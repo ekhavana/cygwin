@@ -89,6 +89,8 @@ while (<F>) {
 close(F);
 print "Key file is $best_file\n";
 
+$ok_count = $bad_count = 0;
+
 while (<M>) {
     next if /^#/;
     ($url, $area, $region) = split(/[;\r\n]+/);
@@ -226,13 +228,20 @@ sub verify_http {
     $http = IO::Socket::INET->new(PeerAddr => $site,
 				  PeerPort => 80,
 				  Proto => "tcp");
-    return 0 unless defined $http;
+    if (!defined $http) {
+	print "Unable to connect to $site:80\n";
+	return 0;
+    }
     $http->autoflush(1);
-    print $http "HEAD $file HTTP/1.0\r\n\r\n";
+    print $http "HEAD $file HTTP/1.0\r\n";
+    print $http "Host: $site:80\r\n";
+    print $http "\r\n";
     $status = <$http>;
     0 while <$http>;
     close $http;
     return 1 if $status =~ / 200 /;
+    $status =~ s/[\r\n]+$//;
+    print "Status was $status\n";
     return 0;
 }
 
