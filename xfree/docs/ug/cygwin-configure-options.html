@@ -6,7 +6,7 @@
 Parameters</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.61
+CONTENT="Modular DocBook HTML Stylesheet Version 1.72
 "/><LINK
 REL="HOME"
 TITLE="Cygwin/XFree86 User's Guide"
@@ -25,6 +25,7 @@ CLASS="sect1"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -42,6 +43,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="configure.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -55,6 +57,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="using.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -72,15 +75,15 @@ NAME="cygwin-configure-options"
 Parameters</A
 ></H1
 ><P
->You need to pass a proper screen configuration for screen number
-<TT
-CLASS="literal"
->0</TT
-> to <B
+>Cygwin/XFree86, by default, runs in windowed mode with the largest
+window that will fit on your Windows desktop, using the best
+performing engine that is installed on your system; you do not need to
+pass any parameters to <B
 CLASS="command"
 >XWin.exe</B
->; below is
-the syntax for <B
+> to use the
+default behavior.  Below is the syntax for
+<B
 CLASS="command"
 >XWin.exe</B
 > parameters.</P
@@ -88,7 +91,7 @@ CLASS="command"
 ><B
 CLASS="command"
 >XWin.exe</B
->  {-screen
+> <BR/> [-screen
 <TT
 CLASS="replaceable"
 ><I
@@ -100,32 +103,45 @@ CLASS="replaceable"
 ><I
 >width</I
 ></TT
->x<TT
+>
+<TT
 CLASS="replaceable"
 ><I
 >height</I
 ></TT
->x<TT
-CLASS="replaceable"
-><I
->bit_depth</I
-></TT
 >
-...}<BR/> [-engine
+...]<BR/> [-engine
 <TT
 CLASS="replaceable"
 ><I
 >engine_number</I
 ></TT
 >
-] [-fullscreen] [-emulate3buttons 
+]<BR/> [-fullscreen
+ [-depth
+<TT
+CLASS="replaceable"
+><I
+>depth_in_bits_per_pixel</I
+></TT
+>
+]
+ [-refresh
+<TT
+CLASS="replaceable"
+><I
+>refresh_rate_in_herz</I
+></TT
+>
+]
+]<BR/> [-emulate3buttons 
 <TT
 CLASS="replaceable"
 ><I
 >timeout_in_milliseconds</I
 ></TT
 >
-]</P
+]<BR/> [-[no]winkill]<BR/> [-[no]unixkill]</P
 ><P
 >Below is an example command line for
 <B
@@ -135,7 +151,7 @@ CLASS="command"
 ><DIV
 CLASS="informalexample"
 ><A
-NAME="AEN437"
+NAME="AEN452"
 ></A
 ><P
 ><B
@@ -144,7 +160,8 @@ CLASS="command"
 <TT
 CLASS="parameter"
 ><I
->-screen 0 800x600x16</I
+>-screen 0 800 600 -fullscreen -depth 32 -refresh 85
+-emulate3buttons 100 -nowinkill -unixkill</I
 ></TT
 >
 </B
@@ -156,6 +173,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"/><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -167,6 +185,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="configure.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -175,6 +194,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-xfree-ug.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -183,6 +203,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="using.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -198,6 +219,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="configure.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
