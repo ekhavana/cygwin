@@ -2025,29 +2025,41 @@ C-callable entry points, you can list <SAMP>`foo.lib'</SAMP> as an object file f
 gcc/g++, just like any <SAMP>`*.o'</SAMP> file. Otherwise, here are some steps:
 
 
-<P>
-1. Build a C file with a function table.  Put all functions you intend
+
+<OL>
+<LI>Build a C file with a function table.  Put all functions you intend
+
 to use in that table.  This forces the linker to include all the object
 files from the .lib.  Maybe there is an option to force LINK.EXE to
 include an object file.
-2. Build a dummy 'LibMain'.
-3. Build a .def with all the exports you need.
-4. Link with your .lib using link.exe.
+<LI>Build a dummy 'LibMain'.
 
+<LI>Build a .def with all the exports you need.
+
+<LI>Link with your .lib using link.exe.
+
+</OL>
 
 <P>
 or
 
 
-<P>
-1. Extract all the object files from the .lib using LIB.EXE.
-2. Build a dummy C file referencing all the functions you need, either
-with a direct call or through an initialized function pointer.
-3. Build a dummy LibMain.
-4. Link all the objects with this file+LibMain.
-5. Write a .def.
-6. Link.
 
+<OL>
+<LI>Extract all the object files from the .lib using LIB.EXE.
+
+<LI>Build a dummy C file referencing all the functions you need, either
+
+      withth a direct call or through an initialized function pointer.
+<LI>Build a dummy LibMain.
+
+<LI>Link all the objects with this file+LibMain.
+
+<LI>Write a .def.
+
+<LI>Link.
+
+</OL>
 
 <P>
 You can use these methods to use MSVC (and many other runtime libs)
