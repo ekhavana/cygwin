@@ -1,0 +1,639 @@
+<HTML>
+<HEAD>
+<TITLE>Release Notes for the B20 release</TITLE>
+<base target="_top">
+</HEAD>
+
+<!--#include virtual="/include/header-subpages.html"-->
+
+<h1 align=center>Release Notes for B20</h1>
+
+<b>October 30, 1998</b>: Greetings!
+
+<p>I'm pleased to announce the immediate availability of the Cygwin Beta
+20 release for Windows NT, 95, and 98!  Appended to this message is
+the README for this release.
+
+<p>*Please* use the mirror closest to you to download the release.  It
+may take a day or two for them to be updated.  If you cannot wait
+until then, it is available from the primary ftp server in
+
+<blockquote>
+  <a href="ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest">ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest</a>
+</blockquote>
+
+<p>as well as from the secondary ftp server <a href="ftp://sourceware.cygnus.com/pub/cygwin/">sourceware.cygnus.com</a>.
+
+<p>Please read the <a href="#readme">README</a>, especially the section
+describing the differences between this release and the last one!  If you
+don't, you won't know to rename the CYGWIN32 environment variable to
+CYGWIN, among other things.
+
+<p>Note that the Cygwin project WWW site has moved to:
+
+<blockquote>
+<a href="http://sourceware.cygnus.com/cygwin/">http://sourceware.cygnus.com/cygwin/</a>
+</blockquote>
+
+<p>Look there for additional information about the Cygwin!
+
+<p>I would like to take a couple of paragraphs to thank the many other
+people who made this release possible:
+
+<p>At Cygnus, the other members of the Win32 engineering team:
+Christopher Faylor, DJ Delorie, and our manager Eric Bachalo.  Also,
+Tobin Brockett, who whipped out the InstallShield installers for us.
+Finally, Cygnus management for its commitment to free software.
+
+<p>On the Net, Mumit Khan provided a lot of valuable patches to dlltool,
+Cygwin, and the Mingw header files for the B20 release.  He also wrote
+the new dllwrap program.  Sergey Okhapkin, Andy Piper, Ernie Boyd, and
+Corinna Vinschen all gave us valuable feedback prior to this release.
+Special thanks go to Sergey in particular -- as of this release, he
+has submitted close to a hundred fixes/improvements to the Cygwin
+library!  Thanks to our many other contributors for their
+patches, and to everyone on the project mailing lists for their
+valuable feedback/suggestions!
+
+<p>Enjoy!
+
+<p>Geoffrey Noer
+<p>noer@cygnus.com
+
+<hr>
+<a name="readme">
+<h1 align=center>README 20.0 for Cygwin B20 Release.</h1>
+</a>
+
+<H1><A NAME="SEC1" HREF="readme_toc.html#TOC1">Cygwin Resources on the Internet</A></H1>
+
+
+
+<H2><A NAME="SEC2" HREF="readme_toc.html#TOC2">FTP Sites</A></H2>
+
+<P>
+The primary ftp site is
+<TT>`ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/'</TT>.  There
+are also several mirrors:
+
+</P>
+
+<UL>
+<LI>North America:
+
+
+<UL>
+<LI>Alberta: <TT>`ftp://ftp.reversion.ca/pub/mirrors/gnu-win32/'</TT>
+
+<LI>Arizona: <TT>`ftp://ftp.ninemoons.com/pub/gnu-win32/'</TT>
+
+<LI>California: <TT>`ftp://go.cygnus.com/pub/ftp.cygnus.com/gnu-win32/'</TT>
+
+<LI>California: <TT>`ftp://ftp.yggdrasil.com/mirrors/site/ftp.cygnus.com/pub/gnu-win32/'</TT>
+
+<LI>California (secondary): <TT>`ftp://sourceware.cygnus.com/pub/cygwin/'</TT>
+
+<LI>Kansas: <TT>`ftp://ftp.the-b.org/pub/gnu-win32/'</TT>
+
+<LI>Tennessee: <TT>`ftp://sunsite.utk.edu/pub/gnu-win32/'</TT>
+
+</UL>
+
+<LI>Central America:
+
+
+<UL>
+<LI>Costa Rica: <TT>`ftp://sunsite.ulatina.ac.cr/gnu-win32/'</TT>
+
+</UL>
+
+<LI>South America:
+
+
+<UL>
+<LI>Brazil: <TT>`ftp://ftp.unicamp.br/pub/gnu/=EXTRA=/cygnus/win32/'</TT>
+
+</UL>
+
+<LI>Africa:
+
+
+<UL>
+<LI>South Africa: <TT>`ftp://ftp.sun.ac.za/sites/ftp.cygnus.com/pub/gnu-win32/'</TT>
+
+</UL>
+
+<LI>Asia:
+
+
+<UL>
+<LI>Japan: <TT>`ftp://ftp.crl.go.jp/pub/GNU/cygnus/gnu-win32/'</TT>
+
+<LI>Japan: <TT>`ftp://sysg.kek.jp/cygnus/'</TT>
+
+<LI>Japan: <TT>`ftp://ftp.u-aizu.ac.jp/pub/gnu/gnu-win32/'</TT>
+
+<LI>Korea: <TT>`ftp://cair-archive.kaist.ac.kr/pub/gnu/gnu-win32/'</TT>
+
+</UL>
+
+<LI>Australasia:
+
+
+<UL>
+<LI>Australia: <TT>`ftp://mirror.aarnet.edu.au/pub/gnu-win32/'</TT>
+
+</UL>
+
+<LI>Europe:
+
+
+<UL>
+<LI>Austria: <TT>`ftp://gd.tuwien.ac.at/pub/gnu/gnu-win32/'</TT>
+
+<LI>Czech Republic: <TT>`ftp://sunsite.ms.mff.cuni.cz/MIRRORS/ftp.cygnus.com/pub/gnu-win32/'</TT>
+
+<LI>Denmark: <TT>`ftp://sunsite.auc.dk/pub/gnu-win32/'</TT>
+
+<LI>France: <TT>`ftp://ftp.fwntug.org/gnu/'</TT>
+
+<LI>France: <TT>`ftp://ftp.inria.fr/INRIA/Projects/Meta2/Scilab/Windows/cygwin/'</TT>
+
+<LI>Germany: <TT>`ftp://ftp.franken.de/pub/win32/develop/gnuwin32/cygwin32/mirrors/cygnus/'</TT>
+
+<LI>Greece: <TT>`ftp://ftp.ntua.gr/pub/pc/gnu-win32/'</TT>
+
+<LI>Hungary: <TT>`ftp://ftp.szrmkk.hu/pub/gnu-win32/ftp.cygnus.com/'</TT>
+
+<LI>Italy: <TT>`ftp://aaue.matrice.it/pub/gnu-win32/'</TT>
+
+<LI>Poland: <TT>`ftp://sunsite.icm.edu.pl/pub/cygnus/gnu-win32/'</TT>
+
+<LI>Slovenia: <TT>`ftp://sunsite.fri.uni-lj.si/pub/gnu-win32/'</TT>
+
+<LI>Spain: <TT>`ftp://ftp.rediris.es/mirror/gnu-win32/'</TT>
+
+<LI>Sweden: <TT>`ftp://ftp.sunet.se/pub/gnu/gnu-win32/'</TT>
+
+<LI>Switzerland: <TT>`ftp://sunsite.cnlab-switch.ch/mirror/gnu-win32/'</TT>
+
+<LI>UK: <TT>`ftp://sunsite.doc.ic.ac.uk/packages/gnu/cygnus/gnu-win32/'</TT>
+
+<LI>UK: <TT>`ftp://ftp.ccp14.dl.ac.uk/ccp14/ftp-mirror/programming/cygnus-gnu-win32/pub/gnu-win32/'</TT>
+
+<LI>Ukraine: <TT>`ftp://ftp.ics-co.kiev.ua/pub/mirror/ftp.cygnus.com/pub/gnu-win32/'</TT>
+
+</UL>
+
+</UL>
+
+
+
+<H2><A NAME="SEC3" HREF="readme_toc.html#TOC3">The Cygwin Project WWW Site</A></H2>
+
+<P>
+The main WWW page for the Cygwin project is
+<TT>`http://sourceware.cygnus.com/cygwin/'</TT>.
+
+</P>
+<P>
+A page containing tool-specific information is
+<TT>`http://www.cygnus.com/pubs/gnupro/'</TT>.
+
+</P>
+<P>
+Links to additional documentation are accessible from the main
+web page.
+
+
+<H1><A NAME="SEC4" HREF="readme_toc.html#TOC4">Installation Instructions</A></H1>
+
+
+<H2><A NAME="SEC5" HREF="readme_toc.html#TOC5">Contents</A></H2>
+
+<P>
+The following packages are included in the full release:
+
+</P>
+<P>
+Development tools:
+binutils, bison, byacc, dejagnu, diff, expect, flex, gas, gcc, gdb,
+itcl, ld, libstdc++, make, patch, tcl, tix, tk
+
+</P>
+<P>
+User tools:
+ash, bash, bzip2, diff, fileutils, findutils, gawk, grep, gzip, m4,
+sed, shellutils, tar, textutils, time
+
+</P>
+<P>
+The user tools release only contains the user tools.
+
+</P>
+<P>
+Full source code is available for these tools.  It is split into
+these two units.
+
+</P>
+
+
+<H2><A NAME="SEC6" HREF="readme_toc.html#TOC6">Installing the binary release:</A></H2>
+
+<P>
+Important!  Be sure to remove any older versions of the Cygwin tools
+from your PATH environment variable so you do not execute them by
+mistake.
+
+</P>
+<P>
+Connect to one of the ftp servers listed above and cd to the directory
+containing the latest release.  On our primary server, that would be:
+
+</P>
+<P>
+<TT>`ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/'</TT>.
+
+</P>
+<P>
+If you want the development tools and the programs necessary to run
+the GNU configure mechanism, you should download the full binary release
+called <TT>`full.exe'</TT>.  If you only care about the user tools
+listed above, download <TT>`user.exe'</TT> instead.
+
+</P>
+<P>
+If you have an unreliable connection, download the appropriate binary in
+smaller chunks instead.  For the split cdk installer, get the files in
+the <TT>`full-split'</TT> subdirectory.  Once downloaded, combine the
+split files at the command prompt by doing a:
+
+</P>
+
+<PRE>
+copy /b xaa + xab + xac + ... + xai + xaj full.exe
+del xa*.*
+</PRE>
+
+<P>
+A similar process can be used for the user tools.
+
+</P>
+<P>
+Once you have an install executable on your system, run it.
+First off, the installer will prompt you for a location to
+extract the temporary files it needs to install the release on your
+system.  The default should be fine for most people.
+
+</P>
+<P>
+Next it will ask you to choose an install location.  The default is
+<TT>`&#60;system-drive&#62;:\cygnus\cygwin-b20'</TT>.  Feel free to choose another
+location if you would prefer.
+
+</P>
+<P>
+Finally, it will ask you for the name of the Program Files folder
+shortcut to add.  By default, the installer will create
+a <TT>`Cygwin B20'</TT> entry in a
+folder called <TT>`Cygnus Solutions'</TT>.  When this step is completed, it
+will install the tools and exit.
+
+</P>
+<P>
+At this point, you should be able to look under the start menu and
+select "Cygwin B20".  This will pop up a bash shell with all special
+environment variables set up for you.  If you are running Windows 95 or
+98 and are faced with the error message "Out of environment space", you
+need to increase the amount of environment space in your config.sys and
+try again.  Adding the line <CODE>shell=C:\command.com /e:4096 /p</CODE>
+should do the trick if <CODE>C:</CODE> is your system drive letter.
+
+</P>
+<P>
+There are two remaining thing you should do from this prompt.
+First, you need to type <CODE>mkdir -p /tmp</CODE> to ensure that a directory
+for temporary files exists for programs that expect to find one there.
+
+</P>
+<P>
+Second, if you are installing the full distribution
+(<TT>`full.exe'</TT>), various programs will need to be able to find
+<TT>`/bin/sh'</TT>.  You should <TT>`mkdir -p /bin'</TT> and put a copy of
+<TT>`sh.exe'</TT> there, removing the older version, if present.  You can
+use the <TT>`mount'</TT> utility to select which drive letter is mounted as
+<TT>`/'</TT>. See the Frequently Asked Questions (FAQ) file for more
+information on <TT>`mount'</TT>.
+
+</P>
+<P>
+If you should ever want to uninstall the tools, you may do so
+via the "Add/Remove Programs" control panel.
+
+</P>
+
+
+<H2><A NAME="SEC7" HREF="readme_toc.html#TOC7">Installing the source code</A></H2>
+
+<P>
+Before downloading the source code corresponding to the release,
+you should install the latest release of the tools (either the full
+release or just the user tools).
+
+</P>
+<P>
+Create the directory that will house the source code.  <TT>`cd'</TT>
+there.
+
+</P>
+<P>
+Connect to one of the ftp servers listed above and cd to the directory
+containing the latest release.  On our primary server, that would be:
+
+</P>
+<P>
+<TT>`ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/'</TT>.
+
+</P>
+<P>
+If you want the user tools source code, <TT>`cd'</TT> into the
+<TT>`user-src-split'</TT> subdirectory.  Download the files there.  If you
+want the development tools sources, <TT>`cd'</TT> into the
+<TT>`dev-src-split'</TT> subdirectory.  Download the files there.
+
+</P>
+<P>
+Back in the Windows command shell, for the user tools source:
+
+</P>
+
+<PRE>
+copy /b xba + xbb + xbc + xbd + xbe + xbf + xbg user-src.tar.bz2
+del xb*.*
+bunzip2 user-src.tar.bz2
+tar xvf user-src.tar
+</PRE>
+
+<P>
+For the development tools source:
+
+</P>
+
+<PRE>
+copy /b xca + xcb + xcc + xcd + ... + xck + xcl dev-src.tar.bz2
+del xc*.*
+bunzip2 dev-src.tar.bz2
+tar xvf dev-src.tar
+</PRE>
+
+<P>
+Both expand into a directory called <TT>`src'</TT>.
+
+</P>
+<P>
+And you should be done...
+
+</P>
+
+
+
+<H1><A NAME="SEC8" HREF="readme_toc.html#TOC8">Release Beta 20 (Oct 30 1998)</A></H1>
+<P>
+This is a significant update to the Beta 19 release.  In addition to an
+EGCS-based compiler and updated tools, this release includes a new
+version of the Cygwin library that contains many improvements and
+bugfixes over the last one.
+
+</P>
+
+
+<H3><A NAME="SEC9" HREF="readme_toc.html#TOC9">The project has a new name!</A></H3>
+
+<P>
+Starting with this release, we are retiring the "GNU-Win32" name for the
+releases.  We have also dropped the "32" from Cygwin32.  This means that
+you should now refer to the tools as "the Cygwin toolset", the library
+as "the Cygwin library" or "the Cygwin DLL", and the library's interface
+as "the Cygwin API".
+
+</P>
+<P>
+Because of this name change, we have changed any aspects of the library
+that involved the name "Cygwin32".  For example, the CYGWIN32
+environment variable is now the CYGWIN environment variable.  API
+functions starting with cygwin32_ are still available under that form
+for backwards-compatibility as well as under the new cygwin_-prefixed
+names.  The same goes for the change of preprocessor define from
+__CYGWIN32__ to __CYGWIN__.  We will remove the old names in a future
+release so please take the minute or two that it will take to remove
+those "32"s.  Thanks and I apologize for the hassle this may cause
+people.  We would have changed the name to "Bob" but that name's already
+taken by Microsoft...  :-)
+
+</P>
+<P>
+Why change it?  For one thing, not all of the software included in the
+distributions is GNU software, including the Cygwin library itself.  So
+calling the project "GNU-Win32" has always been a bit of a misnomer.  In
+addition, we think that calling the tools the "Cygwin tools" that use
+the "Cygwin library" will be less confusing to people.
+
+</P>
+<P>
+Also notice that we are now on the spiffy new sourceware.cygnus.com
+web/ftp site.  The old address will work for some unknown period of
+time (hopefully at least until we get all of the mirrors adjusted).
+
+</P>
+
+
+<H3><A NAME="SEC10" HREF="readme_toc.html#TOC10">Changes in specific tools:</A></H3>
+
+<P>
+The latest public EGCS release is now the basis for the compiler used
+in Cygwin distributions.  As a result, EGCS 1.1 is the compiler in this
+release, with a few additional x86/Cygwin-related patches.
+
+</P>
+<P>
+Those of you who are more interested in native Windows development than
+in porting Unix programs will be glad to know that a new gcc flag
+"-mno-cygwin" will link in the latest Mingw32 libs and produce an
+executable that does not use Cygwin.
+
+</P>
+<P>
+All of the other development tools have been updated to their latest
+versions.  The linker (ld) includes many important bug fixes.  It is now
+possible to safely strip a DLL with a .reloc section.  The windres
+resource compiler is significantly improved.
+
+</P>
+<P>
+Beta 20 also includes upgrades to a number of packages: ash-0.3.2-4,
+bash 2.02.1, grep-2.2, ncurses 4.2, and less 332.  We have added bzip2
+0.9.0 to the distribution.  And you'll now find that the df utility
+has joined its other friends from the fileutils package.
+
+</P>
+<P>
+The sh executable is still ash from the Debian Linux distribution but no
+longer has the problematic quoting bug that was present in the Beta 19
+release.  Control-Cs in the bash shell no longer kill background tasks.
+
+</P>
+<P>
+Tcl/tk are upgraded to version 8.1a2 (with additional patches).
+Compatible versions of tix and itcl are included.  These all include
+Cygwin-compatible configury files so you can do a Unix-style build of
+the Win32 ports of tcl/tk.  expect has been upgraded to 5.26 with some
+additional Cygwin patches.
+
+</P>
+<P>
+In response to customer requests and feedback, Cygnus has developed a
+better graphical front end to GDB than GDBtk or WinGDB.  This tcl-based
+GUI is shipping today to customers of the GNUPro Toolkit.  The
+instrumentation changes to GDB and the tcl interpreter that was built
+into GDB are part of the GPL'd source base.  But the tcl scripts are not
+being made available to the net at this time.  For this reason, you will
+only find a command-line version of gdb in this Cygwin release.
+
+</P>
+<P>
+DJ Delorie has written a new "cygcheck" program that will print out
+useful information about how your Cygwin environment is set up, what
+DLLs a named executable is loading from where, etc.  We hope this will
+make it easier to help diagnose common setup problems.
+
+</P>
+<P>
+The ps utility has been upgraded.  It now has several options including
+shorter and longer output formats.
+
+</P>
+
+
+<H3><A NAME="SEC11" HREF="readme_toc.html#TOC11">Changes in the Cygwin API (cygwin.dll):</A></H3>
+
+<P>
+This version of Cygwin is backwards-compatible with the beta 19 release.
+If you rename the cygwin1.dll included as part of B20 to
+"cygwinb19.dll", the old executables should be able to function with the
+new version of the library.
+
+</P>
+<P>
+Quite a lot of the Cygwin internals have been rewritten or modified to
+address various issues.  If you have a question about specific changes,
+the winsup/ChangeLog file in the development tools sources lists all
+changes made to the DLL over the last three years.  Following are a few
+highlights:
+
+</P>
+<P>
+We are now using a new versioning scheme for Cygwin.  There is now a
+separate version number for the DLL, the API, the shared memory region
+interfaces, and the registry interface.  This will hopefully make it
+easier for multiple Cygwin toolsets to coexist in one user environment.
+
+</P>
+<P>
+Windows 98 is now supported (it is like Windows 95 from Cygwin's
+perspective).  We still recommend upgrading to Windows NT.
+
+</P>
+<P>
+While there is still a lot left to do in improving Cygwin's runtime
+performance, we have put some effort into this prior to the B20 release.
+Hopefully you will find that the latest version of Cygwin is faster than
+ever.  In addition, we have plugged several nasty handle leaks
+associated with opening/closing files and with using ttys.
+
+</P>
+<P>
+The lseek call now uses WriteFile to fill gaps with zeros whenever a
+write is done past an EOF, rather than leaving "undefined" data as Win32
+specifies.
+
+</P>
+<P>
+Significant work has been done to improve the Cygwin header files.
+
+</P>
+<P>
+The Cygwin Support for Unix-style serial I/O is much improved.
+
+</P>
+<P>
+Path handling has had another round of fixes/rewrites.  We no longer use
+NT Extended Attributes for storing Unix permissions/execute status
+because the file NT creates on FAT partitions is not scalable to
+thousands of files (everything slows to a crawl).
+
+</P>
+<P>
+Signal handling has also gotten a fair amount of attention.
+Unfortunately, there are still some problems combining itimers and
+Windows 9x.
+
+</P>
+<P>
+The number of ttys has been upped from 16 to 128.
+
+</P>
+<P>
+New API calls included in the DLL: sethostent, endhostent.
+
+</P>
+<P>
+As mentioned earlier, all cygwin32_-prefixed functions are now exported
+with a cygwin_ prefix instead.  Please adjust your code to call the
+newly named functions.
+
+</P>
+
+
+<H1><A NAME="SEC12" HREF="readme_toc.html#TOC12">Known/potential Problems in the B20 Release</A></H1>
+
+
+
+<H2><A NAME="SEC13" HREF="readme_toc.html#TOC13">Configures in Windows 95/98 not completing</A></H2>
+<P>
+B20's configure setup does not yet work reliably under Windows 95/98 (it
+returns after configuring the top level directory of the compiler tools
+without recursing into subdirectories).  We will release an update to
+address this problem as soon as we have a fix.
+
+</P>
+
+
+<H2><A NAME="SEC14" HREF="readme_toc.html#TOC14">Windows 95 freezing up</A></H2>
+<P>
+While this problem may have been worse under B19, Control-c's in bash
+under Win 95 can lock up the Win 95 kernel, freezing your machine.  This
+problem can be fixed if you are running the OSR2 version of Win 95 by
+installing the USB patch available on OSR2 CDs or on MSDN subscription
+CDs.  More information about OSR2 and the USB patch is available from
+<TT>`http://www.compuclinic.com/osr2faq/index.html'</TT>.
+
+</P>
+
+
+<H2><A NAME="SEC15" HREF="readme_toc.html#TOC15">Some programs can't deal with // pathname scheme in arguments</A></H2>
+<P>
+gcc and other tools aren't fully compatible with the current pathname
+scheme: it can't grok an argument of -I//d/foo which means it is vital
+that when attempting to configure/build UNIX packages, that only normal
+paths with single slashes are used.
+
+</P>
+<P>
+Geoffrey Noer
+noer@cygnus.com
+<P><HR><P>
+This document was generated on 30 October 1998 using the
+<A HREF="http://wwwcn.cern.ch/dci/texi2html/">texi2html</A>
+translator version 1.51.</P>
+
+<!--#include virtual="/include/footer-subpages.html"-->
