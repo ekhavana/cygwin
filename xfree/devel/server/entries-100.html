@@ -1,3 +1,54 @@
+<h4>Release 4.3.0-42</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-16 1500 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040116-1500.tar.bz2">xwin-20040116-1500.tar.bz2</a>
+(134 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-41
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-41-to-4.3.0-42.diff">xwin-4.3.0-41-to-4.3.0-42.diff</a>
+(9 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>InitOutput.c - Only wait for the clipboard thread to exit if the
+clipboard client has been started.  (Harold L Hunt II)</li>
+
+<li>winclipboardwrappers.c/winProcQueryTree,
+winProcEstablishConnection - Unwrap base function and return if
+clipboard is not enabled.  (Harold L Hunt II)</li>
+
+<li>winclipboardxevents.c/winClipboardFlushXEvents - Call
+SetClipboardData when aborting; those should allow Win32 apps that are
+holding the clipboard open to fail gracefully and close the
+clipboard.  (Harold L Hunt II)</li>
+
+<li>winglobals.c - Remove duplicate declaration of
+g_fClipboardStarted.  (Takuma Murakami)</li>
+
+<li>winglobals.c - winInitializeGlobals - Reinitialize all clipboard
+globals.  (Harold L Hunt II)</li>
+
+<li>winmultiwindowwm.c - Change all error messages that occur before a
+call to pthread_exit to make it clear that the window manager is
+exiting.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-41</h4>
 <table>
 <tbody>
