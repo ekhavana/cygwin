@@ -10,6 +10,7 @@ use Net::FTP;
 use LWP::Simple;
 use File::Find;
 use File::stat;
+use Time::localtime;
 
 open(M, "mirrors.txt");
 my $out = "mirrors.html";
@@ -21,6 +22,9 @@ sub siteprint($$;@);
 
 $main::timeout = 120;
 
+my $date_time = localtime();
+my $pretty_date = join(' ', (split(' ', $date_time))[4,3]);
+
 my $header = '<HTML>
 <HEAD>
 <TITLE>Download Cygwin</TITLE>
@@ -28,7 +32,7 @@ my $header = '<HTML>
 
 <!--#include virtual="cygwin-header.html"-->
 
-<h2 align=middle>Mirror Sites</h2>
+<h2 align=middle>Mirror Sites as of ' . $pretty_date . ' GMT
 
 <P>The following sites have generously agreed to mirror our main Cygwin
 ftp site.  To save you download time, please choose the one nearest
@@ -47,9 +51,9 @@ anyone about this.</p>
 
 <p>If a site is listed here that seems to be out-of-date for some period
 of time, that could mean that there is a problem.  Contact sourcemaster
-at this site to report this potential problem</p>.
+at this site to report this potential problem.</p>
 
-<H3>Mirror Sites:</H3>
+<H3>Mirror Sites as of :</H3>
 ';
 
 my $trailer = '
@@ -62,8 +66,7 @@ open(STDOUT, "> /tmp/check-mirrors.out");
 open(STDERR, ">&STDOUT");
 $| = 1;
 
-
-my $summary .= "start at " . scalar localtime() . "\n";
+my $summary .= "start at " . $date_time . "\n";
 
 #----------------------------------------------------------------------
 
@@ -147,7 +150,7 @@ print SUMMARY "Subject: cygwin mirror summary\n";
 print SUMMARY "\n";
 print SUMMARY "\n$ok_count ok, $bad_count bad\n\n";
 print SUMMARY $summary;
-print SUMMARY "done at ", scalar localtime(), "\n";
+print SUMMARY "done at ", $date_time, "\n";
 close SUMMARY;
 
 open(OUT, "> $out");
