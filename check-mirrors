@@ -80,10 +80,12 @@ my $days = 86400;
 my $now = time;
 my $master = <M>;
 $master =~ s/[\r\n]+$//;
+my $dir = ($master =~ m%/([^/]+)$%)[0];
 $main::best_mtime = 0;
 $main::main::best_file = undef;
 find({wanted=>\&wanted, follow_fast=>1, no_chdir=>1}, $master);
 substr($main::best_file, 0, length($master) + 1) = '';
+$main::best_file = "$dir/$main::best_file";
 print "Key file is $main::best_file\n";
 
 my (@ok, $ok_count, $bad_count);
