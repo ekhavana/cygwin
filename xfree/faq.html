@@ -199,9 +199,8 @@ Sites </A></TD></TR>
         <TR>
           <TD>
             <P>At present the X11R6.4 libraries clients and servers are 
-            functional on Windows NT, 2000. Windows 95,98 and ME have 16-bit 
-            code in their GDI and we need help from volunteers to resolve issues 
-            on those platforms. The client libraries will run on Windows 95,98 and ME, but not the X servers.</P></TD></TR>
+            functional on Windows 95,98, ME,&nbsp; NT 4 and Windows 2000.
+            Windows XP should work.&nbsp;</P></TD></TR>
         <TR>
           <TD vAlign=top rowSpan=2>1.5</TD>
           <TD><B>Is there a specific news group?</B></TD></TR>
@@ -232,10 +231,7 @@ Sites </A></TD></TR>
             use X Server!!!!</B></TD></TR>
         <TR>
           <TD>
-            <P>If you are using Windows 95 or 98, break out your debugger and 
-            start working around the 16-bit code in GDI32.dll and 
-            kernel32.dll.</P>
-            <P>If you are using Windows NT or 2000 run startxwin.bat from a 
+            <P>Run startxwin.bat from a 
             cmd prompt, not a bash prompt. then report the console errors on the 
             <A href="./faq.html#mailinglist">mailing list</A>.&nbsp;</P></TD></TR>
         <TR>
@@ -285,18 +281,16 @@ Sites </A></TD></TR>
             this:&nbsp;</P>
             <UL type=disc>
               <LI style="  mso-list: l0 level1 lfo12; tab-stops: list .5in">
-              <P align=left>If you emailed directly to Suhaib, it will get 
+              <P align=left>If you emailed directly to any project member, it will get 
               ignored or forwarded to the Cygwin/XFree86 <A 
-              href="./faq.html#mailinglist">mailing list</A>. As an active 
-              participant in several Open Source projects, he receives over 200 
-              E-Mails per-day, excluding work related mails. Use proper mailing 
-              list to communicate allows other Cygwin/XFree users to help you, 
-              and thus speeds up XFree development.&nbsp; </P>
-              <LI 
-              style="  mso-list: l0 level1 lfo12; tab-stops: list .5in">We 
+              href="./faq.html#mailinglist">mailing list</A>. Use of proper mailing 
+              lists to communicate allows other Cygwin/XFree users to help you, 
+              and thus speeds up XFree development by freeing up developer time. </P>
+              <LI style="  mso-list: l0 level1 lfo12; tab-stops: list .5in">
+              <P align=left>We 
               are all human, occasionally questions will be missed. If that 
               happens (allow 24-36 hours before you conisder it forgotten) just 
-              resend the email to the mailing list. 
+              resend the email to the mailing list. </P>
               <LI 
               style="  mso-list: l0 level1 lfo12; tab-stops: list .5in">If 
               the problem relates to how-to-port a particular X application to 
@@ -368,7 +362,9 @@ Sites </A></TD></TR>
             <P><B>Can I use Cygwin/XFree86?</B></P></TD></TR>
         <TR>
           <TD>
-            <P>At this time, Cygwin/XFree86 only supports Windows NT and Windows 2000. For purely experimental support for Windows 9x and Windows ME see <a href="http://xfree86.cygwin.com/ml/cygwin-xfree/2001-q1/msg00599.html">Shadow Framebuffer Test 8</a>.</P></TD></TR>
+            <P>At this time, Cygwin/XFree86 should work on any version of
+            windows subsequent to windows 3.11. WinCE is not included in that
+            list!. Port cygwin to WinCE and we'll consider it!.</P></TD></TR>
         <TR>
           <TD vAlign=top rowSpan=2>
             <P>2.2&nbsp;</P>
@@ -397,9 +393,8 @@ Sites </A></TD></TR>
         <TR>
           <TD>
             <P>With the merger of the experimental Cygwin based servers into the 
-            XFree86 4 soure tree, you should use the XFree86 X-Server. Of course 
+            XFree86 4 source tree, you should use the XFree86 X-Server. Of course 
             you can use a commercial X-Server such as eXceed if you wish.</P>
-            <P>&nbsp;</P>
             <P>If you last tried cygwin XFree86 before July 2000, then the 
             following may be of interest:</P>
             <P>MI/X is an stdin/stdout type X-server, which uses X11R5 
@@ -555,9 +550,9 @@ code!</B></P></TD></TR>
             Windows95?</B></P></TD></TR>
         <TR>
           <TD>
-            <P>The Cygwin/XFree86 project has ported XFree86 to Windows 
-            NT/2000. See "<A href="./faq.html#howcomplete">How Complete is 
-            it?</A>" for issues with Windows 9x and Windows MW. The Cygwin/XFree86 project does not plan to port XFree86 to windows 3.11.</P></TD></TR>
+            <P>The Cygwin/XFree86 project has ported XFree86 to all the 32-bit
+            versions of windows. The Cygwin/XFree86 project does not plan to port XFree86 to windows 3.11.
+            This includes Win32S for windows 3.</P></TD></TR>
         <TR>
           <TD vAlign=top rowSpan=2>
             <P>3.8</P></TD>
@@ -790,9 +785,7 @@ code!</B></P></TD></TR>
                 style="   tab-stops: list 1.0in">Use 
                 Cygwin tar and gzip or bzip2 for packing, even if some foobar 
                 packer gives you 1 % better compression. Don't 
-                use&nbsp;<TT><SPAN 
-                style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">Windows 
-                Winzip</SPAN></TT>.&nbsp; 
+                use&nbsp;<TT>Windows Winzip</TT> or other non-cygwin aware tools.
                 <LI 
                 style="   tab-stops: list 1.0in">If 
                 you use an&nbsp;<TT><SPAN 
@@ -853,8 +846,8 @@ code!</B></P></TD></TR>
             <P>Since the XFree86 source code is now available, you will find 
             plenty of examples how I did this there.&nbsp;</P>
             <P>Note that you still need some secondary literature on special 
-            features of Imakefile rules. A recommended book on&nbsp;<TT><SPAN 
-            style="FONT-SIZE: 10pt">Imakefile</SPAN></TT>s is available from 
+            features of Imakefile rules. A recommended book on&nbsp;<SPAN 
+            style="FONT-SIZE: 10pt"><TT>Imakefiles</TT></SPAN> is available from 
             O'Reilly&amp;Assoc publ (Using imake). Ask in your 
             bookstore.&nbsp;</P></TD></TR>
         <TR>
@@ -864,11 +857,10 @@ code!</B></P></TD></TR>
             <P><B>How do you make the packages of ported software?</B></P></TD></TR>
         <TR>
           <TD>
-            <P>I distribute&nbsp;<TT><SPAN 
-            style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">a simple 
+            <P>I distribute a simple 
             foo.tar.gz or foo.tar.bz2 archives.Seldom, I might distribute 
             archives with InstallShield Installer, after X Servers are 
-            functional.</SPAN></TT></P></TD></TR>
+            functional.</P></TD></TR>
         <TR>
           <TD vAlign=top rowSpan=2>
             <P>3.22</P></TD>
