@@ -38,14 +38,12 @@ until bash 2.05 is ported, which would be 2.05-1, etc).  Some packages
 also use a YYMMDD format for their versions, e.g.  binutils-20010901-1.tar.bz2.
 The first release of a package should have a -1 suffix.</p>
 
-<p>A complete package currently consists of three files:
-
+<p>A complete package currently consists of three files:</p>
 <ul>
 <li>a binary tar file
 <li>a source tar file
 <li>a setup.hint file
 </ul>
-</p>
 
 <p>Binary tar files are named "package-version.tar.bz2".  They generally
 contain the executable files that will be installed on a user's system
@@ -202,22 +200,21 @@ previous tar files, you <em>must</em> specify <tt>curr</tt> and/or
 <tt>prev</tt>.  Otherwise, the <b>only</b> version that setup.exe will
 display will be the <tt>test</tt> version.</p>
 
-<p>For example, if your setup.hint looks like this:
+<p>For example, if your setup.hint looks like this:</p>
 
 <pre>
 <tt>test: 1.9-1</tt>
 </pre>
 
-then setup.ini will <em>not</em> contain the 0.9-1 or 1.0-1 versions.</p>
+then setup.ini will not contain the 0.9-1 or 1.0-1 versions.
 
-<p>If you want all of the versions included, you must do this:
+<p>If you want all of the versions included, you must do this:</p>
 
 <pre>
 <tt>prev: 0.9-1
 curr: 1.0-1
 test: 1.9-1</tt>
 </pre>
-</p>
 
 <p>The <tt>skip</tt> line indicates that that package should not appear in
 setup.ini.  It is intended for directories that exist in the hierarchy that
@@ -247,7 +244,7 @@ This is correct:
 <tt>sdesc:	"A whackamole simulation in ASCII art"</tt>
 </pre>
 
-<p>Quote text that takes up several lines e.g.:
+<p>Quote text that takes up several lines e.g.:</p>
 <pre>
 ldesc: "A whackamole simulation in ASCII art.
 Intended for use on VT100 terminals at BAUD rates 1200 and
@@ -256,7 +253,6 @@ bar whacks the mole.
 
 No actual moles will be harmed during execution of this game."
 </pre>
-</p>
 
 <p>The <tt>category</tt> line indicates the categories that this package belongs
 to.  One package can belong to multiple categories.  Multiple categories
@@ -264,7 +260,7 @@ are separated by spaces.</p>
 <p>Do no enclose multiple category names within quotation marks.</p>
 
 <p>Please do not invent a new category without checking with the cygwin-apps
-mailing list first.  As of this writing, the current categories are:<br>
+mailing list first.  As of this writing, the current categories are:</p>
 <table width="50%" align=center>
 <tr>
 <td>Admin</td>
@@ -294,7 +290,6 @@ mailing list first.  As of this writing, the current categories are:<br>
 <td>Web</td>
 </tr>
 </table>
-</p>
 
 <p>Note that category names may be multi-word, e.g., "ASCII Games" but, currently
 all categories are only a single word.</p>
@@ -318,9 +313,9 @@ fact.</p>
 <p>Multiple packages are separated by spaces.  Do not enclose multiple
 package names within quotation marks.</p>
 
-Here's an example of a complete <i>contrib/current/boffo/setup.hint</i>:
-<tt>
+Here's an example of a complete <i>contrib/current/boffo/setup.hint</i>:</p>
 <pre>
+<tt>
     category: Games Text
     requires: libncurses6 cygwin
     sdesc:    "A whackamole simulation in ASCII art"
@@ -330,8 +325,8 @@ Here's an example of a complete <i>contrib/current/boffo/setup.hint</i>:
     bar whacks the mole.
 
     No actual moles will be harmed during execution of this game."
+</tt>
 </pre>
-</tt></p>
 
 <p>Notice that we didn't use the <tt>prev</tt>, <tt>curr</tt>,
 <tt>test</tt>, or <tt>@</tt> options.  Instead, we relied on the
@@ -450,11 +445,11 @@ quite important.  Since setup.exe extracts into a predetermined
 directory, you must structure your package contents accordingly.</p>
 <p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
 <ul>
-  <li><p>Binary packages are extracted in /, include all file paths from
+  <li>Binary packages are extracted in /, include all file paths from
   the root in your archive, e.g.:<pre><tt>  usr/bin/boffo.exe
   usr/share/boffo/boffo.dat
-  etc...</tt></pre></p></li>
-  <li><p>The package is configured using (at a minimum) the following paths:</p>
+  etc...</tt></pre></li>
+  <li>The package is configured using (at a minimum) the following paths:
   <pre>  --prefix=/usr
   --sysconfdir=/etc
   --libexecdir='$(sbindir)'
@@ -468,7 +463,6 @@ directory, you must structure your package contents accordingly.</p>
   etc...
 </tt></pre></li>
 
-</p></li>
   <li><p>In your binary package, include a file /usr/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.</p></li>
   <li><p>In your binary package include a directory /usr/doc/foo-vendor/ that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc.</p></li>
   <li><p>In your source package include the same foo-vendor-suffix.README as used in the binary package.</p></li>
