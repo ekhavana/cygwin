@@ -203,7 +203,7 @@ sub verify_with_timeout {
     print "parent waiting for child\n";
     $rin = "";
     vec($rin, fileno(RH), 1) = 1;
-    ($nfound, $timeleft) = select($rout = $rin, undef, undef, 60);
+    ($nfound, $timeleft) = select($rout = $rin, undef, undef, 120);
     print "nfound = $nfound, timeleft = $timeleft\n";
     if ($nfound) {
 	$rv = <RH>;
