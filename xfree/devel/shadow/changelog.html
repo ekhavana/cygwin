@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2003-05-29 0045 EDT</p>
+<p>Last updated: 2003-05-30 2355 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -63,6 +63,61 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test88</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-05-30 2355 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test86</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-39</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test88.exe.bz2">XWin-Test88.exe.bz2</a>
+(1208 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030530-2355.tar.bz2">xwin-20030530-2355.tar.bz2</a>
+(117 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Test87
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test87-to-Test88.diff">xwin-Test87-to-Test88.diff</a>
+(4 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winmultiwindowwindow.c/winScaleXBitmapToWindows() - Clear the bits
+in the alpha channel of the converted 32 bpp bitmap because it was
+causing problems with window icons for certain display drivers.  Most
+notably, display drivers from ATI were exhibiting these problems.
+(Earle F. Philhower III)</li>
+
+<li>wincursor.c/winPointerWarpCursor() - Discard the first cursor warp
+message, since this is just X putting the mouse cursor in the center
+of the screen, which is undesireable in Windows.  (Earle F. Philhower
+III, Harold L Hunt II)</li>
+
+<li>windialogs.c/winDisplay[Exit|DepthChange]Dialog() - Add calls to
+drop the minimize and maximize buttons from the Exit Confirmation and
+Depth Change dialog boxes, while preserving the icon on the upper left
+hand corner of the dialog window.  (Earle F. Philhower III)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
 
 
 <h4>Test87</h4>
