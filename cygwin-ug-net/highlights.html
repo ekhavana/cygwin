@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Highlights of Cygwin Functionality</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.66.1"><link rel="start" href="index.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="brief-history.html" title="A brief history of the Cygwin project"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Highlights of Cygwin Functionality</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="brief-history.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="highlights"></a>Highlights of Cygwin Functionality</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-intro"></a>Introduction</h3></div></div></div><p>When a binary linked
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Highlights of Cygwin Functionality</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="previous" href="brief-history.html" title="A brief history of the Cygwin project"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Highlights of Cygwin Functionality</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="brief-history.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="highlights"></a>Highlights of Cygwin Functionality</h2></div></div><div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-intro"></a>Introduction</h3></div></div><div></div></div><p>When a binary linked
 against the library is executed, the Cygwin DLL is loaded into the
 application's text segment.  Because we are trying to emulate a UNIX kernel
 which needs access to all processes running under it, the first Cygwin DLL to
@@ -18,7 +18,7 @@ decision that it would not be necessary to strictly adhere to existing UNIX
 standards like POSIX.1 if it was not possible or if it would significantly
 diminish the usability of the tools on the Win32 platform.  In many cases, an
 environment variable can be set to override the default behavior and force
-standards compliance.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-win9xnt"></a>Supporting both Windows NT and 9x</h3></div></div></div><p>While Windows 95 and Windows 98 are similar enough to each other that we
+standards compliance.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-win9xnt"></a>Supporting both Windows NT and 9x</h3></div></div><div></div></div><p>While Windows 95 and Windows 98 are similar enough to each other that we
 can safely ignore the distinction when implementing Cygwin, Windows NT is an
 extremely different operating system.  For this reason, whenever the DLL is
 loaded, the library checks which operating system is active so that it can act
@@ -30,7 +30,7 @@ uname, the library examines the sysinfo.dwProcessorType structure
 member to figure out the processor type under Windows 9x.  This field
 is not supported in NT, which has its own operating system-specific
 structure member called sysinfo.wProcessorLevel.</p><p>Other differences between NT and 9x are much more fundamental in
-nature.  The best example is that only NT provides a security model.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-perm"></a>Permissions and Security</h3></div></div></div><p>Windows NT includes a sophisticated security model based on Access
+nature.  The best example is that only NT provides a security model.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-perm"></a>Permissions and Security</h3></div></div><div></div></div><p>Windows NT includes a sophisticated security model based on Access
 Control Lists (ACLs).  Cygwin maps Win32 file ownership and permissions to the
 more standard, older UNIX model by default.  Cygwin version 1.1 introduces
 support for ACLs according to the system calls used on newer versions of
@@ -62,7 +62,7 @@ another user by changing the shared memory information in ways that
 they could not in a more typical WinNT program.  For this reason, it
 is not appropriate to use Cygwin in high-security applications.  In
 practice, this will not be a major problem for most uses of the
-library.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-files"></a>File Access</h3></div></div></div><p>Cygwin supports
+library.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-files"></a>File Access</h3></div></div><div></div></div><p>Cygwin supports
 both Win32- and POSIX-style paths, using either forward or back slashes as the
 directory delimiter.  Paths coming into the DLL are translated from Win32 to
 POSIX as needed.  As a result, the library believes that the file system is a
@@ -102,7 +102,7 @@ native Cygwin applications are accessible inside of the chroot environment.
 Since that applications are only using the Cygwin POSIX API to access the
 file system their access can be restricted as it is intended. This includes
 not only POSIX paths but Win32 paths (containing drive letter and/or
-backslashes) and CIFS paths (//server/share or \\server\share) as well.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-textvsbinary"></a>Text Mode vs. Binary Mode</h3></div></div></div><p>Interoperability with other Win32 programs such as text editors was
+backslashes) and CIFS paths (//server/share or \\server\share) as well.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-textvsbinary"></a>Text Mode vs. Binary Mode</h3></div></div><div></div></div><p>Interoperability with other Win32 programs such as text editors was
 critical to the success of the port of the development tools.  Most Red Hat
 customers upgrading from the older DOS-hosted toolchains expected the new
 Win32-hosted ones to continue to work with their old development
@@ -113,7 +113,7 @@ violating the POSIX standard that states that text and binary mode will be
 identical. Consequently, processes that attempt to lseek through text files can
 no longer rely on the number of bytes read as an accurate indicator of position
 in the file.  For this reason, the CYGWIN environment variable can be
-set to override this behavior.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-ansiclib"></a>ANSI C Library</h3></div></div></div><p>We chose to include Red Hat's own existing ANSI C library
+set to override this behavior.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-ansiclib"></a>ANSI C Library</h3></div></div><div></div></div><p>We chose to include Red Hat's own existing ANSI C library
 "newlib" as part of the library, rather than write all of the lib C
 and math calls from scratch.  Newlib is a BSD-derived ANSI C library,
 previously only used by cross-compilers for embedded systems
@@ -123,7 +123,7 @@ effort.  In addition, Cygwin uses Doug Lea's free malloc
 implementation that successfully balances speed and compactness.  The
 library accesses the malloc calls via an exported function pointer.
 This makes it possible for a Cygwin process to provide its own
-malloc if it so desires.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-process"></a>Process Creation</h3></div></div></div><p>The fork call in Cygwin is particularly interesting because it
+malloc if it so desires.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-process"></a>Process Creation</h3></div></div><div></div></div><p>The fork call in Cygwin is particularly interesting because it
 does not map well on top of the Win32 API.  This makes it very
 difficult to implement correctly.  Currently, the Cygwin fork is a
 non-copy-on-write implementation similar to what was present in early
@@ -159,7 +159,7 @@ Win32, Cygwin has to invent its own Process IDs (PIDs).  As a
 result, when a process performs multiple exec calls, there will be
 multiple Windows PIDs associated with a single Cygwin PID.  In some
 cases, stubs of each of these Win32 processes may linger, waiting for
-their exec'd Cygwin process to exit.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-signals"></a>Signals</h3></div></div></div><p>When
+their exec'd Cygwin process to exit.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-signals"></a>Signals</h3></div></div><div></div></div><p>When
 a Cygwin process starts, the library starts a secondary thread for
 use in signal handling.  This thread waits for Windows events used to
 pass signals to the process.  When a process notices it has a signal,
@@ -180,7 +180,7 @@ the signal is processed, the signal handler signals the event that it
 is done.  This process keeps intraprocess signals synchronous, as
 required by POSIX.</p><p>Most standard UNIX signals are provided.  Job
 control works as expected in shells that support
-it.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-sockets"></a>Sockets</h3></div></div></div><p>Socket-related calls in Cygwin simply
+it.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-sockets"></a>Sockets</h3></div></div><div></div></div><p>Socket-related calls in Cygwin simply
 call the functions by the same name in Winsock, Microsoft's
 implementation of Berkeley sockets.  Only a few changes were needed to
 match the expected UNIX semantics - one of the most troublesome
@@ -193,7 +193,7 @@ at process startup is usually a slow affair.  Because many processes
 do not use sockets, Cygwin explicitly loads the Winsock DLL the
 first time it calls the Winsock initialization routine.  This single
 change sped up GNU configure times by thirty
-percent.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-select"></a>Select</h3></div></div></div><p>The UNIX select function is another
+percent.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-select"></a>Select</h3></div></div><div></div></div><p>The UNIX select function is another
 call that does not map cleanly on top of the Win32 API.  Much to our
 dismay, we discovered that the Win32 select in Winsock only worked on
 socket handles.  Our implementation allows select to function normally
