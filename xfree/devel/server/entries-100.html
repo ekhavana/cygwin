@@ -1,3 +1,43 @@
+<h4>Release 4.3.0-18</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-10-06 2120 EDT</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.3.0-18</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20031006-2120.tar.bz2">xwin-20031006-2120.tar.bz2</a>
+(129 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-17
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-17-to-4.3.0-18.diff">xwin-4.3.0-17-to-4.3.0-18.diff</a>
+(3 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winclipboardxevents.c - Fix crash when copying large amounts of
+data from an X application.  The crash was caused because the encoding
+of the XTextProperty was INCR, which is an incremental transfer of
+large amounts of text.  The problem isn't really fixed because copying
+or cutting large amounts of text now causes that text to be lost
+without warning, rather than copied to the clipboard.  The real
+solution will be to implement the INCR protocol, which will follow in
+a few days.  (Kensuke Matsuzaki, Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-17</h4>
 <table>
 <tbody>
