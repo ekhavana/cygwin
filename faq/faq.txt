@@ -1,7 +1,10 @@
+This is faq.txt, produced by makeinfo version 4.2 from
+../../../../src/winsup/doc/faq.texinfo.
+
 What is it?
 ***********
 
-The Cygwin tools are ports of the popular GNU development tools for
+   The Cygwin tools are ports of the popular GNU development tools for
 Microsoft Windows.  They run thanks to the Cygwin library which
 provides the UNIX system calls and environment these programs expect.
 
@@ -3398,6 +3401,15 @@ gcc command line options.  This is because Cygwin is supposed to be a
 Unix emulation environment and defining _WIN32 confuses some programs
 which think that they have to make special concessions for a Windows
 environment which Cygwin handles automatically.
+
+   Note that using -mno-cygwin replaces __CYGWIN__ with __MINGW32__ as
+to tell which compiler (or settings) you're running.  Check this out in
+detail by running, for example
+
+            $ gcc  -dM -E -xc /dev/null >gcc.txt
+            $ gcc -mno-cygwin -dM -E -xc /dev/null >gcc-mno-cygwin.txt
+            $ gcc -mwin32 -dM -E -xc /dev/null >gcc-mwin32.txt
+   Then use the diff and grep utilities to check what the difference is.
 
 How should I port my Unix GUI to Windows?
 -----------------------------------------
