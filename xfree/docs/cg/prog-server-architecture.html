@@ -2,13 +2,13 @@
 <HTML
 ><HEAD
 ><TITLE
->Cygwin/XFree86 X Server
+>Cygwin/X X Server
 Architecture</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.7"/><LINK
 REL="HOME"
-TITLE="Cygwin/XFree86 Contributor's Guide"
+TITLE="Cygwin/X Contributor's Guide"
 HREF="cygwin-xfree-cg.html"/><LINK
 REL="UP"
 TITLE="Programming"
@@ -33,7 +33,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Cygwin/XFree86 Contributor's Guide</TH
+>Cygwin/X Contributor's Guide</TH
 ></TR
 ><TR
 ><TD
@@ -70,11 +70,11 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="prog-server-architecture"
->Cygwin/XFree86 X Server
+>Cygwin/X X Server
 Architecture</A
 ></H1
 ><P
->Cygwin/XFree86's X Server architecture was heavily inspired by <A
+>Cygwin/X's X Server architecture was heavily inspired by <A
 HREF="biblio.html#porting-layer-definition"
 >Angebranndt94</A
 >, the Definition of the
@@ -129,7 +129,7 @@ CLASS="glossterm"
 ></A
 >, etc.)  may require
 additional information to be associated with these internal
-structures.  For example, the Cygwin/XFree86 X Server must associate a
+structures.  For example, the Cygwin/X X Server must associate a
 Windows window handle (hwnd) with each X Server screen that is
 open.</P
 ><P
@@ -263,7 +263,7 @@ CLASS="type"
 CLASS="function"
 >winGetScreenPriv</CODE
 > will
-cause an access violation, crashing the Cygwin/XFree86 X Server.</P
+cause an access violation, crashing the Cygwin/X X Server.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
@@ -307,7 +307,7 @@ CLASS="type"
 CLASS="function"
 >winSetScreenPriv</CODE
 > will cause an access violation,
-crashing the Cygwin/XFree86 X Server.</P
+crashing the Cygwin/X X Server.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
@@ -354,7 +354,7 @@ CLASS="type"
 CLASS="function"
 >winScreenPriv</CODE
 > will
-cause an access violation, crashing the Cygwin/XFree86 X Server.</P
+cause an access violation, crashing the Cygwin/X X Server.</P
 ></DIV
 ></DIV
 ><DIV
@@ -366,7 +366,7 @@ NAME="prog-server-architecture-engines"
 >Engine System</A
 ></H2
 ><P
->The Cygwin/XFree86 X Server uses several methods of drawing graphics
+>The Cygwin/X X Server uses several methods of drawing graphics
 on the display device; each of these different drawing methods is
 referred to as an engine.  Each of the engines can be classified as
 either a Shadow FB engine, a Native GDI engine, or as a Primary FB
@@ -452,7 +452,7 @@ NAME="prog-server-architecture-engines-primary"
 ></H3
 ><P
 >The Primary FB engine is deprecated.  Primary FB works in the
-same manner that the original Cygwin/XFree86 X Server worked, namely, it
+same manner that the original Cygwin/X X Server worked, namely, it
 uses <CODE
 CLASS="function"
 >IDirectDrawSurface_Lock</CODE
@@ -482,12 +482,12 @@ operations.  All of this leads to the following situation on Windows
 TYPE="1"
 ><LI
 ><P
->The primary framebuffer is locked, causing the Cygwin/XFree86 X
+>The primary framebuffer is locked, causing the Cygwin/X X
 Server to hold the Win16Mutex.</P
 ></LI
 ><LI
 ><P
->Windows switches the Cygwin/XFree86 X Server out of the current
+>Windows switches the Cygwin/X X Server out of the current
 process slot; another process is switched in.</P
 ></LI
 ><LI
@@ -497,8 +497,8 @@ process slot; another process is switched in.</P
 ><LI
 ><P
 >The GDI function call must wait for the Win16Mutex to be
-released, but the Win16Mutex cannot be released until the Cygwin/XFree86 X
-Server releases the Win16Mutex.  However, the Cygwin/XFree86 X Server will
+released, but the Win16Mutex cannot be released until the Cygwin/X X
+Server releases the Win16Mutex.  However, the Cygwin/X X Server will
 not release the Win16Mutex until it exits.  The end result is that the
 Win16Mutex has been deadlocked and the Windows machine is frozen
 with no way to recover.</P
@@ -822,13 +822,13 @@ CLASS="keycap"
 > messages, so the fake messages can be easily
 identified.</P
 ><P
->Special keyboard considerations must be handled the Cygwin/XFree86 X
+>Special keyboard considerations must be handled the Cygwin/X X
 Server losses or gains the keyboard focus.  For example, the user can
-switch out of Cygwin/XFree86, toggle the <B
+switch out of Cygwin/X, toggle the <B
 CLASS="keycap"
 >Num Lock</B
 > key,
-then switch back into Cygwin/XFree86; in this case Cygwin/XFree86 would not have
+then switch back into Cygwin/X; in this case Cygwin/X would not have
 received the <B
 CLASS="keycap"
 >Num Lock</B
@@ -904,9 +904,9 @@ are:</P
 ><P
 >Handling mouse motion is relatively straight forward, with the
 special consideration that the Windows mouse cursor must be hidden
-when the mouse is moving over the client area of a Cygwin/XFree86 window;
+when the mouse is moving over the client area of a Cygwin/X window;
 the Windows mouse cursor must be redisplayed when the mouse is
-moving over the non-client area of a Cygwin/XFree86 window.  Win32 sends
+moving over the non-client area of a Cygwin/X window.  Win32 sends
 the absolute coordinates of the mouse, so we call
 <CODE
 CLASS="function"

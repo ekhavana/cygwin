@@ -3,7 +3,7 @@
 <html lang="en-US">
 
 <head>
-<title>Cygwin/XFree86 - Development - To-Do List</title>
+<title>Cygwin/X - Development - To-Do List</title>
 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 <link rel="stylesheet" type="text/css" href="../xfree86.css">
@@ -12,11 +12,11 @@
 
 <!--#include virtual="../cygx-header.html" -->
 
-<h2>Cygwin/XFree86 - Development - To-Do List</h2>
+<h2>Cygwin/X - Development - To-Do List</h2>
 
 <p>Last updated: 2003-09-22 1620 EDT</p>
 
-<p>Following is a list of open tasks on the Cygwin/XFree86
+<p>Following is a list of open tasks on the Cygwin/X
 project:</p>
 
 <table border="0" cellpadding="5">
@@ -157,7 +157,7 @@ solution.</td>
 
 <td>2003-08-27</td>
 
-<td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/XFree86
+<td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/X
 clipboard manager, to handle data types other than XA_STRING and
 UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.</td>
 </tr>
@@ -177,9 +177,9 @@ Porting</a> site for more information.</td>
 </tr>
 
 <tr>
-<td>Cygwin/XFree86 needs the ability to play sounds from X clients or
+<td>Cygwin/X needs the ability to play sounds from X clients or
 windowing systems (Gnome, KDE, CDE, etc.) running on machines across
-the network.  For example, you should hear, on your Cygwin/XFree86
+the network.  For example, you should hear, on your Cygwin/X
 machine, the sounds being played by KDE if you use XDMCP to logon to a
 KDE session on a remote machine.  Investigate the various network
 transparent audio systems, such as Gnome's <a
@@ -212,22 +212,22 @@ would be highly beneficial.</td>
 <td>2003-08-27</td>
 
 <td>Catch and gracefully handle display mode changes while
-Cygwin/XFree86 is running.  Some of this will require using
+Cygwin/X is running.  Some of this will require using
 server-side RandR (resize and rotate extension) while other parts will
 require catching window message and shuffling around device context
 handles, reacquiring DirectDraw surfaces, etc.  Example case: assuming
 a notebook computer that has an internal 1024x768 display and an
-external 1280x1024 monitor; start Cygwin/XFree86 when the external
+external 1280x1024 monitor; start Cygwin/X when the external
 monitor is plugged in, thus the Windows desktop size will be 1280x1024
 and the primary display is the external monitor; unplug the external
 display so that the notebook reverts to its internal display; the
 display area will have changed from 1280x1024 to 1024x768, and the
 device context and/or DirectDraw surface handles may need to be
 changed to point to the internal display.  Currently switching from
-the monitor to the internal display will cause the Cygwin/XFree86
+the monitor to the internal display will cause the Cygwin/X
 window to cease refreshing; the window will only be filled with white.
 Switching from the internal display to the external monitor shows the
-Cygwin/XFree86 window with the content stretched to fit the now larger
+Cygwin/X window with the content stretched to fit the now larger
 window.</td>
 </tr>
 

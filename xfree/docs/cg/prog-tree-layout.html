@@ -7,7 +7,7 @@
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.7"/><LINK
 REL="HOME"
-TITLE="Cygwin/XFree86 Contributor's Guide"
+TITLE="Cygwin/X Contributor's Guide"
 HREF="cygwin-xfree-cg.html"/><LINK
 REL="UP"
 TITLE="Programming"
@@ -16,7 +16,7 @@ REL="PREVIOUS"
 TITLE="Programming"
 HREF="programming.html"/><LINK
 REL="NEXT"
-TITLE="Cygwin/XFree86 X Server
+TITLE="Cygwin/X X Server
 Architecture"
 HREF="prog-server-architecture.html"/></HEAD
 ><BODY
@@ -33,7 +33,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Cygwin/XFree86 Contributor's Guide</TH
+>Cygwin/X Contributor's Guide</TH
 ></TR
 ><TR
 ><TD
@@ -74,7 +74,7 @@ NAME="prog-tree-layout"
 ></H1
 ><P
 >The XFree86 CVS tree consists of several top-level directories,
-only three of which are of concern to Cygwin/XFree86 as of 2001-10-26.</P
+only three of which are of concern to Cygwin/X as of 2001-10-26.</P
 ><P
 ><B
 >Abridged Top Level XFree86 CVS Directories (in order of
@@ -98,7 +98,7 @@ CLASS="filename"
 >devel</TT
 > contains the
 scripts used to package a standard XFree86 distribution; thus,
-Cygwin/XFree86 uses these scripts to build distributions.  You will need
+Cygwin/X uses these scripts to build distributions.  You will need
 the <TT
 CLASS="filename"
 >util</TT
@@ -131,7 +131,7 @@ CLASS="filename"
 documented in <A
 HREF="prog-distribution.html"
 >the Section called <I
->Packaging a Cygwin/XFree86 Distribution</I
+>Packaging a Cygwin/X Distribution</I
 ></A
 >.  The
 remainder of this section deals only with the <TT
@@ -160,7 +160,7 @@ CLASS="filename"
 >cf</TT
 > contains generic and
 platform specific imake configuration settings, build rules, and other
-macros.  Cygwin/XFree86 specific settings, build rules, and shared library
+macros.  Cygwin/X specific settings, build rules, and shared library
 template are contained in <TT
 CLASS="filename"
 >cygwin.cf</TT
@@ -289,9 +289,9 @@ CLASS="filename"
 >hardcopy</TT
 > contains
 precompiled PostScript documentation for various components of the X
-Window System.  Cygwin/XFree86-specific documentation is not contained in
+Window System.  Cygwin/X-specific documentation is not contained in
 this directory, as of 2001-10-26.  The documentation contained in this
-directory is of great interest and relevance to Cygwin/XFree86
+directory is of great interest and relevance to Cygwin/X
 programmers.</P
 ></LI
 ><LI
@@ -304,7 +304,7 @@ sources to build the documents in <TT
 CLASS="filename"
 >hardcopy</TT
 >.  This directory is of little
-interest to Cygwin/XFree86 programmers.</P
+interest to Cygwin/X programmers.</P
 ></LI
 ><LI
 ><P
@@ -313,7 +313,7 @@ CLASS="filename"
 >util</TT
 > contains a few awk
 scripts for use in building documentation.  This directory is of little
-interest to Cygwin/XFree86 programmers.</P
+interest to Cygwin/X programmers.</P
 ></LI
 ></UL
 ></LI
@@ -324,7 +324,7 @@ CLASS="filename"
 >fonts</TT
 > contains font
 definition files used to compile fonts.  This directory is of little
-interest to Cygwin/XFree86 programmers.</P
+interest to Cygwin/X programmers.</P
 ></LI
 ><LI
 ><P
@@ -352,7 +352,7 @@ CLASS="filename"
 CLASS="filename"
 >lib</TT
 > contains both X
-client and X Server libraries.  Cygwin/XFree86 does not generally call any
+client and X Server libraries.  Cygwin/X does not generally call any
 functions in these libraries directly; however, we do have to link to
 several of these libraries to get our X Server to build.  These
 libraries are maintained by various developers from the XFree86
@@ -364,7 +364,7 @@ TARGET="_top"
 HREF="http://www.x.org/"
 TARGET="_top"
 >X.Org</A
->.  Cygwin/XFree86 programmers
+>.  Cygwin/X programmers
 occasionally need to fix Cygwin-related build errors that occur in
 these libraries.</P
 ></LI
@@ -379,7 +379,7 @@ HREF="http://www.xfree86.org/mailman/listinfo/i18n"
 TARGET="_top"
 >XFree86 I18N</A
 > project.  This directory
-is of little interest to Cygwin/XFree86 programmers.</P
+is of little interest to Cygwin/X programmers.</P
 ></LI
 ><LI
 ><P
@@ -394,7 +394,7 @@ CLASS="filename"
 CLASS="filename"
 >Xserver</TT
 > contains the
-heart of Cygwin/XFree86, namely, the Cygwin/XFree86 X Server.</P
+heart of Cygwin/X, namely, the Cygwin/X X Server.</P
 ><UL
 ><LI
 ><P
@@ -416,7 +416,7 @@ CLASS="glossterm"
 >Shadow</I
 ></A
 > drawing system that
-Cygwin/XFree86 depends upon.  This directory is of no interest to Cygwin/XFree86
+Cygwin/X depends upon.  This directory is of no interest to Cygwin/X
 programmers.</P
 ></LI
 ><LI
@@ -439,7 +439,7 @@ CLASS="filename"
 <CODE
 CLASS="function"
 >main</CODE
-> entry-point function for the Cygwin/XFree86 X
+> entry-point function for the Cygwin/X X
 Server.  The X Server startup procedure can be followed by examining
 <CODE
 CLASS="function"
@@ -452,8 +452,8 @@ CLASS="function"
 CLASS="filename"
 >fb</TT
 > contains the modern
-framebuffer drawing procedures used by Cygwin/XFree86.  This directory is
-maintained by Keith Packard and is only of interest to Cygwin/XFree86
+framebuffer drawing procedures used by Cygwin/X.  This directory is
+maintained by Keith Packard and is only of interest to Cygwin/X
 programmers when it fails to build.</P
 ></LI
 ><LI
@@ -482,8 +482,8 @@ CLASS="filename"
 > contains source
 code for the XFree86 servers that run on various operating systems
 that generally have low-level access to the graphics hardware.
-Cygwin/XFree86 does not have low-level access to the graphics hardware,
-thus Cygwin/XFree86 is not able to utilize the XFree86 server.</P
+Cygwin/X does not have low-level access to the graphics hardware,
+thus Cygwin/X is not able to utilize the XFree86 server.</P
 ></LI
 ><LI
 ><P
@@ -492,7 +492,7 @@ CLASS="filename"
 >xnest</TT
 > contains source
 code for the Nested X Server which runs inside of another X Server.
-xnest is not generally of interest to Cygwin/XFree86 programmers.</P
+xnest is not generally of interest to Cygwin/X programmers.</P
 ></LI
 ><LI
 ><P
@@ -500,8 +500,8 @@ xnest is not generally of interest to Cygwin/XFree86 programmers.</P
 CLASS="filename"
 >xwin</TT
 > contains the source
-code for the Cygwin/XFree86 X Server.  This is the primary directory that
-Cygwin/XFree86 programmers are interested in.</P
+code for the Cygwin/X X Server.  This is the primary directory that
+Cygwin/X programmers are interested in.</P
 ></LI
 ></UL
 ></LI
@@ -512,7 +512,7 @@ CLASS="filename"
 >include</TT
 > contains header
 files specific to the X Server program, such as graphics context
-structures.  This directory is useful to Cygwin/XFree86 programmers when
+structures.  This directory is useful to Cygwin/X programmers when
 they need to lookup the name or data type of members of various X
 Server structures.</P
 ></LI
@@ -528,7 +528,7 @@ CLASS="glossterm"
 >machine independent</I
 ></A
 > drawing
-routines.  These drawing routines are used by the Cygwin/XFree86 Native GDI
+routines.  These drawing routines are used by the Cygwin/X Native GDI
 X Server engine.  In turn, the machine independent routines depend in
 <CODE
 CLASS="function"
@@ -558,7 +558,7 @@ CLASS="filename"
 >layer</TT
 > contains source
 code for the layer extension.  This extension is supported by
-Cygwin/XFree86, however, this directory will be of interest only when layer
+Cygwin/X, however, this directory will be of interest only when layer
 fails to build.</P
 ></LI
 ><LI
@@ -567,10 +567,10 @@ fails to build.</P
 CLASS="filename"
 >shadow</TT
 > contains source
-code for the shadow extension that the Cygwin/XFree86 X Server depends
-upon.  This directory is of primary importance to Cygwin/XFree86, but it is
+code for the shadow extension that the Cygwin/X X Server depends
+upon.  This directory is of primary importance to Cygwin/X, but it is
 maintained by other programmers and is only of direct interest to
-Cygwin/XFree86 programmers when it fails to build.  The shadow extension
+Cygwin/X programmers when it fails to build.  The shadow extension
 does three things:</P
 ><OL
 TYPE="1"
@@ -589,7 +589,7 @@ have been drawn on.</P
 ></LI
 ><LI
 ><P
->Calls one of Cygwin/XFree86's engine dependent ShadowUpdate ()
+>Calls one of Cygwin/X's engine dependent ShadowUpdate ()
 functions to transfer the updated regions of the offscreen framebuffer
 to the screen.</P
 ></LI
@@ -646,9 +646,9 @@ more information.</P
 CLASS="filename"
 >util</TT
 > contains a few
-utilities for programmers, such as a memory leak counter.  Cygwin/XFree86
+utilities for programmers, such as a memory leak counter.  Cygwin/X
 has never used these utilities, thus this directory is of little
-interest to Cygwin/XFree86 programmers.</P
+interest to Cygwin/X programmers.</P
 ></LI
 ><LI
 ><P
@@ -658,7 +658,7 @@ CLASS="filename"
 > is supposed
 to contain various side projects that are in progress.  As of
 2001-10-26, this directory contains only empty directories.  This
-directory is of little interest to Cygwin/XFree86 programmers.</P
+directory is of little interest to Cygwin/X programmers.</P
 ></LI
 ></UL
 ></DIV
@@ -720,7 +720,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Cygwin/XFree86 X Server
+>Cygwin/X X Server
 Architecture</TD
 ></TR
 ></TABLE

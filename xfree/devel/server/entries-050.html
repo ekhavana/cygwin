@@ -655,12 +655,12 @@ initialize an 8bpp PseudoColor visual on top of our TrueColor visual
 when WIN_EMULATE_PSEUDO_SUPPORT is enabled; by default,
 WIN_EMULATE_PSEUDO_SUPPORT is not enabled.  This new PseudoColor
 visual will allow programs such as Magic 7.1 to display when
-Cygwin/XFree86 is running with a TrueColor default visual; however,
+Cygwin/X is running with a TrueColor default visual; however,
 the colors are all messed up.  It may be possible to fix the colors by
 making changes to our local colormap handling funtions (and enabling
 them in TrueColor mode, which they currently are not), or by making
 some change to FB and/or SHADOW.  This feature is being added now
-because Cygwin/XFree86 doesn't crash when we call
+because Cygwin/X doesn't crash when we call
 miSetVisualTypesAndMasks a second time; I must be doing something
 differently now that fixed the crashing (probably the bpp and depth
 handling fixes).  (Harold Hunt)</li>
@@ -754,8 +754,8 @@ we try to restore the primary DirectDraw surface up to
 WIN_REGAIN_SURFACE_RETRIES (currently 1) times when a bit block
 transfer of the exposed regions fails.  This corrects the case where
 switching a notebook from its internal display to an external display
-(or vice versa) would cause the Cygwin/XFree86 window to blank and
-fail to redraw itself until the Cygwin/XFree86 window was minimized
+(or vice versa) would cause the Cygwin/X window to blank and
+fail to redraw itself until the Cygwin/X window was minimized
 and then restored.  (Harold Hunt)</li>
 
 </ul>
@@ -841,7 +841,7 @@ href="http://www.msu.edu/~huntharo/xwin/devel/server/xc-programs-Xserver-os-osin
 <ul>
 
 <li>win.h, xc/config/cf/cygwin.cf - Stop building RANDR and disable
-Cygwin/XFree86's LAYER support.  These two extensions were causing KDE
+Cygwin/X's LAYER support.  These two extensions were causing KDE
 3.0 icons with alpha channels to not display.  RENDER is still
 enabled.  (Harold Hunt)</li>
 
@@ -885,8 +885,8 @@ href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20020613-0102.tar.bz2"
 <ul>
 
 <li>InitOutput.c, XWin.man, win.h, winwndproc.c - Add the -lesspointer
-command line parameter which causes Cygwin/XFree86 to hide the Windows
-mouse cursor when the mouse is over any Cygwin/XFree86 window (whether
+command line parameter which causes Cygwin/X to hide the Windows
+mouse cursor when the mouse is over any Cygwin/X window (whether
 activated or not).  (Stuart Adamson)</li>
 
 </ul>
@@ -957,7 +957,7 @@ href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20020607-2235.tar.bz2"
 <ul>
 
 <li>InitOutput.c, win.h, wincreatewnd.c - Add a -nodecoration
-parameter that creates the Cygwin/XFree86 window that is the same size
+parameter that creates the Cygwin/X window that is the same size
 as the desktop, without a border.  The end effect is that you can
 still get to the taskbar (even with Auto Hide enabled) and easily
 switch to other application while not giving up any screen space to
@@ -977,9 +977,9 @@ Adamson)</li>
 
 <li>wincursor.c - See if we are the foreground window before warping
 the Windows cursor position.  This fixes the new bug that occurs if
-you launch Cygwin/XFree86 and give another application the focus.  In
+you launch Cygwin/X and give another application the focus.  In
 that case the Windows mouse cursor would still jump to the center of
-the screen, even though the Cygwin/XFree86 window was not active.
+the screen, even though the Cygwin/X window was not active.
 (Harold Hunt)</li>
 
 <li>winkeybd.h - Fix the bug where pressing both shift keys then
@@ -989,9 +989,9 @@ VK_SHIFT key to KEY_ShiftL.  (Harold Hunt)</li>
 
 <li>wincreatewnd.c - Pass SW_SHOWNORMAL instead of SW_HIDE to
 ShowWindow when running a DirectDraw engine in fullscreen mode.  This
-fixes the bug where launching Cygwin/XFree86 then giving another
-application the focus before the Cygwin/XFree86 window was displayed
-would cause Cygwin/XFree86 to never display a window or register a
+fixes the bug where launching Cygwin/X then giving another
+application the focus before the Cygwin/X window was displayed
+would cause Cygwin/X to never display a window or register a
 window handle on the Windows taskbar.  (Harold Hunt)</li>
 
 </ul>
@@ -1022,7 +1022,7 @@ href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20020404-2206.tar.bz2"
 <ul>
 
 <li>wincursor.c - Try to fix winPointerWarpCursor by offsetting by the
-coordinates of the Cygwin/XFree86 client area upper left-hand
+coordinates of the Cygwin/X client area upper left-hand
 corner.  (Harold Hunt)</li>
 
 </ul>
@@ -1091,12 +1091,12 @@ href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20011111-1500.tar.bz2"
 
 <li>winkeybd.c - winRestoreModeKeyStates () - This function is
 supposed to handle the case where the user switches out of
-Cygwin/XFree86, changes the state of a mode key (i.e. Num Lock), then
-returns to Cygwin/XFree86.  Back in May I replaced a macro, WIN_XOR,
+Cygwin/X, changes the state of a mode key (i.e. Num Lock), then
+returns to Cygwin/X.  Back in May I replaced a macro, WIN_XOR,
 with the C binary operator ^.  At the time I didn't realize that I was
 using the binary operator instead of the logical operator.  The end
 result is that some of the mode keys were toggled each time that
-Cygwin/XFree86 gained and lost focus, regardless of whether the key
+Cygwin/X gained and lost focus, regardless of whether the key
 state had changed.  The WIN_XOR macro is being used again, and I have
 added a note as to why the C xor operator cannot be used.  This has
 been broken for months, I'm really surprised that no one noticed it
