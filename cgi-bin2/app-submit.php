@@ -333,7 +333,7 @@
 			if ($_SERVER["REMOTE_HOST"] != "")
 				$received = "from " . $_SERVER["REMOTE_HOST"] . " (" . $_SERVER["REMOTE_ADDR"] . ")\r\n  by " . $_SERVER["SERVER_NAME"] . " with HTTP; " . date("r");
 			else
-				$received = "from " . $_SERVER["REMOTE_ADDR"] . "\r\n  by " . $_SERVER["SERVER_NAME"] . " with HTTP; " . date();
+				$received = "from " . $_SERVER["REMOTE_ADDR"] . "\r\n  by " . $_SERVER["SERVER_NAME"] . " with HTTP; " . date("r");
 			$headers = "Received: " . $received . "\r\n"
 				. "From: " . $from . "\r\n";
 			if (($from != "") && ($subject != "") && ($to != ""))
