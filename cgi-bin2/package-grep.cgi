@@ -43,13 +43,12 @@ if (!open(INDEX, 'index.html')) {
     close INDEX;
 }
 
-if (!%main::packages) {
-    print "<br><br>No packages contained search string '<tt>$grep<tt>'";
-} else {
-    print "Found <b>$main::count</b> matches for <b>$grep</b>.<br><br>\n";
+print "Found <b>$main::count</b> matches for <b>$grep</b>.<br><br>\n";
+if (%main::packages) {
     for my $p (sort keys %main::packages) {
 	for my $f (@{$main::packages{$p}}) {
-	    print '<tr><td><img src="http://sources.redhat.com/icons/ball.gray.gif" height=10 width=10 alt=""></a></td><td cellspacing=10><a href="../packages/' . $f . '">' . $f . '</a></td><td align="left">' . findheader($p, $index) . "</td></tr>\n";
+	    print '<tr><td><img src="http://sources.redhat.com/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
+	           "<td cellspacing=10><a href=\"package-cat.cgi?file=$f&grep=$grep\">" . $f . '</a></td><td align="left">' . findheader($p, $index) . "</td></tr>\n";
 	}
     }
 }
