@@ -151,7 +151,7 @@ CLASS="command"
 ><DIV
 CLASS="informalexample"
 ><A
-NAME="AEN457"
+NAME="AEN462"
 ></A
 ><P
 ><B
@@ -166,6 +166,334 @@ CLASS="parameter"
 >
 </B
 > </P
+></DIV
+><DIV
+CLASS="table"
+><A
+NAME="AEN466"
+></A
+><P
+><B
+>Table 3-1. Parameters Descriptions</B
+></P
+><TABLE
+BORDER="1"
+CLASS="CALSTABLE"
+><THEAD
+><TR
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>Parameter</TH
+><TH
+ALIGN="LEFT"
+VALIGN="MIDDLE"
+>Description</TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>[-screen
+<TT
+CLASS="replaceable"
+><I
+>screen_number</I
+></TT
+>
+<TT
+CLASS="replaceable"
+><I
+>width</I
+></TT
+>
+<TT
+CLASS="replaceable"
+><I
+>height</I
+></TT
+>
+...]</P
+>
+</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>This parameter does not have to be specified.  Cygwin/XFree86's
+default behavior is to create a single screen that is roughly the
+size of the current Windows display area.</P
+>
+
+<P
+>This parameter may be used to specify the screen number, height,
+and width of one or several Cygwin/XFree86 screens; each Cygwin/XFree86 screen
+will be opened in its own window.  When using multiple screens, be
+sure not to duplicate any screen numbers.  Do note that, as of
+2002-01-08, using multiple screens is not fully implemented; there are
+several bugs that must be fixed by someone that uses the multiple
+screens feature.</P
+>
+
+<P
+>Screen specific parameters, such as
+<TT
+CLASS="parameter"
+><I
+>-fullscreen</I
+></TT
+>, can be applied as a default to all
+screens by placing those screen specific parameters before any
+<TT
+CLASS="parameter"
+><I
+>-screen</I
+></TT
+> parameter.  Screen specific parameters
+placed after the first <TT
+CLASS="parameter"
+><I
+>-screen</I
+></TT
+> parameter will
+apply only to the immediately preceeding
+<TT
+CLASS="parameter"
+><I
+>-screen</I
+></TT
+> parameter.</P
+>
+</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>[-engine
+<TT
+CLASS="replaceable"
+><I
+>engine_number</I
+></TT
+>
+]</P
+>
+</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>Do not use this parameter unless you are a Cygwin/XFree86 developer
+or are instructed by a Cygwin/XFree86 developer to do so.</P
+>
+
+<P
+>Cygwin/XFree86's default behavior is to determine if DirectDraw or
+DirectDraw4 are present, then to examine the
+<TT
+CLASS="parameter"
+><I
+>-depth</I
+></TT
+> and <TT
+CLASS="parameter"
+><I
+>-fullscreen</I
+></TT
+>
+parameters to determine the engine with optimum performance that
+supports the specified depth and window configuration.</P
+>
+</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>[-fullscreen]</P
+>
+</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>This parameter tells Cygwin/XFree86 to open a given screen in
+fullscreen mode.</P
+>
+</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>[-depth
+<TT
+CLASS="replaceable"
+><I
+>depth_in_bits_per_pixel</I
+></TT
+>
+]</P
+>
+</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>This parameter can only be used with
+<TT
+CLASS="parameter"
+><I
+>-fullscreen</I
+></TT
+> and a DirectDraw based engine to
+specify the display depth that should be used for the fullscreen
+Cygwin/XFree86 screen.</P
+>
+</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>[-refresh
+<TT
+CLASS="replaceable"
+><I
+>refresh_rate_in_herz</I
+></TT
+>
+]</P
+>
+</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>This parameter can only be used with
+<TT
+CLASS="parameter"
+><I
+>-fullscreen</I
+></TT
+> and a DirectDraw based engine to
+specify the refresh rate that should be used for the fullscreen
+Cygwin/XFree86 screen.</P
+>
+</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>[-emulate3buttons 
+<TT
+CLASS="replaceable"
+><I
+>timeout_in_milliseconds</I
+></TT
+>
+]</P
+>
+</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>Note: scroll wheel mice often allow you to click the scroll
+wheel for middle mouse button functionality.  Thus, most users with a
+scroll wheel mouse will not need to use this parameter.</P
+>
+
+<P
+>This option allows users with a two-button mouse to emulate a
+third mouse button by pressing both mouse buttons within the optional
+timeout specified in milliseconds.  The default timeout is 50
+milliseconds.</P
+>
+</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>[-[no]winkill]</P
+>
+</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>Enable or disable the
+<B
+CLASS="keycap"
+>Alt</B
+>-<B
+CLASS="keycap"
+>F4</B
+> key combo
+as a signal to exit Cygwin/XFree86.  The
+<B
+CLASS="keycap"
+>Alt</B
+>-<B
+CLASS="keycap"
+>F4</B
+> key combo
+is enabled by default.</P
+>
+</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>[-[no]unixkill]</P
+>
+</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>&#13;<P
+>Enable or disable the
+<B
+CLASS="keycap"
+>Ctrl</B
+>-<B
+CLASS="keycap"
+>Alt</B
+>-<B
+CLASS="keycap"
+>Backspace</B
+>
+key combo as a signal to exit Cygwin/XFree86.  The
+<B
+CLASS="keycap"
+>Ctrl</B
+>-<B
+CLASS="keycap"
+>Alt</B
+>-<B
+CLASS="keycap"
+>Backspace</B
+>
+key combo is disabled by default.</P
+>
+</TD
+></TR
+></TBODY
+></TABLE
 ></DIV
 ></DIV
 ><DIV

@@ -56,6 +56,9 @@ Harold L Hunt, II
         9. [32]TERMINATION
         10. [33]FUTURE REVISIONS OF THIS LICENSE
         [34]How to use this License for your documents
+
+   List of Tables
+   3-1. [35]Parameters Descriptions
      _________________________________________________________________
 
 Chapter 1. Cygwin/XFree86 Overview
@@ -79,7 +82,7 @@ Cygwin/XFree86 Contents
 Downloading Cygwin
 
    Cygwin tools are, in the words of the Cygwin development homepage,
-   [35]http://cygwin.com/, "ports of the popular GNU development tools
+   [36]http://cygwin.com/, "ports of the popular GNU development tools
    and utilities for Windows 95, 98, and NT. They function by using the
    Cygwin library which provides a UNIX-like API on top of the Win32
    API." Cygwin allows the compilation of the XFree86 source on Win32;
@@ -94,7 +97,7 @@ Downloading Cygwin
      to save the downloaded packages to a Samba share; some versions of
      Samba have a problem with prior versions of setup.exe.
 
-    1. Open the Cygwin, [36]http://cygwin.com/ page in your web browser
+    1. Open the Cygwin, [37]http://cygwin.com/ page in your web browser
     2. Click the "Install Cygwin Now" link in the upper-right hand corner
        of the page; or, click the "Install" link next to "Latest net
        release:", which should be near the top of the page in the main
@@ -189,7 +192,7 @@ Downloading Cygwin/XFree86
    Cygwin/XFree86 is comprised of several binary tarballs.
 
    Follow these steps to download Cygwin/XFree86 binaries:
-    1. Visit the [37]Cygwin mirrors page to find your closest mirror
+    1. Visit the [38]Cygwin mirrors page to find your closest mirror
     2. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
     3. Download the following files from xfree/xc-4-binaries/4.1.0,
@@ -364,6 +367,78 @@ Command Line Parameters
 
    XWin.exe -screen 0 800 600 -fullscreen -depth 32 -refresh 85
    -emulate3buttons 100 -nowinkill -unixkill
+
+   Table 3-1. Parameters Descriptions
+   Parameter Description
+
+   [-screen screen_number width height ...]
+
+   This parameter does not have to be specified. Cygwin/XFree86's default
+   behavior is to create a single screen that is roughly the size of the
+   current Windows display area.
+
+   This parameter may be used to specify the screen number, height, and
+   width of one or several Cygwin/XFree86 screens; each Cygwin/XFree86
+   screen will be opened in its own window. When using multiple screens,
+   be sure not to duplicate any screen numbers. Do note that, as of
+   2002-01-08, using multiple screens is not fully implemented; there are
+   several bugs that must be fixed by someone that uses the multiple
+   screens feature.
+
+   Screen specific parameters, such as -fullscreen, can be applied as a
+   default to all screens by placing those screen specific parameters
+   before any -screen parameter. Screen specific parameters placed after
+   the first -screen parameter will apply only to the immediately
+   preceeding -screen parameter.
+
+   [-engine engine_number ]
+
+   Do not use this parameter unless you are a Cygwin/XFree86 developer or
+   are instructed by a Cygwin/XFree86 developer to do so.
+
+   Cygwin/XFree86's default behavior is to determine if DirectDraw or
+   DirectDraw4 are present, then to examine the -depth and -fullscreen
+   parameters to determine the engine with optimum performance that
+   supports the specified depth and window configuration.
+
+   [-fullscreen]
+
+   This parameter tells Cygwin/XFree86 to open a given screen in
+   fullscreen mode.
+
+   [-depth depth_in_bits_per_pixel ]
+
+   This parameter can only be used with -fullscreen and a DirectDraw
+   based engine to specify the display depth that should be used for the
+   fullscreen Cygwin/XFree86 screen.
+
+   [-refresh refresh_rate_in_herz ]
+
+   This parameter can only be used with -fullscreen and a DirectDraw
+   based engine to specify the refresh rate that should be used for the
+   fullscreen Cygwin/XFree86 screen.
+
+   [-emulate3buttons timeout_in_milliseconds ]
+
+   Note: scroll wheel mice often allow you to click the scroll wheel for
+   middle mouse button functionality. Thus, most users with a scroll
+   wheel mouse will not need to use this parameter.
+
+   This option allows users with a two-button mouse to emulate a third
+   mouse button by pressing both mouse buttons within the optional
+   timeout specified in milliseconds. The default timeout is 50
+   milliseconds.
+
+   [-[no]winkill]
+
+   Enable or disable the Alt-F4 key combo as a signal to exit
+   Cygwin/XFree86. The Alt-F4 key combo is enabled by default.
+
+   [-[no]unixkill]
+
+   Enable or disable the Ctrl-Alt-Backspace key combo as a signal to exit
+   Cygwin/XFree86. The Ctrl-Alt-Backspace key combo is disabled by
+   default.
      _________________________________________________________________
 
 Chapter 4. Using Cygwin/XFree86
@@ -379,7 +454,7 @@ startxwin.bat
 
    startxwin.bat - Use a MS-DOS batch file as the startup script. An
    example startxwin.bat is included in startup-scripts.tgz, which is
-   extracted according to the instructions in [38]the Section called
+   extracted according to the instructions in [39]the Section called
    Installing Cygwin/XFree86 in Chapter 2. Run
    /usr/X11R6/bin/startxwin.bat by double-clicking it in Windows
    Explorer.
@@ -389,7 +464,7 @@ startxwin.sh
 
    startxwin.sh - Use an sh shell script as the startup script. An
    example startxwin.sh is included in startup-scripts.tgz, which is
-   extracted according to the instructions in [39]the Section called
+   extracted according to the instructions in [40]the Section called
    Installing Cygwin/XFree86 in Chapter 2. Run
    /usr/X11R6/bin/startxwin.sh in a Cygwin shell:
 Harold@MyWindowsHost ~
@@ -824,7 +899,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [40]http://www.gnu.org/copyleft/.
+   [41]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -865,7 +940,7 @@ References
 
    1. file://localhost/home/public/documents/cygx/build/ug/dump.html#overview
    2. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup
-   3. file://localhost/home/public/documents/cygx/build/ug/dump.html#AEN57
+   3. file://localhost/home/public/documents/cygx/build/ug/dump.html#AEN62
    4. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-downloading
    5. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-installing
    6. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-xfree-downloading
@@ -897,9 +972,10 @@ References
   32. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-termination
   33. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-future-revisions-of-this-license
   34. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-using-for-your-documents
-  35. http://cygwin.com/
+  35. file://localhost/home/public/documents/cygx/build/ug/dump.html#AEN466
   36. http://cygwin.com/
-  37. http://cygwin.com/mirrors.html
-  38. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-xfree-installing
+  37. http://cygwin.com/
+  38. http://cygwin.com/mirrors.html
   39. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-xfree-installing
-  40. http://www.gnu.org/copyleft/
+  40. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-xfree-installing
+  41. http://www.gnu.org/copyleft/
