@@ -88,7 +88,7 @@ href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-20020610-2055.tar.bz2"
 <td>
 <ul>
 
-<li>xwinclip.c - Use select () in ConnectionNumber(pDisplay) and
+<li><p>xwinclip.c - Use select () in ConnectionNumber(pDisplay) and
 /dev/windows instead of calling XNextEvent, which blocks until the
 next event.  This has many benefits: Windows messages are now
 processed almost immediately after they come in (the old approach
@@ -98,7 +98,26 @@ connection has closed (we don't currently catch these events), and the
 clipboard integration code can now be rewritten with the assumption
 that we can and will see the Windows events when they arrive without
 an X event immediately preceeding them (which may allow us to stop
-stealing ownership of the X selection).  (Harold Hunt)</li>
+stealing ownership of the X selection).  (Harold Hunt)</p>
+
+<p>Here is a
+<a
+href="http://www.xfree86.org/pipermail/xpert/2001-December/013978.html">description of using select instead of XNextEvent</a>.</p>
+
+<p>Here are two examples of how to use select instead of XNextEvent:
+<ul>
+<li>
+<a
+href="http://www.neosoft.com/tcl/tclhtml/tclFAQ/part2/faq-doc-54.html">Example 1</a></li>
+
+<li>
+<a
+href="http://www-h.eng.cam.ac.uk/help/tpl/graphics/X/signals.html">Example
+2</a>(That
+second one is towards the bottom, just find
+`ConnectionNumber')</li>
+</ul>
+</p></li>
 
 <li>xwinclip.c - Move the X event loop into new function
 FlushXEventQueue.  (Harold Hunt)</li>
