@@ -1,3 +1,48 @@
+<h4>Release 4.3.0-29</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-12-24 1624 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20031224-1624.tar.bz2">xwin-20031224-1624.tar.bz2</a>
+(131 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-28
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-28-to-4.3.0-29.diff">xwin-4.3.0-28-to-4.3.0-29.diff</a>
+(6 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winkeybd.c/winIsFakeCtrl_L - Call Sleep (0) if the first call to
+PeekMessage returns nothing.  TweakUI occasionally causes the Alt_R
+press/release to not be in the message queue at the time that we
+receive the fake Ctrl_L press/release.  Calling Sleep (0) gives up the
+rest of our time slice to other apps that need it, which causes the
+Alt_R message to show up on our queue.  We can then call PeekMessage
+again and check if the Alt_R is there or not.  If it is not there,
+then we assume that we have a real Ctrl_L press, if it is there, then
+we discard the fake Ctrl_L as usual.  I tested this with the
+US-International layout and it seemed to work fine.  I originally
+coded this fix with a short "keytest" program and was able to confirm that
+the fix works there as well.  (Harold L Hunt II)</li>
+
+<li>win.h, winkeybd.c, winkeybd.h, winwndproc.c - Remove dead code
+that was wrapped with #if WIN_NEW_KEYBOARD_SUPPORT.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-28</h4>
 <table>
 <tbody>
