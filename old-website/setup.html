@@ -302,12 +302,13 @@ all categories are only a single word.</p>
 <p>The <tt>requires</tt> line indicates the packages that this package
 relies on.  If your package is dependent on a file provided by another
 package that other package should be included here - this includes the
-cygwin package itself!
+cygwin package itself!</p>
 
-<p>A package can rely on multiple packages. Hierarchical dependencies
-work correctly. It is best to only include specific
-dependencies, i.e. drop '<tt>bar</tt>' from your dependency list for boffo
-if you are including '<tt>foo</tt>' which relies on '<tt>bar</tt>' and boffo itself does not directly require '<tt>bar</tt>'.
+<p>A package can rely on multiple packages.  Hierarchical dependencies
+should work correctly, however, it is best to always include specific
+dependencies, i.e., don't drop '<tt>bar</tt>' from your dependency list
+if your package requires it, even if you are including '<tt>foo</tt>'
+which relies on '<tt>bar</tt>'.</p>
 
 <p>Multiple packages are separated by spaces.  Do not enclose multiple
 package names within quotation marks.</p>
