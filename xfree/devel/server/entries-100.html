@@ -1,3 +1,54 @@
+<h4>Release 4.3.0-38</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-11 1730 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040111-1730.tar.bz2">xwin-20040111-1730.tar.bz2</a>
+(134 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-37
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-37-to-4.3.0-38.diff">xwin-4.3.0-37-to-4.3.0-38.diff</a>
+(7 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winconfig.c/winConfigKeyboard - Fix problem with Japanese keyboard
+layout being ignored after server reset in XDMCP sessions.  (Takuma
+Murakami)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_DRAWCLIPBOARD -
+Release ownership of the X11 PRIMARY and/or CLIPBOARD selections if an
+unsupported format is copied to the Win32 clipboard and we currently
+own the PRIMARY and/or CLIPBOARD selections.  This will prevent a
+silent failure in X11 when pasting after an unsupported item has been
+copied to the Win32 clipboard; instead, X11 apps should either paste
+from an another owned selection (xterm does this) or they might report
+that the clipboard is empty.  (Harold L Hunt II)</li>
+
+<li>winclipboardwrappers.c - Initialize g_iOwners to None.  (Harold L
+Hunt II)</li>
+
+<li>winclipboardwrappers.c/winProcSetSelectionOwner - Fix a bug in the
+call to MakeAtom for the CLIPBOARD atom that was causing MakeAtom to
+return a failure code instead of the CLIPBOARD atom; this caused the
+owner window for the CLIPBOARD atom to never be saved by
+winProcSetSelectionOwner.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-37</h4>
 <table>
 <tbody>
