@@ -78,8 +78,26 @@ Bad examples: <br>
 
 This also applies to general discussion.  It's very hard to follow
 the list when most of the subject lines look very similar. <P>
-
+<li>Avoid the use of exclamation marks or multiple question marks.  They add
+nothing to the bug report and provide the impression that you are too excited
+to calmly think about the problem.</li>
+<li>Avoid personal details about why you need the bug fixed or how important
+it is for you to have it fixed.  People will be more likely to look at your
+problem if it is cut and dry, to the point, and uses a minimum of extra words.</li>
+<li>Reporting that your problem "works fine" on some "other" UNIX platform or
+used to work ok in a previous release is marginally useful data.  However, this
+does <em>not</em> guarantee that you've uncovered a Cygwin problem.  UNIXes
+vary in their behavior and Cygwin is basically a different flavor of UNIX.
+<p>This is <em>particularly</em> true of programs which rely on specific
+malloc behavior, like being able to free a pointer twice or being able to
+access memory after freeing.</p>
+<p>Another common problem is attempting to modify the contents of a C "string".
+On Cygwin (and many UNIXes) strings are stored in read-only memory.  So, it
+is not possible to modify them.  You can change this behavior with the gcc
+option <tt>-fwritable-strings</tt> but we suggest that it is better to change
+your program.</li>
 <li>In your description, show how to reproduce the problem.  This means
+
 including a test case if at all possible. <P>
 
 <li>At the very least, always include which cygwin beta release you are
