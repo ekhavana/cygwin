@@ -1,51 +1,62 @@
 <HTML>
 <HEAD>
-<title>Setup.INI Developer's Guide</title>
+  <title>Cygwin Package Contributors Guide</title>
 </HEAD>
 
 <!--#include virtual="cygwin-header.html"-->
 
-<h1 align=center>Setup.INI Developer's Guide</h1>
+<h1 align=center>Cygwin Package Contributors Guide</h1>
 
 <p>This document is intended for people who post packages to
 sources.redhat.com, and thus need to make them available through the
 standard Cygwin setup program.  This documents the syntax of the
-setup.ini file, and the program that automatically generates it on a
-regular basis.
+setup.ini file, the program that automatically generates it on a
+regular basis, the layout required for packages, and the related policies to ensure good behaviour from the setup.exe program.</p>
+<p>Setup depends on vertain conventions being followed. If they are not followed, bad things may happen to the users of setup.exe. Where a convention can be ignored, should circumstances warrent, this document will specify that.</p>
+<p>The mailing list cygwin-apps@cygwin.com is the correct place to discuss any package creation or maintenance issues. It is not a place for end user bug reports - direct those to cygwin at cygwin dot com isntead.</p>
+<h2>Contents</h2>
+<ul>
+  <li><p><a href="#naming">package naming</a></p></li>
+  <li><p><a href="#sources.redhat.com">Sources.redhat.com</a></p></li>
+  <li><p><a href="#setup.hint">setup.hint</a></p></li>
+  <li><p><a href="#setup.ini">setup.ini</a></p></li>
+  <li><p><a href="#package_contents">making packages</a></p></li>
+  <li><p><a href="#submitting">Submitting a package</a></p></li>
+</ul>
 
-<p> Recommended package versioning scheme: use the vendor's version
+<h2><a id="naming">Package file naming</a></h2>
+<p> Package naming scheme: use the vendor's version
 plus a suffix for ports of existing packages (i.e. bash 2.04 becomes
 2.04-1, 2.04-2, etc, until bash 2.05 is ported, which would be 2.05-1,
 etc).  Some packages also use a YYMMDD format for their versions, e.g.
-binutils-20010901.tar.bz2.  Binary tarballs are "package-version.tar.bz2"
-while source tarballs are "package-version-src.tar.bz2".</p>
+binutils-20010901-1.tar.bz2. The first release of a package for a given vendor version may optionally skip the suffix. Binary tarballs are "package-version.tar.bz2" while source tarballs are "package-version-src.tar.bz2". Comparison of versions is done via ASCII sort order. In the event that a package doesn't sort correctly (for example, from ...-9-... to ...-10-..., use the setup.hint current, prev and exp labels to override the inbuilt sort during the transition period.</p>
 
-<h2>Automatic setup.ini generation on sources.redhat.com</h2>
+<h2><a id="sources.redhat.com">Automatic setup.ini generation on sources.redhat.com</a></h2>
 
-A script runs on sources.redhat.com which collects information from
+<p>A script runs on sources.redhat.com which collects information from
 the<tt> latest </tt>and<tt> contrib </tt> directories (possibly more in
 the future) and automatically generates the default setup.ini.  If you
 are putting packages in these directories, it is important that you
-understand how this program works.
+understand how this program works.</p>
 
 <p>Files that end in ".tar.bz2" or ".tar.gz" automatically qualify as
-packages.  It is assumed that the file name is package-version[-src].tar.bz2,
+packages.  It is required that the file name is package-version[-src].tar.bz2,
 and that the version number starts with a digit.  Higher version numbers
 are used for the current version of a package; the next stable version
 (if any) is used for the previous version.</p>
 
-<p>We recommend you keep no more than three versions of each package around:
+<p>Setup is currently unable to list more than three versions of each packge. Therefore you should not keep more than three versions of each package around:
 The current version, the previous stable version, and one test
 version.  By keeping a previous stable version around, you isolate
 yourself (somewhat) from problems with partial mirrors.  When you add
 a new "current" version, you can either keep the old "previous"
 version, or make the old current version the new previous version,
-depending on how stable they each were.
+depending on how stable they each were.</p>
 
 <p>Test versions are specified via the setup.hint file as described
 below.</p>
 
-<h2><tt>setup.hint</tt></h2>
+<h2><a id="setup.hint"><tt>setup.hint</tt></a></h2>
 
 <p>If the above rules don't work for your package, for some reason, you
 can amend them with a file called<tt> setup.hint </tt> which provides
@@ -121,14 +132,14 @@ mailing list first.  As of this writing, the current categories are:<br>
 </tr>
 </table>
 
-<p>The <tt>requires</tt> line indicates the packages that this package belongs to.
+<p>The <tt>requires</tt> line indicates the packages that this package relys on.
 A package can rely on multiple packages.  Multiple packages are
 separated by spaces.</p>
 
 <p>Note colons following keywords are optional in setup.hint file while they
 are mandatory in setup.ini.</p>
 
-<h2><tt>setup.ini</tt></h2>
+<h2><a id="setup.ini"><tt>setup.ini</tt></a></h2>
 
 <p>Note that <tt>setup.ini</tt> is automatically generated.  This
 section is for completeness, not instruction.
@@ -235,5 +246,35 @@ install: latest/bash/bash-2.04.tar.bz2 277375
 source:  latest/bash/bash-2.04-src.tar.bz2 1815177
 
 </pre>
+
+<h2><a id="package_contents">Making Packages</a></h2>
+<p>The files paths within both the -src and the binary package files are quite important. Setup extracts into a predetermined directory, so you must structure your package contents accordingly.</p>
+<p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
+<ul>
+  <li><p>Binary packages are extracted in /, include all file paths from the root in your archive.<p></li>
+  <li><p>Source packages are extracted in /usr/src. Include a 'root' directory with the same name as the archive root (ie foo-vendor-suffix).</p></li>
+  <li><p>In your binary package, include a file /usr/doc/cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.</p></li>
+  <li><p>In your binary package include a file /usr/doc/foo-vendor that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc.</p></li>
+  <li><p>In your source package include the same foo-vendor-suffix.README as used in the binary package.</p></li>
+  <li><p>Your source package should contain any patches you've applied to it pre-applied.</p></li>
+  <li><p>Include a single file foo-vendor-suffix.patch in your source package, that when applied will remove all the patches you've applied to the package, leaving it as the vendor distributes it. This file should extract as /usr/src/foo-vendor-suffix.patch.<p></li>
+  <li><p>If you are not creating your package from an installed virtual root, be sure to check that the file permissions are appropriate.</p></li>
+  <li><p>If the package has any global settings (ie in files in /etc) that are not overrideable on a per user basis (sshd, as a daemon, is an example of this) do not include the relevant config files in your package. Instead include a post-install script to install the settings files. Be sure that if you would overwrite an already present file that the user is offered the choice of keeping their own or overwriting with your defaults.</p></li>
+  <li><p>Ensure that your package handles binary only systems, textmode only systems, and hybrid systems correctly.</p></li>
+</ul>
+
+<h2><a id="submitting">Submitting a package</a></h2>
+<p>So you've got a package you want to submit. Follow the following checklist before emailing cygwin-apps@cygwin.com and you'll almost certainly save time.</p>
+<ol>
+  <li><p>Propose on cygwin-apps@cygwin.com that you are interested in becoming a package maintainer for package foo. Some packages cannot be distributed via cygwin's setup due to vendor licence limitations. Other packages may not be appropriate for cygwin. This step will save time if, for some reason we cannot accept the package.</p></li>
+  <li><p>Make sure your package follows all the criteria listed <a href="#submitting">here</a></p></li>
+  <li><p>Do you have the time to maintain the package? Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to cygwin at cygwin dot com (digest mode is fine) and when a <i>bug</i> is reported in your package, address the bug (if it's a cygwin-only bug) or pass back to the vendor. When a solution exists, create an updated package with the fix in it, and upload that. Note that you are not expected to be a helpdesk for the package - the users are pointed back at the vendors lists, once you've determined that the bug is not a cygwin-related bug</p></li>
+  <li><p>Do you have a SSH1 public key? This is required to upload the packages</p></li>
+  <li><p>Look in the debian package list and identify the section that your package is present in there - if it's available via debian. If it's not, have a look and take a sensible guess.</p></li>
+  <li><p>Create setup.hint file following the documentation on this web page. For new packages the first upload MUST be tagged as experimental. Once the package has no major bug reports from the users, then a current package may be introduced.</p></li>
+  <li><p>Announce on cygwin-apps@cygwin.com that you have the package ready for uploading, and a user account and package directory will be created for you.</p></li>
+  <li><p>Use commands like the following to upload the package. (Doing setup.hint first is recommended).</p><p><tt>scp setup.hint username@source.redhat.com:/sourceware/ftp/anonftp/cygwin/contrib/foo/</tt></p></li>
+  <li><p>Announce via cygwin-announce@cygwin.com that the new package, is available for experimentation. NOTE: it is suggested that on any major version upgrade, that the new version is introduced as experimental again</p></li>
+</ol>
 
 <!--#include virtual="cygwin-footer.html"-->
