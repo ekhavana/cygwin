@@ -1968,7 +1968,7 @@ Why doesn't chmod work?
 -----------------------
 
    `ntsec' will allow UNIX permissions in Windows NT on NTFS file
-systems.
+systems.  This is on by default (a recent change).
 
    `ntea' works on NTFS _and_ FAT but it creates a huge, *undeletable*
 file on FAT filesystems.
@@ -2200,6 +2200,10 @@ binmode or textmode using the `mount' command.  For example,
 How can I copy and paste into Cygwin console windows?
 -----------------------------------------------------
 
+   First, consider using rxvt instead of the standard console window.
+In rxvt, selecting with the left-mouse also copies, and middle-mouse
+pastes.  It couldn't be easier!
+
    Under Windows NT, open the properties dialog of the console window.
 The options contain a toggle button, named "Quick edit mode".  It must
 be ON.  Save the properties.
@@ -2411,6 +2415,19 @@ What about XEmacs?
    For a concise description of the current situation with XEmacs, see
 this message from the Cygwin mailing list:
 `http://cygwin.com/ml/cygwin/2002-11/msg00609.html'.
+
+Is there a better alternative to the standard console window?
+-------------------------------------------------------------
+
+   Yes!  Use rxvt instead.  It's an optional package in Cygwin Setup.
+You can use it with or without X11.  You can resize it easily by
+dragging an edge or corner.  Copy and paste is easy with the left and
+middle mouse buttons, respectively.  It will honor settings in your
+~/.Xdefaults file, even without X.
+
+   Don't invoke as simply "rxvt" because that will run /bin/sh (really
+ash) which is not a good interactive shell.  For details see
+`/usr/doc/Cygwin/rxvt-<ver>.README'.
 
 info error "dir: No such file or directory"
 -------------------------------------------
