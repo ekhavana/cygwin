@@ -251,8 +251,8 @@ Cygwin now' link on the Cygwin Home Page at <TT><a target="_top" href="http://cy
 If you are downloading from the Internet, setup will fail if it cannot
 download the list of mirrors at
 <TT><a target="_top" href="http://cygwin.com/mirrors.html">http://cygwin.com/mirrors.html</a></TT>.  It could be that
-the network is too busy.  Similarly for an ftp download site that isn't
-working.  Try another mirror, or try again later.
+the network is too busy.  Something similar could be the cause of a
+download site not working.  Try another mirror, or try again later.
 
 
 <P>
@@ -460,6 +460,38 @@ this purpose.  See <TT><a target="_top" href="http://rsync.samba.org/">http://rs
 For more information on setting up a custom Cygwin package server, see
 the Cygwin Setup homepage at
 <TT><a target="_top" href="http://sources.redhat.com/cygwin-apps/setup.html">http://sources.redhat.com/cygwin-apps/setup.html</a></TT>.
+
+
+
+
+<H3><A NAME="SEC23" HREF="faq_toc.html#TOC23">How can I make my own portable Cygwin on CD?</A></H3>
+
+<P>
+While some users have successfully done this, for example Indiana
+University's XLiveCD <TT><a target="_top" href="http://xlivecd.indiana.edu/">http://xlivecd.indiana.edu/</a></TT>, there is no
+easy way to do it. Full instructions for constructing a porttable Cygwin
+on CD by hand can be found on the mailing list at
+<TT><a target="_top" href="http://www.cygwin.com/ml/cygwin/2003-07/msg01117.html">http://www.cygwin.com/ml/cygwin/2003-07/msg01117.html</a></TT>.  (Thanks
+to fergus at bonhard dot uklinux dot net for these instructions.)
+
+
+
+
+<H3><A NAME="SEC24" HREF="faq_toc.html#TOC24">How do I save, restore, delete, or modify the Cygwin information stored in the registry?</A></H3>
+
+<P>
+Currently Cygwin stores its mount table information in the registry.  It
+is recommended that you use the <SAMP>`mount'</SAMP> and <SAMP>`umount'</SAMP> commands
+to manipulate the mount information instead of directly modifying the
+registry.
+
+
+<P>
+To save the mount information to a file for later restoration, use
+<SAMP>`mount -m &#62; mounts.bat'</SAMP> To remove all mount information use
+<SAMP>`umount -A'</SAMP>.  To reincorporate saved mount information just run the
+batch file. For more information on using <SAMP>`mount'</SAMP>, see
+<TT><a target="_top" href="http://cygwin.com/cygwin-ug-net/using-utils.html#mount">http://cygwin.com/cygwin-ug-net/using-utils.html#mount</a></TT>.
 <P><HR><P>
 Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_1.html">previous</A>, <A HREF="faq_3.html">next</A>, <A HREF="faq_7.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
 </BODY>

@@ -263,8 +263,8 @@ link on the Cygwin Home Page at `http://cygwin.com/'.
    If you are downloading from the Internet, setup will fail if it
 cannot download the list of mirrors at
 `http://cygwin.com/mirrors.html'.  It could be that the network is too
-busy.  Similarly for an ftp download site that isn't working.  Try
-another mirror, or try again later.
+busy.  Something similar could be the cause of a download site not
+working.  Try another mirror, or try again later.
 
    If setup refuses to download a package that you know needs to be
 upgraded, try deleting that package's entry from /etc/setup.  If you are
@@ -401,6 +401,30 @@ purpose.  See `http://rsync.samba.org/', `http://wget.sunsite.dk/' for
 utilities that can do this for you.  For more information on setting up
 a custom Cygwin package server, see the Cygwin Setup homepage at
 `http://sources.redhat.com/cygwin-apps/setup.html'.
+
+2.2.15 How can I make my own portable Cygwin on CD?
+---------------------------------------------------
+
+While some users have successfully done this, for example Indiana
+University's XLiveCD `http://xlivecd.indiana.edu/', there is no easy
+way to do it. Full instructions for constructing a porttable Cygwin on
+CD by hand can be found on the mailing list at
+`http://www.cygwin.com/ml/cygwin/2003-07/msg01117.html'.  (Thanks to
+fergus at bonhard dot uklinux dot net for these instructions.)
+
+2.2.16 How do I save, restore, delete, or modify the Cygwin information stored in the registry?
+-----------------------------------------------------------------------------------------------
+
+Currently Cygwin stores its mount table information in the registry.  It
+is recommended that you use the `mount' and `umount' commands to
+manipulate the mount information instead of directly modifying the
+registry.
+
+   To save the mount information to a file for later restoration, use
+`mount -m > mounts.bat' To remove all mount information use `umount
+-A'.  To reincorporate saved mount information just run the batch file.
+For more information on using `mount', see
+`http://cygwin.com/cygwin-ug-net/using-utils.html#mount'.
 
 3 Question and Answers
 **********************
@@ -1967,10 +1991,9 @@ recommend trying the latest snapshot from
 `http://cygwin.com/snapshots/' or build the DLL from CVS.
 
    To build a debugging version of the Cygwin DLL, you will need to
-follow the instructions at `http://cygwin.com/faq/faq_3.html#SEC102',
-adding the `--enable-debugging' option to `../configure'.  You can also
-contact the mailing list for pointers (a simple test case that
-demonstrates the bug is always welcome).
+follow the instructions at `http://cygwin.com/faq/faq_3.html#SEC102'.
+You can also contact the mailing list for pointers (a simple test case
+that demonstrates the bug is always welcome).
 
 3.4.19 How can I compile Cygwin for an unsupported platform (PowerPC, Alpha, ARM, Itanium)?
 -------------------------------------------------------------------------------------------
