@@ -290,7 +290,8 @@
 		if (!isset($_REQUEST["PACKAGE_CATEGORY"]))
 			$_REQUEST["PACKAGE_CATEGORY"] = $category;
 		printsubs($step2ar);
-	}
+	} else
+		readfile("/home/nmlorg/PPL/maintainers.txt");
 	if ($step2) {
 		if (!isset($_REQUEST["MESSAGE_CONTENTS"]))
 			$message = dosubs($templates[$_REQUEST["SUBMISSION_TYPE"]]);
