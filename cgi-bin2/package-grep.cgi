@@ -14,7 +14,7 @@ my $grep = $html->param('grep');
 $main::packages = ();
 use FindBin qw($Bin);
 
-print $html->header, "\n<html>\n<title>Package List Search Results</title>\n",
+print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title></head>\n",
       "<!--#include virtual=\"../cygwin-header.html\" -->\n",
       $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n",
       $html->h2({-align=>'center'}, 'Search Results'), "\n";
