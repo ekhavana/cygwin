@@ -110,38 +110,145 @@ NAME="CYGCHECK"
 ></H2
 ><PRE
 CLASS="SCREEN"
->Usage: cygcheck [OPTIONS] [program ...]
+>Usage: cygcheck [OPTIONS] [PROGRAM...]
 Check system information or PROGRAM library dependencies
 
- -c, --check-setup  check packages installed via setup.exe
- -s, --sysinfo      system information (not with -k)
- -v, --verbose      verbose output (indented) (for -s or programs)
- -r, --registry     registry search (requires -s)
- -k, --keycheck     perform a keyboard check session (not with -s)
- -h, --help         give help about the info (not with -c)
- -V, --version      output version information and exit
-You must at least give either -s or -k or a program name</PRE
+ -c, --check-setup   check packages installed via setup.exe
+ -d, --dump-only     no integrity checking of package contents (requires -c)
+ -s, --sysinfo       system information (not with -k)
+ -v, --verbose       verbose output (indented) (for -[cfls] or programs)
+ -r, --registry      registry search (requires -s)
+ -k, --keycheck      perform a keyboard check session (not with -[scfl])
+ -f, --find-package  find installed packages containing files (not with -[cl])
+ -l, --list-package  list the contents of installed packages (not with -[cf])
+ -h, --help          give help about the info (not with -[cfl])
+ -V, --version       output version information and exit</PRE
 ><P
 >The <B
 CLASS="COMMAND"
 >cygcheck</B
-> program is a diagnostic utility
-that examines your system and reports the information that is
-significant to the proper operation of Cygwin programs.  It can give
-information about specific programs or libraries you are trying to
-run, general system information, or both.  If you list one or more
-programs on the command line, it will diagnose the runtime environment
-of that program or programs, providing the names of DLL files on which
-the program depends.  If you specify the <VAR
+> program is a diagnostic utility for
+dealing with Cygwin programs. If you are familiar with
+<B
+CLASS="COMMAND"
+>dpkg</B
+> or <B
+CLASS="COMMAND"
+>rpm</B
+>,
+<B
+CLASS="COMMAND"
+>cygcheck</B
+> is similar in many ways. (The major difference
+is that <B
+CLASS="COMMAND"
+>setup.exe</B
+> handles installing and uninstalling
+packages; see <A
+HREF="setup-net.html#INTERNET-SETUP"
+>the Section called <I
+>Internet Setup</I
+> in Chapter 2</A
+> for more information.)</P
+><P
+>The <VAR
+CLASS="LITERAL"
+>-c</VAR
+> option checks the version and status of 
+installed Cygwin packages. If you specify one or more package names,
+<B
+CLASS="COMMAND"
+>cygcheck</B
+> will limit its output to those packages,
+or with no arguments it lists all packages. A package will be marked
+<VAR
+CLASS="LITERAL"
+>Incomplete</VAR
+> if files originally installed are no longer
+present. The best thing to do in that situation is reinstall the package
+with <B
+CLASS="COMMAND"
+>setup.exe</B
+>. To see which files are missing, use the
+<VAR
+CLASS="LITERAL"
+>-v</VAR
+> option. If you do not need to know the status
+of each package and want <B
+CLASS="COMMAND"
+>cygcheck</B
+> to run faster, add the
+<VAR
+CLASS="LITERAL"
+>-d</VAR
+> option and <B
+CLASS="COMMAND"
+>cygcheck</B
+> will only
+output the name and version for each package.</P
+><P
+>If you list one or more programs on the command line,
+<B
+CLASS="COMMAND"
+>cygcheck</B
+> will diagnose the runtime environment of that
+program or programs, providing the names of DLL files on which the program
+depends.  If you specify the <VAR
 CLASS="LITERAL"
 >-s</VAR
->
-option, it will give general system information.  If you specify
+> option,
+<B
+CLASS="COMMAND"
+>cygcheck</B
+> will give general system information.  If you
+list one or more programs on the command line and specify
 <VAR
 CLASS="LITERAL"
 >-s</VAR
-> and list one or more programs on the command line,
-it reports on both.</P
+>, <B
+CLASS="COMMAND"
+>cygcheck</B
+> will report on
+both.</P
+><P
+>The <VAR
+CLASS="LITERAL"
+>-f</VAR
+> option helps you to track down which package a
+file came from, and <VAR
+CLASS="LITERAL"
+>-l</VAR
+> lists all files in a package.
+For example, to find out about <TT
+CLASS="FILENAME"
+>/usr/bin/less</TT
+> and its
+package:
+<DIV
+CLASS="EXAMPLE"
+><A
+NAME="AEN1162"
+></A
+><P
+><B
+>Example 3-3. Example <B
+CLASS="COMMAND"
+>cygcheck</B
+> usage</B
+></P
+><PRE
+CLASS="SCREEN"
+>$ cygcheck.exe -f /usr/bin/less
+less-381-1
+
+$ cygcheck.exe -l less
+/usr/bin/less.exe
+/usr/bin/lessecho.exe
+/usr/bin/lesskey.exe
+/usr/man/man1/less.1
+/usr/man/man1/lesskey.1</PRE
+></DIV
+></P
 ><P
 >The <VAR
 CLASS="LITERAL"
@@ -174,17 +281,6 @@ that is relevent to Cygwin programs.  These registry entries are the
 ones that have "Cygwin" in the name.  If you are paranoid about
 privacy, you may remove information from this report, but please keep
 in mind that doing so makes it harder to diagnose your problems.</P
-><P
->The <VAR
-CLASS="LITERAL"
->-c</VAR
-> option causes the arguments
-to be interpreted as package names.  <B
-CLASS="COMMAND"
->cygcheck</B
-> will
-report the current version of the package that you specify, or with no
-arguments, on all packages.</P
 ><P
 >The <B
 CLASS="COMMAND"
@@ -220,6 +316,7 @@ Convert Unix and Windows format paths, or output system path information
 Output type options:
   -d, --dos             print DOS (short) form of NAME (C:\PROGRA~1\)
   -m, --mixed           like --windows, but with regular slashes (C:/WINNT)
+  -M, --mode		report on mode of file (currently binmode or textmode)
   -u, --unix            (default) print Unix form of NAME (/cygdrive/c/winnt)
   -w, --windows         print Windows form of NAME (C:\WINNT)
   -t, --type TYPE       print TYPE form: 'dos', 'mixed', 'unix', or 'windows'
@@ -356,11 +453,14 @@ contain spaces (C:\Program Files) so should be enclosed in quotes.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1168"
+NAME="AEN1210"
 ></A
 ><P
 ><B
->Example 3-3. Example cygpath usage</B
+>Example 3-4. Example <B
+CLASS="COMMAND"
+>cygpath</B
+> usage</B
 ></P
 ><PRE
 CLASS="SCREEN"
@@ -370,8 +470,8 @@ if [ "${1}" = "" ];
 		XPATH=".";
 	else
 		XPATH="$(cygpath -w "${1}")";
-	fi
-	explorer $XPATH &#38;</PRE
+fi
+explorer $XPATH &#38;</PRE
 ></DIV
 ><P
 >The capital options 
@@ -557,10 +657,10 @@ it exists. For more information on Cygwin and Windows ACLs, see
 see <A
 HREF="ntsec.html"
 >the Section called <I
->NT security and the <VAR
+>NT security and usage of <VAR
 CLASS="LITERAL"
 >ntsec</VAR
-> usage</I
+></I
 > in Chapter 2</A
 > in the Cygwin User's Guide.
 The format for ACL output is as follows:
@@ -691,11 +791,11 @@ part), like these examples:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1237"
+NAME="AEN1280"
 ></A
 ><P
 ><B
->Example 3-4. Using the kill command</B
+>Example 3-5. Using the kill command</B
 ></P
 ><PRE
 CLASS="SCREEN"
@@ -817,11 +917,11 @@ something like this:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1257"
+NAME="AEN1300"
 ></A
 ><P
 ><B
->Example 3-5. Setting up the groups file for local accounts</B
+>Example 3-6. Setting up the groups file for local accounts</B
 ></P
 ><PRE
 CLASS="SCREEN"
@@ -887,10 +987,10 @@ option omits the NT Security Identifier (SID).  For more information on
 SIDs, see <A
 HREF="ntsec.html"
 >the Section called <I
->NT security and the <VAR
+>NT security and usage of <VAR
 CLASS="LITERAL"
 >ntsec</VAR
-> usage</I
+></I
 > in Chapter 2</A
 > in the Cygwin User's Guide.  The
 <VAR
@@ -967,11 +1067,11 @@ something like this:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1287"
+NAME="AEN1330"
 ></A
 ><P
 ><B
->Example 3-6. Setting up the passwd file for local accounts</B
+>Example 3-7. Setting up the passwd file for local accounts</B
 ></P
 ><PRE
 CLASS="SCREEN"
@@ -1047,10 +1147,10 @@ option omits the NT Security Identifier (SID).  For more information on
 SIDs, see <A
 HREF="ntsec.html"
 >the Section called <I
->NT security and the <VAR
+>NT security and usage of <VAR
 CLASS="LITERAL"
 >ntsec</VAR
-> usage</I
+></I
 > in Chapter 2</A
 > in the Cygwin User's Guide.  The
 <VAR
@@ -1068,11 +1168,11 @@ CLASS="LITERAL"
 <DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1311"
+NAME="AEN1354"
 ></A
 ><P
 ><B
->Example 3-7. Using an alternate home root</B
+>Example 3-8. Using an alternate home root</B
 ></P
 ><PRE
 CLASS="SCREEN"
@@ -1149,7 +1249,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1324"
+NAME="AEN1367"
 >Using mount</A
 ></H3
 ><P
@@ -1161,11 +1261,11 @@ will display the current mount table for you.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1328"
+NAME="AEN1371"
 ></A
 ><P
 ><B
->Example 3-8. Displaying the current set of mount points</B
+>Example 3-9. Displaying the current set of mount points</B
 ></P
 ><PRE
 CLASS="SCREEN"
@@ -1211,11 +1311,11 @@ CLASS="FILENAME"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1340"
+NAME="AEN1383"
 ></A
 ><P
 ><B
->Example 3-9. Adding mount points</B
+>Example 3-10. Adding mount points</B
 ></P
 ><PRE
 CLASS="SCREEN"
@@ -1365,7 +1465,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1373"
+NAME="AEN1416"
 >Cygdrive mount points</A
 ></H3
 ><P
@@ -1400,11 +1500,11 @@ CLASS="FILENAME"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1382"
+NAME="AEN1425"
 ></A
 ><P
 ><B
->Example 3-10. Changing the default prefix</B
+>Example 3-11. Changing the default prefix</B
 ></P
 ><PRE
 CLASS="SCREEN"
@@ -1442,7 +1542,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1392"
+NAME="AEN1435"
 >Limitations</A
 ></H3
 ><P
@@ -1746,7 +1846,20 @@ CLASS="LITERAL"
 >
 for services. The UID column shows which user owns each process. 
 STIME is the time the process was started, and COMMAND gives the name
-of the program running.</P
+of the program running. Listings may also have a status flag in
+column zero; <VAR
+CLASS="LITERAL"
+>S</VAR
+> means stopped or suspended (in other
+words, in the background), <VAR
+CLASS="LITERAL"
+>I</VAR
+> means waiting for
+input or interactive (foreground), and <VAR
+CLASS="LITERAL"
+>O</VAR
+> means
+waiting to output. </P
 ><P
 >By default <B
 CLASS="COMMAND"
@@ -2049,10 +2162,10 @@ For more information on Cygwin and Windows ACLs, see
 see <A
 HREF="ntsec.html"
 >the Section called <I
->NT security and the <VAR
+>NT security and usage of <VAR
 CLASS="LITERAL"
 >ntsec</VAR
-> usage</I
+></I
 > in Chapter 2</A
 > in the Cygwin User's Guide.</P
 ><P
