@@ -223,11 +223,11 @@ choose the packages you wish to install, and update them individually.
 
    The following packages are available with the latest net release:
 
-   ash, bash, binutils, bison, byacc, bzip2, clear, common, cygwin,
-dejagnu, diff, expect, fileutils, findutils, flex, gawk, gcc, gdb,
-gperf, grep, groff, gzip, inetutils, less, libpng, login, m4, make, man,
-patch, sed, shellutils, tar, tcltk, termcap, texinfo, textutils, time,
-zlib
+   ash(really '/bin/sh'), bash, binutils, bison, byacc, bzip2, clear,
+common, cygwin, dejagnu, diff, expect, fileutils, findutils, flex,
+gawk, gcc, gdb, gperf, grep, groff, gzip, inetutils, less, libpng,
+login, m4, make, man, patch, sed, shellutils, tar, tcltk, termcap,
+texinfo, textutils, time, zlib
 
    Full source code is available for all packages and tools.
 
@@ -324,6 +324,11 @@ Cygwin" shortcut, if present, is unlikely to do a complete job.  If you
 want to completely uninstall Cygwin, you will probably have to delete
 some things by hand.
 
+   Once setup is complete you may remove the temporary directory.  It
+will contain `setup.exe', the downloaded `.tar.gz' files, and a setup
+log file, which is not needed, but may contain helpful diagnostics if
+your installation failed for some reason.
+
 Directory installation with `setup.exe'
 ---------------------------------------
 
@@ -362,6 +367,11 @@ Cygwin" shortcut, if present, is unlikely to do a complete job.  If you
 want to completely uninstall Cygwin, you will probably have to delete
 some things by hand.
 
+   Once setup is complete you may remove the temporary directory.  It
+will contain `setup.exe', the downloaded `.tar.gz' files, and a setup
+log file, which is not needed, but may contain helpful diagnostics if
+your installation failed for some reason.
+
 Adding or updating packages
 ---------------------------
 
@@ -398,6 +408,11 @@ this case, you should not use `-u'.  Omitting `-u' forces `setup.exe' to
 perform the update, regardless of whether `setup.exe' deems it
 necessary.
 
+   Once setup is complete you may remove the temporary directory.  It
+will contain `setup.exe', the downloaded `.tar.gz' files, and a setup
+log file, which is not needed, but may contain helpful diagnostics if
+your installation failed for some reason.
+
 Problems running `setup.exe'
 ----------------------------
 
@@ -429,7 +444,9 @@ probably want to:
 
   4. perform a (d)irectory install
 
-  5. scan everything below your Cygwin root directory (`C:\cygwin' by
+  5. re-enable the anti-virus software
+
+  6. scan everything below your Cygwin root directory (`C:\cygwin' by
      default)
 
 What Unix API calls are supported by Cygwin?
@@ -1769,6 +1786,21 @@ applications that are not part of the core net release.  (That is,
 anything not found in an ftp mirror of `latest' and installed by
 `setup.exe'.)
 
+How do I convert between Windows and UNIX paths?
+------------------------------------------------
+
+   Use the 'cygpath' utility.  Type '`cygpath'' with no arguments to
+get usage information.  For example (on my installation):
+     	bash$ cygpath --windows ~/.bashrc
+             D:\starksb\.bashrc
+             bash$ cygpath --unix C:/cygwin/bin/cygwin.bat
+             /usr/bin/cygwin.bat
+             bash$ cygpath --unix C:\\cygwin\\bin\\cygwin.bat
+             /usr/bin/cygwin.bat
+   Note that bash interprets the backslash '\' as an escape character,
+so you must type it twice in the bash shell if you want it to be
+recognised as such.
+
 How do I set /etc up?
 ---------------------
 
@@ -1808,11 +1840,8 @@ used by Cygwin tools.
    In particular, bash interprets space as a word separator.  You would
 have to quote a filename containing spaces, or escape the space
 character.  For example:
-
      	bash-2.03$ cd '/cygdrive/c/Program Files'
-
    or
-
      	bash-2.03$ cd /cygdrive/c/Program\ Files
 
 Why can't I cd into a shortcut to a directory?
@@ -1897,17 +1926,13 @@ mounted.  You can access any drive, say Z:, as '/cygdrive/z/'.
 backward-slashes ('\').  (But see the warning below!)  This maps in the
 obvious way to the Windows path, but will be converted internally to use
 the Cygwin path, following mounts (default or explicit).  For example:
-
      	bash-2.03$ cd C:/Windows
      	bash-2.03$ pwd
              /cygdrive/c/Windows
-
    and
-
      	bash-2.03$ cd C:/cygwin
      	bash-2.03$ pwd
              /
-
    for a default setup.  (You could also use backward-slashes in the
 Windows path, but these would have to be escaped from the shell.)
 
@@ -1919,11 +1944,9 @@ Cygwin apps will vary depending on the posix path used to get there.
 
    You can avoid the ambiguity of Windows paths, and avoid typing
 "/cygdrive", by explicitly mounting drives to posix paths.  For example:
-
      	bash$ mkdir /c
      	bash$ mount c:/ /c
      	bash$ ls /c
-
    Note that you only need to mount drives once.  The mapping is kept
 in the registry so mounts stay valid pretty much indefinitely.  You can
 only get rid of them with umount (or the registry editor).
@@ -2089,7 +2112,6 @@ standalone info program (probably `/usr/bin/info') can be used to read
 those info files.  This is how you do it:
      	bash$ cd /usr/info
      	bash$ for f in *.info ; do install-info $f dir ; done
-
    This may generate warnings:
      	install-info: warning: no info dir entry in `gzip.info'
      	install-info: warning: no info dir entry in `time.info'
@@ -2466,6 +2488,15 @@ _timezone?  If not, you must do so.
 
 Programming Questions
 =====================
+
+Why are compiled executables so huge?!?
+---------------------------------------
+
+   By default, gcc compiles in all symbols.  You'll also find that gcc
+creates large executables on UNIX.
+
+   If that bothers you, just use the 'strip' program, part of the
+binutils package.
 
 Why is gcc failing?
 -------------------

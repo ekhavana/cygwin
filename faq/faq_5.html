@@ -217,7 +217,30 @@ and installed by <CODE>setup.exe</CODE>.)
 </P>
 
 
-<H3><A NAME="SEC27" HREF="faq_toc.html#TOC27">How do I set /etc up?</A></H3>
+<H3><A NAME="SEC27" HREF="faq_toc.html#TOC27">How do I convert between Windows and UNIX paths?</A></H3>
+
+<P>
+Use the 'cygpath' utility.  Type '<CODE>cygpath</CODE>' with no arguments to
+get usage information.  For example (on my installation):
+
+<PRE>
+	bash$ cygpath --windows ~/.bashrc
+        D:\starksb\.bashrc
+        bash$ cygpath --unix C:/cygwin/bin/cygwin.bat
+        /usr/bin/cygwin.bat
+        bash$ cygpath --unix C:\\cygwin\\bin\\cygwin.bat
+        /usr/bin/cygwin.bat
+</PRE>
+
+<P>
+Note that bash interprets the backslash '\' as an escape character, so
+you must type it twice in the bash shell if you want it to be recognised
+as such.
+
+</P>
+
+
+<H3><A NAME="SEC28" HREF="faq_toc.html#TOC28">How do I set /etc up?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -236,7 +259,7 @@ you're running Windows 95/98.
 </P>
 
 
-<H3><A NAME="SEC28" HREF="faq_toc.html#TOC28">Why doesn't bash read my .bashrc file on startup?</A></H3>
+<H3><A NAME="SEC29" HREF="faq_toc.html#TOC29">Why doesn't bash read my .bashrc file on startup?</A></H3>
 
 <P>
 Your .bashrc is read from your home directory specified by the HOME
@@ -247,7 +270,7 @@ mounted as / in Cygwin.
 </P>
 
 
-<H3><A NAME="SEC29" HREF="faq_toc.html#TOC29">How can I get bash filename completion to be case insensitive?</A></H3>
+<H3><A NAME="SEC30" HREF="faq_toc.html#TOC30">How can I get bash filename completion to be case insensitive?</A></H3>
 
 <P>
 "shopt -s nocaseglob" should do the trick.
@@ -255,7 +278,7 @@ mounted as / in Cygwin.
 </P>
 
 
-<H3><A NAME="SEC30" HREF="faq_toc.html#TOC30">Can I use paths/filenames containing spaces in them?</A></H3>
+<H3><A NAME="SEC31" HREF="faq_toc.html#TOC31">Can I use paths/filenames containing spaces in them?</A></H3>
 
 <P>
 Cygwin does support spaces in filenames and paths.  That said, some
@@ -270,8 +293,6 @@ In particular, bash interprets space as a word separator.  You would have
 to quote a filename containing spaces, or escape the space character.
 For example:
 
-</P>
-
 <PRE>
 	bash-2.03$ cd '/cygdrive/c/Program Files'
 </PRE>
@@ -279,15 +300,13 @@ For example:
 <P>
 or
 
-</P>
-
 <PRE>
 	bash-2.03$ cd /cygdrive/c/Program\ Files
 </PRE>
 
 
 
-<H3><A NAME="SEC31" HREF="faq_toc.html#TOC31">Why can't I cd into a shortcut to a directory?</A></H3>
+<H3><A NAME="SEC32" HREF="faq_toc.html#TOC32">Why can't I cd into a shortcut to a directory?</A></H3>
 
 <P>
 Cygwin does not follow MS Windows Explorer Shortcuts (*.lnk files).  It
@@ -303,7 +322,7 @@ under native Win32 non-Cygwin applications such as Explorer.
 </P>
 
 
-<H3><A NAME="SEC32" HREF="faq_toc.html#TOC32">I'm having basic problems with find.  Why?</A></H3>
+<H3><A NAME="SEC33" HREF="faq_toc.html#TOC33">I'm having basic problems with find.  Why?</A></H3>
 
 <P>
 Make sure you are using the find that came with Cygwin and that you
@@ -313,7 +332,7 @@ you are getting the right one by doing a "type find" in bash.
 </P>
 
 
-<H3><A NAME="SEC33" HREF="faq_toc.html#TOC33">Why don't cursor keys work under Win95/Win98?</A></H3>
+<H3><A NAME="SEC34" HREF="faq_toc.html#TOC34">Why don't cursor keys work under Win95/Win98?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -352,7 +371,7 @@ properly).
 </P>
 
 
-<H3><A NAME="SEC34" HREF="faq_toc.html#TOC34">Is it OK to have multiple copies of the DLL?</A></H3>
+<H3><A NAME="SEC35" HREF="faq_toc.html#TOC35">Is it OK to have multiple copies of the DLL?</A></H3>
 
 <P>
 It is a very bad idea to have multiple *versions* of the cygwin DLL in
@@ -368,7 +387,7 @@ though.
 </P>
 
 
-<H3><A NAME="SEC35" HREF="faq_toc.html#TOC35">Where can I find "more"?</A></H3>
+<H3><A NAME="SEC36" HREF="faq_toc.html#TOC36">Where can I find "more"?</A></H3>
 
 <P>
 If you are looking for the "more" pager, you should use the "less" pager
@@ -377,7 +396,7 @@ instead.
 </P>
 
 
-<H3><A NAME="SEC36" HREF="faq_toc.html#TOC36">Where can I find "which"?</A></H3>
+<H3><A NAME="SEC37" HREF="faq_toc.html#TOC37">Where can I find "which"?</A></H3>
 
 <P>
 There is no "which" command with Cygwin.  However, you can use the bash
@@ -386,7 +405,7 @@ shell builtin "type" which does something similar.
 </P>
 
 
-<H3><A NAME="SEC37" HREF="faq_toc.html#TOC37">How can I access other drives?</A></H3>
+<H3><A NAME="SEC38" HREF="faq_toc.html#TOC38">How can I access other drives?</A></H3>
 
 <P>
 You have some flexibility here.
@@ -404,8 +423,6 @@ backward-slashes ('\').  (But see the warning below!)  This maps in the
 obvious way to the Windows path, but will be converted internally to use
 the Cygwin path, following mounts (default or explicit).  For example:
 
-</P>
-
 <PRE>
 	bash-2.03$ cd C:/Windows
 	bash-2.03$ pwd
@@ -414,8 +431,6 @@ the Cygwin path, following mounts (default or explicit).  For example:
 
 <P>
 and
-
-</P>
 
 <PRE>
 	bash-2.03$ cd C:/cygwin
@@ -441,8 +456,6 @@ get there.
 You can avoid the ambiguity of Windows paths, and avoid typing
 "/cygdrive", by explicitly mounting drives to posix paths.  For example:
 
-</P>
-
 <PRE>
 	bash$ mkdir /c
 	bash$ mount c:/ /c
@@ -467,7 +480,7 @@ new mounts is text mode ("textmode"), which is also the mode for all
 </P>
 
 
-<H3><A NAME="SEC38" HREF="faq_toc.html#TOC38">How can I copy and paste into Cygwin console windows?</A></H3>
+<H3><A NAME="SEC39" HREF="faq_toc.html#TOC39">How can I copy and paste into Cygwin console windows?</A></H3>
 
 <P>
 Under Windows NT, open the properties dialog of the console window.
@@ -482,7 +495,7 @@ Select the Misc tab.  Uncheck Fast Pasting.  Check QuickEdit.
 </P>
 
 
-<H3><A NAME="SEC39" HREF="faq_toc.html#TOC39">What does "mount failed: Device or resource busy" mean?</A></H3>
+<H3><A NAME="SEC40" HREF="faq_toc.html#TOC40">What does "mount failed: Device or resource busy" mean?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -508,7 +521,7 @@ Cygwin library.
 </P>
 
 
-<H3><A NAME="SEC40" HREF="faq_toc.html#TOC40">How can I share files between Unix and Windows?</A></H3>
+<H3><A NAME="SEC41" HREF="faq_toc.html#TOC41">How can I share files between Unix and Windows?</A></H3>
 
 <P>
 During development, we have both Unix boxes running Samba and
@@ -521,7 +534,7 @@ filesystem so we can also access the files under Windows 9x.
 </P>
 
 
-<H3><A NAME="SEC41" HREF="faq_toc.html#TOC41">Are mixed-case filenames possible with Cygwin?</A></H3>
+<H3><A NAME="SEC42" HREF="faq_toc.html#TOC42">Are mixed-case filenames possible with Cygwin?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -545,7 +558,7 @@ code for beta 16.
 </P>
 
 
-<H3><A NAME="SEC42" HREF="faq_toc.html#TOC42">What about DOS special filenames?</A></H3>
+<H3><A NAME="SEC43" HREF="faq_toc.html#TOC43">What about DOS special filenames?</A></H3>
 
 <P>
 Files cannot be named com1, lpt1, or aux (to name a few); either as
@@ -559,7 +572,7 @@ letters 'aux' in it will hang.
 </P>
 
 
-<H3><A NAME="SEC43" HREF="faq_toc.html#TOC43">When it hangs, how do I get it back?</A></H3>
+<H3><A NAME="SEC44" HREF="faq_toc.html#TOC44">When it hangs, how do I get it back?</A></H3>
 
 <P>
 If something goes wrong and the tools hang on you for some reason (easy
@@ -580,7 +593,7 @@ This should never be necessary under Windows NT.
 </P>
 
 
-<H3><A NAME="SEC44" HREF="faq_toc.html#TOC44">Why the weird directory structure?</A></H3>
+<H3><A NAME="SEC45" HREF="faq_toc.html#TOC45">Why the weird directory structure?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -641,7 +654,7 @@ it's worth it for people with more complex installations.
 </P>
 
 
-<H3><A NAME="SEC45" HREF="faq_toc.html#TOC45">How do anti-virus programs like Cygwin?</A></H3>
+<H3><A NAME="SEC46" HREF="faq_toc.html#TOC46">How do anti-virus programs like Cygwin?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -657,7 +670,7 @@ to fail, wreaking havoc on many of the tools.
 </P>
 
 
-<H3><A NAME="SEC46" HREF="faq_toc.html#TOC46">Why can't I run bash as a shell under NT Emacs?</A></H3>
+<H3><A NAME="SEC47" HREF="faq_toc.html#TOC47">Why can't I run bash as a shell under NT Emacs?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -680,7 +693,7 @@ Place the following code in your startup file and try again:
 
 
 
-<H3><A NAME="SEC47" HREF="faq_toc.html#TOC47">info error "dir: No such file or directory"</A></H3>
+<H3><A NAME="SEC48" HREF="faq_toc.html#TOC48">info error "dir: No such file or directory"</A></H3>
 
 <P>
 Cygwin packages install their info documentation in the /usr/info
@@ -708,7 +721,7 @@ have to add their entries to <CODE>/usr/info/dir</CODE> by hand.
 </P>
 
 
-<H3><A NAME="SEC48" HREF="faq_toc.html#TOC48">Why do I get a message saying Out of Queue slots?</A></H3>
+<H3><A NAME="SEC49" HREF="faq_toc.html#TOC49">Why do I get a message saying Out of Queue slots?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -731,7 +744,7 @@ this explanation).
 </P>
 
 
-<H3><A NAME="SEC49" HREF="faq_toc.html#TOC49">Why don't symlinks work on samba-mounted filesystems?</A></H3>
+<H3><A NAME="SEC50" HREF="faq_toc.html#TOC50">Why don't symlinks work on samba-mounted filesystems?</A></H3>
 
 <P>
 Symlinks are marked with "system" file attribute.  Samba does not
@@ -752,7 +765,7 @@ Note that the 0775 can be anything as long as the 0010 bit is set.
 </P>
 
 
-<H3><A NAME="SEC50" HREF="faq_toc.html#TOC50">Why does df report sizes incorrectly.</A></H3>
+<H3><A NAME="SEC51" HREF="faq_toc.html#TOC51">Why does df report sizes incorrectly.</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -767,7 +780,7 @@ Perhaps that may be your problem?
 </P>
 
 
-<H3><A NAME="SEC51" HREF="faq_toc.html#TOC51">Has the screen program been ported yet?</A></H3>
+<H3><A NAME="SEC52" HREF="faq_toc.html#TOC52">Has the screen program been ported yet?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -781,11 +794,11 @@ them have been implemented in Cygwin yet.
 </P>
 
 
-<H2><A NAME="SEC52" HREF="faq_toc.html#TOC52">Cygwin API Questions</A></H2>
+<H2><A NAME="SEC53" HREF="faq_toc.html#TOC53">Cygwin API Questions</A></H2>
 
 
 
-<H3><A NAME="SEC53" HREF="faq_toc.html#TOC53">How does everything work?</A></H3>
+<H3><A NAME="SEC54" HREF="faq_toc.html#TOC54">How does everything work?</A></H3>
 
 <P>
 There's a C library which provides a Unix-style API.  The
@@ -813,7 +826,7 @@ WWW site.
 </P>
 
 
-<H3><A NAME="SEC54" HREF="faq_toc.html#TOC54">Are development snapshots for the Cygwin library available?</A></H3>
+<H3><A NAME="SEC55" HREF="faq_toc.html#TOC55">Are development snapshots for the Cygwin library available?</A></H3>
 
 <P>
 Yes.  They're made whenever anything interesting happens inside the
@@ -828,7 +841,7 @@ http://sourceware.cygnus.com/cygwin/snapshots/
 
 
 
-<H3><A NAME="SEC55" HREF="faq_toc.html#TOC55">How is the DOS/Unix CR/LF thing handled?</A></H3>
+<H3><A NAME="SEC56" HREF="faq_toc.html#TOC56">How is the DOS/Unix CR/LF thing handled?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -904,7 +917,7 @@ Explanation adapted from mailing list email by Earnie Boyd
 </P>
 
 
-<H3><A NAME="SEC56" HREF="faq_toc.html#TOC56">Is the Cygwin library multi-thread-safe?</A></H3>
+<H3><A NAME="SEC57" HREF="faq_toc.html#TOC57">Is the Cygwin library multi-thread-safe?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -956,7 +969,7 @@ should be fine.
 </P>
 
 
-<H3><A NAME="SEC57" HREF="faq_toc.html#TOC57">Why is some functionality only supported in Windows NT?</A></H3>
+<H3><A NAME="SEC58" HREF="faq_toc.html#TOC58">Why is some functionality only supported in Windows NT?</A></H3>
 
 <P>
 Windows 9x: n.
@@ -974,7 +987,7 @@ is not supported in Win 9x.
 </P>
 
 
-<H3><A NAME="SEC58" HREF="faq_toc.html#TOC58">How is fork() implemented?</A></H3>
+<H3><A NAME="SEC59" HREF="faq_toc.html#TOC59">How is fork() implemented?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1013,7 +1026,7 @@ shared area and then returns from fork itself.
 </P>
 
 
-<H3><A NAME="SEC59" HREF="faq_toc.html#TOC59">How does wildcarding (globbing) work?</A></H3>
+<H3><A NAME="SEC60" HREF="faq_toc.html#TOC60">How does wildcarding (globbing) work?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1042,7 +1055,7 @@ Beware: globbing uses <CODE>malloc</CODE>.  If your application defines
 </P>
 
 
-<H3><A NAME="SEC60" HREF="faq_toc.html#TOC60">How do symbolic links work?</A></H3>
+<H3><A NAME="SEC61" HREF="faq_toc.html#TOC61">How do symbolic links work?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1063,7 +1076,7 @@ attribute.
 </P>
 
 
-<H3><A NAME="SEC61" HREF="faq_toc.html#TOC61">Why do some files, which are not executables have the 'x' type.</A></H3>
+<H3><A NAME="SEC62" HREF="faq_toc.html#TOC62">Why do some files, which are not executables have the 'x' type.</A></H3>
 
 <P>
 When working out the unix-style attribute bits on a file, the library
@@ -1077,7 +1090,7 @@ ones which have a "#!" as their first characters.
 </P>
 
 
-<H3><A NAME="SEC62" HREF="faq_toc.html#TOC62">How secure is Cygwin in a multi-user environment?</A></H3>
+<H3><A NAME="SEC63" HREF="faq_toc.html#TOC63">How secure is Cygwin in a multi-user environment?</A></H3>
 
 <P>
 Cygwin is not secure in a multi-user environment.  For
@@ -1097,7 +1110,7 @@ all processes.
 </P>
 
 
-<H3><A NAME="SEC63" HREF="faq_toc.html#TOC63">How do the net-related functions work?</A></H3>
+<H3><A NAME="SEC64" HREF="faq_toc.html#TOC64">How do the net-related functions work?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1168,7 +1181,7 @@ As of the b19 release, this information may be slightly out of date.
 </P>
 
 
-<H3><A NAME="SEC64" HREF="faq_toc.html#TOC64">I don't want Unix sockets, how do I use normal Win32 winsock?</A></H3>
+<H3><A NAME="SEC65" HREF="faq_toc.html#TOC65">I don't want Unix sockets, how do I use normal Win32 winsock?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1184,7 +1197,7 @@ libwsock32.a.
 </P>
 
 
-<H3><A NAME="SEC65" HREF="faq_toc.html#TOC65">What version numbers are associated with Cygwin?</A></H3>
+<H3><A NAME="SEC66" HREF="faq_toc.html#TOC66">What version numbers are associated with Cygwin?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1223,7 +1236,7 @@ This has been "B15.0" since the beta 15 release.
 </P>
 
 
-<H3><A NAME="SEC66" HREF="faq_toc.html#TOC66">Why isn't _timezone set correctly?</A></H3>
+<H3><A NAME="SEC67" HREF="faq_toc.html#TOC67">Why isn't _timezone set correctly?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1237,11 +1250,25 @@ If not, you must do so.
 </P>
 
 
-<H2><A NAME="SEC67" HREF="faq_toc.html#TOC67">Programming Questions</A></H2>
+<H2><A NAME="SEC68" HREF="faq_toc.html#TOC68">Programming Questions</A></H2>
 
 
 
-<H3><A NAME="SEC68" HREF="faq_toc.html#TOC68">Why is gcc failing?</A></H3>
+<H3><A NAME="SEC69" HREF="faq_toc.html#TOC69">Why are compiled executables so huge?!?</A></H3>
+
+<P>
+By default, gcc compiles in all symbols.  You'll also find that gcc
+creates large executables on UNIX.
+
+</P>
+<P>
+If that bothers you, just use the 'strip' program, part of the binutils
+package.
+
+</P>
+
+
+<H3><A NAME="SEC70" HREF="faq_toc.html#TOC70">Why is gcc failing?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1259,7 +1286,7 @@ see this message.
 </P>
 
 
-<H3><A NAME="SEC69" HREF="faq_toc.html#TOC69">Why can't bison find bison.simple or bison.hairy?</A></H3>
+<H3><A NAME="SEC71" HREF="faq_toc.html#TOC71">Why can't bison find bison.simple or bison.hairy?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1277,7 +1304,7 @@ systems, you would want to set it to <CODE>C:/cygnus/cygwin-b20/share</CODE>.
 </P>
 
 
-<H3><A NAME="SEC70" HREF="faq_toc.html#TOC70">Why is make behaving badly?</A></H3>
+<H3><A NAME="SEC72" HREF="faq_toc.html#TOC72">Why is make behaving badly?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1314,7 +1341,7 @@ install sets MAKE_MODE to UNIX.
 </P>
 
 
-<H3><A NAME="SEC71" HREF="faq_toc.html#TOC71">Why the undefined reference to "WinMain@16"?</A></H3>
+<H3><A NAME="SEC73" HREF="faq_toc.html#TOC73">Why the undefined reference to "WinMain@16"?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1327,7 +1354,7 @@ Try adding an empty main() function to one of your sources.
 </P>
 
 
-<H3><A NAME="SEC72" HREF="faq_toc.html#TOC72">How do I use Win32 API calls?</A></H3>
+<H3><A NAME="SEC74" HREF="faq_toc.html#TOC74">How do I use Win32 API calls?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1403,7 +1430,7 @@ the file that makes the reference.
 </P>
 
 
-<H3><A NAME="SEC73" HREF="faq_toc.html#TOC73">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
+<H3><A NAME="SEC75" HREF="faq_toc.html#TOC75">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1418,7 +1445,7 @@ that don't need a UNIX emulation layer.
 </P>
 
 
-<H3><A NAME="SEC74" HREF="faq_toc.html#TOC74">How do I make the console window go away?</A></H3>
+<H3><A NAME="SEC76" HREF="faq_toc.html#TOC76">How do I make the console window go away?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1434,7 +1461,7 @@ It you are writing a GUI program, you should either compile with
 </P>
 
 
-<H3><A NAME="SEC75" HREF="faq_toc.html#TOC75">Why does make complain about a "missing separator"?</A></H3>
+<H3><A NAME="SEC77" HREF="faq_toc.html#TOC77">Why does make complain about a "missing separator"?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1449,7 +1476,7 @@ lines must start with tabs.
 </P>
 
 
-<H3><A NAME="SEC76" HREF="faq_toc.html#TOC76">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
+<H3><A NAME="SEC78" HREF="faq_toc.html#TOC78">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1467,7 +1494,7 @@ Win32 headers which are pretty complete.
 </P>
 
 
-<H3><A NAME="SEC77" HREF="faq_toc.html#TOC77">How do I link against .lib files?</A></H3>
+<H3><A NAME="SEC79" HREF="faq_toc.html#TOC79">How do I link against .lib files?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1514,7 +1541,7 @@ rewriting the runtime library in question from specs...
 </P>
 
 
-<H3><A NAME="SEC78" HREF="faq_toc.html#TOC78">How do I rebuild the tools on my NT box?</A></H3>
+<H3><A NAME="SEC80" HREF="faq_toc.html#TOC80">How do I rebuild the tools on my NT box?</A></H3>
 
 <P>
 <STRONG>Note:</STRONG> You must build in a directory <EM>outside</EM> the source
@@ -1537,7 +1564,7 @@ make install &#62; install.log 2&#62;&#38;1
 
 
 
-<H3><A NAME="SEC79" HREF="faq_toc.html#TOC79">How can I compile a powerpc NT toolchain?</A></H3>
+<H3><A NAME="SEC81" HREF="faq_toc.html#TOC81">How can I compile a powerpc NT toolchain?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1555,7 +1582,7 @@ Please send us patches if you do this work!
 </P>
 
 
-<H3><A NAME="SEC80" HREF="faq_toc.html#TOC80">How can I compile an Alpha NT toolchain?</A></H3>
+<H3><A NAME="SEC82" HREF="faq_toc.html#TOC82">How can I compile an Alpha NT toolchain?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1570,7 +1597,7 @@ for Alpha NT if someone contributes the changes to us.
 </P>
 
 
-<H3><A NAME="SEC81" HREF="faq_toc.html#TOC81">How can I adjust the heap/stack size of an application?</A></H3>
+<H3><A NAME="SEC83" HREF="faq_toc.html#TOC83">How can I adjust the heap/stack size of an application?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1589,7 +1616,7 @@ gcc as:
 </P>
 
 
-<H3><A NAME="SEC82" HREF="faq_toc.html#TOC82">How can I find out which dlls are needed by an executable?</A></H3>
+<H3><A NAME="SEC84" HREF="faq_toc.html#TOC84">How can I find out which dlls are needed by an executable?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1602,7 +1629,7 @@ objdump -p provides this information.
 </P>
 
 
-<H3><A NAME="SEC83" HREF="faq_toc.html#TOC83">How do I build a DLL?</A></H3>
+<H3><A NAME="SEC85" HREF="faq_toc.html#TOC85">How do I build a DLL?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1616,7 +1643,7 @@ project web page (http://sourceware.cygnus.com/cygwin/).
 </P>
 
 
-<H3><A NAME="SEC84" HREF="faq_toc.html#TOC84">How can I set a breakpoint at MainCRTStartup?</A></H3>
+<H3><A NAME="SEC86" HREF="faq_toc.html#TOC86">How can I set a breakpoint at MainCRTStartup?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1630,7 +1657,7 @@ question.
 </P>
 
 
-<H3><A NAME="SEC85" HREF="faq_toc.html#TOC85">How can I build a relocatable dll?</A></H3>
+<H3><A NAME="SEC87" HREF="faq_toc.html#TOC87">How can I build a relocatable dll?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1775,7 +1802,7 @@ like -ltcl80 in your linker command.
 </P>
 
 
-<H3><A NAME="SEC86" HREF="faq_toc.html#TOC86">How can I debug what's going on?</A></H3>
+<H3><A NAME="SEC88" HREF="faq_toc.html#TOC88">How can I debug what's going on?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1793,7 +1820,7 @@ info would not be compatible with gdb).
 </P>
 
 
-<H3><A NAME="SEC87" HREF="faq_toc.html#TOC87">Can I use a system trace mechanism instead?</A></H3>
+<H3><A NAME="SEC89" HREF="faq_toc.html#TOC89">Can I use a system trace mechanism instead?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1823,7 +1850,7 @@ mechanism is well documented in the Cygwin library sources in the file
 </P>
 
 
-<H3><A NAME="SEC88" HREF="faq_toc.html#TOC88">The linker complains that it can't find something.</A></H3>
+<H3><A NAME="SEC90" HREF="faq_toc.html#TOC90">The linker complains that it can't find something.</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1842,7 +1869,7 @@ This is right <CODE>gcc hello.cc -lstdc++</CODE>.
 </P>
 
 
-<H3><A NAME="SEC89" HREF="faq_toc.html#TOC89">I use a function I know is in the API, but I still get a link</A></H3>
+<H3><A NAME="SEC91" HREF="faq_toc.html#TOC91">I use a function I know is in the API, but I still get a link</A></H3>
 <P>
 error.
 
@@ -1859,7 +1886,7 @@ the UNICODE stuff for it isn't filled in.
 </P>
 
 
-<H3><A NAME="SEC90" HREF="faq_toc.html#TOC90">Can you make DLLs that are linked against libc ?</A></H3>
+<H3><A NAME="SEC92" HREF="faq_toc.html#TOC92">Can you make DLLs that are linked against libc ?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1872,7 +1899,7 @@ Yes.
 </P>
 
 
-<H3><A NAME="SEC91" HREF="faq_toc.html#TOC91">Where is malloc.h?</A></H3>
+<H3><A NAME="SEC93" HREF="faq_toc.html#TOC93">Where is malloc.h?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1885,7 +1912,7 @@ Include stdlib.h instead of malloc.h.
 </P>
 
 
-<H3><A NAME="SEC92" HREF="faq_toc.html#TOC92">Can I use my own malloc?</A></H3>
+<H3><A NAME="SEC94" HREF="faq_toc.html#TOC94">Can I use my own malloc?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1908,7 +1935,7 @@ to occur after <CODE>main</CODE> is called, then this will surely break.
 </P>
 
 
-<H3><A NAME="SEC93" HREF="faq_toc.html#TOC93">Can I mix objects compiled with msvc++ and gcc?</A></H3>
+<H3><A NAME="SEC95" HREF="faq_toc.html#TOC95">Can I mix objects compiled with msvc++ and gcc?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1923,7 +1950,7 @@ combining C++ objects.
 </P>
 
 
-<H3><A NAME="SEC94" HREF="faq_toc.html#TOC94">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
+<H3><A NAME="SEC96" HREF="faq_toc.html#TOC96">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1946,7 +1973,7 @@ data types, line numbers, local variables etc.
 </P>
 
 
-<H3><A NAME="SEC95" HREF="faq_toc.html#TOC95">Where can I find info on x86 assembly?</A></H3>
+<H3><A NAME="SEC97" HREF="faq_toc.html#TOC97">Where can I find info on x86 assembly?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1964,7 +1991,7 @@ downloadable PDF form on Intel's web site:
 </P>
 
 
-<H3><A NAME="SEC96" HREF="faq_toc.html#TOC96">Shell scripts aren't running properly from my makefiles?</A></H3>
+<H3><A NAME="SEC98" HREF="faq_toc.html#TOC98">Shell scripts aren't running properly from my makefiles?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1979,7 +2006,7 @@ Makefiles.
 </P>
 
 
-<H3><A NAME="SEC97" HREF="faq_toc.html#TOC97">What preprocessor do I need to know about?</A></H3>
+<H3><A NAME="SEC99" HREF="faq_toc.html#TOC99">What preprocessor do I need to know about?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2000,7 +2027,7 @@ be compiled with VC++.
 </P>
 
 
-<H3><A NAME="SEC98" HREF="faq_toc.html#TOC98">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
+<H3><A NAME="SEC100" HREF="faq_toc.html#TOC100">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2014,7 +2041,7 @@ from <TT><a target="_top" href="http://www.xraylith.wisc.edu/~khan/software/gnu-
 </P>
 
 
-<H3><A NAME="SEC99" HREF="faq_toc.html#TOC99">How should I port my Unix GUI to Windows?</A></H3>
+<H3><A NAME="SEC101" HREF="faq_toc.html#TOC101">How should I port my Unix GUI to Windows?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2043,7 +2070,7 @@ advantages inherent in using Cygwin.
 </P>
 
 
-<H3><A NAME="SEC100" HREF="faq_toc.html#TOC100">Why not use DJGPP ?</A></H3>
+<H3><A NAME="SEC102" HREF="faq_toc.html#TOC102">Why not use DJGPP ?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
