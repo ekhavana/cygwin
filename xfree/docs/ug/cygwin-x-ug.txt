@@ -75,9 +75,9 @@ Chapter 2. Setting Up Cygwin/X
 Cygwin/X Contents
 
    Cygwin/X consists of two parts: Cygwin, a port of the GNU tools to
-   Win32, and Cygwin/X, a port of XFree86 to Win32. Both parts of
-   Cygwin/X are needed to successfully run an X Server on a Win32
-   platform.
+   Win32, and Cygwin/X, a port of the X Window System to Win32. Both
+   parts of Cygwin/X are needed to successfully run an X Server on a
+   Win32 platform.
      _________________________________________________________________
 
 Installing Cygwin/X
@@ -86,10 +86,9 @@ Installing Cygwin/X
    [36]http://cygwin.com/, "ports of the popular GNU development tools
    and utilities for Windows 95, 98, and NT. They function by using the
    Cygwin library which provides a UNIX-like API on top of the Win32
-   API." Cygwin allows the compilation of the XFree86 source on Win32;
-   several patches were made to the XFree86 source to make XFree86
-   actually compile and run under Cygwin; those patches have been merged
-   into the XFree86 4.0 source tree.
+   API." Cygwin allows the compilation of the X Window System source on
+   Win32; several patches were made to the X Window System source to make
+   it actually compile and run under Cygwin.
 
    Cygwin has a nice setup program that downloads and installs the
    necessary Cygwin packages for you.
@@ -401,9 +400,9 @@ $ sh /usr/X11R6/bin/startxwin.sh
 
 startx
 
-   startx - Use the standard XFree86 startx script with its attendant
-   ~/.xinitrc configuration file. First you need to create ~/.xinitrc
-   from the template in /etc/X11/xinit/:
+   startx - Use the standard X Window System startx script with its
+   attendant ~/.xinitrc configuration file. First you need to create
+   ~/.xinitrc from the template in /etc/X11/xinit/:
 Username@CygwinHost ~
 $ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 
@@ -553,7 +552,7 @@ Secure ssh
     3. Run the following in an X terminal:
 
 Username@CygwinHost ~
-$ ssh -X -l username remote_hostname_or_ip_address
+$ ssh -Y -l username remote_hostname_or_ip_address
 
     4. Enter your password when prompted by ssh.
     5. Your ssh session should now show you a shell prompt for your
@@ -954,50 +953,50 @@ How to use this License for your documents
 
 References
 
-   1. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#overview
-   2. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#setup
-   3. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#setup-project-contents
-   4. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#setup-cygwin-x-installing
-   5. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#configure
-   6. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#configure-cygwin-x-overview
-   7. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#configure-cygwin-x-options
-   8. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using
-   9. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-starting
-  10. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-starting-bat
-  11. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-starting-sh
-  12. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-starting-startx
-  13. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-switching
-  14. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-stopping
-  15. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-window-managers
-  16. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-clipboard-integration
-  17. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-shared-memory
-  18. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-remote-session
-  19. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-remote-apps
-  20. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-remote-apps-ssh
-  21. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-remote-apps-telnet
-  22. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl
-  23. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-preamble
-  24. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-applicability-and-definitions
-  25. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-verbation-copying
-  26. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-copying-in-quantity
-  27. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-modifications
-  28. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-combining-documents
-  29. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-collections-of-documents
-  30. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-aggregation-with-independent-works
-  31. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-translation
-  32. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-termination
-  33. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-future-revisions-of-this-license
-  34. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#gfdl-using-for-your-documents
-  35. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#AEN388
+   1. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#overview
+   2. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#setup
+   3. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#setup-project-contents
+   4. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#setup-cygwin-x-installing
+   5. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#configure
+   6. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#configure-cygwin-x-overview
+   7. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#configure-cygwin-x-options
+   8. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using
+   9. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-starting
+  10. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-starting-bat
+  11. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-starting-sh
+  12. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-starting-startx
+  13. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-switching
+  14. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-stopping
+  15. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-window-managers
+  16. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-clipboard-integration
+  17. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-shared-memory
+  18. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-remote-session
+  19. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-remote-apps
+  20. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-remote-apps-ssh
+  21. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-remote-apps-telnet
+  22. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl
+  23. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-preamble
+  24. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-applicability-and-definitions
+  25. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-verbation-copying
+  26. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-copying-in-quantity
+  27. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-modifications
+  28. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-combining-documents
+  29. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-collections-of-documents
+  30. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-aggregation-with-independent-works
+  31. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-translation
+  32. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-termination
+  33. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-future-revisions-of-this-license
+  34. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#gfdl-using-for-your-documents
+  35. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#AEN393
   36. http://cygwin.com/
   37. http://cygwin.com/
-  38. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using
-  39. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#setup-cygwin-x-installing
-  40. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#setup-cygwin-x-installing
-  41. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#configure-cygwin-x-options
-  42. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-remote-session
-  43. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#using-remote-apps-ssh
-  44. file://localhost/home/harold/fdo/build/cygwin-x-doc/ug/dump.html#configure-cygwin-x-options
+  38. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using
+  39. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#setup-cygwin-x-installing
+  40. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#setup-cygwin-x-installing
+  41. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#configure-cygwin-x-options
+  42. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-remote-session
+  43. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#using-remote-apps-ssh
+  44. file://localhost/home/harold/ports/cygwin-x-doc/cygwin-x-doc-1.0.2/.build/ug/dump.html#configure-cygwin-x-options
   45. http://www.xfree86.org/current/Xserver.1.html
   46. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
   47. http://www.xfree86.org/current/Xserver.1.html#sect6

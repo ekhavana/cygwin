@@ -44,6 +44,23 @@ COLSPAN="3"
 ><TR
 ><TD
 ALIGN="LEFT"
+>Revision 1.0.16</TD
+><TD
+ALIGN="LEFT"
+>2003-04-03</TD
+><TD
+ALIGN="LEFT"
+>Revised by: harold@codeweavers.com</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Update the ssh instructions.  Remove old entries.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
 >Revision 1.0.15</TD
 ><TD
 ALIGN="LEFT"
@@ -648,7 +665,7 @@ HREF="cygwin-x-faq.html#remote"
 ><DT
 >5.1. <A
 HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
-> X11Forwarding does not work with openssh</A
+>X11Forwarding does not work with OpenSSH under Cygwin</A
 ></DT
 ></DL
 ></DD
@@ -766,11 +783,6 @@ mouse wheel scrolling.</A
 ></DT
 ><DT
 >8.2. <A
-HREF="cygwin-x-faq.html#q-cygncurses5.dll-not-found"
->A required DLL file: cygncurses5.dll cannot be found</A
-></DT
-><DT
->8.3. <A
 HREF="cygwin-x-faq.html#q-owner-tmp-.X11-unix"
 ><SPAN
 CLASS="errorname"
@@ -779,7 +791,7 @@ set to root</SPAN
 ></A
 ></DT
 ><DT
->8.4. <A
+>8.3. <A
 HREF="cygwin-x-faq.html#q-error-security-policy"
 ><SPAN
 CLASS="errorname"
@@ -788,7 +800,7 @@ CLASS="errorname"
 ></A
 ></DT
 ><DT
->8.5. <A
+>8.4. <A
 HREF="cygwin-x-faq.html#q-error-font-eof"
 ><SPAN
 CLASS="errorname"
@@ -797,7 +809,7 @@ CLASS="errorname"
 ></A
 ></DT
 ><DT
->8.6. <A
+>8.5. <A
 HREF="cygwin-x-faq.html#q-removing-font-path-element"
 ><SPAN
 CLASS="errorname"
@@ -810,7 +822,7 @@ list!</SPAN
 ></A
 ></DT
 ><DT
->8.7. <A
+>8.6. <A
 HREF="cygwin-x-faq.html#q-procedure-entry-point-missing"
 ><SPAN
 CLASS="errorname"
@@ -819,16 +831,7 @@ not be located</SPAN
 ></A
 ></DT
 ><DT
->8.8. <A
-HREF="cygwin-x-faq.html#q-status-integer-divide-by-zero"
-><SPAN
-CLASS="errorname"
->Exception:
-STATUS_INTEGER_DIVIDE_BY_ZERO</SPAN
-></A
-></DT
-><DT
->8.9. <A
+>8.7. <A
 HREF="cygwin-x-faq.html#q-status-access-violation"
 ><SPAN
 CLASS="errorname"
@@ -836,7 +839,7 @@ CLASS="errorname"
 ></A
 ></DT
 ><DT
->8.10. <A
+>8.8. <A
 HREF="cygwin-x-faq.html#q-error-max-clients"
 ><SPAN
 CLASS="errorname"
@@ -849,7 +852,7 @@ by server Xlib: Maximum number of clients reached</SPAN
 ></A
 ></DT
 ><DT
->8.11. <A
+>8.9. <A
 HREF="cygwin-x-faq.html#q-xio-fatal-io-error-104"
 ><SPAN
 CLASS="errorname"
@@ -858,7 +861,7 @@ CLASS="errorname"
 ></A
 ></DT
 ><DT
->8.12. <A
+>8.10. <A
 HREF="cygwin-x-faq.html#q-cannot-open-display"
 ><SPAN
 CLASS="errorname"
@@ -866,12 +869,12 @@ CLASS="errorname"
 ></A
 ></DT
 ><DT
->8.13. <A
+>8.11. <A
 HREF="cygwin-x-faq.html#q-error-env-space"
 >Out of environment space</A
 ></DT
 ><DT
->8.14. <A
+>8.12. <A
 HREF="cygwin-x-faq.html#q-too-many-parameters"
 >Too many parameters</A
 ></DT
@@ -1067,7 +1070,7 @@ TARGET="_top"
 CLASS="QUOTE"
 >"ports of the
 popular GNU development tools and utilities for Windows 95, 98, and
-NT. They function by using the Cygwin library which provides a
+NT.  They function by using the Cygwin library which provides a
 <ACRONYM
 CLASS="acronym"
 >UNIX</ACRONYM
@@ -1359,11 +1362,11 @@ CLASS="answer"
 ><P
 ><B
 > </B
->The configfile support was only limited. Because of this and extra
-dependencies it was removed again. But most of the options which were 
-configurable in the configfile are now available as commandline options.
-For more information on configuring other keyboard layout see
-<A
+>The configfile support was only limited.  Because of this and
+extra dependencies it was removed again.  But most of the options
+which were configurable in the configfile are now available as
+commandline options.  For more information on configuring other
+keyboard layout see <A
 HREF="cygwin-x-faq.html#q-non-U.S.-keyboard-layout"
 >Q: 4.1.1.</A
 ></P
@@ -1560,31 +1563,28 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-Some keyboard layouts are configured according to the Windows keyboard settings.
-For these layouts no special change is needed.
-
-For all other layouts there is the possibility to configure the layout via 
-commandline options.
-</P
+>Some keyboard layouts are configured according to the Windows
+keyboard settings.  For these layouts no special change is needed.
+For all other layouts there is the possibility to configure the layout
+via commandline options.</P
 ><P
->&#13;The mainoption for changing the layout is 
-<VAR
+>The mainoption for changing the layout is <VAR
 CLASS="parameter"
->-xkblayout <VAR
+>-xkblayout
+<VAR
 CLASS="replaceable"
 >countrycode</VAR
 ></VAR
-> 
-where <VAR
+> where
+<VAR
 CLASS="replaceable"
 >countrycode</VAR
-> is in most cases the 2 character
-code which also represents the country in internet adresses (e.g. 
-Australia = au, Deutschland = de, France = fr, Japan = jp, United Kingdom = uk).
-</P
+> is in most cases the 2
+character code which also represents the country in internet adresses
+(e.g.  Australia = au, Deutschland = de, France = fr, Japan = jp,
+United Kingdom = uk).</P
 ><P
->&#13;Other options for tweaking the XKB layout are
+>Other options for tweaking the XKB layout are
 <VAR
 CLASS="parameter"
 >-xkbmodel</VAR
@@ -1595,19 +1595,17 @@ CLASS="parameter"
 <VAR
 CLASS="parameter"
 >-xkboptions</VAR
-> and <VAR
+> and
+<VAR
 CLASS="parameter"
 >-xkbrules</VAR
->. 
-These are the counterparts for the similar named options known from the 
-XF86Config file.
-</P
+>.  These are the counterparts for the
+similar named options known from the XF86Config file.</P
 ><P
 >If the loading fails, check <A
 HREF="cygwin-x-faq.html#q-xkb-not-working"
 >Q: 4.1.5.</A
->
-</P
+></P
 ></DIV
 ></DIV
 ><DIV
@@ -1728,9 +1726,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-First check if you are able to change the server to another layout via XKB. 
-The german layout will be good for testing:
+>First check if you are able to change the server to another
+layout via XKB.  The german layout will be good for testing:
+
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -1739,18 +1737,19 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->setxkbmap de -model pc105
+>&#13;setxkbmap de -model pc105
 </PRE
 ></TD
 ></TR
 ></TABLE
 >
+
 This worked if pressing "Shift" and "8" produces "(" instead of "*".
-If it worked then you can skip the next paragraph.
-</P
+If it worked then you can skip the next paragraph.</P
 ><P
->&#13;There is currently a problem with the /tmp directory mounted in textmode. 
-You can change the setting to binmode with:
+>There is currently a problem with the /tmp directory mounted in
+textmode.  You can change the setting to binmode with:
+
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -1759,13 +1758,15 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->mount -b "$(cygpath -m /tmp)" /tmp
+>&#13;mount -b "$(cygpath -m /tmp)" /tmp
 </PRE
 ></TD
 ></TR
 ></TABLE
 >
+
 If this fails with an errormessage stating unsufficient rights, try
+
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -1774,16 +1775,19 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->mount -b -u "$(cygpath -m /tmp)" /tmp
+>&#13;mount -b -u "$(cygpath -m /tmp)" /tmp
 </PRE
 ></TD
 ></TR
 ></TABLE
 >
+
 </P
 ><P
->&#13;Not all keyboard layouts are tested very well and some contain errors or do
-not work at all. To test if the compiling of your layout works start 
+>Not all keyboard layouts are tested very well and some contain
+errors or do not work at all. To test if the compiling of your layout
+works start
+
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -1792,7 +1796,7 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->xkbcomp -w 3 -xkm -m <VAR
+>&#13;xkbcomp -w 3 -xkm -m <VAR
 CLASS="replaceable"
 >de</VAR
 > /etc/X11/xkb/keymap/xfree86 localhost:0.0
@@ -1801,10 +1805,10 @@ CLASS="replaceable"
 ></TR
 ></TABLE
 >
-(replace the "de" with your layout code).        
-This may produce warnings, but must not produce errors. If there are errors 
-then please report them to the mailinglist.
-</P
+
+(replace the "de" with your layout code).  This may produce warnings,
+but must not produce errors. If there are errors then please report
+them to the mailinglist.</P
 ></DIV
 ></DIV
 ><DIV
@@ -1848,14 +1852,16 @@ CLASS="answer"
 ><P
 ><B
 > </B
->The older X11 releases on the various commercial unices define the AltGr
-key as ModeSwitch, MetaR, AltR or similar. Cygwin/X expects it to be 
-ISO_Level3_Switch. For reasons unknown to us this is reset when loggin into 
-the remote host. As far as we don't have access to such a machine we are unable
-to track this down and find a reason. 
-</P
+>The older X11 releases on the various commercial unices define
+the AltGr key as ModeSwitch, MetaR, AltR or similar.  Cygwin/X expects
+it to be ISO_Level3_Switch.  For reasons unknown to us this is reset
+when loggin into the remote host.  As far as we don't have access to
+such a machine we are unable to track this down and find a
+reason.</P
 ><P
->&#13;Sometimes it does help to run <TABLE
+>Sometimes it does help to run
+
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -1863,7 +1869,7 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->DISPLAY=:0.0 setxkbmap <VAR
+>&#13;DISPLAY=:0.0 setxkbmap <VAR
 CLASS="replaceable"
 >languagecode</VAR
 >
@@ -1872,11 +1878,11 @@ CLASS="replaceable"
 ></TR
 ></TABLE
 >
+
 from a cygwin shell. For more information see <A
 HREF="cygwin-x-faq.html#q-non-U.S.-keyboard-layout"
 >Q: 4.1.1.</A
->.
-</P
+>.</P
 ></DIV
 ></DIV
 ></DIV
@@ -1994,19 +2000,63 @@ NAME="q-ssh-no-x11forwarding"
 ></A
 ><B
 >5.1. </B
-> X11Forwarding does not work with openssh</P
+>X11Forwarding does not work with OpenSSH under Cygwin</P
 ></DIV
 ><DIV
 CLASS="answer"
 ><P
 ><B
 > </B
->
-Before establishing the ssh connection the xserver must be started and the
-environment variable <VAR
+>A1:</P
+><P
+>OpenSSH 3.8 enables trusted X11 forwarding by default when
+connecting to an ssh server that supports trusted X11 forwarding.
+Most ssh servers for GNU/Linux are versions of OpenSSH that do support
+trusted X11 forwarding, so using OpenSSH 3.8 from Cygwin will result
+in a connection that uses trusted X11 forwarding by default.  You will
+quickly notice that this is the case if most of your X applications
+are now killed when you try to copy and paste or if
+<B
+CLASS="command"
+>xdpyinfo</B
+> returns only a fraction of the supported
+extensions that it does if run locally.</P
+><P
+>It is easiest to just override trusted X11 forwarding by passing
+<VAR
+CLASS="parameter"
+>-Y</VAR
+> to <B
+CLASS="command"
+>ssh</B
+> in place of
+<VAR
+CLASS="parameter"
+>-X</VAR
+>.  The <VAR
+CLASS="parameter"
+>-Y</VAR
+> does the
+same thing as <VAR
+CLASS="parameter"
+>-X</VAR
+>, but it disables trusted X11
+forwarding for the current connection.</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>A2:</P
+><P
+>Before establishing the ssh connection the xserver must be
+started and the environment variable <VAR
 CLASS="parameter"
 >DISPLAY</VAR
-> must be set for ssh.
+>
+must be set for ssh.
+
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2029,7 +2079,9 @@ CLASS="replaceable"
 ></TR
 ></TABLE
 >
+
 or
+
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2050,6 +2102,7 @@ CLASS="replaceable"
 ></TR
 ></TABLE
 >
+
 </P
 ></DIV
 ><DIV
@@ -2057,62 +2110,66 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-Make sure you're not starting ssh with the parameter <VAR
+>A3:</P
+><P
+>Make sure you're not starting ssh with the parameter
+<VAR
 CLASS="parameter"
 >-x</VAR
->.
-This disables <A
+>.  This disables <A
 HREF="glossary.html#gloss-x11forwarding"
 ><I
 CLASS="glossterm"
 >X11Forwarding</I
 ></A
->. 
-The correct parameter is <VAR
+>.  The correct
+parameter is <VAR
 CLASS="parameter"
 >-X</VAR
-> (uppercase).
-</P
+> (uppercase).</P
 ></DIV
 ><DIV
 CLASS="answer"
 ><P
 ><B
 > </B
->
-Check that X11Forwarding is not disabled in the openssh client configuration.
-
-The configfiles are by default <TT
+>A4:</P
+><P
+>Check that X11Forwarding is not disabled in the openssh client
+configuration.</P
+><P
+>The configfiles are by default
+<TT
 CLASS="filename"
 >~/.ssh/config</TT
-> and 
+> and
 <TT
 CLASS="filename"
 >/etc/ssh_config</TT
->. The file in the home directory 
-overrides settings in the global one.
-
-The configfile is split into various sections starting with 
+>.  The file in the home directory
+overrides settings in the global one.</P
+><P
+>The configfile is split into various sections starting with
 <SPAN
 CLASS="QUOTE"
 >"Host <VAR
 CLASS="replaceable"
 >wildcard</VAR
 >"</SPAN
->. 
-The section applies to all hosts where <VAR
+>.  The section
+applies to all hosts where <VAR
 CLASS="replaceable"
 >wildcard</VAR
-> 
-matches the hostname.
-
-If this section contains an entry <SPAN
+> matches
+the hostname.</P
+><P
+>If this section contains an entry <SPAN
 CLASS="QUOTE"
 >"ForwardX11 no"</SPAN
-> then
-X11Forwarding is disabled. To enable it change the entry to 
-<TABLE
+>
+then X11Forwarding is disabled. To enable it change the entry to:
+</P
+><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -2120,20 +2177,20 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->ForwardX11 yes</PRE
+>&#13;ForwardX11 yes
+</PRE
 ></TD
 ></TR
 ></TABLE
->
-</P
 ><P
->&#13;Starting with OpenSSH 3.8 you will need the switch <SPAN
+>Starting with OpenSSH 3.8 you will need the switch
+<SPAN
 CLASS="QUOTE"
->"ForwardX11Trusted
-yes"</SPAN
-> in the client configuration to allow remote clients full access 
-to the xserver. Without it some clients will fail with a similar error:
-<TABLE
+>"ForwardX11Trusted yes"</SPAN
+> in the client configuration to
+allow remote clients full access to the xserver. Without it some
+clients will fail with a similar error:</P
+><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -2150,28 +2207,30 @@ CLASS="screen"
 ></TD
 ></TR
 ></TABLE
->
-</P
 ></DIV
 ><DIV
 CLASS="answer"
 ><P
 ><B
 > </B
->
-Check that X11Forwarding is not disabled in the ssh server configuration.
-
-The configfile is by default <TT
+>A5:</P
+><P
+>Check that X11Forwarding is not disabled in the ssh server
+configuration.</P
+><P
+>The configfile is by default
+<TT
 CLASS="filename"
 >/etc/ssh/ssh_config</TT
->.
-If there is an entry <SPAN
+>.  If there is an entry
+<SPAN
 CLASS="QUOTE"
 >"X11Forwarding no"</SPAN
-> then X11Forwarding is 
-disabled. 
+> then X11Forwarding is
+disabled. </P
+><P
+>If you have write access to the config file then change it to
 
-If you have write access to the config file then change it to
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2180,13 +2239,14 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->X11Forwarding yes</PRE
+>&#13;X11Forwarding yes
+</PRE
 ></TD
 ></TR
 ></TABLE
-> 
-Otherwise ask your you admin to change this for you.
-</P
+>
+
+Otherwise ask your you admin to change this for you.</P
 ></DIV
 ></DIV
 ></DIV
@@ -2959,7 +3019,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;; X Windows
-*,*,XWin.exe,*,*,cygwin/xfree86,WheelStd,0,9
+*,*,XWin.exe,*,*,Cygwin/X,WheelStd,0,9
 </PRE
 ></TD
 ></TR
@@ -2974,38 +3034,10 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-cygncurses5.dll-not-found"
-></A
-><B
->8.2. </B
->A required DLL file: cygncurses5.dll cannot be found</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->Upgrading from ncurses-5.2-5 to ncurses-5.2-7 requires following
-some <A
-HREF="http://cygwin.com/ml/cygwin-announce/2001/msg00124.html"
-TARGET="_top"
->special
-instructions</A
->; failure to follow those instructions will cause
-the above error message when running various Cygwin and Cygwin/X
-programs.</P
-></DIV
-></DIV
-><DIV
-CLASS="qandaentry"
-><DIV
-CLASS="question"
-><P
-><A
 NAME="q-owner-tmp-.X11-unix"
 ></A
 ><B
->8.3. </B
+>8.2. </B
 ><SPAN
 CLASS="errorname"
 >_XSERVTransmkdir: Owner of /tmp/.X11-unix should be
@@ -3030,7 +3062,7 @@ CLASS="question"
 NAME="q-error-security-policy"
 ></A
 ><B
->8.4. </B
+>8.3. </B
 ><SPAN
 CLASS="errorname"
 >error opening security policy file
@@ -3064,7 +3096,7 @@ CLASS="question"
 NAME="q-error-font-eof"
 ></A
 ><B
->8.5. </B
+>8.4. </B
 ><SPAN
 CLASS="errorname"
 >Fatal server error: could not open default font
@@ -3214,7 +3246,7 @@ CLASS="question"
 NAME="q-removing-font-path-element"
 ></A
 ><B
->8.6. </B
+>8.5. </B
 ><SPAN
 CLASS="errorname"
 >Could not init font path element
@@ -3247,7 +3279,7 @@ fonts) is being removed.</P
 >If you are getting these message and the X Server is also
 failing to start, then see <A
 HREF="cygwin-x-faq.html#q-error-font-eof"
->Q: 8.5.</A
+>Q: 8.4.</A
 >
 for information on how to fix your fonts.</P
 ></DIV
@@ -3261,7 +3293,7 @@ CLASS="question"
 NAME="q-procedure-entry-point-missing"
 ></A
 ><B
->8.7. </B
+>8.6. </B
 ><SPAN
 CLASS="errorname"
 >The procedure entry point _check_for_executable could
@@ -3285,50 +3317,10 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-status-integer-divide-by-zero"
-></A
-><B
->8.8. </B
-><SPAN
-CLASS="errorname"
->Exception:
-STATUS_INTEGER_DIVIDE_BY_ZERO</SPAN
-></P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->You are most likely running your primary Windows display at a
-bit depth that requires palettized color, most likely 8 bits per
-pixel, in conjunction with a release of Cygwin/X that does not
-support palettized color modes.  Palettized color support was added to
-Cygwin/X on 2001-06-05.  You may either install a newer version of
-Cygwin/X that supports palettized color, or you may run your primary
-Windows display at 15, 16, 24, or 32 bits per pixel.</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->See <A
-HREF="cygwin-x-faq.html#q-status-access-violation"
->Q: 8.9.</A
-></P
-></DIV
-></DIV
-><DIV
-CLASS="qandaentry"
-><DIV
-CLASS="question"
-><P
-><A
 NAME="q-status-access-violation"
 ></A
 ><B
->8.9. </B
+>8.7. </B
 ><SPAN
 CLASS="errorname"
 >Exception: STATUS_ACCESS_VIOLATION</SPAN
@@ -3397,7 +3389,7 @@ CLASS="question"
 NAME="q-error-max-clients"
 ></A
 ><B
->8.10. </B
+>8.8. </B
 ><SPAN
 CLASS="errorname"
 >Xlib: connection to
@@ -3439,7 +3431,7 @@ CLASS="question"
 NAME="q-xio-fatal-io-error-104"
 ></A
 ><B
->8.11. </B
+>8.9. </B
 ><SPAN
 CLASS="errorname"
 >XIO: fatal IO error 104 (Connection reset by peer) on
@@ -3453,7 +3445,7 @@ CLASS="answer"
 > </B
 >See <A
 HREF="cygwin-x-faq.html#q-error-max-clients"
->Q: 8.10.</A
+>Q: 8.8.</A
 ></P
 ></DIV
 ></DIV
@@ -3466,7 +3458,7 @@ CLASS="question"
 NAME="q-cannot-open-display"
 ></A
 ><B
->8.12. </B
+>8.10. </B
 ><SPAN
 CLASS="errorname"
 >Cannot Open Display: 127.0.0.1:0.0</SPAN
@@ -3550,7 +3542,7 @@ CLASS="question"
 NAME="q-error-env-space"
 ></A
 ><B
->8.13. </B
+>8.11. </B
 >Out of environment space</P
 ></DIV
 ><DIV
@@ -3575,7 +3567,7 @@ CLASS="question"
 NAME="q-too-many-parameters"
 ></A
 ><B
->8.14. </B
+>8.12. </B
 >Too many parameters</P
 ></DIV
 ><DIV
@@ -3585,7 +3577,7 @@ CLASS="answer"
 > </B
 >See <A
 HREF="cygwin-x-faq.html#q-error-env-space"
->Q: 8.13.</A
+>Q: 8.11.</A
 ></P
 ></DIV
 ></DIV
@@ -3674,7 +3666,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN716"
+NAME="AEN725"
 ></A
 ><P
 ><B
@@ -3682,7 +3674,7 @@ NAME="AEN716"
 ></P
 ><P
 >This example is based off an error that actually occurred in the
-XFree86 source code tree in
+source code tree in
 <TT
 CLASS="filename"
 >xc/programs/Xserver/Xext/xvmc.c</TT
@@ -4106,11 +4098,13 @@ CLASS="answer"
 ><P
 ><B
 > </B
->XFree86 source code is generally licensed under an <A
+>X Window System source code is generally licensed under an
+<A
 HREF="http://www.x.org/terms.htm"
 TARGET="_top"
 >X11 style license</A
->, which is <A
+>, which is
+<A
 HREF="http://www.fsf.org/philosophy/license-list.html#GPLCompatibleLicenses"
 TARGET="_top"
 >certified by the Free Software

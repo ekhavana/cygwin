@@ -72,306 +72,39 @@ NAME="prog-distribution"
 >Packaging a Cygwin/X Distribution</A
 ></H1
 ><P
->Cygwin/X uses the standard XFree86 distribution build scripts.
-You will need to start by downloading the XFree86 <TT
+>Cygwin/X uses a custom build and packaging script that
+automates all of the tasks required to build, create binary packages,
+and source code packages.</P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>These instructions assume that you want to build a distribution
+from the source packages available from Cygwin's
+<B
+CLASS="command"
+>setup.exe</B
+>.  You can use these instructions to build
+a distribution from CVS instead by just replacing references to
+<TT
 CLASS="filename"
->util</TT
-> <A
-HREF="glossary.html#gloss-cvs"
-><I
-CLASS="glossterm"
->CVS</I
-></A
-> module.  The following
-instructions are paraphrased from <TT
+>/usr/src/xc</TT
+> with the path to the
+<TT
 CLASS="filename"
->bindist-notes</TT
->
-in the XFree86 <TT
-CLASS="filename"
->devel</TT
-> CVS
-module, with adaptations to make them Cygwin/X specific.</P
+>xc/</TT
+> directory that you checked out of CVS.</P
+></BLOCKQUOTE
+></DIV
 ><OL
 TYPE="1"
 ><LI
 ><P
->Copy
-<TT
-CLASS="filename"
->xc/programs/Xserver/hw/xfree86/etc/bindist/Cygwin/host.def</TT
->
-to <TT
-CLASS="filename"
->xc/config/cf/host.def</TT
->.</P
-></LI
-><LI
-><P
->Build and install the <B
-CLASS="command"
->extract</B
-> tool from the
-<TT
-CLASS="filename"
->utils</TT
-> module.</P
-></LI
-><LI
-><P
->Run a full build of the XFree86 CVS tree, following the
-instructions in <A
-HREF="prog-build-native.html"
->the Section called <I
->Native Compiling</I
-></A
->.</P
-></LI
-><LI
-><P
->Install the full build of XFree86 to a staging directory:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;Username@CygwinHost ~/x-devel/build/std
-$ mkdir /stagingdir
-
-Username@CygwinHost ~/x-devel/build/std
-$ make DESTDIR=/stagingdir install install.man
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->Create directories for the bindist and commondist:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;Username@CygwinHost ~/x-devel/build/std
-$ mkdir /bindistdir
-
-Username@CygwinHost ~/x-devel/build/std
-$ mkdir /commondist
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->Copy the bindist and commondist scripts to their respective
-directories:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;Username@CygwinHost ~/x-devel/xc
-$ cp programs/Xserver/hw/xfree86/etc/bindist/Cygwin/* /bindistdir
-
-Username@CygwinHost ~/x-devel/xc
-$ cp programs/Xserver/hw/xfree86/etc/bindist/common/* /commondist
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->Copy the <B
-CLASS="command"
->build-bindist</B
-> script to somewhere in
-your search path, such as <TT
-CLASS="filename"
->/usr/bin</TT
->:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;Username@CygwinHost ~/x-devel/xc
-$ cp programs/Xserver/hw/xfree86/etc/bindist/build-bindist /usr/bin
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->Build the distribution tarballs:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;Username@CygwinHost ~
-$ build-bindist /stagingdir /bindistdir
-
-Username@CygwinHost ~
-$ build-bindist /stagingdir /commondist
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->Verify the tarball contents by extracting them in a test
-directory and comparing them to what is in the staging
-directory:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;Username@CygwinHost ~
-$ mkdir -p /testdir/usr/X11R6 /testdir/etc/X11 /testdir/var
-
-Username@CygwinHost ~
-$ cd /bindistdir/bindist
-
-Username@CygwinHost /bindistdir/bindist
-$ extract -C /testdir/etc/X11 Xetc.tgz
-
-Username@CygwinHost /bindistdir/bindist
-$ extract -C /testdir/var Xvar.tgz
-
-Username@CygwinHost /bindistdir/bindist
-$ extract -C /testdir/usr/X11R6 `pwd`/X[a-df-uw-z]*.tgz `pwd`/Xvfb.tgz
-
-Username@CygwinHost /bindistdir/bindist
-$ cd /commondist/bindist
-
-Username@CygwinHost /commondist/bindist
-$ extract -C /testdir/usr/X11R6 `pwd`/*.tgz
-
-Username@CygwinHost /commondist/bindist
-$ cd /testdir; find . ! -type d -print | sort &gt; /tmp/dist.list
-
-Username@CygwinHost /testdir
-$ cd /stagingdir; find . ! -type d -print | sort &gt; /tmp/stage.list
-
-Username@CygwinHost /stagingdir
-$ diff -u /tmp/stage.list /tmp/dist.list
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->The following differences are expected because the directories
-referred to are symlinks created by the installation script, other
-differences indicate that the bindist data files need to be fixed:</P
-><UL
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/app-defaults</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/fs</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/lbxproxy</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/proxymngr</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/rstart</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/twm</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/xdm</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/xinit</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/xserver</TT
-></P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->./usr/X11R6/lib/X11/xsm</TT
-></P
-></LI
-></UL
-></LI
-><LI
-><P
->Upload <TT
-CLASS="filename"
->*.tgz</TT
-> and
-<TT
-CLASS="filename"
->extract</TT
-> to your distribution site.</P
+>Wait for these instructions to be updated, sometime after
+2004-04-03.</P
 ></LI
 ></OL
 ></DIV
