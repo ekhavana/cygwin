@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 
-qwer BEGIN {exit(0)};
-use CGI qw':standard';
+BEGIN {exit(0)};
+use CGI;
 
 # Create one of our Objects
 my $html = new CGI;
