@@ -1,0 +1,832 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html lang="en-US">
+<head>
+<title>The Cygwin/XFree86 FAQ</title>
+
+<meta http-equiv=Content-Type content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="xfree86.css" >
+</head>
+
+<!--#include virtual="cygx-header.html" -->
+
+<p>Cygwin/XFree86 has two Frequently Asked Questions documents; yes,
+that is intentional.  The other FAQ can be found at <a
+href="http://xfree86.cygwin.com/docs/faq/">http://xfree86.cygwin.com/docs/faq/</a>.</p>
+
+
+      <H1>The Cygwin/XFree86 FAQ</H1>
+      <P>March 25th, 2001</P>
+      <P>&nbsp;</P>
+      <H2>Table of Contents</H2>
+      <OL>
+        <LI>General Information 
+        <LI>Installation and Troubleshooting 
+        <LI>Programming and Porting of Software 
+        <LI>How to build XGGI sources tree for Cygwin. </LI></OL>
+      <H2>1. General Information</H2>
+      <TABLE cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD vAlign=top rowSpan=3>
+            <P>1.1</P></TD>
+          <TD>
+            <P class=question><B>What is X11, X11R6.x, and 
+            Cygwin/XFree86?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P class=answer><I>X11</I>, more precisely called "The X Window 
+            System" is a complete window system that usually runs as the 
+            de-facto standard in Unix environments. <I>X11R6.4</I> is the name 
+            of the current release (precisely, the most recent one is X11R6.5.1, 
+            but this is not part of the 4.X server line. <I>XFree86</I> was 
+            originally an implementation of the X Window System on x86-based 
+            Un*x systems. (For more information see <A 
+            href="http://www.xfree86.org/#whatis">http://www.xfree86.org/#whatis</A> 
+            ). <I>Cygwin/XFree86 </I>is a port of <I>XFree86</I> version 4 for 
+            x86 based Microsoft Windows(tm) systems using Redhat's Cygwin Development 
+            Tools.</P></TD></TR>
+        <TR>
+          <TD>
+            <P>&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top>1.2</TD>
+          <TD>
+            <P class=question><B>Why port XFree86 to windows, and why use it 
+            afterwards?</B> </P></TD></TR>
+        <TR>
+          <TD vAlign=top></TD>
+          <TD>
+            <P>The links under where can I find more information; particularly 
+            the one for Kenton Lee provide very good answers to this question. 
+            To prevent duplication, we have only got the 'short answer' here. 
+            Follow the links for more information... 
+            <UL>
+              <LI>Why port XFree86? - only commercial X-Servers were available 
+              for the Windows platform. 
+              <LI>Why use an X-Server on Windows?&nbsp; 
+              <UL>
+                <LI>to show the output of programs running on unix machines or 
+                remote servers. 
+                <LI>to ease porting of Unix programs to windows by providing a 
+                100% compatible GUI environment, so no "porting" layer for the 
+                GUI is needed. 
+                <LI>for a similar reason to the existence of the <A 
+                href="http://www.winehq.com/">WINE</A> project: Some people like 
+                choice and flexibility - this gives them that. 
+          </LI></UL></LI></UL></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>1.3</TD>
+          <TD>
+            <P><B>Where can I find more information?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P><A href="./faq.html#books">Books</A> about X11 exist in any 
+            well-sorted CS bookstore.&nbsp;</P>
+            <UL type=disc>
+              <LI>Some URLs:&nbsp; 
+              <UL type=circle>
+                <LI><A href="http://www.x.org/">http://www.x.org/</A> (this 
+                has a rather large bibliography)&nbsp; 
+                <LI><A 
+                href="http://www.xfree86.org/">http://www.xfree86.org/</A>&nbsp; 
+
+                <LI><A 
+                href="http://www.rahul.net/kenton">http://www.rahul.net/kenton</A> 
+                </LI></UL>
+              <LI>Mailing list <A 
+              href="http://sources.redhat.com/cygwin/lists.html">Cygwin-XFree@sources.redhat.com</A>. 
+              </LI></UL></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>1.<A name=howcomplete>4</A></P></TD>
+          <TD>
+            <P><B>How complete is Cygwin/XFree86?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>At present the X11R6.4 libraries clients and servers are 
+            functional on Windows 95,98, ME,&nbsp; NT 4 and Windows 2000.
+            Windows XP should work.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>1.5</TD>
+          <TD><B>Is there a specific news group?</B></TD></TR>
+        <TR>
+          <TD>There is no newsgroup specifically for Cygwin/XFree86.</TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>1.6<A name=mailinglist></A></TD>
+          <TD><B>Is there a mailing list for Cygwin/XFree86?</B></TD></TR>
+        <TR>
+          <TD>
+            <P>Yes, read <A 
+            href="http://sources.redhat.com/cygwin/lists.html">http://sources.redhat.com/cygwin/lists.html</A> 
+            for subscription details &amp; a searchable archive of the mailing 
+            list..</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>1.7 </TD>
+          <TD><B>Where do I get the source code for Cygwin/XFree86?</B></TD></TR>
+        <TR>
+          <TD>The source code for Cygwin/XFree86 is the same source code for 
+            XFree86 4.01 and above. See <A 
+            href="http://www.xfree86.org/">http://www.xfree86.org</A> or <A 
+            href="http://www.xfree86.org/cvs">http://www.xfree86.org/cvs</A>. 
+            The source is not available from cygwin as it is no longer 
+            maintained separately from the core xfree86 source.</TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>1.8</TD>
+          <TD><B>Help, I retrieved the latest version via FTP, and I cannot 
+            use X Server!!!!</B></TD></TR>
+        <TR>
+          <TD>
+            <P>Run startxwin.bat from a 
+            cmd prompt, not a bash prompt. then report the console errors on the 
+            <A href="./faq.html#mailinglist">mailing list</A>.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>1.9</P></TD>
+          <TD>
+            <P><B>How do I ensure that I have the latest code?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Search the Cygwin/XFree86 Mailing List archive for news and 
+            announcements. Read the <A 
+            href="http://sources.redhat.com/cygwin/xfree">Cygwin/XFree86</A> 
+            Home Page.&nbsp;<A href="cvs.html">Use CVS to retrieve the code from 
+            the XFree86.org anonymous cvs servers</A>.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>1.<A name=bugreports>10</A></P></TD>
+          <TD>
+            <P><B>I have found a bug. How do I report it?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Search the <A href="./faq.html#mailinglist">mailing list</A> to 
+            see if it is a new bug, or even if it has been fixed already. If not 
+            then subscribe to the mailing list and email the bug details to the 
+            mailing list.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>1.<A name=whatversion>11</A></P></TD>
+          <TD>
+            <P><B>Which version of X11R6.x libraries and clients should I use 
+            and where can I get it?</B></P></TD></TR>
+        <TR>
+          <TD>Precompiled X11R6.x libraries and clients are available from any 
+            of the sources.redhat.com mirror sites. (See <A 
+            href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</A> 
+            for a list). Look under cygwin/xfree/xc-4-binaries.&nbsp; </TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>1.12</P></TD>
+          <TD>
+            <P><B>I have submitted a problem report to the mailing list, and it 
+            hasn't been answered yet.</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Unfortunately, this may happen, although Suhaib often replies to 
+            all questions and reports. There are a number of reasons for 
+            this:&nbsp;</P>
+            <UL type=disc>
+              <LI style="  mso-list: l0 level1 lfo12; tab-stops: list .5in">
+              <P align=left>If you emailed directly to any project member, it will get 
+              ignored or forwarded to the Cygwin/XFree86 <A 
+              href="./faq.html#mailinglist">mailing list</A>. Use of proper mailing 
+              lists to communicate allows other Cygwin/XFree users to help you, 
+              and thus speeds up XFree development by freeing up developer time. </P>
+              <LI style="  mso-list: l0 level1 lfo12; tab-stops: list .5in">
+              <P align=left>We 
+              are all human, occasionally questions will be missed. If that 
+              happens (allow 24-36 hours before you conisder it forgotten) just 
+              resend the email to the mailing list. </P>
+              <LI 
+              style="  mso-list: l0 level1 lfo12; tab-stops: list .5in">If 
+              the problem relates to how-to-port a particular X application to 
+              Windows, the answer may not be straightforward (but you should 
+              still get an answer!).&nbsp; </LI></UL></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>1.13</P></TD>
+          <TD>
+            <P><B>I have problems with the installation, and don't know if this 
+            is a bug. What to do?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Follow the steps in 
+            the how-to installation guide (coming soon). When you have followed 
+            those steps and it still does work follow the <A 
+            href="./faq.html#bugreports">bug reporting 
+        instructions</A>.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>1.14<A name=115></A>&nbsp;</P></TD>
+          <TD>
+            <P><B>Software, I want software!</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Look at the ported software WWW page at<BR><A 
+            href="http://sources.redhat.com/cygwin">http://sources.redhat.com/cygwin</A> 
+            to see whether there is something for you. This page is updated 
+            whenever someone ports something and gives the Cygwin Web Pages 
+            maintainer a pointer. As cygwin is fairly mature now, porting has 
+            become much easier - <B>YOU MIGHT CONSIDER PORTING SOMETHING AS 
+            WELL!&nbsp;</B></P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>1.<A name=books>15</A></P></TD>
+          <TD>
+            <P><B>Are there some X11 books?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Sure, ask in your bookstore. A user's guide is for 
+            instance:&nbsp;</P>
+            <UL type=disc>
+              <LI 
+              style="  mso-list: l1 level1 lfo15; tab-stops: list .5in">Niall 
+              Mansfield, The X Window System - A User's Guide, Addison 
+              Wesley,<BR>or&nbsp; 
+              <LI 
+              style="  mso-list: l1 level1 lfo15; tab-stops: list .5in">The 
+              Definite Guides to the X Windows System, Volume Three, X Window 
+              System User's Guide, O'Reilly &amp; Associates&nbsp; </LI></UL>
+            <P>The latter one is part of an eight (nine, ten?) volume 
+            documentation set for the X11 programmer. From my biased point of 
+            view of a programmer, this is the most comprehensive must-have for 
+            the serious programmer (however, it does not belong to the cheaper 
+            book sets, unfortunately).&nbsp;</P>
+            <P>Your mileage on book recommendations may vary, of course, and 
+            there is much more stuff in the 
+      shelves.&nbsp;</P></TD></TR></TBODY></TABLE>
+      <H2><A name=2></A>2. Installation and Troubleshooting</H2>
+      <TABLE 
+      style="WIDTH: 100%;" 
+      cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>2.1&nbsp;</P>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P><B>Can I use Cygwin/XFree86?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>At this time, Cygwin/XFree86 should work on any version of
+            windows subsequent to windows 3.11. WinCE is not included in that
+            list!. Port cygwin to WinCE and we'll consider it!.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>2.2&nbsp;</P>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P><B>How do I install Cygwin/XFree86?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Carefully follow the instructions in the <a
+            href="docs/ug/">Cygwin/XFree86 User's Guide</a>. The instructions in the HOW-TO require that you install the current version of cygwin from <a href="http://cygwin.com">the cygwin homepage</a>. Do so! XFree86 requires features not present in older installs of cygwin, and will continue to depend on current functionality from cygwin. If you have a pre-net-release version of Cygwin (Indicated by a version number like B19 or B20), uninstall that completely first.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>2.3&nbsp;</P>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P><B>Running Cygwin/XFree86?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>If the HOW-TO instructions don't work, make sure that you are running startxwin.bat from a MS-DOS command prompt, not a cygwin Bash prompt. If you are using Bash, you should run startx, not startxwin.bat. .</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>2.4&nbsp;</P>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P><B>Which X-server should I use? I tried MI/X and my X application 
+            crashed.</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>With the merger of the experimental Cygwin based servers into the 
+            XFree86 4 source tree, you should use the XFree86 X-Server. Of course 
+            you can use a commercial X-Server such as eXceed if you wish.</P>
+            <P>If you last tried cygwin XFree86 before July 2000, then the 
+            following may be of interest:</P>
+            <P>MI/X is an stdin/stdout type X-server, which uses X11R5 
+            libraries. Most of the modern X applications need X11R6 libraries; 
+            therefore there is a capability issue.MI/X also cannot do 
+            multi-windowing. Almost 99% of X applications require an X-server 
+            with at least multi-windowing capability. Therefore, executing a 
+            multi-windowing X application on MI/X will definitely 
+        crash.</P></TD></TR>
+        <TR>
+          <TD vAlign=top>
+            <P>2.5</P></TD>
+          <TD>
+            <P><B>I need MOTIF libraries to compile my X base 
+code!</B></P></TD></TR>
+        <TR>
+          <TD vAlign=top>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P>Use the most recent version of LessTif. Source code for LessTif is available from <A 
+            href="http://www.lesstif.org/">http://www.lesstif.org</A>.</P></TD></TR>
+        <TR>
+          <TD vAlign=top>
+            <P>2.6<A name=22></A>.3</P></TD>
+          <TD>
+            <P><B>My X code compiled but my application crashed with 
+            ACCESS_VIOLATION ERROR MESSAGES. What should I do?</B></P></TD></TR>
+        <TR>
+          <TD vAlign=top>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <OL>
+              <LI>
+              <P >Check for multiple different versions of X 
+              libraries and Cygwin1.dll in your path. You MUST have only one and 
+              most recent ones in your PATH. </P>
+              <LI>
+              <P >Read <A href="./faq.html#whatversion">"what 
+              version should I get?"</A> above. You might be using an old 
+              version of X11R6.x libraries. </P>
+              <LI>Use GDB to debug your code.&nbsp; </LI></OL></TD></TR>
+        <TR>
+          <TD vAlign=top>
+            <P>2.7</P></TD>
+          <TD>
+            <P><B>I need a good TERMCP file!</B></P></TD></TR>
+        <TR>
+          <TD vAlign=top>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P>Use termcap file, which came with Cygwin v 1.0 CD And is 
+            available as part of the current net release. (See <A 
+            href="http://sources.redhat.com/cygwin">http://sources.redhat.com/cygwin</A>. 
+            Click on Install Cygwin now to install the current Cygwin net 
+            release.</P></TD></TR>
+<TR>
+  <TD vAlign=top>
+    <P>2.8</P></TD>
+  <TD>
+    <P><B>When I switch tasks between the X-Server and other programs and then back again, the keyboard no longer responds correctly.</B></P></TD></TR>
+<TR>
+  <TD vAlign=top>
+    <P>&nbsp;</P></TD>
+  <TD>
+    <P>Some versions of the X server get confused as to the state of the ALT key when you task switch. Press the ALT key you used to task switch twice (within the X server).</P></TD></TR>
+<TR>
+  <TD vAlign=top>
+    <P>2.9</P></TD>
+  <TD>
+    <P><B>I get a 'Can't connect to host' error.</B></P></TD></TR>
+<TR>
+  <TD vAlign=top>
+    <P>&nbsp;</P></TD>
+  <TD>
+    <P>Some VPN/Firewall software has been found to interfere with XFree86's operation. Try temporarily disabling any such software. If that fixes your problem, turn your software back on, and start excluding XFree86 traffic. (i.e. if you are conenction to a machine at 192.168.0.3 that is on your local LAN, you might disable encryption and firewalling for conenctions to and from that machine. SSH portforwarding is a good solution for encrypting X11 traffic. See <a href="http://www.openssh.org">openSSH.org</a> for more information.</P></TD></TR>
+</TBODY></TABLE>
+      <H2>3. Programming and Porting of Software</H2>
+      <TABLE 
+      style="WIDTH: 100%;" cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>&nbsp;3.1</P>
+            <P>&nbsp;</P>
+            <P>&nbsp;</P>
+            <P>3.2</P></TD>
+          <TD>
+            <P><B>&nbsp;<TT><B>I get errors with references to Screen* 
+            functions, when I compile an X-Client.</B><BR><BR><FONT 
+            style="COLOR: #ff6600" color="#ff6600">Delete /usr/include/X11 which 
+            gets installed by tcl/tk during cygwin installation. ( You may need 
+            to do this each time you update cygwin...).<BR>These are deprecated 
+            X11R5 6 headers, not even complete set and caused problems during X 
+            clients compilation.</FONT></TT></B></P>
+            <P><B>I have some cool X fonts from other X11 systems. How do I 
+            convert them to the "foo.pcz" format?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>The "foo.pcz" is exactly the same as the "foo.pcf.Z" format known 
+            from Unix. Just rename your files, copy them to the font directories 
+            and run the&nbsp;<TT>mkfontdir</TT> utility.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.3</P></TD>
+          <TD>
+            <P><B>Where is the X contrib kit? Should I port it?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Feel free to do so. The contrib. Kit source codes are available 
+            from <A href="ftp://ftp.x.org/">ftp://ftp.x.org</A></P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.4</P></TD>
+          <TD>
+            <P><B>I have found a cool X utility which I want to port. How should 
+            I proceed?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Normally, with X utilities, you get an&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt">Imakefile</SPAN></TT>. Simply proceed as if 
+            you were under Unix. Run&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt">xmkmf -a</SPAN></TT> to 
+        compile.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3<A name=44></A>.5</P></TD>
+          <TD>
+            <P><B>Is there a utility for...?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>If you don't find it in the distribution.</P>
+            <P>Ask whether someone is already porting it, e.g. in the <A 
+            href="./faq.html#mailinglist">mailing list</A>, if not, then do it 
+            yourself. Applications don't appear magically, unless someone really 
+            ports them. <B>So why not YOU?</B></P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.6</P></TD>
+          <TD>
+            <P><B>Are there games...?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>At this point no-one has had the time to port games - other 
+            things like a working X Server took priority. If you want to play 
+            games port them yourself. (And be sure to post your success's so 
+            this FAQ entry can be more positive!)</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.7</P></TD>
+          <TD>
+            <P><B>Will you port <I>XFree86</I> to Windows, NT, and 
+            Windows95?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>The Cygwin/XFree86 project has ported XFree86 to all the 32-bit
+            versions of windows. The Cygwin/XFree86 project does not plan to port XFree86 to windows 3.11.
+            This includes Win32S for windows 3.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.8</P></TD>
+          <TD>
+            <P><B>Is there a better window manager than twm?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>There are a number of them, e.g.&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt">ctwm</SPAN></TT>,&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt">fvwm</SPAN></TT>,&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt">fvwm95</SPAN></TT>,&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt">afterstep</SPAN></TT>, you need to port them 
+            yourself, check the <A 
+            href="http://sources.redhat.com/cygwin/ported.html">ported software 
+            page </A>or ask at the <A href="./faq.html#mailinglist">mailing list 
+            </A>if someone has done it.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.9</P></TD>
+          <TD>
+            <P><B>Why is FVWM not the default window manager? It has many 
+            advantages, for instance "...."</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>The distribution reflects what is in the core part of XFree86, 
+            which offers&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">twm</SPAN></TT> 
+            by default. There is more stuff that would be worth becoming part of 
+            the standard, such as&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt">xv</SPAN></TT>, but ...well, it 
+            isn't...&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.10</P></TD>
+          <TD>
+            <P><B>Do you plan to port Motif?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>MOTIF is a copyright protected commercial (NOT an Open Source) 
+            product. </P>
+            <P>There is also the <A href="http://www.lesstif.org/">LessTif</A> 
+            project to build a free Motif clone.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.11</P></TD>
+          <TD>
+            <P><B><I>Cygwin/XFree86</I></B><B><I> </I>is free, but copyrighted 
+            software. Is commercial software based on this allowed or 
+            welcome?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P><I>Cygwin/XFree86</I> requires the use of the GNU&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt">GCC</SPAN></TT> compiler and <A 
+            href="http://www.cygnus.com/cygwin">Cygwin</A>. There may be certain 
+            restrictions and side effects involved concerning the GPL and the 
+            use of certain libraries. I won't discuss this here, but I would 
+            refer you to send message to <A 
+            href="mailto:cygwin-info@cygnus.com">cygwin-info@cygnus.com</A> 
+            concerning license requirements.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.12</P></TD>
+          <TD>
+            <P><B>Are there static versions of the X libraries?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>NO.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.13</P></TD>
+          <TD>
+            <P><B>Will there be Xaw.DLL, Xt.DLL and Xmu.DLL?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>There are no plans for them at this pont. <TT>GCC</TT> is free 
+            software, and most stuff written for it is also freely available. 
+            Recompile Xaw, Xt and Xmu if you want. However, keep the following 
+            in mind:</P>
+            <P>"One of the biggest issues with X on Win32 is the moronic DLL 
+            format. Specifically - it is not possible to export data from a 
+            Win32 DLL in a form that can be used to statically initialize 
+            another global variable. Data access from a DLL requires at least 
+            one pointer&nbsp;indirection, and hence executable code. This is why 
+            X11R6 doesn't have DLLs for Xt/Xmu/Xaw (and Motif) on Win32", quoted 
+            from XFree86-developers Mailing List - David E. Wexelblat (<I><A 
+            href="mailto:dwex@datafocus.com%3Fsubject=RE:%20Using%20MSVC%20(was%20RE:%20New%20dude%20coming%20on%20board)%26replyto=CE3283EB3AE9D011BF4B0020AFF8FDD740A833@hercules.fairfax.datafocus.com">dwex@datafocus.com</A></I>) 
+            Wed, 25 Mar 1998 10:08:27 -0500.</P>
+            <P>NB: See the mailing list page and the cygwin mailing list for 
+            discussions on libtool, which is facing the same issue and may 
+            generate a successful workaround. If that is done then you should 
+            have a relatively easy time porting Xt/Xmu/Xaw.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.14</P></TD>
+          <TD>
+            <P><B>I want to have support for a commercial compiler, because I do 
+            not</B> <B>want to use GCC</B>.&nbsp;</P></TD></TR>
+        <TR>
+          <TD>
+            <P>You want a version for a commercial compiler? No problem: write 
+            one.&nbsp;Seriously though see the <A 
+            href="http://www.xfree86.org/">XFree86</A> web pages to follow this 
+            question up.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.15</P></TD>
+          <TD>
+            <P><B>Will the DLLs link with Watcom, Borland, MSVC, and 
+            VAC++?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>The patched source code for 
+            Cygwin/GCC compilers is available via <A 
+            href="./faq.html#getthesource">cvs</A>. You will need to consult 
+            Mumit Khan's URL at <A 
+            href="http://www.xraylith.wisc.edu/~khan/software/gnu-win32">http://www.xraylith.wisc.edu/~khan/software/gnu-win32</A> 
+            and edit cygwin.cf and cygwin.rules in xc/cf directory as needed and 
+            compile them yourself.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.16</P></TD>
+          <TD>
+            <P><B>Why must I use GNU make? I am accustomed to XYZmake, which has 
+            very nice features.</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Well,&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">Imakefile</SPAN></TT>s 
+            also have nice features, particularly that they expand 
+            to&nbsp;<TT>Makefile</TT>s that may have several thousand lines. I 
+            have tested numerous make programs: all but GNU&nbsp;<TT>make</TT> 
+            failed this benchmark somehow. You are accustomed to XYZmake; let's 
+            say,&nbsp;<TT>imake</TT> is accustomed to 
+            GNU&nbsp;<TT>make</TT>.&nbsp;<BR>Information on imake can be found 
+            via any popular search engine.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P><A name=416></A>3.17</P></TD>
+          <TD>
+            <P><B>Are there special porting considerations?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Below are few basic rules I follow and are derived from XFree86 
+            source code:&nbsp;</P>
+            <UL type=disc>
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">Use 
+              the&nbsp;<TT><SPAN style="FONT-SIZE: 10pt">Imakefile</SPAN></TT> 
+              and do not try to handcraft or patch a&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">Makefile</SPAN></TT>. Things will go 
+              wrong!&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">Read 
+              about the macros&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">ProgramTargetName()</SPAN></TT> 
+              and&nbsp;<TT>LibraryTargetName()</TT> and use them in 
+              the&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">Imakefile</SPAN></TT>, 
+              rather than hacking .exe and .lib names. The above will work, 
+              hacking won't.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">Use&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">#ifdef cygwinArchitecture</SPAN></TT> in 
+              an&nbsp;<TT><SPAN style="FONT-SIZE: 10pt">Imakefile</SPAN></TT> to 
+              specify a Cygwin dependent part.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">In 
+              source or header files, exclusively use&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">#ifdef 
+              __CYGWIN__</SPAN></TT> for CYGWIN specific parts. Don't use other 
+              symbols, such as "WIN32", "__WIN32__", "i386", "__GNUC__", or 
+              "__32BIT__". Use only&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">#ifdef</SPAN></TT>,&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">#else</SPAN></TT>,&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">#endif</SPAN></TT>, 
+              not&nbsp;<TT>#elif</TT>, as some other compilers don't support 
+              this.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">If 
+              you think there is a bug in the provided X11 include files, you 
+              are doing something wrong.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">Many&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">Imakefile</SPAN></TT>s silently assume 
+              they are running under Unix, and therefore have program and 
+              library names hardcoded in. Use the&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">LibraryTargetName</SPAN></TT> 
+              and&nbsp;<TT>ProgramTargetName</TT> macros to wrap libs and 
+              programs, such as in </LI></UL>
+            <P style="MARGIN-LEFT: 0.5in"><BR><TT>EXTRA_LIBRARIES = 
+            ../Xpmlib/LibraryTargetName(Xpm)</TT><SPAN 
+            style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New';"> 
+            <BR><TT>PROGRAMS = ProgramTargetName(xterm) 
+            ProgramTargetName(resize)</TT></SPAN><A name=416a></A> </P>
+            <UL type=disc>
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">Don't 
+              reinvent the wheel concerning environment variables. Use the ones 
+              that are described in the installation file&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">README</SPAN></TT>, 
+              rather than invent yet another variable name for&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">USER</SPAN></TT>s,&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">HOME</SPAN></TT> 
+              directories,&nbsp;<TT>TMP&gt;</TT> directories, etc.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">Try 
+              to make your filenames comply with the 8.3 file name convention, 
+              so that users may relocate them to elsewhere.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">The 
+              libraries are DLLs for certain reasons.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">Much 
+              software from Unix assumes that lines have '\n' as a line 
+              delimiter. Don't change this, some code relies on this. Rather 
+              rewrite the code to accept&nbsp;<TT><SPAN 
+              style="FONT-SIZE: 10pt">\r\n</SPAN></TT> as a line 
+              delimiter.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">Code 
+              that relies on Unix security, job control, tty/pty handling, does 
+              not need major rewriting because Cygwin1.dll offers this 
+              functionality.&nbsp; 
+              <LI 
+              style="  mso-list: l3 level1 lfo18; tab-stops: list .5in">If 
+              you want to contribute other software, please follow these 
+              guidelines for making your distribution zip file:&nbsp; 
+              <UL type=circle>
+                <LI 
+                style="   tab-stops: list 1.0in">Use 
+                Cygwin tar and gzip or bzip2 for packing, even if some foobar 
+                packer gives you 1 % better compression. Don't 
+                use&nbsp;<TT>Winzip</TT> or other non-Cygwin aware tools.
+                <LI 
+                style="   tab-stops: list 1.0in">If 
+                you use an&nbsp;<TT><SPAN 
+                style="FONT-SIZE: 10pt">Imakefile</SPAN></TT> (which is common 
+                practice with X apps), set the&nbsp;<TT><SPAN 
+                style="FONT-SIZE: 10pt">X11ROOT</SPAN></TT> variable to another 
+                letter than the one where you have your X11 tree. This makes it 
+                easier for you to combine all necessary files into a 
+                distribution.&nbsp; 
+                <LI>Use exactly the same tree structure as <I>Cygwin/XFree86</I> 
+                is using don't reinvent wheels and install 
+                to&nbsp;/usr/X11R6/bin or similar.&nbsp; 
+                <LI>The last section means that the directories in your archive 
+                should be rooted to /usr/X11R6.&nbsp; 
+                <LI>Put sources in a separate archive, not in the binary 
+                release, and root this archive 
+                at&nbsp;<TT>/usr/X11R6/src/PACKAGENAME</TT>, 
+                e.g.&nbsp;<TT>/usr/X11R6/src/xfoo-0.99</TT>.&nbsp; 
+                <LI>The reason for all that is that there are plans for a 
+                Software Installer in the future to improve the installation 
+                procedure. This should integrate all contribution packages as 
+                well. Non-conforming contributions will be rejected without 
+                warning.&nbsp; </LI></UL></LI></UL></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.18</P></TD>
+          <TD>
+            <P><B>'make' does not work.</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P><TT>You must use GNU make which came with Cygwin and you must set 
+            MAKE_MODE=UNIX.</TT></P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.19</P></TD>
+          <TD>
+            <P><B>When I start an application I have compiled myself, the 
+            speaker beeps.</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Use an&nbsp;<TT><SPAN 
+            style="FONT-SIZE: 10pt; FONT-FAMILY: 'Courier New'">Imakefile.</SPAN></TT> 
+            You have not passed the correct options to&nbsp;<TT>GCC</TT>. The 
+            most simple Imakefile to compile a client with just one source 
+            file&nbsp;<TT><SPAN style="FONT-SIZE: 10pt">foo.c</SPAN></TT> looks 
+            like this:</P>
+            <P><BR><TT>======snip========================</TT><SPAN 
+            style="FONT-SIZE: 10pt;"> 
+            <BR><TT>SimpleProgramTarget(foo)</TT> 
+            <BR><TT>======snip========================</TT></SPAN> </P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.20</P></TD>
+          <TD>
+            <P><B>How do I make a <I>XFree86</I> compliant DLL?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Since the XFree86 source code is now available, you will find 
+            plenty of examples how I did this there.&nbsp;</P>
+            <P>Note that you still need some secondary literature on special 
+            features of Imakefile rules. A recommended book on&nbsp;<SPAN 
+            style="FONT-SIZE: 10pt"><TT>Imakefiles</TT></SPAN> is available from 
+            O'Reilly&amp;Assoc publ (Using imake). Ask in your 
+            bookstore.&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.21</P></TD>
+          <TD>
+            <P><B>How do you make the packages of ported software?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>I distribute a simple 
+            foo.tar.gz or foo.tar.bz2 archives.Seldom, I might distribute 
+            archives with InstallShield Installer, after X Servers are 
+            functional.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.22</P></TD>
+          <TD>
+            <P><B>The new Imake config files now contain also "Motif" and "CDE" 
+            rule and template files. Does this mean that this stuff will be 
+            available soon for free?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>No, it doesn't. These files were added in X11R6.3 to better 
+            integrate Motif and CDE into the system, but this does not make this 
+            software public domain (or whatever you want to call 
+          that).&nbsp;</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>3.23&nbsp;</P>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P><B>I compiled an X/MOTIF client foo.exe.&nbsp; My foo.exe 
+            executes but I cannot use keyboard and my console dumps Xt 
+            Warnings:</B> </P>
+            <P><B><SPAN style="FONT-SIZE: 10pt; COLOR: red">Warning: translation 
+            table syntax error:</SPAN></B><SPAN 
+            style="FONT-SIZE: 10pt; COLOR: red; FONT-FAMILY: 'Courier New'"> 
+            <B>Unknown event type :<SPAN>&nbsp;&nbsp; 
+            </SPAN>BtnMotion<BR></B></SPAN><B><SPAN 
+            style="FONT-SIZE: 10pt; COLOR: red">Warning: ... found while parsing 
+            ' &lt;BtnMotion&gt;: <SPAN>&nbsp;</SPAN>ManagerGadgetButtonM&#8230;<BR>&lt;SNIP&gt;</SPAN><SPAN 
+            style="FONT-SIZE: 10pt"> &#8230;</SPAN></B></P>
+            <P><SPAN style="FONT-SIZE: 10pt"><B></B></SPAN><B><SPAN 
+            style="FONT-SIZE: 10pt">What is wrong</SPAN>?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>You need to set XKeysymDB and XErrorDB Environment.<SPAN>&nbsp; </SPAN>XKeysymDB and XErrorDB files 
+            usually resides in /usr/X11R6/lib/X11 directory.</P>
+            <P>For example:</P><TT>SET 
+            XKeysymDB=C:\usr\X11R6\lib\X11\XKeysymDB<BR>SET XErrorDB 
+            =C:\usr\X11R6\lib\X11\XErrorDB</TT></TD></TR>
+        <TR>
+          <TD vAlign=top>3.24</TD>
+          <TD>
+            <P ><B>Can I use DLLs and libraries&nbsp;with MSVC 
+            (Microsoft Visual C++) to compile my source 
+            code</B><B>?</B>&nbsp;</P>
+            <P >No!&nbsp; You cannot use Cygwin/XFree86 libraries 
+            with MSVC.&nbsp;You need latest version of Cygwin and GCC which 
+            comes with Cygwin.&nbsp;&nbsp;However, you can check out <A 
+            href="http://sources.redhat.com/win32-x11">http://sources.redhat.com/win32-x11</A> 
+            for &nbsp;MSVC.</P>
+            <P >&nbsp;</P></TD></TR></TBODY></TABLE>
+      <H2>4. How to build XGGI sources tree for Cygwin</H2>
+      <P><B>NB: XGGI is currently unmaintained - YMMV.</B> Download,&nbsp; 
+      xggi-1.tar.bz2, xggi-2.tar.bz2, and xggi-3.tar.bz2, which is ready to go 
+      for Cygwin is available from <A 
+      href="ftp://mirrors.rcn.net/pub/sourceware/cygwin/xfree/xggi">ftp://mirrors.rcn.net/pub/sourceware/cygwin/xfree/xggi</A>. 
+      Bunzip2 and untar xggi-1.tar.bz2, xggi-2.tar.bz2, and xggi-3.tar.bz2 to 
+      "xc" directory.&nbsp; Go to "xc" directory and type, "make World".</P>
+      <P>&nbsp;</P>
+
+<!--#include virtual="cygx-footer.html" -->
+
+</body>
+</html>
