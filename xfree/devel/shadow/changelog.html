@@ -17,7 +17,7 @@
 
 <!--#include virtual="../../cygx-header.html" -->
 
-<p>Last updated: 2001-07-15 1615 EDT</p>
+<p>Last updated: 2001-07-26 1608 EDT</p>
 
 <p>As you can see from the change log entries below, we have one guy
 spending way too much time in front of his computer.  Help this guy
@@ -65,13 +65,64 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-2001-.tar.bz2">xwin-2001-.ta
 </table>
 -->
 
+
+<h4>Test41</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-07-26 1608 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test41.exe.bz2">XWin-Test41.exe.bz2</a>
+(1052 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20010726-1608.tar.bz2">xwin-20010726-1608.tar.bz2</a>
+(68 KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Abstract the GDI PseudoColor handling into a set of functions for
+each engine.</li>
+
+<li>Add support for PseudoColor visuals when using DirectDraw engines
+in fullscreen 8 bit color modes.  Support may never be added for using
+PseudoColor visuals with DirectDraw engines in windowed mode, as the
+DirectDrawPalette object has the first ten and the last ten colors
+reserved in windowed mode.  Thus, adding PseudoColor support for
+windowed DirectDraw modes would be rather difficult.</li>
+
+<li>Fall back on StaticColor if running a DirectDraw engine in
+windowed mode.</li>
+
+<li>Turn off WIN_LAYER_SUPPORT for now, as it was causing the server to
+crash on exit when running in 8 bit color modes.</li>
+
+<li>Remove the WIN_PSEUDO_SUPPORT build flag; it is no longer used
+because the PseudoColor support is stable.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
 <h4>Test40</h4>
 <table>
 <tbody>
 
 <tr><td>Released: 2001-07-15 1615 EDT</td></tr>
 
-<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+<tr><td>Committed to XFree86 CVS: 2001-07-25 1031 EDT</td></tr>
 
 <tr><td>Basis: Test39</td></tr>
 
@@ -110,7 +161,7 @@ fails.</li>
 
 <tr><td>Released: 2001-07-02 0503 EDT</td></tr>
 
-<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+<tr><td>Committed to XFree86 CVS: 2001-07-25 1031 EDT</td></tr>
 
 <tr><td>Basis: XFree86 CVS</td></tr>
 
