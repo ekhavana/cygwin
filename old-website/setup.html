@@ -22,19 +22,19 @@ while source tarballs are "package-version-src.tar.bz2".</p>
 
 <h2>Automatic setup.ini generation on sources.redhat.com</h2>
 
-A script that runs on sources.redhat.com that collects information from
+A script runs on sources.redhat.com which collects information from
 the<tt> latest </tt>and<tt> contrib </tt> directories (possibly more in
 the future) and automatically generates the default setup.ini.  If you
 are putting packages in these directories, it is important that you
 understand how this program works.
 
 <p>Files that end in ".tar.bz2" or ".tar.gz" automatically qualify as
-packages.  It is assumed that the file is package-version[-src].tar.bz2,
+packages.  It is assumed that the file name is package-version[-src].tar.bz2,
 and that the version number starts with a digit.  Higher version numbers
 are used for the current version of a package; the next stable version
 (if any) is used for the previous version.</p>
 
-<p>We recommend you keep up to three versions of each package around:
+<p>We recommend you keep no more than three versions of each package around:
 The current version, the previous stable version, and one test
 version.  By keeping a previous stable version around, you isolate
 yourself (somewhat) from problems with partial mirrors.  When you add
