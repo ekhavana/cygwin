@@ -157,14 +157,14 @@ choose the packages you wish to install, and update them individually.
 their respective directories:
 
 `latest'
-     ash bash binutils bison byacc bzip2 clear common crypt cygwin
-     dejagnu diff expect fileutils findutils flex gawk gcc gdb gperf
-     grep groff gzip inetutils less login m4 make man mt opengl openssh
-     openssl patch sed shellutils tar tcltk termcap texinfo textutils
-     time vim
+     ash autoconf bash binutils bison byacc bzip2 clear common crypt
+     cygwin dejagnu diff expect fileutils findutils flex gawk gcc gdb
+     gperf grep groff gzip inetutils less login m4 make man mt opengl
+     openssh openssl patch regex sed shellutils tar tcltk termcap
+     texinfo textutils time vim w32api
 
 `contrib'
-     cvs gdbm jbigkit jpeg libpng tiff zlib
+     cvs gdbm gettext jbigkit jpeg libpng ncurses readline tiff xpm zlib
 
    Full source code is available for all packages and tools.
 
@@ -305,9 +305,9 @@ What's the difference between packages in `latest' and `contrib'?
 `cygwin-apps' mailing list.  Check the list archives if you want to
 know more.  Start at `http://cygwin.com/lists.html'.
 
-   In any case, there is no distinction as far as `setup.exe' is
-concerned.  It should install all packages from both `latest' and
-`contrib' directories.
+   But it really doesn't matter, and there is no distinction as far as
+`setup.exe' is concerned.  By default, it will install all packages
+from both `latest' and `contrib' directories.
 
 My Windows logon name has a space in it, will this cause problems?
 ------------------------------------------------------------------
@@ -371,6 +371,40 @@ manually:
    It's up to you to deal with other changes you made to your system,
 such as installing the inetd service, altering system paths, etc.  Setup
 would not have done any of these things for you.
+
+Can I use setup to install snapshots?
+-------------------------------------
+
+   Yes.  If experimenting with developer snapshots from
+`http://cygwin.com/snapshots/', you should generally install the full
+`cygwin-inst-YYYYMMDD.tar.bz2' update, rather than just the DLL,
+otherwise some components may be out of sync.  However, Cygwin tar
+won't work because it will load the DLL that you're trying to update,
+and a non-Cygwin program like WinZip will put everything in the wrong
+place.  The solution is to use `setup.exe'.
+
+   Just bunzip2 the cygwin-inst tarball, rename it to
+cygwin-YYYYMMDD.tar, gzip it, put it in an empty directory, and run
+`setup.exe' there.  You should be given the option to install it.
+
+   The obvious warnings about updating the cygwin package and using
+developer snapshots apply:
+
+  1. Always download the latest version of setup from
+     `http://cygwin.com/setup.exe'.
+
+  2. Close all Cygwin apps, including shells and services (e.g. inetd),
+     before running setup.  You may have to restart Windows to clear
+     the DLL from memory.
+
+  3. Snapshots are risky.  They have not been tested.  Use them *only*
+     if there is a feature or bugfix that you need to try.
+
+  4. If you cannot download a snapshot from the main ftp distribution
+     site, use a mirror, and look in the `snapshots' directory.  You may
+     have to hunt for one that has a copy of the latest snapshot.
+     Start at `http://cygwin.com/mirrors.html'.
+
 
 What Unix API calls are supported by Cygwin?
 ********************************************
@@ -2400,16 +2434,7 @@ areas passed to it via shared area and then returns from fork itself.
 How does wildcarding (globbing) work?
 -------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
-
-   If an application using CYGWIN.DLL starts up, and can't find the
-`PID' environment variable, it assumes that it has been started from
-the a DOS style command prompt.  This is pretty safe, since the rest of
-the tools (including bash) set PID so that a new process knows what PID
-it has when it starts up.
-
-   If the DLL thinks it has come from a DOS style prompt, it runs a
+   If the DLL thinks it was invoked from a DOS style prompt, it runs a
 `globber' over the arguments provided on the command line.  This means
 that if you type `LS *.EXE' from DOS, it will do what you might expect.
 
