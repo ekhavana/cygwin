@@ -1,3 +1,119 @@
+<h4>Release 6.7-10</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-06-14 2330 PDT</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>windialogs.c - Fix path to locally installed change log for the
+About dialog box.  (Harold L Hunt II)</li>
+
+<li>winpriv.c - Create win32 window if not already created.
+(Alexander Gottwald)</li>
+
+<li>winmultiwindowwindow.c - Export winCreateWindowWindow.  (Alexander
+Gottwald)</li>
+
+<li>winwindow.h - Allow CYGWINDOWING_DEBUG to defined in the Makefile.
+(Alexander Gottwald)</li>
+
+<li>win.h - Allow CYGDEBUG to defined in the Makefile.  (Alexander
+Gottwald)</li>
+
+<li>winmultiwindowicons.c - Load the small default icon too.
+(Alexander Gottwald)</li>
+
+<li>winprefs.h, winprefs.c - Takes the iconsize as parameter.
+(Alexander Gottwald)</li>
+
+<li>win.h, winmultiwindowicons.c (winXIconToHICON): Takes iconsize as
+parameter.  (Alexander Gottwald)</li>
+
+<li>winglobals.c, winmultiwindowicons.c - Rename g_hiconX to g_hIconX.
+Added new variable g_hSmallIconX for 16x16 icon.  (Alexander
+Gottwald)</li>
+
+<li>winwindow.h, winmultiwindowicons.c - Inits the global g_hIconX
+handles.  (Alexander Gottwald)</li>
+
+<li>winwindow.h, winmultiwindowicons.c - Free the icon without messing
+with the global icon handle.  (Alexander Gottwald)</li>
+
+<li>winmultiwindowicons.c - Generate a custom icon from window
+settings or set them to globals.  (Alexander Gottwald)</li>
+
+<li>winmultiwindowshape.c, winmultiwindowwindow.c, winwin32rootless.c,
+winwin32rootlesswindow.c, winwin32rootlesswndproc.c - Remove
+declaration of g_hiconX.  (Alexander Gottwald)</li>
+
+<li>winmultiwindowwindow.c, winwin32rootless.c - Use winSelectIcons to
+get the window icons. Set the small icon too.  (Alexander
+Gottwald)</li>
+
+<li>winmultiwindowwindow.c, winmultiwindowicons.c, winprefs.c,
+winwin32rootlesswindow.c, winwin32rootless.c - Use winDestroyIcon to
+free the icon without destroying the global icon.  (Alexander
+Gottwald)</li>
+
+<li>windialogs.c, winmultiwindowwndproc.c, winwndproc.c - Check if
+g_fSoftwareCursor is set before calling ShowCursor.  (Alexander
+Gottwald, Dan Wilks - Intuit)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 6.7-9</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-05-13 1300 EDT</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winclipboard.h - Add extern prototypes for winDebug, winErrorFVerb
+copied from winmsg.h.  (Dan Wilks - Intuit)</li>
+
+<li>winclipboardinit.c/winFixClipboardChain - Post rather than send
+the reinit message to the clipboard window.  Sending the message
+caused, or possibly just exacerbated an existing, race condition that
+would cause the X server to hang when coming back from a remote
+desktop session.  (Dan Wilks - Intuit)</li>
+
+<li>winclipboardwndproc.c/winProcessXEventsTimeout - Switch to new
+logging api's.  (Dan Wilks - Intuit)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc - Switch to new
+logging api's.  Add some additional debug logging.  Make best effort
+to prevent our window appearing twice in the clipboard chain.  Also
+detect loops when they occur and try to behave in a reasonable way.
+(Dan Wilks - Intuit)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 6.7-8</h4>
 <table>
 <tbody>
