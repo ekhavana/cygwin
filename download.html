@@ -13,22 +13,33 @@ the <a href="index.html">Cygwin home page</a>.  This will download the
 setup.exe program to your computer.  When you run setup.exe you will be
 asked a series of questions for installing Cygwin on your computer.
 Using setup.exe is the only supported method for installing Cygwin.</p>
-
-<p>The setup.exe program also allows you to download the Cygwin files to
-a directory on your computer without installing them.  By copying this
-download directory to other systems or putting it on a file server, you
-can, at a later time, use setup.exe to install directly from your hard
-disk.</p>
-
 <p>Due to volume limitations, the Cygwin distribution is only available from
 <a href="mirrors.html">mirror sites</a>.  You'll be prompted to choose one
 of these during the setup.exe installation.</p>
 
+<p>Currently, the setup.exe program has three options for installing
+files.  The first option "Install from Internet" is the default and
+is the option that should be used in most cases.  Selecting this option
+causes packages to be downloaded from a mirror site and then installed
+on your computer.</p>
+
+<p>The other two available options essentially allow you to break up
+the first into two disparate steps.  Selecting "Download from Internet"
+causes setup.exe to retrieve files from your selected mirror site without
+actually installing them.  Selecting "Install from Local Directory" causes
+setup.exe to scan the specified local directory for packages to install
+for files to install.</p>
+
+<p>Both "Install from Internet" and "Download from Internet" check for
+the existence of package files in your download directory.  They will
+not download the same file more than once if it already exists in the
+download directory hierarchy.</p>
+
 <p>If you are adventurous (i.e., masochistic) you can also download the
 Cygwin distribution via ftp or http using some other program than
 setup.exe.  If you do this, note that the distribution is currently
-located in two directories: "latest" and "contrib".  That is subject to
-change at any time, though.</p>
+located in the "release" directory.  This is subject to change at any
+time, though.</p>
 
 <p>The Cygwin distribution consists of standard UNIX .tar.gz or .tar.bz2
 files.  Cygwin's tar + gzip + bzip2 programs can unpack these files,
