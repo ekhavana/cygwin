@@ -6,7 +6,6 @@
 # version.
 
 # TODO
-# Have $templates[] replaced with individual template .txt files.
 # I would like to extend this to send an email-confirmation to the supposed 
 #  maintainer, which they will simply reply to confirm it as legitimate (similar 
 #  to how ezmlm confirms mailing list subscriptions).
@@ -44,91 +43,15 @@
 		"PACKAGE_DESCRIPTION"	=> 'The full description of the package (ldesc in setup.hint).',
 		"PACKAGE_BUGREPORT"	=> 'The prefered means of contacting the package maintainer regarding problems (cygwin@cygwin.com, your email address, or a separate bug-report address).',
 	);
-	$templates = array(
-		"new" =>  "From: You <your@email.address>\n"
-			. "\n"
-			. "To: cygwin-apps@cygwin.com\n"
-			. "\n"
-			. "Subject: New: @PACKAGE_NAME@ @PACKAGE_VERSION@\n"
-			. "\n"
-			. "I am pleased to announce the availability of @PACKAGE_NAME@ @PACKAGE_VERSION@ for the Cygwin Net Release.\n"
-			. "\n"
-			. "@PACKAGE_DESCRIPTION@\n"
-			. "\n"
-			. "@PACKAGE_TARNAME@-@PACKAGE_VERSION@-@PACKAGE_RELEASE@ is available from:\n"
-			. "\n"
-			. "sdesc: @PACKAGE_TEASER@\n"
-			. "\n"
-			. "BIN http://\n"
-			. "\n"
-			. "SRC http://\n"
-			. "\n"
-			. "HINT http://\n"
-			. "\n"
-			. "Please let me know if you have any problems with the packaging.\n"
-			. "\n"
-			. "Thanks.",
-		"update" =>
-			  "From: You <your@email.address>\n"
-			. "\n"
-			. "To: cygwin-apps@cygwin.com\n"
-			. "\n"
-			. "Subject: Update: @PACKAGE_NAME@ @PACKAGE_VERSION@\n"
-			. "\n"
-			. "I have updated the @PACKAGE_NAME@ package to the new vendor version @PACKAGE_VERSION@. Please upload at your earliest convenience.\n"
-			. "\n"
-			. "@PACKAGE_TARNAME@-@PACKAGE_VERSION@-@PACKAGE_RELEASE@ is available from:\n"
-			. "\n"
-			. "BIN http://\n"
-			. "\n"
-			. "SRC http://\n"
-			. "\n"
-			. "HINT http://\n"
-			. "\n"
-			. "Thanks.",
-		"correction" =>
-			  "From: You <your@email.address>\n"
-			. "\n"
-			. "To: cygwin-apps@cygwin.com\n"
-			. "\n"
-			. "Subject: Update: @PACKAGE_NAME@ @PACKAGE_VERSION@-@PACKAGE_RELEASE@\n"
-			. "\n"
-			. "I have updated the @PACKAGE_NAME@ package to @PACKAGE_VERSION@-@PACKAGE_RELEASE@. Please upload at your earliest convenience.\n"
-			. "\n"
-			. "[CHANGEME: A partial list of what was wrong with the earlier submission.]\n"
-			. "\n"
-			. "@PACKAGE_TARNAME@-@PACKAGE_VERSION@-@PACKAGE_RELEASE@ is available from:\n"
-			. "\n"
-			. "BIN http://\n"
-			. "\n"
-			. "SRC http://\n"
-			. "\n"
-			. "HINT http://\n"
-			. "\n"
-			. "Thanks.",
-		"announce" =>
-			  "From: You <your@email.address>\n"
-			. "\n"
-			. "To: cygwin-announce@cygwin.com\n"
-			. "\n"
-			. "Subject: Update: @PACKAGE_NAME@ @PACKAGE_VERSION@-@PACKAGE_RELEASE@\n"
-			. "\n"
-			. "I have updated the @PACKAGE_NAME@ package to @PACKAGE_VERSION@-@PACKAGE_RELEASE@.\n"
-			. "\n"
-			. "@PACKAGE_DESCRIPTION@\n"
-			. "\n"
-			. "[CHANGEME: The full list of what the submission contains. For example, condensed ChangeLog entries for this version, or what you changed for this release. If this is an announcement for a new package, this may be blank.]\n"
-			. "\n"
-			. "To update your installation, click on the \"Install Cygwin now\" link on the http://cygwin.com/ web page. This downloads setup.exe to your system. Then, run setup and answer all of the questions.\n"
-			. "\n"
-			. "To install @PACKAGE_NAME@ for the first time, choose \"@PACKAGE_TARNAME@\" from the packages list, in the \"@PACKAGE_CATEGORY@\" category. If you already have @PACKAGE_NAME@ installed, the update will be pre-selected.\n"
-			. "\n"
-			. "Remember that some mirror sites may not have updated before this announcement is made. If your usual mirror does not have the latest version of this package, please be patient or select an alternate mirror.\n"
-			. "\n"
-			. "If you have general questions or comments, please send them to <@PACKAGE_BUGREPORT@>. I would appreciate it if you would use this address rather than emailing me directly.\n"
-			. "\n"
-			. "Thanks.",
-	);
+
+	function grabtemplate($name) {
+		$fd = fopen("templates/" . basename($name) . ".in"), "r");
+		if (!$fd)
+			return("");
+		$str = fgets($fd, 10*1024);
+		fclose($fd);
+		return($str);
+	}
 
 	$step1 = true;
 	reset($step1ar);
@@ -294,7 +217,7 @@
 		readfile("/home/nmlorg/PPL/maintainers.txt");
 	if ($step2) {
 		if (!isset($_REQUEST["MESSAGE_CONTENTS"]))
-			$message = dosubs($templates[$_REQUEST["SUBMISSION_TYPE"]]);
+			$message = dosubs(grabtemplate($_REQUEST["SUBMISSION_TYPE"]));
 		else
 			$message = dosubs($_REQUEST["MESSAGE_CONTENTS"]);
 		echo wordwrap("Feel free to paste this into an email of your own, or continue and I will send it for you.\n");
