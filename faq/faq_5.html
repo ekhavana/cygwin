@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 10 October 2001 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 16 October 2001 -->
 
 <TITLE>The Cygwin FAQ
  - Known Problems in the Latest Net Release</TITLE>
@@ -29,23 +29,7 @@ other advantages.  (Do not attempt to use the "broken" pipe key
 
 
 
-<H3><A NAME="SEC127" HREF="faq_toc.html#TOC127">On Win9x, scp and cvs/ssh leave ssh processes running</A></H3>
-
-<P>
-For now you'll just have to kill them manually.
-
-
-<P>
-This is a difficult problem, related to the implementation of select()
-and pipes on Windows 9x.  It has been discussed at length on the cygwin
-mailing list.  For an excellent technical description of the problem, see
-<TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/2000-12/msg00470.html">http://sources.redhat.com/ml/cygwin/2000-12/msg00470.html</a></TT>, and
-related threads.
-
-
-
-
-<H3><A NAME="SEC128" HREF="faq_toc.html#TOC128">Cannot access tape devices with mt on Win9x</A></H3>
+<H3><A NAME="SEC127" HREF="faq_toc.html#TOC127">Cannot access tape devices with mt on Win9x</A></H3>
 
 <P>
 Win9x does not support the API used by the Cygwin fhandler_dev_tape
@@ -55,10 +39,25 @@ class.  Details at
 
 
 
-<H2><A NAME="SEC129" HREF="faq_toc.html#TOC129">Fixed in the Next Release</A></H2>
+<H3><A NAME="SEC128" HREF="faq_toc.html#TOC128">Hang or core-dump during make</A></H3>
 
 <P>
-(section empty)
+There is a rare core-dump that seems to be triggered by a recursive
+make.  There is also a hang condition that happens more frequently
+during parallel makes (<CODE>make -j 3</CODE>).  The solution is not known,
+so please help debug this.  "Me too" reports are not useful, unless
+accompanied by exhaustive, useful data (stack traces, reproducible
+test cases, patches).
+
+
+
+
+<H2><A NAME="SEC129" HREF="faq_toc.html#TOC129">Fixed in the Next Release</A></H2>
+
+
+
+<H3><A NAME="SEC130" HREF="faq_toc.html#TOC130">On Win9x, scp and cvs/ssh leave ssh processes running, and cvs/ssh hangs at completion</A></H3>
+
 <P><HR><P>
 Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_4.html">previous</A>, <A HREF="faq_6.html">next</A>, <A HREF="faq_8.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
 </BODY>

@@ -3381,18 +3381,6 @@ does not have this problem.  This is no real loss, because rxvt has many
 other advantages.  (Do not attempt to use the "broken" pipe key (`¦')
 as a substitute, it is a different character.)
 
-On Win9x, scp and cvs/ssh leave ssh processes running
------------------------------------------------------
-
-   For now you'll just have to kill them manually.
-
-   This is a difficult problem, related to the implementation of
-select() and pipes on Windows 9x.  It has been discussed at length on
-the cygwin mailing list.  For an excellent technical description of the
-problem, see
-`http://sources.redhat.com/ml/cygwin/2000-12/msg00470.html', and
-related threads.
-
 Cannot access tape devices with mt on Win9x
 -------------------------------------------
 
@@ -3400,10 +3388,21 @@ Cannot access tape devices with mt on Win9x
 class.  Details at
 `http://sources.redhat.com/ml/cygwin/2000-12/msg00331.html'.
 
+Hang or core-dump during make
+-----------------------------
+
+   There is a rare core-dump that seems to be triggered by a recursive
+make.  There is also a hang condition that happens more frequently
+during parallel makes (`make -j 3').  The solution is not known, so
+please help debug this.  "Me too" reports are not useful, unless
+accompanied by exhaustive, useful data (stack traces, reproducible test
+cases, patches).
+
 Fixed in the Next Release
 =========================
 
-   (section empty)
+On Win9x, scp and cvs/ssh leave ssh processes running, and cvs/ssh hangs at completion
+--------------------------------------------------------------------------------------
 
 History
 *******
