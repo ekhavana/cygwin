@@ -503,47 +503,47 @@ Obtaining the Source Code
        Cygnus Solutions, and finally Cygwin Bash Shell. You will see
        output similar to the following:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $
 
     2. Create a directory in which to store your XFree86 CVS tree and
        your builds; ~/x-devel is recommended:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ mkdir x-devel
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $
 
     3. Change the current directory to your new XFree86 development
        directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd x-devel
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     4. Set the CVSROOT environment variable to point to the XFree86 CVS
        repository:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ CVSROOT=:pserver:anoncvs@anoncvs.xfree86.org:/cvs
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ export CVSROOT
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     5. Login to the CVS server, using password "anoncvs":
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ cvs login
 (Logging in to anoncvs@anoncvs.xfree86.org)
 CVS password:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     6. Checkout the xc/ directory from the XFree86 CVS tree:
@@ -552,26 +552,26 @@ $
      1 to 9, with 9 being maximum compression.
 
      Note: As of 2001-06-12, a checked out XFree86 CVS source code tree
-     contains 16,199 files in 3,021 folders, which is 242 MB of data,
-     but requires 285 MB of storage space on a file system using 4 KB
+     contains 16,199 files in 3,021 folders, which is 242 MiB of data,
+     but requires 285 MiB of storage space on a file system using 4 KiB
      allocation units.
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ cvs -z4 checkout xc
 cvs server: Updating xc
 
 ...
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
        You may preserve a logfile for the checkout session by instead
        using the following command:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ cvs -z4 checkout xc > xc-cvs-checkout.log 2>&1
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
      _________________________________________________________________
 
@@ -600,46 +600,46 @@ Compiling Overview
    utility is included with the XFree86 source code tree; but the catch
    is that you need to build the tree before you get lndir.exe. lndir.exe
    has been compiled and is available at
-   [69]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 kB). Download
+   [69]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 KiB). Download
    the file, saving it to your Cygwin root directory (e.g. c:\cygwin),
    then follow the simple instructions below to install the utility:
     1. Launch a Cygwin bash prompt. You should see a screen similar to
        the following:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $
 
     2. Change to your Cygwin root directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd /
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $
 
     3. Uncompress lndir.exe.bz2:
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $ bunzip2 lndir.exe.bz2
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $
 
     4. Copy lndir.exe to /bin:
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $ cp lndir.exe /bin
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $
 
     5. Verify that lndir is working:
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $ lndir
 usage: lndir.exe [-silent] [-ignorelinks] fromdir [todir]
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $
 
     6. The lndir utility is now installed.
@@ -651,61 +651,61 @@ Standard Build
     1. Change the current directory to your XFree86 development
        directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd x-devel
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     2. Create a directory to house your builds, ~/x-devel/build is
        recommended:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ mkdir build
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     3. Change the current directory to your build directory:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ cd build
 
-Harold@MyWindowsHost ~/x-devel/build
+Username@CygwinHost ~/x-devel/build
 $
 
     4. Create a directory for your standard build, std is recommended:
 
-Harold@MyWindowsHost ~/x-devel/build
+Username@CygwinHost ~/x-devel/build
 $ mkdir std
 
-Harold@MyWindowsHost ~/x-devel/build
+Username@CygwinHost ~/x-devel/build
 $
 
     5. Change the current directory to your standard build directory:
 
-Harold@MyWindowsHost ~/x-devel/build
+Username@CygwinHost ~/x-devel/build
 $ cd std
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $
 
     6. Create symlinks to your source tree, using lndir, in your standard
        build directory:
 
      Note: As of 2001-09-19, creating symlinks to the source tree
-     creates 11,678 files in 1,524 folders, which is only 2.31 MB of
-     data, but requires 45.6 MB of storage space on a file system using
-     4 KB allocation units.
+     creates 11,678 files in 1,524 folders, which is only 2.31 MiB of
+     data, but requires 45.6 MiB of storage space on a file system using
+     4 KiB allocation units.
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $ lndir ../../xc/
 ../../xc/config:
 ../../../xc/config/cf:
 
 ...
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $
 
     7. Run a standard build of the entire tree, which takes between 30
@@ -713,16 +713,16 @@ $
        World.log:
 
      Note: As of 2001-09-19, a standard build of the entire tree
-     requires 234 MB of storage space on a file system using 4 KB
-     allocation units; that is in addition to the 45.6 MB of previously
+     requires 234 MiB of storage space on a file system using 4 KiB
+     allocation units; that is in addition to the 45.6 MiB of previously
      generated symlinks.
      As a benchmark, a standard build runs for 30 minutes on a machine
-     with a 1.2 GHz Atlhon, 256 MB DDR RAM, and a 7200 RPM ATA/100 HD.
+     with a 1.2 GHz Atlhon, 256 MiB DDR RAM, and a 7200 RPM ATA/100 HD.
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $ make World > World.log 2>&1
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $
 
     8. Standard build is now complete.
@@ -734,61 +734,61 @@ Debug Build
     1. Change the current directory to your XFree86 development
        directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd x-devel
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     2. If you have not already done so, create a directory to house your
        builds, ~/x-devel/build is recommended:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ mkdir build
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     3. Change the current directory to your build directory:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ cd build
 
-Harold@MyWindowsHost ~/x-devel/build
+Username@CygwinHost ~/x-devel/build
 $
 
     4. Create a directory for your debug build, debug is recommended:
 
-Harold@MyWindowsHost ~/x-devel/build
+Username@CygwinHost ~/x-devel/build
 $ mkdir debug
 
-Harold@MyWindowsHost ~/x-devel/build
+Username@CygwinHost ~/x-devel/build
 $
 
     5. Change the current directory to your debug build directory:
 
-Harold@MyWindowsHost ~/x-devel/build
+Username@CygwinHost ~/x-devel/build
 $ cd debug
 
-Harold@MyWindowsHost ~/x-devel/build/debug
+Username@CygwinHost ~/x-devel/build/debug
 $
 
     6. Create links to your source tree, using lndir, in your standard
        build directory:
 
      Note: As of 2001-09-19, creating symlinks to the source tree
-     creates 11,678 files in 1,524 folders, which is only 2.31 MB of
-     data, but requires 45.6 MB of storage space on a file system using
-     4 KB allocation units.
+     creates 11,678 files in 1,524 folders, which is only 2.31 MiB of
+     data, but requires 45.6 MiB of storage space on a file system using
+     4 KiB allocation units.
 
-Harold@MyWindowsHost ~/x-devel/build/debug
+Username@CygwinHost ~/x-devel/build/debug
 $ lndir ../../xc/
 ../../xc/config:
 ../../../xc/config/cf:
 
 ...
 
-Harold@MyWindowsHost ~/x-devel/build/debug
+Username@CygwinHost ~/x-devel/build/debug
 $
 
     7. Run a debug build of the entire tree, which takes between 30
@@ -796,18 +796,18 @@ $
        World.log:
 
      Note: As of 2001-06-12, a debug build of the entire tree requires
-     566.5 MB of storage space on a file system using 4 KB allocation
-     units; that is in addition to the 45.6 MB of previously generated
+     566.5 MiB of storage space on a file system using 4 KiB allocation
+     units; that is in addition to the 45.6 MiB of previously generated
      symlinks.
      As a benchmark, a debug build runs for 71 minutes on a machine with
-     a 1.2 GHz Atlhon, 256 MB DDR RAM, and a 7200 RPM ATA/100 HD. You
+     a 1.2 GHz Atlhon, 256 MiB DDR RAM, and a 7200 RPM ATA/100 HD. You
      may have noticed that the standard build time and the debug build
      time are identical.
 
-Harold@MyWindowsHost ~/x-devel/build/debug
+Username@CygwinHost ~/x-devel/build/debug
 $ ./config/util/makeg.sh World > World.log 2>&1
 
-Harold@MyWindowsHost ~/x-devel/build/debug
+Username@CygwinHost ~/x-devel/build/debug
 $
 
     8. Debug build is now complete.
@@ -830,27 +830,27 @@ Installing a local build
    the instructions below to install a local build:
     1. Move the /etc/X11 directory to /etc/X11_build-prefix_date_time:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ mv /etc/X11 /etc/X11_build-prefix_date_time
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $
 
     2. Move the /usr/X11R6 diretory to /usr/X11R6_build-prefix_date_time:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ mv /usr/X11R6 /usr/X11R6_build-prefix_date_time
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $
 
     3. Change the current directory to your desired XFree86 build
        directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd ~/x-devel/build/build-prefix
 
-Harold@MyWindowsHost ~/x-devel/build/build-prefix
+Username@CygwinHost ~/x-devel/build/build-prefix
 $
 
     4. Make the install target, which installs binaries, fonts,
@@ -858,35 +858,35 @@ $
        everything except the man pages:
 
      Note: As of 2001-06-12, the install target copies 5,074 files in 83
-     folders into /usr/X11R6, requiring 89.2 MB of storage space for a
-     standard build or 177 MB of storage space for a debug build, and
-     276 files in 39 folders into /etc/X11, requiring 2.57 MB of storage
-     space. All stated storage requirements are for a file system using
-     4 KB allocation units.
+     folders into /usr/X11R6, requiring 89.2 MiB of storage space for a
+     standard build or 177 MiB of storage space for a debug build, and
+     276 files in 39 folders into /etc/X11, requiring 2.57 MiB of
+     storage space. All stated storage requirements are for a file
+     system using 4 KiB allocation units.
      As a benchmark, install runs for 20 minutes on a machine with a 1.2
-     GHz Atlhon, 256 MB DDR RAM, and a 7200 RPM ATA/100 HD. Standard and
-     debug installs both complete in the stated time.
+     GHz Atlhon, 256 MiB DDR RAM, and a 7200 RPM ATA/100 HD. Standard
+     and debug installs both complete in the stated time.
 
-Harold@MyWindowsHost ~/x-devel/build/build-prefix
+Username@CygwinHost ~/x-devel/build/build-prefix
 $ make install > install.log 2>&1
 
-Harold@MyWindowsHost ~/x-devel/build/build-prefix
+Username@CygwinHost ~/x-devel/build/build-prefix
 $
 
     5. Make the install.man target, which only installs the man pages:
 
      Note: As of 2001-06-12, the install.man target copies 541 files in
-     3 folders into /usr/X11R6/man, requiring 4.22 MB of storage space,
+     3 folders into /usr/X11R6/man, requiring 4.22 MiB of storage space,
      and 544 files in 1 folder into /usr/X11R6/lib/X11/doc, requiring
-     4.76 MB of storage space. All stated storage requirements are for a
-     file system using 4 KB allocation units.
+     4.76 MiB of storage space. All stated storage requirements are for
+     a file system using 4 KiB allocation units.
      As a benchmark, install.man runs for 2 minutes on a machine with a
-     1.2 GHz Atlhon, 256 MB DDR RAM, and a 7200 RPM ATA/100 HD.
+     1.2 GHz Atlhon, 256 MiB DDR RAM, and a 7200 RPM ATA/100 HD.
 
-Harold@MyWindowsHost ~/x-devel/build/build-prefix
+Username@CygwinHost ~/x-devel/build/build-prefix
 $ make install.man > install.man.log 2>&1
 
-Harold@MyWindowsHost ~/x-devel/build/build-prefix
+Username@CygwinHost ~/x-devel/build/build-prefix
 $
      _________________________________________________________________
 
@@ -902,19 +902,19 @@ Update the entire source code tree
     1. Change the current directory to your XFree86 development
        directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd x-devel
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     2. Change the current directory to the root of the XFree86 source
        code tree, xc/:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ cd xc
 
-Harold@MyWindowsHost ~/x-devel/xc
+Username@CygwinHost ~/x-devel/xc
 $
 
     3. To update your entire XFree86 source code tree, run the following
@@ -926,10 +926,10 @@ $
      causes new directories in the source code tree to be downloaded
      (new directories are skipped if you do not specify -d).
 
-Harold@MyWindowsHost ~/x-devel/xc
+Username@CygwinHost ~/x-devel/xc
 $ cvs -z4 update -d > cvs-update.log 2>&1
 
-Harold@MyWindowsHost ~/x-devel/xc
+Username@CygwinHost ~/x-devel/xc
 $
 
     4. Search cvs-update.log for any lines containing conflict. Examine
@@ -937,10 +937,10 @@ $
        true conflicts. grep will not display any information if no line
        in cvs-update.log contains conflict.
 
-Harold@MyWindowsHost ~/x-devel/xc
+Username@CygwinHost ~/x-devel/xc
 $ grep conflict cvs-update.log
 
-Harold@MyWindowsHost ~/x-devel/xc
+Username@CygwinHost ~/x-devel/xc
 $
      _________________________________________________________________
 
@@ -949,20 +949,20 @@ Update a single file or directory
     1. Change the current directory to your XFree86 development
        directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd x-devel
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $
 
     2. Change the current directory to the directory that contains the
        file you wish to update, or change the current directory to the
        directory that you wish to update:
 
-Harold@MyWindowsHost ~/x-devel
+Username@CygwinHost ~/x-devel
 $ cd xc/directory_to_update
 
-Harold@MyWindowsHost ~/x-devel/xc/directory_to_update
+Username@CygwinHost ~/x-devel/xc/directory_to_update
 $
 
     3. To update a single file, or a set of specified files, run the
@@ -971,10 +971,10 @@ $
      Tip: The -zn parameter specifies the compression level to use, from
      1 to 9, with 9 being maximum compression.
 
-Harold@MyWindowsHost ~/x-devel/xc/directory_to_update
+Username@CygwinHost ~/x-devel/xc/directory_to_update
 $ cvs -z4 update filename_1 [filename_2 ...]
 
-Harold@MyWindowsHost ~/x-devel/xc/directory_to_update
+Username@CygwinHost ~/x-devel/xc/directory_to_update
 $
 
     4. To update a single directory, and its subdirectories, run the
@@ -986,10 +986,10 @@ $
      causes new directories in the source code tree to be downloaded
      (new directories are skipped if you do not specify -d).
 
-Harold@MyWindowsHost ~/x-devel/xc/directory_to_update
+Username@CygwinHost ~/x-devel/xc/directory_to_update
 $ cvs -z4 update -d
 
-Harold@MyWindowsHost ~/x-devel/xc/directory_to_update
+Username@CygwinHost ~/x-devel/xc/directory_to_update
 $
      _________________________________________________________________
 
@@ -1043,9 +1043,9 @@ Obtaining binutils and gcc Source
      file link and choosing a command such as Save Target As... or Save
      Link As... from the context sensitive menu. Better yet, download
      your files with a stand alone ftp client.
-          + binutils/binutils-20010914-1-src.tar.bz2 (7.5 MB; required,
+          + binutils/binutils-20010914-1-src.tar.bz2 (7.5 MiB; required,
             necessary to build gcc and Cygwin/XFree86)
-          + gcc/gcc-2.95.3-5-src.tar.bz2 (8.1 MB; required, necessary to
+          + gcc/gcc-2.95.3-5-src.tar.bz2 (8.1 MiB; required, necessary to
             build Cygwin/XFree86)
      _________________________________________________________________
 
@@ -1069,40 +1069,40 @@ Obtaining Cygwin Headers and Libs
        from your Cygwin directory (e.g. c:\cygwin); you should see a
        window like the following:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $
 
     2. Change the current directory to Cygwin root directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd /
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $
 
     3. Create an archive of the contents of the /lib directory:
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $ tar -czf cygwin-lib.tgz lib/
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $
 
     4. Change the current directory to the usr directory in your Cygwin
        root directory:
 
-Harold@MyWindowsHost /
+Username@CygwinHost /
 $ cd /usr
 
-Harold@MyWindowsHost /usr
+Username@CygwinHost /usr
 $
 
     5. Create an archive of the contents of the /usr/include directory:
 
-Harold@MyWindowsHost /usr
+Username@CygwinHost /usr
 $ tar -czf cygwin-include.tgz include/
 
-Harold@MyWindowsHost /usr
+Username@CygwinHost /usr
 $
 
     6. Transfer cygwin-lib.tgz and cygwin-include.tgz to your build host
@@ -1356,74 +1356,74 @@ Packaging a Cygwin/XFree86 Distribution
        instructions in [78]the Section called Native Compiling.
     4. Install the full build of XFree86 to a staging directory:
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $ mkdir /stagingdir
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $ make DESTDIR=/stagingdir install install.man
 
     5. Create directories for the bindist and commondist:
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $ mkdir /bindistdir
 
-Harold@MyWindowsHost ~/x-devel/build/std
+Username@CygwinHost ~/x-devel/build/std
 $ mkdir /commondist
 
     6. Copy the bindist and commondist scripts to their respective
        directories:
 
-Harold@MyWindowsHost ~/x-devel/xc
+Username@CygwinHost ~/x-devel/xc
 $ cp programs/Xserver/hw/xfree86/etc/bindist/Cygwin/* /bindistdir
 
-Harold@MyWindowsHost ~/x-devel/xc
+Username@CygwinHost ~/x-devel/xc
 $ cp programs/Xserver/hw/xfree86/etc/bindist/common/* /commondist
 
     7. Copy the build-bindist script to somewhere in your search path,
        such as /usr/bin:
 
-Harold@MyWindowsHost ~/x-devel/xc
+Username@CygwinHost ~/x-devel/xc
 $ cp programs/Xserver/hw/xfree86/etc/bindist/build-bindist /usr/bin
 
     8. Build the distribution tarballs:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ build-bindist /stagingdir /bindistdir
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ build-bindist /stagingdir /commondist
 
     9. Verify the tarball contents by extracting them in a test directory
        and comparing them to what is in the staging directory:
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ mkdir -p /testdir/usr/X11R6 /testdir/etc/X11 /testdir/var
 
-Harold@MyWindowsHost ~
+Username@CygwinHost ~
 $ cd /bindistdir/bindist
 
-Harold@MyWindowsHost /bindistdir/bindist
+Username@CygwinHost /bindistdir/bindist
 $ extract -C /testdir/etc/X11 Xetc.tgz
 
-Harold@MyWindowsHost /bindistdir/bindist
+Username@CygwinHost /bindistdir/bindist
 $ extract -C /testdir/var Xvar.tgz
 
-Harold@MyWindowsHost /bindistdir/bindist
+Username@CygwinHost /bindistdir/bindist
 $ extract -C /testdir/usr/X11R6 `pwd`/X[a-df-uw-z]*.tgz `pwd`Xvfb.tgz
 
-Harold@MyWindowsHost /bindistdir/bindist
+Username@CygwinHost /bindistdir/bindist
 $ cd /commondist/bindist
 
-Harold@MyWindowsHost /commondist/bindist
+Username@CygwinHost /commondist/bindist
 $ extract -C /testdir/usr/X11R6 `pwd`/*.tgz
 
-Harold@MyWindowsHost /commondist/bindist
+Username@CygwinHost /commondist/bindist
 $ cd /testdir; find . ! -type d -print | sort > /tmp/dist.list
 
-Harold@MyWindowsHost /testdir
+Username@CygwinHost /testdir
 $ cd /stagingdir; find . ! -type d -print | sort > /tmp/stage.list
 
-Harold@MyWindowsHost /stagingdir
+Username@CygwinHost /stagingdir
 $ diff -u /tmp/stage.list /tmp/dist.list
 
    10. The following differences are expected because the directories
