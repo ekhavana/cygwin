@@ -1,14 +1,13 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Compatibility with Miscellaneous Other Standards</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin API Reference"
-HREF="cygwin-api-int.html"><LINK
+HREF="cygwin-api.html"><LINK
 REL="UP"
 TITLE="Compatibility"
 HREF="compatibility.html"><LINK
@@ -59,7 +58,10 @@ HREF="cygwin-functions.html"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
 ><H1
+CLASS="SECT1"
 ><A
 NAME="STD-MISC"
 >Compatibility with Miscellaneous Other Standards</A
@@ -67,15 +69,16 @@ NAME="STD-MISC"
 ><P
 >The following functions are compatible with miscellaneous other
 standards:</P
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN90"
+NAME="AEN107"
 >Networking</A
 ></H2
 ><P
-></P
-><P
->(standardized by POSIX 1.g, which is probably still in draft?)</P
+>(Standardized by POSIX 1.g, which is probably still in draft?)</P
 ><P
 >accept, bind, connect, getdomainname, gethostbyaddr,
 gethostbyname, getpeername, getprotobyname, getprotobynumber,
@@ -87,9 +90,13 @@ setsockopt, shutdown, socket, socketpair</P
 >Of these networking calls, rexec, rcmd and rresvport are
 implemented in MS IP stack but may not be implemented in other
 vendors' stacks. </P
+></DIV
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN96"
+NAME="AEN112"
 >Other</A
 ></H2
 ><P
@@ -106,68 +113,81 @@ spawnlpe, spawnv, spawnve, spawnvp, spawnvpe, srandom, statfs,
 strsignal, strtosigno, swab, syslog, timezone, truncate, ttyslot,
 unlockpt, unsetenv, usleep, utimes, vfork, vhangup, wait3, wait4,
 wcscmp, wcslen, wprintf, writev&#13;</P
+></DIV
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN99"
+NAME="AEN115"
 >Implementation Notes</A
 ></H2
 ><P
 > <TT
 CLASS="FUNCTION"
-><B
->initgroups</B
-></TT
+>initgroups</TT
 > does nothing</P
 ><P
 > <TT
 CLASS="FUNCTION"
-><B
->chroot</B
-></TT
+>chroot</TT
 >, <TT
 CLASS="FUNCTION"
-><B
->mknod</B
-></TT
+>mknod</TT
 >,
 <TT
 CLASS="FUNCTION"
-><B
->settimeofday</B
-></TT
+>settimeofday</TT
 >, and <TT
 CLASS="FUNCTION"
-><B
->vhangup</B
-></TT
+>vhangup</TT
 >
 always return -1 and sets errno to ENOSYS.</P
 ><P
 > <TT
 CLASS="FUNCTION"
-><B
->seteuid</B
-></TT
+>nice</TT
+> allows Cygwin programs to alter their
+current runtime priority through the use of its incr argument.  Cygwin
+processes can be set to IDLE_PRIORITY_CLASS, NORMAL_PRIORITY_CLASS,
+HIGH_PRIORITY_CLASS, or REALTIME_PRIORITY_CLASS with the
+<TT
+CLASS="FUNCTION"
+>nice</TT
+> call.  NORMAL_PRIORITY_CLASS is the
+default.  If you pass a positive number to nice(), then the priority
+level will decrease by one (within the above list of priorities).  A
+negative number would make it increase by one.  It is not possible to
+change it by more than one at a time without making repeated calls.
+An increment above REALTIME_PRIORITY_CLASS results in the process
+staying at that priority.  Likewise, a decrement to
+IDLE_PRIORITY_CLASS has it stay at that priority.  Note that in the
+Win32 API, there are 32 priorities.  So currently we only give access
+to four of these through <TT
+CLASS="FUNCTION"
+>nice</TT
+>.</P
+><P
+> <TT
+CLASS="FUNCTION"
+>seteuid</TT
 > and <TT
 CLASS="FUNCTION"
-><B
->setegid</B
-></TT
-> always return 0 and set errno to
+>setegid</TT
+>
+always return 0 and set errno to
 ENOSYS.</P
 ><P
 ><TT
 CLASS="FUNCTION"
-><B
->vfork</B
-></TT
+>vfork</TT
 > just calls
 <TT
 CLASS="FUNCTION"
-><B
->fork</B
-></TT
+>fork</TT
 ></P
+></DIV
+></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
@@ -191,7 +211,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="cygwin-api-int.html"
+HREF="cygwin-api.html"
 >Home</A
 ></TD
 ><TD
