@@ -81,15 +81,18 @@ non-cvs mailing lists</a>.</p>
 <H2>When you have finalized your changes</H2>
 <P>Once you've finished making and testing your changes, you should send
 a unified diff to the <a href="mailto:cygwin-patches@cygwin.com">cygwin-patches list</a>.
-As an example, if you modified winsup/syscalls.cc and have the original
-source file around as /winsup/syscalls.cc-orig, you would do the
-following in bash:</p>
+As an example, if you have modified several files in /c/src/winsup, then do the following
+in bash:</p>
 
 <p>
 <pre>
       cd /c/src/winsup
-      diff -up syscalls.cc-orig syscalls.cc &gt; syscalls.cc-patch 2&gt;&1
+      cvs diff -up &gt; /tmp/mypatch
 </pre>
+
+<p>This will produce one file with all of your changes, making it easy for someone
+to review and apply.</p>
+
 
 <P>Then send it to the cygwin-patches list in an email along with an
 explanation of what the change does.  <em>Make sure that you include a ChangeLog
