@@ -13,7 +13,7 @@
 
 <!--#include virtual="../cygx-header.html" -->
 
-<p>Last updated: 2001-07-26 1649 EDT</p>
+<p>Last updated: 2001-07-26 1742 EDT</p>
 
 <p>Following is a list of open tasks on the Cygwin/XFree86
 project:</p>
@@ -48,6 +48,35 @@ that has shown up on recent builds.  This may actually be due to a
 regression in a statically linked Cygwin library, if xterm statically
 links any Cygwin libraries.  Otherwise it is more likely to be a
 change made to xterm sometime after 2001-06-01.</td>
+</tr>
+
+
+<tr valign="top">
+<td>Windowed mode window size</td>
+
+<td>Currently we subtract one pixel off the bottom edge of a windowed
+X Server if the window height is as tall as the screen; this is soley
+to allow hidden Start bars to "pop up" when you bump the mouse against
+them.  Needless to say, this is a horrible kludge, as it doesn't even
+check to see if the Start bar is at that bottom of the screen (could
+be on the left side, right side, or top of the screen).  Furthermore,
+we don't handle any sort of window message that would tell us if the
+Start bar has moved.  It may be that simply changing our window style
+would allow the Start bar to pop up without having to adjust the
+window dimensions.  Start off by looking at
+xc/programs/Xserver/hw/xwin/winscrinit.c/winCreateBoundingWindowWindowed
+().</td>
+</tr>
+
+
+<tr valign="top">
+<td>Backing store support</td>
+
+<td>The functions to intialize backing store support are being called,
+but it has yet to be verified whether the backing store support is
+actually working.  Take a look at
+xc/programs/Xserver/hw/xwin/winscrinit.c/winFinishScreenInitFB () for
+the backing store initialization calls.</td>
 </tr>
 
 
@@ -90,6 +119,20 @@ DirectDraw reserves the first ten and the last ten colors in each
 DirectDrawPalette object when running in windowed mode.  Therefore,
 PseudoColor visuals are only supported with DirectDraw engines when
 running in fullscreen 8 bit color modes.</td>
+</tr>
+
+
+<tr valign="top">
+<td>DirectDraw header files</td>
+
+<td>We currently distribute xc/programs/Xserver/hw/xwin/ddraw.h and
+obj_base.h, which we got from the Wine project, in our CVS directory
+but the headers should be merged with the Cygwin w32api headers.
+Merging the headers into Cygwin's w32api package isn't as trivial as
+it may seem, as the w32api headers duplicate some of the functionality
+of the Wine headers; it seems that it would take several hours, if not
+a few days, to sort out the differences and develop a workable
+solution.</td>
 </tr>
 
 </tbody>
