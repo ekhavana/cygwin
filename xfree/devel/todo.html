@@ -13,7 +13,7 @@
 
 <!--#include virtual="../cygx-header.html" -->
 
-<p>Last updated: 2001-08-31 1312 EDT</p>
+<p>Last updated: 2001-09-02 1731 EDT</p>
 
 <p>Following is a list of open tasks on the Cygwin/XFree86
 project:</p>
@@ -82,14 +82,17 @@ now larger window.</td>
 <tr valign="top">
 <td>Windows clipboard integration</td>
 
-<td>Create a bridge between Cygwin/XFree86 and the Windows clipboard
-system.  It seems that copying items to the Windows clipboard when
-they are selected in Cygwin/XFree86 can be done through functions in
-the X Server executable.  However, it seems that copying Windows
-clipboard items into Cygwin/XFree86 may require a helper client that
-watches the Windows clipboard and makes those items available in
-Cygwin/XFree86.  Robert Collins' has contributed /dev/clipboard
-support to Cygwin that may be of use.</td>
+<td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/XFree86
+clipboard manager, to handle data types other than XA_STRING and
+UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.  Embed the
+xwinclip functionality within XWin.exe.  The later task may be rather
+difficult, as there are numerous collisions between the X client
+headers and the X Server headers that must be prevented.  One method
+of preventing collisions may be to break the win.h header into
+multiple files, and to add a list of only the necessary includes to
+the top each .c file.  Any embedded clipboard support will need a
+command line option that can disable the built-in clipboard
+manager.</td>
 </tr>
 
 
