@@ -95,7 +95,14 @@ reflects the name of the program currently running.  Default is not
 set.  Note that under Win9x the title bar is always enabled and it is
 stripped by default, but this is because of the way Win9x works.  In
 order not to strip, specify <tt class="literal">title</tt> or <tt class="literal">title
-nostrip_title</tt>.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)tty</tt> - if set, Cygwin enables extra support
+nostrip_title</tt>.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)traverse</tt> - This option only affects NT systems.
+If set, Cygwin handles file permissions so that the parent directories'
+permissions are checked, as it's default on POSIX systems.  If not set,
+only the file's own permissions are taken into account.  This is the
+default on Windows and called "bypass traverse checking".  Beginning with
+version 1.5.13, traverse checking (as on POSIX) is enabled by default.
+If you want to switch off traverse checking for Cygwin processes and child
+processes started from Cygwin processes, you have to set "notraverse".</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)tty</tt> - if set, Cygwin enables extra support
 (i.e., termios) for UNIX-like ttys. 
 It is not compatible with some Windows programs.
 Defaults to not set, in which case the tty is opened in text mode.
