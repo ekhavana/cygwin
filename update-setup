@@ -23,7 +23,7 @@ open (S, "setup.exe");
 while (<S>) {
     if (/%%% setup-version (\S+)/) {
 	$setup_version = $1;
-	break;
+	last;
     }
 }
 close S;
@@ -171,8 +171,8 @@ sub one_version {
 for $p (sort keys %versions) {
     next if $skip{$p};
     print "@ $p\n";
-    print "sdesc: ".$sdesc{$p}, "\n" if $sdesc{$p};
-    print "ldesc: ".$ldesc{$p}, "\n" if $ldesc{$p};
+    print "sdesc: ", quoted($sdesc{$p}), "\n" if $sdesc{$p};
+    print "ldesc: ", quoted($ldesc{$p}), "\n" if $ldesc{$p};
     &one_version("", "curr");
     &one_version("[prev]\n", "prev");
     &one_version("[test]\n", "test");
@@ -203,3 +203,8 @@ if ($changed) {
     system "cp $tmpfile setup.ini";
 }
 unlink $tmpfile;
+
+sub quoted {
+    my $text;
+    return $text =~ /"/ ? $text : '"' . $text . '"';
+}
