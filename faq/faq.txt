@@ -2004,18 +2004,21 @@ Why doesn't my shell script work?
 
    There are two basic problems you might run into.  One is the fact
 that /bin/sh is really ash, and is missing some features you might
-expect in /bin/sh.  For example:
+expect in /bin/sh, particularly if you are used to /bin/sh actually
+being bash (Linux) or ksh (Tru64).  For example:
 
    bullet No job control
 
    bullet No getopts
+
+   bullet No let
 
    bullet No functions exported
 
    bullet Must use `.' instead of `source' (true of sh and ksh too, not
      just ash)
 
-   Or it could be a permission problem, and Cygwin doesn't understand
+   Or, it could be a permission problem, and Cygwin doesn't understand
 that your script is executable.  Because `chmod' may not work (see FAQ
 entry above), Cygwin must read the contents of files to determine if
 they are executable.  If your script does not start with

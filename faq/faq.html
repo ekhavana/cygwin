@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 20 January 2002 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 23 January 2002 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -2712,8 +2712,9 @@ bash$ mkdir -p path/to/new/dir
 
 <P>
 There are two basic problems you might run into.  One is the fact that
-/bin/sh is really ash, and is missing some features you might expect in
-/bin/sh.  For example:
+/bin/sh is really ash, and is missing some features you might expect
+in /bin/sh, particularly if you are used to /bin/sh actually being
+bash (Linux) or ksh (Tru64).  For example:
 
 
 
@@ -2722,6 +2723,8 @@ There are two basic problems you might run into.  One is the fact that
 
 <LI>No getopts
 
+<LI>No let
+
 <LI>No functions exported
 
 <LI>Must use `.' instead of `source' (true of sh and ksh too, not just ash)
@@ -2729,7 +2732,7 @@ There are two basic problems you might run into.  One is the fact that
 </UL>
 
 <P>
-Or it could be a permission problem, and Cygwin doesn't understand that
+Or, it could be a permission problem, and Cygwin doesn't understand that
 your script is executable.  Because <SAMP>`chmod'</SAMP> may not work (see FAQ
 entry above), Cygwin must read the contents of files to determine if
 they are executable.  If your script does not start with
@@ -6668,7 +6671,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 20 January 2002 using
+This document was generated on 23 January 2002 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
