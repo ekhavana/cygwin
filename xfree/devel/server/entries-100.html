@@ -1,3 +1,66 @@
+<h4>Release 4.3.0-41</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-15 0100 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040115-0100.tar.bz2">xwin-20040115-0100.tar.bz2</a>
+(135 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-40
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-40-to-4.3.0-41.diff">xwin-4.3.0-40-to-4.3.0-41.diff</a>
+(36 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Clipboard - Try to check all allocated pointers for NULL before
+dereferencing and try to provide clean failures with error messages.
+(Harold L Hunt II)</li>
+
+<li>General - Allow XF86Config support to be turned on or off via the
+WIN_XF86CONFIG_SUPPORT #define in win.h.  This is needed for the
+xserver tree on freedesktop.org (fd.o) since it does not have the
+necessary files from the XFree86 DDX (hw/xfree86).  (Harold L Hunt
+II)</li>
+
+<li>resource.h - Rename resource.h to winresource.h to fix a problem
+with a header of the same name in the xserver tree on fd.o.  (Harold L
+Hunt II)</li>
+
+<li>win.h - Wrap #include "layer.h" with #if WIN_LAYER_SUPPORT so that
+the header will not be included when layer is not being built.
+(Harold L Hunt II)</li>
+
+<li>win.h - Remove XWDFile.h, pXWDCmap, and pXWDHeader; these have not
+been used in ages, if ever.  (Harold L Hunt II)</li>
+
+<li>General - Change all includes for Xlib headers from #include
+"foo.h" or #include <foo.h> to #include "X11/foo.h" for consistency
+and to make the build work in the xserver tree on fd.o.  (Harold L
+Hunt II)</li>
+
+<li>General - Grab the rest of Alexander Gottwald's fixes for build
+warnings due to malformed prototypes.  Add a few more fixes to silence
+additional warnings along the same lines.</li>
+
+<li>General - Protect some more XKB stuff with #ifdef XKB.  Needed for
+the build in the xserver tree on fd.o.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
 <h4>Release 4.3.0-40</h4>
 <table>
 <tbody>
