@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2003-05-31 2255 EDT</p>
+<p>Last updated: 2003-06-02 1055 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -63,6 +63,76 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test91</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-06-02 1055 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test90</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-42</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test91.exe.bz2">XWin-Test91.exe.bz2</a>
+(1208 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030602-1055.tar.bz2">xwin-20030602-1055.tar.bz2</a>
+(118 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Test90
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test90-to-Test91.diff.bz2">xwin-Test90-to-Test91.diff.bz2</a>
+(18 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winconfig.c - Change nodeadkeys default to NULL for the German
+(Germany) keyboard layout.  (Alexander Gottwald, Benjamin
+Riefenstahl)</li>
+
+<li>X.ico - Add 24 x 24 - 256 color and 24 x 24 - 16 color icons.
+(Harold L Hunt II, Benjamin Riefenstahl)</li>
+
+<li>wintrayicon.c - Change hard-coded 16 x 16 icon load to use
+GetSystemMetrics (SM_CXSMICON) and GetSystemMetrics (SM_CYSMICON) to
+retrieve size of small icon to be used.  Hopefully this loads the 24 x
+24 icon on systems that have been changed to use 24 x 24 icons for the
+notification tray.  (Harold L Hunt II, Benjamin Riefenstahl)</li>
+
+<li>winmultiwindowwindow.c - Break some functions from this file into
+several new files: winmultiwindowicons.c, winmultiwindowshape.c, and
+winmultiwindowwndproc.c.  Provide enough Tender Loving Care (TLC) to
+the various header files so that all files still build with no
+warnings.  Note that this drops the size of winmultiwindowwindow.c
+from 55 KiB to 21 KiB and creates three new files, none of which is
+larger than 23 KiB.  Of those three new files, winmultiwindowicons.c
+is 10 KiB, winmultiwindowshape.c is 6 KiB, and winmultiwindowwndproc.c
+is 23 KiB.  Finally, it is interesting to note that
+winmultiwindowwndproc.c contains a single function,
+winTopLevelWindowProc(), so that file cannot be made any smaller by
+breaking other functions into separate files.  (Harold L Hunt II)</li>
+
+<li>winclass.c, winclass.h - Rename these files to
+winmultiwindowclass.c and winmultiwindowclass.h, respectively, since
+they are only used in MultiWindow mode.  Prefix the functions in these
+files with MultiWindow.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
 
 
 <h4>Test90</h4>
