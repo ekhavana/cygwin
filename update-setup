@@ -200,7 +200,6 @@ close (NEW);
 close (OLD);
 
 if ($changed) {
-    system "diff -c2 setup.ini $tmpfile";
-    system "set -x; cp $tmpfile setup.ini";
+    system "cp $tmpfile setup.ini";
 }
 unlink $tmpfile;
