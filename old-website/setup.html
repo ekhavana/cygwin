@@ -458,11 +458,11 @@ directory, you must structure your package contents accordingly.</p>
   <li>The package is configured using (at a minimum) the following paths:
   <pre>  --prefix=/usr
   --sysconfdir=/etc
-  --libexecdir='$(sbindir)'
+  --libexecdir=/usr/sbin
   --localstatedir=/var
-  --datadir='$(prefix)/share'
-  --mandir='$(datadir)/man'
-  --infodir='$(datadir)/info'</pre></li>
+  --datadir=/usr/share
+  --mandir=/usr/share/man
+  --infodir=/usr/share/info</pre></li>
   <li><p>All executables in your binary package are stripped (run 'strip' on them). Some makefiles have a install-strip command you can use to do this automatically when you setup your 'installed' tree.</p></li>
   <li><p>Source packages are extracted in /usr/src.  See the <a href="#srcpackage_contents">Package Source</a> section for more information.
   <li><p>In your binary package, include a file /usr/share/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.</p></li>
