@@ -2247,15 +2247,6 @@ net release.)*
 it return incorrect values for disks larger than 2 GB in size.  Perhaps
 that may be your problem?
 
-Has the screen program been ported yet?
----------------------------------------
-
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
-
-   Screen requires either unix domain sockets or fifoes.  Neither of
-them have been implemented in Cygwin yet.
-
 Cygwin API Questions
 ====================
 
@@ -3115,45 +3106,25 @@ programs which use the Windows GUI.
 Known/potential Problems in the Latest Net Release
 **************************************************
 
-Linking with -lm or -lc leads to crash
-======================================
+Aware of the problem, no solution yet found.
+============================================
 
-   Currently, `/usr/lib/libm.a' and `/usr/lib/libc.a' are symbolic
-links to libcygwin.a, where this stuff is actually implemented.  You
-need not explicitly link with -lm or -lc.
+On Win9x, scp and cvs/ssh leave ssh processes running
+-----------------------------------------------------
 
-   In fact, you *must not* link with -lm or -lc, or your application
-will crash.  This is a bug, and it is being worked on.
+   This is a difficult problem, related to the implementation of
+select() and pipes on Windows 9x.  It has been discussed at length on
+the cygwin mailing list.  For an excellent technical description of the
+problem, see
+`http://sources.redhat.com/ml/cygwin/2000-12/msg00470.html', and
+related threads.
 
-   Providing empty stub libraries for libm.a and libc.a is not
-considered workable, because some packages look for symbols there.
+   For now you'll just have to kill them manually.
 
-   There are some discussions of this in the mailing list.  See
+Fixed in the Next Release
+=========================
 
-   * `http://cygwin.com/ml/cygwin/2000-05/msg01175.html'
-
-   * `http://cygwin.com/ml/cygwin/2000-09/msg00290.html'
-
-   and related messages.
-
-Ctrl-S hangs rxvt and xterm
-===========================
-
-   This is a bug in the Cygwin pty code.  It should be fixed in the next
-release.
-
-dllwrap is broken
-=================
-
-   Any invocation of dllwrap results in the error
-
-   `/usr/bin/ld: warning: cannot find entry symbol
-__cygwin_dll_entry@12'
-
-   This should be fixed in the next release.  For details and a
-workaround, see
-
-   `http://cygwin.com/ml/cygwin/2000-08/msg00256.html'
+   Nothing currently.
 
 History
 *******

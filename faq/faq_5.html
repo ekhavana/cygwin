@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 29 November 2000 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 12 December 2000 -->
 
 <TITLE>The Cygwin FAQ
  - Known/potential Problems in the Latest Net Release</TITLE>
@@ -10,74 +10,34 @@ Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_4.html">previous</A>, <A 
 <P><HR><P>
 
 
-<H1><A NAME="SEC110" HREF="faq_toc.html#TOC110">Known/potential Problems in the Latest Net Release</A></H1>
+<H1><A NAME="SEC109" HREF="faq_toc.html#TOC109">Known/potential Problems in the Latest Net Release</A></H1>
 
 
 
-<H2><A NAME="SEC111" HREF="faq_toc.html#TOC111">Linking with -lm or -lc leads to crash</A></H2>
+<H2><A NAME="SEC110" HREF="faq_toc.html#TOC110">Aware of the problem, no solution yet found.</A></H2>
 
-<P>
-Currently, <CODE>/usr/lib/libm.a</CODE> and <CODE>/usr/lib/libc.a</CODE> are
-symbolic links to libcygwin.a, where this stuff is actually implemented.
-You need not explicitly link with -lm or -lc.
 
+
+<H3><A NAME="SEC111" HREF="faq_toc.html#TOC111">On Win9x, scp and cvs/ssh leave ssh processes running</A></H3>
 
 <P>
-In fact, you <STRONG>must not</STRONG> link with -lm or -lc, or your application
-will crash.  This is a bug, and it is being worked on.
-
-
-<P>
-Providing empty stub libraries for libm.a and libc.a is not considered
-workable, because some packages look for symbols there.
+This is a difficult problem, related to the implementation of select()
+and pipes on Windows 9x.  It has been discussed at length on the cygwin
+mailing list.  For an excellent technical description of the problem, see
+<TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/2000-12/msg00470.html">http://sources.redhat.com/ml/cygwin/2000-12/msg00470.html</a></TT>, and
+related threads.
 
 
 <P>
-There are some discussions of this in the mailing list.  See
+For now you'll just have to kill them manually.
 
 
 
-<UL>
-<LI>
 
-<TT><a target="_top" href="http://cygwin.com/ml/cygwin/2000-05/msg01175.html">http://cygwin.com/ml/cygwin/2000-05/msg01175.html</a></TT>
-<LI>
-
-<TT><a target="_top" href="http://cygwin.com/ml/cygwin/2000-09/msg00290.html">http://cygwin.com/ml/cygwin/2000-09/msg00290.html</a></TT>
-</UL>
+<H2><A NAME="SEC112" HREF="faq_toc.html#TOC112">Fixed in the Next Release</A></H2>
 
 <P>
-and related messages.
-
-
-
-
-<H2><A NAME="SEC112" HREF="faq_toc.html#TOC112">Ctrl-S hangs rxvt and xterm</A></H2>
-
-<P>
-This is a bug in the Cygwin pty code.  It should be fixed in the next
-release.
-
-
-
-
-<H2><A NAME="SEC113" HREF="faq_toc.html#TOC113">dllwrap is broken</A></H2>
-
-<P>
-Any invocation of dllwrap results in the error
-
-
-<P>
-<CODE>/usr/bin/ld: warning: cannot find entry symbol __cygwin_dll_entry@12</CODE>
-
-
-<P>
-This should be fixed in the next release.  For details and a workaround,
-see
-
-
-<P>
-<TT><a target="_top" href="http://cygwin.com/ml/cygwin/2000-08/msg00256.html">http://cygwin.com/ml/cygwin/2000-08/msg00256.html</a></TT>
+Nothing currently.
 <P><HR><P>
 Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_4.html">previous</A>, <A HREF="faq_6.html">next</A>, <A HREF="faq_8.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
 </BODY>
