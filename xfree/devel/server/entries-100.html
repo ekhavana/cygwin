@@ -1,3 +1,102 @@
+<h4>Release 4.3.0-33</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-07 2315 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040107-2315.tar.bz2">xwin-20040107-2315.tar.bz2</a>
+(137 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-32
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-32-to-4.3.0-33.diff">xwin-4.3.0-32-to-4.3.0-33.diff</a>
+(112 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>General - If you use the diff above, note that the Imakefile was
+missing from previous tarballs, so this diff includes the whole
+Imakefile.  I have updated my source packaging script so that this
+does not happen again.  Also, the source code in this release has
+already been committed to the xorg repository on freedesktop.org's
+CVS.  (Harold L Hunt II)</li>
+
+<li>winauth.c - New File - Move winGenerateAuthorization into this new
+file.  This function generates a cookie to be used by the clipboard
+client for authorization when using Xdmcp.  (Harold L Hunt II)</li>
+
+<li>winglobals.c - New File - Start moving global variables into this
+file.  (Harold L Hunt II)</li>
+
+<li>winclipboardwrappers.c - New File - Move all clipboard wrappers of
+ProcVector and InitialVector funtions into this file.  (Harold L Hunt II)</li>
+
+<li>winprocarg.c - New File - Move winInitializeDefaultScreens and
+ddxProcessArgument from InitOutput.c into this file.  The same will be
+done eventually for other functions in InitOutput.c.  (Harold L Hunt
+II)</li>
+
+<li>win.h, General - Get started on removing "extern" declarations
+from win.h by including explicit references to extern symbols in the
+source files that use those symbols.  The long term goal is to start
+breaking up the monolithic win.h header file.  (Harold L Hunt II)</li>
+
+<li>Xserver/dix/dispatch.c/Dispatch() - Add hook to OsVendorReset
+function that can be optionally defined in the DDX layer when
+DDXOSRESET is defined.  (Harold L Hunt II)<li>
+
+<li>InitOutput.c/OsVendorReset() - New Function - Send a message to
+the clipboard client telling it to shutdown, then wait for the
+clipboard client thread to exit before proceeding.  This allows us to
+cleanly shutdown the clipboard client.  Incidentally, I noticed that
+the previous code would spawn *additional* clipboard client threads
+when the X Server was reset; this was happening because we trapped IO
+errors and attempted to reconnect when they happened.  There was no
+code that told a clipboard client thread to exit when the server was
+being reset so that it could be replaced by a new clipboard client
+thread (which was happening correctly).  This should lead to greater
+stablility across X Server resets, though I did discover that this
+version and previous versions where shutting down after two or three
+resets without any error message being logged nor exception being
+thrown.  That problem will be looked into later.  (Harold L Hunt
+II)</li>
+
+<li>winclipboardinit.c, winclipboardthread.c, winclipboardxevents.c,
+winclipboardwndproc.c - Fix problems getting killed by Xdmcp code and
+remote XDM/KDM/GDM client on startup.  Fix problems not being
+authorized to connect when using Xdmcp by calling XSetAuthorization
+and passing it our cookie that was created earlier; this removes the
+need to save the cookie to a .Xauthority file.  Watch the CLIPBOARD
+selection in addition to the PRIMARY selection and track which was
+changed within X last so that we know which one we should paste within
+Win32.  Fix crashes when the server resets (as explained above, it
+still exits after one or two resets, for an unknown reason).  The
+improved clipboard code should now be good to go.  (Harold L Hunt
+II)</li>
+
+<li>winmultiwindowwm.c - Clean up the startup of the two multi-window
+threads.  Create separate error and IO error handlers for the XMsgProc
+thread since it was using the same IO error handler as another thread
+and would try to longjmp into the other thread if it received an IO
+error, which was likely causing some crashes.  The multi-window code
+needs additional work to confirm that it properly shuts down and exits
+both threads; something similar to the clipboard shutdown message in
+OsVendorReset will be needed.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
 <h4>Release 4.3.0-32</h4>
 <table>
 <tbody>
@@ -55,6 +154,8 @@ above item).  (Harold L Hunt II)</li>
 </tr>
 </tbody>
 </table>
+
+
 
 
 <h4>Release 4.3.0-31</h4>
