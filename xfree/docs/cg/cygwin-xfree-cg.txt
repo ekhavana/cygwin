@@ -17,37 +17,38 @@ Harold L Hunt, II
    2. [2]Programming
 
         [3]Overview
-        [4]Obtaining the Source Code
-        [5]Compiling the Source Code
+        [4]Native Compiling
 
-              [6]Compiling Overview
-              [7]Standard Build
-              [8]Debug Build
+              [5]Obtaining the Source Code
+              [6]Compiling the Source Code
+              [7]Installing a local build
+              [8]Keeping your source code tree updated
 
-        [9]Installing a local build
-        [10]Keeping your source code tree updated
+        [9]Cross Compiling
 
-              [11]Update the entire source code tree
-              [12]Update a single file or directory
+              [10]Obtaining binutils and gcc Source
+              [11]Obtaining Cygwin Headers and Libs
+              [12]Building binutils and gcc
+              [13]Building Cygwin/XFree86
 
-   3. [13]Documentation
-   4. [14]Web Site Maintenance
-   [15]Bibliography
-   [16]Glossary
-   A. [17]GNU Free Documentation License
+   3. [14]Documentation
+   4. [15]Web Site Maintenance
+   [16]Bibliography
+   [17]Glossary
+   A. [18]GNU Free Documentation License
 
-        0. [18]PREAMBLE
-        1. [19]APPLICABILITY AND DEFINITIONS
-        2. [20]VERBATIM COPYING
-        3. [21]COPYING IN QUANTITY
-        4. [22]MODIFICATIONS
-        5. [23]COMBINING DOCUMENTS
-        6. [24]COLLECTIONS OF DOCUMENTS
-        7. [25]AGGREGATION WITH INDEPENDENT WORKS
-        8. [26]TRANSLATION
-        9. [27]TERMINATION
-        10. [28]FUTURE REVISIONS OF THIS LICENSE
-        [29]How to use this License for your documents
+        0. [19]PREAMBLE
+        1. [20]APPLICABILITY AND DEFINITIONS
+        2. [21]VERBATIM COPYING
+        3. [22]COPYING IN QUANTITY
+        4. [23]MODIFICATIONS
+        5. [24]COMBINING DOCUMENTS
+        6. [25]COLLECTIONS OF DOCUMENTS
+        7. [26]AGGREGATION WITH INDEPENDENT WORKS
+        8. [27]TRANSLATION
+        9. [28]TERMINATION
+        10. [29]FUTURE REVISIONS OF THIS LICENSE
+        [30]How to use this License for your documents
      _________________________________________________________________
 
 Chapter 1. Overview
@@ -67,7 +68,7 @@ Chapter 1. Overview
    Join in the excitement of opening your Windows machine to the X Window
    System.
 
-   We need [30]programmers, [31]documentation writers, and [32]website
+   We need [31]programmers, [32]documentation writers, and [33]website
    maintainers.
      _________________________________________________________________
 
@@ -87,7 +88,7 @@ Overview
    great; our intention is to create more of them.
 
    You will want to start downloading the XFree86 source code tree
-   immediately after reading [33]the section called Obtaining the Source
+   immediately after reading [34]the section called Obtaining the Source
    Code, if you have an active network connection at your disposal, as
    downloading the source code tree can take anywhere from 10 minutes to
    10 hours, depending upon the speed of your connection. You will find
@@ -95,10 +96,12 @@ Overview
    sections.
      _________________________________________________________________
 
+Native Compiling
+
 Obtaining the Source Code
 
    Cygwin/XFree86 source code is contained in, and distributed with, the
-   XFree86 source code tree. Read-only [34]CVS access to the XFree86
+   XFree86 source code tree. Read-only [35]CVS access to the XFree86
    source tree is also available from the XFree86 project.
 
    The XFree86 CVS tree is not always buildable on Cygwin, as the XFree86
@@ -119,8 +122,8 @@ Obtaining the Source Code
    minimizes the scope of problems that you may encounter, which can
    greatly ease debugging of new features and other code modifications.
 
-   It is highly recommended to get the XFree86 [35]CVS tree by using the
-   CVS [36]pserver method. CVS pserver is the easiest CVS method to use
+   It is highly recommended to get the XFree86 [36]CVS tree by using the
+   CVS [37]pserver method. CVS pserver is the easiest CVS method to use
    for anonymous access to public CVS trees, as you need only type in a
    well-known password to download the CVS tree. CVS pserver is rarely
    used to control checkins to CVS trees, as the passwords are stored and
@@ -228,7 +231,7 @@ Compiling Overview
    utility is included with the XFree86 source code tree; but the catch
    is that you need to build the tree before you get lndir.exe. lndir.exe
    has been compiled and is available at
-   [37]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 kB). Download
+   [38]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 kB). Download
    the file, saving it to your Cygwin root directory (e.g. c:\cygwin),
    then follow the simple instructions below to install the utility:
     1. Launch a Cygwin bash prompt. You should see a screen similar to
@@ -516,7 +519,7 @@ $
 
 Keeping your source code tree updated
 
-   [38]CVS makes keeping your source code tree up to date easy. You may
+   [39]CVS makes keeping your source code tree up to date easy. You may
    update your entire source code tree at once, or you can update
    individual directories or files, if you so choose.
      _________________________________________________________________
@@ -606,6 +609,213 @@ Harold@MyWindowsHost ~/x-devel/xc/directory_to_update
 $
      _________________________________________________________________
 
+Cross Compiling
+
+Obtaining binutils and gcc Source
+
+   binutils and gcc source code releases that are known to compile on
+   Cygwin and distributed by the Cygwin project. Therefore, it is highly
+   recommended that you obtain the binutils and gcc sources from the
+   [40]Cygwin mirror network.
+
+   Follow these steps to download Cygwin/XFree86 binaries:
+    1. Create a directory to store the binutils and gcc sources in, such
+       as /cygwin/src/
+    2. Visit the [41]Cygwin mirrors page to find your closest mirror
+    3. The ftp url for your mirror site should take you to the cygwin/
+       directory on the mirror
+    4. Download the following files from cygwin/, saving them to
+       /cygwin/src/ The compressed file size appears after each file in
+       the list below.
+
+     Downloading with a Web Browser: Some web browsers automatically
+     decompress saved files when you use the left mouse button to follow
+     the link to a file; bunzip2 will report, "Data integrity error when
+     decompressing.", when attempting to decompress a file that has been
+     decompressed by your web browser. Prevent your files from being
+     automatically decompressed by clicking the right mouse button on a
+     file link and choosing a command such as Save Target As... or Save
+     Link As... from the context sensitive menu. Better yet, download
+     your files with a stand alone ftp client.
+          + binutils/binutils-20010425-2-src.tar.gz (9.1 MB; required,
+            necessary to build gcc and Cygwin/XFree86)
+          + gcc/gcc-2.95.3-5-src.tar.bz2 (8.1 MB; required, necessary to
+            build Cygwin/XFree86)
+     _________________________________________________________________
+
+Obtaining Cygwin Headers and Libs
+
+   The simplest method of building a cross compiler for Cygwin requires
+   that you have the Cygwin headers and libraries available at the time
+   of building the cross compiler. Cygwin headers and libraries are
+   installed when Cygwin is installed, so the headers and libraries can
+   be obtained from an existing Cygwin installation.
+
+     Don't simply copy the headers and libraries: Some of the headers
+     and libraries are symbolic links to other headers or libraries.
+     Copying these files using a program that is not aware of Cygwin's
+     symlink emulation will result in some of the header and library
+     files being broken. The method described below will preserve the
+     symbolic links used by the header and library files.
+
+    1. Launch your Cygwin environment, using either the icon on your
+       Desktop, the icon in your Start Menu, or by running cygwin.bat
+       from your Cygwin directory (e.g. c:\cygwin); you should see a
+       window like the following:
+
+Harold@MyWindowsHost ~
+$
+
+    2. Change the current directory to Cygwin root directory:
+
+Harold@MyWindowsHost ~
+$ cd /
+
+Harold@MyWindowsHost /
+$
+
+    3. Create an archive of the contents of the /lib directory:
+
+Harold@MyWindowsHost /
+$ tar -czf cygwin-lib.tgz lib/
+
+Harold@MyWindowsHost /
+$
+
+    4. Change the current directory to the usr directory in your Cygwin
+       root directory:
+
+Harold@MyWindowsHost /
+$ cd /usr
+
+Harold@MyWindowsHost /usr
+$
+
+    5. Create an archive of the contents of the /usr/include directory:
+
+Harold@MyWindowsHost /usr
+$ tar -czf cygwin-include.tgz include/
+
+Harold@MyWindowsHost /usr
+$
+
+    6. Transfer cygwin-lib.tgz and cygwin-include.tgz to your build host
+       using any method that you have available (e.g. ftp, samba,
+       diskette, etc.). Save the files in the /cygwin/i686-pc-cygwin/
+       directory.
+    7. Open a shell on your cross compiling build host; you should see a
+       window like the following:
+
+[harold@MyCrossHost harold]$
+
+    8. Change the current directory to the /cygwin/i686-pc-cygwin/
+       directory in your build host root directory:
+
+[harold@MyCrossHost harold]$ cd /cygwin/i686-pc-cygwin/
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$
+
+    9. Extract the cygwin-lib.tgz and cygwin-include.tgz archives:
+
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-lib.tgz
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-include.tgz
+     _________________________________________________________________
+
+Building binutils and gcc
+
+    1. Open a shell on your cross compiling build host; you should see a
+       window like the following:
+
+[harold@MyCrossHost harold]$
+
+    2. Change the current directory to the /cygwin/src/ directory in your
+       build host root directory:
+
+[harold@MyCrossHost harold]$ cd /cygwin/src/
+[harold@MyCrossHost src]$
+
+    3. Extract the binutils-20010425-2-src.tar.gz and
+       gcc-2.95.3-5-src.tar.bz2 archives:
+
+[harold@MyCrossHost src]$ tar -xzf binutils-20010425-2-src.tar.gz
+[harold@MyCrossHost src]$ bunzip2 gcc-2.95.3-5-src.tar.bz2
+[harold@MyCrossHost src]$ tar -xf gcc-2.95.3-5-src.tar
+
+    4. Change the current directory to the
+       /cygwin/src/binutils-20010425-2 directory:
+
+[harold@MyCrossHost src]$ cd /cygwin/src/binutils-20010425-2
+[harold@MyCrossHost binutils-20010425-2]$
+
+    5. Create a build directory and change the current directory to that
+       directory:
+
+[harold@MyCrossHost binutils-20010425-2]$ mkdir build
+[harold@MyCrossHost binutils-20010425-2]$ cd build
+[harold@MyCrossHost build]$
+
+    6. Configure binutils:
+
+[harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin
+ --target=i686-pc-cygwin --host=i686-pc-linux > configure.log 2>&1
+[harold@MyCrossHost build]$
+
+    7. Build binutils:
+
+[harold@MyCrossHost build]$ make all > all.log 2>&1
+[harold@MyCrossHost build]$
+
+    8. Install binutils:
+
+[harold@MyCrossHost build]$ make install > install.log 2>&1
+[harold@MyCrossHost build]$
+
+    9. Modify the PATH environment variable to include the directories
+       that the binutils executables were installed in:
+
+[harold@MyCrossHost build]$ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
+[harold@MyCrossHost build]$
+
+   10. Change the current directory to the
+       /cygwin/src/binutils-20010425-2 directory:
+
+[harold@MyCrossHost src]$ cd /cygwin/src/gcc-2.95.3-5
+[harold@MyCrossHost gcc-2.95.3-5]$
+
+   11. Create a build directory and change the current directory to that
+       directory:
+
+[harold@MyCrossHost gcc-2.95.3-5]$ mkdir build
+[harold@MyCrossHost gcc-2.95.3-5]$ cd build
+[harold@MyCrossHost build]$
+
+   12. Configure gcc:
+
+[harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin
+ --target=i686-pc-cygwin --host=i686-pc-linux --enable-haifa > configure.log 2>
+&1
+[harold@MyCrossHost build]$
+
+   13. Build gcc:
+
+[harold@MyCrossHost build]$ make all > all.log 2>&1
+[harold@MyCrossHost build]$
+
+   14. Install gcc:
+
+[harold@MyCrossHost build]$ make install > install.log 2>&1
+[harold@MyCrossHost build]$
+     _________________________________________________________________
+
+Building Cygwin/XFree86
+
+   Modify host.def/PostIncDir to reflect the actual version of gcc
+   compiled, such as #define PostIncDir
+   /cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include
+
+   make World BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1"
+   IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+     _________________________________________________________________
+
 Chapter 3. Documentation
 
    Foo!
@@ -667,7 +877,7 @@ C
    Concurrent Versions System (CVS)
           CVS is an open source version control system used by the
           majority of open source projects. More information can be found
-          at the [39]CVS project homepage.
+          at the [42]CVS project homepage.
 
 F
 
@@ -708,7 +918,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [40]X Display Manager.
+          See Also: [43]X Display Manager.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -1035,7 +1245,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [41]http://www.gnu.org/copyleft/.
+   [44]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -1077,41 +1287,44 @@ References
    1. file://localhost/home/public/documents/cygx/build/cg/dump.html#overview
    2. file://localhost/home/public/documents/cygx/build/cg/dump.html#programming
    3. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-overview
-   4. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-source-obtaining
-   5. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling
-   6. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-
-   7. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-standard
-   8. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-debug
-   9. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-install
-  10. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-tree-update
-  11. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-tree-update-all
-  12. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-source-update-individual
-  13. file://localhost/home/public/documents/cygx/build/cg/dump.html#documentation
-  14. file://localhost/home/public/documents/cygx/build/cg/dump.html#website
-  15. file://localhost/home/public/documents/cygx/build/cg/dump.html#biblio
-  16. file://localhost/home/public/documents/cygx/build/cg/dump.html#glossary
-  17. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl
-  18. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-preamble
-  19. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-applicability-and-definitions
-  20. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-verbation-copying
-  21. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-copying-in-quantity
-  22. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-modifications
-  23. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-combining-documents
-  24. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-collections-of-documents
-  25. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-aggregation-with-independent-works
-  26. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-translation
-  27. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-termination
-  28. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-future-revisions-of-this-license
-  29. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-using-for-your-documents
-  30. file://localhost/home/public/documents/cygx/build/cg/dump.html#programming
-  31. file://localhost/home/public/documents/cygx/build/cg/dump.html#documentation
-  32. file://localhost/home/public/documents/cygx/build/cg/dump.html#website
-  33. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-source-obtaining
-  34. http://xfree86.org/cvs/
-  35. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  36. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pserver
-  37. http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2
-  38. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  39. http://www.cvshome.org/
-  40. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
-  41. http://www.gnu.org/copyleft/
+   4. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+   5. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-source-obtaining
+   6. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling
+   7. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-install
+   8. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-tree-update
+   9. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-cross
+  10. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-obtaining-compiler-source
+  11. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
+  12. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-building-binutils-and-gcc
+  13. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-build
+  14. file://localhost/home/public/documents/cygx/build/cg/dump.html#documentation
+  15. file://localhost/home/public/documents/cygx/build/cg/dump.html#website
+  16. file://localhost/home/public/documents/cygx/build/cg/dump.html#biblio
+  17. file://localhost/home/public/documents/cygx/build/cg/dump.html#glossary
+  18. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl
+  19. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-preamble
+  20. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-applicability-and-definitions
+  21. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-verbation-copying
+  22. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-copying-in-quantity
+  23. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-modifications
+  24. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-combining-documents
+  25. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-collections-of-documents
+  26. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-aggregation-with-independent-works
+  27. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-translation
+  28. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-termination
+  29. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-future-revisions-of-this-license
+  30. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-using-for-your-documents
+  31. file://localhost/home/public/documents/cygx/build/cg/dump.html#programming
+  32. file://localhost/home/public/documents/cygx/build/cg/dump.html#documentation
+  33. file://localhost/home/public/documents/cygx/build/cg/dump.html#website
+  34. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-source-obtaining
+  35. http://xfree86.org/cvs/
+  36. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  37. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pserver
+  38. http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2
+  39. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  40. http://cygwin.com/mirrors.html
+  41. http://cygwin.com/mirrors.html
+  42. http://www.cvshome.org/
+  43. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
+  44. http://www.gnu.org/copyleft/
