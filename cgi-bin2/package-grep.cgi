@@ -19,8 +19,9 @@ use FindBin qw($Bin);
 print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
       LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "</td></table>\n",
       "<table>\n",
-      $html->h1({-align=>'center'}, 'Cygwin Package List'),
-      $html->h2({-align=>'center'}, 'Search Results'), "\n";
+      $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n",
+      $html->h2({-align=>'center'}, 'Search Results'), "\n",
+      $html->h3({-align=>'center'}, "for search term '<tt>$grep</tt>'"), "\n";
 
 chdir("$Bin/../packages");
 for my $f (<*/*>) {
