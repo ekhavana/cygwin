@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2002-06-22 0007 EDT</p>
+<p>Last updated: 2002-06-27 0020 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -61,6 +61,94 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test61</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2002-06-27 0020 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test61.exe.bz2">XWin-Test61.exe.bz2</a>
+(1070 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020627-0020.tar.bz2">xwin-20020627-0020.tar.bz2</a>
+(72 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>General - Fix the KDE 3.0 alpha-channel icon bug that appeared
+only when running Windows at 32 bits per pixel.  Many more details
+below.  (Alan Hourihane)</li>
+
+<li>
+<p>General - pScreenInfo->dwDepth used to refer to the depth that the
+user specified with the -depth parameter or the depth returned by
+GetDeviceCaps (BITSPIXEL) and pScreenInfo->dwBPP used to refer to the
+bits of color per pixel.  For example, running Windows at 32 bit color
+would mean dwDepth == 32 and dwBPP == 24.  It turns out that this was
+exactly backwards from what it should be.</p>
+
+<p>The dwDepth variable new referes to the color ``depth'' of a pixel,
+that is, the number of bits that make up the color specification for a
+pixel.  For example, a 32 bit pixel uses 24 bits to represent color
+plus an 8 bit pad for alignment purposes and a 16 bit pixel can use 15
+or 16 bits to represent color.  The dwBPP variable now refers to the
+bits used to store each pixel, that is, the number of bits that each
+pixel occupies in the framebuffer memory.  For example, a 32 bit pixel
+occupies 32 bits in the framebuffer memory while a 24 bit pixel
+occupies 24 bits in the framebuffer memory (the former pixels are 32
+bit aligned, while the latter pixels are called ``packed'' because the
+pixels are not aligned and any given pixel may actually be stored in
+two seperate 32 bit units).</p>
+
+<p>The meaning of dwDepth and dwBPP was corrected throughout the
+source code, touching files such as wincmap.c, winscrinit.c,
+InitOutput.c, winshadddnl.c, winshaddd.c, winshadgdi.c,
+winnativegdi.c, winpfbdd.c, and win.h.  Also, we modify the depth 24
+pixmap format at runtime to use 24 bits per pixel, instead of 32, when
+Windows is running in 24 bit color; this matches the Windows pixel
+format when running in 24 bit color.</p>
+
+<p>The end result of all of this is that we now no longer report that
+we have a depth 32 visual, as depth 32 visuals do not exist.  What we
+were previously calling a depth 32 visual is actually a depth 24
+visual with a different bits per pixel.  Advertising a proper visual
+when running Windows at 32 bit color corrects the problem of KDE 3.0
+not displaying icons or text with alpha channels.  Alan did the
+magical part of discovering the underlying problem, I did the grunt
+work of cleaning the code and making sure that all of the corner cases
+were still handled.  (Alan Hourihane, Harold Hunt)</p>
+</li>
+
+<li>winshaddd.c, winshadddnl.c, winshadgdi.c, win.h, winscrinit.c -
+Remove the essentially unused dwStride and dwStrideBytes variables
+from the ScreenInfoRec.  (Harold Hunt)</li>
+
+<li>winshaddd.c, winshadddnl.c - In winBltExposedRegionsShadowDD* ()
+we try to restore the primary DirectDraw surface up to
+WIN_REGAIN_SURFACE_RETRIES (currently 1) times when a bit block
+transfer of the exposed regions fails.  This corrects the case where
+switching a notebook from its internal display to an external display
+(or vice versa) would cause the Cygwin/XFree86 window to blank and
+fail to redraw itself until the Cygwin/XFree86 window was minimized
+and then restored.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 <h4>Test60</h4>
