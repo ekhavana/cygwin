@@ -4,6 +4,10 @@ Cygwin/XFree86 Frequently Asked Questions
 Harold L Hunt, II
 
    Revision History
+   Revision 1.0.4 2003-09-05 Revised by:
+   alexander.gottwald@s1999.tu-chemnitz.de
+   Updated the entries about non U.S. keyboard layouts. Added
+   troubleshooting info for X11Forwarding and keyboard layouts.
    Revision 1.0.3 2003-03-28 Revised by: huntharo@msu.edu
    Reviced q&a entries for showing 8-bit chars in bash and for enabling
    XDMCP on remote machines.
@@ -86,9 +90,9 @@ Questions and Answers
         4.6. [33]How do I get my non-U.S. keyboard modmap to be installed
                 when using xdmcp?
 
-        4.7. [34]I have installed a modmap for my non-U.S. keyboard
-                layout, but how do I get bash to display accents and/or
-                umlauts?
+        4.7. [34]I have configured Cygwin/XFree86 for my non-U.S.
+                keyboard layout, but how do I get bash to display accents
+                and/or umlauts?
 
         4.8. [35]How do I put bash into "8 bit" mode?
         4.9. [36]Why doesn't my Linux/UNIX/*NIX/*BSD machine present a
@@ -152,64 +156,66 @@ Questions and Answers
         6.16. [61]Login to CDE on Solaris via XDMCP hangs Cygwin/XFree86.
         6.17. [62]Out of environment space
         6.18. [63]Too many parameters
+        6.19. [64]X11Forwarding does not work with openssh
+        6.20. [65]Loading XKB keymaps fails
 
-   7. [64]Porting Software
+   7. [66]Porting Software
 
-        7.1. [65]Is there a list of software that has been ported to
+        7.1. [67]Is there a list of software that has been ported to
                 Cygwin/XFree86?
 
-        7.2. [66]How do I start porting software to Cygwin/XFree86?
-        7.3. [67]Are there common problems encountered when porting
+        7.2. [68]How do I start porting software to Cygwin/XFree86?
+        7.3. [69]Are there common problems encountered when porting
                 software to Cygwin/XFree86?
 
-   8. [68]Contributing
+   8. [70]Contributing
 
-        8.1. [69]Are there step-by-step instructions for contributing to
+        8.1. [71]Are there step-by-step instructions for contributing to
                 Cygwin/XFree86?
 
-        8.2. [70]Where do I get the Cygwin/XFree86 source code?
-        8.3. [71]Do I need to be a member of XFree86 to contribute to
+        8.2. [72]Where do I get the Cygwin/XFree86 source code?
+        8.3. [73]Do I need to be a member of XFree86 to contribute to
                 Cygwin/XFree86?
 
-        8.4. [72]Are there editors for Windows that understand and
+        8.4. [74]Are there editors for Windows that understand and
                 preserve UNIX end of line characters?
 
-        8.5. [73]How should I generate patches for Cygwin/XFree86?
-        8.6. [74]Where do I submit patches for Cygwin/XFree86?
-        8.7. [75]Where does Cygwin/XFree86's X Server source reside in
+        8.5. [75]How should I generate patches for Cygwin/XFree86?
+        8.6. [76]Where do I submit patches for Cygwin/XFree86?
+        8.7. [77]Where does Cygwin/XFree86's X Server source reside in
                 the XFree86 source tree?
 
-        8.8. [76]How is compilation of Cygwin/XFree86 configured?
-        8.9. [77]How do I compile Cygwin/XFree86 after I have unpacked a
+        8.8. [78]How is compilation of Cygwin/XFree86 configured?
+        8.9. [79]How do I compile Cygwin/XFree86 after I have unpacked a
                 source snapshot or after I have checked out the XFree86
                 CVS tree?
 
-        8.10. [78]How do I recompile just XWin.exe if I have confined my
+        8.10. [80]How do I recompile just XWin.exe if I have confined my
                 changes to xc/programs/Xserver/hw/xwin/?
 
-        8.11. [79]Why doesn't XFree86 use GNU's autoconf?
-        8.12. [80]What compiler does Cygwin/XFree86 use, and which
+        8.11. [81]Why doesn't XFree86 use GNU's autoconf?
+        8.12. [82]What compiler does Cygwin/XFree86 use, and which
                 compilers are supported?
 
-        8.13. [81]Is cross-compiling from a non-Cygwin platform
+        8.13. [83]Is cross-compiling from a non-Cygwin platform
                 supported?
 
-        8.14. [82]Where can I get help for installing DocBook on Cygwin?
-        8.15. [83]How can I build a debug version of the XFree86 CVS
+        8.14. [84]Where can I get help for installing DocBook on Cygwin?
+        8.15. [85]How can I build a debug version of the XFree86 CVS
                 tree?
 
-   9. [84]Licenses, Patents, Trademarks, and Copyrights
+   9. [86]Licenses, Patents, Trademarks, and Copyrights
 
-        9.1. [85]What licenses apply to Cygwin/XFree86 source code?
-        9.2. [86]What licenses apply to the XFree86 source code?
-        9.3. [87]What license applies to Cygwin source code?
-        9.4. [88]Whom holds the copyright on the Cygwin/XFree86 source
+        9.1. [87]What licenses apply to Cygwin/XFree86 source code?
+        9.2. [88]What licenses apply to the XFree86 source code?
+        9.3. [89]What license applies to Cygwin source code?
+        9.4. [90]Whom holds the copyright on the Cygwin/XFree86 source
                 code?
 
-        9.5. [89]Whom holds the copyright on the XFree86 source code?
-        9.6. [90]Whom holds the copyright on the Cygwin source code?
-        9.7. [91]What license applies to Motif?
-        9.8. [92]Isn't "XWin" trademarked by StarNet Communications?
+        9.5. [91]Whom holds the copyright on the XFree86 source code?
+        9.6. [92]Whom holds the copyright on the Cygwin source code?
+        9.7. [93]What license applies to Motif?
+        9.8. [94]Isn't "XWin" trademarked by StarNet Communications?
 
 1. General Information
 
@@ -223,7 +229,7 @@ Questions and Answers
 
    1.2. What is Cygwin?
 
-   Cygwin tools are, in the words of the [93]Cygwin homepage, "ports of
+   Cygwin tools are, in the words of the [95]Cygwin homepage, "ports of
    the popular GNU development tools and utilities for Windows 95, 98,
    and NT. They function by using the Cygwin library which provides a
    UNIX-like API on top of the Win32 API." Cygwin provides the compiler
@@ -280,12 +286,12 @@ Questions and Answers
    1.8. Is there a Cygwin/XFree86 newsgroup?
 
    No, Cygwin/XFree86 does not have a newsgroup; however, we do have a
-   mailing list. See [94]Q: 1.9.
+   mailing list. See [96]Q: 1.9.
 
    1.9. Is there a Cygwin/XFree86 mailing list?
 
    Yes, Cygwin/XFree86 has a mailing list, namely,
-   cygwin-xfree@cygwin.com. Visit the [95]Cygwin Mailing Lists page to
+   cygwin-xfree@cygwin.com. Visit the [97]Cygwin Mailing Lists page to
    subscribe to cygwin-xfree@cygwin.com as well as to read and search an
    online archive of the mailing list traffic.
 
@@ -308,12 +314,12 @@ Questions and Answers
 
    2.2. How is Cygwin/XFree86 installed?
 
-   The [96]Cygwin/XFree86 User's Guide thoroughly documents the
+   The [98]Cygwin/XFree86 User's Guide thoroughly documents the
    installation process.
 
    2.3. Which archives do I need to download and install?
 
-   The [97]Cygwin/XFree86 User's Guide lists the archives that need to be
+   The [99]Cygwin/XFree86 User's Guide lists the archives that need to be
    downloaded and installed.
 
    2.4. Can I use WinZip to extract Cygwin/XFree86 archives?
@@ -363,7 +369,7 @@ Questions and Answers
        Xinstall.sh in. Does uname return a string that starts with the
        characters CYGWIN? If so, try running Xinstall.sh using sh
        ./Xinstall.sh. If not, perhaps you have multiple copies of
-       cygwin1.dll on your system; see [98]Q: 6.9. for more information.
+       cygwin1.dll on your system; see [100]Q: 6.9. for more information.
     2. Run uname from the same Cygwin bash window that you ran
        Xinstall.sh in. If uname cannot be found, then run cat
        /etc/setup/installed.db | grep sh-utils to see if the sh-utils
@@ -383,9 +389,14 @@ Questions and Answers
    Win32 API, whereas the XFree86 server must read detailed information
    about your hardware from a configuration file.
 
+   Besides that there is limited support for configuration via
+   XF86Config. This includes the path settings for FontPath and RgbPath
+   and the configuration of on U.S. keyboard layouts. For more
+   information see [101]Q: 4.4.
+
    3.2. What are the command line arguments for XWin.exe?
 
-   The [99]Cygwin/XFree86 User's Guide documents the command line
+   The [102]Cygwin/XFree86 User's Guide documents the command line
    arguments for XWin.exe.
 
    3.3. Why does XWin.exe ignore the display depth that I pass on the
@@ -430,7 +441,25 @@ Questions and Answers
 
    4.4. How do I use a non-U.S. keyboard layout?
 
-   See [100]Q: 4.5. to obtain a modmap for your keyboard layout.
+   Some keyboard layouts are configured according to the Windows keyboard
+   settings. For these layouts no special change is needed. For all other
+   layouts there is the possibility to configure the layout via a
+   configfile. A sample file can be obtained from [103]here. Unpack the
+   file and copy it to /etc/X11/XF86Config.
+$ cd /tmp
+$ wget http://www.tu-chemnitz.de/~goal/xfree/XF86Config.bz2
+$ bzip2 -d XF86Config.bz2
+$ cp XF86Config /etc/X11/XF86Config
+
+   The sample configures a german layout. To configure it for your
+   layout, change these lines from the "InputDevice" section.
+    Option "XkbRules"   "xfree86"
+    Option "XkbModel"   "pc105"
+    Option "XkbLayout"  "de"
+
+   Instead of "de" set "XkbLayout" to the code which represents your
+   keyboard layout (e.g. Australia = au, Deutschland = de, France = fr,
+   Japan = jp, United Kingdom = uk).
 
    4.5. Where can I find an xmodmap for my non-U.S. keyboard layout?
 
@@ -438,33 +467,16 @@ Questions and Answers
    GNU/Linux distribution (e.g. RedHat).
 
    Or, you can use xkeycaps to automatically generate a modmap for one of
-   over 208 different layouts. See the [101]xkeycaps home page to
+   over 208 different layouts. See the [104]xkeycaps home page to
    download and for more information.
 
    4.6. How do I get my non-U.S. keyboard modmap to be installed when
    using xdmcp?
 
-   This answer assumes that your non-U.S. keyboard modmap is located in
-   /etc/X11 and is called xmodmap.country_code, where country_code is
-   your two-letter standardized country code (e.g. Australia = au,
-   Deutschland = de, France = fr, Japan = jp, United Kingdom = uk).
+   See [105]Q: 4.4.
 
-   First, you must create a script that tells xmodmap to load the modmap
-   for your non-U.S. keyboard layout. One way to run xmodmap on X Server
-   startup when using [102]xdmcp is to add the following two lines to
-   /etc/X11/xdm/XSetup:
-
-   #!/bin/sh
-
-   /usr/X11R6/bin/xmodmap /etc/X11/xmodmap.country_code
-
-   Now you must tell xdm to run the screen setup script on startup. In
-   /etc/X11/xdm/xdm-config, add the following line:
-
-   DisplayManager*setup: /etc/X11/xdm/Xsetup
-
-   4.7. I have installed a modmap for my non-U.S. keyboard layout, but
-   how do I get bash to display accents and/or umlauts?
+   4.7. I have configured Cygwin/XFree86 for my non-U.S. keyboard layout,
+   but how do I get bash to display accents and/or umlauts?
 
    (Heinz Peter Hippenstiel) Add the following lines to .inputrc in your
    Cygwin home directory (e.g. /home/harold/):
@@ -484,7 +496,7 @@ set convert-meta off # to show it as character, not the octal representation
 
    4.8. How do I put bash into "8 bit" mode?
 
-   See [103]Q: 4.7.
+   See [106]Q: 4.7.
 
    4.9. Why doesn't my Linux/UNIX/*NIX/*BSD machine present a login
    screen when using -query for XDMCP?
@@ -494,7 +506,7 @@ set convert-meta off # to show it as character, not the octal representation
    FreeBSD, NetBSD, etc.) by default. You have to manually enable remote
    logins to your X Display Manager (xdm, kdm, or gdm). The location of
    the proper config file is distribution/OS dependent, but a short list
-   of known config file locations is given in [104]Table 1. You must
+   of known config file locations is given in [107]Table 1. You must
    change the line:
 [Xdmcp]
 Enable=false
@@ -513,7 +525,7 @@ Enable=true
    Solaris when I try to open an XDMCP session with a remote Solaris
    machine?
 
-   See also [105]Q: 4.11. and [106]Q: 6.16.
+   See also [108]Q: 4.11. and [109]Q: 6.16.
 
    [David Dawson] For whatever reason, certain versions of Solaris need
    fonts that are not provided by Cygwin/XFree86; the result is that you
@@ -528,8 +540,8 @@ Enable=true
 
      Note: The -fp parameter is a general X Server parameter, it is not
      specific to Cygwin/XFree86; therefore, the -fp is documented in the
-     [107]X Server documentation. For additional information about
-     fonts, see [108]Fonts in XFree86.
+     [110]X Server documentation. For additional information about
+     fonts, see [111]Fonts in XFree86.
 
    The standard port number for a font server is 7100, however, you may
    need to ask your system administrator what the font server port number
@@ -541,7 +553,7 @@ Enable=true
    4.11. Why does Cygwin/XFree86 freeze when I try to open an XDMCP
    session with a remote Solaris machine?
 
-   See also [109]Q: 4.10. and [110]Q: 6.16.
+   See also [112]Q: 4.10. and [113]Q: 6.16.
 
    Solaris appears to not support certain display bit depths, such as 24
    bits per pixel. Change your Windows display bit depth to 8, 16, or 32
@@ -552,7 +564,7 @@ Enable=true
    4.12. Where can I find more information about XDMCP (X Display Manager
    Protocol).
 
-   See the [111]Linux XDMCP HOWTO for more information about XDMCP.
+   See the [114]Linux XDMCP HOWTO for more information about XDMCP.
 
 5. Troubleshooting
 
@@ -560,7 +572,7 @@ Enable=true
    and error messages?
 
    Yes. The Cygwin/XFree86 log file is located at /tmp/XWin.log. You will
-   find solutions to the most common error messages in [112]the Section
+   find solutions to the most common error messages in [115]the Section
    called Error and Warning Messages.
 
    5.2. I have a specific error message, what does it mean?
@@ -572,9 +584,9 @@ Enable=true
    5.3. I have a specific error message that is not addressed in the
    Error and Warning Messages section.
 
-   Search the [113]Cygwin/XFree86 mailing list archives to see if the
+   Search the [116]Cygwin/XFree86 mailing list archives to see if the
    error message has already been reported and/or addressed. Report the
-   error message to the [114]Cygwin/XFree86 mailing list, how the error
+   error message to the [117]Cygwin/XFree86 mailing list, how the error
    message was caused, and the behavior of the X Server after the error
    message was generated (exit, freeze, etc.), only if the error message
    has not been reported, if the circumstances that produced the error
@@ -585,7 +597,7 @@ Enable=true
    do I do now?
 
    Some bug reports are deliberately ignored by project members if the
-   bug in question was recently dealt with; did you [115]search the
+   bug in question was recently dealt with; did you [118]search the
    mailing list archives for a solution to your problem before submitting
    your bug report? Some bug reports are ignored if they do not contain
    sufficient information to understand the situation that produces the
@@ -618,15 +630,15 @@ Enable=true
    drivers and software packages can consume an incredible amount of
    system resources and processing time. One known example of such a
    program is ATI2evxx.exe, a utility installed with some ATI
-   Technologies graphics card drivers. [116]Answers That Work has
-   information on ATI2evxx.exe on their [117]Task List Programs - A page.
+   Technologies graphics card drivers. [119]Answers That Work has
+   information on ATI2evxx.exe on their [120]Task List Programs - A page.
    You may want to try disabling, one-by-one, ATI2evxx.exe and other such
    programs until you find the program that is causing the slowdown.
 
    6.3. A required DLL file: cygncurses5.dll cannot be found
 
    Upgrading from ncurses-5.2-5 to ncurses-5.2-7 requires following some
-   [118]special instructions; failure to follow those instructions will
+   [121]special instructions; failure to follow those instructions will
    cause the above error message when running various Cygwin and
    Cygwin/XFree86 programs.
 
@@ -638,7 +650,7 @@ Enable=true
    6.5. error opening security policy file
    /usr/X11R6/lib/X11/xserver/SecurityPolicy
 
-   From [119]http://xfree86.org/, "This is a only a warning message, and
+   From [122]http://xfree86.org/, "This is a only a warning message, and
    is mostly harmless. If your server is failing to startup, this is not
    the reason. Check the other messages."
 
@@ -654,18 +666,18 @@ Enable=true
        default mounts to binary-mode by rerunning Cygwin's setup.exe and
        setting Default Text File Type to UNIX; this works even if there
        are no packages that need to be installed or updated by setup.exe.
-       See the Cygwin User's Guide section on [120]Text and Binary modes
+       See the Cygwin User's Guide section on [123]Text and Binary modes
        for more information on Cygwin mount modes.
     2. Manually installing the Cygwin/XFree86 archives using a non-Cygwin
        aware archival extraction program, such as WinZip. You should be
        installing Cygwin/XFree86 with the Xinstall.sh script, rather than
-       manually extracting the Cygwin/XFree86 archives. See [121]Q: 2.4.
+       manually extracting the Cygwin/XFree86 archives. See [124]Q: 2.4.
        for more information regarding WinZip.
 
    6.7. Could not init font path element /usr/X11R6/lib/X11/fonts/*/,
    removing from list!
 
-   See [122]Q: 6.6. and [123]Q: 2.4.
+   See [125]Q: 6.6. and [126]Q: 2.4.
 
    6.8. The procedure entry point _check_for_executable could not be
    located
@@ -684,7 +696,7 @@ Enable=true
    of Cygwin/XFree86 that supports palettized color, or you may run your
    primary Windows display at 15, 16, 24, or 32 bits per pixel.
 
-   See [124]Q: 6.10.
+   See [127]Q: 6.10.
 
    6.10. Exception: STATUS_ACCESS_VIOLATION
 
@@ -704,7 +716,7 @@ Enable=true
    6.11. XDMCP fatal error: Session declined No valid address
 
    Cygwin/XFree86 is sometimes unable to determine which local network
-   interface's address should be reported to the [125]XDMCP server; in
+   interface's address should be reported to the [128]XDMCP server; in
    these cases you need to pass -from local_host_name_or_ip_address to
    XWin.exe to specify which interface address to report.
 
@@ -713,20 +725,20 @@ Enable=true
 
    Cygwin/XFree86 queries getdtablesize () for the maximum number of
    client connections allowed; by default Cygwin returns 32 from
-   getdtablesize (). Cygwin/XFree86 [126]Server Test Series release
-   [127]Test44, released on 2001-08-15, changes the maximum number of
+   getdtablesize (). Cygwin/XFree86 [129]Server Test Series release
+   [130]Test44, released on 2001-08-15, changes the maximum number of
    clients from 32 to 1024 by passing the square of getdtablesize () to
    setdtablesize ().
 
    6.13. XIO: fatal IO error 104 (Connection reset by peer) on X server
    "127.0.0.1:0.0"
 
-   See [128]Q: 6.12.
+   See [131]Q: 6.12.
 
    6.14. Cannot Open Display: 127.0.0.1:0.0
 
-   Certain classes of software, such as that used for [129]Virtual
-   Private Networking and [130]fire-walling may cause the IP address
+   Certain classes of software, such as that used for [132]Virtual
+   Private Networking and [133]fire-walling may cause the IP address
    127.0.0.1, or other local adapter addresses, to be redirected, to
    become inoperable in some way, or to be operated in a manner that
    violates the defined operation of IP address.
@@ -763,26 +775,67 @@ Enable=true
 
    6.16. Login to CDE on Solaris via XDMCP hangs Cygwin/XFree86.
 
-   See also [131]Q: 4.10. and [132]Q: 4.11.
+   See also [134]Q: 4.10. and [135]Q: 4.11.
 
-   Install the [133]recommended set of patches for your version of
+   Install the [136]recommended set of patches for your version of
    Solaris.
 
    6.17. Out of environment space
 
    Increase your Windows environment space by following the
-   [134]instructions provided by Microsoft.
+   [137]instructions provided by Microsoft.
 
    6.18. Too many parameters
 
-   See [135]Q: 6.17.
+   See [138]Q: 6.17.
+
+   6.19. X11Forwarding does not work with openssh
+
+   Before establishing the ssh connection the xserver must be started and
+   the environment variable DISPLAY must be set for ssh.
+$ DISPLAY=localhost:0.0
+$ export DISPLAY
+$ ssh -X remotehost
+
+   or
+   $ DISPLAY=localhost:0.0 ssh -X remotehost
+
+   Make sure you're not starting ssh with the parameter -x. This disables
+   [139]X11Forwarding. The correct parameter is -X (uppercase).
+
+   Check that X11Forwarding is not disabled in the openssh client
+   configuration. The configfiles are by default ~/.ssh/config and
+   /etc/ssh/ssh_config. The file in the home directory overrides settings
+   in the global one. The configfile is split into various sections
+   starting with "Host wildcard". The section applies to all hosts where
+   wildcard matches the hostname. If this section contains an entry
+   "ForwardX11 no" then X11Forwarding is disabled. To enable it change
+   the entry to
+   ForwardX11 yes
+
+   Check that X11Forwarding is not disabled in the ssh server
+   configuration. The configfile is by default /etc/ssh/ssh_config. If
+   there is an entry "X11Forwarding no" then X11Forwarding is disabled.
+   If you have write access to the config file then change it to
+   X11Forwarding yes
+
+   Otherwise ask your you admin to change this for you.
+
+   6.20. Loading XKB keymaps fails
+
+   There is currently a problem with the /tmp directory mounted in
+   textmode. You can change the setting to binmode with:
+   mount -b "$(cygpath -m /tmp)" /tmp
+
+   If this fails with an errormessage stating unsufficient rights, try
+   mount -b -u "$(cygpath -m /tmp)" /tmp
 
 7. Porting Software
 
    7.1. Is there a list of software that has been ported to
    Cygwin/XFree86?
 
-   Yes, see the [136]Cygwin/XFree86 - Ported Software page.
+   Yes, see the [140]Cygwin/XFree86 - Ported Software page.
 
    7.2. How do I start porting software to Cygwin/XFree86?
 
@@ -826,7 +879,7 @@ Enable=true
    8.1. Are there step-by-step instructions for contributing to
    Cygwin/XFree86?
 
-   Yes. The [137]Cygwin/XFree86 Contributor's Guide has step-by-step
+   Yes. The [141]Cygwin/XFree86 Contributor's Guide has step-by-step
    instructions for obtaining the source, building the source, building
    debug versions of the source, and even cross-compiling under Linux.
 
@@ -835,7 +888,7 @@ Enable=true
    Cygwin/XFree86 source code is contained in, and distributed with, the
    XFree86 source tree. Periodically the Cygwin/XFree86 project releases
    a snapshot of the XFree86 source code that is known to compile.
-   Read-only [138]CVS access to the XFree86 source tree is also available
+   Read-only [142]CVS access to the XFree86 source tree is also available
    from the XFree86 project.
 
    8.3. Do I need to be a member of XFree86 to contribute to
@@ -856,14 +909,14 @@ Enable=true
    Yes. Emacs and XEmacs are available for Windows; they both understand
    and preserve UNIX end of line characters.
 
-   See the [139]GNU Mirror List for a mirror near you; Emacs is located
+   See the [143]GNU Mirror List for a mirror near you; Emacs is located
    under gnu/pub/windows/emacs/.
 
-   See the [140]XEmacs Download Page to download XEmacs for Windows.
+   See the [144]XEmacs Download Page to download XEmacs for Windows.
 
    8.5. How should I generate patches for Cygwin/XFree86?
 
-   Only submit patches that have UNIX end of line characters. See [141]Q:
+   Only submit patches that have UNIX end of line characters. See [145]Q:
    8.4. for information on editors for Windows that are aware of UNIX end
    of line characters.
 
@@ -882,7 +935,7 @@ Enable=true
    Submit patches for Cygwin/XFree86 to the cygwin-xfree@cygwin.com
    mailing list.
 
-   See [142]Q: 8.5. for more information on generating patches.
+   See [146]Q: 8.5. for more information on generating patches.
 
    8.7. Where does Cygwin/XFree86's X Server source reside in the XFree86
    source tree?
@@ -932,7 +985,7 @@ Enable=true
    we cannot guarantee that Cygwin/XFree86 will compile with any other
    compiler, nor can we afford to support compilers other than gcc.
 
-   See the [143]GCC Home Page for more information on gcc.
+   See the [147]GCC Home Page for more information on gcc.
 
    8.13. Is cross-compiling from a non-Cygwin platform supported?
 
@@ -942,12 +995,12 @@ Enable=true
    the Cygwin/XFree86 mailing, but do not always expect an answer, as we
    may not currently have a subscriber that is actively cross-compiling.
 
-   See [144]CrossGCC Frequently Asked Questions for more information on
+   See [148]CrossGCC Frequently Asked Questions for more information on
    cross compiling with gcc.
 
    8.14. Where can I get help for installing DocBook on Cygwin?
 
-   See [145]SGML for Windows NT: Setting up a free SGML editing and
+   See [149]SGML for Windows NT: Setting up a free SGML editing and
    publishing system on Windows NT/Cygwin by Markus Hoenicka.
 
    8.15. How can I build a debug version of the XFree86 CVS tree?
@@ -966,13 +1019,13 @@ Enable=true
    Cygwin/XFree86 is made up of two parts that are covered by distinct
    licenses: Cygwin and XFree86.
 
-   See [146]Q: 9.2. and [147]Q: 9.3. for more information regarding the
+   See [150]Q: 9.2. and [151]Q: 9.3. for more information regarding the
    licenses that apply to Cygwin/XFree86.
 
    9.2. What licenses apply to the XFree86 source code?
 
-   XFree86 source code is generally licensed under an [148]X11 style
-   license, which is [149]certified by the Free Software Foundation as
+   XFree86 source code is generally licensed under an [152]X11 style
+   license, which is [153]certified by the Free Software Foundation as
    compatible with the GNU GPL.
 
    9.3. What license applies to Cygwin source code?
@@ -993,7 +1046,7 @@ Enable=true
    each part follows a different scheme in regards to whom will hold the
    copyright on source code.
 
-   See [150]Q: 9.5. and [151]Q: 9.6. for more information regarding whom
+   See [154]Q: 9.5. and [155]Q: 9.6. for more information regarding whom
    holds the copyright on Cygwin/XFree86 source code.
 
    9.5. Whom holds the copyright on the XFree86 source code?
@@ -1008,19 +1061,19 @@ Enable=true
 
    9.6. Whom holds the copyright on the Cygwin source code?
 
-   [152]RedHat owns the copyright on the Cygwin source code. RedHat
+   [156]RedHat owns the copyright on the Cygwin source code. RedHat
    requires that copyright be assigned to RedHat for non-trivial changes
    to Cygwin. You must fill out a copyright transfer form if you are
    going to contribute substantial changes to Cygwin.
 
    9.7. What license applies to Motif?
 
-   Motif is a closed source product produced by [153]The Open Group.
-   However, The Open Group released [154]Open Motif on 2000-05-15 under a
-   public license, [155]The Open Group Public License, that allows Open
+   Motif is a closed source product produced by [157]The Open Group.
+   However, The Open Group released [158]Open Motif on 2000-05-15 under a
+   public license, [159]The Open Group Public License, that allows Open
    Motif to be distributed with and used on Open Source platforms. As of
    2001-07-10, Cygwin/XFree86 does not qualify as a platform that Open
-   Motif can be distributed with and used on. However, the [156]Open
+   Motif can be distributed with and used on. However, the [160]Open
    Motif FAQ states, "[...] we hope to be able to make a distribution
    under a license complying with the Open Source guidelines sometime in
    the future. For now this is as close as to Open Source as we could
@@ -1028,7 +1081,7 @@ Enable=true
 
    9.8. Isn't "XWin" trademarked by StarNet Communications?
 
-   No. A quick search at the [157]United States Patent and Trademark
+   No. A quick search at the [161]United States Patent and Trademark
    Office for "XWin" turns up one dead record and one live record. The
    live record is for a logo belonging to a rock crusher manufacturer
    based out of Belgium. Neither trademark affects Cygwin/XFree86, as the
@@ -1111,7 +1164,15 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [158]X Display Manager.
+          See Also: [162]X Display Manager.
+
+   OpenSSH X11 Forwarding
+          Some SSH programs like OpenSSH provide a feature where in
+          addition to the normal text channel opened between the local
+          and the remote host another encrypted channel is opened for the
+          communication between the X11 client and the X11 server. The
+          SSH server will act as proxy-server for the X11 clients and
+          will forward all communication to the X11 server.
      _________________________________________________________________
 
 A. GNU Free Documentation License
@@ -1438,7 +1499,7 @@ A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [159]http://www.gnu.org/copyleft/.
+   [163]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -1477,162 +1538,166 @@ How to use this License for your documents
 
 References
 
-   1. file://localhost/home/public/documents/cygx/build/faq/dump.html#qanda
-   2. file://localhost/home/public/documents/cygx/build/faq/dump.html#biblio
-   3. file://localhost/home/public/documents/cygx/build/faq/dump.html#glossary
-   4. file://localhost/home/public/documents/cygx/build/faq/dump.html#gfdl
-   5. file://localhost/home/public/documents/cygx/build/faq/dump.html#general
-   6. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-what-is-cygwin-xfree86
-   7. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-what-is-cygwin
-   8. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-what-is-x-window-system
-   9. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-what-is-xfree86
-  10. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-what-is-x-server
-  11. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-what-is-x-client
-  12. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-why-port-to-windows
-  13. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-newsgroup
-  14. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-mailing-list
-  15. file://localhost/home/public/documents/cygx/build/faq/dump.html#installation
-  16. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-windows-versions-supported
-  17. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-how-to-install
-  18. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-which-archives
-  19. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-winzip
-  20. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-bunzip2
-  21. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-xmod.tgz
-  22. file://localhost/home/public/documents/cygx/build/faq/dump.html#configuration
-  23. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-why-no-xf86config
-  24. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-command-line-args
-  25. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-display-depth-ignored
-  26. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-three-button-emulation
-  27. file://localhost/home/public/documents/cygx/build/faq/dump.html#usage
-  28. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-aix-xkb
-  29. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-why-twm-only-wm
-  30. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-what-wm-available
-  31. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-non-U.S.-keyboard-layout
-  32. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-modmap-obtaining
-  33. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-how-modmap-and-xdmcp
-  34. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-bash-extended-chars
-  35. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-bash-8bit
-  36. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-mandrake-8.1-xdmcp
-  37. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-solaris-fonts
-  38. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-remote-solaris
-  39. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-xdmcp-info
-  40. file://localhost/home/public/documents/cygx/build/faq/dump.html#troubleshooting
-  41. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-log-file-location
-  42. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-message-interpretation
-  43. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-message-not-listed
-  44. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-but-report-ignored
-  45. file://localhost/home/public/documents/cygx/build/faq/dump.html#errors
-  46. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-trackpoint
-  47. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-tasklist-programs-slow
-  48. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-cygncurses5.dll-not-found
-  49. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-owner-tmp-.X11-unix
-  50. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-security-policy
-  51. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-font-eof
-  52. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-removing-font-path-element
-  53. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-procedure-entry-point-missing
-  54. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-status-integer-divide-by-zero
-  55. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-status-access-violation
-  56. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-xdmcp-no-valid-address
-  57. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-max-clients
-  58. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-xio-fatal-io-error-104
-  59. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-cannot-open-display
-  60. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-negative-sized-edge
-  61. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-cde-via-xdmcp-hangs
-  62. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-env-space
-  63. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-too-many-parameters
-  64. file://localhost/home/public/documents/cygx/build/faq/dump.html#porting
-  65. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-ported-software-list
-  66. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-how-to-port
-  67. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-common-porting-problems
-  68. file://localhost/home/public/documents/cygx/build/faq/dump.html#contributing
-  69. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-instructions-for-contributing
-  70. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-get-project-source-code
-  71. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-need-to-be-member
-  72. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-editors
-  73. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-contrib-diff
-  74. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-where-to-submit-patches
-  75. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-where-is-x-server-source
-  76. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-project-compilation-configuration
-  77. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-how-to-compile
-  78. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-confined-recompile
-  79. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-why-no-autoconf
-  80. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-which-compilers-supported
-  81. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-cross-compiling
-  82. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-help-installing-docbook
-  83. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-build-debug
-  84. file://localhost/home/public/documents/cygx/build/faq/dump.html#license-ptc
-  85. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-what-licenses-apply
-  86. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-license-xfree
-  87. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-license-cygwin
-  88. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-cygwin-xfree86
-  89. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-xfree
-  90. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-cygwin
-  91. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-motif-license
-  92. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-trademark-xwin
-  93. http://cygwin.com/
-  94. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-mailing-list
-  95. http://cygwin.com/lists.html
-  96. http://xfree86.cygwin.com/docs/ug/cygwin-xfree-ug.html
-  97. http://xfree86.cygwin.com/docs/ug/cygwin-xfree-ug.html
-  98. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-status-integer-divide-by-zero
+   1. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#qanda
+   2. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#biblio
+   3. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#glossary
+   4. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#gfdl
+   5. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#general
+   6. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-what-is-cygwin-xfree86
+   7. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-what-is-cygwin
+   8. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-what-is-x-window-system
+   9. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-what-is-xfree86
+  10. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-what-is-x-server
+  11. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-what-is-x-client
+  12. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-why-port-to-windows
+  13. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-newsgroup
+  14. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-mailing-list
+  15. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#installation
+  16. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-windows-versions-supported
+  17. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-how-to-install
+  18. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-which-archives
+  19. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-winzip
+  20. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-bunzip2
+  21. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-xmod.tgz
+  22. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#configuration
+  23. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-why-no-xf86config
+  24. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-command-line-args
+  25. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-display-depth-ignored
+  26. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-three-button-emulation
+  27. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#usage
+  28. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-aix-xkb
+  29. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-why-twm-only-wm
+  30. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-what-wm-available
+  31. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
+  32. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-modmap-obtaining
+  33. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-how-modmap-and-xdmcp
+  34. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-bash-extended-chars
+  35. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-bash-8bit
+  36. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-mandrake-8.1-xdmcp
+  37. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-solaris-fonts
+  38. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-remote-solaris
+  39. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-xdmcp-info
+  40. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#troubleshooting
+  41. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-log-file-location
+  42. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-message-interpretation
+  43. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-message-not-listed
+  44. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-but-report-ignored
+  45. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#errors
+  46. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-trackpoint
+  47. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-tasklist-programs-slow
+  48. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-cygncurses5.dll-not-found
+  49. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-owner-tmp-.X11-unix
+  50. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-security-policy
+  51. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-font-eof
+  52. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-removing-font-path-element
+  53. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-procedure-entry-point-missing
+  54. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-status-integer-divide-by-zero
+  55. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-status-access-violation
+  56. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-xdmcp-no-valid-address
+  57. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-max-clients
+  58. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-xio-fatal-io-error-104
+  59. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-cannot-open-display
+  60. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-negative-sized-edge
+  61. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
+  62. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-env-space
+  63. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-too-many-parameters
+  64. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-ssh-no-x11forwarding
+  65. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-xkb-not-working
+  66. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#porting
+  67. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-ported-software-list
+  68. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-how-to-port
+  69. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-common-porting-problems
+  70. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#contributing
+  71. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-instructions-for-contributing
+  72. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-get-project-source-code
+  73. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-need-to-be-member
+  74. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-editors
+  75. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-contrib-diff
+  76. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-where-to-submit-patches
+  77. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-where-is-x-server-source
+  78. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-project-compilation-configuration
+  79. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-how-to-compile
+  80. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-confined-recompile
+  81. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-why-no-autoconf
+  82. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-which-compilers-supported
+  83. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-cross-compiling
+  84. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-help-installing-docbook
+  85. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-build-debug
+  86. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#license-ptc
+  87. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-what-licenses-apply
+  88. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-license-xfree
+  89. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-license-cygwin
+  90. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-copyright-cygwin-xfree86
+  91. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-copyright-xfree
+  92. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-copyright-cygwin
+  93. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-motif-license
+  94. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-trademark-xwin
+  95. http://cygwin.com/
+  96. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-mailing-list
+  97. http://cygwin.com/lists.html
+  98. http://xfree86.cygwin.com/docs/ug/cygwin-xfree-ug.html
   99. http://xfree86.cygwin.com/docs/ug/cygwin-xfree-ug.html
- 100. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-modmap-obtaining
- 101. http://www.jwz.org/xkeycaps/
- 102. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-xdmcp
- 103. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-bash-extended-chars
- 104. file://localhost/home/public/documents/cygx/build/faq/dump.html#tbl-config-files
- 105. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-remote-solaris
- 106. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-cde-via-xdmcp-hangs
- 107. http://www.xfree86.org/current/Xserver.1.html
- 108. http://www.xfree86.org/current/fonts.html
- 109. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-solaris-fonts
- 110. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-cde-via-xdmcp-hangs
- 111. http://www.linuxdoc.org/HOWTO/XDMCP-HOWTO/
- 112. file://localhost/home/public/documents/cygx/build/faq/dump.html#errors
- 113. http://cygwin.com/ml/cygwin-xfree/
- 114. file://localhost/home/public/documents/cygx/build/faq/cygwin-xfree@cygwin.com
- 115. file://localhost/home/public/documents/cygx/build/faq/project-url-ml-search;
- 116. http://www.answersthatwork.com/
- 117. http://www.answersthatwork.com/Tasklist_pages/tasklist_a.htm
- 118. http://cygwin.com/ml/cygwin-announce/2001/msg00124.html
- 119. http://xfree86.org/
- 120. http://cygwin.com/cygwin-ug-net/using-textbinary.html
- 121. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-winzip
- 122. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-font-eof
- 123. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-winzip
- 124. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-status-access-violation
- 125. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-xdmcp
- 126. http://xfree86.cygwin.com/devel/shadow/
- 127. http://xfree86.cygwin.com/devel/shadow/changelog.html
- 128. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-max-clients
- 129. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-vpn
- 130. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-firewall
- 131. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-solaris-fonts
- 132. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-remote-solaris
- 133. http://www.sun.com/bigadmin/patches/indexRec.html
- 134. http://support.microsoft.com/support/kb/articles/Q230/2/05.ASP
- 135. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-env-space
- 136. http://xfree86.cygwin.com/ported-software.html
- 137. http://xfree86.cygwin.com/docs/cg/cygwin-xfree-cg.html
- 138. http://xfree86.org/cvs/
- 139. http://www.gnu.org/order/ftp.html
- 140. http://xemacs.org/Download/index.html
- 141. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-editors
- 142. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-contrib-diff
- 143. http://gcc.gnu.org/
- 144. http://www.objsw.com/CrossGCC/
- 145. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
- 146. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-license-xfree
- 147. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-license-cygwin
- 148. http://www.x.org/terms.htm
- 149. http://www.fsf.org/philosophy/license-list.html#GPLCompatibleLicenses
- 150. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-xfree
- 151. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-cygwin
- 152. http://redhat.com/
- 153. http://www.opengroup.org/
- 154. http://www.opengroup.org/openmotif/
- 155. http://www.opengroup.org/openmotif/license
- 156. http://www.opengroup.org/openmotif/faq.html
- 157. http://www.uspto.gov/
- 158. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-xdm
- 159. http://www.gnu.org/copyleft/
+ 100. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-status-integer-divide-by-zero
+ 101. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
+ 102. http://xfree86.cygwin.com/docs/ug/cygwin-xfree-ug.html
+ 103. http://www.tu-chemnitz.de/~goal/xfree/XF86Config.bz2
+ 104. http://www.jwz.org/xkeycaps/
+ 105. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
+ 106. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-bash-extended-chars
+ 107. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#tbl-config-files
+ 108. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-remote-solaris
+ 109. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
+ 110. http://www.xfree86.org/current/Xserver.1.html
+ 111. http://www.xfree86.org/current/fonts.html
+ 112. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-solaris-fonts
+ 113. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
+ 114. http://www.linuxdoc.org/HOWTO/XDMCP-HOWTO/
+ 115. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#errors
+ 116. http://cygwin.com/ml/cygwin-xfree/
+ 117. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/cygwin-xfree@cygwin.com
+ 118. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/project-url-ml-search;
+ 119. http://www.answersthatwork.com/
+ 120. http://www.answersthatwork.com/Tasklist_pages/tasklist_a.htm
+ 121. http://cygwin.com/ml/cygwin-announce/2001/msg00124.html
+ 122. http://xfree86.org/
+ 123. http://cygwin.com/cygwin-ug-net/using-textbinary.html
+ 124. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-winzip
+ 125. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-font-eof
+ 126. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-winzip
+ 127. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-status-access-violation
+ 128. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#gloss-xdmcp
+ 129. http://xfree86.cygwin.com/devel/shadow/
+ 130. http://xfree86.cygwin.com/devel/shadow/changelog.html
+ 131. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-max-clients
+ 132. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#gloss-vpn
+ 133. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#gloss-firewall
+ 134. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-solaris-fonts
+ 135. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-remote-solaris
+ 136. http://www.sun.com/bigadmin/patches/indexRec.html
+ 137. http://support.microsoft.com/support/kb/articles/Q230/2/05.ASP
+ 138. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-error-env-space
+ 139. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#gloss-x11forwarding
+ 140. http://xfree86.cygwin.com/ported-software.html
+ 141. http://xfree86.cygwin.com/docs/cg/cygwin-xfree-cg.html
+ 142. http://xfree86.org/cvs/
+ 143. http://www.gnu.org/order/ftp.html
+ 144. http://xemacs.org/Download/index.html
+ 145. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-editors
+ 146. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-contrib-diff
+ 147. http://gcc.gnu.org/
+ 148. http://www.objsw.com/CrossGCC/
+ 149. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+ 150. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-license-xfree
+ 151. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-license-cygwin
+ 152. http://www.x.org/terms.htm
+ 153. http://www.fsf.org/philosophy/license-list.html#GPLCompatibleLicenses
+ 154. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-copyright-xfree
+ 155. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#q-copyright-cygwin
+ 156. http://redhat.com/
+ 157. http://www.opengroup.org/
+ 158. http://www.opengroup.org/openmotif/
+ 159. http://www.opengroup.org/openmotif/license
+ 160. http://www.opengroup.org/openmotif/faq.html
+ 161. http://www.uspto.gov/
+ 162. file://localhost/home/harold/x-devel/cygwin-xfree-doc/build/faq/dump.html#gloss-xdm
+ 163. http://www.gnu.org/copyleft/

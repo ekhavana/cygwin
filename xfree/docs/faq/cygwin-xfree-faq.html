@@ -44,6 +44,24 @@ COLSPAN="3"
 ><TR
 ><TD
 ALIGN="LEFT"
+>Revision 1.0.4</TD
+><TD
+ALIGN="LEFT"
+>2003-09-05</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Updated the entries about non U.S. keyboard layouts.
+Added troubleshooting info for X11Forwarding and keyboard layouts.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
 >Revision 1.0.3</TD
 ><TD
 ALIGN="LEFT"
@@ -414,7 +432,7 @@ using xdmcp?</A
 ><DT
 >4.7. <A
 HREF="cygwin-xfree-faq.html#q-bash-extended-chars"
->I have installed a modmap for my non-U.S. keyboard layout, but
+>I have configured Cygwin/XFree86 for my non-U.S. keyboard layout, but
 how do I get <B
 CLASS="command"
 >bash</B
@@ -646,6 +664,16 @@ HREF="cygwin-xfree-faq.html#q-error-env-space"
 >6.18. <A
 HREF="cygwin-xfree-faq.html#q-too-many-parameters"
 >Too many parameters</A
+></DT
+><DT
+>6.19. <A
+HREF="cygwin-xfree-faq.html#q-ssh-no-x11forwarding"
+> X11Forwarding does not work with openssh</A
+></DT
+><DT
+>6.20. <A
+HREF="cygwin-xfree-faq.html#q-xkb-not-working"
+>Loading XKB keymaps fails</A
 ></DT
 ></DL
 ></DD
@@ -1467,6 +1495,15 @@ XFree86.  Cygwin/XFree86 queries Windows for configuration information and
 accesses your hardware in a device independent manner through the
 Win32 API, whereas the XFree86 server must read detailed information
 about your hardware from a configuration file.</P
+><P
+>Besides that there is limited support for configuration via 
+XF86Config. This includes the path settings for FontPath and RgbPath
+and the configuration of on U.S. keyboard layouts. For more information 
+see <A
+HREF="cygwin-xfree-faq.html#q-non-U.S.-keyboard-layout"
+>Q: 4.4.</A
+>
+</P
 ></DIV
 ></DIV
 ><DIV
@@ -1668,11 +1705,73 @@ CLASS="answer"
 ><P
 ><B
 > </B
->See <A
-HREF="cygwin-xfree-faq.html#q-modmap-obtaining"
->Q: 4.5.</A
-> to obtain a modmap for
-your keyboard layout.</P
+>
+Some keyboard layouts are configured according to the Windows keyboard settings.
+For these layouts no special change is needed.
+
+For all other layouts there is the possibility to configure the layout via a
+configfile. A sample file can be obtained from <A
+HREF="http://www.tu-chemnitz.de/~goal/xfree/XF86Config.bz2"
+TARGET="_top"
+>here</A
+>. Unpack the file and copy it to 
+<TT
+CLASS="filename"
+>/etc/X11/XF86Config</TT
+>.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ cd /tmp
+$ wget http://www.tu-chemnitz.de/~goal/xfree/XF86Config.bz2
+$ bzip2 -d XF86Config.bz2
+$ cp XF86Config /etc/X11/XF86Config
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+><P
+>&#13;The sample configures a german layout. To configure it for your layout, change
+these lines from the <SPAN
+CLASS="QUOTE"
+>"InputDevice"</SPAN
+> section.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;    Option "XkbRules"   "xfree86"
+    Option "XkbModel"   "pc105"
+    Option "XkbLayout"  "<VAR
+CLASS="replaceable"
+>de</VAR
+>"
+</PRE
+></TD
+></TR
+></TABLE
+>
+Instead of <SPAN
+CLASS="QUOTE"
+>"de"</SPAN
+> set <SPAN
+CLASS="QUOTE"
+>"XkbLayout"</SPAN
+> to the code which
+represents your keyboard layout (e.g. Australia = au, Deutschland = de,
+France = fr, Japan = jp, United Kingdom = uk).
+</P
 ></DIV
 ></DIV
 ><DIV
@@ -1731,72 +1830,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->This answer assumes that your non-U.S. keyboard modmap is
-located in <TT
-CLASS="filename"
->/etc/X11</TT
-> and is
-called
-<TT
-CLASS="filename"
->xmodmap.<VAR
-CLASS="replaceable"
->country_code</VAR
-></TT
->,
-where <VAR
-CLASS="replaceable"
->country_code</VAR
-> is your two-letter
-standardized country code (e.g. Australia = au, Deutschland = de,
-France = fr, Japan = jp, United Kingdom = uk).</P
-><P
->First, you must create a script that tells
-<B
-CLASS="command"
->xmodmap</B
-> to load the modmap for your
-non-U.S. keyboard layout.  One way to run <B
-CLASS="command"
->xmodmap</B
->
-on X Server startup when using <A
-HREF="glossary.html#gloss-xdmcp"
-><I
-CLASS="glossterm"
->xdmcp</I
-></A
-> is to add the following two
-lines to <TT
-CLASS="filename"
->/etc/X11/xdm/XSetup</TT
->:</P
-><P
-><KBD
-CLASS="userinput"
->#!/bin/sh</KBD
-></P
-><P
-><KBD
-CLASS="userinput"
->/usr/X11R6/bin/xmodmap
-/etc/X11/xmodmap.<VAR
-CLASS="replaceable"
->country_code</VAR
-></KBD
-></P
-><P
->Now you must tell xdm to run the screen setup script on startup.
-In <TT
-CLASS="filename"
->/etc/X11/xdm/xdm-config</TT
->, add the following
-line:</P
-><P
-><KBD
-CLASS="userinput"
->DisplayManager*setup:
-/etc/X11/xdm/Xsetup</KBD
+>See <A
+HREF="cygwin-xfree-faq.html#q-non-U.S.-keyboard-layout"
+>Q: 4.4.</A
 ></P
 ></DIV
 ></DIV
@@ -1810,7 +1846,7 @@ NAME="q-bash-extended-chars"
 ></A
 ><B
 >4.7. </B
->I have installed a modmap for my non-U.S. keyboard layout, but
+>I have configured Cygwin/XFree86 for my non-U.S. keyboard layout, but
 how do I get <B
 CLASS="command"
 >bash</B
@@ -3085,6 +3121,237 @@ HREF="cygwin-xfree-faq.html#q-error-env-space"
 ></P
 ></DIV
 ></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-ssh-no-x11forwarding"
+></A
+><B
+>6.19. </B
+> X11Forwarding does not work with openssh</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Before establishing the ssh connection the xserver must be started and the
+environment variable <VAR
+CLASS="parameter"
+>DISPLAY</VAR
+> must be set for ssh.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ DISPLAY=<VAR
+CLASS="replaceable"
+>localhost:0.0</VAR
+>
+$ export DISPLAY
+$ ssh -X <VAR
+CLASS="replaceable"
+>remotehost</VAR
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+or
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ DISPLAY=<VAR
+CLASS="replaceable"
+>localhost:0.0</VAR
+> ssh -X <VAR
+CLASS="replaceable"
+>remotehost</VAR
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Make sure you're not starting ssh with the parameter <VAR
+CLASS="parameter"
+>-x</VAR
+>.
+This disables <A
+HREF="glossary.html#gloss-x11forwarding"
+><I
+CLASS="glossterm"
+>X11Forwarding</I
+></A
+>. 
+The correct parameter is <VAR
+CLASS="parameter"
+>-X</VAR
+> (uppercase).
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Check that X11Forwarding is not disabled in the openssh client configuration.
+
+The configfiles are by default <TT
+CLASS="filename"
+>~/.ssh/config</TT
+> and 
+<TT
+CLASS="filename"
+>/etc/ssh/ssh_config</TT
+>. The file in the home directory 
+overrides settings in the global one.
+
+The configfile is split into various sections starting with 
+<SPAN
+CLASS="QUOTE"
+>"Host <VAR
+CLASS="replaceable"
+>wildcard</VAR
+>"</SPAN
+>. 
+The section applies to all hosts where <VAR
+CLASS="replaceable"
+>wildcard</VAR
+> 
+matches the hostname.
+
+If this section contains an entry <SPAN
+CLASS="QUOTE"
+>"ForwardX11 no"</SPAN
+> then
+X11Forwarding is disabled. To enable it change the entry to 
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>ForwardX11 yes</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Check that X11Forwarding is not disabled in the ssh server configuration.
+
+The configfile is by default <TT
+CLASS="filename"
+>/etc/ssh/ssh_config</TT
+>.
+If there is an entry <SPAN
+CLASS="QUOTE"
+>"X11Forwarding no"</SPAN
+> then X11Forwarding is 
+disabled. 
+
+If you have write access to the config file then change it to
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>X11Forwarding yes</PRE
+></TD
+></TR
+></TABLE
+> 
+Otherwise ask your you admin to change this for you.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-xkb-not-working"
+></A
+><B
+>6.20. </B
+>Loading XKB keymaps fails</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+There is currently a problem with the /tmp directory mounted in textmode. 
+You can change the setting to binmode with:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>mount -b "$(cygpath -m /tmp)" /tmp
+</PRE
+></TD
+></TR
+></TABLE
+>
+If this fails with an errormessage stating unsufficient rights, try
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>mount -b -u "$(cygpath -m /tmp)" /tmp
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -3170,7 +3437,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN601"
+NAME="AEN637"
 ></A
 ><P
 ><B
