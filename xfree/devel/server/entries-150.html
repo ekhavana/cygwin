@@ -1,8 +1,69 @@
+<h4>Release 6.7.0.0-3</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-04-10 1000 EDT</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winmultiwindowwindow.c - Reapply the path that fix multi-window
+mode crashes when there were multiple instances of XWin.exe.  (Kensuke
+Matsuzaki)</li>
+
+<li>General - Enable build of Kensuke Matsuzaki's newer multi-window
+mode that works with an external window manager (-mwextwm).  This
+newer multi-window mode uses the miext/rootless extension and requires
+Kensuke's <a
+href="http://peppermint.jp/products/x/xwinwm-20040409-1454.tar.gz">xwinwm</a>
+window manager, which will be released later as a Cygwin package.  If
+you have to ask how to run this then you should wait until it is
+explained better; please do not ask questions about this in the
+mailing list for now.</li>
+
+<li>MultiwindowExtWM Mode (-mwextwm) - Fix window reordering. Remove
+winMWExtWMReorderWindows.  (Kensuke Matsuzaki)</li>
+
+<li>General - Make most functions static that can be static.  Remove
+declarations for functions used in only one place from win.h and put
+them in that single file.  (Harold L Hunt II - CodeWeavers)</li>
+
+<li>wincreatewnd.c/winCreateBoundingWindowFullScreen - Stop using
+WS_EX_TOPMOST for fullscreen windows.  (Harold L Hunt II -
+CodeWeavers)</li>
+
+<li>winshadgdi.c/winActivateAppShadowGDI - Stop manually minimizing
+and restoring our window when using the ShadowGDI engine in fullscreen
+mode.  (Harold L Hunt II - CodeWeavers)</li>
+
+<li>InitOutput.c - Document -logfile, -logverbose and -[no]keyhook
+[Bug 437], and only document -xkb* parameter if XKB is defined.
+(Alexander Gottwald)</li>
+
+<li>winshaddd.c - Fix a few DDNL's that should be DD's.  (Harold L
+Hunt II - CodeWeavers)</li>
+
+<li>winengine.c/winSetEngine - Oops, fix ShadowGDI being forced when
+it doesn't need to be.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 6.7.0.0-2</h4>
 <table>
 <tbody>
 
-<tr><td>Released: 2004-04-08 2100 EST</td></tr>
+<tr><td>Released: 2004-04-08 2100 EDT</td></tr>
 
 <tr><td>Download source: Now available as src package via setup.exe</td></tr>
 
@@ -26,7 +87,7 @@
 <table>
 <tbody>
 
-<tr><td>Released: 2004-04-07 0200 EST</td></tr>
+<tr><td>Released: 2004-04-07 0200 EDT</td></tr>
 
 <tr><td>Download source: Now available as src package via setup.exe</td></tr>
 
