@@ -14,16 +14,17 @@
 
 <h2>Cygwin/XFree86 - Development - To-Do List</h2>
 
-<p>Last updated: 2003-08-27 2253 EDT</p>
+<p>Last updated: 2003-09-22 1620 EDT</p>
 
 <p>Following is a list of open tasks on the Cygwin/XFree86
 project:</p>
 
-<table border="0" cellpadding="8">
+<table border="0" cellpadding="5">
 
 <thead>
 <tr>
 <td><b>Summary</b></td>
+<td><b>Updated</b></td>
 <td><b>Description</b></td>
 </tr>
 </thead>
@@ -37,11 +38,77 @@ project:</p>
 <td></td>
 
 <td></td>
+
+<td></td>
 </tr>
 -->
 
+
+<tr valign="top">
+<td>-rootless and -multiwindow checks</td>
+
+<td>2003-09-22</td>
+
+<td>The -rootless and -multiwindow flags are not supposed to be used
+together.  Add simple checking to the -rootless processing to make
+sure that -multiwindow is FALSE before continuing with -rootless
+processing.  This will cause -multiwindow to overide -rootless.  Note
+that we are not causing an error here, but it may be a good idea to
+add a warning to the log file.</td>
+</tr>
+
+
+<tr valign="top">
+<td>Window manager detection</td>
+
+<td>2003-09-22</td>
+
+<td>Search for a better mechanism to detect when another window
+manager is already running so that the -multiwindow window manager can
+abort initialization.  This should result in a failure message.  We
+should also be using this mechanism to signal that our window manager
+is running so that other window managers started after ours will fail
+to initialize.  I saw some documentation on this, possibly in the
+ICCCM, and tried to implement what they described, but it does not
+appear to be working.</td>
+</tr>
+
+
+<tr valign="top">
+<td>MultiWindow DirectDraw and DirectDraw NL</td>
+
+<td>2003-09-22</td>
+
+<td>Try to create one DirectDrawSurface for a single top-level window
+in MultiWindow mode.  Ignore window repositioning, etc. for now; just
+make the surface paint correctly in MultiWindow mode.  MultiWindow
+mode is currently slower than it has to be because it only uses the
+ShadowGDI engine.  MultiWindow mode eventually needs to be abstracted
+so that it can run on the ShadowDD and ShadowDDNL engines.  All I want
+to see right now is a single surface being created for one
+window... all the rest can come later.</td>
+</tr>
+
+
+<tr valign="top">
+<td>User's Guide - Document .XWinrc</td>
+
+<td>2003-09-22</td>
+
+<td>Documentation needs to be added to the User's Guide for Earle F
+Philhower III's .XWinrc mechanism.  The documentation source is
+available via CVS in the 'xoncygwin' project on sourceforge.  This
+task is greatly simplied by the fact that Earle provided comments in
+his <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/example.XWinrc">example
+.XWinrc file</a>.</td>
+</tr>
+
+
 <tr valign="top">
 <td>DirectDraw windowed PseudoColor</td>
+
+<td>2003-08-27</td>
 
 <td>Figure out a satisfactory solution for enabling DirectDraw engines
 to support PseudoColor visuals when running in 8 bit color modes.
@@ -54,6 +121,8 @@ running in fullscreen 8 bit color modes.</td>
 
 <tr valign="top">
 <td>DirectDraw header files</td>
+
+<td>2003-08-27</td>
 
 <td>We currently distribute xc/programs/Xserver/hw/xwin/ddraw.h and
 obj_base.h, which we got from the Wine project, in our CVS directory
@@ -69,6 +138,8 @@ solution.</td>
 <tr valign="top">
 <td>Windows clipboard integration</td>
 
+<td>2003-08-27</td>
+
 <td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/XFree86
 clipboard manager, to handle data types other than XA_STRING and
 UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.</td>
@@ -77,6 +148,8 @@ UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.</td>
 
 <tr valign="top">
 <td>Network transparent audio</td>
+
+<td>2003-08-27</td>
 
 <td>
 <table>
@@ -118,6 +191,8 @@ would be highly beneficial.</td>
 
 <tr valign="top">
 <td>Windows display mode change while running</td>
+
+<td>2003-08-27</td>
 
 <td>Catch and gracefully handle display mode changes while
 Cygwin/XFree86 is running.  Some of this will require using
