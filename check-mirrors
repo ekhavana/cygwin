@@ -50,7 +50,7 @@ open(STDOUT, "| tee /tmp/check-mirrors.out | /usr/lib/sendmail -t -odi -oep -oi"
 open(STDERR, ">&STDOUT");
 $| = 1;
 
-print "To: dj-nl\@delorie.com, starksb\@ebi.ac.uk\n";
+print "To: dj-nl\@delorie.com\n";
 print "Subject: cygwin mirror status\n";
 print "\n";
 
@@ -147,7 +147,7 @@ $oldregion = '';
 $oldarea = '';
 
 open(SUMMARY, "| /usr/lib/sendmail -t -odi -oep -oi");
-print SUMMARY "To: dj\@delorie.com, cgf\@cygnus.com, starksb\@ebi.ac.uk\n";
+print SUMMARY "To: dj\@delorie.com, cgf\@cygnus.com\n";
 print SUMMARY "Subject: cygwin mirror summary\n";
 print SUMMARY "\n";
 print SUMMARY "\n$ok_count ok, $bad_count bad\n\n";
