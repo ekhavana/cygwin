@@ -79,8 +79,8 @@ sub extract_listings {
 	}
     }
 
+    &note_file("$which-new.html");
     open(NEW, ">$which-new.html");
-    $commit{"$which-new.html"} = 1;
     @list = reverse sort @list;
     for ($i=0; $i<=$#list; $i++) {
 	($date, $id) = split(' ', $list[$i]);
@@ -116,8 +116,8 @@ sub extract_listings {
 	@list = sort @list;
 	$t = '<a href="$url"><b>$title</b></a><br>';
     }
+    &note_file("$which-full.html");
     open(FULL, ">$which-full.html");
-    $commit{"$which-full.html"} = 1;
     for ($i=0; $i<=$#list; $i++) {
 	($key, $id) = split(/\0/, $list[$i]);
 	$text{"$id.udate"} = &user_date($text{"$id.date"});
@@ -134,6 +134,24 @@ sub user_date {
     return sprintf("%s %d %d",
 	       substr("JanFebMarAprMayJunJulAugSepOctNovDec", $m*3-3, 3),
 		   $d, $y);
+}
+
+sub note_file {
+    my ($f) = @_;
+    open(F, $f);
+    $checksum{$f} = unpack("%32C*", <F>);
+    close F;
+    $length{$f} = (stat($f))[7];
+}
+
+for $f (keys %checksum) {
+    open(F, $f);
+    $c = unpack("%32C*", <F>);
+    close F;
+    $l = (stat($f))[7];
+    if ($c != $checksum{$f} || $l != $length{$f}) {
+	$commit{$f} = 1;
+    }
 }
 
 print "cvs update ", join(' ', sort keys %commit), "\n";
