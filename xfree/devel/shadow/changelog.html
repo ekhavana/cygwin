@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2003-05-13 0954 EDT</p>
+<p>Last updated: 2003-05-17 1320 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -63,6 +63,63 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test85</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-05-17 1320 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test84</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-36</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test85.exe.bz2">XWin-Test85.exe.bz2</a>
+(1206 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030517-1320.tar.bz2">xwin-20030517-1320.tar.bz2</a>
+(110 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Test84
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test84-to-Test85.diff">xwin-Test84-to-Test85.diff</a>
+(22 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Implement window title changing in MultiWindow mode.  (Earle
+F. Philhower, III)</li>
+
+<li>Implement an Always On Top command in the right-click menu (System
+Menu) for each window in MultiWindow mode.  (Earle F. Philhower,
+III)</li>
+
+<li>Move the XNextEvent loop into a seperate thread for MultiWindow
+mode.  (Earle F. Philhower, III)</li>
+
+<li>Fix a race between the startup of the clipboard theard and
+MultiWindow window manager thread that caused window title changing to
+bork.  (Harold L Hunt II)</li>
+
+<li>Stop calling pthread_exit () from winClipboardErrorHandler ().  An
+error is an error, not a reason to dump core.  This may fix problems
+people have been having with -clipboard, but I don't make any
+promises.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 
