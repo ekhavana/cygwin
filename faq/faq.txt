@@ -366,13 +366,18 @@ The README says I should turn off anti-virus software.  Isn't that dangerous?
 
    Only Network Associates (formerly McAfee) products have been
 reported to "hang" when extracting Cygwin tar archives.  Other products
-should not cause problems, if you prefer to keep them running.
+have been reported to detect false positives in Cygwin files.
+Depending on how your anti-virus software is configured, it may then
+delete the file(s) without prompting you.  Any problems will depend on
+the particular engine and/or signature file in use, and possibly other
+factors.  If you don't mind *this* risk, then just leave your
+anti-virus software running.
 
    Otherwise, you can download `setup.exe' and scan it.  Then turn off
 the anti-virus software, then run setup to download and extract all the
 tar files.  Then re-activate your anti-virus software and scan
 everything in C:\cygwin (or wherever you chose to install).  This should
-be safe.  (As long as nobody substitutes a malicious setup.exe ...)
+be safe, as long as nobody substitutes a malicious `setup.exe'!
 
 What packages should I download?
 --------------------------------
@@ -2671,10 +2676,16 @@ directory /obj, and want to install the tools in /install:
      make > make.log 2>&1
      make install > install.log 2>&1
 
-   This will normally attempt to build the documentation, which
-additionally requires texinfo, texi2html, db2html and possibly others.
-These tools are not included in the Cygwin distribution, but are readily
-obtainable (or build OOTB).
+   Normally, this will also attempt to build the documentation, which
+additionally requires db2html, texi2html and possibly others.  These
+tools are not included in the Cygwin distribution, but are readily
+obtainable:
+
+`db2html'
+     Part of docbook, from `http://sources.redhat.com/docbook-tools/'.
+
+`texi2html'
+     From `http://www.mathematik.uni-kl.de/~obachman/Texi2html/'.
 
    To check a cygwin1.dll, run "make check" in the winsup/cygwin
 directory.  If that works, install everything *except* the dll (if you
@@ -3042,6 +3053,46 @@ programs which use the Windows GUI.
 
 Known/potential Problems in the Latest Net Release
 **************************************************
+
+Linking with -lm or -lc leads to crash
+======================================
+
+   Currently, `/usr/lib/libm.a' and `/usr/lib/libc.a' are symbolic
+links to libcygwin.a, where this stuff is actually implemented.  You
+need not explicitly link with -lm or -lc.
+
+   In fact, you *must not* link with -lm or -lc, or your application
+will crash.  This is a bug, and it is being worked on.
+
+   Providing empty stub libraries for libm.a and libc.a is not
+considered workable, because some packages look for symbols there.
+
+   There are some discussions of this in the mailing list.  See
+
+   * `http://sources.redhat.com/ml/cygwin/2000-05/msg01175.html'
+
+   * `http://sources.redhat.com/ml/cygwin/2000-09/msg00290.html'
+
+   and related messages.
+
+Ctrl-S hangs rxvt and xterm
+===========================
+
+   This is a bug in the Cygwin pty code.  It should be fixed in the next
+release.
+
+dllwrap is broken
+=================
+
+   Any invocation of dllwrap results in the error
+
+   `/usr/bin/ld: warning: cannot find entry symbol
+__cygwin_dll_entry@12'
+
+   This should be fixed in the next release.  For details and a
+workaround, see
+
+   `http://sources.redhat.com/ml/cygwin/2000-08/msg00256.html'
 
 History
 *******

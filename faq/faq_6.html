@@ -12,6 +12,72 @@ Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_5.html">previous</A>, <A 
 
 <H1><A NAME="SEC106" HREF="faq_toc.html#TOC106">Known/potential Problems in the Latest Net Release</A></H1>
 
+
+
+<H2><A NAME="SEC107" HREF="faq_toc.html#TOC107">Linking with -lm or -lc leads to crash</A></H2>
+
+<P>
+Currently, <CODE>/usr/lib/libm.a</CODE> and <CODE>/usr/lib/libc.a</CODE> are
+symbolic links to libcygwin.a, where this stuff is actually implemented.
+You need not explicitly link with -lm or -lc.
+
+
+<P>
+In fact, you <STRONG>must not</STRONG> link with -lm or -lc, or your application
+will crash.  This is a bug, and it is being worked on.
+
+
+<P>
+Providing empty stub libraries for libm.a and libc.a is not considered
+workable, because some packages look for symbols there.
+
+
+<P>
+There are some discussions of this in the mailing list.  See
+
+
+
+<UL>
+<LI>
+
+<TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/2000-05/msg01175.html">http://sources.redhat.com/ml/cygwin/2000-05/msg01175.html</a></TT>
+<LI>
+
+<TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/2000-09/msg00290.html">http://sources.redhat.com/ml/cygwin/2000-09/msg00290.html</a></TT>
+</UL>
+
+<P>
+and related messages.
+
+
+
+
+<H2><A NAME="SEC108" HREF="faq_toc.html#TOC108">Ctrl-S hangs rxvt and xterm</A></H2>
+
+<P>
+This is a bug in the Cygwin pty code.  It should be fixed in the next
+release.
+
+
+
+
+<H2><A NAME="SEC109" HREF="faq_toc.html#TOC109">dllwrap is broken</A></H2>
+
+<P>
+Any invocation of dllwrap results in the error
+
+
+<P>
+<CODE>/usr/bin/ld: warning: cannot find entry symbol __cygwin_dll_entry@12</CODE>
+
+
+<P>
+This should be fixed in the next release.  For details and a workaround,
+see
+
+
+<P>
+<TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/2000-08/msg00256.html">http://sources.redhat.com/ml/cygwin/2000-08/msg00256.html</a></TT>
 <P><HR><P>
 Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_5.html">previous</A>, <A HREF="faq_7.html">next</A>, <A HREF="faq_9.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
 </BODY>
