@@ -61,7 +61,7 @@ ALIGN="LEFT"
 WIDTH="100%"></DIV
 ><H1
 ><A
-NAME="AEN41"
+NAME="AEN49"
 >Highlights of Cygwin Functionality</A
 ></H1
 ><H2
@@ -184,7 +184,7 @@ etc...).</P
 >The library exports several Cygwin-specific functions that can be used
 by external programs to convert a path or path list from Win32 to POSIX or vice
 versa.  Shell scripts and Makefiles cannot call these functions directly.
-Instead, they can do the same path translations by executing the "cygpath"
+Instead, they can do the same path translations by executing the cygpath
 utility program that we provide with Cygwin.</P
 ><P
 >Win32 file systems are case preserving but case insensitive.  Cygwin
@@ -228,8 +228,8 @@ similar reason.</P
 violating the POSIX standard that states that text and binary mode will be
 identical. Consequently, processes that attempt to lseek through text files can
 no longer rely on the number of bytes read as an accurate indicator of position
-in the file.  For this reason, an environment variable can be set to override
-this behavior.</P
+in the file.  For this reason, the CYGWIN environment variable can be
+set to override this behavior.</P
 ><H2
 ><A
 NAME="OV-HI-ANSICLIB"
@@ -366,7 +366,7 @@ call that does not map cleanly on top of the Win32 API.  Much to our
 dismay, we discovered that the Win32 select in Winsock only worked on
 socket handles.  Our implementation allows select to function normally
 when given different types of file descriptors (sockets, pipes,
-handles, and a custom /dev/windows windows messages
+handles, and a custom /dev/windows Windows messages
 pseudo-device).</P
 ><P
 >Upon entry into the select function, the first
@@ -383,8 +383,7 @@ respective type with the appropriate Win32 API call.  As soon as a
 thread identifies a ready descriptor, that thread signals the main
 thread to wake up.  This case is now the same as the first one since
 we know at least one descriptor is ready.  So select returns, after
-polling all of the file descriptors one last
-time.</P
+polling all of the file descriptors one last time.</P
 ><DIV
 CLASS="NAVFOOTER"
 ><HR

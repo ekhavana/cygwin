@@ -14,7 +14,7 @@ TITLE="Setting Up Cygwin"
 HREF="setup-net.html"><LINK
 REL="PREVIOUS"
 TITLE="Installing the source code"
-HREF="setup-net126.html"><LINK
+HREF="setup-net143.html"><LINK
 REL="NEXT"
 TITLE="Environment Variables"
 HREF="setup-env.html"></HEAD
@@ -38,7 +38,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="setup-net126.html"
+HREF="setup-net143.html"
 >Prev</A
 ></TD
 ><TD
@@ -65,21 +65,51 @@ NAME="SETUP-DIR"
 >Directory Structure</A
 ></H1
 ><P
->Cygwin knows how to emulate a standard Unix directory
-structure, to some extent.  You should make sure that you always have
-<TT
-CLASS="FILENAME"
->/tmp</TT
-> both with and without the mount table
-translations, just in case.  If you want to emulate the
-<TT
-CLASS="FILENAME"
->/etc</TT
-> directory (i.e. so <B
+>Cygwin knows how to emulate a standard UNIX directory structure, to
+some extent.  This is done through the use of mount tables that map
+Win32 paths to POSIX ones.  The mount table may be set up and modified
+with the <B
 CLASS="COMMAND"
->ls -l</B
->
-works), just do this:</P
+>mount</B
+> command. This section explains how
+to properly organize the structure. </P
+><P
+> When you set up the system you should decide where you want the
+root to be mapped.  Possible choices are the root of your Windows
+system, such as
+<TT
+CLASS="FILENAME"
+>c:</TT
+> or a directory such as
+<TT
+CLASS="FILENAME"
+>c:\progra~1\root</TT
+>.</P
+><P
+>Execute the following commands inside bash as it is difficult to
+change the position of the root from the Windows command prompt.
+Changing the mount points may invalidate <TT
+CLASS="ENVAR"
+>PATH</TT
+>, if this
+happens simply exit and relaunch bash.  Create the directory if
+needed, then <B
+CLASS="COMMAND"
+>umount /</B
+> the current root and 
+<B
+CLASS="COMMAND"
+>mount</B
+> it in its new place.  You also have to decide if
+you want to use text or binary mode.  </P
+><P
+>Next, create the traditional main UNIX directories, with
+the following command (in some shells it is necessary to issue
+four separate <B
+CLASS="COMMAND"
+>mkdir</B
+> commands, each with a single
+argument).</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -88,24 +118,213 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->$ mkdir /etc/
-$ cd /etc
-mkpasswd &#62; /etc/passwd
-mkgroup &#62; /etc/group</PRE
+><TT
+CLASS="PROMPT"
+>/$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mkdir /tmp /bin /etc /usr</B
+></TT
+></PRE
 ></TD
 ></TR
 ></TABLE
 ><P
->Note: this only works fully under Windows NT.  Under Windows 9x,
-you may need to edit these files with a text editor.  Note that
-further changes to your NT registry will NOT be reflected in
-/etc/passwd or /etc/group after this so you may want to regenerate
-these files periodically.  You should also set your home directories
-to something other than <TT
+>Next we will initialize the content of these directories.</P
+><P
+>You should make sure that you always have a valid
+<TT
 CLASS="FILENAME"
->/</TT
-> to prevent unexplained
-delays in various programs.  </P
+>/tmp</TT
+> directory.  If you want to avoid creating a
+real <TT
+CLASS="FILENAME"
+>/tmp</TT
+>, you can use the
+<B
+CLASS="COMMAND"
+>mount</B
+> utility to point <TT
+CLASS="FILENAME"
+>/tmp</TT
+> to
+another directory, such as <TT
+CLASS="FILENAME"
+>c:\tmp</TT
+>, or create a
+symbolic link <TT
+CLASS="FILENAME"
+>/tmp</TT
+> to point to such a directory.</P
+><P
+>The <TT
+CLASS="FILENAME"
+>/bin</TT
+> directory should contain the shell
+<TT
+CLASS="FILENAME"
+>sh.exe</TT
+>.  You have three choices.  The first is to
+copy this program from the Cygnus <TT
+CLASS="FILENAME"
+>bin</TT
+> directory.
+The second is to use <B
+CLASS="COMMAND"
+>mount</B
+> to mount the Cygnus
+<TT
+CLASS="FILENAME"
+>bin</TT
+> directory to <TT
+CLASS="FILENAME"
+>/bin</TT
+> (the
+advantage of this approach is that your <TT
+CLASS="ENVAR"
+>PATH</TT
+> will be
+shorter inside bash).  The third is to make <TT
+CLASS="FILENAME"
+>/bin</TT
+> a
+symbolic link to the Cygnus <TT
+CLASS="FILENAME"
+>bin</TT
+> directory.</P
+><P
+>Note that Cygwin comes with two shells: <B
+CLASS="COMMAND"
+>bash.exe</B
+>
+and <B
+CLASS="COMMAND"
+>sh.exe</B
+>, which is based on ash.  The system is
+faster when ash is used as the non-interactive shell.  In case of
+trouble with ash make <B
+CLASS="COMMAND"
+>sh.exe</B
+> point to
+<B
+CLASS="COMMAND"
+>bash.exe</B
+>.</P
+><P
+>We now turn to <TT
+CLASS="FILENAME"
+>/etc</TT
+>.  You may want to copy in it
+the <TT
+CLASS="FILENAME"
+>termcap</TT
+> file from the Cygnus
+<TT
+CLASS="FILENAME"
+>etc</TT
+> directory, although the defaults built into
+the programs suffice for the normal console.  You may also use
+<B
+CLASS="COMMAND"
+>mount</B
+> or create as symbolic link to the Cygnus
+<TT
+CLASS="FILENAME"
+>etc</TT
+>, just as for <TT
+CLASS="FILENAME"
+>/bin</TT
+>
+above.</P
+><P
+> Under Windows NT, if you want to create 
+<TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+> and <TT
+CLASS="FILENAME"
+>/etc/group</TT
+> 
+(i.e. so <B
+CLASS="COMMAND"
+>ls -l</B
+> replaces the UID with a name) just
+do this:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>/$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>cd /etc</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>/etc$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mkpasswd &#62; /etc/passwd</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>/etc$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mkgroup &#62; /etc/group</B
+></TT
+></PRE
+></TD
+></TR
+></TABLE
+><P
+> Future changes to your NT registry will NOT be reflected in
+<TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+> or <TT
+CLASS="FILENAME"
+>/etc/group </TT
+> after
+this so you may want to regenerate these files periodically.  Under Windows
+9x, you can create and edit these files with a text editor.  </P
+><P
+>The <TT
+CLASS="FILENAME"
+>/usr</TT
+> directory is not used by the Cygwin
+system, but you may want to install optional packages there.</P
+><P
+>You may also want to mount directories such as <TT
+CLASS="FILENAME"
+>/a</TT
+>
+and <TT
+CLASS="FILENAME"
+>/d</TT
+> to refer to your local and network drives.</P
+><P
+>You do not need to create <TT
+CLASS="FILENAME"
+>/dev</TT
+> in order to set up
+mounts for devices such as <TT
+CLASS="FILENAME"
+>/dev/null</TT
+> as these
+are already automatically simulated inside the Cygwin library.</P
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
@@ -121,7 +340,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="setup-net126.html"
+HREF="setup-net143.html"
 >Prev</A
 ></TD
 ><TD

@@ -16,8 +16,8 @@ REL="PREVIOUS"
 TITLE="Directory Structure"
 HREF="setup-dir.html"><LINK
 REL="NEXT"
-TITLE="Mount Table"
-HREF="setup-mount.html"></HEAD
+TITLE="Customizing bash"
+HREF="setup-files.html"></HEAD
 ><BODY
 ><DIV
 CLASS="NAVHEADER"
@@ -51,7 +51,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="setup-mount.html"
+HREF="setup-files.html"
 >Next</A
 ></TD
 ></TR
@@ -65,23 +65,31 @@ NAME="SETUP-ENV"
 >Environment Variables</A
 ></H1
 ><P
-><TT
-CLASS="FILENAME"
->make</TT
-> uses an environment variable MAKE_MODE
-to decide if it uses <TT
-CLASS="FILENAME"
->command.com</TT
-> or
+>Before starting bash, you must set some environment variables, some of
+which can also be set or modified inside bash.  Cygnus provides you
+with a .bat file where the most important ones are set before bash in
+launched.  This is the safest way to launch bash initially.  The .bat
+file is installed by default in
 <TT
 CLASS="FILENAME"
->/bin/sh</TT
-> to run command lines.  If you're getting
-strange errors from <TT
-CLASS="FILENAME"
->make</TT
-> about "/c not found",
-set MAKE_MODE to UNIX:</P
+>\cygnus\cygwin-b20/cygnus.bat</TT
+> and pointed to in
+the Start Menu.  You can edit it to your liking.</P
+><P
+>The <TT
+CLASS="ENVAR"
+>CYGWIN</TT
+> variable is used to configure many global 
+settings for the Cygwin
+runtime system.  Initially you can leave <TT
+CLASS="ENVAR"
+>CYGWIN</TT
+> unset
+or set it to <TT
+CLASS="LITERAL"
+>tty</TT
+> using a syntax like this in the
+DOS shell, before launching bash.</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -90,112 +98,143 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->C:\&#62; set MAKE_MODE=UNIX
-
-$ export MAKE_MODE=UNIX</PRE
+><TT
+CLASS="PROMPT"
+>C:\Cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>set CYGWIN="tty notitle strace=0x1"</B
+></TT
+></PRE
 ></TD
 ></TR
 ></TABLE
 ><P
->The HOME environment variable is used by UNIX shells to
-determine the location of your home directory.  This environment
-variable is converted from Windows format (e.g., <TT
-CLASS="FILENAME"
->C:\home\bob</TT
->)
-to UNIX format (e.g., <TT
-CLASS="FILENAME"
->/home/bob</TT
->) when a cygwin process
-first starts.</P
-><P
->The PATH environment variable is used by Cygwin applications
-as a list of directories to search for executable files to run.  This
-environment variable is converted from Windows format (e.g. <TT
+>The <TT
+CLASS="ENVAR"
+>PATH</TT
+> environment variable is used by Cygwin
+applications as a list of directories to search for executable files
+to run.  This environment variable is converted from Windows format
+(e.g. <TT
 CLASS="FILENAME"
 >C:\WinNT\system32;C:\WinNT</TT
->)
-to UNIX format (e.g., <TT
+>) to UNIX format
+(e.g., <TT
 CLASS="FILENAME"
 >/WinNT/system32:/WinNT</TT
->) when
-a cygwin process first starts.</P
+>) when a Cygwin
+process first starts.
+Set it so that it contains at least the Cygnus
+<TT
+CLASS="FILENAME"
+>bin</TT
+> directory
+<TT
+CLASS="FILENAME"
+>C:\cygnus\cygwin-b20\H-i586-cygwin32\bin</TT
+> before
+launching bash.</P
 ><P
->The LD_LIBRARY_PATH environment variable is used by the Cygwin function
+> 
+The <TT
+CLASS="ENVAR"
+>HOME</TT
+> environment variable is used by many programs to
+determine the location of your home directory and we recommend that it be
+defined.  This environment variable is also converted from Windows format
+when a Cygwin process first starts.  Set it to point to your home directory
+before launching bash. </P
+><P
+><B
+CLASS="COMMAND"
+>make</B
+> uses an environment variable
+<TT
+CLASS="ENVAR"
+>MAKE_MODE</TT
+> to decide if it uses
+<TT
+CLASS="FILENAME"
+>command.com</TT
+> or <TT
+CLASS="FILENAME"
+>/bin/sh</TT
+> to
+run command lines.  If you are getting strange errors from
+<B
+CLASS="COMMAND"
+>make</B
+> about "/c not found", set
+<TT
+CLASS="ENVAR"
+>MAKE_MODE</TT
+> to <TT
+CLASS="LITERAL"
+>UNIX</TT
+> at the command
+prompt or in bash.</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>C:\Cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>set MAKE_MODE=UNIX</B
+></TT
+>
+
+<TT
+CLASS="PROMPT"
+>/Cygnus$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>export MAKE_MODE=UNIX</B
+></TT
+></PRE
+></TD
+></TR
+></TABLE
+><P
+>The <TT
+CLASS="ENVAR"
+>TERM</TT
+> environment variable specifies your terminal
+type.  You can set it to <TT
+CLASS="LITERAL"
+>cygwin</TT
+>.</P
+><P
+>The <TT
+CLASS="ENVAR"
+>LD_LIBRARY_PATH</TT
+> environment variable is
+used by the Cygwin function <TT
+CLASS="FUNCTION"
+><B
+>dlopen ()</B
+></TT
+> as a list
+of directories to search for .dll files to load.  This environment
+variable is converted from Windows format to UNIX format
+when a Cygwin process first starts.
+Most Cygwin applications do not make use of the
 <TT
 CLASS="FUNCTION"
 ><B
 >dlopen ()</B
 ></TT
-> as a list of directories to search for .dll files to load.  This
-environment variable is converted from Windows format (e.g. <TT
-CLASS="FILENAME"
->C:\WinNT\system32;C:\WinNT</TT
->)
-to UNIX format (e.g., <TT
-CLASS="FILENAME"
->/WinNT/system32:/WinNT</TT
->) when
-a cygwin process first starts.</P
-><P
->The most important environment variable is the CYGWIN
-variable.  It is used to configure many global settings for
-the Cygwin runtime system.  It allows you to express many
-attributes, using a syntax like this:&#13;</P
-><P
->set CYGWIN="foo nobar grill=27"</P
-><P
->Note that each option is separated by others with a space.  Many
-options can be turned off by prefixing with "no" (i.e. "nobar" vs
-"bar" above).  The options are as follows:&#13;</P
-><P
->(no)export - if set, the final values of these settings are
-re-exported to the environment as $CYGWIN again.</P
-><P
->(no)title - if set, the title bar reflects the name of the
-program currently running.  Default is not set.</P
-><P
->(no)strip_title - if set, strips the directory part off the
-window title.  Default is not set.</P
-><P
->(no)glob - if set, command line arguments containing unix-style
-file wildcard characters (brackets, question mark, asterisk) are
-expanded into lists of files that match those wildcards.  This is
-applicable only to programs running from a windows command line prompt.
-Default is set.</P
-><P
->(no)tty - if set, cygwin enables extra support (i.e., termios) for
-unix-like ttys.  Defaults to not set.</P
-><P
->(no)binmode - if set, pipes and unspecified file opens default
-to binary mode (no CR/LF/Ctrl-Z translations) instead of text mode.
-Defaults to not set (text mode).</P
-><P
->strace=n[:cache][,filename] - configures system tracing.  Off by
-default, setting various bits in n (a bit flag) enables various types
-of system messages.  Setting n to 1 enables most messages.  Other
-values can be found in sys/strace.h.  The :cache option
-lets you specify how many lines to cache before flushing the output
-(example: strace=1:20).  The filename option lets you send the
-messages to a file instead of the screen. </P
-><P
->(no)ntea - if set, use the full NT Extended Attributes to store
-unix-like inode information.  Warning: this may create additional
-<I
-CLASS="EMPHASIS"
->large</I
-> files on non-NTFS partitions.  This option
-only operates under Windows NT.  Defaults to not set. </P
-><P
->(no)reset_com - if set, serial ports are reset to 9600-8-N-1
-with no flow control when used (warning: this is done at open time and
-when handles are inherited).  Defaults to set.</P
-><P
->(no)envcache - If set, environment variable conversions (between
-Win32 and POSIX) are cached.  Note that this is may cause problems if
-the mount table changes, as the cache is not invalidated and may
-contain values that depend on the previous mount table
-contents. Defaults to set.</P
+> call and do not need this variable.</P
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
@@ -227,7 +266,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="setup-mount.html"
+HREF="setup-files.html"
 >Next</A
 ></TD
 ></TR
@@ -249,7 +288,7 @@ HREF="setup-net.html"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Mount Table</TD
+>Customizing bash</TD
 ></TR
 ></TABLE
 ></DIV

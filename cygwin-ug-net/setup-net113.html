@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Installing the binary release:</TITLE
+>Installing the binary release</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
@@ -17,7 +17,7 @@ TITLE="Setting Up Cygwin"
 HREF="setup-net.html"><LINK
 REL="NEXT"
 TITLE="Installing the source code"
-HREF="setup-net126.html"></HEAD
+HREF="setup-net143.html"></HEAD
 ><BODY
 ><DIV
 CLASS="NAVHEADER"
@@ -51,7 +51,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="setup-net126.html"
+HREF="setup-net143.html"
 >Next</A
 ></TD
 ></TR
@@ -61,34 +61,45 @@ ALIGN="LEFT"
 WIDTH="100%"></DIV
 ><H1
 ><A
-NAME="AEN105"
->Installing the binary release:</A
+NAME="AEN113"
+>Installing the binary release</A
 ></H1
 ><P
 >Important!  Be sure to remove any older versions of the Cygwin
-tools from your PATH environment variable so you do not execute them
-by mistake.</P
+tools from your <TT
+CLASS="ENVAR"
+>PATH</TT
+> environment variable so you do
+not execute them by mistake.</P
 ><P
->Connect to one of the ftp servers listed above and cd to the
-directory containing the latest release. On our primary server, that
-would be:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
->ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/</PRE
-></TD
-></TR
-></TABLE
+>Connect to one of the ftp servers listed in
+<A
+HREF="http://sourceware.cygnus.com/cygwin/download.html"
+TARGET="_top"
+>http://sourceware.cygnus.com/cygwin/download.html</A
+> and
+<B
+CLASS="COMMAND"
+>cd</B
+> to the directory containing the latest release. On our
+primary server, that would be:
+<A
+HREF="ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/"
+TARGET="_top"
+>ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/</A
+>.</P
 ><P
 >If you want the development tools and the programs necessary to
 run the GNU configure mechanism, you should download the full binary
-release called `cygwinfull.exe'.  If you only care about the user
-tools listed above, download `cygwinuser.exe' instead.</P
+release called <TT
+CLASS="FILENAME"
+>cygwinfull.exe</TT
+>.  If you only care
+about the user tools listed above, download
+<TT
+CLASS="FILENAME"
+>cygwinuser.exe</TT
+> instead.</P
 ><P
 >If you have an unreliable connection, download the appropriate
 binary in smaller chunks instead.  For the split full installer, get
@@ -102,8 +113,24 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->copy /b xaa + xab + xac + ... + xai + xaj full.exe
-del xa*.*</PRE
+><TT
+CLASS="PROMPT"
+>C:\Cygnus\&#62;</TT
+><TT
+CLASS="USERINPUT"
+><B
+>copy /b xaa + xab + xac + ... + xak + xal full.exe</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>C:\Cygnus\&#62;</TT
+><TT
+CLASS="USERINPUT"
+><B
+>del xa*.*</B
+></TT
+></PRE
 ></TD
 ></TR
 ></TABLE
@@ -115,8 +142,7 @@ it.  First off, the installer will prompt you for a location to extract
 the temporary files it needs to install the release on your
 system. The default should be fine for most people.</P
 ><P
->Next it will ask you to choose an install location.  The default
-is
+>Next it will ask you to choose an install location.  The default is
 <TT
 CLASS="FILENAME"
 ><TT
@@ -133,39 +159,35 @@ folder shortcut to add.  By default, the installer will create a
 `Cygwin B20' entry in a folder called `Cygnus Solutions'. When this
 step is completed, it will install the tools and exit.</P
 ><P
->At this point, you should be able to look under the start menu
-and select "Cygwin Beta 20" (or whatever you named it). This will
-pop up a bash shell with all special environment variables set up for
-you. If you are running Windows 95 or 98 and are faced with the error
-message "Out of environment space", you need to increase the amount of
-environment space in your config.sys and try again. Adding the line
-<B
-CLASS="COMMAND"
->shell=C:\command.com /e:4096 /p</B
-> should do the trick
-if C: is your system drive letter.</P
-><P
->There are two remaining thing you should do from this
-prompt. First, you need to type <B
-CLASS="COMMAND"
->mkdir -p /tmp</B
-> to
-ensure that a directory for temporary files exists for programs that
-expect to find one there.</P
-><P
->Second, if you are installing the full distribution
-(<TT
-CLASS="FILENAME"
->full.exe</TT
->), various programs will need to
-be able to find `/bin/sh'.  You should `mkdir -p /bin' and put a copy of
-`sh.exe' there, removing the older version, if present.  You can use
-the `mount' utility to select which drive letter is mounted as
-`/'.  See the Frequently Asked Questions (FAQ) file for more
-information on `mount'.</P
-><P
 >If you should ever want to uninstall the tools, you may do so
 via the "Add/Remove Programs" control panel.</P
+><P
+> At this point you should be able to look under the start menu and
+select "Cygwin Beta 20" (or whatever you named it). This will pop up a bash
+shell with special environment variables set up for you. If you are running
+Windows 95 or 98 and are faced with the error message "Out of environment
+space", you need to increase the amount of environment space. Adding the
+line <B
+CLASS="COMMAND"
+>shell=C:\command.com /e:4096 /p</B
+> to the file
+<TT
+CLASS="FILENAME"
+>C:\CONFIG.SYS</TT
+> and then rebooting should do the trick if
+<TT
+CLASS="FILENAME"
+>C:</TT
+> is your system drive letter.</P
+><P
+>If you want to install the sources follow the
+instructions in the next section, else go directly to 
+<A
+HREF="setup-dir.html"
+>the section called <I
+>Directory Structure</I
+></A
+> to complete your system setup.</P
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
@@ -197,7 +219,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="setup-net126.html"
+HREF="setup-net143.html"
 >Next</A
 ></TD
 ></TR

@@ -1,0 +1,422 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Special filenames</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+REL="HOME"
+TITLE="Cygwin User's Guide"
+HREF="cygwin-ug-net.html"><LINK
+REL="UP"
+TITLE="Using Cygwin"
+HREF="using.html"><LINK
+REL="PREVIOUS"
+TITLE="File permissions"
+HREF="using-filemodes.html"><LINK
+REL="NEXT"
+TITLE="The CYGWIN environment
+variable"
+HREF="using-cygwinenv.html"></HEAD
+><BODY
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="using-filemodes.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Using Cygwin</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="using-cygwinenv.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><H1
+><A
+NAME="USING-SPECIALNAMES"
+>Special filenames</A
+></H1
+><H2
+><A
+NAME="AEN521"
+>DOS devices</A
+></H2
+><P
+>Windows filenames invalid under Windows are also invalid under
+Cygwin.  This means that base filenames such as 
+<TT
+CLASS="FILENAME"
+>AUX</TT
+>, <TT
+CLASS="FILENAME"
+>COM1</TT
+>,
+<TT
+CLASS="FILENAME"
+>LPT1</TT
+> or <TT
+CLASS="FILENAME"
+>PRN</TT
+> (to name a few)
+cannot be used in a regular Cygwin Windows or POSIX path, even with an
+extension (<TT
+CLASS="FILENAME"
+>prn.txt</TT
+>). However the special names can be
+used as filename extensions (<TT
+CLASS="FILENAME"
+>file.aux</TT
+>). You can use
+the special names as you would under DOS, for example you can print on your
+default printer with the command <B
+CLASS="COMMAND"
+>cat filename &#62; PRN</B
+>
+(make sure to end with a Form Feed).</P
+><H2
+><A
+NAME="AEN531"
+>POSIX devices</A
+></H2
+><P
+>There is no need to create a POSIX <TT
+CLASS="FILENAME"
+>/dev</TT
+> 
+directory as it is simulated within Cygwin automatically.
+It supports the following devices: <TT
+CLASS="FILENAME"
+>/dev/null</TT
+>,
+<TT
+CLASS="FILENAME"
+>/dev/tty</TT
+> and
+<TT
+CLASS="FILENAME"
+>/dev/comX</TT
+> (the serial ports).
+These devices cannot be seen with the command <B
+CLASS="COMMAND"
+>ls /dev</B
+>
+although commands such as <B
+CLASS="COMMAND"
+>ls /dev/tty</B
+> work fine.&#13;</P
+><H2
+><A
+NAME="AEN541"
+>The .exe extension</A
+></H2
+><P
+> Executable program filenames end with .exe but the .exe need not be
+included in the command, so that traditional UNIX names can be used.
+To the contrary the extensions ".bat" and ".com" cannot be omitted.</P
+><P
+>As a side effect, the <B
+CLASS="COMMAND"
+> ls filename</B
+> gives
+information about <TT
+CLASS="FILENAME"
+>filename.exe</TT
+> if
+<TT
+CLASS="FILENAME"
+>filename.exe</TT
+> exists and <TT
+CLASS="FILENAME"
+>filename</TT
+>
+does not.  In the same situation the function call
+<TT
+CLASS="FUNCTION"
+><B
+>stat("filename",..)</B
+></TT
+> gives information about
+<TT
+CLASS="FILENAME"
+>filename.exe</TT
+>.  The two files can be distinguished
+by examining their inodes, as demonstrated below. </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>C:\Cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>ls * </B
+></TT
+>
+a      a.exe     b.exe
+<TT
+CLASS="PROMPT"
+>C:\Cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>ls -i a a.exe</B
+></TT
+>
+445885548 a       435996602 a.exe
+<TT
+CLASS="PROMPT"
+>C:\Cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>ls -i b b.exe</B
+></TT
+>
+432961010 b       432961010 b.exe</PRE
+></TD
+></TR
+></TABLE
+><P
+>The <B
+CLASS="COMMAND"
+>gcc</B
+> compiler produces an executable named
+<TT
+CLASS="FILENAME"
+>filename.exe</TT
+> when asked to produce
+<TT
+CLASS="FILENAME"
+>filename</TT
+>. This allows many makefiles written
+for UNIX systems to work well under Cygwin.</P
+><P
+>Unfortunately the <B
+CLASS="COMMAND"
+>install</B
+> and
+<B
+CLASS="COMMAND"
+>strip</B
+> commands do distinguish between
+<TT
+CLASS="FILENAME"
+>filename</TT
+> and <TT
+CLASS="FILENAME"
+>filename.exe</TT
+>. They
+fail when working on a non-existing <TT
+CLASS="FILENAME"
+>filename</TT
+> even if
+<TT
+CLASS="FILENAME"
+>filename.exe</TT
+> exists, thus breaking some makefiles.
+This problem can be solved by writing <B
+CLASS="COMMAND"
+>install</B
+> and
+<B
+CLASS="COMMAND"
+>strip</B
+> shell scripts to provide the extension ".exe"
+when needed.</P
+><H2
+><A
+NAME="AEN571"
+>The @pathnames</A
+></H2
+><P
+>To circumvent the limitations on shell line length in the native
+Windows command shells, Cygwin programs expand their arguments
+starting with "@" in a special way.  If a file
+<TT
+CLASS="FILENAME"
+>pathname</TT
+> exists, the argument
+<TT
+CLASS="FILENAME"
+>@pathname</TT
+> expands recursively to the content of
+<TT
+CLASS="FILENAME"
+>pathname</TT
+>. Double quotes can be used inside the
+file to delimit strings containing blank space. In the following
+example compare the behaviors of the bash built-in
+<B
+CLASS="COMMAND"
+>echo</B
+> and of the program <B
+CLASS="COMMAND"
+>/bin/echo</B
+>.
+
+<DIV
+CLASS="EXAMPLE"
+><P
+><B
+>Example 3-4.  Using @pathname</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>/Cygnus$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>echo  'This     is "a     long" line' &#62; mylist</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>/Cygnus$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>echo @mylist</B
+></TT
+>
+@mylist
+<TT
+CLASS="PROMPT"
+>/Cygnus$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>/bin/echo @mylist</B
+></TT
+>
+This is a     long line
+<TT
+CLASS="PROMPT"
+>/Cygnus$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>rm mylist</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>/Cygnus$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>/bin/echo @mylist</B
+></TT
+>
+@mylist</PRE
+></TD
+></TR
+></TABLE
+></DIV
+></P
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="using-filemodes.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="using-cygwinenv.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>File permissions</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="using.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>The <TT
+CLASS="ENVAR"
+>CYGWIN</TT
+> environment
+variable</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

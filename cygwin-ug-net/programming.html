@@ -2,19 +2,16 @@
 <HTML
 ><HEAD
 ><TITLE
->GUI Mode Applications</TITLE
+>Programming with Cygwin</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
-REL="UP"
-TITLE="Using GCC with Cygwin"
-HREF="gcc.html"><LINK
 REL="PREVIOUS"
-TITLE="Using GCC with Cygwin"
-HREF="gcc.html"><LINK
+TITLE="Cygwin Utilities"
+HREF="using-utils.html"><LINK
 REL="NEXT"
 TITLE="Debugging Cygwin Programs"
 HREF="gdb.html"></HEAD
@@ -38,14 +35,14 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="gcc.html"
+HREF="using-utils.html"
 >Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Chapter 3. Using GCC with Cygwin</TD
+></TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
@@ -61,9 +58,99 @@ ALIGN="LEFT"
 WIDTH="100%"></DIV
 ><H1
 ><A
+NAME="PROGRAMMING"
+>Chapter 4. Programming with Cygwin</A
+></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="programming.html#GCC"
+>Using GCC with Cygwin</A
+></DT
+><DT
+><A
+HREF="gdb.html"
+>Debugging Cygwin Programs</A
+></DT
+><DT
+><A
+HREF="dll.html"
+>Building and Using DLLs</A
+></DT
+><DT
+><A
+HREF="windres.html"
+>Defining Windows Resources</A
+></DT
+></DL
+></DIV
+><H1
+><A
+NAME="GCC"
+>Using GCC with Cygwin</A
+></H1
+><H2
+><A
+NAME="GCC-CONS"
+>Console Mode Applications</A
+></H2
+><P
+>Use gcc to compile, just like under UNIX.
+Refer to the GCC User's Guide for information on standard usage and
+options.  Here's a simple example:</P
+><DIV
+CLASS="EXAMPLE"
+><P
+><B
+>Example 4-1. Building Hello World with GCC</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>gcc hello.c -o hello.exe</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>hello.exe</B
+></TT
+>
+Hello, World
+
+<TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+></PRE
+></TD
+></TR
+></TABLE
+></DIV
+><H2
+><A
 NAME="GCC-GUI"
 >GUI Mode Applications</A
-></H1
+></H2
 ><P
 >Cygwin allows you to build programs with full access to the
 standard Windows 32-bit API, including the GUI functions as defined in
@@ -91,10 +178,9 @@ foo (int i)</PRE
 ></TABLE
 ><P
 >For most cases, you can just remove the __export and leave it at
-that.  For convenience sake, you might want to work around a
-misfeature in cygwin's libraries by including this code snippet, else
-you'll have to add "-e _mainCRTStartup" to your link line in your
-Makefile.</P
+that.  For convenience sake, you might want to include the following
+code snippet when compiling GUI programs.  If you don't, you will want
+to add "-e _mainCRTStartup" to your link line in your Makefile.</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -110,8 +196,8 @@ WinMainCRTStartup() { mainCRTStartup(); }
 ></TR
 ></TABLE
 ><P
->The Makefile is similar to any other unix-like Makefile, and
-like any other Cygwin makefile.  The only difference is that you use
+>The Makefile is similar to any other UNIX-like Makefile,
+and like any other Cygwin makefile.  The only difference is that you use
 <B
 CLASS="COMMAND"
 >gcc -mwindows</B
@@ -162,7 +248,7 @@ CLASS="FILENAME"
 <TT
 CLASS="FILENAME"
 >windres</TT
->, consule the Binutils manual.  </P
+>, consult the Binutils manual.  </P
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
@@ -178,7 +264,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="gcc.html"
+HREF="using-utils.html"
 >Prev</A
 ></TD
 ><TD
@@ -203,15 +289,12 @@ HREF="gdb.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Using GCC with Cygwin</TD
+>Cygwin Utilities</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
-><A
-HREF="gcc.html"
->Up</A
-></TD
+>&nbsp;</TD
 ><TD
 WIDTH="33%"
 ALIGN="right"

@@ -1,0 +1,327 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>The <TT
+CLASS="ENVAR"
+>CYGWIN</TT
+> environment
+variable</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+REL="HOME"
+TITLE="Cygwin User's Guide"
+HREF="cygwin-ug-net.html"><LINK
+REL="UP"
+TITLE="Using Cygwin"
+HREF="using.html"><LINK
+REL="PREVIOUS"
+TITLE="Special filenames"
+HREF="using-specialnames.html"><LINK
+REL="NEXT"
+TITLE="Cygwin Utilities"
+HREF="using-utils.html"></HEAD
+><BODY
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="using-specialnames.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Using Cygwin</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="using-utils.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><H1
+><A
+NAME="USING-CYGWINENV"
+>The <TT
+CLASS="ENVAR"
+>CYGWIN</TT
+> environment
+variable</A
+></H1
+><P
+>The <TT
+CLASS="ENVAR"
+>CYGWIN</TT
+> environment variable is used to configure
+many global settings for the Cygwin runtime system. It contains the options
+listed below, separated by blank characters. Many options can be turned off
+by prefixing with <TT
+CLASS="LITERAL"
+>no </TT
+>.</P
+><P
+></P
+><UL
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)binmode</I
+> - if set, unspecified file
+opens default to binary mode (no CR/LF/Ctrl-Z translations) instead of
+text mode.  Defaults to not set (text mode). This option must be set
+before starting a Cygwin shell to have an effect on redirection.</P
+><TABLE
+CLASS="WARNING"
+BORDER="1"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="CENTER"
+><B
+>Warning!</B
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+><P
+>If set in b20.1, all files 
+always open in binary mode.</P
+></TD
+></TR
+></TABLE
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)envcache</I
+> - If set, environment variable
+conversions (between Win32 and POSIX) are cached.  Note that this is may
+cause problems if the mount table changes, as the cache is not invalidated
+and may contain values that depend on the previous mount table
+contents. Defaults to set.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)export</I
+> - if set, the final values of these
+settings are re-exported to the environment as $CYGWIN again.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)glob</I
+> - if set, command line arguments
+containing UNIX-style file wildcard characters (brackets, question mark,
+asterisk) are expanded into lists of files that match those wildcards.  This
+is applicable only to programs running from a DOS command line prompt.
+Default is set.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)ntea</I
+> - if set, use the full NT Extended
+Attributes to store UNIX-like inode information.
+This option only operates under Windows NT. Defaults to not set. </P
+><TABLE
+CLASS="WARNING"
+BORDER="1"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="CENTER"
+><B
+>Warning!</B
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+><P
+>This may create additional
+<I
+CLASS="EMPHASIS"
+>large</I
+> files on non-NTFS partitions.</P
+></TD
+></TR
+></TABLE
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)reset_com</I
+> - if set, serial ports are reset
+to 9600-8-N-1 with no flow control when used (warning: this is done at open
+time and when handles are inherited).  Defaults to set.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>strace=n[:cache][,filename]</I
+> - configures system
+tracing.  Off by default, setting various bits in <TT
+CLASS="LITERAL"
+>n</TT
+> (a
+bit flag) enables various types of system messages.  Setting
+<TT
+CLASS="LITERAL"
+>n</TT
+> to 1 enables most messages.  Other values can be found
+in <TT
+CLASS="FILENAME"
+>sys/strace.h</TT
+>.  The <TT
+CLASS="LITERAL"
+>:cache</TT
+> option
+lets you specify how many lines to cache before flushing the output
+(example: <TT
+CLASS="LITERAL"
+>strace=1:20</TT
+>).  The <TT
+CLASS="LITERAL"
+>filename</TT
+>
+option lets you send the messages to a file instead of the screen. </P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)strip_title</I
+> - if set, strips the directory
+part off the window title, if any.  Default is not set.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)title</I
+> - if set, the title bar reflects the
+name of the program currently running.  Default is not set.  Note that
+under Win9x the title bar is always enabled and is stripped
+by default.  In order not to strip, specify <TT
+CLASS="LITERAL"
+>title</TT
+> or
+<TT
+CLASS="LITERAL"
+>title nostrip_title</TT
+>.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)tty</I
+> - if set, Cygwin enables extra support
+(i.e., termios) for UNIX-like ttys.  Defaults to not set, in which case the
+tty is opened in text mode with ^Z as EOF. This option must be specified
+before starting a Cygwin shell.</P
+></LI
+></UL
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="using-specialnames.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="using-utils.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Special filenames</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="using.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Cygwin Utilities</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
