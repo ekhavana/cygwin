@@ -16,7 +16,7 @@
 
 <h2>Cygwin/X - Development - To-Do List</h2>
 
-<p>Last updated: 2003-02-22 1625 EST (Harold L Hunt II)</p>
+<p>Last updated: 2003-03-04 2200 EST (Harold L Hunt II)</p>
 
 <p>Following is a list of open tasks on the Cygwin/X
 project:</p>
@@ -47,6 +47,108 @@ project:</p>
 
 
 <tr valign="top">
+<td>Indirect OpenGL acceleration</td>
+
+<td>2004-03-04</td>
+
+<td>Implement indirect OpenGL acceleration according to the <a
+href="http://msu.edu/~huntharo/xwin/devel/server/CygwinX-Accelerated-OpenGL-Support-20040229.pdf">notes
+posted by Harold on 2004-02-29</a>.  Additional information concerning
+how to implemnt this feature as well as differences between indirect
+OpenGL rendering and DRI (direct rendering) are explained in the <a
+href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00001.html">email
+that accompanied the above notes</a>.</td>
+</tr>
+
+
+<tr valign="top">
+<td>Automatically assign display number</td>
+
+<td>2004-03-04</td>
+
+<td>Coupled with the detection of in-use display numbers, it would be
+advantageous if we could optionally automatically assign an unused
+display number to a new instance of XWin.exe.  We would need an IPC
+mechanism used for all instances of XWin.exe to share information
+about in-use display numbers, as well as a check of potentially
+available ports for use by other applications.  Finally, this whole
+thing is useless if we do not have a way to query the started instance
+of XWin.exe for the display number that it assigned to itself; the
+ideal solution to this problem will likely require an external
+executable that has an IPC mechanism to retrieve the desired display
+number from all running instances of XWin.exe.  We may be able to
+adapt the run.exe utility to query the XWin.exe instance with the same
+parent process id (should be the command shell that both were started
+from, I hope) and to then modify the environment being passed to a
+child process.  There may be other ways to solve this problem, but
+anything that allows for a race between started instances of XWin.exe
+will be unacceptable, since an error would result in applications
+attaching to the wrong display.</td>
+</tr>
+
+
+<tr valign="top">
+<td>Detect in-use display number ports</td>
+
+<td>2004-03-04</td>
+
+<td>Display number <i>n</i> in X11 listens on TCP port 6000 +
+<i>n</i>.  As of our X Server release 4.3.0-49 we check for other
+instances of XWin.exe running on a given display number, but we
+perform no checks for other applications listening on port 6000 +
+<i>n</i>.  We may not be able to atomically check port 6000 + <i>n</i>
+and start listening on it if it is not in use, but we can at least
+perform a sanity check with only a small window where another
+application could start listening on that port before we started
+listening on it; this would be a sufficient fix for our purposes.
+Other developers can help with adding command-line parameters to
+control this feature once the above code is finished.</td>
+</tr>
+
+
+<tr valign="top">
+<td>Timestamp on log file entries</td>
+
+<td>2004-03-04</td>
+
+<td>Add a timestamp to each line of /tmp/XWin.log, as suggested by
+Ehud Karni on 2004-03-03.  Ehud also <a
+href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00082.html">provided
+source code useful for performing such timestamping</a> in his
+email.</td>
+</tr>
+
+
+<tr valign="top">
+<td>MultiWindow DirectDraw and DirectDraw NL</td>
+
+<td>2004-03-04</td>
+
+<td>Blit updates from a DirectDraw shadow framebuffer to the updated
+Win32 window instead of blitting from a GDI shadow framebuffer.  This
+should be trivially easy to start and should require only a single
+DirectDraw surface for the whole screen (I had previously said it
+would require one surface per Win32 window).  It would be very
+important to just demonstrate that this can be done; clipping the
+blits to properly handle window z-order and such can be finished by
+other developers.</td>
+</tr>
+
+
+<tr valign="top">
+<td>Windows display size changes while running</td>
+
+<td>2004-03-04</td>
+
+<td>Use RandR (resize and rotate) to pass changes to the display size
+(e.g. 1024 x 768 --&gt; 1280 x 1024) to the X Server and all running
+applications.  This should be very easy to do; you can use the code
+that is in place for detecting display changes and just pass these
+values to RandR to let it do its thing.</td>
+</tr>
+
+
+<tr valign="top">
 <td>Emulate PseudoColor on TrueColor</td>
 
 <td>2003-09-23</td>
@@ -64,18 +166,13 @@ accordingly.</td>
 
 
 <tr valign="top">
-<td>MultiWindow DirectDraw and DirectDraw NL</td>
+<td>Windows clipboard integration</td>
 
-<td>2003-09-22</td>
+<td>2004-01-07</td>
 
-<td>Try to create one DirectDrawSurface for a single top-level window
-in MultiWindow mode.  Ignore window repositioning, etc. for now; just
-make the surface paint correctly in MultiWindow mode.  MultiWindow
-mode is currently slower than it has to be because it only uses the
-ShadowGDI engine.  MultiWindow mode eventually needs to be abstracted
-so that it can run on the ShadowDD and ShadowDDNL engines.  All I want
-to see right now is a single surface being created for one
-window... all the rest can come later.</td>
+<td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/X clipboard
+manager, to handle data types other than XA_STRING, COMPOUND_TEXT, and
+UTF8_STRING; for example, BITMAP, PIXMAP, etc.</td>
 </tr>
 
 
@@ -105,43 +202,6 @@ DirectDraw reserves the first ten and the last ten colors in each
 DirectDrawPalette object when running in windowed mode.  Therefore,
 PseudoColor visuals are only supported with DirectDraw engines when
 running in fullscreen 8 bit color modes.</td>
-</tr>
-
-
-<tr valign="top">
-<td>Windows clipboard integration</td>
-
-<td>2004-01-07</td>
-
-<td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/X clipboard
-manager, to handle data types other than XA_STRING, COMPOUND_TEXT, and
-UTF8_STRING; for example, BITMAP, PIXMAP, etc.</td>
-</tr>
-
-
-<tr valign="top">
-<td>Windows display mode change while running</td>
-
-<td>2003-08-27</td>
-
-<td>Catch and gracefully handle display mode changes while
-Cygwin/X is running.  Some of this will require using
-server-side RandR (resize and rotate extension) while other parts will
-require catching window message and shuffling around device context
-handles, reacquiring DirectDraw surfaces, etc.  Example case: assuming
-a notebook computer that has an internal 1024x768 display and an
-external 1280x1024 monitor; start Cygwin/X when the external
-monitor is plugged in, thus the Windows desktop size will be 1280x1024
-and the primary display is the external monitor; unplug the external
-display so that the notebook reverts to its internal display; the
-display area will have changed from 1280x1024 to 1024x768, and the
-device context and/or DirectDraw surface handles may need to be
-changed to point to the internal display.  Currently switching from
-the monitor to the internal display will cause the Cygwin/X
-window to cease refreshing; the window will only be filled with white.
-Switching from the internal display to the external monitor shows the
-Cygwin/X window with the content stretched to fit the now larger
-window.</td>
 </tr>
 
 </tbody>
