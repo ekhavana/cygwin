@@ -1,0 +1,443 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Packaging a Cygwin/XFree86 Distribution</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.72
+"/><LINK
+REL="HOME"
+TITLE="Cygwin/XFree86 Contributor's Guide"
+HREF="cygwin-xfree-cg.html"/><LINK
+REL="UP"
+TITLE="Programming"
+HREF="programming.html"/><LINK
+REL="PREVIOUS"
+TITLE="Cross Compiling"
+HREF="prog-build-cross.html"/><LINK
+REL="NEXT"
+TITLE="Documentation"
+HREF="documentation.html"/></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin/XFree86 Contributor's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="prog-build-cross.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Programming</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="documentation.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="prog-distribution"
+>Packaging a Cygwin/XFree86 Distribution</A
+></H1
+><P
+>Cygwin/XFree86 uses the standard XFree86 distribution build scripts.
+You will need to start by downloading the XFree86 <TT
+CLASS="filename"
+>util</TT
+> <A
+HREF="glossary.html#gloss-cvs"
+><I
+CLASS="glossterm"
+>CVS</I
+></A
+> module.  The following
+instructions are paraphrased from <TT
+CLASS="filename"
+>bindist-notes</TT
+>
+in the XFree86 <TT
+CLASS="filename"
+>devel</TT
+> CVS
+module, with adaptations to make them Cygwin/XFree86 specific.</P
+><OL
+TYPE="1"
+><LI
+><P
+>Copy
+<TT
+CLASS="filename"
+>xc/programs/Xserver/hw/xfree86/etc/bindist/Cygwin/host.def</TT
+>
+to <TT
+CLASS="filename"
+>xc/config/cf/host.def</TT
+>.</P
+></LI
+><LI
+><P
+>Build and install the <B
+CLASS="command"
+>extract</B
+> tool from the
+<TT
+CLASS="filename"
+>utils</TT
+> module.</P
+></LI
+><LI
+><P
+>Run a full build of the XFree86 CVS tree, following the
+instructions in <A
+HREF="prog-build-native.html"
+>the Section called <I
+>Native Compiling</I
+></A
+>.</P
+></LI
+><LI
+><P
+>Install the full build of XFree86 to a staging directory:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~/x-devel/build/std
+$ mkdir /stagingdir
+
+Harold@MyWindowsHost ~/x-devel/build/std
+$ make DESTDIR=/stagingdir install install.man
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Create directories for the bindist and commondist:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~/x-devel/build/std
+$ mkdir /bindistdir
+
+Harold@MyWindowsHost ~/x-devel/build/std
+$ mkdir /commondist
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Copy the bindist and commondist scripts to their respective
+directories:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~/x-devel/xc
+$ cp programs/Xserver/hw/xfree86/etc/bindist/Cygwin/* /bindistdir
+
+Harold@MyWindowsHost ~/x-devel/xc
+$ cp programs/Xserver/hw/xfree86/etc/bindist/common/* /commondist
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Copy the <B
+CLASS="command"
+>build-bindist</B
+> script to somewhere in
+your search path, such as <TT
+CLASS="filename"
+>/usr/bin</TT
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~/x-devel/xc
+$ cp programs/Xserver/hw/xfree86/etc/bindist/build-bindist /usr/bin
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Build the distribution tarballs:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~
+$ build-bindist /stagingdir /bindistdir
+
+Harold@MyWindowsHost ~
+$ build-bindist /stagingdir /commondist
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Verify the tarball contents by extracting them in a test
+directory and comparing them to what is in the staging
+directory:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~
+$ mkdir -p /testdir/usr/X11R6 /testdir/etc/X11 /testdir/var
+
+Harold@MyWindowsHost ~
+$ cd /bindistdir/bindist
+
+Harold@MyWindowsHost /bindistdir/bindist
+$ extract -C /testdir/etc/X11 Xetc.tgz
+
+Harold@MyWindowsHost /bindistdir/bindist
+$ extract -C /testdir/var Xvar.tgz
+
+Harold@MyWindowsHost /bindistdir/bindist
+$ extract -C /testdir/usr/X11R6 `pwd`/X[a-df-uw-z]*.tgz `pwd`Xvfb.tgz
+
+Harold@MyWindowsHost /bindistdir/bindist
+$ cd /commondist/bindist
+
+Harold@MyWindowsHost /commondist/bindist
+$ extract -C /testdir/usr/X11R6 `pwd`/*.tgz
+
+Harold@MyWindowsHost /commondist/bindist
+$ cd /testdir; find . ! -type d -print | sort &gt; /tmp/dist.list
+
+Harold@MyWindowsHost /testdir
+$ cd /stagingdir; find . ! -type d -print | sort &gt; /tmp/stage.list
+
+Harold@MyWindowsHost /stagingdir
+$ diff -u /tmp/stage.list /tmp/dist.list
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>The following differences are expected because the directories
+referred to are symlinks created by the installation script, other
+differences indicate that the bindist data files need to be fixed:</P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/app-defaults</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/fs</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/lbxproxy</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/proxymngr</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/rstart</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/twm</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/xdm</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/xinit</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/xserver</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>./usr/X11R6/lib/X11/xsm</TT
+></P
+></LI
+></UL
+></LI
+><LI
+><P
+>Upload <TT
+CLASS="filename"
+>*.tgz</TT
+> and
+<TT
+CLASS="filename"
+>extract</TT
+> to your distribution site.</P
+></LI
+></OL
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="prog-build-cross.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-xfree-cg.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="documentation.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Cross Compiling</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="programming.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Documentation</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

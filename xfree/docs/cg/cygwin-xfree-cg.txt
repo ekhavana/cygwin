@@ -16,39 +16,47 @@ Harold L Hunt, II
    2. [2]Programming
 
         [3]Overview
-        [4]Native Compiling
+        [4]Source Code Tree Layout
+        [5]Cygwin/XFree86 X Server Architecture
 
-              [5]Obtaining the Source Code
-              [6]Compiling the Source Code
-              [7]Installing a local build
-              [8]Keeping your source code tree updated
+              [6]Server Privates
+              [7]Engine System
+              [8]User Input
 
-        [9]Cross Compiling
+        [9]Obtaining the Source Code
+        [10]Native Compiling
 
-              [10]Obtaining binutils and gcc Source
-              [11]Obtaining Cygwin Headers and Libs
-              [12]Building binutils and gcc
-              [13]Obtaining the Source Code
-              [14]Building Cygwin/XFree86
+              [11]Compiling the Source Code
+              [12]Installing a local build
+              [13]Keeping your source code tree updated
 
-   3. [15]Documentation
-   4. [16]Web Site Maintenance
-   [17]Bibliography
-   [18]Glossary
-   A. [19]GNU Free Documentation License
+        [14]Cross Compiling
 
-        0. [20]PREAMBLE
-        1. [21]APPLICABILITY AND DEFINITIONS
-        2. [22]VERBATIM COPYING
-        3. [23]COPYING IN QUANTITY
-        4. [24]MODIFICATIONS
-        5. [25]COMBINING DOCUMENTS
-        6. [26]COLLECTIONS OF DOCUMENTS
-        7. [27]AGGREGATION WITH INDEPENDENT WORKS
-        8. [28]TRANSLATION
-        9. [29]TERMINATION
-        10. [30]FUTURE REVISIONS OF THIS LICENSE
-        [31]How to use this License for your documents
+              [15]Obtaining binutils and gcc Source
+              [16]Obtaining Cygwin Headers and Libs
+              [17]Building binutils and gcc
+              [18]Building Cygwin/XFree86
+
+        [19]Packaging a Cygwin/XFree86 Distribution
+
+   3. [20]Documentation
+   4. [21]Web Site Maintenance
+   [22]Bibliography
+   [23]Glossary
+   A. [24]GNU Free Documentation License
+
+        0. [25]PREAMBLE
+        1. [26]APPLICABILITY AND DEFINITIONS
+        2. [27]VERBATIM COPYING
+        3. [28]COPYING IN QUANTITY
+        4. [29]MODIFICATIONS
+        5. [30]COMBINING DOCUMENTS
+        6. [31]COLLECTIONS OF DOCUMENTS
+        7. [32]AGGREGATION WITH INDEPENDENT WORKS
+        8. [33]TRANSLATION
+        9. [34]TERMINATION
+        10. [35]FUTURE REVISIONS OF THIS LICENSE
+        [36]How to use this License for your documents
      _________________________________________________________________
 
 Chapter 1. Overview
@@ -68,7 +76,7 @@ Chapter 1. Overview
    Join in the excitement of opening your Windows machine to the X Window
    System.
 
-   We need [32]programmers, [33]documentation writers, and [34]website
+   We need [37]programmers, [38]documentation writers, and [39]website
    maintainers.
      _________________________________________________________________
 
@@ -87,21 +95,380 @@ Overview
    Cygwin/XFree86 after reading this chapter. Programming gurus are
    great; our intention is to create more of them.
 
-   You will want to start downloading the XFree86 source code tree
-   immediately after reading [35]the Section called Obtaining the Source
-   Code, if you have an active network connection at your disposal, as
-   downloading the source code tree can take anywhere from 10 minutes to
-   10 hours, depending upon the speed of your connection. You will find
-   it advantageous to have a source code tree as you read the later
+   Downloading the XFree86 source code tree can take anywhere from 10
+   minutes to 10 hours, depending upon the speed of your network
+   connection. If you have an active network connection at your disposal
+   you may want to skip ahead to [40]the Section called Obtaining the
+   Source Code and start downloading the source code tree now. You will
+   find it advantageous to have a source code tree as you read the other
    sections.
      _________________________________________________________________
 
-Native Compiling
+Source Code Tree Layout
+
+   The XFree86 CVS tree consists of several top-level directories, only
+   three of which are of concern to Cygwin/XFree86 as of 2001-10-26.
+
+   Abridged Top Level XFree86 CVS Directories (in order of interest)
+    1. xc contains source code for X libraries, the X servers, and all X
+       clients distributed with XFree86.
+    2. devel contains the scripts used to package a standard XFree86
+       distribution; thus, Cygwin/XFree86 uses these scripts to build
+       distributions. You will need the util directory to use these build
+       scripts.
+    3. util contains gnutar and zlib needed by the devel scripts. You
+       will not need this directory for any other reason.
+
+   The layout of the devel and util directories are documented in [41]the
+   Section called Packaging a Cygwin/XFree86 Distribution. The remainder
+   of this section deals only with the xc directory.
+
+   Descriptions of Important xc Directories and Subdirectories
+     * config
+          + cf contains generic and platform specific imake configuration
+            settings, build rules, and other macros. Cygwin/XFree86
+            specific settings, build rules, and shared library template
+            are contained in cygwin.cf, cygwin.rules, and cygwin.tmpl,
+            respectively. Settings in cygwin.cf can be overridden for a
+            single build host by creating a file called host.def that
+            defines any host specific settings. xfree86site.def may be
+            used as a template for host.def; simply copy xfree86site.def
+            to host.def, then edit and/or uncomment any settings that you
+            wish to override.
+          + imake contains source code for the imake utility that is used
+            to combine the configuration files in cf with the Imakefile
+            in a given directory to produce a Makefile that will work
+            correctly for a given platform; in our case, that platform is
+            Cygwin. Any build problems with imake will stop compilation
+            of the XFree86 CVS tree, as there will not be any Makefile's
+            to operate on. This directory will therefore be of interest
+            only when imake fails to build.
+          + makedepend contains source code for the makedepend utility
+            that scans the included files in the .c and .h used by a
+            project to determine which files the build targets depend
+            upon. This directory will only be of interest when makedepend
+            fails to build.
+          + util contains a few general utilities, such as lndir.
+     * doc
+          + hardcopy contains precompiled PostScript documentation for
+            various components of the X Window System.
+            Cygwin/XFree86-specific documentation is not contained in
+            this directory, as of 2001-10-26. The documentation contained
+            in this directory is of great interest and relevance to
+            Cygwin/XFree86 programmers.
+          + specs contains the sources to build the documents in
+            hardcopy. This directory is of little interest to
+            Cygwin/XFree86 programmers.
+          + util contains a few awk scripts for use in building
+            documentation. This directory is of little interest to
+            Cygwin/XFree86 programmers.
+     * fonts contains font definition files used to compile fonts. This
+       directory is of little interest to Cygwin/XFree86 programmers.
+     * include contains various X Window System headers that are not
+       generally specific to any one client or library (i.e. X.h,
+       Xproto.h, and keysymdef.h).
+     * lib contains both X client and X Server libraries. Cygwin/XFree86
+       does not generally call any functions in these libraries directly;
+       however, we do have to link to several of these libraries to get
+       our X Server to build. These libraries are maintained by various
+       developers from the XFree86 project and there are occasional
+       synchronizations with [42]The Open Group's [43]X.Org.
+       Cygwin/XFree86 programmers occasionally need to fix Cygwin-related
+       build errors that occur in these libraries.
+     * nls contains locale definition files. These files are maintained
+       by the [44]XFree86 I18N project. This directory is of little
+       interest to Cygwin/XFree86 programmers.
+     * programs
+          + Xserver contains the heart of Cygwin/XFree86, namely, the
+            Cygwin/XFree86 X Server.
+               o cfb* contains deprecated [45]color framebuffer drawing
+                 procedures that are not compatible with the [46]Shadow
+                 drawing system that Cygwin/XFree86 depends upon. This
+                 directory is of no interest to Cygwin/XFree86
+                 programmers.
+               o dix contains [drawing] [47]device independent X
+                 routines. main.c contains the main entry-point function
+                 for the Cygwin/XFree86 X Server. The X Server startup
+                 procedure can be followed by examining main.
+               o fb contains the modern framebuffer drawing procedures
+                 used by Cygwin/XFree86. This directory is maintained by
+                 Keith Packard and is only of interest to Cygwin/XFree86
+                 programmers when it fails to build.
+               o hw contains [drawing] hardware dependent functions.
+                    # vfb contains the Virtual Framebuffer X Server. The
+                      vfb server draws to a system memory framebuffer
+                      with the primary purpose of allowing X clients to
+                      run on a machine that does not have display
+                      hardware.
+                    # xfree86 contains source code for the XFree86
+                      servers that run on various operating systems that
+                      generally have low-level access to the graphics
+                      hardware. Cygwin/XFree86 does not have low-level
+                      access to the graphics hardware, thus
+                      Cygwin/XFree86 is not able to utilize the XFree86
+                      server.
+                    # xnest contains source code for the Nested X Server
+                      which runs inside of another X Server. xnest is not
+                      generally of interest to Cygwin/XFree86
+                      programmers.
+                    # xwin contains the source code for the
+                      Cygwin/XFree86 X Server. This is the primary
+                      directory that Cygwin/XFree86 programmers are
+                      interested in.
+               o include contains header files specific to the X Server
+                 program, such as graphics context structures. This
+                 directory is useful to Cygwin/XFree86 programmers when
+                 they need to lookup the name or data type of members of
+                 various X Server structures.
+               o mi contains [48]machine independent drawing routines.
+                 These drawing routines are used by the Cygwin/XFree86
+                 Native GDI X Server engine. In turn, the machine
+                 independent routines depend in winGetSpans,
+                 winFillSpans, and winSetSpans, which are implemented in
+                 the Native GDI engine.
+               o miext contains various machine independent X extensions.
+                    # layer contains source code for the layer extension.
+                      This extension is supported by Cygwin/XFree86,
+                      however, this directory will be of interest only
+                      when layer fails to build.
+                    # shadow contains source code for the shadow
+                      extension that the Cygwin/XFree86 X Server depends
+                      upon. This directory is of primary importance to
+                      Cygwin/XFree86, but it is maintained by other
+                      programmers and is only of direct interest to
+                      Cygwin/XFree86 programmers when it fails to build.
+                      The shadow extension does three things:
+                        1. Allows the fb graphics routines to draw to an
+                           offscreen framebuffer.
+                        2. Keeps track of the regions of the offscreen
+                           framebuffer that have been drawn on.
+                        3. Calls one of Cygwin/XFree86's engine dependent
+                           ShadowUpdate () functions to transfer the
+                           updated regions of the offscreen framebuffer
+                           to the screen.
+               o os contains [49]operating system dependent X Server
+                 functions. However, the functions in the os have been
+                 written in such a way that they are actually compatible
+                 with most UNIX-style operating systems, include Cygwin.
+          + xwinclip provides Windows clipboard and X clipboard
+            integration. The xwinclip is not, as of 2001-10-26, contained
+            in the XFree86 CVS tree. Please see the [50]xwinclip
+            development page for more information.
+     * util contains a few utilities for programmers, such as a memory
+       leak counter. Cygwin/XFree86 has never used these utilities, thus
+       this directory is of little interest to Cygwin/XFree86
+       programmers.
+     * workInProgess is supposed to contain various side projects that
+       are in progress. As of 2001-10-26, this directory contains only
+       empty directories. This directory is of little interest to
+       Cygwin/XFree86 programmers.
+     _________________________________________________________________
+
+Cygwin/XFree86 X Server Architecture
+
+   Cygwin/XFree86's X Server architecture was heavily inspired by
+   [51]Angebranndt94, the Definition of the Porting Layer for the X v11
+   Sample Server.
+     _________________________________________________________________
+
+Server Privates
+
+   X Servers use various structures to pass information around to
+   functions. Some of those structures are colormaps, [52]graphics
+   contexts (GCs), [53]pixmaps, and [54]screens. The X protocol defines
+   the contents of each of these structures, however, the X Server
+   implementation and various X Server libraries ([55]MI, [56]FB,
+   [57]Shadow, etc.) may require additional information to be associated
+   with these internal structures. For example, the Cygwin/XFree86 X
+   Server must associate a Windows window handle (hwnd) with each X
+   Server screen that is open.
+
+   [58]Privates are the mechanism provided by the X protocol for
+   associating additional information with internal X Server structures.
+   Privates originally consisted of a single pointer member contained in
+   each structure, usually named devPrivate or devPriv. This original
+   specification only allowed one of the X Server layers (mi, fb, shadow,
+   etc.) to have privates associated with an internal structure. Privates
+   have since been revised.
+
+   The current privates implementation requires that each X Server layer
+   call a function on startup to indicate that that layer will require
+   privates and to obtain an index into the array of privates that that
+   layer's privates will be stored at. Modern privates are generally
+   stored in an array of type DevUnion pointed to by a structure member
+   named devPrivates; DevUnion is defined in
+   xc/programs/Xserver/include/miscstruct.h. There are two different
+   memory allocation schemes for devPrivates.
+
+   Memory for privates structures can either be preallocated or allocated
+   upon use. Preallocation, the preferred method for GCs, pixmaps, and
+   windows, requires that the size of the privates memory needed be
+   specified during X Server initialization. Preallocation allows the
+   [59]DIX layer to allocate all memory needed for a given internal
+   structure, including all privates memory, as a single contiguous block
+   of memory; this greatly reduces memory fragmentation. Allocation upon
+   use, used by screens, requires the [60]DDX structure creation function
+   to allocate memory for the privates; winScreenInit calling
+   winAllocatePrivates, which allocates screen privates memory directly,
+   is an example of this. Allocation upon use can optionally and
+   non-optimally be used by GCs, pixmaps, and windows.
+     _________________________________________________________________
+
+Macros
+
+   Three macros are provided for each class of privates that make setting
+   up and using the privates easier. The macros for screen privates are
+   examined as an example.
+
+   winPrivScreenPtr winGetScreenPriv(ScreenPtr pScreen);
+
+   winGetScreenPriv takes a non-NULL pointer to a screen, a ScreenPtr,
+   and returns the pointer stored in the DDX privates for that screen.
+   Passing a NULL or invalid ScreenPtr to winGetScreenPriv will cause an
+   access violation, crashing the Cygwin/XFree86 X Server.
+
+   void winSetScreenPriv(ScreenPtr pScreen, void * pvPrivates);
+
+   winSetScreenPriv takes a non-NULL pointer to a screen, a ScreenPtr,
+   and sets the DDX privates pointer to the value of the pvPrivates
+   parameter. Passing a NULL or invalid ScreenPtr to winSetScreenPriv
+   will cause an access violation, crashing the Cygwin/XFree86 X Server.
+
+   void winScreenPriv(ScreenPtr pScreen);
+
+   winScreenPriv takes a non-NULL pointer to a screen, a ScreenPtr, and
+   declares a local variable in the calling function named pScreenPriv.
+   winScreenPriv may only be called at the top of a C function within the
+   variable declaration block; calling the function elsewhere will break
+   the ANSI C rule that all variables must be declared at the top of a
+   scope block. Passing a NULL or invalid ScreenPtr to winScreenPriv will
+   cause an access violation, crashing the Cygwin/XFree86 X Server.
+     _________________________________________________________________
+
+Engine System
+
+   The Cygwin/XFree86 X Server uses several methods of drawing graphics
+   on the display device; each of these different drawing mehtods is
+   referred to as an engine. Each of the engines can be classified as
+   either a Shadow FB engine, a Native GDI engine, or as a Primary FB
+   engine. It should be noted that the Primary FB engine is deprecated
+   and is discussed here only for completeness. The engines are
+   disscussed in the following sections, in order of importance.
+     _________________________________________________________________
+
+Shadow FB Engines
+
+   The Shadow FB engines use Keith Packard's [61]FB drawing procedures
+   wrapped with his [62]Shadow layer that allows drawing to an
+   [63]offscreen framebuffer with periodic updates of the [64]primary
+   framebuffer.
+     _________________________________________________________________
+
+Native GDI Engine
+
+   The Native GDI engine will eventually translate individual X graphics
+   calls into their GDI equivalent. Some X graphics calls do not
+   translate direclty to a GDI call so they may be passed through the MI
+   layer to change them into a serious of lower level calls that are
+   supported. Currently, the Native GDI engine passes all X graphics
+   calls through the MI layer to convert them into three functions:
+   FillSpans, GetSpans, and SetSpans. The functionality of those three
+   functions, as of 2001-10-28, is limited to the functionality needed to
+   draw the familiar X background pattern upon X Server startup.
+     _________________________________________________________________
+
+Primary FB Engine
+
+   The Primary FB engine is deprecated. Primary FB works in the same
+   manner that the original Cygwin/XFree86 X Server worked, namely, it
+   uses IDirectDrawSurface_Lock to obtain a pointer to the [65]primary
+   framebuffer memory at server startup. This memory pointer is held
+   until the X Server shuts down. This technique does not work on all
+   versions of Windows.
+
+   Locking the primary framebuffer on Windows 95/98/Me causes the
+   Win16Mutex to be obtained by the program that locks the primary
+   framebuffer; the Win16Mutex is not released until the primary
+   framebuffer is unlocked. The Win16Mutex is a semaphore introduced in
+   Windows 95 that prevents 16 bit Windows code from being reentered by
+   different threads or processes. For compatibility reasons, all GDI
+   operations in Windows 95/98/Me are written in 16 bit code, thus
+   requiring that the Win16Mutex be obtained before performing those
+   operations. All of this leads to the following situation on Windows
+   95/98/Me:
+    1. The primary framebuffer is locked, causing the Cygwin/XFree86 X
+       Server to hold the Win16Mutex.
+    2. Windows switches the Cygwin/XFree86 X Server out of the current
+       process slot; another process is switched in.
+    3. The newly selected process makes a GDI function call.
+    4. The GDI function call must wait for the Win16Mutex to be released,
+       but the Win16Mutex cannot be released until the Cygwin/XFree86 X
+       Server releases the Win16Mutex. However, the Cygwin/XFree86 X
+       Server will not release the Win16Mutex until it exits. The end
+       result is that the Win16Mutex has been deadlocked and the Windows
+       machine is frozen with no way to recover.
+
+   Windows NT/2000/XP do not contain any 16 bit code, so the Win16Mutex
+   is not an issue; thus, the Primary FB engine works fine on those
+   operating systems. However, drawing directly to the primary
+   framebuffer suffers performance problems. For example, on some systems
+   writing to the primary framebuffer requires doing memory reads and
+   writes across the PCI bus which is only 32 bits wide and features a
+   clock speed of 33 MHz, as opposed to accessing system memory, which is
+   attached to a 64 bit wide bus that runs at between 100 and 266
+   (effective) MHz. Furthermore, accessing the primary framebuffer memory
+   requires several synchronization steps that take many clock cycles to
+   complete. The end result is that the Primary FB engine is several
+   times slower than the Shadow FB engines.
+
+   The Primary FB engine also has several unique issues that are
+   difficult to program around. Development of the Primary FB engine has
+   ceased, due to the difficulty of maintaining it, coupled with the fact
+   that Primary FB does not run on Windows 95/98/Me and with the poor
+   performance of Primary FB. The Primary FB source code has been left in
+   place so that future programmers can enable it and see the poor
+   performance of the engine for themselves.
+     _________________________________________________________________
+
+User Input
+
+Keyboard
+
+   Foo!
+     _________________________________________________________________
+
+Mouse
+
+Wheel
+
+   Foo!
+     _________________________________________________________________
+
+Motion
+
+   Foo!
+     _________________________________________________________________
+
+Buttons
+
+   Foo!
+     _________________________________________________________________
+
+Three Button Emulation
+
+   Foo!
+     _________________________________________________________________
 
 Obtaining the Source Code
 
+     Cross Compiling: Obtaining the source code when cross compiling
+     XFree86 is nearly identical to the process described below. The
+     only divergence from the following instructions is that you will be
+     using a bash shell on your cross compiling host, rather than on
+     your native Cygwin host.
+
    Cygwin/XFree86 source code is contained in, and distributed with, the
-   XFree86 source code tree. Read-only [36]CVS access to the XFree86
+   XFree86 source code tree. Read-only [66]CVS access to the XFree86
    source tree is also available from the XFree86 project.
 
    The XFree86 CVS tree is not always buildable on Cygwin, as the XFree86
@@ -122,8 +489,8 @@ Obtaining the Source Code
    minimizes the scope of problems that you may encounter, which can
    greatly ease debugging of new features and other code modifications.
 
-   It is highly recommended to get the XFree86 [37]CVS tree by using the
-   CVS [38]pserver method. CVS pserver is the easiest CVS method to use
+   It is highly recommended to get the XFree86 [67]CVS tree by using the
+   CVS [68]pserver method. CVS pserver is the easiest CVS method to use
    for anonymous access to public CVS trees, as you need only type in a
    well-known password to download the CVS tree. CVS pserver is rarely
    used to control checkins to CVS trees, as the passwords are stored and
@@ -208,6 +575,8 @@ Harold@MyWindowsHost ~/x-devel
 $
      _________________________________________________________________
 
+Native Compiling
+
 Compiling the Source Code
 
    Compiling Cygwin/XFree86 doesn't have to be hard, although the XFree86
@@ -231,7 +600,7 @@ Compiling Overview
    utility is included with the XFree86 source code tree; but the catch
    is that you need to build the tree before you get lndir.exe. lndir.exe
    has been compiled and is available at
-   [39]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 kB). Download
+   [69]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 kB). Download
    the file, saving it to your Cygwin root directory (e.g. c:\cygwin),
    then follow the simple instructions below to install the utility:
     1. Launch a Cygwin bash prompt. You should see a screen similar to
@@ -523,7 +892,7 @@ $
 
 Keeping your source code tree updated
 
-   [40]CVS makes keeping your source code tree up to date easy. You may
+   [70]CVS makes keeping your source code tree up to date easy. You may
    update your entire source code tree at once, or you can update
    individual directories or files, if you so choose.
      _________________________________________________________________
@@ -626,17 +995,38 @@ $
 
 Cross Compiling
 
+   Cross compiling is the act of the building source code on one system,
+   the build host, into executables or libraries to be run on a different
+   host, the native host. The build host and the native host may differ
+   in operating system and/or processor type. Cross compiling is done for
+   several reasons:
+     * The native host is grossly underpowered, such as a handheld
+       computer.
+     * The user happens to have greatly more compiling power available on
+       a platform other than the native host. For example, the user may
+       have access to a 32 processor machine while their desktop machine
+       may only be a uni-processor machine.
+     *
+
+   Cross compiling is much trickier than building on the native host.
+   There are a whole new class of problems that can happen when cross
+   compiling that are simply not an issue when building on Cygwin. You
+   should be familiar with building Cygwin/XFree86 on Cygwin, as
+   described in [71]the Section called Native Compiling, before
+   attempting to cross compile Cygwin/XFree86.
+     _________________________________________________________________
+
 Obtaining binutils and gcc Source
 
    binutils and gcc source code releases that are known to compile on
    Cygwin and distributed by the Cygwin project. Therefore, it is highly
    recommended that you obtain the binutils and gcc sources from the
-   [41]Cygwin mirror network.
+   [72]Cygwin mirror network.
 
    Follow these steps to download Cygwin/XFree86 binaries:
     1. Create a directory to store the binutils and gcc sources in, such
        as /cygwin/src/
-    2. Visit the [42]Cygwin mirrors page to find your closest mirror
+    2. Visit the [73]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
     4. Change current ftp directory to cygwin/latest/.
@@ -849,25 +1239,15 @@ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
    15. Building binutils and gcc is now complete.
      _________________________________________________________________
 
-Obtaining the Source Code
-
-   Obtaining the source code when cross compiling XFree86 is nearly
-   identical to the process described in [43]the Section called Obtaining
-   the Source Code of the Native Compiling section. The only divergence
-   from the aformentioned instructions is that you will be using a bash
-   shell on your cross compiling host, rather than on your native Cygwin
-   host.
-     _________________________________________________________________
-
 Building Cygwin/XFree86
 
    Building the source code when cross compiling XFree86 is nearly
-   identical to the process described in [44]the Section called Compiling
-   the Source Code of the Native Compiling section. One divergence from
-   the aformentioned instructions is that you will be using a bash shell
+   identical to the process described below in [74]the Section called
+   Native Compiling of the Native Compiling section. One divergence from
+   the aforementioned instructions is that you will be using a bash shell
    on your cross compiling host, rather than on your native Cygwin host;
    other divergences follow.
-    1. Download [45]host.def, and place the file in xc/config/cf.
+    1. Download [75]host.def, and place the file in xc/config/cf.
     2. Modify host.def/PostIncDir to reflect the actual version of gcc
        compiled, such as #define PostIncDir
        /cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include. The version
@@ -876,7 +1256,7 @@ Building Cygwin/XFree86
     3. lndir should generally already be installed if your build host
        already has the X Window System installed. In any case, you
        certainly won't want to install the build of lndir mentioned in
-       [46]the Section called Native Compiling as that executable is for
+       [76]the Section called Native Compiling as that executable is for
        Cygwin only.
     4. Always remember to set your PATH environment variable to include
        the Cygwin binutils and gcc binary directories:
@@ -962,9 +1342,113 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
 [harold@MyCrossHost debug]$
      _________________________________________________________________
 
+Packaging a Cygwin/XFree86 Distribution
+
+   Cygwin/XFree86 uses the standard XFree86 distribution build scripts.
+   You will need to start by downloading the XFree86 util [77]CVS module.
+   The following instructions are paraphrased from bindist-notes in the
+   XFree86 devel CVS module, with adaptations to make them Cygwin/XFree86
+   specific.
+    1. Copy xc/programs/Xserver/hw/xfree86/etc/bindist/Cygwin/host.def to
+       xc/config/cf/host.def.
+    2. Build and install the extract tool from the utils module.
+    3. Run a full build of the XFree86 CVS tree, following the
+       instructions in [78]the Section called Native Compiling.
+    4. Install the full build of XFree86 to a staging directory:
+
+Harold@MyWindowsHost ~/x-devel/build/std
+$ mkdir /stagingdir
+
+Harold@MyWindowsHost ~/x-devel/build/std
+$ make DESTDIR=/stagingdir install install.man
+
+    5. Create directories for the bindist and commondist:
+
+Harold@MyWindowsHost ~/x-devel/build/std
+$ mkdir /bindistdir
+
+Harold@MyWindowsHost ~/x-devel/build/std
+$ mkdir /commondist
+
+    6. Copy the bindist and commondist scripts to their respective
+       directories:
+
+Harold@MyWindowsHost ~/x-devel/xc
+$ cp programs/Xserver/hw/xfree86/etc/bindist/Cygwin/* /bindistdir
+
+Harold@MyWindowsHost ~/x-devel/xc
+$ cp programs/Xserver/hw/xfree86/etc/bindist/common/* /commondist
+
+    7. Copy the build-bindist script to somewhere in your search path,
+       such as /usr/bin:
+
+Harold@MyWindowsHost ~/x-devel/xc
+$ cp programs/Xserver/hw/xfree86/etc/bindist/build-bindist /usr/bin
+
+    8. Build the distribution tarballs:
+
+Harold@MyWindowsHost ~
+$ build-bindist /stagingdir /bindistdir
+
+Harold@MyWindowsHost ~
+$ build-bindist /stagingdir /commondist
+
+    9. Verify the tarball contents by extracting them in a test directory
+       and comparing them to what is in the staging directory:
+
+Harold@MyWindowsHost ~
+$ mkdir -p /testdir/usr/X11R6 /testdir/etc/X11 /testdir/var
+
+Harold@MyWindowsHost ~
+$ cd /bindistdir/bindist
+
+Harold@MyWindowsHost /bindistdir/bindist
+$ extract -C /testdir/etc/X11 Xetc.tgz
+
+Harold@MyWindowsHost /bindistdir/bindist
+$ extract -C /testdir/var Xvar.tgz
+
+Harold@MyWindowsHost /bindistdir/bindist
+$ extract -C /testdir/usr/X11R6 `pwd`/X[a-df-uw-z]*.tgz `pwd`Xvfb.tgz
+
+Harold@MyWindowsHost /bindistdir/bindist
+$ cd /commondist/bindist
+
+Harold@MyWindowsHost /commondist/bindist
+$ extract -C /testdir/usr/X11R6 `pwd`/*.tgz
+
+Harold@MyWindowsHost /commondist/bindist
+$ cd /testdir; find . ! -type d -print | sort > /tmp/dist.list
+
+Harold@MyWindowsHost /testdir
+$ cd /stagingdir; find . ! -type d -print | sort > /tmp/stage.list
+
+Harold@MyWindowsHost /stagingdir
+$ diff -u /tmp/stage.list /tmp/dist.list
+
+   10. The following differences are expected because the directories
+       referred to are symlinks created by the installation script, other
+       differences indicate that the bindist data files need to be fixed:
+          + ./usr/X11R6/lib/X11/app-defaults
+          + ./usr/X11R6/lib/X11/fs
+          + ./usr/X11R6/lib/X11/lbxproxy
+          + ./usr/X11R6/lib/X11/proxymngr
+          + ./usr/X11R6/lib/X11/rstart
+          + ./usr/X11R6/lib/X11/twm
+          + ./usr/X11R6/lib/X11/xdm
+          + ./usr/X11R6/lib/X11/xinit
+          + ./usr/X11R6/lib/X11/xserver
+          + ./usr/X11R6/lib/X11/xsm
+   11. Upload *.tgz and extract to your distribution site.
+     _________________________________________________________________
+
 Chapter 3. Documentation
 
-   Foo!
+   Cygwin/XFree86 documentation is written in XML according to the
+   [79]DocBook document type definition (DTD). These XML input files are
+   then compiled using an autoconf and automake build system. We
+   currently build the following output formats: HTML, PDF, PS, RTF, and
+   TXT.
      _________________________________________________________________
 
 Chapter 4. Web Site Maintenance
@@ -974,6 +1458,14 @@ Chapter 4. Web Site Maintenance
 
 Bibliography
 
+Articles
+
+   [Angebranndt94] Definition of the Porting Layer for the X v11 Sample
+   Server, Angebranndt94, Susan Angebranndt, Raymond Drewry, Philip
+   Karlton, Todd Newman, Robert W. Scheifler, Keith Packard, and David P.
+   Wiggins, 1994.
+     _________________________________________________________________
+
 Books
 
    [ScheiflerGettys92] Robert W. Scheifler, James Gettys, Jim Flowers,
@@ -981,28 +1473,27 @@ Books
    Window System: The Complete Reference to Xlib, X Protocol, ICCCM, and
    XLFD.
 
-   [Richter99] Jeffrey Richter, 1999, 1-57231-996-8, Microsoft® Press,
-   Programming Applications for Microsoft® Windows®: Mastering the
-   critical building blocks of 32-bit and 64-bit Windows®-based
-   applications.
+   [Richter99] Jeffrey Richter, 1999, 1-57231-996-8, Microsoft Press,
+   Programming Applications for Microsoft Windows: Mastering the critical
+   building blocks of 32-bit and 64-bit Windows-based applications.
 
-   [Petzold99] Charles Petzold, 1999, 1-57231-995-X, Microsoft® Press,
-   Programming Windows: The definitive guide to the Win32® API.
+   [Petzold99] Charles Petzold, 1999, 1-57231-995-X, Microsoft Press,
+   Programming Windows: The definitive guide to the Win32 API.
 
-   [McKay99] Everett N. McKay, 1999, 0-7356-0586-6, Microsoft® Press,
-   Developing User Interfaces for Microsoft® Windows®: Practical and
+   [McKay99] Everett N. McKay, 1999, 0-7356-0586-6, Microsoft Press,
+   Developing User Interfaces for Microsoft Windows: Practical and
    effective methods for improving the user experience.
 
    [JonesOhlund99] Anthony Jones and Jim Ohlund, 1999, 0-7356-0560-2,
-   Microsoft® Press, Network Programming for Microsoft® Windows®: Clear,
+   Microsoft Press, Network Programming for Microsoft Windows: Clear,
    practical guide to Microsoft's networking APIs.
 
-   [Yuan01] Feng Yuan, 2001, 0-13-086985-6, Prentice Hall PTR, Windows®
-   Graphics Programming: Win32® GDI and DirectDraw®.
+   [Yuan01] Feng Yuan, 2001, 0-13-086985-6, Prentice Hall PTR, Windows
+   Graphics Programming: Win32 GDI and DirectDraw.
 
    [CohenWoodring98] Aaron Cohen and Mike Woodring, 1998, 1-56592-296-4,
-   O'Reilly & Associates, Inc., Win32® Multithreaded Programming:
-   Building Thread-Safe Applications.
+   O'Reilly & Associates, Inc., Win32 Multithreaded Programming: Building
+   Thread-Safe Applications.
 
    [CameronRosenblattRaymond96] Debra Cameron, Bill Rosenblatt, and Eric
    Raymond, 1996, 1991, 1-56592-152-6, O'Reilly & Associates, Inc.,
@@ -1012,26 +1503,106 @@ Books
    0-937175-73-0, O'Reilly & Associates, Inc., POSIX Programmer's Guide:
    Writing Portable UNIX Programs.
 
-   [KernighanRitchie88] Brian W. Kernighan and Dennis M. Ritchie, 1998,
+   [KernighanRitchie88] Brian W. Kernighan and Dennis M. Ritchie, 1988,
    1978, 0-13-110370-9, Prentice Hall PTR, The C Programming Language:
    ANSI C.
 
 Glossary
 
+B
+
+   Bitmap (Win32)
+          Windows pixel map.
+
+   Bitmap (X)
+          X pixel map with bit depth equal to one. X pixel maps of bit
+          depth not equal to one are called [80]pixmaps.
+
 C
+
+   Color Framebuffer Layer (CFB)
+          Deprecated X Server layer providing implementations of the X
+          graphics functions to draw on an antiquated framebuffer device.
+          CFB is optimized to minimize CPU instructions at the expense of
+          additional memory accesses; this does not work well on modern
+          machines because memory access is the system performance bottle
+          neck. CFB can only be initialized to draw on one depth of
+          framebuffer per instantiation; this was done to eliminate CPU
+          instructions that checked the current framebuffer depth, thus
+          saving processing time on early machines.
+
+   Colormap (cmap)
+          X Server colormap. Contains a table translating index values to
+          red, green, blue 3-tuples that will be displayed on the screen
+          when a given index value is contained in a bitmap.
 
    Concurrent Versions System (CVS)
           CVS is an open source version control system used by the
           majority of open source projects. More information can be found
-          at the [47]CVS project homepage.
+          at the [81]CVS project homepage.
+
+D
+
+   Device Dependent X Layer (DDX)
+          X Server layer that depends on the hardware; but not the
+          operating system.
+
+   Device Independent X Layer (DIX)
+          X Server layer that does not depend on the hardware layer, nor
+          the operating system.
 
 F
 
-   firewall
-          Firewall software attempts to protect an internal network from
-          intrusions originating from an external network.
+   Framebuffer Layer (FB)
+          X Server layer providing implementations of the X graphics
+          functions to draw on a modern framebuffer device. FB is
+          optimized to minimize memory accesses at the expense of
+          additional CPU instructions; this works well on modern machines
+          because memory access is the system performance bottle neck.
+
+G
+
+   Graphics Context (GC)
+          X Server graphics context. Stores information describing a
+          graphics operation to perform, such as the foreground and
+          background colors, fill style, stipple, and tile.
+
+M
+
+   Machine Independent Layer (MI)
+          X Server layer providing user input and graphics display
+          functions that are independent of the machine used by the DDX
+          layer. The MI drawing functions depend on only three DDX
+          functions: FillSpans, GetSpans, and SetSpans.
+
+O
+
+   Offscreen Framebuffer
+          Essentially a [82]bitmap, in the Windows sense, of size and
+          color format that can be displayed on the screen. An offscreen
+          framebuffer may be identical in size and color format to the
+          [83]primary framebuffer, but this is not always required.
+
+   OS Layer (OS)
+          X Server layer that depends on the operating system; but not
+          the hardware.
 
 P
+
+   Pixmap
+          X pixel map with bit depth not equal to one. X pixel maps of
+          bit depth one are called [84]bitmaps.
+
+   Primary Framebuffer
+          The block of memory, essentially a [85]bitmap, that describes
+          what is currently being displayed on the screen. Any updates to
+          the primary framebuffer will be displayed on the screen after
+          the next screen refresh.
+
+   Privates
+          Additional information associated with internal X Server
+          structures, such as [86]colormaps, [87]GCs, [88]pixmaps, or
+          [89]screens.
 
    pserver
           CVS pserver, short for "password server", is one of the user
@@ -1041,12 +1612,18 @@ P
           access to open source CVS trees, as CVS pserver is by far the
           easiest method to use.
 
-V
+S
 
-   Virtual Private Network (VPN)
-          Virtual Private Networks are encrypted tunnels through which
-          private data can be safely transmitted over a private network
-          (e.g. the Internet).
+   Screen
+          X Server screen. A screen usually corresponds to a display
+          device; however, Cygwin/XFree86's X Server corresponds each
+          screen to one Windows window. A single instance of the
+          Cygwin/XFree86 X Server may have several screens.
+
+   Shadow
+          X Server shadow layer that allows [90]FB to draw to an
+          offscreen framebuffer and occasionally call a [91]DDX function
+          that transfers the updated regions to the screen.
 
 X
 
@@ -1064,7 +1641,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [48]X Display Manager.
+          See Also: [92]X Display Manager.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -1391,7 +1968,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [49]http://www.gnu.org/copyleft/.
+   [93]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -1433,49 +2010,93 @@ References
    1. file://localhost/home/public/documents/cygx/build/cg/dump.html#overview
    2. file://localhost/home/public/documents/cygx/build/cg/dump.html#programming
    3. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-overview
-   4. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-   5. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-source-obtaining
-   6. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling
-   7. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-install
-   8. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-tree-update
-   9. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-cross
-  10. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-obtaining-compiler-source
-  11. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
-  12. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-building-binutils-and-gcc
-  13. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-source-obtaining
-  14. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-build
-  15. file://localhost/home/public/documents/cygx/build/cg/dump.html#documentation
-  16. file://localhost/home/public/documents/cygx/build/cg/dump.html#website
-  17. file://localhost/home/public/documents/cygx/build/cg/dump.html#biblio
-  18. file://localhost/home/public/documents/cygx/build/cg/dump.html#glossary
-  19. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl
-  20. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-preamble
-  21. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-applicability-and-definitions
-  22. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-verbation-copying
-  23. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-copying-in-quantity
-  24. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-modifications
-  25. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-combining-documents
-  26. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-collections-of-documents
-  27. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-aggregation-with-independent-works
-  28. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-translation
-  29. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-termination
-  30. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-future-revisions-of-this-license
-  31. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-using-for-your-documents
-  32. file://localhost/home/public/documents/cygx/build/cg/dump.html#programming
-  33. file://localhost/home/public/documents/cygx/build/cg/dump.html#documentation
-  34. file://localhost/home/public/documents/cygx/build/cg/dump.html#website
-  35. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-source-obtaining
-  36. http://xfree86.org/cvs/
-  37. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  38. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pserver
-  39. http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2
-  40. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  41. http://cygwin.com/mirrors.html
-  42. http://cygwin.com/mirrors.html
-  43. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-source-obtaining
-  44. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling
-  45. http://www.msu.edu/~huntharo/xwin/host.def
-  46. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  47. http://www.cvshome.org/
-  48. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
-  49. http://www.gnu.org/copyleft/
+   4. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-tree-layout
+   5. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-server-architecture
+   6. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-server-architecture-privates
+   7. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-server-architecture-engines
+   8. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-server-architecture-input
+   9. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-obtaining-source
+  10. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  11. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling
+  12. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-install
+  13. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-tree-update
+  14. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-cross
+  15. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-obtaining-compiler-source
+  16. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
+  17. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-building-binutils-and-gcc
+  18. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-cross-build
+  19. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-distribution
+  20. file://localhost/home/public/documents/cygx/build/cg/dump.html#documentation
+  21. file://localhost/home/public/documents/cygx/build/cg/dump.html#website
+  22. file://localhost/home/public/documents/cygx/build/cg/dump.html#biblio
+  23. file://localhost/home/public/documents/cygx/build/cg/dump.html#glossary
+  24. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl
+  25. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-preamble
+  26. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-applicability-and-definitions
+  27. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-verbation-copying
+  28. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-copying-in-quantity
+  29. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-modifications
+  30. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-combining-documents
+  31. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-collections-of-documents
+  32. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-aggregation-with-independent-works
+  33. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-translation
+  34. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-termination
+  35. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-future-revisions-of-this-license
+  36. file://localhost/home/public/documents/cygx/build/cg/dump.html#gfdl-using-for-your-documents
+  37. file://localhost/home/public/documents/cygx/build/cg/dump.html#programming
+  38. file://localhost/home/public/documents/cygx/build/cg/dump.html#documentation
+  39. file://localhost/home/public/documents/cygx/build/cg/dump.html#website
+  40. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-obtaining-source
+  41. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-distribution
+  42. http://www.opengroup.org/
+  43. http://www.x.org/
+  44. http://www.xfree86.org/mailman/listinfo/i18n
+  45. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cfb-layer
+  46. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-shadow-layer
+  47. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-dix-layer
+  48. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-mi-layer
+  49. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-os-layer
+  50. http://xfree86.cygwin.com/devel/xwinclip/
+  51. file://localhost/home/public/documents/cygx/build/cg/dump.html#porting-layer-definition
+  52. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-gc
+  53. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  54. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-screen
+  55. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-mi-layer
+  56. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
+  57. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-shadow-layer
+  58. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-privates
+  59. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-dix-layer
+  60. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-ddx-layer
+  61. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
+  62. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-shadow-layer
+  63. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-offscreen-framebuffer
+  64. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
+  65. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
+  66. http://xfree86.org/cvs/
+  67. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  68. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pserver
+  69. http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2
+  70. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  71. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  72. http://cygwin.com/mirrors.html
+  73. http://cygwin.com/mirrors.html
+  74. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  75. http://www.msu.edu/~huntharo/xwin/host.def
+  76. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  77. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  78. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  79. http://docbook.org/
+  80. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  81. http://www.cvshome.org/
+  82. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
+  83. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
+  84. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-x
+  85. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
+  86. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-colormap
+  87. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-gc
+  88. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  89. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-screen
+  90. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
+  91. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-ddx-layer
+  92. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
+  93. http://www.gnu.org/copyleft/

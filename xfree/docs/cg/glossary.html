@@ -73,10 +73,82 @@ CLASS="glossdiv"
 ><H1
 CLASS="glossdiv"
 ><A
-NAME="AEN785"
+NAME="AEN1188"
+>B</A
+></H1
+><DL
+><DT
+><A
+NAME="gloss-bitmap-win32"
+><B
+>Bitmap (Win32)</B
+></A
+></DT
+><DD
+><P
+>Windows pixel map.</P
+></DD
+><DT
+><A
+NAME="gloss-bitmap-x"
+><B
+>Bitmap (X)</B
+></A
+></DT
+><DD
+><P
+>X pixel map with bit depth equal to one.  X pixel maps of bit
+depth not equal to one are called <A
+HREF="glossary.html#gloss-pixmap"
+><I
+CLASS="glossterm"
+>pixmaps</I
+></A
+>.</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="glossdiv"
+><H1
+CLASS="glossdiv"
+><A
+NAME="AEN1199"
 >C</A
 ></H1
 ><DL
+><DT
+><A
+NAME="gloss-cfb-layer"
+><B
+>Color Framebuffer Layer</B
+></A
+></DT
+> (CFB)<DD
+><P
+>Deprecated X Server layer providing implementations of the X
+graphics functions to draw on an antiquated framebuffer device.  CFB
+is optimized to minimize CPU instructions at the expense of additional
+memory accesses; this does not work well on modern machines because
+memory access is the system performance bottle neck.  CFB can only be
+initialized to draw on one depth of framebuffer per instantiation;
+this was done to eliminate CPU instructions that checked the current
+framebuffer depth, thus saving processing time on early
+machines.</P
+></DD
+><DT
+><A
+NAME="gloss-colormap"
+><B
+>Colormap</B
+></A
+></DT
+> (cmap)<DD
+><P
+>X Server colormap.  Contains a table translating index values to
+red, green, blue 3-tuples that will be displayed on the screen when a
+given index value is contained in a bitmap.</P
+></DD
 ><DT
 ><A
 NAME="gloss-cvs"
@@ -101,21 +173,33 @@ CLASS="glossdiv"
 ><H1
 CLASS="glossdiv"
 ><A
-NAME="AEN793"
->F</A
+NAME="AEN1217"
+>D</A
 ></H1
 ><DL
 ><DT
 ><A
-NAME="gloss-firewall"
+NAME="gloss-ddx-layer"
 ><B
->firewall</B
+>Device Dependent X Layer</B
 ></A
 ></DT
-><DD
+> (DDX)<DD
 ><P
->Firewall software attempts to protect an internal network from
-intrusions originating from an external network.</P
+>X Server layer that depends on the hardware; but not the
+operating system.</P
+></DD
+><DT
+><A
+NAME="gloss-dix-layer"
+><B
+>Device Independent X Layer</B
+></A
+></DT
+> (DIX)<DD
+><P
+>X Server layer that does not depend on the hardware layer, nor
+the operating system.</P
 ></DD
 ></DL
 ></DIV
@@ -124,10 +208,219 @@ CLASS="glossdiv"
 ><H1
 CLASS="glossdiv"
 ><A
-NAME="AEN799"
+NAME="AEN1229"
+>F</A
+></H1
+><DL
+><DT
+><A
+NAME="gloss-fb-layer"
+><B
+>Framebuffer Layer</B
+></A
+></DT
+> (FB)<DD
+><P
+>X Server layer providing implementations of the X graphics
+functions to draw on a modern framebuffer device.  FB is optimized to
+minimize memory accesses at the expense of additional CPU
+instructions; this works well on modern machines because memory access
+is the system performance bottle neck.</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="glossdiv"
+><H1
+CLASS="glossdiv"
+><A
+NAME="AEN1236"
+>G</A
+></H1
+><DL
+><DT
+><A
+NAME="gloss-gc"
+><B
+>Graphics Context</B
+></A
+></DT
+> (GC)<DD
+><P
+>X Server graphics context.  Stores information describing a
+graphics operation to perform, such as the foreground and background
+colors, fill style, stipple, and tile.</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="glossdiv"
+><H1
+CLASS="glossdiv"
+><A
+NAME="AEN1243"
+>M</A
+></H1
+><DL
+><DT
+><A
+NAME="gloss-mi-layer"
+><B
+>Machine Independent Layer</B
+></A
+></DT
+> (MI)<DD
+><P
+>X Server layer providing user input and graphics display
+functions that are independent of the machine used by the DDX layer.
+The MI drawing functions depend on only three DDX functions:
+<TT
+CLASS="function"
+>FillSpans</TT
+>, <TT
+CLASS="function"
+>GetSpans</TT
+>, and
+<TT
+CLASS="function"
+>SetSpans</TT
+>.</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="glossdiv"
+><H1
+CLASS="glossdiv"
+><A
+NAME="AEN1253"
+>O</A
+></H1
+><DL
+><DT
+><A
+NAME="gloss-offscreen-framebuffer"
+><B
+>Offscreen Framebuffer</B
+></A
+></DT
+><DD
+><P
+>Essentially a <A
+HREF="glossary.html#gloss-bitmap-win32"
+><I
+CLASS="glossterm"
+>bitmap</I
+></A
+>, in the Windows
+sense, of size and color format that can be displayed on the screen.
+An offscreen framebuffer may be identical in size and color format to
+the <A
+HREF="glossary.html#gloss-primary-framebuffer"
+><I
+CLASS="glossterm"
+>primary
+framebuffer</I
+></A
+>, but this is not always required.</P
+></DD
+><DT
+><A
+NAME="gloss-os-layer"
+><B
+>OS Layer</B
+></A
+></DT
+> (OS)<DD
+><P
+>X Server layer that depends on the operating system; but not the
+hardware.</P
+></DD
+></DL
+></DIV
+><DIV
+CLASS="glossdiv"
+><H1
+CLASS="glossdiv"
+><A
+NAME="AEN1266"
 >P</A
 ></H1
 ><DL
+><DT
+><A
+NAME="gloss-pixmap"
+><B
+>Pixmap</B
+></A
+></DT
+><DD
+><P
+>X pixel map with bit depth not equal to one.  X pixel maps of
+bit depth one are called <A
+HREF="glossary.html#gloss-bitmap-x"
+><I
+CLASS="glossterm"
+>bitmaps</I
+></A
+>.</P
+></DD
+><DT
+><A
+NAME="gloss-primary-framebuffer"
+><B
+>Primary Framebuffer</B
+></A
+></DT
+><DD
+><P
+>The block of memory, essentially a <A
+HREF="glossary.html#gloss-bitmap-win32"
+><I
+CLASS="glossterm"
+>bitmap</I
+></A
+>, that describes what
+is currently being displayed on the screen.  Any updates to the
+primary framebuffer will be displayed on the screen after the next
+screen refresh.</P
+></DD
+><DT
+><A
+NAME="gloss-privates"
+><B
+>Privates</B
+></A
+></DT
+><DD
+><P
+>Additional information associated with internal X Server
+structures, such as <A
+HREF="glossary.html#gloss-colormap"
+><I
+CLASS="glossterm"
+>colormaps</I
+></A
+>, <A
+HREF="glossary.html#gloss-gc"
+><I
+CLASS="glossterm"
+>GCs</I
+></A
+>, <A
+HREF="glossary.html#gloss-pixmap"
+><I
+CLASS="glossterm"
+>pixmaps</I
+></A
+>, or <A
+HREF="glossary.html#gloss-screen"
+><I
+CLASS="glossterm"
+>screens</I
+></A
+>.</P
+></DD
 ><DT
 ><A
 NAME="gloss-pserver"
@@ -154,22 +447,48 @@ CLASS="glossdiv"
 ><H1
 CLASS="glossdiv"
 ><A
-NAME="AEN806"
->V</A
+NAME="AEN1291"
+>S</A
 ></H1
 ><DL
 ><DT
 ><A
-NAME="gloss-vpn"
+NAME="gloss-screen"
 ><B
->Virtual Private Network</B
+>Screen</B
 ></A
 ></DT
-> (VPN)<DD
+><DD
 ><P
->Virtual Private Networks are encrypted tunnels through which
-private data can be safely transmitted over a private network
-(e.g. the Internet).</P
+>X Server screen.  A screen usually corresponds to a display
+device; however, Cygwin/XFree86's X Server corresponds each screen to one
+Windows window.  A single instance of the Cygwin/XFree86 X Server may have
+several screens.</P
+></DD
+><DT
+><A
+NAME="gloss-shadow-layer"
+><B
+>Shadow</B
+></A
+></DT
+><DD
+><P
+>X Server shadow layer that allows <A
+HREF="glossary.html#gloss-fb-layer"
+><I
+CLASS="glossterm"
+>FB</I
+></A
+> to draw to an offscreen
+framebuffer and occasionally call a <A
+HREF="glossary.html#gloss-ddx-layer"
+><I
+CLASS="glossterm"
+>DDX</I
+></A
+> function that transfers the
+updated regions to the screen.</P
 ></DD
 ></DL
 ></DIV
@@ -178,7 +497,7 @@ CLASS="glossdiv"
 ><H1
 CLASS="glossdiv"
 ><A
-NAME="AEN813"
+NAME="AEN1303"
 >X</A
 ></H1
 ><DL
