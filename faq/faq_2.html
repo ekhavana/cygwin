@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 16 November 2000 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 17 November 2000 -->
 
 <TITLE>The Cygwin FAQ
  - Installation Instructions</TITLE>
@@ -263,7 +263,47 @@ README file for that package.)
 
 
 
-<H3><A NAME="SEC15" HREF="faq_toc.html#TOC15">How do I uninstall Cygwin?</A></H3>
+<H3><A NAME="SEC15" HREF="faq_toc.html#TOC15">Setup screwed up my mounts!</A></H3>
+
+<P>
+Setup will remove the following mounts, should you have them:
+
+
+
+<PRE>
+	/
+        /usr
+        /usr/bin
+        /usr/lib
+        /var
+        /lib
+        /bin
+        /etc
+</PRE>
+
+<P>
+It will then restore (or create new) mounts for /, /usr/bin and /usr/lib
+as follows (assuming the default install root C:\cygwin):
+
+
+
+<PRE>
+	Device              Directory
+	C:\cygwin\bin       /usr/bin
+	C:\cygwin\lib       /usr/lib
+	C:\cygwin           /
+</PRE>
+
+<P>
+Since setup is not a Cygwin program, it cannot know about your mounts
+(or symlinks, for that matter), and so must impose and enforce this
+structure.  You should not try to defeat it, unless you know what you
+are doing and can deal with the consequences.
+
+
+
+
+<H3><A NAME="SEC16" HREF="faq_toc.html#TOC16">How do I uninstall Cygwin?</A></H3>
 
 <P>
 Setup has no automatic uninstall facility.  Just delete everything
