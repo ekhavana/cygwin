@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from ./faq.texinfo on 16 July 2004 -->
+<!-- Created by texi2html 1.56k from ./faq.texinfo on 29 September 2004 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -28,7 +28,7 @@
 <LI><A NAME="TOC10" HREF="faq0.html#SEC10">Can I use Cygwin Setup to get old versions of packages (like gcc-2.95)?</A>
 <LI><A NAME="TOC11" HREF="faq0.html#SEC11">Is Cygwin Setup, or one of the packages, infected with a virus?</A>
 <LI><A NAME="TOC12" HREF="faq0.html#SEC12">My computer hangs when I run Cygwin Setup!</A>
-<LI><A NAME="TOC13" HREF="faq0.html#SEC13">What packages should I download?</A>
+<LI><A NAME="TOC13" HREF="faq0.html#SEC13">What packages should I download? Where are 'make', 'gcc', 'vi', etc?</A>
 <LI><A NAME="TOC14" HREF="faq0.html#SEC14">How do I just get everything?</A>
 <LI><A NAME="TOC15" HREF="faq0.html#SEC15">How much disk space does Cygwin require?</A>
 <LI><A NAME="TOC16" HREF="faq0.html#SEC16">What if setup fails?</A>
@@ -51,7 +51,7 @@
 <UL>
 <LI><A NAME="TOC28" HREF="faq0.html#SEC28">Why can't my application locate cygncurses5.dll?  or cygintl.dll?  or cygreadline5.dll?  or ...?</A>
 <LI><A NAME="TOC29" HREF="faq0.html#SEC29">Why is Cygwin suddenly <EM>so</EM> slow?</A>
-<LI><A NAME="TOC30" HREF="faq0.html#SEC30">Why doesn't //c (for C:) work anymore?</A>
+<LI><A NAME="TOC30" HREF="faq0.html#SEC30">Why can't I access my network shares with <SAMP>`cron'</SAMP>, or when using pubkey authentication with <SAMP>`ssh'</SAMP>?</A>
 <LI><A NAME="TOC31" HREF="faq0.html#SEC31">How should I set my PATH?</A>
 <LI><A NAME="TOC32" HREF="faq0.html#SEC32">Bash says "command not found", but it's right there!</A>
 <LI><A NAME="TOC33" HREF="faq0.html#SEC33">How do I convert between Windows and UNIX paths?</A>
@@ -245,7 +245,7 @@ Yes.  Parts are GNU software (gcc, gas, ld, etc...), parts are covered
 by the standard X11 license, some of it is public domain, some of
 it was written by Cygnus and placed under the GPL.  None of it is
 shareware.  You don't have to pay anyone to use it but you should be
-sure to read the copyright section of the FAQ more more information on
+sure to read the copyright section of the FAQ for more information on
 how the GNU General Public License may affect your use of these tools.
 
 
@@ -277,7 +277,7 @@ To find the version of the Cygwin DLL installed, you can use
 
 
 <P>
-If you are looking for the a version number for the whole Cygwin
+If you are looking for the version number for the whole Cygwin
 release, there is none. Each package in the Cygwin release has its own
 version.  The packages in Cygwin are continually improving, thanks to
 the efforts of net volunteers who maintain the Cygwin binary ports.
@@ -424,8 +424,7 @@ something malicious, and no mirror has been compromised.
 
 
 
-<H3><A NAME="SEC13" HREF="faq0.html#TOC13">What packages should I download?</A></H3>
-
+<H3><A NAME="SEC13" HREF="faq0.html#TOC13">What packages should I download? Where are 'make', 'gcc', 'vi', etc?</A></H3>
 <P>
 When using Cygwin Setup for the first time, the default is to install
 a minimal subset of packages.  If you want anything beyond that, you
@@ -437,7 +436,7 @@ packages.
 <P>
 If you want to build programs, of course you'll need <SAMP>`gcc'</SAMP>,
 <SAMP>`binutils'</SAMP>, <SAMP>`make'</SAMP> and probably other packages from the
-"Devel" category.
+"Devel" category. Text editors can be found under "Editors".
 
 
 
@@ -914,31 +913,40 @@ containing packages, see
 <H3><A NAME="SEC29" HREF="faq0.html#TOC29">Why is Cygwin suddenly <EM>so</EM> slow?</A></H3>
 
 <P>
-If you recently upgraded the <SAMP>`cygwin'</SAMP> package and suddenly
-<EM>every</EM> command takes a <EM>very</EM> long time, then you probably
-have the obsolete <CODE>//c</CODE> notation in your PATH.  This now means
-the <EM>network share</EM> <CODE>c</CODE>, which will slow things down
-tremendously if it does not exist.  See then next FAQ entry.
-
-
-
-
-<H3><A NAME="SEC30" HREF="faq0.html#TOC30">Why doesn't //c (for C:) work anymore?</A></H3>
-
-<P>
-(Similarly for any drive letter, e.g. <CODE>//z</CODE> for <CODE>Z:</CODE>)
+If you recently upgraded and suddenly <EM>every</EM> command takes a
+<EM>very</EM> long time, then something is probably attempting to 
+access a network share.  You may have the obsolete <CODE>//c</CODE>
+notation in your PATH or startup files.  This now means the
+<EM>network share</EM> <CODE>c</CODE>, which will slow things down
+tremendously if it does not exist.  
 
 
 <P>
-This "feature" has long been deprecated, and no longer works at all
-in the latest release.  As of release 1.3.3, <CODE>//c</CODE> now means the
-<EM>network share</EM> <CODE>c</CODE>.
-
-
-<P>
+Using //c (for C:) doesn't work anymore.  (Similarly for any drive
+letter, e.g. <CODE>//z</CODE> for <CODE>Z:</CODE>) This "feature" has long been
+deprecated, and no longer works at all in the latest release.  As of
+release 1.3.3, <CODE>//c</CODE> now means the <EM>network share</EM> <CODE>c</CODE>.
 For a detailed discussion of why this change was made, and how deal
 with it now, refer to
 <STRONG><A HREF="http://sources.redhat.com/ml/cygwin/2001-09/msg00014.html">http://sources.redhat.com/ml/cygwin/2001-09/msg00014.html</A></STRONG>.
+
+
+
+
+<H3><A NAME="SEC30" HREF="faq0.html#TOC30">Why can't I access my network shares with <SAMP>`cron'</SAMP>, or when using pubkey authentication with <SAMP>`ssh'</SAMP>?</A></H3>
+
+<P>
+Some Cygwin services normally run as the SYSTEM user, which has
+certain limitations. Under the Windows authentication scheme, the
+SYSTEM user cannot access network shares that require authentication.
+For more information, see
+<STRONG><A HREF="http://cygwin.com/cygwin-ug-net/ntsec.html">http://cygwin.com/cygwin-ug-net/ntsec.html</A></STRONG>.
+
+
+<P>
+Workarounds include using public network share that does not require
+authentication (for non-critical files), or running the service as
+your own user with <SAMP>`cygrunsrv'</SAMP>.
 
 
 
@@ -2531,12 +2539,9 @@ MAKE_MODE to "UNIX" (actually case is not significant) or "WIN32"
 <H3><A NAME="SEC91" HREF="faq0.html#TOC91">Why the undefined reference to <SAMP>`<A HREF="mailto:WinMain@16">WinMain@16</A>'</SAMP>?</A></H3>
 
 <P>
-Try adding an empty main() function to one of your sources.
-
-
-<P>
-Or, perhaps you have <SAMP>`-lm'</SAMP> too early in the link command line.  It
-should be at the end:
+If you're using <SAMP>`gcc'</SAMP>, try adding an empty main() function to one
+of your sources.  Or, perhaps you have <SAMP>`-lm'</SAMP> too early in the
+link command line.  It should be at the end:
 
 
 
@@ -2562,6 +2567,15 @@ works, but
 <P>
 This is an artifact of libm.a being a symbolic link to libcygwin.a.
 
+
+<P>
+If you're using GCJ, you need to pass a "--main" flag:
+
+
+
+<PRE>
+gcj --main=Hello Hello.java
+</PRE>
 
 
 
@@ -4010,7 +4024,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 16 July 2004 using
+This document was generated on 29 September 2004 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
