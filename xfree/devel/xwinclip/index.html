@@ -1,89 +1,85 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
-<html lang="en-US">
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en-US">
 <head>
-<title>Cygwin/X - Development - xwinclip</title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" type="text/css" href="../../cygx.css">
-<link rel="icon" type="image/ico" href="../../favicon.ico">
-
-<meta name="Author" content="Harold L Hunt II">
-<meta name="keywords" content="xfree86, Cygwin, X, x window system,
-microsoft, windows, x/server, xserver, x-server, Cygwin/X,
-Win32, Win32API, Win32 API, xwinclip, clipboard, cut, paste, copy,
-primary, secondary">
-<meta name="description" content="Cygwin/X - Development - xwinclip">
-
+    <title>Cygwin/X - Development - xwinclip</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=us-ascii" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="../../cygx.css" />
+    <link rel="icon"
+          type="image/ico"
+          href="../../favicon.ico" />
+    <meta name="Author"
+          content="Harold L Hunt II" />
+    <meta name="keywords"
+          content="xfree86, Cygwin, X, x window system, microsoft, windows, x/server, xserver, x-server, Cygwin/X, Win32, Win32API, Win32 API, xwinclip, clipboard, cut, paste, copy, primary, secondary" />
+    <meta name="description"
+          content="Cygwin/X - Development - xwinclip" />
 </head>
-
-<!--#include virtual="../../cygx-header.html" -->
-
 <!-- BODY MODIFIED: $Date$ $Author$ -->
 
-<h2>Cygwin/X - Development - xwinclip</h2>
+<body>
+    <!--#include virtual="../../cygx-header.html" -->
 
-<p>Last updated: 2004-02-22 1620 EST (Harold L Hunt II)</p>
+    <h2>Cygwin/X - Development - xwinclip</h2>
 
-<p>xwinclip is a clipboard manager for Cygwin/X that integrates
-the X Window System clipboard with the Microsoft Windows clipboard.
-xwinclip currently supports two-way text transfers.  More formats will
-be added as they are requested by users.</p>
+    <p>Last updated: 2004-02-22 1620 EST (Harold L Hunt II)</p>
 
+    <p>xwinclip is a clipboard manager for Cygwin/X that integrates
+    the X Window System clipboard with the Microsoft Windows
+    clipboard. xwinclip currently supports two-way text transfers.
+    More formats will be added as they are requested by users.</p>
 
-<h4>News</h4>
-<ul>
+    <h4>News</h4>
 
-<li>2004-02-22 - xwinclip is not needed anymore.  The integrated
-clipboard support (XWin.exe -clipboard) no longer steals the X
-selection and it works with most XDM servers.  This page is here for
-historical purposes only and will be removed at some point in the near
-future.</li>
+    <ul>
+        <li>2004-02-22 - xwinclip is not needed anymore. The
+        integrated clipboard support (XWin.exe -clipboard) no
+        longer steals the X selection and it works with most XDM
+        servers. This page is here for historical purposes only and
+        will be removed at some point in the near future.</li>
 
-<li>2003-10-30 - 1.2.0-1 has been released.  See the <a
-href="changelog.html">Change Log</a> for details.</li>
+        <li>2003-10-30 - 1.2.0-1 has been released. See the
+        <a href="changelog.html">Change Log</a> for details.</li>
 
-<li>2003-01-12 - Test08 has been released.  See the <a
-href="changelog.html">Change Log</a> for details.</li>
+        <li>2003-01-12 - Test08 has been released. See the
+        <a href="changelog.html">Change Log</a> for details.</li>
+    </ul>
 
-</ul>
+    <h4>Known Issues</h4>
 
+    <ul>
+        <li>xwinclip may leak resources.</li>
 
-<h4>Known Issues</h4>
-<ul>
+        <li>xwinclip may crash when it sees an unknown format.</li>
+    </ul>
 
-<li>xwinclip may leak resources.</li>
+    <h4>To-Do List</h4>
 
-<li>xwinclip may crash when it sees an unknown format.</li>
+    <p>See the Cygwin/X <a href="../todo.html">To-Do List</a> for a
+    list of open tasks for xwinclip.</p>
 
-</ul>
+    <h4>Downloading and Installing an xwinclip Binary</h4>
 
+    <p>To update your installation, click on the "Install Cygwin
+    now" link on the http://cygwin.com/ web page. This downloads
+    setup.exe to your system. Once you've downloaded setup.exe, run
+    it and select "XFree86" and then click on the appropriate field
+    until the above announced version number appears if it is not
+    displayed already.</p>
 
-<h4>To-Do List</h4>
+    <h4>Using xwinclip</h4>
 
-<p>See the Cygwin/X <a href="../todo.html">To-Do List</a> for a
-list of open tasks for xwinclip.</p>
-
-
-<h4>Downloading and Installing an xwinclip Binary</h4>
-
-<p>To update your installation, click on the "Install Cygwin now" link on
-the http://cygwin.com/ web page.  This downloads setup.exe to your
-system.  Once you've downloaded setup.exe, run it and select "XFree86"
-and then click on the appropriate field until the above announced
-version number appears if it is not displayed already.</p>
-
-
-<h4>Using xwinclip</h4>
-
-<p>To use xwinclip, modify your startxwin.bat file to start
-xwinclip.exe.  On Windows NT/2000, add the "start /B xwinclip.exe"
-immediately after the "start /B XWin.exe" line.  On Windows 95/98/Me,
-add the line "start xwinclip.exe" immediately after the "start
-XWin.exe" line.</p>
-
-<!--#include virtual="../../cygx-footer.html" -->
-
-</body>
+    <p>To use xwinclip, modify your startxwin.bat file to start
+    xwinclip.exe. On Windows NT/2000, add the "start /B
+    xwinclip.exe" immediately after the "start /B XWin.exe" line.
+    On Windows 95/98/Me, add the line "start xwinclip.exe"
+    immediately after the "start XWin.exe" line.</p>
+    <!--#include virtual="../../cygx-footer.html" -->
+    </body>
 </html>
