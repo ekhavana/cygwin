@@ -15,7 +15,7 @@ $main::packages = ();
 use FindBin qw($Bin);
 
 print $html->header, "\n<html>\n<title>Package List Search Results</title>\n",
-      "<!--#include virtual=\"cygwin-header.html\" -->\n",
+      "<!--#include virtual=\"../cygwin-header.html\" -->\n",
       $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n",
       $html->h2({-align=>'center'}, 'Search Results'), "\n";
 
@@ -49,7 +49,7 @@ if (!%main::packages) {
 	}
     }
 }
-print "<!--#include virtual=\"cygwin-footer.html\" -->\n", $html->end_html;
+print "<!--#include virtual=\"../cygwin-footer.html\" -->\n", $html->end_html;
 
 sub addfn($) {
     $_[0] =~ m!^([^/]+)/! or return;
