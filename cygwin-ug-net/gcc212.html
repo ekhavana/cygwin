@@ -1,0 +1,212 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML
+><HEAD
+><TITLE
+>GUI Mode Applications</TITLE
+><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"><META
+NAME="CREATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
+NAME="form"
+CONTENT="html"></HEAD
+><BODY
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="gcc.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Using GCC with Cygwin</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="gdb.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><H1
+><A
+NAME="GCC-GUI"
+>GUI Mode Applications</A
+></H1
+><P
+>Cygwin allows you to build programs with full access to the
+standard Windows 32-bit API, including the GUI functions as defined in
+any Microsoft or off-the-shelf publication.  However, the process of
+building those applications is slightly different, as you'll be using
+the GNU tools instead of the Microsoft tools.</P
+><P
+>For the most part, your sources won't need to change at all.
+However, you should remove all __export attributes from functions
+and replace them like this:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>int foo (int) __attribute__ ((__dllexport__));
+
+int
+foo (int i)</PRE
+></TD
+></TR
+></TABLE
+><P
+>For most cases, you can just remove the __export and leave it at
+that.  For convenience sake, you might want to work around a
+misfeature in cygwin's libraries by including this code snippet, else
+you'll have to add "-e _mainCRTStartup" to your link line in your
+Makefile.</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>#ifdef __CYGWIN__
+WinMainCRTStartup() { mainCRTStartup(); }
+#endif</PRE
+></TD
+></TR
+></TABLE
+><P
+>The Makefile is similar to any other unix-like Makefile, and
+like any other Cygwin makefile.  The only difference is that you use
+<B
+CLASS="COMMAND"
+>gcc -mwindows</B
+> to link your program into a GUI
+application instead of a command-line application.  Here's an example:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>myapp.exe : myapp.o myapp.res
+	gcc -mwindows myapp.o myapp.res -o $@
+
+myapp.res : myapp.rc resource.h
+	windres $&#60; -O coff -o $@</PRE
+></TD
+></TR
+></TABLE
+><P
+>Note the use of <TT
+CLASS="FILENAME"
+>windres</TT
+> to compile the
+Windows resources into a COFF-format <TT
+CLASS="FILENAME"
+>.res</TT
+> file.
+That will include all the bitmaps, icons, and other resources you
+need, into one handy object file.  Normally, if you omitted the "-O
+coff" it would create a Windows <TT
+CLASS="FILENAME"
+>.res</TT
+> format file,
+but we can only link COFF objects.  So, we tell
+<TT
+CLASS="FILENAME"
+>windres</TT
+> to produce a COFF object, but for
+compatibility with the many examples that assume your linker can
+handle Windows resource files directly, we maintain the
+<TT
+CLASS="FILENAME"
+>.res</TT
+> naming convention.  For more information on
+<TT
+CLASS="FILENAME"
+>windres</TT
+>, consule the Binutils manual.  </P
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="gcc.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gdb.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Using GCC with Cygwin</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="gcc.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Debugging Cygwin Programs</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

@@ -1,0 +1,215 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML
+><HEAD
+><TITLE
+>Installing the binary release:</TITLE
+><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"><META
+NAME="CREATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
+NAME="form"
+CONTENT="html"></HEAD
+><BODY
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="setup-net.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Setting Up Cygwin</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="setup-net126.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><H1
+><A
+NAME="AEN105"
+>Installing the binary release:</A
+></H1
+><P
+>Important!  Be sure to remove any older versions of the Cygwin
+tools from your PATH environment variable so you do not execute them
+by mistake.</P
+><P
+>Connect to one of the ftp servers listed above and cd to the
+directory containing the latest release. On our primary server, that
+would be:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/</PRE
+></TD
+></TR
+></TABLE
+><P
+>If you want the development tools and the programs necessary to
+run the GNU configure mechanism, you should download the full binary
+release called `cygwinfull.exe'.  If you only care about the user
+tools listed above, download `cygwinuser.exe' instead.</P
+><P
+>If you have an unreliable connection, download the appropriate
+binary in smaller chunks instead.  For the split full installer, get
+the files in the `full-split' subdirectory.  Once downloaded,
+combine the split files at the command prompt by doing a:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>copy /b xaa + xab + xac + ... + xai + xaj full.exe
+del xa*.*</PRE
+></TD
+></TR
+></TABLE
+><P
+>A similar process can be used for the user tools.</P
+><P
+>Once you have an install executable on your system, run
+it.  First off, the installer will prompt you for a location to extract
+the temporary files it needs to install the release on your
+system. The default should be fine for most people.</P
+><P
+>Next it will ask you to choose an install location.  The default
+is
+<TT
+CLASS="FILENAME"
+><TT
+CLASS="REPLACEABLE"
+><I
+>system-drive</I
+></TT
+>:\cygnus\cygwin-b20</TT
+>.
+Feel free to choose another location if you would prefer.</P
+><P
+>Finally, it will ask you for the name of the Program Files
+folder shortcut to add.  By default, the installer will create a
+`Cygwin B20' entry in a folder called `Cygnus Solutions'. When this
+step is completed, it will install the tools and exit.</P
+><P
+>At this point, you should be able to look under the start menu
+and select "Cygwin Beta 20" (or whatever you named it). This will
+pop up a bash shell with all special environment variables set up for
+you. If you are running Windows 95 or 98 and are faced with the error
+message "Out of environment space", you need to increase the amount of
+environment space in your config.sys and try again. Adding the line
+<B
+CLASS="COMMAND"
+>shell=C:\command.com /e:4096 /p</B
+> should do the trick
+if C: is your system drive letter.</P
+><P
+>There are two remaining thing you should do from this
+prompt. First, you need to type <B
+CLASS="COMMAND"
+>mkdir -p /tmp</B
+> to
+ensure that a directory for temporary files exists for programs that
+expect to find one there.</P
+><P
+>Second, if you are installing the full distribution
+(<TT
+CLASS="FILENAME"
+>full.exe</TT
+>), various programs will need to
+be able to find `/bin/sh'.  You should `mkdir -p /bin' and put a copy of
+`sh.exe' there, removing the older version, if present.  You can use
+the `mount' utility to select which drive letter is mounted as
+`/'.  See the Frequently Asked Questions (FAQ) file for more
+information on `mount'.</P
+><P
+>If you should ever want to uninstall the tools, you may do so
+via the "Add/Remove Programs" control panel.</P
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="setup-net.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="setup-net126.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Setting Up Cygwin</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="setup-net.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Installing the source code</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

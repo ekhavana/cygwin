@@ -1,0 +1,232 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML
+><HEAD
+><TITLE
+>kill</TITLE
+><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"><META
+NAME="CREATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
+NAME="form"
+CONTENT="html"></HEAD
+><BODY
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="utils347.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 7. Cygwin Utilities</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="utils382.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><H1
+><A
+NAME="KILL"
+>kill</A
+></H1
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>Usage: kill [-sigN] pid1 [pid2 ...]</PRE
+></TD
+></TR
+></TABLE
+><P
+>The <B
+CLASS="COMMAND"
+>kill</B
+> program allows you to send arbitrary
+signals to other cygwin programs.  The usual purpose is to end a
+running program from some other window when ^C won't work, but you can
+also send program-specified signals such as SIGUSR1 to trigger actions
+within the program, like enabling debugging or re-opening log files.
+Each program defines the signals they understand.</P
+><P
+>Note that the "pid" values are the cygwin pids, not the windows
+pids.  To get a list of running programs and their cygwin pids, use
+the cygwin <B
+CLASS="COMMAND"
+>ps</B
+> program.</P
+><P
+>To send a specific signal, use the
+<TT
+CLASS="LITERAL"
+>-signN</TT
+> option, either
+with a signal number or a signal name (minus the "SIG" part), like
+these examples:</P
+><DIV
+CLASS="EXAMPLE"
+><P
+><B
+>Example 7-2. Specifying signals with the kill command</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>$</TT
+> kill 123
+<TT
+CLASS="PROMPT"
+>$</TT
+> kill -1 123
+<TT
+CLASS="PROMPT"
+>$</TT
+> kill -HUP 123</PRE
+></TD
+></TR
+></TABLE
+></DIV
+><P
+>Here is a list of available signals, their numbers, and some
+commentary on them, from the file
+<TT
+CLASS="LITERAL"
+>&#60;sys/signal.h&#62;</TT
+>, which should be considered
+the official source of this information.</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>SIGHUP       1    hangup
+SIGINT       2    interrupt
+SIGQUIT      3    quit
+SIGILL       4    illegal instruction (not reset when caught)
+SIGTRAP      5    trace trap (not reset when caught)
+SIGABRT      6    used by abort
+SIGEMT       7    EMT instruction
+SIGFPE       8    floating point exception
+SIGKILL      9    kill (cannot be caught or ignored)
+SIGBUS      10    bus error
+SIGSEGV     11    segmentation violation
+SIGSYS      12    bad argument to system call
+SIGPIPE     13    write on a pipe with no one to read it
+SIGALRM     14    alarm clock
+SIGTERM     15    software termination signal from kill
+SIGURG      16    urgent condition on IO channel
+SIGSTOP     17    sendable stop signal not from tty
+SIGTSTP     18    stop signal from tty
+SIGCONT     19    continue a stopped process
+SIGCHLD     20    to parent on child stop or exit
+SIGCLD      20    System V name for SIGCHLD
+SIGTTIN     21    to readers pgrp upon background tty read
+SIGTTOU     22    like TTIN for output if (tp-&#62;t_local&#38;LTOSTOP)
+SIGIO       23    input/output possible signal
+SIGPOLL     23    System V name for SIGIO
+SIGXCPU     24    exceeded CPU time limit
+SIGXFSZ     25    exceeded file size limit
+SIGVTALRM   26    virtual time alarm
+SIGPROF     27    profiling time alarm
+SIGWINCH    28    window changed
+SIGLOST     29    resource lost (eg, record-lock lost)
+SIGUSR1     30    user defined signal 1
+SIGUSR2     31    user defined signal 2</PRE
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="utils347.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="utils382.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>cygpath</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="utils.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>mkgroup</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

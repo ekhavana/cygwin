@@ -1,0 +1,198 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML
+><HEAD
+><TITLE
+>cygpath</TITLE
+><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"><META
+NAME="CREATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
+NAME="form"
+CONTENT="html"></HEAD
+><BODY
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="utils.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 7. Cygwin Utilities</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="utils364.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><H1
+><A
+NAME="CYGPATH"
+>cygpath</A
+></H1
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>Usage: cygpath [-p|--path] (-u|--unix)|(-w|--windows) filename
+       cygpath [-v|--version]
+  -u|--unix     print Unix form of filename
+  -w|--windows  print Windows form of filename
+  -p|--path     filename argument is a path
+  -v|--version  print program version</PRE
+></TD
+></TR
+></TABLE
+><P
+>The <B
+CLASS="COMMAND"
+>cygpath</B
+> program is a utility that
+converts Windows native filenames to Cygwin POSIX-style pathnames and
+back.  It can be used when a cygwin program needs to pass a file name
+to a native windows program, or expects to get a file name from a
+native windows program.  You may use the long or short option names
+interchangeably, even though only the short ones are described
+here.</P
+><P
+>The <TT
+CLASS="LITERAL"
+>-u</TT
+> and <TT
+CLASS="LITERAL"
+>-w</TT
+> options
+indicate whether you want a conversion from windows to unix (posix)
+format (<TT
+CLASS="LITERAL"
+>-u</TT
+>) or a conversion from unix (posix) to
+windows format (<TT
+CLASS="LITERAL"
+>-w</TT
+>).  You must give exactly
+one of these.  To give neither or both is an error.</P
+><P
+>The <TT
+CLASS="LITERAL"
+>-p</TT
+> option means that you want to convert
+a path-style string rather than a single filename.  For example, the
+PATH environment variable is semicolon-delimited in Windows, but
+colon-delimited in Unix.  By giving <TT
+CLASS="LITERAL"
+>-p</TT
+> you are
+instructing <B
+CLASS="COMMAND"
+>cygpath</B
+> to convert between these
+formats.</P
+><DIV
+CLASS="EXAMPLE"
+><P
+><B
+>Example 7-1. Example cygpath usage</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>#!/bin/sh
+for i in `echo *.exe | sed 's/\.exe/cc/'`
+do
+  notepad `cygpath -w $i`
+done</PRE
+></TD
+></TR
+></TABLE
+></DIV
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="utils.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="utils364.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Cygwin Utilities</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="utils.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>kill</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML
+><HEAD
+><TITLE
+>Environment Variables</TITLE
+><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"><META
+NAME="CREATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
+NAME="form"
+CONTENT="html"></HEAD
+><BODY
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="setup-net138.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Setting Up Cygwin</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="setup-net179.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><H1
+><A
+NAME="SETUP-ENV"
+>Environment Variables</A
+></H1
+><P
+><TT
+CLASS="FILENAME"
+>make</TT
+> uses an environment variable MAKE_MODE
+to decide if it uses <TT
+CLASS="FILENAME"
+>command.com</TT
+> or
+<TT
+CLASS="FILENAME"
+>/bin/sh</TT
+> to run command lines.  If you're getting
+strange errors from <TT
+CLASS="FILENAME"
+>make</TT
+> about "/c not found",
+set MAKE_MODE to UNIX:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>C:\&#62; set MAKE_MODE=UNIX
+
+$ export MAKE_MODE=UNIX</PRE
+></TD
+></TR
+></TABLE
+><P
+>The HOME environment variable is used by UNIX shells to
+determine the location of your home directory.  This environment
+variable is converted from Windows format (e.g., <TT
+CLASS="FILENAME"
+>C:\home\bob</TT
+>)
+to UNIX format (e.g., <TT
+CLASS="FILENAME"
+>/home/bob</TT
+>) when a cygwin process
+first starts.</P
+><P
+>The PATH environment variable is used by Cygwin applications
+as a list of directories to search for executable files to run.  This
+environment variable is converted from Windows format (e.g. <TT
+CLASS="FILENAME"
+>C:\WinNT\system32;C:\WinNT</TT
+>)
+to UNIX format (e.g., <TT
+CLASS="FILENAME"
+>/WinNT/system32:/WinNT</TT
+>) when
+a cygwin process first starts.</P
+><P
+>The LD_LIBRARY_PATH environment variable is used by the Cygwin function
+<B
+CLASS="FUNCTION"
+>dlopen ()</B
+> as a list of directories to search for .dll files to load.  This
+environment variable is converted from Windows format (e.g. <TT
+CLASS="FILENAME"
+>C:\WinNT\system32;C:\WinNT</TT
+>)
+to UNIX format (e.g., <TT
+CLASS="FILENAME"
+>/WinNT/system32:/WinNT</TT
+>) when
+a cygwin process first starts.</P
+><P
+>The most important environment variable is the CYGWIN
+variable.  It is used to configure many global settings for
+the Cygwin runtime system.  It allows you to express many
+attributes, using a syntax like this:&#13;</P
+><P
+>set CYGWIN="foo nobar grill=27"</P
+><P
+>Note that each option is separated by others with a space.  Many
+options can be turned off by prefixing with "no" (i.e. "nobar" vs
+"bar" above).  The options are as follows:&#13;</P
+><P
+>(no)export - if set, the final values of these settings are
+re-exported to the environment as $CYGWIN again.</P
+><P
+>(no)title - if set, the title bar reflects the name of the
+program currently running.  Default is not set.</P
+><P
+>(no)strip_title - if set, strips the directory part off the
+window title.  Default is not set.</P
+><P
+>(no)glob - if set, command line arguments containing unix-style
+file wildcard characters (brackets, question mark, asterisk) are
+expanded into lists of files that match those wildcards.  This is
+applicable only to programs running from a windows command line prompt.
+Default is set.</P
+><P
+>(no)tty - if set, cygwin enables extra support (i.e., termios) for
+unix-like ttys.  Defaults to not set.</P
+><P
+>(no)binmode - if set, pipes and unspecified file opens default
+to binary mode (no CR/LF/Ctrl-Z translations) instead of text mode.
+Defaults to text mode.</P
+><P
+>strace=n[:cache][,filename] - configures system tracing.  Off by
+default, setting various bits in n (a bit flag) enables various types
+of system messages.  Setting n to 1 enables most messages.  Other
+values can be found in sys/strace.h.  The :cache option
+lets you specify how many lines to cache before flushing the output
+(example: strace=1:20).  The filename option lets you send the
+messages to a file instead of the screen. </P
+><P
+>(no)ntea - if set, use the full NT Extended Attributes to store
+unix-like inode information.  Warning: this may create additional
+<I
+CLASS="EMPHASIS"
+>large</I
+> files on non-NTFS partitions.  This option only
+operates under Windows NT.  Defaults to not set. </P
+><P
+>(no)reset_com - if set, serial ports are reset to 9600-8-N-1
+with no flow control when used (warning: this is done at open time and
+when handles are inherited).  Defaults to set.</P
+><P
+>(no)envcache - If set, environment variable conversions (between
+Win32 and POSIX) are cached.  Note that this is may cause problems if
+the mount table changes, as the cache is not invalidated and may
+contain values that depend on the previous mount table
+contents. Defaults to set.</P
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="setup-net138.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="setup-net179.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Directory Structure</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="setup-net.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Mount Table</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

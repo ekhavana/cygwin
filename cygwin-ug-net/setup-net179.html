@@ -1,0 +1,214 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML
+><HEAD
+><TITLE
+>Mount Table</TITLE
+><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"><META
+NAME="CREATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
+NAME="form"
+CONTENT="html"></HEAD
+><BODY
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="setup-net147.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Setting Up Cygwin</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="gcc.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><H1
+><A
+NAME="SETUP-MOUNT"
+>Mount Table</A
+></H1
+><P
+>The "mount" utility controls a mount table that is used to
+emulate a POSIX view of the Windows file system space.  This can be
+used to change the Windows path used as '/' and mount arbitrary Win32
+paths into the POSIX file system space.  Many people use the utility to
+mount each drive letter under the slash partition (e.g. C:\ to /c, D:\
+to /d, etc...).</P
+><P
+>Executing "mount" without any arguments prints the current
+mount table to the screen.  Otherwise, provide the Win32 path you
+would like to mount as the first argument and the POSIX path as the
+second argument.</P
+><P
+>The following example demonstrates using the mount utility to
+mount the directory "C:/cygnus/cygwin-b20/H-i586-cygwin32/bin"
+to "/bin".  This makes /bin/sh a valid shell, needed to satisfy make
+and so that you can execute Bourne Shell scripts normally.</P
+><DIV
+CLASS="EXAMPLE"
+><P
+><B
+>Example 2-1. Adding a /bin mount point</B
+></P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>ls /bin</B
+></TT
+>
+ls: /bin: No such file or directory
+<TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mkdir /bin</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mount
+C:/cygnus/cygwin-b20/H-i586-cygwin32/bin /bin</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mount</B
+></TT
+>
+Device           Directory           Type        Flags
+C:               /c                  native      text!=binary
+D:               /d                  native      text!=binary
+\\.\tape1:       /dev/st1            native      text!=binary
+\\.\tape0:       /dev/st0            native      text!=binary
+\\.\b:           /dev/fd1            native      text!=binary
+\\.\a:           /dev/fd0            native      text!=binary
+C:\cygnus\cygwin-b20\H-i586-cygwin32\bin /bin                native      text!=binary
+C:               /                   native      text!=binary
+<TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>ls /bin/sh</B
+></TT
+>
+/bin/sh
+<TT
+CLASS="PROMPT"
+>C:\cygnus\&#62;</TT
+></PRE
+></TD
+></TR
+></TABLE
+></DIV
+><P
+>The mount table is stored in the Windows registry and can be
+accessed under "HKEY_CURRENT_USER/Software/Cygnus Solutions/CYGWIN.DLL
+setup/&#60;version&#62;/mounts" where &#60;version&#62; is the latest
+registry version associated with the Cygwin library.</P
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="setup-net147.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gcc.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Environment Variables</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="setup-net.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Using GCC with Cygwin</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>
