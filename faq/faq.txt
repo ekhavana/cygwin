@@ -1898,8 +1898,8 @@ it:
      bash$ cd //MACHINE/Share
      bash$ mkdir -p path/to/new/dir
 
-Why doesn't my script work?
----------------------------
+Why doesn't my shell script work?
+---------------------------------
 
    There are two basic problems you might run into.  One is the fact
 that /bin/sh is really ash, and is missing some features you might
@@ -1910,6 +1910,9 @@ expect in /bin/sh.  For example:
    bullet No getopts
 
    bullet No functions exported
+
+   bullet Must use `.' instead of `source' (true of sh and ksh too, not
+     just ash)
 
    Or it could be a permission problem, and Cygwin doesn't understand
 that your script is executable.  Because `chmod' may not work (see FAQ
@@ -1931,6 +1934,13 @@ idiom
 under the mount point as executable.  This can be used for individual
 files as well as directories.  Then Cygwin will not bother to read files
 to determine whether they are executable.
+
+How do I print under Cygwin?
+----------------------------
+
+   In lieu of a comprehensive FAQ entry (which will come soon), there
+are a couple of messages from the mailing list archives that may be
+helpful.  Start at `http://cygwin.com/ml/cygwin/2001-04/msg00657.html'.
 
 Why don't cursor keys work under Win95/Win98?
 ---------------------------------------------
@@ -2613,6 +2623,12 @@ give you an idea of what is required.
    You should announce your intentions to the general cygwin list, in
 case others were thinking the same thing.
 
+How do I contribute to Cygwin?
+------------------------------
+
+   If you want to contribute to Cygwin itself, see
+`http://cygwin.com/contrib.html'.
+
 Why are compiled executables so huge?!?
 ---------------------------------------
 
@@ -2628,6 +2644,15 @@ Where is glibc?
    Cygwin does not provide glibc.  It uses newlib instead, which
 provides much (but not all) of the same functionality.  Porting glibc
 to Cygwin would be difficult.
+
+Where is Objective C?
+---------------------
+
+   Objective C is not distributed with the Cygwin version of gcc, and
+there are no plans to do so.  The gcc package maintainer had difficulty
+building it, and once built there were problems using it.  It appears
+that there is only minimual support for the Objective C front-end in the
+main GCC distribution, anyway.
 
 Why is make behaving badly?
 ---------------------------
