@@ -1,0 +1,1234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0045)http://borneo.gmd.de/~veit/os2/x11os2faq.html -->
+<!-- You should read this file with a WWW reader -->
+<html xmlns:v="urn:schemas-microsoft-com:vml"
+xmlns:o="urn:schemas-microsoft-com:office:office"
+xmlns:w="urn:schemas-microsoft-com:office:word"
+xmlns="http://www.w3.org/TR/REC-html40">
+
+<head>
+<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+<meta name=ProgId content=Word.Document>
+<meta name=Generator content="Microsoft Word 9">
+<meta name=Originator content="Microsoft Word 9">
+<link rel=File-List href="./cygwin-xfree-faq_files/filelist.xml">
+<title>The XFree86/OS2 FAQ</title>
+<!--[if gte mso 9]><xml>
+ <o:DocumentProperties>
+  <o:Author>Suhaib M. Siddiqi</o:Author>
+  <o:LastAuthor>Suhaib M. Siddiqi</o:LastAuthor>
+  <o:Revision>45</o:Revision>
+  <o:TotalTime>155</o:TotalTime>
+  <o:Created>1999-11-01T00:31:00Z</o:Created>
+  <o:LastSaved>1999-11-01T02:42:00Z</o:LastSaved>
+  <o:Pages>5</o:Pages>
+  <o:Words>2348</o:Words>
+  <o:Characters>13386</o:Characters>
+  <o:Company> </o:Company>
+  <o:Lines>111</o:Lines>
+  <o:Paragraphs>26</o:Paragraphs>
+  <o:CharactersWithSpaces>16438</o:CharactersWithSpaces>
+  <o:Version>9.2720</o:Version>
+ </o:DocumentProperties>
+</xml><![endif]-->
+<style>
+<!--
+ /* Style Definitions */
+p.MsoNormal, li.MsoNormal, div.MsoNormal
+	{mso-style-parent:"";
+	margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+h1
+	{margin-right:0in;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:1;
+	font-size:24.0pt;
+	font-family:"Times New Roman";
+	mso-font-kerning:18.0pt;
+	font-weight:bold;}
+h2
+	{margin-right:0in;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	mso-outline-level:2;
+	font-size:18.0pt;
+	font-family:"Times New Roman";
+	font-weight:bold;}
+a:link, span.MsoHyperlink
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+a:visited, span.MsoHyperlinkFollowed
+	{color:blue;
+	text-decoration:underline;
+	text-underline:single;}
+p
+	{margin-right:0in;
+	mso-margin-top-alt:auto;
+	mso-margin-bottom-alt:auto;
+	margin-left:0in;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	mso-fareast-font-family:"Times New Roman";}
+address
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	font-size:12.0pt;
+	font-family:"Times New Roman";
+	font-style:italic;}
+code
+	{mso-ascii-font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";
+	mso-hansi-font-family:"Courier New";
+	mso-bidi-font-family:"Courier New";}
+pre
+	{margin:0in;
+	margin-bottom:.0001pt;
+	mso-pagination:widow-orphan;
+	tab-stops:45.8pt 91.6pt 137.4pt 183.2pt 229.0pt 274.8pt 320.6pt 366.4pt 412.2pt 458.0pt 503.8pt 549.6pt 595.4pt 641.2pt 687.0pt 732.8pt;
+	font-size:10.0pt;
+	font-family:"Courier New";
+	mso-fareast-font-family:"Courier New";}
+@page Section1
+	{size:8.5in 11.0in;
+	margin:1.0in 1.25in 1.0in 1.25in;
+	mso-header-margin:.5in;
+	mso-footer-margin:.5in;
+	mso-paper-source:0;}
+div.Section1
+	{page:Section1;}
+ /* List Definitions */
+@list l0
+	{mso-list-id:6492279;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1252648790 -1691962956 -1155896524 990832742 445141300 -1737849276 2120271540 1498323354 604779600 807829504;}
+@list l0:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l1
+	{mso-list-id:89855212;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1358258346 1432405328 506789662 -1404042500 -430569298 1844899602 414227816 529549956 -118837450 1172608256;}
+@list l1:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l2
+	{mso-list-id:999695825;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-293288368 1677078356 774296972 -679869516 1589285422 1427555964 -124455790 989754354 -2136604330 -1214866786;}
+@list l3
+	{mso-list-id:1214275468;
+	mso-list-type:hybrid;
+	mso-list-template-ids:-1266131818 1993762866 -571408536 -1134934558 1324938950 -1143323808 1146158728 827723424 2017209408 337141272;}
+@list l3:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l3:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l4
+	{mso-list-id:1474635779;
+	mso-list-type:hybrid;
+	mso-list-template-ids:2039784838 -1984682524 -387786472 325093138 1358178318 435872902 -1943898922 -1123900042 757338468 -1825253542;}
+@list l4:level1
+	{mso-level-number-format:bullet;
+	mso-level-text:\F0B7;
+	mso-level-tab-stop:.5in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:Symbol;}
+@list l4:level2
+	{mso-level-number-format:bullet;
+	mso-level-text:o;
+	mso-level-tab-stop:1.0in;
+	mso-level-number-position:left;
+	text-indent:-.25in;
+	mso-ansi-font-size:10.0pt;
+	font-family:"Courier New";
+	mso-bidi-font-family:"Times New Roman";}
+@list l5
+	{mso-list-id:1533956902;
+	mso-list-type:hybrid;
+	mso-list-template-ids:988604466 1441810218 -2068944042 1161583490 -124460828 1257254652 -778162356 -1104394596 803511398 1765724316;}
+ol
+	{margin-bottom:0in;}
+ul
+	{margin-bottom:0in;}
+-->
+</style>
+<!--[if gte mso 9]><xml>
+ <o:shapedefaults v:ext="edit" spidmax="1027"/>
+</xml><![endif]--><!--[if gte mso 9]><xml>
+ <o:shapelayout v:ext="edit">
+  <o:idmap v:ext="edit" data="1"/>
+ </o:shapelayout></xml><![endif]-->
+</head>
+
+<body bgcolor=white lang=EN-US link=blue vlink=blue style='tab-interval:.5in'>
+
+<div class=Section1>
+
+<p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+
+<h1>The Cygwin-XFree FAQ</h1>
+
+<p class=MsoNormal>October 31, 1999<br>
+<span style="mso-spacerun: yes"> </span></p>
+
+<h2 style='margin:0in;margin-bottom:.0001pt'><span style='mso-bidi-font-size:
+12.0pt'>Table of Contents<o:p></o:p></span></h2>
+
+<ol start=1 type=1>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l5 level1 lfo3;tab-stops:list .5in'>General Information </li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l5 level1 lfo3;tab-stops:list .5in'>Installation and
+     Troubleshooting </li>
+ <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:auto;
+     mso-list:l5 level1 lfo3;tab-stops:list .5in'>Programming and Porting of
+     Software </li>
+</ol>
+
+<h2>1. General Information</h2>
+
+<table border=0 cellpadding=0 width="100%" style='width:100.0%;mso-cellspacing:
+ 1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>*1</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>What is X11, X11R6.3, and Cygwin-XFree?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><i>X11</i>, more precisely called &quot;The X Window
+  System&quot; is a complete window system that usually runs as the de-facto
+  standard in Unix environments. <i>X11R6.3</i> is the name of the current
+  release (precisely, the most recent one is X11R6.4, but this is not part of
+  the 3.X server line. <i>XFree86</i> is a port of the X Window System to
+  x86-based systems. <i>Cygwin-XFree </i>is a project to port <i>XFree86</i>
+  for x86-based systems using Cygnus Solutions Cygwin Development Tools.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><span
+  style='font-size:10.0pt'><o:p></o:p></span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>2</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Where can I find more information?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Books about X11 exist in any well-sorted CS bookstore. </p>
+  <ul type=disc>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l4 level1 lfo6;tab-stops:list .5in'>Some URLs: </li>
+   <ul type=circle>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l4 level2 lfo6;tab-stops:list 1.0in'><a
+        href="http://www.x11.org/">http://www.x11.org/</a> (this has a rather
+        large bibliography) </li>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l4 level2 lfo6;tab-stops:list 1.0in'><a
+        href="http://www.xfree86.org/">http://www.xfree86.org/</a> </li>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l4 level2 lfo6;tab-stops:list 1.0in'><a
+        href="http://www.rahul.net/kenton">http://www.rahul.net/kenton</a></li>
+   </ul>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l4 level1 lfo6;tab-stops:list .5in'>Mailing list <a
+       href="http://sourceware.cygnus.com/cygwin/lists.html">Cygwin-XFree</a>@sourceware.cygnus.com.</li>
+  </ul>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>How complete is Cygwin-XFree?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>At present only X11R6.3 and X11R6.4 libraries and Clients
+  are functional.<span style="mso-spacerun: yes">  </span>The executables for
+  X-servers are NOT FUNCTIONAL.<span style="mso-spacerun: yes">  </span>We need
+  help from volunteers who have experience with Windows devices drivers.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>4</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Is there a specific news group?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p>There is no newsgroup specifically for Cygwin-XFree.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>5<a name=17></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Is there a mailing list for Cygwin-XFree?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <address>Yes, read <a href="http://sourceware.cygnus.com/cygwin/lists.html">http://sourceware.cygnus.com/cygwin/lists.html</a>
+  for details.</address>
+  <p class=MsoNormal><span style="mso-spacerun: yes"> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>6<a name=18></a></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Where do I get the source code for Cygwin-XFree?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>The source code for XFree86 is available from the common
+  XFree86 FTP servers. Also look at <a
+  href="http://sourceware.cygnus.com/cygwin/xfree">http://sourceware.cygnus.com/cygwin/xfree</a>
+  for FTP address.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>7 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Help, I retrieved the latest version via FTP, and I
+  cannot user X Server!!!!</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>As indicated before <b>X SERVERS ARE NOT FUNCTIONAL YET</b>.<span
+  style="mso-spacerun: yes">   </span>However, you can use X11 libraries and
+  clients for porting UNIX codes to Windows.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>8 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>How do I ensure that I have the latest code?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Search the Cygwin-XFree Mailing List archive for news and
+  announcements.<span style="mso-spacerun: yes">  </span>Read <a
+  href="http://sourceware.cygnus.com/cygwin/xfree">Cygwin-XFree</a> Home Page. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>9 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>I have found a bug. How do I report it?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>E-Mail to <a
+  href="mailto:Cygwin-xfree@sourceware.cygnus.com">Cygwin-xfree@sourceware.cygnus.com</a>
+  mailing list.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>10</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Which version of X11R6.x libraries and clients should I
+  use and where can I get it?</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <ol start=1 type=1>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l2 level1 lfo9;tab-stops:list .5in'>The X11R6.x libraries
+       and clients are available from <a
+       href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">ftp://sourceware.cygnus.com/pub/cygwin/xfree</a>.
+       </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l2 level1 lfo9;tab-stops:list .5in'>The <a
+       href="ftp://sourceware.cygnus.com/pub/cygwin/xfree/pre-alpha-xfree-cygwin-b20.1.tar.bz2">pre-alpha-xfree-cygwin-b20.1.tar.bz2</a>
+       contains precompiled X11R6.3 libraries and clients compiled from <a
+       href="http://www.xfree86.org/">XFree86 3.3.5</a> for Cygwin B20.1.
+       Please note, this archive also contains NON-FUNCTIONAL X-server
+       executable.<span style="mso-spacerun: yes">  </span>Attempts to use
+       these executables will be a waste of time.</li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l2 level1 lfo9;tab-stops:list .5in'>The <a
+       href="ftp://sourceware.cygnus.com/pub/cygwin/xfree/cygwin-xfree-x11r6.4-cygwin-B20.1.tar.bz2">cygwin-xfree-x11r6.4-cygwin-B20.1.tar.bz2</a>
+       contains precompiled X11R6.4 libraries and widgets from X11R6.4 for
+       Cygwin B20.1</li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l2 level1 lfo9;tab-stops:list .5in'>The <a
+       href="ftp://sourceware.cygnus.com/pub/cygwin/xfree/cygwin-xfree-4.0-cygwin-v-1.tar.bz2">cygwin-xfree-4.0-cygwin-v-1.tar.bz2</a>
+       contains precompiled libraries and clients from XFree86 4.0 (Developers
+       Snapshots).<span style="mso-spacerun: yes">  </span>This binary
+       distribution is for <a href="http://www.cygnus.com/cygwin">Cygwin v 1.0
+       (CD Distribution)</a>.<span style="mso-spacerun: yes">  </span>You can
+       also use this binary distribution for <a
+       href="http://sourceware.cygnus.com/cygwin/snapshots/">Cygwin Development
+       Snapshots</a>.. </li>
+  </ol>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>11 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>I have submitted a problem report to you, and you
+  haven't answered yet.</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Unfortunately, this may happen, although I try to reply to
+  all questions and reports. There are a number of reasons for this: </p>
+  <ul type=disc>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l0 level1 lfo12;tab-stops:list .5in'>If your report
+       (questions) directly to <a href="mailto:ssiddiqi@inspirepharm.com">me</a>,
+       I might ignore it, unless you reported some <b>bugs</b> or you were
+       among Cygwin-XFree <b>developers</b>.<span style="mso-spacerun: yes"> 
+       </span>I participate in several Open Source projects and on average I
+       receive over 200 E-Mails per-day, excluding work related mails.<span
+       style="mso-spacerun: yes">  </span>I prefer users use proper mailing list
+       to communicate.</li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l0 level1 lfo12;tab-stops:list .5in'>If the problem
+       relates to how-to-port a particular X application to Windows, I would
+       forward it to Cygwin-XFree mailing list. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l0 level1 lfo12;tab-stops:list .5in'>Occasionally, I am
+       out of office, and won't read mail. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l0 level1 lfo12;tab-stops:list .5in'>Occasionally, I lose
+       or forget some mail. This could be related to the fact/problem that I am
+       human, not a mail robot. </li>
+  </ul>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>12 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>I have problems with the installation, and don't know
+  if this is a bug. What to do?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>If you are attempting to use XF_xxx.exe (X-server
+  executables) by executing startx in initx, then you are out-of-luck. The
+  X-server executables are not functional yet. </p>
+  <p class=MsoNormal>To install X11R6.x libraries and clients for development
+  work, unzip and untar the needed cygwin-xfree-xxxx.tar.bz2 archive to
+  /usr/X11R6 directory and add /usr/X11R6/bin to your PATH.<span
+  style="mso-spacerun: yes">  </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>13<a name=115></a> </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Software, I want software!</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Look at the ported software WWW page at<br>
+  <a href="http://sourceware.cygnus.com/cygwin">http://sourceware.cygnus.com/cygwin</a>
+  whether there is something for you. This page is updated whenever someone
+  ports something and gives Cygwin Web Pages maintainer a pointer. <b>YOU MIGHT
+  CONSIDER PORTING SOMETHING AS WELL!</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>14 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Are there some X11 books?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Sure, ask in your bookstore. A user's guide is for
+  instance: </p>
+  <ul type=disc>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l1 level1 lfo15;tab-stops:list .5in'>Niall Mansfield, The
+       X Window System - A User's Guide, Addison Wesley,<br>
+       or </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l1 level1 lfo15;tab-stops:list .5in'>The Definite Guides
+       to the X Windows System, Volume Three, X Window System User's Guide,
+       O'Reilly &amp; Associates </li>
+  </ul>
+  <p class=MsoNormal>The latter one is part of an eight (nine, ten?) volume
+  documentation set for the X11 programmer. From my biased point of view of a
+  programmer, this is the most comprehensive must-have for the serious
+  programmer (however, it does not belong to the cheaper book sets,
+  unfortunately). </p>
+  <p>Your mileage on book recommendations may vary, of course, and there is
+  much more stuff in the shelves. </p>
+  </td>
+ </tr>
+</table>
+
+<h2><a name=2></a>2. Installation and Troubleshooting</h2>
+
+<table border=0 cellpadding=0 width="100%" style='width:100.0%;mso-cellspacing:
+ 1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>2.1 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Which X-server should I use?<span style="mso-spacerun:
+  yes">  </span>I tried MI/X and my X application crashed.</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>MI/X is an stdin/stdout type X-server, which uses X11R5
+  libraries.<span style="mso-spacerun: yes">  </span>Most of the modern X
+  applications need X11R6 libraries; therefore there is a capability
+  issue.<span style="mso-spacerun: yes">  </span>MI/X also cannot do
+  multi-windowing. Almost 99% of X applications require an X-server with at
+  least multi-windowing capability.<span style="mso-spacerun: yes"> 
+  </span>Therefore, executing a multi-windowing X application on MI/X will
+  definitely crash.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>2.2</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>I need MOTIF libraries to compile my X base code!</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Use the most recent version of LessTif.<span
+  style="mso-spacerun: yes">   </span>Precompiled LessTif binaries for Cygwin
+  are always available from <a href="http://www.lesstif.org/">http://www.lesstif.org</a>.</p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><b><o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>2<a name=22></a>.3</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>My X code compiled but my application crashed with
+  ACCESS_VIOLATION ERROR MESSAGES.<span style="mso-spacerun: yes">  </span>What
+  should I do?</b></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p>First read POINT 10 above.<span style="mso-spacerun: yes">  </span>You
+  might be using a wrong version of X11R6.x libraries.</p>
+  <p>Second, use GDB to debug your code. </p>
+  <p>Third, check for multiple different versions of X libraries and
+  Cygwin1.dll in your path.<span style="mso-spacerun: yes">  </span>You MUST
+  have only one and most recent ones in your PATH.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>2.4</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p><b>I need a good TERMCP file!<o:p></o:p></b></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p>Use termcap file, which came with Cygwin v 1.0 CD.</p>
+  </td>
+ </tr>
+</table>
+
+<h2><a name=324></a>3. Programming and Porting of Software</h2>
+
+<table border=0 cellpadding=0 width="100%" style='width:100.0%;mso-cellspacing:
+ 1.5pt;mso-padding-alt:0in 0in 0in 0in'>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.1 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>I have some cool X fonts from other X11 systems. How do
+  I convert them to the &quot;foo.pcz&quot; format?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>The &quot;foo.pcz&quot; is exactly the same as the
+  &quot;foo.pcf.Z&quot; format known from Unix. Just rename your files, copy
+  them to the font directories and run the <code><span style='font-size:10.0pt;
+  font-family:"Courier New"'>mkfontdir</span></code> utility. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.2 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Where is the X contrib kit? Should I port it?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Feel free to do so.<span style="mso-spacerun: yes"> 
+  </span>The contrib Kit source codes are available from <a
+  href="ftp://ftp.x.org/">ftp://ftp.x.org</a></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.3 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>I have found a cool X utility which I want to port. How
+  should I proceed?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Normally, with X utilities, you get an <code><span
+  style='font-size:10.0pt;font-family:"Courier New"'>Imakefile</span></code>. Simply
+  proceed as if you were under Unix. Run <code><span style='font-size:10.0pt;
+  font-family:"Courier New"'>xmkmf -a</span></code> to compile. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3<a name=44></a>.4 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Is there a utility for...?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>If you don't find it in the distribution.</p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  <p class=MsoNormal>Ask whether someone is already porting it, e.g. in the <a
+  href="mailto:cygwin-xfree@sourceware.cygnus.com">cygwin-xfree@sourceware.cygnus.com</a>
+  mailing list, if not, then do it yourself. Applications don't appear
+  magically, unless someone really ports them. <b>So why not YOU?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.5 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Are there games...?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>If you want to play games port it yourself.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.6 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Will you port <i>XFree86</i> to Windows, NT, and
+  Windows95?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Cygwin-XFree project is for porting XFree86 to Windows.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.7<a name=471></a> </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Is there a better window manager than twm?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>There are a number of them, e.g. <code><span
+  style='font-size:10.0pt;font-family:"Courier New"'>ctwm</span></code>, <code><span
+  style='font-size:10.0pt;font-family:"Courier New"'>fvwm</span></code>, <code><span
+  style='font-size:10.0pt;font-family:"Courier New"'>fvwm95</span></code>, <code><span
+  style='font-size:10.0pt;font-family:"Courier New"'>afterstep</span></code>,
+  you need to port them yourself, or ask at the <a
+  href="mailto:cygwin-xfree@sourceware.cygnus.com">cygwin-xfree@sourceware.cygnus.com</a>
+  mailing list if someone has done it.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.8</p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Why is FVWM not the default window manager? It has many
+  advantages, for instance &quot;....&quot;</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>The distribution reflects what is in the core part of
+  XFree86, which offers <code><span style='font-size:10.0pt;font-family:"Courier New"'>twm</span></code>
+  by default. There is more stuff that would be worth becoming part of the
+  standard, such as <code><span style='font-size:10.0pt;font-family:"Courier New"'>xv</span></code>,
+  but ...well, it isn't... </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.9 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Do you plan to port Motif?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p>MOTIF is a copyright protected commercial (NOT an Open Source) product.</p>
+  <p>There is also the <a href="http://www.lesstif.org/">LessTif</a> project to
+  build a free Motif clone. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.10 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b><i>Cygwin-XFree </i>is free, but copyrighted software.
+  Is commercial software based on this allowed or welcome?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><i>Cygwin-XFree</i> requires the use of the GNU <code><span
+  style='font-size:10.0pt;font-family:"Courier New"'>GCC</span></code> compiler
+  and <a href="http://www.cygnus.com/cygwin">Cygwin</a>. There may be certain
+  restrictions and side effects involved concerning the GPL and the use of
+  certain libraries. I won't discuss this here, but I would refer you to send
+  message to <a href="mailto:info@cygnus.com">info@cygnus.com</a> concerning
+  license requirements. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.11 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Are there static versions of the X libraries?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>NO. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.12 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Will there be Xaw.DLL, Xt.DLL and Xmu.DLL?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>No. <code><span style='font-size:10.0pt;font-family:"Courier New"'>GCC</span></code>
+  is free software, and most stuff written for it is also freely available.
+  Recompile if you want.<span style="mso-spacerun: yes">  </span>However, keep
+  the following in mind:</p>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  <p class=MsoNormal>“One of the biggest issues with X on Win32 is the moronic
+  DLL format. Specifically - it is not possible to export data from a Win32 DLL
+  in a form that can be used to statically initialize another global variable.
+  Data access from a DLL requires at least one pointer <br>
+  indirection, and hence executable code. This is why X11R6 doesn't have DLLs
+  for Xt/Xmu/Xaw (and Motif) on Win32”, quoted from XFree86-developers Mailing
+  List - David E. Wexelblat (<a
+  href="mailto:dwex@datafocus.com?subject=RE:%20Using%20MSVC%20(was%20RE:%20New%20dude%20coming%20on%20board)&amp;replyto=CE3283EB3AE9D011BF4B0020AFF8FDD740A833@hercules.fairfax.datafocus.com"><em><span
+  style='color:windowtext;text-decoration:none;text-underline:none'>dwex@datafocus.com</span></em></a>)
+  Wed, 25 Mar 1998 10:08:27 –0500.</p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.13 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>I want to have support for a commercial compiler,
+  because I do not</b> <b>want to use GCC</b>. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>You want a version for a commercial compiler? No problem:
+  write one. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.14 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Will the DLLs link with Watcom, Borland, MSVC, and
+  VAC++?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal style='mso-layout-grid-align:none;text-autospace:none'>The
+  patched source code for Cygwin/GCC compilers is available from <a
+  href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">ftp://sourceware.cygnus.com/pub/cygwin/xfree</a>.<span
+  style="mso-spacerun: yes">  </span>You will need to consult Mumit Khan’s URL
+  at <span style='font-size:10.0pt;font-family:"Courier New"'><a
+  href="http://www.xraylith.wisc.edu/~khan/software/gnu-win32%20and%20edit%20cygwin.cf">http://www.xraylith.wisc.edu/~khan/software/gnu-win32
+  and edit cygwin.cf</a> and cygwin.rules in xc/cf directory as needed and
+  compile them yourself.</span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.15 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Why must I use GNU make? I am accustomed to XYZmake,
+  which has very nice features.</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Well, <code><span style='font-size:10.0pt;font-family:
+  "Courier New"'>Imakefile</span></code>s also have nice features, particularly
+  that they expand to <code><span style='font-size:10.0pt;font-family:"Courier New"'>Makefile</span></code>s
+  that may have several thousand lines. I have tested numerous make programs:
+  all but GNU <code><span style='font-size:10.0pt;font-family:"Courier New"'>make</span></code>
+  failed this benchmark somehow. You are accustomed to XYZmake; let's say, <code><span
+  style='font-size:10.0pt;font-family:"Courier New"'>imake</span></code> is
+  accustomed to GNU <code><span style='font-size:10.0pt;font-family:"Courier New"'>make</span></code>.
+  </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3<a name=416></a>.16 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>Are there special porting considerations?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Below are few basic rules I follow and are derived from
+  XFree86 source code: </p>
+  <ul type=disc>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>Use the <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>Imakefile</span></code>
+       and do not try to handcraft or patch a <code><span style='font-size:
+       10.0pt;font-family:"Courier New"'>Makefile</span></code>. Things will go
+       wrong! </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>Read about the macros
+       <code><span style='font-size:10.0pt;font-family:"Courier New"'>ProgramTargetName()</span></code>
+       and <code><span style='font-size:10.0pt;font-family:"Courier New"'>LibraryTargetName()</span></code>
+       and use them in the <code><span style='font-size:10.0pt;font-family:
+       "Courier New"'>Imakefile</span></code>, rather than hacking .exe and
+       .lib names. The above will work, hacking won't. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>Use <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>#ifdef
+       cygwinArchitecture</span></code> in an <code><span style='font-size:
+       10.0pt;font-family:"Courier New"'>Imakefile</span></code> to specify an
+       CYGWIN dependent part. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>In source or header
+       files, exclusively use <code><span style='font-size:10.0pt;font-family:
+       "Courier New"'>#ifdef __CYGWIN__</span></code> for CYGWIN specific
+       parts. Don't use other symbols, such as &quot;WIN32&quot;,
+       &quot;__WIN32__&quot;, &quot;i386&quot;, &quot;__GNUC__&quot;, or
+       &quot;__32BIT__&quot;. Use only <code><span style='font-size:10.0pt;
+       font-family:"Courier New"'>#ifdef</span></code>, <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>#else</span></code>, <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>#endif</span></code>,
+       not <code><span style='font-size:10.0pt;font-family:"Courier New"'>#elif</span></code>,
+       as some other compilers don't support this. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>If you think there is
+       a bug in the provided X11 include files, you are doing something wrong. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>Many <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>Imakefile</span></code>s
+       silently assume they are running under Unix, and therefore have program
+       and library names hardcoded in. Use the <code><span style='font-size:
+       10.0pt;font-family:"Courier New"'>LibraryTargetName</span></code> and <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>ProgramTargetName</span></code>
+       macros to wrap libs and programs, such as in<br>
+       <code><span style='font-size:10.0pt;font-family:"Courier New"'>EXTRA_LIBRARIES
+       = ../Xpmlib/LibraryTargetName(Xpm)</span></code><span style='font-size:
+       10.0pt;font-family:"Courier New";mso-fareast-font-family:"Courier New"'><br>
+       <code>PROGRAMS = ProgramTargetName(xterm) ProgramTargetName(resize)</code></span><a
+       name=416a></a></li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>Don't reinvent the wheel
+       concerning environment variables. Use the ones that are described in the
+       installation file <code><span style='font-size:10.0pt;font-family:"Courier New"'>README</span></code>,
+       rather than invent yet another variable name for <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>USER</span></code>s, <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>HOME</span></code>
+       directories, <code><span style='font-size:10.0pt;font-family:"Courier New"'>TMP</span></code>
+       directories, etc. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>Try to make your
+       filenames comply with the 8.3 file name convention, so that users may
+       relocate them to elsewhere. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>The libraries are
+       DLLs<span style="mso-spacerun: yes">  </span>for certain reasons. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>Much software from
+       Unix assumes that lines have '\n' as a line delimiter. Don't change
+       this, some code relies on this. Rather rewrite the code to accept <code><span
+       style='font-size:10.0pt;font-family:"Courier New"'>\r\n</span></code> as
+       a line delimiter. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>Code that relies on
+       Unix security, job control, tty/pty handling, does not need major
+       rewriting because Cygwin1.dll offers this functionality. </li>
+   <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+       auto;mso-list:l3 level1 lfo18;tab-stops:list .5in'>If you want to
+       contribute other software, please follow these guidelines for making
+       your distribution zip file: </li>
+   <ul type=circle>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l3 level2 lfo18;tab-stops:list 1.0in'>Use Cygwin tar and
+        gzip or bzip2 for packing, even if some foobar packer gives you 1 %
+        better compression. Don't use <code><span style='font-size:10.0pt;
+        font-family:"Courier New"'>Windows Winzip</span></code>. </li>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l3 level2 lfo18;tab-stops:list 1.0in'>If you use an <code><span
+        style='font-size:10.0pt;font-family:"Courier New"'>Imakefile</span></code>
+        (which is common practice with X apps), set the <code><span
+        style='font-size:10.0pt;font-family:"Courier New"'>X11ROOT</span></code>
+        variable to another letter than the one where you have your X11 tree.
+        This makes it easier for you to combine all necessary files into a
+        distribution. </li>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l3 level2 lfo18;tab-stops:list 1.0in'>Use exactly the
+        same tree structure as <i>Cygwin-XFree</i> is using Don't reinvent
+        wheels and install to <code><span style='font-size:10.0pt;font-family:
+        "Courier New"'>/usr/X11R6/bin</span></code> or similar. </li>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l3 level2 lfo18;tab-stops:list 1.0in'>The last section
+        means that the directories in your archive should be rooted to
+        /usr/X11R6. </li>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l3 level2 lfo18;tab-stops:list 1.0in'>Put sources in a
+        separate archive, not in the binary release, and root this archive at <code><span
+        style='font-size:10.0pt;font-family:"Courier New"'>/usr/X11R6/src/PACKAGENAME</span></code>,
+        e.g. <code><span style='font-size:10.0pt;font-family:"Courier New"'>/usr/X11R6/src/xfoo-0.99</span></code>.
+        </li>
+    <li class=MsoNormal style='mso-margin-top-alt:auto;mso-margin-bottom-alt:
+        auto;mso-list:l3 level2 lfo18;tab-stops:list 1.0in'>The reason for all
+        that is that I want to engage Software Installer in the future to
+        improve the installation procedure. This should integrate all
+        contribution packages as well. I'll reject non-conforming contributions
+        without warning. </li>
+   </ul>
+  </ul>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.17 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>'make' does not work.</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><code><span style='font-size:10.0pt;font-family:"Courier New"'>You
+  must GNU make which came with Cygwin and you must set MAKE_MODE=UNIX.</span></code></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.18 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>When I start an application I have compiled myself, the
+  speaker beeps.</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Use an <code><span style='font-size:10.0pt;font-family:
+  "Courier New"'>Imakefile.</span></code> You have not passed the correct
+  options to <code><span style='font-size:10.0pt;font-family:"Courier New"'>GCC</span></code>.
+  The most simple Imakefile to compile a client with just one source file <code><span
+  style='font-size:10.0pt;font-family:"Courier New"'>foo.c</span></code> looks
+  like this:<br>
+  <code><span style='font-size:10.0pt;font-family:"Courier New"'>======snip========================</span></code><span
+  style='font-size:10.0pt;font-family:"Courier New";mso-fareast-font-family:
+  "Courier New"'><br>
+  <code>SimpleProgramTarget(foo)</code><br>
+  <code>======snip========================</code></span><br>
+  <span style="mso-spacerun: yes"> </span></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.19 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>How do I make a <i>XFree86</i> compliant DLL?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>Since the XFree86 source code is now available, you will
+  find plenty of examples how I did this there. </p>
+  <p>Note that you still need some secondary literature on special features of
+  Imakefile rules. A recommended book on <code><span style='font-size:10.0pt;
+  font-family:"Courier New"'>Imakefile</span></code>s is available from
+  O'Reilly&amp;Assoc publ (Using imake). Ask in your bookstore. </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.20 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>How do you make the packages of ported software?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>I distribute <code><span style='font-size:10.0pt;
+  font-family:"Courier New"'>a simple foo.tar.gz or foo.tar.bz2 archives.<span
+  style="mso-spacerun: yes">   </span>Seldom, I might distribute archives with
+  InstallShiled Installer, after X Servers are functional.</span></code></p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>3.21 </p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><b>The new Imake config files now contain also
+  &quot;Motif&quot; and &quot;CDE&quot; rule and template files. Does this mean
+  that this stuff will be available soon for free?</b> </p>
+  </td>
+ </tr>
+ <tr>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></p>
+  </td>
+  <td style='padding:.75pt .75pt .75pt .75pt'>
+  <p class=MsoNormal>No, it doesn't. These files were added in X11R6.3 to
+  better integrate Motif and CDE into the system, but this does not make this
+  software public domain (or whatever you want to call that). </p>
+  </td>
+ </tr>
+</table>
+
+<h2><![if !supportEmptyParas]>&nbsp;<![endif]><o:p></o:p></h2>
+
+</div>
+
+</body>
+
+</html>
