@@ -1,3 +1,66 @@
+<h4>Release 4.3.0-62</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-03-25 2230 EST</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>X-boxed.ico - Use Michael Bax's boxed X icon.</li>
+
+<li>win.h, winmultiwindowwindow.c, winmultiwindowwm.c,
+winmultiwindowwndproc.c, winprefs.c - Remove fAlwaysOnTop and
+PreserveWin32Stack() instead of reinstating
+winReorderWindowsMultiWindow(), which now inhibits reentries to avoid
+infinite restacking.  Call winReorderWindowsMultiWindow() in
+appropriate places to keep consistent window Z order even if
+always-on-top windows are mixed.  (Earle F. Philhower III and Takuma
+Murakami)</li>
+
+<li>winwindow.h, winmultiwindowwndproc.c, winmultiwindowwm.c,
+winmultiwindowwindow.c - Always-on-top mods: fix popup menus over AOT
+windows, AOTs not disappearing, normal windows appearing over AOTs.
+(Earle F. Philhower III)</li>
+
+<li>windialogs.c - Exit dialog gets top of Z order, otherwise can be
+hidden by X apps.  (Earle F. Philhower III)</li>
+
+<li>winmultiwindowwindow.c - Make winRestackWindowMultiWindow empty
+(except calling the wrapped function).  (Takuma Murakami)</li>
+
+<li>win.h, winblock.c, winglobals.c, winmultiwindowwindow.c,
+winmultiwindowwndproc.c, winscrinit.c, winshadgdi.c, winwakeup.c -
+Remove fRestacking and fWindowOrderChanged cache variables and
+winReorderWindowsMultiWindow function from multiwindow mode.  This
+function was called around 100 times per second.  Now the ordering
+task is done in winTopLevelWindowProc/WM_ACTIVATE handler in event
+driven manner.  Stop propagating WM_ACTIVATEAPP messages to the root
+window.  Simplify winRedrawAllProcShadowGDI.  (Takuma Murakami)</li>
+
+<li>XWin.rc, win.h, winblock.c, windialogs.c, winglobals.c,
+winmultiwindowwindow.c, winresource.h, winshaddd.c, winshadddnl.c,
+winshadgdi.c, winwakeup.c, winwndproc.c - Add an About dialog box to
+the tray icon menu, complete with links to our local change log
+(/usr/X11R6/share/doc/XFree86-xserv/changelog.html) and documentation
+on our website.  (Harold L Hunt II - CodeWeavers)</li>
+
+<li>winclipboardwndproc.c - Drop the clipboard failure timeout from 2
+seconds to 1 second.  (Harold L Hunt II - CodeWeavers)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-61</h4>
 <table>
 <tbody>
