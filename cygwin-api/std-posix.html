@@ -1,17 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Compatibility with POSIX.1</TITLE
-><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="docbook.css"><META
-NAME="CREATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
-NAME="form"
-CONTENT="html"></HEAD
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+REL="HOME"
+TITLE="Cygwin API Reference"
+HREF="cygwin-api-int.html"><LINK
+REL="UP"
+TITLE="Compatibility"
+HREF="compatibility.html"><LINK
+REL="PREVIOUS"
+TITLE="Compatibility"
+HREF="compatibility.html"><LINK
+REL="NEXT"
+TITLE="Compatibility with Miscellaneous Other Standards"
+HREF="std-misc.html"></HEAD
 ><BODY
+><DIV
+CLASS="NAVHEADER"
 ><TABLE
 WIDTH="100%"
 BORDER="0"
@@ -42,14 +51,15 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="compatibility87.html"
+HREF="std-misc.html"
 >Next</A
 ></TD
 ></TR
 ></TABLE
 ><HR
 ALIGN="LEFT"
-WIDTH="100%"><H1
+WIDTH="100%"></DIV
+><H1
 ><A
 NAME="STD-POSIX"
 >Compatibility with POSIX.1</A
@@ -130,38 +140,52 @@ NAME="AEN74"
 >Implementation Details</A
 ></H2
 ><P
+><TT
+CLASS="FUNCTION"
 ><B
-CLASS="FUNCTION"
 >setuid</B
-> and <B
+></TT
+> and <TT
 CLASS="FUNCTION"
+><B
 >setgid</B
+></TT
 >
 always return ENOSYS.</P
 ><P
-><B
+><TT
 CLASS="FUNCTION"
+><B
 >link</B
+></TT
 > will copy the file if it can't
 implement a true symbolic link.  Currently, symbolic links work, if at
 all, only under Windows NT.</P
 ><P
-><B
+><TT
 CLASS="FUNCTION"
+><B
 >chown</B
+></TT
 > always returns zero.</P
 ><P
-><B
+><TT
 CLASS="FUNCTION"
+><B
 >fcntl</B
+></TT
 > doesn't support F_GETLK - it returns
 -1 and sets errno to ENOSYS.</P
 ><P
-><B
+><TT
 CLASS="FUNCTION"
+><B
 >lseek</B
+></TT
 > only works properly on binary
 files.</P
+><DIV
+CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
@@ -183,7 +207,7 @@ WIDTH="34%"
 ALIGN="center"
 VALIGN="top"
 ><A
-HREF="cygwin-api.html"
+HREF="cygwin-api-int.html"
 >Home</A
 ></TD
 ><TD
@@ -191,7 +215,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="compatibility87.html"
+HREF="std-misc.html"
 >Next</A
 ></TD
 ></TR
@@ -216,6 +240,7 @@ VALIGN="top"
 >Compatibility with Miscellaneous Other Standards</TD
 ></TR
 ></TABLE
+></DIV
 ></BODY
 ></HTML
 >
