@@ -115,31 +115,6 @@ option will control the line endings for standard output/input/error
 for redirection from the Windows command shell.  It will also affect
 the default translation mode of a pipe, although most shells set the
 pipe to binary by default.</P
-><DIV
-CLASS="WARNING"
-><P
-></P
-><TABLE
-CLASS="WARNING"
-BORDER="1"
-WIDTH="90%"
-><TR
-><TD
-ALIGN="CENTER"
-><B
->Warning!</B
-></TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-><P
->If set in 12/98 b20.1, all files 
-always open in binary mode.</P
-></TD
-></TR
-></TABLE
-></DIV
 ></LI
 ><LI
 STYLE="list-style-type: disc"
@@ -267,23 +242,28 @@ STYLE="list-style-type: disc"
 ><P
 ><VAR
 CLASS="ENVAR"
->error_start:filepath</VAR
+>error_start:Win32filepath</VAR
 > - if set, runs 
 <TT
 CLASS="FILENAME"
->filepath</TT
-> when cygwin encounters a fatal error.  This is
-useful for debugging.  <TT
+>Win32filepath</TT
+> when cygwin encounters a fatal error,
+which is useful for debugging.  <TT
 CLASS="FILENAME"
->filepath</TT
-> is usually set to the path
-to the <B
+>Win32filepath</TT
+> is
+usually set to the path to <B
 CLASS="COMMAND"
 >gdb</B
-> or <B
+> or
+<B
 CLASS="COMMAND"
 >dumper</B
-> program.
+>, for example
+<TT
+CLASS="FILENAME"
+>C:\cygwin\bin\gdb.exe</TT
+>. 
 There is no default set.</P
 ></LI
 ><LI

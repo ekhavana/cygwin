@@ -134,48 +134,101 @@ NAME="AEN806"
 CLASS="FILENAME"
 >/dev</TT
 > 
-directory as it is simulated within Cygwin automatically.
-It supports the following devices: <TT
-CLASS="FILENAME"
->/dev/null</TT
->,
-<TT
-CLASS="FILENAME"
->/dev/zero</TT
->, <TT
-CLASS="FILENAME"
->/dev/tty</TT
->,
-<TT
-CLASS="FILENAME"
->/dev/ttyX</TT
->, <TT
-CLASS="FILENAME"
->/dev/ptmx</TT
->,
-<TT
-CLASS="FILENAME"
->/dev/comX</TT
-> (the serial ports),
-<TT
-CLASS="FILENAME"
->/dev/windows</TT
-> (the windows message queue),
-<TT
-CLASS="FILENAME"
->/dev/random</TT
-> and <TT
-CLASS="FILENAME"
->/dev/urandom</TT
->.
+directory as Cygwin automatically simulates it internally. 
 These devices cannot be seen with the command <B
 CLASS="COMMAND"
->ls /dev</B
+>ls /dev/</B
 >
 although commands such as <B
 CLASS="COMMAND"
 >ls /dev/tty</B
 > work fine.</P
+><P
+>Cygwin supports the following devices commonly found on POSIX systems:
+<TT
+CLASS="FILENAME"
+>/dev/dsp</TT
+>, <TT
+CLASS="FILENAME"
+>/dev/null</TT
+>, 
+<TT
+CLASS="FILENAME"
+>/dev/zero</TT
+>, <TT
+CLASS="FILENAME"
+>/dev/console</TT
+>,
+<TT
+CLASS="FILENAME"
+>/dev/tty</TT
+>, <TT
+CLASS="FILENAME"
+>/dev/ttym</TT
+>, 
+<TT
+CLASS="FILENAME"
+>/dev/ttyX</TT
+>, <TT
+CLASS="FILENAME"
+>/dev/ttySX</TT
+>, 
+<TT
+CLASS="FILENAME"
+>/dev/pipe</TT
+>, <TT
+CLASS="FILENAME"
+>/dev/port</TT
+>, 
+<TT
+CLASS="FILENAME"
+>/dev/ptmx</TT
+>, <TT
+CLASS="FILENAME"
+>/dev/mem</TT
+>,
+<TT
+CLASS="FILENAME"
+>/dev/random</TT
+>, and <TT
+CLASS="FILENAME"
+>/dev/urandom</TT
+>.
+Cygwin also has several Windows-specific devices:
+<TT
+CLASS="FILENAME"
+>/dev/comX</TT
+> (the serial ports, starting with 
+<TT
+CLASS="FILENAME"
+>COM1</TT
+> which is the same as <TT
+CLASS="FILENAME"
+>ttyS0</TT
+>),
+<TT
+CLASS="FILENAME"
+>/dev/conin</TT
+> (Windows <TT
+CLASS="FILENAME"
+>CONIN$</TT
+>),
+<TT
+CLASS="FILENAME"
+>/dev/conout</TT
+> (Windows <TT
+CLASS="FILENAME"
+>CONOUT$</TT
+>),
+<TT
+CLASS="FILENAME"
+>/dev/clipboard</TT
+> (the Windows clipboard, currently
+text only), and
+<TT
+CLASS="FILENAME"
+>/dev/windows</TT
+> (the Windows message queue).</P
 ><P
 >Windows NT/W2K/XP additionally support raw devices like floppies,
 disks, partitions and tapes.  These are accessed from Cygwin applications
@@ -233,6 +286,24 @@ CLASS="SCREEN"
 ln -s /dev/scd2 /dev/sr2      # actually srX are real device nodes on Linux but who cares.
 ln -s /dev/nst0  /dev/tape
 ...</PRE
+><DIV
+CLASS="WARNING"
+><P
+></P
+><TABLE
+CLASS="WARNING"
+BORDER="1"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="CENTER"
+><B
+>Warning</B
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
 ><P
 >Note that you can't use the mount table to map from fixed device name
 to your own device name or to map from internal NT device name to
@@ -241,16 +312,20 @@ NT device name to your own device name will not do what you want.
 The following three examples will not work as expected:</P
 ><PRE
 CLASS="SCREEN"
->mount -f -b /dev/nst0 /dev/tape
+>mount -f -b /dev/nst0 /dev/tape 
 mount -f -b /device/tape0 /dev/tape
 ln -s /device/tape0 /dev/tape</PRE
+></TD
+></TR
+></TABLE
+></DIV
 ></DIV
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN830"
+NAME="AEN846"
 >The .exe extension</A
 ></H2
 ><P
@@ -377,7 +452,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN863"
+NAME="AEN879"
 >The /proc filesystem</A
 ></H2
 ><P
@@ -428,7 +503,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN876"
+NAME="AEN892"
 >The @pathnames</A
 ></H2
 ><P
@@ -460,7 +535,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN884"
+NAME="AEN900"
 ></A
 ><P
 ><B
