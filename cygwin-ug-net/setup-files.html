@@ -113,8 +113,8 @@ page) contains bash commands.  It is executed when bash is started as login
 shell, e.g. from the command <B
 CLASS="COMMAND"
 >bash --login</B
-> (the provided
-.bat file does not set the switch).  This is a useful place to define and
+>.
+This is a useful place to define and
 export environment variables and bash functions that will be used by bash
 and the programs invoked by bash.  It is a good place to redefine
 <VAR
@@ -173,31 +173,55 @@ CLASS="FILENAME"
 CLASS="FILENAME"
 >.inputrc</TT
 > controls how programs using the readline
-library (including bash) behave.  It is loaded automatically.  The
-full details are in the <TT
-CLASS="FILENAME"
->readline.info</TT
->. 
-Due to a bug in the current readline version, 
-<TT
-CLASS="FILENAME"
->.inputrc</TT
-> cannot contain \r,
-even on text mounted systems.
+library (including <B
+CLASS="COMMAND"
+>bash</B
+>) behave.  It is loaded
+automatically.  For full details see the <VAR
+CLASS="LITERAL"
+>Function and Variable
+Index</VAR
+> section of the GNU <SPAN
+CLASS="SYSTEMITEM"
+>readline</SPAN
+> manual.
 Consider the following settings:
 <PRE
 CLASS="SCREEN"
-># Make Bash 8bit clean
+># Ignore case while completing
+set completion-ignore-case on
+# Make Bash 8bit clean
 set meta-flag on
 set convert-meta off
-set output-meta on
-# Ignore case while completing
-set completion-ignore-case on</PRE
+set output-meta on</PRE
 >
-The first three commands allow bash to display 8-bit characters,
-useful for languages with accented characters.  The last line makes
-filename completion case insensitive, which can be convenient in a
-Windows environment.</P
+The first command makes filename completion case insensitive, which can
+be convenient in a Windows environment.  The next three commands allow
+<B
+CLASS="COMMAND"
+>bash</B
+> to display 8-bit characters, useful for
+languages with accented characters.  Note that tools that do not use
+<SPAN
+CLASS="SYSTEMITEM"
+>readline</SPAN
+> for display, such as
+<B
+CLASS="COMMAND"
+>less</B
+> and <B
+CLASS="COMMAND"
+>ls</B
+>, require additional
+settings, which could be put in your <TT
+CLASS="FILENAME"
+>.bashrc</TT
+>:
+<PRE
+CLASS="SCREEN"
+>alias less='/bin/less -r'
+alias ls='/bin/ls -F --color=tty --show-control-chars'</PRE
+></P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"

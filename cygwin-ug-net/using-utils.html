@@ -357,7 +357,7 @@ contain spaces (C:\Program Files) so should be enclosed in quotes.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1049"
+NAME="AEN1056"
 ></A
 ><P
 ><B
@@ -692,7 +692,7 @@ part), like these examples:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1118"
+NAME="AEN1125"
 ></A
 ><P
 ><B
@@ -818,7 +818,7 @@ something like this:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1138"
+NAME="AEN1145"
 ></A
 ><P
 ><B
@@ -968,7 +968,7 @@ something like this:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1168"
+NAME="AEN1175"
 ></A
 ><P
 ><B
@@ -1069,7 +1069,7 @@ CLASS="LITERAL"
 <DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1192"
+NAME="AEN1199"
 ></A
 ><P
 ><B
@@ -1150,7 +1150,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1205"
+NAME="AEN1212"
 >Using mount</A
 ></H3
 ><P
@@ -1162,7 +1162,7 @@ will display the current mount table for you.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1209"
+NAME="AEN1216"
 ></A
 ><P
 ><B
@@ -1212,7 +1212,7 @@ CLASS="FILENAME"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1221"
+NAME="AEN1228"
 ></A
 ><P
 ><B
@@ -1366,7 +1366,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1254"
+NAME="AEN1261"
 >Cygdrive mount points</A
 ></H3
 ><P
@@ -1401,7 +1401,7 @@ CLASS="FILENAME"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1263"
+NAME="AEN1270"
 ></A
 ><P
 ><B
@@ -1443,7 +1443,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1273"
+NAME="AEN1280"
 >Limitations</A
 ></H3
 ><P
@@ -1519,25 +1519,36 @@ NAME="PASSWD"
 ></H2
 ><PRE
 CLASS="SCREEN"
->Usage: passwd (-l|-u|-S) [USER]
-       passwd [-i NUM] [-n MINDAYS] [-x MAXDAYS] [-L LEN]
-Change USER's password or password attributes
+>Usage: passwd [OPTION] [USER]
+Change USER's password or password attributes.
 
 User operations:
- -l, --lock      lock USER's account
- -u, --unlock    unlock USER's account
- -S, --status    display password status for USER (locked, expired, etc.)
+  -l, --lock               lock USER's account.
+  -u, --unlock             unlock USER's account.
+  -c, --cannot-change      USER can't change password.
+  -C, --can-change         USER can change password.
+  -e, --never-expires      USER's password never expires.
+  -E, --expires            USER's password expires according to system's
+                           password aging rule.
+  -p, --pwd-not-required   no password required for USER.
+  -P, --pwd-required       password is required for USER.
 
 System operations:
- -i, --inactive  set NUM of days before inactive accounts are disabled
-                 (inactive accounts are those with expired passwords)
- -n, --minage    set system minimum password age to MINDAYS
- -x, --maxage    set system maximum password age to MAXDAYS
- -L, --length    set system minimum password length to LEN
+  -i, --inactive NUM       set NUM of days before inactive accounts are disabled
+                           (inactive accounts are those with expired passwords).
+  -n, --minage DAYS        set system minimum password age to DAYS days.
+  -x, --maxage DAYS        set system maximum password age to DAYS days.
+  -L, --length LEN         set system minimum password length to LEN.
 
 Other options:
- -h, --help      output usage information and exit
- -v, --version   output version information and exit</PRE
+  -S, --status             display password status for USER (locked, expired,
+                           etc.) plus global system password settings.
+  -h, --help               output usage information and exit.
+  -v, --version            output version information and exit.
+
+If no option is given, change USER's password.  If no user name is given,
+operate on current user.  System operations must not be mixed with user
+operations.  Don't specify a USER when triggering a system operation. </PRE
 ><P
 > <B
 CLASS="COMMAND"
@@ -1551,7 +1562,7 @@ CLASS="COMMAND"
 > also changes account information, such as
 password expiry dates and intervals.</P
 ><P
->Password changes: The user is first prompted for their old
+>For password changes, the user is first prompted for their old
 password, if one is present.  This password is then encrypted and
 compared against the stored password.  The user has only one chance to
 enter the correct password.  The administrators are permitted to
@@ -1562,7 +1573,7 @@ bypass this step so that forgotten passwords may be changed.</P
 CLASS="COMMAND"
 >passwd</B
 > will prompt twice for this replacement and 
-compare the second entry against the first.  Both entries are require to 
+compare the second entry against the first.  Both entries are required to 
 match in order for the password to be changed.</P
 ><P
 >After the password has been entered, password aging information
@@ -1573,28 +1584,49 @@ CLASS="COMMAND"
 > refuses to change the
 password and exits.</P
 ><P
->Account maintenance: User accounts may be locked and unlocked with the
+>To get current password status information, use the
 <VAR
-CLASS="LITERAL"
->-l</VAR
-> and <VAR
-CLASS="LITERAL"
->-u</VAR
-> flags.  The
-<VAR
-CLASS="LITERAL"
->-l</VAR
-> option disables an account.  The <VAR
-CLASS="LITERAL"
->-u</VAR
->
-option re-enables an account.</P
-><P
->The account status may be given with the <VAR
 CLASS="LITERAL"
 >-S</VAR
->
-option.  The status information is self explanatory.</P
+> option. Administrators can use
+<B
+CLASS="COMMAND"
+>passwd</B
+> to perform several account maintenance
+functions (users may perform some of these functions on their own
+accounts).  Accounts may be locked with the <VAR
+CLASS="LITERAL"
+>-l</VAR
+> flag
+and unlocked with the <VAR
+CLASS="LITERAL"
+>-u</VAR
+> flag.  Similarly,
+<VAR
+CLASS="LITERAL"
+>-c</VAR
+> disables a user's ability to change passwords, and
+<VAR
+CLASS="LITERAL"
+>-C</VAR
+> allows a user to change passwords.  For password
+expiry, the <VAR
+CLASS="LITERAL"
+>-e</VAR
+> option disables expiration, while the
+<VAR
+CLASS="LITERAL"
+>-E</VAR
+> option causes the password to expire according to
+the system's normal aging rules.  Use <VAR
+CLASS="LITERAL"
+>-p</VAR
+> to disable
+the password requirement for a user, or <VAR
+CLASS="LITERAL"
+>-P</VAR
+> to require
+a password.</P
 ><P
 >Administrators can also use <B
 CLASS="COMMAND"
