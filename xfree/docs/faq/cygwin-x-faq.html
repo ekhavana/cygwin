@@ -26,6 +26,12 @@ CLASS="author"
 NAME="AEN5"
 >Harold L Hunt, II</A
 ></H3
+><H3
+CLASS="author"
+><A
+NAME="AEN10"
+>Alexander Gottwald</A
+></H3
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -99,16 +105,21 @@ HREF="cygwin-x-faq.html#q-what-is-x-client"
 ></DT
 ><DT
 >1.6. <A
+HREF="cygwin-x-faq.html#display-and-screen"
+>What does :0.0 mean?</A
+></DT
+><DT
+>1.7. <A
 HREF="cygwin-x-faq.html#q-why-port-to-windows"
 >Why port the X Window System to Microsoft Windows?</A
 ></DT
 ><DT
->1.7. <A
+>1.8. <A
 HREF="cygwin-x-faq.html#q-newsgroup"
 >Is there a Cygwin/X newsgroup?</A
 ></DT
 ><DT
->1.8. <A
+>1.9. <A
 HREF="cygwin-x-faq.html#q-mailing-list"
 >Is there a Cygwin/X mailing list?</A
 ></DT
@@ -148,12 +159,18 @@ HREF="cygwin-x-faq.html#q-why-no-xf86config"
 ><DT
 >3.2. <A
 HREF="cygwin-x-faq.html#q-command-line-args"
->What are the command line arguments for XWin.exe?</A
+>What are the command line arguments for <TT
+CLASS="filename"
+>XWin.exe</TT
+>?</A
 ></DT
 ><DT
 >3.3. <A
 HREF="cygwin-x-faq.html#q-display-depth-ignored"
->Why does XWin.exe ignore the display depth that I pass
+>Why does <TT
+CLASS="filename"
+>XWin.exe</TT
+> ignore the display depth that I pass
 on the command line?</A
 ></DT
 ><DT
@@ -171,6 +188,12 @@ HREF="cygwin-x-faq.html#window-auto-focus"
 HREF="cygwin-x-faq.html#disable-terminate-server"
 >The option -nounixkill has no effect. How can i prevent the server 
 shutdown an Ctrl-Alt-BackSpace?</A
+></DT
+><DT
+>3.7. <A
+HREF="cygwin-x-faq.html#q-multihead"
+>I have a multihead system. Do I need special options to make it work?
+</A
 ></DT
 ></DL
 ></DD
@@ -296,6 +319,17 @@ address</SPAN
 ></DT
 ><DT
 >6.2. <A
+HREF="cygwin-x-faq.html#q-audit-client-rejected"
+>Why does Cygwin/X report AUDIT: client 1 rejected from IP 
+<TT
+CLASS="replaceable"
+><I
+>remotehost</I
+></TT
+>?</A
+></DT
+><DT
+>6.3. <A
 HREF="cygwin-x-faq.html#q-mandrake-8.1-xdmcp"
 >I get no login screen when using <TT
 CLASS="parameter"
@@ -305,26 +339,32 @@ CLASS="parameter"
 ></A
 ></DT
 ><DT
->6.3. <A
+>6.4. <A
 HREF="cygwin-x-faq.html#q-solaris-fonts"
 >I get no login screen for Solaris</A
 ></DT
 ><DT
->6.4. <A
+>6.5. <A
 HREF="cygwin-x-faq.html#q-remote-solaris"
 >XDMCP freezes with remote Solaris machine!</A
 ></DT
 ><DT
->6.5. <A
+>6.6. <A
 HREF="cygwin-x-faq.html#q-cde-via-xdmcp-hangs"
 >Login to <SPAN
 CLASS="acronym"
 >CDE</SPAN
-> on Solaris via XDMCP hangs
+> on Solaris via <A
+HREF="glossary.html#gloss-xdmcp"
+><I
+CLASS="glossterm"
+>XDMCP</I
+></A
+> hangs
 Cygwin/X.</A
 ></DT
 ><DT
->6.6. <A
+>6.7. <A
 HREF="cygwin-x-faq.html#q-xdmcp-info"
 >Where can I find more information about XDMCP.</A
 ></DT
@@ -687,8 +727,13 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Cygwin/X is a port of the X Window System to Cygwin;
-Cygwin provides a UNIX-like API on the Win32 platform.</P
+>
+Cygwin/X is a port of the X Window System to Cygwin. 
+Cygwin provides a <SPAN
+CLASS="acronym"
+>UNIX</SPAN
+>-like API on the Win32 platform.
+</P
 ></DIV
 ></DIV
 ><DIV
@@ -807,8 +852,112 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-why-port-to-windows"/><B
+NAME="display-and-screen"/><B
 >1.6. </B
+>What does :0.0 mean?</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>The <TT
+CLASS="replaceable"
+><I
+>:0.0</I
+></TT
+> part of the <TT
+CLASS="parameter"
+><I
+>DISPLAY</I
+></TT
+> variable denote
+the display and the screen of an X server.</P
+><P
+>The display is the first number and equals to a running instance of an 
+X server. If it is using TCP/IP for communication it listens on port 6000 + 
+<TT
+CLASS="replaceable"
+><I
+>display-number</I
+></TT
+> for connections.
+With local (UNIX domain sockets) it uses the socket 
+<TT
+CLASS="filename"
+>/tmp/.X11-unix/X<TT
+CLASS="replaceable"
+><I
+>display-number</I
+></TT
+></TT
+>
+</P
+><P
+> The screen denotes different output devices of the X server. You could 
+start <TT
+CLASS="filename"
+>XWin.exe</TT
+> with two <TT
+CLASS="parameter"
+><I
+>-screen</I
+></TT
+> options and would end up 
+with two X11 windows. Each of them is a different screen. Other X servers open
+different screens for different monitors connected to the computer.</P
+><P
+>Cygwin/X supports different formats of the <TT
+CLASS="parameter"
+><I
+>DISPLAY</I
+></TT
+> variable
+<UL
+><LI
+><P
+>&#13;<TT
+CLASS="replaceable"
+><I
+>:0.0</I
+></TT
+> or <TT
+CLASS="replaceable"
+><I
+>unix:0.0</I
+></TT
+>
+</P
+><P
+>&#13;This names a local X server and the communication uses the UNIX domain sockets.
+</P
+></LI
+><LI
+><P
+>&#13;<TT
+CLASS="replaceable"
+><I
+>hostname:0.0</I
+></TT
+>
+</P
+><P
+>&#13;This names a remote X server and the communication uses the TCP/IP network.
+</P
+></LI
+></UL
+>
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-why-port-to-windows"/><B
+>1.7. </B
 >Why port the X Window System to Microsoft Windows?</P
 ></DIV
 ><DIV
@@ -851,7 +1000,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-newsgroup"/><B
->1.7. </B
+>1.8. </B
 >Is there a Cygwin/X newsgroup?</P
 ></DIV
 ><DIV
@@ -862,7 +1011,7 @@ CLASS="answer"
 >No, Cygwin/X does not have a newsgroup; however, we do have a
 mailing list.  See <A
 HREF="cygwin-x-faq.html#q-mailing-list"
->Q: 1.8.</A
+>Q: 1.9.</A
 ></P
 ></DIV
 ></DIV
@@ -873,7 +1022,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-mailing-list"/><B
->1.8. </B
+>1.9. </B
 >Is there a Cygwin/X mailing list?</P
 ></DIV
 ><DIV
@@ -899,7 +1048,7 @@ CLASS="tip"
 >Post
 your X-related inquires to cygwin-xfree@cygwin.com only; do not post nor cross
 post your inquires to the cygwin@cygwin.com mailing list.  Cygwin's
-mailing list is only for Cygwin API related inquires that are not
+mailing list is only for Cygwin related inquires that are not
 handled by another more-specific list.</P
 ></BLOCKQUOTE
 ></DIV
@@ -988,7 +1137,7 @@ CLASS="answer"
 extra dependencies it was removed again.  But most of the options
 which were configurable in the configfile are now available as
 commandline options.  For more information on configuring other
-keyboard layout see <A
+keyboard layouts see <A
 HREF="cygwin-x-faq.html#q-non-U.S.-keyboard-layout"
 >Q: 4.1.1.</A
 ></P
@@ -1002,7 +1151,10 @@ CLASS="question"
 ><A
 NAME="q-command-line-args"/><B
 >3.2. </B
->What are the command line arguments for XWin.exe?</P
+>What are the command line arguments for <TT
+CLASS="filename"
+>XWin.exe</TT
+>?</P
 ></DIV
 ><DIV
 CLASS="answer"
@@ -1025,7 +1177,10 @@ CLASS="question"
 ><A
 NAME="q-display-depth-ignored"/><B
 >3.3. </B
->Why does XWin.exe ignore the display depth that I pass
+>Why does <TT
+CLASS="filename"
+>XWin.exe</TT
+> ignore the display depth that I pass
 on the command line?</P
 ></DIV
 ><DIV
@@ -1034,9 +1189,15 @@ CLASS="answer"
 ><B
 > </B
 >When running in windowed mode or GDI-based fullscreen mode,
-XWin.exe must run the X Server at whatever display depth
+<TT
+CLASS="filename"
+>XWin.exe</TT
+> must run the X Server at whatever display depth
 Windows is currently using; in these cases the display depth passed on
-the command line is ignored.  XWin.exe only uses the display
+the command line is ignored.  <TT
+CLASS="filename"
+>XWin.exe</TT
+> only uses the display
 depth parameter when running in a DirectDraw-based fullscreen mode, as
 DirectDraw allows applications to change the display resolution and
 depth when running in fullscreen mode.</P
@@ -1068,7 +1229,10 @@ CLASS="replaceable"
 ></I
 ></TT
 >
-parameter to XWin.exe, where <TT
+parameter to <TT
+CLASS="filename"
+>XWin.exe</TT
+>, where <TT
 CLASS="replaceable"
 ><I
 >timeout_in_milliseconds</I
@@ -1111,6 +1275,15 @@ CLASS="screen"
 ></TABLE
 >
 Other windowmanagers (eg. windowmaker) have similar features too.</P
+><P
+>If you are using the <TT
+CLASS="parameter"
+><I
+>-multiwindow</I
+></TT
+> mode you can not set this behaviour
+in the windowmanager but you can use the TweakUI tool to enable this feature
+for all windows, not limited to Cygwin/X windows.</P
 ></DIV
 ></DIV
 ><DIV
@@ -1147,6 +1320,33 @@ CLASS="screen"
 ></TABLE
 >
 </P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-multihead"/><B
+>3.7. </B
+>I have a multihead system. Do I need special options to make it work?
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>You should start <TT
+CLASS="filename"
+>XWin.exe</TT
+> with the <TT
+CLASS="parameter"
+><I
+>-multiplemonitors</I
+></TT
+> options</P
 ></DIV
 ></DIV
 ></DIV
@@ -1234,8 +1434,8 @@ HREF="cygwin-x-faq.html#q-xkb-not-working"
 ></P
 ><P
 >If your keyboard layout is not automaticly detected you can send 
-the required information for inluding it to cygwin-xfree@cygwin.com. Please include 
-the following information in your mail:</P
+the required information for including it into Cygwin/X to cygwin-xfree@cygwin.com. 
+Please include the following information in your mail:</P
 ><UL
 ><LI
 ><P
@@ -1265,7 +1465,17 @@ CLASS="screen"
 ></LI
 ><LI
 ><P
->The XKB country code for this layout if you known it.</P
+>The XKB layout code for this layout if you known it.</P
+></LI
+><LI
+><P
+>A description how the layout looks like. This makes it easy to identify
+the matching XKB layout code. Many layouts are available from the 
+<A
+HREF="http://www.microsoft.com/globaldev/keyboards/kbdru.htm"
+TARGET="_top"
+>&#13;Microsoft Global Dev</A
+> website. Just add a link to your layout.</P
 ></LI
 ></UL
 ></DIV
@@ -1660,10 +1870,16 @@ CLASS="answer"
 >A1:</P
 ><P
 >OpenSSH 3.8 enables untrusted X11 forwarding by default when
-connecting to an ssh server that supports untrusted X11 forwarding.
+connecting to an ssh server that supports untrusted <A
+HREF="glossary.html#gloss-x11forwarding"
+><I
+CLASS="glossterm"
+>X11Forwarding</I
+></A
+>.
 Most ssh servers for GNU/Linux are versions of OpenSSH that do support
-untrusted X11 forwarding, so using OpenSSH 3.8 from Cygwin will result
-in a connection that uses untrusted X11 forwarding by default.  You will
+untrusted X11Forwarding, so using OpenSSH 3.8 from Cygwin will result
+in a connection that uses untrusted X11Forwarding by default.  You will
 quickly notice that this is the case if most of your X applications
 are now killed when you try to copy and paste or if
 <B
@@ -1672,7 +1888,7 @@ CLASS="command"
 > returns only a fraction of the supported
 extensions that it does if run locally.</P
 ><P
->It is easiest to just override untrusted X11 forwarding by passing
+>It is easiest to just override untrusted X11Forwarding by passing
 <TT
 CLASS="parameter"
 ><I
@@ -1698,8 +1914,8 @@ CLASS="parameter"
 ><I
 >-X</I
 ></TT
->, but it enables trusted X11
-forwarding for the current connection.</P
+>, but it enables trusted X11Forwarding 
+for the current connection.</P
 ></DIV
 ><DIV
 CLASS="answer"
@@ -1775,7 +1991,7 @@ CLASS="parameter"
 ><I
 >-Y</I
 ></TT
-> enables trusted X11 Forwarding. 
+> enables trusted X11Forwarding. 
 This is available since OpenSSH 3.8. If you have an older version of ssh
 you will have to use <TT
 CLASS="parameter"
@@ -1798,13 +2014,7 @@ CLASS="parameter"
 >-x</I
 ></TT
 > 
-(lowercase). This disables <A
-HREF="glossary.html#gloss-x11forwarding"
-><I
-CLASS="glossterm"
->&#13;X11Forwarding</I
-></A
->. 
+(lowercase). This disables X11Forwarding. 
 </P
 ></DIV
 ><DIV
@@ -1972,8 +2182,8 @@ HREF="glossary.html#gloss-xdmcp"
 CLASS="glossterm"
 >XDMCP</I
 ></A
-> server; in these cases you
-need to pass <TT
+> server; in these 
+cases you need to pass <TT
 CLASS="parameter"
 ><I
 >-from</I
@@ -1984,7 +2194,61 @@ CLASS="replaceable"
 >local_host_name_or_ip_address</I
 ></TT
 > to
-XWin.exe to specify which interface address to report.</P
+<TT
+CLASS="filename"
+>XWin.exe</TT
+> to specify which interface address to report.</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-audit-client-rejected"/><B
+>6.2. </B
+>Why does Cygwin/X report AUDIT: client 1 rejected from IP 
+<TT
+CLASS="replaceable"
+><I
+>remotehost</I
+></TT
+>?</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>The problem is most likely a wrong DNS (Network name resolution). Make 
+sure your windows host has a hostname which is valid from linux too and an IP 
+address which linux can resolve to that hostname.</P
+><P
+>If you add a line
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;192.168.26.1 myhost
+</PRE
+></TD
+></TR
+></TABLE
+>
+to /etc/hosts on the <A
+HREF="glossary.html#gloss-xdmcp"
+><I
+CLASS="glossterm"
+>XDMCP</I
+></A
+> server with the IP address and the hostname 
+of your windows host the name resolution should work.
+</P
 ></DIV
 ></DIV
 ><DIV
@@ -1994,7 +2258,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-mandrake-8.1-xdmcp"/><B
->6.2. </B
+>6.3. </B
 >I get no login screen when using <TT
 CLASS="parameter"
 ><I
@@ -2007,7 +2271,13 @@ CLASS="answer"
 ><P
 ><B
 > </B
->[Mika Laitio] For security reasons, XDMCP is not enabled by
+>[Mika Laitio] For security reasons, <A
+HREF="glossary.html#gloss-xdmcp"
+><I
+CLASS="glossterm"
+>XDMCP</I
+></A
+> is not enabled by
 default on most Linux/UNIX/*NIX/*BSD distributions (RedHat, Mandrake,
 SuSE, FreeBSD, NetBSD, etc.) by default.  You have to manually enable
 remote logins to your X Display Manager (<B
@@ -2152,7 +2422,13 @@ CLASS="answer"
 ><P
 ><B
 > </B
->XDMCP will not work correctly if you have a personal firewall installed
+><A
+HREF="glossary.html#gloss-xdmcp"
+><I
+CLASS="glossterm"
+>XDMCP</I
+></A
+> will not work correctly if you have a personal firewall installed
 or the built-in firewall of Windows is activated.</P
 ><P
 >The XDMCP protocol will send and receive data on port 177/UDP. But the 
@@ -2253,7 +2529,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-solaris-fonts"/><B
->6.3. </B
+>6.4. </B
 >I get no login screen for Solaris</P
 ></DIV
 ><DIV
@@ -2263,11 +2539,11 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-x-faq.html#q-remote-solaris"
->Q: 6.4.</A
+>Q: 6.5.</A
 > and 
 <A
 HREF="cygwin-x-faq.html#q-cde-via-xdmcp-hangs"
->Q: 6.5.</A
+>Q: 6.6.</A
 ></P
 ></DIV
 ><DIV
@@ -2281,7 +2557,13 @@ may see the Solaris background tile and the hourglass cursor, but the
 XDM login prompt will never appear.  The simplest solution is to point
 Cygwin/X at the font server that is usually running on the Solaris
 machine.  You'll need a command line similar to the following to start
-your XDMCP session and to connect to the Solaris font server:</P
+your <A
+HREF="glossary.html#gloss-xdmcp"
+><I
+CLASS="glossterm"
+>XDMCP</I
+></A
+> session and to connect to the Solaris font server:</P
 ><P
 >&#13;<TT
 CLASS="userinput"
@@ -2356,7 +2638,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-remote-solaris"/><B
->6.4. </B
+>6.5. </B
 >XDMCP freezes with remote Solaris machine!</P
 ></DIV
 ><DIV
@@ -2366,11 +2648,11 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-x-faq.html#q-solaris-fonts"
->Q: 6.3.</A
+>Q: 6.4.</A
 > and 
 <A
 HREF="cygwin-x-faq.html#q-cde-via-xdmcp-hangs"
->Q: 6.5.</A
+>Q: 6.6.</A
 ></P
 ></DIV
 ><DIV
@@ -2392,11 +2674,17 @@ CLASS="question"
 ><P
 ><A
 NAME="q-cde-via-xdmcp-hangs"/><B
->6.5. </B
+>6.6. </B
 >Login to <SPAN
 CLASS="acronym"
 >CDE</SPAN
-> on Solaris via XDMCP hangs
+> on Solaris via <A
+HREF="glossary.html#gloss-xdmcp"
+><I
+CLASS="glossterm"
+>XDMCP</I
+></A
+> hangs
 Cygwin/X.</P
 ></DIV
 ><DIV
@@ -2406,10 +2694,10 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-x-faq.html#q-solaris-fonts"
->Q: 6.3.</A
+>Q: 6.4.</A
 > and <A
 HREF="cygwin-x-faq.html#q-remote-solaris"
->Q: 6.4.</A
+>Q: 6.5.</A
 ></P
 ></DIV
 ><DIV
@@ -2432,7 +2720,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-xdmcp-info"/><B
->6.6. </B
+>6.7. </B
 >Where can I find more information about XDMCP.</P
 ></DIV
 ><DIV
@@ -2699,6 +2987,19 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>Some online virus scanners like Symantec Antivirus do slowdown Cygwin/X
+a lot. They scan every file access and network traffic which causes serious 
+processing overhead beyond that from the X11 protocol and the unix emulation
+layer.</P
+><P
+>So far there is no know solution but to disable the virus scanner 
+completely.</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
 >[Dr. Edward Wornar] Certain programs that are installed by various 
 drivers and software packages can consume an incredible amount of system
 resources and processing time.  One known example of such a program is
@@ -2866,7 +3167,8 @@ CLASS="answer"
 >This is a small problem with <TT
 CLASS="filename"
 >run.exe</TT
->. If you start <TT
+>. If you start 
+<TT
 CLASS="filename"
 >XWin.exe</TT
 > with <TT
@@ -2884,7 +3186,8 @@ CLASS="parameter"
 ><I
 >-fullscreen</I
 ></TT
-> the window will come up normally.</P
+> the window will come 
+up normally.</P
 ></DIV
 ></DIV
 ><DIV
@@ -3033,10 +3336,10 @@ CLASS="answer"
 >Most likely you have started <TT
 CLASS="filename"
 >XWin.exe</TT
-> 
-twice with <TT
+> twice with <TT
 CLASS="filename"
->startxwin.bat</TT
+>startxwin.bat
+</TT
 > or <TT
 CLASS="filename"
 >startx</TT
@@ -3046,8 +3349,8 @@ or a similar script.</P
 >if you start multiple instances of <TT
 CLASS="filename"
 >XWin.exe</TT
-> you have to start to number them
-</P
+> you have to start to number 
+them </P
 ><P
 ><TABLE
 BORDER="0"
@@ -3057,9 +3360,9 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->XWin -query foo
-XWin :1 -query bar
-XWin :2 -query blubb
+>XWin.exe -query foo
+XWin.exe :1 -query bar
+XWin.exe :2 -query blubb
 </PRE
 ></TD
 ></TR
@@ -3682,7 +3985,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN706"/><P
+NAME="AEN770"/><P
 ><B
 >Example 1. Include Problems</B
 ></P

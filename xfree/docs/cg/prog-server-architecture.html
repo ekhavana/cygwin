@@ -6,7 +6,8 @@
 Architecture</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.7"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"/><LINK
 REL="HOME"
 TITLE="Cygwin/X Contributor's Guide"
 HREF="cygwin-x-cg.html"/><LINK
@@ -69,10 +70,8 @@ CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
-NAME="prog-server-architecture"
->Cygwin/X X Server
-Architecture</A
-></H1
+NAME="prog-server-architecture"/>Cygwin/X X Server
+Architecture</H1
 ><P
 >Cygwin/X's X Server architecture was heavily inspired by <A
 HREF="biblio.html#porting-layer-definition"
@@ -84,9 +83,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-server-architecture-privates"
->Server Privates</A
-></H2
+NAME="prog-server-architecture-privates"/>Server Privates</H2
 ><P
 >X Servers use various structures to pass information around to
 functions.  Some of those structures are colormaps, <A
@@ -143,13 +140,17 @@ CLASS="glossterm"
 mechanism provided by the X protocol for associating additional
 information with internal X Server structures.  Privates originally
 consisted of a single pointer member contained in each structure,
-usually named <CODE
+usually named <TT
 CLASS="structfield"
->devPrivate</CODE
+><I
+>devPrivate</I
+></TT
 > or
-<CODE
+<TT
 CLASS="structfield"
->devPriv</CODE
+><I
+>devPriv</I
+></TT
 >.  This original specification only
 allowed one of the X Server layers (mi, fb, shadow, etc.) to have
 privates associated with an internal structure.  Privates have since
@@ -159,27 +160,31 @@ been revised.</P
 layer call a function on startup to indicate that that layer will
 require privates and to obtain an index into the array of privates
 that that layer's privates will be stored at.  Modern privates are
-generally stored in an array of type <CODE
+generally stored in an array of type <SPAN
 CLASS="structname"
->DevUnion</CODE
+>DevUnion</SPAN
 >
 pointed to by a structure member named
-<CODE
+<TT
 CLASS="structfield"
->devPrivates</CODE
+><I
+>devPrivates</I
+></TT
 >;
-<CODE
+<SPAN
 CLASS="structname"
->DevUnion</CODE
+>DevUnion</SPAN
 > is defined in
 <TT
 CLASS="filename"
 >xc/programs/Xserver/include/miscstruct.h</TT
 >.  There
 are two different memory allocation schemes for
-<CODE
+<TT
 CLASS="structfield"
->devPrivates</CODE
+><I
+>devPrivates</I
+></TT
 >.</P
 ><P
 >Memory for privates structures can either be preallocated or
@@ -204,13 +209,13 @@ CLASS="glossterm"
 ></A
 > structure creation function
 to allocate memory for the privates;
-<CODE
+<TT
 CLASS="function"
->winScreenInit</CODE
+>winScreenInit</TT
 > calling
-<CODE
+<TT
 CLASS="function"
->winAllocatePrivates</CODE
+>winAllocatePrivates</TT
 >, which allocates screen
 privates memory directly, is an example of this.  Allocation upon use
 can optionally and non-optimally be used by GCs, pixmaps, and
@@ -220,9 +225,7 @@ CLASS="sect3"
 ><H3
 CLASS="sect3"
 ><A
-NAME="prog-server-architecture-privates-macros"
->Macros</A
-></H3
+NAME="prog-server-architecture-privates-macros"/>Macros</H3
 ><P
 >Three macros are provided for each class of privates that make
 setting up and using the privates easier.  The macros for screen
@@ -230,9 +233,7 @@ privates are examined as an example.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN313"
-></A
-><P
+NAME="AEN211"/><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
@@ -247,9 +248,9 @@ CLASS="PDPARAM"
 ></P
 ></DIV
 ><P
-><CODE
+><TT
 CLASS="function"
->winGetScreenPriv</CODE
+>winGetScreenPriv</TT
 > takes a non-NULL pointer
 to a screen, a <SPAN
 CLASS="type"
@@ -259,17 +260,15 @@ in the DDX privates for that screen.  Passing a NULL or invalid
 <SPAN
 CLASS="type"
 >ScreenPtr</SPAN
-> to <CODE
+> to <TT
 CLASS="function"
->winGetScreenPriv</CODE
+>winGetScreenPriv</TT
 > will
 cause an access violation, crashing the Cygwin/X X Server.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN324"
-></A
-><P
+NAME="AEN222"/><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
@@ -287,33 +286,33 @@ CLASS="PDPARAM"
 ></P
 ></DIV
 ><P
-><CODE
+><TT
 CLASS="function"
->winSetScreenPriv</CODE
+>winSetScreenPriv</TT
 > takes a non-NULL pointer
 to a screen, a <SPAN
 CLASS="type"
 >ScreenPtr</SPAN
 >, and sets the DDX privates
-pointer to the value of the <VAR
+pointer to the value of the <TT
 CLASS="parameter"
->pvPrivates</VAR
+><I
+>pvPrivates</I
+></TT
 >
 parameter.  Passing a NULL or invalid <SPAN
 CLASS="type"
 >ScreenPtr</SPAN
 > to
-<CODE
+<TT
 CLASS="function"
->winSetScreenPriv</CODE
+>winSetScreenPriv</TT
 > will cause an access violation,
 crashing the Cygwin/X X Server.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN338"
-></A
-><P
+NAME="AEN236"/><P
 ><CODE
 ><CODE
 CLASS="FUNCDEF"
@@ -328,21 +327,21 @@ CLASS="PDPARAM"
 ></P
 ></DIV
 ><P
-><CODE
+><TT
 CLASS="function"
->winScreenPriv</CODE
+>winScreenPriv</TT
 > takes a non-NULL pointer to a
 screen, a <SPAN
 CLASS="type"
 >ScreenPtr</SPAN
 >, and declares a local variable in the
-calling function named <VAR
+calling function named <TT
 CLASS="varname"
->pScreenPriv</VAR
+>pScreenPriv</TT
 >.
-<CODE
+<TT
 CLASS="function"
->winScreenPriv</CODE
+>winScreenPriv</TT
 > may only be called at the top of a
 C function within the variable declaration block; calling the function
 elsewhere will break the ANSI C rule that all variables must be
@@ -350,9 +349,9 @@ declared at the top of a scope block.  Passing a NULL or invalid
 <SPAN
 CLASS="type"
 >ScreenPtr</SPAN
-> to <CODE
+> to <TT
 CLASS="function"
->winScreenPriv</CODE
+>winScreenPriv</TT
 > will
 cause an access violation, crashing the Cygwin/X X Server.</P
 ></DIV
@@ -362,9 +361,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-server-architecture-engines"
->Engine System</A
-></H2
+NAME="prog-server-architecture-engines"/>Engine System</H2
 ><P
 >The Cygwin/X X Server uses several methods of drawing graphics
 on the display device; each of these different drawing methods is
@@ -378,9 +375,7 @@ CLASS="sect3"
 ><H3
 CLASS="sect3"
 ><A
-NAME="prog-server-architecture-engines-shadow"
->Shadow FB Engines</A
-></H3
+NAME="prog-server-architecture-engines-shadow"/>Shadow FB Engines</H3
 ><P
 >The Shadow FB engines use Keith Packard's <A
 HREF="glossary.html#gloss-fb-layer"
@@ -417,10 +412,8 @@ CLASS="sect3"
 ><H3
 CLASS="sect3"
 ><A
-NAME="prog-server-architecture-engines-native"
->Native GDI
-Engine</A
-></H3
+NAME="prog-server-architecture-engines-native"/>Native GDI
+Engine</H3
 ><P
 >The Native GDI engine will eventually translate individual X
 graphics calls into their GDI equivalent.  Some X graphics calls do
@@ -428,16 +421,16 @@ not translate directly to a GDI call so they may be passed through the
 MI layer to change them into a serious of lower level calls that are
 supported.  Currently, the Native GDI engine passes all X graphics
 calls through the MI layer to convert them into three functions:
-<CODE
+<TT
 CLASS="function"
->FillSpans</CODE
->, <CODE
+>FillSpans</TT
+>, <TT
 CLASS="function"
->GetSpans</CODE
+>GetSpans</TT
 >, and
-<CODE
+<TT
 CLASS="function"
->SetSpans</CODE
+>SetSpans</TT
 >.  The functionality of those three
 functions, as of 2001-10-28, is limited to the functionality needed to
 draw the familiar X background pattern upon X Server startup.</P
@@ -447,15 +440,13 @@ CLASS="sect3"
 ><H3
 CLASS="sect3"
 ><A
-NAME="prog-server-architecture-engines-primary"
->Primary FB Engine</A
-></H3
+NAME="prog-server-architecture-engines-primary"/>Primary FB Engine</H3
 ><P
 >The Primary FB engine is deprecated.  Primary FB works in the
 same manner that the original Cygwin/X X Server worked, namely, it
-uses <CODE
+uses <TT
 CLASS="function"
->IDirectDrawSurface_Lock</CODE
+>IDirectDrawSurface_Lock</TT
 > to obtain a pointer
 to the <A
 HREF="glossary.html#gloss-primary-framebuffer"
@@ -532,9 +523,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-server-architecture-input"
->User Input</A
-></H2
+NAME="prog-server-architecture-input"/>User Input</H2
 ><P
 >User input is processed using the <A
 HREF="glossary.html#gloss-mi-layer"
@@ -548,9 +537,9 @@ messages, are handled when <TT
 CLASS="filename"
 >hw/xwin/winwakeup.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->winWakeupHandler</CODE
+>winWakeupHandler</TT
 > function is called by the
 <A
 HREF="glossary.html#gloss-os-layer"
@@ -563,9 +552,9 @@ CLASS="glossterm"
 CLASS="filename"
 >os/WaitFor.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->WaitForSomething</CODE
+>WaitForSomething</TT
 > function and when the <A
 HREF="glossary.html#gloss-dix-layer"
 ><I
@@ -576,64 +565,62 @@ CLASS="glossterm"
 <TT
 CLASS="filename"
 >dix/dispatch.c</TT
->'s <CODE
+>'s <TT
 CLASS="function"
->Dispatch</CODE
+>Dispatch</TT
 >
 function calls <TT
 CLASS="filename"
 >hw/xwin/InitInput.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->ProcessInputEvents</CODE
+>ProcessInputEvents</TT
 > function.  Each Win32 user
 input message typically queues an input event, or several input
 events, using the MI layer's <TT
 CLASS="filename"
 >mi/mieq.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->mieqEnqueue</CODE
+>mieqEnqueue</TT
 > function.  Enqueued MI input events
-are processed in <CODE
+are processed in <TT
 CLASS="function"
->ProcessInputEvents</CODE
+>ProcessInputEvents</TT
 > by calling
 <TT
 CLASS="filename"
 >mi/mieq.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->mieqProcessInputEvents</CODE
+>mieqProcessInputEvents</TT
 >; the cursor position is
 updated on the screen by calling <TT
 CLASS="filename"
 >mipointer.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->miPointerUpdate</CODE
+>miPointerUpdate</TT
 >.</P
 ><DIV
 CLASS="sect3"
 ><H3
 CLASS="sect3"
 ><A
-NAME="prog-server-architecture-input-keyboard"
->Keyboard</A
-></H3
+NAME="prog-server-architecture-input-keyboard"/>Keyboard</H3
 ><P
 >Win32 keyboard messages are processed in
 <TT
 CLASS="filename"
 >winwndproc.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->winWindowProc</CODE
+>winWindowProc</TT
 >.  The messages processed
 are:</P
 ><UL
@@ -715,9 +702,11 @@ table that links the normal and extended state of each virtual key
 code to a scan code.  This method seems valid, but the method does not
 work reliably for users with non-U.S. keyboard layouts.  The second
 method simply pulls the scan code out of the
-<VAR
+<TT
 CLASS="parameter"
->lParam</VAR
+><I
+>lParam</I
+></TT
 > of the keyboard messages; this method
 works reliably for non-U.S. keyboard layouts.  However, there are
 further concerns for non-U.S. keyboard layouts.</P
@@ -754,9 +743,9 @@ CLASS="keycap"
 CLASS="keycap"
 >AltLang</B
 >; the
-<ABBR
+<SPAN
 CLASS="abbrev"
->Gr</ABBR
+>Gr</SPAN
 > is short for <SPAN
 CLASS="QUOTE"
 >"grave"</SPAN
@@ -798,13 +787,13 @@ keyboard message to <TT
 CLASS="filename"
 >winkeybd.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->winIsFakeCtrl_L</CODE
+>winIsFakeCtrl_L</TT
 > function.
-<CODE
+<TT
 CLASS="function"
->winIsFakeCtrl_L</CODE
+>winIsFakeCtrl_L</TT
 > detects the fake key presses and
 releases by comparing the timestamps of the <B
 CLASS="keycap"
@@ -861,18 +850,16 @@ CLASS="sect3"
 ><H3
 CLASS="sect3"
 ><A
-NAME="prog-server-architecture-input-mouse"
->Mouse</A
-></H3
+NAME="prog-server-architecture-input-mouse"/>Mouse</H3
 ><P
 >Win32 mouse messages are processed in
 <TT
 CLASS="filename"
 >winwndproc.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->winWindowProc</CODE
+>winWindowProc</TT
 >.  The messages processed
 are:</P
 ><UL
@@ -908,9 +895,9 @@ when the mouse is moving over the client area of a Cygwin/X window;
 the Windows mouse cursor must be redisplayed when the mouse is
 moving over the non-client area of a Cygwin/X window.  Win32 sends
 the absolute coordinates of the mouse, so we call
-<CODE
+<TT
 CLASS="function"
->miPointerAbsoluteCursor</CODE
+>miPointerAbsoluteCursor</TT
 > to change the position of
 the mouse.</P
 ><P
@@ -921,13 +908,13 @@ disabled, mouse button presses and releases are handled trivially in
 CLASS="filename"
 >winmouse.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->winMouseButtonsHandle</CODE
+>winMouseButtonsHandle</TT
 > by simply passing the event
-to <CODE
+to <TT
 CLASS="function"
->mieqEnqueue</CODE
+>mieqEnqueue</TT
 >.  Three-button mouse emulation is
 quite complicated.</P
 ><P
@@ -942,9 +929,9 @@ before the timer runs out.</P
 CLASS="filename"
 >winmouse.c</TT
 >'s
-<CODE
+<TT
 CLASS="function"
->winMouseWheel</CODE
+>winMouseWheel</TT
 > by generating sequences of button 4
 and button 5 presses and releases corresponding to how much the mouse
 wheel has moved.  Win32 uses variable resolution for the mouse wheel

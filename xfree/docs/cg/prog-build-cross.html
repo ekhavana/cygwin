@@ -5,7 +5,8 @@
 >Cross Compiling</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.7"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"/><LINK
 REL="HOME"
 TITLE="Cygwin/X Contributor's Guide"
 HREF="cygwin-x-cg.html"/><LINK
@@ -68,9 +69,7 @@ CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
-NAME="prog-build-cross"
->Cross Compiling</A
-></H1
+NAME="prog-build-cross"/>Cross Compiling</H1
 ><P
 >Cross compiling is the act of the building source code on one
 system, the build host, into executables or libraries to be run on a
@@ -108,9 +107,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-obtaining-compiler-source"
->Obtaining binutils and gcc Source</A
-></H2
+NAME="prog-cross-obtaining-compiler-source"/>Obtaining binutils and gcc Source</H2
 ><P
 >binutils and gcc source code releases that are known to
 compile on Cygwin and distributed by the Cygwin project.
@@ -237,9 +234,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-obtaining-cygwin-headers-and-libs"
->Obtaining Cygwin Headers and Libs</A
-></H2
+NAME="prog-cross-obtaining-cygwin-headers-and-libs"/>Obtaining Cygwin Headers and Libs</H2
 ><P
 >The simplest method of building a cross compiler for Cygwin
 requires that you have the Cygwin headers and libraries available at
@@ -463,9 +458,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-building-binutils-and-gcc"
->Building binutils and gcc</A
-></H2
+NAME="prog-cross-building-binutils-and-gcc"/>Building binutils and gcc</H2
 ><OL
 TYPE="1"
 ><LI
@@ -643,9 +636,9 @@ CLASS="screen"
 ></LI
 ><LI
 ><P
->Modify the <VAR
+>Modify the <TT
 CLASS="envar"
->PATH</VAR
+>PATH</TT
 > environment variable to include
 the directories that the binutils executables were installed in:</P
 ><TABLE
@@ -784,9 +777,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-tool-links"
->Creating Links for binutils and gcc</A
-></H2
+NAME="prog-cross-tool-links"/>Creating Links for binutils and gcc</H2
 ><P
 >Links to the executables in
 <TT
@@ -879,9 +870,7 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-build"
->Building Cygwin/X</A
-></H2
+NAME="prog-cross-build"/>Building Cygwin/X</H2
 ><P
 >Building the source code when cross compiling X Window System is nearly
 identical to the process described below in
@@ -924,9 +913,11 @@ CLASS="command"
 ><LI
 ><P
 >When building the entire tree, you must pass
-<VAR
+<TT
 CLASS="parameter"
->CROSSCOMPILEDIR</VAR
+><I
+>CROSSCOMPILEDIR</I
+></TT
 > to <B
 CLASS="command"
 >make</B
@@ -983,9 +974,11 @@ CLASS="screen"
 CLASS="command"
 >makeg</B
 >, which should generally already be installed,
-and pass <VAR
+and pass <TT
 CLASS="parameter"
->CROSSCOMPILEDIR</VAR
+><I
+>CROSSCOMPILEDIR</I
+></TT
 > to
 <B
 CLASS="command"
@@ -1039,13 +1032,17 @@ CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" &gt; XWin.log 2&gt;&a
 ><LI
 ><P
 >When installing a standard build of the entire tree, you must
-pass <VAR
+pass <TT
 CLASS="parameter"
->DESTDIR</VAR
+><I
+>DESTDIR</I
+></TT
 > and
-<VAR
+<TT
 CLASS="parameter"
->CROSSCOMPILEDIR</VAR
+><I
+>CROSSCOMPILEDIR</I
+></TT
 > to <B
 CLASS="command"
 >make</B
@@ -1067,9 +1064,11 @@ CLASS="tip"
 CLASS="command"
 >make install install.man</B
 > on your
-host platform without the <VAR
+host platform without the <TT
 CLASS="parameter"
->DESTDIR</VAR
+><I
+>DESTDIR</I
+></TT
 > parameter, as
 that will cause the Cygwin build of X Window System to be installed over top
 of your local X Window System installation, which would completely
@@ -1097,13 +1096,17 @@ CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" &gt; install.log 2&gt
 ><LI
 ><P
 >When installing a debug build of the entire tree, you must pass
-<VAR
+<TT
 CLASS="parameter"
->DESTDIR</VAR
+><I
+>DESTDIR</I
+></TT
 > and
-<VAR
+<TT
 CLASS="parameter"
->CROSSCOMPILEDIR</VAR
+><I
+>CROSSCOMPILEDIR</I
+></TT
 > to <B
 CLASS="command"
 >makeg</B
@@ -1125,9 +1128,11 @@ CLASS="tip"
 CLASS="command"
 >makeg install install.man</B
 > on your
-host platform without the <VAR
+host platform without the <TT
 CLASS="parameter"
->DESTDIR</VAR
+><I
+>DESTDIR</I
+></TT
 > parameter, as
 that will cause the Cygwin debug build of X Window System to be installed
 over top of your local X Window System installation, which would
