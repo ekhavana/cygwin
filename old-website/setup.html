@@ -297,8 +297,15 @@ all categories are only a single word.</p>
 
 <p>The <tt>requires</tt> line indicates the packages that this package
 relies on.  If your package is dependent on a file provided by another
-package that other package should be included here - this includes the
-cygwin package itself!</p>
+package that other package should be included here.  The requires
+field may be missing or empty if your package truly does not require any
+other package.  A package will probably require the <tt>cygwin</tt>
+package if it contain any DLLs or executable files since the
+<tt>cygwin</tt> package contains <tt>cygwin1.dll</tt>, which is required
+for most programs.  However, the <tt>cygwin</tt> package would not be a
+required dependency for a package which contained only text files, as is
+the case with, for example, packages that consist entirely of man
+pages.</p>
 
 <p>A package can rely on multiple other packages.  Hierarchical
 dependencies should work correctly, however, it is best to always
