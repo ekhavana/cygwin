@@ -19,18 +19,19 @@ community but we could definitely use more help!
 <P>The code corresponding to cygwin1.dll is mostly in the winsup
 directory with additional code coming from newlib/libc, newlib/libm,
 libiberty, and gcc.  Any changes you make should ideally be made to
-the <a href="http://sourceware.cygnus.com/cygwin/snapshots/">
-current development sources</a>.  This makes it much easier to
-integrate your changes once they're completed and tested.  Note the
-development snapshots should compile, but they should always be
-assumed to be unstable and contain untested, experimental code.
+the <a href="snapshots/"> current development sources</a>.  This makes
+it much easier to integrate your changes once they're completed and
+tested.  Note the development snapshots should compile, but they
+should always be assumed to be unstable and contain untested,
+experimental code.
 
-<P>To build the Cygwin library, start by building the comp-tools sources
-with the last release, substituting in the newlib and winsup sources
-from the snapshot location.  Minimal build instructions are included in
-the <a href="faq_toc.html">FAQ</a>.  If your object directory is /c/obj,
-the Cygwin dll you will build should be /c/obj/winsup/new-cygwinxx.dll
-where xx represents the current API_MAJOR version number.
+<P>To build the Cygwin library, start by building the comp-tools
+sources with the last release, substituting in the newlib and winsup
+sources from the snapshot location.  Minimal build instructions are
+included in the <a href="faq/">FAQ</a>.  If your object directory is
+/c/obj, the Cygwin dll you will build should be
+/c/obj/winsup/new-cygwinxx.dll where xx represents the current
+API_MAJOR version number.
 
 <P>Once you have a built comp-tools tree, if you make further changes
 to the winsup sources, you can rebuild the library by typing:
@@ -61,28 +62,28 @@ free to send us Cygwin-related patches for other tools -- we'll
 probably know what you should do with them if we're not in the position
 of making the change directly.
 
-<P>If your change is going to be a significant one in terms of the size
-of your code changes, be aware that you will have to sign over the
-copyright ownership of your code changes to Cygnus or the FSF
+<P>If your change is going to be a significant one in terms of the
+size of your code changes, be aware that you will have to sign over
+the copyright ownership of your code changes to Cygnus or the FSF
 (depending on the source file) before we can include your changes in
 the main source tree.  Your employer may also have to send us a
-disclaimer stating that they have no claims to your contribution.  This
-is necessary for liability reasons.  Here is our
-<a href="assign.txt">standard assignment form</a> for changes to
-Cygwin that you can fill
-out, sign, and send back.  It shouldn't end up being that much of a
-pain.  If you have any questions, please send them to
-<a href="mailto:cygwin32-developers@cygnus.com">cygwin32-developers@cygnus.com</a>.
+disclaimer stating that they have no claims to your contribution.
+This is necessary for liability reasons.  Here is our <a
+href="assign.txt">standard assignment form</a> for changes to Cygwin
+that you can fill out, sign, and send back.  It shouldn't end up being
+that much of a pain.  If you have any questions, please send them to
+<a
+href="mailto:cygwin-developers@sourceware.cygnus.com">cygwin-developers@sourceware.cygnus.com</a>.
 
 <P>Finally, before you start modifying anything for real, you should
-probably join the cygwin32-developers mailing list and send it mail
+probably join the cygwin-developers mailing list and send it mail
 describing what you want to do and how you want to do it so you
 don't waste time working on something we can't integrate.  This also
 allows us to keep track of what's being worked on so efforts aren't
 duplicated.
 
 <P>Once you've finished making and testing your changes, you should send
-a context diff to the cygwin32-developers list.  As an example, if you
+a context diff to the cygwin-developers list.  As an example, if you
 modified winsup/syscalls.cc and have the original source file around
 as /winsup/syscalls.cc-orig, you would do the following in bash:
 
@@ -92,7 +93,7 @@ as /winsup/syscalls.cc-orig, you would do the following in bash:
       diff -cp syscalls.cc-orig syscalls.cc > syscalls.cc-patch 2>&1 <br>
 </pre>
 
-<P>Then gzip and uuencode it and send it to the cygwin32-developers list
+<P>Then gzip and uuencode it and send it to the cygwin-developers list
 in an email along with an explanation of what the change does.  This
 must include a ChangeLog entry (model yours after other entries in the
 file winsup/ChangeLog).  Then we'll test it and get back to you as
@@ -108,10 +109,10 @@ everyone else's work as well as our own...
 <P>A fair amount of stuff.  Hopefully it will be listed here soon...
 
 <P>You can get a good idea of the current bugs and problem areas by
-browsing the gnu-win32 mailing list archives.  In addition, check out
-the API calls portion of the FAQ and look for references to
-unimplemented functions.  Or send mail to <a
-href="mailto:cygwin32-developers@cygnus.com">cygwin32-developers@cygnus.com</a>
+browsing the cygwin mailing list archives.  In addition, check out the
+API calls portion of the FAQ and look for references to unimplemented
+functions.  Or send mail to <a
+href="mailto:cygwin-developers@sourceware.cygnus.com">cygwin-developers@sourceware.cygnus.com</a>
 and see what people suggest...
 
 <!--#include virtual="/include/footer-subpages.html"-->
