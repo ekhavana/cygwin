@@ -187,11 +187,12 @@ Downloading Cygwin/XFree86
     2. The ftp url for your mirror site should take you to the Cygwin
        directory on the mirror
     3. Download the following files from xfree/xc-4-binaries, saving them
-       to the root of your Cygwin installation directory (e.g.
-       c:\cygwin), the compressed file size appears after each file; as
-       of 2001-07-01 you will need approximately 30 MB of disk space to
-       download the required files, your download size will vary if you
-       choose to download any optional files.
+       to the tmp directory in the root of your Cygwin installation
+       directory (e.g. c:\cygwin). The full path that you save the files
+       to will look like c:\cygwin\tmp. The compressed file size appears
+       after each file; as of 2001-07-01 you will need approximately 30
+       MB of disk space to download the required files, your download
+       size will vary if you choose to download any optional files.
 
      Downloading with a Web Browser: Some web browsers automatically
      decompress saved files when you use the left mouse button to follow
@@ -248,31 +249,35 @@ Installing Cygwin/XFree86
 Harold@MyWindowsHost ~
 $
 
-    2. Change the current directory to your Cygwin root directory:
+    2. Change the current directory to the tmp directory in your Cygwin
+       root directory:
 
 Harold@MyWindowsHost ~
-$ cd /
-Harold@MyWindowsHost /
+$ cd /tmp
+
+Harold@MyWindowsHost /tmp
 $
 
     3. Extract the extract.exe.bz2 archive:
 
-Harold@MyWindowsHost /
+Harold@MyWindowsHost /tmp
 $ bunzip2 extract.exe.bz2
-Harold@MyWindowsHost /
+
+Harold@MyWindowsHost /tmp
 $
 
     4. Copy the extract.exe file to /bin:
 
-Harold@MyWindowsHost /
+Harold@MyWindowsHost /tmp
 $ cp extract.exe /bin
-Harold@MyWindowsHost /
+
+Harold@MyWindowsHost /tmp
 $
 
     5. Run the Xinstall.sh script. Follow the step-by-step instructions
        that the script provides:
 
-Harold@MyWindowsHost /
+Harold@MyWindowsHost /tmp
 $ ./Xinstall.sh
 
                 Welcome to the XFree86 4.1.0 installer
@@ -290,20 +295,22 @@ Do you wish to continue? (y/n) [n] n
 
 ...
 
-Harold@MyWindowsHost /
+Harold@MyWindowsHost /tmp
 $
 
     6. Copy startup-scripts.tgz to /usr/X11R6/bin:
 
-Harold@MyWindowsHost /
+Harold@MyWindowsHost /tmp
 $ cp startup-scripts.tgz /usr/X11R6/bin
-Harold@MyWindowsHost /
+
+Harold@MyWindowsHost /tmp
 $
 
     7. Change the current directory to /usr/X11R6/bin:
 
-Harold@MyWindowsHost /
+Harold@MyWindowsHost /tmp
 $ cd /usr/X11R6/bin
+
 Harold@MyWindowsHost /usr/X11R6/bin
 $
 
@@ -311,6 +318,7 @@ $
 
 Harold@MyWindowsHost /usr/X11R6/bin
 $ tar -xzf startup-scripts.tgz
+
 Harold@MyWindowsHost /usr/X11R6/bin
 $
 
@@ -765,7 +773,7 @@ References
 
    1. file://localhost/home/public/documents/cygx/build/ug/dump.html#overview
    2. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup
-   3. file://localhost/home/public/documents/cygx/build/ug/dump.html#AEN37
+   3. file://localhost/home/public/documents/cygx/build/ug/dump.html#AEN47
    4. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-downloading
    5. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-installing
    6. file://localhost/home/public/documents/cygx/build/ug/dump.html#cygwin-xfree-downloading
