@@ -756,7 +756,8 @@ Building binutils and gcc
     6. Configure binutils:
 
 [harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin
- --target=i686-pc-cygwin --host=i686-pc-linux > configure.log 2>&1
+
+--target=i686-pc-cygwin --host=i686-pc-linux > configure.log 2>&1
 [harold@MyCrossHost build]$
 
     7. Build binutils:
@@ -791,8 +792,9 @@ Building binutils and gcc
    12. Configure gcc:
 
 [harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin
- --target=i686-pc-cygwin --host=i686-pc-linux --enable-haifa > configure.log 2>
-&1
+
+--target=i686-pc-cygwin --host=i686-pc-linux
+--enable-haifa > configure.log 2>&1
 [harold@MyCrossHost build]$
 
    13. Build gcc:
@@ -808,9 +810,13 @@ Building binutils and gcc
 
 Building Cygwin/XFree86
 
+   Download [42]host.def, and place the file in xc/config/cf.
+
    Modify host.def/PostIncDir to reflect the actual version of gcc
    compiled, such as #define PostIncDir
-   /cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include
+   /cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include. The version
+   number in the path will change depending on which version of gcc you
+   built and installed.
 
    make World BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1"
    IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
@@ -877,7 +883,7 @@ C
    Concurrent Versions System (CVS)
           CVS is an open source version control system used by the
           majority of open source projects. More information can be found
-          at the [42]CVS project homepage.
+          at the [43]CVS project homepage.
 
 F
 
@@ -918,7 +924,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [43]X Display Manager.
+          See Also: [44]X Display Manager.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -1245,7 +1251,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [44]http://www.gnu.org/copyleft/.
+   [45]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -1325,6 +1331,7 @@ References
   39. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
   40. http://cygwin.com/mirrors.html
   41. http://cygwin.com/mirrors.html
-  42. http://www.cvshome.org/
-  43. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
-  44. http://www.gnu.org/copyleft/
+  42. http://www.msu.edu/~huntharo/xwin/host.def
+  43. http://www.cvshome.org/
+  44. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
+  45. http://www.gnu.org/copyleft/

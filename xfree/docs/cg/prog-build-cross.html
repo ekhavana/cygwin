@@ -537,7 +537,8 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin --target=i686-pc-cygwin --host=i686-pc-linux &gt; configure.log 2&gt;&amp;1
+>&#13;[harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin 
+--target=i686-pc-cygwin --host=i686-pc-linux &gt; configure.log 2&gt;&amp;1
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -658,7 +659,9 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin --target=i686-pc-cygwin --host=i686-pc-linux --enable-haifa &gt; configure.log 2&gt;&amp;1
+>&#13;[harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin 
+--target=i686-pc-cygwin --host=i686-pc-linux 
+--enable-haifa &gt; configure.log 2&gt;&amp;1
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -712,9 +715,21 @@ NAME="prog-cross-build"
 >Building Cygwin/XFree86</A
 ></H2
 ><P
+>Download <A
+HREF="http://www.msu.edu/~huntharo/xwin/host.def"
+TARGET="_top"
+>host.def</A
+>, and
+place the file in <TT
+CLASS="filename"
+>xc/config/cf</TT
+>.</P
+><P
 >Modify host.def/PostIncDir to reflect the actual version of gcc
 compiled, such as #define PostIncDir
-/cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include</P
+/cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include.  The version
+number in the path will change depending on which version of gcc you
+built and installed.</P
 ><P
 >make World BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1" IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1</P
 ></DIV
