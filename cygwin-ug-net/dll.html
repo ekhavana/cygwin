@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Building and Using DLLs</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.72
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
 "><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
@@ -20,6 +21,11 @@ TITLE="Defining Windows Resources"
 HREF="windres.html"></HEAD
 ><BODY
 CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -42,13 +48,13 @@ VALIGN="bottom"
 ><A
 HREF="gdb.html"
 ACCESSKEY="P"
->Prev</A
+>&#60;&#60;&#60; Previous</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Chapter 4. Programming with Cygwin</TD
+>Programming with Cygwin</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
@@ -56,7 +62,7 @@ VALIGN="bottom"
 ><A
 HREF="windres.html"
 ACCESSKEY="N"
->Next</A
+>Next &#62;&#62;&#62;</A
 ></TD
 ></TR
 ></TABLE
@@ -69,8 +75,8 @@ CLASS="SECT1"
 CLASS="SECT1"
 ><A
 NAME="DLL"
->Building and Using DLLs</A
-></H1
+></A
+>Building and Using DLLs</H1
 ><P
 >DLLs are Dynamic Link Libraries, which means that they're linked
 into your program at run time instead of build time.  There are three
@@ -130,8 +136,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="DLL-BUILD"
->Building DLLs</A
-></H2
+></A
+>Building DLLs</H2
 ><P
 >OK, let's go through a simple example of how to build a dll.
 For this example, we'll use a single file
@@ -152,21 +158,6 @@ CLASS="FILENAME"
 >mydll.dll</TT
 >).</P
 ><P
->Now compile everything to objects:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
->gcc -c myprog.c
-gcc -c mydll.c</PRE
-></TD
-></TR
-></TABLE
-><P
 >Fortunately, with the latest gcc and binutils the process for building a dll
 is now pretty simple. Say you want to build this minimal function in mydll.c:</P
 ><TABLE
@@ -177,11 +168,13 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->int WINAPI
-mydll_init(HANDLE h, DWORD reason, void *foo)
+>#include &#60;stdio.h&#62;
+
+int
+hello()
 {
-  return 1;
-}</PRE
+  printf ("Hello World!\n");
+}  </PRE
 ></TD
 ></TR
 ></TABLE
@@ -214,7 +207,40 @@ CLASS="SCREEN"
 ></TR
 ></TABLE
 ><P
->That's it! However, if you are building a dll as an export library,
+>That's it! To finish up the example, you can now link to the
+dll with a simple program:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>int 
+main ()
+{
+  hello ();
+}  </PRE
+></TD
+></TR
+></TABLE
+><P
+>Then link to your dll with a command like:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>gcc -o myprog myprog.ca -L./ -lmydll</PRE
+></TD
+></TR
+></TABLE
+><P
+>However, if you are building a dll as an export library,
 you will probably want to use the complete syntax:</P
 ><TABLE
 BORDER="0"
@@ -245,13 +271,22 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="DLL-LINK"
->Linking Against DLLs</A
-></H2
+></A
+>Linking Against DLLs</H2
 ><P
 >If you have an existing DLL already, you need to build a
-Cygwin-compatible import library (The supplied ones should work, but
-you might not have them) to link against.  Unfortunately, there is not
-yet any tool to do this automatically.  However, you can get most of
+Cygwin-compatible import library.  If you have the source to compile
+the DLL, see <A
+HREF="dll.html#DLL-BUILD"
+>the Section called <I
+>Building DLLs</I
+></A
+> for details on having 
+<TT
+CLASS="FILENAME"
+>gcc</TT
+> build one for you.  If you do not have the
+source or a supplied working import library, you can get most of
 the way by creating a .def file with these commands (you might need to
 do this in <TT
 CLASS="FILENAME"
@@ -313,7 +348,7 @@ VALIGN="top"
 ><A
 HREF="gdb.html"
 ACCESSKEY="P"
->Prev</A
+>&#60;&#60;&#60; Previous</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -331,7 +366,7 @@ VALIGN="top"
 ><A
 HREF="windres.html"
 ACCESSKEY="N"
->Next</A
+>Next &#62;&#62;&#62;</A
 ></TD
 ></TR
 ><TR
