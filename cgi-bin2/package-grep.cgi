@@ -21,36 +21,42 @@ use FindBin qw($Bin);
 print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
       LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "</td></table>\n",
       "<table>\n",
-      $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n",
-      $html->h2({-align=>'center'}, 'Search Results'), "\n";
+      $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n";
 
-chdir("$Bin/../packages");
-for my $f (<*/*>) {
-    open(F, $f) or next;
-    while (<F>) {
-	if (/$grep/o) {
-	    addfn($f);
-	    last;
-	}
-    }
-    close F;
-}
-
-my $index;
-if (!open(INDEX, 'index.html')) {
-    %main::packages = ();
+eval '"foo" =~ /$grep/o';
+if ($@) {
+    print $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $grep);
+    print $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>');
 } else {
-    $index = join('', <INDEX>);
-    close INDEX;
-}
+    print $html->h2({-align=>'center'}, 'Search Results'), "\n";
+    chdir("$Bin/../packages");
+    for my $f (<*/*>) {
+	open(F, $f) or next;
+	while (<F>) {
+	    if (/$grep/o) {
+		addfn($f);
+		last;
+	    }
+	}
+	close F;
+    }
 
-print "Found <b>$main::count</b> matches for <b>$grep</b>.<br><br>\n";
-if (%main::packages) {
-    for my $p (sort keys %main::packages) {
-	for my $f (@{$main::packages{$p}}) {
-	    print '<tr><td><img src="http://sources.redhat.com/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
-	           '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		   uri_escape($grep) . '">' . $f . '</a></td><td align="left">' . findheader($p, $index) . "</td></tr>\n";
+    my $index;
+    if (!open(INDEX, 'index.html')) {
+	%main::packages = ();
+    } else {
+	$index = join('', <INDEX>);
+	close INDEX;
+    }
+
+    print "Found <b>$main::count</b> matches for <b>$grep</b>.<br><br>\n";
+    if (%main::packages) {
+	for my $p (sort keys %main::packages) {
+	    for my $f (@{$main::packages{$p}}) {
+		print '<tr><td><img src="http://sources.redhat.com/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
+		       '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
+		       uri_escape($grep) . '">' . $f . '</a></td><td align="left">' . findheader($p, $index) . "</td></tr>\n";
+	    }
 	}
     }
 }
