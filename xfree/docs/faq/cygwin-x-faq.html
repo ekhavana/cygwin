@@ -44,6 +44,40 @@ COLSPAN="3"
 ><TR
 ><TD
 ALIGN="LEFT"
+>Revision 1.0.18</TD
+><TD
+ALIGN="LEFT"
+>2004-04-13</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Changed error with ssh -Y where enable was meant but disable was written</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 1.0.17</TD
+><TD
+ALIGN="LEFT"
+>2004-04-13</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added some extra notes about trusted X11Forwarding</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
 >Revision 1.0.16</TD
 ><TD
 ALIGN="LEFT"
@@ -2040,7 +2074,7 @@ CLASS="parameter"
 same thing as <VAR
 CLASS="parameter"
 >-X</VAR
->, but it disables trusted X11
+>, but it enables trusted X11
 forwarding for the current connection.</P
 ></DIV
 ><DIV
@@ -2070,7 +2104,7 @@ CLASS="replaceable"
 >localhost:0.0</VAR
 >
 $ export DISPLAY
-$ ssh -X <VAR
+$ ssh -Y <VAR
 CLASS="replaceable"
 >remotehost</VAR
 >
@@ -2093,7 +2127,7 @@ CLASS="screen"
 >&#13;$ DISPLAY=<VAR
 CLASS="replaceable"
 >localhost:0.0</VAR
-> ssh -X <VAR
+> ssh -Y <VAR
 CLASS="replaceable"
 >remotehost</VAR
 >
@@ -2102,7 +2136,15 @@ CLASS="replaceable"
 ></TR
 ></TABLE
 >
-
+The parameter <VAR
+CLASS="parameter"
+>-Y</VAR
+> enables trusted X11 Forwarding. 
+This is available since OpenSSH 3.8. If you have an older version of ssh
+you will have to use <VAR
+CLASS="parameter"
+>-X</VAR
+>.
 </P
 ></DIV
 ><DIV
@@ -2112,21 +2154,18 @@ CLASS="answer"
 > </B
 >A3:</P
 ><P
->Make sure you're not starting ssh with the parameter
-<VAR
+>&#13;Make sure you're not starting ssh with the parameter <VAR
 CLASS="parameter"
 >-x</VAR
->.  This disables <A
+> 
+(lowercase). This disables <A
 HREF="glossary.html#gloss-x11forwarding"
 ><I
 CLASS="glossterm"
->X11Forwarding</I
+>&#13;X11Forwarding</I
 ></A
->.  The correct
-parameter is <VAR
-CLASS="parameter"
->-X</VAR
-> (uppercase).</P
+>. 
+</P
 ></DIV
 ><DIV
 CLASS="answer"
@@ -2207,6 +2246,12 @@ CLASS="screen"
 ></TD
 ></TR
 ></TABLE
+><P
+>&#13;The commandline switch <VAR
+CLASS="parameter"
+>-Y</VAR
+> does the same.
+</P
 ></DIV
 ><DIV
 CLASS="answer"
@@ -2571,14 +2616,14 @@ parameter, it is not specific to Cygwin/X; therefore, the
 CLASS="parameter"
 >-fp</VAR
 > is documented in the <A
-HREF="http://www.xfree86.org/current/Xserver.1.html"
+HREF="http://freedesktop.org/~xorg/X11R6.7.0/doc/Xserver.1.html"
 TARGET="_top"
->X Server documentation</A
+>X Server manual page</A
 >.  For
 additional information about fonts, see <A
-HREF="http://www.xfree86.org/current/fonts.html"
+HREF="http://freedesktop.org/~xorg/X11R6.7.0/doc/fonts.html"
 TARGET="_top"
->Fonts in XFree86</A
+>Fonts in X11R6.7</A
 >.</P
 ></BLOCKQUOTE
 ></DIV
@@ -3074,17 +3119,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->From <A
-HREF="http://xfree86.org/"
-TARGET="_top"
->http://xfree86.org/</A
->, <SPAN
-CLASS="QUOTE"
->"This
-is a only a warning message, and is mostly harmless. If your server is
-failing to startup, this is not the reason. Check the other
-messages."</SPAN
-></P
+>This error is harmless.</P
 ></DIV
 ></DIV
 ><DIV
@@ -3666,7 +3701,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN725"
+NAME="AEN736"
 ></A
 ><P
 ><B

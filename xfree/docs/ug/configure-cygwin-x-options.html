@@ -88,7 +88,9 @@ CLASS="command"
 ><B
 CLASS="command"
 >XWin.exe</B
-> <BR/> [-clipboard]<BR/> [-clipupdates
+> <BR/> [-help]<BR/> [-clipboard
+ [-nounicodeclipboard]
+]<BR/> [-clipupdates
 <VAR
 CLASS="replaceable"
 >clip_updates_above_n</VAR
@@ -129,18 +131,42 @@ CLASS="replaceable"
 CLASS="replaceable"
 >height</VAR
 >
-...]<BR/> [-scrollbars]<BR/> [-[no]trayicon]<BR/> [-[no]unixkill]<BR/> [-[no]winkill]<BR/> [-xf86config
+...]<BR/> [-scrollbars]<BR/> [-[no]trayicon]<BR/> [-[no]unixkill]<BR/> [-[no]winkill]<BR/> [-[no]keyhook]<BR/> [-xkbrules
 <VAR
 CLASS="replaceable"
->windows_path_to_config_file</VAR
+>XKBRules</VAR
 >
- [-keyboard
+]<BR/> [-xkbmodel
 <VAR
 CLASS="replaceable"
->keyboard_device_from_xf86config</VAR
+>XKBModel</VAR
 >
-]
-]<BR/></P
+]<BR/> [-xkblayout
+<VAR
+CLASS="replaceable"
+>XKBLayout</VAR
+>
+]<BR/> [-xkbvariant
+<VAR
+CLASS="replaceable"
+>XKBVariant</VAR
+>
+]<BR/> [-xkboptions
+<VAR
+CLASS="replaceable"
+>XKBOptions</VAR
+>
+]<BR/> [-logfile
+<VAR
+CLASS="replaceable"
+>path_to_logfile</VAR
+>
+]<BR/> [-logverbose
+<VAR
+CLASS="replaceable"
+>verbosity_level</VAR
+>
+]<BR/><BR/></P
 ><P
 >Below is an example command line for
 <B
@@ -150,7 +176,7 @@ CLASS="command"
 ><DIV
 CLASS="informalexample"
 ><A
-NAME="AEN393"
+NAME="AEN423"
 ></A
 ><P
 ><B
@@ -167,7 +193,7 @@ CLASS="parameter"
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN397"
+NAME="AEN427"
 ></A
 ><P
 ><B
@@ -190,7 +216,22 @@ VALIGN="top"
 ><TR
 ><TD
 >&#13;<P
->[-clipboard]</P
+>[-help]</P
+>
+</TD
+><TD
+>&#13;<P
+>Print a list of supported commandline options and their description
+similar to this list.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-clipboard
+ [-nounicodeclipboard]
+]</P
 >
 </TD
 ><TD
@@ -205,6 +246,14 @@ Windows clipboard.  Do not use in conjunction with the
 CLASS="command"
 >xwinclip</B
 > program.</P
+>
+<P
+><VAR
+CLASS="parameter"
+>-nounicodeclipboard</VAR
+> disables Unicode clipboard 
+even if Cygwin/X is running on a NT-based platform
+</P
 >
 </TD
 ></TR
@@ -603,37 +652,150 @@ is enabled by default.</P
 ><TR
 ><TD
 >&#13;<P
->[-xf86config
-<VAR
-CLASS="replaceable"
->windows_path_to_config_file</VAR
->
- [-keyboard
-<VAR
-CLASS="replaceable"
->keyboard_device_from_xf86config</VAR
->
-]
-]</P
+>[-[no]keyhook]</P
 >
 </TD
 ><TD
 >&#13;<P
-><VAR
-CLASS="parameter"
->-xf86config</VAR
-> allows you to specify a
-XF86Config-style configuration file.</P
->
-
-<P
-><VAR
-CLASS="parameter"
->-keyboard</VAR
-> allows you to specify a
-keyboard device from the configuration file.</P
+>Enable or disable grabbing of special windows keys like the
+<B
+CLASS="keycap"
+>Menu</B
+> key or 
+<B
+CLASS="keycap"
+>Alt</B
+>-<B
+CLASS="keycap"
+>Tab</B
+>. This is
+disabled by default.</P
 >
 </TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-xkbrules 
+<VAR
+CLASS="replaceable"
+>XKBRules</VAR
+>
+]</P
+></TD
+><TD
+>&#13;<P
+>Set the rules to use for XKB. This defaults to 
+<VAR
+CLASS="replaceable"
+>xorg</VAR
+>.</P
+></TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-xkbmodel 
+<VAR
+CLASS="replaceable"
+>XKBModel</VAR
+>
+]</P
+></TD
+><TD
+>&#13;<P
+>Set the model to use for XKB. This defaults to
+<VAR
+CLASS="replaceable"
+>pc105</VAR
+>.</P
+></TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-xkblayout 
+<VAR
+CLASS="replaceable"
+>XKBLayout</VAR
+>
+]</P
+></TD
+><TD
+>&#13;<P
+>Set the layout to use for XKB. This defaults to a layout matching
+your current layout from windows or 
+<VAR
+CLASS="replaceable"
+>us</VAR
+> if no matching layout was found.
+</P
+></TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-xkbvariant 
+<VAR
+CLASS="replaceable"
+>XKBVariant</VAR
+>
+]</P
+></TD
+><TD
+>&#13;<P
+>Set the variant to use for XKB. This defaults to not set.</P
+></TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-xkboptions 
+<VAR
+CLASS="replaceable"
+>XKBOptions</VAR
+>
+]</P
+></TD
+><TD
+>&#13;<P
+>Set the options to use for XKB. This defaults to not set.</P
+></TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-logfile 
+<VAR
+CLASS="replaceable"
+>path_to_logfile</VAR
+>
+]</P
+></TD
+><TD
+>&#13;<P
+>Set the location of the logfile. This defaults to 
+<VAR
+CLASS="replaceable"
+>/tmp/XWin.log</VAR
+>.</P
+></TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-logverbose 
+<VAR
+CLASS="replaceable"
+>verbosity_level</VAR
+>
+]</P
+></TD
+><TD
+>&#13;<P
+>Set the level of logging verbosity. Currently only a few log messages
+respect this setting.</P
+></TD
 ></TR
 ></TBODY
 ></TABLE
