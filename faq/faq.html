@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 18 October 2000 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 24 October 2000 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -562,6 +562,14 @@ everything!)
 <H3><A NAME="SEC12" HREF="faq.html#TOC12">What if setup fails?</A></H3>
 
 <P>
+First, make sure that you are using the latest version of
+<CODE>setup.exe</CODE>.  It's a work in progress, with improvements and
+bugfixes being made often.  The latest version is always available from
+the 'Install Cygwin now' link on the Cygwin Home Page at
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/">http://sources.redhat.com/cygwin/</a></TT>.
+
+
+<P>
 If you are downloading from the internet, setup will fail if it cannot
 download the list of mirrors at
 <TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.  It could be that
@@ -577,6 +585,22 @@ that the mirror you are using doesn't have the latest copy yet.  Try
 another mirror, or try again tomorrow.
 
 
+<P>
+If setup has otherwise behaved strangely, check the files
+<SAMP>`setup.log'</SAMP> and <SAMP>`setup.log.full'</SAMP> in the Cygwin root directory
+(<CODE>C:\cygwin</CODE> by default).  It may provide some clues as to what
+went wrong and why.
+
+
+<P>
+If you're still baffled, search the Cygwin mailing list for clues.
+Others may have the same problem, and a solution may be posted there.
+If that search proves fruitless, send a query to the Cygwin mailing
+list.  You must provide complete details in your query: version of
+setup, options you selected, contents of setup.log and setup.log.full,
+what happened that wasn't supposed to happen, etc.
+
+
 
 
 <H3><A NAME="SEC13" HREF="faq.html#TOC13">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
@@ -585,6 +609,12 @@ another mirror, or try again tomorrow.
 Good question!  That very issue has been debated on the
 <SAMP>`cygwin-apps'</SAMP> mailing list.  Check the list archives if you want to
 know more.  Start at <TT><a target="_top" href="http://sources.redhat.com/cygwin/lists.html">http://sources.redhat.com/cygwin/lists.html</a></TT>.
+
+
+<P>
+In any case, there is no distinction as far as <CODE>setup.exe</CODE> is
+concerned.  It should install all packages from both <CODE>latest</CODE> and
+<CODE>contrib</CODE> directories.
 
 
 
@@ -2432,8 +2462,8 @@ obvious way to the Windows path, but will be converted internally to use
 the Cygwin path, following mounts (default or explicit).  For example:
 
 <PRE>
-	bash-2.03$ cd C:/Windows
-	bash-2.03$ pwd
+	bash$ cd C:/Windows
+	bash$ pwd
         /cygdrive/c/Windows
 </PRE>
 
@@ -2441,14 +2471,14 @@ the Cygwin path, following mounts (default or explicit).  For example:
 and
 
 <PRE>
-	bash-2.03$ cd C:/cygwin
-	bash-2.03$ pwd
+	bash$ cd C:/cygwin
+	bash$ pwd
         /
 </PRE>
 
 <P>
-for a default setup.  (You could also use backward-slashes in the
-Windows path, but these would have to be escaped from the shell.)
+for a default setup.  You could also use backward-slashes in the
+Windows path, but these would have to be escaped from the shell.
 
 
 <P>
@@ -2471,9 +2501,14 @@ You can avoid the ambiguity of Windows paths, and avoid typing
 </PRE>
 
 <P>
+Then <SAMP>`/cygdrive/c/Windows'</SAMP> becomes <SAMP>`/c/Windows'</SAMP> which is a
+little less typing.
+
+
+<P>
 Note that you only need to mount drives once.  The mapping is kept
 in the registry so mounts stay valid pretty much indefinitely.
-You can only get rid of them with umount (or the registry editor).
+You can only get rid of them with umount, or the registry editor.
 
 
 <P>
@@ -2484,6 +2519,18 @@ flags are missing from open calls.  It is also the setting for /,
 /usr/bin and /usr/lib in a default Cygwin installation.  The default for
 new mounts is text mode ("textmode"), which is also the mode for all
 "cygdrive" mounts.
+
+
+<P>
+You can change the default <SAMP>`cygdrive'</SAMP> prefix and whether it is
+binmode or textmode using the <CODE>mount</CODE> command.  For example,
+
+<PRE>
+	bash$ mount -b --change-cygdrive-prefix cygdrive
+</PRE>
+
+<P>
+will change all <CODE>/cygdrive/...</CODE> mounts to binmode.
 
 
 
@@ -6049,7 +6096,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 18 October 2000 using
+This document was generated on 24 October 2000 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>

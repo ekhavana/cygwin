@@ -268,6 +268,12 @@ possibly lots more.  (Again, consider just getting everything!)
 What if setup fails?
 --------------------
 
+   First, make sure that you are using the latest version of
+`setup.exe'.  It's a work in progress, with improvements and bugfixes
+being made often.  The latest version is always available from the
+'Install Cygwin now' link on the Cygwin Home Page at
+`http://sources.redhat.com/cygwin/'.
+
    If you are downloading from the internet, setup will fail if it
 cannot download the list of mirrors at
 `http://sources.redhat.com/cygwin/mirrors.html'.  It could be that the
@@ -280,12 +286,28 @@ reacting quickly to an announcement on the mailing list, it could be
 that the mirror you are using doesn't have the latest copy yet.  Try
 another mirror, or try again tomorrow.
 
+   If setup has otherwise behaved strangely, check the files
+`setup.log' and `setup.log.full' in the Cygwin root directory
+(`C:\cygwin' by default).  It may provide some clues as to what went
+wrong and why.
+
+   If you're still baffled, search the Cygwin mailing list for clues.
+Others may have the same problem, and a solution may be posted there.
+If that search proves fruitless, send a query to the Cygwin mailing
+list.  You must provide complete details in your query: version of
+setup, options you selected, contents of setup.log and setup.log.full,
+what happened that wasn't supposed to happen, etc.
+
 What's the difference between packages in `latest' and `contrib'?
 -----------------------------------------------------------------
 
    Good question!  That very issue has been debated on the
 `cygwin-apps' mailing list.  Check the list archives if you want to
 know more.  Start at `http://sources.redhat.com/cygwin/lists.html'.
+
+   In any case, there is no distinction as far as `setup.exe' is
+concerned.  It should install all packages from both `latest' and
+`contrib' directories.
 
 My Windows logon name has a space in it, will this cause problems?
 ------------------------------------------------------------------
@@ -1839,15 +1861,15 @@ mounted.  You can access any drive, say Z:, as '/cygdrive/z/'.
 backward-slashes ('\').  (But see the warning below!)  This maps in the
 obvious way to the Windows path, but will be converted internally to use
 the Cygwin path, following mounts (default or explicit).  For example:
-     	bash-2.03$ cd C:/Windows
-     	bash-2.03$ pwd
+     	bash$ cd C:/Windows
+     	bash$ pwd
              /cygdrive/c/Windows
    and
-     	bash-2.03$ cd C:/cygwin
-     	bash-2.03$ pwd
+     	bash$ cd C:/cygwin
+     	bash$ pwd
              /
-   for a default setup.  (You could also use backward-slashes in the
-Windows path, but these would have to be escaped from the shell.)
+   for a default setup.  You could also use backward-slashes in the
+Windows path, but these would have to be escaped from the shell.
 
    *Warning:* There is some ambiguity in going from a Windows path to
 the posix path, because different posix paths, through different mount
@@ -1860,9 +1882,12 @@ Cygwin apps will vary depending on the posix path used to get there.
      	bash$ mkdir /c
      	bash$ mount c:/ /c
      	bash$ ls /c
+   Then `/cygdrive/c/Windows' becomes `/c/Windows' which is a little
+less typing.
+
    Note that you only need to mount drives once.  The mapping is kept
 in the registry so mounts stay valid pretty much indefinitely.  You can
-only get rid of them with umount (or the registry editor).
+only get rid of them with umount, or the registry editor.
 
    The '-b' option to mount mounts the mountpoint in binary mode
 ("binmode") where text and binary files are treated equivalently.  This
@@ -1871,6 +1896,11 @@ flags are missing from open calls.  It is also the setting for /,
 /usr/bin and /usr/lib in a default Cygwin installation.  The default for
 new mounts is text mode ("textmode"), which is also the mode for all
 "cygdrive" mounts.
+
+   You can change the default `cygdrive' prefix and whether it is
+binmode or textmode using the `mount' command.  For example,
+     	bash$ mount -b --change-cygdrive-prefix cygdrive
+   will change all `/cygdrive/...' mounts to binmode.
 
 How can I copy and paste into Cygwin console windows?
 -----------------------------------------------------

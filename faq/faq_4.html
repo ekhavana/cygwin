@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 18 October 2000 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 24 October 2000 -->
 
 <TITLE>The Cygwin FAQ
  - Question and Answers</TITLE>
@@ -458,8 +458,8 @@ obvious way to the Windows path, but will be converted internally to use
 the Cygwin path, following mounts (default or explicit).  For example:
 
 <PRE>
-	bash-2.03$ cd C:/Windows
-	bash-2.03$ pwd
+	bash$ cd C:/Windows
+	bash$ pwd
         /cygdrive/c/Windows
 </PRE>
 
@@ -467,14 +467,14 @@ the Cygwin path, following mounts (default or explicit).  For example:
 and
 
 <PRE>
-	bash-2.03$ cd C:/cygwin
-	bash-2.03$ pwd
+	bash$ cd C:/cygwin
+	bash$ pwd
         /
 </PRE>
 
 <P>
-for a default setup.  (You could also use backward-slashes in the
-Windows path, but these would have to be escaped from the shell.)
+for a default setup.  You could also use backward-slashes in the
+Windows path, but these would have to be escaped from the shell.
 
 
 <P>
@@ -497,9 +497,14 @@ You can avoid the ambiguity of Windows paths, and avoid typing
 </PRE>
 
 <P>
+Then <SAMP>`/cygdrive/c/Windows'</SAMP> becomes <SAMP>`/c/Windows'</SAMP> which is a
+little less typing.
+
+
+<P>
 Note that you only need to mount drives once.  The mapping is kept
 in the registry so mounts stay valid pretty much indefinitely.
-You can only get rid of them with umount (or the registry editor).
+You can only get rid of them with umount, or the registry editor.
 
 
 <P>
@@ -510,6 +515,18 @@ flags are missing from open calls.  It is also the setting for /,
 /usr/bin and /usr/lib in a default Cygwin installation.  The default for
 new mounts is text mode ("textmode"), which is also the mode for all
 "cygdrive" mounts.
+
+
+<P>
+You can change the default <SAMP>`cygdrive'</SAMP> prefix and whether it is
+binmode or textmode using the <CODE>mount</CODE> command.  For example,
+
+<PRE>
+	bash$ mount -b --change-cygdrive-prefix cygdrive
+</PRE>
+
+<P>
+will change all <CODE>/cygdrive/...</CODE> mounts to binmode.
 
 
 
