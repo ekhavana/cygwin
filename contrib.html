@@ -20,8 +20,8 @@ directory with additional code coming from newlib/libc, newlib/libm,
 libiberty, and include.  Any changes you make should ideally be made to the
 <a href="cvs.html">current development sources</a>.  This makes it much
 easier to integrate your changes once they're completed and tested.
-Note that the current CVS tree (and thedevelopment snapshots) should
-compile, but they should always be assumed to be unstable and contain
+Note that the current CVS tree (and the development snapshots) should
+compile, but they should always be assumed to be unstable since they contain
 untested, experimental code.
 
 <P>Minimal build instructions are included in the <a
@@ -29,14 +29,7 @@ href="faq/">FAQ</a>.  If your object directory is /c/obj, the Cygwin dll
 you will build should be /c/obj/winsup/new-cygwinxx.dll where xx
 represents the current API_MAJOR version number.
 
-<P>Once you have a built cygwin, if you make further changes
-to the winsup sources, you can rebuild the library by typing:
-
-<blockquote>
-	<tt>make all-target-winsup</tt>
-</blockquote>
-
-<P>Note that minimally, the top-level tree needs to contain:
+<P>Note that minimally, the top-level source tree needs to contain:
 
 <blockquote>
 Makefile.in, config, config-ml.in, config.guess, config.sub, configure,
@@ -87,7 +80,7 @@ as /winsup/syscalls.cc-orig, you would do the following in bash:
 explanation of what the change does.  This must include a ChangeLog
 entry.  If you have never used a ChangeLog before 1) refer to the <a
 href="http://www.gnu.org/prep/standards_39.html">GNU ChangeLog
-Standards</a> and 2) model yours after other entries in the file
+Standards</a> and 2) model your entry after other entries in the file
 winsup/ChangeLog.</p>
 
 <p>Common submission problems to cygwin-patches include:
@@ -107,6 +100,7 @@ with lists of functions.
 <li>Not "unidiff" format (i.e., no -u).
 <li>Missing function names (i.e., no -p).
 <li>Not an actual patch! (e.g., "I changed line 27 of foo.cc to this:")
+</ul>
 </ul>
 
 <P>Note that you must be subscribed to cygwin-developers and

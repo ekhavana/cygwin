@@ -17,22 +17,19 @@ community but we could definitely use more help!
 
 <P>The code corresponding to cygwin1.dll is mostly in the winsup
 directory with additional code coming from newlib/libc, newlib/libm,
-libiberty, and gcc.  Any changes you make should ideally be made to
-the <a href="snapshots/"> current development sources</a>.  This makes
-it much easier to integrate your changes once they're completed and
-tested.  Note the development snapshots should compile, but they
-should always be assumed to be unstable and contain untested,
-experimental code.
+libiberty, and include.  Any changes you make should ideally be made to the
+<a href="cvs.html">current development sources</a>.  This makes it much
+easier to integrate your changes once they're completed and tested.
+Note that the current CVS tree (and thedevelopment snapshots) should
+compile, but they should always be assumed to be unstable and contain
+untested, experimental code.
 
-<P>To build the Cygwin library, start by building the comp-tools
-sources with the last release, substituting in the newlib and winsup
-sources from the snapshot location.  Minimal build instructions are
-included in the <a href="faq/">FAQ</a>.  If your object directory is
-/c/obj, the Cygwin dll you will build should be
-/c/obj/winsup/new-cygwinxx.dll where xx represents the current
-API_MAJOR version number.
+<P>Minimal build instructions are included in the <a
+href="faq/">FAQ</a>.  If your object directory is /c/obj, the Cygwin dll
+you will build should be /c/obj/winsup/new-cygwinxx.dll where xx
+represents the current API_MAJOR version number.
 
-<P>Once you have a built comp-tools tree, if you make further changes
+<P>Once you have a built cygwin, if you make further changes
 to the winsup sources, you can rebuild the library by typing:
 
 <blockquote>
@@ -46,12 +43,6 @@ Makefile.in, config, config-ml.in, config.guess, config.sub, configure,
 configure.in, include, install-sh, libiberty, ltconfig, ltmain.sh, missing,
 move-if-change, newlib, symlink-tree, winsup, ylwrap.
 </blockquote>
-
-<P>So another method that might work would be to start with a
-newlib and winsup snapshot and copy the missing pieces from the last
-major release source tree.  You may also want to fix the EXE_LDFLAGS
-variable in winsup/Makefile.in so that winsup/utils/ programs link
-with the correct libcygwin.a.
 
 <H2>Before you get started</H2>
 
@@ -94,8 +85,29 @@ as /winsup/syscalls.cc-orig, you would do the following in bash:
 
 <P>Then send it to the cygwin-patches list in an email along with an
 explanation of what the change does.  This must include a ChangeLog
-entry (model yours after other entries in the file winsup/ChangeLog).
-Then we'll test it and get back to you as soon as we can.
+entry.  If you have never used a ChangeLog before 1) refer to the <a
+href="http://www.gnu.org/prep/standards_39.html">GNU ChangeLog
+Standards</a> and 2) model yours after other entries in the file
+winsup/ChangeLog.</p>
+
+<p>Common submission problems to cygwin-patches include:
+<ul>
+<li>Submissions without a ChangeLog.
+<li>Improper ChangeLog formatting:
+<ul>
+<li>Missing function names (e.g., "* foo.cc: Don't increment x if y is negative").
+<li>Strange formatting (e.g., extra spaces or too many blank lines).
+<li>Wrong "tense" (e.g., "Added one to x" rather than "Add one to x").
+<li>Incorrect use of <a href="http://www.gnu.org/prep/standards_40.html">continuation</a>
+with lists of functions.
+</ul>
+<li>Diffs sent in uuencoded or otherwise encrypted fashion.
+<li>Diffs sent in improper form:
+<ul>
+<li>Not "unidiff" format (i.e., no -u).
+<li>Missing function names (i.e., no -p).
+<li>Not an actual patch! (e.g., "I changed line 27 of foo.cc to this:")
+</ul>
 
 <P>Note that you must be subscribed to cygwin-developers and
 cygwin-patches to send email to those lists.  If you have a <b>small</b>
@@ -103,18 +115,18 @@ patch for Cygwin and don't intend to contribute to ongoing development,
 it is not necessary to send your patch to the cygwin-patches mailing
 list.  Instead, you may try your luck on the general cygwin mailing
 list.  The responsible parties at Cygnus read the cygwin mailing list so
-they will eventually see your proposed change.
+they will eventually see your proposed change.</p>
 
-<P>Please feel free to ask me any questions about any of this.  I
+<P>Please feel free to ask questions about any of this.  We
 would love it if more people made useful contributions -- this can be
 one of the big advantages of free software; we all benefit from
-everyone else's work as well as our own...
+everyone else's work as well as our own...</p>
 
 <H2>What needs doing:</H2>
 
-<P>A fair amount of stuff.  Hopefully it will be listed here soon...
+<P>There is a to-do list <a href="cygwin-todo.cgi">here</a>.
 
-<P>You can get a good idea of the current bugs and problem areas by
+<P>You can also get a good idea of the current bugs and problem areas by
 browsing the cygwin mailing list archives.  In addition, check out the
 API calls portion of the FAQ and look for references to unimplemented
 functions.  Or send mail to <a
