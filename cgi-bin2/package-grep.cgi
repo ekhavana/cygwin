@@ -24,7 +24,7 @@ print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</titl
       $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n";
 
 eval '"foo" =~ /$grep/o';
-if ($@) {
+if ($@ || $grep =~ m!\\.\\.!o) {
     print $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $grep);
     print $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>');
 } else {
