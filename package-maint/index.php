@@ -31,8 +31,12 @@
 		$_REQUEST2[$key] = stripslashes($val);
 	$_REQUEST = $_REQUEST2;
 
+	if (isset($_REQUEST["PACKAGE_MAINTAINER"]) && ($_REQUEST["PACKAGE_MAINTAINER"] != $_COOKIE["PACKAGE_MAINTAINER"]))
+		SetCookie("PACKAGE_MAINTAINER", $_REQUEST["PACKAGE_MAINTAINER"], time()+60*60*24*30*9);
+
 	$step1ar = array(
 		"PACKAGE_NAME"		=> 'The printed name of the package.',
+		"PACKAGE_MAINTAINER"	=> 'Your name and email address.',
 		"SUBMISSION_TYPE"	=> 'new,update,correction,announce:Format for a new package, update to a new vendor version, correction for a broken package, or announcement to cygwin-announce.',
 	);
 	$step2ar = array(
@@ -170,6 +174,9 @@
 	echo "<pre>\n";
 	echo "<form action=\"\" method=\"POST\">\n";
 
+	if (!isset($_REQUEST["PACKAGE_MAINTAINER"]))
+		$_REQUEST"PACKAGE_MAINTAINER"] = "CHANGEME <your@email.address>";
+
 	printsubs($step1ar);
 	if ($step1) {
 		if (!isset($_REQUEST["PACKAGE_TARNAME"]))
@@ -214,7 +221,7 @@
 	} else {
 		$fd = fopen("/home/nmlorg/PPL/maintainers.txt", "r");
 		while ($l = fgets($fd)) {
-			if ($l[0] == " ")
+			if ((trim($l) == "") || ($l[0] == " "))
 				echo $l;
 			else {
 				$pack = strtok($l, " ");
