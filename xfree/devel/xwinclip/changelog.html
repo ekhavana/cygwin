@@ -20,7 +20,7 @@ primary, secondary">
 
 <!--#include virtual="../../cygx-header.html" -->
 
-<p>Last updated: 2001-09-02 1252 EDT</p>
+<p>Last updated: 2001-10-22 1832 EDT</p>
 
 <p>xwinclip binary and source code releases are available via the
 sources.redhat.com ftp <a href="http://cygwin.com/mirrors.html">mirror
@@ -43,7 +43,7 @@ mirror</a>.</p>
 
 <tr><td>Download binary: <a
 href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-Test.exe.bz2">xwinclip-Test.exe.bz2</a>
-(9 KB)</td></tr>
+(3 KB)</td></tr>
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-2001-.tar.bz2">xwinclip-2001-.tar.bz2</a>
@@ -63,6 +63,47 @@ href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-2001-.tar.bz2">xwincli
 </tbody>
 </table>
 -->
+
+
+<h4>Test02</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-10-22 1832 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-Test02.exe.bz2">xwinclip-Test02.exe.bz2</a>
+(4 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-20011022-1832.tar.bz2">xwinclip-20011022-1832.tar.bz2</a>
+(5 KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>xwinclip.c - Line 327 - Pass strlen (pszGlobalData) instead of
+strlen (pszGlobalData) + 1 to XChangeProperty ().  This eliminates the
+trailing ^@ when pasting to certain X applications, such as Emacs.
+(Brian Genisio)</li>
+
+<li>xwinclip.c - Add DOStoUNIX () function to change \r\n to \n when
+copying text from the Windows clipboard to an X client.  Call the
+function right before calling XChangeProperty ().  (Harold Hunt, Brian
+Genisio, Cygwin)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 <h4>Test01</h4>
