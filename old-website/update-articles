@@ -88,9 +88,9 @@ sub extract_listings {
 	($date, $id) = split(' ', $list[$i]);
 	$text{"$id.udate"} = &user_date($date);
 	if ($date ge $full_cutoff) {
-	    $t = '<a href="$url"><b>$title</b></a><small><br>$text <i>$udate, <a href="$email">$author</a></i></p></small>';
+	    $t = '<a href="$url"><b>$title</b></a><small><br>$text <i>$udate, <a href="$email">$author</a></i></small>';
 	} elsif ($date ge $new_cutoff || $i < $min_new) {
-	    $t = '<a href="$url"><b>$title</b></a><small> <i>$udate, <a href="$email">$author</a></i></p></small>';
+	    $t = '<a href="$url"><b>$title</b></a><small> <i>$udate, <a href="$email">$author</a></i></small>';
 	} else {
 	    $t = '';
 	}
