@@ -5,7 +5,7 @@
 variable</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.54"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.52"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -122,6 +122,82 @@ always open in binary mode.</P
 ></TR
 ></TABLE
 ></DIV
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>check_case:level</I
+> - Controls the behaviour of
+Cygwin when a user tries to open or create a file using a case different from
+the case of the path as asved on the disk.
+<TT
+CLASS="LITERAL"
+>level</TT
+> is one of <TT
+CLASS="LITERAL"
+>relaxed</TT
+>,
+<TT
+CLASS="LITERAL"
+>adjust</TT
+> and <TT
+CLASS="LITERAL"
+>strict</TT
+>.</P
+><P
+></P
+><UL
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>relaxed</I
+> which is the default behaviour simply
+ignores case. That's the default for native Windows applications as well.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>adjust</I
+> behaves mostly invisible. The POSIX input
+path is internally adjusted in case, so that the resulting DOS path uses the
+correct case throughout. You can see the result when changing the directory
+using a wrong case and calling <B
+CLASS="COMMAND"
+>/bin/pwd</B
+> afterwards.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>strict</I
+> results in a error message if the case
+isn't correct. Trying to open a file <TT
+CLASS="FILENAME"
+>Foo</TT
+> while a file
+<TT
+CLASS="FILENAME"
+>fOo</TT
+> exists results in a "no such file or directory"
+error. Trying to create a file <TT
+CLASS="FILENAME"
+>BAR</TT
+> while a file
+<TT
+CLASS="FILENAME"
+>Bar</TT
+> exists results in a "Filename exists with different
+case" error.</P
+></LI
+></UL
 ></LI
 ><LI
 STYLE="list-style-type: disc"
@@ -303,6 +379,17 @@ with ^Z as EOF. Note that this has been changed such that ^D works as
 expected instead of ^Z, and is settable via stty.
 This option must be specified before starting a Cygwin shell 
 and it cannot be changed in the shell.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)winsymlinks</I
+> - if set, Cygwin creates
+symlinks as Windows shortcuts with a special header and the R/O attribute
+set. If not set, Cygwin creates symlinks as plain files with a magic number,
+a path and the system attribute set. Defaults to set.</P
 ></LI
 ></UL
 ></DIV
