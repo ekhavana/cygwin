@@ -1,3 +1,48 @@
+<h4>Release 4.3.0-35</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-10 2015 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040110-2015.tar.bz2">xwin-20040110-2015.tar.bz2</a>
+(134 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-34
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-34-to-4.3.0-35.diff">xwin-4.3.0-34-to-4.3.0-35.diff</a>
+(5 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winclipboardwrappers.c/winProcSetSelectionOwner - Remember to
+abort if stuff->window == None and we did not previously abort.  This
+fixes crashes in some cases when the X11 selection is being disowned
+by another X Client.  (Harold L Hunt II)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_DRAWCLIPBOARD - Do
+not take ownership of the X11 selections when something other than
+CF_TEXT or CF_UNICODETEXT has been copied into the Win32 clipboard.
+(Harold L Hunt II)</li>
+
+<li>winclipboardxevents.c/winClipboardFlushXEvents - Make sure that
+CF_TEXT and CF_UNICODETEXT are available from the clipboard before
+request their contents.  This some fix some weird behavior and
+possible crashes.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
 <h4>Release 4.3.0-34</h4>
 <table>
 <tbody>
