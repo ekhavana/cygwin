@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Setting Up Cygwin</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -13,11 +14,21 @@ TITLE="Highlights of Cygwin Functionality"
 HREF="highlights.html"><LINK
 REL="NEXT"
 TITLE="Environment Variables"
-HREF="setup-env.html"></HEAD
+HREF="setup-env.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -35,6 +46,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="highlights.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -48,6 +60,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="setup-env.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -60,8 +73,8 @@ CLASS="CHAPTER"
 ><H1
 ><A
 NAME="SETUP-NET"
->Chapter 2. Setting Up Cygwin</A
-></H1
+></A
+>Chapter 2. Setting Up Cygwin</H1
 ><DIV
 CLASS="TOC"
 ><DL
@@ -87,9 +100,9 @@ HREF="setup-maxmem.html"
 ><DT
 ><A
 HREF="ntsec.html"
->NT security and the <TT
+>NT security and the <VAR
 CLASS="LITERAL"
->ntsec</TT
+>ntsec</VAR
 > usage</A
 ></DT
 ><DT
@@ -113,7 +126,7 @@ HREF="http://cygwin.com/"
 TARGET="_top"
 >http://cygwin.com/</A
 > and click on <A
-HREF="http://cygwin.com/"
+HREF="http://cygwin.com/setup.exe"
 TARGET="_top"
 >"Install Cygwin Now!"</A
 >.  This will
@@ -137,17 +150,17 @@ CLASS="COMMAND"
 check the wishlist in the <A
 HREF="http://sources.redhat.com/cgi-bin/cvsweb.cgi/setup/README?cvsroot=cygwin-apps&rev=2"
 TARGET="_top"
->CVS <TT
+>CVS <VAR
 CLASS="LITERAL"
->README</TT
+>README</VAR
 ></A
 >. It may already be present in the CVS version!</P
 ><P
 >Since the default value for each option is the logical choice for
 most installations, you can get a working minimal Cygwin environment
-installed by simply clicking the <TT
+installed by simply clicking the <VAR
 CLASS="LITERAL"
->Next</TT
+>Next</VAR
 > button
 at each page. The only exception to this is choosing a Cygwin mirror,
 which you can choose by experimenting with those listed at
@@ -177,40 +190,40 @@ NAME="AEN104"
 ></H2
 ><P
 >Cygwin uses packages to manage installing various software. When
-the default <TT
+the default <VAR
 CLASS="LITERAL"
->Install from Internet</TT
+>Install from Internet</VAR
 > option is chosen,
 <B
 CLASS="COMMAND"
 >setup.exe</B
 > creates a local directory to store
 the packages before actually installing the contents. 
-<TT
+<VAR
 CLASS="LITERAL"
->Download from Internet</TT
+>Download from Internet</VAR
 > performs only the first
 part (storing the packages locally), while 
-<TT
+<VAR
 CLASS="LITERAL"
->Install from Local Directory</TT
+>Install from Local Directory</VAR
 > performs only the 
 second (installing the contents of the packages). </P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->Download from Internet</TT
+>Download from Internet</VAR
 > option is mainly
 for creating a base Cygwin package tree on one computer for 
 installation on several machines with 
-<TT
+<VAR
 CLASS="LITERAL"
->Install from Local Directory</TT
+>Install from Local Directory</VAR
 >; copy the
 entire local package tree to another machine with the directory
-tree intact. For example, you might create a <TT
+tree intact. For example, you might create a <VAR
 CLASS="LITERAL"
->C:\cache\</TT
+>C:\cache\</VAR
 >
 directory and place <B
 CLASS="COMMAND"
@@ -219,21 +232,21 @@ CLASS="COMMAND"
 <B
 CLASS="COMMAND"
 >setup.exe</B
-> to <TT
+> to <VAR
 CLASS="LITERAL"
->Install from Internet</TT
+>Install from Internet</VAR
 >
-or <TT
+or <VAR
 CLASS="LITERAL"
->Download from Internet</TT
+>Download from Internet</VAR
 >, then copy the whole
-<TT
+<VAR
 CLASS="LITERAL"
->C:\cache\</TT
+>C:\cache\</VAR
 > to each machine and instead choose
-<TT
+<VAR
 CLASS="LITERAL"
->Install from Local Directory</TT
+>Install from Local Directory</VAR
 >. Unfortunately
 <B
 CLASS="COMMAND"
@@ -261,44 +274,44 @@ NAME="AEN125"
 >Selecting an Install Directory</A
 ></H2
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->Root Directory</TT
+>Root Directory</VAR
 > for Cygwin (default
-<TT
+<VAR
 CLASS="LITERAL"
->C:\cygwin</TT
->) will become <TT
+>C:\cygwin</VAR
+>) will become <VAR
 CLASS="LITERAL"
->/</TT
+>/</VAR
 > 
 within your Cygwin installation. You must have write access to
 the parent directory, and any ACLs on the parent directory will
 determine access to installed files.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->Install For</TT
-> options of <TT
+>Install For</VAR
+> options of <VAR
 CLASS="LITERAL"
->All Users</TT
+>All Users</VAR
 > 
-or <TT
+or <VAR
 CLASS="LITERAL"
->Just Me</TT
+>Just Me</VAR
 > should always be left on the default
-<TT
+<VAR
 CLASS="LITERAL"
->All Users</TT
+>All Users</VAR
 >, unless you do not have write access to 
-<TT
+<VAR
 CLASS="LITERAL"
->HKEY_LOCAL_MACHINE</TT
+>HKEY_LOCAL_MACHINE</VAR
 > in the registry or the All Users 
 Start Menu. This is true  even if you are the only user planning to use Cygwin 
-on the machine.  Selecting <TT
+on the machine.  Selecting <VAR
 CLASS="LITERAL"
->Just Me</TT
+>Just Me</VAR
 > will cause problems 
 for programs such as <B
 CLASS="COMMAND"
@@ -310,24 +323,24 @@ CLASS="COMMAND"
 If you do not have the necessary permissions, but still want to use these
 programs, consult the Cygwin mailing list archives about others' experiences.&#13;</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->Default Text File Type</TT
+>Default Text File Type</VAR
 > should be left on
-<TT
+<VAR
 CLASS="LITERAL"
->Unix</TT
-> (that is, <TT
+>Unix</VAR
+> (that is, <VAR
 CLASS="LITERAL"
->\n</TT
+>\n</VAR
 >) unless you
 have a very good reason to switch it to 
-<TT
+<VAR
 CLASS="LITERAL"
->DOS</TT
-> (that is, <TT
+>DOS</VAR
+> (that is, <VAR
 CLASS="LITERAL"
->\r\n</TT
+>\r\n</VAR
 >).</P
 ></DIV
 ><DIV
@@ -339,9 +352,9 @@ NAME="AEN146"
 >Local Package Directory</A
 ></H2
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->Local Package Directory</TT
+>Local Package Directory</VAR
 > is the cache where 
 <B
 CLASS="COMMAND"
@@ -367,17 +380,17 @@ NAME="AEN152"
 >Connection Method</A
 ></H2
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->Direct Connection</TT
+>Direct Connection</VAR
 > method of downloading will 
 directly download the packages, while the IE5 method will leverage your 
 IE5 cache for performance. If your organisation uses a proxy server or
 auto-configuration scripts, the IE5 method also uses these settings.
 If you have a proxy server, you can manually type it into 
-the <TT
+the <VAR
 CLASS="LITERAL"
->Use Proxy</TT
+>Use Proxy</VAR
 > section. Unfortunately, 
 <B
 CLASS="COMMAND"
@@ -402,9 +415,9 @@ TARGET="_top"
 >http://cygwin.com/mirrors.html</A
 >
 to find one near you. You can select multiple mirrors by holding down
-<TT
+<VAR
 CLASS="LITERAL"
->CTRL</TT
+>CTRL</VAR
 > and clicking on each one. If you have the URL of 
 an unlisted mirror (for example, if your organization has an internal Cygwin 
 mirror) you can add it.</P
@@ -422,20 +435,20 @@ NAME="AEN163"
 CLASS="COMMAND"
 >setup.exe</B
 > downloads a 
-small text file called <TT
+small text file called <VAR
 CLASS="LITERAL"
->setup.bz2</TT
+>setup.bz2</VAR
 > that contains a list
 of packages available from that site along with some basic information about
 each package which <B
 CLASS="COMMAND"
 >setup.exe</B
 > parses and uses to create the 
-chooser window. For details about the format of this file, see
-<A
-HREF="http://sources.redhat.com/cygwin-apps/setup.html#setup.ini"
+chooser window. For details about the format of this file, see 
+the <A
+HREF="http://sources.redhat.com/cygwin-apps/setup.html"
 TARGET="_top"
->http://sources.redhat.com/cygwin-apps/setup.html</A
+>setup.exe homepage</A
 >.</P
 ><P
 >The chooser is the most complex part of <B
@@ -449,20 +462,29 @@ By default <B
 CLASS="COMMAND"
 >setup.exe</B
 >
-will install only the packages in the <TT
+will install only the packages in the <VAR
 CLASS="LITERAL"
->Base</TT
+>Base</VAR
 > category
 and their dependencies, resulting in a minimal Cygwin installation.
 However, this will not include many commonly used tools such as 
 <B
 CLASS="COMMAND"
 >gcc</B
-> (which you will find in the <TT
+> (which you will find in the <VAR
 CLASS="LITERAL"
->Devel</TT
+>Devel</VAR
 > 
-category). </P
+category).  Since <B
+CLASS="COMMAND"
+>setup.exe</B
+> automatically selects
+dependencies, be careful not to unselect any required packages. In 
+particular, everything in the <VAR
+CLASS="LITERAL"
+>Base</VAR
+> category is
+required.</P
 ><P
 >You can change <B
 CLASS="COMMAND"
@@ -470,25 +492,25 @@ CLASS="COMMAND"
 >'s view style, which is helpful
 if you know the name of a package you want to install but not which 
 category it is in. 
-Click on the <TT
+Click on the <VAR
 CLASS="LITERAL"
->View</TT
+>View</VAR
 > button and it will rotate between 
-<TT
+<VAR
 CLASS="LITERAL"
->Category</TT
-> (the default), <TT
+>Category</VAR
+> (the default), <VAR
 CLASS="LITERAL"
->Full</TT
+>Full</VAR
 > (all 
-packages), and <TT
+packages), and <VAR
 CLASS="LITERAL"
->Partial</TT
+>Partial</VAR
 > (only packages to be upgraded).
 If you are familiar with Unix, you will probably want to at least glance 
-through the <TT
+through the <VAR
 CLASS="LITERAL"
->Full</TT
+>Full</VAR
 > listing for your favorite tools.</P
 ><P
 >Once you have an existing Cygwin installation, the <B
@@ -497,9 +519,9 @@ CLASS="COMMAND"
 >
 chooser is also used to manage your Cygwin installation. 
 Information on installed packages is kept in the
-<TT
+<VAR
 CLASS="LITERAL"
->/etc/setup/</TT
+>/etc/setup/</VAR
 > directory of your Cygwin installation; if 
 <B
 CLASS="COMMAND"
@@ -511,20 +533,20 @@ CLASS="COMMAND"
 >
 finds a newer version of an installed package available, it will automatically 
 mark it to be upgraded. 
-To <TT
+To <VAR
 CLASS="LITERAL"
->Uninstall</TT
->, <TT
+>Uninstall</VAR
+>, <VAR
 CLASS="LITERAL"
->Reinstall</TT
+>Reinstall</VAR
 >, or get the
-<TT
+<VAR
 CLASS="LITERAL"
->Source</TT
+>Source</VAR
 > for an existing package, click on 
-<TT
+<VAR
 CLASS="LITERAL"
->Keep</TT
+>Keep</VAR
 > to toggle it. 
 Also, to avoid the need to reboot after upgrading, make sure
 to close all Cygwin windows and stop all Cygwin processes before 
@@ -537,35 +559,36 @@ CLASS="COMMAND"
 CLASS="COMMAND"
 >setup.exe</B
 > chooser is for
-<TT
+<VAR
 CLASS="LITERAL"
->Previous</TT
-> and <TT
+>Previous</VAR
+> and <VAR
 CLASS="LITERAL"
->Experimental</TT
+>Experimental</VAR
 > packages.
 By default the chooser shows only the current version of each package,
 though mirrors have at least one previous version and occasionally there
 is a testing or beta version of a package available. To see these package,
-click on the <TT
+click on the <VAR
 CLASS="LITERAL"
->Prev</TT
-> or <TT
+>Prev</VAR
+> or <VAR
 CLASS="LITERAL"
->Exp</TT
+>Exp</VAR
 > radio button.
 Be warned, however, that the next time you run <B
 CLASS="COMMAND"
 >setup.exe</B
 > 
-it will try to replace old or experimental versions with the latest. </P
+it will try to replace old or experimental versions with the current
+stable version. </P
 ></DIV
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN200"
+NAME="AEN202"
 >Download and Installation Progress</A
 ></H2
 ><P
@@ -590,18 +613,18 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN206"
+NAME="AEN208"
 >Icons</A
 ></H2
 ><P
 >You may choose to install shortcuts on the Desktop and/or Start Menu
-to start a <TT
+to start a <VAR
 CLASS="LITERAL"
->bash</TT
+>bash</VAR
 > shell. If you prefer to use a different
-shell or the native Windows version of <TT
+shell or the native Windows version of <VAR
 CLASS="LITERAL"
->rxvt</TT
+>rxvt</VAR
 >, you can
 use these shortcuts as a guide to creating your own. </P
 ></DIV
@@ -610,7 +633,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN211"
+NAME="AEN213"
 >Post-Install Scripts</A
 ></H2
 ><P
@@ -632,9 +655,9 @@ CLASS="COMMAND"
 > 
 will display a box announcing the completion. A few packages, such as
 the OpenSSH server, require some manual site-specific configuration. 
-Relevant documentation can be found in the <TT
+Relevant documentation can be found in the <VAR
 CLASS="LITERAL"
->/usr/doc/Cygwin/</TT
+>/usr/doc/Cygwin/</VAR
 > 
 directory.</P
 ></DIV
@@ -645,6 +668,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -656,6 +680,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="highlights.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -664,6 +689,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -672,6 +698,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="setup-env.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR

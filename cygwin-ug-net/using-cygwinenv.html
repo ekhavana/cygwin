@@ -1,3 +1,4 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
@@ -5,7 +6,7 @@
 variable</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -17,11 +18,21 @@ TITLE="Special filenames"
 HREF="using-specialnames.html"><LINK
 REL="NEXT"
 TITLE="Cygwin Utilities"
-HREF="using-utils.html"></HEAD
+HREF="using-utils.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -39,6 +50,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="using-specialnames.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -52,6 +64,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="using-utils.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -65,22 +78,22 @@ CLASS="SECT1"
 CLASS="SECT1"
 ><A
 NAME="USING-CYGWINENV"
->The <TT
+>The <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > environment
 variable</A
 ></H1
 ><P
->The <TT
+>The <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > environment variable is used to configure
 many global settings for the Cygwin runtime system. It contains the options
 listed below, separated by blank characters. Many options can be turned off
-by prefixing with <TT
+by prefixing with <VAR
 CLASS="LITERAL"
->no </TT
+>no </VAR
 >.</P
 ><P
 ></P
@@ -88,9 +101,9 @@ CLASS="LITERAL"
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)binmode</I
+><VAR
+CLASS="ENVAR"
+>(no)binmode</VAR
 > - if set, non-disk 
 (e.g. pipe and COM ports) file opens default to binary mode 
 (no CRLF translation) instead of text mode.  Defaults to set (binary
@@ -131,25 +144,25 @@ always open in binary mode.</P
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->check_case:level</I
+><VAR
+CLASS="ENVAR"
+>check_case:level</VAR
 > - Controls the behaviour of
 Cygwin when a user tries to open or create a file using a case different from
 the case of the path as asved on the disk.
-<TT
+<VAR
 CLASS="LITERAL"
->level</TT
-> is one of <TT
+>level</VAR
+> is one of <VAR
 CLASS="LITERAL"
->relaxed</TT
+>relaxed</VAR
 >,
-<TT
+<VAR
 CLASS="LITERAL"
->adjust</TT
-> and <TT
+>adjust</VAR
+> and <VAR
 CLASS="LITERAL"
->strict</TT
+>strict</VAR
 >.</P
 ><P
 ></P
@@ -157,18 +170,18 @@ CLASS="LITERAL"
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->relaxed</I
+><VAR
+CLASS="ENVAR"
+>relaxed</VAR
 > which is the default behaviour simply
 ignores case. That's the default for native Windows applications as well.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->adjust</I
+><VAR
+CLASS="ENVAR"
+>adjust</VAR
 > behaves mostly invisible. The POSIX input
 path is internally adjusted in case, so that the resulting DOS path uses the
 correct case throughout. You can see the result when changing the directory
@@ -180,9 +193,9 @@ CLASS="COMMAND"
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->strict</I
+><VAR
+CLASS="ENVAR"
+>strict</VAR
 > results in a error message if the case
 isn't correct. Trying to open a file <TT
 CLASS="FILENAME"
@@ -207,9 +220,9 @@ case" error.</P
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->codepage:[ansi|oem]</I
+><VAR
+CLASS="ENVAR"
+>codepage:[ansi|oem]</VAR
 > - Windows console 
 applications can use different character sets (codepages) for drawing
 characters.  The first setting, called "ansi", is the default.
@@ -227,9 +240,9 @@ Cygwin, you can use this option to select an appropriate codepage.</P
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)envcache</I
+><VAR
+CLASS="ENVAR"
+>(no)envcache</VAR
 > - If set, environment variable
 conversions (between Win32 and POSIX) are cached.  Note that this is may
 cause problems if the mount table changes, as the cache is not invalidated
@@ -239,35 +252,61 @@ contents. Defaults to set.</P
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)export</I
+><VAR
+CLASS="ENVAR"
+>(no)export</VAR
 > - if set, the final values of these
-settings are re-exported to the environment as $CYGWIN again.</P
+settings are re-exported to the environment as <VAR
+CLASS="ENVAR"
+>CYGWIN</VAR
+> again.
+Defaults to off.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->error_start:filepath</I
-> - if set, runs <TT
-CLASS="FILENAME"
->filepath</TT
->
-when cygwin encounters a fatal error.  This is useful for debugging.
+><VAR
+CLASS="ENVAR"
+>error_start:filepath</VAR
+> - if set, runs 
 <TT
 CLASS="FILENAME"
 >filepath</TT
-> is usually set to the path to the <TT
+> when cygwin encounters a fatal error.  This is
+useful for debugging.  <TT
 CLASS="FILENAME"
->gdb</TT
->
-program.</P
+>filepath</TT
+> is usually set to the path
+to the <B
+CLASS="COMMAND"
+>gdb</B
+> or <B
+CLASS="COMMAND"
+>dumper</B
+> program.
+There is no default set.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)glob[:ignorecase]</I
+><VAR
+CLASS="ENVAR"
+>forkchunk:32768</VAR
+> - causes <CODE
+CLASS="FUNCTION"
+>fork()</CODE
+>
+to copy memory some number of bytes at a time, in the above example 
+32768 bytes (32Kb) at a time. The default is to copy as many bytes as 
+possible, which is preferable in most cases but may slow some older systems
+down.</P
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><VAR
+CLASS="ENVAR"
+>(no)glob[:ignorecase]</VAR
 > - if set, command line arguments
 containing UNIX-style file wildcard characters (brackets, question mark,
 asterisk, escaped with \) are expanded into lists of files that match 
@@ -275,21 +314,21 @@ those wildcards.
 This is applicable only to programs running from a DOS command line prompt.
 Default is set.</P
 ><P
->This option also accepts an optional <TT
+>This option also accepts an optional <VAR
 CLASS="LITERAL"
->[no]ignorecase</TT
+>[no]ignorecase</VAR
 > modifer.
-If supplied, wildcard matching is case insensitive.  The default is <TT
+If supplied, wildcard matching is case insensitive.  The default is <VAR
 CLASS="LITERAL"
->noignorecase</TT
+>noignorecase</VAR
 ></P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)ntea</I
+><VAR
+CLASS="ENVAR"
+>(no)ntea</VAR
 > - if set, use the full NT Extended
 Attributes to store UNIX-like inode information.
 This option only operates under Windows NT. Defaults to not set. </P
@@ -313,9 +352,12 @@ ALIGN="CENTER"
 ALIGN="LEFT"
 ><P
 >This may create additional
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >large</I
+></SPAN
 > files on non-NTFS partitions.</P
 ></TD
 ></TR
@@ -325,39 +367,54 @@ CLASS="EMPHASIS"
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)ntsec</I
+><VAR
+CLASS="ENVAR"
+>(no)ntsec</VAR
 > - if set, use the NT security
 model to set UNIX-like permissions on files and processes. The
 file permissions can only be set on NTFS partitions. FAT doesn't
-support the NT file security. For more information, read the documentation
-in [<SPAN
-CLASS="CITATION"
->ntsec.sgml</SPAN
->].</P
+support the NT file security. Defaults to set. For more information, read
+the documentation in <A
+HREF="ntsec.html"
+>the Section called <I
+>NT security and the <VAR
+CLASS="LITERAL"
+>ntsec</VAR
+> usage</I
+> in Chapter 2</A
+>.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)smbntsec</I
-> - if set, use `ntsec' on remote
+><VAR
+CLASS="ENVAR"
+>(no)smbntsec</VAR
+> - if set, use <VAR
+CLASS="ENVAR"
+>ntsec</VAR
+> on remote
 drives as well (this is the default). If you encounter problems with NT shares
-or Samba drives, setting this to `nosmbntsec' could help. In that case the
-permission and owner/group information is faked as on FAT partitions.
-A reason for a non working ntsec on remote drives could be insufficient
-permissions of the users. Since the needed user rights are somewhat dangerous
-(SeRestorePrivilege) it's not always an option to grant that rights to users.
-However, this shouldn't be a problem in NT domain environments.</P
+or Samba drives, setting this to <VAR
+CLASS="ENVAR"
+>nosmbntsec</VAR
+> could help. In that
+case the permission and owner/group information is faked as on FAT partitions.
+A reason for a non working <VAR
+CLASS="ENVAR"
+>ntsec</VAR
+> on remote drives could be
+insufficient permissions of the users. Since the needed user rights are
+somewhat dangerous (SeRestorePrivilege) it's not always an option to grant that
+rights to users.  However, this shouldn't be a problem in NT domain
+environments.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)reset_com</I
+><VAR
+CLASS="ENVAR"
+>(no)reset_com</VAR
 > - if set, serial ports are reset
 to 9600-8-N-1 with no flow control when used. This is done at open
 time and when handles are inherited.  Defaults to set.</P
@@ -365,37 +422,37 @@ time and when handles are inherited.  Defaults to set.</P
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)strip_title</I
+><VAR
+CLASS="ENVAR"
+>(no)strip_title</VAR
 > - if set, strips the directory
 part off the window title, if any.  Default is not set.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)title</I
+><VAR
+CLASS="ENVAR"
+>(no)title</VAR
 > - if set, the title bar
 reflects the name of the program currently running.  Default is not
 set.  Note that under Win9x the title bar is always enabled and it is
 stripped by default, but this is because of the way Win9x works.  In
-order not to strip, specify <TT
+order not to strip, specify <VAR
 CLASS="LITERAL"
->title</TT
-> or <TT
+>title</VAR
+> or <VAR
 CLASS="LITERAL"
 >title
-nostrip_title</TT
+nostrip_title</VAR
 >.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)tty</I
+><VAR
+CLASS="ENVAR"
+>(no)tty</VAR
 > - if set, Cygwin enables extra support
 (i.e., termios) for UNIX-like ttys. 
 It is not compatible with some Windows programs.
@@ -408,9 +465,9 @@ and it cannot be changed in the shell.</P
 ><LI
 STYLE="list-style-type: disc"
 ><P
-><I
-CLASS="FIRSTTERM"
->(no)winsymlinks</I
+><VAR
+CLASS="ENVAR"
+>(no)winsymlinks</VAR
 > - if set, Cygwin creates
 symlinks as Windows shortcuts with a special header and the R/O attribute
 set. If not set, Cygwin creates symlinks as plain files with a magic number,
@@ -423,6 +480,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -434,6 +492,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="using-specialnames.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -442,6 +501,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -450,6 +510,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="using-utils.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -465,6 +526,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="using.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD

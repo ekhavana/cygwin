@@ -1,3 +1,4 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
@@ -17,11 +18,17 @@ HREF="using-filemodes.html"><LINK
 REL="NEXT"
 TITLE="The CYGWIN environment
 variable"
-HREF="using-cygwinenv.html"><META
-http-equiv="Content-Type"
-content="text/html; charset="></HEAD
+HREF="using-cygwinenv.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
 CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -71,16 +78,16 @@ CLASS="SECT1"
 CLASS="SECT1"
 ><A
 NAME="USING-SPECIALNAMES"
-></A
->Special filenames</H1
+>Special filenames</A
+></H1
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN745"
-></A
->DOS devices</H2
+NAME="AEN747"
+>DOS devices</A
+></H2
 ><P
 >Windows filenames invalid under Windows are also invalid under
 Cygwin.  This means that base filenames such as 
@@ -119,9 +126,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN755"
-></A
->POSIX devices</H2
+NAME="AEN757"
+>POSIX devices</A
+></H2
 ><P
 >There is no need to create a POSIX <TT
 CLASS="FILENAME"
@@ -188,12 +195,6 @@ The first floppy in the system is \device\floppy0, the first CD-ROM is
 ><P
 >The new fixed POSIX names are mapped to NT internal devices as
 follows:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >/dev/st0	\device\tape0, rewind
@@ -223,56 +224,35 @@ CLASS="SCREEN"
 /dev/sdl1	\device\harddisk11\partition1
 ...
 /dev/sdl15	\device\harddisk11\partition15</PRE
-></TD
-></TR
-></TABLE
 ><P
 >if you don't like these device names, feel free to create symbolic
 links as they are created on Linux systems for convenience:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >ln -s /dev/scd0 /dev/cdrom
 ln -s /dev/scd2 /dev/sr2      # actually srX are real device nodes on Linux but who cares.
 ln -s /dev/nst0  /dev/tape
 ...</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Note that you can't use the mount table to map from fixed device name
 to your own device name or to map from internal NT device name to
 your own device name.  Also using symbolic links to map from the internal
 NT device name to your own device name will not do what you want.
 The following three examples will not work as expected:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >mount -f -b /dev/nst0 /dev/tape
 mount -f -b /device/tape0 /dev/tape
 ln -s /device/tape0 /dev/tape</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN779"
-></A
->The .exe extension</H2
+NAME="AEN781"
+>The .exe extension</A
+></H2
 ><P
 > Executable program filenames end with .exe but the .exe need
 not be included in the command, so that traditional UNIX names can be
@@ -295,56 +275,41 @@ CLASS="FILENAME"
 >filename</TT
 >
 does not.  In the same situation the function call
-<TT
+<CODE
 CLASS="FUNCTION"
->stat("filename",..)</TT
+>stat("filename",..)</CODE
 > gives information about
 <TT
 CLASS="FILENAME"
 >filename.exe</TT
 >.  The two files can be distinguished
 by examining their inodes, as demonstrated below.
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->C:\&gt;</TT
-> <TT
+>C:\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->ls * </B
-></TT
+>ls * </KBD
 >
 a      a.exe     b.exe
-<TT
+<SAMP
 CLASS="PROMPT"
->C:\&gt;</TT
-> <TT
+>C:\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->ls -i a a.exe</B
-></TT
+>ls -i a a.exe</KBD
 >
 445885548 a       435996602 a.exe
-<TT
+<SAMP
 CLASS="PROMPT"
->C:\&gt;</TT
-> <TT
+>C:\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->ls -i b b.exe</B
-></TT
+>ls -i b b.exe</KBD
 >
 432961010 b       432961010 b.exe</PRE
-></TD
-></TR
-></TABLE
 >
 If a shell script <TT
 CLASS="FILENAME"
@@ -412,9 +377,60 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN812"
-></A
->The @pathnames</H2
+NAME="AEN814"
+>The /proc filesystem</A
+></H2
+><P
+>Cygwin, like Linux and other similar operating systems, supports the
+<TT
+CLASS="FILENAME"
+>/proc</TT
+> virtual filesystem. The files in this
+directory are representations of various aspects of your system,
+for example the command <KBD
+CLASS="USERINPUT"
+>cat /proc/cpuinfo</KBD
+> 
+displays information such as what model and speed processor you have.</P
+><P
+>One unique aspect of the Cygwin <TT
+CLASS="FILENAME"
+>/proc</TT
+> filesystem
+is <TT
+CLASS="FILENAME"
+>/proc/registry</TT
+>, which displays the Windows
+registry with each <VAR
+CLASS="LITERAL"
+>KEY</VAR
+> as a directory and each
+<VAR
+CLASS="LITERAL"
+>VALUE</VAR
+> as a file. As anytime you deal with the
+Windows registry, use caution since changes may result in an unstable
+or broken system.</P
+><P
+>The Cygwin <TT
+CLASS="FILENAME"
+>/proc</TT
+> is not as complete as the
+one in Linux, but it provides significant capabilities. The
+<SPAN
+CLASS="SYSTEMITEM"
+>procps</SPAN
+> package contains several utilities
+that use it.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN827"
+>The @pathnames</A
+></H2
 ><P
 >To circumvent the limitations on shell line length in the native
 Windows command shells, Cygwin programs expand their arguments
@@ -444,52 +460,37 @@ CLASS="COMMAND"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN820"
+NAME="AEN835"
 ></A
 ><P
 ><B
 >Example 3-2.  Using @pathname</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->bash$</TT
-> <TT
+>bash$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->echo  'This   is   "a     long"  line' &#62; mylist</B
-></TT
+>echo  'This   is   "a     long"  line' &#62; mylist</KBD
 >
-<TT
+<SAMP
 CLASS="PROMPT"
->bash$</TT
-> <TT
+>bash$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->echo @mylist</B
-></TT
+>echo @mylist</KBD
 >
 @mylist
-<TT
+<SAMP
 CLASS="PROMPT"
->c:\&gt;</TT
-> <TT
+>c:\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->c:\cygwin\bin\echo @mylist</B
-></TT
+>c:\cygwin\bin\echo @mylist</KBD
 >
 This is a     long line</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ></DIV
 ></DIV
@@ -551,9 +552,9 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->The <TT
+>The <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > environment
 variable</TD
 ></TR

@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Programming with Cygwin</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -13,11 +14,21 @@ TITLE="Using Cygwin effectively with Windows"
 HREF="using-effectively.html"><LINK
 REL="NEXT"
 TITLE="Debugging Cygwin Programs"
-HREF="gdb.html"></HEAD
+HREF="gdb.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -35,6 +46,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="using-effectively.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -48,6 +60,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="gdb.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -60,8 +73,8 @@ CLASS="CHAPTER"
 ><H1
 ><A
 NAME="PROGRAMMING"
->Chapter 4. Programming with Cygwin</A
-></H1
+></A
+>Chapter 4. Programming with Cygwin</H1
 ><DIV
 CLASS="TOC"
 ><DL
@@ -113,45 +126,35 @@ Refer to the GCC User's Guide for information on standard usage and
 options.  Here's a simple example:</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1565"
+></A
 ><P
 ><B
 >Example 4-1. Building Hello World with GCC</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
+>C:\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->gcc hello.c -o hello.exe</B
-></TT
+>gcc hello.c -o hello.exe</KBD
 >
-<TT
+<SAMP
 CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
+>C:\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->hello.exe</B
-></TT
+>hello.exe</KBD
 >
 Hello, World
 
-<TT
+<SAMP
 CLASS="PROMPT"
->C:\&#62;</TT
+>C:\&gt;</SAMP
 ></PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ></DIV
 ><DIV
@@ -172,21 +175,12 @@ the GNU tools instead of the Microsoft tools.</P
 >For the most part, your sources won't need to change at all.
 However, you should remove all __export attributes from functions
 and replace them like this:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >int foo (int) __attribute__ ((__dllexport__));
 
 int
 foo (int i)</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The Makefile is similar to any other UNIX-like Makefile,
 and like any other Cygwin makefile.  The only difference is that you use
@@ -195,12 +189,6 @@ CLASS="COMMAND"
 >gcc -mwindows</B
 > to link your program into a GUI
 application instead of a command-line application.  Here's an example:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >myapp.exe : myapp.o myapp.res
@@ -208,9 +196,6 @@ CLASS="SCREEN"
 
 myapp.res : myapp.rc resource.h
 	windres $&#60; -O coff -o $@</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Note the use of <TT
 CLASS="FILENAME"
@@ -244,19 +229,13 @@ CLASS="FILENAME"
 ><P
 >The following is a simple GUI-mode "Hello, World!" program to help
 get you started:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >/*-------------------------------------------------*/
 /* hellogui.c - gui hello world                    */
 /* build: gcc -mwindows hellogui.c -o hellogui.exe */
 /*-------------------------------------------------*/
-#include &#60;windows.h&#62;
+#include &lt;windows.h&gt;
 
 char glpszText[1024];
 
@@ -287,7 +266,7 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	wcex.lpszClassName = "HELLO";
 	wcex.hIconSm = NULL;
 
-	if (!RegisterClassEx(&#38;wcex))
+	if (!RegisterClassEx(&amp;wcex))
 		return FALSE; 
 
 	HWND hWnd;
@@ -301,10 +280,10 @@ int APIENTRY WinMain(HINSTANCE hInstance,
 	UpdateWindow(hWnd);
 
 	MSG msg;
-	while (GetMessage(&#38;msg, NULL, 0, 0)) 
+	while (GetMessage(&amp;msg, NULL, 0, 0)) 
 	{
-		TranslateMessage(&#38;msg);
-		DispatchMessage(&#38;msg);
+		TranslateMessage(&amp;msg);
+		DispatchMessage(&amp;msg);
 	}
 
 	return msg.wParam;
@@ -318,11 +297,11 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	switch (message) 
 	{
 		case WM_PAINT:
-			hdc = BeginPaint(hWnd, &#38;ps);
+			hdc = BeginPaint(hWnd, &amp;ps);
 			RECT rt;
-			GetClientRect(hWnd, &#38;rt);
-			DrawText(hdc, glpszText, strlen(glpszText), &#38;rt, DT_TOP | DT_LEFT);
-			EndPaint(hWnd, &#38;ps);
+			GetClientRect(hWnd, &amp;rt);
+			DrawText(hdc, glpszText, strlen(glpszText), &amp;rt, DT_TOP | DT_LEFT);
+			EndPaint(hWnd, &amp;ps);
 			break;
 		case WM_DESTROY:
 			PostQuitMessage(0);
@@ -332,9 +311,6 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
 	}
 	return 0;
 }</PRE
-></TD
-></TR
-></TABLE
 ></P
 ></DIV
 ></DIV
@@ -344,6 +320,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -355,6 +332,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="using-effectively.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -363,6 +341,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -371,6 +350,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="gdb.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR

@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >NT security and the ntsec usage</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -16,11 +17,21 @@ TITLE="Changing Cygwin's Maximum Memory"
 HREF="setup-maxmem.html"><LINK
 REL="NEXT"
 TITLE="Customizing bash"
-HREF="setup-files.html"></HEAD
+HREF="setup-files.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -38,6 +49,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="setup-maxmem.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -51,6 +63,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="setup-files.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -64,9 +77,9 @@ CLASS="SECT1"
 CLASS="SECT1"
 ><A
 NAME="NTSEC"
->NT security and the <TT
+>NT security and the <VAR
 CLASS="LITERAL"
->ntsec</TT
+>ntsec</VAR
 > usage</A
 ></H1
 ><P
@@ -92,12 +105,12 @@ with release 1.1.3.</P
 >Chapter six describes in short the new acl API since release 1.1</P
 ><P
 >The setting of UNIX like object permissions is controlled by the new
-<TT
+<VAR
 CLASS="ENVAR"
->CYGWIN</TT
-> variable setting <TT
+>CYGWIN</VAR
+> variable setting <VAR
 CLASS="LITERAL"
->(no)ntsec</TT
+>(no)ntsec</VAR
 >.</P
 ><DIV
 CLASS="SECT2"
@@ -122,32 +135,14 @@ SIDs are comparable to UNIX UIDs and GIDs, but are more complicated
 because they are unique across networks. Example:</P
 ><P
 >SID of a system `foo':</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >  S-1-5-21-165875785-1005667432-441284377</PRE
-></TD
-></TR
-></TABLE
 ><P
 >SID of a user `johndoe' of the system `foo':</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >  S-1-5-21-165875785-1005667432-441284377-1023</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The above example shows the convention for printing SIDs. The leading
 `S' should show that it is a SID. The next number is a version number which
@@ -162,32 +157,14 @@ any circumstances DIFFERENT, regardless of the usage of the same user
 name and password!</P
 ><P
 >SID of a domain `bar':</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >  S-1-5-21-186985262-1144665072-740312968</PRE
-></TD
-></TR
-></TABLE
 ><P
 >SID of a user `johndoe' in the domain `bar':</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >  S-1-5-21-186985262-1144665072-740312968-1207</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The last part of the SID, the so called `relative identifier' (RID),
 is by default used as UID and/or GID under cygwin. As the name and the
@@ -204,12 +181,6 @@ group of `all users'. NT has an SID for them, called `Everyone' in the
 English versions. The SIDs of well-known groups are not unique across
 an NT network but their meanings are unmistakable.
 Examples of well-known groups:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >everyone                        S-1-1-0
@@ -217,29 +188,17 @@ creator/owner                   S-1-3-0
 batch process (via `at')        S-1-5-3
 authenticated users             S-1-5-11
 system                          S-1-5-18</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The last important group of SIDs are the `predefined groups'. This
 groups are used mainly on systems outside of domains to simplify the 
 administration of user permissions. The corresponding SIDs are not unique
 across the network so they are interpreted only locally:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >administrators                  S-1-5-32-544
 users                           S-1-5-32-545
 guests                          S-1-5-32-546
 ...</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Now, how are permissions given to objects? A process may assign an SD
 to the object. The SD of an object consists of three parts:</P
@@ -387,37 +346,19 @@ CLASS="COMMAND"
 >:</P
 ><P
 >If your login is member of the administrators' group:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >  rwxrwxrwx 1  544  513  ... foo</PRE
-></TD
-></TR
-></TABLE
 ><P
 >if not:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >  rwxrwxrwx 1  1000  513  ... foo</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Note the user and group IDs. 544 is the UID of the administrators' group.
-This is a `feature' <TT
+This is a `feature' <VAR
 CLASS="LITERAL"
->:-P</TT
+>:-P</VAR
 > of WinNT. If one is a member of
 the administrators' group, every file, that he has created is owned by the
 administrators' group, instead by him.</P
@@ -446,18 +387,9 @@ In cygwin release 1.0 the names and the IDs must correspond to the
 appropriate NT IDs! The IDs used in cygwin are the RID of the NT SID, as
 mentioned earlier.
 An SID of e.g. the user `corinna' on my NT workstation:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >  S-1-5-21-165875785-1005667432-441284377-1000</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Note the last number: It's the RID 1000, the cygwin's UID.</P
 ><P
@@ -479,16 +411,13 @@ chapter for details).  With the exception of my personal user entry, all
 entries are well known entries.</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN352"
+></A
 ><P
 ><B
 >Example 2-1. /etc/passwd</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >everyone:*:0:0:::
@@ -497,22 +426,16 @@ administrator::500:544::/home/root:/bin/bash
 guest:*:501:546:::
 administrators:*:544:544::/home/root:
 corinna::1000:547:Corinna Vinschen:/home/corinna:/bin/tcsh</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN355"
+></A
 ><P
 ><B
 >Example 2-2. /etc/group</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >everyone::0:
@@ -522,9 +445,6 @@ administrators::544:
 users::545:
 guests::546:
 powerusers::547:</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >As you can see, I changed my primary group membership from 513 (None)
@@ -620,32 +540,14 @@ CLASS="COMMAND"
 CLASS="COMMAND"
 >ls</B
 >):</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="90%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >root::500:513::/home/root:/bin/sh</PRE
-></TD
-></TR
-></TABLE
 ><P
 >instead of</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="90%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >adminstrator::500:513::/home/root:/bin/sh</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Caution: If you like to use the account as login account via
 <B
@@ -662,32 +564,14 @@ part of the standard Cygwin distribution since 1.1.</P
 ><P
 >Cygwin UIDs and GIDs are now not necessarily the RID
 part of the NT SID:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="90%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >root::0:513:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh</PRE
-></TD
-></TR
-></TABLE
 ><P
 >instead of</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="90%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >root::500:513::/home/root:/bin/sh</PRE
-></TD
-></TR
-></TABLE
 ></LI
 ><LI
 ><P
@@ -696,41 +580,29 @@ don't influence each other. So it's possible to have same Id's for a
 user and a group:</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN400"
+></A
 ><P
 ><B
 >Example 2-3. /etc/passwd:</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="90%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >root::0:0:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN403"
+></A
 ><P
 ><B
 >Example 2-4. /etc/group:</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="90%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >root:S-1-5-32-544:0:</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ></LI
 ></UL
@@ -743,12 +615,12 @@ CLASS="COMMAND"
 >mkgroup</B
 >
 create the needed entries by default. If you don't want that you can use
-the options <TT
+the options <VAR
 CLASS="LITERAL"
->-s</TT
-> or <TT
+>-s</VAR
+> or <VAR
 CLASS="LITERAL"
->--no-sids</TT
+>--no-sids</VAR
 >. I suggest
 not to do this since ntsec works better when having the SIDs available.</P
 ><P
@@ -768,32 +640,14 @@ add another field to pw_gecos which contains the NT user name including
 it's domain. So you are able to login as each domain user. The syntax
 is easy: Just add an entry of the form U-ntdomain\ntusername to the pw_gecos
 field. Note that the SID must still remain the last field in pw_gecos!</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >the_king::1:1:Elvis Presley,U-STILLHERE\elvis,S-1-5-21-1234-5678-9012-1000:/bin/sh</PRE
-></TD
-></TR
-></TABLE
 ><P
 >For a local user just drop the domain:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >the_king::1:1:Elvis Presley,U-elvis,S-1-5-21-1234-5678-9012-1000:/bin/sh</PRE
-></TD
-></TR
-></TABLE
 ><P
 >In either case the password of the user is taken from the NT user
 database, NOT from the passwd file!</P
@@ -811,16 +665,13 @@ need to change them that way, it's just for testing purposes and...
 for fun.</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN422"
+></A
 ><P
 ><B
 >Example 2-5. /etc/passwd</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >root:*:0:0:Administrators group,S-1-5-32-544::
@@ -828,22 +679,16 @@ SYSTEM:*:18:18:,S-1-5-18:/home/system:/bin/bash
 admin:*:500:513:,S-1-5-21-1844237615-436374069-1060284298-500:/home/Administrator:/bin/bash
 corinna:*:100:0:Corinna Vinschen,S-1-5-21-1844237615-436374069-1060284298-1003:/home/corinna:/bin/tcsh
 Guest:*:501:546:,S-1-5-21-1844237615-436374069-1060284298-501:/home/Guest:/bin/bash</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN425"
+></A
 ><P
 ><B
 >Example 2-6. /etc/group</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >root:S-1-5-32-544:0:
@@ -860,9 +705,6 @@ guests:S-1-5-32-546:546:
 pwrusers:S-1-5-32-547:547:
 replicator:S-1-5-32-552:552:
 users:S-1-5-32-545:545:</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >If you want to do similar changes to your files, please do that only
@@ -916,73 +758,37 @@ remains unchanged if one presses the Cancel button.</P
 ><P
 >You still ask "Where is the leak?" NT ACLs are unable to reflect each
 possible combination of POSIX permissions. Example:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >rw-r-xrw-</PRE
-></TD
-></TR
-></TABLE
 ><P
 >1st try:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >UserAllow:   110
 GroupAllow:  101
 OthersAllow: 110</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Hmm, because of the accumulation of allow rights the user may
 execute because the group may execute.</P
 ><P
 >2st try:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >UserDeny:    001
 GroupAllow:  101
 OthersAllow: 110</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Now the user may read and write but not execute. Better? No!
 Unfortunately the group may write now because others may write.</P
 ><P
 >3rd try:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >UserDeny:    001
 GroupDeny:   010
 GroupAllow:  001
 OthersAllow: 110</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Now the group may not write as intended but unfortunately the user may
 not write anymore, too. How should this problem be solved? According to
@@ -990,12 +796,6 @@ the official rules a UserAllow has to follow the GroupDeny but it's
 easy to see that this can never be solved that way.</P
 ><P
 >The only chance:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >UserDeny:    001
@@ -1003,9 +803,6 @@ UserAllow:   010
 GroupDeny:   010
 GroupAllow:  001
 OthersAllow: 110</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Again: This works for both, NT4 and W2K. Only the GUIs aren't
 able to deal with that order.</P
@@ -1026,12 +823,6 @@ for a single ACL entry (ACE in NT terminology) is defined in
 CLASS="FILENAME"
 >sys/acl.h</TT
 > as:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >typedef struct acl {
@@ -1039,9 +830,6 @@ CLASS="SCREEN"
   uid_t   a_id;    /* UID | GID */
   mode_t  a_perm;  /* permissions */
 } aclent_t;</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The a_perm member of the aclent_t type contains only the bits
 for read, write and execute as in the file mode. If eg. read permission
@@ -1049,12 +837,6 @@ is granted, all read bits (S_IRUSR, S_IRGRP, S_IROTH) are set.
 CLASS_OBJ or MASK ACL entries are not fully implemented yet.</P
 ><P
 >The new API calls are</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >acl(2), facl(2)
@@ -1063,9 +845,6 @@ aclsort(3),
 acltomode(3), aclfrommode(3),
 acltopbits(3), aclfrompbits(3),
 acltotext(3), aclfromtext(3)</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Like in Solaris, Cygwin has two new commands for working with
 ACLs on the command line: <B
@@ -1123,20 +902,11 @@ CLASS="COMMAND"
 >LogonUser</B
 > must have special
 permissions:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >"Act as part of the operating system"
 "Replace process level token"
 "Increase quotas"</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Note that administrators do not have all these user rights set 
 by default.</P
@@ -1163,18 +933,12 @@ CLASS="COMMAND"
 >setuid</B
 > application is illustrated by
 a short example:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >&#13;/* First include all needed cygwin stuff. */
 #ifdef __CYGWIN__
-#include &#60;windows.h&#62;
-#include &#60;sys/cygwin.h&#62;
+#include &lt;windows.h&gt;
+#include &lt;sys/cygwin.h&gt;
 /* Use the following define to determine the Windows version */
 #define is_winnt        (GetVersion() &#60; 0x80000000)
 #endif
@@ -1206,56 +970,35 @@ CLASS="SCREEN"
     /* Use standard method for W9X as well. */
     hashed_password = crypt (cleartext_password, salt);
     if (!user_pwd_entry ||
-        strcmp (hashed_password, user_pwd_entry-&#62;pw_password))
+        strcmp (hashed_password, user_pwd_entry-&gt;pw_password))
       error_exit;
 
 [...]
 
   /* Everything else remains the same! */
 
-  setegid (user_pwd_entry-&#62;pw_gid);
-  seteuid (user_pwd_entry-&#62;pw_uid);
+  setegid (user_pwd_entry-&gt;pw_gid);
+  seteuid (user_pwd_entry-&gt;pw_uid);
   execl ("/bin/sh", ...);&#13;</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The new Cygwin call to retrive an access token is defined as follows:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
->#include &#60;windows.h&#62;
-#include &#60;sys/cygwin.h&#62;
+>#include &lt;windows.h&gt;
+#include &lt;sys/cygwin.h&gt;
 
 HANDLE
 cygwin_logon_user (struct passwd *pw, const char *cleartext_password)</PRE
-></TD
-></TR
-></TABLE
 ><P
 >You can call that function as often as you want for different user
 logons and remeber the access tokens for further calls to the second function.</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
->#include &#60;windows.h&#62;
-#include &#60;sys/cygwin.h&#62;
+>#include &lt;windows.h&gt;
+#include &lt;sys/cygwin.h&gt;
 
 void
 cygwin_set_impersonation_token (HANDLE hToken);</PRE
-></TD
-></TR
-></TABLE
 ><P
 > is the call to inform Cygwin about the user context to which further
 calls to <B
@@ -1288,12 +1031,6 @@ CLASS="COMMAND"
 >cygwin_logon_user</B
 > you can switch to different user
 contexts by observing the following order:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >&#13;  cygwin_set_impersonation_token (user1_token);
@@ -1312,9 +1049,6 @@ CLASS="SCREEN"
   seteuid (user1_uid);
 
 etc.&#13;</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -1429,9 +1163,12 @@ COMPACT="COMPACT"
 <TT
 CLASS="FILENAME"
 >/etc/passwd</TT
->, it's <I
+>, it's <SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >group</I
+></SPAN
 > will
 be named 'mkpasswd'.</P
 ></LI
@@ -1475,6 +1212,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1486,6 +1224,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="setup-maxmem.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -1494,6 +1233,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1502,6 +1242,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="setup-files.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -1517,6 +1258,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="setup-net.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD

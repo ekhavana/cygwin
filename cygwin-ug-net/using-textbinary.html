@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Text and Binary modes</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -16,11 +17,21 @@ TITLE="Using Cygwin"
 HREF="using.html"><LINK
 REL="NEXT"
 TITLE="File permissions"
-HREF="using-filemodes.html"></HEAD
+HREF="using-filemodes.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -38,6 +49,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="using.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -51,6 +63,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="using-filemodes.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -71,7 +84,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN635"
+NAME="AEN637"
 >The Issue</A
 ></H2
 ><P
@@ -149,7 +162,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN655"
+NAME="AEN657"
 >The default Cygwin behavior</A
 ></H2
 ><P
@@ -179,13 +192,13 @@ applies.</P
 ><LI
 ><P
 >Pipes and non-file devices are opened in binary mode,
-except if the <TT
+except if the <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > environment variable contains
-<TT
+<VAR
 CLASS="LITERAL"
->nobinmode</TT
+>nobinmode</VAR
 >.</P
 ><DIV
 CLASS="WARNING"
@@ -219,12 +232,12 @@ TYPE="1"
 ></LI
 ><LI
 ><P
-><TT
+><VAR
 CLASS="ENVAR"
->CYGWIN</TT
-> contains <TT
+>CYGWIN</VAR
+> contains <VAR
 CLASS="LITERAL"
->binmode</TT
+>binmode</VAR
 ></P
 ></LI
 ><LI
@@ -244,20 +257,20 @@ CLASS="LITERAL"
 ><LI
 ><P
 >When a Cygwin program is launched by a shell, its standard input,
-output and error are in binary mode if the <TT
+output and error are in binary mode if the <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > variable
-contains <TT
+contains <VAR
 CLASS="LITERAL"
->tty</TT
+>tty</VAR
 >, else in text mode, except if they are piped
 or redirected.</P
 ><P
 > When redirecting, the Cygwin shells uses rules (a-c). For
-these shells the relevant value of <TT
+these shells the relevant value of <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > is that at the time
 the shell was launched and not that at the time the program is executed.
 Non-Cygwin shells always pipe and redirect with binary mode. With
@@ -267,7 +280,7 @@ CLASS="COMMAND"
 >
 and <B
 CLASS="COMMAND"
-> program &#60; filename </B
+> program &lt; filename </B
 > are not equivalent when
 <TT
 CLASS="FILENAME"
@@ -281,7 +294,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN691"
+NAME="AEN693"
 >Example</A
 ></H2
 ><P
@@ -292,53 +305,26 @@ CLASS="COMMAND"
 > program, which can only write
 to standard output. 
 The script</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >#!/bin/sh
 # Remove \r from the file given as argument
 tr -d '\r' &#60; "$1" &#62; "$1".nocr</PRE
-></TD
-></TR
-></TABLE
 ><P
 > will not work on a text mounted systems because the \r will be 
 reintroduced on writing. However scripts such as </P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >#!/bin/sh
 # Remove \r from the file given as argument
 tr -d '\r' | gzip | gunzip &#62; "$1".nocr</PRE
-></TD
-></TR
-></TABLE
 ><P
 >and the .bat file</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >REM Remove \r from the file given as argument
 @echo off
 tr -d \r &#60; %1 &#62; %1.nocr</PRE
-></TD
-></TR
-></TABLE
 ><P
 > work fine. In the first case (assuming the pipes are binary)
 we rely on <B
@@ -353,7 +339,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN702"
+NAME="AEN704"
 >Binary or text?</A
 ></H2
 ><P
@@ -402,66 +388,66 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN711"
+NAME="AEN713"
 >Programming</A
 ></H2
 ><P
->In the <TT
+>In the <CODE
 CLASS="FUNCTION"
->open()</TT
+>open()</CODE
 > function call, binary mode can be
-specified with the flag <TT
+specified with the flag <VAR
 CLASS="LITERAL"
->O_BINARY</TT
+>O_BINARY</VAR
 > and text mode with
-<TT
+<VAR
 CLASS="LITERAL"
->O_TEXT</TT
+>O_TEXT</VAR
 >. These symbols are defined in
 <TT
 CLASS="FILENAME"
 >fcntl.h</TT
 >.</P
 ><P
->In the <TT
+>In the <CODE
 CLASS="FUNCTION"
->fopen()</TT
+>fopen()</CODE
 > function call, binary mode can be
-specified by adding a <TT
+specified by adding a <VAR
 CLASS="LITERAL"
->b</TT
+>b</VAR
 > to the mode string. There is no
 direct way to specify text mode.</P
 ><P
 >The mode of a file can be changed by the call
-<TT
+<CODE
 CLASS="FUNCTION"
->setmode(fd,mode)</TT
-> where <TT
+>setmode(fd,mode)</CODE
+> where <VAR
 CLASS="LITERAL"
->fd</TT
+>fd</VAR
 > is a file
-descriptor (an integer) and <TT
+descriptor (an integer) and <VAR
 CLASS="LITERAL"
->mode</TT
+>mode</VAR
 > is
-<TT
+<VAR
 CLASS="LITERAL"
->O_BINARY</TT
-> or <TT
+>O_BINARY</VAR
+> or <VAR
 CLASS="LITERAL"
->O_TEXT</TT
+>O_TEXT</VAR
 >. The function
-returns <TT
+returns <VAR
 CLASS="LITERAL"
->O_BINARY</TT
-> or <TT
+>O_BINARY</VAR
+> or <VAR
 CLASS="LITERAL"
->O_TEXT</TT
+>O_TEXT</VAR
 > depending
-on the mode before the call, and <TT
+on the mode before the call, and <VAR
 CLASS="LITERAL"
->EOF</TT
+>EOF</VAR
 > on error.</P
 ></DIV
 ></DIV
@@ -470,6 +456,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -481,6 +468,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="using.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -489,6 +477,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -497,6 +486,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="using-filemodes.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -512,6 +502,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="using.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD

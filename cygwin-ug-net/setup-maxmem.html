@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Changing Cygwin's Maximum Memory</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -16,11 +17,21 @@ TITLE="Environment Variables"
 HREF="setup-env.html"><LINK
 REL="NEXT"
 TITLE="NT security and the ntsec usage"
-HREF="ntsec.html"></HEAD
+HREF="ntsec.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -38,6 +49,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="setup-env.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -51,6 +63,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="ntsec.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -71,22 +84,22 @@ NAME="SETUP-MAXMEM"
 (program+data).  You should not need to change this default in most 
 circumstances.  However, if you need to use more real or virtual memory in 
 your machine you may add an entry in the either the 
-<TT
+<VAR
 CLASS="LITERAL"
->HKEY_LOCAL_MACHINE</TT
+>HKEY_LOCAL_MACHINE</VAR
 > (to change the limit for all users) or 
-<TT
+<VAR
 CLASS="LITERAL"
->HKEY_CURRENT_USER</TT
+>HKEY_CURRENT_USER</VAR
 > (for just the current user) section of 
 the registry. </P
 ><P
->Add the <TT
+>Add the <VAR
 CLASS="LITERAL"
->DWORD</TT
-> value <TT
+>DWORD</VAR
+> value <VAR
 CLASS="LITERAL"
->heap_chunk_in_mb</TT
+>heap_chunk_in_mb</VAR
 > 
 and set it to the desired memory limit in decimal MB. It is preferred to do 
 this in Cygwin using the <B
@@ -100,13 +113,13 @@ CLASS="COMMAND"
 > or the other Cygwin 
 utilities, see <A
 HREF="using-utils.html"
->the section called <I
+>the Section called <I
 >Cygwin Utilities</I
 > in Chapter 3</A
 > or use each the
-<TT
+<VAR
 CLASS="LITERAL"
->--help</TT
+>--help</VAR
 > option of each util.)  You should always be careful 
 when using <B
 CLASS="COMMAND"
@@ -114,19 +127,10 @@ CLASS="COMMAND"
 > since damaging your system registry can 
 result in an unusable system.  This example sets memory limit to 1024 MB:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >regtool -i set /HKLM/Software/Cygnus\ Solutions/Cygwin/heap_chunk_in_mb 1024
 regtool -v list /HKLM/Software/Cygnus\ Solutions/Cygwin</PRE
-></TD
-></TR
-></TABLE
 ></P
 ><P
 >Exit all running Cygwin processes and restart them. Memory can be allocated up 
@@ -138,13 +142,7 @@ Control Panel.  </P
 >Here is a small program written by DJ Delorie that tests the 
 memory allocation limit on your system:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >main()
 {
@@ -161,24 +159,12 @@ CLASS="SCREEN"
   printf("%08x bytes (%.1fMb)\n", sum, sum/1024.0/1024.0);
   return 0;
 }</PRE
-></TD
-></TR
-></TABLE
 >
 
 You can compile this program using:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >gcc max_memory.c -o max_memory.exe</PRE
-></TD
-></TR
-></TABLE
 >
 
 Run the program and it will output the maximum amount of allocatable memory.</P
@@ -188,6 +174,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -199,6 +186,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="setup-env.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -207,6 +195,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -215,6 +204,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="ntsec.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -230,15 +220,16 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="setup-net.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->NT security and the <TT
+>NT security and the <VAR
 CLASS="LITERAL"
->ntsec</TT
+>ntsec</VAR
 > usage</TD
 ></TR
 ></TABLE

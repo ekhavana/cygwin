@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Debugging Cygwin Programs</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -16,11 +17,21 @@ TITLE="Programming with Cygwin"
 HREF="programming.html"><LINK
 REL="NEXT"
 TITLE="Building and Using DLLs"
-HREF="dll.html"></HEAD
+HREF="dll.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -38,6 +49,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="programming.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -51,6 +63,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="dll.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -71,9 +84,12 @@ NAME="GDB"
 it, meaning there's something wrong with the program itself that is
 causing unexpected results or crashes.  Diagnosing these bugs and
 fixing them is made easy by special tools called
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >debuggers</I
+></SPAN
 >.  In the case of Cygwin, the debugger
 is GDB, which stands for "GNU DeBugger".  This tool lets you run your
 program in a controlled environment where you can investigate the
@@ -83,36 +99,30 @@ regular text files that cannot be used directly by GDB.</P
 ><P
 >Before you can debug your program, you need to prepare your
 program for debugging.  What you need to do is add
-<TT
+<VAR
 CLASS="LITERAL"
->-g</TT
+>-g</VAR
 > to all the other flags you use when compiling
 your sources to objects.</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1596"
+></A
 ><P
 ><B
 >Example 4-2. Compiling with -g</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->$</TT
+>$</SAMP
 > gcc -g -O2 -c myapp.c
-<TT
+<SAMP
 CLASS="PROMPT"
->$</TT
+>$</SAMP
 > gcc -g myapp.c -o myapp</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >What this does is add extra information to the objects (they get
@@ -130,9 +140,9 @@ CLASS="COMMAND"
 >gdb myapp.exe</B
 > at the command prompt.  It will
 display some text telling you about itself, then
-<TT
+<VAR
 CLASS="LITERAL"
->(gdb)</TT
+>(gdb)</VAR
 > will appear to prompt you to enter commands.
 Whenever you see this prompt, it means that gdb is waiting for you to
 type in a command, like <B
@@ -142,9 +152,9 @@ CLASS="COMMAND"
 <B
 CLASS="COMMAND"
 >help</B
->.  Oh <TT
+>.  Oh <VAR
 CLASS="LITERAL"
->:-)</TT
+>:-)</VAR
 > type
 <B
 CLASS="COMMAND"
@@ -184,29 +194,23 @@ CLASS="COMMAND"
 gets to a specific function or line number:</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1617"
+></A
 ><P
 ><B
 >Example 4-3. "break" in gdb</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->(gdb)</TT
+>(gdb)</SAMP
 > break my_function
-<TT
+<SAMP
 CLASS="PROMPT"
->(gdb)</TT
+>(gdb)</SAMP
 > break 47</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >Now, when you type <B
@@ -230,34 +234,28 @@ your program.  These two cases are the same as far as your program is
 concerned:</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1627"
+></A
 ><P
 ><B
 >Example 4-4. Debugging with command line arguments</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->$</TT
+>$</SAMP
 > myprog -t foo --queue 47
 
-<TT
+<SAMP
 CLASS="PROMPT"
->$</TT
+>$</SAMP
 > gdb myprog
-<TT
+<SAMP
 CLASS="PROMPT"
->(gdb)</TT
+>(gdb)</SAMP
 > run -t foo --queue 47</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ></DIV
 ><DIV
@@ -265,6 +263,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -276,6 +275,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="programming.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -284,6 +284,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -292,6 +293,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="dll.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -307,6 +309,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="programming.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD

@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Using Cygwin</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -13,11 +14,21 @@ TITLE="Customizing bash"
 HREF="setup-files.html"><LINK
 REL="NEXT"
 TITLE="Text and Binary modes"
-HREF="using-textbinary.html"></HEAD
+HREF="using-textbinary.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="CHAPTER"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -35,6 +46,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="setup-files.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -48,6 +60,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="using-textbinary.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -60,8 +73,8 @@ CLASS="CHAPTER"
 ><H1
 ><A
 NAME="USING"
->Chapter 3. Using Cygwin</A
-></H1
+></A
+>Chapter 3. Using Cygwin</H1
 ><DIV
 CLASS="TOC"
 ><DL
@@ -92,9 +105,9 @@ HREF="using-specialnames.html"
 ><DT
 ><A
 HREF="using-cygwinenv.html"
->The <TT
+>The <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > environment
 variable</A
 ></DT
@@ -127,7 +140,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN571"
+NAME="AEN573"
 >Introduction</A
 ></H2
 ><P
@@ -192,8 +205,8 @@ NT).</P
 ><P
 >The current user's table is located under
 "HKEY_CURRENT_USER/Software/Cygnus Solutions/Cygwin/mounts
-v&#60;version&#62;"
-where &#60;version&#62; is the latest registry version associated with
+v&lt;version&gt;"
+where &lt;version&gt; is the latest registry version associated with
 the Cygwin library (this version is not the same as the release
 number).  The system-wide table is located under the same subkeys
 under HKEY_LOCAL_SYSTEM.</P
@@ -247,26 +260,21 @@ CLASS="FILENAME"
 to the current user.</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN600"
+></A
 ><P
 ><B
 >Example 3-1. Displaying the current set of mount points</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->c:\&#62;</TT
-> <TT
+>c:\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mount</B
-></TT
+>mount</KBD
 >
 f:\cygwin\bin on /usr/bin type system (binmode)
 f:\cygwin\lib on /usr/lib type system (binmode)
@@ -274,9 +282,6 @@ f:\cygwin on / type system (binmode)
 e:\src on /usr/src type system (binmode)
 c: on /cygdrive/c type user (binmode,noumount)
 e: on /cygdrive/e type user (binmode,noumount)</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >You can also use the <B
@@ -289,12 +294,12 @@ CLASS="COMMAND"
 > to delete
 them.  See <A
 HREF="using-utils.html#MOUNT"
->the section called <I
+>the Section called <I
 >mount</I
 ></A
 > and <A
 HREF="using-utils.html#UMOUNT"
->the section called <I
+>the Section called <I
 >umount</I
 ></A
 > for more
@@ -326,7 +331,7 @@ CLASS="FILENAME"
 > may be changed (see the
 <A
 HREF="using-utils.html#MOUNT"
->the section called <I
+>the Section called <I
 >mount</I
 ></A
 > for more information).</P
@@ -337,7 +342,7 @@ mounts.  Mounts can also be marked as either "textmode" or "binmode"
 -- whether text files are read in the same manner as binary files by
 default or not (see <A
 HREF="using-textbinary.html"
->the section called <I
+>the Section called <I
 >Text and Binary modes</I
 ></A
 > for more
@@ -348,7 +353,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN617"
+NAME="AEN619"
 >Additional Path-related Information</A
 ></H2
 ><P
@@ -359,21 +364,21 @@ CLASS="COMMAND"
 translate between Win32 and POSIX pathnames in shell scripts. See
 <A
 HREF="using-utils.html#CYGPATH"
->the section called <I
+>the Section called <I
 >cygpath</I
 ></A
 > for the details.</P
 ><P
->The <TT
+>The <VAR
 CLASS="ENVAR"
->HOME</TT
->, <TT
+>HOME</VAR
+>, <VAR
 CLASS="ENVAR"
->PATH</TT
+>PATH</VAR
 >, and
-<TT
+<VAR
 CLASS="ENVAR"
->LD_LIBRARY_PATH</TT
+>LD_LIBRARY_PATH</VAR
 > environment variables are automatically
 converted from Win32 format to POSIX format (e.g.  from
 <TT
@@ -419,6 +424,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -430,6 +436,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="setup-files.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -438,6 +445,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -446,6 +454,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="using-textbinary.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR

@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Cygwin Utilities</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -17,11 +18,21 @@ variable"
 HREF="using-cygwinenv.html"><LINK
 REL="NEXT"
 TITLE="Using Cygwin effectively with Windows"
-HREF="using-effectively.html"></HEAD
+HREF="using-effectively.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -39,6 +50,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="using-cygwinenv.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -52,6 +64,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="using-effectively.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -72,21 +85,21 @@ NAME="USING-UTILS"
 used to manage the UNIX emulation portion of the Cygwin environment.
 While many of these reflect their UNIX counterparts, each was written
 specifically for Cygwin.  You may use the long or short option names 
-interchangeably; for example, <TT
+interchangeably; for example, <VAR
 CLASS="LITERAL"
->--help</TT
+>--help</VAR
 > and 
-<TT
+<VAR
 CLASS="LITERAL"
->-h</TT
+>-h</VAR
 > function identically. All of the Cygwin 
-command-line utilities support the <TT
+command-line utilities support the <VAR
 CLASS="LITERAL"
->--help</TT
+>--help</VAR
 > and
-<TT
+<VAR
 CLASS="LITERAL"
->--version</TT
+>--version</VAR
 > options. </P
 ><DIV
 CLASS="SECT2"
@@ -96,12 +109,6 @@ CLASS="SECT2"
 NAME="CYGCHECK"
 >cygcheck</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: cygcheck [OPTIONS] [program ...]
@@ -115,9 +122,6 @@ Check system information or PROGRAM library dependencies
  -h, --help         give help about the info (not with -c)
  -V, --version      output version information and exit
 You must at least give either -s or -k or a program name</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -129,29 +133,29 @@ information about specific programs or libraries you are trying to
 run, general system information, or both.  If you list one or more
 programs on the command line, it will diagnose the runtime environment
 of that program or programs, providing the names of DLL files on which
-the program depends.  If you specify the <TT
+the program depends.  If you specify the <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 >
 option, it will give general system information.  If you specify
-<TT
+<VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 > and list one or more programs on the command line,
 it reports on both.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-h</TT
+>-h</VAR
 > option prints additional helpful
 messages in the report, at the beginning of each section.  It also
 adds table column headings.  While this is useful information, it also
 adds some to the size of the report, so if you want a compact report
 or if you know what everything is already, just leave this out.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-v</TT
+>-v</VAR
 > option causes the output to be more
 verbose.  What this means is that additional information will be
 reported which is usually not interesting, such as the internal
@@ -159,9 +163,9 @@ version numbers of DLLs, additional information about recursive DLL
 usage, and if a file in one directory in the PATH also occurs in other
 directories on the PATH.  </P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-r</TT
+>-r</VAR
 > option causes
 <B
 CLASS="COMMAND"
@@ -172,9 +176,9 @@ ones that have "Cygwin" in the name.  If you are paranoid about
 privacy, you may remove information from this report, but please keep
 in mind that doing so makes it harder to diagnose your problems.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-c</TT
+>-c</VAR
 > option causes the arguments
 to be interpreted as package names.  <B
 CLASS="COMMAND"
@@ -190,26 +194,15 @@ CLASS="COMMAND"
 information about your system for troubleshooting when requested.  
 When asked to run this command save the output so that you can email it,
 for example:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->C:\cygwin&#62;</TT
-> <TT
+>C:\cygwin&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->cygcheck -s -v -r -h &#62; cygcheck_output.txt</B
-></TT
+>cygcheck -s -v -r -h &gt; cygcheck_output.txt</KBD
 ></PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -219,12 +212,6 @@ CLASS="SECT2"
 NAME="CYGPATH"
 >cygpath</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: cygpath (-d|-m|-u|-w|-t TYPE) [-c HANDLE] [-f FILE] [options] NAME
@@ -249,9 +236,6 @@ System information:
   -P, --smprograms      output Start Menu `Programs' directory and exit
   -S, --sysdir          output system directory and exit
   -W, --windir          output `Windows' directory and exit</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -267,82 +251,91 @@ CLASS="COMMAND"
 output information about the location of important system directories 
 in either format.  </P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-u</TT
-> and <TT
+>-u</VAR
+> and <VAR
 CLASS="LITERAL"
->-w</TT
+>-w</VAR
 > options
 indicate whether you want a conversion to UNIX (POSIX) format 
-(<TT
+(<VAR
 CLASS="LITERAL"
->-u</TT
->) or to Windows format (<TT
+>-u</VAR
+>) or to Windows format (<VAR
 CLASS="LITERAL"
->-w</TT
+>-w</VAR
 >).  
-Use the <TT
+Use the <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 > to get DOS-style (8.3) file and path names.
-The <TT
+The <VAR
 CLASS="LITERAL"
->-m</TT
+>-m</VAR
 > option will output Windows-style format
 but with forward slashes instead of backslashes.  This option is 
 especially useful in shell scripts, which use backslashes as an escape 
 character.</P
 ><P
-> In combination with the <TT
+> In combination with the <VAR
 CLASS="LITERAL"
->-w</TT
+>-w</VAR
 > option, you can use
-the <TT
+the <VAR
 CLASS="LITERAL"
->-l</TT
-> and <TT
+>-l</VAR
+> and <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 > options to use normal
-(long) or DOS-style (short) form. The <TT
+(long) or DOS-style (short) form. The <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 > option is 
-identical to <TT
+identical to <VAR
 CLASS="LITERAL"
->-w</TT
-> and <TT
+>-w</VAR
+> and <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 > together.</P
 ><P
->Caveat: The <TT
+>Caveat: The <VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 > option does not work if the
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >check_case</I
-> parameter of <I
+></SPAN
+> parameter of <SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >CYGWIN</I
+></SPAN
 > 
-is set to <I
+is set to <SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >strict</I
+></SPAN
 >, since Cygwin is not able to match 
 any Windows short path in this mode.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-p</TT
+>-p</VAR
 > option means that you want to convert
 a path-style string rather than a single filename.  For example, the
 PATH environment variable is semicolon-delimited in Windows, but
-colon-delimited in UNIX.  By giving <TT
+colon-delimited in UNIX.  By giving <VAR
 CLASS="LITERAL"
->-p</TT
+>-p</VAR
 > you are
 instructing <B
 CLASS="COMMAND"
@@ -350,9 +343,9 @@ CLASS="COMMAND"
 > to convert between these
 formats.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-i</TT
+>-i</VAR
 > option supresses the print out of the
 usage message if no filename argument was given.  It can be used in
 make file rules converting variables that may be omitted
@@ -363,16 +356,13 @@ CLASS="COMMAND"
 contain spaces (C:\Program Files) so should be enclosed in quotes.</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1001"
+></A
 ><P
 ><B
 >Example 3-3. Example cygpath usage</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >#!/bin/sh
@@ -383,68 +373,65 @@ if [ "${1}" = "" ];
 		XPATH="$(cygpath -w "${1}")";
 	fi
 	explorer $XPATH &#38;</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >The capital options 
-<TT
+<VAR
 CLASS="LITERAL"
->-D</TT
->, <TT
+>-D</VAR
+>, <VAR
 CLASS="LITERAL"
->-H</TT
->, <TT
+>-H</VAR
+>, <VAR
 CLASS="LITERAL"
->-P</TT
+>-P</VAR
 >, 
-<TT
+<VAR
 CLASS="LITERAL"
->-S</TT
->, and <TT
+>-S</VAR
+>, and <VAR
 CLASS="LITERAL"
->-W</TT
+>-W</VAR
 > output directories used 
 by Windows that are not the same on all systems, for example 
-<TT
+<VAR
 CLASS="LITERAL"
->-S</TT
+>-S</VAR
 > might output C:\WINNT\SYSTEM32 or C:\WINDOWS\SYSTEM. 
-The <TT
+The <VAR
 CLASS="LITERAL"
->-H</TT
+>-H</VAR
 > shows the Windows profiles directory that can 
-be used as root of home.  The <TT
+be used as root of home.  The <VAR
 CLASS="LITERAL"
->-A</TT
+>-A</VAR
 > option forces use of 
 the "All Users" directories instead of the current user for the 
-<TT
+<VAR
 CLASS="LITERAL"
->-D</TT
-> and <TT
+>-D</VAR
+> and <VAR
 CLASS="LITERAL"
->-P</TT
+>-P</VAR
 > options. 
-On Win9x systems with only a single user, <TT
+On Win9x systems with only a single user, <VAR
 CLASS="LITERAL"
->-A</TT
+>-A</VAR
 > has no
-effect; <TT
+effect; <VAR
 CLASS="LITERAL"
->-D</TT
-> and <TT
+>-D</VAR
+> and <VAR
 CLASS="LITERAL"
->-AD</TT
+>-AD</VAR
 > would have the
 same output.  By default the output is in UNIX (POSIX) format; 
-use the <TT
+use the <VAR
 CLASS="LITERAL"
->-w</TT
-> or <TT
+>-w</VAR
+> or <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 > options to get
 other formats.</P
 ></DIV
@@ -456,12 +443,6 @@ CLASS="SECT2"
 NAME="DUMPER"
 >dumper</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: dumper [OPTION] FILENAME WIN32PID
@@ -471,9 +452,6 @@ Dump core from WIN32PID to FILENAME.core
 -h, --help     output help information and exit
 -q, --quiet    be quiet while dumping (default)
 -v, --version  output version information and exit</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -490,31 +468,25 @@ CLASS="COMMAND"
 > is to plug it into cygwin's Just-In-Time 
 debugging facility by adding
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >error_start=x:\path\to\dumper.exe</PRE
-></TD
-></TR
-></TABLE
 >
 
-to the <I
+to the <SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >CYGWIN</I
+></SPAN
 > environment variable. Please note that
-<TT
+<VAR
 CLASS="LITERAL"
->x:\path\to\dumper.exe</TT
+>x:\path\to\dumper.exe</VAR
 > is Windows-style and not cygwin
-path. If <TT
+path. If <VAR
 CLASS="LITERAL"
->error_start</TT
+>error_start</VAR
 > is set this way, then dumper will
 be started whenever some program encounters a fatal error.</P
 ><P
@@ -552,12 +524,6 @@ CLASS="SECT2"
 NAME="GETFACL"
 >getfacl</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: getfacl [-adn] FILE [FILE2...]
@@ -573,9 +539,6 @@ Display file and directory access control lists (ACLs).
 
 When multiple files are specified on the command line, a blank
 line separates the ACLs for each file.</PRE
-></TD
-></TR
-></TABLE
 ><P
 >For each argument that is a regular file, special file or
 directory, <B
@@ -594,21 +557,15 @@ the filename, the owner, the group, and both the ACL and the default ACL, if
 it exists. For more information on Cygwin and Windows ACLs, see
 see <A
 HREF="ntsec.html"
->the section called <I
->NT security and the <TT
+>the Section called <I
+>NT security and the <VAR
 CLASS="LITERAL"
->ntsec</TT
+>ntsec</VAR
 > usage</I
 > in Chapter 2</A
 > in the Cygwin User's Guide.
 The format for ACL output is as follows:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >     # file: filename
      # owner: name or uid
@@ -625,9 +582,6 @@ CLASS="SCREEN"
      default:group:name or gid:perm
      default:mask:perm
      default:other:perm</PRE
-></TD
-></TR
-></TABLE
 ></P
 ></DIV
 ><DIV
@@ -638,12 +592,6 @@ CLASS="SECT2"
 NAME="KILL"
 >kill</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: kill [-f] [-signal] [-s signal] pid1 [pid2 ...]
@@ -655,9 +603,6 @@ Send signals to processes
  -s, --signal    send signal (use kill --list for a list)
  -h, --help      output usage information and exit
  -v, --version   output version information and exit</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -688,24 +633,18 @@ CLASS="COMMAND"
 CLASS="COMMAND"
 >bash</B
 >
-man page under <I
+man page under <SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >BUILTIN COMMANDS</I
+></SPAN
 > for more information.
 To make sure you are using the Cygwin version, try
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >$ /bin/kill --version</PRE
-></TD
-></TR
-></TABLE
 >
 
 which should give the Cygwin <B
@@ -714,9 +653,9 @@ CLASS="COMMAND"
 > version number and
 copyright information.</P
 ><P
->Unless you specific the <TT
+>Unless you specific the <VAR
 CLASS="LITERAL"
->-f</TT
+>-f</VAR
 > option, the "pid" values 
 used by <B
 CLASS="COMMAND"
@@ -730,9 +669,12 @@ CLASS="COMMAND"
 CLASS="COMMAND"
 >ps -W</B
 > will display
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >all</I
+></SPAN
 > windows pids.</P
 ><P
 >The <B
@@ -741,80 +683,60 @@ CLASS="COMMAND"
 > option prints the name of the
 given signal, or a list of all signal names if no signal is given.</P
 ><P
->To send a specific signal, use the <TT
+>To send a specific signal, use the <VAR
 CLASS="LITERAL"
->-signN</TT
+>-signN</VAR
 >
 option, either with a signal number or a signal name (minus the "SIG"
 part), like these examples:</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1070"
+></A
 ><P
 ><B
 >Example 3-4. Using the kill command</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->kill 123</B
-></TT
+>kill 123</KBD
 >
-<TT
+<SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->kill -1 123</B
-></TT
+>kill -1 123</KBD
 >
-<TT
+<SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->kill -HUP 123</B
-></TT
+>kill -HUP 123</KBD
 >
-<TT
+<SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->kill -f 123</B
-></TT
+>kill -f 123</KBD
 ></PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >Here is a list of available signals, their numbers, and some
 commentary on them, from the file
-<TT
+<VAR
 CLASS="LITERAL"
->&#60;sys/signal.h&#62;</TT
+>&lt;sys/signal.h&gt;</VAR
 >, which should be considered
 the official source of this information.</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >SIGHUP       1    hangup
@@ -838,7 +760,7 @@ SIGTSTP     18    stop signal from tty
 SIGCONT     19    continue a stopped process
 SIGCHLD     20    to parent on child stop or exit
 SIGTTIN     21    to readers pgrp upon background tty read
-SIGTTOU     22    like TTIN for output if (tp-&#62;t_local&#38;LTOSTOP)
+SIGTTOU     22    like TTIN for output if (tp-&gt;t_local&amp;LTOSTOP)
 SIGPOLL     23    System V name for SIGIO
 SIGXCPU     24    exceeded CPU time limit
 SIGXFSZ     25    exceeded file size limit
@@ -848,9 +770,6 @@ SIGWINCH    28    window changed
 SIGLOST     29    resource lost (eg, record-lock lost)
 SIGUSR1     30    user defined signal 1
 SIGUSR2     31    user defined signal 2</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -860,12 +779,6 @@ CLASS="SECT2"
 NAME="MKGROUP"
 >mkgroup</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: mkgroup [OPTION]... [domain]...
@@ -886,9 +799,6 @@ Options:
    -v,--version           print version information and exit
 
 One of `-l' or `-d' must be given on NT/W2K.</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -907,96 +817,86 @@ To initially set up your machine if you are a local user, you'd do
 something like this:</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1090"
+></A
 ><P
 ><B
 >Example 3-5. Setting up the groups file for local accounts</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mkdir /etc</B
-></TT
+>mkdir /etc</KBD
 >
-<TT
+<SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mkgroup -l &#62; /etc/group</B
-></TT
+>mkgroup -l &gt; /etc/group</KBD
 ></PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >Note that this information is static.  If you change the group
 information in your system, you'll need to regenerate the group file
 for it to have the new information.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-d</TT
-> and <TT
+>-d</VAR
+> and <VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 > options
 allow you to specify where the information comes from, the
 local machine or the domain (default or given), or both.
-With the  <TT
+With the  <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 > option the program contacts the Domain
 Controller, which my be unreachable or have restricted access.
 An entry for the current domain user can then be created by using the
-option <TT
+option <VAR
 CLASS="LITERAL"
->-c</TT
-> together with <TT
+>-c</VAR
+> together with <VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 >,
-but <TT
+but <VAR
 CLASS="LITERAL"
->-c</TT
-> has no effect when used with <TT
+>-c</VAR
+> has no effect when used with <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 >.
-The <TT
+The <VAR
 CLASS="LITERAL"
->-o</TT
+>-o</VAR
 > option allows for special cases
 (such as multiple domains) where the GIDs might match otherwise.
-The <TT
+The <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 >
 option omits the NT Security Identifier (SID).  For more information on 
 SIDs, see <A
 HREF="ntsec.html"
->the section called <I
->NT security and the <TT
+>the Section called <I
+>NT security and the <VAR
 CLASS="LITERAL"
->ntsec</TT
+>ntsec</VAR
 > usage</I
 > in Chapter 2</A
 > in the Cygwin User's Guide.  The
-<TT
+<VAR
 CLASS="LITERAL"
->-u</TT
+>-u</VAR
 > option causes <B
 CLASS="COMMAND"
 >mkgroup</B
@@ -1018,12 +918,6 @@ CLASS="SECT2"
 NAME="MKPASSWD"
 >mkpasswd</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: mkpasswd [OPTION]... [domain]...
@@ -1047,9 +941,6 @@ Options:
    -v,--version            version information and exit
 
 One of `-l', `-d' or `-g' must be given on NT/W2K.</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -1067,159 +958,139 @@ CLASS="FILENAME"
 >/etc/passwd</TT
 >.
 On the Win9x series (Windows 95, 98, and Me) the password field must be
-replaced by the output of <TT
+replaced by the output of <KBD
 CLASS="USERINPUT"
-><B
->crypt your_password</B
-></TT
+>crypt your_password</KBD
 >
 if remote access is desired.
 To initially set up your machine if you are a local user, you'd do
 something like this:</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1120"
+></A
 ><P
 ><B
 >Example 3-6. Setting up the passwd file for local accounts</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mkdir /etc</B
-></TT
+>mkdir /etc</KBD
 >
-<TT
+<SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mkpasswd -l &#62; /etc/passwd</B
-></TT
+>mkpasswd -l &gt; /etc/passwd</KBD
 ></PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >Note that this information is static.  If you change the user
 information in your system, you'll need to regenerate the passwd file
 for it to have the new information.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-d</TT
-> and <TT
+>-d</VAR
+> and <VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 > options
 allow you to specify where the information comes from, the
 local machine or the domain (default or given), or both.
-With the  <TT
+With the  <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 > option the program contacts the Domain
 Controller, which my be unreachable or have restricted access.
 An entry for the current domain user can then be created by using the
-option <TT
+option <VAR
 CLASS="LITERAL"
->-c</TT
-> together with <TT
+>-c</VAR
+> together with <VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 >,
-but <TT
+but <VAR
 CLASS="LITERAL"
->-c</TT
-> has no effect when used with <TT
+>-c</VAR
+> has no effect when used with <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 >.
-The <TT
+The <VAR
 CLASS="LITERAL"
->-o</TT
+>-o</VAR
 > option allows for special cases
 (such as multiple domains) where the UIDs might match otherwise.
-The <TT
+The <VAR
 CLASS="LITERAL"
->-g</TT
+>-g</VAR
 > option creates a local
 user that corresponds to each local group. This is because NT assigns groups
-file ownership.  The <TT
+file ownership.  The <VAR
 CLASS="LITERAL"
->-m</TT
+>-m</VAR
 > option bypasses the current
 mount table so that, for example, two users who have a Windows home 
-directory of H: could mount them differently.  The <TT
+directory of H: could mount them differently.  The <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 >
 option omits the NT Security Identifier (SID).  For more information on
 SIDs, see <A
 HREF="ntsec.html"
->the section called <I
->NT security and the <TT
+>the Section called <I
+>NT security and the <VAR
 CLASS="LITERAL"
->ntsec</TT
+>ntsec</VAR
 > usage</I
 > in Chapter 2</A
 > in the Cygwin User's Guide.  The
-<TT
+<VAR
 CLASS="LITERAL"
->-p</TT
+>-p</VAR
 > option causes <B
 CLASS="COMMAND"
 >mkpasswd</B
 > to
-use the specified prefix instead of the account home dir or <TT
+use the specified prefix instead of the account home dir or <VAR
 CLASS="LITERAL"
->/home/</TT
+>/home/</VAR
 >. For example, this command:
 
 <DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1144"
+></A
 ><P
 ><B
 >Example 3-7. Using an alternate home root</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->$</TT
-> <TT
+>$</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mkpasswd -l -p "$(cygpath -H)" &#62; /etc/passwd</B
-></TT
+>mkpasswd -l -p "$(cygpath -H)" &gt; /etc/passwd</KBD
 ></PRE
-></TD
-></TR
-></TABLE
 ></DIV
 >
 
 would put local users' home directories in the Windows 'Profiles' directory. 
-On Win9x machines the <TT
+On Win9x machines the <VAR
 CLASS="LITERAL"
->-u</TT
+>-u</VAR
 > option creates an entry for
 the specified user. On the NT series it restricts the output to that user,
 greatly reducing the amount of time it takes in a large domain.</P
@@ -1232,20 +1103,14 @@ CLASS="SECT2"
 NAME="MOUNT"
 >mount</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
->Usage: mount [OPTION] [&#60;win32path&#62; &#60;posixpath&#62;]
+>Usage: mount [OPTION] [&lt;win32path&gt; &lt;posixpath&gt;]
 Display information about mounted filesystems, or mount a filesystem
 
   -b, --binary     (default)    text files are equivalent to binary files
                                 (newline = \n)
-  -c, --change-cygdrive-prefix  change the cygdrive path prefix to &#60;posixpath&#62;
+  -c, --change-cygdrive-prefix  change the cygdrive path prefix to &lt;posixpath&gt;
   -f, --force                   force mount, don't warn about missing mount
                                 point directories
   -h, --help                    output usage information and exit
@@ -1262,9 +1127,6 @@ Display information about mounted filesystems, or mount a filesystem
                                 non-executables
   -X, --cygwin-executable       treat all files under mount point as cygwin
                                 executables</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -1274,7 +1136,7 @@ and shares onto Cygwin's simulated POSIX directory tree, much like as is
 done by mount commands on typical UNIX systems.  Please see
 <A
 HREF="using.html#MOUNT-TABLE"
->the section called <I
+>the Section called <I
 >The Cygwin Mount Table</I
 ></A
 > for more information on the concepts
@@ -1288,7 +1150,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1150"
+NAME="AEN1157"
 >Using mount</A
 ></H3
 ><P
@@ -1299,35 +1161,27 @@ CLASS="COMMAND"
 will display the current mount table for you.</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1161"
+></A
 ><P
 ><B
 >Example 3-8. Displaying the current set of mount points</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->c:\cygwin\&#62;</TT
-> <TT
+>c:\cygwin\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mount</B
-></TT
+>mount</KBD
 >
 c:\cygwin\bin on /usr/bin type system (binmode)
 c:\cygwin\lib on /usr/lib type system (binmode)
 c:\cygwin on / type system (binmode)
 c: on /c type user (binmode,noumount)
 d: on /d type user (binmode,noumount)</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >In this example, c:\cygwin is the POSIX root and D drive is mapped to
@@ -1357,46 +1211,37 @@ CLASS="FILENAME"
 >.</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1173"
+></A
 ><P
 ><B
 >Example 3-9. Adding mount points</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->c:\cygwin\&#62;</TT
-> <TT
+>c:\cygwin\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->ls /data</B
-></TT
+>ls /data</KBD
 >
 ls: /data: No such file or directory
-<TT
+<SAMP
 CLASS="PROMPT"
->c:\cygwin\&#62;</TT
-> <TT
+>c:\cygwin\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mount \\pollux\home\joe\data /data</B
-></TT
+>mount \\pollux\home\joe\data /data</KBD
 >
 mount: warning - /data does not exist!
-<TT
+<SAMP
 CLASS="PROMPT"
->c:\cygwin\&#62;</TT
-> <TT
+>c:\cygwin\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mount</B
-></TT
+>mount</KBD
 >
 \\pollux\home\joe\data on /data type sytem (binmode)
 c:\cygwin\bin on /usr/bin type system (binmode)
@@ -1404,9 +1249,6 @@ c:\cygwin\lib on /usr/lib type system (binmode)
 c:\cygwin on / type system (binmode)
 c: on /c type user (binmode,noumount)
 d: on /d type user (binmode,noumount)</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >Note that <B
@@ -1417,9 +1259,9 @@ command shell in the previous example.  In many Unix shells, including
 bash, it is legal and convenient to use the forward "/" in Win32
 pathnames since the "\" is the shell's escape character. </P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 > flag to <B
 CLASS="COMMAND"
 >mount</B
@@ -1439,17 +1281,17 @@ permitted to modify the system-wide mount table.</P
 ><P
 >Note that a given POSIX path may only exist once in the user
 table and once in the global, system-wide table.  Attempts to replace
-the mount will fail with a busy error.  The <TT
+the mount will fail with a busy error.  The <VAR
 CLASS="LITERAL"
->-f</TT
+>-f</VAR
 > (force) flag causes
 the old mount to be silently replaced with the new one.  It will also
 silence warnings about the non-existence of directories at the Win32
 path location.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-b</TT
+>-b</VAR
 > flag is used to instruct Cygwin to treat binary and
 text files in the same manner by default.  Binary mode mounts are
 marked as "binmode" in the Flags column of <B
@@ -1462,35 +1304,35 @@ column).</P
 >Normally, files ending in certain extensions (.exe, .com, .bat, .cmd) 
 are assumed to be executable.  Files whose first two characters begin with 
 '#!' are also considered to be executable.  
-The <TT
+The <VAR
 CLASS="LITERAL"
->-x</TT
+>-x</VAR
 > flag is used to instruct Cygwin that the 
-mounted file is "executable".  If the <TT
+mounted file is "executable".  If the <VAR
 CLASS="LITERAL"
->-x</TT
+>-x</VAR
 > flag is used 
 with a directory then all files in the directory are executable.  
 This option allows other files to be marked as executable and avoids the 
-overhead of opening each file to check for a '#!'.  The <TT
+overhead of opening each file to check for a '#!'.  The <VAR
 CLASS="LITERAL"
->-X</TT
+>-X</VAR
 >
-option is very similar to <TT
+option is very similar to <VAR
 CLASS="LITERAL"
->-x</TT
+>-x</VAR
 >, but also prevents Cygwin
 from setting up commands and environment variables for a normal Windows 
 program, adding another small performance gain.  The opposite of these 
-flags is the <TT
+flags is the <VAR
 CLASS="LITERAL"
->-E</TT
+>-E</VAR
 > flag, which means that no files should be 
 marked as executable.  </P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-m</TT
+>-m</VAR
 > option causes the <B
 CLASS="COMMAND"
 >mount</B
@@ -1500,18 +1342,12 @@ points. You can save this output as a backup when experimenting with the
 mount table. It also makes moving your settings to a different machine
 much easier.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-o</TT
+>-o</VAR
 > option is the method via which various options about
 the mount point may be recorded.  The following options are available (note that
 most of the options are duplicates of other mount flags):</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >  user       - mount lives user-specific mount
@@ -1524,16 +1360,13 @@ CLASS="SCREEN"
   nosuid     - no suid files are allowed (currently unimplemented)
   managed    - directory is managed by cygwin.  Mixed case and special
                characters in filenames are allowed.</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><DIV
 CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1199"
+NAME="AEN1206"
 >Cygdrive mount points</A
 ></H3
 ><P
@@ -1567,49 +1400,41 @@ CLASS="FILENAME"
 >:</P
 ><DIV
 CLASS="EXAMPLE"
+><A
+NAME="AEN1215"
+></A
 ><P
 ><B
 >Example 3-10. Changing the default prefix</B
 ></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
-><TT
+><SAMP
 CLASS="PROMPT"
->c:\cygwin\&#62;</TT
-> <TT
+>c:\cygwin\&gt;</SAMP
+> <KBD
 CLASS="USERINPUT"
-><B
->mount --change-cygdrive-prefix /</B
-></TT
+>mount --change-cygdrive-prefix /</KBD
 ></PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ><P
 >Note that if you set a new prefix in this manner, you can
-specify the <TT
+specify the <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 > flag to make this the system-wide default 
-prefix.  By default, the cygdrive-prefix applies only to the current user.  
+prefix.  By default, the cygdrive-prefix applies only to the system-wide setting.  
 You can always see the user and system cygdrive prefixes with the 
-<TT
+<VAR
 CLASS="LITERAL"
->-p</TT
-> option.  Using the <TT
+>-p</VAR
+> option.  Using the <VAR
 CLASS="LITERAL"
->-b</TT
+>-b</VAR
 >
-flag with <TT
+flag with <VAR
 CLASS="LITERAL"
->--change-cygdrive-prefix</TT
+>--change-cygdrive-prefix</VAR
 > makes all new 
 automounted filesystems default to binary mode file accesses.</P
 ></DIV
@@ -1618,7 +1443,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1218"
+NAME="AEN1225"
 >Limitations</A
 ></H3
 ><P
@@ -1692,12 +1517,6 @@ CLASS="SECT2"
 NAME="PASSWD"
 >passwd</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: passwd (-l|-u|-S) [USER]
@@ -1719,9 +1538,6 @@ System operations:
 Other options:
  -h, --help      output usage information and exit
  -v, --version   output version information and exit</PRE
-></TD
-></TR
-></TABLE
 ><P
 > <B
 CLASS="COMMAND"
@@ -1758,25 +1574,25 @@ CLASS="COMMAND"
 password and exits.</P
 ><P
 >Account maintenance: User accounts may be locked and unlocked with the
-<TT
+<VAR
 CLASS="LITERAL"
->-l</TT
-> and <TT
+>-l</VAR
+> and <VAR
 CLASS="LITERAL"
->-u</TT
+>-u</VAR
 > flags.  The
-<TT
+<VAR
 CLASS="LITERAL"
->-l</TT
-> option disables an account.  The <TT
+>-l</VAR
+> option disables an account.  The <VAR
 CLASS="LITERAL"
->-u</TT
+>-u</VAR
 >
 option re-enables an account.</P
 ><P
->The account status may be given with the <TT
+>The account status may be given with the <VAR
 CLASS="LITERAL"
->-S</TT
+>-S</VAR
 >
 option.  The status information is self explanatory.</P
 ><P
@@ -1785,56 +1601,68 @@ CLASS="COMMAND"
 >passwd</B
 > to change
 system-wide password expiry and length requirements with the
-<TT
+<VAR
 CLASS="LITERAL"
->-i</TT
->, <TT
+>-i</VAR
+>, <VAR
 CLASS="LITERAL"
->-n</TT
->, <TT
+>-n</VAR
+>, <VAR
 CLASS="LITERAL"
->-x</TT
+>-x</VAR
 >,
-and <TT
+and <VAR
 CLASS="LITERAL"
->-L</TT
-> options.  The <TT
+>-L</VAR
+> options.  The <VAR
 CLASS="LITERAL"
->-i</TT
+>-i</VAR
 >
 option is used to disable an account after the password has been expired
 for a number of days.  After a user account has had an expired password
-for <I
+for <SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >NUM</I
+></SPAN
 > days, the user may no longer sign on to
-the account.  The <TT
+the account.  The <VAR
 CLASS="LITERAL"
->-n</TT
+>-n</VAR
 > option is
 used to set the minimum number of days before a password may be changed.
 The user will not be permitted to change the password until
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >MINDAYS</I
+></SPAN
 > days have elapsed.  The
-<TT
+<VAR
 CLASS="LITERAL"
->-x</TT
+>-x</VAR
 > option is used to set the maximum number of days
-a password remains valid.  After <I
+a password remains valid.  After <SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >MAXDAYS</I
+></SPAN
 > days, the
 password is required to be changed.  Allowed values for the above options 
-are 0 to 999.  The <TT
+are 0 to 999.  The <VAR
 CLASS="LITERAL"
->-L</TT
+>-L</VAR
 > option sets the minimum length of 
 allowed passwords for users who don't belong to the administrators group
-to <I
+to <SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >LEN</I
+></SPAN
 > characters.  Allowed values for the minimum
 password length are 0 to 14.  In any of the above cases, a value of 0
 means `no restrictions'.</P
@@ -1850,12 +1678,6 @@ CLASS="SECT2"
 NAME="PS"
 >ps</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: ps [-aefls] [-u UID]
@@ -1871,9 +1693,6 @@ Report process status
  -v, --version   output version information and exit
  -W, --windows   show windows as well as cygwin processes
 With no options, ps outputs the long format by default</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -1890,9 +1709,9 @@ CLASS="COMMAND"
 > command. The PPID is the parent process ID,
 and PGID is the process group ID.  The WINPID column is the process 
 ID displayed by NT's Task Manager program. The TTY column gives which 
-pseudo-terminal a process is running on, or a <TT
+pseudo-terminal a process is running on, or a <VAR
 CLASS="LITERAL"
->'?'</TT
+>'?'</VAR
 >
 for services. The UID column shows which user owns each process. 
 STIME is the time the process was started, and COMMAND gives the name
@@ -1902,35 +1721,35 @@ of the program running.</P
 CLASS="COMMAND"
 >ps</B
 > will only show processes owned by the
-current user. With either the <TT
+current user. With either the <VAR
 CLASS="LITERAL"
->-a</TT
-> or <TT
+>-a</VAR
+> or <VAR
 CLASS="LITERAL"
->-e</TT
+>-e</VAR
 >
 option, all user's processes (and system processes) are listed. There are
 historical UNIX reasons for the synonomous options, which are functionally
-identical. The <TT
+identical. The <VAR
 CLASS="LITERAL"
->-f</TT
+>-f</VAR
 > option outputs a "full" listing with
-usernames for UIDs. The <TT
+usernames for UIDs. The <VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 > option is the default display
 mode, showing a "long" listing with all the above columns. The other display
-option is <TT
+option is <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 >, which outputs a shorter listing of just
-PID, TTY, STIME, and COMMAND. The <TT
+PID, TTY, STIME, and COMMAND. The <VAR
 CLASS="LITERAL"
->-u</TT
+>-u</VAR
 > option allows you
-to show only processes owned by a specific user. The <TT
+to show only processes owned by a specific user. The <VAR
 CLASS="LITERAL"
->-W</TT
+>-W</VAR
 >
 option causes <B
 CLASS="COMMAND"
@@ -1940,9 +1759,9 @@ well as Cygwin processes. The WINPID is also the PID, and they can be killed
 with the Cygwin <B
 CLASS="COMMAND"
 >kill</B
-> command's <TT
+> command's <VAR
 CLASS="LITERAL"
->-f</TT
+>-f</VAR
 >
 option.</P
 ></DIV
@@ -1954,12 +1773,6 @@ CLASS="SECT2"
 NAME="REGTOOL"
 >regtool</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: regtool.exe [OPTION] (add | check | get | list | remove | unset) KEY
@@ -1986,7 +1799,7 @@ Options for 'set' Action:
  -s, --string         set type to REG_SZ
 
 Options for 'set' and 'unset' Actions:
- -K&#60;c&#62;, --key-separator[=]&#60;c&#62;  set key separator to &#60;c&#62; instead of '\'
+ -K&lt;c&gt;, --key-separator[=]&lt;c&gt;  set key separator to &lt;c&gt; instead of '\'
 
 Other Options:
  -h, --help     output usage information and exit
@@ -2005,9 +1818,6 @@ remote host in either \\hostname or hostname: format and prefix is any of:
 You can use forward slash ('/') as a separator instead of backslash, in
 that case backslash is treated as escape character
 Example: regtool.exe get '\user\software\Microsoft\Clock\iFormat'</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -2017,14 +1827,14 @@ to access and modify the Windows registry.  Note that modifying the
 Windows registry is dangerous, and carelessness here can result
 in an unusable system.  Be careful.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->-v</TT
+>-v</VAR
 > option means "verbose".  For most
 commands, this causes additional or lengthier messages to be printed.
-Conversely, the <TT
+Conversely, the <VAR
 CLASS="LITERAL"
->-q</TT
+>-q</VAR
 > option supresses error messages,
 so you can use the exit status of the program to detect if a key
 exists or not (for example).</P
@@ -2033,114 +1843,117 @@ exists or not (for example).</P
 CLASS="COMMAND"
 >regtool</B
 > with an 
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >action</I
+></SPAN
 > following options (if any). Currently,
-the action must be <TT
+the action must be <VAR
 CLASS="LITERAL"
->add</TT
->, <TT
+>add</VAR
+>, <VAR
 CLASS="LITERAL"
->set</TT
+>set</VAR
 >,
-<TT
+<VAR
 CLASS="LITERAL"
->check</TT
->, <TT
+>check</VAR
+>, <VAR
 CLASS="LITERAL"
->get</TT
->, <TT
+>get</VAR
+>, <VAR
 CLASS="LITERAL"
->list</TT
+>list</VAR
 >,
-<TT
+<VAR
 CLASS="LITERAL"
->remove</TT
->, <TT
+>remove</VAR
+>, <VAR
 CLASS="LITERAL"
->set</TT
->, or <TT
+>set</VAR
+>, or <VAR
 CLASS="LITERAL"
->unset</TT
+>unset</VAR
 >.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->add</TT
+>add</VAR
 > action adds a new key.  The 
-<TT
+<VAR
 CLASS="LITERAL"
->check</TT
+>check</VAR
 > action checks to see if a key exists (the 
 exit code of the program is zero if it does, nonzero if it does not).
-The <TT
+The <VAR
 CLASS="LITERAL"
->get</TT
+>get</VAR
 > action gets the value of a value of a key,
 and prints it (and nothing else) to stdout.  Note: if the value
 doesn't exist, an error message is printed and the program returns a
-non-zero exit code.  If you give <TT
+non-zero exit code.  If you give <VAR
 CLASS="LITERAL"
->-q</TT
+>-q</VAR
 >, it doesn't
 print the message but does return the non-zero exit code.</P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->list</TT
+>list</VAR
 > action lists the subkeys and values
-belonging to the given key. With <TT
+belonging to the given key. With <VAR
 CLASS="LITERAL"
->list</TT
+>list</VAR
 >, the 
-<TT
+<VAR
 CLASS="LITERAL"
->-k</TT
+>-k</VAR
 > option instructs <B
 CLASS="COMMAND"
 >regtool</B
 >
-to print only KEYs, and the <TT
+to print only KEYs, and the <VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 > option to print
-only VALUEs. The <TT
+only VALUEs. The <VAR
 CLASS="LITERAL"
->-p</TT
+>-p</VAR
 > option postfixes a 
-<TT
+<VAR
 CLASS="LITERAL"
->'/'</TT
+>'/'</VAR
 > to each KEY, but leave VALUEs with no
-postfix.  The <TT
+postfix.  The <VAR
 CLASS="LITERAL"
->remove</TT
+>remove</VAR
 > action 
 removes a key.  Note that you may need to remove everything in the key 
 before you may remove it, but don't rely on this stopping you from 
 accidentally removing too much.  </P
 ><P
->The <TT
+>The <VAR
 CLASS="LITERAL"
->set</TT
+>set</VAR
 > action sets a value within a key.
-<TT
+<VAR
 CLASS="LITERAL"
->-e</TT
+>-e</VAR
 > means it's an expanding string (REG_EXPAND_SZ)
 that contains embedded environment variables.  
-<TT
+<VAR
 CLASS="LITERAL"
->-i</TT
+>-i</VAR
 > means the value is an integer (REG_DWORD).
-<TT
+<VAR
 CLASS="LITERAL"
->-m</TT
+>-m</VAR
 > means it's a multi-string (REG_MULTI_SZ).  
-<TT
+<VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 > means the value is a string (REG_SZ).
 If you don't specify one of these, <B
 CLASS="COMMAND"
@@ -2150,15 +1963,15 @@ guess the type based on the value you give.  If it looks like a
 number, it's a DWORD.  If it starts with a percent, it's an expanding
 string.  If you give multiple values, it's a multi-string.  Else, it's
 a regular string.
-The <TT
+The <VAR
 CLASS="LITERAL"
->unset</TT
+>unset</VAR
 > action removes a value from a key.</P
 ><P
 >By default, the last "\" or "/" is assumed to be the separator between the
-key and the value.  You can use the <TT
+key and the value.  You can use the <VAR
 CLASS="LITERAL"
->-K</TT
+>-K</VAR
 > option to provide 
 an alternate key/value separator character.</P
 ></DIV
@@ -2170,12 +1983,6 @@ CLASS="SECT2"
 NAME="SETFACL"
 >setfacl</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: setfacl [-r] (-f ACL_FILE | -s acl_entries) FILE...
@@ -2194,42 +2001,33 @@ Modify file and directory access control lists (ACLs)
   -v, --version    output version information and exit
 
 At least one of (-d, -f, -m, -s) must be specified</PRE
-></TD
-></TR
-></TABLE
 ><P
 >For each file given as parameter, <B
 CLASS="COMMAND"
 >setfacl</B
 > will 
-either replace its complete ACL (<TT
+either replace its complete ACL (<VAR
 CLASS="LITERAL"
->-s</TT
->, <TT
+>-s</VAR
+>, <VAR
 CLASS="LITERAL"
->-f</TT
+>-f</VAR
 >), 
 or it will add, modify, or delete ACL entries.
 For more information on Cygwin and Windows ACLs, see
 see <A
 HREF="ntsec.html"
->the section called <I
->NT security and the <TT
+>the Section called <I
+>NT security and the <VAR
 CLASS="LITERAL"
->ntsec</TT
+>ntsec</VAR
 > usage</I
 > in Chapter 2</A
 > in the Cygwin User's Guide.</P
 ><P
 >Acl_entries are one or more comma-separated ACL entries 
 from the following list:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >         u[ser]::perm
          u[ser]:uid:perm
@@ -2237,62 +2035,53 @@ CLASS="SCREEN"
          g[roup]:gid:perm
          m[ask]::perm
          o[ther]::perm</PRE
-></TD
-></TR
-></TABLE
 >
 Default entries are like the above with the additional
 default identifier. For example: 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >         d[efault]:u[ser]:uid:perm</PRE
-></TD
-></TR
-></TABLE
 ></P
 ><P
+><SPAN
+CLASS="emphasis"
 ><I
 CLASS="EMPHASIS"
 >perm</I
+></SPAN
 > is either a 3-char permissions string in the form
-"rwx" with the character <TT
+"rwx" with the character <VAR
 CLASS="LITERAL"
->'-'</TT
+>'-'</VAR
 > for no permission
 or it is the octal representation of the permissions, a
 value from 0 (equivalent to "---") to 7 ("rwx").
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >uid</I
+></SPAN
 > is a user name or a numerical uid.
-<I
+<SPAN
+CLASS="emphasis"
+><I
 CLASS="EMPHASIS"
 >gid</I
+></SPAN
 > is a group name or a numerical gid.</P
 ><P
 >The following options are supported:</P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 >
 Delete one or more specified entries from the file's ACL.
 The owner, group and others entries must not be deleted.
 Acl_entries to be deleted should be specified without
 permissions, as in the following list:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >         u[ser]:uid
          g[roup]:gid
@@ -2300,14 +2089,11 @@ CLASS="SCREEN"
          d[efault]:g[roup]:gid
          d[efault]:m[ask]:
          d[efault]:o[ther]:</PRE
-></TD
-></TR
-></TABLE
 ></P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-f</TT
+>-f</VAR
 >
 Take the Acl_entries from ACL_FILE one per line. Whitespace
 characters are ignored, and the character "#" may be used
@@ -2321,18 +2107,9 @@ CLASS="COMMAND"
 >setfacl</B
 > to copy 
 ACLs from one file to another:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >$ getfacl source_file | setfacl -f - target_file</PRE
-></TD
-></TR
-></TABLE
 ></P
 ><P
 >Required entries are: 
@@ -2350,45 +2127,45 @@ one default group entry for the group of the file,
 one default mask entry for the file group class, and
 one default other entry.</P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-m</TT
+>-m</VAR
 >
 Add or modify one or more specified ACL entries.  Acl_entries is a 
 comma-separated list of entries from the same list as above.</P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-r</TT
+>-r</VAR
 >   
 Causes the permissions specified in the mask 
 entry to be ignored and replaced by the maximum permissions needed for 
 the file group class.</P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 >   
-Like <TT
+Like <VAR
 CLASS="LITERAL"
->-f</TT
+>-f</VAR
 >, but substitute the 
 file's ACL with Acl_entries specified in a comma-separated list on the 
 command line.</P
 ><P
->While the <TT
+>While the <VAR
 CLASS="LITERAL"
->-d</TT
-> and <TT
+>-d</VAR
+> and <VAR
 CLASS="LITERAL"
->-m</TT
+>-m</VAR
 > options may be used 
-in the same command, the <TT
+in the same command, the <VAR
 CLASS="LITERAL"
->-f</TT
-> and <TT
+>-f</VAR
+> and <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 > 
 options may be used only exclusively.</P
 ><P
@@ -2408,12 +2185,6 @@ CLASS="SECT2"
 NAME="SSP"
 >ssp</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >Usage: ssp [options] low_pc high_pc command...
@@ -2435,9 +2206,6 @@ Single-step profile COMMAND
  -V, --version        output version information and exit
 
 Example: ssp 0x401000 0x403000 hello.exe</PRE
-></TD
-></TR
-></TABLE
 ><P
 >SSP - The Single Step Profiler</P
 ><P
@@ -2469,28 +2237,13 @@ CLASS="COMMAND"
 > won't run) 
 and run objdump like this:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >$ objdump -h cygwin1.dll</PRE
-></TD
-></TR
-></TABLE
 >
 
 It will print a report like this:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >cygwin1.dll:     file format pei-i386
 
@@ -2501,9 +2254,6 @@ Idx Name          Size      VMA       LMA       File off  Algn
   1 .data         00008000  61080000  61080000  0007ee00  2**2
                   CONTENTS, ALLOC, LOAD, DATA
   . . .</PRE
-></TD
-></TR
-></TABLE
 ></P
 ><P
 >The only information we're concerned with are the VMA of 
@@ -2524,18 +2274,9 @@ CLASS="COMMAND"
 By default, it will step the whole program.  Here's a simple example, using 
 the numbers above:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >$ ssp 0x61001000 0x61080000 hello.exe</PRE
-></TD
-></TR
-></TABLE
 >
 
 This will step the whole program.  It will take at least 8 minutes on
@@ -2546,18 +2287,9 @@ CLASS="COMMAND"
 >gprof</B
 >:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >$ gprof -b cygwin1.dll</PRE
-></TD
-></TR
-></TABLE
 >
 
 The "-b" means 'skip the help pages'.  You can omit this until you're
@@ -2572,22 +2304,13 @@ CLASS="COMMAND"
 things.  For example, the first part of the report reports the amount of time 
 spent in each function, like this:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >Each sample counts as 0.01 seconds.
   %   cumulative   self              self     total
  time   seconds   seconds    calls  ms/call  ms/call  name
  10.02    231.22    72.43       46  1574.57  1574.57  strcspn
   7.95    288.70    57.48      130   442.15   442.15  strncasematch</PRE
-></TD
-></TR
-></TABLE
 >
 
 The "seconds" columns are really CPU opcodes, 1/100 second per opcode.
@@ -2602,30 +2325,21 @@ it's the time() function.  We can use SSP to selectively profile this
 function by using OutputDebugString() to control SSP from within the
 program.  Here's a sample program:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
->	#include &#60;windows.h&#62;
+>	#include &lt;windows.h&gt;
 	main()
 	{
 	  time_t t;
 	  OutputDebugString("ssp on");
-	  time(&#38;t);
+	  time(&amp;t);
 	  OutputDebugString("ssp off");
 	}</PRE
-></TD
-></TR
-></TABLE
 ></P
 ><P
->Then, add the <TT
+>Then, add the <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 > option to ssp to default to 
 *disabling* profiling.  The program will run at full speed until the first 
 OutputDebugString, then step until the second.
@@ -2640,91 +2354,82 @@ program run about 1,000 times slower than normal, it's best to
 understand all the options so that you can narrow down the parts
 of your program you need to single-step.</P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-v</TT
+>-v</VAR
 > - verbose.  This prints messages about threads 
 starting and stopping, OutputDebugString calls, DLLs loading, etc.</P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-t</TT
-> and <TT
+>-t</VAR
+> and <VAR
 CLASS="LITERAL"
->-c</TT
+>-c</VAR
 > - tracing.  
-With <TT
+With <VAR
 CLASS="LITERAL"
->-t</TT
+>-t</VAR
 >, *every* step's address is written
 to the file "trace.ssp".  This can be used to help debug functions,
 since it can trace multiple threads.  Clever use of scripts can match
 addresses with disassembled opcodes if needed.  Warning: creates
-*huge* files, very quickly.  <TT
+*huge* files, very quickly.  <VAR
 CLASS="LITERAL"
->-c</TT
+>-c</VAR
 > prints each address to 
 the console, useful for debugging key chunks of assembler.  Use 
-<TT
+<VAR
 CLASS="LITERAL"
->addr2line -C -f -s -e foo.exe &#60; trace.ssp &#62; lines.ssp</TT
+>addr2line -C -f -s -e foo.exe &lt; trace.ssp &gt; lines.ssp</VAR
 >
-and then <TT
+and then <VAR
 CLASS="LITERAL"
->perl cvttrace</TT
+>perl cvttrace</VAR
 > to convert to symbolic traces.</P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 > - subthreads.  Usually, you only need to trace the 
 main thread, but sometimes you need to trace all threads, so this enables that.
 It's also needed when you want to profile a function that only a
 subthread calls.  However, using OutputDebugString automatically
 enables profiling on the thread that called it, not the main thread.</P
 ><P
-><TT
+><VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 > - dll profiling.  Generates a pretty table of how much 
 time was spent in each dll the program used.  No sense optimizing a function in
 your program if most of the time is spent in the DLL.
-I usually use the <TT
+I usually use the <VAR
 CLASS="LITERAL"
->-v</TT
->, <TT
+>-v</VAR
+>, <VAR
 CLASS="LITERAL"
->-s</TT
+>-s</VAR
 >, and 
-<TT
+<VAR
 CLASS="LITERAL"
->-l</TT
+>-l</VAR
 > options:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
->$ ssp <TT
+>$ ssp <VAR
 CLASS="LITERAL"
->-v</TT
-> <TT
+>-v</VAR
+> <VAR
 CLASS="LITERAL"
->-s</TT
-> <TT
+>-s</VAR
+> <VAR
 CLASS="LITERAL"
->-l</TT
-> <TT
+>-l</VAR
+> <VAR
 CLASS="LITERAL"
->-d</TT
+>-d</VAR
 > 0x61001000 0x61080000 hello.exe</PRE
-></TD
-></TR
-></TABLE
 ></P
 ></DIV
 ><DIV
@@ -2735,16 +2440,10 @@ CLASS="SECT2"
 NAME="STRACE"
 >strace</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
->Usage: strace.exe [OPTIONS] &#60;command-line&#62;
-Usage: strace.exe [OPTIONS] -p &#60;pid&#62;
+>Usage: strace.exe [OPTIONS] &lt;command-line&gt;
+Usage: strace.exe [OPTIONS] -p &lt;pid&gt;
 Trace system calls and signals
 
   -b, --buffer-size=SIZE       set size of output file buffer
@@ -2760,7 +2459,7 @@ Trace system calls and signals
   -t, --timestamp              use an absolute hh:mm:ss timestamp insted of 
                                the default microsecond timestamp.  Implies -d
   -T, --toggle                 toggle tracing in a process already being
-                               traced. Requires -p &#60;pid&#62;
+                               traced. Requires -p &lt;pid&gt;
   -v, --version                output version information and exit
   -w, --new-window             spawn program under test in a new window
 
@@ -2789,37 +2488,25 @@ Trace system calls and signals
     nomutex  0x10000 (_STRACE_NOMUTEX)  Don't use mutex for synchronization.
     malloc   0x20000 (_STRACE_MALLOC)   Trace malloc calls.
     thread   0x40000 (_STRACE_THREAD)   Thread-locking calls.</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
 >strace</B
 > program executes a program, and
 optionally the children of the program, reporting any Cygwin DLL output
-from the program(s) to stdout, or to a file with the <TT
+from the program(s) to stdout, or to a file with the <VAR
 CLASS="LITERAL"
->-o</TT
+>-o</VAR
 >
-option.  With the <TT
+option.  With the <VAR
 CLASS="LITERAL"
->-w</TT
+>-w</VAR
 > option, you can start an strace
 session in a new window, for example:
 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 >$ strace -o tracing_output -w sh -c 'while true; do echo "tracing..."; done' &#38;</PRE
-></TD
-></TR
-></TABLE
 >
 This is particularly useful for <B
 CLASS="COMMAND"
@@ -2847,15 +2534,9 @@ CLASS="SECT2"
 NAME="UMOUNT"
 >umount</A
 ></H2
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
->Usage: umount.exe [OPTION] [&#60;posixpath&#62;]
+>Usage: umount.exe [OPTION] [&lt;posixpath&gt;]
 Unmount filesystems
 
   -A, --remove-all-mounts       remove all mounts
@@ -2866,9 +2547,6 @@ Unmount filesystems
   -u, --user                    remove user mount
   -U, --remove-user-mounts      remove all user mounts
   -v, --version                 output version information and exit</PRE
-></TD
-></TR
-></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
@@ -2880,9 +2558,9 @@ CLASS="COMMAND"
 >umount</B
 > will remove it from the
 system registry area.  (Administrator priviledges are required).
-The <TT
+The <VAR
 CLASS="LITERAL"
->-u</TT
+>-u</VAR
 > flag may be used to specify removing the mount 
 from the user-specific registry area instead.</P
 ><P
@@ -2891,27 +2569,27 @@ CLASS="COMMAND"
 >umount</B
 > utility may also be used to remove
 all mounts of a particular type.  With the extended options it is
-possible to remove all mounts (<TT
+possible to remove all mounts (<VAR
 CLASS="LITERAL"
->-A</TT
+>-A</VAR
 >), all 
-cygdrive automatically-mounted mounts (<TT
+cygdrive automatically-mounted mounts (<VAR
 CLASS="LITERAL"
->-c</TT
+>-c</VAR
 >), all
-mounts in the current user's registry area (<TT
+mounts in the current user's registry area (<VAR
 CLASS="LITERAL"
->-U</TT
+>-U</VAR
 >), 
-or all mounts in the system-wide registry area (<TT
+or all mounts in the system-wide registry area (<VAR
 CLASS="LITERAL"
->-S</TT
+>-S</VAR
 >) 
 (with Administrator privileges).</P
 ><P
 >See <A
 HREF="using-utils.html#MOUNT"
->the section called <I
+>the Section called <I
 >mount</I
 ></A
 > for more information on the mount
@@ -2923,6 +2601,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -2934,6 +2613,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="using-cygwinenv.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -2942,6 +2622,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -2950,6 +2631,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="using-effectively.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -2958,9 +2640,9 @@ HREF="using-effectively.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->The <TT
+>The <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > environment
 variable</TD
 ><TD
@@ -2969,6 +2651,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="using.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD

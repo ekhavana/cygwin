@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Customizing bash</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -16,11 +17,21 @@ TITLE="NT security and the ntsec usage"
 HREF="ntsec.html"><LINK
 REL="NEXT"
 TITLE="Using Cygwin"
-HREF="using.html"></HEAD
+HREF="using.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -38,6 +49,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="ntsec.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -51,6 +63,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="using.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -87,9 +100,9 @@ CLASS="FILENAME"
 CLASS="FILENAME"
 >.inputrc</TT
 >.  These initialization files will only
-be read if <TT
+be read if <VAR
 CLASS="ENVAR"
->HOME</TT
+>HOME</VAR
 > is defined before starting bash.</P
 ><P
 ><TT
@@ -104,25 +117,25 @@ CLASS="COMMAND"
 .bat file does not set the switch).  This is a useful place to define and
 export environment variables and bash functions that will be used by bash
 and the programs invoked by bash.  It is a good place to redefine
-<TT
+<VAR
 CLASS="ENVAR"
->PATH</TT
+>PATH</VAR
 > if needed.  We recommend adding a ":." to the end of
-<TT
+<VAR
 CLASS="ENVAR"
->PATH</TT
+>PATH</VAR
 > to also search the current working directory (contrary
 to DOS, the local directory is not searched by default).  Also to avoid
 delays you should either <B
 CLASS="COMMAND"
 >unset</B
-> <TT
+> <VAR
 CLASS="ENVAR"
->MAILCHECK</TT
+>MAILCHECK</VAR
 > 
-or define <TT
+or define <VAR
 CLASS="ENVAR"
->MAILPATH</TT
+>MAILPATH</VAR
 > to point to your existing mail inbox.</P
 ><P
 ><TT
@@ -142,18 +155,9 @@ CLASS="FILENAME"
 > as discussed above in this file
 instead.</P
 ><P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >shopt -s nocaseglob</PRE
-></TD
-></TR
-></TABLE
 >
 will allow bash to glob filenames in a case-insensitive manner.
 Note that <TT
@@ -181,13 +185,7 @@ CLASS="FILENAME"
 > cannot contain \r,
 even on text mounted systems.
 Consider the following settings:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
 ># Make Bash 8bit clean
 set meta-flag on
@@ -195,9 +193,6 @@ set convert-meta off
 set output-meta on
 # Ignore case while completing
 set completion-ignore-case on</PRE
-></TD
-></TR
-></TABLE
 >
 The first three commands allow bash to display 8-bit characters,
 useful for languages with accented characters.  The last line makes
@@ -209,6 +204,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -220,6 +216,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="ntsec.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -228,6 +225,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -236,6 +234,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="using.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -244,9 +243,9 @@ HREF="using.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->NT security and the <TT
+>NT security and the <VAR
 CLASS="LITERAL"
->ntsec</TT
+>ntsec</VAR
 > usage</TD
 ><TD
 WIDTH="34%"
@@ -254,6 +253,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="setup-net.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD

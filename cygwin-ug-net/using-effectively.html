@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Using Cygwin effectively with Windows</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -16,11 +17,21 @@ TITLE="Cygwin Utilities"
 HREF="using-utils.html"><LINK
 REL="NEXT"
 TITLE="Programming with Cygwin"
-HREF="programming.html"></HEAD
+HREF="programming.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -38,6 +49,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="using-utils.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -51,6 +63,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="programming.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -83,9 +96,9 @@ CLASS="COMMAND"
 >net.exe</B
 > views and configures
 network file and printer resources.  Most of these tools
-support the <TT
+support the <VAR
 CLASS="LITERAL"
->/?</TT
+>/?</VAR
 > switch to display usage information. </P
 ><P
 >Unfortunately, no standard set of tools included with all versions of 
@@ -124,19 +137,19 @@ path (<B
 CLASS="COMMAND"
 >/usr/bin/find</B
 >) or that your Cygwin 
-<TT
+<VAR
 CLASS="LITERAL"
->bin</TT
-> directory comes first in your <TT
+>bin</VAR
+> directory comes first in your <VAR
 CLASS="ENVAR"
->PATH</TT
+>PATH</VAR
 >.</P
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1463"
+NAME="AEN1470"
 >Pathnames</A
 ></H2
 ><P
@@ -149,56 +162,38 @@ CLASS="COMMAND"
 converting between Windows and POSIX paths. A complete description of its 
 options and examples of its usage are in <A
 HREF="using-utils.html#CYGPATH"
->the section called <I
+>the Section called <I
 >cygpath</I
 ></A
 >, 
 including a shell script for starting Windows Explorer in any directory. 
 The same format works for most Windows programs, for example 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
-><TT
+><VAR
 CLASS="LITERAL"
->notepad.exe "$(cygpath -aw "Desktop/Phone Numbers.txt")"</TT
+>notepad.exe "$(cygpath -aw "Desktop/Phone Numbers.txt")"</VAR
 ></PRE
-></TD
-></TR
-></TABLE
 >
 A few programs require a Windows-style, semicolon-delimited path list, 
 which <B
 CLASS="COMMAND"
 >cygpath</B
 > can translate from a POSIX path with the
-<TT
+<VAR
 CLASS="LITERAL"
->-p</TT
+>-p</VAR
 > option. For example, a Java compilation from 
 <B
 CLASS="COMMAND"
 >bash</B
 > might look like this: 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
+<PRE
 CLASS="SCREEN"
-><TT
+><VAR
 CLASS="LITERAL"
->javac -cp "$(cygpath -pw "$CLASSPATH")" hello.java</TT
+>javac -cp "$(cygpath -pw "$CLASSPATH")" hello.java</VAR
 ></PRE
-></TD
-></TR
-></TABLE
 >
 Since using quoting and subshells is somewhat awkward, it is often 
 preferable to use <B
@@ -211,7 +206,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1476"
+NAME="AEN1483"
 >Console Programs</A
 ></H2
 ><P
@@ -242,27 +237,27 @@ CLASS="COMMAND"
 >bash</B
 > with 
 the default DOS box. To make Cygwin more Unix compatible in this case, 
-set <TT
+set <VAR
 CLASS="ENVAR"
->CYGWIN=tty</TT
+>CYGWIN=tty</VAR
 > (see <A
 HREF="using-cygwinenv.html"
->the section called <I
->The <TT
+>the Section called <I
+>The <VAR
 CLASS="ENVAR"
->CYGWIN</TT
+>CYGWIN</VAR
 > environment
 variable</I
 ></A
 >).
-Alternatively, the optional <B
-CLASS="COMMAND"
->rxvt</B
+Alternatively, the optional <SPAN
+CLASS="SYSTEMITEM"
+>rxvt</SPAN
 > package provides 
 a native-Windows version of the popular X11 terminal emulator (it is not 
-necessary to set <TT
+necessary to set <VAR
 CLASS="ENVAR"
->CYGWIN=tty</TT
+>CYGWIN=tty</VAR
 > with <B
 CLASS="COMMAND"
 >rxvt</B
@@ -278,20 +273,20 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1489"
+NAME="AEN1496"
 >Cygwin and Windows Networking</A
 ></H2
 ><P
->Many popular Cygwin packages, such as <B
-CLASS="COMMAND"
->ncftp</B
+>Many popular Cygwin packages, such as <SPAN
+CLASS="SYSTEMITEM"
+>ncftp</SPAN
 >, 
-<B
-CLASS="COMMAND"
->lynx</B
->, and <B
-CLASS="COMMAND"
->wget</B
+<SPAN
+CLASS="SYSTEMITEM"
+>lynx</SPAN
+>, and <SPAN
+CLASS="SYSTEMITEM"
+>wget</SPAN
 >, require a 
 network connection.  Since Cygwin relies on Windows for connectivity, 
 if one of these tools is not working as expected you may need to 
@@ -301,7 +296,11 @@ CLASS="COMMAND"
 >ping.exe</B
 >, one of the 
 few utilities included with every Windows version since Windows 95.
-If you chose to install the inetutils package, you may have both
+If you chose to install the <SPAN
+CLASS="SYSTEMITEM"
+>inetutils</SPAN
+> package, 
+you may have both
 Windows and Cygwin versions of utilities such as <B
 CLASS="COMMAND"
 >ftp</B
@@ -342,23 +341,29 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1503"
+NAME="AEN1511"
 >The cygutils package</A
 ></H2
 ><P
->The optional cygutils package contains miscellaneous tools that are
+>The optional <SPAN
+CLASS="SYSTEMITEM"
+>cygutils</SPAN
+> package contains miscellaneous tools that are
 small enough to not require their own package. It is not included in a
 default Cygwin install; select it from the Utils category in 
 <B
 CLASS="COMMAND"
 >setup.exe</B
->. Several of the cygutils tools are useful
+>. Several of the <SPAN
+CLASS="SYSTEMITEM"
+>cygutils</SPAN
+> tools are useful
 for interacting with Windows. </P
 ><P
 >One of the hassles of Unix-Windows interoperability is the different line 
 endings on text files.  As mentioned in <A
 HREF="using-textbinary.html"
->the section called <I
+>the Section called <I
 >Text and Binary modes</I
 ></A
 >, 
@@ -366,7 +371,10 @@ Unix tools such as <B
 CLASS="COMMAND"
 >tr</B
 > can convert between CRLF and LF 
-endings, but cygutils provides several dedicated programs: 
+endings, but <SPAN
+CLASS="SYSTEMITEM"
+>cygutils</SPAN
+> provides several dedicated programs: 
 <B
 CLASS="COMMAND"
 >conv</B
@@ -384,9 +392,9 @@ CLASS="COMMAND"
 CLASS="COMMAND"
 >unix2dos</B
 >. Use the
-<TT
+<VAR
 CLASS="LITERAL"
->--help</TT
+>--help</VAR
 > switch for usage information. </P
 ></DIV
 ><DIV
@@ -394,7 +402,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1516"
+NAME="AEN1527"
 >Creating shortcuts with cygutils</A
 ></H2
 ><P
@@ -405,7 +413,11 @@ different.  By default, Cygwin uses a mechanism that creates symbolic
 links that are compatible with standard Microsoft .lnk files. However,
 they do not include much of the information that is available in a 
 standard Microsoft shortcut, such as the working directory, an icon, 
-etc.  The cygutils package includes a <B
+etc.  The <SPAN
+CLASS="SYSTEMITEM"
+>cygutils</SPAN
+> package includes a 
+<B
 CLASS="COMMAND"
 >mkshortcut</B
 > 
@@ -428,7 +440,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN1522"
+NAME="AEN1534"
 >Printing with cygutils</A
 ></H2
 ><P
@@ -436,44 +448,50 @@ NAME="AEN1522"
 <B
 CLASS="COMMAND"
 >lpr</B
-> found in cygutils (not to be confused with the 
+> found in <SPAN
+CLASS="SYSTEMITEM"
+>cygutils</SPAN
+> (not to be confused with the 
 native Windows <B
 CLASS="COMMAND"
 >lpr.exe</B
->). The easiest way to use cygutils' 
+>). The easiest way to use <SPAN
+CLASS="SYSTEMITEM"
+>cygutils</SPAN
+>' 
 <B
 CLASS="COMMAND"
 >lpr</B
 > is to specify a default device name in the 
-<TT
+<VAR
 CLASS="ENVAR"
->PRINTER</TT
+>PRINTER</VAR
 > environment variable.  You may also specify a device 
-on the command line with the <TT
+on the command line with the <VAR
 CLASS="LITERAL"
->-d</TT
-> or <TT
+>-d</VAR
+> or <VAR
 CLASS="LITERAL"
->-P</TT
+>-P</VAR
 > 
 options, which will override the environment variable setting. </P
 ><P
 >A device name 
-may be a UNC path (<TT
+may be a UNC path (<VAR
 CLASS="LITERAL"
->\\server_name\printer_name</TT
+>\\server_name\printer_name</VAR
 >), a reserved 
-DOS device name (<TT
+DOS device name (<VAR
 CLASS="LITERAL"
->prn</TT
->, <TT
+>prn</VAR
+>, <VAR
 CLASS="LITERAL"
->lpt1</TT
+>lpt1</VAR
 >), or a 
 local port name that is mapped to a printer share. Note that forward slashes 
-may be used in a UNC path (<TT
+may be used in a UNC path (<VAR
 CLASS="LITERAL"
->//server_name/printer_name</TT
+>//server_name/printer_name</VAR
 >),
 which is helpful when using <B
 CLASS="COMMAND"
@@ -487,14 +505,18 @@ CLASS="COMMAND"
 > sends raw data to the printer; no formatting is done.
 Many, but not all, printers accept plain text as input. If your printer 
 supports PostScript, packages such as 
-<B
-CLASS="COMMAND"
->a2ps</B
-> and <B
-CLASS="COMMAND"
->enscript</B
-> can prepare text
-files for printing. The ghostscript package also provides some translation
+<SPAN
+CLASS="SYSTEMITEM"
+>a2ps</SPAN
+> and <SPAN
+CLASS="SYSTEMITEM"
+>enscript</SPAN
+> can prepare 
+text files for printing. The <SPAN
+CLASS="SYSTEMITEM"
+>ghostscript</SPAN
+> package also 
+provides some translation
 from PostScript to various native printer languages. Additionally, a native 
 Windows application for printing PostScript, <B
 CLASS="COMMAND"
@@ -513,6 +535,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -524,6 +547,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="using-utils.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -532,6 +556,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -540,6 +565,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="programming.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -555,6 +581,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="using.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD

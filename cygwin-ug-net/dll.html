@@ -1,10 +1,11 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Building and Using DLLs</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -16,11 +17,21 @@ TITLE="Debugging Cygwin Programs"
 HREF="gdb.html"><LINK
 REL="NEXT"
 TITLE="Defining Windows Resources"
-HREF="windres.html"></HEAD
+HREF="windres.html"><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"></HEAD
 ><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -38,6 +49,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="gdb.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -51,6 +63,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="windres.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -158,61 +171,28 @@ CLASS="FILENAME"
 ><P
 >Fortunately, with the latest gcc and binutils the process for building a dll
 is now pretty simple. Say you want to build this minimal function in mydll.c:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
->#include &#60;stdio.h&#62;
+>#include &lt;stdio.h&gt;
 
 int
 hello()
 {
   printf ("Hello World!\n");
 }  </PRE
-></TD
-></TR
-></TABLE
 ><P
 >First compile mydll.c to object code:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >gcc -c mydll.c</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Then, tell gcc that it is building a shared library:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >gcc -shared -o mydll.dll mydll.o</PRE
-></TD
-></TR
-></TABLE
 ><P
 >That's it! To finish up the example, you can now link to the
 dll with a simple program:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >int 
@@ -220,48 +200,58 @@ main ()
 {
   hello ();
 }  </PRE
-></TD
-></TR
-></TABLE
 ><P
 >Then link to your dll with a command like:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >gcc -o myprog myprog.ca -L./ -lmydll</PRE
-></TD
-></TR
-></TABLE
 ><P
 >However, if you are building a dll as an export library,
 you will probably want to use the complete syntax:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >gcc -shared -o cyg${module}.dll \
     -Wl,--out-implib=lib${module}.dll.a \
     -Wl,--export-all-symbols \
     -Wl,--enable-auto-import \
-    -Wl,--whole-archive ${old_lib} \
+    -Wl,--whole-archive ${old_libs} \
     -Wl,--no-whole-archive ${dependency_libs}</PRE
-></TD
-></TR
-></TABLE
 ><P
->Where ${module} is the name of your DLL, ${old_lib} are all
+>The name of your library is <VAR
+CLASS="LITERAL"
+>${module}</VAR
+>, prefixed with
+<VAR
+CLASS="LITERAL"
+>cyg</VAR
+> for the DLL and <VAR
+CLASS="LITERAL"
+>lib</VAR
+> for the
+import library. Cygwin DLLs use the <VAR
+CLASS="LITERAL"
+>cyg</VAR
+> prefix to 
+differentiate them from native-Windows MinGW DLLs, see 
+<A
+HREF="http://mingw.org"
+TARGET="_top"
+>the MinGW website</A
+> for more details.
+<VAR
+CLASS="LITERAL"
+>${old_libs}</VAR
+> are all
 your object files, bundled together in static libs or single object
-files and the ${dependency_libs} are import libs you need to
-link against, e.g '-lpng -lz -L/usr/local/special -lmyspeciallib'.</P
+files and the <VAR
+CLASS="LITERAL"
+>${dependency_libs}</VAR
+> are import libs you 
+need to link against, e.g 
+<KBD
+CLASS="USERINPUT"
+>'-lpng -lz -L/usr/local/special -lmyspeciallib'</KBD
+>.</P
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -276,7 +266,7 @@ NAME="DLL-LINK"
 Cygwin-compatible import library.  If you have the source to compile
 the DLL, see <A
 HREF="dll.html#DLL-BUILD"
->the section called <I
+>the Section called <I
 >Building DLLs</I
 ></A
 > for details on having 
@@ -291,19 +281,10 @@ CLASS="FILENAME"
 >bash</TT
 > for the quoting to work
 correctly):</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >echo EXPORTS &#62; foo.def
 nm foo.dll | grep ' T _' | sed 's/.* T _//' &#62;&#62; foo.def</PRE
-></TD
-></TR
-></TABLE
 ><P
 >Note that this will only work if the DLL is not stripped.
 Otherwise you will get an error message: "No symbols in
@@ -314,18 +295,9 @@ CLASS="FILENAME"
 >.def</TT
 > file, you can create
 an import library from it like this:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
 ><PRE
 CLASS="SCREEN"
 >dlltool --def foo.def --dllname foo.dll --output-lib foo.a</PRE
-></TD
-></TR
-></TABLE
 ></DIV
 ></DIV
 ><DIV
@@ -333,6 +305,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -344,6 +317,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="gdb.html"
+ACCESSKEY="P"
 >Prev</A
 ></TD
 ><TD
@@ -352,6 +326,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -360,6 +335,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="windres.html"
+ACCESSKEY="N"
 >Next</A
 ></TD
 ></TR
@@ -375,6 +351,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="programming.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
