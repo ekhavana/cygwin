@@ -358,7 +358,7 @@ else.  The following steps should work:
 
   1. Download the snapshot, and run:
           	cd /
-                  tar jxvf /posix/path/to/cygwin-inst-YYYYMMDD.tar.bz2
+                  tar jxvf /posix/path/to/cygwin-inst-YYYYMMDD.tar.bz2 --exclude=usr/bin/cygwin1.dll
                   cd /tmp
                   tar jxvf /posix/path/to/cygwin-inst-YYYYMMDD.tar.bz2 usr/bin/cygwin1.dll
 
@@ -1960,6 +1960,19 @@ does not seem to be available on Win9x.)  Type
    You may need to press the formfeed button on your printer or append
 the formfeed character to your file.
 
+Why don't international (8-bit) characters work?
+------------------------------------------------
+
+   Before you can type international characters (£åäö) in bash, you must
+add the following lines to your `~/.inputrc' file:
+
+     	set meta-flag on
+             set convert-meta off
+             set output-meta on
+
+   These are options to the `readline' library, which you can read
+about in the `bash(1)' man page.
+
 Why don't cursor keys work under Win95/Win98?
 ---------------------------------------------
 
@@ -2318,6 +2331,17 @@ net release.)*
    There is a bug in the Win32 API function GetFreeDiskSpace that makes
 it return incorrect values for disks larger than 2 GB in size.  Perhaps
 that may be your problem?
+
+Why doesn't Cygwin tcl/tk understand Cygwin paths?
+--------------------------------------------------
+
+   The versions of Tcl/Tk distributed with Cygwin (e.g. cygtclsh80.exe)
+are not actually "Cygwin versions" of those tools.  They are built with
+the `-mno-cygwin' option to `gcc', which means they do not understand
+Cygwin mounts or symbolic links.
+
+   See the entry "How do I convert between Windows and UNIX paths?"
+elsewhere in this FAQ.
 
 Cygwin API Questions
 ====================
@@ -3228,11 +3252,19 @@ programs which use the Windows GUI.
    You can get more info on DJGPP by following
 `http://www.delorie.com/'.
 
-Known/potential Problems in the Latest Net Release
-**************************************************
+Known Problems in the Latest Net Release
+****************************************
 
 Aware of the problem, no solution known.
 ========================================
+
+Pipe key (`|') doesn't work on non-US keyboards in Win9x
+--------------------------------------------------------
+
+   This might get fixed someday, but meanwhile, just use rxvt, which
+does not have this problem.  This is no real loss, because rxvt has many
+other advantages.  (Do not attempt to use the "broken" pipe key (`¦')
+as a substitute, it is a different character.)
 
 On Win9x, scp and cvs/ssh leave ssh processes running
 -----------------------------------------------------
@@ -3256,7 +3288,7 @@ class.  Details at
 Fixed in the Next Release
 =========================
 
-   Nothing currently.
+   (section empty)
 
 History
 *******
