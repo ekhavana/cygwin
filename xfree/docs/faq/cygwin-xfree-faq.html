@@ -510,6 +510,16 @@ HREF="cygwin-xfree-faq.html#q-but-report-ignored"
 >My bug report the Cygwin/XFree86 mailing list was ignored.  What do I
 do now?</A
 ></DT
+><DT
+>5.5. <A
+HREF="cygwin-xfree-faq.html#q-ssh-no-x11forwarding"
+> X11Forwarding does not work with openssh</A
+></DT
+><DT
+>5.6. <A
+HREF="cygwin-xfree-faq.html#q-xkb-not-working"
+>Loading XKB keymaps fails</A
+></DT
 ></DL
 ></DD
 ><DT
@@ -664,16 +674,6 @@ HREF="cygwin-xfree-faq.html#q-error-env-space"
 >6.18. <A
 HREF="cygwin-xfree-faq.html#q-too-many-parameters"
 >Too many parameters</A
-></DT
-><DT
->6.19. <A
-HREF="cygwin-xfree-faq.html#q-ssh-no-x11forwarding"
-> X11Forwarding does not work with openssh</A
-></DT
-><DT
->6.20. <A
-HREF="cygwin-xfree-faq.html#q-xkb-not-working"
->Loading XKB keymaps fails</A
 ></DT
 ></DL
 ></DD
@@ -2357,6 +2357,281 @@ simply resubmit such bug reports that have not received a response
 within 7 days of submission.</P
 ></DIV
 ></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-ssh-no-x11forwarding"
+></A
+><B
+>5.5. </B
+> X11Forwarding does not work with openssh</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Before establishing the ssh connection the xserver must be started and the
+environment variable <VAR
+CLASS="parameter"
+>DISPLAY</VAR
+> must be set for ssh.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ DISPLAY=<VAR
+CLASS="replaceable"
+>localhost:0.0</VAR
+>
+$ export DISPLAY
+$ ssh -X <VAR
+CLASS="replaceable"
+>remotehost</VAR
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+or
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ DISPLAY=<VAR
+CLASS="replaceable"
+>localhost:0.0</VAR
+> ssh -X <VAR
+CLASS="replaceable"
+>remotehost</VAR
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Make sure you're not starting ssh with the parameter <VAR
+CLASS="parameter"
+>-x</VAR
+>.
+This disables <A
+HREF="glossary.html#gloss-x11forwarding"
+><I
+CLASS="glossterm"
+>X11Forwarding</I
+></A
+>. 
+The correct parameter is <VAR
+CLASS="parameter"
+>-X</VAR
+> (uppercase).
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Check that X11Forwarding is not disabled in the openssh client configuration.
+
+The configfiles are by default <TT
+CLASS="filename"
+>~/.ssh/config</TT
+> and 
+<TT
+CLASS="filename"
+>/etc/ssh/ssh_config</TT
+>. The file in the home directory 
+overrides settings in the global one.
+
+The configfile is split into various sections starting with 
+<SPAN
+CLASS="QUOTE"
+>"Host <VAR
+CLASS="replaceable"
+>wildcard</VAR
+>"</SPAN
+>. 
+The section applies to all hosts where <VAR
+CLASS="replaceable"
+>wildcard</VAR
+> 
+matches the hostname.
+
+If this section contains an entry <SPAN
+CLASS="QUOTE"
+>"ForwardX11 no"</SPAN
+> then
+X11Forwarding is disabled. To enable it change the entry to 
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>ForwardX11 yes</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Check that X11Forwarding is not disabled in the ssh server configuration.
+
+The configfile is by default <TT
+CLASS="filename"
+>/etc/ssh/ssh_config</TT
+>.
+If there is an entry <SPAN
+CLASS="QUOTE"
+>"X11Forwarding no"</SPAN
+> then X11Forwarding is 
+disabled. 
+
+If you have write access to the config file then change it to
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>X11Forwarding yes</PRE
+></TD
+></TR
+></TABLE
+> 
+Otherwise ask your you admin to change this for you.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-xkb-not-working"
+></A
+><B
+>5.6. </B
+>Loading XKB keymaps fails</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+First check if you are able to change the server to another layout via XKB. 
+The german layout will be good for testing:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>setxkbmap de -model pc105
+</PRE
+></TD
+></TR
+></TABLE
+>
+This worked if pressing "Shift" and "8" produces "(" instead of "*".
+If it worked then you can skip the next paragraph.
+</P
+><P
+>&#13;There is currently a problem with the /tmp directory mounted in textmode. 
+You can change the setting to binmode with:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>mount -b "$(cygpath -m /tmp)" /tmp
+</PRE
+></TD
+></TR
+></TABLE
+>
+If this fails with an errormessage stating unsufficient rights, try
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>mount -b -u "$(cygpath -m /tmp)" /tmp
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+><P
+>&#13;Not all keyboard layouts are tested very well and some contain errors or do
+not work at all. To test if the compiling of your layout works start 
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>xkbcomp -w 3 -xkm -m <VAR
+CLASS="replaceable"
+>de</VAR
+> /etc/X11/xkb/keymap/xfree86 localhost:0.0
+</PRE
+></TD
+></TR
+></TABLE
+>
+(replace the "de" with your layout code).        
+This may produce warnings, but must not produce errors. If there are errors 
+then please report them to the mailinglist.
+</P
+></DIV
+></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -3121,237 +3396,6 @@ HREF="cygwin-xfree-faq.html#q-error-env-space"
 ></P
 ></DIV
 ></DIV
-><DIV
-CLASS="qandaentry"
-><DIV
-CLASS="question"
-><P
-><A
-NAME="q-ssh-no-x11forwarding"
-></A
-><B
->6.19. </B
-> X11Forwarding does not work with openssh</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-Before establishing the ssh connection the xserver must be started and the
-environment variable <VAR
-CLASS="parameter"
->DISPLAY</VAR
-> must be set for ssh.
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;$ DISPLAY=<VAR
-CLASS="replaceable"
->localhost:0.0</VAR
->
-$ export DISPLAY
-$ ssh -X <VAR
-CLASS="replaceable"
->remotehost</VAR
->
-</PRE
-></TD
-></TR
-></TABLE
->
-or
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;$ DISPLAY=<VAR
-CLASS="replaceable"
->localhost:0.0</VAR
-> ssh -X <VAR
-CLASS="replaceable"
->remotehost</VAR
->
-</PRE
-></TD
-></TR
-></TABLE
->
-</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-Make sure you're not starting ssh with the parameter <VAR
-CLASS="parameter"
->-x</VAR
->.
-This disables <A
-HREF="glossary.html#gloss-x11forwarding"
-><I
-CLASS="glossterm"
->X11Forwarding</I
-></A
->. 
-The correct parameter is <VAR
-CLASS="parameter"
->-X</VAR
-> (uppercase).
-</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-Check that X11Forwarding is not disabled in the openssh client configuration.
-
-The configfiles are by default <TT
-CLASS="filename"
->~/.ssh/config</TT
-> and 
-<TT
-CLASS="filename"
->/etc/ssh/ssh_config</TT
->. The file in the home directory 
-overrides settings in the global one.
-
-The configfile is split into various sections starting with 
-<SPAN
-CLASS="QUOTE"
->"Host <VAR
-CLASS="replaceable"
->wildcard</VAR
->"</SPAN
->. 
-The section applies to all hosts where <VAR
-CLASS="replaceable"
->wildcard</VAR
-> 
-matches the hostname.
-
-If this section contains an entry <SPAN
-CLASS="QUOTE"
->"ForwardX11 no"</SPAN
-> then
-X11Forwarding is disabled. To enable it change the entry to 
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->ForwardX11 yes</PRE
-></TD
-></TR
-></TABLE
->
-</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-Check that X11Forwarding is not disabled in the ssh server configuration.
-
-The configfile is by default <TT
-CLASS="filename"
->/etc/ssh/ssh_config</TT
->.
-If there is an entry <SPAN
-CLASS="QUOTE"
->"X11Forwarding no"</SPAN
-> then X11Forwarding is 
-disabled. 
-
-If you have write access to the config file then change it to
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->X11Forwarding yes</PRE
-></TD
-></TR
-></TABLE
-> 
-Otherwise ask your you admin to change this for you.
-</P
-></DIV
-></DIV
-><DIV
-CLASS="qandaentry"
-><DIV
-CLASS="question"
-><P
-><A
-NAME="q-xkb-not-working"
-></A
-><B
->6.20. </B
->Loading XKB keymaps fails</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-There is currently a problem with the /tmp directory mounted in textmode. 
-You can change the setting to binmode with:
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->mount -b "$(cygpath -m /tmp)" /tmp
-</PRE
-></TD
-></TR
-></TABLE
->
-If this fails with an errormessage stating unsufficient rights, try
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->mount -b -u "$(cygpath -m /tmp)" /tmp
-</PRE
-></TD
-></TR
-></TABLE
->
-</P
-></DIV
-></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -3437,7 +3481,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN637"
+NAME="AEN642"
 ></A
 ><P
 ><B
