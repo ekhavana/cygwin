@@ -78,31 +78,27 @@ NAME="SETUP-ENV"
 >Environment Variables</A
 ></H1
 ><P
->Before starting bash, you must set some environment variables, some of
-which can also be set or modified inside bash.  Cygnus provides you
-with a .bat file where the most important ones are set before bash in
+>Before starting bash, you may set some environment variables.  A .bat
+file is provided where the most important ones are set before bash in
 launched.  This is the safest way to launch bash initially.  The .bat
-file is installed by default in
-<TT
-CLASS="FILENAME"
->\cygnus\cygwin-b20/cygnus.bat</TT
-> and pointed to in
-the Start Menu.  You can edit it to your liking.</P
+file is installed in the root directory that you specified during setup
+and pointed to in the Start Menu under the "Cygwin" option.  You can
+edit it this file your liking.</P
 ><P
 >The <TT
 CLASS="ENVAR"
 >CYGWIN</TT
-> variable is used to configure many global 
-settings for the Cygwin
-runtime system.  Initially you can leave <TT
+> variable is used to configure many global
+settings for the Cygwin runtime system.  Initially you can leave
+<TT
 CLASS="ENVAR"
 >CYGWIN</TT
-> unset
-or set it to <TT
+> unset or set it to <TT
 CLASS="LITERAL"
 >tty</TT
-> (e.g. to support job control with ^Z 
-etc...) using a syntax like this in the DOS shell, before launching bash.</P
+> (e.g.
+to support job control with ^Z etc...) using a syntax like this in the
+DOS shell, before launching bash.  </P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -113,7 +109,7 @@ WIDTH="100%"
 CLASS="SCREEN"
 ><TT
 CLASS="PROMPT"
->C:\Cygnus\&#62;</TT
+>C:\&#62;</TT
 > <TT
 CLASS="USERINPUT"
 ><B
@@ -139,16 +135,15 @@ CLASS="FILENAME"
 >/WinNT/system32:/WinNT</TT
 >) when a Cygwin
 process first starts.
-Set it so that it contains at least the Cygnus
-<TT
+Set it so that it contains at least the <TT
 CLASS="FILENAME"
->bin</TT
-> directory
-<TT
+>x:\cygwin\bin</TT
+>
+directory where "<TT
 CLASS="FILENAME"
->C:\cygnus\cygwin-b20\H-i586-cygwin32\bin</TT
-> before
-launching bash.</P
+>x:\cygwin</TT
+> is the "root" of your
+cygwin installation if you wish to use cygwin tools outside of bash.</P
 ><P
 > 
 The <TT
@@ -160,86 +155,27 @@ defined.  This environment variable is also converted from Windows format
 when a Cygwin process first starts.  Set it to point to your home directory
 before launching bash. </P
 ><P
-><B
-CLASS="COMMAND"
->make</B
-> uses an environment variable
-<TT
-CLASS="ENVAR"
->MAKE_MODE</TT
-> to decide if it uses
-<TT
-CLASS="FILENAME"
->command.com</TT
-> or <TT
-CLASS="FILENAME"
->/bin/sh</TT
-> to
-run command lines.  If you are getting strange errors from
-<B
-CLASS="COMMAND"
->make</B
-> about "/c not found", set
-<TT
-CLASS="ENVAR"
->MAKE_MODE</TT
-> to <TT
-CLASS="LITERAL"
->UNIX</TT
-> at the command
-prompt or in bash.</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
-><TT
-CLASS="PROMPT"
->C:\Cygnus\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->set MAKE_MODE=UNIX</B
-></TT
->
-
-<TT
-CLASS="PROMPT"
->/Cygnus$</TT
-> <TT
-CLASS="USERINPUT"
-><B
->export MAKE_MODE=UNIX</B
-></TT
-></PRE
-></TD
-></TR
-></TABLE
-><P
 >The <TT
 CLASS="ENVAR"
 >TERM</TT
 > environment variable specifies your terminal
-type.  You can set it to <TT
+type.  It is automatically set to <TT
 CLASS="LITERAL"
 >cygwin</TT
->.</P
+> if you have
+not set it to something else.</P
 ><P
 >The <TT
 CLASS="ENVAR"
 >LD_LIBRARY_PATH</TT
-> environment variable is
-used by the Cygwin function <TT
+> environment variable is used by
+the Cygwin function <TT
 CLASS="FUNCTION"
 >dlopen ()</TT
-> as a list
-of directories to search for .dll files to load.  This environment
-variable is converted from Windows format to UNIX format
-when a Cygwin process first starts.
-Most Cygwin applications do not make use of the
+> as a list of
+directories to search for .dll files to load.  This environment variable
+is converted from Windows format to UNIX format when a Cygwin process
+first starts.  Most Cygwin applications do not make use of the
 <TT
 CLASS="FUNCTION"
 >dlopen ()</TT

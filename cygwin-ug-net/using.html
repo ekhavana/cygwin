@@ -90,7 +90,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN412"
+NAME="AEN400"
 >Introduction</A
 ></H2
 ><P
@@ -154,7 +154,7 @@ the appropriate priviledges (Administrator priviledges in Windows
 NT).</P
 ><P
 >The current user's table is located under
-"HKEY_CURRENT_USER/Software/Cygnus Solutions/Cygwin/mounts
+"HKEY_CURRENT_USER/Software/Red Hat, Inc./Cygwin/mounts
 v&#60;version&#62;"
 where &#60;version&#62; is the latest registry version associated with
 the Cygwin library (this version is not the same as the release
@@ -211,7 +211,7 @@ to the current user.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN439"
+NAME="AEN427"
 ></A
 ><P
 ><B
@@ -227,16 +227,19 @@ WIDTH="100%"
 CLASS="SCREEN"
 ><TT
 CLASS="PROMPT"
->c:\cygnus\&#62;</TT
+>c:\&#62;</TT
 > <TT
 CLASS="USERINPUT"
 ><B
 >mount</B
 ></TT
 >
-Device           Directory           Type        Flags
-D:               /d                  user        textmode
-C:               /                   system      textmode</PRE
+f:\cygwin\bin on /usr/bin type system (binmode)
+f:\cygwin\lib on /usr/lib type system (binmode)
+f:\cygwin on / type system (binmode)
+e:\src on /usr/src type system (binmode)
+c: on /cygdrive/c type user (binmode,noumount)
+e: on /cygdrive/e type user (binmode,noumount)</PRE
 ></TD
 ></TR
 ></TABLE
@@ -311,150 +314,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN458"
->Cygwin Mount Table Strategies</A
-></H2
-><P
->Which set of mounts is right for a given Cygwin user depends
-largely on how closely you want to simulate a POSIX environment,
-whether you mix Windows and Cygwin programs, and how many drive
-letters you are using.  If you want to be very POSIX-like (assuming
-"CygwinRoot" is the top directory of your Cygwin distribution), you may
-want to do something like this:</P
-><DIV
-CLASS="EXAMPLE"
-><A
-NAME="AEN461"
-></A
-><P
-><B
->Example 2. POSIX-like mount setup</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
-><TT
-CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount c:\Cygnus\CygwinRoot /</B
-></TT
->
-<TT
-CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount c:\ /c</B
-></TT
->
-<TT
-CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount d:\ /d</B
-></TT
->
-<TT
-CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount e:\ /cdrom</B
-></TT
-></PRE
-></TD
-></TR
-></TABLE
-></DIV
-><P
->However, if you mix Windows and Cygwin programs a lot, you might
-want to create an "identity" mapping, so that conversions between the
-two (see <A
-HREF="using-utils.html#CYGPATH"
->the Section called <I
->cygpath</I
-></A
->) can be eliminated:</P
-><DIV
-CLASS="EXAMPLE"
-><A
-NAME="AEN474"
-></A
-><P
-><B
->Example 3. Identity mount setup</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
-><TT
-CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount c:\ /</B
-></TT
->
-<TT
-CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount d:\foo /foo</B
-></TT
->
-<TT
-CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount d:\bar /bar</B
-></TT
->
-<TT
-CLASS="PROMPT"
->C:\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount e:\grill /grill</B
-></TT
-></PRE
-></TD
-></TR
-></TABLE
-></DIV
-><P
->You'd have to repeat this for all top-level subdirectories on
-all drives, but then you'd always have the top-level directories
-available as the same names in both systems.</P
-></DIV
-><DIV
-CLASS="SECT2"
-><H2
-CLASS="SECT2"
-><A
-NAME="AEN486"
+NAME="AEN446"
 >Additional Path-related Information</A
 ></H2
 ><P
@@ -481,16 +341,16 @@ CLASS="ENVAR"
 CLASS="ENVAR"
 >LD_LIBRARY_PATH</TT
 > environment variables are automatically
-converted from Win32 format to POSIX format (e.g. from
+converted from Win32 format to POSIX format (e.g.  from
 <TT
 CLASS="FILENAME"
->C:\cygnus\cygwin-b20\H-i586-cygwin32\bin</TT
-> to
-<TT
+>c:\cygwin\bin</TT
+> to <TT
 CLASS="FILENAME"
 >/bin</TT
->, if there was a mount from that Win32 path to
-that POSIX path) when a Cygwin process first starts.</P
+>, if
+there was a mount from that Win32 path to that POSIX path) when a Cygwin
+process first starts.</P
 ><P
 >Symbolic links can also be used to map Win32 pathnames to POSIX.
 For example, the command
