@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from ./faq.texinfo on 26 January 2005 -->
+<!-- Created by texi2html 1.56k from ./faq.texinfo on 3 March 2005 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -317,7 +317,7 @@ that the GUI installer is a "work in progress", so there might be a few
 difficulties, especially if you are behind a firewall or have other
 specific requirements.  If something doesn't work right for you, and
 it's not covered here or in the latest development snapshot at
-<STRONG><A HREF="http://cygwin.com/setup-snapshots/">http://cygwin.com/setup-snapshots/</A></STRONG>, then by all means report it to the
+<STRONG><A HREF="http://cygwin.com/setup/">http://cygwin.com/setup/</A></STRONG>, then by all means report it to the
 mailing list.
 
 
@@ -1195,23 +1195,28 @@ or
 <H3><A NAME="SEC40" HREF="faq0.html#TOC40">Why can't I cd into a shortcut to a directory?</A></H3>
 
 <P>
-This is only valid up to but not including version 1.3.0:
+Cygwin versions &#60; 1.3.0 do not follow MS Windows Explorer Shortcuts
+(*.lnk files).  It sees a shortcut as a regular file and this you
+cannot "cd" into it.
 
 
 <P>
-Cygwin does not follow MS Windows Explorer Shortcuts (*.lnk files).  It
-sees a shortcut as a regular file and this you cannot "cd" into it.
+Since version 1.3.0, Cygwin uses shortcuts as symlinks by default.
 
 
 <P>
-Some people have suggested replacing the current symbolic link scheme
-with shortcuts.  The major problem with this is that .LNK files would
-then be used to symlink Cygwin paths that may or may not be valid
-under native Win32 non-Cygwin applications such as Explorer.
+Cygwin shortcuts are different from shortcuts created by native Windows
+applications.  Windows applications can usually make use of Cygwin
+shortcuts but not vice versa.  This is by choice.  The reason is that
+Windows shortcuts may contain a bunch of extra information which would
+get lost, if, for example, Cygwin tar archives and extracts them as
+symlinks.
 
 
 <P>
-Since version 1.3.0, Cygwin treats shortcuts as symlinks.
+Changing a Cygwin shortcut in Windows Explorer usually changes a Cygwin
+shortcut into a Windows native shortcut.  Afterwards, Cygwin will not
+recognize it as symlink anymore.
 
 
 
@@ -2357,19 +2362,12 @@ ones which have a "#!" as their first characters.
 <H3><A NAME="SEC81" HREF="faq0.html#TOC81">How secure is Cygwin in a multi-user environment?</A></H3>
 
 <P>
-Cygwin is not secure in a multi-user environment.  For
-example if you have a long running daemon such as "inetd"
-running as admin while ordinary users are logged in, or if
-you have a user logged in remotely while another user is logged
-into the console, one cygwin client can trick another into
-running code for it.  In this way one user may gain the
-privilege of another cygwin program running on the machine.
-This is because cygwin has shared state that is accessible by 
-all processes.
-
-
-<P>
-(Thanks to Tim Newsham (<A HREF="mailto:newsham@lava.net">newsham@lava.net</A>) for this explanation).
+As of version 1.5.13, the Cygwin developers are not aware of any feature
+in the cygwin dll that would allow users to gain privileges or to access
+objects to which they have no rights under Windows. However there is no
+guarantee that Cygwin is as secure as the Windows it runs on.  Cygwin
+processes share some variables and are thus easier targets of denial of
+service type of attacks.
 
 
 
@@ -3056,12 +3054,9 @@ recommend trying the latest snapshot from
 
 <P>
 To build a debugging version of the Cygwin DLL, you will need to follow
-the instructions at <STRONG><A HREF="http://cygwin.com/faq/faq_3.html#SEC104">http://cygwin.com/faq/faq_3.html#SEC104</A></STRONG>.
-A regular build includes debugging symbols, you do not need to use the
-<SAMP>`--enable-debugging'</SAMP> option, which adds extra trace output of
-interest to Cygwin developers.  You can also contact the mailing list
-for pointers (a simple test case that demonstrates the bug is always
-welcome).
+the instructions at <STRONG><A HREF="http://cygwin.com/faq/faq_3.html#SEC102">http://cygwin.com/faq/faq_3.html#SEC102</A></STRONG>. You
+can also contact the mailing list for pointers (a simple test case that
+demonstrates the bug is always welcome).
 
 
 
@@ -4128,7 +4123,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 26 January 2005 using
+This document was generated on 3 March 2005 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
