@@ -1,10 +1,12 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Directory Structure</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.54"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -19,6 +21,11 @@ TITLE="Environment Variables"
 HREF="setup-env.html"></HEAD
 ><BODY
 CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -39,20 +46,20 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="installing-source.html"
->Prev</A
+>&#60;&#60;&#60; Previous</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Chapter 2. Setting Up Cygwin</TD
+>Setting Up Cygwin</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="setup-env.html"
->Next</A
+>Next &#62;&#62;&#62;</A
 ></TD
 ></TR
 ></TABLE
@@ -274,8 +281,7 @@ CLASS="COMMAND"
 <B
 CLASS="COMMAND"
 >ls -l</B
-> replaces the UID with a name) just
-do this:</P
+> replaces the UID with a name) based on the accounts local to the machine, just do this:</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -315,7 +321,92 @@ CLASS="USERINPUT"
 ></TR
 ></TABLE
 ><P
-> Future changes to your NT registry will NOT be reflected in
+>If you are logging in based on an NT network domain, and want to
+also create entries in <TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+> and
+<TT
+CLASS="FILENAME"
+>/etc/group</TT
+> based on all the accounts in the
+domain, then after creating local entries do this:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>/$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>cd /etc</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>/etc$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mkpasswd -d &#62;&#62; /etc/passwd</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>/etc$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mkgroup -d &#62;&#62; /etc/group</B
+></TT
+></PRE
+></TD
+></TR
+></TABLE
+><P
+>Alternatively, to add only your account to the passwd file,
+assuming your NT name is "my_ntusername", instead of the above
+<B
+CLASS="COMMAND"
+>mkpasswd</B
+> you should do:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="PROMPT"
+>/$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>cd /etc</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>/etc$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>mkpasswd -d | grep my_ntusername &#62;&#62; /etc/passwd</B
+></TT
+></PRE
+></TD
+></TR
+></TABLE
+><P
+> Future changes to your NT registry or network domain will NOT be reflected in
 <TT
 CLASS="FILENAME"
 >/etc/passwd</TT
@@ -382,7 +473,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="installing-source.html"
->Prev</A
+>&#60;&#60;&#60; Previous</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -398,7 +489,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="setup-env.html"
->Next</A
+>Next &#62;&#62;&#62;</A
 ></TD
 ></TR
 ><TR
