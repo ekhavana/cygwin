@@ -10,6 +10,7 @@ use Net::FTP;
 use LWP::Simple;
 use File::Find;
 use File::stat;
+use Time::localtime;
 
 open(M, "mirrors.txt");
 my $out = "mirrors.html";
@@ -21,8 +22,7 @@ sub siteprint($$;@);
 
 $main::timeout = 120;
 
-my $date_time = localtime();
-my $pretty_date = join(' ', (split(' ', $date_time))[4,3]);
+my $pretty_date = sprintf "%4d-%02d-%02d %02d:%02d", 1900 + localtime->year, localtime->mon + 1, localtime->mday, localtime->hour, localtime->min;
 
 my $header = '<HTML>
 <HEAD>
@@ -65,7 +65,7 @@ open(STDOUT, "> /tmp/check-mirrors.out");
 open(STDERR, ">&STDOUT");
 $| = 1;
 
-my $summary .= "start at " . $date_time . "\n";
+my $summary .= "start at " . $pretty_date . "\n";
 
 #----------------------------------------------------------------------
 
@@ -149,7 +149,7 @@ print SUMMARY "Subject: cygwin mirror summary\n";
 print SUMMARY "\n";
 print SUMMARY "\n$ok_count ok, $bad_count bad\n\n";
 print SUMMARY $summary;
-print SUMMARY "done at ", $date_time, "\n";
+print SUMMARY "done at ", $pretty_date, "\n";
 close SUMMARY;
 
 open(OUT, "> $out");
