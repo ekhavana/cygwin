@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2002-07-02 0026 EDT</p>
+<p>Last updated: 2002-07-04 0300 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -63,6 +63,121 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-
 -->
 
 
+<h4>Test63</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2002-07-04 0300 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test62</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test63.exe.bz2">XWin-Test63.exe.bz2</a>
+(1073 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020704-0300.tar.bz2">xwin-20020704-0300.tar.bz2</a>
+(75 KiB)</td></tr>
+
+<tr><td>Download xc/config/cf/cygwin.cf diff against 20020704 XFree86 CVS: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xc-config-cf-cygwin.cf-20020704-0300.diff">xc-config-cf-cygwin.cf-20020704-0300.diff</a>
+(2 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/Imakefile diff against 20020704
+XFree86 CVS: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xc-programs-Xserver-Imakefile-20020704-0300.diff">xc-programs-Xserver-Imakefile-20020704-0300.diff</a>
+(1 KiB)</td></tr>
+
+<tr><td>Download xwin diff against 20020704 XFree86 CVS: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020704-0300.diff.bz2">xwin-20020704-0300.diff.bz2</a>
+(23 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>General - Fix the broken build that was Test62.  Test62 crashed
+during its startup sequence for anyone unfortunate to download it
+before it was pulled from distribution.  (Harold Hunt)</li>
+
+<li>win.h, winmisc.c, winpfbdd.c, winshadgdi.c, winshaddd.c,
+winshadddnl.c, winscrinit.c - Reimplement the stride pixel
+calculations that were removed in Test61.  The ``stride'' is the
+number of whole pixels that fit in a padded scan line; in other words,
+the stride is the number of bits in a scanline divided by the number
+of bits used to store each pixel (i.e., bits per pixel).  We cannot
+pass the simple pixel width of the window to the fb initialization
+routines because sometimes we have invisible pixels on the scanline
+that must be accounted for (e.g., when the number of pixels in the
+width is odd).  Had anyone seen this bug they would have seen a server
+that drew things diagonally (only -engine 2 seemed to exhibit this
+problem).  (Harold Hunt)</li>
+
+<li>winshaddd.c, winshadddnl.c - Add support for the `-clipupdates
+num_boxes' parameter when using `-engine 2' or `-engine 4', in
+addition to the previously supported `-engine 1'.  Once again, I can't
+tell if this feature has any benefit whatsoever.  I need some
+volunteers to perform rigorous testing with different values for the
+threshold at which point updated boxes are collected into a clipping
+region.  One may find the ``x11perf'' program beneficial here, as well
+as ``glxgears'', which gives a frames per second reading.  Of course,
+it would be most beneficial to have performance comparisions for a few
+different machine types (processors, memory amounts, video cards, PCI
+or AGP, etc.).  Update clipping is off by default.  (Harold Hunt)</li>
+
+<li>win.h, InitOutput.c, winengine.c, winshaddd.c, winshadddnl.c,
+winshadpfb.c - Change the DirectDraw module handle and function
+pointers from screen privates to global variables.  Loading the
+DirectDraw module and function pointers needs to be done only at
+server initialization, not at screen initialization.  Similarly, we
+don't need to unload and reload DirectDraw for each screen when the
+server regenerates; rather, we need only unload DirectDraw when the
+server is shutting down.  This cleanup makes it much for difficult to
+misunderstand what is going on with the DirectDraw module handle and
+function pointers.  (Harold Hunt)</li>
+
+<li>win.h, InitOutput.c, winengine.c - Detect the supported engines
+only once at startup, rather than once per screen initialization.
+Rework the supported engine detection logic to assume that the
+DirectDraw module handle and function pointers have already been
+loaded if they are present and working.  (Harold Hunt)</li>
+
+<li>win.h, InitOutput.c, winwndproc.c - Add a global module handle for
+``comctl32.dll'' and ``_TrackMouseEvent''.  Try to get a pointer to
+the _TrackMouseEvent function and print an informational message if we
+cannot find the function, suggesting to the user that they install
+Internet Explorer 3.0 or greater if they have not already done so.
+We also set the _TrackMouseEvent function pointer to point to the no
+operation function if we can't find a valid function so that any calls
+to the function pointer will do nothing (instead of trying to
+dereference a NULL and crashing).  Mouse pointer hiding/showing may be
+messed up when we don't have _TrackMouseEvent, but the user can
+remedy that by following the advice in the information message.
+Remove our compile-time link to comctl32.dll.  (Harold Hunt)</li>
+
+<li>InitOutput.c, winshadgdi.c, winshaddd.c, winshadddnl.c - Add an
+`-emulatepseudo' parameter that causes a depth 8 PseudoColor visual to
+be created in TrueColor modes, with the same limitations described in
+the Test62 change log.  PseudoColor emulation is off by default.
+(Harold Hunt)</li>
+
+<li>winscrinit.c - Add special handling for 8 bits per pixel screens
+when calculating the depth of the screen.  An 8 bit per pixel screen
+has no color masks so we can't sum up the bits in the color masks.
+Fortunately, we know that an 8 bit per pixel screen is always depth
+8.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
 <h4>Test62</h4>
 <table>
 <tbody>
@@ -85,7 +200,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020702-0026.tar.bz2">xwin-
 href="http://www.msu.edu/~huntharo/xwin/shadow/xc-programs-Xserver-Imakefile-20020702-0026.diff">xc-programs-Xserver-Imakefile-20020702-0026.diff</a>
 (1 KiB)</td></tr>
 
-<tr><td>Download xwin diff against 20020702 CVS: <a
+<tr><td>Download xwin diff against 20020702 XFree86 CVS: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020702-0026.diff.bz2">xwin-20020702-0026.diff.bz2</a>
 (23 KiB)</td></tr>
 
