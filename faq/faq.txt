@@ -165,6 +165,9 @@ choose the packages you wish to install, and update them individually.
      tcsh termcap tetex-beta texinfo textutils tiff time unzip vim w32api
      wget which xpm xpm-nox zip zlib
 
+   (This list is almost certainly out of date as new packages are
+added.)
+
    Full source code is available for all packages and tools.
 
    There is one recommended way to install Cygwin, which is to use the
@@ -321,33 +324,6 @@ without spaces.
 /etc/passwd, you may need to make corresponding changes there.  See the
 README file for that package.)
 
-Setup screwed up my mounts!
----------------------------
-
-   Setup will remove the following mounts, should you have them:
-
-     	/
-             /usr
-             /usr/bin
-             /usr/lib
-             /var
-             /lib
-             /bin
-             /etc
-
-   It will then restore (or create new) mounts for /, /usr/bin and
-/usr/lib as follows (assuming the default install root C:\cygwin):
-
-     	Device              Directory
-     	C:\cygwin\bin       /usr/bin
-     	C:\cygwin\lib       /usr/lib
-     	C:\cygwin           /
-
-   Since setup is not a Cygwin program, it cannot know about your mounts
-(or symlinks, for that matter), and so must impose and enforce this
-structure.  You should not try to defeat it, unless you know what you
-are doing and can deal with the consequences.
-
 How do I uninstall Cygwin?
 --------------------------
 
@@ -371,32 +347,38 @@ would not have done any of these things for you.
 Can I use setup to install snapshots?
 -------------------------------------
 
-   Yes.  If experimenting with developer snapshots from
+   No.  It used to be possible, but not any more.
+
+   If experimenting with developer snapshots from
 `http://cygwin.com/snapshots/', you should generally install the full
 `cygwin-inst-YYYYMMDD.tar.bz2' update, rather than just the DLL,
-otherwise some components may be out of sync.  However, Cygwin tar
-won't work because it will load the DLL that you're trying to update,
-and a non-Cygwin program like WinZip will put everything in the wrong
-place.  The solution is to use `setup.exe'.
+otherwise some components may be out of sync.  Cygwin tar won't be able
+to update `/usr/bin/cygwin1.dll', but it should succeed with everything
+else.  The following steps should work:
 
-   Just bunzip2 the cygwin-inst tarball, rename it to
-cygwin-YYYYMMDD.tar, gzip it, put it in an empty directory, and run
-`setup.exe' there.  You should be given the option to install it.
+  1. Download the snapshot, and run:
+          	cd /
+                  tar jxvf /posix/path/to/cygwin-inst-YYYYMMDD.tar.bz2
+                  cd /tmp
+                  tar jxvf /posix/path/to/cygwin-inst-YYYYMMDD.tar.bz2 usr/bin/cygwin1.dll
+
+  2. After closing all Cygwin apps (see below), use Explorer or the
+     Windows command shell to move `C:\cygwin\tmp\usr\bin\cygwin1.dll'
+     to `C:\cygwin\bin\cygwin1.dll'.
+
 
    The obvious warnings about updating the cygwin package and using
 developer snapshots apply:
 
-  1. Always download the latest version of setup from
-     `http://cygwin.com/setup.exe'.
+  1. Close all Cygwin apps, including shells and services (e.g. inetd),
+     before updating `cygwin1.dll'.  You may have to restart Windows to
+     clear the DLL from memory.
 
-  2. Close all Cygwin apps, including shells and services (e.g. inetd),
-     before running setup.  You may have to restart Windows to clear
-     the DLL from memory.
+  2. Snapshots are risky.  They have not been tested.  Use them *only*
+     if there is a feature or bugfix that you need to try, and you are
+     willing to deal with any problems.
 
-  3. Snapshots are risky.  They have not been tested.  Use them *only*
-     if there is a feature or bugfix that you need to try.
-
-  4. If you cannot download a snapshot from the main ftp distribution
+  3. If you cannot download a snapshot from the main ftp distribution
      site, use a mirror, and look in the `snapshots' directory.  You may
      have to hunt for one that has a copy of the latest snapshot.
      Start at `http://cygwin.com/mirrors.html'.
@@ -1844,18 +1826,25 @@ is itself a symbolic link, then find will not traverse it unless you
 specify the `-follow' option.  This behavior is different than most
 other UNIX implementations, but is not likely to change.
 
-Why doesn't man work?
----------------------
+Why doesn't man (or apropos) work?
+----------------------------------
 
    Even after installing the `man' package, you get an error like this:
 
-     	bash-2.03$ man man
+     	bash-2.04$ man man
      	Error executing formatting or display command.
      	System command (cd /usr/man ; (echo -e ".pl 1100i"; cat /usr/man/man1/man.1; echo ".pl \n(nlu+10") | /usr/bin/tbl | /usr/bin/groff -Tascii -mandoc | less -is) exited with status 32512.
      	No manual entry for man
 
-   You also need /bin/sh, which is found in the `ash' package.  Install
-this too.
+   You also need /bin/sh, which is found in the `ash' package.  You
+must install this too.
+
+   In addition, before you can use `man -k' or `apropos', you must
+create the whatis database.  Just run the command
+
+     	/usr/sbin/makewhatis
+
+   (it may take a minute to complete).
 
 Why doesn't chmod work?
 -----------------------
@@ -1938,9 +1927,27 @@ to determine whether they are executable.
 How do I print under Cygwin?
 ----------------------------
 
-   In lieu of a comprehensive FAQ entry (which will come soon), there
-are a couple of messages from the mailing list archives that may be
-helpful.  Start at `http://cygwin.com/ml/cygwin/2001-04/msg00657.html'.
+   There is no working lp or lpr system as you would find on UNIX.
+
+   Jason Tishler has written a couple of messages that explain how to
+use a2ps (for nicely formatted text in PostScript) and ghostscript (to
+print PostScript files on non-PostScript Windows printers).  Start at
+`http://cygwin.com/ml/cygwin/2001-04/msg00657.html'.  Note that the
+`file' command is now available as part of Cygwin setup.
+
+   Alternatively, on NT, you can use the Windows `print' command.  (It
+does not seem to be available on Win9x.)  Type
+
+     	bash$ print /\?
+
+   for usage instructions (note the `?' must be escaped from the shell).
+
+   Finally, you can simply `cat' the file to the printer's share name:
+
+     	bash$ cat myfile > //host/printer
+
+   You may need to press the formfeed button on your printer or append
+the formfeed character to your file.
 
 Why don't cursor keys work under Win95/Win98?
 ---------------------------------------------
@@ -2155,10 +2162,13 @@ discouraged?
    After a new installation in the default location, your mount points
 will look something like this:
 
-     Device              Directory           Type         Flags
-     C:\cygwin\bin       /usr/bin            user         binmode
-     C:\cygwin\lib       /usr/lib            user         binmode
-     C:\cygwin           /                   user         binmode
+     	bash$ mount
+     	C:\cygwin\bin on /usr/bin type system (binmode)
+     	C:\cygwin\lib on /usr/lib type system (binmode)
+     	C:\cygwin on / type system (binmode)
+
+   (Exactly what you see depends on what options you gave to
+`setup.exe'.)
 
    Note that /bin and /usr/bin point to the same location, as do /lib
 and /usr/lib.  This is intentional, and you should not undo these mounts
@@ -2211,8 +2221,8 @@ directories whose contents are exempt from scanning.  In a default
 installation, this would be ``C:\cygwin\bin''.  Obviously, this could be
 exploited by a hostile non-Cygwin program, so do this at your own risk.
 
-Why can't I run bash as a shell under NT Emacs?
------------------------------------------------
+How do I run bash as a shell under NT Emacs?
+--------------------------------------------
 
    The Windows port of GNU Emacs (aka "NT emacs") uses the Windows
 command shell by default.  Also, since Emacs is not a Cygwin
@@ -2841,15 +2851,9 @@ directory /obj, and want to install the tools in /install:
      make install > install.log 2>&1
 
    Normally, this will also attempt to build the documentation, which
-additionally requires db2html, texi2html and possibly others.  These
-tools are not included in the Cygwin distribution, but are readily
-obtainable:
-
-`db2html'
-     Part of docbook, from `http://sources.redhat.com/docbook-tools/'.
-
-`texi2html'
-     From `http://www.mathematik.uni-kl.de/~obachman/Texi2html/'.
+additionally requires db2html, and possibly other tools, which are not
+included in the Cygwin distribution.  You can get db2html as part of
+docbook, from `http://sources.redhat.com/docbook-tools/'.
 
    To check a cygwin1.dll, run "make check" in the winsup/cygwin
 directory.  If that works, install everything _except_ the dll (if you
