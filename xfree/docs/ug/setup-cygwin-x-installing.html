@@ -302,7 +302,7 @@ beyond the scope of this document.</P
 ><P
 ><TT
 CLASS="filename"
->XFree86-base</TT
+>xorg-x11-base</TT
 > (1 KiB;
 required, automatically selects a base set of packages for the typical
 installation)</P
@@ -311,32 +311,49 @@ installation)</P
 ><P
 ><TT
 CLASS="filename"
->XFree86-bin</TT
-> (3.1 MiB;
-required, executables for xterm, twm, etc.)</P
+>xorg-x11-bin</TT
+> (1.9 MiB;
+optional, executables for xterm, twm, etc.)</P
 ></LI
 ><LI
 ><P
 ><TT
 CLASS="filename"
->X-start-menu-icons</TT
-> (4 KiB;
-optional, adds icons for X Clients to the Start menu)</P
+>xorg-x11-bin-dlls</TT
+> (1.9 MiB;
+optional, libraries (DLLs) for executables.)</P
 ></LI
 ><LI
 ><P
 ><TT
 CLASS="filename"
->XFree86-etc</TT
-> (330 KiB;
+>xorg-x11-bin-lndir</TT
+> (5 KiB;
+optional, lndir program, useful for developing)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>xorg-x11-devel</TT
+> (938 MiB;
+optional, additional files needed to compile programs for
+Cygwin/X)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>xorg-x11-etc</TT
+> (335 KiB;
 required, configuration files for the X Server and programs in
-XFree86-bin)</P
+xorg-x11-bin)</P
 ></LI
 ><LI
 ><P
 ><TT
 CLASS="filename"
->XFree86-f100</TT
+>xorg-x11-f100</TT
 > (11.9 MiB;
 optional, 100 dpi fonts (75 dpi fonts are used by default))</P
 ></LI
@@ -344,7 +361,7 @@ optional, 100 dpi fonts (75 dpi fonts are used by default))</P
 ><P
 ><TT
 CLASS="filename"
->XFree86-fcyr</TT
+>xorg-x11-fcyr</TT
 > (368 KiB;
 optional, Cyrillic fonts)</P
 ></LI
@@ -352,31 +369,31 @@ optional, Cyrillic fonts)</P
 ><P
 ><TT
 CLASS="filename"
->XFree86-fenc</TT
-> (335 KiB;
+>xorg-x11-fenc</TT
+> (488 KiB;
 required, font encodings)</P
 ></LI
 ><LI
 ><P
 ><TT
 CLASS="filename"
->XFree86-fnts</TT
-> (16.3 MiB;
+>xorg-x11-fnts</TT
+> (16.4 MiB;
 required, 75 dpi fonts)</P
 ></LI
 ><LI
 ><P
 ><TT
 CLASS="filename"
->XFree86-fscl</TT
-> (1.96 MiB;
+>xorg-x11-fscl</TT
+> (2.2 MiB;
 optional, Speedo and Type1 scalable fonts)</P
 ></LI
 ><LI
 ><P
 ><TT
 CLASS="filename"
->XFree86-fsrv</TT
+>xorg-x11-fsrv</TT
 > (184 KiB;
 optional, X Font Server)</P
 ></LI
@@ -384,16 +401,8 @@ optional, X Font Server)</P
 ><P
 ><TT
 CLASS="filename"
->XFree86-html</TT
-> (635 KiB;
-optional, documentation html format)</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->XFree86-lib</TT
-> (156 KiB;
+>xorg-x11-libs-data</TT
+> (306 KiB;
 required, <TT
 CLASS="filename"
 >X11R6/lib/</TT
@@ -404,8 +413,8 @@ files)</P
 ><P
 ><TT
 CLASS="filename"
->XFree86-man</TT
-> (566 KiB;
+>xorg-x11-man-pages</TT
+> (550 KiB;
 optional, <B
 CLASS="command"
 >man</B
@@ -415,18 +424,20 @@ CLASS="command"
 ><P
 ><TT
 CLASS="filename"
->XFree86-nest</TT
-> (1.1 MiB;
-optional, Xnest nested X Server)</P
+>xorg-x11-man-pages-html</TT
+> (596 KiB;
+optional, <B
+CLASS="command"
+>man</B
+> pages in html format)</P
 ></LI
 ><LI
 ><P
 ><TT
 CLASS="filename"
->XFree86-prog</TT
+>xorg-x11-nest</TT
 > (1.1 MiB;
-optional, additional files needed to compile programs for
-Cygwin/X)</P
+optional, Xnest nested X Server)</P
 ></LI
 ><LI
 ><P
@@ -449,7 +460,7 @@ required, example X Server and client startup scripts)</P
 ><P
 ><TT
 CLASS="filename"
->XFree86-vfb</TT
+>xorg-x11-vfb</TT
 > (1.2 MiB;
 optional, X Virtual Frame Buffer (Xvfb) server)</P
 ></LI
@@ -457,8 +468,8 @@ optional, X Virtual Frame Buffer (Xvfb) server)</P
 ><P
 ><TT
 CLASS="filename"
->XFree86-xserv</TT
-> (1.2 MiB;
+>xorg-x11-xwin</TT
+> (1.3 MiB;
 required, the Cygwin/X X Server)</P
 ></LI
 ></UL
@@ -467,15 +478,15 @@ required, the Cygwin/X X Server)</P
 ><P
 >You must select the <VAR
 CLASS="literal"
->XFree86-base</VAR
+>xorg-x11-base</VAR
 > package,
 which is located in the <VAR
 CLASS="literal"
->XFree86</VAR
+>X11</VAR
 >
 category.  The <VAR
 CLASS="literal"
->XFree86-base</VAR
+>xorg-x11-base</VAR
 > package is a helper
 package that automatically selects a working set of packages for you
 that will allow Cygwin/X to work.  You may also want to ensure that
