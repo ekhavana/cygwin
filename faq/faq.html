@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 14 September 2000 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 26 September 2000 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -57,12 +57,12 @@
 <UL>
 <LI><A NAME="TOC29" HREF="faq.html#SEC29">How should I set my PATH?</A>
 <LI><A NAME="TOC30" HREF="faq.html#SEC30">How do I convert between Windows and UNIX paths?</A>
-<LI><A NAME="TOC31" HREF="faq.html#SEC31">How do I set /etc up?</A>
-<LI><A NAME="TOC32" HREF="faq.html#SEC32">Why doesn't bash read my .bashrc file on startup?</A>
-<LI><A NAME="TOC33" HREF="faq.html#SEC33">How can I get bash filename completion to be case insensitive?</A>
-<LI><A NAME="TOC34" HREF="faq.html#SEC34">Can I use paths/filenames containing spaces in them?</A>
-<LI><A NAME="TOC35" HREF="faq.html#SEC35">Why can't I cd into a shortcut to a directory?</A>
-<LI><A NAME="TOC36" HREF="faq.html#SEC36">I'm having basic problems with find.  Why?</A>
+<LI><A NAME="TOC31" HREF="faq.html#SEC31">Why doesn't bash read my .bashrc file on startup?</A>
+<LI><A NAME="TOC32" HREF="faq.html#SEC32">How can I get bash filename completion to be case insensitive?</A>
+<LI><A NAME="TOC33" HREF="faq.html#SEC33">Can I use paths/filenames containing spaces in them?</A>
+<LI><A NAME="TOC34" HREF="faq.html#SEC34">Why can't I cd into a shortcut to a directory?</A>
+<LI><A NAME="TOC35" HREF="faq.html#SEC35">I'm having basic problems with find.  Why?</A>
+<LI><A NAME="TOC36" HREF="faq.html#SEC36">Why doesn't man work?</A>
 <LI><A NAME="TOC37" HREF="faq.html#SEC37">Why doesn't chmod work?</A>
 <LI><A NAME="TOC38" HREF="faq.html#SEC38">Why don't cursor keys work under Win95/Win98?</A>
 <LI><A NAME="TOC39" HREF="faq.html#SEC39">Is it OK to have multiple copies of the DLL?</A>
@@ -2375,26 +2375,7 @@ as such.
 
 
 
-<H3><A NAME="SEC31" HREF="faq.html#TOC31">How do I set /etc up?</A></H3>
-
-<P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
-
-
-<P>
-If you want a valid /etc set up (so "ls -l" will display correct
-user information for example) and if you are running NT (preferably
-with an NTFS file system), you should just need to create the /etc
-directory on the filesystem mounted as / and then use mkpasswd and
-mkgroup to create /etc/passwd and /etc/group respectively.  Since
-Windows 95/98's Win32 API is less complete, you're out of luck if
-you're running Windows 95/98.
-
-
-
-
-<H3><A NAME="SEC32" HREF="faq.html#TOC32">Why doesn't bash read my .bashrc file on startup?</A></H3>
+<H3><A NAME="SEC31" HREF="faq.html#TOC31">Why doesn't bash read my .bashrc file on startup?</A></H3>
 
 <P>
 Your .bashrc is read from your home directory specified by the HOME
@@ -2405,7 +2386,7 @@ mounted as / in Cygwin.
 
 
 
-<H3><A NAME="SEC33" HREF="faq.html#TOC33">How can I get bash filename completion to be case insensitive?</A></H3>
+<H3><A NAME="SEC32" HREF="faq.html#TOC32">How can I get bash filename completion to be case insensitive?</A></H3>
 
 <P>
 "shopt -s nocaseglob" should do the trick.
@@ -2413,7 +2394,7 @@ mounted as / in Cygwin.
 
 
 
-<H3><A NAME="SEC34" HREF="faq.html#TOC34">Can I use paths/filenames containing spaces in them?</A></H3>
+<H3><A NAME="SEC33" HREF="faq.html#TOC33">Can I use paths/filenames containing spaces in them?</A></H3>
 
 <P>
 Cygwin does support spaces in filenames and paths.  That said, some
@@ -2441,7 +2422,7 @@ or
 
 
 
-<H3><A NAME="SEC35" HREF="faq.html#TOC35">Why can't I cd into a shortcut to a directory?</A></H3>
+<H3><A NAME="SEC34" HREF="faq.html#TOC34">Why can't I cd into a shortcut to a directory?</A></H3>
 
 <P>
 Cygwin does not follow MS Windows Explorer Shortcuts (*.lnk files).  It
@@ -2457,12 +2438,33 @@ under native Win32 non-Cygwin applications such as Explorer.
 
 
 
-<H3><A NAME="SEC36" HREF="faq.html#TOC36">I'm having basic problems with find.  Why?</A></H3>
+<H3><A NAME="SEC35" HREF="faq.html#TOC35">I'm having basic problems with find.  Why?</A></H3>
 
 <P>
 Make sure you are using the find that came with Cygwin and that you
 aren't picking up the Win32 find command instead.  You can verify that
 you are getting the right one by doing a "type find" in bash.
+
+
+
+
+<H3><A NAME="SEC36" HREF="faq.html#TOC36">Why doesn't man work?</A></H3>
+
+<P>
+Even after installing the <SAMP>`man'</SAMP> package, you get an error like this:
+
+
+
+<PRE>
+	bash-2.03$ man man
+	Error executing formatting or display command.
+	System command (cd /usr/man ; (echo -e ".pl 1100i"; cat /usr/man/man1/man.1; echo ".pl \n(nlu+10") | /usr/bin/tbl | /usr/bin/groff -Tascii -mandoc | less -is) exited with status 32512.
+	No manual entry for man
+</PRE>
+
+<P>
+You also need /bin/sh, which is found in the <SAMP>`ash'</SAMP> package.
+Install this too.
 
 
 
@@ -6179,7 +6181,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 14 September 2000 using
+This document was generated on 26 September 2000 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
