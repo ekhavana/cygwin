@@ -247,7 +247,7 @@
 	}
 
 	echo "<pre>\n";
-	echo "<form action=\"\" method=\"POST\">\n";
+	echo "<form action=\"app-submit.php\" method=\"POST\">\n";
 
 	printsubs($step1ar);
 	if ($step1) {
