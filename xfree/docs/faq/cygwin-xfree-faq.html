@@ -44,6 +44,58 @@ COLSPAN="3"
 ><TR
 ><TD
 ALIGN="LEFT"
+>Revision 1.0.7</TD
+><TD
+ALIGN="LEFT"
+>2003-12-18</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added troubleshooting info for Microsoft Services for Unix.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 1.0.6</TD
+><TD
+ALIGN="LEFT"
+>2003-12-06</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added troubleshooting info for Ctrl-Alt-BackSpace and AutoFocus.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 1.0.5</TD
+><TD
+ALIGN="LEFT"
+>2003-12-05</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added troubleshooting info for AltGr problem with Windows XP and Powertoys.
+Added troubleshooting for very poor performance.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
 >Revision 1.0.4</TD
 ><TD
 ALIGN="LEFT"
@@ -519,6 +571,34 @@ HREF="cygwin-xfree-faq.html#q-ssh-no-x11forwarding"
 >5.6. <A
 HREF="cygwin-xfree-faq.html#q-xkb-not-working"
 >Loading XKB keymaps fails</A
+></DT
+><DT
+>5.7. <A
+HREF="cygwin-xfree-faq.html#alt-gr-win-xp-powertoys"
+>I have Windows XP with Powertoys installed and AltGr does not work. 
+What can I do?</A
+></DT
+><DT
+>5.8. <A
+HREF="cygwin-xfree-faq.html#poor-performance"
+>XWin has very poor performance. What's the reason?</A
+></DT
+><DT
+>5.9. <A
+HREF="cygwin-xfree-faq.html#disable-terminate-server"
+>The option -nounixkill has no effect. How can i prevent the server 
+shutdown an Ctrl-Alt-BackSpace?</A
+></DT
+><DT
+>5.10. <A
+HREF="cygwin-xfree-faq.html#window-auto-focus"
+>Is there a Focus-Follows-Mouse feature (Auto-Focus)?</A
+></DT
+><DT
+>5.11. <A
+HREF="cygwin-xfree-faq.html#microsoft-services-for-unix"
+>I have Microsoft Services for Unix installed and can't type anything. 
+Help me!!!</A
 ></DT
 ></DL
 ></DD
@@ -2632,6 +2712,178 @@ then please report them to the mailinglist.
 </P
 ></DIV
 ></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="alt-gr-win-xp-powertoys"
+></A
+><B
+>5.7. </B
+>I have Windows XP with Powertoys installed and AltGr does not work. 
+What can I do?</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>Unfortunately there is not much you can do. Somehow Powertoys on Windows
+XP causes the algorithm for AltGr detection to fail. So the easy solution is
+to disable Powertoys.</P
+><P
+>The second (and hard) solution is to debug the keyboardhandling code and
+determine how the two messages which are sent by Windows when AltGr is pressed
+can be distinguished from a combined Alt and Control press.</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="poor-performance"
+></A
+><B
+>5.8. </B
+>XWin has very poor performance. What's the reason?</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>Most likely you have installed some kind of personal firewall, VPN 
+software or any other software that modifies the TCP/IP stack of Windows.
+Especially Webwasher and some other filtering software are known to slow
+down the network traffic.</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="disable-terminate-server"
+></A
+><B
+>5.9. </B
+>The option -nounixkill has no effect. How can i prevent the server 
+shutdown an Ctrl-Alt-BackSpace?</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>There is a keybinding to Ctrl-Alt-BackSpace which is named 
+TerminateServer. Remove this binding and Ctrl-Alt-BackSpace will have no 
+effect.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>xmodmap -e "keycode 22 = BackSpace"
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="window-auto-focus"
+></A
+><B
+>5.10. </B
+>Is there a Focus-Follows-Mouse feature (Auto-Focus)?</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>This is a setting of the windowmanager used. The default windowmanager
+twm has no such feature. But with fvwm2 this can be achieved with the this 
+configuration entry: 
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>Focus FocusFollowsMouse
+</PRE
+></TD
+></TR
+></TABLE
+>
+Other windowmanagers (eg. windowmaker) have similar features too.</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="microsoft-services-for-unix"
+></A
+><B
+>5.11. </B
+>I have Microsoft Services for Unix installed and can't type anything. 
+Help me!!!</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>Microsoft Services for Unix set some environment variables which 
+points Cygwin/X to outdated or not existing files. These variables are
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>XAPPLRESDIR
+XCMSDB
+XKEYSYMDB
+XNLSPATH
+</PRE
+></TD
+></TR
+></TABLE
+>
+To have Cygwin/X work correctly you have to unset at least <VAR
+CLASS="parameter"
+>&#13;XKEYSYMDB</VAR
+>. 
+</P
+><P
+>&#13;Reported by Juan Medina, Pavel Rozenboim
+</P
+></DIV
+></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -3481,7 +3733,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN642"
+NAME="AEN688"
 ></A
 ><P
 ><B
