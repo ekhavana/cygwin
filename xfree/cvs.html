@@ -1,0 +1,84 @@
+<HTML>
+<HEAD>
+<title>Cygwin in CVS</title>
+</HEAD>
+
+<!--#include virtual="cygwin-header.html"-->
+
+<h1 align=center>Cygwin/XFree in CVS</h1>
+
+<p>The sources to the core Cygwin/XFree files are available via anonymous CVS access.  If you don't
+know what CVS is, visit <a href="http://www.sourcegear.com/CVS">the
+CVS home page</a> or read <a
+href="http://www.delorie.com/gnu/docs/cvs/cvs_toc.html">the CVS
+Manual</a>.  You'll need a version with networking capabilities to
+access this server.</p>
+
+<p>To access the repository, you'll need to set the <tt>CVSROOT</tt>
+environment variable as in these examples (if you are using a
+different shell, you'll have to figure it out yourself):</p>
+
+<pre>
+95/NT	set    CVSROOT=:pserver:anoncvs@anoncvs.cygnus.com:/cvs/src
+bash	export CVSROOT=:pserver:anoncvs@anoncvs.cygnus.com:/cvs/src
+csh	setenv CVSROOT :pserver:anoncvs@anoncvs.cygnus.com:/cvs/src
+</pre>
+
+<p>Once you've done that, you need to tell your local cvs software
+what password to use.  The password is the word
+<tt>anoncvs </tt>:</p>
+
+<pre>
+bash$ cvs login
+(Logging in to anoncvs@anoncvs.cygnus.com)
+CVS password: <i>anoncvs</i>
+</pre>
+
+<p><em>Note:</em> Windows users may need to make sure the
+<tt>HOME</tt> environment variable is set to something meaningful. (for example
+create a directory <a href="file:///c:/users/home">c:\users\home</a> and do SET
+HOME=C:\users\home)</p>
+
+<p>After this, you shouldn't have to worry about passwords any more,
+as it will store your password in <tt>$HOME/.cvspass</tt>
+(semi-encoded).  In other words, don't type "<tt>cvs login</tt>"
+again.</p>
+
+<p>To get the Cygwin sources, do this:
+
+<pre>
+bash$ cvs co src/cygwin-xfree
+</pre>
+
+<p>This will create a subdirectory called <tt>src/cygwin-xfree</tt> and fill it
+with the core sources.  Once you have the latest sources, "<tt>cvs
+update</tt>" will get any changes since your last update.</p>
+
+<pre>
+
+
+
+
+
+
+
+
+</pre>
+<hr>
+
+<h2>For developers with write access</h2>
+
+<p>If you are a cygwin developer with a sourceware account, and
+someone has told you that you have permission to write to
+the sourceware cvs repository, the above information still applies
+to you with two exceptions:
+
+<ol>
+<li>Replace <tt>:pserver:</tt> with <tt>:ext:</tt>
+<li>Set <tt>CVS_RSH</tt> to the path to your <tt>ssh</tt> program
+</ol>
+
+If you don't know if you have write access or not, you don't have it.
+
+
+<!--#include virtual="cygwin-footer.html"-->
