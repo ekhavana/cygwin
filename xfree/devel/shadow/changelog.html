@@ -16,7 +16,7 @@
 
 <!--#include virtual="../../cygx-header.html" -->
 
-<p>Last updated: 2001-11-11 1200 EST</p>
+<p>Last updated: 2001-11-11 1500 EST</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -59,6 +59,54 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-2001-.tar.bz2">xwin-2001-.ta
 </tbody>
 </table>
 -->
+
+
+<h4>Test53</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-11-11 1500 EST</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test53.exe.bz2">XWin-Test53.exe.bz2</a>
+(1074 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20011111-1500.tar.bz2">xwin-20011111-1500.tar.bz2</a>
+(69 KiB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winkeybd.c - winRestoreModeKeyStates () - This function is
+supposed to handle the case where the user switches out of
+Cygwin/XFree86, changes the state of a mode key (i.e. Num Lock), then
+returns to Cygwin/XFree86.  Back in May I replaced a macro, WIN_XOR,
+with the C binary operator ^.  At the time I didn't realize that I was
+using the binary operator instead of the logical operator.  The end
+result is that some of the mode keys were toggled each time that
+Cygwin/XFree86 gained and lost focus, regardless of whether the key
+state had changed.  The WIN_XOR macro is being used again, and I have
+added a note as to why the C xor operator cannot be used.  This has
+been broken for months, I'm really surprised that no one noticed it
+yet.</li>
+
+<li>winwndproc.c - winWindowProc () - Move the mode key state
+save/restore function calls to the WM_KILLFOCUS and WM_SETFOCUS
+messages, from the WM_ACTIVATE message.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 <h4>Test52</h4>
