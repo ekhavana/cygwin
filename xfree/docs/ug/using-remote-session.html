@@ -73,12 +73,11 @@ NAME="using-remote-session"
 >Remote Sessions via XDMCP</A
 ></H1
 ><P
->Cygwin/XFree86 can be used login to a remote session using XDMCP (X
-Display Manager Control Protocol).</P
+>Cygwin/XFree86 can be used login to one or several remote sessions
+using XDMCP (X Display Manager Control Protocol).</P
 ><P
 >Start Cygwin/XFree86 with a command similar to the following to login
-to a remote session using
-XDMCP:</P
+to a single remote session using XDMCP:</P
 ><P
 >&#13;<TT
 CLASS="userinput"
@@ -87,25 +86,92 @@ CLASS="userinput"
 <TT
 CLASS="replaceable"
 ><I
->remote_host_ip_address</I
-></TT
-> -from
-<TT
-CLASS="replaceable"
-><I
->local_host_ip_address</I
+>remote_hostname_or_ip_address</I
 ></TT
 ></B
 ></TT
-></P
+>
+</P
 ><P
->XDMCP is a complex system; further discussion of XDMCP is beyond
-the scope of this document.  You may wish to read the <A
+>You may login to several remote sesstions with a single or
+multiple hosts using XDMCP.  Each session will need a seperate display
+number, specified by the <TT
+CLASS="parameter"
+><I
+>:display_number</I
+></TT
+>
+parameter, such as <TT
+CLASS="parameter"
+><I
+>:0</I
+></TT
+>.  A display number is not
+the same as a screen number, as a single display can have multiple
+screens associated with it.  Each display listens on a different
+network port number, so each display can connect to multiple machines.
+Start Cygwin/XFree86 with command lines similar to the following to login
+to several remote sessions using XDMCP:</P
+><P
+>&#13;<TT
+CLASS="userinput"
+><B
+>XWin.exe :0 -query
+<TT
+CLASS="replaceable"
+><I
+>remote_hostname_or_ip_address_0</I
+></TT
+></B
+></TT
+>
+</P
+><P
+>&#13;<TT
+CLASS="userinput"
+><B
+>XWin.exe :1 -query
+<TT
+CLASS="replaceable"
+><I
+>remote_hostname_or_ip_address_1</I
+></TT
+></B
+></TT
+>
+</P
+><P
+>Note that the <TT
+CLASS="parameter"
+><I
+>:display_number</I
+></TT
+> parameter
+is a general X Server parameter, not specific to Cygwin/XFree86.  Further
+documentation of the <TT
+CLASS="parameter"
+><I
+>:display_number</I
+></TT
+> parameter
+can be found in the <A
+HREF="http://www.xfree86.org/current/Xserver.1.html"
+TARGET="_top"
+>X Server
+documentation</A
+>.  XDMCP is a complex system that is not specific
+to Cygwin/XFree86; further discussion of XDMCP is beyond the scope of this
+document.  You may wish to read the <A
 HREF="http://www.linuxdoc.org/HOWTO/XDMCP-HOWTO/"
 TARGET="_top"
 >Linux XDMCP HOWTO</A
-> for more
-information.</P
+> or the
+<A
+HREF="http://www.xfree86.org/current/Xserver.1.html#sect6"
+TARGET="_top"
+>X Server
+XDMCP Options</A
+> for more information.</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
