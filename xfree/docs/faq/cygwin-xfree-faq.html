@@ -339,6 +339,15 @@ HREF="cygwin-xfree-faq.html#usage"
 ><DL
 ><DT
 >4.1. <A
+HREF="cygwin-xfree-faq.html#q-aix-xkb"
+>Logging into AIX via XDMCP causes the keyboard to function as if
+<B
+CLASS="keycap"
+>AltGr</B
+> is permanently pressed.</A
+></DT
+><DT
+>4.2. <A
 HREF="cygwin-xfree-faq.html#q-why-twm-only-wm"
 >Why is <SPAN
 CLASS="application"
@@ -347,28 +356,28 @@ CLASS="application"
 with Cygwin/XFree86?</A
 ></DT
 ><DT
->4.2. <A
+>4.3. <A
 HREF="cygwin-xfree-faq.html#q-what-wm-available"
 >What precompiled window managers are available?</A
 ></DT
 ><DT
->4.3. <A
+>4.4. <A
 HREF="cygwin-xfree-faq.html#q-non-U.S.-keyboard-layout"
 >How do I use a non-U.S. keyboard layout?</A
 ></DT
 ><DT
->4.4. <A
+>4.5. <A
 HREF="cygwin-xfree-faq.html#q-modmap-obtaining"
 >Where can I find an xmodmap for my non-U.S. keyboard layout?</A
 ></DT
 ><DT
->4.5. <A
+>4.6. <A
 HREF="cygwin-xfree-faq.html#q-how-modmap-and-xdmcp"
 >How do I get my non-U.S. keyboard modmap to be installed when
 using xdmcp?</A
 ></DT
 ><DT
->4.6. <A
+>4.7. <A
 HREF="cygwin-xfree-faq.html#q-bash-extended-chars"
 >I have installed a modmap for my non-U.S. keyboard layout, but
 how do I get <B
@@ -377,7 +386,7 @@ CLASS="command"
 > to display accents and/or umlauts?</A
 ></DT
 ><DT
->4.7. <A
+>4.8. <A
 HREF="cygwin-xfree-faq.html#q-bash-8bit"
 >How do I put <B
 CLASS="command"
@@ -389,7 +398,7 @@ CLASS="QUOTE"
 mode?</A
 ></DT
 ><DT
->4.8. <A
+>4.9. <A
 HREF="cygwin-xfree-faq.html#q-mandrake-8.1-xdmcp"
 >Why doesn't Linux-Mandrake 8.1 present a login screen when using
 <TT
@@ -400,19 +409,19 @@ CLASS="parameter"
 > for XDMCP?</A
 ></DT
 ><DT
->4.9. <A
+>4.10. <A
 HREF="cygwin-xfree-faq.html#q-solaris-fonts"
 >Why does Cygwin/XFree86 not display the XDM login prompt on Solaris
 when I try to open an XDMCP session with a remote Solaris machine?</A
 ></DT
 ><DT
->4.10. <A
+>4.11. <A
 HREF="cygwin-xfree-faq.html#q-remote-solaris"
 >Why does Cygwin/XFree86 freeze when I try to open an XDMCP session
 with a remote Solaris machine?</A
 ></DT
 ><DT
->4.11. <A
+>4.12. <A
 HREF="cygwin-xfree-faq.html#q-xdmcp-info"
 >Where can I find more information about XDMCP (X Display Manager
 Protocol).</A
@@ -1528,10 +1537,55 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-why-twm-only-wm"
+NAME="q-aix-xkb"
 ></A
 ><B
 >4.1. </B
+>Logging into AIX via XDMCP causes the keyboard to function as if
+<B
+CLASS="keycap"
+>AltGr</B
+> is permanently pressed.</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>[Pavel Rybnicek] The X Keyboard Extension doesn't work with AIX.
+The X Keyboard Extension is enabled by default, so you must disable it
+with the <TT
+CLASS="parameter"
+><I
+>-kb</I
+></TT
+> parameter.  An example command
+line follows.</P
+><P
+><TT
+CLASS="userinput"
+><B
+>XWin.exe -kb -query
+<TT
+CLASS="replaceable"
+><I
+>aix_hostname_or_ip_address</I
+></TT
+></B
+></TT
+></P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-why-twm-only-wm"
+></A
+><B
+>4.2. </B
 >Why is <SPAN
 CLASS="application"
 >twm</SPAN
@@ -1562,7 +1616,7 @@ CLASS="question"
 NAME="q-what-wm-available"
 ></A
 ><B
->4.2. </B
+>4.3. </B
 >What precompiled window managers are available?</P
 ></DIV
 ><DIV
@@ -1582,7 +1636,7 @@ CLASS="question"
 NAME="q-non-U.S.-keyboard-layout"
 ></A
 ><B
->4.3. </B
+>4.4. </B
 >How do I use a non-U.S. keyboard layout?</P
 ></DIV
 ><DIV
@@ -1592,7 +1646,7 @@ CLASS="answer"
 > </B
 >See <A
 HREF="cygwin-xfree-faq.html#q-modmap-obtaining"
->Q: 4.4.</A
+>Q: 4.5.</A
 > to obtain a modmap for
 your keyboard layout.</P
 ></DIV
@@ -1606,7 +1660,7 @@ CLASS="question"
 NAME="q-modmap-obtaining"
 ></A
 ><B
->4.4. </B
+>4.5. </B
 >Where can I find an xmodmap for my non-U.S. keyboard layout?</P
 ></DIV
 ><DIV
@@ -1644,7 +1698,7 @@ CLASS="question"
 NAME="q-how-modmap-and-xdmcp"
 ></A
 ><B
->4.5. </B
+>4.6. </B
 >How do I get my non-U.S. keyboard modmap to be installed when
 using xdmcp?</P
 ></DIV
@@ -1743,7 +1797,7 @@ CLASS="question"
 NAME="q-bash-extended-chars"
 ></A
 ><B
->4.6. </B
+>4.7. </B
 >I have installed a modmap for my non-U.S. keyboard layout, but
 how do I get <B
 CLASS="command"
@@ -1790,7 +1844,7 @@ CLASS="question"
 NAME="q-bash-8bit"
 ></A
 ><B
->4.7. </B
+>4.8. </B
 >How do I put <B
 CLASS="command"
 >bash</B
@@ -1807,7 +1861,7 @@ CLASS="answer"
 > </B
 >See <A
 HREF="cygwin-xfree-faq.html#q-bash-extended-chars"
->Q: 4.6.</A
+>Q: 4.7.</A
 ></P
 ></DIV
 ></DIV
@@ -1820,7 +1874,7 @@ CLASS="question"
 NAME="q-mandrake-8.1-xdmcp"
 ></A
 ><B
->4.8. </B
+>4.9. </B
 >Why doesn't Linux-Mandrake 8.1 present a login screen when using
 <TT
 CLASS="parameter"
@@ -1889,7 +1943,7 @@ CLASS="question"
 NAME="q-solaris-fonts"
 ></A
 ><B
->4.9. </B
+>4.10. </B
 >Why does Cygwin/XFree86 not display the XDM login prompt on Solaris
 when I try to open an XDMCP session with a remote Solaris machine?</P
 ></DIV
@@ -1900,7 +1954,7 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-xfree-faq.html#q-remote-solaris"
->Q: 4.10.</A
+>Q: 4.11.</A
 > and 
 <A
 HREF="cygwin-xfree-faq.html#q-cde-via-xdmcp-hangs"
@@ -1995,7 +2049,7 @@ CLASS="question"
 NAME="q-remote-solaris"
 ></A
 ><B
->4.10. </B
+>4.11. </B
 >Why does Cygwin/XFree86 freeze when I try to open an XDMCP session
 with a remote Solaris machine?</P
 ></DIV
@@ -2006,7 +2060,7 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-xfree-faq.html#q-solaris-fonts"
->Q: 4.9.</A
+>Q: 4.10.</A
 > and 
 <A
 HREF="cygwin-xfree-faq.html#q-cde-via-xdmcp-hangs"
@@ -2034,7 +2088,7 @@ CLASS="question"
 NAME="q-xdmcp-info"
 ></A
 ><B
->4.11. </B
+>4.12. </B
 >Where can I find more information about XDMCP (X Display Manager
 Protocol).</P
 ></DIV
@@ -2838,10 +2892,10 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-xfree-faq.html#q-solaris-fonts"
->Q: 4.9.</A
+>Q: 4.10.</A
 > and <A
 HREF="cygwin-xfree-faq.html#q-remote-solaris"
->Q: 4.10.</A
+>Q: 4.11.</A
 ></P
 ></DIV
 ><DIV
@@ -2990,7 +3044,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN548"
+NAME="AEN558"
 ></A
 ><P
 ><B
