@@ -49,7 +49,8 @@ if (%main::packages) {
     for my $p (sort keys %main::packages) {
 	for my $f (@{$main::packages{$p}}) {
 	    print '<tr><td><img src="http://sources.redhat.com/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
-	           "<td cellspacing=10><a href=\"package-cat.cgi?file=$f&grep=" . uri_escape($grep) . '">' . $f . '</a></td><td align="left">' . findheader($p, $index) . "</td></tr>\n";
+	           '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
+		   uri_escape($grep) . '">' . $f . '</a></td><td align="left">' . findheader($p, $index) . "</td></tr>\n";
 	}
     }
 }
