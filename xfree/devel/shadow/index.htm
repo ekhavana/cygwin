@@ -1,0 +1,187 @@
+<html lang="en-US">
+
+<meta name="Author" content="Harold L Hunt II">
+<meta name="keywords" content="xfree86, Cygwin, X, x window system, microsoft, windows, x/server, xserver, x-server, Cygwin/XFree86, Win32, Win32API, Win32 API, shadow, shadowfb, fb">
+<meta name="description" content="Cygwin/XFree86 Shadow Framebuffer Test"> 
+
+<head>
+<title>
+Cygwin/XFree86 - Shadow Framebuffer Test
+</title>
+
+<style type="text/css">
+<!--
+body	{font-family: Arial, Helvetica, sans-serif}
+p	{font-family: Arial, Helvetica, sans-serif; font-size: small}
+a	{font-family: Arial, Helvetica, sans-serif}
+a:hover {font-family: Arial, Helvetica, sans-serif; text-decoration: none}
+-->
+</style>
+</head>
+
+<body>
+
+<h3>
+Cygwin/XFree86 - Shadow Framebuffer Test
+</h3>
+
+<p>
+Last updated: 29Mar2001 1419 EST
+</p>
+
+<p>Shadow Framebuffer Test is, you guessed it, a development release.</p>
+
+<p>Shadow Framebuffer Test will work with Windows 95/98/Me, as well as Windows NT 4.0 and Windows 2000.</p>
+
+<p>Colors have now, as of 21Mar2001 2240 EST, been fixed for some colors depths (16, 32 for sure, maybe 24).</p>
+
+<h4>
+Known Issues
+</h4>
+<ul>
+
+<li>
+Your X server, compiled libraries, and fonts must all be the same version, else you will get strange problems (ie. Closing an application window kills the server).
+</li>
+
+<li>
+Latest test servers are compiled from the XFree86 4.0.3 source, so you must have the Cygwin/XFree86 4.0.3 binaries, fonts, and libraries installed in order to run the most recent test servers.
+</li>
+
+<li>
+Color depths of 16 and 32 bits per pixel have been tested, 24 bits per pixel may work.
+</li>
+
+<li>
+Keyboard key mappings are not perfect; however, they are generally correct for US keyboards, as of 28Mar2001.  You may find keys that don't work or that are mapped to the wrong symbol.
+</li>
+
+<li>
+This is not a feature complete release.  This is not a stable release.
+</li>
+
+</ul>
+
+</tbody>
+</table>
+
+<h4>
+Downloading Shadow Framebuffer Test
+</h4>
+<h5>
+Primary Download Site (MSU - ridiculously high bandwidth)
+</h5>
+<table>
+<tbody>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/shadow/XWin.exe.bz2">
+XWin.exe.bz2</a> - Install this binary on top of the binary included with your Cygwin/XFree86 4.0.3 installation. (1344 kB)
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20010329-1419.tar.bz2">
+xwin-20010329-1419.tar.bz2</a> Source code for the server. (77 kB)
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/shadow/xc-programs-Xserver-20010328-1938.tar.bz2">
+xc-programs-Xserver-20010328-1938.tar.bz2</a> Modified Imakefile for compiling the server. (17 kB)
+</td>
+</tr>
+
+</tbody>
+</table>
+
+<h4>
+Installing Shadow Framebuffer Test
+</h4>
+
+<p>Shadow Framebuffer Test is an update to one file, namely XWin.exe, that you install overtop of your current Cygwin/XFree86 installation.  Follow the procedures below to backup your original files and install the Shadow Framebuffer Test files.  Run the following commands in a Cygwin shell:</p>
+
+<table>
+<tbody>
+
+<tr>
+<td>
+cp XWin.exe.bz2 /usr/X11R6/bin
+</td>
+</tr>
+
+<tr>
+<td>
+cd /usr/X11R6/bin
+</td>
+</tr>
+
+<tr>
+<td>
+mv XWin.exe XWin.orig.exe
+</td>
+</tr>
+
+<tr>
+<td>
+bunzip2 XWin.exe.bz2
+</td>
+</tr>
+
+</tbody>
+</table>
+
+<h4>
+Screenshots (Of course :)
+</h4>
+
+<table>
+<tbody>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/shadow/cygwin-xfree86-windows-twm.png">
+cygwin-xfree86-windows-twm.png (64 kB)
+</a>
+Cygwin/XFree86 running twm, overlayed by the Windows start menu and WinAmp.
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/shadow/cygwin-xfree86-remote-gnome.png">
+cygwin-xfree86-remote-gnome.png (121 kB)
+</a>
+Cygwin/XFree86 running a remote Gnome session, showing Netscape and a Gnome terminal.
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/shadow/cygwin-xfree86-remote-kde.png">
+cygwin-xfree86-remote-kde.png (320 kB)
+</a>
+Cygwin/XFree86 running a remote KDE session, showing Konqueror and an Eterm with output from xdpyinfo; notice that the Render extension is installed.
+</td>
+</tr>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/shadow/cygwin-xfree86-xdmcp-kdm.png">
+cygwin-xfree86-xdmcp-kde.png (52 kB)
+</a>
+Cygwin/XFree86 using xdmcp to login to a remote Linux machine running kdm.  An example command line to do this is: 'XWin.exe -screen 0 800x600x16 -from %WINDOWS_HOST_NAME% -query %REMOTE_UNIX_HOST_NAME_OR_IP%', where the %HOST_NAME%s are replaced with your actual hostnames.
+</td>
+</tr>
+
+</tbody>
+</table>
+
+<p>Good luck, and enjoy!</p>
+
+</body>
+
+</html>

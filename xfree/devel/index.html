@@ -1,7 +1,7 @@
 <html lang="en-US">
 
 <meta name="author" content="Harold L Hunt II">
-<meta name="keywords" content="Windows GDI, GDI, xfree86, Cygwin, X, x window system, microsoft, windows, x/server, xserver, x-server, Cygwin/XFree86, Win32, Win32API, Win32 API, dfr, development framework, development">
+<meta name="keywords" content="shadow, shadow fb, shadowfb, fb, Windows GDI, GDI, xfree86, Cygwin, X, x window system, microsoft, windows, x/server, xserver, x-server, Cygwin/XFree86, Win32, Win32API, Win32 API, dfr, development framework, development">
 <meta name="description" content="Cygwin/XFree86 Development Home">
 
 <head>
@@ -27,12 +27,14 @@ Cygwin/XFree86</a> Development Home
 </h3>
 
 <p>
-Last updated: 25Feb2001 1715 EST
+Last updated: 29Mar2001 1727 EST
 </p>
 
-<p>Current development efforts are focused on implementing each of the X graphics calls using Windows GDI graphics calls.  Check out the GDI Server Development Framework if you are interested in contributing to Cygwin/XFree86 development.</p>
 
-<p>The Offscreen (framebuffer) and No Direct Input development branch has served its purpose and is not being further developed.</p>
+
+<p>Current development efforts are focused on a shadow framebuffer based server that uses three different methods of getting the updated bits to the screen; the GDI blitter, the DirectDraw blitter, and the DirectDraw4 blitter are the three methods of getting the updated bits to the screen.</p>
+
+<p>Future development efforts will be focused on implementing each of the X graphics calls using native Windows GDI graphics calls; this style of server will not require a shadow framebuffer, nor will it require access to the primary framebuffer.  The framework for the native GDI server is contained in the sources for the shadow framebuffer series of servers.</p>
 
 <h3>
 Development Areas
@@ -44,13 +46,8 @@ Documentation</a>
 </p>
 
 <p>
-<a href="gdi/">
-GDI Server Development Framework</a>
-</p>
-
-<p>
-<a href="offscreen_fb/">
-Test 7 - Offscreen and No Direct Input (Windows 95/98/Me compatible)</a>
+<a href="shadow/">
+Shadow Framebuffer Server Development</a>
 </p>
 
 <h3>
