@@ -12,9 +12,8 @@ my $file = $html->param('file');
 use FindBin qw($Bin);
 
 print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
-      LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "\n",
+      LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "\n";
 
-print "HELLO<br>";
 chdir("$Bin/../packages");
 if (!open(F, $file)) {
     print h1("Couldn't open file: $file");
