@@ -3,75 +3,6 @@ Cygwin/X Frequently Asked Questions
 
 Harold L Hunt, II
 
-   Revision History
-   Revision 1.0.18 2004-04-13 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Changed error with ssh -Y where enable was meant but disable was
-   written
-   Revision 1.0.17 2004-04-13 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Added some extra notes about trusted X11Forwarding
-   Revision 1.0.16 2003-04-03 Revised by: harold@codeweavers.com
-   Update the ssh instructions. Remove old entries.
-   Revision 1.0.15 2003-03-09 Revised by: huntharo@msu.edu
-   Add answer for font problems. Remove an old entry.
-   Revision 1.0.14 2004-03-08 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Changed the OpenSSH config file location. Reported by tulitanssi <at>
-   luukku <dot> com Marked Alt-Gr with XP Powertoys as solved. Added
-   section about wrong AltGr key name.
-   Revision 1.0.13 2004-02-29 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Replaced XF86Config with the new commandline options.
-   Revision 1.0.12 2004-02-28 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Added ForwardX11Trusted to ssh section.
-   Revision 1.0.11 2004-01-04 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Restructured keyboard and remote questions to own sections.
-   Revision 1.0.10 2003-12-29 Revised by: huntharo@msu.edu
-   Remove more old entries.
-   Revision 1.0.9 2003-12-29 Revised by: huntharo@msu.edu
-   Remove old entries about Xinstall.sh.
-   Revision 1.0.8 2003-12-22 Revised by: huntharo@msu.edu
-   Updated XDMCP entries and kdmrc locations.
-   Revision 1.0.7 2003-12-18 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Added troubleshooting info for Microsoft Services for Unix.
-   Revision 1.0.6 2003-12-06 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Added troubleshooting info for Ctrl-Alt-BackSpace and AutoFocus.
-   Revision 1.0.5 2003-12-05 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Added troubleshooting info for AltGr problem with Windows XP and
-   Powertoys. Added troubleshooting for very poor performance.
-   Revision 1.0.4 2003-09-05 Revised by:
-   alexander.gottwald@s1999.tu-chemnitz.de
-   Updated the entries about non U.S. keyboard layouts. Added
-   troubleshooting info for X11Forwarding and keyboard layouts.
-   Revision 1.0.3 2003-03-28 Revised by: huntharo@msu.edu
-   Revised q&a entries for showing 8-bit chars in bash and for enabling
-   XDMCP on remote machines.
-   Revision 1.0.2 2002-05-26 Revised by: huntharo@msu.edu
-   Add a q&a for TrackPoint mouse wheel emulation.
-   Revision 1.0.1 2001-10-22 Revised by: huntharo@msu.edu
-   Added a q&a's to the Usage section, contributed by Mika Laitio,
-   regarding why Linux-Mandrake 8.1 doesn't display an XDMCP login
-   screen.
-   Revision 1.0.0 2001-10-19 Revised by: huntharo@msu.edu
-   Added a q&a to the Error and Warning Messages section for the
-   cygncurses5.dll problem. Added three q&a's to the Porting Software
-   section. Bumped the revision number to 1.0.0 to indicate that all
-   planned content is now present.
-   Revision 0.0.3 2001-06-10 Revised by: huntharo@msu.edu
-   Added a q&a to the Installation section regarding web browsers that
-   automatically decompress bzip2 files. Updated the answer for the error
-   message STATUS_INTEGER_DIVIDE_BY_ZERO to indicate that 8 bit color is
-   now supported.
-   Revision 0.0.2 2001-06-03 Revised by: huntharo@msu.edu
-   Revision 0.0.1 2001-05-23 Revised by: huntharo@msu.edu
-   Revision 0.0.0 2001-05-22 Revised by: huntharo@msu.edu
-   
    Table of Contents
    [1]Questions and Answers
    [2]Bibliography
@@ -499,19 +430,19 @@ set convert-meta off # to show it as character, not the octal representation
    
    A1:
    
-   OpenSSH 3.8 enables trusted X11 forwarding by default when connecting
-   to an ssh server that supports trusted X11 forwarding. Most ssh
-   servers for GNU/Linux are versions of OpenSSH that do support trusted
-   X11 forwarding, so using OpenSSH 3.8 from Cygwin will result in a
-   connection that uses trusted X11 forwarding by default. You will
-   quickly notice that this is the case if most of your X applications
-   are now killed when you try to copy and paste or if xdpyinfo returns
-   only a fraction of the supported extensions that it does if run
-   locally.
+   OpenSSH 3.8 enables untrusted X11 forwarding by default when
+   connecting to an ssh server that supports untrusted X11 forwarding.
+   Most ssh servers for GNU/Linux are versions of OpenSSH that do support
+   untrusted X11 forwarding, so using OpenSSH 3.8 from Cygwin will result
+   in a connection that uses untrusted X11 forwarding by default. You
+   will quickly notice that this is the case if most of your X
+   applications are now killed when you try to copy and paste or if
+   xdpyinfo returns only a fraction of the supported extensions that it
+   does if run locally.
    
-   It is easiest to just override trusted X11 forwarding by passing -Y to
-   ssh in place of -X. The -Y does the same thing as -X, but it enables
-   trusted X11 forwarding for the current connection.
+   It is easiest to just override untrusted X11 forwarding by passing -Y
+   to ssh in place of -X. The -Y does the same thing as -X, but it
+   enables trusted X11 forwarding for the current connection.
    
    A2:
    
