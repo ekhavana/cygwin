@@ -67,14 +67,15 @@ duplicated.
 
 <H2>When you have finalized your changes</H2>
 <P>Once you've finished making and testing your changes, you should send
-a context diff to the cygwin-patches list.  As an example, if you
-modified winsup/syscalls.cc and have the original source file around
-as /winsup/syscalls.cc-orig, you would do the following in bash:
+a unified diff to the <a href="mailto:cygwin-patches@cygwin.com>cygwin-patches list</a>.
+As an example, if you modified winsup/syscalls.cc and have the original
+source file around as /winsup/syscalls.cc-orig, you would do the
+following in bash:</p>
 
 <p>
 <pre>
-      cd /c/src/winsup<br>
-      diff -up syscalls.cc-orig syscalls.cc &gt; syscalls.cc-patch 2&gt;&1<br>
+      cd /c/src/winsup
+      diff -up syscalls.cc-orig syscalls.cc &gt; syscalls.cc-patch 2&gt;&1
 </pre>
 
 <P>Then send it to the cygwin-patches list in an email along with an
@@ -91,7 +92,7 @@ Just send the complete ChangeLog entry.</p>
 <p>Common patch submission problems include:
 <ul>
 <li>Missing ChangeLog.
-<p><li>ChangeLog sent as part of "diff" rather than a separate entry.</p>
+<p><li>ChangeLog sent as part of "diff" rather than as a separate "non-diffed" entry.</p>
 <p><li>Improper ChangeLog formatting:</p>
 <ul>
 <li>Missing function names (e.g., "* foo.cc: Don't increment x if y is negative").
@@ -129,13 +130,16 @@ everyone else's work as well as our own...</p>
 <P>You can also get a good idea of the current bugs and problem areas by
 browsing the cygwin mailing list archives.  In addition, check out the
 API calls portion of the FAQ and look for references to unimplemented
-functions.  Or send mail to <a
-href="mailto:cygwin-developers@cygwin.com">cygwin-developers@cygwin.com</a>
-and see what people suggest.  Please be advised that this list is intended only for
-people who are serious about augmenting the cygwin DLL.  It is not intended as a
-vehicle for getting your general cygwin questions answered or for announcing ports of
-any associated Cygwin utilities.  You will first have to join the
-list before you are able to send email.
+functions.  Or send mail to the <a href="mailto:cygwin-developers">
+cygwin developers mailing list</a> and see what people suggest.
+
+Remember that the cygwin-developers and cygwin-patches mailing lists are
+intended only for people who are serious about augmenting the cygwin
+DLL.  It is not intended as a vehicle for getting general cygwin
+questions answered, for announcing ports of any utilities, or for
+providing patches for anything other than the files in the "winsup"
+directory.  You will first have to join the list before you are able to
+send email.
 
 <!--#include virtual="cygwin-footer.html"-->
 </body>
