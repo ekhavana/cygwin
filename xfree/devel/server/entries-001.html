@@ -134,3 +134,725 @@ winscrinit.c/winFinishScreenInitFB (). (Alan Hourihane)</li>
 </tr>
 </tbody>
 </table>
+
+
+
+
+<h4>Release 21</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-04-22 1438</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Fixed AltGr handling by discarding Ctrl_L presses/releases with
+the same timestamp as an immediately following AltGr press/release.
+(Alexander Gottwald, Harold L Hunt II)</li>
+
+<li>Fake Ctrl_L discarding should now work on both Windows NT/2000 and
+Windows 95/98/Me.  (Alexander Gottwald, Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 20</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-04-22 1325</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Fixed AltGr handling by discarding Ctrl_L presses/releases with
+the same timestamp as an immediately following AltGr press/release.
+(Alexander Gottwald, Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 19</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-04-20 1648</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li><p>Fixed 24 bpp color.  (Harold L Hunt II)</p>
+
+<p>I was able to fix 24 bpp color because I finally switched my monitor to use
+my built in graphics card which supports 24 bpp.</p>
+
+<p>There were only two things preventing 24 bpp color from
+working:</p>
+
+<ul>
+<li>hw/xwin/InitOutput.c/g_PixmapFormats had the wrong bitsPerPixel, 32, for
+24 bit depth pixmaps.  The correct bitsPerPixel for 24 bit depth pixmaps is
+32.</li>
+<li>hw/xwin/winshadgdi.c/winQueryRGBBitsAndMasks() cannot detect the color
+masks for 24 bpp; however, the color masks for 24 bpp are standardized, so I
+hard coded them.</li>
+</ul>
+</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 18</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-04-12 1508</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Fixed a file descriptor leak when the server was respawned, as
+when you log out of an xdmcp session; the /dev/windows file was being
+opened in each call to hw/xwin/InitInput.c/InitInput (), when it
+should only be opened on the very first call to InitInput ().</li>
+
+<li>Added a patch to cygwin.cf to cause imake to handle binmode and
+textmode mounts automagically.</li>
+
+<li>Applied Suhaib's patch to cygwin.rules.</li>
+
+<li>Cleaned up some cruft from winwakeup.c and winblock.c.</li>
+
+<li>Fixed dual declarations of g_winGeneration and
+g_winScreenPrivateIndex.</li>
+
+<li>Wrapped nonessential debugging messages in #if CYGDEBUG.  Turned
+CYGDEBUG off by default.</li>
+
+<li>Cleaned up color mask detection in
+hw/xwin/winshadgdi.c/winInitVisualsShadowGDI ().</li>
+
+<li>Cleaned up some cruft in win.h.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 17</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-04-11 1406</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Fixed client exits causing a crash; these crashes were due to
+#ifdef __CYGWIN__'d code in os/connection.c, io.c, osinit.c, utils.c,
+and osdep.h.  I haven't tracked down exactly which line(s) caused the
+crash, as I removed them all at once and the problem went away.  The
+gist of the correction is that the #ifdef __CYGWIN__'d sections of
+code were the same as the #ifdef WIN32'd sections of code; we don't
+use the WIN32 define, and Cygwin has all of the functions used by the
+non-WIN32 sections.  Basically, we weren't using a coherent mix of
+APIs.  (Harold L Hunt II)</li>
+
+<li>Fixed, hopefully, the freeze on startup when running on Windows
+Me, as well as removing the 10 millisecond wakeup from
+WaitForSomething; the server now only wakes up when it has real events
+pending, or when the usual timeout of around 2 minutes has
+expired.  (Pierre Humblet)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 16</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-04-06 1824</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>ASCII scan codes are now used for key presses instead of Windows
+virtual key codes.  Alexander Gottwald pointed out that I was mistaken
+in my assumption that virtual key codes would make Cygwin/XFree86 more
+compatible with foreign keyboards.  Quite the contrary of my
+assumptions, ASCII scan codes are desired because they allow
+non-U.S. keyboard users to use existing modmaps.  I believe that all
+keys, excepting AltGr, should return the correct scan code.  AltGr
+returns the correct scan code, I believe, but it still has a problem
+with the ghost Control_L press/release.</li>
+
+<li>Failed blits no longer result in a call to FatalError.  Failed
+blits are essentially ignored.  However, Ctrl-Alt-Del handling is a
+little strange, because you have to press and release the Alt key when
+the server regains focus after pressing Ctrl-Alt-Del; failing to do so
+will cause your mouse clicks and key presses to be ignored.</li>
+
+<li>xc/programs/Xserver/Imakefile has been cleaned up and the
+dependency warning has been fixed.</li>
+
+<li>Keyboard related functions have been moved from InitInput.c and
+winwndproc.c to a new file called winkeybd.c.</li>
+
+<li>Mouse related funtions have been moved from InitInput.c to a new
+file called winmouse.c.</li>
+
+<li>winUpdateFBPointer has been moved from winwndproc.c to
+winmisc.c.</li>
+
+<li>winkeymap.h has been removed.  XFree86's standard key map header
+and AT key names header are used in its place; those headers are
+xf86Keymap.h and atKeynames.h, both located in
+xc/programs/Xserver/hw/xfree86/common/.</li>
+
+<li>Several definitions in win.h that mirrored defintions in
+xf86Keymap.h and atKeynames.h have been removed.</li>
+
+<li>Removed lots of #if 0'd code.</li>
+
+<li>Got the winScreenInit/winFinishScreenInit division of labor
+working.</li>
+
+<li>Removed some debugging messages, placed them within if
+(failed)... blocks.</li>
+
+<li>Engine 8 (Primary framebuffer DirectDraw) has gone undocumented.
+It is still there, but it is no longer reported in the usage message.
+From here on I won't be supporting engine 8, nor will I be
+expecting/handling bug reports for it.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 15</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-30 1037</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Test 14 clobbered 32 bits per pixel support; that has been
+fixed.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 14</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-29 1425</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Mode key states are initialized to their current state upon server
+startup (NumLock, CapsLock, etc).</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 13</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-29 1349</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>The bitmask for detecting right and left modifier keys was
+incorrect.</li>
+
+<li>Right and left modifier key detection was reversed, had the mask
+been correct.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 12</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-28 2040</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>A great developer (John Fortin) once told me that the
+DDLOCK_NOSYSLOCK flag for IDirectDrawSurface_Lock was not introduced
+until DirectDraw4, which is not available for Windows NT 4.0.
+Including that flag causes the surface lock to fail on NT 4.0.  I
+removed the flag from all calls to IDirectDrawSurface_Lock.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 11</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-28 1943</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Keyboard input distinquishes between right and left Shift,
+Control, and Alt keys.</li>
+
+<li>Added key maps for Help, Select, Clear, and language mode
+switches.  The language mode key codes are probably incorrect, but
+having them at least cause an input event will allow people to map
+them to the correct symbol for their language.</li>
+
+<li>Numeric keypad Enter causes an XK_KP_Enter instead of
+XK_Return.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 10</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-26 1206</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Restart messages, such as the one sent by the "Close Connection"
+button when using xdcmp, caused the server to crash, as I was not
+completely closing the screen resources.  This has no been fixed.  You
+can send restart messages, till your heart is content, and the Test 10
+server will cheerily process them and give you a fresh server every
+time.  I hope :)</li>
+
+<li>Neat new feature, as a consequence of 1: you can now run multiple
+screens in one server, for example:
+
+start XWin -screen 0 1024x768x16 -screen 1 800x600x16
+start rxvt -display 127.0.0.1:0.0 -fn "Lucidia Console-12"
+start rxvt -display 127.0.0.1:0.1 -fn "Lucidia Console-12"
+start twm -display 127.0.0.1:0.0
+start twm -display 127.0.0.1:0.1
+
+Caveats:
+Don't try throwing in any -fullscreen parameters.
+There is some strange mouse behavior that I'm working on.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 9</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-26 0047</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Test 9 is the same as Test 8 except that is compiled using the
+XFree86 4.0.3 source code.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 8</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-25 2043</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Server engine codes changed:
+<ul>
+<li>Shadow GDI DIB is "-engine 1"</li>
+<li>Shadow DD is "-engine 2"</li>
+<li>Shadow DD Non Locking is "-engine 4"</li>
+<li>Primary DD is "-engine 8"</li>
+</ul>
+</li>
+
+<li>Added code to detect supported server engines.</li>
+
+<li>Added code to automatically choose the optimum supported engine.
+You no longer have to specify a "-engine n" parameter.  However, you
+can suggest that the server use a particular engine with an "-engine
+n" parameter.</li>
+
+<li>Made a quick fix to handle the incorrect depth being passed when
+running the engines in windowed mode.</li>
+
+<li>Updated the "XWin -help" message with the new engine codes.</li>
+
+<li>Rearranged the internal server structure to new engines to be
+added more easily, as well as making the current code easier to read
+and maintain.</li>
+
+<li>Test 8 is built against XFree86 4.0.2, as the previous tests in
+this series.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 7</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-25 0322</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>The server is comprised of four "engines" specifiable on the
+command line:
+<ul>
+<li>A GDI based shadow framebuffer server "-engine 1"</li>
+
+<li>A DirectDraw3 based shadow framebuffer server "-engine 2"</li>
+
+<li>A DirectDraw4 based shadow framebuffer server "-engine 3" This
+server is special becuase it doesn't have to lock and unlock the
+shadow framebuffer for blitting.  This server seems to have the
+highest performance.</li>
+
+<li>A DirectDraw3 based primary framebuffer server "-engine 4" Engine
+4 has the worst performance and is not as complete as the other
+servers, and it probably never will be complete, as the performance
+doesn't warrant the effort.</li>
+</ul>
+</li>
+
+<li>Each server can be run in two modes:
+<ul>
+<li>Standard windowed mode, this is the default</li>
+
+<li>Full screen mode, accessible via the "-fullscreen" parameter</li>
+</ul>
+</li>
+
+<li>All engines, except engine 4, clip their output to their display
+window.</li>
+
+<li>All engines, except engine 4, redraw areas of their display window
+that has been covered and reexposed by another application's
+window.</li>
+
+<li>All engines should automatically detect the color masks</li>
+
+<li>Engines 2, 3, and 4 change the video mode to the mode specified on
+the command line.  However, these engines do not currently verify that
+the mode is valid, nor do they fallback on another mode, they simple
+exit if the mode cannot be set.</li>
+
+<li>Engines 1, 2, and 3 can be minimized and moved all over the screen
+without crashing.</li>
+
+<li>A bug was fixed in the window repainting code that caused an
+infinite loop.  I lost track of whether I ever released a version that
+contained that bug; but it is fixed now, so who cares? :)</li>
+
+<li>All engines allow you to specify modes that will hang your
+computer.  I'm not kidding... be careful what engine and mode you
+specify.</li>
+
+<li>Engine 4 will freeze Window 95/98/Me in its tracks, don't try to
+run it on those versions of Windows.  Besides, engines 1, 2, and 3 are
+much faster than engine 4, so you have no reason to try running engine
+4.</li>
+
+<li>Engine 3 only works when you have DirectX 6+ installed.</li>
+
+<li>Mouse wheel support, just in case you missed the last couple of
+announcements :)</li>
+
+</ul>
+
+<p>Thanks to John Fortin for pointing me in the direction of a client
+memory DirectDraw shadow surface, which allowed the non locking server
+to be created; also thanks for the example code.</p>
+
+<p>As a side note, the Shadow Framebuffer Test name is now a misnomer,
+as the server includes an engine that writes directly to the primary
+framebuffer, without the need for the shadow fb code.</p>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 6</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-23 1113</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>I think I have fixed the bitfield color mask detection.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 5</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-22 2143</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Screen bitfield formats are now automatically detected for 15, 16,
+24, and 32 bits per pixel.  I'm not sure if 24 bpp or 15 bpp works
+though, cause my display can only do 16 and 32 bpp; 16 and 32 bpp have
+been tested on my machine.  This release has much better chances of
+working on those problem machines that are out there, so please give
+it a try.</li>
+
+<li>Those of you running at 8 bits per pixel will also notice that I have
+started working on supporting 8 bits.  The server will currently startup in
+8 bits per pixel, but it doesn't have the correct colormap yet, so colors
+are mostly black with some pink and yellow thrown in for fun :)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 4</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-22 1425</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Crash on startup when resolution close to screen resolution.</li>
+
+<li>Crashes when a Windows window is moved over the border of the
+Cygwin/XFree86 window.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 3</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-22 0135</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>The mouse wheel was only scrolling once every other turn.  I fixed
+it so that it scrolls with every turn.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 2</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-21 2250</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Alexander Gottwald pointed me in the direction using 'xdpyinfo' to
+understand the visual formats being used by the X server.  Combined
+with my examination of the XonX folks code I was able to get colors
+displaying correctly for some screen depths, namely 16 and 32, and
+possibly 24 bits per pixel.</li>
+
+<li>While I was fixing things I decided to throw in some dogfood:
+mouse wheel scrolling now works :) Of course, mouse wheeling under X
+has plenty of caveats, so don't expect all of your applications to
+magically support the wheel.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 1</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-03-20 2126</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>I'm happy to announce a shadow framebuffer based test server.
+This server should work on Windows 95/98/Me, as well as Windows NT 4.0
+and Windows 2000.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
