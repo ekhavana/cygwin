@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2003-05-18 1426 EDT</p>
+<p>Last updated: 2003-05-29 0045 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -65,6 +65,153 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 -->
 
 
+<h4>Test87</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-05-29 0045 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test86</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-38</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test87.exe.bz2">XWin-Test87.exe.bz2</a>
+(1208 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030529-0045.tar.bz2">xwin-20030529-0045.tar.bz2</a>
+(116 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Test86
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test86-to-Test87.diff.bz2">xwin-Test86-to-Test87.diff.bz2</a>
+(11 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Convert X application icons set in WM_HINTS from XPMs to Windows
+BMPs using an internal algorithm.  Earle, Ralf, and Colin worked
+together on this one with coding, suggesting ideas, and testing.  The
+end result is, as they say, very nearly perfect.  Each top-level X
+window is now given its own class that has an icon associated with it.
+The icon can be even changed while the application is running and this
+is properly handled.  Icons are properly freed when a window and its
+associated class are destroyed.  This entry encompasses a flurry of
+emails and patches that I cannot possibly recount here; hopefully no
+one feels slighted by this bried summary.  (Earle F. Philhower III,
+Ralf Habacker, Colin Harrison)</li>
+
+<li> Set XIconSizes() to the Windows approved 16, 32, and 48.  It
+doesn't seem to be looked at by anything, but it is in the XLib
+documents as something a WM should set.  (Earle F. Philhower III)</li>
+
+<li>Removed several misc compile warnings.  (Earle F. Philhower
+III)</li>
+
+<li>winmultiwindowwindow.c/winTopLevelWindowProc() - Add a call to
+winKeybdReleaseKeys () in WM_KILLFOCUS.  This fix stops the phantom
+key presses that people were seeing.  The example here would be to
+launch an xterm, then launch another xterm from that xterm.  Type
+``exit'' in the first xterm and press enter.  The enter keydown
+message is processed by the second xterm, but the keyup is never
+processed so it got sent repeatedly to the root-level message loop
+(which performs all keyboard processing), causing phantom key presses
+to show up in any X app that currently had the focus.  At least, I
+think that is that the problem was.  An interim solution was to press
+and release the enter key, which would cause a keydown/keyup message
+combo to be sent, thus ending the crazy looping.  This fix pops all
+keys that are pressed when the current X app looses the keyboard
+focus.  Colin suggested this, Earle move the location of the call to
+the proper place.  (Colin Harrison, Earle F. Philhower III)</li>
+
+<li>XWin.rc - Change the Exit Confirmation and Depth Change dialog
+boxes to be centered by adding the DS_CENTER flag to the STYLE
+attribute.  (Biju G C, Harold L Hunt II)</li>
+
+<li>winmultiwindowwindow.c/winTopLevelWindowProc() - Let
+DefaultWindowProc() handle the Alt+F4 key combo in the WM_*KEYDOWN
+messages.  This allows a user to close a top-level X window (which has
+an associated Widnows window) by pressing Alt+F4.  Note that this
+happens regardless of the -[no]winkill command-line parameter.  This
+is the desired behavior since -[no]winkill should only affect the
+behavior of the root-level window, not the individual X Client
+windows.  (Biju G C, Harold L Hunt II)</li>
+
+<li>winwndproc.c/winWindowProc() - Define a WM_GIVEUP message that
+calls GiveUp(); remove the GiveUp() call from WM_CLOSE and replace it
+with a call to winDisplayExitDialog(), which displays the Exit
+Confirmation dialog box.  This only makes sense in conjunction with
+the next change log entry.  (Biju G C, Harold L Hunt II)</li>
+
+<li>windialogs.c/winExitDlgProc()/WM_COMMAND/ID_OK - Pass WM_GIVEUP to
+PostMessage() instead of passing WM_CLOSE.  This patch causes the end
+result that, in MultiWindow mode, selecting Close from the system menu
+for non-root-level Windows window causes that particular X Client to
+be killed.  The previous result was that the XWin.exe procss was
+exited without displaying the Exit Confirmation dialog box.  This must
+have been a frustrating situation indeed and it makes this bug a
+marvelous catch on Biju's part.  NOTE: The system menu can be opened
+by right clicking on the title bar, or by left clicking the icon in
+the upper left-hand corner of the app window, or by right clicking on
+the application entry in the task bar.  (Biju G C, Harold L Hunt
+II)</li>
+
+<li>windialogs.c/winDisplay(Exit)|(ChangeDepth)Dialog() - Call
+SetForegroundWindow() if the dialog box has already been created.
+This pulls the dialog box to the foreground if it has been buried by
+other windows.  It is legitimate to do this here because we are
+responding to user input of some sort when this function gets called.
+(Harold L Hunt II)</li>
+
+<li>XWin.rc - Add the extended style WS_EX_DLGMODALFRAME and the
+normal style WS_DLGFRAME to the Exit Confirmation dialog box in an
+attempt to stop the dialog box from being listed in the task bar,
+which was reported by one user.  This task bar listing has been
+negatively confirmed in Windows 2000 and Windows XP, but it may be
+happening in other versions of Windows.  Of course, this could have
+been a reference to the fact that the dialog is present in the Alt+Tab
+list.  However, that is the desired behavior and will not be changed
+(how else could you get back to that dialog box?).  (Biju G C, Harold
+L Hunt II)</li>
+
+<li>Try, in vain, to maintain a uniform coding style and
+variable/function naming convention.  I am mostly winning the
+curly-brace (curly braces on separate lines please), indenting (emacs
+default please), parameter spacing (e.g. func&nbsp;(x, y) instead of
+func(&nbsp;x,y&nbsp;), func(&nbsp;x, y&nbsp), or even func(x,y)), and
+binary operator spacing ((x&nbsp;+&nbsp;y) instead of (x+y)) wars, but
+I am pitiful excuse for a belligerent dictator when it comes to the
+variable naming (follow examples in winwndproc.c), variable prefixing
+(follow winwndproc.c, which is my own sick mix of Hungarian prefixes
+(int, dw, psz, f) and old-school C prefixes (i, n, l)), and function
+naming wars.  I would like to ask all contributors to try to follow
+the code that they see in the files that I authored, but I don't feel
+that I have the right to reject patches that don't follow those
+conventions.  I will, however, try my best to adapt all patches so
+that I can read them and more easily maintain them in the future.  You
+may also have noticed that I am a profuse commentor... I do that
+because I have a very poor memory of why things were done they way
+that they were done, so I sprinkle tips throughout the code to help
+myself remember things.  You know, I have been realizing the entire
+time that I was writing this change log that I have low blood sugar, I
+am tired, and this is so not the place for such amounts of text.  Time
+for bed.  Change log over.  (Anonymous... Like you have to guess)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Test86</h4>
 <table>
 <tbody>
@@ -101,7 +248,7 @@ dependency on GetWindowInfo(), which is only present in NT 4.0 SP6,
 Windows 98, and later.  Thanks to Dr. Charles L. Werner for reporting
 this problem on Windows NT 4.0 SP3 and to Alexander Gottwald for
 confirming that GetWindowInfo() is not present in Windows 95.  (Earle
-F. Philhower, III)</li>
+F. Philhower III)</li>
 
 </ul>
 </td>
@@ -143,14 +290,14 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test84-to-Test85.diff">xwin-
 <ul>
 
 <li>Implement window title changing in MultiWindow mode.  (Earle
-F. Philhower, III)</li>
+F. Philhower III)</li>
 
 <li>Implement an Always On Top command in the right-click menu (System
 Menu) for each window in MultiWindow mode.  (Earle F. Philhower,
 III)</li>
 
 <li>Move the XNextEvent loop into a separate thread for MultiWindow
-mode.  (Earle F. Philhower, III)</li>
+mode.  (Earle F. Philhower III)</li>
 
 <li>Fix a race between the startup of the clipboard thread and
 MultiWindow window manager thread that caused window title changing to
@@ -201,11 +348,11 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test83-to-Test84.diff">xwin-
 <ul>
 
 <li>Fix/implement window maximizing and restoring in MultiWindow mode.
-(Earle F. Philhower, III)</li>
+(Earle F. Philhower III)</li>
 
 <li>Implement handling in MultiWindow mode for monitors to the left of
 the primary monitor on systems with multiple monitors.  (Earle
-F. Philhower, III)</li>
+F. Philhower III)</li>
 
 <li>Destroy the Exit confirmation dialog box and NULL its pointer when
 the server is reset.  This fixes a problem that occurred when the Exit
