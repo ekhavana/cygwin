@@ -1,110 +1,21 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML
-><HEAD
-><TITLE
->Defining Windows Resources</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
-REL="HOME"
-TITLE="Cygwin User's Guide"
-HREF="cygwin-ug-net.html"><LINK
-REL="UP"
-TITLE="Programming with Cygwin"
-HREF="programming.html"><LINK
-REL="PREVIOUS"
-TITLE="Building and Using DLLs"
-HREF="dll.html"><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="docbook.css"></HEAD
-><BODY
-CLASS="SECT1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->Cygwin User's Guide</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="dll.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->Chapter 4. Programming with Cygwin</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
->&nbsp;</TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="SECT1"
-><H1
-CLASS="SECT1"
-><A
-NAME="WINDRES"
->Defining Windows Resources</A
-></H1
-><P
-><TT
-CLASS="FILENAME"
->windres</TT
-> reads a Windows resource file
-(<TT
-CLASS="FILENAME"
->*.rc</TT
->) and converts it to a res or coff file.
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Defining Windows Resources</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.66.1"><link rel="start" href="index.html" title="Cygwin User's Guide"><link rel="up" href="programming.html" title="Chapter 4. Programming with Cygwin"><link rel="prev" href="dll.html" title="Building and Using DLLs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Defining Windows Resources</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="dll.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Programming with Cygwin</th><td width="20%" align="right"> </td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="windres"></a>Defining Windows Resources</h2></div></div></div><p><tt class="filename">windres</tt> reads a Windows resource file
+(<tt class="filename">*.rc</tt>) and converts it to a res or coff file.
 The syntax and semantics of the input file are the same as for any
 other resource compiler, so please refer to any publication describing
 the Windows resource format for details.  Also, the
-<TT
-CLASS="FILENAME"
->windres</TT
-> program itself is fully documented in the
-Binutils manual.  Here's an example of using it in a project:</P
-><PRE
-CLASS="SCREEN"
->myapp.exe : myapp.o myapp.res
+<tt class="filename">windres</tt> program itself is fully documented in the
+Binutils manual.  Here's an example of using it in a project:</p><pre class="screen">
+
+myapp.exe : myapp.o myapp.res
 	gcc -mwindows myapp.o myapp.res -o $@
 
 myapp.res : myapp.rc resource.h
-	windres $&#60; -O coff -o $@</PRE
-><P
->What follows is a quick-reference to the syntax
-<TT
-CLASS="FILENAME"
->windres</TT
-> supports.</P
-><PRE
-CLASS="SCREEN"
->&#13;id ACCELERATORS suboptions
+	windres $&lt; -O coff -o $@
+
+</pre><p>What follows is a quick-reference to the syntax
+<tt class="filename">windres</tt> supports.</p><pre class="screen">
+
+id ACCELERATORS suboptions
 BEG
 "^C" 12
 "Q" 12
@@ -241,66 +152,6 @@ suboptions:
 	LANGUAGE num,num
 	VERSIONK num
 
-memflags are MOVEABLE/FIXED PURE/IMPURE PRELOAD/LOADONCALL DISCARDABLE&#13;</PRE
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="dll.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="cygwin-ug-net.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->&nbsp;</TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Building and Using DLLs</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="programming.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->&nbsp;</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+memflags are MOVEABLE/FIXED PURE/IMPURE PRELOAD/LOADONCALL DISCARDABLE
+
+</pre></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="dll.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="programming.html">Up</a></td><td width="40%" align="right"> </td></tr><tr><td width="40%" align="left" valign="top">Building and Using DLLs </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> </td></tr></table></div></body></html>

@@ -1,110 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML
-><HEAD
-><TITLE
->The CYGWIN environment
-variable</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
-REL="HOME"
-TITLE="Cygwin User's Guide"
-HREF="cygwin-ug-net.html"><LINK
-REL="UP"
-TITLE="Using Cygwin"
-HREF="using.html"><LINK
-REL="PREVIOUS"
-TITLE="Special filenames"
-HREF="using-specialnames.html"><LINK
-REL="NEXT"
-TITLE="Cygserver"
-HREF="using-cygserver.html"><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="docbook.css"></HEAD
-><BODY
-CLASS="SECT1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->Cygwin User's Guide</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="using-specialnames.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->Chapter 3. Using Cygwin</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="using-cygserver.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="SECT1"
-><H1
-CLASS="SECT1"
-><A
-NAME="USING-CYGWINENV"
->The <VAR
-CLASS="ENVAR"
->CYGWIN</VAR
-> environment
-variable</A
-></H1
-><P
->The <VAR
-CLASS="ENVAR"
->CYGWIN</VAR
-> environment variable is used to configure
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>The CYGWIN environment
+variable</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.66.1"><link rel="start" href="index.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter 3. Using Cygwin"><link rel="prev" href="using-specialnames.html" title="Special filenames"><link rel="next" href="using-cygserver.html" title="Cygserver"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The <tt class="envar">CYGWIN</tt> environment
+variable</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Using Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="using-cygserver.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-cygwinenv"></a>The <tt class="envar">CYGWIN</tt> environment
+variable</h2></div></div></div><p>The <tt class="envar">CYGWIN</tt> environment variable is used to configure
 many global settings for the Cygwin runtime system. It contains the options
 listed below, separated by blank characters. Many options can be turned off
-by prefixing with <VAR
-CLASS="LITERAL"
->no </VAR
->.</P
-><P
-></P
-><UL
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)binmode</VAR
-> - if set, non-disk 
+by prefixing with <tt class="literal">no </tt>.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><tt class="envar">(no)binmode</tt> - if set, non-disk 
 (e.g. pipe and COM ports) file opens default to binary mode 
 (no CRLF translation) instead of text mode.  Defaults to set (binary
 mode).  By default, devices are opened in binary mode, so this option
@@ -114,91 +14,21 @@ It does affect two things, however.  For non-NTFS filesystems, this
 option will control the line endings for standard output/input/error
 for redirection from the Windows command shell.  It will also affect
 the default translation mode of a pipe, although most shells set the
-pipe to binary by default.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->check_case:level</VAR
-> - Controls the behavior of
+pipe to binary by default.
+</p></li><li style="list-style-type: disc"><p><tt class="envar">check_case:level</tt> - Controls the behavior of
 Cygwin when a user tries to open or create a file using a case different from
 the case of the path as saved on the disk.
-<VAR
-CLASS="LITERAL"
->level</VAR
-> is one of <VAR
-CLASS="LITERAL"
->relaxed</VAR
->,
-<VAR
-CLASS="LITERAL"
->adjust</VAR
-> and <VAR
-CLASS="LITERAL"
->strict</VAR
->.</P
-><P
-></P
-><UL
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->relaxed</VAR
-> which is the default behaviour simply
-ignores case. That's the default for native Windows applications as well.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->adjust</VAR
-> behaves mostly invisible. The POSIX input
+<tt class="literal">level</tt> is one of <tt class="literal">relaxed</tt>,
+<tt class="literal">adjust</tt> and <tt class="literal">strict</tt>.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><tt class="envar">relaxed</tt> which is the default behaviour simply
+ignores case. That's the default for native Windows applications as well.</p></li><li style="list-style-type: disc"><p><tt class="envar">adjust</tt> behaves mostly invisible. The POSIX input
 path is internally adjusted in case, so that the resulting DOS path uses the
 correct case throughout. You can see the result when changing the directory
-using a wrong case and calling <B
-CLASS="COMMAND"
->/bin/pwd</B
-> afterwards.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->strict</VAR
-> results in a error message if the case
-isn't correct. Trying to open a file <TT
-CLASS="FILENAME"
->Foo</TT
-> while a file
-<TT
-CLASS="FILENAME"
->fOo</TT
-> exists results in a "no such file or directory"
-error. Trying to create a file <TT
-CLASS="FILENAME"
->BAR</TT
-> while a file
-<TT
-CLASS="FILENAME"
->Bar</TT
-> exists results in a "Filename exists with different
-case" error.</P
-></LI
-></UL
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->codepage:[ansi|oem]</VAR
-> - Windows console 
+using a wrong case and calling <span><b class="command">/bin/pwd</b></span> afterwards.</p></li><li style="list-style-type: disc"><p><tt class="envar">strict</tt> results in a error message if the case
+isn't correct. Trying to open a file <tt class="filename">Foo</tt> while a file
+<tt class="filename">fOo</tt> exists results in a "no such file or directory"
+error. Trying to create a file <tt class="filename">BAR</tt> while a file
+<tt class="filename">Bar</tt> exists results in a "Filename exists with different
+case" error.</p></li></ul></div></li><li style="list-style-type: disc"><p><tt class="envar">codepage:[ansi|oem]</tt> - Windows console 
 applications can use different character sets (codepages) for drawing
 characters.  The first setting, called "ansi", is the default.
 This character set contains various forms of latin characters used
@@ -210,338 +40,69 @@ drawing and special characters.  It is called "oem" since it was
 originally encoded in the firmware of IBM PCs by original
 equipment manufacturers (OEMs).  If you find that some characters 
 (especially non-US or 'graphical' ones) do not display correctly in 
-Cygwin, you can use this option to select an appropriate codepage.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)envcache</VAR
-> - If set, environment variable
+Cygwin, you can use this option to select an appropriate codepage.
+</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)envcache</tt> - If set, environment variable
 conversions (between Win32 and POSIX) are cached.  Note that this is may
 cause problems if the mount table changes, as the cache is not invalidated
 and may contain values that depend on the previous mount table
-contents. Defaults to set.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)export</VAR
-> - if set, the final values of these
-settings are re-exported to the environment as <VAR
-CLASS="ENVAR"
->CYGWIN</VAR
-> again.
-Defaults to off.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->error_start:Win32filepath</VAR
-> - if set, runs 
-<TT
-CLASS="FILENAME"
->Win32filepath</TT
-> when cygwin encounters a fatal error,
-which is useful for debugging.  <TT
-CLASS="FILENAME"
->Win32filepath</TT
-> is
-usually set to the path to <B
-CLASS="COMMAND"
->gdb</B
-> or
-<B
-CLASS="COMMAND"
->dumper</B
->, for example
-<TT
-CLASS="FILENAME"
->C:\cygwin\bin\gdb.exe</TT
->. 
-There is no default set.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->forkchunk:32768</VAR
-> - causes <CODE
-CLASS="FUNCTION"
->fork()</CODE
->
+contents. Defaults to set.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)export</tt> - if set, the final values of these
+settings are re-exported to the environment as <tt class="envar">CYGWIN</tt> again.
+Defaults to off.</p></li><li style="list-style-type: disc"><p>
+<tt class="envar">error_start:Win32filepath</tt> - if set, runs 
+<tt class="filename">Win32filepath</tt> when cygwin encounters a fatal error,
+which is useful for debugging.  <tt class="filename">Win32filepath</tt> is
+usually set to the path to <span><b class="command">gdb</b></span> or
+<span><b class="command">dumper</b></span>, for example
+<tt class="filename">C:\cygwin\bin\gdb.exe</tt>. 
+There is no default set.
+</p></li><li style="list-style-type: disc"><p><tt class="envar">forkchunk:32768</tt> - causes <tt class="function">fork()</tt>
 to copy memory some number of bytes at a time, in the above example 
 32768 bytes (32Kb) at a time. The default is to copy as many bytes as 
 possible, which is preferable in most cases but may slow some older systems
-down.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)glob[:ignorecase]</VAR
-> - if set, command line arguments
+down.
+</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)glob[:ignorecase]</tt> - if set, command line arguments
 containing UNIX-style file wildcard characters (brackets, question mark,
 asterisk, escaped with \) are expanded into lists of files that match 
 those wildcards.
 This is applicable only to programs running from a DOS command line prompt.
-Default is set.</P
-><P
->This option also accepts an optional <VAR
-CLASS="LITERAL"
->[no]ignorecase</VAR
-> modifer.
-If supplied, wildcard matching is case insensitive.  The default is <VAR
-CLASS="LITERAL"
->noignorecase</VAR
-></P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)ntea</VAR
-> - if set, use the full NT Extended
+Default is set.</p><p>This option also accepts an optional <tt class="literal">[no]ignorecase</tt> modifer.
+If supplied, wildcard matching is case insensitive.  The default is <tt class="literal">noignorecase</tt></p></li><li style="list-style-type: disc"><p><tt class="envar">(no)ntea</tt> - if set, use the full NT Extended
 Attributes to store UNIX-like inode information.
-This option only operates under Windows NT. Defaults to not set. </P
-><DIV
-CLASS="WARNING"
-><P
-></P
-><TABLE
-CLASS="WARNING"
-BORDER="1"
-WIDTH="90%"
-><TR
-><TD
-ALIGN="CENTER"
-><B
->Warning!</B
-></TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-><P
->This may create additional
-<SPAN
-CLASS="emphasis"
-><I
-CLASS="EMPHASIS"
->large</I
-></SPAN
-> files on non-NTFS partitions.</P
-></TD
-></TR
-></TABLE
-></DIV
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)ntsec</VAR
-> - if set, use the NT security
+This option only operates under Windows NT. Defaults to not set. </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning!</h3><p>This may create additional
+<span class="emphasis"><em>large</em></span> files on non-NTFS partitions.</p></div></li><li style="list-style-type: disc"><p><tt class="envar">(no)ntsec</tt> - if set, use the NT security
 model to set UNIX-like permissions on files and processes. The
 file permissions can only be set on NTFS partitions. FAT doesn't
 support the NT file security. Defaults to set. For more information, read
-the documentation in <A
-HREF="ntsec.html"
->the Section called <I
->NT security and usage of <VAR
-CLASS="LITERAL"
->ntsec</VAR
-></I
-> in Chapter 2</A
->.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)smbntsec</VAR
-> - if set, use <VAR
-CLASS="ENVAR"
->ntsec</VAR
-> on remote
+the documentation in <a href="ntsec.html" title="NT security and usage of ntsec">the section called &#8220;NT security and usage of <tt class="literal">ntsec</tt>&#8221;</a>.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)smbntsec</tt> - if set, use <tt class="envar">ntsec</tt> on remote
 drives as well (default is "nosmbntesc"). When setting "smbntsec" there's
 a chance that you get problems with Samba shares so you should use this
-option with care.  One reason for a non working <VAR
-CLASS="ENVAR"
->ntsec</VAR
-> on
+option with care.  One reason for a non working <tt class="envar">ntsec</tt> on
 remote drives could be insufficient permissions of the users. The requires
 user rights are somewhat dangerous (SeRestorePrivilege), so it's not always
 an option to grant that rights to users.  However, this shouldn't be a
-problem in NT domain environments.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)reset_com</VAR
-> - if set, serial ports are reset
+problem in NT domain environments.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)reset_com</tt> - if set, serial ports are reset
 to 9600-8-N-1 with no flow control when used. This is done at open
-time and when handles are inherited.  Defaults to set.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)server</VAR
-> - if set, allows client applications
+time and when handles are inherited.  Defaults to set.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)server</tt> - if set, allows client applications
 to use the Cygserver facilities.  This option must be enabled explicitely
 on the client side, otherwise your applications won't be able to use the
-XSI IPC function calls (<CODE
-CLASS="FUNCTION"
->msgget</CODE
->,
-<CODE
-CLASS="FUNCTION"
->semget</CODE
->, <CODE
-CLASS="FUNCTION"
->shmget</CODE
->, and friends)
+XSI IPC function calls (<tt class="function">msgget</tt>,
+<tt class="function">semget</tt>, <tt class="function">shmget</tt>, and friends)
 successfully.  These function calls will return with
-<VAR
-CLASS="LITERAL"
->ENOSYS</VAR
->, "Bad system call".</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)strip_title</VAR
-> - if set, strips the directory
-part off the window title, if any.  Default is not set.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)title</VAR
-> - if set, the title bar
+<tt class="literal">ENOSYS</tt>, "Bad system call".
+</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)strip_title</tt> - if set, strips the directory
+part off the window title, if any.  Default is not set.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)title</tt> - if set, the title bar
 reflects the name of the program currently running.  Default is not
 set.  Note that under Win9x the title bar is always enabled and it is
 stripped by default, but this is because of the way Win9x works.  In
-order not to strip, specify <VAR
-CLASS="LITERAL"
->title</VAR
-> or <VAR
-CLASS="LITERAL"
->title
-nostrip_title</VAR
->.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)tty</VAR
-> - if set, Cygwin enables extra support
+order not to strip, specify <tt class="literal">title</tt> or <tt class="literal">title
+nostrip_title</tt>.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)tty</tt> - if set, Cygwin enables extra support
 (i.e., termios) for UNIX-like ttys. 
 It is not compatible with some Windows programs.
 Defaults to not set, in which case the tty is opened in text mode.
 Note that this has been changed such that ^D works as
-expected instead of ^Z, and is settable via <B
-CLASS="COMMAND"
->stty</B
->.
+expected instead of ^Z, and is settable via <span><b class="command">stty</b></span>.
 This option must be specified before starting a Cygwin shell 
-and it cannot be changed in the shell.</P
-></LI
-><LI
-STYLE="list-style-type: disc"
-><P
-><VAR
-CLASS="ENVAR"
->(no)winsymlinks</VAR
-> - if set, Cygwin creates
+and it cannot be changed in the shell.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)winsymlinks</tt> - if set, Cygwin creates
 symlinks as Windows shortcuts with a special header and the R/O attribute
 set. If not set, Cygwin creates symlinks as plain files with a magic number,
-a path and the system attribute set. Defaults to set.</P
-></LI
-></UL
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="using-specialnames.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="cygwin-ug-net.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="using-cygserver.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Special filenames</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="using.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Cygserver</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+a path and the system attribute set. Defaults to set.</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="using-cygserver.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Special filenames </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Cygserver</td></tr></table></div></body></html>

@@ -1,198 +1,23 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<HTML
-><HEAD
-><TITLE
->File permissions</TITLE
-><META
-NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.7"><LINK
-REL="HOME"
-TITLE="Cygwin User's Guide"
-HREF="cygwin-ug-net.html"><LINK
-REL="UP"
-TITLE="Using Cygwin"
-HREF="using.html"><LINK
-REL="PREVIOUS"
-TITLE="Text and Binary modes"
-HREF="using-textbinary.html"><LINK
-REL="NEXT"
-TITLE="Special filenames"
-HREF="using-specialnames.html"><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="docbook.css"></HEAD
-><BODY
-CLASS="SECT1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
-><DIV
-CLASS="NAVHEADER"
-><TABLE
-SUMMARY="Header navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TH
-COLSPAN="3"
-ALIGN="center"
->Cygwin User's Guide</TH
-></TR
-><TR
-><TD
-WIDTH="10%"
-ALIGN="left"
-VALIGN="bottom"
-><A
-HREF="using-textbinary.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="80%"
-ALIGN="center"
-VALIGN="bottom"
->Chapter 3. Using Cygwin</TD
-><TD
-WIDTH="10%"
-ALIGN="right"
-VALIGN="bottom"
-><A
-HREF="using-specialnames.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-></TABLE
-><HR
-ALIGN="LEFT"
-WIDTH="100%"></DIV
-><DIV
-CLASS="SECT1"
-><H1
-CLASS="SECT1"
-><A
-NAME="USING-FILEMODES"
->File permissions</A
-></H1
-><P
->On Windows 9x systems, files are always readable, and Cygwin uses the
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>File permissions</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.66.1"><link rel="start" href="index.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter 3. Using Cygwin"><link rel="prev" href="using-textbinary.html" title="Text and Binary modes"><link rel="next" href="using-specialnames.html" title="Special filenames"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">File permissions</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-textbinary.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Using Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="using-specialnames.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-filemodes"></a>File permissions</h2></div></div></div><p>On Windows 9x systems, files are always readable, and Cygwin uses the
 native read-only mode to determine if they are writable. Files are
 considered to be executable if the filename ends with .bat, .com or .exe, or
-if its content starts with #!. Consequently <B
-CLASS="COMMAND"
->chmod</B
-> can
+if its content starts with #!. Consequently <span><b class="command">chmod</b></span> can
 only affect the "w" mode, it silently ignores actions involving the other
-modes.  This means that <B
-CLASS="COMMAND"
->ls -l</B
->
-needs to open and read files. It can thus be relatively slow.</P
-><P
->Under NT, file permissions default to the same behavior as Windows
+modes.  This means that <span><b class="command">ls -l</b></span>
+needs to open and read files. It can thus be relatively slow.</p><p>Under NT, file permissions default to the same behavior as Windows
 9x but there is optional functionality in Cygwin that can make file
 systems behave more like on UNIX systems.  This is turned on by adding
-the "ntea" option to the <VAR
-CLASS="ENVAR"
->CYGWIN</VAR
-> environment variable.</P
-><P
->When the "ntea" feature is activated, Cygwin will start with basic
+the "ntea" option to the <tt class="envar">CYGWIN</tt> environment variable.</p><p>When the "ntea" feature is activated, Cygwin will start with basic
 permissions as determined above, but can store POSIX file permissions in NT
 Extended Attributes.  This feature works quite well on NTFS partitions
 because the attributes can be stored sensibly inside the normal NTFS
 filesystem structure.  However, on a FAT partition, NT stores extended
-attributes in a flat file at the root of the partition called <TT
-CLASS="FILENAME"
->EA
-DATA. SF</TT
->.  This file can grow to extremely large sizes if you
+attributes in a flat file at the root of the partition called <tt class="filename">EA
+DATA. SF</tt>.  This file can grow to extremely large sizes if you
 have a large number of files on the partition in question, slowing the
-system to a crawl.  In addition, the <TT
-CLASS="FILENAME"
->EA DATA. SF</TT
-> file
+system to a crawl.  In addition, the <tt class="filename">EA DATA. SF</tt> file
 can only be deleted outside of Windows because of its "in use" status.  For
 these reasons, the use of NT Extended Attributes is off by default in
-Cygwin.  Finally, note that specifying "ntea" in <VAR
-CLASS="ENVAR"
->CYGWIN</VAR
-> has no
-effect under Windows 9x. </P
-><P
->Under NT, the test "[ -w filename]" is only true if filename is
-writable across the board, e.g. <B
-CLASS="COMMAND"
->chmod +w filename</B
->. </P
-></DIV
-><DIV
-CLASS="NAVFOOTER"
-><HR
-ALIGN="LEFT"
-WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
-WIDTH="100%"
-BORDER="0"
-CELLPADDING="0"
-CELLSPACING="0"
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
-><A
-HREF="using-textbinary.html"
-ACCESSKEY="P"
->Prev</A
-></TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="cygwin-ug-net.html"
-ACCESSKEY="H"
->Home</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
-><A
-HREF="using-specialnames.html"
-ACCESSKEY="N"
->Next</A
-></TD
-></TR
-><TR
-><TD
-WIDTH="33%"
-ALIGN="left"
-VALIGN="top"
->Text and Binary modes</TD
-><TD
-WIDTH="34%"
-ALIGN="center"
-VALIGN="top"
-><A
-HREF="using.html"
-ACCESSKEY="U"
->Up</A
-></TD
-><TD
-WIDTH="33%"
-ALIGN="right"
-VALIGN="top"
->Special filenames</TD
-></TR
-></TABLE
-></DIV
-></BODY
-></HTML
->
+Cygwin.  Finally, note that specifying "ntea" in <tt class="envar">CYGWIN</tt> has no
+effect under Windows 9x. </p><p>Under NT, the test "[ -w filename]" is only true if filename is
+writable across the board, e.g. <span><b class="command">chmod +w filename</b></span>. </p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-textbinary.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="using-specialnames.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Text and Binary modes </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Special filenames</td></tr></table></div></body></html>
