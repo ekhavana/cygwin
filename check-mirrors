@@ -241,7 +241,7 @@ sub verify_http {
     my @result = LWP::Simple::head($url);
     my $status = @result == 5 ? 1 : 0;
     if ($status) {
-	print "$file -- $result[0]\n";
+	print "$file -- ", join(';', @result), "\n";
     } else {
 	siteprint $site, 'http', "$file not found";
     }
