@@ -161,9 +161,8 @@ Source Code Tree Layout
      * doc
           + hardcopy contains precompiled PostScript documentation for
             various components of the X Window System. Cygwin/X-specific
-            documentation is not contained in this directory, as of
-            2001-10-26. The documentation contained in this directory is
-            of great interest and relevance to Cygwin/X programmers.
+            documentation is not contained in this directory. This
+            directory is of little interest to Cygwin/X programmers.
           + specs contains the sources to build the documents in
             hardcopy. This directory is of little interest to Cygwin/X
             programmers.
@@ -254,39 +253,31 @@ Source Code Tree Layout
                  functions. However, the functions in the os have been
                  written in such a way that they are actually compatible
                  with most UNIX-style operating systems, include Cygwin.
-          + xwinclip provides Windows clipboard and X clipboard
-            integration. The xwinclip is not, as of 2001-10-26, contained
-            in the XFree86 CVS tree. Please see the [56]xwinclip
-            development page for more information.
      * util contains a few utilities for programmers, such as a memory
        leak counter. Cygwin/X has never used these utilities, thus this
        directory is of little interest to Cygwin/X programmers.
-     * workInProgess is supposed to contain various side projects that
-       are in progress. As of 2001-10-26, this directory contains only
-       empty directories. This directory is of little interest to
-       Cygwin/X programmers.
      _________________________________________________________________
 
 Cygwin/X X Server Architecture
 
    Cygwin/X's X Server architecture was heavily inspired by
-   [57]Angebranndt94, the Definition of the Porting Layer for the X v11
+   [56]Angebranndt94, the Definition of the Porting Layer for the X v11
    Sample Server.
      _________________________________________________________________
 
 Server Privates
 
    X Servers use various structures to pass information around to
-   functions. Some of those structures are colormaps, [58]graphics
-   contexts (GCs), [59]pixmaps, and [60]screens. The X protocol defines
+   functions. Some of those structures are colormaps, [57]graphics
+   contexts (GCs), [58]pixmaps, and [59]screens. The X protocol defines
    the contents of each of these structures, however, the X Server
-   implementation and various X Server libraries ([61]MI, [62]FB,
-   [63]Shadow, etc.) may require additional information to be associated
+   implementation and various X Server libraries ([60]MI, [61]FB,
+   [62]Shadow, etc.) may require additional information to be associated
    with these internal structures. For example, the Cygwin/X X Server
    must associate a Windows window handle (hwnd) with each X Server
    screen that is open.
 
-   [64]Privates are the mechanism provided by the X protocol for
+   [63]Privates are the mechanism provided by the X protocol for
    associating additional information with internal X Server structures.
    Privates originally consisted of a single pointer member contained in
    each structure, usually named devPrivate or devPriv. This original
@@ -307,10 +298,10 @@ Server Privates
    upon use. Preallocation, the preferred method for GCs, pixmaps, and
    windows, requires that the size of the privates memory needed be
    specified during X Server initialization. Preallocation allows the
-   [65]DIX layer to allocate all memory needed for a given internal
+   [64]DIX layer to allocate all memory needed for a given internal
    structure, including all privates memory, as a single contiguous block
    of memory; this greatly reduces memory fragmentation. Allocation upon
-   use, used by screens, requires the [66]DDX structure creation function
+   use, used by screens, requires the [65]DDX structure creation function
    to allocate memory for the privates; winScreenInit calling
    winAllocatePrivates, which allocates screen privates memory directly,
    is an example of this. Allocation upon use can optionally and
@@ -361,9 +352,9 @@ Engine System
 
 Shadow FB Engines
 
-   The Shadow FB engines use Keith Packard's [67]FB drawing procedures
-   wrapped with his [68]Shadow layer that allows drawing to an
-   [69]offscreen framebuffer with periodic updates of the [70]primary
+   The Shadow FB engines use Keith Packard's [66]FB drawing procedures
+   wrapped with his [67]Shadow layer that allows drawing to an
+   [68]offscreen framebuffer with periodic updates of the [69]primary
    framebuffer.
      _________________________________________________________________
 
@@ -384,7 +375,7 @@ Primary FB Engine
 
    The Primary FB engine is deprecated. Primary FB works in the same
    manner that the original Cygwin/X X Server worked, namely, it uses
-   IDirectDrawSurface_Lock to obtain a pointer to the [71]primary
+   IDirectDrawSurface_Lock to obtain a pointer to the [70]primary
    framebuffer memory at server startup. This memory pointer is held
    until the X Server shuts down. This technique does not work on all
    versions of Windows.
@@ -435,11 +426,11 @@ Primary FB Engine
 
 User Input
 
-   User input is processed using the [72]MI layer's user input system.
+   User input is processed using the [71]MI layer's user input system.
    Any queued Win32 user input messages, as well as other Win32 messages,
    are handled when hw/xwin/winwakeup.c's winWakeupHandler function is
-   called by the [73]OS layer os/WaitFor.c's WaitForSomething function
-   and when the [74]DIX layer dix/dispatch.c's Dispatch function calls
+   called by the [72]OS layer os/WaitFor.c's WaitForSomething function
+   and when the [73]DIX layer dix/dispatch.c's Dispatch function calls
    hw/xwin/InitInput.c's ProcessInputEvents function. Each Win32 user
    input message typically queues an input event, or several input
    events, using the MI layer's mi/mieq.c's mieqEnqueue function.
@@ -583,7 +574,7 @@ Obtaining the Source Code
      your native Cygwin host.
 
    Cygwin/X source code is contained in, and distributed with, the
-   XFree86 source code tree. Read-only [75]CVS access to the XFree86
+   XFree86 source code tree. Read-only [74]CVS access to the XFree86
    source tree is also available from the XFree86 project.
 
    The XFree86 CVS tree is not always buildable on Cygwin, as the XFree86
@@ -604,8 +595,8 @@ Obtaining the Source Code
    problems that you may encounter, which can greatly ease debugging of
    new features and other code modifications.
 
-   It is highly recommended to get the XFree86 [76]CVS tree by using the
-   CVS [77]pserver method. CVS pserver is the easiest CVS method to use
+   It is highly recommended to get the XFree86 [75]CVS tree by using the
+   CVS [76]pserver method. CVS pserver is the easiest CVS method to use
    for anonymous access to public CVS trees, as you need only type in a
    well-known password to download the CVS tree. CVS pserver is rarely
    used to control checkins to CVS trees, as the passwords are stored and
@@ -721,16 +712,30 @@ Required Packages for Compiling
    installation; do not unselect any of these automatically selected
    packages.
      * binutils
+     * bison
      * byacc
-     * cygipc
+     * bzip2
      * cvs
-     * diff
+     * diffutils
      * expat
+     * fileutils
+     * findutils
      * flex
+     * gawk
      * gcc
+     * libfontconfig-devel
+     * libfreetype2-devel
      * libncurses-devel
      * make
      * patch
+     * pcre
+     * pcre-devel
+     * perl
+     * sed
+     * tar
+     * termcap
+     * terminfo
+     * zlib
      _________________________________________________________________
 
 Building and Installing lndir
@@ -1060,7 +1065,7 @@ $
 
 Keeping your source code tree updated
 
-   [78]CVS makes keeping your source code tree up to date easy. You may
+   [77]CVS makes keeping your source code tree up to date easy. You may
    update your entire source code tree at once, or you can update
    individual directories or files, if you so choose.
      _________________________________________________________________
@@ -1179,7 +1184,7 @@ Cross Compiling
    There are a whole new class of problems that can happen when cross
    compiling that are simply not an issue when building on Cygwin. You
    should be familiar with building Cygwin/X on Cygwin, as described in
-   [79]the Section called Native Compiling, before attempting to cross
+   [78]the Section called Native Compiling, before attempting to cross
    compile Cygwin/X.
      _________________________________________________________________
 
@@ -1188,12 +1193,12 @@ Obtaining binutils and gcc Source
    binutils and gcc source code releases that are known to compile on
    Cygwin and distributed by the Cygwin project. Therefore, it is highly
    recommended that you obtain the binutils and gcc sources from the
-   [80]Cygwin mirror network.
+   [79]Cygwin mirror network.
 
    Follow these steps to download Cygwin/X binaries:
     1. Create a directory to store the binutils and gcc sources in, such
        as /home/my_login/cygwin/src/
-    2. Visit the [81]Cygwin mirrors page to find your closest mirror
+    2. Visit the [80]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
     4. Change current ftp directory to cygwin/release/.
@@ -1450,7 +1455,7 @@ ln -s gcc cc
 Building Cygwin/X
 
    Building the source code when cross compiling XFree86 is nearly
-   identical to the process described below in [82]the Section called
+   identical to the process described below in [81]the Section called
    Native Compiling of the Native Compiling section. One divergence from
    the aforementioned instructions is that you will be using a bash shell
    on your cross compiling host, rather than on your native Cygwin host;
@@ -1458,7 +1463,7 @@ Building Cygwin/X
     1. lndir should generally already be installed if your build host
        already has the X Window System installed. If you do not have
        lndir, you can build it for your build host by following the
-       instructions in [83]the Section called Building and Installing
+       instructions in [82]the Section called Building and Installing
        lndir.
     2. When building the entire tree, you must pass CROSSCOMPILEDIR to
        make to cause the build system to build for the target, Cygwin,
@@ -1537,7 +1542,7 @@ CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" > install.log 2>&1
 Packaging a Cygwin/X Distribution
 
    Cygwin/X uses the standard XFree86 distribution build scripts. You
-   will need to start by downloading the XFree86 util [84]CVS module. The
+   will need to start by downloading the XFree86 util [83]CVS module. The
    following instructions are paraphrased from bindist-notes in the
    XFree86 devel CVS module, with adaptations to make them Cygwin/X
    specific.
@@ -1545,7 +1550,7 @@ Packaging a Cygwin/X Distribution
        xc/config/cf/host.def.
     2. Build and install the extract tool from the utils module.
     3. Run a full build of the XFree86 CVS tree, following the
-       instructions in [85]the Section called Native Compiling.
+       instructions in [84]the Section called Native Compiling.
     4. Install the full build of XFree86 to a staging directory:
 
 Username@CygwinHost ~/x-devel/build/std
@@ -1638,7 +1643,7 @@ Chapter 3. Documentation
 
 Overview
 
-   Cygwin/X documentation is written in XML according to the [86]DocBook
+   Cygwin/X documentation is written in XML according to the [85]DocBook
    document type definition (DTD). These XML input files are then
    compiled using an autoconf and automake build system. We currently
    build the following output formats: HTML, PDF, PS, RTF, and TXT.
@@ -1649,11 +1654,11 @@ Obtaining the Source Code
    Cygwin/X documentation source code is distributed in a tarred and
    gzipped archive, seperately from the Cygwin/X X Server source code.
    The documentation source code is not, as of 2002-01-06, distributed as
-   part of any [87]CVS tree. Updates to the documentation source code are
+   part of any [86]CVS tree. Updates to the documentation source code are
    periodically released via the sources.redhat.com mirror network.
 
    Follow these steps to checkout the Cygwin/X documentation source code:
-    1. Find your closest sources.redhat.com mirror from the [88]mirror
+    1. Find your closest sources.redhat.com mirror from the [87]mirror
        list.
     2. Change to the xfree/devel/documentation/ directory.
     3. Download the latest version of the documentation source code
@@ -1673,7 +1678,7 @@ cygwin-x-doc-1.0.0  cygwin-x-doc-1.0.0.tar.gz
 
 Setting Up a DocBook Build Environment
 
-   Setup a DocBook build environment on Cygwin by consulting the [89]SGML
+   Setup a DocBook build environment on Cygwin by consulting the [88]SGML
    for Windows NT: Setting up a free SGML editing and publishing system
    on Windows NT/Cygwin document.
      _________________________________________________________________
@@ -1827,7 +1832,7 @@ B
 
    Bitmap (X)
           X pixel map with bit depth equal to one. X pixel maps of bit
-          depth not equal to one are called [90]pixmaps.
+          depth not equal to one are called [89]pixmaps.
 
 C
 
@@ -1850,7 +1855,7 @@ C
    Concurrent Versions System (CVS)
           CVS is an open source version control system used by the
           majority of open source projects. More information can be found
-          at the [91]CVS project homepage.
+          at the [90]CVS project homepage.
 
 D
 
@@ -1889,10 +1894,10 @@ M
 O
 
    Offscreen Framebuffer
-          Essentially a [92]bitmap, in the Windows sense, of size and
+          Essentially a [91]bitmap, in the Windows sense, of size and
           color format that can be displayed on the screen. An offscreen
           framebuffer may be identical in size and color format to the
-          [93]primary framebuffer, but this is not always required.
+          [92]primary framebuffer, but this is not always required.
 
    OS Layer (OS)
           X Server layer that depends on the operating system; but not
@@ -1902,18 +1907,18 @@ P
 
    Pixmap
           X pixel map with bit depth not equal to one. X pixel maps of
-          bit depth one are called [94]bitmaps.
+          bit depth one are called [93]bitmaps.
 
    Primary Framebuffer
-          The block of memory, essentially a [95]bitmap, that describes
+          The block of memory, essentially a [94]bitmap, that describes
           what is currently being displayed on the screen. Any updates to
           the primary framebuffer will be displayed on the screen after
           the next screen refresh.
 
    Privates
           Additional information associated with internal X Server
-          structures, such as [96]colormaps, [97]GCs, [98]pixmaps, or
-          [99]screens.
+          structures, such as [95]colormaps, [96]GCs, [97]pixmaps, or
+          [98]screens.
 
    pserver
           CVS pserver, short for "password server", is one of the user
@@ -1932,8 +1937,8 @@ S
           may have several screens.
 
    Shadow
-          X Server shadow layer that allows [100]FB to draw to an
-          offscreen framebuffer and occasionally call a [101]DDX function
+          X Server shadow layer that allows [99]FB to draw to an
+          offscreen framebuffer and occasionally call a [100]DDX function
           that transfers the updated regions to the screen.
 
 X
@@ -1952,7 +1957,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [102]X Display Manager.
+          See Also: [101]X Display Manager.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -2279,7 +2284,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [103]http://www.gnu.org/copyleft/.
+   [102]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -2373,51 +2378,50 @@ References
   53. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-dix-layer
   54. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-mi-layer
   55. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-os-layer
-  56. http://x.cygwin.com/devel/xwinclip/
-  57. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#porting-layer-definition
-  58. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-gc
-  59. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
-  60. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-screen
-  61. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-mi-layer
-  62. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
-  63. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-shadow-layer
-  64. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-privates
-  65. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-dix-layer
-  66. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-ddx-layer
-  67. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
-  68. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-shadow-layer
-  69. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-offscreen-framebuffer
+  56. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#porting-layer-definition
+  57. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-gc
+  58. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
+  59. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-screen
+  60. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-mi-layer
+  61. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
+  62. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-shadow-layer
+  63. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-privates
+  64. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-dix-layer
+  65. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-ddx-layer
+  66. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
+  67. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-shadow-layer
+  68. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-offscreen-framebuffer
+  69. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-primary-framebuffer
   70. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-primary-framebuffer
-  71. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-primary-framebuffer
-  72. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-mi-layer
-  73. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-os-layer
-  74. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-dix-layer
-  75. http://xfree86.org/cvs/
-  76. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
-  77. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pserver
-  78. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
-  79. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
+  71. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-mi-layer
+  72. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-os-layer
+  73. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-dix-layer
+  74. http://xfree86.org/cvs/
+  75. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
+  76. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pserver
+  77. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
+  78. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
+  79. http://cygwin.com/mirrors.html
   80. http://cygwin.com/mirrors.html
-  81. http://cygwin.com/mirrors.html
-  82. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
-  83. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-compiling-lndir
-  84. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
-  85. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
-  86. http://docbook.org/
-  87. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
-  88. http://cygwin.com/mirrors.html
-  89. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
-  90. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
-  91. http://www.cvshome.org/
-  92. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-win32
-  93. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-primary-framebuffer
-  94. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-x
-  95. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-win32
-  96. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-colormap
-  97. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-gc
-  98. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
-  99. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-screen
- 100. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
- 101. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-ddx-layer
- 102. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-xdm
- 103. http://www.gnu.org/copyleft/
+  81. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
+  82. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-compiling-lndir
+  83. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
+  84. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
+  85. http://docbook.org/
+  86. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
+  87. http://cygwin.com/mirrors.html
+  88. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+  89. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
+  90. http://www.cvshome.org/
+  91. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-win32
+  92. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-primary-framebuffer
+  93. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-x
+  94. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-win32
+  95. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-colormap
+  96. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-gc
+  97. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
+  98. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-screen
+  99. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
+ 100. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-ddx-layer
+ 101. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-xdm
+ 102. http://www.gnu.org/copyleft/
