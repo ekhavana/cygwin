@@ -180,7 +180,7 @@ Source Code Tree Layout
        however, we do have to link to several of these libraries to get
        our X Server to build. These libraries are maintained by various
        developers from the XFree86 project and there are occasional
-       synchronizations with [48]The Open Group's [49]X.Org. Cygwin/X
+       synchronizations with [48]The Open Group's [49]X.org. Cygwin/X
        programmers occasionally need to fix Cygwin-related build errors
        that occur in these libraries.
      * nls contains locale definition files. These files are maintained
@@ -1657,18 +1657,18 @@ Obtaining the Source Code
        list.
     2. Change to the xfree/devel/documentation/ directory.
     3. Download the latest version of the documentation source code
-       archive, for example, cygwin-xfree-doc-0.9.6.tar.gz (272 KiB).
+       archive, for example, cygwin-x-doc-1.0.0.tar.gz (685 KiB).
     4. Unpack the documentation source code archive, for example:
 
 Username@CygwinHost ~
-$ tar -xzf cygwin-xfree-doc-0.9.6.tar.gz
+$ tar -xzf cygwin-x-doc-1.0.0.tar.gz
 
     5. You should now have a directory with the base name of the archive
        that contains the Cygwin/X documentation source code. For example:
 
 Username@CygwinHost ~
 $ ls
-cygwin-xfree-doc-0.9.6  cygwin-xfree-doc-0.9.6.tar.gz
+cygwin-x-doc-1.0.0  cygwin-x-doc-1.0.0.tar.gz
      _________________________________________________________________
 
 Setting Up a DocBook Build Environment
@@ -1692,34 +1692,34 @@ $
        directory:
 
 Username@CygwinHost ~
-$ cd cygwin-xfree-doc-0.9.6
+$ cd cygwin-x-doc-1.0.0
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6
+Username@CygwinHost ~/cygwin-x-doc-1.0.0
 $
 
     3. Create a build directory and change the current directory to that
        directory:
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6
+Username@CygwinHost ~/cygwin-x-doc-1.0.0
 $ mkdir build
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6
+Username@CygwinHost ~/cygwin-x-doc-1.0.0
 $ cd build
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6/build
+Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
 $
 
     4. Configure the documentation source code:
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6/build
+Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
 $ ../configure
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6/build
+Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
 $
 
     5. Build the documentation:
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6/build
+Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
 $ make all
 
     6. Building the documentation is now complete.
@@ -1734,7 +1734,7 @@ Packaging a Documentation Distribution
        distribution. The line containing the version tag should look
        like:
 
-AM_INIT_AUTOMAKE(cygwin-xfree-doc, 0.9.6)
+AM_INIT_AUTOMAKE(cygwin-xfree-doc, 1.0.0)
 
     2. Open a shell on your documentation build host; you should see a
        window like the following:
@@ -1746,19 +1746,19 @@ $
        build directory:
 
 Username@CygwinHost ~
-$ cd cygwin-xfree-doc-0.9.6/build
+$ cd cygwin-x-doc-1.0.0/build
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6/build
+Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
 $
 
     4. Build the documentation source code distribution:
 
-Username@CygwinHost ~/cygwin-xfree-doc-0.9.6/build
+Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
 $ make distcheck
 
     5. The documentation source code distribution should now be contained
        in the current directory in a file called
-       cygwin-xfree-doc-0.9.6.tar.gz.
+       cygwin-x-doc-1.0.0.tar.gz.
     6. Building the documentation is now complete.
      _________________________________________________________________
 
@@ -2318,106 +2318,106 @@ How to use this License for your documents
 
 References
 
-   1. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#overview
-   2. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#programming
-   3. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-overview
-   4. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-tree-layout
-   5. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-server-architecture
-   6. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-server-architecture-privates
-   7. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-server-architecture-engines
-   8. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-server-architecture-input
-   9. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-obtaining-source
-  10. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-build-native
-  11. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-compiling
-  12. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-compiling-install
-  13. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-tree-update
-  14. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-build-cross
-  15. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-cross-obtaining-compiler-source
-  16. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
-  17. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-cross-building-binutils-and-gcc
-  18. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-cross-tool-links
-  19. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-cross-build
-  20. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-distribution
-  21. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#documentation
-  22. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#docs-overview
-  23. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#docs-obtaining-source
-  24. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#docs-docbook
-  25. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#docs-build
-  26. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#docs-distribution
-  27. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#website
-  28. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#biblio
-  29. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#glossary
-  30. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl
-  31. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-preamble
-  32. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-applicability-and-definitions
-  33. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-verbation-copying
-  34. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-copying-in-quantity
-  35. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-modifications
-  36. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-combining-documents
-  37. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-collections-of-documents
-  38. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-aggregation-with-independent-works
-  39. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-translation
-  40. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-termination
-  41. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-future-revisions-of-this-license
-  42. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gfdl-using-for-your-documents
-  43. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#programming
-  44. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#documentation
-  45. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#website
-  46. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-obtaining-source
-  47. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-distribution
+   1. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#overview
+   2. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#programming
+   3. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-overview
+   4. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-tree-layout
+   5. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-server-architecture
+   6. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-server-architecture-privates
+   7. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-server-architecture-engines
+   8. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-server-architecture-input
+   9. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-obtaining-source
+  10. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
+  11. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-compiling
+  12. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-compiling-install
+  13. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-tree-update
+  14. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-cross
+  15. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-cross-obtaining-compiler-source
+  16. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
+  17. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-cross-building-binutils-and-gcc
+  18. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-cross-tool-links
+  19. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-cross-build
+  20. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-distribution
+  21. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#documentation
+  22. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#docs-overview
+  23. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#docs-obtaining-source
+  24. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#docs-docbook
+  25. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#docs-build
+  26. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#docs-distribution
+  27. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#website
+  28. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#biblio
+  29. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#glossary
+  30. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl
+  31. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-preamble
+  32. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-applicability-and-definitions
+  33. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-verbation-copying
+  34. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-copying-in-quantity
+  35. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-modifications
+  36. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-combining-documents
+  37. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-collections-of-documents
+  38. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-aggregation-with-independent-works
+  39. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-translation
+  40. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-termination
+  41. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-future-revisions-of-this-license
+  42. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gfdl-using-for-your-documents
+  43. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#programming
+  44. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#documentation
+  45. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#website
+  46. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-obtaining-source
+  47. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-distribution
   48. http://www.opengroup.org/
   49. http://www.x.org/
   50. http://www.xfree86.org/mailman/listinfo/i18n
-  51. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-cfb-layer
-  52. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-shadow-layer
-  53. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-dix-layer
-  54. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-mi-layer
-  55. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-os-layer
-  56. http://xfree86.cygwin.com/devel/xwinclip/
-  57. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#porting-layer-definition
-  58. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-gc
-  59. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-pixmap
-  60. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-screen
-  61. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-mi-layer
-  62. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-fb-layer
-  63. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-shadow-layer
-  64. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-privates
-  65. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-dix-layer
-  66. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-ddx-layer
-  67. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-fb-layer
-  68. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-shadow-layer
-  69. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-offscreen-framebuffer
-  70. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-primary-framebuffer
-  71. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-primary-framebuffer
-  72. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-mi-layer
-  73. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-os-layer
-  74. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-dix-layer
+  51. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cfb-layer
+  52. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-shadow-layer
+  53. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-dix-layer
+  54. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-mi-layer
+  55. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-os-layer
+  56. http://x.cygwin.com/devel/xwinclip/
+  57. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#porting-layer-definition
+  58. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-gc
+  59. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
+  60. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-screen
+  61. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-mi-layer
+  62. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
+  63. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-shadow-layer
+  64. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-privates
+  65. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-dix-layer
+  66. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-ddx-layer
+  67. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
+  68. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-shadow-layer
+  69. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-offscreen-framebuffer
+  70. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-primary-framebuffer
+  71. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-primary-framebuffer
+  72. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-mi-layer
+  73. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-os-layer
+  74. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-dix-layer
   75. http://xfree86.org/cvs/
-  76. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-cvs
-  77. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-pserver
-  78. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-cvs
-  79. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-build-native
+  76. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
+  77. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pserver
+  78. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
+  79. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
   80. http://cygwin.com/mirrors.html
   81. http://cygwin.com/mirrors.html
-  82. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-build-native
-  83. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-compiling-lndir
-  84. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-cvs
-  85. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#prog-build-native
+  82. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
+  83. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-compiling-lndir
+  84. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
+  85. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#prog-build-native
   86. http://docbook.org/
-  87. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-cvs
+  87. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-cvs
   88. http://cygwin.com/mirrors.html
   89. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
-  90. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-pixmap
+  90. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
   91. http://www.cvshome.org/
-  92. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-bitmap-win32
-  93. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-primary-framebuffer
-  94. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-bitmap-x
-  95. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-bitmap-win32
-  96. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-colormap
-  97. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-gc
-  98. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-pixmap
-  99. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-screen
- 100. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-fb-layer
- 101. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-ddx-layer
- 102. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/cg/dump.html#gloss-xdm
+  92. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-win32
+  93. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-primary-framebuffer
+  94. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-x
+  95. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-bitmap-win32
+  96. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-colormap
+  97. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-gc
+  98. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-pixmap
+  99. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-screen
+ 100. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-fb-layer
+ 101. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-ddx-layer
+ 102. file://localhost/home/harold/fdo/build/cygwin-x-doc/cg/dump.html#gloss-xdm
  103. http://www.gnu.org/copyleft/
