@@ -1,0 +1,767 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en-US">
+
+<head>
+<title>Cygwin/XFree86 - Server Test Series - Change Log</title>
+
+<meta name="Author" content="Harold L Hunt II">
+<meta name="keywords" content="xfree86, Cygwin, X, x window system, microsoft, windows, x/server, xserver, x-server, Cygwin/XFree86, Win32, Win32API, Win32 API, shadow, shadowfb, fb">
+<meta name="description" content="Cygwin/XFree86 - Server Test Series - Change Log">
+
+<style type="text/css">
+<!--
+body	{font-family: Arial, Helvetica, sans-serif}
+p	{font-family: Arial, Helvetica, sans-serif; font-size: small}
+a	{font-family: Arial, Helvetica, sans-serif}
+a:hover {font-family: Arial, Helvetica, sans-serif; text-decoration: none}
+-->
+</style>
+</head>
+
+<body>
+<h3>Cygwin/XFree86 - Server Test Series - Change Log</h3>
+
+<p>Last updated: 2001-07-02 0300 EDT</p>
+
+<p>As you can see from the change log entries below, we have one guy
+spending way too much time in front of his computer.  Help this guy
+get his social life back by submitting some patches, eh?  :)</p>
+
+<!-- Change log entry template -->
+<!--
+<h4></h4>
+<table>
+<tbody>
+
+<tr><td>Released: </td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="XWin-Test.exe.bz2">XWin-Test.exe.bz2</a> ( KB)</td></tr>
+
+<tr><td>Download source: <a
+href="xwin-2001-.tar.bz2">xwin-2001-.tar.bz2</a> ( KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li></li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+-->
+
+<h4>Test38</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-29 1717 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test37</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test38.exe.bz2">XWin-Test38.exe.bz2</a>
+(1050 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20010629-1717.tar.bz2">xwin-20010629-1717.tar.bz2</a>
+(66 KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Pick up the value of the monitorResolution global variable that is
+set by passing the '-dpi' parameter to XWin.exe. (Harold Hunt)</li>
+
+<li>Add file winlayer.c, which provides the source code framework, and
+intial implementations for RandR and miext/layer support.
+Unfortunately, the layer support doesn't work correctly when it is
+enabled.  The server just draws a black screen when layer support is
+enabled.  I would appreciate it if someone with layer experience or
+some extra time on their hands would look into finishing this. (Harold
+Hunt)</li>
+
+<li>Make PseudoColor, as opposed to StaticColor, the default visual
+class when running the GDI engine at 8 bits per pixel. (Harold
+Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test37</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-26 0001 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test37.exe.bz2">XWin-Test37.exe.bz2</a>
+(1045 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20010626-0001.tar.bz2">xwin-20010626-0001.tar.bz2</a>
+(64 KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>PseudoColor - Fixed the strange colors when redrawing portions of
+the Cygwin/XFree86 window that have been covered then exposed by
+another Window. (Harold Hunt)</li>
+
+<li>Stop creating a fake PseudoColor visual in when using a TrueColor
+display.  Emulating PseudoColor on TrueColor is a long standing
+problem and will be handled by the RandR extension when it
+stabilizes. (Harold Hunt)</li>
+
+<li>Move the palette realization code into an engine specific
+funtion. (Harold Hunt)</li>
+
+<li>Move the screen redrawing code into an engine specific
+funtion. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test36</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-24 1656 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test35</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test36.exe.bz2">XWin-Test36.exe.bz2</a>
+(1046 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20010624-1656.tar.bz2">xwin-20010624-1656.tar.bz2</a>
+(64 KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Changed the PseudoColor whitePixel location from 255 to 1, which
+allows Magic 7.1 to use the default colormap, as opposed to creating
+its own.  This prevents colormap changes when moving into and out of
+the Magic window, which keeps the window viewable when the focus
+is in another X window. (Harold Hunt)</li>
+
+<li>Brought the experimental Native GDI support back from the dead by
+setting up Pixmap privates and GC privates so that the global device
+context handles could be gotten rid of.  Actually, the global handles
+were long since gone, as the code that used them was #if 0'd out.  I
+managed to change the drawing logic in the process, so the code now
+only draws a white window, whereas before it was drawing the X hatched
+background. (Harold Hunt)</li>
+
+<li>Rewrote the winFinishScreenInitNativeGDI () procedure so that it
+defers most of the default setup work to miScreenInit (). (Harold Hunt)</li>
+
+<li>Added winnativegdi.c, which includes functions to fit the Native
+GDI support into the current engine framework. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test35</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-23 2225 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test34</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test35.exe.bz2">XWin-Test35.exe.bz2</a>
+(1043 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20010623-2225.tar.bz2">xwin-20010623-2225.tar.bz2</a>
+(63 KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>PseudoColor support is now enabled, albeit with lots of
+caveats. (Harold Hunt)
+
+<ul>
+
+<li>PseudoColor is only supported by the GDI blitter (-engine 1), so
+you have to pass the '-engine 1' parameter to XWin.exe.</li>
+
+<li>PseudoColor is only supported when Windows is running in 256 color
+mode (8 bit color); the GDI engine cannot change the Windows display
+depth, so you must be running Windows in 256 color mode before
+starting XWin.exe.</li>
+
+<li>There are plenty of situations that cause the colors displayed by
+Cygwin/XFree86 to become garbled.</li>
+
+<li>Test35 has been tested only on Windows 2000.  There is no reason
+why Test35 should not run on the other versions of Windows, but I
+would appreciate some quick feedback on whether Test35 functions on
+Windows 95, 98, Me, and NT 4.0 when running Windows in 256 color mode
+and passing '-engine 1' to XWin.exe.</li>
+
+</ul>
+
+</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test34</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-21 1500 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test33</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test34.exe.bz2">XWin-Test34.exe.bz2</a>
+(1042 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20010621-1500.tar.bz2">xwin-20010621-1500.tar.bz2</a> (62
+KB)</td</tr>
+
+<tr><td>Download XFree86 CVS diffs: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xfree86-cvs-diffs-20010621-1800.tar.bz2">xfree86-cvs-diffs-20010621-1800.tar.bz2</a>
+(25 KB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Add desired display depth vs. current display depth as criteria
+for whether to change the video mode when using a DirectDraw engine in
+fullscreen. (Harold Hunt)</li>
+
+<li>Add experimental support for a real PseudoColor visual.  Toggled
+on and off with WIN_PSEUDO_SUPPORT in win.h. (Harold Hunt)</li>
+
+<li>Add DirectDraw return values to error messages for failed function
+calls in winshaddd.c and winshadddnl.c. (Harold Hunt)</li>
+
+<li>The StaticColor colormap only had 20 colors when using the GDI
+engine.  Create the colormap with all 256 colors in the default GDI
+palette, and set the shadow DIB palette to the default GDI palette so
+that all colors in the colormap display correctly.  In other words,
+fix the StaticColor support when using the GDI engine. (Harold
+Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test33</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-19 2255 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test32</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test33.exe.bz2">XWin-Test33.exe.bz2</a>
+(1042 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20010619-2255.tar.bz2">xwin-20010619-2255.tar.bz2</a>
+(60 KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Add warning message if the requested DIB or DirectDraw surface
+will be larger than 16 MB.  There is a 16 MB size limit for DIBs in
+Windows 95, 98, and, presumably, Me.  For more information, see <a
+href="http://msdn.microsoft.com/library/psdk/gdi/bitmaps_5d4g.htm">MSDN
+Library->Platform SDK->Graphics and Multimedia Services->Windows
+GDI->Bitmaps->Bitmap Reference->Bitmap
+Functions->CreateDIBitmap</a>. (Harold Hunt)</li>
+
+<li>Re-disable UseSmartScheduler, and add a note to
+xc/config/cf/cygwin.cf that UseSmartScheduler has terrible performance
+on Cygwin. (Harold Hunt)</li>
+
+<li>Add processing for the '-screen' command to handle 'WxH', if it is
+present.  This is in addition to the new 'W H' format. (Harold Hunt)</li>
+
+<li>Grab a new ddraw.h header from the Wine project.  The new header
+has several fixes to function parameter types, thus preventing
+compilation warnings, and a few fixes to some structures that may have
+been causing DirectDraw Surface creation problems. (Harold Hunt)</li>
+
+<li>Add a check for a NULL hardware device context being returned by
+BeginPaint in the winBltExposedRegions functions. (Harold Hunt)</li>
+
+<li>Add error messages and extra sanity checks to winBltExposedRegions
+functions. (Harold Hunt)</li>
+
+<li>Remove the ShadowWindowProc functions, as the Cygwin/XFree86
+ShadowUpdateProcs do not need ShadowWindowProcs. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test32</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-17 2256 EDT</td></tr>
+
+<tr><td>Committed to
+XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test31</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test32.exe.bz2">XWin-Test32.exe.bz2</a>
+(1042 KB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Process keyboard message repeat counts.  The repeat count is
+usually 1 on fast or lightly loaded machines. (Harold Hunt)</li>
+
+<li>Disable processing of the left and right Windows keys, as they
+cause focus to be returned to Windows.  Some users were reporting that
+this caused endless keypresses to show up in Cygwin/XFree86. (Harold
+Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test31</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-15 1953 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test31.exe.bz2">XWin-Test31.exe.bz2</a>
+(1040 KB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>A set of recent releases changed the '-screen n
+WIDTHxHEIGHTxDEPTH' parameter to '-screen n width height' and added
+the '-depth color_bit_depth' parameter.  The '-depth color_bit_depth'
+parameter is only used in fullscreen mode when using a DirectDraw
+engine.  Some of that information was missing from previous change log
+entries. (Harold Hunt)</li>
+
+<li>Tell X Server to quit when Alt-F4 key combination is
+pressed. (Harold Hunt)</li>
+
+<li>Don't call IDirectDraw_SetDisplayMode if the desired mode is the
+same as the current mode.  This makes fullscreen server startup and
+switching back and forth between the server and Windows much
+faster.  This also causes the current refresh rate to be used by
+default in fullscreen mode, rather than the minimal refresh rate that
+is chosen by DirectDraw when you change the display mode but do not
+specify a refresh rate.  Translation: yay! (Harold Hunt)</li>
+
+<li>Added '-refresh rate_in_Hz' command line parameter to specify a
+refresh rate.  Specifying an invalid refresh rate will cause the X
+Server to abort on startup. (Harold Hunt)</li>
+
+<li>Switch from DirectDraw to DirectDraw2 to support changing the
+refresh rate.  The minimum DirectDraw version required to date has
+been DirectDraw3, which is not affected by this release; therefore, I
+don't foresee anyone being forced to upgrade to a new version of
+DirectDraw. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Test30</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-13 0027 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: 2001-06-15 0411</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Send release messages for modifier keys (Alt, Ctrl, and Shift) to
+the X Server when Cygwin/XFree86 loses the Windows keyboard focus.
+This fixes the keyboard problems experienced when locking an NT
+workstation by pressing Ctrl-Alt-Del when Cygwin/XFree86 had the
+keyboard focus. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test29</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-07 2034 EDT</td></tr>
+<tr><td>Committed to XFree86 CVS: 2001-06-08 0408 EDT</td></tr>
+<tr><td>Basis: XFree86 CVS</td></tr>
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Be a little more clever about handling cursor hiding/unhiding when
+the server has regenerated itself.  Server regeneration happens when
+you log off of an XDMCP session and are subsequently presented with a
+new XDMCP login screen.  This fix addresses the server error message,
+"Couldn't get last screen privates". (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Test28</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-06 1427 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: 2001-06-06 1406 EDT</td></tr>
+
+<tr><td>Basis: Test27</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Detect when the cursor has crossed into a new X screen without
+causing a Windows activation event; notify the cursor handling code
+that the transition has happened.  (e.g. Launch two screens, place
+them side by side, then move the cursor between them; previously, the
+mouse events from the second screen would cause mouse movement on the
+first screen, not on the second screen.) (Harold Hunt)</li>
+
+<li>Improve cursor hiding/unhiding when using multiple screens
+(e.g. 'XWin -screen 0 640x480 -screen 1 640x480').  Cursor
+hiding/unhiding with multiple screens is not perfect yet, but using
+multiple screens is now much more bearable. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test27</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-05 2009 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: 2001-06-06 1406 EDT</td></tr>
+
+<tr><td>Basis: Test26</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Added a debug message to display the value returned by a failed
+call to IDirectDraw_SetDisplayMode ().</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test26</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-05 0723 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: 2001-06-06 1406 EDT</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Try installing a PseudoColor visual after the real visual to see
+if this helps programs that require an 8 bit PseudoColor visual.  Try
+running such programs at TrueColor depths (bit depth >= 15) and at
+StaticColor (bit depth == 8). (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test25</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-05 0335 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: 2001-06-05 0614 EDT</td></tr>
+
+<tr><td>Basis: Test24</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Added support for 8 bit display modes in both the GDI and
+DirectDraw based server engines!  Currently, 8 bit mode is handled
+using a StaticColor visual, which means that the values in the color
+palette cannot be changed by X clients at runtime.  That should be
+okay for most people, as the primary purpose of 8 bit display mode
+support is to ensure that new users have a good first impression of
+running Cygwin/XFree86; it is likely that most new users will
+eventually move on to higher color modes. (Harold Hunt)</li>
+
+<li>Verify that the desired or current display depth is in the list of
+supported depths when starting the server.  This is now a mostly
+useless feature, due to 8 bit mode support. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test24</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-06-03 2030 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: 2001-06-05 0614 EDT</td></tr>
+
+<tr><td>Basis: XFree86 4.1.0</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Remove depth from '-screen n WxHxD' parameter, now the parameter
+is '-screen n WxH'. (Harold Hunt)</li>
+
+<li>Add optional '-depth n' parameter, only used with DirectDraw
+engines in fullscreen mode. (Harold Hunt)</li>
+
+<li>Remove unused '-linebias n' parameter. (Harold Hunt)</li>
+
+<li>Remove unused '-blackpixel n' parameter. (Harold Hunt)</li>
+
+<li>Remove unused '-whitepixel n' parameter. (Harold Hunt)</li>
+
+<li>Normalize naming of a few global variables. (Harold Hunt)</li>
+
+<li>Replace lingering fprintf ()'s with ErrorF ()'s. (Harold
+Hunt)</li>
+
+<li>Move #include of atKeynames.h from win.h to winkeybd.c (The header
+is only needed in winkeybd.c). (Harold Hunt)</li>
+
+<li>Remove BuildDPMS cruft from hw/xwin/Imakefile, as display power
+management will *always* be handled by Windows, not by X. (Harold
+Hunt)</li>
+
+<li>Remove BuildDPMS cruft from Xserver/Imakefile. (Harold Hunt)</li>
+
+<li>General cleanup and consolidation of Xserver/Imakefile #if
+XWinServer section. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test23</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-05-07 0309 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: 2001-05-08 0415 EDT</td></tr>
+
+<tr><td>Basis: Test22</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Added 3 button mouse emulation support. (Alexander Gottwald,
+Harold Hunt)</li>
+
+<li>Removed extraneous text following an #endif from winshadgdi.c
+(Harold Hunt)</li>
+
+<li>Pulled mouse button handling out of winwndproc.c, deposited said
+code into winmouse.c. (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+<h4>Test22</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-05-01 1908 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: 2001-05-01 2046 EDT</td></tr>
+
+<tr><td>Basis: Test21</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Pulled AltGr handling out of winwakeup.c/winWakeupHandler (),
+deposited said code into winkeybd.c/winIsFakeCtrl_L (); this function
+is now called from winwndproc.c/winWindowProc ().  Thanks to Alexander
+Gottwald for showing me the GetMessageTime () function in his 3 button
+emulation patches; I did not know about this function
+previously. (Harold Hunt)</li>
+
+<li>Some calls to ReleaseDC () had the hdc parameter in the wrong
+position; thus, an hdc was being leaked. (Alan Hourihane, Harold
+Hunt)</li>
+
+<li>Fixed warnings on some calls to DirectDrawCreate () and
+IDirectDraw_CreateSurface (). (Alan Hourihane, Harold Hunt)</li>
+
+<li>Pulled engine specific WM_ACTIVATEAPP handling out of
+winwndproc.c/winWindowProc ().  Created a new engine dependent
+function to handle application activation/deactivation. (Harold
+Hunt)</li>
+
+<li>Fixed some coding and commenting style inconsistencies. (Harold
+Hunt)</li>
+
+<li>Fix Xrender extension by adding a call to miSetPixmapDepths () in
+winscrinit.c/winFinishScreenInitFB (). (Alan Hourihane)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+</body>
+
+</html>
