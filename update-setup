@@ -111,6 +111,10 @@ for $p (sort keys %versions) {
     if ( ! $type{"$p prev"} && $type{"$p junk"}) {
 	$type{"$p prev"} = $type{"$p junk"};
     }
+    if ( ! $type{"$p curr"} && $type{"$p test"}) {
+	$type{"$p curr"} = $type{"$p test"};
+	$type{"$p test"} = undef;
+    }
 }
 
 # Now look for overrides
