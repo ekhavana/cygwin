@@ -235,9 +235,10 @@ sub verify_with_timeout {
 sub verify_http {
     my ($site, $file) = @_;
     my $url = "http://$site/$file";
-    my $status = LWP::Simple::head($url) ? 1 : 0;
+    my $result = LWP::Simple::head($url);
+    my $status = $result ? 1 : 0;
     if ($status) {
-	print $file, "\n";
+	print "$file -- $result\n";
     } else {
 	siteprint $site, 'http', "$file not found";
     }
