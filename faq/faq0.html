@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from ./faq.texinfo on 21 February 2004 -->
+<!-- Created by texi2html 1.56k from ./faq.texinfo on 22 February 2004 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -17,7 +17,7 @@
 <LI><A NAME="TOC2" HREF="faq0.html#SEC2">What versions of Windows are supported?</A>
 <LI><A NAME="TOC3" HREF="faq0.html#SEC3">Where can I get it?</A>
 <LI><A NAME="TOC4" HREF="faq0.html#SEC4">Is it free software?</A>
-<LI><A NAME="TOC5" HREF="faq0.html#SEC5">Recent history of the project: What version <EM>is</EM> this, anyway?</A>
+<LI><A NAME="TOC5" HREF="faq0.html#SEC5">What version of Cygwin <EM>is</EM> this, anyway?</A>
 </UL>
 <LI><A NAME="TOC6" HREF="faq0.html#SEC6">Installation Instructions</A>
 <UL>
@@ -271,128 +271,32 @@ it with their friends, etc.  The Cygwin license allows you those
 freedoms, so it is free software.
 
 
-<P>
-The Cygwin 1.0 product was a "commercial" distribution of cygwin.  As
-such, it included such non-software things as printed manuals,
-support, and aggregation of useful utilities.  There was nothing
-(software-wise) in there that you couldn't get off the net already, if
-you took the time to find and download everything (and usually, build
-it yourself), although the <EM>versions</EM> available for download may
-have been different than those distributed with the commercial
-product.  We tested it all to make sure it worked together, and
-packaged it in a convenient form.  We considered such testing and
-packaging to be a valuable service and thus charged a fee for it.
-Plus, it provided income for the Cygwin project so we could continue
-working on it.  However, Red Hat is no longer offering Cygwin 1.0 on
-CD, and there are no plans to do so again.  The latest news about this
-can be found at <STRONG><A HREF="http://cygwin.com/cygwin-cd.html">http://cygwin.com/cygwin-cd.html</A></STRONG>.
 
 
-
-
-<H2><A NAME="SEC5" HREF="faq0.html#TOC5">Recent history of the project: What version <EM>is</EM> this, anyway?</A></H2>
+<H2><A NAME="SEC5" HREF="faq0.html#TOC5">What version of Cygwin <EM>is</EM> this, anyway?</A></H2>
 
 <P>
-Starting on April 17, 2000, the Cygwin team changed the procedure for
-doing net releases.
+To find the version of the Cygwin DLL installed, you can use
+<TT>`uname'</TT> as on Linux or <TT>`cygcheck'</TT>. Refer to each command's
+<SAMP>`--help'</SAMP> output and the <A HREF="http://cygwin.com/cygwin-ug-net/">Cygwin User's Guide</A> for more information.
 
 
 <P>
-Previously, net releases entailed downloading one or two large files
-(called something like <CODE>FULL.EXE</CODE> or <CODE>USER.EXE</CODE>).  These files
-unpacked a "Cygwin Distribution" to a static (and arcane) directory
-structure.  This distribution contained lots of .exe, .a, .h, and other
-files.
+If you are looking for the a version number for the whole Cygwin
+release, there is none. Each package in the Cygwin release has its own
+version.  The packages in Cygwin are continually improving, thanks to
+the efforts of net volunteers who maintain the Cygwin binary ports.
+Each package has its own version numbers and its own release process.
 
 
 <P>
-These distributions were named after the version of the Cygwin DLL which
-they contained.  The last version released with this method was Cygwin
-B20.1.
-
-
-<P>
-This distribution method has the advantage that everything was "all in
-one place".  You could copy the huge FULL.EXE file around and know that
-you were getting the complete "Cygwin Distribution".
-
-
-<P>
-The method had several disadvantages, however.  1) it was huge, 2) it
-was hard to download in one error-free piece, and 3) it was hard to
-update.
-
-
-<P>
-Why was it hard to update?  Because any change to any package in
-FULL.EXE meant re-generating all of FULL.EXE.  This process was not easy
-to automate since FULL.EXE was an InstallShield executable.  As a
-result, until recently, Cygwin development was relatively static.
-
-
-<P>
-To rectify these problems, the Cygwin team decided, early in January
-2000, to break up the packages in the release and make a small program
-(<CODE>setup.exe</CODE>) available to use in downloading packages.  After much
-development and internal discussion on the cygwin-developers mailing
-list, the new, improved version of a Cygwin release was made available
-on April 17, 2000.
-
-
-<P>
-This new release also had a new version of the Cygwin DLL -- 1.1.0.
-Most of the other packages were updated and some packages from the
-Cygwin CD were included.  Meanwhile, the Cygwin DLL continues to be
-updated, and since release 1.3.1, is more generically referred to as
-"1.3.x".
-
-
-<P>
-Users obtain this package by first downloading a version of
-Cygwin Setup.  This program started as a simple command line tool,
-has metamorphosed into a GUI, and is in the process of continual
-improvement.  However, its purpose is simple -- it is designed to
-install packages from the cygwin web site at <STRONG><A HREF="http://cygwin.com/">http://cygwin.com/</A></STRONG>.
-In effect, it is a smaller, more intelligent replacement for FULL.EXE.
-It does not require the downloading a huge executable but rather
-downloads individual small packages.
-
-
-<P>
-Does this mean that the new net release of the Cygwin package is 1.3.x?
-No.  We no longer label the releases with the Cygwin version number.
-Each package in the cygwin release has its own version now.
-
-
-<P>
-Does this mean that Cygwin 1.3.x is newer than B20.1?  Yes!  The cygwin
-1.3.x versions all represent continual improvement in the Cygwin DLL.
-Although the 1.3.x code is still considered "beta quality", the Cygwin
-team felt comfortable enough with the cygwin technology to bump the
-version number to "1".
-
-
-<P>
-The other packages in the latest directory are also continually
-improving, thanks to the efforts of net volunteers who maintain the
-cygwin binary ports.  Each package has its own version numbers and its
-own release process.
-
-
-<P>
-So, how do you get the most up-to-date version of cygwin?  Easy.  Just
+So, how do you get the most up-to-date version of Cygwin?  Easy.  Just
 download the Cygwin Setup program from
-<STRONG><A HREF="http://cygwin.com/setup.exe">http://cygwin.com/setup.exe</A></STRONG>.  This program will handle the task
-of updating the packages on your system to the latest version.  The
-Cygwin team frequently updates and adds new packages to the sourceware
-web site.  The Cygwin Setup program is the easiest way to determine what
-you need on your system.
-
-
-<P>
-For some "ancient" history of the project (rather, just woefully out of
-date), visit the Project History page at
-<STRONG><A HREF="http://cygwin.com/history.html">http://cygwin.com/history.html</A></STRONG>.
+<A HREF="http://cygwin.com/setup.exe">http://cygwin.com/setup.exe</A>.  This program will handle the task
+of updating the packages on your system to the latest version. For
+more information about using Cygwin's <TT>`setup.exe'</TT>, see 
+<A HREF="http://cygwin.com/cygwin-ug-net/setup-net.html">Setting Up Cygwin</A>
+in the Cygwin User's Guide. 
 
 
 <H1><A NAME="SEC6" HREF="faq0.html#TOC6">Installation Instructions</A></H1>
@@ -5351,7 +5255,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 21 February 2004 using
+This document was generated on 22 February 2004 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
