@@ -89,6 +89,11 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020403-2033.tar.bz2">xwin-
 winWarpCursor.  The new function calls SetCursorPos () with the x and
 y coordinates passed to winWarpCursor.  Hopefully this works.</li>
 
+<li>Change winkeybd.c/winKeybdBell () to call MessageBeep (MB_OK)
+instead of Beep (0, 0).  Beep () uses the PC speaker on Windows
+NT/2000, which isn't desireable.  It also seems that Beep () may have
+been causing freezes for some users.</li>
+
 </ul>
 </td>
 </tr>
