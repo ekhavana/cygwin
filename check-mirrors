@@ -77,6 +77,7 @@ open(F, "cd $master; find * -type f -print |");
 while (<F>) {
     s/[\r\n]+$//;
     next if m@private/@;
+    next if m@old/@;
     next if /md5.sum/;
     $mtime = $now - (stat("$master/$_"))[9];
     next if $mtime < 7*$days;
