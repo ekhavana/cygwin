@@ -36,7 +36,7 @@
 
 	$step1ar = array(
 		"PACKAGE_NAME"		=> 'The printed name of the package.',
-		"PACKAGE_MAINTAINER"	=> 'Your name and email address.',
+		"PACKAGE_MAINTAINER"	=> 'Your name and email address. If your browser supports cookies, this will be remembered when you return.',
 		"SUBMISSION_TYPE"	=> 'new,update,correction,announce:Format for a new package, update to a new vendor version, correction for a broken package, or announcement to cygwin-announce.',
 	);
 	$step2ar = array(
@@ -175,7 +175,7 @@
 	echo "<form action=\"\" method=\"POST\">\n";
 
 	if (!isset($_REQUEST["PACKAGE_MAINTAINER"]))
-		$_REQUEST"PACKAGE_MAINTAINER"] = "CHANGEME <your@email.address>";
+		$_REQUEST["PACKAGE_MAINTAINER"] = "CHANGEME <your@email.address>";
 
 	printsubs($step1ar);
 	if ($step1) {
