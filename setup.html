@@ -460,11 +460,13 @@ directory, you must structure your package contents accordingly.</p>
   --sysconfdir=/etc
   --libexecdir='$(sbindir)'
   --localstatedir=/var
-  --datadir='$(prefix)/share'</pre></li>
+  --datadir='$(prefix)/share'
+  --mandir='$(datadir)/man'
+  --infodir='$(datadir)/info'</pre></li>
   <li><p>All executables in your binary package are stripped (run 'strip' on them). Some makefiles have a install-strip command you can use to do this automatically when you setup your 'installed' tree.</p></li>
   <li><p>Source packages are extracted in /usr/src.  See the <a href="#srcpackage_contents">Package Source</a> section for more information.
-  <li><p>In your binary package, include a file /usr/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.</p></li>
-  <li><p>In your binary package include a directory /usr/doc/foo-vendor/ that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc.</p></li>
+  <li><p>In your binary package, include a file /usr/share/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.</p></li>
+  <li><p>In your binary package include a directory /usr/share/doc/foo-vendor/ that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc.</p></li>
   <li><p>If you are not creating your package from an installed virtual root, be sure to check that the file permissions are appropriate.</p></li>
   <li><p>If you have any 'info' documention in your package, run install-info as part of your post-install script</p></li>
   <li><p>If the package has any global settings (ie in files in /etc) that are not overrideable on a per user basis (sshd, as a daemon, is an example of this) do not include the relevant config files in your package. Instead include in your post-install script to install the settings files. Be sure that if you would overwrite an already present file that the user is offered the choice of keeping their own or overwriting with your defaults.</p></li>
@@ -606,7 +608,7 @@ directory, you must structure your package contents accordingly.</p>
     <tt>.../CYGWIN-PATCHES/&lt;package&gt;.README</tt>.  In this example, it would
     be stored as <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/boffo.README</tt>.  The
     build script will ensure that it gets installed as
-    <tt>/usr/doc/Cygwin/boffo-1.0.README</tt>
+    <tt>/usr/share/doc/Cygwin/boffo-1.0.README</tt>
     <li>Prepare the staging location for the -src package (yes, do the -src
     package first): From the directory above your boffo-1.0 tree (e.g.
     <tt>~/sources/</tt> in our example) execute '<tt>./boffo-1.0-1.sh mkdirs</tt>'</p>
