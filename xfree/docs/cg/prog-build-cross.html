@@ -402,8 +402,10 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-lib.tgz
-[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-include.tgz
+>&#13;[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf 
+cygwin-lib.tgz
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf 
+cygwin-include.tgz
 </PRE
 ></TD
 ></TR
@@ -473,9 +475,12 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost src]$ tar -xzf binutils-20010425-2-src.tar.gz
-[harold@MyCrossHost src]$ bunzip2 gcc-2.95.3-5-src.tar.bz2
-[harold@MyCrossHost src]$ tar -xf gcc-2.95.3-5-src.tar
+>&#13;[harold@MyCrossHost src]$ tar -xzf 
+binutils-20010425-2-src.tar.gz
+[harold@MyCrossHost src]$ bunzip2 
+gcc-2.95.3-5-src.tar.bz2
+[harold@MyCrossHost src]$ tar -xf 
+gcc-2.95.3-5-src.tar
 </PRE
 ></TD
 ></TR
@@ -537,7 +542,8 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin 
+>&#13;[harold@MyCrossHost build]$ ../configure 
+--prefix=/cygwin --exec-prefix=/cygwin 
 --target=i686-pc-cygwin --host=i686-pc-linux &gt; configure.log 2&gt;&amp;1
 [harold@MyCrossHost build]$
 </PRE
@@ -596,7 +602,8 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost build]$ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
+>&#13;[harold@MyCrossHost build]$ 
+PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
 [harold@MyCrossHost build]$ 
 </PRE
 ></TD
@@ -659,7 +666,8 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost build]$ ../configure --prefix=/cygwin --exec-prefix=/cygwin 
+>&#13;[harold@MyCrossHost build]$ ../configure 
+--prefix=/cygwin --exec-prefix=/cygwin 
 --target=i686-pc-cygwin --host=i686-pc-linux 
 --enable-haifa &gt; configure.log 2&gt;&amp;1
 [harold@MyCrossHost build]$
@@ -711,9 +719,50 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
+NAME="prog-cross-source-obtaining"
+>Obtaining the Source Code</A
+></H2
+><P
+>Obtaining the source code when cross compiling XFree86 is nearly
+identical to the process described in <A
+HREF="prog-build-native.html#prog-source-obtaining"
+>the section called <I
+>Obtaining the Source Code</I
+></A
+> of the Native Compiling
+section.  The only divergence from the aformentioned instructions is
+that you will be using a <B
+CLASS="command"
+>bash</B
+> shell on your cross
+compiling host, rather than on your native Cygwin host.</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
 NAME="prog-cross-build"
 >Building Cygwin/XFree86</A
 ></H2
+><P
+>Building the source code when cross compiling XFree86 is nearly
+identical to the process described in <A
+HREF="prog-build-native.html#prog-compiling"
+>the section called <I
+>Compiling the Source Code</I
+></A
+> of the Native Compiling section.  One
+divergence from the aformentioned instructions is that you will be
+using a <B
+CLASS="command"
+>bash</B
+> shell on your cross compiling host,
+rather than on your native Cygwin host; other divergences
+follow.</P
+><OL
+TYPE="1"
+><LI
 ><P
 >Download <A
 HREF="http://www.msu.edu/~huntharo/xwin/host.def"
@@ -724,14 +773,302 @@ place the file in <TT
 CLASS="filename"
 >xc/config/cf</TT
 >.</P
+></LI
+><LI
 ><P
 >Modify host.def/PostIncDir to reflect the actual version of gcc
 compiled, such as #define PostIncDir
 /cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include.  The version
 number in the path will change depending on which version of gcc you
 built and installed.</P
+></LI
+><LI
 ><P
->make World BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1" IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1</P
+><B
+CLASS="command"
+>lndir</B
+> should generally already be installed
+if your build host already has the X Window System installed.  In any
+case, you certainly won't want to install the build of
+<B
+CLASS="command"
+>lndir</B
+> mentioned in <A
+HREF="prog-build-native.html"
+>the section called <I
+>Native Compiling</I
+></A
+> as that executable is for Cygwin
+only.</P
+></LI
+><LI
+><P
+>When building the entire tree, you must pass
+<TT
+CLASS="parameter"
+><I
+>IMAKE_DEFINES</I
+></TT
+> and
+<TT
+CLASS="parameter"
+><I
+>BOOTSTRAPCFLAGS</I
+></TT
+> to <B
+CLASS="command"
+>make</B
+> to
+cause the build system to build for the target, Cygwin,
+platform:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;[harold@MyCrossHost std]$ make World 
+BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1" 
+IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1
+[harold@MyCrossHost std]$
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>When rebuilding individual elements of the tree after doing a
+build of the entire tree, you must pass
+<TT
+CLASS="parameter"
+><I
+>IMAKE_DEFINES</I
+></TT
+> to <B
+CLASS="command"
+>make</B
+> to
+cause the build system to build for the target, Cygwin,
+platform:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;[harold@MyCrossHost Xserver]$ make World 
+IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1
+[harold@MyCrossHost Xserver]$
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>When building a debug version of the entire tree, use
+<B
+CLASS="command"
+>makeg</B
+>, which should generally already be installed,
+and pass <TT
+CLASS="parameter"
+><I
+>IMAKE_DEFINES</I
+></TT
+> and
+<TT
+CLASS="parameter"
+><I
+>BOOTSTRAPCFLAGS</I
+></TT
+> to <B
+CLASS="command"
+>makeg</B
+> to
+cause the build system to build for the target, Cygwin,
+platform:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;[harold@MyCrossHost debug]$ makeg World 
+BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1" 
+IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1
+[harold@MyCrossHost debug]$
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>When rebuilding debug versions of individual elements of the
+tree after doing a debug build of the entire tree, you must pass
+<TT
+CLASS="parameter"
+><I
+>IMAKE_DEFINES</I
+></TT
+> to <B
+CLASS="command"
+>makeg</B
+> to
+cause the build system to build for the target, Cygwin,
+platform:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;[harold@MyCrossHost Xserver]$ makeg World 
+IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1
+[harold@MyCrossHost Xserver]$
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>When installing a standard build of the entire tree, you must
+pass <TT
+CLASS="parameter"
+><I
+>DESTDIR</I
+></TT
+> and
+<TT
+CLASS="parameter"
+><I
+>IMAKE_DEFINES</I
+></TT
+> to <B
+CLASS="command"
+>make</B
+> to
+install the target platform build into <TT
+CLASS="filename"
+>/stagingdir</TT
+> and to cause the build system
+to build a few remaining programs for the target, Cygwin,
+platform:</P
+><DIV
+CLASS="tip"
+><BLOCKQUOTE
+CLASS="tip"
+><P
+><B
+>Tip: </B
+>Never run <B
+CLASS="command"
+>make install install.man</B
+> on your
+host platform without the <TT
+CLASS="parameter"
+><I
+>DESTDIR</I
+></TT
+> parameter, as
+that will cause the Cygwin build of XFree86 to be installed overtop
+of your local X Window System installation, which would completely
+destroy your host systems' X Window System installation.</P
+></BLOCKQUOTE
+></DIV
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;[harold@MyCrossHost std]$ make install install.man 
+DESTDIR=/stagingdir 
+IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; install.log 2&gt;&amp;1
+[harold@MyCrossHost std]$
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>When installing a debug build of the entire tree, you must pass
+<TT
+CLASS="parameter"
+><I
+>DESTDIR</I
+></TT
+> and
+<TT
+CLASS="parameter"
+><I
+>IMAKE_DEFINES</I
+></TT
+> to <B
+CLASS="command"
+>makeg</B
+> to
+install the target platform build into <TT
+CLASS="filename"
+>/stagingdir</TT
+> and to cause the build system
+to build debug versions of a few remaining programs for the target,
+Cygwin, platform:</P
+><DIV
+CLASS="tip"
+><BLOCKQUOTE
+CLASS="tip"
+><P
+><B
+>Tip: </B
+>Never run <B
+CLASS="command"
+>makeg install install.man</B
+> on your
+host platform without the <TT
+CLASS="parameter"
+><I
+>DESTDIR</I
+></TT
+> parameter, as
+that will cause the Cygwin debug build of XFree86 to be installed
+overtop of your local X Window System installation, which would
+completely destroy your host systems' X Window System
+installation.</P
+></BLOCKQUOTE
+></DIV
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;[harold@MyCrossHost debug]$ makeg install install.man 
+DESTDIR=/stagingdir 
+IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; install.log 2&gt;&amp;1
+[harold@MyCrossHost debug]$
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+></OL
 ></DIV
 ></DIV
 ><DIV
