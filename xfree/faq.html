@@ -84,6 +84,9 @@
           <TD vAlign=top align=left height=200>
             <UL style="LIST-STYLE-TYPE: disc">
               <LI>
+              <DIV><FONT style="COLOR: red; BACKGROUND-COLOR: #eeeeee"
+              color=red>Cygwin/XFree86 FAQ updated&nbsp;March 25th 2001.</FONT><FONT style="COLOR: blue; BACKGROUND-COLOR: #eeeeee" color=blue>Updates include material contributed by Bob Gowin and Clemmitt Sigler.</FONT></DIV></LI>
+              <LI>
               <DIV><FONT style="COLOR: red; BACKGROUND-COLOR: #eeeeee" 
               color=red>Cygwin/XFree86 FAQ updated&nbsp;November 24th 
               2000.</FONT></DIV></LI></UL></TD></TR></TBODY></TABLE>
@@ -113,10 +116,10 @@
             of the current release (precisely, the most recent one is X11R6.5.1, 
             but this is not part of the 4.X server line. <I>XFree86</I> was 
             originally an implementation of the X Window System on x86-based 
-            systems. (For more information see <A 
+            Un*x systems. (For more information see <A 
             href="http://www.xfree86.org/#whatis">http://www.xfree86.org/#whatis</A> 
             ). <I>Cygwin/XFree86 </I>is a port of <I>XFree86</I> version 4 for 
-            x86 windows based systems using Redhat's Cygwin Development 
+            x86 based Microsoft Windows(tm) systems using Redhat's Cygwin Development 
             Tools.</P></TD></TR>
         <TR>
           <TD>
@@ -177,9 +180,9 @@
         <TR>
           <TD>
             <P>At present the X11R6.4 libraries clients and servers are 
-            functional on Windows NT, 2000 and ME. Windows 95 and 98 have 16-bit 
+            functional on Windows NT, 2000. Windows 95,98 and ME have 16-bit 
             code in their GDI and we need help from volunteers to resolve issues 
-            on those platforms.</P></TD></TR>
+            on those platforms. The client libraries will run on Windows 95,98 and ME, but not the X servers.</P></TD></TR>
         <TR>
           <TD vAlign=top rowSpan=2>1.5</TD>
           <TD><B>Is there a specific news group?</B></TD></TR>
@@ -213,7 +216,7 @@
             <P>If you are using Windows 95 or 98, break out your debugger and 
             start working around the 16-bit code in GDI32.dll and 
             kernel32.dll.</P>
-            <P>If you are using Windows ME, NT or 2000 run startxwin.bat from a 
+            <P>If you are using Windows NT or 2000 run startxwin.bat from a 
             cmd prompt, not a bash prompt. then report the console errors on the 
             <A href="./faq.html#mailinglist">mailing list</A>.&nbsp;</P></TD></TR>
         <TR>
@@ -343,6 +346,33 @@
             <P>2.1&nbsp;</P>
             <P>&nbsp;</P></TD>
           <TD>
+            <P><B>Can I use Cygwin/XFree86?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>At this time, Cygwin/XFree86 only supports Windows NT and Windows 2000. For purely experimental support for Windows 9x and Windows ME see <a href="http://xfree86.cygwin.com/ml/cygwin-xfree/2001-q1/msg00599.html">Shadow Framebuffer Test 8</a>.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>2.2&nbsp;</P>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P><B>How do I install Cygwin/XFree86?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>Carefully follow the instructions in the <a href="http://xfree86.cygwin.com/docs/howto/cygwin-xfree-ug.html">Cygwin/XFree86 Installation HOW-TO</a>. The instructions in the HOW-TO require that you install the current version of cygwin from <a href="http://cygwin.com">the cygwin homepage</a>. Do so! XFree86 requires features not present in older installs of cygwin, and will continue to depend on current functionality from cygwin. If you have a pre-net-release version of Cygwin (Indicated by a version number like B19 or B20), uninstall that completely first.</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>2.3&nbsp;</P>
+            <P>&nbsp;</P></TD>
+          <TD>
+            <P><B>Running Cygwin/XFree86?</B></P></TD></TR>
+        <TR>
+          <TD>
+            <P>If the HOW-TO instructions don't work, make sure that you are running startxwin.bat from a MS-DOS command prompt, not a cygwin Bash prompt. If you are using Bash, you should run startx, not startxwin.bat. .</P></TD></TR>
+        <TR>
+          <TD vAlign=top rowSpan=2>
+            <P>2.4&nbsp;</P>
+            <P>&nbsp;</P></TD>
+          <TD>
             <P><B>Which X-server should I use? I tried MI/X and my X application 
             crashed.</B></P></TD></TR>
         <TR>
@@ -362,7 +392,7 @@
         crash.</P></TD></TR>
         <TR>
           <TD vAlign=top>
-            <P>2.2</P></TD>
+            <P>2.5</P></TD>
           <TD>
             <P><B>I need MOTIF libraries to compile my X base 
 code!</B></P></TD></TR>
@@ -375,7 +405,7 @@ code!</B></P></TD></TR>
             href="http://www.lesstif.org/">http://www.lesstif.org</A>.</P></TD></TR>
         <TR>
           <TD vAlign=top>
-            <P>2<A name=22></A>.3</P></TD>
+            <P>2.6<A name=22></A>.3</P></TD>
           <TD>
             <P><B>My X code compiled but my application crashed with 
             ACCESS_VIOLATION ERROR MESSAGES. What should I do?</B></P></TD></TR>
@@ -395,7 +425,7 @@ code!</B></P></TD></TR>
               <LI>Use GDB to debug your code.&nbsp; </LI></OL></TD></TR>
         <TR>
           <TD vAlign=top>
-            <P>2.4</P></TD>
+            <P>2.7</P></TD>
           <TD>
             <P><B>I need a good TERMCP file!</B></P></TD></TR>
         <TR>
@@ -406,7 +436,28 @@ code!</B></P></TD></TR>
             available as part of the current net release. (See <A 
             href="http://sources.redhat.com/cygwin">http://sources.redhat.com/cygwin</A>. 
             Click on Install Cygwin now to install the current Cygwin net 
-            release.</P></TD></TR></TBODY></TABLE>
+            release.</P></TD></TR>
+<TR>
+  <TD vAlign=top>
+    <P>2.8</P></TD>
+  <TD>
+    <P><B>When I switch tasks between the X-Server and other programs and then back again, the keyboard no longer responds correctly.</B></P></TD></TR>
+<TR>
+  <TD vAlign=top>
+    <P>&nbsp;</P></TD>
+  <TD>
+    <P>Some versions of the X server get confused as to the state of the ALT key when you task switch. Press the ALT key you used to task switch twice (within the X server).</P></TD></TR>
+<TR>
+  <TD vAlign=top>
+    <P>2.9</P></TD>
+  <TD>
+    <P><B>I get a 'Can't connect to host' error.</B></P></TD></TR>
+<TR>
+  <TD vAlign=top>
+    <P>&nbsp;</P></TD>
+  <TD>
+    <P>Some VPN/Firewall software has been found to interfere with XFree86's operation. Try temporarily disabling any such software. If that fixes your problem, turn your software back on, and start excluding XFree86 traffic. (i.e. if you are conenction to a machine at 192.168.0.3 that is on your local LAN, you might disable encryption and firewalling for conenctions to and from that machine. SSH portforwarding is a good solution for encrypting X11 traffic. See <a href="http://www.openssh.org">openSSH.org</a> for more information.</P></TD></TR>
+</TBODY></TABLE>
       <H2>3. Programming and Porting of Software</H2>
       <TABLE 
       style="WIDTH: 100%;" cellPadding=0 width="100%" border=0>
@@ -486,9 +537,8 @@ code!</B></P></TD></TR>
         <TR>
           <TD>
             <P>The Cygwin/XFree86 project has ported XFree86 to Windows 
-            ME/NT/2000. See "<A href="./faq.html#howcomplete">How Complete is 
-            it?</A>" for issues with Windows 9x. The Cygwin/XFree86 project does 
-            not plan to port XFree86 to windows 3.11.</P></TD></TR>
+            NT/2000. See "<A href="./faq.html#howcomplete">How Complete is 
+            it?</A>" for issues with Windows 9x and Windows MW. The Cygwin/XFree86 project does not plan to port XFree86 to windows 3.11.</P></TD></TR>
         <TR>
           <TD vAlign=top rowSpan=2>
             <P>3.8</P></TD>
