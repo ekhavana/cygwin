@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML
+><HEAD
+><TITLE
+>Compatibility with Miscellaneous Other Standards</TITLE
+><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"><META
+NAME="CREATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
+NAME="form"
+CONTENT="html"></HEAD
+><BODY
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin API Reference</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="compatibility47.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 1. Compatibility</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="cygwin-functions.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><H1
+><A
+NAME="STD-MISC"
+>Compatibility with Miscellaneous Other Standards</A
+></H1
+><P
+>The following functions are compatible with miscellaneous other
+standards:</P
+><H2
+><A
+NAME="AEN90"
+>Networking</A
+></H2
+><P
+></P
+><P
+>(standardized by POSIX 1.g, which is probably still in draft?)</P
+><P
+>accept, bind, connect, getdomainname, gethostbyaddr,
+gethostbyname, getpeername, getprotobyname, getprotobynumber,
+getservbyname, getservbyport, getsockname, getsockopt, herror, htonl,
+htons, inet_addr, inet_makeaddr, inet_netof, inet_ntoa, listen, ntohl,
+ntohs, rcmd, recv, recvfrom, rexec, rresvport, send, sendto,
+setsockopt, shutdown, socket, socketpair</P
+><P
+>Of these networking calls, rexec, rcmd and rresvport are
+implemented in MS IP stack but may not be implemented in other
+vendors' stacks. </P
+><H2
+><A
+NAME="AEN96"
+>Other</A
+></H2
+><P
+>&#13;chroot, closelog, cwait, dlclose, dlerror, dlfork, dlopen, dlsym,
+endgrent, ffs, fstatfs, ftime, get_osfhandle, getdtablesize, getgrent,
+gethostname, getitimer, getmntent, getpagesize, getpgid, getpwent,
+gettimeofday, grantpt, initgroups, ioctl, killpg, login, logout,
+lstat, mknod, memccpy, nice, openlog, pclose, popen, ptsname, putenv,
+random, readv, realpath, regfree, rexec, select, setegid setenv,
+seterrno, seteuid, setitimer, setmntent, setmode, setpassent, setpgrp,
+setpwent, settimeofday, sexecl, sexecle, sexeclp, sexeclpe, sexeclpe,
+sexecp, sexecv, sexecve, sexecvpe, sigpause, spawnl, spawnle, spawnlp,
+spawnlpe, spawnv, spawnve, spawnvp, spawnvpe, srandom, statfs,
+strsignal, strtosigno, swab, syslog, timezone, truncate, ttyslot,
+unlockpt, unsetenv, usleep, utimes, vfork, vhangup, wait3, wait4,
+wcscmp, wcslen, wprintf, writev&#13;</P
+><H2
+><A
+NAME="AEN99"
+>Implementation Notes</A
+></H2
+><P
+> <B
+CLASS="FUNCTION"
+>initgroups</B
+> does nothing</P
+><P
+> <B
+CLASS="FUNCTION"
+>chroot</B
+>, <B
+CLASS="FUNCTION"
+>mknod</B
+>,
+<B
+CLASS="FUNCTION"
+>settimeofday</B
+>, and <B
+CLASS="FUNCTION"
+>vhangup</B
+>
+always return -1 and sets errno to ENOSYS.</P
+><P
+> <B
+CLASS="FUNCTION"
+>seteuid</B
+>, <B
+CLASS="FUNCTION"
+>setegid</B
+>, and
+<B
+CLASS="FUNCTION"
+>settimeofday</B
+> always return 0 and sets errno to
+ENOSYS.</P
+><P
+><B
+CLASS="FUNCTION"
+>vfork</B
+> just calls
+<B
+CLASS="FUNCTION"
+>fork</B
+></P
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="compatibility47.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-api.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="cygwin-functions.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Compatibility with POSIX.1</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="compatibility.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Cygwin Functions</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>

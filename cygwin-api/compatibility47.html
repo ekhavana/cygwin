@@ -1,0 +1,221 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<HTML
+><HEAD
+><TITLE
+>Compatibility with POSIX.1</TITLE
+><LINK
+REL="STYLESHEET"
+TYPE="text/css"
+HREF="docbook.css"><META
+NAME="CREATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
+NAME="form"
+CONTENT="html"></HEAD
+><BODY
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin API Reference</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="compatibility.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 1. Compatibility</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="compatibility87.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><H1
+><A
+NAME="STD-POSIX"
+>Compatibility with POSIX.1</A
+></H1
+><P
+>The following functions are compatible with POSIX.1:</P
+><H2
+><A
+NAME="AEN50"
+>Process Primitives (Section 3)</A
+></H2
+><P
+>&#13;fork, execl, execle, execlp, execv, execve, execvp, wait, waitpid,
+_exit, kill, sigemptyset, sigfillset, sigaddset, sigdelset,
+sigismember, sigaction, pthread_sigmask, sigprocmask, sigpending,
+sigsuspend, alarm, pause, sleep&#13;</P
+><H2
+><A
+NAME="AEN53"
+>Process Environment (Section 4)</A
+></H2
+><P
+>&#13;getpid, getppid, getuid, geteuid, getgid, getegid, setuid, setgid,
+getgroups, getlogin, getpgrp, setsid, setpgid, uname, time, times,
+getenv, ctermid, ttyname, isatty, sysconf&#13;</P
+><H2
+><A
+NAME="AEN56"
+>Files and Directories (Section 5)</A
+></H2
+><P
+>&#13;opendir, readdir, rewinddir, closedir, chdir, getcwd, open, creat,
+umask, link, mkdir, unlink, rmdir, rename, stat, fstat, access, chmod,
+fchmod, chown, utime, ftruncate, pathconf, fpathconf&#13;</P
+><H2
+><A
+NAME="AEN59"
+>Input and Output Primitives (Section 6)</A
+></H2
+><P
+>&#13;pipe, dup, dup2, close, read, write, fcntl, lseek, fsync&#13;</P
+><H2
+><A
+NAME="AEN62"
+>Device- and Class-Specific Functions (Section 7)</A
+></H2
+><P
+>&#13;cfgetispeed, cfgetospeed, cfsetispeed, cfsetospeed, tcdrain, tcflow,
+tcflush, tcgetattr, tcgetpgrp, tcsendbreak, tcsetattr, tcsetpgrp&#13;</P
+><H2
+><A
+NAME="AEN65"
+>Language-Specific Services for the C Programming Language (Section 8)</A
+></H2
+><P
+>&#13;abort, exit, fclose, fdopen, fflush, fgetc, fgets, fileno, fopen,
+fprintf, fputc, fputs, fread, freopen, fscanf, fseek, ftell, fwrite,
+getc, getchar, gets, perror, printf, putc, putchar, puts, remove,
+rewind, scanf, setlocale, siglongjmp, sigsetjmp, tmpfile, tmpnam,
+tzset&#13;</P
+><H2
+><A
+NAME="AEN68"
+>System Databases (Section 9)</A
+></H2
+><P
+>&#13;getgrgid, getgrnam, getpwnam, getpwuid&#13;</P
+><H2
+><A
+NAME="AEN71"
+>Memory Management (Section 12)</A
+></H2
+><P
+>&#13;mmap, mprotect, msync, munmap&#13;</P
+><H2
+><A
+NAME="AEN74"
+>Implementation Details</A
+></H2
+><P
+><B
+CLASS="FUNCTION"
+>setuid</B
+> and <B
+CLASS="FUNCTION"
+>setgid</B
+>
+always return ENOSYS.</P
+><P
+><B
+CLASS="FUNCTION"
+>link</B
+> will copy the file if it can't
+implement a true symbolic link.  Currently, symbolic links work, if at
+all, only under Windows NT.</P
+><P
+><B
+CLASS="FUNCTION"
+>chown</B
+> always returns zero.</P
+><P
+><B
+CLASS="FUNCTION"
+>fcntl</B
+> doesn't support F_GETLK - it returns
+-1 and sets errno to ENOSYS.</P
+><P
+><B
+CLASS="FUNCTION"
+>lseek</B
+> only works properly on binary
+files.</P
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="compatibility.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-api.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="compatibility87.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Compatibility</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="compatibility.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Compatibility with Miscellaneous Other Standards</TD
+></TR
+></TABLE
+></BODY
+></HTML
+>
