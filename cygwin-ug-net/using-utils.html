@@ -5,7 +5,7 @@
 >Cygwin Utilities</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.64
+CONTENT="Modular DocBook HTML Stylesheet Version 1.73
 "><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
@@ -30,6 +30,7 @@ ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
+SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -47,6 +48,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="using-cygwinenv.html"
+ACCESSKEY="P"
 >&#60;&#60;&#60; Previous</A
 ></TD
 ><TD
@@ -60,6 +62,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="programming.html"
+ACCESSKEY="N"
 >Next &#62;&#62;&#62;</A
 ></TD
 ></TR
@@ -97,6 +100,7 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage: cygcheck [-s] [-v] [-r] [-h] [program ...]
+  -c = check current package setup
   -s = system information
   -v = verbose output (indented) (for -s or programs)
   -r = registry search (requires -s)
@@ -126,6 +130,21 @@ CLASS="LITERAL"
 > and list one or more programs on the command line,
 it reports on both.</P
 ><P
+>The <TT
+CLASS="LITERAL"
+>-c</TT
+> option causes the "program" arguments
+to be interpreted as package names.  <B
+CLASS="COMMAND"
+>cygcheck</B
+> will
+report the current version of the package that you specify.  With no
+arguments, <B
+CLASS="COMMAND"
+>cygcheck</B
+> will report on all packages.
+
+<P
 >The <B
 CLASS="COMMAND"
 >cygcheck</B
@@ -135,7 +154,9 @@ support representative requests it).  When asked to run this command,
 include all the options plus any commands you are having trouble with,
 and save the output so that you can mail it to Cygnus, like
 this:</P
-><TABLE
+>
+
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -155,7 +176,9 @@ CLASS="USERINPUT"
 ></TD
 ></TR
 ></TABLE
-><P
+>
+
+<P
 >The <TT
 CLASS="LITERAL"
 >-v</TT
@@ -165,7 +188,9 @@ reported which is usually not interesting, such as the internal
 version numbers of DLLs, additional information about recursive DLL
 usage, and if a file in one directory in the PATH also occurs in other
 directories on the PATH.  </P
-><P
+>
+
+<P
 >The <TT
 CLASS="LITERAL"
 >-r</TT
@@ -179,7 +204,9 @@ ones that have "Cygnus" in the name.  If you are paranoid about
 privacy, you may remove information from this report, but please keep
 in mind that doing so makes it harder for Cygnus to diagnose your
 problems.</P
-><P
+>
+
+<P
 >The <TT
 CLASS="LITERAL"
 >-h</TT
@@ -188,6 +215,7 @@ messages in the report, at the beginning of each section.  It also
 adds table column headings.  While this is useful information, it also
 adds some to the size of the report, so if you want a compact report
 or if you know what everything is already, just leave this out.</P
+>&#13;</P
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -282,7 +310,7 @@ omitted.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN996"
+NAME="AEN1009"
 ></A
 ><P
 ><B
@@ -322,7 +350,7 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->Usage: kill [-sigN] pid1 [pid2 ...]</PRE
+>Usage: kill [-f] [-sigN] pid1 [pid2 ...]</PRE
 ></TD
 ></TR
 ></TABLE
@@ -337,28 +365,38 @@ also send program-specified signals such as SIGUSR1 to trigger actions
 within the program, like enabling debugging or re-opening log files.
 Each program defines the signals they understand.</P
 ><P
->Note that the "pid" values are the Cygwin pids, not the Windows
-pids.  To get a list of running programs and their Cygwin pids, use
-the Cygwin <B
+>Note that, unless you specific the <TT
+CLASS="LITERAL"
+>-f</TT
+> option,
+the "pid" values are the Cygwin pids, not the Windows pids.  To get a
+list of running programs and their Cygwin pids, use the Cygwin
+<B
 CLASS="COMMAND"
 >ps</B
-> program.</P
+> program. <B
+CLASS="COMMAND"
+>ps -W</B
+> will display
+<I
+CLASS="EMPHASIS"
+>all</I
+> windows pids.</P
 ><P
->To send a specific signal, use the
-<TT
+>To send a specific signal, use the <TT
 CLASS="LITERAL"
 >-signN</TT
-> option, either
-with a signal number or a signal name (minus the "SIG" part), like
-these examples:</P
+>
+option, either with a signal number or a signal name (minus the "SIG"
+part), like these examples:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1008"
+NAME="AEN1024"
 ></A
 ><P
 ><B
->Example 6. Specifying signals with the kill command</B
+>Example 6. Using the kill command</B
 ></P
 ><TABLE
 BORDER="0"
@@ -393,6 +431,15 @@ CLASS="PROMPT"
 CLASS="USERINPUT"
 ><B
 >kill -HUP 123</B
+></TT
+>
+<TT
+CLASS="PROMPT"
+>$</TT
+> <TT
+CLASS="USERINPUT"
+><B
+>kill -f 123</B
 ></TT
 ></PRE
 ></TD
@@ -496,7 +543,7 @@ you'd do something like this:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1026"
+NAME="AEN1044"
 ></A
 ><P
 ><B
@@ -590,7 +637,7 @@ To initially set up your machine, you'd do something like this:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1043"
+NAME="AEN1061"
 ></A
 ><P
 ><B
@@ -806,6 +853,7 @@ CLASS="SCREEN"
 
   -b = text files are equivalent to binary files (newline = \n)
   -x = files in the mounted directory are automatically given execute permission.
+  -X = files in the mounted directory are automatically given execute permission and are assumed to be Cygwin (i.e., not generic windows) executables only.
   -f = force mount, don't warn about missing mount point directories
   -s = add mount point to system-wide registry location
   --change-automount-prefix = change path prefix used for automatic mount points
@@ -824,7 +872,7 @@ and shares onto Cygwin's simulated POSIX directory tree, much like as is
 done by mount commands on typical UNIX systems.  Please see
 <A
 HREF="using.html#MOUNT-TABLE"
->the section called <I
+>the Section called <I
 >The Cygwin Mount Table</I
 ></A
 > for more information on the concepts
@@ -835,7 +883,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1091"
+NAME="AEN1109"
 >Using mount</A
 ></H3
 ><P
@@ -847,7 +895,7 @@ will display the current mount table for you.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1095"
+NAME="AEN1113"
 ></A
 ><P
 ><B
@@ -919,7 +967,7 @@ CLASS="FILENAME"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1110"
+NAME="AEN1128"
 ></A
 ><P
 ><B
@@ -1050,7 +1098,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1133"
+NAME="AEN1151"
 >Cygdrive mount points</A
 ></H3
 ><P
@@ -1079,7 +1127,7 @@ CLASS="FILENAME"
 > may be changed via the
 <A
 HREF="using-utils.html#MOUNT"
->the section called <I
+>the Section called <I
 >mount</I
 ></A
 > command.</P
@@ -1097,7 +1145,7 @@ CLASS="FILENAME"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN1145"
+NAME="AEN1163"
 ></A
 ><P
 ><B
@@ -1136,7 +1184,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1151"
+NAME="AEN1169"
 >Limitations</A
 ></H3
 ><P
@@ -1294,7 +1342,7 @@ system-wide registry area (with Administrator priviledges).</P
 ><P
 >See <A
 HREF="using-utils.html#MOUNT"
->the section called <I
+>the Section called <I
 >mount</I
 ></A
 >) for more information on the mount
@@ -1496,6 +1544,7 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -1507,6 +1556,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="using-cygwinenv.html"
+ACCESSKEY="P"
 >&#60;&#60;&#60; Previous</A
 ></TD
 ><TD
@@ -1515,6 +1565,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -1523,6 +1574,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="programming.html"
+ACCESSKEY="N"
 >Next &#62;&#62;&#62;</A
 ></TD
 ></TR
@@ -1542,6 +1594,7 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="using.html"
+ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
