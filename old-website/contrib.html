@@ -11,27 +11,26 @@
 paid for by Cygnus customers.  Some of the rest has been due to employees
 volunteering many extra hours making these tools more viable.  And
 we have also received a significant amount of help from the Net
-community but we could definitely
-use more help addressing some of the known problems.
+community but we could definitely use more help!
 
 <H2>Building the development version of Cygwin</H2>
 
-<P>The code corresponding to the cygwin.dll is mostly in the winsup
+<P>The code corresponding to cygwin1.dll is mostly in the winsup
 directory with additional code coming from newlib/libc, newlib/libm,
 libiberty, and gcc.  Any changes you make should ideally be made to
 the <a href="ftp://ftp.cygnus.com/pub/noer/winsup-snapshot/" target"_top">
-current development sources</a>, available via ftp.  This will
-make it much easier for us to integrate your changes once they are
-completed and tested.  Note that these sources will usually compile,
-but they should always be assumed to be unstable and contain untested,
+current development sources</a>, available via ftp.  This makes it
+much easier to integrate your changes once they're completed and
+tested.  Note the development snapshots should compile, but they
+should always be assumed to be unstable and contain untested,
 experimental code.
 
 <P>To build the Cygwin library, start by building the comp-tools sources
 with the last release, substituting in the newlib and winsup sources
 from the snapshot location.  Minimal build instructions are included in
 the <a href="faq_toc.html">FAQ</a>.  If your object directory is /c/obj,
-the Cygwin dll you will build should be /c/obj/winsup/new-cygwinbxx.dll
-where xx represents the current version number.
+the Cygwin dll you will build should be /c/obj/winsup/new-cygwinxx.dll
+where xx represents the current API_MAJOR version number.
 
 <P>Once you have a built comp-tools tree, if you make further changes
 to the winsup sources, you can rebuild the library by typing:
@@ -56,10 +55,11 @@ with the correct libcygwin.a.
 
 <H2>Before you get started</H2>
 
-<P>First, note that Cygnus is only the maintainer of the winsup and
-newlib directories.  That said, feel free to send us Cygwin-related
-patches for other tools -- we'll probably know what you should do with
-them if we're not in the position of making the change myself.
+<P>First, note that our team only maintains the winsup directory
+(but can also make changes to newlib as well).  That said, feel
+free to send us Cygwin-related patches for other tools -- we'll
+probably know what you should do with them if we're not in the position
+of making the change directly.
 
 <P>If your change is going to be a significant one in terms of the size
 of your code changes, be aware that you will have to sign over the
@@ -71,8 +71,8 @@ is necessary for liability reasons.  Here is our
 <a href="assign.txt">standard assignment form</a> for changes to
 Cygwin that you can fill
 out, sign, and send back.  It shouldn't end up being that much of a
-pain.  If you have any questions, please ask
-<a href="mailto:noer@cygnus.com">noer@cygnus.com</a>.
+pain.  If you have any questions, please send them to
+<a href="mailto:cygwin32-developers@cygnus.com">cygwin32-developers@cygnus.com</a>.
 
 <P>Finally, before you start modifying anything for real, you should
 probably join the cygwin32-developers mailing list and send it mail
@@ -92,21 +92,27 @@ as /winsup/syscalls.cc-orig, you would do the following in bash:
       diff -cp syscalls.cc-orig syscalls.cc > syscalls.cc-patch 2>&1 <br>
 </pre>
 
-
 <P>Then gzip and uuencode it and send it to the cygwin32-developers list
 in an email along with an explanation of what the change does.  This
-should include a ChangeLog entry (model yours after other entries in the
+must include a ChangeLog entry (model yours after other entries in the
 file winsup/ChangeLog).  Then we'll test it and get back to you as
-soon as we can...
+soon as we can.
 
-<P>Please feel free to ask me any questions about any of this.  I would love
-it if more people made useful contributions -- this can be one of the big
-advantages of free software; we all benefit from everyone else's work
-as well as our own...
+<P>Please feel free to ask me any questions about any of this.  I
+would love it if more people made useful contributions -- this can be
+one of the big advantages of free software; we all benefit from
+everyone else's work as well as our own...
 
 <H2>What needs doing:</H2>
 
 <P>A fair amount of stuff.  Hopefully it will be listed here soon...
+
+<P>You can get a good idea of the current bugs and problem areas by
+browsing the gnu-win32 mailing list archives.  In addition, check out
+the API calls portion of the FAQ and look for references to
+unimplemented functions.  Or send mail to <a
+href="mailto:cygwin32-developers@cygnus.com">cygwin32-developers@cygnus.com<\
+/a> and see what people suggest...
 
 </body>
 </html>
