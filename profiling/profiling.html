@@ -1,0 +1,53 @@
+<title>Profiling Cygwin</title>
+<h1 align=center>Profiling Cygwin</h1>
+
+<p>There are a couple of steps you need to do to profile cygwin itself
+(newlib and winsup).  This is preliminary documentation but ought to
+be applicable to the Beta 20.1 net release.  Don't expect things to go
+smoothly.</p>
+
+<p>From the Cygwin development tools source distribution, configure,
+build, and install gprof.
+
+<p>Delete all of your <tt>.o</tt>'s in newlib and winsup.  Rebuild
+them all with profiling options:
+
+<pre>
+make -k -w CFLAGS='-pg -O2 -g' CXXFLAGS='-pg -O2 -g'
+</pre>
+
+Note: the dll builds will fail; this is OK.  You're not going to use
+those dlls.  <b>Make sure</b> you have a working <tt>cygwin.dll</tt>
+available and <b>do not</b> touch or rename it.  You'll need it.</p>
+
+<p>OK, now go into winsup and <b>delete</b> <tt>mcount.o</tt>,
+<tt>gcrt0.o</tt>, <tt>gmon.o</tt>, and <tt>profil.o.</tt> Rebuild
+those without <tt>-pg</tt>.  <tt>It is possible that mcount.c</tt>
+<b>must</b> be built without <tt>-O</tt> (this was a problem once,
+at least) - so just use <tt>-g</tt> for that one.</p>
+
+<p>Next, you need to build new libraries for newlib and winsup that
+contain these objects.  Here's <a href="prof-script">a script</a>
+to do it.</p>
+
+<p>You will also need a standalone malloc package.
+<a href="djmalloc.c">Here's one from djgpp</a> that we
+modified to work for this context.</p>
+
+Now that you have <tt>libcpg.a</tt>, <tt>libwinpg.a</tt>, and
+<tt>malloc.o</tt>, you can build your programs like this:
+
+<pre>
+CFLAGS = -g -pg -O2
+
+D = djmalloc.o libwinpg.a libcpg.a libwinpg.a
+
+test.exe : test.c $D
+	gcc -pg -g -o test.exe test.c $D -lgdi32 -luser32
+
+gmon.out : test.exe
+	./test.exe
+
+test.gp : gmon.out
+	gprof -b test.exe > test.gp
+</pre>

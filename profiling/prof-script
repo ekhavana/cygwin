@@ -1,0 +1,32 @@
+#!/bin/ksh
+
+# Where the linux x cygwin tools are installed
+export PATH=$HOME/builds/win32/install/H-i386-pc-linux-gnu/bin:$PATH
+
+# Where the native build tree is
+BUILD=$HOME/builds/win32/build/i586-cygwin32-x-i586-cygwin32/
+TMP=$HOME/tmp/newprof
+
+mkdir $TMP 2>/dev/null
+rm -f $TMP/*.o 2>/dev/null
+
+newlib()
+{
+  DIR=$1
+  LIB=$2
+  print -n "$DIR -> $LIB... "
+  print -n 'cp... '
+  cd $BUILD
+  cp `find $DIR -name '*.o' -print` $TMP
+  cd $TMP
+  print -n 'ar... '
+  i586-cygwin32-ar rs $LIB *.o
+  i586-cygwin32-ranlib $LIB
+  rm *.o
+  print
+}
+
+newlib winsup libwin.a
+#newlib winsup-pg libwinpg.a
+#newlib newlib libc.a
+#newlib newlib-pg libcpg.a
