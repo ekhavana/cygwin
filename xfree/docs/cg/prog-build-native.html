@@ -1444,7 +1444,48 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Harold@MyWindowsHost ~/x-devel/xc
-$ cvs -z4 update -d
+$ cvs -z4 update -d &gt; cvs-update.log 2&gt;&amp;1
+
+Harold@MyWindowsHost ~/x-devel/xc
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Search <TT
+CLASS="filename"
+>cvs-update.log</TT
+> for any lines
+containing <TT
+CLASS="literal"
+>conflict</TT
+>.  Examine each line that
+contains <TT
+CLASS="literal"
+>conflict</TT
+>; resolve those lines that are
+true conflicts.  <B
+CLASS="command"
+>grep</B
+> will not display any
+information if no line in cvs-update.log contains
+<TT
+CLASS="literal"
+>conflict</TT
+>.</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~/x-devel/xc
+$ grep conflict cvs-update.log
 
 Harold@MyWindowsHost ~/x-devel/xc
 $ 

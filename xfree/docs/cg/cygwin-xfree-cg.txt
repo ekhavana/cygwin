@@ -555,7 +555,18 @@ $
      (new directories are skipped if you do not specify -d).
 
 Harold@MyWindowsHost ~/x-devel/xc
-$ cvs -z4 update -d
+$ cvs -z4 update -d > cvs-update.log 2>&1
+
+Harold@MyWindowsHost ~/x-devel/xc
+$
+
+    4. Search cvs-update.log for any lines containing conflict. Examine
+       each line that contains conflict; resolve those lines that are
+       true conflicts. grep will not display any information if no line
+       in cvs-update.log contains conflict.
+
+Harold@MyWindowsHost ~/x-devel/xc
+$ grep conflict cvs-update.log
 
 Harold@MyWindowsHost ~/x-devel/xc
 $
