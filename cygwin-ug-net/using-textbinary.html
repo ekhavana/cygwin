@@ -1,11 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Text and Binary modes</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -59,14 +58,20 @@ HREF="using-filemodes.html"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
 ><H1
+CLASS="SECT1"
 ><A
 NAME="USING-TEXTBINARY"
 >Text and Binary modes</A
 ></H1
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN415"
+NAME="AEN422"
 >The Issue</A
 ></H2
 ><P
@@ -138,14 +143,19 @@ CLASS="COMMAND"
 CLASS="COMMAND"
 >tr</B
 >) use the default mode.</P
+></DIV
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN435"
+NAME="AEN442"
 >The default Cygwin behavior</A
 ></H2
 ><P
 >The Cygwin system gives us some flexibility in deciding how files 
-are to be opened when the mode is not specified explicitly:</P
+are to be opened when the mode is not specified explicitly. 
+The rules are evolving, this section gives the design goals.</P
 ><P
 ></P
 ><OL
@@ -164,19 +174,27 @@ applies.</P
 ><LI
 ><P
 >If the file appears to reside on a file system that is not mounted
-(as can happen when the path contains a drive letter), the default mode is
-text, except if the <TT
+(as can happen when the path contains a drive letter), the default is text.</P
+></LI
+><LI
+><P
+>Pipes and non-file devices are opened in binary mode,
+except if the <TT
 CLASS="ENVAR"
 >CYGWIN</TT
 > environment variable contains
 <TT
 CLASS="LITERAL"
->binmode</TT
+>nobinmode</TT
 >.</P
+><DIV
+CLASS="WARNING"
+><P
+></P
 ><TABLE
 CLASS="WARNING"
 BORDER="1"
-WIDTH="100%"
+WIDTH="90%"
 ><TR
 ><TD
 ALIGN="CENTER"
@@ -188,7 +206,7 @@ ALIGN="CENTER"
 ><TD
 ALIGN="LEFT"
 ><P
->In b20.1 only, a file will be opened
+>In b20.1 of 12/98, a file will be opened
 in binary mode if any of the following conditions hold:</P
 ><P
 ></P
@@ -213,14 +231,15 @@ CLASS="LITERAL"
 ><P
 >the file resides in a binary mounted partition</P
 ></LI
+><LI
+><P
+>the file is not a disk file</P
+></LI
 ></OL
 ></TD
 ></TR
 ></TABLE
-></LI
-><LI
-><P
->Pipes and non-file devices are always opened in binary mode.</P
+></DIV
 ></LI
 ><LI
 ><P
@@ -256,18 +275,23 @@ CLASS="FILENAME"
 > is on a text-mounted partition. </P
 ></LI
 ></OL
+></DIV
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN469"
+NAME="AEN478"
 >Example</A
 ></H2
 ><P
->To illustrate the various rules, we provide a script to delete CRs
+>To illustrate the various rules, we provide scripts to delete CRs
 from files by using the <B
 CLASS="COMMAND"
 >tr</B
 > program, which can only write
-to standard output.</P
+to standard output. 
+The script</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -277,42 +301,59 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >#!/bin/sh
-# Remove \r from the files given as arguments
-for file in "$@"
-do
-  CYGWIN=binmode sh -c "tr -d \\\"\\\r\\\" &#60; '$file' &#62; c:tmpfile.tmp"
-  if [ "$?" = "0" ]
-  then
-    rm "$file"
-    mv c:tmpfile.tmp "$file"
-  fi
-done</PRE
+# Remove \r from the file given as argument
+tr -d '\r' &#60; "$1" &#62; "$1".nocr</PRE
 ></TD
 ></TR
 ></TABLE
 ><P
->This works irrespective of the mount because rule b) applies for the
-path <TT
-CLASS="FILENAME"
->c:tmpfile.tmp</TT
->.  According to rule d)
-<TT
-CLASS="ENVAR"
->CYGWIN</TT
-> must be set before invoking the shell.  These
-precautions are necessary because <B
+> will not work on a text mounted systems because the \r will be 
+reintroduced on writing. However scripts such as </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>#!/bin/sh
+# Remove \r from the file given as argument
+tr -d '\r' | gzip | gunzip &#62; "$1".nocr</PRE
+></TD
+></TR
+></TABLE
+><P
+>and the .bat file</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>REM Remove \r from the file given as argument
+@echo off
+tr -d \r &#60; %1 &#62; %1.nocr</PRE
+></TD
+></TR
+></TABLE
+><P
+> work fine. In the first case (assuming the pipes are binary)
+we rely on <B
 CLASS="COMMAND"
->tr</B
-> does not set its
-standard output to binary mode. It would thus reintroduce \r when writing to
-a file on a text mounted partition. The desired behavior can also be
-obtained by using <B
-CLASS="COMMAND"
->tr -d \r</B
-> in a .bat file. </P
+>gunzip</B
+> to set its output to binary mode,
+possibly overriding the mode used by the shell.
+In the second case we rely on the DOS shell to redirect in binary mode.</P
+></DIV
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN479"
+NAME="AEN489"
 >Binary or text?</A
 ></H2
 ><P
@@ -337,12 +378,12 @@ UNIX system. </P
 ><P
 >If you are mounting a remote file system from a UNIX machine,
 or moving files back and forth to a UNIX machine, you may want to
-access them in binary mode as the text files found there will normally
-be NL format anyway, and you would want any files put there by Cygwin
-programs to be stored in a format that the UNIX machine will
-understand.  Be sure to remove CRs from all Makefiles and
+access the files in binary mode. The text files found there will normally
+be in UNIX NL format, and you would want any files put there by Cygwin
+programs to be stored in a format understood by UNIX.
+Be sure to remove CRs from all Makefiles and
 shell scripts and make sure that you only edit the files with
-DOS/Windows editors that can cope with binary mode files.</P
+DOS/Windows editors that can cope with and preserve NL terminated lines.</P
 ><P
 >Note that you can decide this on a disk by disk basis (for
 example, mounting local disks in text mode and network disks in binary
@@ -355,17 +396,19 @@ CLASS="FILENAME"
 >c:\home</TT
 >
 in binary mode.</P
+></DIV
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN488"
+NAME="AEN498"
 >Programming</A
 ></H2
 ><P
 >In the <TT
 CLASS="FUNCTION"
-><B
->open()</B
-></TT
+>open()</TT
 > function call, binary mode can be
 specified with the flag <TT
 CLASS="LITERAL"
@@ -382,9 +425,7 @@ CLASS="FILENAME"
 ><P
 >In the <TT
 CLASS="FUNCTION"
-><B
->fopen()</B
-></TT
+>fopen()</TT
 > function call, binary mode can be
 specified by adding a <TT
 CLASS="LITERAL"
@@ -395,9 +436,7 @@ direct way to specify text mode.</P
 >The mode of a file can be changed by the call
 <TT
 CLASS="FUNCTION"
-><B
->setmode(fd,mode)</B
-></TT
+>setmode(fd,mode)</TT
 > where <TT
 CLASS="LITERAL"
 >fd</TT
@@ -424,6 +463,8 @@ on the mode before the call, and <TT
 CLASS="LITERAL"
 >EOF</TT
 > on error.</P
+></DIV
+></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR

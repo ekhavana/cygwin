@@ -1,11 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Directory Structure</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -14,7 +13,7 @@ TITLE="Setting Up Cygwin"
 HREF="setup-net.html"><LINK
 REL="PREVIOUS"
 TITLE="Installing the source code"
-HREF="setup-net143.html"><LINK
+HREF="installing-source.html"><LINK
 REL="NEXT"
 TITLE="Environment Variables"
 HREF="setup-env.html"></HEAD
@@ -38,7 +37,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="setup-net143.html"
+HREF="installing-source.html"
 >Prev</A
 ></TD
 ><TD
@@ -59,7 +58,10 @@ HREF="setup-env.html"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
 ><H1
+CLASS="SECT1"
 ><A
 NAME="SETUP-DIR"
 >Directory Structure</A
@@ -105,7 +107,7 @@ you want to use text or binary mode.  </P
 ><P
 >Next, create the traditional main UNIX directories, with
 the following command (in some shells it is necessary to issue
-four separate <B
+separate <B
 CLASS="COMMAND"
 >mkdir</B
 > commands, each with a single
@@ -124,7 +126,7 @@ CLASS="PROMPT"
 > <TT
 CLASS="USERINPUT"
 ><B
->mkdir /tmp /bin /etc /usr</B
+>mkdir /tmp /bin /etc /var /usr</B
 ></TT
 ></PRE
 ></TD
@@ -197,17 +199,35 @@ CLASS="FILENAME"
 >Note that Cygwin comes with two shells: <B
 CLASS="COMMAND"
 >bash.exe</B
->
-and <B
-CLASS="COMMAND"
->sh.exe</B
->, which is based on ash.  The system is
-faster when ash is used as the non-interactive shell.  In case of
-trouble with ash make <B
-CLASS="COMMAND"
->sh.exe</B
-> point to
+> and
 <B
+CLASS="COMMAND"
+>sh.exe</B
+>, which is based on <B
+CLASS="COMMAND"
+>ash</B
+>.  The
+system is faster when <B
+CLASS="COMMAND"
+>ash</B
+> is used as the 
+non-interactive shell. 
+The only functionality supported in <B
+CLASS="COMMAND"
+>ash</B
+> is that 
+of the traditional <B
+CLASS="COMMAND"
+>sh</B
+>.  
+In case of trouble with <B
+CLASS="COMMAND"
+>ash</B
+> make
+<B
+CLASS="COMMAND"
+>sh.exe</B
+> point to <B
 CLASS="COMMAND"
 >bash.exe</B
 >.</P
@@ -246,7 +266,11 @@ CLASS="FILENAME"
 CLASS="FILENAME"
 >/etc/group</TT
 > 
-(i.e. so <B
+(i.e. so that <B
+CLASS="COMMAND"
+>whoami</B
+> works and 
+<B
 CLASS="COMMAND"
 >ls -l</B
 > replaces the UID with a name) just
@@ -301,11 +325,26 @@ CLASS="FILENAME"
 this so you may want to regenerate these files periodically.  Under Windows
 9x, you can create and edit these files with a text editor.  </P
 ><P
+>The <B
+CLASS="COMMAND"
+>who</B
+> command requires the
+<TT
+CLASS="FILENAME"
+>/var/run/utmp</TT
+> to exist.
+Create it if you wish.
+The system also logs information in <TT
+CLASS="FILENAME"
+>/var/log/wtmp</TT
+>,
+if it exists.</P
+><P
 >The <TT
 CLASS="FILENAME"
 >/usr</TT
 > directory is not used by the Cygwin
-system, but you may want to install optional packages there.</P
+system but it is a standard place to install optional packages.</P
 ><P
 >You may also want to mount directories such as <TT
 CLASS="FILENAME"
@@ -325,6 +364,7 @@ CLASS="FILENAME"
 >/dev/null</TT
 > as these
 are already automatically simulated inside the Cygwin library.</P
+></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
@@ -340,7 +380,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="setup-net143.html"
+HREF="installing-source.html"
 >Prev</A
 ></TD
 ><TD

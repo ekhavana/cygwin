@@ -1,15 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
->The <TT
-CLASS="ENVAR"
->CYGWIN</TT
-> environment
+>The CYGWIN environment
 variable</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -63,7 +59,10 @@ HREF="using-utils.html"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
 ><H1
+CLASS="SECT1"
 ><A
 NAME="USING-CYGWINENV"
 >The <TT
@@ -92,14 +91,19 @@ STYLE="list-style-type: disc"
 ><I
 CLASS="FIRSTTERM"
 >(no)binmode</I
-> - if set, unspecified file
-opens default to binary mode (no CR/LF/Ctrl-Z translations) instead of
-text mode.  Defaults to not set (text mode). This option must be set
+> - if set, non-disk 
+(e.g. pipe and COM ports) file opens default to binary mode 
+(no CR/LF/Ctrl-Z translations) instead of text mode.
+Defaults to set (binary mode). This option must be set
 before starting a Cygwin shell to have an effect on redirection.</P
+><DIV
+CLASS="WARNING"
+><P
+></P
 ><TABLE
 CLASS="WARNING"
 BORDER="1"
-WIDTH="100%"
+WIDTH="90%"
 ><TR
 ><TD
 ALIGN="CENTER"
@@ -111,11 +115,12 @@ ALIGN="CENTER"
 ><TD
 ALIGN="LEFT"
 ><P
->If set in b20.1, all files 
+>If set in 12/98 b20.1, all files 
 always open in binary mode.</P
 ></TD
 ></TR
 ></TABLE
+></DIV
 ></LI
 ><LI
 STYLE="list-style-type: disc"
@@ -146,8 +151,9 @@ CLASS="FIRSTTERM"
 >(no)glob</I
 > - if set, command line arguments
 containing UNIX-style file wildcard characters (brackets, question mark,
-asterisk) are expanded into lists of files that match those wildcards.  This
-is applicable only to programs running from a DOS command line prompt.
+asterisk, escaped with \) are expanded into lists of files that match 
+those wildcards.
+This is applicable only to programs running from a DOS command line prompt.
 Default is set.</P
 ></LI
 ><LI
@@ -159,10 +165,14 @@ CLASS="FIRSTTERM"
 > - if set, use the full NT Extended
 Attributes to store UNIX-like inode information.
 This option only operates under Windows NT. Defaults to not set. </P
+><DIV
+CLASS="WARNING"
+><P
+></P
 ><TABLE
 CLASS="WARNING"
 BORDER="1"
-WIDTH="100%"
+WIDTH="90%"
 ><TR
 ><TD
 ALIGN="CENTER"
@@ -182,6 +192,22 @@ CLASS="EMPHASIS"
 ></TD
 ></TR
 ></TABLE
+></DIV
+></LI
+><LI
+STYLE="list-style-type: disc"
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)ntsec</I
+> - if set, use the NT security
+model to set UNIX-like permissions on files and processes. The
+file permissions can only be set on NTFS partitions. FAT and SAMBA doesn't
+support the NT file security. For more information, read the documentation
+in [<SPAN
+CLASS="CITATION"
+>ntsec.sgml</SPAN
+>].</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
@@ -190,8 +216,8 @@ STYLE="list-style-type: disc"
 CLASS="FIRSTTERM"
 >(no)reset_com</I
 > - if set, serial ports are reset
-to 9600-8-N-1 with no flow control when used (warning: this is done at open
-time and when handles are inherited).  Defaults to set.</P
+to 9600-8-N-1 with no flow control when used. This is done at open
+time and when handles are inherited.  Defaults to set.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
@@ -241,16 +267,17 @@ STYLE="list-style-type: disc"
 ><I
 CLASS="FIRSTTERM"
 >(no)title</I
-> - if set, the title bar reflects the
-name of the program currently running.  Default is not set.  Note that
-under Win9x the title bar is always enabled and is stripped
-by default.  In order not to strip, specify <TT
+> - if set, the title bar
+reflects the name of the program currently running.  Default is not
+set.  Note that under Win9x the title bar is always enabled and it is
+stripped by default, but this is because of the way Win9x works.  In
+order not to strip, specify <TT
 CLASS="LITERAL"
 >title</TT
-> or
-<TT
+> or <TT
 CLASS="LITERAL"
->title nostrip_title</TT
+>title
+nostrip_title</TT
 >.</P
 ></LI
 ><LI
@@ -260,11 +287,16 @@ STYLE="list-style-type: disc"
 CLASS="FIRSTTERM"
 >(no)tty</I
 > - if set, Cygwin enables extra support
-(i.e., termios) for UNIX-like ttys.  Defaults to not set, in which case the
-tty is opened in text mode with ^Z as EOF. This option must be specified
-before starting a Cygwin shell.</P
+(i.e., termios) for UNIX-like ttys. 
+It is not compatible with some Windows programs.
+Defaults to not set, in which case the tty is opened in text mode 
+with ^Z as EOF. Note that this has been changed such that ^D works as
+expected instead of ^Z, and is settable via stty.
+This option must be specified before starting a Cygwin shell 
+and it cannot be changed in the shell.</P
 ></LI
 ></UL
+></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR

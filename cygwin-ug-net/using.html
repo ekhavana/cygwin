@@ -1,11 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Using Cygwin</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -56,6 +55,8 @@ HREF="using-textbinary.html"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"></DIV
+><DIV
+CLASS="CHAPTER"
 ><H1
 ><A
 NAME="USING"
@@ -108,113 +109,142 @@ HREF="using-utils.html"
 >This chapter explains some key differences between the Cygwin
 environment and traditional UNIX systems. It assumes a working
 knowledge of standard UNIX commands.</P
+><DIV
+CLASS="SECT1"
 ><H1
+CLASS="SECT1"
 ><A
 NAME="USING-PATHNAMES"
 >Mapping path names</A
 ></H1
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN321"
->Win32 and POSIX paths</A
+NAME="AEN330"
+>Introduction</A
 ></H2
 ><P
->Cygwin supports both Win32- and POSIX-style paths, using either
-forward or back slashes as the directory delimiter.  UNC pathnames (starting
-with two slashes and a network name) are also supported.</P
+>Cygwin supports both Win32- and POSIX-style paths, where
+directory delimiters may be either forward or back slashes.  UNC
+pathnames (starting with two slashes and a network name) are also
+supported.</P
 ><P
->In POSIX operating systems (such as Linux) there is no concept of
-"drives" nor drive letters.  All absolute paths begin with a slash instead
-of "c:" and all file systems appear as subdirectories (for example, you
-might buy a new disk and make it be the <TT
+>POSIX operating systems (such as Linux) do not have the concept
+of drive letters.  Instead, all absolute paths begin with a
+slash (instead of a drive letter such as "c:") and all file systems
+appear as subdirectories (for example, you might buy a new disk and
+make it be the <TT
 CLASS="FILENAME"
 >/disk2</TT
->
-directory).  This practice is simulated by Cygwin to assist in porting POSIX
-programs to Windows.</P
+> directory).</P
+><P
+>Because many programs written to run on UNIX systems assume
+the existance of a single unified POSIX file system structure, Cygwin
+maintains a special internal POSIX view of the Win32 file system
+that allows these programs to successfully run under Windows.  Cygwin
+uses this mapping to translate between Win32 and POSIX paths as
+necessary.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="MOUNT-TABLE"
+>The Cygwin Mount Table</A
+></H2
 ><P
 >The <B
 CLASS="COMMAND"
 >mount</B
-> program is used to map drives and shares
-onto the POSIX directory tree, much like as is done by the POSIX
+> utility program is used to
+to map Win32 drives and network shares into Cygwin's internal POSIX
+directory tree.  This is a similar concept to the typical UNIX mount
+program.  For those people coming from a Windows background, the
 <B
 CLASS="COMMAND"
 >mount</B
-> utility.  This is very similar to the old DOS
+> utility is very similar to the old DOS
 <B
 CLASS="COMMAND"
 >join</B
 >, in that it makes your drive letters appear as
-subdirectories somewhere else.  By default the POSIX root
-<TT
-CLASS="FILENAME"
->/</TT
-> points to the system partition but it can be
-relocated to any directory in the Windows file system.</P
+subdirectories somewhere else.</P
 ><P
->The mapping between Win32 pathnames and POSIX styles appears in the
+>The mapping is stored in the current user's Cygwin
 <I
 CLASS="FIRSTTERM"
 >mount table</I
->. Cygwin maps between Win32 and POSIX
-paths by finding the longest matching prefix in the mount table.  This table
-is stored in in the Windows registry and can be accessed under
-"HKEY_CURRENT_USER/Software/Cygnus Solutions/CYGWIN.DLL
-setup/&#60;version&#62;/mounts" where &#60;version&#62; is the latest registry
-version associated with the Cygwin library (this version is not the same
-as the release number).</P
+> in the Windows registry so that the
+information will be retrieved next time the user logs in.  Because it
+is sometimes desirable to have system-wide as well as user-specific
+mounts, there is also a system-wide mount table that all Cygwin users
+inherit.  The system-wide table may only be modified by a user with
+the appropriate priviledges (Administrator priviledges in Windows
+NT).</P
 ><P
->The mount table is displayed with <B
+>The current user's table is located under
+"HKEY_CURRENT_USER/Software/Cygnus Solutions/Cygwin/mounts
+v&#60;version&#62;"
+where &#60;version&#62; is the latest registry version associated with
+the Cygwin library (this version is not the same as the release
+number).  The system-wide table is located under the same subkeys
+under HKEY_LOCAL_SYSTEM.</P
+><P
+>By default, the POSIX root <TT
+CLASS="FILENAME"
+>/</TT
+> points to the
+system partition but it can be relocated to any directory in the
+Windows file system using the <B
 CLASS="COMMAND"
 >mount</B
-> and it is
-modified by <B
-CLASS="COMMAND"
->mount [-switch] Win32path POSIXpath</B
->.  The
-optional switches <TT
-CLASS="LITERAL"
->-b</TT
-> and <TT
-CLASS="LITERAL"
->-t</TT
-> specify a
-default file mode, a concept detailed in
-<A
-HREF="using-textbinary.html"
->the section called <I
->Text and Binary modes</I
-></A
->.</P
-><P
->The following example demonstrates using the mount utility to
-mount the directory 
+> command.
+Whenever Cygwin generates a POSIX path from a Win32 one, it uses the
+longest matching prefix in the mount table.  Thus, if
 <TT
 CLASS="FILENAME"
->C:\cygnus\cygwin-b20\H-i586-cygwin32\bin</TT
->
-to <TT
+>C:</TT
+> is mounted as <TT
 CLASS="FILENAME"
->/bin</TT
-> and the network directory 
+>/c</TT
+> and also
+as <TT
+CLASS="FILENAME"
+>/</TT
+>, then Cygwin would translate
 <TT
 CLASS="FILENAME"
->\\pollux\home\joe\data</TT
+>C:/foo/bar</TT
 > to <TT
 CLASS="FILENAME"
->/data</TT
->.
+>/c/foo/bar</TT
+>.</P
+><P
+>Invoking <B
+CLASS="COMMAND"
+>mount</B
+> without any arguments displays
+Cygwin's current set of mount points.
+In the following example, the C
+drive is the POSIX root and D drive is mapped to
 <TT
 CLASS="FILENAME"
->/bin</TT
-> is assumed to already exist.
-exist</P
+>/d</TT
+>.  Note that in this case, the root mount is a
+system-wide mount point that is visible to all users running Cygwin
+programs, whereas the <TT
+CLASS="FILENAME"
+>/d</TT
+> mount is only visible
+to the current user.</P
 ><DIV
 CLASS="EXAMPLE"
 ><P
 ><B
->Example 3-1. Adding mount points</B
+>Example 3-1. Displaying the current set of mount points</B
 ></P
 ><TABLE
 BORDER="0"
@@ -230,186 +260,97 @@ CLASS="PROMPT"
 > <TT
 CLASS="USERINPUT"
 ><B
->ls /bin /data</B
-></TT
->
-ls: /data: No such file or directory
-<TT
-CLASS="PROMPT"
->c:\cygnus\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount C:\cygnus\cygwin-b20\H-i586-cygwin32\bin /bin</B
-></TT
->
-<TT
-CLASS="PROMPT"
->c:\cygnus\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->mount \\pollux\home\joe\data /data</B
-></TT
->
-Warning: /data does not exist!
-<TT
-CLASS="PROMPT"
->c:\cygnus\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
 >mount</B
 ></TT
 >
 Device           Directory           Type        Flags
-\\pollux\home\joe\data   /data       native      text!=binary 
-C:\cygnus\cygwin-b20\H-i586-cygwin32\bin   /bin   native   text!=binary
-D:               /d                  native      text!=binary
-\\.\tape1:       /dev/st1            native      text!=binary
-\\.\tape0:       /dev/st0            native      text!=binary
-\\.\b:           /dev/fd1            native      text!=binary
-\\.\a:           /dev/fd0            native      text!=binary
-C:               /                   native      text!=binary
-<TT
-CLASS="PROMPT"
->c:\cygnus\&#62;</TT
-> <TT
-CLASS="USERINPUT"
-><B
->ls /bin/sh</B
-></TT
->
-/bin/sh</PRE
+D:               /d                  user        textmode
+C:               /                   system      textmode</PRE
 ></TD
 ></TR
 ></TABLE
 ></DIV
 ><P
->The previous example was shown in the DOS shell.
-In bash it is legal and convenient to use the forward "/" in the Win32 pathname
-as the "\" is the shell escape. </P
-><P
->The <B
-CLASS="COMMAND"
->cygpath</B
-> program can be used to translate
-between Win32 and POSIX pathnames in shell scripts. See
-<A
-HREF="using-utils.html"
->the section called <I
->Cygwin Utilities</I
-></A
-> for details.</P
-><P
->The <TT
-CLASS="ENVAR"
->HOME</TT
->, <TT
-CLASS="ENVAR"
->PATH</TT
->, and
-<TT
-CLASS="ENVAR"
->LD_LIBRARY_PATH</TT
-> environment variables are automatically
-converted from Win32 format to POSIX format (e.g. from
-<TT
-CLASS="FILENAME"
->C:\cygnus\cygwin-b20\H-i586-cygwin32\bin</TT
-> to
-<TT
-CLASS="FILENAME"
->/bin</TT
->) when a Cygwin process first starts.</P
-><P
->Symbolic links can also be used to map Win32 pathnames to POSIX.  For
-example the command <B
-CLASS="COMMAND"
->ln -s //pollux/home/joe/data /data</B
->
-would have about the same effect as the <B
+>You can also use the <B
 CLASS="COMMAND"
 >mount</B
-> in
-the example above, except that symbolic links do not set a default file mode.
-Other differences are that the mapping is distributed
-troughout the file system and proceeds by iteratively walking the directory
-tree instead of matching the longest prefix in a kernel table.
-Note that symbolic links work on network drives only if they support
-the "system" file attribute.</P
-><H2
-><A
-NAME="AEN371"
->Mount point types</A
-></H2
+> command to add
+new mount points, and the <B
+CLASS="COMMAND"
+>umount</B
+> to delete
+them.  See <A
+HREF="using-utils.html#MOUNT"
+>the section called <I
+>mount</I
+></A
+> and <A
+HREF="using-utils.html#UMOUNT"
+>the section called <I
+>umount</I
+></A
+> for more
+information on how to use these utilities to set up your Cygwin POSIX
+file system.</P
 ><P
->Usually the POSIX mount point is an existing empty
-directory, as in standard UNIX. If this is the case, or if there is a
-place-holder for the mount point, such as a file, a symbolic link (pointing
-to anywhere) or a non-empty directory, you get the expected behavior. Files
-present in a mount point directory before the mount become invisible to
-Cygwin programs.</P
-><P
-> It is sometimes desirable to mount to a non-existent directory,
-for example to avoid cluttering the root directory with names
-such as
+>Whenever Cygwin cannot use any of the existing mounts to convert
+from a particular Win32 path to a POSIX one, Cygwin will
+automatically default to an imaginary mount point under the default POSIX
+path <TT
+CLASS="FILENAME"
+>/cygdrive</TT
+>.  For example, if Cygwin accesses
 <TT
 CLASS="FILENAME"
->a</TT
->, <TT
+>Z:\foo</TT
+> and the Z drive is not currently in the
+mount table, then <TT
 CLASS="FILENAME"
->b</TT
->, <TT
+>Z:\</TT
+> would be automatically
+converted to <TT
 CLASS="FILENAME"
->c</TT
->
-pointing to disks. 
-Although you will get a warning, most everything will work properly
-when you refer to the mount point explicitly.
-Some strange effects can occur however.
-For example if your current working directory is <TT
+>/cygdrive/Z</TT
+>.  The default
+prefix of <TT
 CLASS="FILENAME"
->/dir</TT
->,
-say, and <TT
-CLASS="FILENAME"
->/dir/mtpt</TT
-> is a mount point, then
-<TT
-CLASS="FILENAME"
->mtpt</TT
-> will not show up in an <B
-CLASS="COMMAND"
->ls</B
-> or
-<B
-CLASS="COMMAND"
->echo *</B
-> command and <B
-CLASS="COMMAND"
->find .</B
-> will not
-find <TT
-CLASS="FILENAME"
->mtpt</TT
->.</P
+>/cygdrive</TT
+> may be changed (see the
+<A
+HREF="using-utils.html#MOUNT"
+>the section called <I
+>mount</I
+></A
+> for more information).</P
 ><P
->Although you can mount to pathnames that do not start with "/",
-there is no way to make use of such mount points.</P
+>It is possible to assign some special attributes to each mount
+point.  Automatically mounted partitions are displayed as "auto"
+mounts.  Mounts can also be marked as either "textmode" or "binmode"
+-- whether text files are read in the same manner as binary files by
+default or not (see <A
+HREF="using-textbinary.html"
+>the section called <I
+>Text and Binary modes</I
+></A
+> for more
+information on text and binary modes.</P
+></DIV
+><DIV
+CLASS="SECT2"
 ><H2
+CLASS="SECT2"
 ><A
-NAME="AEN386"
->Where to mount</A
+NAME="AEN376"
+>Cygwin Mount Table Strategies</A
 ></H2
 ><P
 >Which set of mounts is right for a given Cygwin user depends
 largely on how closely you want to simulate a POSIX environment,
 whether you mix Windows and Cygwin programs, and how many drive
-letters you are using.  If you want to be very POSIX-like, you may
-want to do something like this:
-
-<DIV
+letters you are using.  If you want to be very POSIX-like (assuming
+"CygwinRoot" is the top directory of your Cygwin distribution), you may
+want to do something like this:</P
+><DIV
 CLASS="EXAMPLE"
 ><P
 ><B
@@ -429,7 +370,7 @@ CLASS="PROMPT"
 > <TT
 CLASS="USERINPUT"
 ><B
->mount c:\Cygnus\98r2 /</B
+>mount c:\Cygnus\CygwinRoot /</B
 ></TT
 >
 <TT
@@ -463,11 +404,15 @@ CLASS="USERINPUT"
 ></TR
 ></TABLE
 ></DIV
->&#13;</P
 ><P
 >However, if you mix Windows and Cygwin programs a lot, you might
 want to create an "identity" mapping, so that conversions between the
-two (see the cygpath command) can be eliminated:</P
+two (see <A
+HREF="using-utils.html#CYGPATH"
+>the section called <I
+>cygpath</I
+></A
+>) can be eliminated:</P
 ><DIV
 CLASS="EXAMPLE"
 ><P
@@ -526,6 +471,78 @@ CLASS="USERINPUT"
 >You'd have to repeat this for all top-level subdirectories on
 all drives, but then you'd always have the top-level directories
 available as the same names in both systems.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN404"
+>Additional Path-related Information</A
+></H2
+><P
+>The <B
+CLASS="COMMAND"
+>cygpath</B
+> program provides the ability to
+translate between Win32 and POSIX pathnames in shell scripts. See
+<A
+HREF="using-utils.html#CYGPATH"
+>the section called <I
+>cygpath</I
+></A
+> for the details.</P
+><P
+>The <TT
+CLASS="ENVAR"
+>HOME</TT
+>, <TT
+CLASS="ENVAR"
+>PATH</TT
+>, and
+<TT
+CLASS="ENVAR"
+>LD_LIBRARY_PATH</TT
+> environment variables are automatically
+converted from Win32 format to POSIX format (e.g. from
+<TT
+CLASS="FILENAME"
+>C:\cygnus\cygwin-b20\H-i586-cygwin32\bin</TT
+> to
+<TT
+CLASS="FILENAME"
+>/bin</TT
+>, if there was a mount from that Win32 path to
+that POSIX path) when a Cygwin process first starts.</P
+><P
+>Symbolic links can also be used to map Win32 pathnames to POSIX.
+For example, the command
+<B
+CLASS="COMMAND"
+>ln -s //pollux/home/joe/data /data</B
+> would have about
+the same effect as creating a mount point from
+<TT
+CLASS="FILENAME"
+>//pollux/home/joe/data</TT
+> to <TT
+CLASS="FILENAME"
+>/data</TT
+>
+using <B
+CLASS="COMMAND"
+>mount</B
+>, except that symbolic links cannot set
+the default file access mode.  Other differences are that the mapping is
+distributed throughout the file system and proceeds by iteratively
+walking the directory tree instead of matching the longest prefix in a
+kernel table.  Note that symbolic links will only work on network
+drives that are properly configured to support the "system" file
+attribute.  Many do not do so by default (the Unix Samba server does
+not by default, for example).</P
+></DIV
+></DIV
+></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR

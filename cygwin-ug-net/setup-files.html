@@ -1,11 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Customizing bash</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -59,7 +58,10 @@ HREF="using.html"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
 ><H1
+CLASS="SECT1"
 ><A
 NAME="SETUP-FILES"
 >Customizing bash</A
@@ -113,9 +115,12 @@ CLASS="ENVAR"
 to DOS, the local directory is not searched by default).  Also to avoid
 delays you should either <B
 CLASS="COMMAND"
->unset MAILCHECK</B
-> or set
-<TT
+>unset</B
+> <TT
+CLASS="ENVAR"
+>MAILCHECK</TT
+> 
+or define <TT
 CLASS="ENVAR"
 >MAILPATH</TT
 > to point to your existing mail inbox.</P
@@ -168,9 +173,15 @@ library (including bash) behave.  It is loaded automatically.  The
 full details are in the <TT
 CLASS="FILENAME"
 >readline.info</TT
->.  The
-following settings are useful:</P
-><TABLE
+>. 
+Due to a bug in the current readline version, 
+<TT
+CLASS="FILENAME"
+>.inputrc</TT
+> cannot contain \r,
+even on text mounted systems.
+Consider the following settings:
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -187,11 +198,12 @@ set completion-ignore-case on</PRE
 ></TD
 ></TR
 ></TABLE
-><P
->The first three commands allow bash to display 8-bit characters,
+>
+The first three commands allow bash to display 8-bit characters,
 useful for languages with accented characters.  The last line makes
 filename completion case insensitive, which can be convenient in a
 Windows environment.</P
+></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR

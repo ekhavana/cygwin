@@ -1,11 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >File permissions</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -59,21 +58,28 @@ HREF="using-specialnames.html"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
 ><H1
+CLASS="SECT1"
 ><A
 NAME="USING-FILEMODES"
 >File permissions</A
 ></H1
 ><P
->On Windows 9x systems, files are always readable, and Cygwin
-uses the native read-only mode to determine if they are
-writable. Files are considered to be executable if the filename ends
-with .bat, .com or .exe, or if its content starts with
-#!. Consequently <B
+>On Windows 9x systems, files are always readable, and Cygwin uses the
+native read-only mode to determine if they are writable. Files are
+considered to be executable if the filename ends with .bat, .com or .exe, or
+if its content starts with #!. Consequently <B
 CLASS="COMMAND"
 >chmod</B
-> can only affect the
-"w" mode, it silently ignores actions involving the other modes.</P
+> can
+only affect the "w" mode, it silently ignores actions involving the other
+modes.  This means that <B
+CLASS="COMMAND"
+>ls -l</B
+>
+needs to open and read files. It can thus be relatively slow.</P
 ><P
 >Under NT, file permissions default to the same behavior as Windows
 9x but there is optional functionality in Cygwin that can make file
@@ -111,6 +117,7 @@ writable across the board, e.g. <B
 CLASS="COMMAND"
 >chmod +w filename</B
 >. </P
+></DIV
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
