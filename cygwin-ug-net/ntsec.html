@@ -1,11 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <HTML
 ><HEAD
 ><TITLE
 >NT security and the ntsec usage</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+CONTENT="Modular DocBook HTML Stylesheet Version 1.72
 "><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
@@ -21,11 +20,6 @@ TITLE="Customizing bash"
 HREF="setup-files.html"></HEAD
 ><BODY
 CLASS="SECT1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -48,13 +42,13 @@ VALIGN="bottom"
 ><A
 HREF="setup-env.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Setting Up Cygwin</TD
+>Chapter 2. Setting Up Cygwin</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
@@ -62,7 +56,7 @@ VALIGN="bottom"
 ><A
 HREF="setup-files.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -74,10 +68,12 @@ CLASS="SECT1"
 ><H1
 CLASS="SECT1"
 ><A
-NAME="NTSEC">NT security and the <TT
+NAME="NTSEC"
+>NT security and the <TT
 CLASS="LITERAL"
 >ntsec</TT
-> usage</H1
+> usage</A
+></H1
 ><P
 >The design goal of the ntsec patch was to get a more UNIX like
 permission structure based upon the security features of Windows NT.
@@ -113,7 +109,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="NTSEC-COMMON">NT security</H2
+NAME="NTSEC-COMMON"
+>NT security</A
+></H2
 ><P
 >The NT security allows a process to allow or deny access of
 different kind to `objects'. `Objects' are files, processes,
@@ -338,7 +336,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="NTSEC-PROCESSES">Process privileges</H2
+NAME="NTSEC-PROCESSES"
+>Process privileges</A
+></H2
 ><P
 >Any process started under control of cygwin has a semaphore attached
 to it, that is used for signaling purposes. The creation of this semaphore
@@ -370,7 +370,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="NTSEC-FILES">File permissions</H2
+NAME="NTSEC-FILES"
+>File permissions</A
+></H2
 ><P
 >If ntsec is turned on, file permissions are set as in UNIX. An SD is
 assigned to the file containing the owner and group and ACEs for the
@@ -483,9 +485,11 @@ entries are well known entries.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN235"><P
+NAME="AEN235"
+></A
+><P
 ><B
->Example 1. /etc/passwd</B
+>Example 2-1. /etc/passwd</B
 ></P
 ><TABLE
 BORDER="0"
@@ -508,9 +512,11 @@ corinna::1000:547:Corinna Vinschen:/home/corinna:/bin/tcsh</PRE
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN238"><P
+NAME="AEN238"
+></A
+><P
 ><B
->Example 2. /etc/group</B
+>Example 2-2. /etc/group</B
 ></P
 ><TABLE
 BORDER="0"
@@ -570,7 +576,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="NTSEC-RELEASE1.1">New since Cygwin release 1.1</H2
+NAME="NTSEC-RELEASE1.1"
+>New since Cygwin release 1.1</A
+></H2
 ><P
 >In Cygwin release 1.1 a new technique of using the 
 <TT
@@ -700,9 +708,11 @@ user and a group:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN283"><P
+NAME="AEN283"
+></A
+><P
 ><B
->Example 3. /etc/passwd:</B
+>Example 2-3. /etc/passwd:</B
 ></P
 ><TABLE
 BORDER="0"
@@ -720,9 +730,11 @@ CLASS="SCREEN"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN286"><P
+NAME="AEN286"
+></A
+><P
 ><B
->Example 4. /etc/group:</B
+>Example 2-4. /etc/group:</B
 ></P
 ><TABLE
 BORDER="0"
@@ -817,9 +829,11 @@ for fun.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN305"><P
+NAME="AEN305"
+></A
+><P
 ><B
->Example 5. /etc/passwd</B
+>Example 2-5. /etc/passwd</B
 ></P
 ><TABLE
 BORDER="0"
@@ -842,9 +856,11 @@ Guest:*:501:546:,S-1-5-21-1844237615-436374069-1060284298-501:/home/Guest:/bin/b
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN308"><P
+NAME="AEN308"
+></A
+><P
 ><B
->Example 6. /etc/group</B
+>Example 2-6. /etc/group</B
 ></P
 ><TABLE
 BORDER="0"
@@ -886,7 +902,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="NTSEC-MAPPING">The mapping leak</H2
+NAME="NTSEC-MAPPING"
+>The mapping leak</A
+></H2
 ><P
 >Now its time to point out the leak in the NT permissions.
 The official documentation explains in short the following:</P
@@ -1022,7 +1040,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="NTSEC-ACLFUNCS">New acl API</H2
+NAME="NTSEC-ACLFUNCS"
+>New acl API</A
+></H2
 ><P
 >For dealing with ACLs Cygwin now has the acl API as it's
 implemented in newer versions of Solaris. The new data structure
@@ -1090,7 +1110,9 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="NTSEC-SETUID">New setuid concept</H2
+NAME="NTSEC-SETUID"
+>New setuid concept</A
+></H2
 ><P
 >UNIX applications which have to switch the user context are using
 the <B
@@ -1318,6 +1340,45 @@ etc.&#13;</PRE
 ></TR
 ></TABLE
 ></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="NTSEC-RELEASE1.3.3"
+>New since Cygwin release 1.3.3</A
+></H2
+><P
+>Since Cygwin release 1.3.3, applications having the
+<B
+CLASS="COMMAND"
+>Create a process level token</B
+> user right can switch user
+context without giving a password by just calling the usual
+<B
+CLASS="COMMAND"
+>setuid</B
+>, <B
+CLASS="COMMAND"
+>seteuid</B
+>,
+<B
+CLASS="COMMAND"
+>setgid</B
+> and <B
+CLASS="COMMAND"
+>setegid</B
+> functions.  This is
+typically only given to the SYSTEM user. However, this now allows to switch
+the user context using e. g. rhosts authentication or (when running sshd
+under SYSTEM account as service) public key authentication.</P
+><P
+>An important restriction of this method is, that a process started under
+SYSTEM account can't access network shares which require authentication.
+This also applies to the subprocesses which switched the user context 
+without a password.  People using network home drives are typically not
+able to access it when trying to login using ssh or rsh without password.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -1337,7 +1398,7 @@ VALIGN="top"
 ><A
 HREF="setup-env.html"
 ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -1355,7 +1416,7 @@ VALIGN="top"
 ><A
 HREF="setup-files.html"
 ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
