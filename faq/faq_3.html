@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 13 September 2000 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 14 September 2000 -->
 
 <TITLE>The Cygwin FAQ
  - Installation Instructions</TITLE>
@@ -30,10 +30,10 @@ respective directories:
 
 <DT><SAMP>`latest'</SAMP>
 <DD>
-bison common diff flex gperf inetutils make opengl shellutils texinfo
-ash byacc crypt expect gawk grep less man patch tar textutils bash bzip2
-cygwin fileutils gcc groff login sed tcltk time binutils clear dejagnu
-findutils gdb gzip m4 mt termcap vim
+ash bash binutils bison byacc bzip2 clear common crypt cygwin dejagnu
+diff expect fileutils findutils flex gawk gcc gdb gperf grep groff gzip
+inetutils less login m4 make man mt opengl openssh openssl patch sed
+shellutils tar tcltk termcap texinfo textutils time vim
 
 <DT><SAMP>`contrib'</SAMP>
 <DD>
@@ -47,7 +47,7 @@ Full source code is available for all packages and tools.
 
 <P>
 There is one recommended way to install Cygwin, which is to use the GUI
-installer <CODE>setup.exe</CODE>.  There are some variations on how you go
+installer <SAMP>`setup.exe'</SAMP>.  There are some variations on how you go
 about that.
 
 
@@ -62,17 +62,17 @@ mailing list.
 
 
 
-<H2><A NAME="SEC10" HREF="faq_toc.html#TOC10">Installation using the <CODE>setup.exe</CODE> program</A></H2>
+<H2><A NAME="SEC10" HREF="faq_toc.html#TOC10">Installation using the <SAMP>`setup.exe'</SAMP> program</A></H2>
 
 <P>
-<STRONG>IMPORTANT: First read the README file in the <CODE>latest</CODE>
+<STRONG>IMPORTANT: First read the README file in the <SAMP>`latest'</SAMP>
 directory at any ftp mirror.  DO THIS NOW!  Information in the README
 file is not repeated here.  You can find a mirror site near you from
 <TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.</STRONG>
 
 
 <P>
-The <CODE>setup.exe</CODE> program is the recommended way to install Cygwin,
+The <SAMP>`setup.exe'</SAMP> program is the recommended way to install Cygwin,
 but it is still a work in progress.  Expect features and functionality
 to change.  For this reason, it is a good idea to note the version and
 build time reported by <CODE>setup.exe</CODE> when you run it.  This will help
@@ -86,7 +86,7 @@ for the latest news about <CODE>setup.exe</CODE>.
 
 <P>
 The <CODE>setup.exe</CODE> program will prompt you for a "root" directory.
-The default is 'C:\cygwin', but you can change it.  You are urged not to
+The default is <SAMP>`C:\cygwin'</SAMP>, but you can change it.  You are urged not to
 choose something like 'C:\' (the root directory on the system drive) for
 your Cygwin root.  If you do, then critical Cygwin system directories
 like 'etc', 'lib' and 'bin' could easily be corrupted by other (non-Cygwin)
@@ -165,8 +165,8 @@ creates for you won't actually do anything.
 <DT><SAMP>`ash'</SAMP>
 <DD>
 This is often forgotten because it's not obvious that <SAMP>`ash'</SAMP>
-contains <CODE>/bin/sh</CODE>, which is essential for running scripts, (and
-<CODE>make</CODE> and ...).
+contains <CODE>/bin/sh</CODE>, which is essential for running scripts (and
+<SAMP>`make'</SAMP> and ...).
 
 </DL>
 
@@ -202,14 +202,38 @@ another mirror, or try again tomorrow.
 <H3><A NAME="SEC16" HREF="faq_toc.html#TOC16">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
 
 <P>
-Good question!  That very issue is sometimes debated on the
+Good question!  That very issue has been debated on the
 <SAMP>`cygwin-apps'</SAMP> mailing list.  Check the list archives if you want to
-know more.
+know more.  Start at <TT><a target="_top" href="http://sources.redhat.com/cygwin/lists.html">http://sources.redhat.com/cygwin/lists.html</a></TT>.
 
 
 
 
-<H3><A NAME="SEC17" HREF="faq_toc.html#TOC17">How do I uninstall Cygwin?</A></H3>
+<H3><A NAME="SEC17" HREF="faq_toc.html#TOC17">My Windows logon name has a space in it, will this cause problems?</A></H3>
+
+<P>
+Most definitely yes!  UNIX shells (and thus Cygwin) use the space
+character as a word delimiter.  Under certain circumstances, it is
+possible to get around this with various shell quoting mechanisms, but
+you are much better off if you can avoid the problem entirely.
+
+
+<P>
+In particular, the environment variables <SAMP>`USER'</SAMP> and <SAMP>`HOME'</SAMP> are
+set for you in /etc/profile.  By default these derive from your Windows
+logon name.  You may edit this file and set them explicitly to something
+without spaces.
+
+
+<P>
+(If you use the <SAMP>`login'</SAMP> package or anything else that reads
+/etc/passwd, you may need to make corresponding changes there.  See the
+README file for that package.)
+
+
+
+
+<H3><A NAME="SEC18" HREF="faq_toc.html#TOC18">How do I uninstall Cygwin?</A></H3>
 
 <P>
 Setup has no automatic uninstall facility.  Just delete everything
