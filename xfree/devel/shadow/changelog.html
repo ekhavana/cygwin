@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2003-05-30 2355 EDT</p>
+<p>Last updated: 2003-05-31 2255 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -65,6 +65,60 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 -->
 
 
+<h4>Test89</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-05-31 2255 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test88</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-40</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test89.exe.bz2">XWin-Test89.exe.bz2</a>
+(1208 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030531-2255.tar.bz2">xwin-20030531-2255.tar.bz2</a>
+(116 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Test88
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test88-to-Test89.diff">xwin-Test88-to-Test89.diff</a>
+(6 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winmultiwindowwindow.c/winTopLevelWindowProc() - Rework the mouse
+polling timer so that it is attached to the root-level window.  This
+prevents multiple mouse polling timers from being created, which was
+happening in the old versions.  Introduce a new way of determining
+that the timer should be created or deleted, which will hopefully fix
+some corner cases where the timer was not being created.  (Harold L
+Hunt II)</li>
+
+<li>XWin.rc - Remove a couple of window style flags that were not
+compatible with Earle's patch for removing the minimize and maximize
+buttons from the dialog boxes.  (Earle F. Philhower III)</li>
+
+<li>XWin.rc - Make ``x'' and ``C'' hotkeys for the Exit Confirmation
+dialog box.  (Colin Harrison, Biju G C)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Test88</h4>
 <table>
 <tbody>
@@ -73,7 +127,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 
 <tr><td>Committed to XFree86 CVS: not yet</td></tr>
 
-<tr><td>Basis: Test86</td></tr>
+<tr><td>Basis: Test87</td></tr>
 
 <tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-39</td></tr>
 
