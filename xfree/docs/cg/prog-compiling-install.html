@@ -1,0 +1,454 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Installing a local build</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.61
+"/><LINK
+REL="HOME"
+TITLE="Cygwin/XFree86 Contributer's Guide"
+HREF="cygwin-xfree-cg.html"/><LINK
+REL="UP"
+TITLE="Programming"
+HREF="programming.html"/><LINK
+REL="PREVIOUS"
+TITLE="Compiling the Source Code"
+HREF="prog-compiling.html"/><LINK
+REL="NEXT"
+TITLE="Keeping your source code tree updated"
+HREF="prog-tree-update.html"/></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin/XFree86 Contributer's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="prog-compiling.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Programming</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="prog-tree-update.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="prog-compiling-install"
+>Installing a local build</A
+></H1
+><P
+>Installing a local build enables you to verify that a build of
+the entire source tree is operational.  It is wise to verify the
+operation of full builds of the source tree from time to time, as full
+builds will occasionally be broken by changes that other developers
+are making to the XFree86 source code tree.</P
+><P
+>Installing a local build on top of an existing build is not a
+good idea, as this can mask problems that occured during the build
+process, or it can cause problems that are unrelated to the build
+process; either situation is undesireable.  It is generally a good
+idea to move your old installation out of the way before installing a
+local build, and these instructions will assume that you desire to do
+so.  Follow the instructions below to install a local build:</P
+><OL
+TYPE="1"
+><LI
+><P
+>Move the <TT
+CLASS="filename"
+>/etc/X11</TT
+>
+directory to <TT
+CLASS="filename"
+>/etc/X11_<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>_<TT
+CLASS="replaceable"
+><I
+>date</I
+></TT
+>_<TT
+CLASS="replaceable"
+><I
+>time</I
+></TT
+></TT
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~
+$ mv /etc/X11 /etc/X11_<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>_<TT
+CLASS="replaceable"
+><I
+>date</I
+></TT
+>_<TT
+CLASS="replaceable"
+><I
+>time</I
+></TT
+>
+
+Harold@MyWindowsHost ~
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Move the <TT
+CLASS="filename"
+>/usr/X11R6</TT
+>
+diretory to <TT
+CLASS="filename"
+>/usr/X11R6_<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>_<TT
+CLASS="replaceable"
+><I
+>date</I
+></TT
+>_<TT
+CLASS="replaceable"
+><I
+>time</I
+></TT
+></TT
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~
+$ mv /usr/X11R6 /usr/X11R6_<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>_<TT
+CLASS="replaceable"
+><I
+>date</I
+></TT
+>_<TT
+CLASS="replaceable"
+><I
+>time</I
+></TT
+>
+
+Harold@MyWindowsHost ~
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Change the current directory to your desired XFree86 build
+directory:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~
+$ cd ~/x-devel/build/<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>
+
+Harold@MyWindowsHost ~/x-devel/build/<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Make the <TT
+CLASS="userinput"
+><B
+>install</B
+></TT
+> target, which installs
+binaries, fonts, libraries, and configuration files; in short,
+<TT
+CLASS="userinput"
+><B
+>install</B
+></TT
+> installs everything except the
+<B
+CLASS="command"
+>man</B
+> pages:</P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>As of 2001-06-12, the <TT
+CLASS="userinput"
+><B
+>install</B
+></TT
+> target
+copies 5,074 files in 83 folders into <TT
+CLASS="filename"
+>/usr/X11R6</TT
+>, requiring 89.2 MB of storage
+space for a standard build or 177 MB of storage space for a debug
+build, and 276 files in 39 folders into <TT
+CLASS="filename"
+>/etc/X11</TT
+>, requiring 2.57 MB of storage
+space.  All stated storage requirements are for a file system using 4
+KB allocation units.</P
+><P
+>As a benchmark, <TT
+CLASS="userinput"
+><B
+>install</B
+></TT
+> runs for 20
+minutes on a machine with a 1.2 GHz Atlhon, 256 MB DDR RAM, and a 7200
+RPM ATA/100 HD.  Standard and debug installs both complete in the
+stated time.</P
+></BLOCKQUOTE
+></DIV
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~/x-devel/build/<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>
+$ make install &gt; install.log 2&gt;&amp;1
+
+Harold@MyWindowsHost ~/x-devel/build/<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Make the <TT
+CLASS="userinput"
+><B
+>install.man</B
+></TT
+> target, which only
+installs the <B
+CLASS="command"
+>man</B
+> pages:</P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>As of 2001-06-12, the <TT
+CLASS="userinput"
+><B
+>install.man</B
+></TT
+> target
+copies 541 files in 3 folders into <TT
+CLASS="filename"
+>/usr/X11R6/man</TT
+>, requiring 4.22 MB of
+storage space, and 544 files in 1 folder into <TT
+CLASS="filename"
+>/usr/X11R6/lib/X11/doc</TT
+>, requiring 4.76 MB
+of storage space.  All stated storage requirements are for a file
+system using 4 KB allocation units.</P
+><P
+>As a benchmark, <TT
+CLASS="userinput"
+><B
+>install.man</B
+></TT
+> runs for 2
+minutes on a machine with a 1.2 GHz Atlhon, 256 MB DDR RAM, and a 7200
+RPM ATA/100 HD.</P
+></BLOCKQUOTE
+></DIV
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~/x-devel/build/<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>
+$ make install.man &gt; install.man.log 2&gt;&amp;1
+
+Harold@MyWindowsHost ~/x-devel/build/<TT
+CLASS="replaceable"
+><I
+>build-prefix</I
+></TT
+>
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+></OL
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="prog-compiling.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-xfree-cg.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="prog-tree-update.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Compiling the Source Code</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="programming.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Keeping your source code tree updated</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
