@@ -1,18 +1,17 @@
 
-Cygwin/X Frequently Asked Questions
-
-Harold L Hunt, II
+Cygwin/X Frequently Asked QuestionsHarold L Hunt, II
+  _______________________________________________________________________
 
    Table of Contents
    [1]Questions and Answers
    [2]Bibliography
    [3]Glossary
    A. [4]GNU Free Documentation License
-          
+
 Questions and Answers
 
    1. [5]General Information
-          
+
         1.1. [6]What is Cygwin/X?
         1.2. [7]What is Cygwin?
         1.3. [8]What is the X Window System?
@@ -21,184 +20,196 @@ Questions and Answers
         1.6. [11]Why port the X Window System to Microsoft Windows?
         1.7. [12]Is there a Cygwin/X newsgroup?
         1.8. [13]Is there a Cygwin/X mailing list?
-                
+
    2. [14]Installation
-          
+
         2.1. [15]What versions of Windows does Cygwin/X run on?
         2.2. [16]How is Cygwin/X installed?
-                
+
    3. [17]Configuration
-          
+
         3.1. [18]Is there an XF86Config file?
         3.2. [19]What are the command line arguments for XWin.exe?
         3.3. [20]Why does XWin.exe ignore the display depth that I pass
                 on the command line?
-                
+
         3.4. [21]I have a two button mouse, can I emulate a three button
                 mouse?
-                
+
         3.5. [22]Is there a Focus-Follows-Mouse feature (Auto-Focus)?
         3.6. [23]The option -nounixkill has no effect. How can i prevent
                 the server shutdown an Ctrl-Alt-BackSpace?
-                
+
    4. [24]Internationalization
-          
+
         4.1. [25]Keyboard support
-                
+
               4.1.1. [26]How do I use a non-U.S. keyboard layout?
               4.1.2. [27]Where can I find an xmodmap for my non-U.S.
                       keyboard layout?
-                      
+
               4.1.3. [28]How do I get my non-U.S. keyboard modmap to be
                       installed when using xdmcp?
-                      
+
               4.1.4. [29]Logging into AIX via XDMCP causes the keyboard
                       to function as if AltGr is permanently pressed.
-                      
+
               4.1.5. [30]Loading XKB keymaps fails
               4.1.6. [31]I have Windows XP with Powertoys installed and
                       AltGr does not work. What can I do?
-                      
+
               4.1.7. [32]AltGr does not work properly when connecting to
                       other unices or to old XFree86.
-                      
+
         4.2. [33]Display problems
-                
+
               4.2.1. [34]How do I get bash to display accents and/or
                       umlauts?
-                      
+
               4.2.2. [35]How do I put bash into "8 bit" mode?
-                      
+
    5. [36]Remote connections
-          
+
         5.1. [37]X11Forwarding does not work with OpenSSH under Cygwin
-                
+
    6. [38]XDMCP connections
-          
+
         6.1. [39]XDMCP fatal error: Session declined No valid address
         6.2. [40]I get no login screen when using -query
         6.3. [41]I get no login screen for Solaris
         6.4. [42]XDMCP freezes with remote Solaris machine!
         6.5. [43]Login to CDE on Solaris via XDMCP hangs Cygwin/X.
         6.6. [44]Where can I find more information about XDMCP.
-                
+
    7. [45]Troubleshooting
-          
+
         7.1. [46]Is there a log file that I can look at for diagnostic
                 information and error messages?
-                
+
         7.2. [47]I have a specific error message, what does it mean?
         7.3. [48]I have a specific error message that is not addressed in
                 the Error and Warning Messages section.
-                
+
         7.4. [49]My bug report the Cygwin/X mailing list was ignored.
                 What do I do now?
-                
-        7.5. [50]Cygwin/X has very poor performance. What's the reason?
-        7.6. [51]I have Microsoft Services for Unix installed and can't
+
+        7.5. [50]Why does Cygwin/X freeze right after startup?
+        7.6. [51]Cygwin/X has very poor performance. What's the reason?
+        7.7. [52]I have Microsoft Services for Unix installed and can't
                 type anything. Help me!!!
-                
-        7.7. [52]Cygwin/X is extremely slow, especially when using XDMCP
+
+        7.8. [53]Cygwin/X is extremely slow, especially when using XDMCP
                 to connect to remote machines.
-                
-   8. [53]Error and Warning Messages
-          
-        8.1. [54]IBM ThinkPad's with a TrackPoint mouse doesn't allow
+
+        7.9. [54]IBM ThinkPad's with a TrackPoint mouse doesn't allow
                 simulated mouse wheel scrolling.
-                
-        8.2. [55]_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set
+
+        7.10. [55]Why is the root window not shown in normal mode?
+        7.11. [56]Why is the cross the default cursor in multiwindow
+                mode?
+
+        7.12. [57]How can I adjust the linewidth in bash after resizing
+                XTerm?
+
+        7.13. [58]Why do some menus not work if Num-Lock is on?
+
+   8. [59]Error and Warning Messages
+
+        8.1. [60]_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set
                 to root
-                
-        8.3. [56]error opening security policy file
+
+        8.2. [61]error opening security policy file
                 /usr/X11R6/lib/X11/xserver/SecurityPolicy
-                
-        8.4. [57]Fatal server error: could not open default font 'fixed'
-        8.5. [58]Could not init font path element
+
+        8.3. [62]Duplicate invocation on display number: 0. Exiting.
+        8.4. [63]Fatal server error: could not open default font 'fixed'
+        8.5. [64]Could not init font path element
                 /usr/X11R6/lib/X11/fonts/*/, removing from list!
-                
-        8.6. [59]The procedure entry point _check_for_executable could
+
+        8.6. [65]The procedure entry point _check_for_executable could
                 not be located
-                
-        8.7. [60]Exception: STATUS_ACCESS_VIOLATION
-        8.8. [61]Xlib: connection to "local_host_name_or_ip_address:0.0"
+
+        8.7. [66]cygX11-6.dll not found after installation or upgrade
+        8.8. [67]Exception: STATUS_ACCESS_VIOLATION
+        8.9. [68]Xlib: connection to "local_host_name_or_ip_address:0.0"
                 refused by server Xlib: Maximum number of clients reached
-                
-        8.9. [62]XIO: fatal IO error 104 (Connection reset by peer) on X
+
+        8.10. [69]XIO: fatal IO error 104 (Connection reset by peer) on X
                 server "127.0.0.1:0.0"
-                
-        8.10. [63]Cannot Open Display: 127.0.0.1:0.0
-        8.11. [64]Out of environment space
-        8.12. [65]Too many parameters
-                
-   9. [66]Porting Software
-          
-        9.1. [67]Is there a list of software that has been ported to
+
+        8.11. [70]Cannot Open Display: 127.0.0.1:0.0
+        8.12. [71]Out of environment space
+        8.13. [72]Too many parameters
+
+   9. [73]Porting Software
+
+        9.1. [74]Is there a list of software that has been ported to
                 Cygwin/X?
-                
-        9.2. [68]How do I start porting software to Cygwin/X?
-        9.3. [69]Are there common problems encountered when porting
+
+        9.2. [75]How do I start porting software to Cygwin/X?
+        9.3. [76]Are there common problems encountered when porting
                 software to Cygwin/X?
-                
-   10. [70]Contributing
-          
-        10.1. [71]Are there step-by-step instructions for contributing to
+
+   10. [77]Contributing
+
+        10.1. [78]Are there step-by-step instructions for contributing to
                 Cygwin/X?
-                
-        10.2. [72]Are there editors for Windows that understand and
+
+        10.2. [79]Are there editors for Windows that understand and
                 preserve UNIX end of line characters?
-                
-        10.3. [73]How should I generate patches for Cygwin/X?
-        10.4. [74]Where do I submit patches for Cygwin/X?
-        10.5. [75]Why doesn't the X Window System use GNU's autoconf?
-        10.6. [76]What compiler does Cygwin/X use, and which compilers
+
+        10.3. [80]How should I generate patches for Cygwin/X?
+        10.4. [81]Where do I submit patches for Cygwin/X?
+        10.5. [82]Why doesn't the X Window System use GNU's autoconf?
+        10.6. [83]What compiler does Cygwin/X use, and which compilers
                 are supported?
-                
-        10.7. [77]Is cross-compiling from a non-Cygwin platform
+
+        10.7. [84]Is cross-compiling from a non-Cygwin platform
                 supported?
-                
-        10.8. [78]Where can I get help for installing DocBook on Cygwin?
-                
-   11. [79]Licenses, Patents, Trademarks, and Copyrights
-          
-        11.1. [80]What licenses apply to Cygwin/X source code?
-        11.2. [81]What licenses apply to the X Window System source code?
-        11.3. [82]What license applies to Cygwin source code?
-        11.4. [83]Whom holds the copyright on the Cygwin/X source code?
-        11.5. [84]Whom holds the copyright on the X Window System source
+
+        10.8. [85]Where can I get help for installing DocBook on Cygwin?
+
+   11. [86]Licenses, Patents, Trademarks, and Copyrights
+
+        11.1. [87]What licenses apply to Cygwin/X source code?
+        11.2. [88]What licenses apply to the X Window System source code?
+        11.3. [89]What license applies to Cygwin source code?
+        11.4. [90]Whom holds the copyright on the Cygwin/X source code?
+        11.5. [91]Whom holds the copyright on the X Window System source
                 code?
-                
-        11.6. [85]Whom holds the copyright on the Cygwin source code?
-        11.7. [86]What license applies to Motif?
-        11.8. [87]Isn't "XWin" trademarked by StarNet Communications?
-                
+
+        11.6. [92]Whom holds the copyright on the Cygwin source code?
+        11.7. [93]What license applies to Motif?
+        11.8. [94]Isn't "XWin" trademarked by StarNet Communications?
+
 1. General Information
 
    1.1. What is Cygwin/X?
-   
+
    Cygwin/X is a port of the X Window System to Cygwin; Cygwin provides a
    UNIX-like API on the Win32 platform.
-   
+
    1.2. What is Cygwin?
-   
-   Cygwin tools are, in the words of the [88]Cygwin homepage, "ports of
+
+   Cygwin tools are, in the words of the [95]Cygwin homepage, "ports of
    the popular GNU development tools and utilities for Windows 95, 98,
    and NT. They function by using the Cygwin library which provides a
    UNIX-like API on top of the Win32 API." Cygwin provides the compiler
    (gcc), libraries, headers, and other utilities which build and support
    the operation of Cygwin/X.
-   
+
    1.3. What is the X Window System?
-   
+
    [ScheiflerGettys92]
-   
+
    The X Window System, or X, is a network-transparent window system.
    With X, multiple applications can run simultaneously in windows,
    generating text and graphics in monochrome or color on a bitmap
    display. Network transparency means that application programs can run
    on machines scattered through the network.
-   
+
    1.4. What is an X Server?
-   
+
    An X Server is a program that provides display and user input services
    to other programs. In comparison, a file server provides other
    programs with access to file storage devices. File servers are
@@ -207,16 +218,16 @@ Questions and Answers
    X Server is typically running on the machine that you are located at;
    display and user input services may be requested by programs running
    on your machine, as well as by programs running on remote machines.
-   
+
    1.5. What is an X client?
-   
+
    An X client is a program that utilizes the display and user input
    services provided by an X Server. X clients may run on the same or
    disparate machine as the X Server that is providing display and user
    input services.
-   
+
    1.6. Why port the X Window System to Microsoft Windows?
-   
+
    Porting X Window System to Microsoft Windows benefits many people and
    projects in many ways:
      * Prior to Cygwin/X only commercial, closed source X Servers were
@@ -226,58 +237,58 @@ Questions and Answers
      * Cygwin/X, in conjunction with Cygwin, provides a complete
        compatibility layer for compiling and running UNIX applications on
        Microsoft Windows.
-       
+
    1.7. Is there a Cygwin/X newsgroup?
-   
+
    No, Cygwin/X does not have a newsgroup; however, we do have a mailing
-   list. See [89]Q: 1.8.
-   
+   list. See [96]Q: 1.8.
+
    1.8. Is there a Cygwin/X mailing list?
-   
+
    Yes, Cygwin/X has a mailing list, namely, cygwin-xfree@cygwin.com.
-   Visit the [90]Cygwin Mailing Lists page to subscribe to
+   Visit the [97]Cygwin Mailing Lists page to subscribe to
    cygwin-xfree@cygwin.com as well as to read and search an online
    archive of the mailing list traffic.
-   
+
      Tip: Post your X-related inquires to cygwin-xfree@cygwin.com only;
      do not post nor cross post your inquires to the cygwin@cygwin.com
      mailing list. Cygwin's mailing list is only for Cygwin API related
      inquires that are not handled by another more-specific list.
-     
+
 2. Installation
 
    2.1. What versions of Windows does Cygwin/X run on?
-   
+
    Cygwin/X supports Windows 95, Windows 98, Windows Me, Windows NT 4.0,
    Windows 2000, Windows XP, and Windows Server 2003 as of 2003-12-29.
-   
+
    Cygwin/X requires Cygwin to compile and run. Cygwin is not, as of
    2003-12-29, available on Microsoft Windows CE, therefore Cygwin/X is
    not currently available on Microsoft Windows CE.
-   
+
    2.2. How is Cygwin/X installed?
-   
-   The [91]Cygwin/X User's Guide thoroughly documents the installation
+
+   The [98]Cygwin/X User's Guide thoroughly documents the installation
    process. Installation is performed through Cygwin's setup.exe program.
-   
+
 3. Configuration
 
    3.1. Is there an XF86Config file?
-   
+
    The configfile support was only limited. Because of this and extra
    dependencies it was removed again. But most of the options which were
    configurable in the configfile are now available as commandline
    options. For more information on configuring other keyboard layout see
-   [92]Q: 4.1.1.
-   
+   [99]Q: 4.1.1.
+
    3.2. What are the command line arguments for XWin.exe?
-   
-   The [93]Cygwin/X User's Guide documents the command line arguments for
-   XWin.exe.
-   
+
+   The [100]Cygwin/X User's Guide documents the command line arguments
+   for XWin.exe.
+
    3.3. Why does XWin.exe ignore the display depth that I pass on the
    command line?
-   
+
    When running in windowed mode or GDI-based fullscreen mode, XWin.exe
    must run the X Server at whatever display depth Windows is currently
    using; in these cases the display depth passed on the command line is
@@ -285,125 +296,136 @@ Questions and Answers
    in a DirectDraw-based fullscreen mode, as DirectDraw allows
    applications to change the display resolution and depth when running
    in fullscreen mode.
-   
+
    3.4. I have a two button mouse, can I emulate a three button mouse?
-   
+
    Yes. Pass the -emulate3buttons timeout_in_milliseconds parameter to
    XWin.exe, where timeout_in_milliseconds is the, optional, maximum
    number of milliseconds between a button release and opposite button
    press that will trigger an emulated third button press.
-   
+
    3.5. Is there a Focus-Follows-Mouse feature (Auto-Focus)?
-   
+
    This is a setting of the windowmanager used. The default windowmanager
    twm has no such feature. But with fvwm2 this can be achieved with the
    this configuration entry:
-Focus FocusFollowsMouse
+   Focus FocusFollowsMouse
 
    Other windowmanagers (eg. windowmaker) have similar features too.
-   
+
    3.6. The option -nounixkill has no effect. How can i prevent the
    server shutdown an Ctrl-Alt-BackSpace?
-   
+
    There is a keybinding to Ctrl-Alt-BackSpace which is named
    TerminateServer. Remove this binding and Ctrl-Alt-BackSpace will have
    no effect.
-xmodmap -e "keycode 22 = BackSpace"
+   xmodmap -e "keycode 22 = BackSpace"
 
 4. Internationalization
 
 4.1. Keyboard support
 
    4.1.1. How do I use a non-U.S. keyboard layout?
-   
+
    Some keyboard layouts are configured according to the Windows keyboard
    settings. For these layouts no special change is needed. For all other
    layouts there is the possibility to configure the layout via
    commandline options.
-   
+
    The mainoption for changing the layout is -xkblayout countrycode where
    countrycode is in most cases the 2 character code which also
    represents the country in internet adresses (e.g. Australia = au,
    Deutschland = de, France = fr, Japan = jp, United Kingdom = uk).
-   
+
    Other options for tweaking the XKB layout are -xkbmodel,-xkbvariant,
    -xkboptions and -xkbrules. These are the counterparts for the similar
    named options known from the XF86Config file.
-   
-   If the loading fails, check [94]Q: 4.1.5.
-   
+
+   If the loading fails, check [101]Q: 4.1.5.
+
+   If your keyboard layout is not automaticly detected you can send the
+   required information for inluding it to cygwin-xfree@cygwin.com.
+   Please include the following information in your mail:
+     * The windows keyboard layout code and the layout name
+       You will find it in /tmp/XWin.log in lines similar to these:
+
+(--) winConfigKeyboard - Layout: "00001809" (00001809)
+(EE) Keyboardlayout "Irish" (00001809) is unknown
+
+     * The XKB country code for this layout if you known it.
+
    4.1.2. Where can I find an xmodmap for my non-U.S. keyboard layout?
-   
+
    You can try using an xmodmap file for your keyboard layout from a
    GNU/Linux distribution (e.g. RedHat).
-   
+
    Or, you can use xkeycaps to automatically generate a modmap for one of
-   over 208 different layouts. See the [95]xkeycaps home page to download
-   and for more information.
-   
+   over 208 different layouts. See the [102]xkeycaps home page to
+   download and for more information.
+
    4.1.3. How do I get my non-U.S. keyboard modmap to be installed when
    using xdmcp?
-   
-   See [96]Q: 4.1.1.
-   
+
+   See [103]Q: 4.1.1.
+
    4.1.4. Logging into AIX via XDMCP causes the keyboard to function as
    if AltGr is permanently pressed.
-   
+
    [Pavel Rybnicek] The X Keyboard Extension doesn't work with AIX. The X
    Keyboard Extension is enabled by default, so you must disable it with
    the -kb parameter. An example command line follows.
-   
+
    XWin.exe -kb -query aix_hostname_or_ip_address
-   
+
    4.1.5. Loading XKB keymaps fails
-   
+
    First check if you are able to change the server to another layout via
    XKB. The german layout will be good for testing:
-setxkbmap de -model pc105
+   setxkbmap de -model pc105
 
    This worked if pressing "Shift" and "8" produces "(" instead of "*".
    If it worked then you can skip the next paragraph.
-   
+
    There is currently a problem with the /tmp directory mounted in
    textmode. You can change the setting to binmode with:
-mount -b "$(cygpath -m /tmp)" /tmp
+   mount -b "$(cygpath -m /tmp)" /tmp
 
    If this fails with an errormessage stating unsufficient rights, try
-mount -b -u "$(cygpath -m /tmp)" /tmp
+   mount -b -u "$(cygpath -m /tmp)" /tmp
 
    Not all keyboard layouts are tested very well and some contain errors
    or do not work at all. To test if the compiling of your layout works
    start
-xkbcomp -w 3 -xkm -m de /etc/X11/xkb/keymap/xfree86 localhost:0.0
+   xkbcomp -w 3 -xkm -m de /etc/X11/xkb/keymap/xfree86 localhost:0.0
 
    (replace the "de" with your layout code). This may produce warnings,
    but must not produce errors. If there are errors then please report
    them to the mailinglist.
-   
+
    4.1.6. I have Windows XP with Powertoys installed and AltGr does not
    work. What can I do?
-   
+
    This problem is solved in recent Cygwin/X releases. Use cygwin setup
-   to upgrade the XFree86-xserv package.
-   
+   to upgrade the xorg-x11-xwin package.
+
    4.1.7. AltGr does not work properly when connecting to other unices or
    to old XFree86.
-   
+
    The older X11 releases on the various commercial unices define the
    AltGr key as ModeSwitch, MetaR, AltR or similar. Cygwin/X expects it
    to be ISO_Level3_Switch. For reasons unknown to us this is reset when
    loggin into the remote host. As far as we don't have access to such a
    machine we are unable to track this down and find a reason.
-   
-   Sometimes it does help to run
-DISPLAY=:0.0 setxkbmap languagecode
 
-   from a cygwin shell. For more information see [97]Q: 4.1.1..
-   
+   Sometimes it does help to run
+   DISPLAY=:0.0 setxkbmap languagecode
+
+   from a cygwin shell. For more information see [104]Q: 4.1.1..
+
 4.2. Display problems
 
    4.2.1. How do I get bash to display accents and/or umlauts?
-   
+
    (Heinz Peter Hippenstiel) Add the following lines to .inputrc in your
    Cygwin home directory (e.g. /home/harold/):
 set meta-flag on
@@ -421,15 +443,15 @@ set convert-meta off # to show it as character, not the octal representation
 # (TODO: Mapping for accents?)
 
    4.2.2. How do I put bash into "8 bit" mode?
-   
-   See [98]Q: 4.2.1.
-   
+
+   See [105]Q: 4.2.1.
+
 5. Remote connections
 
    5.1. X11Forwarding does not work with OpenSSH under Cygwin
-   
+
    A1:
-   
+
    OpenSSH 3.8 enables untrusted X11 forwarding by default when
    connecting to an ssh server that supports untrusted X11 forwarding.
    Most ssh servers for GNU/Linux are versions of OpenSSH that do support
@@ -439,13 +461,13 @@ set convert-meta off # to show it as character, not the octal representation
    applications are now killed when you try to copy and paste or if
    xdpyinfo returns only a fraction of the supported extensions that it
    does if run locally.
-   
+
    It is easiest to just override untrusted X11 forwarding by passing -Y
    to ssh in place of -X. The -Y does the same thing as -X, but it
    enables trusted X11 forwarding for the current connection.
-   
+
    A2:
-   
+
    Before establishing the ssh connection the xserver must be started and
    the environment variable DISPLAY must be set for ssh.
 $ DISPLAY=localhost:0.0
@@ -453,32 +475,32 @@ $ export DISPLAY
 $ ssh -Y remotehost
 
    or
-$ DISPLAY=localhost:0.0 ssh -Y remotehost
+   $ DISPLAY=localhost:0.0 ssh -Y remotehost
 
    The parameter -Y enables trusted X11 Forwarding. This is available
    since OpenSSH 3.8. If you have an older version of ssh you will have
    to use -X.
-   
+
    A3:
-   
+
    Make sure you're not starting ssh with the parameter -x (lowercase).
-   This disables [99]X11Forwarding.
-   
+   This disables [106]X11Forwarding.
+
    A4:
-   
+
    Check that X11Forwarding is not disabled in the openssh client
    configuration.
-   
+
    The configfiles are by default ~/.ssh/config and /etc/ssh_config. The
    file in the home directory overrides settings in the global one.
-   
+
    The configfile is split into various sections starting with "Host
    wildcard". The section applies to all hosts where wildcard matches the
    hostname.
-   
+
    If this section contains an entry "ForwardX11 no" then X11Forwarding
    is disabled. To enable it change the entry to:
-ForwardX11 yes
+   ForwardX11 yes
 
    Starting with OpenSSH 3.8 you will need the switch "ForwardX11Trusted
    yes" in the client configuration to allow remote clients full access
@@ -491,37 +513,37 @@ ForwardX11 yes
   Current serial number in output stream: 372
 
    The commandline switch -Y does the same.
-   
+
    A5:
-   
+
    Check that X11Forwarding is not disabled in the ssh server
    configuration.
-   
+
    The configfile is by default /etc/ssh/ssh_config. If there is an entry
    "X11Forwarding no" then X11Forwarding is disabled.
-   
+
    If you have write access to the config file then change it to
-X11Forwarding yes
+   X11Forwarding yes
 
    Otherwise ask your you admin to change this for you.
-   
+
 6. XDMCP connections
 
    6.1. XDMCP fatal error: Session declined No valid address
-   
+
    Cygwin/X is sometimes unable to determine which local network
-   interface's address should be reported to the [100]XDMCP server; in
+   interface's address should be reported to the [107]XDMCP server; in
    these cases you need to pass -from local_host_name_or_ip_address to
    XWin.exe to specify which interface address to report.
-   
+
    6.2. I get no login screen when using -query
-   
+
    [Mika Laitio] For security reasons, XDMCP is not enabled by default on
    most Linux/UNIX/*NIX/*BSD distributions (RedHat, Mandrake, SuSE,
    FreeBSD, NetBSD, etc.) by default. You have to manually enable remote
    logins to your X Display Manager (xdm, kdm, or gdm). The location of
    the proper config file is distribution/OS dependent, but a short list
-   of known config file locations is given in [101]Table 1. You must
+   of known config file locations is given in [108]Table 1. You must
    change the line:
 [Xdmcp]
 Enable=false
@@ -531,30 +553,29 @@ Enable=false
 Enable=true
 
    Table 1. Known XDM Configuration File Locations
-   Distribution/OS Version Display Manager Location
-   Linux Mandrake 8.1 kdm /usr/share/config/kdm/kdmrc
-   Debian GNU/Linux Unstable kdm /etc/kde3/kdm/kdmrc
-   Debian GNU/Linux Unstable gdm /etc/X11/gdm/gdm.conf
-   
+   Distribution/OS  Version  Display Manager Location
+   Linux Mandrake   8.1      kdm             /usr/share/config/kdm/kdmrc
+   Debian GNU/Linux Unstable kdm             /etc/kde3/kdm/kdmrc
+   Debian GNU/Linux Unstable gdm             /etc/X11/gdm/gdm.conf
+
    XDMCP will not work correctly if you have a personal firewall
    installed or the built-in firewall of Windows is activated.
-   
+
    The XDMCP protocol will send and receive data on port 177/UDP. But the
    actual connections will be made to the local port 6000/TCP. It is safe
    to allow connections since the xserver has an own security layer. An
-   overview of used ports is given in [102]Table 2.
-   
+   overview of used ports is given in [109]Table 2.
+
    Table 2. Ports used with XDMCP connections
-   
    Port Protocol Direction Comment
    177 UDP Incoming/Outgoing Actual XDMCP connection
    6000+display TCP Incoming Connection for X11 clients. display is
    usally 0 except you specify it on the commandline.
-   
+
    6.3. I get no login screen for Solaris
-   
-   See also [103]Q: 6.4. and [104]Q: 6.5.
-   
+
+   See also [110]Q: 6.4. and [111]Q: 6.5.
+
    [David Dawson] For whatever reason, certain versions of Solaris need
    fonts that are not provided by Cygwin/X; the result is that you may
    see the Solaris background tile and the hourglass cursor, but the XDM
@@ -562,75 +583,75 @@ Enable=true
    Cygwin/X at the font server that is usually running on the Solaris
    machine. You'll need a command line similar to the following to start
    your XDMCP session and to connect to the Solaris font server:
-   
+
    XWin.exe -query solaris_hostname_or_ip_address -fp
    tcp/solaris_hostname_or_ip_address:7100
-   
+
      Note: The -fp parameter is a general X Server parameter, it is not
      specific to Cygwin/X; therefore, the -fp is documented in the
-     [105]X Server manual page. For additional information about fonts,
-     see [106]Fonts in X11R6.7.
-     
+     [112]X Server manual page. For additional information about fonts,
+     see [113]Fonts in X11R6.7.
+
    The standard port number for a font server is 7100, however, you may
    need to ask your system administrator what the font server port number
    is if you cannot connect to a font server on port 7100. It is also
    possible that your Solaris machine is not running a font server, in
    which case you will need to consult your Solaris documentation for
    instructions on how to run a font server.
-   
+
    6.4. XDMCP freezes with remote Solaris machine!
-   
-   See also [107]Q: 6.3. and [108]Q: 6.5.
-   
+
+   See also [114]Q: 6.3. and [115]Q: 6.5.
+
    Solaris appears to not support certain display bit depths, such as 24
    bits per pixel. Change your Windows display bit depth to 8, 16, or 32
    and try logging in again. File a complaint with Sun if this issue is
    important to you, or change your Solaris machines to use XFree86
    instead of the Solaris X Window System.
-   
+
    6.5. Login to CDE on Solaris via XDMCP hangs Cygwin/X.
-   
-   See also [109]Q: 6.3. and [110]Q: 6.4.
-   
-   Install the [111]recommended set of patches for your version of
+
+   See also [116]Q: 6.3. and [117]Q: 6.4.
+
+   Install the [118]recommended set of patches for your version of
    Solaris.
-   
+
    6.6. Where can I find more information about XDMCP.
-   
-   See the [112]Linux XDMCP HOWTO for more information about XDMCP.
-   
+
+   See the [119]Linux XDMCP HOWTO for more information about XDMCP.
+
 7. Troubleshooting
 
    7.1. Is there a log file that I can look at for diagnostic information
    and error messages?
-   
+
    Yes. The Cygwin/X log file is located at /tmp/XWin.log. You will find
-   solutions to the most common error messages in [113]the Section called
+   solutions to the most common error messages in [120]the Section called
    Error and Warning Messages.
-   
+
    7.2. I have a specific error message, what does it mean?
-   
+
    See the Error and Warning Messages section for help with specific
    error messages. Return to this section if you do not find a specific
    answer for the error message that you have.
-   
+
    7.3. I have a specific error message that is not addressed in the
    Error and Warning Messages section.
-   
-   Search the [114]Cygwin/X mailing list archives to see if the error
+
+   Search the [121]Cygwin/X mailing list archives to see if the error
    message has already been reported and/or addressed. Report the error
-   message to the [115]Cygwin/X mailing list, how the error message was
+   message to the [122]Cygwin/X mailing list, how the error message was
    caused, and the behavior of the X Server after the error message was
    generated (exit, freeze, etc.), only if the error message has not been
    reported, if the circumstances that produced the error message are
    significantly different from other reports, or if you have additional
    information regarding the error message to contribute.
-   
+
    7.4. My bug report the Cygwin/X mailing list was ignored. What do I do
    now?
-   
+
    Some bug reports are deliberately ignored by project members if the
-   bug in question was recently dealt with; did you [116]search the
+   bug in question was recently dealt with; did you [123]search the
    mailing list archives for a solution to your problem before submitting
    your bug report? Some bug reports are ignored if they do not contain
    sufficient information to understand the situation that produces the
@@ -638,26 +659,47 @@ Enable=true
    missed or forgotten, thus some valid bug reports do not receive a
    reply; simply resubmit such bug reports that have not received a
    response within 7 days of submission.
-   
-   7.5. Cygwin/X has very poor performance. What's the reason?
-   
+
+   7.5. Why does Cygwin/X freeze right after startup?
+
+   Zone Alarm 5 is known to break Cygwin/X. As a result you'll see this
+   line (or a similar) as last output in /tmp/XWin.log
+Rules = "xorg" Model = "pc101" Layout = "us" Variant = "(null)" Options = "(nul
+l)"
+
+   Disabling Zone Alarm will not solve this problem. You can only
+   uninstall Zone Alarm 5 and switch to an earlier version (4.5 is known
+   to work) or use a different personal firewall.
+
+   Another reason is /tmp mounted in textmode. This does only happen with
+   the -multiwindow and -clipboard switches because of the extra threads
+   within Cygwin/X.
+
+   You can remount /tmp to binmode with these commands:
+   mount -b "$(cygpath -m /tmp)" /tmp
+
+   If this fails with an errormessage stating unsufficient rights, try
+   mount -b -u "$(cygpath -m /tmp)" /tmp
+
+   7.6. Cygwin/X has very poor performance. What's the reason?
+
    Most likely you have installed some kind of personal firewall, VPN
    software or any other software that modifies the TCP/IP stack of
    Windows. Especially Webwasher and some other filtering software are
    known to slow down the network traffic.
-   
+
    [Dr. Edward Wornar] Certain programs that are installed by various
    drivers and software packages can consume an incredible amount of
    system resources and processing time. One known example of such a
    program is ATI2evxx.exe, a utility installed with some ATI
-   Technologies graphics card drivers. [117]Answers That Work has
-   information on ATI2evxx.exe on their [118]Task List Programs - A page.
+   Technologies graphics card drivers. [124]Answers That Work has
+   information on ATI2evxx.exe on their [125]Task List Programs - A page.
    You may want to try disabling, one-by-one, ATI2evxx.exe and other such
    programs until you find the program that is causing the slowdown.
-   
-   7.6. I have Microsoft Services for Unix installed and can't type
+
+   7.7. I have Microsoft Services for Unix installed and can't type
    anything. Help me!!!
-   
+
    Microsoft Services for Unix set some environment variables which
    points Cygwin/X to outdated or not existing files. These variables are
 XAPPLRESDIR
@@ -666,19 +708,17 @@ XKEYSYMDB
 XNLSPATH
 
    To have Cygwin/X work correctly you have to unset at least XKEYSYMDB.
-   
-   Reported by Juan Medina, Pavel Rozenboim
-   
-   7.7. Cygwin/X is extremely slow, especially when using XDMCP to
-   connect to remote machines.
-   
-   see [119]Q: 7.5..
-   
-8. Error and Warning Messages
 
-   8.1. IBM ThinkPad's with a TrackPoint mouse doesn't allow simulated
+   Reported by Juan Medina, Pavel Rozenboim
+
+   7.8. Cygwin/X is extremely slow, especially when using XDMCP to
+   connect to remote machines.
+
+   see [126]Q: 7.6..
+
+   7.9. IBM ThinkPad's with a TrackPoint mouse doesn't allow simulated
    mouse wheel scrolling.
-   
+
    [Gerald S. Williams] The TrackPoint driver tries to send scroll
    up/down messages to the default scrollbar in a window. Cygwin/X does
    not use Windows scrollbars for X Client windows, so we must configure
@@ -691,18 +731,65 @@ XNLSPATH
 ; X Windows
 *,*,XWin.exe,*,*,Cygwin/X,WheelStd,0,9
 
-   8.2. _XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root
-   
+   7.10. Why is the root window not shown in normal mode?
+
+   This is a small problem with run.exe. If you start XWin.exe with
+   -nodecoration, -multiwindow or -fullscreen the window will come up
+   normally.
+
+   7.11. Why is the cross the default cursor in multiwindow mode?
+
+   To workaround this add the command
+   run xsetroot -cursor_name left_ptr -fg white -bg black
+
+   to startxwin.bat
+
+   7.12. How can I adjust the linewidth in bash after resizing XTerm?
+
+   Try starting resize.
+
+   7.13. Why do some menus not work if Num-Lock is on?
+
+   The problem are programs which treat Num-Lock as modifier similar to
+   Control. The programs expect a plain click but received some strange
+   Num-Lock-Click combination and can't associate this with the action
+   "open menu".
+
+8. Error and Warning Messages
+
+   8.1. _XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root
+
+   _XSERVTransmkdir: ERROR: euid != 0,directory /tmp/.X11-unix will not
+   be created
+
    This warning message can be ignored; it does not cause any known
    problems.
-   
-   8.3. error opening security policy file
+
+   8.2. error opening security policy file
    /usr/X11R6/lib/X11/xserver/SecurityPolicy
-   
+
    This error is harmless.
-   
+
+   8.3. Duplicate invocation on display number: 0. Exiting.
+
+   Most likely you have started XWin.exe twice with startxwin.bat or
+   startx or a similar script.
+
+   if you start multiple instances of XWin.exe you have to start to
+   number them
+
+XWin -query foo
+XWin :1 -query bar
+XWin :2 -query blubb
+
+   Specifying no number is the same as using :0
+
+   If you want another terminal window (which in fact is just a
+   convenient side effect of running startxwin.bat) you should do this by
+   starting xterm from the cygwin shell or from the startmenu entries.
+
    8.4. Fatal server error: could not open default font 'fixed'
-   
+
    This error occurs for one of two reasons:
     1. You do not have the xorg-x11-fnts package installed. This is
        rarely the problem; but in the event that it is the problem, just
@@ -716,7 +803,7 @@ XNLSPATH
        mount point is not pointing to a valid folder on your system, or
        if there are not about 400 files in the misc/ subdirectory of that
        folder on your system.
-       
+
      Note: You cannot reliably fix this problem by deleting your Cygwin
      installation and reinstalling it. The mount points that Cygwin was
      using will be left in your system settings and the invalid mount
@@ -739,29 +826,38 @@ XNLSPATH
             were previously untarred into an invalid location; removing
             the mount point for the fonts directory should result in the
             files being untarred to a valid location.
-       
+
    8.5. Could not init font path element /usr/X11R6/lib/X11/fonts/*/,
    removing from list!
-   
+
    These warnings are generally harmless since they indicate that default
    search paths for fonts do not actually contain fonts; this is only a
    problem if the misc path does not contain fonts and/or all of the
    paths do not contain fonts. For example, this message is generally
    useless if it only notifies you that /usr/X11R6/lib/X11/fonts/100dpi
    (optional 100 dpi fonts) is being removed.
-   
+
    If you are getting these message and the X Server is also failing to
-   start, then see [120]Q: 8.4. for information on how to fix your fonts.
-   
+   start, then see [127]Q: 8.4. for information on how to fix your fonts.
+
    8.6. The procedure entry point _check_for_executable could not be
    located
-   
+
    Programs that you are attempting to use were compiled against a newer
    version of Cygwin than is currently on your system. Run Cygwin's setup
    program to update your installation to the latest version.
-   
-   8.7. Exception: STATUS_ACCESS_VIOLATION
-   
+
+   8.7. cygX11-6.dll not found after installation or upgrade
+
+   Reinstall the xorg-x11-bin-dlls package. Make sure not to reinstall
+   any XFree-* packages.
+
+   Check if /usr/X11R6/bin/cygX11-6.dll does exist.
+
+   Check if $PATH contains /usr/X11R6/bin.
+
+   8.8. Exception: STATUS_ACCESS_VIOLATION
+
    cygwin1.dll uses a shared memory section amongst all loaded copies of
    cygwin1.dll; unfortunately, the layout and usage of the shared memory
    section changes between versions of cygwin1.dll. Loading two different
@@ -774,29 +870,29 @@ XNLSPATH
    the local directory before searching other paths; thus, it is rather
    easy, and common, for multiple versions of cygwin1.dll to become
    loaded at the same time if they exist on a particular system.
-   
-   8.8. Xlib: connection to "local_host_name_or_ip_address:0.0" refused
+
+   8.9. Xlib: connection to "local_host_name_or_ip_address:0.0" refused
    by server Xlib: Maximum number of clients reached
-   
+
    Cygwin/X queries getdtablesize () for the maximum number of client
    connections allowed; by default Cygwin returns 32 from getdtablesize
-   (). Cygwin/X [121]Server Test Series release [122]Test44, released on
+   (). Cygwin/X [128]Server Test Series release [129]Test44, released on
    2001-08-15, changes the maximum number of clients from 32 to 1024 by
    passing the square of getdtablesize () to setdtablesize ().
-   
-   8.9. XIO: fatal IO error 104 (Connection reset by peer) on X server
+
+   8.10. XIO: fatal IO error 104 (Connection reset by peer) on X server
    "127.0.0.1:0.0"
-   
-   See [123]Q: 8.8.
-   
-   8.10. Cannot Open Display: 127.0.0.1:0.0
-   
-   Certain classes of software, such as that used for [124]Virtual
-   Private Networking and [125]fire-walling may cause the IP address
+
+   See [130]Q: 8.9.
+
+   8.11. Cannot Open Display: 127.0.0.1:0.0
+
+   Certain classes of software, such as that used for [131]Virtual
+   Private Networking and [132]fire-walling may cause the IP address
    127.0.0.1, or other local adapter addresses, to be redirected, to
    become inoperable in some way, or to be operated in a manner that
    violates the defined operation of IP address.
-   
+
    As a potential remedy, try removing all instances of such software;
    this may not always fix the problem though, as some software may leave
    artifacts even after uninstallation is completed. The only way to be
@@ -804,54 +900,54 @@ XNLSPATH
    freshly formatted hard drive, followed by Cygwin and Cygwin/X, and
    finally add your other software one application at a time until
    Cygwin/X stops working.
-   
+
    Some products that have been reported to cause problems:
-   
+
      Note: These products may not cause problems in all configurations.
      However, the Cygwin/X project has neither the time, ability, nor
      resources to help you correctly configure your third-party
      software.
-     
+
      * Aventail Connect
      * Zonealarm PC Firewall from Zonelab
-       
-   8.11. Out of environment space
-   
+
+   8.12. Out of environment space
+
    Increase your Windows environment space by following the
-   [126]instructions provided by Microsoft.
-   
-   8.12. Too many parameters
-   
-   See [127]Q: 8.11.
-   
+   [133]instructions provided by Microsoft.
+
+   8.13. Too many parameters
+
+   See [134]Q: 8.12.
+
 9. Porting Software
 
    9.1. Is there a list of software that has been ported to Cygwin/X?
-   
-   Yes, see the [128]Cygwin/X - Ported Software page.
-   
+
+   Yes, see the [135]Cygwin/X - Ported Software page.
+
    9.2. How do I start porting software to Cygwin/X?
-   
+
    Cygwin/X provides a software interface that is very similar to the
    software interface provided by GNU/Linux and other UNIX systems. Most
    software packages will compile on Cygwin/X without any changes at all.
    To begin with, try to compile a given software package following that
    package's compilation instructions for GNU/Linux.
-   
+
    9.3. Are there common problems encountered when porting software to
    Cygwin/X?
-   
+
    One common problem encountered when porting software to Cygwin/X is
    due to Cygwin's inability to distinguish between files with the same
    name but different capitalization (e.g. XvMC.h and xvmc.h), which is
    due to a Windows' limitation.
-   
+
    Example 1. Include Problems
-   
+
    This example is based off an error that actually occurred in the
    source code tree in xc/programs/Xserver/Xext/xvmc.c. xvmc.c included
    XvMC.h, as shown below:
-#include "XvMC.h"
+   #include "XvMC.h"
 
    The intention was to include the file xc/include/extensions/XvMC.h.
    Unfortunately, there was a file named xc/programs/Xserver/Xext/xvmc.h
@@ -862,93 +958,93 @@ XNLSPATH
    ended up being included in xvmc.c. The build process on Cygwin broke
    because the contents of XvMC.h were entirely different than the
    contents of xvmc.h.
-   
+
    The solution was to change the include to specifically reference the
    desired header:
-#include "../../../include/extensions/XvMC.h"
+   #include "../../../include/extensions/XvMC.h"
 
 10. Contributing
 
    10.1. Are there step-by-step instructions for contributing to
    Cygwin/X?
-   
-   Yes. The [129]Cygwin/X Contributor's Guide has step-by-step
+
+   Yes. The [136]Cygwin/X Contributor's Guide has step-by-step
    instructions for obtaining the source, building the source, building
    debug versions of the source, and even cross-compiling under Linux.
-   
+
    10.2. Are there editors for Windows that understand and preserve UNIX
    end of line characters?
-   
+
    Yes. Emacs and XEmacs are available for Windows; they both understand
    and preserve UNIX end of line characters.
-   
+
    10.3. How should I generate patches for Cygwin/X?
-   
-   Only submit patches that have UNIX end of line characters. See [130]Q:
+
+   Only submit patches that have UNIX end of line characters. See [137]Q:
    10.2. for information on editors for Windows that are aware of UNIX
    end of line characters.
-   
+
    Generally it is better for us if you generate your patches against the
    X.org CVS tree. For example, run cvs -z4 diff -U3 hw/xwin/ from
    xc/programs/Xserver/ to generate a diff file for all the modified
    files in hw/xwin/. CVS is smart enough to only generate diffs for
    files that are in the CVS repository; for example, CVS diff will not
    create diffs for Emacs temporary files.
-   
+
    In the case that you have modified a single file, create the diff with
    cvs -z4 diff -U3 file_name.
-   
+
    10.4. Where do I submit patches for Cygwin/X?
-   
+
    Submit patches for Cygwin/X to the cygwin-xfree@cygwin.com mailing
    list.
-   
-   See [131]Q: 10.3. for more information on generating patches.
-   
+
+   See [138]Q: 10.3. for more information on generating patches.
+
    10.5. Why doesn't the X Window System use GNU's autoconf?
-   
+
    The X Window System does not use autoconf because autoconf was not
    available when the X Window System was started in 1984.
-   
+
    10.6. What compiler does Cygwin/X use, and which compilers are
    supported?
-   
+
    Cygwin/X uses the gcc compiler from the Free Software Foundation.
    Cygwin/X source code is mostly ANSI C compliant, but we cannot
    guarantee that Cygwin/X will compile with any other compiler, nor can
    we afford the time to support compilers other than gcc.
-   
-   See the [132]GCC Home Page for more information on gcc.
-   
+
+   See the [139]GCC Home Page for more information on gcc.
+
    10.7. Is cross-compiling from a non-Cygwin platform supported?
-   
+
    Cross-compiling from a non-Cygwin platform is described in the
-   [133]Cygwin/X Contributor's Guide
-   
+   [140]Cygwin/X Contributor's Guide
+
    10.8. Where can I get help for installing DocBook on Cygwin?
-   
-   See [134]SGML for Windows NT: Setting up a free SGML editing and
+
+   See [141]SGML for Windows NT: Setting up a free SGML editing and
    publishing system on Windows NT/Cygwin by Markus Hoenicka.
-   
+
 11. Licenses, Patents, Trademarks, and Copyrights
 
    11.1. What licenses apply to Cygwin/X source code?
-   
+
    Cygwin/X proper isn't covered by a single license, as Cygwin/X is made
    up of two parts that are covered by distinct licenses: Cygwin and the
    X Window System.
-   
-   See [135]Q: 11.2. and [136]Q: 11.3. for more information regarding the
+
+   See [142]Q: 11.2. and [143]Q: 11.3. for more information regarding the
    licenses that apply to Cygwin/X.
-   
+
    11.2. What licenses apply to the X Window System source code?
-   
-   X Window System source code is generally licensed under an [137]X11
-   style license, which is [138]certified by the Free Software Foundation
+
+   X Window System source code is generally licensed under an [144]X11
+   style license, which is [145]certified by the Free Software Foundation
    as compatible with the GNU GPL.
-   
+
    11.3. What license applies to Cygwin source code?
-   
+
    Cygwin source code is licensed under a modified version of the GNU
    GPL. Cygwin's license modification specifically allows third-party
    software under an open source license to be linked with Cygwin without
@@ -957,19 +1053,19 @@ XNLSPATH
    to great trouble to obtain this modification and should be thanked for
    doing so, as without it the modification, Cygwin/X linking to Cygwin
    would be the subject of endless discussion.
-   
+
    11.4. Whom holds the copyright on the Cygwin/X source code?
-   
+
    Cygwin/X proper doesn't have a single copyright holder, as Cygwin/X is
    made up of two parts, namely Cygwin and the X Window System; each part
    follows a different scheme in regards to whom will hold the copyright
    on source code.
-   
-   See [139]Q: 11.5. and [140]Q: 11.6. for more information regarding
+
+   See [146]Q: 11.5. and [147]Q: 11.6. for more information regarding
    whom holds the copyright on Cygwin/X source code.
-   
+
    11.5. Whom holds the copyright on the X Window System source code?
-   
+
    Each source code file in the X Window System typically has its own
    license and copyright statement. Therefore, there is not a general
    rule for determining whom holds the copyright on a particular X Window
@@ -977,79 +1073,78 @@ XNLSPATH
    someone else, to some group, or to keep the copyright themselves. You
    must inspect the source code file in question to determine whom holds
    the copyright for that file.
-   
+
    11.6. Whom holds the copyright on the Cygwin source code?
-   
-   [141]RedHat owns the copyright on the Cygwin source code. RedHat
+
+   [148]RedHat owns the copyright on the Cygwin source code. RedHat
    requires that copyright be assigned to RedHat for non-trivial changes
    to Cygwin. You must fill out a copyright transfer form if you are
    going to contribute substantial changes to Cygwin.
-   
+
    11.7. What license applies to Motif?
-   
-   Motif is a closed source product produced by [142]The Open Group.
-   However, The Open Group released [143]Open Motif on 2000-05-15 under a
-   public license, [144]The Open Group Public License, that allows Open
+
+   Motif is a closed source product produced by [149]The Open Group.
+   However, The Open Group released [150]Open Motif on 2000-05-15 under a
+   public license, [151]The Open Group Public License, that allows Open
    Motif to be distributed with and used on Open Source platforms. As of
    2001-07-10, Cygwin/X does not qualify as a platform that Open Motif
-   can be distributed with and used on. However, the [145]Open Motif FAQ
+   can be distributed with and used on. However, the [152]Open Motif FAQ
    states, "[...] we hope to be able to make a distribution under a
    license complying with the Open Source guidelines sometime in the
    future. For now this is as close as to Open Source as we could get."
-   
+
    11.8. Isn't "XWin" trademarked by StarNet Communications?
-   
-   No. A quick search at the [146]United States Patent and Trademark
+
+   No. A quick search at the [153]United States Patent and Trademark
    Office for "XWin" turns up one dead record and one live record. The
    live record is for a logo belonging to a rock crusher manufacturer
    based out of Belgium. Neither trademark affects Cygwin/X, as the dead
    record is no longer enforceable, while the live record is in an
    unrelated and distinct industry; there cannot be confusion between
    rock crushers and computer programs.
-   
-                                 Bibliography
-                                       
-Books
+     _________________________________________________________________
+
+BibliographyBooks
 
    [ScheiflerGettys92] Robert W. Scheifler, James Gettys, Jim Flowers,
    and David Rosenthal, 1992, 1-55558-088-2, Butterworth-Heinemann, X
    Window System: The Complete Reference to Xlib, X Protocol, ICCCM, and
    XLFD.
-   
+
    [Richter99] Jeffrey Richter, 1999, 1-57231-996-8, Microsoft Press,
    Programming Applications for Microsoft Windows: Mastering the critical
    building blocks of 32-bit and 64-bit Windows-based applications.
-   
+
    [Petzold99] Charles Petzold, 1999, 1-57231-995-X, Microsoft Press,
    Programming Windows: The definitive guide to the Win32 API.
-   
+
    [McKay99] Everett N. McKay, 1999, 0-7356-0586-6, Microsoft Press,
    Developing User Interfaces for Microsoft Windows: Practical and
    effective methods for improving the user experience.
-   
+
    [JonesOhlund99] Anthony Jones and Jim Ohlund, 1999, 0-7356-0560-2,
    Microsoft Press, Network Programming for Microsoft Windows: Clear,
    practical guide to Microsoft's networking APIs.
-   
+
    [Yuan01] Feng Yuan, 2001, 0-13-086985-6, Prentice Hall PTR, Windows
    Graphics Programming: Win32 GDI and DirectDraw.
-   
+
    [CohenWoodring98] Aaron Cohen and Mike Woodring, 1998, 1-56592-296-4,
    O'Reilly & Associates, Inc., Win32 Multithreaded Programming: Building
    Thread-Safe Applications.
-   
+
    [CameronRosenblattRaymond96] Debra Cameron, Bill Rosenblatt, and Eric
    Raymond, 1996, 1991, 1-56592-152-6, O'Reilly & Associates, Inc.,
    Learning GNU Emacs: UNIX Text Processing.
-   
+
    [Lewine91] Edited by Dale Dougherty, Donald A. Lewine, 1991,
    0-937175-73-0, O'Reilly & Associates, Inc., POSIX Programmer's Guide:
    Writing Portable UNIX Programs.
-   
+
    [KernighanRitchie88] Brian W. Kernighan and Dennis M. Ritchie, 1988,
    1978, 0-13-110370-9, Prentice Hall PTR, The C Programming Language:
    ANSI C.
-   
+
 Glossary
 
 F
@@ -1057,14 +1152,14 @@ F
    firewall
           Firewall software attempts to protect an internal network from
           intrusions originating from an external network.
-          
+
 V
 
    Virtual Private Network (VPN)
           Virtual Private Networks are encrypted tunnels through which
           private data can be safely transmitted over a private network
           (e.g. the Internet).
-          
+
 X
 
    X Display Manager (XDM)
@@ -1073,16 +1168,16 @@ X
           environment or window manager to be for their login session.
           Some X Display Managers are xdm, gdm (Gnome Display Manager),
           and kdm (KDE Display Manager).
-          
+
    X Display Manager Control Protocol (XDMCP)
           XDMCP allows XDM to process logins for users remote to the
           machine that XDM is running on; login sessions will be run on
           the machine running XDM. For example, at a university you may
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
-          
-          See Also: [147]X Display Manager.
-          
+
+          See Also: [154]X Display Manager.
+
    X11 Forwarding
           Some SSH programs like OpenSSH provide a feature where in
           addition to the normal text channel opened between the local
@@ -1090,160 +1185,157 @@ X
           communication between the X11 client and the X11 server. The
           SSH server will act as proxy-server for the X11 clients and
           will forward all communication to the X11 server.
-          
-                       A. GNU Free Documentation License
-                                       
-   Version 1.1, March 2000
-   
+     _________________________________________________________________
+
+A. GNU Free Documentation License
+
+Version 1.1, March 2000
+
      Copyright (C) 2000 Free Software Foundation, Inc. 59 Temple Place,
      Suite 330, Boston, MA 02111-1307 USA Everyone is permitted to copy
      and distribute verbatim copies of this license document, but
      changing it is not allowed.
-     
+     _________________________________________________________________
+
 0. PREAMBLE
 
-   The purpose of this License is to make a manual, textbook, or other
-   written document "free" in the sense of freedom: to assure everyone
-   the effective freedom to copy and redistribute it, with or without
-   modifying it, either commercially or noncommercially. Secondarily,
-   this License preserves for the author and publisher a way to get
-   credit for their work, while not being considered responsible for
-   modifications made by others.
-   
-   This License is a kind of "copyleft", which means that derivative
-   works of the document must themselves be free in the same sense. It
-   complements the GNU General Public License, which is a copyleft
-   license designed for free software.
-   
-   We have designed this License in order to use it for manuals for free
-   software, because free software needs free documentation: a free
-   program should come with manuals providing the same freedoms that the
-   software does. But this License is not limited to software manuals; it
-   can be used for any textual work, regardless of subject matter or
-   whether it is published as a printed book. We recommend this License
-   principally for works whose purpose is instruction or reference.
-   
+The purpose of this License is to make a manual, textbook, or other written
+document "free" in the sense of freedom: to assure everyone the effective
+freedom to copy and redistribute it, with or without modifying it, either
+commercially or noncommercially. Secondarily, this License preserves for the
+author and publisher a way to get credit for their work, while not being
+considered responsible for modifications made by others.
+
+This License is a kind of "copyleft", which means that derivative works of
+the document must themselves be free in the same sense. It complements the
+GNU General Public License, which is a copyleft license designed for free
+software.
+
+We have designed this License in order to use it for manuals for free
+software, because free software needs free documentation: a free program
+should come with manuals providing the same freedoms that the software does.
+But this License is not limited to software manuals; it can be used for any
+textual work, regardless of subject matter or whether it is published as a
+printed book. We recommend this License principally for works whose purpose
+is instruction or reference.
+     _________________________________________________________________
+
 1. APPLICABILITY AND DEFINITIONS
 
-   This License applies to any manual or other work that contains a
-   notice placed by the copyright holder saying it can be distributed
-   under the terms of this License. The "Document", below, refers to any
-   such manual or work. Any member of the public is a licensee, and is
-   addressed as "you".
-   
-   A "Modified Version" of the Document means any work containing the
-   Document or a portion of it, either copied verbatim, or with
-   modifications and/or translated into another language.
-   
-   A "Secondary Section" is a named appendix or a front-matter section of
-   the Document that deals exclusively with the relationship of the
-   publishers or authors of the Document to the Document's overall
-   subject (or to related matters) and contains nothing that could fall
-   directly within that overall subject. (For example, if the Document is
-   in part a textbook of mathematics, a Secondary Section may not explain
-   any mathematics.) The relationship could be a matter of historical
-   connection with the subject or with related matters, or of legal,
-   commercial, philosophical, ethical or political position regarding
-   them.
-   
-   The "Invariant Sections" are certain Secondary Sections whose titles
-   are designated, as being those of Invariant Sections, in the notice
-   that says that the Document is released under this License.
-   
-   The "Cover Texts" are certain short passages of text that are listed,
-   as Front-Cover Texts or Back-Cover Texts, in the notice that says that
-   the Document is released under this License.
-   
-   A "Transparent" copy of the Document means a machine-readable copy,
-   represented in a format whose specification is available to the
-   general public, whose contents can be viewed and edited directly and
-   straightforwardly with generic text editors or (for images composed of
-   pixels) generic paint programs or (for drawings) some widely available
-   drawing editor, and that is suitable for input to text formatters or
-   for automatic translation to a variety of formats suitable for input
-   to text formatters. A copy made in an otherwise Transparent file
-   format whose markup has been designed to thwart or discourage
-   subsequent modification by readers is not Transparent. A copy that is
-   not "Transparent" is called "Opaque".
-   
-   Examples of suitable formats for Transparent copies include plain
-   ASCII without markup, Texinfo input format, LaTeX input format, SGML
-   or XML using a publicly available DTD, and standard-conforming simple
-   HTML designed for human modification. Opaque formats include
-   PostScript, PDF, proprietary formats that can be read and edited only
-   by proprietary word processors, SGML or XML for which the DTD and/or
-   processing tools are not generally available, and the
-   machine-generated HTML produced by some word processors for output
-   purposes only.
-   
-   The "Title Page" means, for a printed book, the title page itself,
-   plus such following pages as are needed to hold, legibly, the material
-   this License requires to appear in the title page. For works in
-   formats which do not have any title page as such, "Title Page" means
-   the text near the most prominent appearance of the work's title,
-   preceding the beginning of the body of the text.
-   
+This License applies to any manual or other work that contains a notice
+placed by the copyright holder saying it can be distributed under the terms
+of this License. The "Document", below, refers to any such manual or work.
+Any member of the public is a licensee, and is addressed as "you".
+
+A "Modified Version" of the Document means any work containing the Document
+or a portion of it, either copied verbatim, or with modifications and/or
+translated into another language.
+
+A "Secondary Section" is a named appendix or a front-matter section of the
+Document that deals exclusively with the relationship of the publishers or
+authors of the Document to the Document's overall subject (or to related
+matters) and contains nothing that could fall directly within that overall
+subject. (For example, if the Document is in part a textbook of mathematics,
+a Secondary Section may not explain any mathematics.) The relationship could
+be a matter of historical connection with the subject or with related
+matters, or of legal, commercial, philosophical, ethical or political
+position regarding them.
+
+The "Invariant Sections" are certain Secondary Sections whose titles are
+designated, as being those of Invariant Sections, in the notice that says
+that the Document is released under this License.
+
+The "Cover Texts" are certain short passages of text that are listed, as
+Front-Cover Texts or Back-Cover Texts, in the notice that says that the
+Document is released under this License.
+
+A "Transparent" copy of the Document means a machine-readable copy,
+represented in a format whose specification is available to the general
+public, whose contents can be viewed and edited directly and
+straightforwardly with generic text editors or (for images composed of
+pixels) generic paint programs or (for drawings) some widely available
+drawing editor, and that is suitable for input to text formatters or for
+automatic translation to a variety of formats suitable for input to text
+formatters. A copy made in an otherwise Transparent file format whose markup
+has been designed to thwart or discourage subsequent modification by readers
+is not Transparent. A copy that is not "Transparent" is called "Opaque".
+
+Examples of suitable formats for Transparent copies include plain ASCII
+without markup, Texinfo input format, LaTeX input format, SGML or XML using
+a publicly available DTD, and standard-conforming simple HTML designed for
+human modification. Opaque formats include PostScript, PDF, proprietary
+formats that can be read and edited only by proprietary word processors,
+SGML or XML for which the DTD and/or processing tools are not generally
+available, and the machine-generated HTML produced by some word processors
+for output purposes only.
+
+The "Title Page" means, for a printed book, the title page itself, plus such
+following pages as are needed to hold, legibly, the material this License
+requires to appear in the title page. For works in formats which do not have
+any title page as such, "Title Page" means the text near the most prominent
+appearance of the work's title, preceding the beginning of the body of the
+text.
+     _________________________________________________________________
+
 2. VERBATIM COPYING
 
-   You may copy and distribute the Document in any medium, either
-   commercially or noncommercially, provided that this License, the
-   copyright notices, and the license notice saying this License applies
-   to the Document are reproduced in all copies, and that you add no
-   other conditions whatsoever to those of this License. You may not use
-   technical measures to obstruct or control the reading or further
-   copying of the copies you make or distribute. However, you may accept
-   compensation in exchange for copies. If you distribute a large enough
-   number of copies you must also follow the conditions in section 3.
-   
-   You may also lend copies, under the same conditions stated above, and
-   you may publicly display copies.
-   
+You may copy and distribute the Document in any medium, either commercially
+or noncommercially, provided that this License, the copyright notices, and
+the license notice saying this License applies to the Document are
+reproduced in all copies, and that you add no other conditions whatsoever to
+those of this License. You may not use technical measures to obstruct or
+control the reading or further copying of the copies you make or distribute.
+However, you may accept compensation in exchange for copies. If you
+distribute a large enough number of copies you must also follow the
+conditions in section 3.
+
+You may also lend copies, under the same conditions stated above, and you
+may publicly display copies.
+     _________________________________________________________________
+
 3. COPYING IN QUANTITY
 
-   If you publish printed copies of the Document numbering more than 100,
-   and the Document's license notice requires Cover Texts, you must
-   enclose the copies in covers that carry, clearly and legibly, all
-   these Cover Texts: Front-Cover Texts on the front cover, and
-   Back-Cover Texts on the back cover. Both covers must also clearly and
-   legibly identify you as the publisher of these copies. The front cover
-   must present the full title with all words of the title equally
-   prominent and visible. You may add other material on the covers in
-   addition. Copying with changes limited to the covers, as long as they
-   preserve the title of the Document and satisfy these conditions, can
-   be treated as verbatim copying in other respects.
-   
-   If the required texts for either cover are too voluminous to fit
-   legibly, you should put the first ones listed (as many as fit
-   reasonably) on the actual cover, and continue the rest onto adjacent
-   pages.
-   
-   If you publish or distribute Opaque copies of the Document numbering
-   more than 100, you must either include a machine-readable Transparent
-   copy along with each Opaque copy, or state in or with each Opaque copy
-   a publicly-accessible computer-network location containing a complete
-   Transparent copy of the Document, free of added material, which the
-   general network-using public has access to download anonymously at no
-   charge using public-standard network protocols. If you use the latter
-   option, you must take reasonably prudent steps, when you begin
-   distribution of Opaque copies in quantity, to ensure that this
-   Transparent copy will remain thus accessible at the stated location
-   until at least one year after the last time you distribute an Opaque
-   copy (directly or through your agents or retailers) of that edition to
-   the public.
-   
-   It is requested, but not required, that you contact the authors of the
-   Document well before redistributing any large number of copies, to
-   give them a chance to provide you with an updated version of the
-   Document.
-   
+If you publish printed copies of the Document numbering more than 100, and
+the Document's license notice requires Cover Texts, you must enclose the
+copies in covers that carry, clearly and legibly, all these Cover Texts:
+Front-Cover Texts on the front cover, and Back-Cover Texts on the back
+cover. Both covers must also clearly and legibly identify you as the
+publisher of these copies. The front cover must present the full title with
+all words of the title equally prominent and visible. You may add other
+material on the covers in addition. Copying with changes limited to the
+covers, as long as they preserve the title of the Document and satisfy these
+conditions, can be treated as verbatim copying in other respects.
+
+If the required texts for either cover are too voluminous to fit legibly,
+you should put the first ones listed (as many as fit reasonably) on the
+actual cover, and continue the rest onto adjacent pages.
+
+If you publish or distribute Opaque copies of the Document numbering more
+than 100, you must either include a machine-readable Transparent copy along
+with each Opaque copy, or state in or with each Opaque copy a
+publicly-accessible computer-network location containing a complete
+Transparent copy of the Document, free of added material, which the general
+network-using public has access to download anonymously at no charge using
+public-standard network protocols. If you use the latter option, you must
+take reasonably prudent steps, when you begin distribution of Opaque copies
+in quantity, to ensure that this Transparent copy will remain thus
+accessible at the stated location until at least one year after the last
+time you distribute an Opaque copy (directly or through your agents or
+retailers) of that edition to the public.
+
+It is requested, but not required, that you contact the authors of the
+Document well before redistributing any large number of copies, to give them
+a chance to provide you with an updated version of the Document.
+     _________________________________________________________________
+
 4. MODIFICATIONS
 
-   You may copy and distribute a Modified Version of the Document under
-   the conditions of sections 2 and 3 above, provided that you release
-   the Modified Version under precisely this License, with the Modified
-   Version filling the role of the Document, thus licensing distribution
-   and modification of the Modified Version to whoever possesses a copy
-   of it. In addition, you must do these things in the Modified Version:
+You may copy and distribute a Modified Version of the Document under the
+conditions of sections 2 and 3 above, provided that you release the Modified
+Version under precisely this License, with the Modified Version filling the
+role of the Document, thus licensing distribution and modification of the
+Modified Version to whoever possesses a copy of it. In addition, you must do
+these things in the Modified Version:
     A. Use in the Title Page (and on the covers, if any) a title distinct
        from that of the Document, and from those of previous versions
        (which should, if there were any, be listed in the History section
@@ -1291,20 +1383,20 @@ X
        be included in the Modified Version.
     N. Do not retitle any existing section as "Endorsements" or to
        conflict in title with any Invariant Section.
-       
+
    If the Modified Version includes new front-matter sections or
    appendices that qualify as Secondary Sections and contain no material
    copied from the Document, you may at your option designate some or all
    of these sections as invariant. To do this, add their titles to the
    list of Invariant Sections in the Modified Version's license notice.
    These titles must be distinct from any other section titles.
-   
+
    You may add a section entitled "Endorsements", provided it contains
    nothing but endorsements of your Modified Version by various
    parties--for example, statements of peer review or that the text has
    been approved by an organization as the authoritative definition of a
    standard.
-   
+
    You may add a passage of up to five words as a Front-Cover Text, and a
    passage of up to 25 words as a Back-Cover Text, to the end of the list
    of Cover Texts in the Modified Version. Only one passage of
@@ -1314,113 +1406,112 @@ X
    by arrangement made by the same entity you are acting on behalf of,
    you may not add another; but you may replace the old one, on explicit
    permission from the previous publisher that added the old one.
-   
+
    The author(s) and publisher(s) of the Document do not by this License
    give permission to use their names for publicity for or to assert or
    imply endorsement of any Modified Version.
-   
+     _________________________________________________________________
+
 5. COMBINING DOCUMENTS
 
-   You may combine the Document with other documents released under this
-   License, under the terms defined in section 4 above for modified
-   versions, provided that you include in the combination all of the
-   Invariant Sections of all of the original documents, unmodified, and
-   list them all as Invariant Sections of your combined work in its
-   license notice.
-   
-   The combined work need only contain one copy of this License, and
-   multiple identical Invariant Sections may be replaced with a single
-   copy. If there are multiple Invariant Sections with the same name but
-   different contents, make the title of each such section unique by
-   adding at the end of it, in parentheses, the name of the original
-   author or publisher of that section if known, or else a unique number.
-   Make the same adjustment to the section titles in the list of
-   Invariant Sections in the license notice of the combined work.
-   
-   In the combination, you must combine any sections entitled "History"
-   in the various original documents, forming one section entitled
-   "History"; likewise combine any sections entitled "Acknowledgements",
-   and any sections entitled "Dedications". You must delete all sections
-   entitled "Endorsements."
-   
+You may combine the Document with other documents released under this
+License, under the terms defined in section 4 above for modified versions,
+provided that you include in the combination all of the Invariant Sections
+of all of the original documents, unmodified, and list them all as Invariant
+Sections of your combined work in its license notice.
+
+The combined work need only contain one copy of this License, and multiple
+identical Invariant Sections may be replaced with a single copy. If there
+are multiple Invariant Sections with the same name but different contents,
+make the title of each such section unique by adding at the end of it, in
+parentheses, the name of the original author or publisher of that section if
+known, or else a unique number. Make the same adjustment to the section
+titles in the list of Invariant Sections in the license notice of the
+combined work.
+
+In the combination, you must combine any sections entitled "History" in the
+various original documents, forming one section entitled "History"; likewise
+combine any sections entitled "Acknowledgements", and any sections entitled
+"Dedications". You must delete all sections entitled "Endorsements."
+     _________________________________________________________________
+
 6. COLLECTIONS OF DOCUMENTS
 
-   You may make a collection consisting of the Document and other
-   documents released under this License, and replace the individual
-   copies of this License in the various documents with a single copy
-   that is included in the collection, provided that you follow the rules
-   of this License for verbatim copying of each of the documents in all
-   other respects.
-   
-   You may extract a single document from such a collection, and
-   distribute it individually under this License, provided you insert a
-   copy of this License into the extracted document, and follow this
-   License in all other respects regarding verbatim copying of that
-   document.
-   
+You may make a collection consisting of the Document and other documents
+released under this License, and replace the individual copies of this
+License in the various documents with a single copy that is included in the
+collection, provided that you follow the rules of this License for verbatim
+copying of each of the documents in all other respects.
+
+You may extract a single document from such a collection, and distribute it
+individually under this License, provided you insert a copy of this License
+into the extracted document, and follow this License in all other respects
+regarding verbatim copying of that document.
+     _________________________________________________________________
+
 7. AGGREGATION WITH INDEPENDENT WORKS
 
-   A compilation of the Document or its derivatives with other separate
-   and independent documents or works, in or on a volume of a storage or
-   distribution medium, does not as a whole count as a Modified Version
-   of the Document, provided no compilation copyright is claimed for the
-   compilation. Such a compilation is called an "aggregate", and this
-   License does not apply to the other self-contained works thus compiled
-   with the Document, on account of their being thus compiled, if they
-   are not themselves derivative works of the Document.
-   
-   If the Cover Text requirement of section 3 is applicable to these
-   copies of the Document, then if the Document is less than one quarter
-   of the entire aggregate, the Document's Cover Texts may be placed on
-   covers that surround only the Document within the aggregate. Otherwise
-   they must appear on covers around the whole aggregate.
-   
+A compilation of the Document or its derivatives with other separate and
+independent documents or works, in or on a volume of a storage or
+distribution medium, does not as a whole count as a Modified Version of the
+Document, provided no compilation copyright is claimed for the compilation.
+Such a compilation is called an "aggregate", and this License does not apply
+to the other self-contained works thus compiled with the Document, on
+account of their being thus compiled, if they are not themselves derivative
+works of the Document.
+
+If the Cover Text requirement of section 3 is applicable to these copies of
+the Document, then if the Document is less than one quarter of the entire
+aggregate, the Document's Cover Texts may be placed on covers that surround
+only the Document within the aggregate. Otherwise they must appear on covers
+around the whole aggregate.
+     _________________________________________________________________
+
 8. TRANSLATION
 
-   Translation is considered a kind of modification, so you may
-   distribute translations of the Document under the terms of section 4.
-   Replacing Invariant Sections with translations requires special
-   permission from their copyright holders, but you may include
-   translations of some or all Invariant Sections in addition to the
-   original versions of these Invariant Sections. You may include a
-   translation of this License provided that you also include the
-   original English version of this License. In case of a disagreement
-   between the translation and the original English version of this
-   License, the original English version will prevail.
-   
+Translation is considered a kind of modification, so you may distribute
+translations of the Document under the terms of section 4. Replacing
+Invariant Sections with translations requires special permission from their
+copyright holders, but you may include translations of some or all Invariant
+Sections in addition to the original versions of these Invariant Sections.
+You may include a translation of this License provided that you also include
+the original English version of this License. In case of a disagreement
+between the translation and the original English version of this License,
+the original English version will prevail.
+     _________________________________________________________________
+
 9. TERMINATION
 
-   You may not copy, modify, sublicense, or distribute the Document
-   except as expressly provided for under this License. Any other attempt
-   to copy, modify, sublicense or distribute the Document is void, and
-   will automatically terminate your rights under this License. However,
-   parties who have received copies, or rights, from you under this
-   License will not have their licenses terminated so long as such
-   parties remain in full compliance.
-   
+You may not copy, modify, sublicense, or distribute the Document except as
+expressly provided for under this License. Any other attempt to copy,
+modify, sublicense or distribute the Document is void, and will
+automatically terminate your rights under this License. However, parties who
+have received copies, or rights, from you under this License will not have
+their licenses terminated so long as such parties remain in full compliance.
+     _________________________________________________________________
+
 10. FUTURE REVISIONS OF THIS LICENSE
 
-   The Free Software Foundation may publish new, revised versions of the
-   GNU Free Documentation License from time to time. Such new versions
-   will be similar in spirit to the present version, but may differ in
-   detail to address new problems or concerns. See
-   [148]http://www.gnu.org/copyleft/.
-   
-   Each version of the License is given a distinguishing version number.
-   If the Document specifies that a particular numbered version of this
-   License "or any later version" applies to it, you have the option of
-   following the terms and conditions either of that specified version or
-   of any later version that has been published (not as a draft) by the
-   Free Software Foundation. If the Document does not specify a version
-   number of this License, you may choose any version ever published (not
-   as a draft) by the Free Software Foundation.
-   
+The Free Software Foundation may publish new, revised versions of the GNU
+Free Documentation License from time to time. Such new versions will be
+similar in spirit to the present version, but may differ in detail to
+address new problems or concerns. See [155]http://www.gnu.org/copyleft/.
+
+Each version of the License is given a distinguishing version number. If the
+Document specifies that a particular numbered version of this License "or
+any later version" applies to it, you have the option of following the terms
+and conditions either of that specified version or of any later version that
+has been published (not as a draft) by the Free Software Foundation. If the
+Document does not specify a version number of this License, you may choose
+any version ever published (not as a draft) by the Free Software Foundation.
+     _________________________________________________________________
+
 How to use this License for your documents
 
-   To use this License in a document you have written, include a copy of
-   the License in the document and put the following copyright and
-   license notices just after the title page:
-   
+To use this License in a document you have written, include a copy of the
+License in the document and put the following copyright and license notices
+just after the title page:
+
      Copyright (c) YEAR YOUR NAME. Permission is granted to copy,
      distribute and/or modify this document under the terms of the GNU
      Free Documentation License, Version 1.1 or any later version
@@ -1429,12 +1520,12 @@ How to use this License for your documents
      LIST, and with the Back-Cover Texts being LIST. A copy of the
      license is included in the section entitled "GNU Free Documentation
      License".
-     
+
    If you have no Invariant Sections, write "with no Invariant Sections"
    instead of saying which ones are invariant. If you have no Front-Cover
    Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts
    being LIST"; likewise for Back-Cover Texts.
-   
+
    If your document contains nontrivial examples of program code, we
    recommend releasing these examples in parallel under your choice of
    free software license, such as the GNU General Public License, to
@@ -1442,151 +1533,158 @@ How to use this License for your documents
 
 References
 
-   1. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#qanda
-   2. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#biblio
-   3. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#glossary
-   4. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#gfdl
-   5. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#general
-   6. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-what-is-cygwin-x
-   7. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-what-is-cygwin
-   8. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-what-is-x-window-system
-   9. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-what-is-x-server
-  10. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-what-is-x-client
-  11. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-why-port-to-windows
-  12. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-newsgroup
-  13. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-mailing-list
-  14. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#installation
-  15. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-windows-versions-supported
-  16. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-how-to-install
-  17. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#configuration
-  18. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-why-no-xf86config
-  19. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-command-line-args
-  20. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-display-depth-ignored
-  21. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-three-button-emulation
-  22. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#window-auto-focus
-  23. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#disable-terminate-server
-  24. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#i18n
-  25. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#i18n-keyboard
-  26. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
-  27. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-modmap-obtaining
-  28. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-how-modmap-and-xdmcp
-  29. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-aix-xkb
-  30. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-xkb-not-working
-  31. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#alt-gr-win-xp-powertoys
-  32. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#alt-gr-with-old-x
-  33. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#i18n-display
-  34. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-bash-extended-chars
-  35. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-bash-8bit
-  36. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#remote
-  37. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-ssh-no-x11forwarding
-  38. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#xdmcp
-  39. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-xdmcp-no-valid-address
-  40. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-mandrake-8.1-xdmcp
-  41. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-solaris-fonts
-  42. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-remote-solaris
-  43. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
-  44. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-xdmcp-info
-  45. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#troubleshooting
-  46. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-log-file-location
-  47. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-message-interpretation
-  48. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-message-not-listed
-  49. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-but-report-ignored
-  50. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#poor-performance
-  51. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#microsoft-services-for-unix
-  52. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-tasklist-programs-slow
-  53. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#errors
-  54. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-trackpoint
-  55. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-owner-tmp-.X11-unix
-  56. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-security-policy
-  57. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-font-eof
-  58. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-removing-font-path-element
-  59. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-procedure-entry-point-missing
-  60. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-status-access-violation
-  61. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-max-clients
-  62. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-xio-fatal-io-error-104
-  63. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-cannot-open-display
-  64. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-env-space
-  65. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-too-many-parameters
-  66. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#porting
-  67. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-ported-software-list
-  68. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-how-to-port
-  69. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-common-porting-problems
-  70. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#contributing
-  71. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-instructions-for-contributing
-  72. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-editors
-  73. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-contrib-diff
-  74. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-where-to-submit-patches
-  75. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-why-no-autoconf
-  76. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-which-compilers-supported
-  77. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-cross-compiling
-  78. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-help-installing-docbook
-  79. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#license-ptc
-  80. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-what-licenses-apply
-  81. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-license-x-window-system
-  82. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-license-cygwin
-  83. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-copyright-cygwin-x
-  84. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-copyright-x-window-system
-  85. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-copyright-cygwin
-  86. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-motif-license
-  87. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-trademark-xwin
-  88. http://cygwin.com/
-  89. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-mailing-list
-  90. http://cygwin.com/lists.html
-  91. http://x.cygwin.com/docs/ug/cygwin-x-ug.html
-  92. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
-  93. http://x.cygwin.com/docs/ug/cygwin-x-ug.html
-  94. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-xkb-not-working
-  95. http://www.jwz.org/xkeycaps/
-  96. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
-  97. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
-  98. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-bash-extended-chars
-  99. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#gloss-x11forwarding
- 100. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#gloss-xdmcp
- 101. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#tbl-config-files
- 102. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#tbl-xdmcp-ports
- 103. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-remote-solaris
- 104. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
- 105. http://freedesktop.org/~xorg/X11R6.7.0/doc/Xserver.1.html
- 106. http://freedesktop.org/~xorg/X11R6.7.0/doc/fonts.html
- 107. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-solaris-fonts
- 108. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
- 109. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-solaris-fonts
- 110. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-remote-solaris
- 111. http://www.sun.com/bigadmin/patches/indexRec.html
- 112. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
- 113. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#errors
- 114. http://cygwin.com/ml/cygwin-xfree/
- 115. file://localhost/usr/tmp/cygwin-x-doc/build/faq/cygwin-xfree@cygwin.com
- 116. file://localhost/usr/tmp/cygwin-x-doc/build/faq/project-url-ml-search;
- 117. http://www.answersthatwork.com/
- 118. http://www.answersthatwork.com/Tasklist_pages/tasklist_a.htm
- 119. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#poor-performance
- 120. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-font-eof
- 121. http://x.cygwin.com/devel/server/
- 122. http://x.cygwin.com/devel/server/changelog.html
- 123. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-max-clients
- 124. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#gloss-vpn
- 125. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#gloss-firewall
- 126. http://support.microsoft.com/support/kb/articles/Q230/2/05.ASP
- 127. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-error-env-space
- 128. http://x.cygwin.com/ported-software.html
- 129. http://x.cygwin.com/docs/cg/cygwin-x-cg.html
- 130. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-editors
- 131. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-contrib-diff
- 132. http://gcc.gnu.org/
- 133. http://x.cygwin.com/docs/cg/cygwin-x-cg.html
- 134. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
- 135. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-license-x-window-system
- 136. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-license-cygwin
- 137. http://www.x.org/terms.htm
- 138. http://www.fsf.org/philosophy/license-list.html#GPLCompatibleLicenses
- 139. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-copyright-x-window-system
- 140. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#q-copyright-cygwin
- 141. http://redhat.com/
- 142. http://www.opengroup.org/
- 143. http://www.opengroup.org/openmotif/
- 144. http://www.opengroup.org/openmotif/license
- 145. http://www.opengroup.org/openmotif/faq.html
- 146. http://www.uspto.gov/
- 147. file://localhost/usr/tmp/cygwin-x-doc/build/faq/dump.html#gloss-xdm
- 148. http://www.gnu.org/copyleft/
+   1. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#qanda
+   2. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#biblio
+   3. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#glossary
+   4. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#gfdl
+   5. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#general
+   6. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-what-is-cygwin-x
+   7. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-what-is-cygwin
+   8. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-what-is-x-window-system
+   9. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-what-is-x-server
+  10. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-what-is-x-client
+  11. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-why-port-to-windows
+  12. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-newsgroup
+  13. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-mailing-list
+  14. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#installation
+  15. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-windows-versions-supported
+  16. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-how-to-install
+  17. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#configuration
+  18. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-why-no-xf86config
+  19. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-command-line-args
+  20. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-display-depth-ignored
+  21. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-three-button-emulation
+  22. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#window-auto-focus
+  23. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#disable-terminate-server
+  24. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#i18n
+  25. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#i18n-keyboard
+  26. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
+  27. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-modmap-obtaining
+  28. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-how-modmap-and-xdmcp
+  29. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-aix-xkb
+  30. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-xkb-not-working
+  31. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#alt-gr-win-xp-powertoys
+  32. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#alt-gr-with-old-x
+  33. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#i18n-display
+  34. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-bash-extended-chars
+  35. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-bash-8bit
+  36. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#remote
+  37. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-ssh-no-x11forwarding
+  38. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#xdmcp
+  39. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-xdmcp-no-valid-address
+  40. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-mandrake-8.1-xdmcp
+  41. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-solaris-fonts
+  42. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-remote-solaris
+  43. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
+  44. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-xdmcp-info
+  45. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#troubleshooting
+  46. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-log-file-location
+  47. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-message-interpretation
+  48. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-message-not-listed
+  49. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-but-report-ignored
+  50. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#freeze-at-startup
+  51. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#poor-performance
+  52. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#microsoft-services-for-unix
+  53. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-tasklist-programs-slow
+  54. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-trackpoint
+  55. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#no-rootwindow-with-run
+  56. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#cross-as-pointer
+  57. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#xterm-not-resizing
+  58. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#numlock-modifier
+  59. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#errors
+  60. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-owner-tmp-.X11-unix
+  61. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-security-policy
+  62. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#duplicate-invocation
+  63. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-font-eof
+  64. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-removing-font-path-element
+  65. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-procedure-entry-point-missing
+  66. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#cygX11-6.dll-missing
+  67. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-status-access-violation
+  68. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-max-clients
+  69. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-xio-fatal-io-error-104
+  70. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-cannot-open-display
+  71. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-env-space
+  72. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-too-many-parameters
+  73. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#porting
+  74. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-ported-software-list
+  75. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-how-to-port
+  76. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-common-porting-problems
+  77. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#contributing
+  78. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-instructions-for-contributing
+  79. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-editors
+  80. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-contrib-diff
+  81. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-where-to-submit-patches
+  82. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-why-no-autoconf
+  83. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-which-compilers-supported
+  84. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-cross-compiling
+  85. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-help-installing-docbook
+  86. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#license-ptc
+  87. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-what-licenses-apply
+  88. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-license-x-window-system
+  89. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-license-cygwin
+  90. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-copyright-cygwin-x
+  91. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-copyright-x-window-system
+  92. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-copyright-cygwin
+  93. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-motif-license
+  94. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-trademark-xwin
+  95. http://cygwin.com/
+  96. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-mailing-list
+  97. http://cygwin.com/lists.html
+  98. http://x.cygwin.com/docs/ug/cygwin-x-ug.html
+  99. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
+ 100. http://x.cygwin.com/docs/ug/cygwin-x-ug.html
+ 101. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-xkb-not-working
+ 102. http://www.jwz.org/xkeycaps/
+ 103. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
+ 104. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-non-U.S.-keyboard-layout
+ 105. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-bash-extended-chars
+ 106. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#gloss-x11forwarding
+ 107. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#gloss-xdmcp
+ 108. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#tbl-config-files
+ 109. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#tbl-xdmcp-ports
+ 110. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-remote-solaris
+ 111. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
+ 112. http://freedesktop.org/~xorg/X11R6.7.0/doc/Xserver.1.html
+ 113. http://freedesktop.org/~xorg/X11R6.7.0/doc/fonts.html
+ 114. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-solaris-fonts
+ 115. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
+ 116. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-solaris-fonts
+ 117. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-remote-solaris
+ 118. http://www.sun.com/bigadmin/patches/indexRec.html
+ 119. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
+ 120. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#errors
+ 121. http://cygwin.com/ml/cygwin-xfree/
+ 122. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/cygwin-xfree@cygwin.com
+ 123. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/project-url-ml-search;
+ 124. http://www.answersthatwork.com/
+ 125. http://www.answersthatwork.com/Tasklist_pages/tasklist_a.htm
+ 126. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#poor-performance
+ 127. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-font-eof
+ 128. http://x.cygwin.com/devel/server/
+ 129. http://x.cygwin.com/devel/server/changelog.html
+ 130. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-max-clients
+ 131. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#gloss-vpn
+ 132. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#gloss-firewall
+ 133. http://support.microsoft.com/support/kb/articles/Q230/2/05.ASP
+ 134. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-error-env-space
+ 135. http://x.cygwin.com/ported-software.html
+ 136. http://x.cygwin.com/docs/cg/cygwin-x-cg.html
+ 137. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-editors
+ 138. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-contrib-diff
+ 139. http://gcc.gnu.org/
+ 140. http://x.cygwin.com/docs/cg/cygwin-x-cg.html
+ 141. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+ 142. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-license-x-window-system
+ 143. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-license-cygwin
+ 144. http://www.x.org/terms.htm
+ 145. http://www.fsf.org/philosophy/license-list.html#GPLCompatibleLicenses
+ 146. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-copyright-x-window-system
+ 147. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#q-copyright-cygwin
+ 148. http://redhat.com/
+ 149. http://www.opengroup.org/
+ 150. http://www.opengroup.org/openmotif/
+ 151. http://www.opengroup.org/openmotif/license
+ 152. http://www.opengroup.org/openmotif/faq.html
+ 153. http://www.uspto.gov/
+ 154. file://localhost/mnt/d/ago/cygwin-x-doc/build/faq/dump.html#gloss-xdm
+ 155. http://www.gnu.org/copyleft/
