@@ -11,10 +11,16 @@
 <p>This document is intended for people who post packages to
 sources.redhat.com, and thus need to make them available through the
 standard Cygwin setup program.  This documents the syntax of the
-setup.ini file, the program that automatically generates it on a
-regular basis, the layout required for packages, and the related policies to ensure good behaviour from the setup.exe program.</p>
-<p>Setup depends on certain conventions being followed. If they are not followed, bad things may happen to the users of setup.exe. Where a convention can be ignored, should circumstances warrent, this document will specify that.</p>
-<p>The mailing list cygwin-apps@cygwin.com is the correct place to discuss any package creation or maintenance issues. It is not a place for end user bug reports - direct those to cygwin at cygwin dot com instead.</p>
+setup.ini file, the program that automatically generates it on a regular
+basis, the layout required for packages, and the related policies to
+ensure good behaviour from the setup.exe program.</p> <p>Setup depends
+on certain conventions being followed.  If they are not followed, bad
+things may happen to the users of setup.exe.  Where a convention can be
+ignored, should circumstances warrent, this document will specify
+that.</p> <p>The mailing list cygwin-apps@cygwin.com is the correct
+place to discuss any package creation or maintenance issues.  It is not
+a place for end user bug reports - direct those to cygwin at cygwin dot
+com instead.</p>
 <h2>Contents</h2>
 <ul>
   <li><p><a href="#naming">package naming</a></p></li>
@@ -26,47 +32,105 @@ regular basis, the layout required for packages, and the related policies to ens
 </ul>
 
 <h2><a id="naming">Package file naming</a></h2>
-<p> Package naming scheme: use the vendor's version
-plus a suffix for ports of existing packages (i.e. bash 2.04 becomes
-2.04-1, 2.04-2, etc, until bash 2.05 is ported, which would be 2.05-1,
-etc).  Some packages also use a YYMMDD format for their versions, e.g.
-binutils-20010901-1.tar.bz2. The first release of a package should have a -1 suffix. Binary tarballs are "package-version.tar.bz2" while source tarballs are "package-version-src.tar.bz2". Comparison of versions is done via ASCII sort order. In the event that a package doesn't sort correctly (for example, from ...-9-... to ...-10-..., use the setup.hint current, prev and exp labels to override the inbuilt sort during the transition period.</p>
+<p> Package naming scheme: use the vendor's version plus a suffix for
+ports of existing packages (i.e.  bash 2.04 becomes 2.04-1, 2.04-2, etc,
+until bash 2.05 is ported, which would be 2.05-1, etc).  Some packages
+also use a YYMMDD format for their versions, e.g.  binutils-20010901-1.tar.bz2.
+The first release of a package should have a -1 suffix.
+
+A package currently consists of three files:
+
+<ul>
+<li>a binary tar file
+<li>a source tar file
+<li>a setup.hint file
+</ul>
+
+<p>Binary tar files are named "package-version.tar.bz2".  They generally
+contain the executable files that will be installed on a user's system
+plus any auxilliary files needed by the package.  See the <a
+href="#package_contents">making packages</a> section below for more
+details on how to generate a binary tar file.</p>
+
+<p>Source tar files are named "package-version-src.tar.bz2".  Source tar files
+should contain the source files needed to rebuild the package.  While
+installing these files is optional under setup.exe, the inclusion of
+is part of the totality that makes up a cygwin package and so, these
+files are <em>not</em> optional.  See the <a href="#package_contents">
+making packages</a> section below for more details on the contents of
+a -src tar file..</p>
+
+<p>Comparison of versions should be relatively intelligent and
+"intuitive" however, in the event that a package doesn't sort correctly,
+use the <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> labels in <a
+href="#setup.hint"> setup.hint</a> to override the builtin sort.</p>
+
+<p>The setup.hint file is discussed <a href="#setup.hint">below</a>.
 
 <h2><a id="sources.redhat.com">Automatic setup.ini generation on sources.redhat.com</a></h2>
 
 <p>A script runs on sources.redhat.com which collects information from
-the<tt> latest </tt>and<tt> contrib </tt> directories (possibly more in
-the future) and automatically generates the default setup.ini.  If you
-are putting packages in these directories, it is important that you
-understand how this program works.</p>
+(currently) the <tt>latest</tt> and <tt>contrib</tt> directories and
+automatically generates the default <a href="#setup.ini">setup.ini</a>
+file which is used by the cygwin setup.exe program for installation
+control.  If you are putting packages in these directories, it is
+important that you understand how this program works.</p>
 
-<p>Files that end in ".tar.bz2" or ".tar.gz" automatically qualify as
-packages.  It is required that the file name is
-package-version[-src].tar.bz2, and that the version number starts with a
-digit.  Higher version numbers are used for the current version of a
-package; the next stable version (if any) is used for the previous
-version.  Note that gzipped package files are deprecated.  New package
-submissions should be bzip2'ed.</p>
+<p>Packages are grouped by directory under <tt>latest</tt> or
+<tt>contrib</tt>.  The directory name is typically the same as the
+package name.  For example, the <tt>boffo</tt> package will live in the
+<tt>boffo</tt> subdirectory.  Exceptions to this rule are historical.
+All new packages will follow the rule of package name == directory name.
 
-<p>Setup is currently unable to list more than three versions of each packge. Therefore you should not keep more than three versions of each package around:
-The current version, the previous stable version, and one test
-version.  By keeping a previous stable version around, you isolate
-yourself (somewhat) from problems with partial mirrors.  When you add
-a new "current" version, you can either keep the old "previous"
+<p>Each directory contains <a href="#naming">source and binary tar
+files</a> which have been been compressed using bzip2.  The required format <a
+href="#naming">format of these files</a> is: <tt>package-version[<i>-src</i>].tar.bz2</tt> .
+
+<p>The "package" part of the filename is the name mentioned
+above.</p>
+
+<p>The version number <b>must</b> start with a digit and must adhere to
+the rules in <a href="#naming">package file naming</a> above.  Higher
+version numbers are used for the current version of a package; the
+previous stable version (if any) is used for the previous version
+(however see <a href="#setup.hint">setup.hint</a> for exceptions to
+this rule).</p>
+
+<p>The <i>-src</i> component of the filename is added to files which
+contain source code.</p>
+
+<p>A complete "package" is made up of three files: the "binary" package
+tar file, the "source" tar file, and the "setup.hint" file, e.g.:
+
+<pre>
+bash$ ls contrib/boffo
+boffo-1.0-1.tar.bz2  boffo-1.0-1-src.tar.bz2  setup.hint
+</pre>
+
+<p>Setup is currently unable to list more than three versions of each
+package.  Therefore you should not keep more than three versions of each
+package around: The current version, the previous stable version, and
+one test version.  By keeping a previous stable version around, you
+isolate yourself (somewhat) from problems with partial mirrors.  When
+you add a new "current" version, you can either keep the old "previous"
 version, or make the old current version the new previous version,
 depending on how stable they each were.</p>
 
 <p>Test versions are specified via the setup.hint file as described
-below.</p>
+below.  It is not required that your package have a <tt>test</tt>
+version.  Use of <tt>test</tt> is at the discretion of the package
+maintainer (see <a href="#setup.hint">below</a>).</p>
+
+<p>Note that currently some files in the distribution are gzipped.  Use of
+gzip for file compression is deprecated, however.  New package
+submissions must be bzip2'ed.</p>
 
 <h2><a id="setup.hint"><tt>setup.hint</tt></a></h2>
 
-<p>If the above rules don't work for your package, for some reason, you
-can amend them with a file called<tt> setup.hint </tt> which provides
-additional information for<tt> setup.ini </tt> to use.  Note that
-these files must be in subdirectories named after the package
-(i.e. <tt>latest/cygwin/setup.hint</tt> is for the cygwin package).
-Each line in<tt> setup.hint </tt> is one of the following:
+<p>Each package must contain a file called <tt>setup.hint</tt>.  This
+file is used for information that cannot be inferred just from the
+context of the file name or package name.  Each line in<tt> setup.hint
+</tt> is one of the following:
 
 <pre>
 @ <i>package</i>
@@ -80,26 +144,97 @@ category: <i>name1[ name2...]</i>
 requires: <i>package[ package...]</i>
 </pre>
 
+<p>(You may see some older setup.hint files which lack the colons after
+the introducing field.  This usage is allowed but deprecated.  Please
+use colons in your setup.hint)</p>
+
 <p>A line that begins with a "<tt>@</tt>" behaves similarly to the setup.ini
 field (see below).  It overrides the package name for the enclosing
-directory.</p>
+directory.  This is an optional entry.  Do <em>not</em> use it unless your
+package name is different from the name of the directory where the package
+resides.  This option is intended only for older packages which did not follow
+the rule of the directory name matching the package name.</p>
 
-<p>The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate which versions should be used
-for which sections of that package.  If any of them are valid, they
-replace <em>all</em> versions in setup.ini.</p>
+<p>The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate
+which versions should be used for which sections of that package.  Use
+these settings <em>only</em> if you need to circumvent the normal
+intuitive version numbering scheme.</p>
 
-<p>The <tt>skip</tt> line indicates that that package should not appear in
-setup.ini.</p>
+<p>So, if you had previously released boffo-0.9-1 and now have a new
+boffo-1.0-1, there is no need to use <tt>curr</tt> or <tt>prev</tt>.
+It is obvious that boffo-1.0-1 is newer than boffo-0.9-1 and the
+setup.ini generator will do the right thing in this case.</p>
 
-<p>The <tt>sdesc</tt> and <tt>ldesc</tt> texts are simply copied to setup.ini in the
-appropriate place.  Quote the text if you want the text to continue
-over multiple lines, e.g.:
+<p>However, if you had discovered a serious error in the boffo-1.0
+release, and then decided that you want to drop back to boffo-0.9-1, you
+would include entries like this:
 
 <pre>
-ldesc "this is
-a multi-line
-ldesc"
+prev: 1.0-1
+cur: 0.9-1
 </pre>
+
+This usage should be very rare, however.
+
+<p>In general, you should trust the sutomatic setup.ini generator to "do
+the right thing" -- with one exception.  If you decide that you need to
+release a <i>test</i> version of your package, there is no way for the
+setup.ini generator to know that.</p>
+
+<p>So, you will have to put something like <tt>test: 1.9-1</tt> in your
+setup.hint file.  This will cause setup.exe to characterize the package
+as a "test" package.  With the current setup.exe implementation, it will
+also mean that it will be overlooked by most people during installation.
+So, unless you have made arrangements to advertise your test release,
+this option should also be used very sparingly.</p>
+
+<p>If any of these settings are valid, they replace <em>all</em>
+versions in setup.ini.  So, if you include a <tt>test</tt> setting, and
+you have valid <tt>curr</tt> and/or <tt>prev</tt> settings, you
+<em>must</em> specify them also.  Otherwise, the <b>only</b> version
+that setup.exe will display will be the <tt>test</tt> version.</p>
+
+<p>The <tt>skip</tt> line indicates that that package should not appear in
+setup.ini.  It is intended for directories that exist in the hierarchy that
+should not be considered for inclusion in setup.ini.</p>
+
+<p><tt>sdesc</tt> and <tt>ldesc</tt> are both mandatory fields for
+setup.hint.  Your package <em>must</em>contain these fields.  The
+<tt>sdesc</tt> and <tt>ldesc</tt> texts are simply copied to setup.ini
+in the appropriate place.</p>
+
+<p><tt>sdesc</tt> is a one line description of the package.  This is the
+information that will be displayed when installing packages via
+setup.exe.</p>
+
+<p><tt>ldesc</tt> is a more descriptive, multi-line description of the
+package intended for future use in setup.exe.</p>
+
+Please note that the package name should <em>not</em> be part of the
+description, e.g., this is incorrect:
+
+<pre>
+sdesc:	"boffo: A whackamole simulation in ASCII art"
+</pre>
+
+This is correct:
+
+<pre>
+sdesc:	"A whackamole simulation in ASCII art"
+</pre>
+
+Quote the text if you want the text to continue over multiple lines,
+e.g.:
+
+<pre>
+ldesc: "A whackamole simulation in ASCII art.
+Intended for use on VT100 terminals at BAUD rates 1200 and
+above.  Uses arrow keys for positioning over moles.  Space
+bar whacks the mole.
+
+No actual moles will be harmed during execution of this game."
+</pre>
+
 
 <p>The <tt>category</tt> line indicates the categories that this package belongs
 to.  One package can belong to multiple categories.  Multiple categories
@@ -136,14 +271,16 @@ mailing list first.  As of this writing, the current categories are:<br>
 </tr>
 </table>
 
+Note that category names may be multi-word, e.g., "ASCII Games" but, currently
+all categories are only a single word.</p>
+
 <p>The <tt>requires</tt> line indicates the packages that this package relies on.
 A package can rely on multiple packages.  Multiple packages are
 separated by spaces.</p>
 <p>Do not enclose multiple package names within quotation marks.</p>
-<p>If your package is dependent on a file provided by another package that other package should be included here - this include cygwin1.dll!</p>
-
-<p>Note colons following keywords are optional in setup.hint file while they
-are mandatory in setup.ini.</p>
+<p>If your package is dependent on a file provided by another package
+that other package should be included here - this include
+cygwin1.dll!</p>
 
 <h2><a id="setup.ini"><tt>setup.ini</tt></a></h2>
 
@@ -210,9 +347,8 @@ version, and "test" indicates a test or experimental version.
 
 <p><tt>version: <i>version</i></tt></p>
 
-Indicates the version of the package.  While this can be derived from
-the file names, it currently is not, and in some cases cannot reliably
-be.
+Indicates the version of the package.  This is currently derived from
+the <a href="#naming">name of the package</a>.
 
 <p><tt>install: <i>filename</i> <i>size-in-bytes</i></tt></p>
 
