@@ -28,12 +28,12 @@ while (<S>) {
 }
 close S;
 
-open (F, "find $setupdirs -name '*.tar.gz' -print |");
+open (F, "find $setupdirs -name '*.tar.[bg]z*' -print |");
 
 while (<F>) {
     $file = $_;
     $file =~ s/[\r\n]+$//;
-    ($subdir, $package) = $file =~ m@(.*)/(.*).tar.gz@;
+    ($subdir, $package) = $file =~ m@(.*)/(.*).tar.(gz|bz2)@;
     $src = '';
     if ($package =~ /-src$/) {
 	$package =~ s/-src$//;
