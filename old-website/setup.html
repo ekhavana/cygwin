@@ -28,10 +28,11 @@ com instead.</p>
   <li><p><a href="#setup.hint">setup.hint</a></p></li>
   <li><p><a href="#setup.ini">setup.ini</a></p></li>
   <li><p><a href="#package_contents">making packages</a></p></li>
+  <li><p><a href="#postinstall">Creating a package postinstall script</a></p></li>
   <li><p><a href="#submitting">Submitting a package</a></p></li>
 </ul>
 
-<h2><a id="naming">Package file naming</a></h2>
+<h2><a id="naming" name="naming">Package file naming</a></h2>
 <p> Package naming scheme: use the vendor's version plus a suffix for
 ports of existing packages (i.e.  bash 2.04 becomes 2.04-1, 2.04-2, etc,
 until bash 2.05 is ported, which would be 2.05-1, etc).  Some packages
@@ -61,7 +62,7 @@ details on the contents of a -src tar file..</p>
 
 <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.
 
-<h2><a id="sources.redhat.com">Automatic setup.ini generation on sources.redhat.com</a></h2>
+<h2><a id="sources.redhat.com" name="sources.redhat.com">Automatic setup.ini generation on sources.redhat.com</a></h2>
 
 <p>A script runs on sources.redhat.com which collects information from
 (currently) the <tt>latest</tt> and <tt>contrib</tt> directories in the
@@ -122,7 +123,7 @@ at the discretion of the package maintainer.
 gzip for file compression is deprecated, however.  New package
 submissions must be bzip2'ed.</p>
 
-<h2><a id="setup.hint"><tt>setup.hint</tt></a></h2>
+<h2><a id="setup.hint" name="setup.hint"><tt>setup.hint</tt></a></h2>
 
 <p>Each package must be submitted with a file called <tt>setup.hint</tt>.  This
 file is used for information that cannot be inferred just from the
@@ -332,7 +333,7 @@ package names within quotation marks.</p>
 <tt>test</tt>, or <tt>@</tt> options.  Instead, we relied on the
 automatic setup.ini generator to do as much as possible for us.</p>
 
-<h2><a id="setup.ini"><tt>setup.ini</tt></a></h2>
+<h2><a id="setup.ini" name="setup.ini"><tt>setup.ini</tt></a></h2>
 
 <p>Note that <tt>setup.ini</tt> is automatically generated.  This
 section is for completeness, not instruction.
@@ -439,7 +440,7 @@ source:  latest/bash/bash-2.04-src.tar.bz2 1815177
 
 </pre>
 
-<h2><a id="package_contents">Making Packages</a></h2>
+<h2><a id="package_contents" name="package_contents">Making Packages</a></h2>
 <p>The files paths within both the -src and the binary package files are
 quite important.  Since setup.exe extracts into a predetermined
 directory, you must structure your package contents accordingly.</p>
@@ -474,7 +475,31 @@ directory, you must structure your package contents accordingly.</p>
   <li><p>Ensure that your package handles binary only systems, textmode only systems, and hybrid systems correctly.</p></li>
 </ul>
 
-<h2><a id="submitting">Submitting a package</a></h2>
+<h2><a id="postinstall" name="postinstall">Creating a package postinstall script</a></h2>
+
+<p>If your package requires certain commands to be executed after the
+files in the package are installed, include them in a file in the
+package called /etc/postinstall/<var>package</var>.sh or
+/etc/postinstall/<var>package</var>.bat.</p>
+
+<p>If the file's name ends in ".sh", it is executed with the Cygwin
+shell; if it ends in ".bat", it is executed with the DOS command
+interpreter.  If it doesn't end with either of these suffixes, it is
+ignored.</p>
+
+<p>After the script has been run it is renamed by appending the suffix
+".done" to its previous name, to prevent it from being run again the
+next time the user runs the setup program.</p>
+
+<p>Note that the setup program runs all the postinstall scripts after
+all desired packages have been installed, that is, it does not run
+each package's postinstall script immediately after installing that
+package.  Note, furthermore, that the order in which the scripts are
+run is not guaranteed.  Therefore, if your package depends on others
+which have their own postinstall scripts, you cannot assume in your
+script that the other packages' scripts have already been run.</p>
+
+<h2><a id="submitting" name="submitting">Submitting a package</a></h2>
 <p>So you've got a package you want to submit. Follow the following checklist before emailing cygwin-apps@cygwin.com and you'll almost certainly save time.</p>
 <ol>
   <li><p>Propose on cygwin-apps@cygwin.com that you are interested in becoming a package maintainer for package foo. Some packages cannot be distributed via cygwin's setup due to vendor licence limitations. Other packages may not be appropriate for cygwin. This step will save time if, for some reason we cannot accept the package.</p></li>
