@@ -108,6 +108,9 @@ for $p (sort keys %versions) {
 	    &push_version("curr", "prev", $v);
 	}
     }
+    if ( ! $type{"$p prev"} && $type{"$p junk"}) {
+	$type{"$p prev"} = $type{"$p junk"};
+    }
 }
 
 # Now look for overrides
