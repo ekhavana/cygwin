@@ -16,27 +16,25 @@ regular basis.
 <p> Recommended package versioning scheme: use the vendor's version
 plus a suffix for ports of existing packages (i.e. bash 2.04 becomes
 2.04-1, 2.04-2, etc, until bash 2.05 is ported, which would be 2.05-1,
-etc).  For experimental builds, use a YYYYMMDD datestamp version (like
-bash-20000901.tar.gz).  Binary tarballs are "package-version.tar.gz"
-while source tarballs are "package-version-src.tar.gz".
+etc).  Some packages also use a YYMMDD format for their versions, e.g.
+binutils-20010901.tar.bz2.  Binary tarballs are "package-version.tar.bz2"
+while source tarballs are "package-version-src.tar.bz2".</p>
 
 <h2>Automatic setup.ini generation on sources.redhat.com</h2>
 
-There is a script that runs on sources.redhat.com that collects
-information from the<tt> latest </tt>and<tt> contrib </tt> directories
-(possibly more in the future) and automatically generates the default
-setup.ini.  If you are putting packages in these directories, it is
-important that you understand how this program works.
+A script that runs on sources.redhat.com that collects information from
+the<tt> latest </tt>and<tt> contrib </tt> directories (possibly more in
+the future) and automatically generates the default setup.ini.  If you
+are putting packages in these directories, it is important that you
+understand how this program works.
 
-<p>Files that end in ".tar.gz" automatically qualify as packages.  It
-is assumed that the file is package-version[-src].tar.gz, and that the
-version number starts with a digit.  Version numbers that look like
-YYMMDD or YYYYMMDD indicate test versions, while other versions are
-considered stable (curr or prev) versions.  Highest version numbers
-are used for test and curr; the second highest stable version (if any)
-is prev.
+<p>Files that end in ".tar.bz2" or ".tar.gz" automatically qualify as
+packages.  It is assumed that the file is package-version[-src].tar.bz2,
+and that the version number starts with a digit.  Higher version numbers
+are used for the current version of a package; the next stable version
+(if any) is used for the previous version.</p>
 
-<p>I recommend you keep up to three versions of each package around:
+<p>We recommend you keep up to three versions of each package around:
 The current version, the previous stable version, and one test
 version.  By keeping a previous stable version around, you isolate
 yourself (somewhat) from problems with partial mirrors.  When you add
@@ -44,9 +42,12 @@ a new "current" version, you can either keep the old "previous"
 version, or make the old current version the new previous version,
 depending on how stable they each were.
 
+<p>Test versions are specified via the setup.hint file as described
+below.</p>
+
 <h2><tt>setup.hint</tt></h2>
 
-If the above rules don't work for your package, for some reason, you
+<p>If the above rules don't work for your package, for some reason, you
 can amend them with a file called<tt> setup.hint </tt> which provides
 additional information for<tt> setup.ini </tt> to use.  Note that
 these files must be in subdirectories named after the package
@@ -54,31 +55,89 @@ these files must be in subdirectories named after the package
 Each line in<tt> setup.hint </tt> is one of the following:
 
 <pre>
+@ <i>package</i>
 sdesc <i>some text</i>
 ldesc <i>some text</i>
 skip
 curr <i>version</i>
 prev <i>version</i>
 test <i>version</i>
+category <i>"name1[ name2...]"</i>
+requires <i>"package[ package...]"</i>
 </pre>
 
-The curr, prev, and test lines indicate which versions should be used
+<p>A line that begins with a "<tt>@</tt>" behaves similarly to the setup.ini
+field (see below).  It overrides the package name for the enclosing
+directory.</p>
+
+The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate which versions should be used
 for which sections of that package.  If any of them are valid, they
-repace <em>all</em> versions in setup.ini.  The skip line indicates
-that that package should not appear in setup.ini.  The sdesc and ldesc
-texts are simply copied to setup.ini in the appropriate place.  Note
-that these lines do not have colons while the setup.ini lines do.
+replace <em>all</em> versions in setup.ini.</p>
+
+<p>The <tt>skip</tt> line indicates that that package should not appear in
+setup.ini.</p>
+
+<p>The <tt>sdesc</tt> and <tt>ldesc</tt> texts are simply copied to setup.ini in the
+appropriate place.  Quote the text if you want the text to continue
+over multiple lines, e.g.:
+
+<pre>
+ldesc "this is
+a multi-line
+ldesc"
+</pre>
+
+<p>The <tt>category</tt> line indicates the categories that this package belongs
+to.  One package can belong to multiple categories.  Multiple categories
+are separated by spaces.</p>
+
+<p>Please do not invent a new category without checking with the cygwin-apps
+mailing list first.  As of this writing, the current categories are:<br>
+<table width=50% align=center>
+<tr>
+<td>Admin</td>
+<td>Archive</td>
+<td>Base</td>
+<td>Database</td>
+<td>Devel</td>
+</tr>
+<tr>
+<td>Doc</td>
+<td>Editors</td>
+<td>Graphics</td>
+<td>Interpreters</td>
+<td>Libs</td>
+</tr>
+<tr>
+<td>Mail</td>
+<td>Net</td>
+<td>Shells</td>
+<td>System</td>
+<td>Text</td>
+</tr>
+<tr>
+<td>Utils</td>
+<td>Web</td>
+</tr>
+</table>
+
+<p>The <tt>requires</tt> line indicates the packages that this package belongs to.
+A package can rely on multiple packages.  Multiple packages are
+separated by spaces.</p>
+
+<p>Note colons following keywords are optional in setup.hint file while they
+are mandatory in setup.ini.</p>
 
 <h2><tt>setup.ini</tt></h2>
 
-<p>Note that<tt> setup.ini </tt> is now automatically generated.  This
+<p>Note that <tt>setup.ini</tt> is automatically generated.  This
 section is for completeness, not instruction.
 
 <p>Setup reads a file called<tt> setup.ini </tt> that resides on all
-cygwin FTP mirrors.  There are a few (well, one) global parameters in
-this file, followed by a list of packages.  Any line beginning
-with<tt> # </tt> is ignored by setup and can be used to add commentary
-to the file at any point.
+cygwin FTP mirrors.  There are a two global parameters in this file,
+followed by a list of packages.  Any line beginning with<tt> # </tt> is
+ignored by setup and can be used to add commentary to the file at any
+point.
 
 <p><tt>setup-timestamp: <i>number</i></tt></p>
 
@@ -88,22 +147,41 @@ warn the user when the timestamp is <em>less</em> than the last
 setup.ini used; i.e. it prevents accidental regression.  Use "perl -e
 'print time'" to get a timestamp.
 
+<p><tt>setup-version: <i>number</i></tt></p>
+
+This line follows the setup-timestamp in all setupl.ini files.  It
+indicates the version number of the setup.exe for which this setup.ini
+was generated.
+
 <p><tt>@ <i>package</i></tt></p>
 
 Lines beginning with the "at" symbol indicate the start of a package
 section.  Each package consists of a name, one or more descriptive
-texts, and up to three version definitions.
+texts, package categories, package requirements, and up to three version
+definitions.
 
-<p><tt>sdesc: <i>some text</i></tt></p>
+<p><tt>sdesc: <i>"some text"</i></tt></p>
 
 This is the "short description" of the package.  This text, if
-available, replaces (<strong>not</strong> accompanies) the package
-name in package listings.
+available, accompanies the package name in package listings.
 
-<p><tt>ldesc: <i>some text</i></tt></p>
+<p><tt>ldesc: <i>"some text"</i></tt></p>
 
 This is the "long description" of the package.  This text, if
 available, is used as a supplimental description of the package.
+
+<p><tt>category: <i>"name1[ name2...]"</i></tt></p>
+
+The category line indicates the categories that this package belongs to.
+One package can belong to multiple categories.  Multiple categories are
+separated by spaces.  See the description of categories in setup.hint
+above for more information on categories.
+
+<p><tt>requires: <i>"package[ package...]</i></tt></p>
+
+The requires line indicates the packages that this package belongs to.  A
+package can rely on multiple packages.  Multiple packages are separated
+by spaces.
 
 <p><tt>[curr]<br>[prev]<br>[test]</tt></p>
 
@@ -139,22 +217,22 @@ setup-timestamp: 967844652
 sdesc: Cygwin Runtime
 ldesc: A Posix runtime emulator for Windows platforms
 version: 1.1.4
-install: latest/cygwin/cygwin-1.1.4.tar.gz 1234567
-source: latest/cygwin/cygwin-1.1.4.tar.gz 1341245
+install: latest/cygwin/cygwin-1.1.4.tar.bz2 1234567
+source: latest/cygwin/cygwin-1.1.4.tar.bz2 1341245
 [prev]
 version: 1.1.3
-install: latest/cygwin/cygwin-1.1.3.tar.gz 1234580
-source: latest/cygwin/cygwin-1.1.3.tar.gz 1341123
+install: latest/cygwin/cygwin-1.1.3.tar.bz2 1234580
+source: latest/cygwin/cygwin-1.1.3.tar.bz2 1341123
 
 @ bash
 [test]
 version: 20000901
-install: latest/bash/bash-20000901.tar.gz 276403
-source:  latest/bash/bash-20000901-src.tar.gz 1892899
+install: latest/bash/bash-20000901.tar.bz2 276403
+source:  latest/bash/bash-20000901-src.tar.bz2 1892899
 [curr]
 version: 2.04
-install: latest/bash/bash-2.04.tar.gz 277375
-source:  latest/bash/bash-2.04-src.tar.gz 1815177
+install: latest/bash/bash-2.04.tar.bz2 277375
+source:  latest/bash/bash-2.04-src.tar.bz2 1815177
 
 </pre>
 
