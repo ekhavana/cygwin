@@ -1,11 +1,11 @@
-What is it?
-***********
+1 What is it?
+*************
 
 The Cygwin tools are ports of the popular GNU development tools for
 Microsoft Windows.  They run thanks to the Cygwin library which
 provides the UNIX system calls and environment these programs expect.
 
-   With these tools installed, it is possible to write Win32 console or
+With these tools installed, it is possible to write Win32 console or
 GUI applications that make use of the standard Microsoft Win32 API
 and/or the Cygwin API.  As a result, it is possible to easily port many
 significant Unix programs without the need for extensive changes to the
@@ -16,12 +16,12 @@ little to no use to you, you may have interest in the many standard
 Unix utilities provided with the package.  They can be used both from
 the bash shell (provided) or from the standard Windows command shell.
 
-What versions of Windows are supported?
-=======================================
+1.1 What versions of Windows are supported?
+===========================================
 
-   Wait a minute... Cygwin is only _supported_ if you are paying for
-it, such as through a support contract with Red Hat.  For information
-about getting a Red Hat support contract, see
+Wait a minute... Cygwin is only _supported_ if you are paying for it,
+such as through a support contract with Red Hat.  For information about
+getting a Red Hat support contract, see
 `http://www.redhat.com/software/tools/cygwin/'.
 
    That said, Cygwin can be expected to run on all modern 32 bit
@@ -32,10 +32,10 @@ versions of Windows, except Windows CE.  This includes Windows
 supports.  Because of this, Cygwin will behave differently, and exhibit
 different limitations, on the various versions of Windows.
 
-Where can I get it?
-===================
+1.2 Where can I get it?
+=======================
 
-   The home page for the Cygwin project is `http://cygwin.com/'.  There
+The home page for the Cygwin project is `http://cygwin.com/'.  There
 you should find everything you need for Cygwin, including links for
 download and setup, a current list of mirror sites, a User's Guide, an
 API Reference, mailing lists and archives, and additional ported
@@ -46,12 +46,12 @@ software.
 local mirror.  Check `http://www.fsf.org/server/list-mirrors.html' for
 a list of them.)
 
-Is it free software?
-====================
+1.3 Is it free software?
+========================
 
-   Yes.  Parts are GNU software (gcc, gas, ld, etc...), parts are
-covered by the standard X11 license, some of it is public domain, some
-of it was written by Cygnus and placed under the GPL.  None of it is
+Yes.  Parts are GNU software (gcc, gas, ld, etc...), parts are covered
+by the standard X11 license, some of it is public domain, some of it
+was written by Cygnus and placed under the GPL.  None of it is
 shareware.  You don't have to pay anyone to use it but you should be
 sure to read the copyright section of the FAQ for more information on
 how the GNU General Public License may affect your use of these tools.
@@ -69,12 +69,12 @@ should be able to change it to fit their needs, learn from it, share it
 with their friends, etc.  The Cygwin license allows you those freedoms,
 so it is free software.
 
-What version of Cygwin _is_ this, anyway?
-=========================================
+1.4 What version of Cygwin _is_ this, anyway?
+=============================================
 
-   To find the version of the Cygwin DLL installed, you can use `uname'
-as on Linux or `cygcheck'. Refer to each command's `--help' output and
-the Cygwin User's Guide (http://cygwin.com/cygwin-ug-net/) for more
+To find the version of the Cygwin DLL installed, you can use `uname' as
+on Linux or `cygcheck'. Refer to each command's `--help' output and the
+Cygwin User's Guide (http://cygwin.com/cygwin-ug-net/) for more
 information.
 
    If you are looking for the version number for the whole Cygwin
@@ -91,13 +91,13 @@ information about using Cygwin's `setup.exe', see Setting Up Cygwin
 (http://cygwin.com/cygwin-ug-net/setup-net.html) in the Cygwin User's
 Guide.
 
-Installation Instructions
-*************************
+2 Installation Instructions
+***************************
 
-Contents
-========
+2.1 Contents
+============
 
-   There is only one recommended way to install Cygwin, which is to use
+There is only one recommended way to install Cygwin, which is to use
 the GUI installer "Cygwin Setup".  It is flexible and easy to use.  You
 can pick and choose the packages you wish to install, and update them
 individually.  Full source code is available for all packages and
@@ -115,17 +115,17 @@ mailing list.
    For a searchable list of packages that can be installed with Cygwin,
 see `http://cygwin.com/packages/'.
 
-Installation using "Cygwin Setup"
-=================================
+2.2 Installation using "Cygwin Setup"
+=====================================
 
-   The Cygwin Setup program is the _only_ recommended way to install
+The Cygwin Setup program is the _only_ recommended way to install
 Cygwin.
 
-Why not install in C:\?
------------------------
+2.2.1 Why not install in C:\?
+-----------------------------
 
-   The Cygwin Setup program will prompt you for a "root" directory.
-The default is `C:\cygwin', but you can change it.  You are urged not to
+The Cygwin Setup program will prompt you for a "root" directory.  The
+default is `C:\cygwin', but you can change it.  You are urged not to
 choose something like `C:\' (the root directory on the system drive) for
 your Cygwin root.  If you do, then critical Cygwin system directories
 like `etc', `lib' and `bin' could easily be corrupted by other
@@ -137,16 +137,15 @@ your Cygwin "filesystems" from the rest of your Windows system disk.
    (In the past, there had been genuine bugs that would cause problems
 for people who installed in `C:\', but we believe those are gone now.)
 
-Can I use Cygwin Setup to get old versions of packages (like gcc-2.95)?
------------------------------------------------------------------------
+2.2.2 Can I use Cygwin Setup to get old versions of packages (like gcc-2.95)?
+-----------------------------------------------------------------------------
 
-   Cygwin Setup can be used to install any packages that are on a
-Cygwin mirror, which usually includes one version previous to the
-current one. The complete list may be searched at
-`http://cygwin.com/packages/'.  There is no complete archive of older
-packages. If you have a problem with the current version of a Cygwin
-package, please report it to the mailing list using the guidelines at
-`http://cygwin.com/problems.html'.
+Cygwin Setup can be used to install any packages that are on a Cygwin
+mirror, which usually includes one version previous to the current one.
+The complete list may be searched at `http://cygwin.com/packages/'.
+There is no complete archive of older packages. If you have a problem
+with the current version of a Cygwin package, please report it to the
+mailing list using the guidelines at `http://cygwin.com/problems.html'.
 
    That said, if you really need an older package, you may be able to
 find an outdated or archival mirror by searching the web for an old
@@ -154,19 +153,19 @@ package version (for example, `gcc2-2.95.3-10-src.tar.bz2'), but keep in
 mind that this older version will not be supported by the mailing list
 and that installing the older version will not help improve Cygwin.
 
-Is Cygwin Setup, or one of the packages, infected with a virus?
----------------------------------------------------------------
+2.2.3 Is Cygwin Setup, or one of the packages, infected with a virus?
+---------------------------------------------------------------------
 
-   Unlikely.  Unless you can confirm it, please don't report it to the
+Unlikely.  Unless you can confirm it, please don't report it to the
 mailing list.  Anti-virus products have been known to detect false
 positives when extracting compressed tar archives.  If this causes
 problems for you, consider disabling your anti-virus software when
 running `setup'.  Read the next entry for a fairly safe way to do this.
 
-My computer hangs when I run Cygwin Setup!
-------------------------------------------
+2.2.4 My computer hangs when I run Cygwin Setup!
+------------------------------------------------
 
-   Both Network Associates (formerly McAfee) and Norton anti-virus
+Both Network Associates (formerly McAfee) and Norton anti-virus
 products have been reported to "hang" when extracting Cygwin tar
 archives.  If this happens to you, consider disabling your anti-virus
 software when running Cygwin Setup.  The following procedure should be
@@ -186,24 +185,24 @@ a fairly safe way to do that:
    This should be safe, but only if Cygwin Setup is not substituted by
 something malicious, and no mirror has been compromised.
 
-What packages should I download? Where are 'make', 'gcc', 'vi', etc?
---------------------------------------------------------------------
+2.2.5 What packages should I download? Where are 'make', 'gcc', 'vi', etc?
+--------------------------------------------------------------------------
 
-   When using Cygwin Setup for the first time, the default is to install
-a minimal subset of packages.  If you want anything beyond that, you
-will have to select it explicitly.  See `http://cygwin.com/packages/'
-for a searchable list of available packages.
+When using Cygwin Setup for the first time, the default is to install a
+minimal subset of packages.  If you want anything beyond that, you will
+have to select it explicitly.  See `http://cygwin.com/packages/' for a
+searchable list of available packages.
 
    If you want to build programs, of course you'll need `gcc',
 `binutils', `make' and probably other packages from the "Devel"
 category. Text editors can be found under "Editors".
 
-How do I just get everything?
------------------------------
+2.2.6 How do I just get everything?
+-----------------------------------
 
-   Long ago, the default was to install everything, much to the
-irritation of most users.  Now the default is to install only a basic
-core of packages.  Cygwin Setup is designed to make it easy to browse
+Long ago, the default was to install everything, much to the irritation
+of most users.  Now the default is to install only a basic core of
+packages.  Cygwin Setup is designed to make it easy to browse
 categories and select what you want to install or omit from those
 categories.  It's also easy to install everything:
 
@@ -241,13 +240,12 @@ them.
      You ought to check whether you _really_ want to install everything!
 
 
-How much disk space does Cygwin require?
-----------------------------------------
+2.2.7 How much disk space does Cygwin require?
+----------------------------------------------
 
-   That depends, obviously, on what you've chosen to download and
-install.  A full installation today is probably larger than 800MB
-installed, not including the package archives themselves nor the source
-code.
+That depends, obviously, on what you've chosen to download and install.
+A full installation today is probably larger than 800MB installed, not
+including the package archives themselves nor the source code.
 
    After installation, the package archives remain in your "Local
 Package Directory", by default the location of `setup.exe'.  You may
@@ -255,12 +253,12 @@ conserve disk space by deleting the subdirectories there.  These
 directories will have very weird looking names, being encoded with
 their URLs.
 
-What if setup fails?
---------------------
+2.2.8 What if setup fails?
+--------------------------
 
-   First, make sure that you are using the latest version of Cygwin
-Setup.  The latest version is always available from the 'Install Cygwin
-now' link on the Cygwin Home Page at `http://cygwin.com/'.
+First, make sure that you are using the latest version of Cygwin Setup.
+The latest version is always available from the 'Install Cygwin now'
+link on the Cygwin Home Page at `http://cygwin.com/'.
 
    If you are downloading from the Internet, setup will fail if it
 cannot download the list of mirrors at
@@ -285,10 +283,10 @@ list.  You must provide complete details in your query: version of
 setup, options you selected, contents of setup.log and setup.log.full,
 what happened that wasn't supposed to happen, etc.
 
-My Windows logon name has a space in it, will this cause problems?
-------------------------------------------------------------------
+2.2.9 My Windows logon name has a space in it, will this cause problems?
+------------------------------------------------------------------------
 
-   Most definitely yes!  UNIX shells (and thus Cygwin) use the space
+Most definitely yes!  UNIX shells (and thus Cygwin) use the space
 character as a word delimiter.  Under certain circumstances, it is
 possible to get around this with various shell quoting mechanisms, but
 you are much better off if you can avoid the problem entirely.
@@ -306,11 +304,11 @@ you are much better off if you can avoid the problem entirely.
 you can delete the offending entry from /etc/passwd.  Cygwin will then
 use the name in the default entry with uid 500.
 
-My `HOME' environment variable is not what I want.
---------------------------------------------------
+2.2.10 My `HOME' environment variable is not what I want.
+---------------------------------------------------------
 
-   When starting Cygwin from Windows, `HOME' is determined as follows
-in order of decreasing priority:
+When starting Cygwin from Windows, `HOME' is determined as follows in
+order of decreasing priority:
 
   1. `HOME' from the Windows environment, translated to POSIX form.
 
@@ -333,18 +331,18 @@ network, thus Domain users may wish to have a different `HOME' in the
 Windows environment (on shared drive) than in /etc/passwd (on local
 drive).  Note that ssh only considers /etc/passwd, disregarding `HOME'.
 
-How do I uninstall individual packages?
----------------------------------------
+2.2.11 How do I uninstall individual packages?
+----------------------------------------------
 
-   Run Cygwin Setup as you would to install packages.  In the list of
+Run Cygwin Setup as you would to install packages.  In the list of
 packages to install, browse the relevant category or click on the
 "View" button to get a full listing.  Click on the cycle glyph until
 the action reads "Uninstall".  Proceed by clicking "Next".
 
-How do I uninstall *all* of Cygwin?
------------------------------------
+2.2.12 How do I uninstall *all* of Cygwin?
+------------------------------------------
 
-   Setup has no automatic uninstall facility.  Just delete everything
+Setup has no automatic uninstall facility.  Just delete everything
 manually:
 
    * Cygwin shortcuts on the Desktop and Start Menu
@@ -361,10 +359,14 @@ manually:
 such as installing the inetd service, altering system paths, etc.  Setup
 would not have done any of these things for you.
 
-How do I install snapshots?
----------------------------
+   If you want to save your mount points for a later reinstall, save the
+output of `mount -m' as described at
+`http://cygwin.com/cygwin-ug-net/using-utils.html#mount'.
 
-   First, are you sure you want to do this?  Snapshots are risky.  They
+2.2.13 How do I install snapshots?
+----------------------------------
+
+First, are you sure you want to do this?  Snapshots are risky.  They
 have not been tested.  Use them *only* if there is a feature or bugfix
 that you need to try, and you are willing to deal with any problems.
 
@@ -391,25 +393,25 @@ but it should succeed with everything else.
      to `C:\cygwin\bin\cygwin1.dll'.
 
 
-Can Cygwin Setup maintain a "mirror"?
--------------------------------------
+2.2.14 Can Cygwin Setup maintain a "mirror"?
+--------------------------------------------
 
-   NO.  Cygwin Setup cannot do this for you.  Use a tool designed for
-this purpose.  See `http://rsync.samba.org/', `http://wget.sunsite.dk/'
-for utilities that can do this for you.  For more information on
-setting up a custom Cygwin package server, see the Cygwin Setup
-homepage at `http://sources.redhat.com/cygwin-apps/setup.html'.
+NO.  Cygwin Setup cannot do this for you.  Use a tool designed for this
+purpose.  See `http://rsync.samba.org/', `http://wget.sunsite.dk/' for
+utilities that can do this for you.  For more information on setting up
+a custom Cygwin package server, see the Cygwin Setup homepage at
+`http://sources.redhat.com/cygwin-apps/setup.html'.
 
-Question and Answers
-********************
+3 Question and Answers
+**********************
 
-Where can I get more information?
-=================================
+3.1 Where can I get more information?
+=====================================
 
-Where's the documentation?
---------------------------
+3.1.1 Where's the documentation?
+--------------------------------
 
-   If you have installed Cygwin, you can find lots of documentation in
+If you have installed Cygwin, you can find lots of documentation in
 `/usr/share/doc/'.  Many packages ship with standard documentation,
 which you can find in `/usr/share/doc/_package_name_' or by using the
 `man' or `info' tools. (Hint: use `cygcheck -l _package_name_' to list
@@ -433,11 +435,11 @@ Reference at `http://cygwin.com/cygwin-api/cygwin-api.html'.
 local mirror, check `http://www.fsf.org/server/list-mirrors.html' for a
 list of them.)
 
-What Cygwin mailing lists can I join?
--------------------------------------
+3.1.2 What Cygwin mailing lists can I join?
+-------------------------------------------
 
-   Comprehensive information about the Cygwin mailing lists can be
-found at `http://cygwin.com/lists.html'.
+Comprehensive information about the Cygwin mailing lists can be found at
+`http://cygwin.com/lists.html'.
 
    To subscribe to the main list, send a message to
 cygwin-subscribe@cygwin.com.  To unsubscribe from the main list, send a
@@ -466,10 +468,10 @@ terms.
 measures in your email address are neither required nor appreciated.
 Also, avoid sending HTML content to Cygwin mailing lists.
 
-Posting Guidelines (Or: Why won't you/the mailing list answer my questions?)
-----------------------------------------------------------------------------
+3.1.3 Posting Guidelines (Or: Why won't you/the mailing list answer my questions?)
+----------------------------------------------------------------------------------
 
-   If you follow these guidelines, you are much more likely to get a
+If you follow these guidelines, you are much more likely to get a
 helpful response from the Cygwin developers and/or the Cygwin community
 at large:
 
@@ -534,13 +536,13 @@ response, but you may not appreciate it!
    Beyond that, perhaps nobody has time to answer your question.
 Perhaps nobody knows the answer.
 
-Using Cygwin
-============
+3.2 Using Cygwin
+================
 
-Why can't my application locate cygncurses5.dll?  or cygintl.dll?  or cygreadline5.dll?  or ...?
-------------------------------------------------------------------------------------------------
+3.2.1 Why can't my application locate cygncurses5.dll?  or cygintl.dll?  or cygreadline5.dll?  or ...?
+------------------------------------------------------------------------------------------------------
 
-   If you upgraded recently, and suddenly vim (or some other Cygwin
+If you upgraded recently, and suddenly vim (or some other Cygwin
 application) cannot find `cygncurses5.dll', it means that you did not
 follow these instructions properly:
 `http://cygwin.com/ml/cygwin-announce/2001/msg00124.html'.  To repair
@@ -561,10 +563,10 @@ it to other missing DLLs (like cygreadline5.dll) and identify their
 containing packages, see
 `http://cygwin.com/ml/cygwin/2002-01/msg01619.html'.
 
-Why is Cygwin suddenly _so_ slow?
----------------------------------
+3.2.2 Why is Cygwin suddenly _so_ slow?
+---------------------------------------
 
-   If you recently upgraded and suddenly _every_ command takes a _very_
+If you recently upgraded and suddenly _every_ command takes a _very_
 long time, then something is probably attempting to access a network
 share.  You may have the obsolete `//c' notation in your PATH or
 startup files.  This now means the _network share_ `c', which will slow
@@ -577,10 +579,10 @@ and no longer works at all in the latest release.  As of release 1.3.3,
 why this change was made, and how deal with it now, refer to
 `http://sources.redhat.com/ml/cygwin/2001-09/msg00014.html'.
 
-Why don't my services work (or access network shares)?
-------------------------------------------------------
+3.2.3 Why don't my services work (or access network shares)?
+------------------------------------------------------------
 
-   Most Windows services run as a special user called `SYSTEM'.  If you
+Most Windows services run as a special user called `SYSTEM'.  If you
 installed Cygwin for "Just Me", the `SYSTEM' user won't see your Cygwin
 mount table.  You need to re-mount all of your mounts as "system" for
 services to work. You can re-run `setup.exe' and select "Install for
@@ -597,12 +599,12 @@ authentication (for non-critical files), or running the service as your
 own user with `cygrunsrv -u' (see
 `/usr/share/doc/Cygwin/cygrunsrv.README' for more information).
 
-How should I set my PATH?
--------------------------
+3.2.4 How should I set my PATH?
+-------------------------------
 
-   This is done for you in the file /etc/profile, which is sourced by
-bash when you start it from the Desktop or Start Menu shortcut, created
-by `setup.exe'.  The line is
+This is done for you in the file /etc/profile, which is sourced by bash
+when you start it from the Desktop or Start Menu shortcut, created by
+`setup.exe'.  The line is
 
      	PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
 
@@ -614,10 +616,10 @@ Windows system directories.  (And you must not omit the Windows system
 directories!)  Otherwise you will likely encounter all sorts of
 problems running Cygwin applications.
 
-Bash says "command not found", but it's right there!
-----------------------------------------------------
+3.2.5 Bash says "command not found", but it's right there!
+----------------------------------------------------------
 
-   If you compile a program, you might find that you can't run it:
+If you compile a program, you might find that you can't run it:
 
      	bash$ gcc -o hello hello.c
              bash$ hello
@@ -632,10 +634,10 @@ tell bash where to find it, when you type it on the command line:
              bash$ ./hello
              Hello World!
 
-How do I convert between Windows and UNIX paths?
-------------------------------------------------
+3.2.6 How do I convert between Windows and UNIX paths?
+------------------------------------------------------
 
-   Use the 'cygpath' utility.  Type '`cygpath --help'' for information.
+Use the 'cygpath' utility.  Type '`cygpath --help'' for information.
 For example (on my installation):
      	bash$ cygpath --windows ~/.bashrc
              D:\starksb\.bashrc
@@ -647,18 +649,18 @@ For example (on my installation):
 so you must type it twice in the bash shell if you want it to be
 recognized as such.
 
-Why doesn't bash read my .bashrc file on startup?
--------------------------------------------------
+3.2.7 Why doesn't bash read my .bashrc file on startup?
+-------------------------------------------------------
 
-   Your .bashrc is read from your home directory specified by the HOME
+Your .bashrc is read from your home directory specified by the HOME
 environment variable.  It uses /.bashrc if HOME is not set.  So you need
 to set HOME correctly, or move your .bashrc to the top of the drive
 mounted as / in Cygwin.
 
-How can I get bash filename completion to be case insensitive?
---------------------------------------------------------------
+3.2.8 How can I get bash filename completion to be case insensitive?
+--------------------------------------------------------------------
 
-   Add the following to your `~/.bashrc' file:
+Add the following to your `~/.bashrc' file:
 
      	shopt -s nocaseglob
 
@@ -666,10 +668,10 @@ How can I get bash filename completion to be case insensitive?
 
      	set completion-ignore-case on
 
-Can I use paths/filenames containing spaces in them?
-----------------------------------------------------
+3.2.9 Can I use paths/filenames containing spaces in them?
+----------------------------------------------------------
 
-   Cygwin does support spaces in filenames and paths.  That said, some
+Cygwin does support spaces in filenames and paths.  That said, some
 utilities that use the library may not, since files don't typically
 contain spaces in Unix.  If you stumble into problems with this, you
 will need to either fix the utilities or stop using spaces in filenames
@@ -682,10 +684,10 @@ character.  For example:
    or
      	bash-2.03$ cd /cygdrive/c/Program\ Files
 
-Why can't I cd into a shortcut to a directory?
-----------------------------------------------
+3.2.10 Why can't I cd into a shortcut to a directory?
+-----------------------------------------------------
 
-   This is only valid up to but not including version 1.3.0:
+This is only valid up to but not including version 1.3.0:
 
    Cygwin does not follow MS Windows Explorer Shortcuts (*.lnk files).
 It sees a shortcut as a regular file and this you cannot "cd" into it.
@@ -697,10 +699,10 @@ native Win32 non-Cygwin applications such as Explorer.
 
    Since version 1.3.0, Cygwin treats shortcuts as symlinks.
 
-I'm having basic problems with find.  Why?
-------------------------------------------
+3.2.11 I'm having basic problems with find.  Why?
+-------------------------------------------------
 
-   Make sure you are using the find that came with Cygwin and that you
+Make sure you are using the find that came with Cygwin and that you
 aren't picking up the Win32 find command instead.  You can verify that
 you are getting the right one by doing a "type find" in bash.
 
@@ -715,10 +717,10 @@ of find's optimisations.  The absence of `.' and `..' directories on
 some filesystems, such as DVD-R UDF, can confuse find.  See the
 documentation for the option `-noleaf' in the man page.
 
-Why doesn't `su' work?
-----------------------
+3.2.12 Why doesn't `su' work?
+-----------------------------
 
-   The `su' command has been in and out of Cygwin distributions, but it
+The `su' command has been in and out of Cygwin distributions, but it
 has not been ported to Cygwin and has never worked.  It is currently
 installed as part of the sh-utils, but again, it does not work.
 
@@ -729,10 +731,10 @@ installed as part of the sh-utils, but again, it does not work.
 `http://www.cygwin.com/ml/cygwin/2003-06/msg00897.html' and related
 messages.
 
-Why doesn't man (or apropos) work?
-----------------------------------
+3.2.13 Why doesn't man (or apropos) work?
+-----------------------------------------
 
-   Even after installing the `man' package, you get an error like this:
+Even after installing the `man' package, you get an error like this:
 
      	bash-2.04$ man man
      	Error executing formatting or display command.
@@ -749,11 +751,11 @@ create the whatis database.  Just run the command
 
    (it may take a minute to complete).
 
-Why doesn't chmod work?
------------------------
+3.2.14 Why doesn't chmod work?
+------------------------------
 
-   `ntsec' will allow UNIX permissions in Windows NT on NTFS file
-systems.  This is on by default (a recent change).
+`ntsec' will allow UNIX permissions in Windows NT on NTFS file systems.
+This is on by default (a recent change).
 
    `ntea' works on NTFS _and_ FAT but it creates a huge, *undeletable*
 file on FAT filesystems.
@@ -771,10 +773,10 @@ the application's source code.  For a hint, based on work done by
 Corinna Vinschen for OpenSSH, see this message from the cygwin mailing
 list: `http://cygwin.com/ml/cygwin/2000-11/msg01176.html'.
 
-Why doesn't `mkdir -p' work on a network share?
------------------------------------------------
+3.2.15 Why doesn't `mkdir -p' work on a network share?
+------------------------------------------------------
 
-   Unfortunately, you cannot do something like this:
+Unfortunately, you cannot do something like this:
 
      bash$ mkdir -p //MACHINE/Share/path/to/new/dir
      mkdir: cannot create directory `//MACHINE': No such file or directory
@@ -790,13 +792,13 @@ it:
      bash$ cd //MACHINE/Share
      bash$ mkdir -p path/to/new/dir
 
-Why doesn't my shell script work?
----------------------------------
+3.2.16 Why doesn't my shell script work?
+----------------------------------------
 
-   There are two basic problems you might run into.  One is the fact
-that /bin/sh is really ash, and is missing some features you might
-expect in /bin/sh, particularly if you are used to /bin/sh actually
-being bash (Linux) or ksh (Tru64).  For example:
+There are two basic problems you might run into.  One is the fact that
+/bin/sh is really ash, and is missing some features you might expect in
+/bin/sh, particularly if you are used to /bin/sh actually being bash
+(Linux) or ksh (Tru64).  For example:
 
    bullet No `~' expansion (use $HOME instead)
 
@@ -832,10 +834,10 @@ under the mount point as executable.  This can be used for individual
 files as well as directories.  Then Cygwin will not bother to read files
 to determine whether they are executable.
 
-How do I print under Cygwin?
-----------------------------
+3.2.17 How do I print under Cygwin?
+-----------------------------------
 
-   There is no working lp or lpr system as you would find on UNIX.
+There is no working lp or lpr system as you would find on UNIX.
 
    Jason Tishler has written a couple of messages that explain how to
 use a2ps (for nicely formatted text in PostScript) and ghostscript (to
@@ -857,10 +859,10 @@ does not seem to be available on Win9x.)  Type
    You may need to press the formfeed button on your printer or append
 the formfeed character to your file.
 
-Why don't international (Unicode) characters work?
---------------------------------------------------
+3.2.18 Why don't international (Unicode) characters work?
+---------------------------------------------------------
 
-   Internationalization is a complex issue. The short answer is that
+Internationalization is a complex issue. The short answer is that
 Cygwin is not Unicode-aware, so things that might work in Linux will
 not necessarily work on Cygwin. However, some things do work. To type
 international characters (£åäö) in `bash', add the following lines to
@@ -884,11 +886,11 @@ additional settings, which could be put in your `~/.bashrc':
    These examples use the Japanese Shift-JIS character set, obviously
 you will want to change them for your own locale.
 
-Why don't cursor keys work under Win95/Win98?
----------------------------------------------
+3.2.19 Why don't cursor keys work under Win95/Win98?
+----------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    Careful examination shows that they not just non-functional, but
 rather behave strangely, for example, with NumLock off, keys on numeric
@@ -913,11 +915,11 @@ keyboard layout editor. But it has russian messages and documentation
 (note the you may need to turn off Windows logo for Keyrus to operate
 properly).
 
-Is it OK to have multiple copies of the DLL?
---------------------------------------------
+3.2.20 Is it OK to have multiple copies of the DLL?
+---------------------------------------------------
 
-   You should only have one copy of the Cygwin DLL on your system.  If
-you have multiple versions, they will conflict and cause problems.
+You should only have one copy of the Cygwin DLL on your system.  If you
+have multiple versions, they will conflict and cause problems.
 
    If you get the error "shared region is corrupted" or "shared region
 version mismatch" it means you have multiple versions of cygwin1.dll
@@ -931,23 +933,23 @@ are the cause.  Then use the Windows System find utility to search your
 whole machine, not just components in your PATH (as 'type' would do) or
 cygwin-mounted filesystems (as Cygwin 'find' would do).
 
-Where can I find "more"?
-------------------------
+3.2.21 Where can I find "more"?
+-------------------------------
 
-   If you are looking for the "more" pager, you should use the "less"
-pager instead.
+If you are looking for the "more" pager, you should use the "less" pager
+instead.
 
-Why isn't package XXXX available in Cygwin?  (Or, why is your package so out of date?)
---------------------------------------------------------------------------------------
+3.2.22 Why isn't package XXXX available in Cygwin?  (Or, why is your package so out of date?)
+---------------------------------------------------------------------------------------------
 
-   Probably because there is nobody willing or able to maintain it.  It
+Probably because there is nobody willing or able to maintain it.  It
 takes time, and the priority for the Cygwin Team is the Cygwin package.
 The rest is a volunteer effort.  Want to contribute?  See below.
 
-How can I access other drives?
-------------------------------
+3.2.23 How can I access other drives?
+-------------------------------------
 
-   You have some flexibility here.
+You have some flexibility here.
 
    Cygwin has a builtin "cygdrive prefix" for drives that are not
 mounted.  You can access any drive, say Z:, as '/cygdrive/z/'.
@@ -998,11 +1000,11 @@ binmode or textmode using the `mount' command.  For example,
      	bash$ mount -b --change-cygdrive-prefix cygdrive
    will change all `/cygdrive/...' mounts to binmode.
 
-How can I copy and paste into Cygwin console windows?
------------------------------------------------------
+3.2.24 How can I copy and paste into Cygwin console windows?
+------------------------------------------------------------
 
-   First, consider using rxvt instead of the standard console window.
-In rxvt, selecting with the left-mouse also copies, and middle-mouse
+First, consider using rxvt instead of the standard console window.  In
+rxvt, selecting with the left-mouse also copies, and middle-mouse
 pastes.  It couldn't be easier!
 
    Under Windows NT, open the properties dialog of the console window.
@@ -1016,11 +1018,11 @@ Select the Misc tab.  Uncheck Fast Pasting.  Check QuickEdit.
 adding the following line to your .inputrc file:
      	"\e[2~": paste-from-clipboard
 
-What does "mount failed: Device or resource busy" mean?
--------------------------------------------------------
+3.2.25 What does "mount failed: Device or resource busy" mean?
+--------------------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    This usually means that you are trying to mount to a location
 already in use by mount.  For example, if c: is mounted as '/' and you
@@ -1034,24 +1036,24 @@ in one of the mount points kept under HKEY_CURRENT_USER/Software/Red
 Hat, Inc./CYGWIN.DLL setup/<version> where <version> is the latest
 registry version associated with the Cygwin library.
 
-How can I share files between Unix and Windows?
------------------------------------------------
+3.2.26 How can I share files between Unix and Windows?
+------------------------------------------------------
 
-   During development, we have both Unix boxes running Samba and
+During development, we have both Unix boxes running Samba and
 NT/Windows 95/98 machines.  We often build with cross-compilers under
 Unix and copy binaries and source to the Windows system or just toy
 with them directly off the Samba-mounted partition.  On dual-boot
 NT/Windows 9x machines, we usually use the FAT filesystem so we can
 also access the files under Windows 9x.
 
-Are mixed-case filenames possible with Cygwin?
-----------------------------------------------
+3.2.27 Are mixed-case filenames possible with Cygwin?
+-----------------------------------------------------
 
-   Several Unix programs expect to be able to use to filenames spelled
-the same way, but with different case.  A prime example of this is
-perl's configuration script, which wants `Makefile' and `makefile'.
-WIN32 can't tell the difference between files with just different case,
-so the configuration fails.
+Several Unix programs expect to be able to use to filenames spelled the
+same way, but with different case.  A prime example of this is perl's
+configuration script, which wants `Makefile' and `makefile'.  WIN32
+can't tell the difference between files with just different case, so
+the configuration fails.
 
    In releases prior to beta 16, mount had a special mixed case option
 which renamed files in such a way as to allow mixed case filenames.  We
@@ -1063,22 +1065,22 @@ only in case, resulting in some (very) undesirable behavior.
    Sergey Okhapkin had maintained a mixed-case patch ('coolview') until
 about B20.1, but this has not been updated to recent versions of Cygwin.
 
-What about DOS special filenames?
----------------------------------
+3.2.28 What about DOS special filenames?
+----------------------------------------
 
-   Files cannot be named com1, lpt1, or aux (to name a few); either as
-the root filename or as the extension part.  If you do, you'll have
+Files cannot be named com1, lpt1, or aux (to name a few); either as the
+root filename or as the extension part.  If you do, you'll have
 trouble.  Unix programs don't avoid these names which can make things
 interesting.  E.g., the perl distribution has a file called `aux.sh'.
 The perl configuration tries to make sure that `aux.sh' is there, but
 an operation on a file with the magic letters 'aux' in it will hang.
 
-When it hangs, how do I get it back?
-------------------------------------
+3.2.29 When it hangs, how do I get it back?
+-------------------------------------------
 
-   If something goes wrong and the tools hang on you for some reason
-(easy to do if you try and read a file called aux.sh), first try
-hitting ^C to return to bash or the cmd prompt.
+If something goes wrong and the tools hang on you for some reason (easy
+to do if you try and read a file called aux.sh), first try hitting ^C to
+return to bash or the cmd prompt.
 
    If you start up another shell, and applications don't run, it's a
 good bet that the hung process is still running somewhere.  Use the Task
@@ -1087,11 +1089,10 @@ Manager, pview, or a similar utility to kill the process.
    And, if all else fails, there's always the reset button/power switch.
 This should never be necessary under Windows NT.
 
-Why the weird directory structure?
-----------------------------------
+3.2.30 Why the weird directory structure?
+-----------------------------------------
 
-   Why do /lib and /usr/lib (and /bin, /usr/bin) point to the same
-thing?
+Why do /lib and /usr/lib (and /bin, /usr/bin) point to the same thing?
 
    Why use mounts instead of symbolic links?
 
@@ -1138,10 +1139,10 @@ applications that may create (for example) \bin and \lib directories.
 (Maybe you have nothing like that installed now, but who knows about
 things you might add in the future?)
 
-How do anti-virus programs like Cygwin?
----------------------------------------
+3.2.31 How do anti-virus programs like Cygwin?
+----------------------------------------------
 
-   Users have reported that NAI (formerly McAfee) VirusScan for NT (and
+Users have reported that NAI (formerly McAfee) VirusScan for NT (and
 others?) is incompatible with Cygwin.  This is because it tries to scan
 the newly loaded shared memory in cygwin1.dll, which can cause fork() to
 fail, wreaking havoc on many of the tools.  (It is not confirmed that
@@ -1160,18 +1161,18 @@ directories whose contents are exempt from scanning.  In a default
 installation, this would be ``C:\cygwin\bin''.  Obviously, this could be
 exploited by a hostile non-Cygwin program, so do this at your own risk.
 
-Is there a Cygwin port of GNU Emacs?
-------------------------------------
+3.2.32 Is there a Cygwin port of GNU Emacs?
+-------------------------------------------
 
-   Yes!  It uses the X11 (`http://cygwin.com/xfree/') Windows
-interface.  From a remote login shell, this "emacs -nw" works fine.
-There is also a non-X11 version which just provides the text-only
-terminal interface.  Use Cygwin Setup to install either one (or both).
+Yes!  It uses the X11 (`http://cygwin.com/xfree/') Windows interface.
+From a remote login shell, this "emacs -nw" works fine.  There is also
+a non-X11 version which just provides the text-only terminal interface.
+Use Cygwin Setup to install either one (or both).
 
-What about NT Emacs?
---------------------
+3.2.33 What about NT Emacs?
+---------------------------
 
-   If you want GNU Emacs with a native Microsoft Windows interface, but
+If you want GNU Emacs with a native Microsoft Windows interface, but
 without X, then you must use the native Windows port, commonly known as
 "NT Emacs".  You get NT Emacs from any GNU mirror.  It is not available
 from Cygwin Setup.
@@ -1210,30 +1211,30 @@ from `http://www.emacswiki.org/elisp/index.html'.
    Note that all of this "just works" if you use the Cygwin port of
 Emacs from Cygwin Setup.
 
-What about XEmacs?
-------------------
+3.2.34 What about XEmacs?
+-------------------------
 
-   For a concise description of the current situation with XEmacs, see
+For a concise description of the current situation with XEmacs, see
 this message from the Cygwin mailing list:
 `http://cygwin.com/ml/cygwin/2002-11/msg00609.html'.
 
-Is there a better alternative to the standard console window?
--------------------------------------------------------------
+3.2.35 Is there a better alternative to the standard console window?
+--------------------------------------------------------------------
 
-   Yes!  Use rxvt instead.  It's an optional package in Cygwin Setup.
-You can use it with or without X11.  You can resize it easily by
-dragging an edge or corner.  Copy and paste is easy with the left and
-middle mouse buttons, respectively.  It will honor settings in your
+Yes!  Use rxvt instead.  It's an optional package in Cygwin Setup.  You
+can use it with or without X11.  You can resize it easily by dragging
+an edge or corner.  Copy and paste is easy with the left and middle
+mouse buttons, respectively.  It will honor settings in your
 ~/.Xdefaults file, even without X.
 
    Don't invoke as simply "rxvt" because that will run /bin/sh (really
 ash) which is not a good interactive shell.  For details see
-`/usr/share/doc/Cygwin/rxvt-<ver>.README'.
+`/usr/doc/Cygwin/rxvt-<ver>.README'.
 
-info error "dir: No such file or directory"
--------------------------------------------
+3.2.36 info error "dir: No such file or directory"
+--------------------------------------------------
 
-   Cygwin packages install their info documentation in the
+Cygwin packages install their info documentation in the
 `/usr/share/info' directory.  But you need to create a `dir' file there
 before the standalone info program (probably `/usr/bin/info') can be
 used to read those info files.  This is how you do it:
@@ -1249,10 +1250,10 @@ have to add their entries to `/usr/share/info/dir' by hand.
 you install new Cygwin packages.  Some packages update the dir file for
 you, but many don't.
 
-Why do I get a message saying Out of Queue slots?
--------------------------------------------------
+3.2.37 Why do I get a message saying Out of Queue slots?
+--------------------------------------------------------
 
-   "Out of queue slots!" generally occurs when you're trying to remove
+"Out of queue slots!" generally occurs when you're trying to remove
 many files that you do not have permission to remove (either because
 you don't have permission, they are opened exclusively, etc).  What
 happens is Cygwin queues up these files with the supposition that it
@@ -1264,10 +1265,10 @@ you're asking about.  Usually you can remedy this with a quick chmod,
 close of a file, or other such thing.  (Thanks to Larry Hall for this
 explanation).
 
-Why don't symlinks work on samba-mounted filesystems?
------------------------------------------------------
+3.2.38 Why don't symlinks work on samba-mounted filesystems?
+------------------------------------------------------------
 
-   Symlinks are marked with "system" file attribute.  Samba does not
+Symlinks are marked with "system" file attribute.  Samba does not
 enable this attribute by default.  To enable it, consult your Samba
 documentation and then add these lines to your samba configuration file:
 
@@ -1276,17 +1277,17 @@ documentation and then add these lines to your samba configuration file:
 
    Note that the 0775 can be anything as long as the 0010 bit is set.
 
-Why does df report sizes incorrectly.
--------------------------------------
+3.2.39 Why does df report sizes incorrectly.
+--------------------------------------------
 
-   There is a bug in the Win32 API function GetFreeDiskSpace that makes
-it return incorrect values for disks larger than 2 GB in size.  Perhaps
+There is a bug in the Win32 API function GetFreeDiskSpace that makes it
+return incorrect values for disks larger than 2 GB in size.  Perhaps
 that may be your problem?
 
-Why doesn't Cygwin tcl/tk understand Cygwin paths?
---------------------------------------------------
+3.2.40 Why doesn't Cygwin tcl/tk understand Cygwin paths?
+---------------------------------------------------------
 
-   The versions of Tcl/Tk distributed with Cygwin (e.g. cygtclsh80.exe,
+The versions of Tcl/Tk distributed with Cygwin (e.g. cygtclsh80.exe,
 cygwish80.exe) are not actually "Cygwin versions" of those tools.  They
 are built with the `-mno-cygwin' option to `gcc', which means they do
 not understand Cygwin mounts or symbolic links.
@@ -1294,14 +1295,14 @@ not understand Cygwin mounts or symbolic links.
    See the entry "How do I convert between Windows and UNIX paths?"
 elsewhere in this FAQ.
 
-Cygwin API Questions
-====================
+3.3 Cygwin API Questions
+========================
 
-How does everything work?
--------------------------
+3.3.1 How does everything work?
+-------------------------------
 
-   There's a C library which provides a Unix-style API.  The
-applications are linked with it and voila - they run on Windows.
+There's a C library which provides a Unix-style API.  The applications
+are linked with it and voila - they run on Windows.
 
    The aim is to add all the goop necessary to make your apps run on
 Windows into the C library.  Then your apps should run on Unix and
@@ -1316,20 +1317,21 @@ Cygwin published by the Usenix Association in conjunction with the 2d
 Usenix NT Symposium in August 1998.  It is available in HTML format on
 the project WWW site.
 
-Are development snapshots for the Cygwin library available?
------------------------------------------------------------
+3.3.2 Are development snapshots for the Cygwin library available?
+-----------------------------------------------------------------
 
-   Yes.  They're made whenever anything interesting happens inside the
+Yes.  They're made whenever anything interesting happens inside the
 Cygwin library (usually roughly on a nightly basis, depending on how
 much is going on).  They are only intended for those people who wish to
 contribute code to the project.  If you aren't going to be happy
 debugging problems in a buggy snapshot, avoid these and wait for a real
-release.  The snapshots are available from http://cygwin.com/snapshots/
+release.  The snapshots are available from
+`http://cygwin.com/snapshots/'.
 
-How is the DOS/Unix CR/LF thing handled?
-----------------------------------------
+3.3.3 How is the DOS/Unix CR/LF thing handled?
+----------------------------------------------
 
-   Let's start with some background.
+Let's start with some background.
 
    In UNIX, a file is a file and what the file contains is whatever the
 program/programmer/user told it to put into it.  In Windows, a file is
@@ -1376,18 +1378,18 @@ since they have no meaning to UNIX.
    Explanation adapted from mailing list email by Earnie Boyd
 <earnie_boyd@yahoo.com>.
 
-Is the Cygwin library multi-thread-safe?
-----------------------------------------
+3.3.4 Is the Cygwin library multi-thread-safe?
+----------------------------------------------
 
-   Yes.
+Yes.
 
    There is also extensive support for 'POSIX threads', see the file
 `cygwin.din' for the list of POSIX thread functions provided.
 
-Why is some functionality only supported in Windows NT?
--------------------------------------------------------
+3.3.5 Why is some functionality only supported in Windows NT?
+-------------------------------------------------------------
 
-   Windows 9x: n.  32 bit extensions and a graphical shell for a 16 bit
+Windows 9x: n.  32 bit extensions and a graphical shell for a 16 bit
 patch to an 8 bit operating system originally coded for a 4 bit
 microprocessor, written by a 2 bit company that can't stand 1 bit of
 competition.
@@ -1397,10 +1399,10 @@ and has several other deficiencies with respect to its version of the
 Win32 API.  See the calls.texinfo document for more information as to
 what is not supported in Win 9x.
 
-How is fork() implemented?
---------------------------
+3.3.6 How is fork() implemented?
+--------------------------------
 
-   Cygwin fork() essentially works like a non-copy on write version of
+Cygwin fork() essentially works like a non-copy on write version of
 fork() (like old Unix versions used to do).  Because of this it can be
 a little slow.  In most cases, you are better off using the spawn
 family of calls if possible.
@@ -1424,20 +1426,20 @@ returns from the fork call.  Child wakes from blocking on mutex,
 recreates any mmapped areas passed to it via shared area and then
 returns from fork itself.
 
-How does wildcarding (globbing) work?
--------------------------------------
+3.3.7 How does wildcarding (globbing) work?
+-------------------------------------------
 
-   If the DLL thinks it was invoked from a DOS style prompt, it runs a
+If the DLL thinks it was invoked from a DOS style prompt, it runs a
 `globber' over the arguments provided on the command line.  This means
 that if you type `LS *.EXE' from DOS, it will do what you might expect.
 
    Beware: globbing uses `malloc'.  If your application defines
 `malloc', that will get used.  This may do horrible things to you.
 
-How do symbolic links work?
----------------------------
+3.3.8 How do symbolic links work?
+---------------------------------
 
-   Cygwin knows of two ways to create symlinks.
+Cygwin knows of two ways to create symlinks.
 
    The old method is the only valid one up to but not including version
 1.3.0.  If it's enabled (from 1.3.0 on by setting `nowinsymlinks' in
@@ -1470,20 +1472,20 @@ with the suffix.  However, both are treated as symlinks.
 since Cygwin treats both as symlinks regardless of the setting of
 `(no)winsymlinks' in the environment variable CYGWIN.
 
-Why do some files, which are not executables have the 'x' type.
----------------------------------------------------------------
+3.3.9 Why do some files, which are not executables have the 'x' type.
+---------------------------------------------------------------------
 
-   When working out the Unix-style attribute bits on a file, the library
+When working out the Unix-style attribute bits on a file, the library
 has to fill out some information not provided by the WIN32 API.
 
    It guesses that files ending in .exe and .bat are executable, as are
 ones which have a "#!" as their first characters.
 
-How secure is Cygwin in a multi-user environment?
--------------------------------------------------
+3.3.10 How secure is Cygwin in a multi-user environment?
+--------------------------------------------------------
 
-   Cygwin is not secure in a multi-user environment.  For example if
-you have a long running daemon such as "inetd" running as admin while
+Cygwin is not secure in a multi-user environment.  For example if you
+have a long running daemon such as "inetd" running as admin while
 ordinary users are logged in, or if you have a user logged in remotely
 while another user is logged into the console, one cygwin client can
 trick another into running code for it.  In this way one user may gain
@@ -1492,11 +1494,11 @@ is because cygwin has shared state that is accessible by all processes.
 
    (Thanks to Tim Newsham (newsham@lava.net) for this explanation).
 
-How do the net-related functions work?
---------------------------------------
+3.3.11 How do the net-related functions work?
+---------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    The network support in Cygwin is supposed to provide the Unix API,
 not the Winsock API.
@@ -1541,22 +1543,22 @@ netdb.  It isn't a good idea to use it in your applications.
 
    As of the b19 release, this information may be slightly out of date.
 
-I don't want Unix sockets, how do I use normal Win32 winsock?
--------------------------------------------------------------
+3.3.12 I don't want Unix sockets, how do I use normal Win32 winsock?
+--------------------------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    To use the vanilla Win32 winsock, you just need to #define
 Win32_Winsock and #include "windows.h" at the top of your source
 file(s).  You'll also want to add -lwsock32 to the compiler's command
 line so you link against libwsock32.a.
 
-What version numbers are associated with Cygwin?
-------------------------------------------------
+3.3.13 What version numbers are associated with Cygwin?
+-------------------------------------------------------
 
-   Cygwin versioning is relatively complicated because of its status as
-a shared library.  First of all, since October 1998 every Cygwin DLL has
+Cygwin versioning is relatively complicated because of its status as a
+shared library.  First of all, since October 1998 every Cygwin DLL has
 been named `cygwin1.dll' and has a 1 in the release name.
 Additionally, there are DLL major and minor numbers that correspond to
 the name of the release, and a release number. In other words,
@@ -1589,30 +1591,30 @@ This has been `mounts v2' for a long time. For more exciting Cygwin
 version number details, check out the `/usr/include/cygwin/version.h'
 file.
 
-Why isn't _timezone set correctly?
-----------------------------------
+3.3.14 Why isn't _timezone set correctly?
+-----------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    Did you explicitly call tzset() before checking the value of
 _timezone?  If not, you must do so.
 
-Is there a mouse interface?
----------------------------
+3.3.15 Is there a mouse interface?
+----------------------------------
 
-   There is no way to capture mouse events from Cygwin.  There are
+There is no way to capture mouse events from Cygwin.  There are
 currently no plans to add support for this.
 
-Programming Questions
-=====================
+3.4 Programming Questions
+=========================
 
-How do I contribute a package?
-------------------------------
+3.4.1 How do I contribute a package?
+------------------------------------
 
-   If you are willing to be a package maintainer, great.  We urgently
-need volunteers to prepare and maintain packages, because the priority
-of the Cygwin Team is Cygwin itself.
+If you are willing to be a package maintainer, great.  We urgently need
+volunteers to prepare and maintain packages, because the priority of the
+Cygwin Team is Cygwin itself.
 
    The Cygwin Package Contributor's Guide is at
 `http://cygwin.com/setup.html', which details everything you need to
@@ -1627,41 +1629,41 @@ give you an idea of what is required.
    You should announce your intentions to the general cygwin list, in
 case others were thinking the same thing.
 
-How do I contribute to Cygwin?
-------------------------------
+3.4.2 How do I contribute to Cygwin?
+------------------------------------
 
-   If you want to contribute to Cygwin itself, see
+If you want to contribute to Cygwin itself, see
 `http://cygwin.com/contrib.html'.
 
-Why are compiled executables so huge?!?
----------------------------------------
+3.4.3 Why are compiled executables so huge?!?
+---------------------------------------------
 
-   By default, gcc compiles in all symbols.  You'll also find that gcc
+By default, gcc compiles in all symbols.  You'll also find that gcc
 creates large executables on UNIX.
 
    If that bothers you, just use the 'strip' program, part of the
 binutils package.  Or compile with the `-s' option to gcc.
 
-Where is glibc?
----------------
-
-   Cygwin does not provide glibc.  It uses newlib instead, which
-provides much (but not all) of the same functionality.  Porting glibc
-to Cygwin would be difficult.
-
-Where is Objective C?
+3.4.4 Where is glibc?
 ---------------------
 
-   Objective C is not distributed with the Cygwin version of gcc, and
-there are no plans to do so.  The gcc package maintainer had difficulty
+Cygwin does not provide glibc.  It uses newlib instead, which provides
+much (but not all) of the same functionality.  Porting glibc to Cygwin
+would be difficult.
+
+3.4.5 Where is Objective C?
+---------------------------
+
+Objective C is not distributed with the Cygwin version of gcc, and there
+are no plans to do so.  The gcc package maintainer had difficulty
 building it, and once built there were problems using it.  It appears
 that there is only minimal support for the Objective C front-end in the
 main GCC distribution, anyway.
 
-Why is make behaving badly?
----------------------------
+3.4.6 Why is make behaving badly?
+---------------------------------
 
-   First of all, if you are using `make -j[N]', then stop.  It doesn't
+First of all, if you are using `make -j[N]', then stop.  It doesn't
 work well.
 
    Otherwise, read on...
@@ -1689,10 +1691,10 @@ MAKE_MODE to "UNIX" (actually case is not significant) or "WIN32"
 (actually anything other than "UNIX").  You can also specify the options
 -unix or -win32 on the make command line.
 
-Why the undefined reference to `WinMain@16'?
---------------------------------------------
+3.4.7 Why the undefined reference to `WinMain@16'?
+--------------------------------------------------
 
-   If you're using `gcc', try adding an empty main() function to one of
+If you're using `gcc', try adding an empty main() function to one of
 your sources.  Or, perhaps you have `-lm' too early in the link command
 line.  It should be at the end:
 
@@ -1714,11 +1716,11 @@ line.  It should be at the end:
 
      gcj --main=Hello Hello.java
 
-How do I use Win32 API calls?
------------------------------
+3.4.8 How do I use Win32 API calls?
+-----------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    It's pretty simple actually.  Cygwin tools require that you
 explicitly link the import libraries for whatever Win32 API functions
@@ -1763,10 +1765,10 @@ that gcc processes the files listed on the command line in sequence and
 will only resolve references to libraries if they are given after the
 file that makes the reference.
 
-How do I compile a Win32 executable that doesn't use Cygwin?
-------------------------------------------------------------
+3.4.9 How do I compile a Win32 executable that doesn't use Cygwin?
+------------------------------------------------------------------
 
-   The -mno-cygwin flag to gcc makes gcc link against standard Microsoft
+The -mno-cygwin flag to gcc makes gcc link against standard Microsoft
 DLLs instead of Cygwin.  This is desirable for native Windows programs
 that don't need a UNIX emulation layer.
 
@@ -1774,10 +1776,10 @@ that don't need a UNIX emulation layer.
 which is a completely separate effort.  That project's home page is
 `http://www.mingw.org/index.shtml'.
 
-Can I build a Cygwin program that does not require cygwin1.dll at runtime?
---------------------------------------------------------------------------
+3.4.10 Can I build a Cygwin program that does not require cygwin1.dll at runtime?
+---------------------------------------------------------------------------------
 
-   No.  If your program uses the Cygwin API, then your executable cannot
+No.  If your program uses the Cygwin API, then your executable cannot
 run without cygwin1.dll.  In particular, it is not possible to
 statically link with a Cygwin library to obtain an independent,
 self-contained executable.
@@ -1788,40 +1790,40 @@ application, then you had better read and understand
 options.  Unless you purchase a special commercial license from Red
 Hat, then your Cygwin application must be Open Source.
 
-Can I link with both MSVCRT*.DLL and cygwin1.dll?
--------------------------------------------------
+3.4.11 Can I link with both MSVCRT*.DLL and cygwin1.dll?
+--------------------------------------------------------
 
-   No, you must use one or the other, they are mutually exclusive.
+No, you must use one or the other, they are mutually exclusive.
 
-How do I make the console window go away?
------------------------------------------
+3.4.12 How do I make the console window go away?
+------------------------------------------------
 
-   The default during compilation is to produce a console application.
-It you are writing a GUI program, you should either compile with
--mwindows as explained above, or add the string
-"-Wl,-subsystem,windows" to the GCC command line.
+The default during compilation is to produce a console application.  It
+you are writing a GUI program, you should either compile with -mwindows
+as explained above, or add the string "-Wl,-subsystem,windows" to the
+GCC command line.
 
-Why does make complain about a "missing separator"?
----------------------------------------------------
+3.4.13 Why does make complain about a "missing separator"?
+----------------------------------------------------------
 
-   This problem usually occurs as a result of someone editing a Makefile
+This problem usually occurs as a result of someone editing a Makefile
 with a text editor that replaces tab characters with spaces.  Command
 lines must start with tabs.  This is not specific to Cygwin.
 
-Why can't we redistribute Microsoft's Win32 headers?
-----------------------------------------------------
+3.4.14 Why can't we redistribute Microsoft's Win32 headers?
+-----------------------------------------------------------
 
-   Subsection 2.d.f of the `Microsoft Open Tools License agreement'
-looks like it says that one may not "permit further redistribution of
-the Redistributables to their end users".  We take this to mean that we
-can give them to you, but you can't give them to anyone else, which is
+Subsection 2.d.f of the `Microsoft Open Tools License agreement' looks
+like it says that one may not "permit further redistribution of the
+Redistributables to their end users".  We take this to mean that we can
+give them to you, but you can't give them to anyone else, which is
 something that Red Hat can't agree to.  Fortunately, we have our own
 Win32 headers which are pretty complete.
 
-How do I link against `cygwin1.dll' with Visual Studio?
--------------------------------------------------------
+3.4.15 How do I link against `cygwin1.dll' with Visual Studio?
+--------------------------------------------------------------
 
-   To my knowledge, none of the Cygwin developers have done this, but we
+To my knowledge, none of the Cygwin developers have done this, but we
 have this report from the mailing list that it can be done this way:
 
   1. Use the impdef program to generate a .def file for the cygwin1.dll
@@ -1838,9 +1840,9 @@ have this report from the mailing list that it can be done this way:
 
           #include <sys/cygwin.h>
           #include <stdlib.h>
-          
+
           typedef int (*MainFunc) (int argc, char *argv[], char **env);
-          
+
           void
             my_crt0 (MainFunc f)
             {
@@ -1869,10 +1871,10 @@ import libraries for the MS VC linker.
    Thanks to Alastair Growcott (alastair dot growcott at bakbone dot co
 dot uk) for this tip.
 
-How do I link against a `.lib' file?
-------------------------------------
+3.4.16 How do I link against a `.lib' file?
+-------------------------------------------
 
-   If your `.lib' file is a normal static or import library with
+If your `.lib' file is a normal static or import library with
 C-callable entry points, you can list `foo.lib' as an object file for
 gcc/g++, just like any `*.o' file. Otherwise, here are some steps:
 
@@ -1912,43 +1914,39 @@ than rewriting the runtime library in question from specs...
    Thanks to Jacob Navia (root at jacob dot remcomp dot fr) for this
 explanation.
 
-How do I rebuild the tools on my NT box?
-----------------------------------------
+3.4.17 How do I build Cygwin on my own?
+---------------------------------------
 
-   Install all required components in one directory (we'll call it
-/src).  Ideally, you should check out what you need from CVS
-(`http://cygwin.com/cvs.html').  This is the _preferred method_ for
-acquiring the sources.  Otherwise, you can install the appropriate
-source packages from the cygwin distribution.
+First, you need to get the Cygwin source.  Ideally, you should check out
+what you need from CVS (`http://cygwin.com/cvs.html').  This is the
+_preferred method_ for acquiring the sources.  Otherwise, you can
+install the cygwin source package from the distribution.
 
-   As of this writing, you need to install at least the cygwin source
-package and the w32api source package.  The winsup source package
-should be extracted first and the w32api source directory should be
-extracted into the resulting 'winsup' directory.  Then rename
-w32api-whatever to w32api.
+   If you are trying to duplicate a cygwin release then you should just
+download the corresponding source package and use "tar xjf" to unpack
+it.  This will unpack the sources into a directory named cygwin-x.y.z-n,
+where x.y.z-n correspond to the version numbering of the tar.bz2
+package.
 
-   It is possible that the cygwin source package may require a newer
-version of the w32api package since the release of the packages is not
-always in lock step (another reason to just use CVS).
+     tar xjf cygwin-1.5.12-1-src.tar.bz2
+     cd cygwin-1.5.12-1
 
-   You _must_ build cygwin in a separate directory from the source.
-So, create something like a /obj directory.  You'll be performing your
-build in that directory:
+   You _must_ build cygwin in a separate directory from the source, so
+create something like a `build/' directory.  You will also want to
+install to a temporary location:
 
-     bash
-     cd /obj
-     /src/configure --prefix=/install -v > configure.log 2>&1
-     make > make.log 2>&1
+     mkdir build
+     mkdir /install
+     cd build
+     (../configure --prefix=/install -v; make) >& make.out
      make install > install.log 2>&1
 
-   Normally, this procedure ignore errors in building the documentation,
-which requires tools which are not included in the Cygwin distribution.
-If you want to build the documentation on Linux, on most distributions a
-package named docbook-utils should get you most of what you need. For
-more information on building the documentation, see the README included
-in the cygwin-doc package.
+   Normally, this procedure ignore errors in building the documentation.
+which requires the `docbook-xml', `docbook-xsl', and `xmlto' packages.
+For more information on building the documentation, see the README
+included in the cygwin-doc package.
 
-   To check a cygwin1.dll, run "make check" in the winsup/cygwin
+   To check a cygwin1.dll, run "make check" in the winsup/testsuite
 directory.  If that works, install everything _except_ the dll (if you
 can).  Then, close down all cygwin programs (including bash windows,
 inetd, etc.), save your old dll, and copy the new dll to the correct
@@ -1959,44 +1957,43 @@ Windows command prompt, and see what happens.
 different versions of cygwin1.dll are running on your machine at the
 same time. Remove all but one.
 
-How can I compile a powerpc NT toolchain?
------------------------------------------
+3.4.18 I may have found a bug in Cygwin, how can I debug it (the symbols in gdb look funny)?
+--------------------------------------------------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+Debugging symbols are stripped from distibuted Cygwin binaries, so any
+symbols that you see in gdb are basically meaningless. It is also a good
+idea to use the latest code in case the bug has been fixed, so we
+recommend trying the latest snapshot from
+`http://cygwin.com/snapshots/' or build the DLL from CVS.
 
-   Unfortunately, this will be difficult.  It hasn't been built for
-some time (late 1996) since Microsoft has dropped development of
-powerpc NT.  Exception handling/signals support semantics/args have been
-changed for x86 and not updated for ppc so the ppc specific support
-would have to be rewritten.  We don't know of any other
-incompatibilities.  Please send us patches if you do this work!
+   To build a debugging version of the Cygwin DLL, you will need to
+follow the instructions at `http://cygwin.com/faq/faq_3.html#SEC102',
+adding the `--enable-debugging' option to `../configure'.  You can also
+contact the mailing list for pointers (a simple test case that
+demonstrates the bug is always welcome).
 
-How can I compile an Alpha NT toolchain?
-----------------------------------------
+3.4.19 How can I compile Cygwin for an unsupported platform (PowerPC, Alpha, ARM, Itanium)?
+-------------------------------------------------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+Unfortunately, this will be difficult.  Exception handling and signals
+support semantics and args have been designed for x86 so you would need
+to write specific support for your platform.  We don't know of any other
+incompatibilities. Please send us patches if you do this work!
 
-   We have not ported the tools to Alpha NT and do not have plans to do
-so at the present time.  We would be happy to add support for Alpha NT
-if someone contributes the changes to us.
+3.4.20 How can I adjust the heap/stack size of an application?
+--------------------------------------------------------------
 
-How can I adjust the heap/stack size of an application?
--------------------------------------------------------
-
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
-
-   Pass heap/stack linker arguments to gcc.  To create foo.exe with a
+If you need to change the maximum amount of memory available to Cygwin,
+see `http://cygwin.com/cygwin-ug-net/setup-maxmem.html'. Otherwise,
+just pass heap/stack linker arguments to gcc.  To create foo.exe with a
 heap size of 1024 and a stack size of 4096, you would invoke gcc as:
 
    `gcc -Wl,--heap,1024,--stack,4096 -o foo foo.c'
 
-How can I find out which DLLs are needed by an executable?
-----------------------------------------------------------
+3.4.21 How can I find out which DLLs are needed by an executable?
+-----------------------------------------------------------------
 
-   `objdump -p' provides this information, but is rather verbose.
+`objdump -p' provides this information, but is rather verbose.
 
    `cygcheck' will do this much more concisely, and operates
 recursively, provided the command is in your path.
@@ -2011,30 +2008,27 @@ to the executable, including the .exe extension:
    (Note the windows path separator must be escaped if this is typed in
 bash.)
 
-How do I build a DLL?
----------------------
+3.4.22 How do I build a DLL?
+----------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+There's documentation that explains the process in the Cygwin User's
+Guide here: `http://cygwin.com/cygwin-ug-net/dll.html'
 
-   There's documentation that explains the process on the main Cygwin
-project web page (http://cygwin.com/).
+3.4.23 How can I set a breakpoint at MainCRTStartup?
+----------------------------------------------------
 
-How can I set a breakpoint at MainCRTStartup?
----------------------------------------------
-
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    Set a breakpoint at *0x401000 in gdb and then run the program in
 question.
 
-How can I build a relocatable dll?
-----------------------------------
+3.4.24 How can I build a relocatable dll?
+-----------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.  However, there was a discussion on the cygwin mailing
-list recently that addresses this issue.  Read
+*(Please note: This section has not yet been updated for the latest net
+release.  However, there was a discussion on the cygwin mailing list
+recently that addresses this issue.  Read
 `http://cygwin.com/ml/cygwin/2000-06/msg00688.html' and related
 messages.)*
 
@@ -2042,15 +2036,15 @@ messages.)*
 order:
 
      $(LD) -s --base-file BASEFILE --dll -o DLLNAME OBJS LIBS -e ENTRY
-     
+
      $(DLLTOOL) --as=$(AS) --dllname DLLNAME --def DEFFILE \
              --base-file BASEFILE --output-exp EXPFILE
-     
+
      $(LD) -s --base-file BASEFILE EXPFILE -dll -o DLLNAME OBJS LIBS -e ENTRY
-     
+
      $(DLLTOOL) --as=$(AS) --dllname DLLNAME --def DEFFILE \
      	--base-file BASEFILE --output-exp EXPFILE
-     
+
      $(LD) EXPFILE --dll -o DLLNAME OBJS LIBS -e ENTRY
 
    In this example, $(LD) is the linker, ld.
@@ -2096,7 +2090,7 @@ the entry function.  Be careful not to export the global variable
      /* This is a global variable.  */
      struct _reent *_impure_ptr;
      extern struct _reent *__imp_reent_data;
-     
+
      int entry (HINSTANT hinst, DWORD reason, LPVOID reserved)
      {
        _impure_ptr = __imp_reent_data;
@@ -2131,74 +2125,71 @@ sure you use the same DLLNAME and DEFFILE, or things won't work right.
 libtcl80.a.  You can then link against that library using something
 like -ltcl80 in your linker command.
 
-How can I debug what's going on?
---------------------------------
+3.4.25 How can I debug what's going on?
+---------------------------------------
 
-   You can debug your application using `gdb'.  Make sure you compile
-it with the -g flag!  If your application calls functions in MS DLLs,
-gdb will complain about not being able to load debug information for
-them when you run your program.  This is normal since these DLLs don't
+You can debug your application using `gdb'.  Make sure you compile it
+with the -g flag!  If your application calls functions in MS DLLs, gdb
+will complain about not being able to load debug information for them
+when you run your program.  This is normal since these DLLs don't
 contain debugging information (and even if they did, that debug info
 would not be compatible with gdb).
 
-Can I use a system trace mechanism instead?
--------------------------------------------
+3.4.26 Can I use a system trace mechanism instead?
+--------------------------------------------------
 
-   Yes.  You can use the `strace.exe' utility to run other cygwin
-programs with various debug and trace messages enabled.  For information
-on using `strace', see the Cygwin User's Guide or the file
+Yes.  You can use the `strace.exe' utility to run other cygwin programs
+with various debug and trace messages enabled.  For information on
+using `strace', see the Cygwin User's Guide or the file
 `winsup/utils/utils.sgml'.
 
-Why doesn't gdb handle signals?
--------------------------------
+3.4.27 Why doesn't gdb handle signals?
+--------------------------------------
 
-   Unfortunately, there is only minimal signal handling support in gdb
+Unfortunately, there is only minimal signal handling support in gdb
 currently.  Signal handling only works with Windows-type signals.
 SIGINT may work, SIGFPE may work, SIGSEGV definitely does.  You cannot
 'stop', 'print' or 'nopass' signals like SIGUSR1 or SIGHUP to the
 process being debugged.
 
-The linker complains that it can't find something.
---------------------------------------------------
+3.4.28 The linker complains that it can't find something.
+---------------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
-
-   A common error is to put the library on the command line before the
+A common error is to put the library on the command line before the
 thing that needs things from it.
 
    This is wrong `gcc -lstdc++ hello.cc'.  This is right `gcc hello.cc
 -lstdc++'.
 
-I use a function I know is in the API, but I still get a link error.
---------------------------------------------------------------------
+3.4.29 I use a function I know is in the API, but I still get a link error.
+---------------------------------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    The function probably isn't declared in the header files, or the
 UNICODE stuff for it isn't filled in.
 
-Can you make DLLs that are linked against libc ?
-------------------------------------------------
+3.4.30 Can you make DLLs that are linked against libc ?
+-------------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    Yes.
 
-Where is malloc.h?
-------------------
+3.4.31 Where is malloc.h?
+-------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+*(Please note: This section has not yet been updated for the latest net
+release.)*
 
    Include stdlib.h instead of malloc.h.
 
-Can I use my own malloc?
-------------------------
+3.4.32 Can I use my own malloc?
+-------------------------------
 
-   If you define a function called `malloc' in your own code, and link
+If you define a function called `malloc' in your own code, and link
 with the DLL, the DLL _will_ call your `malloc'.  Needless to say, you
 will run into serious problems if your malloc is buggy.
 
@@ -2216,19 +2207,19 @@ incompatible with it.  But it may not be possible to replace
 does not expect your program to replace it.  This is really a newlib
 issue, but we are open to suggestions on how to deal with it.
 
-Can I mix objects compiled with msvc++ and gcc?
------------------------------------------------
+3.4.33 Can I mix objects compiled with msvc++ and gcc?
+------------------------------------------------------
 
-   Yes, but only if you are combining C object files.  MSVC C++ uses a
+Yes, but only if you are combining C object files.  MSVC C++ uses a
 different mangling scheme than GNU C++, so you will have difficulties
 combining C++ objects.
 
-Can I use the gdb debugger to debug programs built by VC++?
------------------------------------------------------------
+3.4.34 Can I use the gdb debugger to debug programs built by VC++?
+------------------------------------------------------------------
 
-   No, not for full (high level source language) debugging.  The
-Microsoft compilers generate a different type of debugging symbol
-information, which gdb does not understand.
+No, not for full (high level source language) debugging.  The Microsoft
+compilers generate a different type of debugging symbol information,
+which gdb does not understand.
 
    However, the low-level (assembly-type) symbols generated by
 Microsoft compilers are coff, which gdb DOES understand.  Therefore you
@@ -2236,26 +2227,26 @@ should at least be able to see all of your global symbols; you just
 won't have any information about data types, line numbers, local
 variables etc.
 
-Where can I find info on x86 assembly?
---------------------------------------
+3.4.35 Where can I find info on x86 assembly?
+---------------------------------------------
 
-   CPU reference manuals for Intel's current chips are available in
+CPU reference manuals for Intel's current chips are available in
 downloadable PDF form on Intel's web site:
 
    `http://developer.intel.com/design/pro/manuals/'
 
-Shell scripts aren't running properly from my makefiles?
---------------------------------------------------------
+3.4.36 Shell scripts aren't running properly from my makefiles?
+---------------------------------------------------------------
 
-   If your scripts are in the current directory, you must have `.'
-(dot) in your $PATH.  (It is not normally there by default.)  Otherwise,
-you would need to add /bin/sh in front of each and every shell script
+If your scripts are in the current directory, you must have `.' (dot)
+in your $PATH.  (It is not normally there by default.)  Otherwise, you
+would need to add /bin/sh in front of each and every shell script
 invoked in your Makefiles.
 
-What preprocessor do I need to know about?
-------------------------------------------
+3.4.37 What preprocessor do I need to know about?
+-------------------------------------------------
 
-   We use _WIN32 to signify access to the Win32 API and __CYGWIN__ for
+We use _WIN32 to signify access to the Win32 API and __CYGWIN__ for
 access to the Cygwin environment provided by the dll.
 
    We chose _WIN32 because this is what Microsoft defines in VC++ and
@@ -2278,10 +2269,10 @@ detail by running, for example
             $ gcc -mwin32 -dM -E -xc /dev/null >gcc-mwin32.txt
    Then use the diff and grep utilities to check what the difference is.
 
-How should I port my Unix GUI to Windows?
------------------------------------------
+3.4.38 How should I port my Unix GUI to Windows?
+------------------------------------------------
 
-   There are two basic strategies for porting Unix GUIs to Windows.
+There are two basic strategies for porting Unix GUIs to Windows.
 
    The first is to use a portable graphics library such as tcl/tk, X11,
 or V (and others?).  Typically, you will end up with a GUI on Windows
@@ -2296,10 +2287,10 @@ fashion, you may still want to use Cygwin if your program contains a
 lot of shared (non-GUI-related) code.  That way you still gain some of
 the portability advantages inherent in using Cygwin.
 
-Why not use DJGPP ?
--------------------
+3.4.39 Why not use DJGPP ?
+--------------------------
 
-   DJGPP is a similar idea, but for DOS instead of Win32.  DJGPP uses a
+DJGPP is a similar idea, but for DOS instead of Win32.  DJGPP uses a
 "DOS extender" to provide a more reasonable operating interface for its
 applications.   The Cygwin toolset doesn't have to do this since all of
 the applications are native WIN32.   Applications compiled with the
@@ -2309,52 +2300,52 @@ programs which use the Windows GUI.
    You can get more info on DJGPP by following
 `http://www.delorie.com/'.
 
-Known Problems in the Latest Net Release
-****************************************
+4 Known Problems in the Latest Net Release
+******************************************
 
-Aware of the problem, no solution known.
-========================================
+4.1 Aware of the problem, no solution known.
+============================================
 
-Hangs with Hyperthreaded Processor
-----------------------------------
+4.1.1 Hangs with Hyperthreaded Processor
+----------------------------------------
 
-   Some users using processors with Intel's Hyperthreading turned on
-have reported hangs that do not appear with Hyperthreading off. So far
-the Cygwin developers have not been able to reproduce this problem.
-See `http://www.cygwin.com/ml/cygwin/2004-07/msg01100.html' and related
+Some users using processors with Intel's Hyperthreading turned on have
+reported hangs that do not appear with Hyperthreading off. So far the
+Cygwin developers have not been able to reproduce this problem.  See
+`http://www.cygwin.com/ml/cygwin/2004-07/msg01100.html' and related
 messages for details.
 
-Pipe key (`|') doesn't work on non-US keyboards in Win9x/ME
------------------------------------------------------------
+4.1.2 Pipe key (`|') doesn't work on non-US keyboards in Win9x/ME
+-----------------------------------------------------------------
 
-   This might get fixed someday, but meanwhile, just use rxvt, which
-does not have this problem.  This is no real loss, because rxvt has many
+This might get fixed someday, but meanwhile, just use rxvt, which does
+not have this problem.  This is no real loss, because rxvt has many
 other advantages.  (Do not attempt to use the "broken" pipe key (`¦')
 as a substitute, it is a different character.)
 
-Cannot access tape devices with mt on Win9x
--------------------------------------------
+4.1.3 Cannot access tape devices with mt on Win9x
+-------------------------------------------------
 
-   Win9x does not support the API used by the Cygwin fhandler_dev_tape
+Win9x does not support the API used by the Cygwin fhandler_dev_tape
 class.  Details at
 `http://sources.redhat.com/ml/cygwin/2000-12/msg00331.html'.
 
-On Win9x, scp leaves ssh processes running.
--------------------------------------------
+4.1.4 On Win9x, scp leaves ssh processes running.
+-------------------------------------------------
 
-History
-*******
+5 History
+*********
 
-   This section of the FAQ is no longer maintained.
+This section of the FAQ is no longer maintained.
 
    Instead, see `http://cygwin.com/history.html'.
 
-Who's behind the project?
-*************************
+6 Who's behind the project?
+***************************
 
-   *(Please note that if you have cygwin-specific questions, all of
-these people will appreciate it if you use the cygwin mailing lists
-rather than sending personal email.)*
+*(Please note that if you have cygwin-specific questions, all of these
+people will appreciate it if you use the cygwin mailing lists rather
+than sending personal email.)*
 
    Chris Faylor is behind many of the recent changes in Cygwin.  Prior
 to joining Cygnus, he contributed significant fixes to the process
@@ -2439,17 +2430,17 @@ some email will have to go unanswered.
    Many thanks to everyone using the tools for their many contributions
 in the form of advice, bug reports, and code fixes.  Keep them coming!
 
-What are the copyrights ?
-*************************
+7 What are the copyrights ?
+***************************
 
-The general idea
-================
+7.1 The general idea
+====================
 
-   Most of the tools are covered by the GNU General Public License
-(GPL), although some are public domain, and others have a X11-style
-copyright.  To cover the GNU GPL requirements, the basic rule is if you
-give out any binaries, you must also make the source available.  For
-the full details, be sure to read the text of the GNU GPL which follows.
+Most of the tools are covered by the GNU General Public License (GPL),
+although some are public domain, and others have a X11-style copyright.
+To cover the GNU GPL requirements, the basic rule is if you give out
+any binaries, you must also make the source available.  For the full
+details, be sure to read the text of the GNU GPL which follows.
 
    The Cygwin API library found in the winsup subdirectory of the source
 code is also covered by the GNU GPL.  By default, all executables link
@@ -2480,19 +2471,19 @@ sources for the cygwin DLL.
    See `http://www.opensource.org/docs/definition_plain.html' for the
 precise Open Source Definition referenced above.
 
-GNU GENERAL PUBLIC LICENSE
-==========================
+7.2 GNU GENERAL PUBLIC LICENSE
+==============================
 
      		   GNU GENERAL PUBLIC LICENSE
      		      Version 2, June 1991
-     
+
       Copyright (C) 1989, 1991 Free Software Foundation, Inc.
                                675 Mass Ave, Cambridge, MA 02139, USA
       Everyone is permitted to copy and distribute verbatim copies
       of this license document, but changing it is not allowed.
-     
+
      			    Preamble
-     
+
        The licenses for most software are designed to take away your
      freedom to share and change it.  By contrast, the GNU General Public
      License is intended to guarantee your freedom to share and change free
@@ -2502,48 +2493,48 @@ GNU GENERAL PUBLIC LICENSE
      using it.  (Some other Free Software Foundation software is covered by
      the GNU Library General Public License instead.)  You can apply it to
      your programs, too.
-     
+
        When we speak of free software, we are referring to freedom, not
      price.  Our General Public Licenses are designed to make sure that you
      have the freedom to distribute copies of free software (and charge for
      this service if you wish), that you receive source code or can get it
      if you want it, that you can change the software or use pieces of it
      in new free programs; and that you know you can do these things.
-     
+
        To protect your rights, we need to make restrictions that forbid
      anyone to deny you these rights or to ask you to surrender the rights.
      These restrictions translate to certain responsibilities for you if you
      distribute copies of the software, or if you modify it.
-     
+
        For example, if you distribute copies of such a program, whether
      gratis or for a fee, you must give the recipients all the rights that
      you have.  You must make sure that they, too, receive or can get the
      source code.  And you must show them these terms so they know their
      rights.
-     
+
        We protect your rights with two steps: (1) copyright the software, and
      (2) offer you this license which gives you legal permission to copy,
      distribute and/or modify the software.
-     
+
        Also, for each author's protection and ours, we want to make certain
      that everyone understands that there is no warranty for this free
      software.  If the software is modified by someone else and passed on, we
      want its recipients to know that what they have is not the original, so
      that any problems introduced by others will not reflect on the original
      authors' reputations.
-     
+
        Finally, any free program is threatened constantly by software
      patents.  We wish to avoid the danger that redistributors of a free
      program will individually obtain patent licenses, in effect making the
      program proprietary.  To prevent this, we have made it clear that any
      patent must be licensed for everyone's free use or not licensed at all.
-     
+
        The precise terms and conditions for copying, distribution and
      modification follow.
      
      		    GNU GENERAL PUBLIC LICENSE
         TERMS AND CONDITIONS FOR COPYING, DISTRIBUTION AND MODIFICATION
-     
+
        0. This License applies to any program or other work which contains
      a notice placed by the copyright holder saying it may be distributed
      under the terms of this General Public License.  The "Program", below,
@@ -2553,14 +2544,14 @@ GNU GENERAL PUBLIC LICENSE
      either verbatim or with modifications and/or translated into another
      language.  (Hereinafter, translation is included without limitation in
      the term "modification".)  Each licensee is addressed as "you".
-     
+
      Activities other than copying, distribution and modification are not
      covered by this License; they are outside its scope.  The act of
      running the Program is not restricted, and the output from the Program
      is covered only if its contents constitute a work based on the
      Program (independent of having been made by running the Program).
      Whether that is true depends on what the Program does.
-     
+
        1. You may copy and distribute verbatim copies of the Program's
      source code as you receive it, in any medium, provided that you
      conspicuously and appropriately publish on each copy an appropriate
@@ -2568,23 +2559,23 @@ GNU GENERAL PUBLIC LICENSE
      notices that refer to this License and to the absence of any warranty;
      and give any other recipients of the Program a copy of this License
      along with the Program.
-     
+
      You may charge a fee for the physical act of transferring a copy, and
      you may at your option offer warranty protection in exchange for a fee.
-     
+
        2. You may modify your copy or copies of the Program or any portion
      of it, thus forming a work based on the Program, and copy and
      distribute such modifications or work under the terms of Section 1
      above, provided that you also meet all of these conditions:
-     
+
          a) You must cause the modified files to carry prominent notices
          stating that you changed the files and the date of any change.
-     
+
          b) You must cause any work that you distribute or publish, that in
          whole or in part contains or is derived from the Program or any
          part thereof, to be licensed as a whole at no charge to all third
          parties under the terms of this License.
-     
+
          c) If the modified program normally reads commands interactively
          when run, you must cause it, when started running for such
          interactive use in the most ordinary way, to print or display an
@@ -2605,38 +2596,38 @@ GNU GENERAL PUBLIC LICENSE
      on the Program, the distribution of the whole must be on the terms of
      this License, whose permissions for other licensees extend to the
      entire whole, and thus to each and every part regardless of who wrote it.
-     
+
      Thus, it is not the intent of this section to claim rights or contest
      your rights to work written entirely by you; rather, the intent is to
      exercise the right to control the distribution of derivative or
      collective works based on the Program.
-     
+
      In addition, mere aggregation of another work not based on the Program
      with the Program (or with a work based on the Program) on a volume of
      a storage or distribution medium does not bring the other work under
      the scope of this License.
-     
+
        3. You may copy and distribute the Program (or a work based on it,
      under Section 2) in object code or executable form under the terms of
      Sections 1 and 2 above provided that you also do one of the following:
-     
+
          a) Accompany it with the complete corresponding machine-readable
          source code, which must be distributed under the terms of Sections
          1 and 2 above on a medium customarily used for software interchange; or,
-     
+
          b) Accompany it with a written offer, valid for at least three
          years, to give any third party, for a charge no more than your
          cost of physically performing source distribution, a complete
          machine-readable copy of the corresponding source code, to be
          distributed under the terms of Sections 1 and 2 above on a medium
          customarily used for software interchange; or,
-     
+
          c) Accompany it with the information you received as to the offer
          to distribute corresponding source code.  (This alternative is
          allowed only for noncommercial distribution and only if you
          received the program in object code or executable form with such
          an offer, in accord with Subsection b above.)
-     
+
      The source code for a work means the preferred form of the work for
      making modifications to it.  For an executable work, complete source
      code means all the source code for all modules it contains, plus any
@@ -2647,7 +2638,7 @@ GNU GENERAL PUBLIC LICENSE
      form) with the major components (compiler, kernel, and so on) of the
      operating system on which the executable runs, unless that component
      itself accompanies the executable.
-     
+
      If distribution of executable or object code is made by offering
      access to copy from a designated place, then offering equivalent
      access to copy the source code from the same place counts as
@@ -2661,7 +2652,7 @@ GNU GENERAL PUBLIC LICENSE
      However, parties who have received copies, or rights, from you under
      this License will not have their licenses terminated so long as such
      parties remain in full compliance.
-     
+
        5. You are not required to accept this License, since you have not
      signed it.  However, nothing else grants you permission to modify or
      distribute the Program or its derivative works.  These actions are
@@ -2670,7 +2661,7 @@ GNU GENERAL PUBLIC LICENSE
      Program), you indicate your acceptance of this License to do so, and
      all its terms and conditions for copying, distributing or modifying
      the Program or works based on it.
-     
+
        6. Each time you redistribute the Program (or any work based on the
      Program), the recipient automatically receives a license from the
      original licensor to copy, distribute or modify the Program subject to
@@ -2678,7 +2669,7 @@ GNU GENERAL PUBLIC LICENSE
      restrictions on the recipients' exercise of the rights granted herein.
      You are not responsible for enforcing compliance by third parties to
      this License.
-     
+
        7. If, as a consequence of a court judgment or allegation of patent
      infringement or for any other reason (not limited to patent issues),
      conditions are imposed on you (whether by court order, agreement or
@@ -2691,12 +2682,12 @@ GNU GENERAL PUBLIC LICENSE
      all those who receive copies directly or indirectly through you, then
      the only way you could satisfy both it and this License would be to
      refrain entirely from distribution of the Program.
-     
+
      If any portion of this section is held invalid or unenforceable under
      any particular circumstance, the balance of the section is intended to
      apply and the section as a whole is intended to apply in other
      circumstances.
-     
+
      It is not the purpose of this section to induce you to infringe any
      patents or other property right claims or to contest validity of any
      such claims; this section has the sole purpose of protecting the
@@ -2707,7 +2698,7 @@ GNU GENERAL PUBLIC LICENSE
      system; it is up to the author/donor to decide if he or she is willing
      to distribute software through any other system and a licensee cannot
      impose that choice.
-     
+
      This section is intended to make thoroughly clear what is believed to
      be a consequence of the rest of this License.
      
@@ -2718,12 +2709,12 @@ GNU GENERAL PUBLIC LICENSE
      those countries, so that distribution is permitted only in or among
      countries not thus excluded.  In such case, this License incorporates
      the limitation as if written in the body of this License.
-     
+
        9. The Free Software Foundation may publish revised and/or new versions
      of the General Public License from time to time.  Such new versions will
      be similar in spirit to the present version, but may differ in detail to
      address new problems or concerns.
-     
+
      Each version is given a distinguishing version number.  If the Program
      specifies a version number of this License which applies to it and "any
      later version", you have the option of following the terms and conditions
@@ -2731,7 +2722,7 @@ GNU GENERAL PUBLIC LICENSE
      Software Foundation.  If the Program does not specify a version number of
      this License, you may choose any version ever published by the Free Software
      Foundation.
-     
+
        10. If you wish to incorporate parts of the Program into other free
      programs whose distribution conditions are different, write to the author
      to ask for permission.  For software which is copyrighted by the Free
@@ -2739,9 +2730,9 @@ GNU GENERAL PUBLIC LICENSE
      make exceptions for this.  Our decision will be guided by the two goals
      of preserving the free status of all derivatives of our free software and
      of promoting the sharing and reuse of software generally.
-     
+
      			    NO WARRANTY
-     
+
        11. BECAUSE THE PROGRAM IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
      FOR THE PROGRAM, TO THE EXTENT PERMITTED BY APPLICABLE LAW.  EXCEPT WHEN
      OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
@@ -2751,7 +2742,7 @@ GNU GENERAL PUBLIC LICENSE
      TO THE QUALITY AND PERFORMANCE OF THE PROGRAM IS WITH YOU.  SHOULD THE
      PROGRAM PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL NECESSARY SERVICING,
      REPAIR OR CORRECTION.
-     
+
        12. IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
      WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
      REDISTRIBUTE THE PROGRAM AS PERMITTED ABOVE, BE LIABLE TO YOU FOR DAMAGES,
@@ -2761,62 +2752,62 @@ GNU GENERAL PUBLIC LICENSE
      YOU OR THIRD PARTIES OR A FAILURE OF THE PROGRAM TO OPERATE WITH ANY OTHER
      PROGRAMS), EVEN IF SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE
      POSSIBILITY OF SUCH DAMAGES.
-     
+
      		     END OF TERMS AND CONDITIONS
      
      	Appendix: How to Apply These Terms to Your New Programs
-     
+
        If you develop a new program, and you want it to be of the greatest
      possible use to the public, the best way to achieve this is to make it
      free software which everyone can redistribute and change under these terms.
-     
+
        To do so, attach the following notices to the program.  It is safest
      to attach them to the start of each source file to most effectively
      convey the exclusion of warranty; and each file should have at least
      the "copyright" line and a pointer to where the full notice is found.
-     
+
          <one line to give the program's name and a brief idea of what it does.>
          Copyright (C) 19yy  <name of author>
-     
+
          This program is free software; you can redistribute it and/or modify
          it under the terms of the GNU General Public License as published by
          the Free Software Foundation; either version 2 of the License, or
          (at your option) any later version.
-     
+
          This program is distributed in the hope that it will be useful,
          but WITHOUT ANY WARRANTY; without even the implied warranty of
          MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
          GNU General Public License for more details.
-     
+
          You should have received a copy of the GNU General Public License
          along with this program; if not, write to the Free Software
          Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
-     
+
      Also add information on how to contact you by electronic and paper mail.
-     
+
      If the program is interactive, make it output a short notice like this
      when it starts in an interactive mode:
-     
+
          Gnomovision version 69, Copyright (C) 19yy name of author
          Gnomovision comes with ABSOLUTELY NO WARRANTY; for details type `show w'.
          This is free software, and you are welcome to redistribute it
          under certain conditions; type `show c' for details.
-     
+
      The hypothetical commands `show w' and `show c' should show the appropriate
      parts of the General Public License.  Of course, the commands you use may
      be called something other than `show w' and `show c'; they could even be
      mouse-clicks or menu items--whatever suits your program.
-     
+
      You should also get your employer (if you work as a programmer) or your
      school, if any, to sign a "copyright disclaimer" for the program, if
      necessary.  Here is a sample; alter the names:
-     
+
        Yoyodyne, Inc., hereby disclaims all copyright interest in the program
        `Gnomovision' (which makes passes at compilers) written by James Hacker.
-     
+
        <signature of Ty Coon>, 1 April 1989
        Ty Coon, President of Vice
-     
+
      This General Public License does not permit incorporating your program into
      proprietary programs.  If your program is a subroutine library, you may
      consider it more useful to permit linking proprietary applications with the
