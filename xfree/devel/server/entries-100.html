@@ -1,3 +1,108 @@
+<h4>Release 4.3.0-31</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-05 0105 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040105-0105.tar.bz2">xwin-20040105-0105.tar.bz2</a>
+(131 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-30
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-30-to-4.3.0-31.diff">xwin-4.3.0-30-to-4.3.0-31.diff</a>
+(39 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/Imakefile diff against XFree86 CVS: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xc-programs-Xserver-Imakefile-20040105-0105.diff">xc-programs-Xserver-Imakefile-20040105-0105.diff</a>
+(1 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>General - Everything up to the last three entries describes the
+new clipboard handling system that does not steal ownership of the X11
+selection each time that something is selected; this seems to work
+fine, but it needs to be tested.  The last three entries describe my
+nearly complete attempt at generating a MIT-MAGIC-COOKIE-1, adding it
+to the list of cookies that the X Server recognizes, and using it when
+the clipboard client tries to connect during an XDMCP connection.
+This authentication approach should work, but I need a break from
+trying to figure out which of the function calls has a minor error in
+its parameters; thus, it does not currently work.  However, feel free
+to examine the source code and let me know if any of my calls to
+GenerateAuthorization, AddResource, or XauWriteAuth are incorrect.  I
+would really like to get this automatic authorization working as soon
+as possible.  Until then I will mark this release (and all releases
+based upon it) as 'test'.</li>
+
+<li>InitInput.c - Add a function, winProcSetSelectionOwner, and wrap
+the generic function ProcVector[X_SetSelectionOwner] with it.  This
+allows us to get a notification each time the selection (clipboard)
+owner changes.  Call SetClipboardData (foo, NULL) so that the
+WM_RENDERFORMAT message will be posted when a Win32 app requests the
+clipboard contents.  (Harold L Hunt II, Alexander Gottwald)</li>
+
+<li>winclipboardxevents.c/winClipboardFlushXEvents/SelectionNotify -
+No longer steal ownership of the selection each time it changes in
+X11.  We can do this because we have notification when
+SetSelectionOwner is called (see above).  (Harold L Hunt II)</li>
+
+<li>winclipboardxevents.c/winClipboardFlushXEvents/SelectionClear -
+Remove handling, it is no longer needed; it used to request the
+contents of the selection that we lost ownership of.  (Harold L Hunt
+II)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_CREATE,WM_DESTROY
+- Add information to be used on each call to a window property.
+(Harold L Hunt II)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_CREATE,WM_DESTROY,WM_CHANGECBCHAIN,WM_DRAWCLIPBOARD
+- Add ourselves to the clipboard viewer chain so that we receive
+notification when the clipboard contents are changed by a Win32
+application.  Our normal response to this is to call
+XSetSelectionOwner, but we specifically do nothing if we currently own
+the Win32 clipboard.  (Harold L Hunt II)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_RENDERFORMAT,WM_RENDERALLFORMATS
+- Request the contents of the X11 selection.  Use XPeekIfEvent to wait
+until the response is added to our event queue (this could probably
+lead to a dead-lock of a client exists before responding), then call
+winClipboardFlushXEvents to handle the SelectionNotify event.  UTF8
+and CompoundText targets require that we call XConvertSelection from
+the SelectionNotify event, which will cause another SelectionNotify
+event to be fired; be careful to check for this and do the
+XPeekIfEvent/winClipboardFlushXEvents thing again if this is the
+case (this is untested because I did not see any UTF8 or CompoundText
+targets that needed conversion).  Copy the returned contents to the
+Win32 clipboard with SetClipboardData ().  (Harold L Hunt II)</li>
+
+<li>winscrinit.c/winFinishScreenInitFB - Generate a
+MIT-MAGIC-COOKIE-1 cookie and add it to the server's list of cookies.
+(Harold L Hunt II)</li>
+
+<li>winclipboardthread.c/winClipboardSaveXauthData - Add the generated
+MIT-MAGIC-COOKIE-1 cookie to the Xauthority file.  Beware that this is
+hard-coded to 127.0.0.1:0 and that the entry is not cleaned up upon
+exit; this will force the host-based access to be disabled in some
+cases and could cause problems starting X Clients until this is fixed.
+(Harold L Hunt II)</li>
+
+<li>xc/programs/Xserver/Imakefile - Add $(OS) to the XWINLIBS just
+after libXwin.a is included, which allows us to call unreferenced
+functions in libXau.a, such as XauWriteAuth.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-30</h4>
 <table>
 <tbody>
