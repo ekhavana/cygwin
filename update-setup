@@ -171,8 +171,8 @@ sub one_version {
 for $p (sort keys %versions) {
     next if $skip{$p};
     print "@ $p\n";
-    print "sdesc: ".$sdesc{$p} if $sdesc{$p};
-    print "ldesc: ".$ldesc{$p} if $ldesc{$p};
+    print "sdesc: ".$sdesc{$p}, "\n" if $sdesc{$p};
+    print "ldesc: ".$ldesc{$p}, "\n" if $ldesc{$p};
     &one_version("", "curr");
     &one_version("[prev]\n", "prev");
     &one_version("[test]\n", "test");
