@@ -65,6 +65,241 @@ valuable feedback/suggestions!
 <h1 align=center>README 20.0 for Cygwin B20 Release.</h1>
 </a>
 
+
+<H1><A NAME="SEC8" HREF="readme_toc.html#TOC8">Release Beta 20 (Oct 30 1998)</A></H1>
+<P>
+This is a significant update to the Beta 19 release.  In addition to an
+EGCS-based compiler and updated tools, this release includes a new
+version of the Cygwin library that contains many improvements and
+bugfixes over the last one.
+
+</P>
+
+
+<H3><A NAME="SEC9" HREF="readme_toc.html#TOC9">The project has a new name!</A></H3>
+
+<P>
+Starting with this release, we are retiring the "GNU-Win32" name for the
+releases.  We have also dropped the "32" from Cygwin32.  This means that
+you should now refer to the tools as "the Cygwin toolset", the library
+as "the Cygwin library" or "the Cygwin DLL", and the library's interface
+as "the Cygwin API".
+
+</P>
+<P>
+Because of this name change, we have changed any aspects of the library
+that involved the name "Cygwin32".  For example, the CYGWIN32
+environment variable is now the CYGWIN environment variable.  API
+functions starting with cygwin32_ are still available under that form
+for backwards-compatibility as well as under the new cygwin_-prefixed
+names.  The same goes for the change of preprocessor define from
+__CYGWIN32__ to __CYGWIN__.  We will remove the old names in a future
+release so please take the minute or two that it will take to remove
+those "32"s.  Thanks and I apologize for the hassle this may cause
+people.  We would have changed the name to "Bob" but that name's already
+taken by Microsoft...  :-)
+
+</P>
+<P>
+Why change it?  For one thing, not all of the software included in the
+distributions is GNU software, including the Cygwin library itself.  So
+calling the project "GNU-Win32" has always been a bit of a misnomer.  In
+addition, we think that calling the tools the "Cygwin tools" that use
+the "Cygwin library" will be less confusing to people.
+
+</P>
+<P>
+Also notice that we are now on the spiffy new sourceware.cygnus.com
+web/ftp site.  The old address will work for some unknown period of
+time (hopefully at least until we get all of the mirrors adjusted).
+
+</P>
+
+
+<H3><A NAME="SEC10" HREF="readme_toc.html#TOC10">Changes in specific tools:</A></H3>
+
+<P>
+The latest public EGCS release is now the basis for the compiler used
+in Cygwin distributions.  As a result, EGCS 1.1 is the compiler in this
+release, with a few additional x86/Cygwin-related patches.
+
+</P>
+<P>
+Those of you who are more interested in native Windows development than
+in porting Unix programs will be glad to know that a new gcc flag
+"-mno-cygwin" will link in the latest Mingw32 libs and produce an
+executable that does not use Cygwin.
+
+</P>
+<P>
+All of the other development tools have been updated to their latest
+versions.  The linker (ld) includes many important bug fixes.  It is now
+possible to safely strip a DLL with a .reloc section.  The windres
+resource compiler is significantly improved.
+
+</P>
+<P>
+Beta 20 also includes upgrades to a number of packages: ash-0.3.2-4,
+bash 2.02.1, grep-2.2, ncurses 4.2, and less 332.  We have added bzip2
+0.9.0 to the distribution.  And you'll now find that the df utility
+has joined its other friends from the fileutils package.
+
+</P>
+<P>
+The sh executable is still ash from the Debian Linux distribution but no
+longer has the problematic quoting bug that was present in the Beta 19
+release.  Control-Cs in the bash shell no longer kill background tasks.
+
+</P>
+<P>
+Tcl/tk are upgraded to version 8.1a2 (with additional patches).
+Compatible versions of tix and itcl are included.  These all include
+Cygwin-compatible configury files so you can do a Unix-style build of
+the Win32 ports of tcl/tk.  expect has been upgraded to 5.26 with some
+additional Cygwin patches.
+
+</P>
+<P>
+In response to customer requests and feedback, Cygnus has developed a
+better graphical front end to GDB than GDBtk or WinGDB.  This tcl-based
+GUI is shipping today to customers of the GNUPro Toolkit.  The
+instrumentation changes to GDB and the tcl interpreter that was built
+into GDB are part of the GPL'd source base.  But the tcl scripts are not
+being made available to the net at this time.  For this reason, you will
+only find a command-line version of gdb in this Cygwin release.
+
+</P>
+<P>
+DJ Delorie has written a new "cygcheck" program that will print out
+useful information about how your Cygwin environment is set up, what
+DLLs a named executable is loading from where, etc.  We hope this will
+make it easier to help diagnose common setup problems.
+
+</P>
+<P>
+The ps utility has been upgraded.  It now has several options including
+shorter and longer output formats.
+
+</P>
+
+
+<H3><A NAME="SEC11" HREF="readme_toc.html#TOC11">Changes in the Cygwin API (cygwin.dll):</A></H3>
+
+<P>
+This version of Cygwin is backwards-compatible with the beta 19 release.
+If you rename the cygwin1.dll included as part of B20 to
+"cygwinb19.dll", the old executables should be able to function with the
+new version of the library.
+
+</P>
+<P>
+Quite a lot of the Cygwin internals have been rewritten or modified to
+address various issues.  If you have a question about specific changes,
+the winsup/ChangeLog file in the development tools sources lists all
+changes made to the DLL over the last three years.  Following are a few
+highlights:
+
+</P>
+<P>
+We are now using a new versioning scheme for Cygwin.  There is now a
+separate version number for the DLL, the API, the shared memory region
+interfaces, and the registry interface.  This will hopefully make it
+easier for multiple Cygwin toolsets to coexist in one user environment.
+
+</P>
+<P>
+Windows 98 is now supported (it is like Windows 95 from Cygwin's
+perspective).  We still recommend upgrading to Windows NT.
+
+</P>
+<P>
+While there is still a lot left to do in improving Cygwin's runtime
+performance, we have put some effort into this prior to the B20 release.
+Hopefully you will find that the latest version of Cygwin is faster than
+ever.  In addition, we have plugged several nasty handle leaks
+associated with opening/closing files and with using ttys.
+
+</P>
+<P>
+The lseek call now uses WriteFile to fill gaps with zeros whenever a
+write is done past an EOF, rather than leaving "undefined" data as Win32
+specifies.
+
+</P>
+<P>
+Significant work has been done to improve the Cygwin header files.
+
+</P>
+<P>
+The Cygwin Support for Unix-style serial I/O is much improved.
+
+</P>
+<P>
+Path handling has had another round of fixes/rewrites.  We no longer use
+NT Extended Attributes for storing Unix permissions/execute status
+because the file NT creates on FAT partitions is not scalable to
+thousands of files (everything slows to a crawl).
+
+</P>
+<P>
+Signal handling has also gotten a fair amount of attention.
+Unfortunately, there are still some problems combining itimers and
+Windows 9x.
+
+</P>
+<P>
+The number of ttys has been upped from 16 to 128.
+
+</P>
+<P>
+New API calls included in the DLL: sethostent, endhostent.
+
+</P>
+<P>
+As mentioned earlier, all cygwin32_-prefixed functions are now exported
+with a cygwin_ prefix instead.  Please adjust your code to call the
+newly named functions.
+
+</P>
+
+
+<H1><A NAME="SEC12" HREF="readme_toc.html#TOC12">Known/potential Problems in the B20 Release</A></H1>
+
+
+
+<H2><A NAME="SEC13" HREF="readme_toc.html#TOC13">Configures in Windows 95/98 not completing</A></H2>
+<P>
+B20's configure setup does not yet work reliably under Windows 95/98 (it
+returns after configuring the top level directory of the compiler tools
+without recursing into subdirectories).  We will release an update to
+address this problem as soon as we have a fix.
+
+</P>
+
+
+<H2><A NAME="SEC14" HREF="readme_toc.html#TOC14">Windows 95 freezing up</A></H2>
+<P>
+While this problem may have been worse under B19, Control-c's in bash
+under Win 95 can lock up the Win 95 kernel, freezing your machine.  This
+problem can be fixed if you are running the OSR2 version of Win 95 by
+installing the USB patch available on OSR2 CDs or on MSDN subscription
+CDs.  More information about OSR2 and the USB patch is available from
+<TT>`http://www.compuclinic.com/osr2faq/index.html'</TT>.
+
+</P>
+
+
+<H2><A NAME="SEC15" HREF="readme_toc.html#TOC15">Some programs can't deal with // pathname scheme in arguments</A></H2>
+<P>
+gcc and other tools aren't fully compatible with the current pathname
+scheme: it can't grok an argument of -I//d/foo which means it is vital
+that when attempting to configure/build UNIX packages, that only normal
+paths with single slashes are used.
+
+</P>
+
+
+
 <H1><A NAME="SEC1" HREF="readme_toc.html#TOC1">Cygwin Resources on the Internet</A></H1>
 
 
@@ -395,240 +630,6 @@ And you should be done...
 
 </P>
 
-
-
-<H1><A NAME="SEC8" HREF="readme_toc.html#TOC8">Release Beta 20 (Oct 30 1998)</A></H1>
-<P>
-This is a significant update to the Beta 19 release.  In addition to an
-EGCS-based compiler and updated tools, this release includes a new
-version of the Cygwin library that contains many improvements and
-bugfixes over the last one.
-
-</P>
-
-
-<H3><A NAME="SEC9" HREF="readme_toc.html#TOC9">The project has a new name!</A></H3>
-
-<P>
-Starting with this release, we are retiring the "GNU-Win32" name for the
-releases.  We have also dropped the "32" from Cygwin32.  This means that
-you should now refer to the tools as "the Cygwin toolset", the library
-as "the Cygwin library" or "the Cygwin DLL", and the library's interface
-as "the Cygwin API".
-
-</P>
-<P>
-Because of this name change, we have changed any aspects of the library
-that involved the name "Cygwin32".  For example, the CYGWIN32
-environment variable is now the CYGWIN environment variable.  API
-functions starting with cygwin32_ are still available under that form
-for backwards-compatibility as well as under the new cygwin_-prefixed
-names.  The same goes for the change of preprocessor define from
-__CYGWIN32__ to __CYGWIN__.  We will remove the old names in a future
-release so please take the minute or two that it will take to remove
-those "32"s.  Thanks and I apologize for the hassle this may cause
-people.  We would have changed the name to "Bob" but that name's already
-taken by Microsoft...  :-)
-
-</P>
-<P>
-Why change it?  For one thing, not all of the software included in the
-distributions is GNU software, including the Cygwin library itself.  So
-calling the project "GNU-Win32" has always been a bit of a misnomer.  In
-addition, we think that calling the tools the "Cygwin tools" that use
-the "Cygwin library" will be less confusing to people.
-
-</P>
-<P>
-Also notice that we are now on the spiffy new sourceware.cygnus.com
-web/ftp site.  The old address will work for some unknown period of
-time (hopefully at least until we get all of the mirrors adjusted).
-
-</P>
-
-
-<H3><A NAME="SEC10" HREF="readme_toc.html#TOC10">Changes in specific tools:</A></H3>
-
-<P>
-The latest public EGCS release is now the basis for the compiler used
-in Cygwin distributions.  As a result, EGCS 1.1 is the compiler in this
-release, with a few additional x86/Cygwin-related patches.
-
-</P>
-<P>
-Those of you who are more interested in native Windows development than
-in porting Unix programs will be glad to know that a new gcc flag
-"-mno-cygwin" will link in the latest Mingw32 libs and produce an
-executable that does not use Cygwin.
-
-</P>
-<P>
-All of the other development tools have been updated to their latest
-versions.  The linker (ld) includes many important bug fixes.  It is now
-possible to safely strip a DLL with a .reloc section.  The windres
-resource compiler is significantly improved.
-
-</P>
-<P>
-Beta 20 also includes upgrades to a number of packages: ash-0.3.2-4,
-bash 2.02.1, grep-2.2, ncurses 4.2, and less 332.  We have added bzip2
-0.9.0 to the distribution.  And you'll now find that the df utility
-has joined its other friends from the fileutils package.
-
-</P>
-<P>
-The sh executable is still ash from the Debian Linux distribution but no
-longer has the problematic quoting bug that was present in the Beta 19
-release.  Control-Cs in the bash shell no longer kill background tasks.
-
-</P>
-<P>
-Tcl/tk are upgraded to version 8.1a2 (with additional patches).
-Compatible versions of tix and itcl are included.  These all include
-Cygwin-compatible configury files so you can do a Unix-style build of
-the Win32 ports of tcl/tk.  expect has been upgraded to 5.26 with some
-additional Cygwin patches.
-
-</P>
-<P>
-In response to customer requests and feedback, Cygnus has developed a
-better graphical front end to GDB than GDBtk or WinGDB.  This tcl-based
-GUI is shipping today to customers of the GNUPro Toolkit.  The
-instrumentation changes to GDB and the tcl interpreter that was built
-into GDB are part of the GPL'd source base.  But the tcl scripts are not
-being made available to the net at this time.  For this reason, you will
-only find a command-line version of gdb in this Cygwin release.
-
-</P>
-<P>
-DJ Delorie has written a new "cygcheck" program that will print out
-useful information about how your Cygwin environment is set up, what
-DLLs a named executable is loading from where, etc.  We hope this will
-make it easier to help diagnose common setup problems.
-
-</P>
-<P>
-The ps utility has been upgraded.  It now has several options including
-shorter and longer output formats.
-
-</P>
-
-
-<H3><A NAME="SEC11" HREF="readme_toc.html#TOC11">Changes in the Cygwin API (cygwin.dll):</A></H3>
-
-<P>
-This version of Cygwin is backwards-compatible with the beta 19 release.
-If you rename the cygwin1.dll included as part of B20 to
-"cygwinb19.dll", the old executables should be able to function with the
-new version of the library.
-
-</P>
-<P>
-Quite a lot of the Cygwin internals have been rewritten or modified to
-address various issues.  If you have a question about specific changes,
-the winsup/ChangeLog file in the development tools sources lists all
-changes made to the DLL over the last three years.  Following are a few
-highlights:
-
-</P>
-<P>
-We are now using a new versioning scheme for Cygwin.  There is now a
-separate version number for the DLL, the API, the shared memory region
-interfaces, and the registry interface.  This will hopefully make it
-easier for multiple Cygwin toolsets to coexist in one user environment.
-
-</P>
-<P>
-Windows 98 is now supported (it is like Windows 95 from Cygwin's
-perspective).  We still recommend upgrading to Windows NT.
-
-</P>
-<P>
-While there is still a lot left to do in improving Cygwin's runtime
-performance, we have put some effort into this prior to the B20 release.
-Hopefully you will find that the latest version of Cygwin is faster than
-ever.  In addition, we have plugged several nasty handle leaks
-associated with opening/closing files and with using ttys.
-
-</P>
-<P>
-The lseek call now uses WriteFile to fill gaps with zeros whenever a
-write is done past an EOF, rather than leaving "undefined" data as Win32
-specifies.
-
-</P>
-<P>
-Significant work has been done to improve the Cygwin header files.
-
-</P>
-<P>
-The Cygwin Support for Unix-style serial I/O is much improved.
-
-</P>
-<P>
-Path handling has had another round of fixes/rewrites.  We no longer use
-NT Extended Attributes for storing Unix permissions/execute status
-because the file NT creates on FAT partitions is not scalable to
-thousands of files (everything slows to a crawl).
-
-</P>
-<P>
-Signal handling has also gotten a fair amount of attention.
-Unfortunately, there are still some problems combining itimers and
-Windows 9x.
-
-</P>
-<P>
-The number of ttys has been upped from 16 to 128.
-
-</P>
-<P>
-New API calls included in the DLL: sethostent, endhostent.
-
-</P>
-<P>
-As mentioned earlier, all cygwin32_-prefixed functions are now exported
-with a cygwin_ prefix instead.  Please adjust your code to call the
-newly named functions.
-
-</P>
-
-
-<H1><A NAME="SEC12" HREF="readme_toc.html#TOC12">Known/potential Problems in the B20 Release</A></H1>
-
-
-
-<H2><A NAME="SEC13" HREF="readme_toc.html#TOC13">Configures in Windows 95/98 not completing</A></H2>
-<P>
-B20's configure setup does not yet work reliably under Windows 95/98 (it
-returns after configuring the top level directory of the compiler tools
-without recursing into subdirectories).  We will release an update to
-address this problem as soon as we have a fix.
-
-</P>
-
-
-<H2><A NAME="SEC14" HREF="readme_toc.html#TOC14">Windows 95 freezing up</A></H2>
-<P>
-While this problem may have been worse under B19, Control-c's in bash
-under Win 95 can lock up the Win 95 kernel, freezing your machine.  This
-problem can be fixed if you are running the OSR2 version of Win 95 by
-installing the USB patch available on OSR2 CDs or on MSDN subscription
-CDs.  More information about OSR2 and the USB patch is available from
-<TT>`http://www.compuclinic.com/osr2faq/index.html'</TT>.
-
-</P>
-
-
-<H2><A NAME="SEC15" HREF="readme_toc.html#TOC15">Some programs can't deal with // pathname scheme in arguments</A></H2>
-<P>
-gcc and other tools aren't fully compatible with the current pathname
-scheme: it can't grok an argument of -I//d/foo which means it is vital
-that when attempting to configure/build UNIX packages, that only normal
-paths with single slashes are used.
-
-</P>
-<P>
 Geoffrey Noer
 noer@cygnus.com
 <P><HR><P>
