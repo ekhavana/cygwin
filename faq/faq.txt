@@ -252,7 +252,7 @@ code.
    After installation, the package archives remain in your "Local
 Package Directory", by default the location of `setup.exe'.  You may
 conserve disk space by deleting the subdirectories there.  These
-directories will have very wierd looking names, being encoded with
+directories will have very weird looking names, being encoded with
 their URLs.
 
 What if setup fails?
@@ -262,7 +262,7 @@ What if setup fails?
 Setup.  The latest version is always available from the 'Install Cygwin
 now' link on the Cygwin Home Page at `http://cygwin.com/'.
 
-   If you are downloading from the internet, setup will fail if it
+   If you are downloading from the Internet, setup will fail if it
 cannot download the list of mirrors at
 `http://cygwin.com/mirrors.html'.  It could be that the network is too
 busy.  Similarly for an ftp download site that isn't working.  Try
@@ -369,1214 +369,6 @@ for utilities that can do this for you.  For more information on
 setting up a custom Cygwin package server, see the Cygwin Setup
 homepage at `http://sources.redhat.com/cygwin-apps/setup.html'.
 
-What Unix API calls are supported by Cygwin?
-********************************************
-
-   This is the beginning of documentation listing the calls supported
-by the Cygwin library.
-
-   All POSIX.1/1996 and ANSI C calls are listed in this file.  Note that
-while almost all POSIX.1/1990 calls are included in Cygwin, most
-POSIX.1/1996 calls are not (yet at least!).  Additional Unix
-compatibility calls and extended libc/libm calls are provided by Cygwin
-but may or may not be listed yet.
-
-   To see if a function is implemented but not listed here, check for
-the presence of the call in the file winsup/cygwin.din in the sources.
-In addition, you may want to read the source code corresponding to the
-call to verify that it is not a stub.  Finally, libc/libm functions
-(including extended calls not listed here) may be documented in the
-newlib texinfo documentation.
-
-   Calls are implemented on both Windows 95 and NT unless otherwise
-noted.  Included are references to relevant standards, if any.  Calls
-starting with "cygwin_" are Cygwin-specific calls.
-
-ANSI C Library Functions
-========================
-
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
-
-   `' libc stdio (newlib/libc/stdio)
-        `' clearerr: C 4.9.10.1
-
-        `' fclose: C 4.9.5.1, P 8.2.3.2
-
-        `' feof: C 4.9.10.2
-
-        `' ferror: C 4.9.10.3
-
-        `' fflush: C 4.9.5.2, P 8.2.3.4
-
-        `' fgetc: C 4.9.7.1, P 8.2.3.5
-
-        `' fgetpos: C 4.9.9.1
-
-        `' fgets: C 4.9.7.2, P 8.2.3.5
-
-        `' fopen: C 4.9.5.3, P 8.2.3.1
-
-        `' fprintf: C 4.9.7.3, P 8.2.3.6
-
-        `' fputc: C 4.9.7.3, P 8.2.3.6
-
-        `' fputs: C 4.9.7.4, P 8.2.3.6
-
-        `' fread: C 4.9.8.1, P 8.2.3.5
-
-        `' freopen: C 4.9.5.4, P 8.2.3.3
-
-        `' fscanf: C 4.9.6.2, P 8.2.3.7
-
-        `' fseek: C 4.9.9.2, P 8.2.3.7
-
-        `' fsetpos: C 4.9.9.3
-
-        `' ftell: C 4.9.9.4, P 8.2.3.10
-
-        `' fwrite: C 4.9.8.2, P 8.2.3.6
-
-        `' getc: C 4.9.7.5, P 8.2.3.5
-
-        `' getchar: C 4.9.7.6, P 8.2.3.5
-
-        `' gets: C 4.9.7.7, P 8.2.3.5
-
-        `' perror: C 4.9.10.4, P 8.2.3.8
-
-        `' printf: C 4.9.6.3, P 8.2.3.6
-
-        `' putc: C 4.9.7.8, P 8.2.3.6
-
-        `' putchar: C 4.9.7.9, P 8.2.3.6
-
-        `' puts: C 4.9.7.10, P 8.2.3.6
-
-        `' remove: C 4.9.4.1, P 8.2.4
-
-        `' rename: C 4.9.4.2, P 5.5.3.1
-
-        `' rewind: C 4.9.9.5, P 8.2.3.7
-
-        `' scanf: C 4.9.6.4, P 8.2.3.5
-
-        `' setbuf: C 4.9.5.5
-
-        `' setvbuf: C 4.9.5.6
-
-        `' sprintf: C 4.9.6.5
-
-        `' sscanf: C 4.9.6.6
-
-        `' tmpfile: C 4.9.4.3, P 8.2.3.9
-
-        `' tmpnam: C 4.9.4.4, P 8.2.5
-
-        `' vfprintf: C 4.9.6.7
-
-        `' ungetc: C 4.9.7.11
-
-        `' vprintf: C 4.9.6.8
-
-        `' vsprintf: C 4.9.6.9
-
-   `' libc string (newlib/libc/string)
-        `' memchr: C 4.11.5.1
-
-        `' memcmp: C 4.11.4.1
-
-        `' memcpy: C 4.11.2.1
-
-        `' memmove: C 4.11.2.2
-
-        `' memset: C 4.11.6.1
-
-        `' strcat: C 4.11.3.1
-
-        `' strchr: C 4.11.5.2
-
-        `' strcmp: C 4.11.4.2
-
-        `' strcoll: C 4.11.4.3
-
-        `' strcpy: C 4.11.2.3
-
-        `' strcspn: C 4.11.5.3
-
-        `' strerror: C 4.11.6.2
-
-        `' strlen: C 4.11.6.3
-
-        `' strncat: C 4.11.3.2
-
-        `' strncmp: C 4.11.3.2
-
-        `' strncpy: C 4.11.2.4
-
-        `' strpbrk: C 4.11.5.4
-
-        `' strrchr: C 4.11.5.5
-
-        `' strspn: C 4.11.5.6
-
-        `' strstr: C 4.11.5.7
-
-        `' strtok: C 4.11.5.8
-
-        `' strxfrm: C 4.11.4.5
-
-   `' libc stdlib (newlib/libc/stdlib, environ.cc,
-     newlib/libc/include/machine/setjmp.h newlib/libc/include/assert.h)
-        `' abort: C 4.10.4.1, P 8.2.3.12
-
-        `' abs: C 4.10.6.1
-
-        `' assert: C 4.2.1.1
-
-        `' atexit: C 4.10.4.2
-
-        `' atof: C 4.10.1.1
-
-        `' atoi: C 4.10.1.2
-
-        `' atol: C 4.10.1.3
-
-        `' bsearch: C 4.10.5.1
-
-        `' calloc: C 4.10.3.1
-
-        `' div: C 4.10.6.2
-
-        `' exit: C 4.10.4.3, P 8.2.3.12
-
-        `' free: C 4.10.3.2
-
-        `' getenv: C 4.10.4.4, P 4.6.1.1
-
-        `' labs: C 4.10.6.3
-
-        `' ldiv: C 4.10.6.2
-
-        `' longjmp: C 4.6.2.1
-
-        `' malloc: C 4.10.3.3
-
-        `' mblen: C 4.10.7.1
-
-        `' mbstowcs: C 4.10.8.1
-
-        `' mbtowc: C 4.10.7.2
-
-        `' qsort: 4.10.5.2
-
-        `' rand: C 4.10.2.1
-
-        `' realloc: C 4.10.3.4
-
-        `' setjmp: C 4.6.1.1
-
-        `' srand: C 4.10.2.2
-
-        `' strtod: C 4.10.1.4
-
-        `' strtol: C 4.10.1.5
-
-        `' strtoul: C 4.10.1.6
-
-        `' system: C 4.10.4.5
-
-        `' wcstombs: C 4.10.8.2
-
-        `' wctomb: C 4.10.7.3
-
-   `' libc time (times.cc, newlib/libc/time)
-        `' asctime: C 4.12.3.1
-
-        `' gmtime: C 4.12.3.3
-
-        `' localtime: C 4.12.3.4, P 8.1.1
-
-        `' time: C 4.12.2.4, P 4.5.1.1
-
-        `' clock: C 4.12.2.1
-
-        `' ctime: C 4.12.3.2
-
-        `' difftime: C 4.12.2.2
-
-        `' mktime: C 4.12.2.3, P 8.1.1
-
-        `' strftime: C 4.11.6.2
-
-   `' libc signals (signal.cc, newlib/libc/signal)
-        `' raise: C 4.7.2.1
-
-        `' signal: C 4.7.1.1
-
-   `' libc ctype (newlib/libc/ctype)
-        `' isalnum: C 4.3.1.1
-
-        `' isalpha: C 4.3.1.2
-
-        `' iscntrl: C 4.3.1.3
-
-        `' isdigit: C 4.3.1.4
-
-        `' isgraph: C 4.3.1.5
-
-        `' islower: C 4.3.1.6
-
-        `' isprint: C 4.3.1.7
-
-        `' ispunct: C 4.3.1.8
-
-        `' isspace: C 4.3.1.9
-
-        `' isupper: C 4.3.1.10
-
-        `' isxdigit: C 4.3.1.11
-
-        `' tolower: C 4.3.2.1
-
-        `' toupper: C 4.3.2.2
-
-   `' libm math (newlib/libm/math)
-        `' acos: C 4.5.2.1
-
-        `' asin: C 4.5.2.2
-
-        `' atan: C 4.5.2.3
-
-        `' atan2: C 4.5.2.4
-
-        `' ceil: C 4.5.6.1
-
-        `' cos: C 4.5.2.5
-
-        `' cosh: C 4.5.3.2
-
-        `' exp: C 4.5.4.1
-
-        `' fabs: C 4.5.6.2
-
-        `' floor: C 4.5.6.3
-
-        `' fmod: C 4.5.6.4
-
-        `' frexp: C 4.5.4.2
-
-        `' ldexp: C 4.5.4.3
-
-        `' log: C 4.5.4.4
-
-        `' log10: C 4.5.4.5
-
-        `' modf: C 4.5.4.6
-
-        `' pow: C 4.5.5.1
-
-        `' sin: C 4.5.2.6
-
-        `' sinh: C 4.5.3.2
-
-        `' sqrt: C 4.5.5.2
-
-        `' tan: C 4.5.2.7
-
-        `' tanh: C 4.5.3.3
-
-   `' libc misc (newlib/libc/locale, gcc/ginclude/stdarg.h)
-        `' localeconv: C 4.4.2.1
-
-        `' setlocale: C 4.4.1.1, P 8.1.2.1
-
-        `' va_arg: C 4.8.1.2
-
-        `' va_end: C 4.8.1.3
-
-        `' va_start: C 4.8.1.1
-
-POSIX.1/96 Functions
-====================
-
-     *(Please note: This section has not yet been updated for the latest
-net release.)*
-
-   `' Process Primitives (Section 3)
-        `' fork: P 3.1.1.1
-
-        `' execl: P 3.1.2.1
-
-        `' execle: P 3.1.2.1
-
-        `' execlp: P 3.1.2.1
-
-        `' execv: P 3.1.2.1
-
-        `' execve: P 3.1.2.1
-
-        `' execvp: P 3.1.2.1
-
-        `' pthread_atfork: P96 3.1.3.1 - unimplemented
-
-        `' wait: P 3.2.1.1
-
-        `' waitpid: P 3.2.1.1
-
-        `' _exit: P 3.2.2.1
-
-        `' kill: P 3.3.2.1
-
-        `' sigemptyset: P 3.3.3.1
-
-        `' sigfillset: P 3.3.3.1
-
-        `' sigaddset: P 3.3.3.1
-
-        `' sigdelset: P 3.3.3.1
-
-        `' sigismember: P 3.3.3.1
-
-        `' sigaction: P 3.3.4.1
-
-        `' pthread_sigmask: P96 3.3.5.1
-
-        `' sigprocmask: P 3.3.5.1
-
-        `' sigpending: P 3.3.6.1
-
-        `' sigsuspend: P 3.3.7.1
-
-        `' sigwait: P96 3.3.8.1 - unimplemented
-
-        `' sigwaitinfo: P96 3.3.8.1 - unimplemented
-
-        `' sigtimedwait: P96 3.3.8.1 - unimplemented
-
-        `' sigqueue: P96 3.3.9.1 - unimplemented
-
-        `' pthread_kill: P96 3.3.10.1
-
-        `' alarm: P 3.4.1.1
-
-        `' pause: P 3.4.2.1
-
-        `' sleep: P 3.4.3.1
-
-   `' Process Environment (Section 4)
-        `' getpid: P 4.1.1.1
-
-        `' getppid: P 4.1.1.1
-
-        `' getuid: P 4.2.1.1
-
-        `' geteuid: P 4.2.1.1
-
-        `' getgid: P 4.2.1.1
-
-        `' getegid: P 4.2.1.1
-
-        `' setuid: P 4.2.2.1 (stub on 9X, sets ENOSYS, returns zero)
-
-        `' setgid: P 4.2.2.1 (stub on 9X, sets ENOSYS, returns zero)
-
-        `' getgroups: P 4.2.3.1
-
-        `' getlogin: P 4.2.4.1
-
-        `' getlogin_r: P 4.2.4.1 - unimplemented
-
-        `' getpgrp: P 4.3.1.1
-
-        `' setsid: P 4.3.2.1
-
-        `' setpgid: P 4.3.3.1
-
-        `' uname: P 4.4.1.1
-
-        `' time: C 4.12.2.4, P 4.5.1.1
-
-        `' times: P 4.5.2.1
-
-        `' getenv: C 4.10.4.4, P 4.6.1.1
-
-        `' ctermid: P 4.7.1.1
-
-        `' ttyname: P 4.7.2.1
-
-        `' ttyname_r: P 4.7.2.1 - unimplemented
-
-        `' isatty: P 4.7.2.1
-
-        `' sysconf: P 4.8.1.1
-
-   `' Files and Directories (Section 5)
-        `' opendir: P 5.1.2.1
-
-        `' readdir: P 5.1.2.1
-
-        `' readdir_r: P96 5.1.2.1 - unimplemented
-
-        `' rewinddir: P 5.1.2.1
-
-        `' closedir: P 5.1.2.1
-
-        `' chdir: P 5.2.1.1
-
-        `' getcwd: P 5.2.2.1
-
-        `' open: P 5.3.1.1
-
-        `' creat: P 5.3.2.1
-
-        `' umask: P 5.3.3.1
-
-        `' link: P 5.3.4.1 (copy file in Win 95, and when link fails in
-          NT)
-
-        `' mkdir: P 5.4.1.1
-
-        `' mkfifo: P 5.4.2.1 - unimplemented!!!
-
-        `' unlink: P 5.5.1.1
-
-        `' rmdir: P 5.5.2.1
-
-        `' rename: C 4.9.4.2, P 5.5.3.1
-
-        `' stat: P 5.6.2.1
-
-        `' fstat: P 5.6.2.1
-
-        `' access: P 5.6.3.1
-
-        `' chmod: P 5.6.4.1
-
-        `' fchmod: P96 5.6.4.1
-
-        `' chown: P 5.6.5.1 (stub in Win 95; always returns zero)
-
-        `' utime: P 5.6.6.1
-
-        `' ftruncate: P96 5.6.7.1
-
-        `' pathconf: P 5.7.1.1
-
-        `' fpathconf: P 5.7.1.1
-
-   `' Input and Output Primitives (Section 6)
-        `' pipe: P 6.1.1.1
-
-        `' dup: P 6.2.1.1
-
-        `' dup2: P 6.2.1.1
-
-        `' close: P 6.3.1.1
-
-        `' read: P 6.4.1.1
-
-        `' write: P 6.4.2.1
-
-        `' fcntl: P 6.5.2.1 (note: fcntl(fd, F_GETLK,...) is not
-          implemented (returns -1 with errno set to ENOSYS)).
-
-        `' lseek: P 6.5.3.1 (note: only works correctly on binary files)
-
-        `' fsync: P96 6.6.1.1
-
-        `' fdatasync: P96 6.6.2.1 - unimplemented
-
-        `' aio_read: P96 6.7.2.1 - unimplemented
-
-        `' aio_write: P96 6.7.3.1 - unimplemented
-
-        `' lio_listio: P96 6.7.4.1 - unimplemented
-
-        `' aio_error: P96 6.7.5.1 - unimplemented
-
-        `' aio_return: P96 6.7.6.1 - unimplemented
-
-        `' aio_cancel: P96 6.7.7.1 - unimplemented
-
-        `' aio_suspend: P96 6.7.8.1 - unimplemented
-
-        `' aio_fsync: P96 6.7.9.1 - unimplemented
-
-   `' Device- and Class-Specific Functions (Section 7)
-        `' cfgetispeed: P96 7.1.3.1
-
-        `' cfgetospeed: P96 7.1.3.1
-
-        `' cfsetispeed: P96 7.1.3.1
-
-        `' cfsetospeed: P96 7.1.3.1
-
-        `' tcdrain: P 7.2.2.1
-
-        `' tcflow: P 7.2.2.1
-
-        `' tcflush: P 7.2.2.1
-
-        `' tcgetattr: P96 7.2.1.1
-
-        `' tcgetpgrp: P 7.2.3.1
-
-        `' tcsendbreak: P 7.2.2.1
-
-        `' tcsetattr: P96 7.2.1.1
-
-        `' tcsetpgrp: P 7.2.4.1
-
-   `' Language-Specific Services for the C Programming Language
-     (Section 8)
-        `' abort: C 4.10.4.1, P 8.2.3.12
-
-        `' asctime_r: P96 8.3.4.1 - unimplemented
-
-        `' ctime_r: P96 8.3.5.1 - unimplemented
-
-        `' exit: C 4.10.4.3, P 8.2.3.12
-
-        `' fclose: C 4.9.5.1, P 8.2.3.2
-
-        `' fdopen: P 8.2.2.1
-
-        `' fflush: C 4.9.5.2, P 8.2.3.4
-
-        `' fgetc: C 4.9.7.1, P 8.2.3.5
-
-        `' fgets: C 4.9.7.2, P 8.2.3.5
-
-        `' fileno: P 8.2.1.1
-
-        `' flockfile: P96 8.2.6.1 - unimplemented
-
-        `' fopen: C 4.9.5.3, P 8.2.3.1
-
-        `' fprintf: C 4.9.7.3, P 8.2.3.6
-
-        `' fputc: C 4.9.7.3, P 8.2.3.6
-
-        `' fputs: C 4.9.7.4, P 8.2.3.6
-
-        `' fread: C 4.9.8.1, P 8.2.3.5
-
-        `' freopen: C 4.9.5.4, P 8.2.3.3
-
-        `' fscanf: C 4.9.6.2, P 8.2.3.7
-
-        `' fseek: C 4.9.9.2, P 8.2.3.7
-
-        `' ftell: C 4.9.9.4, P 8.2.3.10
-
-        `' ftrylockfile: P96 8.2.6.1 - unimplemented
-
-        `' funlockfile: P96 8.2.6.1 - unimplemented
-
-        `' fwrite: C 4.9.8.2, P 8.2.3.6
-
-        `' getc: C 4.9.7.5, P 8.2.3.5
-
-        `' getc_unlocked: P96 8.2.7.1
-
-        `' getchar: C 4.9.7.6, P 8.2.3.5
-
-        `' getchar_unlocked: P96 8.2.7.1
-
-        `' gets: C 4.9.7.7, P 8.2.3.5
-
-        `' gmtime_r: P96 8.3.6.1 - unimplemented
-
-        `' localtime_r: P96 8.3.7.1 - unimplemented
-
-        `' perror: C 4.9.10.4, P 8.2.3.8
-
-        `' printf: C 4.9.6.3, P 8.2.3.6
-
-        `' putc: C 4.9.7.8, P 8.2.3.6
-
-        `' putc_unlocked: P96 8.2.7.1
-
-        `' putchar: C 4.9.7.9, P 8.2.3.6
-
-        `' putchar_unlocked: P96 8.2.7.1
-
-        `' puts: C 4.9.7.10, P 8.2.3.6
-
-        `' rand_r: P96 8.3.8.1 - unimplemented
-
-        `' remove: C 4.9.4.1, P 8.2.4
-
-        `' rewind: C 4.9.9.5, P 8.2.3.7
-
-        `' scanf: C 4.9.6.4, P 8.2.3.5
-
-        `' setlocale: C 4.4.1.1, P 8.1.2.1
-
-        `' siglongjmp: P 8.3.1.1
-
-        `' sigsetjmp: P 8.3.1.1
-
-        `' strtok_r: P96 8.3.3.1 - unimplemented
-
-        `' tmpfile: C 4.9.4.3, P 8.2.3.9
-
-        `' tmpnam: C 4.9.4.4, P 8.2.5
-
-        `' tzset: P 8.3.2.1
-
-   `' System Databases (Section 9)
-        `' getgrgid: P 9.2.1.1
-
-        `' getgrgid_r: P96 9.2.1.1 - unimplemented
-
-        `' getgrnam: P 9.2.1.1
-
-        `' getgrnam_r: P96 9.2.1.1 - unimplemented
-
-        `' getpwnam: P 9.2.2.1
-
-        `' getpwnam_r: P96 9.2.2.1 - unimplemented
-
-        `' getpwuid: P 9.2.2.1
-
-        `' getpwuid_r: P96 9.2.2.1 - unimplemented
-
-   `' Synchronization (Section 11)
-        `' pthread_cond_broadcast: P96 11.4.3.1
-
-        `' pthread_cond_destroy: P96 11.4.2.1
-
-        `' pthread_cond_init: P96 11.4.2.1
-
-        `' pthread_cond_signal: P96 11.4.3.1
-
-        `' pthread_cond_timedwait: P96 11.4.4.1
-
-        `' pthread_cond_wait: P96 11.4.4.1
-
-        `' pthread_condattr_destroy: P96 11.4.1.1 - unimplemented
-
-        `' pthread_condattr_getpshared: P96 11.4.1.1 - unimplemented
-
-        `' pthread_condattr_init: P96 11.4.1.1 - unimplemented
-
-        `' pthread_condattr_setpshared: P96 11.4.1.1 - unimplemented
-
-        `' pthread_mutex_destroy: P96 11.3.2.1
-
-        `' pthread_mutex_init: P96 11.3.2.1
-
-        `' pthread_mutex_lock: P96 11.3.3.1
-
-        `' pthread_mutex_trylock: P96 11.3.3.1
-
-        `' pthread_mutex_unlock: P96 11.3.3.1
-
-        `' sem_close: P96 11.2.4.1 - unimplemented
-
-        `' sem_destroy: P96 11.2.2.1
-
-        `' sem_getvalue: P96 11.2.8.1 - unimplemented
-
-        `' sem_init: P96 11.2.1.1
-
-        `' sem_open: P96 11.2.3.1 - unimplemented
-
-        `' sem_post: P96 11.2.7.1
-
-        `' sem_trywait: P96 11.2.6.1
-
-        `' sem_unlink: P96 11.2.5.1 - unimplemented
-
-        `' sem_wait: P96 11.2.6.1
-
-   `' Memory Management (Section 12)
-        `' mlock: P96 12.1.2.1 - unimplemented
-
-        `' mlockall: P96 12.1.1.1 - unimplemented
-
-        `' mmap: P96 12.2.1.1
-
-        `' mprotect: P96 12.2.3.1
-
-        `' msync: P96 12.2.4.1
-
-        `' munlock: P96 12.1.2.1 - unimplemented
-
-        `' munlockall: P96 12.1.1.1 - unimplemented
-
-        `' munmap: P96 12.2.2.1
-
-        `' shm_open: P96 12.3.1.1 - unimplemented
-
-        `' shm_unlink: P96 12.3.2.1 - unimplemented
-
-   `' Execution Scheduling (Section 13)
-        `' pthread_attr_getinheritsched: P96 13.5.1.1 - unimplemented
-
-        `' pthread_attr_getschedparam: P96 13.5.1.1 - unimplemented
-
-        `' pthread_attr_getschedpolicy: P96 13.5.1.1 - unimplemented
-
-        `' pthread_attr_getscope: P96 13.5.1.1 - unimplemented
-
-        `' pthread_attr_setinheritsched: P96 13.5.1.1
-
-        `' pthread_attr_setschedparam: P96 13.5.1.1 - unimplemented
-
-        `' pthread_attr_setschedpolicy: P96 13.5.1.1 - unimplemented
-
-        `' pthread_attr_setscope: P96 13.5.1.1 - unimplemented
-
-        `' pthread_getschedparam: P96 13.5.2.1
-
-        `' pthread_mutex_getprioceiling: P96 13.6.2.1 - unimplemented
-
-        `' pthread_mutex_setprioceiling: P96 13.6.2.1 - unimplemented
-
-        `' pthread_mutexattr_getprioceiling: P96 13.6.1.1 -
-          unimplemented
-
-        `' pthread_mutexattr_getprotocol: P96 13.6.1.1 - unimplemented
-
-        `' pthread_mutexattr_setprioceiling: P96 13.6.1.1 -
-          unimplemented
-
-        `' pthread_mutexattr_setprotocol: P96 13.6.1.1 - unimplemented
-
-        `' pthread_setschedparam: P96 13.5.2.1
-
-        `' sched_get_priority_max: P96 13.3.6.1 - unimplemented
-
-        `' sched_get_priority_min: P96 13.3.6.1 - unimplemented
-
-        `' sched_getparam: P96 13.3.2.1 - unimplemented
-
-        `' sched_getscheduler: P96 13.3.4.1 - unimplemented
-
-        `' sched_rr_get_interval: P96 13.3.6.1 - unimplemented
-
-        `' sched_setparam: P96 13.3.1.1 - unimplemented
-
-        `' sched_setscheduler: P96 13.3.3.1 - unimplemented
-
-        `' sched_yield: P96 13.3.5.1 - unimplemented
-
-   `' Clocks and Timers (Section 14)
-        `' clock_getres: P96 14.2.1.1 - unimplemented
-
-        `' clock_gettime: P96 14.2.1.1 - unimplemented
-
-        `' clock_settime: P96 14.2.1.1 - unimplemented
-
-        `' nanosleep: P96 14.2.5.1 - unimplemented
-
-        `' timer_create: P96 14.2.2.1 - unimplemented
-
-        `' timer_delete: P96 14.2.3.1 - unimplemented
-
-        `' timer_getoverrun: P96 14.2.4.1 - unimplemented
-
-        `' timer_gettime: P96 14.2.4.1 - unimplemented
-
-        `' timer_settime: P96 14.2.4.1 - unimplemented
-
-   `' Message Passing (Section 15)
-        `' mq_close: P96 15.2.2.1 - unimplemented
-
-        `' mq_getattr: P96 15.2.8.1 - unimplemented
-
-        `' mq_notify: P96 15.2.6.1 - unimplemented
-
-        `' mq_open: P96 15.2.1.1 - unimplemented
-
-        `' mq_receive: P96 15.2.5.1 - unimplemented
-
-        `' mq_send: P96 15.2.4.1 - unimplemented
-
-        `' mq_setattr: P96 15.2.7.1 - unimplemented
-
-        `' mq_unlink: P96 15.2.3.1 - unimplemented
-
-   `' Thread Management (Section 16)
-        `' pthread_attr_destroy: P96 16.2.1.1
-
-        `' pthread_attr_getdetachstate: P96 16.2.1.1 - unimplemented
-
-        `' pthread_attr_getstackaddr: P96 16.2.1.1 - unimplemented
-
-        `' pthread_attr_getstacksize: P96 16.2.1.1
-
-        `' pthread_attr_init: P96 16.2.1.1
-
-        `' pthread_attr_setdetachstate: P96 16.2.1.1 - unimplemented
-
-        `' pthread_attr_setstackaddr: P96 16.2.1.1 - unimplemented
-
-        `' pthread_attr_setstacksize: P96 16.2.1.1
-
-        `' pthread_create: P96 16.2.2.1
-
-        `' pthread_detach: P96 16.2.4.1 - unimplemented
-
-        `' pthread_equal: P96 16.2.7.1
-
-        `' pthread_exit: P96 16.2.5.1
-
-        `' pthread_join: P96 16.2.3.1 - unimplemented
-
-        `' pthread_once: P96 16.2.8.1 - unimplemented
-
-        `' pthread_self: P96 16.2.6.1
-
-   `' Thread-Specific Data (Section 17)
-        `' pthread_getspecific: P96 17.1.2.1
-
-        `' pthread_key_create: P96 17.1.1.1
-
-        `' pthread_key_delete: P96 17.1.3.1
-
-        `' pthread_setspecific: P96 17.1.2.1
-
-   `' Thread Cancellation (Section 18)
-        `' pthread_cancel: P96 18.2.1.1 - unimplemented
-
-        `' pthread_cleanup_pop: P96 18.2.3.1 - unimplemented
-
-        `' pthread_cleanup_push: P96 18.2.3.1 - unimplemented
-
-        `' pthread_setcancelstate: P96 18.2.2.1 - unimplemented
-
-        `' pthread_setcanceltype: P96 18.2.2.1 - unimplemented
-
-        `' pthread_testcancel: P96 18.2.2.1 - unimplemented
-
-Misc Functions
-==============
-
-     *(Please note: This section has not yet been updated for the latest
-net release.)*
-
-   `' Networking (net.cc) (Standardized by POSIX 1.g, which is probably
-     still in draft?)
-        `' accept
-
-        `' bind
-
-        `' connect
-
-        `' getdomainname
-
-        `' gethostbyaddr
-
-        `' gethostbyname
-
-        `' getpeername
-
-        `' getprotobyname
-
-        `' getprotobynumber
-
-        `' getservbyname
-
-        `' getservbyport
-
-        `' getsockname
-
-        `' getsockopt
-
-        `' herror
-
-        `' htonl
-
-        `' htons
-
-        `' inet_addr
-
-        `' inet_makeaddr
-
-        `' inet_netof
-
-        `' inet_ntoa
-
-        `' listen
-
-        `' ntohl
-
-        `' ntohs
-
-        `' rcmd
-
-        `' recv
-
-        `' recvfrom
-
-        `' rexec
-
-        `' rresvport
-
-        `' send
-
-        `' sendto
-
-        `' setsockopt
-
-        `' shutdown
-
-        `' socket
-
-        `' socketpair
-
-     Of these networking calls, rexec, rcmd and rresvport are
-     implemented in MS IP stack but may not be implemented in other
-     vendors' stacks.
-
-   `' Other
-        `' acl
-
-        `' aclcheck
-
-        `' aclfrommode
-
-        `' aclfrompbits
-
-        `' aclfromtext
-
-        `' aclsort
-
-        `' acltomode
-
-        `' acltopbits
-
-        `' acltotext
-
-        `' chroot (with restrictions)
-
-        `' closelog
-
-        `' cwait
-
-        `' cygwin_conv_to_full_posix_path
-
-        `' cygwin_conv_to_full_win32_path
-
-        `' cygwin_conv_to_posix_path
-
-        `' cygwin_conv_to_win32_path
-
-        `' cygwin_logon_user
-
-        `' cygwin_posix_path_list_p
-
-        `' cygwin_posix_to_win32_path_list
-
-        `' cygwin_posix_to_win32_path_list_buf_size
-
-        `' cygwin_set_impersonation_token
-
-        `' cygwin_split_path
-
-        `' cygwin_win32_to_posix_path_list
-
-        `' cygwin_win32_to_posix_path_list_buf_size
-
-        `' cygwin_winpid_to_pid
-
-        `' dlclose
-
-        `' dlerror
-
-        `' dlfork
-
-        `' dlopen
-
-        `' dlsym
-
-        `' endgrent
-
-        `' endhostent
-
-        `' facl
-
-        `' fcloseall
-
-        `' fcloseall_r
-
-        `' ffs
-
-        `' fstatfs
-
-        `' ftime
-
-        `' get_osfhandle
-
-        `' getdtablesize
-
-        `' getgrent
-
-        `' gethostname
-
-        `' getitimer
-
-        `' getmntent
-
-        `' getpagesize
-
-        `' getpgid
-
-        `' getpwent
-
-        `' gettimeofday: BSD
-
-        `' grantpt
-
-        `' initgroups (stub)
-
-        `' ioctl
-
-        `' killpg
-
-        `' login
-
-        `' logout
-
-        `' lstat
-
-        `' mknod (stub, sets ENOSYS, returns -1)
-
-        `' memccpy
-
-        `' nice
-
-        `' openlog
-
-        `' pclose
-
-        `' popen
-
-        `' ptsname
-
-        `' putenv
-
-        `' random
-
-        `' readv
-
-        `' realpath
-
-        `' regfree
-
-        `' rexec
-
-        `' select
-
-        `' setegid: SVR4 (stub on 9X, sets ENOSYS, returns zero)
-
-        `' endpwent
-
-        `' setenv
-
-        `' seterrno
-
-        `' seteuid (stub on 9X, sets ENOSYS, returns zero)
-
-        `' sethostent
-
-        `' setitimer
-
-        `' setmntent
-
-        `' setmode
-
-        `' setpassent
-
-        `' setpgrp
-
-        `' setpwent
-
-        `' settimeofday: BSD (stub, set ENOSYS, return -1)
-
-        `' sexecl
-
-        `' sexecle
-
-        `' sexeclp
-
-        `' sexeclpe
-
-        `' sexeclpe
-
-        `' sexecp
-
-        `' sexecv
-
-        `' sexecve
-
-        `' sexecvpe
-
-        `' sigpause
-
-        `' spawnl (spawn calls are from Windows C library)
-
-        `' spawnle
-
-        `' spawnlp
-
-        `' spawnlpe
-
-        `' spawnv
-
-        `' spawnve
-
-        `' spawnvp
-
-        `' spawnvpe
-
-        `' srandom
-
-        `' statfs
-
-        `' strsignal
-
-        `' strtosigno
-
-        `' swab
-
-        `' syslog
-
-        `' timezone
-
-        `' truncate (SVR4/4.3+BSD)
-
-        `' ttyslot
-
-        `' unlockpt
-
-        `' unsetenv
-
-        `' usleep
-
-        `' utimes
-
-        `' vfork: stub that calls fork
-
-        `' vhangup (stub, sets ENOSYS, returns -1)
-
-        `' wait3
-
-        `' wait4
-
-        `' wcscmp
-
-        `' wcslen
-
-        `' wprintf
-
-        `' writev
-
-
 Question and Answers
 ********************
 
@@ -1617,7 +409,7 @@ cygwin-subscribe@cygwin.com.  To unsubscribe from the main list, send a
 message to cygwin-unsubscribe@cygwin.com.  In both cases, the subject
 and body of the message are ignored.
 
-   Similarly, to subscribe to the Cygwin annoucements list, send a
+   Similarly, to subscribe to the Cygwin announcements list, send a
 message to cygwin-announce-subscribe@cygwin.com.  To unsubscribe, send
 a message to cygwin-announce-unsubscribe@cygwin.com.
 
@@ -1721,10 +513,10 @@ the damage, you must run Cygwin Setup again, and re-install the
 `libncurses5' package.
 
    Note that Cygwin Setup won't show this option by default.  In the
-"Select packages to install" dialogue, click on the `Full/Part' button.
-This lists all packages, even those that are already installed.
-Scroll down to locate the `libncurses5' package.  Click on the "cycle"
-glyph until it says "Reinstall".  Continue with the installation.
+"Select packages to install" dialog, click on the `Full/Part' button.
+This lists all packages, even those that are already installed.  Scroll
+down to locate the `libncurses5' package.  Click on the "cycle" glyph
+until it says "Reinstall".  Continue with the installation.
 
    Similarly, if something cannot find `cygintl.dll', then run Cygwin
 Setup and re-install the `libintl' and `libintl1' packages.
@@ -2038,9 +830,9 @@ rather behave strangely, for example, with NumLock off, keys on numeric
 keyboard work, until you press usual cursor keys, when even numeric
 stop working, but they start working again after hitting alphanumeric
 key, etc. This reported to happen on localized versions of Win98 and
-Win95, and not specific to Cygwin (there're known cases of Alt+Enter
+Win95, and not specific to Cygwin; there are known cases of Alt+Enter
 (fullscreen/windowed toggle) not working and shifts sticking with other
-programs). The cause of this problem is Microsoft keyboard localizer
+programs. The cause of this problem is Microsoft keyboard localizer
 which by default installed in 'autoexec.bat'. Corresponding line looks
 like:
 
@@ -2049,7 +841,7 @@ like:
    (That's for russian locale.) You should comment that line if you want
 your keys working properly. Of course, this will deprive you of your
 local alphabet keyboard support, so you should think about another
-localizer. exUSSR users are of course knowledgeable of Keyrus
+localizer. ex-USSR users are of course knowledgeable of Keyrus
 localizer, and it might work for other locales too, since it has
 keyboard layout editor. But it has russian messages and documentation
 ;-( Reference URL is http://www.hnet.ru/software/contrib/Utils/KeyRus/
@@ -2069,10 +861,10 @@ cygwin1.dll without exiting _all_ Cygwin apps (including inetd)
 beforehand.
 
    If you're trying to find multiple versions of the DLL that are
-causing this problem, reboot first, in case DLL's still loaded in
-memory are the cause.  Then use the Windows System find utility to
-search your whole machine, not just components in your PATH (as 'type'
-would do) or cygwin-mounted filesystems (as Cygwin 'find' would do).
+causing this problem, reboot first, in case DLLs still loaded in memory
+are the cause.  Then use the Windows System find utility to search your
+whole machine, not just components in your PATH (as 'type' would do) or
+cygwin-mounted filesystems (as Cygwin 'find' would do).
 
 Where can I find "more"?
 ------------------------
@@ -2452,11 +1244,11 @@ Windows with no changes at the source level.
 
    The C library is in a DLL, which makes basic applications quite
 small.  And it allows relatively easy upgrades to the Win32/Unix
-translation layer, providing that dll changes stay backward-compatible.
+translation layer, providing that DLL changes stay backward-compatible.
 
    For a good overview of Cygwin, you may want to read the paper on
 Cygwin published by the Usenix Association in conjunction with the 2d
-Usenix NT Symposium in August 1998.  It is available in html format on
+Usenix NT Symposium in August 1998.  It is available in HTML format on
 the project WWW site.
 
 Are development snapshots for the Cygwin library available?
@@ -2484,7 +1276,7 @@ specially.  A \n (new line) written to the file will prepend a \r
 (carriage return) so that if you `printf("Hello\n") you in fact get
 "Hello\r\n".  Upon reading this combination, the \r is removed and the
 number of bytes returned by the read is 1 less than was actually read.
-This tends to confuse programs dependant on ftell() and fseek().  A
+This tends to confuse programs dependent on ftell() and fseek().  A
 Ctrl-Z encountered while reading a file sets the End Of File flags even
 though it truly isn't the end of file.
 
@@ -2492,7 +1284,7 @@ though it truly isn't the end of file.
 Cygwin-ported Unix programs with generic Windows programs.  As a
 result, Cygwin opens files in text mode as is normal under Windows.  In
 the accompanying tools, tools that deal with binaries (e.g. objdump)
-operate in unix binary mode and tools that deal with text files (e.g.
+operate in Unix binary mode and tools that deal with text files (e.g.
 bash) operate in text mode.
 
    Some people push the notion of globally setting the default
@@ -2554,17 +1346,18 @@ family of calls if possible.
 Parent creates child suspended using Win32 CreateProcess call, giving
 the same path it was invoked with itself.  Parent calls setjmp to save
 its own context and then sets a pointer to this in the Cygwin shared
-memory area (shared among all Cygwin tasks).  Parent fills in the childs
-.data and .bss subsections by copying from its own address space into
-the suspended child's address space.  Parent then starts the child.
-Parent waits on mutex for child to get to safe point.  Child starts and
-discovers if has been forked and then longjumps using the saved jump
-buffer.  Child sets mutex parent is waiting on and then blocks on
-another mutex waiting for parent to fill in its stack and heap.  Parent
-notices child is in safe area, copies stack and heap from itself into
-child, releases the mutex the child is waiting on and returns from the
-fork call.  Child wakes from blocking on mutex, recreates any mmapped
-areas passed to it via shared area and then returns from fork itself.
+memory area (shared among all Cygwin tasks).  Parent fills in the
+child's .data and .bss subsections by copying from its own address
+space into the suspended child's address space.  Parent then starts the
+child.  Parent waits on mutex for child to get to safe point.  Child
+starts and discovers if has been forked and then longjumps using the
+saved jump buffer.  Child sets mutex parent is waiting on and then
+blocks on another mutex waiting for parent to fill in its stack and
+heap.  Parent notices child is in safe area, copies stack and heap from
+itself into child, releases the mutex the child is waiting on and
+returns from the fork call.  Child wakes from blocking on mutex,
+recreates any mmapped areas passed to it via shared area and then
+returns from fork itself.
 
 How does wildcarding (globbing) work?
 -------------------------------------
@@ -2615,7 +1408,7 @@ since Cygwin treats both as symlinks regardless of the setting of
 Why do some files, which are not executables have the 'x' type.
 ---------------------------------------------------------------
 
-   When working out the unix-style attribute bits on a file, the library
+   When working out the Unix-style attribute bits on a file, the library
 has to fill out some information not provided by the WIN32 API.
 
    It guesses that files ending in .exe and .bat are executable, as are
@@ -2629,7 +1422,7 @@ you have a long running daemon such as "inetd" running as admin while
 ordinary users are logged in, or if you have a user logged in remotely
 while another user is logged into the console, one cygwin client can
 trick another into running code for it.  In this way one user may gain
-the priveledge of another cygwin program running on the machine.  This
+the privilege of another cygwin program running on the machine.  This
 is because cygwin has shared state that is accessible by all processes.
 
    (Thanks to Tim Newsham (newsham@lava.net) for this explanation).
@@ -2647,9 +1440,9 @@ not the Winsock API.
 same name under the API.
 
    E.g., the select system call on Unix can wait on a standard file
-handles and handles to sockets.  The select call in winsock can only
+handles and handles to sockets.  The select call in Winsock can only
 wait on sockets.  Because of this, cygwin.dll does a lot of nasty stuff
-behind the scenes, trying to persuade various winsock/win32 functions
+behind the scenes, trying to persuade various Winsock/win32 functions
 to do what a Unix select would do.
 
    If you are porting an application which already uses Winsock, then
@@ -2658,7 +1451,7 @@ using the net support in Cygwin is wrong.
    But you can still use native Winsock, and use Cygwin.  The functions
 which cygwin.dll exports are called 'cygwin_<name>'.  There are a load
 of defines which map the standard Unix names to the names exported by
-the dll - check out include/netdb.h:
+the DLL- check out include/netdb.h:
 
      ..etc..
      void		cygwin_setprotoent (int);
@@ -2673,7 +1466,7 @@ the dll - check out include/netdb.h:
 
    The idea is that you'll get the Unix->Cygwin mapping if you include
 the standard Unix header files.  If you use this, you won't need to
-link with libwinsock.a - all the net stuff is inside the dll.
+link with libwinsock.a - all the net stuff is inside the DLL.
 
    The mywinsock.h file is a standard winsock.h which has been hacked to
 remove the bits which conflict with the standard Unix API, or are
@@ -2697,15 +1490,23 @@ line so you link against libwsock32.a.
 What version numbers are associated with Cygwin?
 ------------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+   Cygwin versioning is relatively complicated because of its status as
+a shared library.  First of all, since October 1998 every Cygwin DLL has
+been named `cygwin1.dll' and has a 1 in the release name.
+Additionally, there are DLL major and minor numbers that correspond to
+the name of the release, and a release number. In other words,
+cygwin-1.5.10-2 is `cygwin1.dll', major version 5, minor version 10,
+release 2.
 
-   There is a cygwin.dll major version number that gets incremented
-every time we make a new Cygwin release available.  This corresponds to
-the name of the release (e.g. beta 19's major number is "19").  There
-is also a cygwin.dll minor version number.  If we release an update of
-the library for an existing release, the minor number would be
-incremented.
+   The `cygwin1.dll' major version number gets incremented only when a
+change is made that makes existing software incompatible. For example,
+the first major version 5 release, cygwin-1.5.0-1, added 64-bit file I/O
+operations, which required many libraries to be recompiled and relinked.
+The minor version changes every time we make a new backward compatible
+Cygwin release available.  There is also a `cygwin1.dll' release
+version number.  The release number is only incremented if we update an
+existing release in a way that does not effect the DLL (like a missing
+header file).
 
    There are also Cygwin API major and minor numbers.  The major number
 tracks important non-backward-compatible interface changes to the API.
@@ -2714,13 +1515,14 @@ with the latest DLL.  The minor number tracks significant API additions
 or changes that will not break older executables but may be required by
 newly compiled ones.
 
-   Then there is a shared memory region compatibity version number.  It
-is incremented when incompatible changes are made to the shared memory
-region or to any named shared mutexes, semaphores, etc.
-
-   Finally there is a mount point registry version number which keeps
-track of non-backwards-compatible changes to the registry mount table
-layout.  This has been "B15.0" since the beta 15 release.
+   Then there is a shared memory region compatibility version number.
+It is incremented when incompatible changes are made to the shared
+memory region or to any named shared mutexes, semaphores, etc.  Finally
+there is a mount point registry version number which keeps track of
+non-backwards-compatible changes to the registry mount table layout.
+This has been `mounts v2' for a long time. For more exciting Cygwin
+version number details, check out the `/usr/include/cygwin/version.h'
+file.
 
 Why isn't _timezone set correctly?
 ----------------------------------
@@ -2788,7 +1590,7 @@ Where is Objective C?
    Objective C is not distributed with the Cygwin version of gcc, and
 there are no plans to do so.  The gcc package maintainer had difficulty
 building it, and once built there were problems using it.  It appears
-that there is only minimual support for the Objective C front-end in the
+that there is only minimal support for the Objective C front-end in the
 main GCC distribution, anyway.
 
 Why is make behaving badly?
@@ -2929,7 +1731,7 @@ How do I make the console window go away?
    The default during compilation is to produce a console application.
 It you are writing a GUI program, you should either compile with
 -mwindows as explained above, or add the string
-"-Wl,-subsystem,windows" to the GCC commandline.
+"-Wl,-subsystem,windows" to the GCC command line.
 
 Why does make complain about a "missing separator"?
 ---------------------------------------------------
@@ -3022,7 +1824,7 @@ gcc/g++, just like any `*.o' file. Otherwise, here are some steps:
   1. Extract all the object files from the .lib using LIB.EXE.
 
   2. Build a dummy C file referencing all the functions you need, either
-          withth a direct call or through an initialized function
+          with a direct call or through an initialized function
      pointer.
 
   3. Build a dummy LibMain.
@@ -3123,7 +1925,7 @@ heap size of 1024 and a stack size of 4096, you would invoke gcc as:
 
    `gcc -Wl,--heap,1024,--stack,4096 -o foo foo.c'
 
-How can I find out which dlls are needed by an executable?
+How can I find out which DLLs are needed by an executable?
 ----------------------------------------------------------
 
    `objdump -p' provides this information, but is rather verbose.
@@ -3265,9 +2067,9 @@ How can I debug what's going on?
 --------------------------------
 
    You can debug your application using `gdb'.  Make sure you compile
-it with the -g flag!  If your application calls functions in MS dlls,
+it with the -g flag!  If your application calls functions in MS DLLs,
 gdb will complain about not being able to load debug information for
-them when you run your program.  This is normal since these dlls don't
+them when you run your program.  This is normal since these DLLs don't
 contain debugging information (and even if they did, that debug info
 would not be compatible with gdb).
 
