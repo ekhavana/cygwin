@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2002-06-27 0020 EDT</p>
+<p>Last updated: 2002-07-02 0026 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -61,6 +61,84 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test62</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2002-07-02 0026 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test61</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test62.exe.bz2">XWin-Test62.exe.bz2</a>
+(1072 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020602-0026.tar.bz2">xwin-20020702-0026.tar.bz2</a>
+(73 KiB)</td></tr>
+
+<tr><td>Download Xserver/Imakefile diff: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xc-programs-Xserver-Imakefile-20020702-0026.cf.diff">xc-programs-Xserver-Imakefile-20020702-0026.cf.diff</a>
+(1 KiB)</td></tr>
+
+<tr><td>Download cumulative diff against 20020702 CVS: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020702-0026.diff.bz2">xwin-20020702-0026.diff.bz2</a>
+(23 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winscrinit.c, InitOutput.c, winshadgdi.c, winshaddd.c,
+winshadddnl.c - Correctly calculate the number of bits used to store
+color information by counting the total number of bits that are set in
+our color masks.  This should fix problems introduced in Test61 for
+users with 24bpp or 15bpp displays.  (Alan Hourihane, Harold Hunt)</li>
+
+<li>InitOutput.c, winshadgdi.c, win.h - Add support for an
+experimental parameter, that only works with `-engine 1', that
+combines a specified number of boxes in the shadow update region into
+a GDI clipping region then performs a single Blt operation for the
+entire shadow framebuffer to the primary framebuffer, using the
+clipping region to constrain the Blt to the updated area.  You specify
+the number of boxes in a region that should be combined into a
+clipping region using the new `-clipupdates num_boxes' parameter; by
+defaul the feature is disabled, which is done by setting num_boxes to
+zero.  (Harold Hunt)</li>
+
+<li>winshadgdi.c, winshaddd.c, winshadddnl.c - Add a call to
+initialize an 8bpp PseudoColor visual on top of our TrueColor visual
+when WIN_EMULATE_PSEUDO_SUPPORT is enabled; by default,
+WIN_EMULATE_PSEUDO_SUPPORT is not enabled.  This new PseudoColor
+visual will allow programs such as Magic 7.1 to display when
+Cygwin/XFree86 is running with a TrueColor default visual; however,
+the colors are all messed up.  It may be possible to fix the colors by
+making changes to our local colormap handling funtions (and enabling
+them in TrueColor mode, which they currently are not), or by making
+some change to FB and/or SHADOW.  This feature is being added now
+because Cygwin/XFree86 doesn't crash when we call
+miSetVisualTypesAndMasks a second time; I must be doing something
+differently now that fixed the crashing (probably the bpp and depth
+handling fixes).  (Harold Hunt)</li>
+
+<li>winshadgdi.c, winshaddd.c, winshaddnl.c - Add a #if conditional to
+winInitVisuals* that calls miSetVisualTypesAndMasks or
+fbSetVisualTypesAndMasks depending on if XFree86Server is defined.
+Currently this isn't useful because Mesa (similar to Open GL) doesn't
+work when XFree86Server is undefined.  I'll leave this here for now
+for future reference.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 <h4>Test61</h4>
