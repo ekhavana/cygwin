@@ -1,0 +1,166 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+        "http://www.w3.org/TR/html4/loose.dtd">
+
+<html lang="en-US">
+
+<head>
+<title>Cygwin/XFree86 - Development - xwinclip</title>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<link rel="stylesheet" type="text/css" href="../../xfree86.css">
+
+<meta name="Author" content="Harold L Hunt II">
+<meta name="keywords" content="xfree86, Cygwin, X, x window system,
+microsoft, windows, x/server, xserver, x-server, Cygwin/XFree86,
+Win32, Win32API, Win32 API, xwinclip, clipboard, cut, paste, copy,
+primary, secondary">
+<meta name="description" content="Cygwin/XFree86 - Development - xwinclip">
+
+</head>
+
+<!--#include virtual="../../cygx-header.html" -->
+
+<p>Last updated: 2001-09-02 1252 EDT</p>
+
+<p>xwinclip is a clipboard manager for Cygwin/XFree86 that integrates
+the X Window System clipboard with the Microsoft Windows clipboard.
+xwinclip currently supports two-way text transfers.  More formats will
+be added as they are requested by users.</p>
+
+
+<h4>News</h4>
+<ul>
+
+<li>2001-09-02 - Test01 has been released.  See the <a
+href="changelog.html">Change Log</a> for details.</li>
+
+</ul>
+
+
+<h4>Known Issues</h4>
+<ul>
+
+<li>xwinclip may leak resources.</li>
+
+<li>xwinclip may crash when it sees an unknown format.</li>
+
+<li>xwinclip has been tested with the PRIMARY selection, and code is
+in place that may handle the CLIPBOARD selection.  However, no code is
+in place to handle the SECONDARY selection, and the code for the
+CLIPBOARD selection has not been tested and, therefore, it may not
+work.</li>
+
+</ul>
+
+
+<h4>To-Do List</h4>
+
+<p>See the Cygwin/XFree86 <a href="../todo.html">To-Do List</a> for a
+list of open tasks for xwinclip.</p>
+
+
+<h4>Downloading the xwinclip Binary</h4>
+
+<p>xwinclip binary releases are available via the sources.redhat.com
+ftp <a href="http://cygwin.com/mirrors.html">mirror network</a> in the
+pub/cygwin/xfree/devel/xwinclip/ directory.  You may wish to note the
+desired filename in the link(s) below, then download from your <a
+href="http://cygwin.com/mirrors.html">closest mirror</a>.</p>
+
+<table>
+<tbody>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-Test01.exe.bz2">
+xwinclip-Test01.exe.bz2</a> - Install this binary on your
+Cygwin/XFree86 4.1.0 installation using the instructions below. (9 KB)
+</td>
+</tr>
+
+</tbody>
+</table>
+
+<h4>Downloading xwinclip Source Code</h4>
+
+<p>xwinclip source code releases are available via the
+sources.redhat.com ftp <a href="http://cygwin.com/mirrors.html">mirror
+network</a> in the pub/cygwin/xfree/devel/xwinclip/ directory.  You may
+wish to note the desired filename in the link(s) below, then download
+from your <a href="http://cygwin.com/mirrors.html">closest
+mirror</a>.</p>
+
+<table>
+<tbody>
+
+<tr>
+<td>
+<a href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-20010902-1252.tar.bz2">
+xwinclip-20010902-1252.tar.bz2</a> - Test01 - all files in
+xc/programs/xwinclip/. (5 KB)
+</td>
+</tr>
+
+</tbody>
+</table>
+
+
+<h4>Installing a xwinclip Release</h4>
+
+<p>xwinclip consists of one binary file, namely xwinclip.exe, that you
+add to your current Cygwin/XFree86 installation, replacing the
+previous xwinclip.exe if necessary.  Follow the procedures below to
+backup your original file and install the new file.  Run the following
+commands in a Cygwin shell:</p>
+
+<table>
+<tbody>
+
+<tr>
+<td>
+cp xwinclip-Test01.exe.bz2 /usr/X11R6/bin
+</td>
+</tr>
+
+<tr>
+<td>
+cd /usr/X11R6/bin
+</td>
+</tr>
+
+<tr>
+<td>
+mv xwinclip.exe xwinclip.orig.exe
+</td>
+</tr>
+
+<tr>
+<td>
+bunzip2 xwinclip-Test01.exe.bz2
+</td>
+</tr>
+
+<tr>
+<td>
+mv xwinclip-Test01.exe xwinclip.exe
+</td>
+</tr>
+
+<tr>
+<td>
+Modify your startxwin.bat file to start xwinclip.exe.  On Windows
+NT/2000, add the "start /B xwinclip.exe" immediately after the "start
+/B XWin.exe" line.  On Windows 95/98/Me, add the line "start
+xwinclip.exe" immediately after the "start XWin.exe" line.
+</td>
+</tr>
+
+</tbody>
+</table>
+
+<p>Good luck, and enjoy!</p>
+
+<!--#include virtual="../../cygx-footer.html" -->
+
+</body>
+</html>
