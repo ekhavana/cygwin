@@ -31,8 +31,8 @@ the list please <a href="mailto:dj@cygnus.com">contact us</a>.
 ';
 
 $trailer = '
-<P> Optionally you can download from Cygnus'."'".' busy site, 
-<a href="ftp://sourceware.cygnus.com/pub/cygwin/">sourceware.cygnus.com</a>.
+<P> Optionally you can download from Cygnus'."'".' <em>busy</em> site, 
+<a href="ftp://sources.redhat.com/pub/cygwin/">sources.redhat.com</a>.
 
 <P> Regardless of the origin of the tools, please be sure to read the <a
 href="download.html">download instructions</a> which explains how to get
@@ -74,12 +74,12 @@ $master = <M>;
 $master =~ s/[\r\n]+$//;
 $best_mtime = 0;
 $best_file = undef;
-open(F, "cd $master; find * -type f -print |");
+open(F, "cd $master; find * -name md5.sum m-type f -print |");
 while (<F>) {
     s/[\r\n]+$//;
     next if m@private/@;
     next if m@old/@;
-    next if /md5.sum/;
+#    next if /md5.sum/;
     $mtime = $now - (stat("$master/$_"))[9];
     next if $mtime < 7*$days;
     if (! $best_file || $best_mtime > $mtime) {
@@ -112,7 +112,11 @@ while (<M>) {
 	$ok = $oldstate{$site} + 0;
 	print "too many anon users, assuming ok is $ok\n";
     }
+    $oldstate = $oldstate{$site};
     $oldstate{$site} = $ok;
+    if ($oldstate) {
+	$ok = 1;
+    }
 
     if ($ok) {
 	$summary .= "OK   $url\n";
