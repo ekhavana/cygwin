@@ -1367,17 +1367,12 @@ Building Cygwin/XFree86
    on your cross compiling host, rather than on your native Cygwin host;
    other divergences follow.
     1. Download [83]host.def, and place the file in xc/config/cf.
-    2. Modify host.def/PostIncDir to reflect the actual version of gcc
-       compiled, such as #define PostIncDir
-       /cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include. The version
-       number in the path will change depending on which version of gcc
-       you built and installed.
-    3. lndir should generally already be installed if your build host
+    2. lndir should generally already be installed if your build host
        already has the X Window System installed. In any case, you
        certainly won't want to install the build of lndir mentioned in
        [84]the Section called Native Compiling as that executable is for
        Cygwin only.
-    4. Always remember to set your PATH environment variable to include
+    3. Always remember to set your PATH environment variable to include
        the Cygwin binutils and gcc binary directories:
 
 [harold@MyCrossHost std]$
@@ -1385,7 +1380,7 @@ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
 
 [harold@MyCrossHost std]$
 
-    5. When building the entire tree, you must pass IMAKE_DEFINES and
+    4. When building the entire tree, you must pass IMAKE_DEFINES and
        BOOTSTRAPCFLAGS to make to cause the build system to build for the
        target, Cygwin, platform:
 
@@ -1395,7 +1390,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
 
 [harold@MyCrossHost std]$
 
-    6. When rebuilding individual elements of the tree after doing a
+    5. When rebuilding individual elements of the tree after doing a
        build of the entire tree, you must pass IMAKE_DEFINES to make to
        cause the build system to build for the target, Cygwin, platform:
 
@@ -1404,7 +1399,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
 
 [harold@MyCrossHost Xserver]$
 
-    7. When building a debug version of the entire tree, use makeg, which
+    6. When building a debug version of the entire tree, use makeg, which
        should generally already be installed, and pass IMAKE_DEFINES and
        BOOTSTRAPCFLAGS to makeg to cause the build system to build for
        the target, Cygwin, platform:
@@ -1415,7 +1410,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
 
 [harold@MyCrossHost debug]$
 
-    8. When rebuilding debug versions of individual elements of the tree
+    7. When rebuilding debug versions of individual elements of the tree
        after doing a debug build of the entire tree, you must pass
        IMAKE_DEFINES to makeg to cause the build system to build for the
        target, Cygwin, platform:
@@ -1425,7 +1420,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
 
 [harold@MyCrossHost Xserver]$
 
-    9. When installing a standard build of the entire tree, you must pass
+    8. When installing a standard build of the entire tree, you must pass
        DESTDIR and IMAKE_DEFINES to make to install the target platform
        build into /stagingdir and to cause the build system to build a
        few remaining programs for the target, Cygwin, platform:
@@ -1442,7 +1437,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
 
 [harold@MyCrossHost std]$
 
-   10. When installing a debug build of the entire tree, you must pass
+    9. When installing a debug build of the entire tree, you must pass
        DESTDIR and IMAKE_DEFINES to makeg to install the target platform
        build into /stagingdir and to cause the build system to build
        debug versions of a few remaining programs for the target, Cygwin,
