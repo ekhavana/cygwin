@@ -337,16 +337,25 @@ Configuration Overview
 
 Command Line Parameters
 
-   You need to pass a proper screen configuration for screen number 0 to
-   XWin.exe; below is the syntax for XWin.exe parameters.
+   Cygwin/XFree86, by default, runs in windowed mode with the largest
+   window that will fit on your Windows desktop, using the best
+   performing engine that is installed on your system; you do not need to
+   pass any parameters to XWin.exe to use the default behavior. Below is
+   the syntax for XWin.exe parameters.
 
-   XWin.exe {-screen screen_number widthxheightxbit_depth ...}
-   [-engine engine_number ] [-fullscreen] [-emulate3buttons
-   timeout_in_milliseconds ]
+   XWin.exe
+   [-screen screen_number width height ...]
+   [-engine engine_number ]
+   [-fullscreen [-depth depth_in_bits_per_pixel ] [-refresh
+   refresh_rate_in_herz ] ]
+   [-emulate3buttons timeout_in_milliseconds ]
+   [-[no]winkill]
+   [-[no]unixkill]
 
    Below is an example command line for XWin.exe.
 
-   XWin.exe -screen 0 800x600x16
+   XWin.exe -screen 0 800 600 -fullscreen -depth 32 -refresh 85
+   -emulate3buttons 100 -nowinkill -unixkill
      _________________________________________________________________
 
 Chapter 4. Using Cygwin/XFree86
