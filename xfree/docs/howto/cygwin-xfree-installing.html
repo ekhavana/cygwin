@@ -1,0 +1,353 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML
+><HEAD
+><TITLE
+>Installing Cygwin/XFree86</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.61
+"/><LINK
+REL="HOME"
+TITLE="Cygwin/XFree86 User's Guide"
+HREF="cygwin-xfree-ug.html"/><LINK
+REL="UP"
+TITLE="Setting Up Cygwin/XFree86"
+HREF="setup.html"/><LINK
+REL="PREVIOUS"
+TITLE="Downloading Cygwin/XFree86"
+HREF="cygwin-xfree-downloading.html"/><LINK
+REL="NEXT"
+TITLE="Configuring Cygwin/XFree86"
+HREF="configure.html"/></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin/XFree86 User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="cygwin-xfree-downloading.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 2. Setting Up Cygwin/XFree86</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="configure.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="cygwin-xfree-installing"
+>Installing Cygwin/XFree86</A
+></H1
+><P
+>Cygwin/XFree86 binaries are installed by the
+<TT
+CLASS="filename"
+>Xinstall.sh</TT
+> script.</P
+><P
+>Follow these steps to install Cygwin/XFree86 binaries:</P
+><OL
+TYPE="1"
+><LI
+><P
+>Launch your Cygwin environment, using either the icon on your
+Desktop, the icon in your Start Menu, or by running cygwin.bat from
+your Cygwin directory (e.g. <TT
+CLASS="filename"
+>c:\cygwin</TT
+>); you should see a window like
+the following:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Change the current directory to your Cygwin root
+directory:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost ~
+$ cd /
+Harold@MyWindowsHost /
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Extract the <TT
+CLASS="filename"
+>extract.exe.bz2</TT
+>
+archive:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost /
+$ bunzip2 extract.exe.bz2
+Harold@MyWindowsHost /
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Copy the <TT
+CLASS="filename"
+>extract.exe</TT
+>
+file to <TT
+CLASS="filename"
+>/bin</TT
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost /
+$ cp extract.exe /bin
+Harold@MyWindowsHost /
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Run the Xinstall.sh script.  Follow the step-by-step
+instructions that the script provides:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost /
+$ ./Xinstall.sh
+
+                Welcome to the XFree86 4.1.0 installer
+
+You are strongly advised to backup your existing XFree86 installation
+before proceeding.  This includes the /usr/X11R6 and /etc/X11
+directories.  The installation process will overwrite existing files
+in those directories, and this may include some configuration files
+that may have been customised.
+
+If you are installing a version different from 4.1.0, you
+may need an updated version of this installer script.
+
+Do you wish to continue? (y/n) [n] n
+
+...
+
+Harold@MyWindowsHost /
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Copy <TT
+CLASS="filename"
+>startup-scripts.tgz</TT
+> to
+<TT
+CLASS="filename"
+>/usr/X11R6/bin</TT
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost /
+$ cp startup-scripts.tgz /usr/X11R6/bin
+Harold@MyWindowsHost /
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Change the current directory to <TT
+CLASS="filename"
+>/usr/X11R6/bin</TT
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost /
+$ cd /usr/X11R6/bin
+Harold@MyWindowsHost /usr/X11R6/bin
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Extract <TT
+CLASS="filename"
+>startup-scripts.tgz</TT
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Harold@MyWindowsHost /usr/X11R6/bin
+$ tar -xzf startup-scripts.tgz
+Harold@MyWindowsHost /usr/X11R6/bin
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Installation of Cygwin/XFree86 binaries is now complete.</P
+></LI
+></OL
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="cygwin-xfree-downloading.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-xfree-ug.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="configure.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Downloading Cygwin/XFree86</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="setup.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Configuring Cygwin/XFree86</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
