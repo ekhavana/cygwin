@@ -105,6 +105,8 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage: cygcheck [OPTIONS] [program ...]
+Check system information or PROGRAM library dependencies
+
  -c, --check-setup  check packages installed via setup.exe
  -s, --sysinfo      system information (not with -k)
  -v, --verbose      verbose output (indented) (for -s or programs)
@@ -227,6 +229,8 @@ WIDTH="100%"
 CLASS="SCREEN"
 >Usage: cygpath (-d|-m|-u|-w|-t TYPE) [-c HANDLE] [-f FILE] [options] NAME
        cygpath [-ADHPSW] 
+Convert Unix and Windows format paths, or output system path information
+
 Output type options:
   -d, --dos             print DOS (short) form of NAME (C:\PROGRA~1\)
   -m, --mixed           like --windows, but with regular slashes (C:/WINNT)
@@ -462,6 +466,7 @@ WIDTH="100%"
 CLASS="SCREEN"
 >Usage: dumper [OPTION] FILENAME WIN32PID
 Dump core from WIN32PID to FILENAME.core
+
 -d, --verbose  be verbose while dumping
 -h, --help     output help information and exit
 -q, --quiet    be quiet while dumping (default)
@@ -643,6 +648,8 @@ WIDTH="100%"
 CLASS="SCREEN"
 >Usage: kill [-f] [-signal] [-s signal] pid1 [pid2 ...]
        kill -l [signal]
+Send signals to processes
+
  -f, --force     force, using win32 interface if necessary
  -l, --list      print a list of signal names
  -s, --signal    send signal (use kill --list for a list)
@@ -861,17 +868,15 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->Usage: mkgroup [OPTION]... [domain]
-
-This program prints a /etc/group file to stdout
+>Usage: mkgroup [OPTION]... [domain]...
+Prints /etc/group file to stdout
 
 Options:
    -l,--local             print local group information
    -c,--current           print current group, if a domain account
-   -d,--domain            print global group information from the domain
-                          specified (or from the current domain if there is
-                          no domain specified)
-   -o,--id-offset offset  change the default offset (10000) added to uids
+   -d,--domain            print global group information (from current
+                          domain if no domains specified).
+   -o,--id-offset offset  change the default offset (10000) added to gids
                           in domain accounts.
    -s,--no-sids           don't print SIDs in pwd field
                           (this affects ntsec)
@@ -1021,23 +1026,22 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->Usage: mkpasswd [OPTION]... [domain]
-
-This program prints a /etc/passwd file to stdout
+>Usage: mkpasswd [OPTION]... [domain]...
+Prints /etc/passwd file to stdout
 
 Options:
    -l,--local              print local user accounts
    -c,--current            print current account, if a domain account
    -d,--domain             print domain accounts (from current domain
-                           if no domain specified)
+                           if no domains specified)
    -o,--id-offset offset   change the default offset (10000) added to uids
                            in domain accounts.
    -g,--local-groups       print local group information too
-                           if no domain specified
+                           if no domains specified
    -m,--no-mount           don't use mount points for home dir
    -s,--no-sids            don't print SIDs in GCOS field
                            (this affects ntsec)
-   -p,--path-to-home path  use specified path instead of user account home dir
+   -p,--path-to-home path  use specified path and not user account home dir or /home
    -u,--username username  only return information for the specified user
    -h,--help               displays this message
    -v,--version            version information and exit
@@ -1178,7 +1182,7 @@ CLASS="LITERAL"
 CLASS="COMMAND"
 >mkpasswd</B
 > to
-use a prefix other than <TT
+use the specified prefix instead of the account home dir or <TT
 CLASS="LITERAL"
 >/home/</TT
 >. For example, this command:
@@ -1237,7 +1241,9 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage: mount [OPTION] [&#60;win32path&#62; &#60;posixpath&#62;]
-  -b, --binary                  text files are equivalent to binary files
+Display information about mounted filesystems, or mount a filesystem
+
+  -b, --binary     (default)    text files are equivalent to binary files
                                 (newline = \n)
   -c, --change-cygdrive-prefix  change the cygdrive path prefix to &#60;posixpath&#62;
   -f, --force                   force mount, don't warn about missing mount
@@ -1247,7 +1253,7 @@ CLASS="SCREEN"
                                 system mount points and cygdrive prefixes
   -p, --show-cygdrive-prefix    show user and/or system cygdrive path prefix
   -s, --system     (default)    add system-wide mount point
-  -t, --text       (default)    text files get \r\n line endings
+  -t, --text                    text files get \r\n line endings
   -u, --user                    add user-only mount point
   -v, --version                 output version information and exit
   -x, --executable              treat all files under mount point as executables
@@ -1281,7 +1287,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1181"
+NAME="AEN1154"
 >Using mount</A
 ></H3
 ><P
@@ -1498,7 +1504,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1227"
+NAME="AEN1200"
 >Cygdrive mount points</A
 ></H3
 ><P
@@ -1583,7 +1589,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1246"
+NAME="AEN1219"
 >Limitations</A
 ></H3
 ><P
@@ -1667,6 +1673,7 @@ WIDTH="100%"
 CLASS="SCREEN"
 >Usage: passwd (-l|-u|-S) [USER]
        passwd [-i NUM] [-n MINDAYS] [-x MAXDAYS] [-L LEN]
+Change USER's password or password attributes
 
 User operations:
  -l, --lock      lock USER's account
@@ -1823,6 +1830,8 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage: ps [-aefls] [-u UID]
+Report process status
+
  -a, --all       show processes of all users
  -e, --everyone  show processes of all users
  -f, --full      show process uids, ppids
@@ -1925,6 +1934,7 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage: regtool.exe [OPTION] (add | check | get | list | remove | unset) KEY
+View or edit the Win32 registry
 
 Actions:
  add KEY\SUBKEY             add new SUBKEY
@@ -2141,7 +2151,6 @@ WIDTH="100%"
 CLASS="SCREEN"
 >Usage: setfacl [-r] (-f ACL_FILE | -s acl_entries) FILE...
        setfacl [-r] ([-d acl_entries] [-m acl_entries]) FILE...
-
 Modify file and directory access control lists (ACLs)
 
   -d, --delete     delete one or more specified ACL entries
@@ -2379,6 +2388,8 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage: ssp [options] low_pc high_pc command...
+Single-step profile COMMAND
+
  -c, --console-trace  trace every EIP value to the console. *Lots* slower.
  -d, --disable        disable single-stepping by default; use
                       OutputDebugString ("ssp on") to enable stepping
@@ -2705,6 +2716,8 @@ WIDTH="100%"
 CLASS="SCREEN"
 >Usage: strace.exe [OPTIONS] &#60;command-line&#62;
 Usage: strace.exe [OPTIONS] -p &#60;pid&#62;
+Trace system calls and signals
+
   -b, --buffer-size=SIZE       set size of output file buffer
   -d, --no-delta               don't display the delta-t microsecond timestamp
   -f, --trace-children         trace child processes (toggle - default true)
@@ -2814,6 +2827,8 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage: umount.exe [OPTION] [&#60;posixpath&#62;]
+Unmount filesystems
+
   -A, --remove-all-mounts       remove all mounts
   -c, --remove-cygdrive-prefix  remove cygdrive prefix
   -h, --help                    output usage information and exit
