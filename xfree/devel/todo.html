@@ -1,238 +1,255 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 
-<html lang="en-US">
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+      lang="en-US">
 <head>
-<title>Cygwin/X - Development - To-Do List</title>
-
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-<link rel="stylesheet" type="text/css" href="../cygx.css">
-<link rel="icon" type="image/ico" href="../favicon.ico">
+    <title>Cygwin/X - Development - To-Do List</title>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=us-ascii" />
+    <link rel="stylesheet"
+          type="text/css"
+          href="../cygx.css" />
+    <link rel="icon"
+          type="image/ico"
+          href="../favicon.ico" />
 </head>
-
-<!--#include virtual="../cygx-header.html" -->
-
 <!-- BODY MODIFIED: $Date$ $Author$ -->
 
-<h2>Cygwin/X - Development - To-Do List</h2>
+<body>
+    <!--#include virtual="../cygx-header.html" -->
 
-<p>Last updated: 2003-03-25 1350 EST (Harold L Hunt II)</p>
+    <h2>Cygwin/X - Development - To-Do List</h2>
 
-<p>Following is a list of open tasks on the Cygwin/X
-project:</p>
+    <p>Last updated: 2003-03-25 1350 EST (Harold L Hunt II)</p>
 
-<table border="0" cellpadding="5">
+    <p>Following is a list of open tasks on the Cygwin/X
+    project:</p>
 
-<thead>
-<tr>
-<td><b>Summary</b></td>
-<td><b>Updated</b></td>
-<td><b>Description</b></td>
-</tr>
-</thead>
+    <table border="0"
+           cellpadding="5">
+        <thead>
+            <tr>
+                <td><b>Summary</b></td>
 
+                <td><b>Updated</b></td>
 
-<tbody>
+                <td><b>Description</b></td>
+            </tr>
+        </thead>
 
-<!-- ToDo item template -->
-<!--
-<tr valign="top">
-<td></td>
+        <tbody>
+            <!-- ToDo item template -->
+            <!--
+                        <tr valign="top">
+                        <td></td>
 
-<td></td>
+                        <td></td>
 
-<td></td>
-</tr>
--->
+                        <td></td>
+                        </tr>
+                        -->
 
+            <tr valign="top">
+                <td>About: Links to ChangeLog, User's Guide,
+                etc.</td>
 
-<tr valign="top">
-<td>About: Links to ChangeLog, User's Guide, etc.</td>
+                <td>2004-03-25</td>
 
-<td>2004-03-25</td>
+                <td>Create an About dialog box that has links to
+                open the ChangeLog
+                (/usr/X11R6/share/doc/XFree86-xserv/changelog.html),
+                /tmp/XWin.log, and, if they are present, the User's
+                Guide, Contributor's Guide, and Frequently Asked
+                Questions using cygwin_conv_to_win32_path() and
+                ShellExecute(). See the cygstart source in the
+                cygutils package if you need a simple example of
+                how to do this.</td>
+            </tr>
 
-<td>Create an About dialog box that has links to open the ChangeLog
-(/usr/X11R6/share/doc/XFree86-xserv/changelog.html), /tmp/XWin.log,
-and, if they are present, the User's Guide, Contributor's Guide, and
-Frequently Asked Questions using cygwin_conv_to_win32_path() and
-ShellExecute().  See the cygstart source in the cygutils package if
-you need a simple example of how to do this.</td>
-</tr>
+            <tr valign="top">
+                <td>FatalError Dialog Box</td>
 
+                <td>2004-03-25</td>
 
-<tr valign="top">
-<td>FatalError Dialog Box</td>
+                <td>Change the FatalError message box to a dialog
+                box with links to open the same files described in
+                the About box topic.</td>
+            </tr>
 
-<td>2004-03-25</td>
+            <tr valign="top">
+                <td>Indirect OpenGL acceleration</td>
 
-<td>Change the FatalError message box to a dialog box with links to
-open the same files described in the About box topic.</td>
-</tr>
+                <td>2004-03-25</td>
 
+                <td>Finish implementing the indirect OpenGL
+                acceleration that Alexander Gottwald has nearly
+                completed; there are mostly some rough edges
+                remaining. The
+                <a href="http://msu.edu/~huntharo/xwin/devel/server/CygwinX-Accelerated-OpenGL-Support-20040229.pdf">
+                notes posted by Harold on 2004-02-29</a> will be
+                useful. Additional information is in the
+                <a href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00001.html">
+                email that accompanied the above notes</a>.</td>
+            </tr>
 
-<tr valign="top">
-<td>Indirect OpenGL acceleration</td>
+            <tr valign="top">
+                <td>Automatically assign display number</td>
 
-<td>2004-03-25</td>
+                <td>2004-03-04</td>
 
-<td>Finish implementing the indirect OpenGL acceleration that
-Alexander Gottwald has nearly completed; there are mostly some rough
-edges remaining.  The <a
-href="http://msu.edu/~huntharo/xwin/devel/server/CygwinX-Accelerated-OpenGL-Support-20040229.pdf">notes
-posted by Harold on 2004-02-29</a> will be useful.  Additional
-information is in the <a
-href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00001.html">email
-that accompanied the above notes</a>.</td>
-</tr>
+                <td>Coupled with the detection of in-use display
+                numbers, it would be advantageous if we could
+                optionally automatically assign an unused display
+                number to a new instance of XWin.exe. We would need
+                an IPC mechanism used for all instances of XWin.exe
+                to share information about in-use display numbers,
+                as well as a check of potentially available ports
+                for use by other applications. Finally, this whole
+                thing is useless if we do not have a way to query
+                the started instance of XWin.exe for the display
+                number that it assigned to itself; the ideal
+                solution to this problem will likely require an
+                external executable that has an IPC mechanism to
+                retrieve the desired display number from all
+                running instances of XWin.exe. We may be able to
+                adapt the run.exe utility to query the XWin.exe
+                instance with the same parent process id (should be
+                the command shell that both were started from, I
+                hope) and to then modify the environment being
+                passed to a child process. There may be other ways
+                to solve this problem, but anything that allows for
+                a race between started instances of XWin.exe will
+                be unacceptable, since an error would result in
+                applications attaching to the wrong display.</td>
+            </tr>
 
+            <tr valign="top">
+                <td>Detect in-use display number ports</td>
 
-<tr valign="top">
-<td>Automatically assign display number</td>
+                <td>2004-03-04</td>
 
-<td>2004-03-04</td>
+                <td>Display number <i>n</i> in X11 listens on TCP
+                port 6000 + <i>n</i>. As of our X Server release
+                4.3.0-49 we check for other instances of XWin.exe
+                running on a given display number, but we perform
+                no checks for other applications listening on port
+                6000 + <i>n</i>. We may not be able to atomically
+                check port 6000 + <i>n</i> and start listening on
+                it if it is not in use, but we can at least perform
+                a sanity check with only a small window where
+                another application could start listening on that
+                port before we started listening on it; this would
+                be a sufficient fix for our purposes. Other
+                developers can help with adding command-line
+                parameters to control this feature once the above
+                code is finished.</td>
+            </tr>
 
-<td>Coupled with the detection of in-use display numbers, it would be
-advantageous if we could optionally automatically assign an unused
-display number to a new instance of XWin.exe.  We would need an IPC
-mechanism used for all instances of XWin.exe to share information
-about in-use display numbers, as well as a check of potentially
-available ports for use by other applications.  Finally, this whole
-thing is useless if we do not have a way to query the started instance
-of XWin.exe for the display number that it assigned to itself; the
-ideal solution to this problem will likely require an external
-executable that has an IPC mechanism to retrieve the desired display
-number from all running instances of XWin.exe.  We may be able to
-adapt the run.exe utility to query the XWin.exe instance with the same
-parent process id (should be the command shell that both were started
-from, I hope) and to then modify the environment being passed to a
-child process.  There may be other ways to solve this problem, but
-anything that allows for a race between started instances of XWin.exe
-will be unacceptable, since an error would result in applications
-attaching to the wrong display.</td>
-</tr>
+            <tr valign="top">
+                <td>Timestamp on log file entries</td>
 
+                <td>2004-03-04</td>
 
-<tr valign="top">
-<td>Detect in-use display number ports</td>
+                <td>Add a timestamp to each line of /tmp/XWin.log,
+                as suggested by Ehud Karni on 2004-03-03. Ehud also
+                <a href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00082.html">
+                provided source code useful for performing such
+                timestamping</a> in his email.</td>
+            </tr>
 
-<td>2004-03-04</td>
+            <tr valign="top">
+                <td>MultiWindow DirectDraw and DirectDraw NL</td>
 
-<td>Display number <i>n</i> in X11 listens on TCP port 6000 +
-<i>n</i>.  As of our X Server release 4.3.0-49 we check for other
-instances of XWin.exe running on a given display number, but we
-perform no checks for other applications listening on port 6000 +
-<i>n</i>.  We may not be able to atomically check port 6000 + <i>n</i>
-and start listening on it if it is not in use, but we can at least
-perform a sanity check with only a small window where another
-application could start listening on that port before we started
-listening on it; this would be a sufficient fix for our purposes.
-Other developers can help with adding command-line parameters to
-control this feature once the above code is finished.</td>
-</tr>
+                <td>2004-03-04</td>
 
+                <td>Blit updates from a DirectDraw shadow
+                framebuffer to the updated Win32 window instead of
+                blitting from a GDI shadow framebuffer. This should
+                be trivially easy to start and should require only
+                a single DirectDraw surface for the whole screen (I
+                had previously said it would require one surface
+                per Win32 window). It would be very important to
+                just demonstrate that this can be done; clipping
+                the blits to properly handle window z-order and
+                such can be finished by other developers.</td>
+            </tr>
 
-<tr valign="top">
-<td>Timestamp on log file entries</td>
+            <tr valign="top">
+                <td>Windows display size changes while running</td>
 
-<td>2004-03-04</td>
+                <td>2004-03-04</td>
 
-<td>Add a timestamp to each line of /tmp/XWin.log, as suggested by
-Ehud Karni on 2004-03-03.  Ehud also <a
-href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00082.html">provided
-source code useful for performing such timestamping</a> in his
-email.</td>
-</tr>
+                <td>Use RandR (resize and rotate) to pass changes
+                to the display size (e.g. 1024 x 768 --&gt; 1280 x
+                1024) to the X Server and all running applications.
+                This should be very easy to do; you can use the
+                code that is in place for detecting display changes
+                and just pass these values to RandR to let it do
+                its thing.</td>
+            </tr>
 
+            <tr valign="top">
+                <td>Emulate PseudoColor on TrueColor</td>
 
-<tr valign="top">
-<td>MultiWindow DirectDraw and DirectDraw NL</td>
+                <td>2003-09-23</td>
 
-<td>2004-03-04</td>
+                <td>Provide emulation of PseudoColor visuals
+                (typically 8-bit palette-based visuals) on top of
+                the default TrueColor visual (when running in 15,
+                16, 24, or 32 bit color depths). This will allow a
+                lot of CAD-type applications that require
+                PseudoColor to be run when Windows is in a color
+                mode higher than 8 bits per pixel. The general idea
+                here is to add checks to any copying of data
+                between offscreen and onscreen, as well as between
+                areas on the screen; these checks test for
+                differing visual types and convert the pixels and
+                colors accordingly.</td>
+            </tr>
 
-<td>Blit updates from a DirectDraw shadow framebuffer to the updated
-Win32 window instead of blitting from a GDI shadow framebuffer.  This
-should be trivially easy to start and should require only a single
-DirectDraw surface for the whole screen (I had previously said it
-would require one surface per Win32 window).  It would be very
-important to just demonstrate that this can be done; clipping the
-blits to properly handle window z-order and such can be finished by
-other developers.</td>
-</tr>
+            <tr valign="top">
+                <td>Windows clipboard integration</td>
 
+                <td>2004-01-07</td>
 
-<tr valign="top">
-<td>Windows display size changes while running</td>
+                <td>Extend <a href="xwinclip/">xwinclip</a>, the
+                Cygwin/X clipboard manager, to handle data types
+                other than XA_STRING, COMPOUND_TEXT, and
+                UTF8_STRING; for example, BITMAP, PIXMAP, etc.</td>
+            </tr>
 
-<td>2004-03-04</td>
+            <tr valign="top">
+                <td>User's Guide - Document .XWinrc</td>
 
-<td>Use RandR (resize and rotate) to pass changes to the display size
-(e.g. 1024 x 768 --&gt; 1280 x 1024) to the X Server and all running
-applications.  This should be very easy to do; you can use the code
-that is in place for detecting display changes and just pass these
-values to RandR to let it do its thing.</td>
-</tr>
+                <td>2003-09-22</td>
 
+                <td>Documentation needs to be added to the User's
+                Guide for Earle F Philhower III's .XWinrc
+                mechanism. The documentation source is available
+                via CVS in the 'xoncygwin' project on sourceforge.
+                This task is greatly simplied by the fact that
+                Earle provided comments in his
+                <a href="http://www.msu.edu/~huntharo/xwin/server/example.XWinrc">
+                example .XWinrc file</a>.</td>
+            </tr>
 
-<tr valign="top">
-<td>Emulate PseudoColor on TrueColor</td>
+            <tr valign="top">
+                <td>DirectDraw windowed PseudoColor</td>
 
-<td>2003-09-23</td>
+                <td>2003-08-27</td>
 
-<td>Provide emulation of PseudoColor visuals (typically 8-bit
-palette-based visuals) on top of the default TrueColor visual (when
-running in 15, 16, 24, or 32 bit color depths).  This will allow a lot
-of CAD-type applications that require PseudoColor to be run when
-Windows is in a color mode higher than 8 bits per pixel.  The general
-idea here is to add checks to any copying of data between offscreen
-and onscreen, as well as between areas on the screen; these checks
-test for differing visual types and convert the pixels and colors
-accordingly.</td>
-</tr>
-
-
-<tr valign="top">
-<td>Windows clipboard integration</td>
-
-<td>2004-01-07</td>
-
-<td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/X clipboard
-manager, to handle data types other than XA_STRING, COMPOUND_TEXT, and
-UTF8_STRING; for example, BITMAP, PIXMAP, etc.</td>
-</tr>
-
-
-<tr valign="top">
-<td>User's Guide - Document .XWinrc</td>
-
-<td>2003-09-22</td>
-
-<td>Documentation needs to be added to the User's Guide for Earle F
-Philhower III's .XWinrc mechanism.  The documentation source is
-available via CVS in the 'xoncygwin' project on sourceforge.  This
-task is greatly simplied by the fact that Earle provided comments in
-his <a
-href="http://www.msu.edu/~huntharo/xwin/server/example.XWinrc">example
-.XWinrc file</a>.</td>
-</tr>
-
-
-<tr valign="top">
-<td>DirectDraw windowed PseudoColor</td>
-
-<td>2003-08-27</td>
-
-<td>Figure out a satisfactory solution for enabling DirectDraw engines
-to support PseudoColor visuals when running in 8 bit color modes.
-DirectDraw reserves the first ten and the last ten colors in each
-DirectDrawPalette object when running in windowed mode.  Therefore,
-PseudoColor visuals are only supported with DirectDraw engines when
-running in fullscreen 8 bit color modes.</td>
-</tr>
-
-</tbody>
-</table>
-
-<!--#include virtual="../cygx-footer.html" -->
-
-</body>
+                <td>Figure out a satisfactory solution for enabling
+                DirectDraw engines to support PseudoColor visuals
+                when running in 8 bit color modes. DirectDraw
+                reserves the first ten and the last ten colors in
+                each DirectDrawPalette object when running in
+                windowed mode. Therefore, PseudoColor visuals are
+                only supported with DirectDraw engines when running
+                in fullscreen 8 bit color modes.</td>
+            </tr>
+        </tbody>
+    </table><!--#include virtual="../cygx-footer.html" -->
+    </body>
 </html>
