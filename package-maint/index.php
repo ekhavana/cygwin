@@ -45,12 +45,10 @@
 	);
 
 	function grabtemplate($name) {
-		$fd = fopen("templates/" . basename($name) . ".in"), "r");
-		if (!$fd)
+		$path = "templates/" . basename($name) . ".in";
+		if (!file_exists($path))
 			return("");
-		$str = fgets($fd, 10*1024);
-		fclose($fd);
-		return($str);
+		return(implode("", file($path)));
 	}
 
 	$step1 = true;
@@ -64,12 +62,12 @@
 		if (!isset($_REQUEST[$key]))
 			$step2 = false;
 
-	function mywordwrap($str) {
+	function mywordwrap($str, $len = 80) {
 		$str = str_replace("\r\n", "\n", $str);
 		$str = str_replace("\n\n", "@PARAGRAPH@", $str);
 		$str = str_replace("\n", " ", $str);
 		$str = str_replace("@PARAGRAPH@", "\n\n", $str);
-		return(wordwrap($str));
+		return(wordwrap($str, $len));
 	}
 
 	function dosubs($str) {
