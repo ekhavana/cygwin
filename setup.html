@@ -237,18 +237,16 @@ Please note that the package name should <em>not</em> be part of the
 description, e.g., this is incorrect:
 
 <pre>
-sdesc:	"boffo: A whackamole simulation in ASCII art"
+<tt>sdesc:	"boffo: A whackamole simulation in ASCII art"</tt>
 </pre>
 
 This is correct:
 
 <pre>
-sdesc:	"A whackamole simulation in ASCII art"
+<tt>sdesc:	"A whackamole simulation in ASCII art"</tt>
 </pre>
 
-Quote the text if you want the text to continue over multiple lines,
-e.g.:
-
+<p>Quote text that takes up several lines e.g.:
 <pre>
 ldesc: "A whackamole simulation in ASCII art.
 Intended for use on VT100 terminals at BAUD rates 1200 and
@@ -257,7 +255,7 @@ bar whacks the mole.
 
 No actual moles will be harmed during execution of this game."
 </pre>
-
+</p>
 
 <p>The <tt>category</tt> line indicates the categories that this package belongs
 to.  One package can belong to multiple categories.  Multiple categories
@@ -301,16 +299,23 @@ all categories are only a single word.</p>
 
 <p>The <tt>requires</tt> line indicates the packages that this package
 relies on.  If your package is dependent on a file provided by another
-package that other package should be included here - this includes
-cygwin1.dll! A package can rely on multiple packages.  Multiple packages
-are separated by spaces.  Do not enclose multiple package names within
-quotation marks.</p>
+package that other package should be included here - this includes the
+cygwin package itself!
+
+<p>A package can rely on multiple packages.  Hierarchical dependencies
+should work correctly however, it is best to include specific
+dependencies specifically rather than rely on the fact if you need
+package 'foo' and 'bar' but dropping 'bar' because you know that package
+'foo' already relies on 'bar'.</p>
+
+<p>Multiple packages are separated by spaces.  Do not enclose multiple
+package names within quotation marks.</p>
 
 Example of a complete contrib/current/boffo/setup.hint:
 <tt>
 <pre>
     category: Games Text
-    requires: ncurses5 cygwin
+    requires: libncurses6 cygwin
     sdesc:    "A whackamole simulation in ASCII art"
     ldesc:    "A whackamole simulation in ASCII art.
     Intended for use on VT100 terminals at BAUD rates 1200 and
