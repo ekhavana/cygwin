@@ -440,7 +440,7 @@ Enable=true
    Search the [96]Cygwin/XFree86 mailing list archives to see if the
    error message has already been reported and/or addressed. Report the
    error message to the [97]Cygwin/XFree86 mailing list, how the error
-   message was caused, and the behaviour of the X Server after the error
+   message was caused, and the behavior of the X Server after the error
    message was generated (exit, freeze, etc.), only if the error message
    has not been reported, if the circumstances that produced the error
    message are significantly different from other reports, or if you have
@@ -632,13 +632,13 @@ Enable=true
    Cygwin/XFree86?
 
    One common problem encountered when porting software to Cygwin/XFree86
-   is due to Cygwin's inability to distinquish between files with the
+   is due to Cygwin's inability to distinguish between files with the
    same name but different capitalization (e.g. XvMC.h and xvmc.h), which
    is due to a Windows' limitation.
 
    Example 1. Include Problems
 
-   This example is based off an error that actually occured in the
+   This example is based off an error that actually occurred in the
    XFree86 source code tree in xc/programs/Xserver/Xext/xvmc.c. xvmc.c
    included XvMC.h, as shown below:
    #include "XvMC.h"
@@ -648,7 +648,7 @@ Enable=true
    that ended up getting included instead of the desired file, because
    the precompiler searched the local directory,
    xc/programs/Xserver/Xext/, before searching the rest of the include
-   path. Cygwin can't distinquish between XvMC.h and xvmc.h, so xvmc.h
+   path. Cygwin can't distinguish between XvMC.h and xvmc.h, so xvmc.h
    ended up being included in xvmc.c. The build process on Cygwin broke
    because the contents of XvMC.h were entirely different than the
    contents of xvmc.h.

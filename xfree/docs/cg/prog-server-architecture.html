@@ -239,7 +239,7 @@ privates are examined as an example.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN301"
+NAME="AEN306"
 ></A
 ><P
 ><CODE
@@ -276,7 +276,7 @@ cause an access violation, crashing the Cygwin/XFree86 X Server.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN312"
+NAME="AEN317"
 ></A
 ><P
 ><CODE
@@ -322,7 +322,7 @@ crashing the Cygwin/XFree86 X Server.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN326"
+NAME="AEN331"
 ></A
 ><P
 ><CODE
@@ -378,12 +378,12 @@ NAME="prog-server-architecture-engines"
 ></H2
 ><P
 >The Cygwin/XFree86 X Server uses several methods of drawing graphics
-on the display device; each of these different drawing mehtods is
+on the display device; each of these different drawing methods is
 referred to as an engine.  Each of the engines can be classified as
 either a Shadow FB engine, a Native GDI engine, or as a Primary FB
 engine.  It should be noted that the Primary FB engine is deprecated
 and is discussed here only for completeness.  The engines are
-disscussed in the following sections, in order of importance.</P
+discussed in the following sections, in order of importance.</P
 ><DIV
 CLASS="sect3"
 ><H3
@@ -435,7 +435,7 @@ Engine</A
 ><P
 >The Native GDI engine will eventually translate individual X
 graphics calls into their GDI equivalent.  Some X graphics calls do
-not translate direclty to a GDI call so they may be passed through the
+not translate directly to a GDI call so they may be passed through the
 MI layer to change them into a serious of lower level calls that are
 supported.  Currently, the Native GDI engine passes all X graphics
 calls through the MI layer to convert them into three functions:
@@ -546,6 +546,88 @@ CLASS="sect2"
 NAME="prog-server-architecture-input"
 >User Input</A
 ></H2
+><P
+>User input is processed using the <A
+HREF="glossary.html#gloss-mi-layer"
+><I
+CLASS="glossterm"
+>MI</I
+></A
+> layer's user input system.
+Any queued Win32 user input messages, as well as other Win32
+messages, are handled when <TT
+CLASS="filename"
+>hw/xwin/winwakeup.c</TT
+>'s
+<TT
+CLASS="function"
+>winWakeupHandler</TT
+> function is called by the
+<A
+HREF="glossary.html#gloss-os-layer"
+><I
+CLASS="glossterm"
+>OS</I
+></A
+> layer
+<TT
+CLASS="filename"
+>os/WaitFor.c</TT
+>'s
+<TT
+CLASS="function"
+>WaitForSomething</TT
+> function and when the <A
+HREF="glossary.html#gloss-dix-layer"
+><I
+CLASS="glossterm"
+>DIX</I
+></A
+> layer
+<TT
+CLASS="filename"
+>dix/dispatch.c</TT
+>'s <TT
+CLASS="function"
+>Dispatch</TT
+>
+function calls <TT
+CLASS="filename"
+>hw/xwin/InitInput.c</TT
+>'s
+<TT
+CLASS="function"
+>ProcessInputEvents</TT
+> function.  Each Win32 user
+input message typically queues an input event, or several input
+events, using the MI layer's <TT
+CLASS="filename"
+>mi/mieq.c</TT
+>'s
+<TT
+CLASS="function"
+>mieqEnqueue</TT
+> function.  Enqueued MI input events
+are processed in <TT
+CLASS="function"
+>ProcessInputEvents</TT
+> by calling
+<TT
+CLASS="filename"
+>mi/mieq.c</TT
+>'s
+<TT
+CLASS="function"
+>mieqProcessInputEvents</TT
+>; the cursor position is
+updated on the screen by calling <TT
+CLASS="filename"
+>mipointer.c</TT
+>'s
+<TT
+CLASS="function"
+>miPointerUpdate</TT
+>.</P
 ><DIV
 CLASS="sect3"
 ><H3
@@ -555,7 +637,237 @@ NAME="prog-server-architecture-input-keyboard"
 >Keyboard</A
 ></H3
 ><P
->Foo!</P
+>Win32 keyboard messages are processed in
+<TT
+CLASS="filename"
+>winwndproc.c</TT
+>'s
+<TT
+CLASS="function"
+>winWindowProc</TT
+>.  The messages processed
+are:</P
+><UL
+><LI
+><P
+>WM_SYSKEYDOWN</P
+></LI
+><LI
+><P
+>WM_KEYDOWN</P
+></LI
+><LI
+><P
+>WM_SYSKEYUP</P
+></LI
+><LI
+><P
+>WM_KEYUP</P
+></LI
+></UL
+><P
+>The WM_SYSKEY* messages are generated when the user presses a
+key while holding down the <B
+CLASS="keycap"
+>Alt</B
+> key or when the user
+presses a key after pressing and releasing the <B
+CLASS="keycap"
+>F10</B
+>
+key.  Processing for WM_SYSKEYDOWN and WM_KEYDOWN (respectively
+WM_SYSKEYUP, WM_KEYUP) messages are identical because the X Server
+does not distinguish between a normal key press and a key press when
+the <B
+CLASS="keycap"
+>Alt</B
+> key is down.</P
+><P
+>Win32 uses virtual key codes to identify which key is being
+pressed or released.  Virtual key codes follow the idea that the same
+virtual key code will be sent for keys with the same label printed on
+them.  For example, the left and right <B
+CLASS="keycap"
+>Ctrl</B
+> keys both
+generate the VK_CONTROL virtual key code.  Virtual key codes are
+accompanied by other state information, such as the extended flag,
+that distinguishes between the multiple keys with the same label.  For
+example, the left <B
+CLASS="keycap"
+>Ctrl</B
+> key does not have the extended
+flag asserted, while the right <B
+CLASS="keycap"
+>Ctrl</B
+> key does have the
+extended flag asserted.  However, virtual key codes are not the way
+that key presses have traditionally been identified on personal
+computers and in the X Protocol.</P
+><P
+>Personal computers and the X Protocol use scan codes to identify
+which key is being pressed.  Each key on the keyboard generates a
+specified number when that key is pressed or released; this number is
+called the scan code.  Scan codes are always distinct for distinct
+keys.  For example, the left and right <B
+CLASS="keycap"
+>Ctrl</B
+> keys
+generate distinct scan codes, even though their functionality is the
+same.  Scan codes do not have additional state information, as the
+multiple keys with the same label will each generate a unique scan
+code.  There is some debate as to which of virtual key codes or scan
+codes is the better system.</P
+><P
+>The X Protocol expects that keyboard input will be based on a
+scan code system.  There are two methods of sending a scan codes from
+a virtual key code message.  The first method is to create a static
+table that links the normal and extended state of each virtual key
+code to a scan code.  This method seems valid, but the method does not
+work reliably for users with non-U.S. keyboard layouts.  The second
+method simply pulls the scan code out of the
+<TT
+CLASS="parameter"
+><I
+>lParam</I
+></TT
+> of the keyboard messages; this method
+works reliably for non-U.S. keyboard layouts.  However, there are
+further concerns for non-U.S. keyboard layouts.</P
+><P
+>Non-U.S. keyboard layouts typically use the right
+<B
+CLASS="keycap"
+>Alt</B
+> key as a sort of shift key to access an
+additional row of symbols from the <B
+CLASS="keycap"
+>`</B
+>,
+<B
+CLASS="keycap"
+>1</B
+>, <B
+CLASS="keycap"
+>2</B
+>, ..., <B
+CLASS="keycap"
+>0</B
+> keys,
+as well as accented forms of standard alphabetic characters, such as
+á, ä, å, ú and additional alphabetic characters, such as ß.
+Non-U.S. keyboards typically label the right <B
+CLASS="keycap"
+>Alt</B
+> key
+as <B
+CLASS="keycap"
+>AltGr</B
+> or <B
+CLASS="keycap"
+>AltLang</B
+>; the
+<SPAN
+CLASS="abbrev"
+>Gr</SPAN
+> is short for <SPAN
+CLASS="QUOTE"
+>"grave"</SPAN
+>, which is the
+name of one of the accent symbols.  The X Protocol and Win32 methods
+of handling the <B
+CLASS="keycap"
+>AltGr</B
+> key are not directly compatible
+with one another.</P
+><P
+>The X Protocol handles <B
+CLASS="keycap"
+>AltGr</B
+> presses and
+releases in much the same way as any other key press and release.
+Win32, however, generates a fake <B
+CLASS="keycap"
+>Ctrl</B
+> press and
+release for each <B
+CLASS="keycap"
+>AltGr</B
+> press and release.  The X
+Protocol does not expect this fake <B
+CLASS="keycap"
+>Ctrl</B
+> press and
+release, so care must be taken to discard the fake
+<B
+CLASS="keycap"
+>Ctrl</B
+> press and release.  Fake <B
+CLASS="keycap"
+>Ctrl</B
+>
+presses and releases are detected and discarded by passing each
+keyboard message to <TT
+CLASS="filename"
+>winkeybd.c</TT
+>'s
+<TT
+CLASS="function"
+>winIsFakeCtrl_L</TT
+> function.
+<TT
+CLASS="function"
+>winIsFakeCtrl_L</TT
+> detects the fake key presses and
+releases by comparing the timestamps of the <B
+CLASS="keycap"
+>AltGr</B
+>
+message with the timestamp of any preceding or trailing
+<B
+CLASS="keycap"
+>Ctrl</B
+> message.  Two real key events will never have
+the same timestamp, but the fake key events have the same timestamp as
+the <B
+CLASS="keycap"
+>AltGr</B
+> messages, so the fake messages can be easily
+identified.</P
+><P
+>Special keyboard considerations must be handled the Cygwin/XFree86 X
+Server losses or gains the keyboard focus.  For example, the user can
+switch out of Cygwin/XFree86, toggle the <B
+CLASS="keycap"
+>Num Lock</B
+> key,
+then switch back into Cygwin/XFree86; in this case Cygwin/XFree86 would not have
+received the <B
+CLASS="keycap"
+>Num Lock</B
+> toggle message, so it will
+continue to function as if <B
+CLASS="keycap"
+>Num Lock</B
+> was in its
+previous state.  Thus, the state of any mode keys such as <B
+CLASS="keycap"
+>Num
+Lock</B
+>, <B
+CLASS="keycap"
+>Caps Lock</B
+>, <B
+CLASS="keycap"
+>Scroll
+Lock</B
+>, and <B
+CLASS="keycap"
+>Kana Lock</B
+> must be stored upon loss
+of keyboard focus; the stored state of each mode key must then be
+compared to that key's current state, toggling the key if its state
+has changed.</P
 ></DIV
 ><DIV
 CLASS="sect3"
@@ -565,51 +877,96 @@ CLASS="sect3"
 NAME="prog-server-architecture-input-mouse"
 >Mouse</A
 ></H3
-><DIV
-CLASS="sect4"
-><H4
-CLASS="sect4"
-><A
-NAME="prog-server-architecture-input-mouse-wheel"
->Wheel</A
-></H4
 ><P
->Foo!</P
-></DIV
-><DIV
-CLASS="sect4"
-><H4
-CLASS="sect4"
-><A
-NAME="prog-server-architecture-input-mouse-motion"
->Motion</A
-></H4
+>Win32 mouse messages are processed in
+<TT
+CLASS="filename"
+>winwndproc.c</TT
+>'s
+<TT
+CLASS="function"
+>winWindowProc</TT
+>.  The messages processed
+are:</P
+><UL
+><LI
 ><P
->Foo!</P
-></DIV
-><DIV
-CLASS="sect4"
-><H4
-CLASS="sect4"
-><A
-NAME="prog-server-architecture-input-mouse-buttons"
->Buttons</A
-></H4
+>WM_MOUSEMOVE</P
+></LI
+><LI
 ><P
->Foo!</P
-></DIV
-><DIV
-CLASS="sect4"
-><H4
-CLASS="sect4"
-><A
-NAME="prog-server-architecture-input-mouse-3be"
->Three Button
-Emulation</A
-></H4
+>WM_NCMOUSEMOVE</P
+></LI
+><LI
 ><P
->Foo!</P
-></DIV
+>WM_LBUTTON*</P
+></LI
+><LI
+><P
+>WM_MBUTTON*</P
+></LI
+><LI
+><P
+>WM_RBUTTON*</P
+></LI
+><LI
+><P
+>WM_MOUSEWHEEL</P
+></LI
+></UL
+><P
+>Handling mouse motion is relatively straight forward, with the
+special consideration that the Windows mouse cursor must be hidden
+when the mouse is moving over the client area of a Cygwin/XFree86 window;
+the Windows mouse cursor must be redisplayed when the mouse is
+moving over the non-client area of a Cygwin/XFree86 window.  Win32 sends
+the absolute coordinates of the mouse, so we call
+<TT
+CLASS="function"
+>miPointerAbsoluteCursor</TT
+> to change the position of
+the mouse.</P
+><P
+>Three-button mouse emulation is supported for users that do not
+have a three button mouse.  When three-button mouse emulation is
+disabled, mouse button presses and releases are handled trivially in
+<TT
+CLASS="filename"
+>winmouse.c</TT
+>'s
+<TT
+CLASS="function"
+>winMouseButtonsHandle</TT
+> by simply passing the event
+to <TT
+CLASS="function"
+>mieqEnqueue</TT
+>.  Three-button mouse emulation is
+quite complicated.</P
+><P
+>Three-button mouse emulation is handled by starting a timer when
+the left or right mouse buttons are pressed; the button event is sent
+as a left or right mouse button event if the other button is not
+pressed before the timer expires.  The button event is sent as an
+emulated middle button event if the other mouse button is pressed
+before the timer runs out.</P
+><P
+>The mouse wheel is handled in <TT
+CLASS="filename"
+>winmouse.c</TT
+>'s
+<TT
+CLASS="function"
+>winMouseWheel</TT
+> by generating sequences of button 4
+and button 5 presses and releases corresponding to how much the mouse
+wheel has moved.  Win32 uses variable resolution for the mouse wheel
+and passes the mouse wheel motion as a delta from the wheel's previous
+position.  The number of button clicks to send is determined by
+dividing the wheel delta by the distance that is considered by Win32
+to be one unit of motion for the mouse wheel; any remainder of the
+wheel delta must be preserved and added to the next mouse wheel
+message.</P
 ></DIV
 ></DIV
 ></DIV

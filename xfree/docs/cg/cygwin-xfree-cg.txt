@@ -91,7 +91,7 @@ Overview
    this document that tiny amount of information was difficult to obtain,
    as it was scattered across several documents and source code files.
    New programmers with no open source project experience, as well as
-   programming gurus, will be able to make sourc code contributions to
+   programming gurus, will be able to make source code contributions to
    Cygwin/XFree86 after reading this chapter. Programming gurus are
    great; our intention is to create more of them.
 
@@ -348,12 +348,12 @@ Macros
 Engine System
 
    The Cygwin/XFree86 X Server uses several methods of drawing graphics
-   on the display device; each of these different drawing mehtods is
+   on the display device; each of these different drawing methods is
    referred to as an engine. Each of the engines can be classified as
    either a Shadow FB engine, a Native GDI engine, or as a Primary FB
    engine. It should be noted that the Primary FB engine is deprecated
-   and is discussed here only for completeness. The engines are
-   disscussed in the following sections, in order of importance.
+   and is discussed here only for completeness. The engines are discussed
+   in the following sections, in order of importance.
      _________________________________________________________________
 
 Shadow FB Engines
@@ -368,7 +368,7 @@ Native GDI Engine
 
    The Native GDI engine will eventually translate individual X graphics
    calls into their GDI equivalent. Some X graphics calls do not
-   translate direclty to a GDI call so they may be passed through the MI
+   translate directly to a GDI call so they may be passed through the MI
    layer to change them into a serious of lower level calls that are
    supported. Currently, the Native GDI engine passes all X graphics
    calls through the MI layer to convert them into three functions:
@@ -432,31 +432,143 @@ Primary FB Engine
 
 User Input
 
+   User input is processed using the [66]MI layer's user input system.
+   Any queued Win32 user input messages, as well as other Win32 messages,
+   are handled when hw/xwin/winwakeup.c's winWakeupHandler function is
+   called by the [67]OS layer os/WaitFor.c's WaitForSomething function
+   and when the [68]DIX layer dix/dispatch.c's Dispatch function calls
+   hw/xwin/InitInput.c's ProcessInputEvents function. Each Win32 user
+   input message typically queues an input event, or several input
+   events, using the MI layer's mi/mieq.c's mieqEnqueue function.
+   Enqueued MI input events are processed in ProcessInputEvents by
+   calling mi/mieq.c's mieqProcessInputEvents; the cursor position is
+   updated on the screen by calling mipointer.c's miPointerUpdate.
+     _________________________________________________________________
+
 Keyboard
 
-   Foo!
+   Win32 keyboard messages are processed in winwndproc.c's winWindowProc.
+   The messages processed are:
+     * WM_SYSKEYDOWN
+     * WM_KEYDOWN
+     * WM_SYSKEYUP
+     * WM_KEYUP
+
+   The WM_SYSKEY* messages are generated when the user presses a key
+   while holding down the Alt key or when the user presses a key after
+   pressing and releasing the F10 key. Processing for WM_SYSKEYDOWN and
+   WM_KEYDOWN (respectively WM_SYSKEYUP, WM_KEYUP) messages are identical
+   because the X Server does not distinguish between a normal key press
+   and a key press when the Alt key is down.
+
+   Win32 uses virtual key codes to identify which key is being pressed or
+   released. Virtual key codes follow the idea that the same virtual key
+   code will be sent for keys with the same label printed on them. For
+   example, the left and right Ctrl keys both generate the VK_CONTROL
+   virtual key code. Virtual key codes are accompanied by other state
+   information, such as the extended flag, that distinguishes between the
+   multiple keys with the same label. For example, the left Ctrl key does
+   not have the extended flag asserted, while the right Ctrl key does
+   have the extended flag asserted. However, virtual key codes are not
+   the way that key presses have traditionally been identified on
+   personal computers and in the X Protocol.
+
+   Personal computers and the X Protocol use scan codes to identify which
+   key is being pressed. Each key on the keyboard generates a specified
+   number when that key is pressed or released; this number is called the
+   scan code. Scan codes are always distinct for distinct keys. For
+   example, the left and right Ctrl keys generate distinct scan codes,
+   even though their functionality is the same. Scan codes do not have
+   additional state information, as the multiple keys with the same label
+   will each generate a unique scan code. There is some debate as to
+   which of virtual key codes or scan codes is the better system.
+
+   The X Protocol expects that keyboard input will be based on a scan
+   code system. There are two methods of sending a scan codes from a
+   virtual key code message. The first method is to create a static table
+   that links the normal and extended state of each virtual key code to a
+   scan code. This method seems valid, but the method does not work
+   reliably for users with non-U.S. keyboard layouts. The second method
+   simply pulls the scan code out of the lParam of the keyboard messages;
+   this method works reliably for non-U.S. keyboard layouts. However,
+   there are further concerns for non-U.S. keyboard layouts.
+
+   Non-U.S. keyboard layouts typically use the right Alt key as a sort of
+   shift key to access an additional row of symbols from the `, 1, 2,
+   ..., 0 keys, as well as accented forms of standard alphabetic
+   characters, such as á, ä, å, ú and additional alphabetic characters,
+   such as ß. Non-U.S. keyboards typically label the right Alt key as
+   AltGr or AltLang; the Gr is short for "grave", which is the name of
+   one of the accent symbols. The X Protocol and Win32 methods of
+   handling the AltGr key are not directly compatible with one another.
+
+   The X Protocol handles AltGr presses and releases in much the same way
+   as any other key press and release. Win32, however, generates a fake
+   Ctrl press and release for each AltGr press and release. The X
+   Protocol does not expect this fake Ctrl press and release, so care
+   must be taken to discard the fake Ctrl press and release. Fake Ctrl
+   presses and releases are detected and discarded by passing each
+   keyboard message to winkeybd.c's winIsFakeCtrl_L function.
+   winIsFakeCtrl_L detects the fake key presses and releases by comparing
+   the timestamps of the AltGr message with the timestamp of any
+   preceding or trailing Ctrl message. Two real key events will never
+   have the same timestamp, but the fake key events have the same
+   timestamp as the AltGr messages, so the fake messages can be easily
+   identified.
+
+   Special keyboard considerations must be handled the Cygwin/XFree86 X
+   Server losses or gains the keyboard focus. For example, the user can
+   switch out of Cygwin/XFree86, toggle the Num Lock key, then switch
+   back into Cygwin/XFree86; in this case Cygwin/XFree86 would not have
+   received the Num Lock toggle message, so it will continue to function
+   as if Num Lock was in its previous state. Thus, the state of any mode
+   keys such as Num Lock, Caps Lock, Scroll Lock, and Kana Lock must be
+   stored upon loss of keyboard focus; the stored state of each mode key
+   must then be compared to that key's current state, toggling the key if
+   its state has changed.
      _________________________________________________________________
 
 Mouse
 
-Wheel
+   Win32 mouse messages are processed in winwndproc.c's winWindowProc.
+   The messages processed are:
+     * WM_MOUSEMOVE
+     * WM_NCMOUSEMOVE
+     * WM_LBUTTON*
+     * WM_MBUTTON*
+     * WM_RBUTTON*
+     * WM_MOUSEWHEEL
 
-   Foo!
-     _________________________________________________________________
+   Handling mouse motion is relatively straight forward, with the special
+   consideration that the Windows mouse cursor must be hidden when the
+   mouse is moving over the client area of a Cygwin/XFree86 window; the
+   Windows mouse cursor must be redisplayed when the mouse is moving over
+   the non-client area of a Cygwin/XFree86 window. Win32 sends the
+   absolute coordinates of the mouse, so we call miPointerAbsoluteCursor
+   to change the position of the mouse.
 
-Motion
+   Three-button mouse emulation is supported for users that do not have a
+   three button mouse. When three-button mouse emulation is disabled,
+   mouse button presses and releases are handled trivially in
+   winmouse.c's winMouseButtonsHandle by simply passing the event to
+   mieqEnqueue. Three-button mouse emulation is quite complicated.
 
-   Foo!
-     _________________________________________________________________
+   Three-button mouse emulation is handled by starting a timer when the
+   left or right mouse buttons are pressed; the button event is sent as a
+   left or right mouse button event if the other button is not pressed
+   before the timer expires. The button event is sent as an emulated
+   middle button event if the other mouse button is pressed before the
+   timer runs out.
 
-Buttons
-
-   Foo!
-     _________________________________________________________________
-
-Three Button Emulation
-
-   Foo!
+   The mouse wheel is handled in winmouse.c's winMouseWheel by generating
+   sequences of button 4 and button 5 presses and releases corresponding
+   to how much the mouse wheel has moved. Win32 uses variable resolution
+   for the mouse wheel and passes the mouse wheel motion as a delta from
+   the wheel's previous position. The number of button clicks to send is
+   determined by dividing the wheel delta by the distance that is
+   considered by Win32 to be one unit of motion for the mouse wheel; any
+   remainder of the wheel delta must be preserved and added to the next
+   mouse wheel message.
      _________________________________________________________________
 
 Obtaining the Source Code
@@ -468,7 +580,7 @@ Obtaining the Source Code
      your native Cygwin host.
 
    Cygwin/XFree86 source code is contained in, and distributed with, the
-   XFree86 source code tree. Read-only [66]CVS access to the XFree86
+   XFree86 source code tree. Read-only [69]CVS access to the XFree86
    source tree is also available from the XFree86 project.
 
    The XFree86 CVS tree is not always buildable on Cygwin, as the XFree86
@@ -489,8 +601,8 @@ Obtaining the Source Code
    minimizes the scope of problems that you may encounter, which can
    greatly ease debugging of new features and other code modifications.
 
-   It is highly recommended to get the XFree86 [67]CVS tree by using the
-   CVS [68]pserver method. CVS pserver is the easiest CVS method to use
+   It is highly recommended to get the XFree86 [70]CVS tree by using the
+   CVS [71]pserver method. CVS pserver is the easiest CVS method to use
    for anonymous access to public CVS trees, as you need only type in a
    well-known password to download the CVS tree. CVS pserver is rarely
    used to control checkins to CVS trees, as the passwords are stored and
@@ -565,7 +677,7 @@ cvs server: Updating xc
 Username@CygwinHost ~/x-devel
 $
 
-       You may preserve a logfile for the checkout session by instead
+       You may preserve a log file for the checkout session by instead
        using the following command:
 
 Username@CygwinHost ~/x-devel
@@ -580,7 +692,7 @@ Native Compiling
 Compiling the Source Code
 
    Compiling Cygwin/XFree86 doesn't have to be hard, although the XFree86
-   source code tree contains over 250 MB of data. There are a few simple
+   source code tree contains over 250 MiB of data. There are a few simple
    techniques that make building the source code, keeping the source code
    up to date, and keeping the source code organized much easier.
      _________________________________________________________________
@@ -588,19 +700,19 @@ Compiling the Source Code
 Compiling Overview
 
    Compiling the XFree86 source code tree is a lot easier when you keep
-   your builds in directories seperate from the source code directory.
-   Keeping the source code and builds in seperate directories allows you
+   your builds in directories separate from the source code directory.
+   Keeping the source code and builds in separate directories allows you
    to have many builds for different configurations, allows you to easily
    delete a build, and keeps the source code tree clean and manageable.
 
    A small utility, lndir.exe, is needed to keep your builds directories
-   sepereate from your source directory; lndir.exe works just like the
+   separate from your source directory; lndir.exe works just like the
    standard ln on UNIX, but lndir.exe creates links recursively for all
    files and directories in the specified directory. The lndir.exe
    utility is included with the XFree86 source code tree; but the catch
    is that you need to build the tree before you get lndir.exe. lndir.exe
    has been compiled and is available at
-   [69]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 KiB). Download
+   [72]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 KiB). Download
    the file, saving it to your Cygwin root directory (e.g. c:\cygwin),
    then follow the simple instructions below to install the utility:
     1. Launch a Cygwin bash prompt. You should see a screen similar to
@@ -822,12 +934,12 @@ Installing a local build
    making to the XFree86 source code tree.
 
    Installing a local build on top of an existing build is not a good
-   idea, as this can mask problems that occured during the build process,
-   or it can cause problems that are unrelated to the build process;
-   either situation is undesireable. It is generally a good idea to move
-   your old installation out of the way before installing a local build,
-   and these instructions will assume that you desire to do so. Follow
-   the instructions below to install a local build:
+   idea, as this can mask problems that occurred during the build
+   process, or it can cause problems that are unrelated to the build
+   process; either situation is undesirable. It is generally a good idea
+   to move your old installation out of the way before installing a local
+   build, and these instructions will assume that you desire to do so.
+   Follow the instructions below to install a local build:
     1. Move the /etc/X11 directory to /etc/X11_build-prefix_date_time:
 
 Username@CygwinHost ~
@@ -836,7 +948,8 @@ $ mv /etc/X11 /etc/X11_build-prefix_date_time
 Username@CygwinHost ~
 $
 
-    2. Move the /usr/X11R6 diretory to /usr/X11R6_build-prefix_date_time:
+    2. Move the /usr/X11R6 directory to
+       /usr/X11R6_build-prefix_date_time:
 
 Username@CygwinHost ~
 $ mv /usr/X11R6 /usr/X11R6_build-prefix_date_time
@@ -892,7 +1005,7 @@ $
 
 Keeping your source code tree updated
 
-   [70]CVS makes keeping your source code tree up to date easy. You may
+   [73]CVS makes keeping your source code tree up to date easy. You may
    update your entire source code tree at once, or you can update
    individual directories or files, if you so choose.
      _________________________________________________________________
@@ -1000,7 +1113,7 @@ Cross Compiling
    host, the native host. The build host and the native host may differ
    in operating system and/or processor type. Cross compiling is done for
    several reasons:
-     * The native host is grossly underpowered, such as a handheld
+     * The native host is grossly under powered, such as a handheld
        computer.
      * The user happens to have greatly more compiling power available on
        a platform other than the native host. For example, the user may
@@ -1012,7 +1125,7 @@ Cross Compiling
    There are a whole new class of problems that can happen when cross
    compiling that are simply not an issue when building on Cygwin. You
    should be familiar with building Cygwin/XFree86 on Cygwin, as
-   described in [71]the Section called Native Compiling, before
+   described in [74]the Section called Native Compiling, before
    attempting to cross compile Cygwin/XFree86.
      _________________________________________________________________
 
@@ -1021,12 +1134,12 @@ Obtaining binutils and gcc Source
    binutils and gcc source code releases that are known to compile on
    Cygwin and distributed by the Cygwin project. Therefore, it is highly
    recommended that you obtain the binutils and gcc sources from the
-   [72]Cygwin mirror network.
+   [75]Cygwin mirror network.
 
    Follow these steps to download Cygwin/XFree86 binaries:
     1. Create a directory to store the binutils and gcc sources in, such
        as /cygwin/src/
-    2. Visit the [73]Cygwin mirrors page to find your closest mirror
+    2. Visit the [76]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
     4. Change current ftp directory to cygwin/latest/.
@@ -1242,12 +1355,12 @@ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
 Building Cygwin/XFree86
 
    Building the source code when cross compiling XFree86 is nearly
-   identical to the process described below in [74]the Section called
+   identical to the process described below in [77]the Section called
    Native Compiling of the Native Compiling section. One divergence from
    the aforementioned instructions is that you will be using a bash shell
    on your cross compiling host, rather than on your native Cygwin host;
    other divergences follow.
-    1. Download [75]host.def, and place the file in xc/config/cf.
+    1. Download [78]host.def, and place the file in xc/config/cf.
     2. Modify host.def/PostIncDir to reflect the actual version of gcc
        compiled, such as #define PostIncDir
        /cygwin/lib/gcc-lib/i686-pc-cygwin/2.95.3-5/include. The version
@@ -1256,7 +1369,7 @@ Building Cygwin/XFree86
     3. lndir should generally already be installed if your build host
        already has the X Window System installed. In any case, you
        certainly won't want to install the build of lndir mentioned in
-       [76]the Section called Native Compiling as that executable is for
+       [79]the Section called Native Compiling as that executable is for
        Cygwin only.
     4. Always remember to set your PATH environment variable to include
        the Cygwin binutils and gcc binary directories:
@@ -1313,7 +1426,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
 
      Tip: Never run make install install.man on your host platform
      without the DESTDIR parameter, as that will cause the Cygwin build
-     of XFree86 to be installed overtop of your local X Window System
+     of XFree86 to be installed over top of your local X Window System
      installation, which would completely destroy your host systems' X
      Window System installation.
 
@@ -1331,7 +1444,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
 
      Tip: Never run makeg install install.man on your host platform
      without the DESTDIR parameter, as that will cause the Cygwin debug
-     build of XFree86 to be installed overtop of your local X Window
+     build of XFree86 to be installed over top of your local X Window
      System installation, which would completely destroy your host
      systems' X Window System installation.
 
@@ -1345,7 +1458,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
 Packaging a Cygwin/XFree86 Distribution
 
    Cygwin/XFree86 uses the standard XFree86 distribution build scripts.
-   You will need to start by downloading the XFree86 util [77]CVS module.
+   You will need to start by downloading the XFree86 util [80]CVS module.
    The following instructions are paraphrased from bindist-notes in the
    XFree86 devel CVS module, with adaptations to make them Cygwin/XFree86
    specific.
@@ -1353,7 +1466,7 @@ Packaging a Cygwin/XFree86 Distribution
        xc/config/cf/host.def.
     2. Build and install the extract tool from the utils module.
     3. Run a full build of the XFree86 CVS tree, following the
-       instructions in [78]the Section called Native Compiling.
+       instructions in [81]the Section called Native Compiling.
     4. Install the full build of XFree86 to a staging directory:
 
 Username@CygwinHost ~/x-devel/build/std
@@ -1445,7 +1558,7 @@ $ diff -u /tmp/stage.list /tmp/dist.list
 Chapter 3. Documentation
 
    Cygwin/XFree86 documentation is written in XML according to the
-   [79]DocBook document type definition (DTD). These XML input files are
+   [82]DocBook document type definition (DTD). These XML input files are
    then compiled using an autoconf and automake build system. We
    currently build the following output formats: HTML, PDF, PS, RTF, and
    TXT.
@@ -1516,7 +1629,7 @@ B
 
    Bitmap (X)
           X pixel map with bit depth equal to one. X pixel maps of bit
-          depth not equal to one are called [80]pixmaps.
+          depth not equal to one are called [83]pixmaps.
 
 C
 
@@ -1539,7 +1652,7 @@ C
    Concurrent Versions System (CVS)
           CVS is an open source version control system used by the
           majority of open source projects. More information can be found
-          at the [81]CVS project homepage.
+          at the [84]CVS project homepage.
 
 D
 
@@ -1578,10 +1691,10 @@ M
 O
 
    Offscreen Framebuffer
-          Essentially a [82]bitmap, in the Windows sense, of size and
+          Essentially a [85]bitmap, in the Windows sense, of size and
           color format that can be displayed on the screen. An offscreen
           framebuffer may be identical in size and color format to the
-          [83]primary framebuffer, but this is not always required.
+          [86]primary framebuffer, but this is not always required.
 
    OS Layer (OS)
           X Server layer that depends on the operating system; but not
@@ -1591,24 +1704,24 @@ P
 
    Pixmap
           X pixel map with bit depth not equal to one. X pixel maps of
-          bit depth one are called [84]bitmaps.
+          bit depth one are called [87]bitmaps.
 
    Primary Framebuffer
-          The block of memory, essentially a [85]bitmap, that describes
+          The block of memory, essentially a [88]bitmap, that describes
           what is currently being displayed on the screen. Any updates to
           the primary framebuffer will be displayed on the screen after
           the next screen refresh.
 
    Privates
           Additional information associated with internal X Server
-          structures, such as [86]colormaps, [87]GCs, [88]pixmaps, or
-          [89]screens.
+          structures, such as [89]colormaps, [90]GCs, [91]pixmaps, or
+          [92]screens.
 
    pserver
           CVS pserver, short for "password server", is one of the user
           authentication methods supported by CVS. CVS pserver is not
           secure, as passwords are transmitted and stored as plain text.
-          However, CVS pserver is desireable for read-only anonymous
+          However, CVS pserver is desirable for read-only anonymous
           access to open source CVS trees, as CVS pserver is by far the
           easiest method to use.
 
@@ -1621,8 +1734,8 @@ S
           Cygwin/XFree86 X Server may have several screens.
 
    Shadow
-          X Server shadow layer that allows [90]FB to draw to an
-          offscreen framebuffer and occasionally call a [91]DDX function
+          X Server shadow layer that allows [93]FB to draw to an
+          offscreen framebuffer and occasionally call a [94]DDX function
           that transfers the updated regions to the screen.
 
 X
@@ -1641,7 +1754,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [92]X Display Manager.
+          See Also: [95]X Display Manager.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -1968,7 +2081,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [93]http://www.gnu.org/copyleft/.
+   [96]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -2072,31 +2185,34 @@ References
   63. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-offscreen-framebuffer
   64. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
   65. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
-  66. http://xfree86.org/cvs/
-  67. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  68. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pserver
-  69. http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2
+  66. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-mi-layer
+  67. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-os-layer
+  68. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-dix-layer
+  69. http://xfree86.org/cvs/
   70. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  71. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  72. http://cygwin.com/mirrors.html
-  73. http://cygwin.com/mirrors.html
+  71. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pserver
+  72. http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2
+  73. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
   74. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  75. http://www.msu.edu/~huntharo/xwin/host.def
-  76. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  77. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  78. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  79. http://docbook.org/
-  80. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
-  81. http://www.cvshome.org/
-  82. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
-  83. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
-  84. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-x
+  75. http://cygwin.com/mirrors.html
+  76. http://cygwin.com/mirrors.html
+  77. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  78. http://www.msu.edu/~huntharo/xwin/host.def
+  79. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  80. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  81. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  82. http://docbook.org/
+  83. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  84. http://www.cvshome.org/
   85. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
-  86. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-colormap
-  87. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-gc
-  88. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
-  89. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-screen
-  90. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
-  91. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-ddx-layer
-  92. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
-  93. http://www.gnu.org/copyleft/
+  86. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
+  87. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-x
+  88. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
+  89. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-colormap
+  90. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-gc
+  91. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  92. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-screen
+  93. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
+  94. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-ddx-layer
+  95. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
+  96. http://www.gnu.org/copyleft/
