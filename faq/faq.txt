@@ -2048,7 +2048,16 @@ since they have no meaning to UNIX.
 Is the Cygwin library multi-thread-safe?
 ----------------------------------------
 
-   Not yet but it soon will be.
+    No.
+
+    There is an experimental configure option (--enable-threadsafe), which
+allows you to build a DLL with some additional "thread safety" but there
+are no guarantees that this is 100% operational.  This option also
+enables limited "POSIX thread" support.  See the file cygwin.din for the
+list of POSIX thread functions provided.
+
+    Cygnus does not distribute a DLL with this option enabled, and,
+currently, has no plans to do so.
 
    Cygwin is not multi-thread-safe because:
 
