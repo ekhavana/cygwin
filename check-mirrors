@@ -8,6 +8,7 @@ open(M, "mirrors.txt");
 $out = "mirrors.html";
 $state = "mirrors.state";
 $list = "mirrors.lst";
+$MINDAYS = 3;
 
 $header = '<HTML>
 <HEAD>
@@ -31,11 +32,6 @@ site should be listed below or if you would like to add your site to
 the list please <a href="mailto:dj@cygnus.com">contact us</a>.
 
 <H3>Mirror Sites:</H3>
-';
-
-$use_cygwin = '
-<P> Optionally you can download from Cygnus'."'".' <em>busy</em> site, 
-<a href="ftp://cygwin.com/pub/cygwin/">cygwin.com</a>.
 ';
 
 $trailer = '
@@ -86,7 +82,7 @@ while (<F>) {
     next if /mail-archives/;
     next if /snapshots/;
     $mtime = $now - (stat("$master/$_"))[9];
-    next if $mtime < 7*$days;
+    next if $mtime < $MINDAYS*$days;
     if (! $best_file || $best_mtime > $mtime) {
 	$best_file = $_;
 	$best_mtime = $mtime;
