@@ -1,5 +1,5 @@
 
-Cygwin/XFree86 User's Guide
+Cygwin/X User's Guide
 
 Harold L Hunt, II
 
@@ -13,27 +13,27 @@ Harold L Hunt, II
      _________________________________________________________________
 
    Table of Contents
-   1. [1]Cygwin/XFree86 Overview
-   2. [2]Setting Up Cygwin/XFree86
+   1. [1]Cygwin/X Overview
+   2. [2]Setting Up Cygwin/X
 
-        [3]Cygwin/XFree86 Contents
-        [4]Installing Cygwin/XFree86
+        [3]Cygwin/X Contents
+        [4]Installing Cygwin/X
 
-   3. [5]Configuring Cygwin/XFree86
+   3. [5]Configuring Cygwin/X
 
         [6]Configuration Overview
         [7]Command Line Parameters
 
-   4. [8]Using Cygwin/XFree86
+   4. [8]Using Cygwin/X
 
-        [9]Starting Cygwin/XFree86
+        [9]Starting Cygwin/X
 
               [10]startxwin.bat
               [11]startxwin.sh
               [12]startx
 
-        [13]Switching Out of Cygwin/XFree86
-        [14]Stopping Cygwin/XFree86
+        [13]Switching Out of Cygwin/X
+        [14]Stopping Cygwin/X
         [15]Window Managers
         [16]Windows Clipboard Integration
         [17]Shared Memory Support (MIT-SHM Extension)
@@ -62,25 +62,25 @@ Harold L Hunt, II
    3-1. [35]Parameter Descriptions
      _________________________________________________________________
 
-Chapter 1. Cygwin/XFree86 Overview
+Chapter 1. Cygwin/X Overview
 
-   Cygwin/XFree86 is a port of XFree86 to Cygwin; Cygwin provides a
-   UNIX-like API on the Win32 platform. As of 2003-01-01 the supported
-   Win32 platforms are Windows 95, Windows 98, Windows Me, Windows NT
-   4.0, Windows 2000, and Windows XP.
+   Cygwin/X is a port of XFree86 to Cygwin; Cygwin provides a UNIX-like
+   API on the Win32 platform. As of 2003-01-01 the supported Win32
+   platforms are Windows 95, Windows 98, Windows Me, Windows NT 4.0,
+   Windows 2000, and Windows XP.
      _________________________________________________________________
 
-Chapter 2. Setting Up Cygwin/XFree86
+Chapter 2. Setting Up Cygwin/X
 
-Cygwin/XFree86 Contents
+Cygwin/X Contents
 
-   Cygwin/XFree86 consists of two parts: Cygwin, a port of the GNU tools
-   to Win32, and Cygwin/XFree86, a port of XFree86 to Win32. Both parts
-   of Cygwin/XFree86 are needed to successfully run an X Server on a
-   Win32 platform.
+   Cygwin/X consists of two parts: Cygwin, a port of the GNU tools to
+   Win32, and Cygwin/X, a port of XFree86 to Win32. Both parts of
+   Cygwin/X are needed to successfully run an X Server on a Win32
+   platform.
      _________________________________________________________________
 
-Installing Cygwin/XFree86
+Installing Cygwin/X
 
    Cygwin tools are, in the words of the Cygwin development homepage,
    [36]http://cygwin.com/, "ports of the popular GNU development tools
@@ -131,8 +131,8 @@ Installing Cygwin/XFree86
    14. Click Next to proceed to the next screen; setup will download a
        list of available packages as it moves to the next screen.
    15. On the next screen you will select the packages that will be
-       downloaded and installed. A listing of the Cygwin/XFree86 packages
-       is given below; a listing of the general Cygwin packages would be
+       downloaded and installed. A listing of the Cygwin/X packages is
+       given below; a listing of the general Cygwin packages would be
        beyond the scope of this document.
           + XFree86-bin (8.7 MiB; required, executables for xterm, twm,
             etc.)
@@ -154,12 +154,11 @@ Installing Cygwin/XFree86
             documentation)
           + XFree86-lib (83 KiB; required, X11R6/lib/ files)
           + XFree86-lib-compat (1.5 MiB; optional, runtime libraries
-            (DLLs) for X Clients compiled for Cygwin/XFree86 version
-            4.2.0)
+            (DLLs) for X Clients compiled for Cygwin/X version 4.2.0)
           + XFree86-man (548 KiB; optional, man pages)
           + XFree86-nest (1.1 MiB; optional, Xnest nested X Server)
           + XFree86-prog (595 KiB; optional, additional files needed to
-            compile programs for Cygwin/XFree86)
+            compile programs for Cygwin/X)
           + XFree86-prt (791 KiB; optional, X Print (Xprt) server)
           + XFree86-ps (4.41 MiB; optional, documentation in Postscript
             format)
@@ -167,17 +166,16 @@ Installing Cygwin/XFree86
             and client startup scripts)
           + XFree86-vfb (1.22 MiB; optional, X Virtual Frame Buffer
             (Xvfb) server)
-          + XFree86-xserv (1.19 MiB; required, the Cygwin/XFree86 X
-            Server)
+          + XFree86-xserv (1.19 MiB; required, the Cygwin/X X Server)
           + XFree86-xwinclip (6 KiB; legacy, provides clipboard
-            integration between Windows and Cygwin/XFree86, which is now
+            integration between Windows and Cygwin/X, which is now
             handled by the -clipboard command-line parameter)
    16. You must select the XFree86-base package, which is located in the
        XFree86 category. The XFree86-base package is a helper package
        that automatically selects a working set of packages for you that
-       will allow Cygwin/XFree86 to work. You may also want to ensure
-       that the inetutils and openssh packages are selected if you wish
-       to use telnet and ssh to connect to remote machines.
+       will allow Cygwin/X to work. You may also want to ensure that the
+       inetutils and openssh packages are selected if you wish to use
+       telnet and ssh to connect to remote machines.
        [cyi07packages.png]
    17. Click Next to begin the download process, you may want to try
        another mirror if you see a "Connecting" message on this screen
@@ -193,27 +191,27 @@ Installing Cygwin/XFree86
    21. You should receive a message that the installation has completed.
        [cyi11complete.png]
 
-   You have now successfully installed Cygwin/XFree86. Proceed to
-   [38]Chapter 4 for instructions on how to use Cygwin/XFree86.
+   You have now successfully installed Cygwin/X. Proceed to [38]Chapter 4
+   for instructions on how to use Cygwin/X.
      _________________________________________________________________
 
-Chapter 3. Configuring Cygwin/XFree86
+Chapter 3. Configuring Cygwin/X
 
 Configuration Overview
 
-   Cygwin/XFree86 settings are configured primarily through command-line
-   parameters passed to XWin.exe. Cygwin/XFree86 comes with a file called
+   Cygwin/X settings are configured primarily through command-line
+   parameters passed to XWin.exe. Cygwin/X comes with a file called
    startxwin.bat that launches an X Server, a terminal, and a window
    manager.
      _________________________________________________________________
 
 Command Line Parameters
 
-   Cygwin/XFree86, by default, runs in windowed mode with the largest
-   window that will fit on your Windows desktop, using the best
-   performing engine that is installed on your system; you do not need to
-   pass any parameters to XWin.exe to use the default behavior. Below is
-   the syntax for XWin.exe parameters.
+   Cygwin/X, by default, runs in windowed mode with the largest window
+   that will fit on your Windows desktop, using the best performing
+   engine that is installed on your system; you do not need to pass any
+   parameters to XWin.exe to use the default behavior. Below is the
+   syntax for XWin.exe parameters.
 
    XWin.exe
    [-clipboard]
@@ -247,8 +245,8 @@ Command Line Parameters
    [-clipboard]
 
    Enables the integrated version of xwinclip, which provides integration
-   between the Cygwin/XFree86 clipboard and Windows clipboard. Do not use
-   in conjunction with the xwinclip program.
+   between the Cygwin/X clipboard and Windows clipboard. Do not use in
+   conjunction with the xwinclip program.
 
    [-clipupdates clip_updates_above_n ]
 
@@ -274,10 +272,10 @@ Command Line Parameters
 
    [-engine engine_number ]
 
-   Do not use this parameter unless you are a Cygwin/XFree86 developer or
-   are instructed by a Cygwin/XFree86 developer to do so.
+   Do not use this parameter unless you are a Cygwin/X developer or are
+   instructed by a Cygwin/X developer to do so.
 
-   Cygwin/XFree86's default behavior is to determine if DirectDraw or
+   Cygwin/X's default behavior is to determine if DirectDraw or
    DirectDraw4 are present, then to examine the -depth and -fullscreen
    parameters to determine the engine with optimum performance that
    supports the specified depth and window configuration.
@@ -285,16 +283,16 @@ Command Line Parameters
    [-fullscreen [-depth depth_in_bits_per_pixel ] [-refresh
    refresh_rate_in_herz ] ]
 
-   The -fullscreen parameter tells Cygwin/XFree86 to open a given screen
-   in fullscreen mode.
+   The -fullscreen parameter tells Cygwin/X to open a given screen in
+   fullscreen mode.
 
    The -depth parameter can only be used with -fullscreen and a
    DirectDraw based engine to specify the display depth that should be
-   used for the fullscreen Cygwin/XFree86 screen.
+   used for the fullscreen Cygwin/X screen.
 
    The -refresh parameter can only be used with -fullscreen and a
    DirectDraw based engine to specify the refresh rate that should be
-   used for the fullscreen Cygwin/XFree86 screen.
+   used for the fullscreen Cygwin/X screen.
 
    [-ignoreinput]
 
@@ -303,10 +301,10 @@ Command Line Parameters
 
    [-lesspointer]
 
-   Hide the Windows mouse cursor when the mouse is over any
-   Cygwin/XFree86 window (regardless of whether that window is active or
-   inactive). This prevents the Windows mouse cursor from being placed
-   overtop of the X cursor.
+   Hide the Windows mouse cursor when the mouse is over any Cygwin/X
+   window (regardless of whether that window is active or inactive). This
+   prevents the Windows mouse cursor from being placed overtop of the X
+   cursor.
 
    [-multimonitors]
 
@@ -321,9 +319,9 @@ Command Line Parameters
 
    [-nodecoration]
 
-   Do not give the Cygwin/XFree86 window a Windows window border, title
-   bar, etc. This parameter only applies to windowed mode screens, i.e.,
-   this parameter is ignored when the -fullscreen parameter is specified.
+   Do not give the Cygwin/X window a Windows window border, title bar,
+   etc. This parameter only applies to windowed mode screens, i.e., this
+   parameter is ignored when the -fullscreen parameter is specified.
 
    [-rootless]
 
@@ -332,17 +330,16 @@ Command Line Parameters
 
    [-screen screen_number width height ...]
 
-   This parameter does not have to be specified. Cygwin/XFree86's default
+   This parameter does not have to be specified. Cygwin/X's default
    behavior is to create a single screen that is roughly the size of the
    current Windows display area.
 
    This parameter may be used to specify the screen number, height, and
-   width of one or several Cygwin/XFree86 screens; each Cygwin/XFree86
-   screen will be opened in its own window. When using multiple screens,
-   be sure not to duplicate any screen numbers. Do note that, as of
-   2002-01-08, using multiple screens is not fully implemented; there are
-   several bugs that must be fixed by someone that uses the multiple
-   screens feature.
+   width of one or several Cygwin/X screens; each Cygwin/X screen will be
+   opened in its own window. When using multiple screens, be sure not to
+   duplicate any screen numbers. Do note that, as of 2002-01-08, using
+   multiple screens is not fully implemented; there are several bugs that
+   must be fixed by someone that uses the multiple screens feature.
 
    Screen specific parameters, such as -fullscreen, can be applied as a
    default to all screens by placing those screen specific parameters
@@ -363,13 +360,12 @@ Command Line Parameters
    [-[no]unixkill]
 
    Enable or disable the Ctrl-Alt-Backspace key combo as a signal to exit
-   Cygwin/XFree86. The Ctrl-Alt-Backspace key combo is disabled by
-   default.
+   Cygwin/X. The Ctrl-Alt-Backspace key combo is disabled by default.
 
    [-[no]winkill]
 
-   Enable or disable the Alt-F4 key combo as a signal to exit
-   Cygwin/XFree86. The Alt-F4 key combo is enabled by default.
+   Enable or disable the Alt-F4 key combo as a signal to exit Cygwin/X.
+   The Alt-F4 key combo is enabled by default.
 
    [-xf86config windows_path_to_config_file [-keyboard
    keyboard_device_from_xf86config ] ]
@@ -381,12 +377,12 @@ Command Line Parameters
    configuration file.
      _________________________________________________________________
 
-Chapter 4. Using Cygwin/XFree86
+Chapter 4. Using Cygwin/X
 
-Starting Cygwin/XFree86
+Starting Cygwin/X
 
-   There are several methods of starting the Cygwin/XFree86 X Server with
-   a startup script that optionally starts initial clients and loads
+   There are several methods of starting the Cygwin/X X Server with a
+   startup script that optionally starts initial clients and loads
    keyboard modifier maps. Several startup methods are described below.
      _________________________________________________________________
 
@@ -395,9 +391,8 @@ startxwin.bat
    startxwin.bat - Use a MS-DOS batch file as the startup script. An
    example startxwin.bat is included in XFree86-startup-scripts, which is
    extracted according to the instructions in [39]the Section called
-   Installing Cygwin/XFree86 in Chapter 2. Run
-   /usr/X11R6/bin/startxwin.bat by double-clicking it in Windows
-   Explorer.
+   Installing Cygwin/X in Chapter 2. Run /usr/X11R6/bin/startxwin.bat by
+   double-clicking it in Windows Explorer.
      _________________________________________________________________
 
 startxwin.sh
@@ -405,8 +400,8 @@ startxwin.sh
    startxwin.sh - Use an sh shell script as the startup script. An
    example startxwin.sh is included in XFree86-startup-scripts, which is
    extracted according to the instructions in [40]the Section called
-   Installing Cygwin/XFree86 in Chapter 2. Run
-   /usr/X11R6/bin/startxwin.sh in a Cygwin shell:
+   Installing Cygwin/X in Chapter 2. Run /usr/X11R6/bin/startxwin.sh in a
+   Cygwin shell:
 Username@CygwinHost ~
 $ sh /usr/X11R6/bin/startxwin.sh
      _________________________________________________________________
@@ -419,7 +414,7 @@ startx
 Username@CygwinHost ~
 $ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 
-   Now you may customize ~/.xinitrc and start Cygwin/XFree86 with:
+   Now you may customize ~/.xinitrc and start Cygwin/X with:
 Username@CygwinHost ~
 $ cd /usr/X11R6/bin && startx
 
@@ -440,15 +435,15 @@ Username@CygwinHost /usr/X11R6/bin
 $ startx
      _________________________________________________________________
 
-Switching Out of Cygwin/XFree86
+Switching Out of Cygwin/X
 
-   Press Alt-Tab to switch from Cygwin/XFree86 to your Windows desktop or
-   other running Windows applications.
+   Press Alt-Tab to switch from Cygwin/X to your Windows desktop or other
+   running Windows applications.
      _________________________________________________________________
 
-Stopping Cygwin/XFree86
+Stopping Cygwin/X
 
-   When you are done using Cygwin/XFree86, press Alt-F4 to shutdown the X
+   When you are done using Cygwin/X, press Alt-F4 to shutdown the X
    Server; this is the default key combination to shutdown the X Server.
    The -[no]winkill and -[no]unixkill parameters can change the set of
    key combinations that will shutdown the X Server. Using the -unixkill
@@ -458,8 +453,7 @@ Stopping Cygwin/XFree86
 
 Window Managers
 
-   Cygwin/XFree86 works with window managers in a couple of different
-   ways:
+   Cygwin/X works with window managers in a couple of different ways:
      * Internal window manager (a.k.a. MultiWindow Mode) that creates a
        Windows window for each top-level X window. The internal window
        manager is launched using the -multiwindow command-line parameter
@@ -473,43 +467,42 @@ Window Managers
      * Remote window managers via an XDMCP session, which you can read
        more about in [42]the Section called Remote Sessions via XDMCP.
      * Remote window manager launched through an ssh tunnel. This is not
-       Cygwin/XFree86-specific, so you should be able to find information
-       about launching remote window managers from other sources. See
-       [43]the Section called Secure ssh for more information on using
-       ssh.
+       Cygwin/X-specific, so you should be able to find information about
+       launching remote window managers from other sources. See [43]the
+       Section called Secure ssh for more information on using ssh.
      _________________________________________________________________
 
 Windows Clipboard Integration
 
-   The X Window System, and thus Cygwin/XFree86, uses its own internal
+   The X Window System, and thus Cygwin/X, uses its own internal
    clipboard system that is distinct from the clipboard system used by
    Windows. Copying and pasting text between these two clipboard systems
    requires a clipboard integration program that watches for updates to
    either clipboard and copies data between them when either one is
    updated.
 
-   Cygwin/XFree86 has an internal clipboard integration system that is
-   envoked via the -clipboard command-line parameter. See [44]the Section
-   called Command Line Parameters in Chapter 3 for more information on
-   the -clipboard command-line parameter.
+   Cygwin/X has an internal clipboard integration system that is envoked
+   via the -clipboard command-line parameter. See [44]the Section called
+   Command Line Parameters in Chapter 3 for more information on the
+   -clipboard command-line parameter.
 
      Note: Clipboard integration between the X Window System and Windows
-     is not easy to provide. As of 2003-09-19, the Cygwin/XFree86
-     clipboard integration still suffers from a shortcoming that causes
-     selected selected in X programs to be immediately unhighlighted.
-     This issue is very well known and will take somewhere between 40
-     and 120 hours of programming to fix; no one has the time to fix it.
-     Please do not report this to the mailing list as a bug.
+     is not easy to provide. As of 2003-09-19, the Cygwin/X clipboard
+     integration still suffers from a shortcoming that causes selected
+     selected in X programs to be immediately unhighlighted. This issue
+     is very well known and will take somewhere between 40 and 120 hours
+     of programming to fix; no one has the time to fix it. Please do not
+     report this to the mailing list as a bug.
 
-   Cygwin/XFree86 also has a legacy external clipboard integration system
-   that consists of a stand-alone executable called xwinclip. xwinclip
-   can be installed via Cygwin's setup.exe.
+   Cygwin/X also has a legacy external clipboard integration system that
+   consists of a stand-alone executable called xwinclip. xwinclip can be
+   installed via Cygwin's setup.exe.
      _________________________________________________________________
 
 Shared Memory Support (MIT-SHM Extension)
 
    As of 2003-09-19, shared memory support (i.e. the MIT-SHM Extension)
-   is enabled in the default distribution of Cygwin/XFree86. However, the
+   is enabled in the default distribution of Cygwin/X. However, the
    shared memory support is only enabled at runtime if the Cygwin IPC
    Daemon (i.e., ipc-daemon2) is running. The Cygwin IPC Daemon is
    available via the cygipc package from Cygwin's setup.exe.
@@ -522,11 +515,11 @@ Shared Memory Support (MIT-SHM Extension)
 
 Remote Sessions via XDMCP
 
-   Cygwin/XFree86 can be used login to one or several remote sessions
-   using XDMCP (X Display Manager Control Protocol).
+   Cygwin/X can be used login to one or several remote sessions using
+   XDMCP (X Display Manager Control Protocol).
 
-   Start Cygwin/XFree86 with a command similar to the following to login
-   to a single remote session using XDMCP:
+   Start Cygwin/X with a command similar to the following to login to a
+   single remote session using XDMCP:
 
    XWin.exe -query remote_hostname_or_ip_address
 
@@ -536,25 +529,25 @@ Remote Sessions via XDMCP
    number is not the same as a screen number, as a single display can
    have multiple screens associated with it. Each display listens on a
    different network port number, so each display can connect to multiple
-   machines. Start Cygwin/XFree86 with command lines similar to the
-   following to login to several remote sessions using XDMCP:
+   machines. Start Cygwin/X with command lines similar to the following
+   to login to several remote sessions using XDMCP:
 
    XWin.exe :0 -query remote_hostname_or_ip_address_0
 
    XWin.exe :1 -query remote_hostname_or_ip_address_1
 
    Note that the :display_number parameter is a general X Server
-   parameter, not specific to Cygwin/XFree86. Further documentation of
-   the :display_number parameter can be found in the [45]X Server
+   parameter, not specific to Cygwin/X. Further documentation of the
+   :display_number parameter can be found in the [45]X Server
    documentation. XDMCP is a complex system that is not specific to
-   Cygwin/XFree86; further discussion of XDMCP is beyond the scope of
-   this document. You may wish to read the [46]Linux XDMCP HOWTO or the
-   [47]X Server XDMCP Options for more information.
+   Cygwin/X; further discussion of XDMCP is beyond the scope of this
+   document. You may wish to read the [46]Linux XDMCP HOWTO or the [47]X
+   Server XDMCP Options for more information.
      _________________________________________________________________
 
 Displaying Remote Clients
 
-   Displaying remote X clients with Cygwin/XFree86 is nearly identical to
+   Displaying remote X clients with Cygwin/X is nearly identical to
    displaying remote X clients with any other X Server. You may use the
    unsecure telnet session, or the secure ssh method.
      _________________________________________________________________
@@ -562,21 +555,20 @@ Displaying Remote Clients
 Unsecure Telnet
 
    On your Windows machine:
-    1. Launch Cygwin/XFree86
+    1. Launch Cygwin/X
     2. In an X terminal type /usr/X11R6/bin/xhost
        remote_hostname_or_ip_address
     3. In an X terminal type /usr/bin/telnet
        remote_hostname_or_ip_address. Use the explicit path to ensure
        that Cygwin's telnet is run instead of Microsoft's telnet;
-       Microsoft's telnet will crash on startup when run from
-       Cygwin/XFree86.
+       Microsoft's telnet will crash on startup when run from Cygwin/X.
     4. Login to your remote machine via your telnet session
     5. In your telnet session type,
        DISPLAY=windows_hostname_or_ip_address:0.0
     6. In your telnet session type, export DISPLAY
     7. You can now launch remote X clients in your telnet session, for
        example, xterm& will launch an xterm running on your remote host
-       that will display on your Cygwin/XFree86 screen.
+       that will display on your Cygwin/X screen.
     8. Launch other remote clients in the same manner; I recommend
        starting the remote clients in the background, by appending & to
        the command name, so that you don't have to open several telnet
@@ -586,7 +578,7 @@ Unsecure Telnet
 Secure ssh
 
    On your Windows machine:
-    1. Launch Cygwin/XFree86
+    1. Launch Cygwin/X
     2. Run the following in an X terminal:
 
 Username@CygwinHost ~
@@ -597,7 +589,7 @@ $ ssh -X -l username remote_hostname_or_ip_address
        remote machine.
     5. You can now launch remote X clients in your ssh session, for
        example, xterm& will launch an xterm running on your remote host
-       that will display on your Cygwin/XFree86 screen.
+       that will display on your Cygwin/X screen.
     6. Launch other remote clients in the same manner. I recommend
        starting the remote clients in the background, by appending & to
        the command name, so that you don't have to open several ssh
