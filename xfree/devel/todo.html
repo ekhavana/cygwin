@@ -12,7 +12,7 @@
 
 <!--#include virtual="../cygx-header.html" -->
 
-<p>Last updated: 2001-12-03 0001 EST</p>
+<p>Last updated: 2002-06-07 2235 EDT</p>
 
 <p>Following is a list of open tasks on the Cygwin/XFree86
 project:</p>
@@ -37,43 +37,6 @@ project:</p>
 <td></td>
 </tr>
 -->
-
-
-<tr valign="top">
-<td>Release all keys when Cygwin/XFree86 loses focus</td>
-
-<td><b>I will never personally implement this feature/bugfix because
-this item is so easy and I have given so much information here that it
-would take even a novice programmer less than two hours to
-implement.</b> Cygwin/XFree86 currently releases mode keys (Alt, Ctrl,
-etc.)  when it loses the keyboard focus.  This is necessary because a
-user may press Alt+Tab to change to another window, in which case the
-Alt release message would never be received by Cygwin/XFree86; upon
-returning the keyboard focus to Cygwin/XFree86, the program will
-behave as it the Alt key is down.  One shortcoming of the current
-system is that other keys (a, b, 1, 2, etc.) are not released when
-Cygwin/XFree86 loses the keyboard focus.  Thus, a user may press the
-'a' key, then another application may cause an event that forces
-Cygwin/XFree86 to lose keyboard focus, causing Cygwin/XFree86 not to
-receive the release message for the 'a' key.  The end result is that
-Cygwin/XFree86 will endlessly repeat the 'a' key press until the user
-returns the keyboard focus to Cygwin/XFree86 and presses then releases
-the 'a' key to stop the automatic repeat.  The desired solution would
-be to release any keys that are pressed.  This will require some sort
-of table to indicate which key codes are in the pressed state, so that
-pressed keys may be released upon losing the keyboard focus.  We can't
-use the Win32 API function GetKeyboardState () because that function
-gives us the Win32 Virtual Key codes, rather than the OEM scan code
-that we need to send a key event to the X MI (machine independent)
-input layer.  It may be easier to send a release event for all keys
-except the mode keys, regardless of the key state, given that sending
-a release message for a key that is not down does not have any adverse
-side effect.  We currently do this last method for the mod keys (Alt,
-Ctrl, Shift, Kana); earlier versions of Cygwin/XFree86 tracked the
-state of the mod keys and only released the pressed mod keys.  No
-adverse effects have been observed from releasing all mod keys, and
-this method is also used by the Windows VNC client.</td>
-</tr>
 
 
 <tr valign="top">
