@@ -153,8 +153,9 @@ can't find <CODE>/bin/sh</CODE>.
 
 <P>
 Your .bashrc is read from your home directory specified by the HOME
-environment variable.  It uses c:\ if HOME is not set.  So you need
-to set HOME correctly, or move your .bashrc to c:\.
+environment variable.  It uses /.bashrc if HOME is not set.  So you need
+to set HOME correctly, or move your .bashrc to the top of the drive
+mounted as / in Cygwin.
 
 </P>
 
@@ -207,32 +208,62 @@ in bash.
 </P>
 
 
-<H2><A NAME="SEC32" HREF="faq_toc.html#TOC32">Using Cygwin Releases</A></H2>
+<H3><A NAME="SEC32" HREF="faq_toc.html#TOC32">Why don't cursor keys work under Win95/Win98?</A></H3>
+
+<P>
+Careful examination shows that they not just non-functional, but
+rather behave strangely, for example, with NumLock off, keys on numeric
+keyboard work, until you press usual cursor keys, when even numeric
+stop working, but they start working again after hitting alphanumeric
+key, etc. This reported to happen on localized versions of Win98 and
+Win95, and not specific to Cygwin (there're known cases of Alt+Enter
+(fullscreen/windowed toggle) not working and shifts sticking with
+other programs). The cause of this problem is Microsoft keyboard
+localizer which by default installed in 'autoexec.bat'. Corresponding
+line looks like:
+
+</P>
+
+<PRE>
+keyb ru,,C:\WINDOWS\COMMAND\keybrd3.sys
+</PRE>
+
+<P>
+(That's for russian locale.) You should comment that line if you want
+your keys working properly. Of course, this will deprive you of your
+local alphabet keyboard support, so you should think about
+another localizer. exUSSR users are of course knowledgable of Keyrus
+localizer, and it might work for other locales too, since it has keyboard
+layout editor. But it has russian messages and documentation ;-(
+Reference URL is http://www.hnet.ru/software/contrib/Utils/KeyRus/
+(note the you may need to turn off Windows logo for Keyrus to operate
+properly).
+
+</P>
+
+
+<H2><A NAME="SEC33" HREF="faq_toc.html#TOC33">Using Cygwin Releases</A></H2>
 
 
 
-<H3><A NAME="SEC33" HREF="faq_toc.html#TOC33">Why aren't man, groff, etc. included in the betas?</A></H3>
+<H3><A NAME="SEC34" HREF="faq_toc.html#TOC34">Why aren't man, groff, etc. included in the betas?</A></H3>
 
 <P>
 For obvious reasons, it isn't feasible for us to maintain and provide
 binary distributions of every tool ported to work with the Cygwin
-tools.  Instead I think Cygnus should concentrate its efforts on the
-Cygwin library and the core development tools.  It's likely that a
-man command will get added once we get it working to our satisfaction.
+tools.  However, it's likely that a man command will show up in a
+distribution soon.
 
 </P>
 <P>
-Other tools that have been ported should have their changes added to
-the official releases so they can be compiled straight from normal
-sources for that tool.  In cases where that isn't possible, someone
-else (possibly Cygnus if that made sense) could maintain the diffs and
-have them up for ftp.  Maybe we could keep a list of such tools on the
-Cygwin Web site...
+Many other tools have been ported and are referenced on the Cygwin web
+site.  man, groff, info, and many many other packages are all
+available for download there.
 
 </P>
 
 
-<H3><A NAME="SEC34" HREF="faq_toc.html#TOC34">Where can I find "less"?</A></H3>
+<H3><A NAME="SEC35" HREF="faq_toc.html#TOC35">Where can I find "less"?</A></H3>
 
 <P>
 The less pager binary is available for the first time in the 20.1
@@ -243,7 +274,7 @@ the details.
 </P>
 
 
-<H3><A NAME="SEC35" HREF="faq_toc.html#TOC35">Where can I find "more"?</A></H3>
+<H3><A NAME="SEC36" HREF="faq_toc.html#TOC36">Where can I find "more"?</A></H3>
 
 <P>
 If you are looking for the "more" pager, you should use the "less" pager
@@ -252,7 +283,7 @@ instead.  See the last question and answer for more information.
 </P>
 
 
-<H3><A NAME="SEC36" HREF="faq_toc.html#TOC36">Where can I find "which"?</A></H3>
+<H3><A NAME="SEC37" HREF="faq_toc.html#TOC37">Where can I find "which"?</A></H3>
 
 <P>
 While we don't include a which command, you can use the bash built
@@ -261,7 +292,7 @@ in "type" command which does something fairly similar.
 </P>
 
 
-<H3><A NAME="SEC37" HREF="faq_toc.html#TOC37">How can I access other drives?</A></H3>
+<H3><A NAME="SEC38" HREF="faq_toc.html#TOC38">How can I access other drives?</A></H3>
 
 <P>
 The best way is to use the "mount" command to mount the drive letter so
@@ -320,7 +351,7 @@ must be more than one character long.
 </P>
 
 
-<H3><A NAME="SEC38" HREF="faq_toc.html#TOC38">How can I copy and paste into Cygwin console windows?</A></H3>
+<H3><A NAME="SEC39" HREF="faq_toc.html#TOC39">How can I copy and paste into Cygwin console windows?</A></H3>
 
 <P>
 Under Windows NT, open the properties dialog of the console window.
@@ -335,7 +366,7 @@ Select the Misc tab.  Uncheck Fast Pasting.  Check QuickEdit.
 </P>
 
 
-<H3><A NAME="SEC39" HREF="faq_toc.html#TOC39">What does "mount failed: Device or resource busy" mean?</A></H3>
+<H3><A NAME="SEC40" HREF="faq_toc.html#TOC40">What does "mount failed: Device or resource busy" mean?</A></H3>
 
 <P>
 This usually means that you are trying to mount to a location
@@ -356,7 +387,7 @@ Cygwin library.
 </P>
 
 
-<H3><A NAME="SEC40" HREF="faq_toc.html#TOC40">How can I share files between Unix and Windows?</A></H3>
+<H3><A NAME="SEC41" HREF="faq_toc.html#TOC41">How can I share files between Unix and Windows?</A></H3>
 
 <P>
 During development, we have both Unix boxes running Samba and
@@ -369,7 +400,7 @@ filesystem so we can also access the files under Windows 9x.
 </P>
 
 
-<H3><A NAME="SEC41" HREF="faq_toc.html#TOC41">Are mixed-case filenames possible with Cygwin?</A></H3>
+<H3><A NAME="SEC42" HREF="faq_toc.html#TOC42">Are mixed-case filenames possible with Cygwin?</A></H3>
 
 <P>
 Several Unix programs expect to be able to use to filenames
@@ -388,7 +419,7 @@ code for beta 16.
 </P>
 
 
-<H3><A NAME="SEC42" HREF="faq_toc.html#TOC42">What about DOS special filenames?</A></H3>
+<H3><A NAME="SEC43" HREF="faq_toc.html#TOC43">What about DOS special filenames?</A></H3>
 
 <P>
 Files cannot be named com1, lpt1, or aux (to name a few); either as
@@ -402,7 +433,7 @@ letters 'aux' in it will hang.
 </P>
 
 
-<H3><A NAME="SEC43" HREF="faq_toc.html#TOC43">When it hangs, how do I get it back?</A></H3>
+<H3><A NAME="SEC44" HREF="faq_toc.html#TOC44">When it hangs, how do I get it back?</A></H3>
 
 <P>
 If something goes wrong and the tools hang on you for some reason (easy
@@ -423,7 +454,7 @@ This should never be necessary under Windows NT.
 </P>
 
 
-<H3><A NAME="SEC44" HREF="faq_toc.html#TOC44">Why the weird directory structure?</A></H3>
+<H3><A NAME="SEC45" HREF="faq_toc.html#TOC45">Why the weird directory structure?</A></H3>
 
 <P>
 Why are cpp.exe, cc1.exe, etc., not in the bin directory?
@@ -479,7 +510,7 @@ it's worth it for people with more complex installations.
 </P>
 
 
-<H3><A NAME="SEC45" HREF="faq_toc.html#TOC45">How do anti-virus programs like Cygwin?</A></H3>
+<H3><A NAME="SEC46" HREF="faq_toc.html#TOC46">How do anti-virus programs like Cygwin?</A></H3>
 
 <P>
 One person reported that McAfee VirusScan for NT (and others?) is
@@ -490,7 +521,7 @@ to fail, wreaking havoc on many of the tools.
 </P>
 
 
-<H3><A NAME="SEC46" HREF="faq_toc.html#TOC46">Why can't I run bash as a shell under NT Emacs?</A></H3>
+<H3><A NAME="SEC47" HREF="faq_toc.html#TOC47">Why can't I run bash as a shell under NT Emacs?</A></H3>
 
 <P>
 Place the following code in your startup file and try again:
@@ -508,7 +539,7 @@ Place the following code in your startup file and try again:
 
 
 
-<H3><A NAME="SEC47" HREF="faq_toc.html#TOC47">Where did the man/info pages go?</A></H3>
+<H3><A NAME="SEC48" HREF="faq_toc.html#TOC48">Where did the man/info pages go?</A></H3>
 
 <P>
 In order to save space and download times, we have stopped providing
@@ -520,7 +551,7 @@ site.  Or consult the online documentation over the WWW.
 </P>
 
 
-<H3><A NAME="SEC48" HREF="faq_toc.html#TOC48">Why can't B20's "cygcheck -s" find cpp?</A></H3>
+<H3><A NAME="SEC49" HREF="faq_toc.html#TOC49">Why can't B20's "cygcheck -s" find cpp?</A></H3>
 
 <P>
 This is a confusingly worded warning that will be reworded in future
@@ -531,7 +562,7 @@ cause problems).
 </P>
 
 
-<H3><A NAME="SEC49" HREF="faq_toc.html#TOC49">Why do I get a message saying Out of Queue slots?</A></H3>
+<H3><A NAME="SEC50" HREF="faq_toc.html#TOC50">Why do I get a message saying Out of Queue slots?</A></H3>
 
 <P>
 "Out of queue slots!" generally occurs when you're trying to remove
@@ -549,16 +580,28 @@ this explanation).
 </P>
 
 
-<H3><A NAME="SEC50" HREF="faq_toc.html#TOC50">Why don't symlinks work on samba-mounted filesystems?</A></H3>
+<H3><A NAME="SEC51" HREF="faq_toc.html#TOC51">Why don't symlinks work on samba-mounted filesystems?</A></H3>
 
 <P>
 Symlinks are marked with "system" file attribute.  Samba does not
-support this attribute.
+enable this attribute by default.  To enable it, consult your Samba
+documentation and then add these lines to your samba configuration
+file:
+
+</P>
+
+<PRE>
+	mask system = yes
+	create mask = 0775
+</PRE>
+
+<P>
+Note that the 0775 can be anything as long as the 0010 bit is set.
 
 </P>
 
 
-<H3><A NAME="SEC51" HREF="faq_toc.html#TOC51">Why does df report sizes incorrectly.</A></H3>
+<H3><A NAME="SEC52" HREF="faq_toc.html#TOC52">Why does df report sizes incorrectly.</A></H3>
 
 <P>
 There is a bug in the Win32 API function GetFreeDiskSpace that
@@ -568,7 +611,7 @@ Perhaps that may be your problem?
 </P>
 
 
-<H3><A NAME="SEC52" HREF="faq_toc.html#TOC52">Has the screen program been ported yet?</A></H3>
+<H3><A NAME="SEC53" HREF="faq_toc.html#TOC53">Has the screen program been ported yet?</A></H3>
 
 <P>
 Screen requires either unix domain sockets or fifoes.  Neither of
@@ -577,11 +620,11 @@ them have been implemented in Cygwin yet.
 </P>
 
 
-<H2><A NAME="SEC53" HREF="faq_toc.html#TOC53">Cygwin API Questions</A></H2>
+<H2><A NAME="SEC54" HREF="faq_toc.html#TOC54">Cygwin API Questions</A></H2>
 
 
 
-<H3><A NAME="SEC54" HREF="faq_toc.html#TOC54">How does everything work?</A></H3>
+<H3><A NAME="SEC55" HREF="faq_toc.html#TOC55">How does everything work?</A></H3>
 
 <P>
 There's a C library which provides a Unix-style API.  The
@@ -609,21 +652,22 @@ WWW site.
 </P>
 
 
-<H3><A NAME="SEC55" HREF="faq_toc.html#TOC55">Are development snapshots for the Cygwin library available?</A></H3>
+<H3><A NAME="SEC56" HREF="faq_toc.html#TOC56">Are development snapshots for the Cygwin library available?</A></H3>
 
 <P>
 Yes.  They're made whenever anything interesting happens inside the
-Cygwin library (usually roughly on a weekly basis, depending on how much
+Cygwin library (usually roughly on a nightly basis, depending on how much
 is going on).  They are only intended for those people who wish to
 contribute code to the project.  If you aren't going to be happy
 debugging problems in a buggy snapshot, avoid these and wait for a real
-release.  The snapshots are available from ftp.cygnus.com in
-/pub/noer/winsup-snapshot/.
+release.  The snapshots are available from
+http://sourceware.cygnus.com/cygwin/snapshots/
 
 </P>
 
 
-<H3><A NAME="SEC56" HREF="faq_toc.html#TOC56">How is the DOS/Unix CR/LF thing handled?</A></H3>
+
+<H3><A NAME="SEC57" HREF="faq_toc.html#TOC57">How is the DOS/Unix CR/LF thing handled?</A></H3>
 
 <P>
 Let's start with some background.
@@ -694,9 +738,11 @@ Explanation adapted from mailing list email by Earnie Boyd
 </P>
 
 
-<H3><A NAME="SEC57" HREF="faq_toc.html#TOC57">Is the Cygwin library multi-thread-safe?</A></H3>
+<H3><A NAME="SEC58" HREF="faq_toc.html#TOC58">Is the Cygwin library multi-thread-safe?</A></H3>
+
 <P>
 No.
+
 </P>
 <P>
 There is an experimental configure option (--enable-threadsafe), which
@@ -704,6 +750,12 @@ allows you to build a DLL with some additional "thread safety" but there
 are no guarantees that this is 100% operational.  This option also
 enables limited "POSIX thread" support.  See the file cygwin.din for the
 list of POSIX thread functions provided.
+
+</P>
+<P>
+Cygnus does not distribute a DLL with this option enabled, and,
+currently, has no plans to do so.
+
 </P>
 <P>
 Cygwin is not multi-thread-safe because:
@@ -733,7 +785,7 @@ should be fine.
 </P>
 
 
-<H3><A NAME="SEC58" HREF="faq_toc.html#TOC58">Why is some functionality only supported in Windows NT?</A></H3>
+<H3><A NAME="SEC59" HREF="faq_toc.html#TOC59">Why is some functionality only supported in Windows NT?</A></H3>
 
 <P>
 Windows 9x: n.
@@ -751,7 +803,7 @@ is not supported in Win 9x.
 </P>
 
 
-<H3><A NAME="SEC59" HREF="faq_toc.html#TOC59">How is fork() implemented?</A></H3>
+<H3><A NAME="SEC60" HREF="faq_toc.html#TOC60">How is fork() implemented?</A></H3>
 
 <P>
 Cygwin fork() essentially works like a non-copy on write version
@@ -785,7 +837,7 @@ shared area and then returns from fork itself.
 </P>
 
 
-<H3><A NAME="SEC60" HREF="faq_toc.html#TOC60">How does wildcarding (globbing) work?</A></H3>
+<H3><A NAME="SEC61" HREF="faq_toc.html#TOC61">How does wildcarding (globbing) work?</A></H3>
 
 <P>
 If an application using CYGWIN.DLL starts up, and can't find the
@@ -809,22 +861,23 @@ Beware: globbing uses <CODE>malloc</CODE>.  If your application defines
 </P>
 
 
-<H3><A NAME="SEC61" HREF="faq_toc.html#TOC61">How do symbolic links work?</A></H3>
+<H3><A NAME="SEC62" HREF="faq_toc.html#TOC62">How do symbolic links work?</A></H3>
 
 <P>
-CYGWIN.DLL generates link files with a magic header.  When 
+CYGWIN.DLL generates link files with a magic header.  When
 you open a file or directory that is a link to somewhere else, it
 opens the file or directory listed in the magic header.  Because we
 don't want to have to open every referenced file to check symlink
 status, Cygwin marks symlinks with the system attribute.  Files
 without the system attribute are not checked.  Because remote samba
-filesystems do not support the system attribute, symlinks do not work
-on network drives.
+filesystems do not enable the system attribute by default, symlinks do
+not work on network drives unless you explicitly enable this
+attribute.
 
 </P>
 
 
-<H3><A NAME="SEC62" HREF="faq_toc.html#TOC62">Why do some files, which are not executables have the 'x' type.</A></H3>
+<H3><A NAME="SEC63" HREF="faq_toc.html#TOC63">Why do some files, which are not executables have the 'x' type.</A></H3>
 
 <P>
 When working out the unix-style attribute bits on a file, the library
@@ -838,7 +891,7 @@ ones which have a "#!" as their first characters.
 </P>
 
 
-<H3><A NAME="SEC63" HREF="faq_toc.html#TOC63">How secure is Cygwin in a multi-user environment?</A></H3>
+<H3><A NAME="SEC64" HREF="faq_toc.html#TOC64">How secure is Cygwin in a multi-user environment?</A></H3>
 
 <P>
 Cygwin is not secure in a multi-user environment.  For
@@ -858,7 +911,7 @@ all processes.
 </P>
 
 
-<H3><A NAME="SEC64" HREF="faq_toc.html#TOC64">How do the net-related functions work?</A></H3>
+<H3><A NAME="SEC65" HREF="faq_toc.html#TOC65">How do the net-related functions work?</A></H3>
 
 <P>
 The network support in Cygwin is supposed to provide the Unix API, not
@@ -924,7 +977,7 @@ As of the b19 release, this information may be slightly out of date.
 </P>
 
 
-<H3><A NAME="SEC65" HREF="faq_toc.html#TOC65">I don't want Unix sockets, how do I use normal Win32 winsock?</A></H3>
+<H3><A NAME="SEC66" HREF="faq_toc.html#TOC66">I don't want Unix sockets, how do I use normal Win32 winsock?</A></H3>
 
 <P>
 To use the vanilla Win32 winsock, you just need to #define Win32_Winsock
@@ -935,7 +988,7 @@ libwsock32.a.
 </P>
 
 
-<H3><A NAME="SEC66" HREF="faq_toc.html#TOC66">What version numbers are associated with Cygwin?</A></H3>
+<H3><A NAME="SEC67" HREF="faq_toc.html#TOC67">What version numbers are associated with Cygwin?</A></H3>
 
 <P>
 There is a cygwin.dll major version number that gets incremented
@@ -969,7 +1022,7 @@ This has been "B15.0" since the beta 15 release.
 </P>
 
 
-<H3><A NAME="SEC67" HREF="faq_toc.html#TOC67">Why isn't _timezone set correctly?</A></H3>
+<H3><A NAME="SEC68" HREF="faq_toc.html#TOC68">Why isn't _timezone set correctly?</A></H3>
 
 <P>
 Did you explicitly call tzset() before checking the value of _timezone?
@@ -978,11 +1031,11 @@ If not, you must do so.
 </P>
 
 
-<H2><A NAME="SEC68" HREF="faq_toc.html#TOC68">Programming Questions</A></H2>
+<H2><A NAME="SEC69" HREF="faq_toc.html#TOC69">Programming Questions</A></H2>
 
 
 
-<H3><A NAME="SEC69" HREF="faq_toc.html#TOC69">Why is gcc failing?</A></H3>
+<H3><A NAME="SEC70" HREF="faq_toc.html#TOC70">Why is gcc failing?</A></H3>
 
 <P>
 If the error is "gcc: installation problem, cannot exec `cpp':
@@ -995,7 +1048,7 @@ see this message.
 </P>
 
 
-<H3><A NAME="SEC70" HREF="faq_toc.html#TOC70">Why can't bison find bison.simple or bison.hairy?</A></H3>
+<H3><A NAME="SEC71" HREF="faq_toc.html#TOC71">Why can't bison find bison.simple or bison.hairy?</A></H3>
 
 <P>
 If you are getting a warning to this effect, you need to set
@@ -1008,7 +1061,7 @@ systems, you would want to set it to <CODE>C:/cygnus/cygwin-b20/share</CODE>.
 </P>
 
 
-<H3><A NAME="SEC71" HREF="faq_toc.html#TOC71">Why is make behaving badly?</A></H3>
+<H3><A NAME="SEC72" HREF="faq_toc.html#TOC72">Why is make behaving badly?</A></H3>
 
 <P>
 Starting with the beta 19 release, make defaults to a win32 mode in
@@ -1040,7 +1093,7 @@ install sets MAKE_MODE to UNIX.
 </P>
 
 
-<H3><A NAME="SEC72" HREF="faq_toc.html#TOC72">Why the undefined reference to "WinMain@16"?</A></H3>
+<H3><A NAME="SEC73" HREF="faq_toc.html#TOC73">Why the undefined reference to "WinMain@16"?</A></H3>
 
 <P>
 Try adding an empty main() function to one of your sources.
@@ -1048,7 +1101,7 @@ Try adding an empty main() function to one of your sources.
 </P>
 
 
-<H3><A NAME="SEC73" HREF="faq_toc.html#TOC73">How do I use Win32 API calls?</A></H3>
+<H3><A NAME="SEC74" HREF="faq_toc.html#TOC74">How do I use Win32 API calls?</A></H3>
 
 <P>
 It's pretty simple actually.  Cygwin tools require that you explicitly
@@ -1119,7 +1172,7 @@ the file that makes the reference.
 </P>
 
 
-<H3><A NAME="SEC74" HREF="faq_toc.html#TOC74">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
+<H3><A NAME="SEC75" HREF="faq_toc.html#TOC75">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
 
 <P>
 The -mno-cygwin flag to gcc makes gcc link against standard Microsoft
@@ -1129,7 +1182,7 @@ that don't need a UNIX emulation layer.
 </P>
 
 
-<H3><A NAME="SEC75" HREF="faq_toc.html#TOC75">How do I make the console window go away?</A></H3>
+<H3><A NAME="SEC76" HREF="faq_toc.html#TOC76">How do I make the console window go away?</A></H3>
 
 <P>
 The default during compilation is to produce a console application.
@@ -1140,7 +1193,7 @@ It you are writing a GUI program, you should either compile with
 </P>
 
 
-<H3><A NAME="SEC76" HREF="faq_toc.html#TOC76">Why does make complain about a "missing separator"?</A></H3>
+<H3><A NAME="SEC77" HREF="faq_toc.html#TOC77">Why does make complain about a "missing separator"?</A></H3>
 
 <P>
 This problem usually occurs as a result of someone editing a Makefile
@@ -1150,7 +1203,7 @@ lines must start with tabs.
 </P>
 
 
-<H3><A NAME="SEC77" HREF="faq_toc.html#TOC77">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
+<H3><A NAME="SEC78" HREF="faq_toc.html#TOC78">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
 
 <P>
 Subsection 2.d.f of the `Microsoft Open Tools License agreement' looks like
@@ -1163,7 +1216,7 @@ Win32 headers which are pretty complete.
 </P>
 
 
-<H3><A NAME="SEC78" HREF="faq_toc.html#TOC78">How do I link against .lib files?</A></H3>
+<H3><A NAME="SEC79" HREF="faq_toc.html#TOC79">How do I link against .lib files?</A></H3>
 
 <P>
 1. Build a C file with a function table.  Put all functions you intend
@@ -1205,7 +1258,7 @@ rewriting the runtime library in question from specs...
 </P>
 
 
-<H3><A NAME="SEC79" HREF="faq_toc.html#TOC79">How do I rebuild the tools on my NT box?</A></H3>
+<H3><A NAME="SEC80" HREF="faq_toc.html#TOC80">How do I rebuild the tools on my NT box?</A></H3>
 
 <P>
 Assuming that you have the src installed as /src, will build in
@@ -1223,7 +1276,7 @@ make install &#62; install.log 2&#62;&#38;1
 
 
 
-<H3><A NAME="SEC80" HREF="faq_toc.html#TOC80">How can I compile a powerpc NT toolchain?</A></H3>
+<H3><A NAME="SEC81" HREF="faq_toc.html#TOC81">How can I compile a powerpc NT toolchain?</A></H3>
 
 <P>
 Unfortunately, this will be difficult.  It hasn't been built for
@@ -1236,7 +1289,7 @@ Please send us patches if you do this work!
 </P>
 
 
-<H3><A NAME="SEC81" HREF="faq_toc.html#TOC81">How can I compile an Alpha NT toolchain?</A></H3>
+<H3><A NAME="SEC82" HREF="faq_toc.html#TOC82">How can I compile an Alpha NT toolchain?</A></H3>
 
 <P>
 We have not ported the tools to Alpha NT and do not have plans to
@@ -1246,7 +1299,7 @@ for Alpha NT if someone contributes the changes to us.
 </P>
 
 
-<H3><A NAME="SEC82" HREF="faq_toc.html#TOC82">How can I adjust the heap/stack size of an application?</A></H3>
+<H3><A NAME="SEC83" HREF="faq_toc.html#TOC83">How can I adjust the heap/stack size of an application?</A></H3>
 
 <P>
 Pass heap/stack linker arguments to gcc.  To create foo.exe with
@@ -1260,7 +1313,7 @@ gcc as:
 </P>
 
 
-<H3><A NAME="SEC83" HREF="faq_toc.html#TOC83">How can I find out which dlls are needed by an executable?</A></H3>
+<H3><A NAME="SEC84" HREF="faq_toc.html#TOC84">How can I find out which dlls are needed by an executable?</A></H3>
 
 <P>
 objdump -p provides this information.
@@ -1268,7 +1321,7 @@ objdump -p provides this information.
 </P>
 
 
-<H3><A NAME="SEC84" HREF="faq_toc.html#TOC84">How do I build a DLL?</A></H3>
+<H3><A NAME="SEC85" HREF="faq_toc.html#TOC85">How do I build a DLL?</A></H3>
 
 <P>
 There's documentation that explains the process on the main Cygwin
@@ -1277,7 +1330,7 @@ project web page (http://sourceware.cygnus.com/cygwin/).
 </P>
 
 
-<H3><A NAME="SEC85" HREF="faq_toc.html#TOC85">How can I set a breakpoint at MainCRTStartup?</A></H3>
+<H3><A NAME="SEC86" HREF="faq_toc.html#TOC86">How can I set a breakpoint at MainCRTStartup?</A></H3>
 
 <P>
 Set a breakpoint at *0x401000 in gdb and then run the program in
@@ -1286,7 +1339,7 @@ question.
 </P>
 
 
-<H3><A NAME="SEC86" HREF="faq_toc.html#TOC86">How can I build a relocatable dll?</A></H3>
+<H3><A NAME="SEC87" HREF="faq_toc.html#TOC87">How can I build a relocatable dll?</A></H3>
 
 <P>
 You must execute the following sequence of five commands, in this
@@ -1426,7 +1479,7 @@ like -ltcl80 in your linker command.
 </P>
 
 
-<H3><A NAME="SEC87" HREF="faq_toc.html#TOC87">How can I debug what's going on?</A></H3>
+<H3><A NAME="SEC88" HREF="faq_toc.html#TOC88">How can I debug what's going on?</A></H3>
 
 <P>
 You can debug your application using <CODE>gdb</CODE>.  Make sure you
@@ -1439,24 +1492,32 @@ info would not be compatible with gdb).
 </P>
 
 
-<H3><A NAME="SEC88" HREF="faq_toc.html#TOC88">Can I use a system trace mechanism instead?</A></H3>
+<H3><A NAME="SEC89" HREF="faq_toc.html#TOC89">Can I use a system trace mechanism instead?</A></H3>
 
 <P>
-Yes.  At the most basic level, you can set the <CODE>STRACE</CODE>
-environment variable to <CODE>1</CODE>, and get a whole load of
-debug information on your screen whenever a Cygwin app runs.
-This is an especially useful tool to use when tracking bugs down
-inside the Cygwin library.  <CODE>STRACE</CODE> can be set to different
-values to achieve different amounts of granularity.  You can set it
-to <CODE>0x10</CODE> for information about syscalls or <CODE>0x800</CODE> for
-signal/process handling-related info, to name two.  The strace
-mechanism is well documented in the Cygwin library sources in the
-file <CODE>winsup/include/sys/strace.h</CODE>.
+Yes.  If you have a newer cygwin with the <CODE>strace.exe</CODE> program,
+<CODE>strace</CODE> can run other cygwin programs with various debug and
+trace messages enabled.  For information on using the <CODE>strace</CODE>
+program, see the Cygwin User's Guide or the file
+<CODE>winsup/utils/utils/sgml</CODE>.
+
+</P>
+<P>
+If you have an older cygwin, you can set the &#60;CODE&#62;STRACE&#60;/CODE&#62;
+environment variable to &#60;CODE&#62;1&#60;/CODE&#62;, and get a whole load of debug
+information on your screen whenever a Cygwin app runs.  This is an
+especially useful tool to use when tracking bugs down inside the
+Cygwin library.  &#60;CODE&#62;STRACE&#60;/CODE&#62; can be set to different values to
+achieve different amounts of granularity.  You can set it to
+&#60;CODE&#62;0x10&#60;/CODE&#62; for information about syscalls or &#60;CODE&#62;0x800&#60;/CODE&#62;
+for signal/process handling-related info, to name two.  The strace
+mechanism is well documented in the Cygwin library sources in the file
+&#60;CODE&#62;winsup/include/sys/strace.h&#60;/CODE&#62;.
 
 </P>
 
 
-<H3><A NAME="SEC89" HREF="faq_toc.html#TOC89">The linker complains that it can't find something.</A></H3>
+<H3><A NAME="SEC90" HREF="faq_toc.html#TOC90">The linker complains that it can't find something.</A></H3>
 
 <P>
 A common error is to put the library on the command line before
@@ -1470,7 +1531,7 @@ This is right <CODE>gcc hello.cc -lstdc++</CODE>.
 </P>
 
 
-<H3><A NAME="SEC90" HREF="faq_toc.html#TOC90">I use a function I know is in the API, but I still get a link</A></H3>
+<H3><A NAME="SEC91" HREF="faq_toc.html#TOC91">I use a function I know is in the API, but I still get a link</A></H3>
 <P>
 error.
 
@@ -1482,7 +1543,7 @@ the UNICODE stuff for it isn't filled in.
 </P>
 
 
-<H3><A NAME="SEC91" HREF="faq_toc.html#TOC91">Can you make DLLs that are linked against libc ?</A></H3>
+<H3><A NAME="SEC92" HREF="faq_toc.html#TOC92">Can you make DLLs that are linked against libc ?</A></H3>
 
 <P>
 Yes.
@@ -1490,7 +1551,7 @@ Yes.
 </P>
 
 
-<H3><A NAME="SEC92" HREF="faq_toc.html#TOC92">Where is malloc.h?</A></H3>
+<H3><A NAME="SEC93" HREF="faq_toc.html#TOC93">Where is malloc.h?</A></H3>
 
 <P>
 Include stdlib.h instead of malloc.h.
@@ -1498,7 +1559,7 @@ Include stdlib.h instead of malloc.h.
 </P>
 
 
-<H3><A NAME="SEC93" HREF="faq_toc.html#TOC93">Can I use my own malloc?</A></H3>
+<H3><A NAME="SEC94" HREF="faq_toc.html#TOC94">Can I use my own malloc?</A></H3>
 
 <P>
 If you define a function called <CODE>malloc</CODE> in your own code, and link
@@ -1516,7 +1577,7 @@ to occur after <CODE>main</CODE> is called, then this will surely break.
 </P>
 
 
-<H3><A NAME="SEC94" HREF="faq_toc.html#TOC94">Can I mix objects compiled with msvc++ and gcc?</A></H3>
+<H3><A NAME="SEC95" HREF="faq_toc.html#TOC95">Can I mix objects compiled with msvc++ and gcc?</A></H3>
 
 <P>
 Yes, but only if you are combining C object files.  MSVC C++ uses a
@@ -1526,7 +1587,7 @@ combining C++ objects.
 </P>
 
 
-<H3><A NAME="SEC95" HREF="faq_toc.html#TOC95">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
+<H3><A NAME="SEC96" HREF="faq_toc.html#TOC96">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
 
 <P>
 No, not for full (high level source language) debugging.
@@ -1544,7 +1605,7 @@ data types, line numbers, local variables etc.
 </P>
 
 
-<H3><A NAME="SEC96" HREF="faq_toc.html#TOC96">Where can I find info on x86 assembly?</A></H3>
+<H3><A NAME="SEC97" HREF="faq_toc.html#TOC97">Where can I find info on x86 assembly?</A></H3>
 
 <P>
 CPU reference manuals for Intel's current chips are available in
@@ -1557,7 +1618,7 @@ downloadable PDF form on Intel's web site:
 </P>
 
 
-<H3><A NAME="SEC97" HREF="faq_toc.html#TOC97">Shell scripts aren't running properly from my makefiles?</A></H3>
+<H3><A NAME="SEC98" HREF="faq_toc.html#TOC98">Shell scripts aren't running properly from my makefiles?</A></H3>
 
 <P>
 You need to have . (dot) in your $PATH.  You should NOT need to add
@@ -1567,7 +1628,7 @@ Makefiles.
 </P>
 
 
-<H3><A NAME="SEC98" HREF="faq_toc.html#TOC98">What preprocessor do I need to know about?</A></H3>
+<H3><A NAME="SEC99" HREF="faq_toc.html#TOC99">What preprocessor do I need to know about?</A></H3>
 
 <P>
 We use _WIN32 to signify access to the Win32 API and __CYGWIN__ for
@@ -1583,7 +1644,7 @@ be compiled with VC++.
 </P>
 
 
-<H3><A NAME="SEC99" HREF="faq_toc.html#TOC99">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
+<H3><A NAME="SEC100" HREF="faq_toc.html#TOC100">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
 
 <P>
 B20-compatible versions of the f77 and objc components are available
@@ -1592,7 +1653,7 @@ from <TT><a target="_top" href="http://www.xraylith.wisc.edu/~khan/software/gnu-
 </P>
 
 
-<H3><A NAME="SEC100" HREF="faq_toc.html#TOC100">How should I port my Unix GUI to Windows?</A></H3>
+<H3><A NAME="SEC101" HREF="faq_toc.html#TOC101">How should I port my Unix GUI to Windows?</A></H3>
 
 <P>
 There are two basic strategies for porting Unix GUIs to Windows.
@@ -1616,7 +1677,7 @@ advantages inherent in using Cygwin.
 </P>
 
 
-<H3><A NAME="SEC101" HREF="faq_toc.html#TOC101">Why not use DJGPP ?</A></H3>
+<H3><A NAME="SEC102" HREF="faq_toc.html#TOC102">Why not use DJGPP ?</A></H3>
 
 <P>
 DJGPP is a similar idea, but for DOS instead of Win32.  DJGPP uses a

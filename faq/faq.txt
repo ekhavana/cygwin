@@ -80,7 +80,7 @@ FTP Sites
 =========
 
    The primary ftp site is
-`ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/'.  There are
+`ftp://go.cygnus.com/pub/sourceware.cygnus.com/pub/cygwin/'.  There are
 also several mirrors:
 
    * North America:
@@ -89,14 +89,30 @@ also several mirrors:
         * Arizona: `ftp://ftp.ninemoons.com/pub/cygwin/'
 
         * California:
-          `ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/'
+          `ftp://go.cygnus.com/pub/sourceware.cygnus.com/pub/cygwin/'
+
+        * California:
+          `http://go.cygnus.com/pub/sourceware.cygnus.com/pub/cygwin/'
+
+        * California:
+
+
+
+
+
+
+
+
+
+
+          `ftp://ftp.yggdrasil.com/mirrors/site/sourceware.cygnus.com/pub/cygwin/'
 
         * California (secondary):
           `ftp://sourceware.cygnus.com/pub/cygwin/'
 
         * Kansas: `ftp://ftp.the-b.org/pub/cygwin/'
 
-        * Tennessee: `ftp://sunsite.utk.edu/pub/cygwin/'
+        * Tennessee: `ftp://ftp.sunsite.utk.edu/pub/cygwin/'
 
    * Central America:
         * Costa Rica: `ftp://sunsite.ulatina.ac.cr/cygwin/'
@@ -134,6 +150,8 @@ also several mirrors:
         * Japan: `ftp://sysg.kek.jp/cygnus/cygwin/'
 
         * Japan: `ftp://ftp.u-aizu.ac.jp/pub/gnu/gnu-win32/'
+
+        * Taiwan: `ftp://ftp1.sinica.edu.tw/pub3/CYGNUS/cygwin/'
 
    * Australasia:
         * Australia: `ftp://mirror.aarnet.edu.au/pub/cygwin/'
@@ -177,6 +195,8 @@ also several mirrors:
         * Greece: `ftp://ftp.ntua.gr/pub/pc/cygwin/'
 
         * Hungary: `ftp://ftp.szrmkk.hu/pub/gnu-win32/ftp.cygnus.com/'
+
+        * Italy: `ftp://ftp.unina.it/pub/Unix/cygnus/cygwin/'
 
         * Poland: `ftp://sunsite.icm.edu.pl/pub/cygnus/cygwin/'
 
@@ -263,12 +283,12 @@ mistake.
 directory containing the latest release.  On our primary server, that
 would be:
 
-   `ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/'.
+   `ftp://go.cygnus.com/pub/sourceware.cygnus.com/pub/cygwin/latest/'.
 
    If you want the development tools and the programs necessary to run
 the GNU configure mechanism, you should download the full binary release
 called `full.exe'.  If you only care about the user tools listed above,
-download `user.exe' instead.
+download `usertools.exe' instead.
 
    If you have an unreliable connection, download the appropriate
 binary in smaller chunks instead.  For the split cdk installer, get the
@@ -328,7 +348,7 @@ or just the user tools).
 directory containing the latest release.  On our primary server, that
 would be:
 
-   `ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/'.
+   `ftp://go.cygnus.com/pub/sourceware.cygnus.com/pub/cygwin/latest/'.
 
    If you want the user tools source code, `cd' into the
 `user-src-split' subdirectory.  Download the files there.  If you want
@@ -363,7 +383,7 @@ Upgrading to B20.1
    If you downloaded the original B20.0 release, you should definitely
 at least upgrade the Cygwin library to the version present in B20.1.
 To do this, download the file
-`ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/cygwin-b20/cygwin1-20.1.dll.bz2',
+`ftp://go.cygnus.com/pub/sourceware.cygnus.com/pub/cygwin/cygwin-b20/cygwin1-20.1.dll.bz2',
 decompress it with bunzip2, and then install the dll, replacing the
 file cygwin-b20/H-i586-cygwin32/bin/cygwin1.dll in your original
 installation of 20.0.
@@ -1666,8 +1686,9 @@ How can I get bash to read my .bashrc file on startup?
 ------------------------------------------------------
 
    Your .bashrc is read from your home directory specified by the HOME
-environment variable.  It uses c:\ if HOME is not set.  So you need to
-set HOME correctly, or move your .bashrc to c:\.
+environment variable.  It uses /.bashrc if HOME is not set.  So you need
+to set HOME correctly, or move your .bashrc to the top of the drive
+mounted as / in Cygwin.
 
 How can I get bash filename completion to be case insensitive?
 --------------------------------------------------------------
@@ -1703,6 +1724,31 @@ that you aren't picking up the Win32 find command instead.  You can
 verify that you are getting the right one by doing a "type find" in
 bash.
 
+Why don't cursor keys work under Win95/Win98?
+---------------------------------------------
+
+   Careful examination shows that they not just non-functional, but
+rather behave strangely, for example, with NumLock off, keys on numeric
+keyboard work, until you press usual cursor keys, when even numeric
+stop working, but they start working again after hitting alphanumeric
+key, etc. This reported to happen on localized versions of Win98 and
+Win95, and not specific to Cygwin (there're known cases of Alt+Enter
+(fullscreen/windowed toggle) not working and shifts sticking with other
+programs). The cause of this problem is Microsoft keyboard localizer
+which by default installed in 'autoexec.bat'. Corresponding line looks
+like:
+
+     keyb ru,,C:\WINDOWS\COMMAND\keybrd3.sys
+
+   (That's for russian locale.) You should comment that line if you want
+your keys working properly. Of course, this will deprive you of your
+local alphabet keyboard support, so you should think about another
+localizer. exUSSR users are of course knowledgable of Keyrus localizer,
+and it might work for other locales too, since it has keyboard layout
+editor. But it has russian messages and documentation ;-( Reference URL
+is http://www.hnet.ru/software/contrib/Utils/KeyRus/ (note the you may
+need to turn off Windows logo for Keyrus to operate properly).
+
 Using Cygwin Releases
 =====================
 
@@ -1711,16 +1757,12 @@ Why aren't man, groff, etc. included in the betas?
 
    For obvious reasons, it isn't feasible for us to maintain and provide
 binary distributions of every tool ported to work with the Cygwin
-tools.  Instead I think Cygnus should concentrate its efforts on the
-Cygwin library and the core development tools.  It's likely that a man
-command will get added once we get it working to our satisfaction.
+tools.  However, it's likely that a man command will show up in a
+distribution soon.
 
-   Other tools that have been ported should have their changes added to
-the official releases so they can be compiled straight from normal
-sources for that tool.  In cases where that isn't possible, someone
-else (possibly Cygnus if that made sense) could maintain the diffs and
-have them up for ftp.  Maybe we could keep a list of such tools on the
-Cygwin Web site...
+   Many other tools have been ported and are referenced on the Cygwin
+web site.  man, groff, info, and many many other packages are all
+available for download there.
 
 Where can I find "less"?
 ------------------------
@@ -1945,7 +1987,13 @@ Why don't symlinks work on samba-mounted filesystems?
 -----------------------------------------------------
 
    Symlinks are marked with "system" file attribute.  Samba does not
-support this attribute.
+enable this attribute by default.  To enable it, consult your Samba
+documentation and then add these lines to your samba configuration file:
+
+     	mask system = yes
+     	create mask = 0775
+
+   Note that the 0775 can be anything as long as the 0010 bit is set.
 
 Why does df report sizes incorrectly.
 -------------------------------------
@@ -1986,12 +2034,12 @@ Are development snapshots for the Cygwin library available?
 -----------------------------------------------------------
 
    Yes.  They're made whenever anything interesting happens inside the
-Cygwin library (usually roughly on a weekly basis, depending on how much
-is going on).  They are only intended for those people who wish to
+Cygwin library (usually roughly on a nightly basis, depending on how
+much is going on).  They are only intended for those people who wish to
 contribute code to the project.  If you aren't going to be happy
 debugging problems in a buggy snapshot, avoid these and wait for a real
-release.  The snapshots are available from ftp.cygnus.com in
-/pub/noer/winsup-snapshot/.
+release.  The snapshots are available from
+http://sourceware.cygnus.com/cygwin/snapshots/
 
 How is the DOS/Unix CR/LF thing handled?
 ----------------------------------------
@@ -2048,20 +2096,20 @@ since they have no meaning to UNIX.
 Is the Cygwin library multi-thread-safe?
 ----------------------------------------
 
-    No.
+   No.
 
-    There is an experimental configure option (--enable-threadsafe), which
+   There is an experimental configure option (-enable-threadsafe), which
 allows you to build a DLL with some additional "thread safety" but there
 are no guarantees that this is 100% operational.  This option also
 enables limited "POSIX thread" support.  See the file cygwin.din for the
 list of POSIX thread functions provided.
 
-    Cygnus does not distribute a DLL with this option enabled, and,
+   Cygnus does not distribute a DLL with this option enabled, and,
 currently, has no plans to do so.
 
    Cygwin is not multi-thread-safe because:
 
-   1) Newlib (our libc/libm) isn't reentrant (although it almost is).
+   1) Newlib (out libc/libm) isn't reentrant (although it almost is).
 This would have to be fixed or we would have to switch to a libc/libm
 that is reentrant.
 
@@ -2141,8 +2189,9 @@ a file or directory that is a link to somewhere else, it opens the file
 or directory listed in the magic header.  Because we don't want to have
 to open every referenced file to check symlink status, Cygwin marks
 symlinks with the system attribute.  Files without the system attribute
-are not checked.  Because remote samba filesystems do not support the
-system attribute, symlinks do not work on network drives.
+are not checked.  Because remote samba filesystems do not enable the
+system attribute by default, symlinks do not work on network drives
+unless you explicitly enable this attribute.
 
 Why do some files, which are not executables have the 'x' type.
 ---------------------------------------------------------------
@@ -2571,15 +2620,21 @@ would not be compatible with gdb).
 Can I use a system trace mechanism instead?
 -------------------------------------------
 
-   Yes.  At the most basic level, you can set the `STRACE' environment
-variable to `1', and get a whole load of debug information on your
-screen whenever a Cygwin app runs.  This is an especially useful tool
-to use when tracking bugs down inside the Cygwin library.  `STRACE' can
-be set to different values to achieve different amounts of granularity.
-You can set it to `0x10' for information about syscalls or `0x800' for
-signal/process handling-related info, to name two.  The strace
-mechanism is well documented in the Cygwin library sources in the file
-`winsup/include/sys/strace.h'.
+   Yes.  If you have a newer cygwin with the `strace.exe' program,
+`strace' can run other cygwin programs with various debug and trace
+messages enabled.  For information on using the `strace' program, see
+the Cygwin User's Guide or the file `winsup/utils/utils/sgml'.
+
+   If you have an older cygwin, you can set the <CODE>STRACE</CODE>
+environment variable to <CODE>1</CODE>, and get a whole load of debug
+information on your screen whenever a Cygwin app runs.  This is an
+especially useful tool to use when tracking bugs down inside the Cygwin
+library.  <CODE>STRACE</CODE> can be set to different values to achieve
+different amounts of granularity.  You can set it to <CODE>0x10</CODE>
+for information about syscalls or <CODE>0x800</CODE> for signal/process
+handling-related info, to name two.  The strace mechanism is well
+documented in the Cygwin library sources in the file
+<CODE>winsup/include/sys/strace.h</CODE>.
 
 The linker complains that it can't find something.
 --------------------------------------------------
@@ -3633,16 +3688,9 @@ to improve the technology, ported/integrated many of the user tools for
 the first time to Cygwin, and produced all of the releases up to beta
 14.
 
-   Please note that those of us here at Cygnus that work on Cygwin try
-to be as responsive as possible and deal with patches and questions as I
-get them, but realistically we don't have time to answer all of the
-email that is sent to the main mailing list.  Making Net releases of the
-Win32 tools and helping people on the Net out is not our primary job
-function, so some email will have to go unanswered.
-
    Marco Fuykschot (marco@ddi.nl) and Peter Boncz (boncz@ddi.nl) of
 Data Distilleries contributed nearly all of the changes required to
-make Cygwin thread-safe.
+make Cygwin thread-safe.  They also provided the pthreads interface.
 
    Sergey Okhapkin (sos@prospect.com.ru) has been an invaluable Net
 contributor.  He implemented the tty/pty support, has played a
@@ -3655,9 +3703,9 @@ release.
 end of things, providing quite a large number of stabilizing patches to
 the compiler tools for the B20 release.
 
-    Corinna Vinschen <corinna@vinschen.de> has contributed several
-useful fixes to the path handling code, console support, improved security
-handling, and raw device support.
+   Corinna Vinschen <corinna@vinschen.de> has contributed several
+useful fixes to the path handling code, console support, improved
+security handling, and raw device support.
 
    Philippe Giacinti (giac@dalim.de) contributed the implementation of
 dlopen, dlclose, dlsym, dlfork, and dlerror in Cygwin.
@@ -3673,9 +3721,15 @@ other things.  Kim Knuttila and Michael Meissner put in many long hours
 working on the now-defunct PowerPC port.  Jason Molenda and Mark Eichin
 have also made important contributions.
 
-   Also many thanks to everyone using the tools for their many
-contributions in the form of advice, bug reports, and code fixes.  Keep
-them coming!
+   Please note that those of us here at Cygnus that work on Cygwin try
+to be as responsive as possible and deal with patches and questions as
+we get them, but realistically we don't have time to answer all of the
+email that is sent to the main mailing list.  Making Net releases of the
+Win32 tools and helping people on the Net out is not our primary job
+function, so some email will have to go unanswered.
+
+   Many thanks to everyone using the tools for their many contributions
+in the form of advice, bug reports, and code fixes.  Keep them coming!
 
 What are the copyrights ?
 *************************
@@ -3707,6 +3761,21 @@ Pricing for GNUPro Subscription starts at $6000 for three developers
 and includes GNUPro Toolkit, Developer Support, and a commercial-use
 license for 100 copies of the cygwin library.  Please contact
 info@cygnus.com for more information.
+
+   In accordance with section 10 of the GPL, Cygnus permits programs
+whose sources are distributed under a license that complies with the
+Open Source definition to be linked with libcygwin.a without libcygwin.a
+itself causing the resulting program to be covered by the GNU GPL.
+
+   This means that you can port an Open Source(tm) application to
+cygwin, and distribute that executable as if it didn't include a copy of
+libcygwin.a linked into it.  Note that this does not apply to the cygwin
+DLL itself.  If you distribute a (possibly modified) version of the DLL
+you must adhere to the terms of the GPL, i.e., you must provide sources
+for the cygwin DLL.
+
+   See http://www.opensource.org/osd.html for the precise Open Source
+Definition referenced above.
 
 GNU GENERAL PUBLIC LICENSE
 ==========================
