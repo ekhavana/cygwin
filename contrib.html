@@ -1,0 +1,119 @@
+<HTML>
+<HEAD>
+<title>How can I help out?</title>
+</HEAD>
+
+<body bg properties="fixed" bgcolor="#ffffff" link="#b07008" vlink="#000000">
+
+<font face="Verdana, Arial, Helvetica">
+<center>
+<h1>How can I help out?</h1>
+</center>
+</font>
+
+<font face="Verdana, Arial, Helvetica">
+
+<P>Part of the time put into this project has been
+paid for by Cygnus customers.  Some of the rest has been due to employees
+volunteering many extra hours making these tools more viable.  And
+we have also received a significant amount of help from the Net
+community but we could definitely
+use more help addressing some of the known problems.
+
+<H2>Building the development version of Cygwin32</H2>
+
+<P>The code corresponding to the cygwin.dll is mostly in the winsup
+directory with additional code coming from newlib/libc, newlib/libm,
+libiberty, and gcc.  Any changes you make should ideally be made to
+the <a href="ftp://ftp.cygnus.com/pub/noer/winsup-snapshot" target"_top">
+current development sources</a>, available via ftp.  This will
+make it much easier for us to integrate your changes once they are
+completed and tested.  Note that these sources will usually compile,
+but they should always be assumed to be unstable and contain untested,
+experimental code.
+
+<P>To build the Cygwin32 library, start by building the comp-tools
+sources with the last release, substituting in the newlib and winsup
+sources from the snapshot location.  Minimal build instructions
+are included in the <a href="faq_toc.html">FAQ</a>.  If your object
+directory is /c/obj, the Cygwin32 dll you will build should be
+/c/obj/winsup/new-cygwinbxx.dll where xx represents the current
+version number.
+
+<P>Once you have a built comp-tools tree, if you make further changes
+to the winsup sources, you can rebuild the library by typing:
+
+<blockquote>
+	make all-target-winsup <br>
+</blockquote>
+
+<P>Note that minimally, the top-level tree needs to contain:
+
+<blockquote>
+Makefile.in, config, config-ml.in, config.guess, config.sub, configure,
+configure.in, include, install-sh, libiberty, ltconfig, ltmain.sh, missing,
+move-if-change, newlib, symlink-tree, winsup, ylwrap.
+</blockquote>
+
+<P>So another method that might work would be to start with a
+newlib and winsup snapshot and copy the missing pieces from the last
+major release source tree.  You may also want to fix the EXE_LDFLAGS
+variable in winsup/Makefile.in so that winsup/utils/ programs link
+with the correct libcygwin.a.
+
+<H2>Before you get started</H2>
+
+<P>First, note that Cygnus is only the maintainer of the winsup and
+newlib directories.  That said, feel free to send us Cygwin32-related
+patches for other tools -- we'll probably know what you should do with
+them if we're not in the position of making the change myself.
+
+<P>If your change is going to be a significant one in terms of the size
+of your code changes, be aware that you will have to sign over the
+copyright ownership of your code changes to Cygnus or the FSF
+(depending on the source file) before we can include your changes in
+the main source tree.  Your employer may also have to send us a
+disclaimer stating that they have no claims to your contribution.  This
+is necessary for liability reasons.  Here is our
+<a href="assign.txt">standard assignment form</a> for changes to
+Cygwin32 that you can fill
+out, sign, and send back.  It shouldn't end up being that much of a
+pain.  If you have any questions, please ask
+<a href="mailto:noer@cygnus.com">noer@cygnus.com</a>.
+
+<P>Finally, before you start modifying anything for real, you should
+probably join the cygwin32-developers mailing list and send it mail
+describing what you want to do and how you want to do it so you
+don't waste time working on something we can't integrate.  This also
+allows us to keep track of what's being worked on so efforts aren't
+duplicated.
+
+<P>Once you've finished making and testing your changes, you should send
+a context diff to the cygwin32-developers list.  As an example, if you
+modified winsup/syscalls.cc and have the original source file around
+as /winsup/syscalls.cc-orig, you would do the following in bash:
+
+<blockquote>
+	cd /c/src/winsup <br>
+	diff -cp syscalls.cc-orig syscalls.cc > syscalls.cc-patch 2>&1 <br>
+</blockquote>
+
+<P>Then gzip and uuencode it and send it to the cygwin32-developers list
+in an email along with an explanation of what the change does.  This
+should include a ChangeLog entry (model yours after other entries in the
+file winsup/ChangeLog).  Then we'll test it and get back to you as
+soon as we can...
+
+<P>Please feel free to ask me any questions about any of this.  I would love
+it if more people made useful contributions -- this can be one of the big
+advantages of free software; we all benefit from everyone else's work
+as well as our own...
+
+<H2>What needs doing:</H2>
+
+<P>A fair amount of stuff.  Hopefully it will be listed here soon...
+
+</font>
+
+</body>
+</html>
