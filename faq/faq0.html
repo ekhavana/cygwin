@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from ./faq.texinfo on 17 March 2004 -->
+<!-- Created by texi2html 1.56k from ./faq.texinfo on 29 March 2004 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -130,7 +130,7 @@
 <LI><A NAME="TOC100" HREF="faq0.html#SEC100">How do I make the console window go away?</A>
 <LI><A NAME="TOC101" HREF="faq0.html#SEC101">Why does make complain about a "missing separator"?</A>
 <LI><A NAME="TOC102" HREF="faq0.html#SEC102">Why can't we redistribute Microsoft's Win32 headers?</A>
-<LI><A NAME="TOC103" HREF="faq0.html#SEC103">How do I link against .lib files?</A>
+<LI><A NAME="TOC103" HREF="faq0.html#SEC103">How do I link against a <SAMP>`.lib'</SAMP> file?</A>
 <LI><A NAME="TOC104" HREF="faq0.html#SEC104">How do I rebuild the tools on my NT box?</A>
 <LI><A NAME="TOC105" HREF="faq0.html#SEC105">How can I compile a powerpc NT toolchain?</A>
 <LI><A NAME="TOC106" HREF="faq0.html#SEC106">How can I compile an Alpha NT toolchain?</A>
@@ -4045,17 +4045,18 @@ Subsection 2.d.f of the `Microsoft Open Tools License agreement' looks
 like it says that one may not "permit further redistribution of the
 Redistributables to their end users".  We take this to mean that we can
 give them to you, but you can't give them to anyone else, which is
-something that Cygnus (err... Red Hat) can't agree to.  Fortunately, we
+something that Red Hat can't agree to.  Fortunately, we
 have our own Win32 headers which are pretty complete.
 
 
 
 
-<H3><A NAME="SEC103" HREF="faq0.html#TOC103">How do I link against .lib files?</A></H3>
+<H3><A NAME="SEC103" HREF="faq0.html#TOC103">How do I link against a <SAMP>`.lib'</SAMP> file?</A></H3>
 
 <P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
+If your <SAMP>`.lib'</SAMP> file is a normal static or import library with
+C-callable entry points, you can list <SAMP>`foo.lib'</SAMP> as an object file for
+gcc/g++, just like any <SAMP>`*.o'</SAMP> file. Otherwise, here are some steps:
 
 
 <P>
@@ -4138,26 +4139,27 @@ make install &#62; install.log 2&#62;&#38;1
 </PRE>
 
 <P>
-Normally, this procedure will also attempt to build the documentation,
-which additionally requires db2html, and possibly other tools, which are
-not included in the Cygwin distribution.  You can get db2html as part of
-docbook, from <STRONG><A HREF="http://sources.redhat.com/docbook-tools/">http://sources.redhat.com/docbook-tools/</A></STRONG>.
+Normally, this procedure ignore errors in building the documentation,
+which requires tools which are not included in the Cygwin distribution.
+If you want to build the documentation on Linux, on most distributions a
+package named docbook-utils should get you most of what you need. For
+more information on building the documentation, see the README included
+in the cygwin-doc package.
 
 
 <P>
 To check a cygwin1.dll, run "make check" in the winsup/cygwin directory.
 If that works, install everything <EM>except</EM> the dll (if you can).
 Then, close down all cygwin programs (including bash windows, inetd,
-etc.), save your old dll, and copy the new dll to <EM>all</EM> the
-places where the old dll was (if there is more than one on your
-machine).  Then start up a bash window and see what happens.  (Or better,
-run a cygwin program from the Windows command prompt.)
+etc.), save your old dll, and copy the new dll to the correct place.
+Then start up a bash window, or  run a cygwin program from the Windows
+command prompt, and see what happens.
 
 
 <P>
 If you get the error "shared region is corrupted" it means that two
 different versions of cygwin1.dll are running on your machine at the
-same time.
+same time. Remove all but one. 
 
 
 
@@ -5255,7 +5257,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 17 March 2004 using
+This document was generated on 29 March 2004 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>

@@ -1,10 +1,7 @@
-This is faq.txt, produced by makeinfo version 4.2 from
-../../../../src/winsup/doc/faq.texinfo.
-
 What is it?
 ***********
 
-   The Cygwin tools are ports of the popular GNU development tools for
+The Cygwin tools are ports of the popular GNU development tools for
 Microsoft Windows.  They run thanks to the Cygwin library which
 provides the UNIX system calls and environment these programs expect.
 
@@ -103,20 +100,20 @@ Contents
    There is only one recommended way to install Cygwin, which is to use
 the GUI installer "Cygwin Setup".  It is flexible and easy to use.  You
 can pick and choose the packages you wish to install, and update them
-individually.
+individually.  Full source code is available for all packages and
+tools.  More information on using Cygwin Setup may be found at
+`http://cygwin.com/cygwin-ug-net/setup-net.html'.
 
-   Do it any other way, and you're on your own!  That said, keep in mind
-that the GUI installer is a "work in progress", so there might be a few
-difficulties, especially if you are behind a firewall or have other
-specific requirements.  If something doesn't work right for you, and
-it's not covered here or in the latest development snapshot
+   If you do it any other way, you're on your own!  That said, keep in
+mind that the GUI installer is a "work in progress", so there might be
+a few difficulties, especially if you are behind a firewall or have
+other specific requirements.  If something doesn't work right for you,
+and it's not covered here or in the latest development snapshot at
 `http://cygwin.com/setup-snapshots/', then by all means report it to the
 mailing list.
 
    For a searchable list of packages that can be installed with Cygwin,
 see `http://cygwin.com/packages/'.
-
-   Full source code is available for all packages and tools.
 
 Installation using "Cygwin Setup"
 =================================
@@ -129,32 +126,33 @@ Why not install in C:\?
 
    The Cygwin Setup program will prompt you for a "root" directory.
 The default is `C:\cygwin', but you can change it.  You are urged not to
-choose something like 'C:\' (the root directory on the system drive) for
+choose something like `C:\' (the root directory on the system drive) for
 your Cygwin root.  If you do, then critical Cygwin system directories
-like 'etc', 'lib' and 'bin' could easily be corrupted by other
-(non-Cygwin) applications or packages that use \etc, \lib or \bin.
-Perhaps there is no conflict now, but who knows what you might install
-in the future?  It's also just good common sense to segregate your
-Cygwin "filesystems" from the rest of your Windows system disk.
+like `etc', `lib' and `bin' could easily be corrupted by other
+(non-Cygwin) applications or packages that use `\etc', `\lib' or
+`\bin'.  Perhaps there is no conflict now, but who knows what you might
+install in the future?  It's also just good common sense to segregate
+your Cygwin "filesystems" from the rest of your Windows system disk.
 
    (In the past, there had been genuine bugs that would cause problems
-for people who installed in C:\, but we believe those are gone now.)
+for people who installed in `C:\', but we believe those are gone now.)
 
-Can I use Cygwin Setup to update a B18, B19, B20, B20.1 or CD-ROM (1.0) installation of Cygwin?
------------------------------------------------------------------------------------------------
+Can I use Cygwin Setup to get old versions of packages (like gcc-2.95)?
+-----------------------------------------------------------------------
 
-   No, you must start from scratch with the new Cygwin Setup.  The
-overall structure has changed so much that it would be pointless to try
-to accomodate old installations of Cygwin.  You will probably be much
-better off with a whole new installation anyway.  You may backup or
-rename your old installation first, or just install the new one
-somewhere else.  Be sure to make note of your current mount table,
-because this will be overwritten during the new setup.  Make sure you
-don't end up with two different versions of `cygwin1.dll' on your
-system.
+   Cygwin Setup can be used to install any packages that are on a
+Cygwin mirror, which usually includes one version previous to the
+current one. The complete list may be searched at
+`http://cygwin.com/packages/'.  There is no complete archive of older
+packages. If you have a problem with the current version of a Cygwin
+package, please report it to the mailing list using the guidelines at
+`http://cygwin.com/problems.html'.
 
-   Once you've installed the latest net release, Cygwin Setup will
-update just the individual packages that need it.
+   That said, if you really need an older package, you may be able to
+find an outdated or archival mirror by searching the web for an old
+package version (for example, `gcc2-2.95.3-10-src.tar.bz2'), but keep in
+mind that this older version will not be supported by the mailing list
+and that installing the older version will not help improve Cygwin.
 
 Is Cygwin Setup, or one of the packages, infected with a virus?
 ---------------------------------------------------------------
@@ -366,9 +364,10 @@ Can Cygwin Setup maintain a "mirror"?
 -------------------------------------
 
    NO.  Cygwin Setup cannot do this for you.  Use a tool designed for
-this purpose.  See `http://rsync.samba.org/',
-`http://sunsite.org.uk/packages/mirror/', `http://wget.sunsite.dk/' for
-utilities that can do this for you.
+this purpose.  See `http://rsync.samba.org/', `http://wget.sunsite.dk/'
+for utilities that can do this for you.  For more information on
+setting up a custom Cygwin package server, see the Cygwin Setup
+homepage at `http://sources.redhat.com/cygwin-apps/setup.html'.
 
 What Unix API calls are supported by Cygwin?
 ********************************************
@@ -2946,14 +2945,15 @@ Why can't we redistribute Microsoft's Win32 headers?
 looks like it says that one may not "permit further redistribution of
 the Redistributables to their end users".  We take this to mean that we
 can give them to you, but you can't give them to anyone else, which is
-something that Cygnus (err... Red Hat) can't agree to.  Fortunately, we
-have our own Win32 headers which are pretty complete.
+something that Red Hat can't agree to.  Fortunately, we have our own
+Win32 headers which are pretty complete.
 
-How do I link against .lib files?
----------------------------------
+How do I link against a `.lib' file?
+------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+   If your `.lib' file is a normal static or import library with
+C-callable entry points, you can list `foo.lib' as an object file for
+gcc/g++, just like any `*.o' file. Otherwise, here are some steps:
 
    1. Build a C file with a function table.  Put all functions you
 intend to use in that table.  This forces the linker to include all the
@@ -3007,23 +3007,23 @@ build in that directory:
      make > make.log 2>&1
      make install > install.log 2>&1
 
-   Normally, this procedure will also attempt to build the
-documentation, which additionally requires db2html, and possibly other
-tools, which are not included in the Cygwin distribution.  You can get
-db2html as part of docbook, from
-`http://sources.redhat.com/docbook-tools/'.
+   Normally, this procedure ignore errors in building the documentation,
+which requires tools which are not included in the Cygwin distribution.
+If you want to build the documentation on Linux, on most distributions a
+package named docbook-utils should get you most of what you need. For
+more information on building the documentation, see the README included
+in the cygwin-doc package.
 
    To check a cygwin1.dll, run "make check" in the winsup/cygwin
 directory.  If that works, install everything _except_ the dll (if you
 can).  Then, close down all cygwin programs (including bash windows,
-inetd, etc.), save your old dll, and copy the new dll to _all_ the
-places where the old dll was (if there is more than one on your
-machine).  Then start up a bash window and see what happens.  (Or
-better, run a cygwin program from the Windows command prompt.)
+inetd, etc.), save your old dll, and copy the new dll to the correct
+place.  Then start up a bash window, or  run a cygwin program from the
+Windows command prompt, and see what happens.
 
    If you get the error "shared region is corrupted" it means that two
 different versions of cygwin1.dll are running on your machine at the
-same time.
+same time. Remove all but one.
 
 How can I compile a powerpc NT toolchain?
 -----------------------------------------

@@ -142,7 +142,18 @@ CLASS="COMMAND"
 although commands such as <B
 CLASS="COMMAND"
 >ls /dev/tty</B
-> work fine.</P
+> work fine.
+If you want to be able to see all devices in
+<TT
+CLASS="FILENAME"
+>/dev/</TT
+>, you can use Igor Pechtchanski's
+<A
+HREF="http://cygwin.com/ml/cygwin/2004-03/txt00028.txt"
+TARGET="_top"
+>create_devices.sh</A
+>
+script.</P
 ><P
 >Cygwin supports the following devices commonly found on POSIX systems:
 <TT
@@ -185,6 +196,10 @@ CLASS="FILENAME"
 >/dev/ptmx</TT
 >, <TT
 CLASS="FILENAME"
+>/dev/kmem</TT
+>,
+<TT
+CLASS="FILENAME"
 >/dev/mem</TT
 >,
 <TT
@@ -224,11 +239,11 @@ CLASS="FILENAME"
 CLASS="FILENAME"
 >/dev/clipboard</TT
 > (the Windows clipboard, currently
-text only), and
-<TT
+text only), and <TT
 CLASS="FILENAME"
 >/dev/windows</TT
-> (the Windows message queue).</P
+> (the Windows message
+queue).</P
 ><P
 >Windows NT/W2K/XP additionally support raw devices like floppies,
 disks, partitions and tapes.  These are accessed from Cygwin applications
@@ -312,9 +327,9 @@ NT device name to your own device name will not do what you want.
 The following three examples will not work as expected:</P
 ><PRE
 CLASS="SCREEN"
->mount -f -b /dev/nst0 /dev/tape 
-mount -f -b /device/tape0 /dev/tape
-ln -s /device/tape0 /dev/tape</PRE
+>mount -f -b /dev/nst0 /dev/tape     # DOES NOT WORK
+mount -f -b /device/tape0 /dev/tape # DOES NOT WORK
+ln -s /device/tape0 /dev/tape       # DOES NOT WORK</PRE
 ></TD
 ></TR
 ></TABLE
@@ -325,14 +340,27 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN846"
+NAME="AEN849"
 >The .exe extension</A
 ></H2
 ><P
-> Executable program filenames end with .exe but the .exe need
-not be included in the command, so that traditional UNIX names can be
-used.  However, for programs that end in ".bat" and ".com", you cannot
-omit the extension.</P
+> Executable program filenames end with <TT
+CLASS="FILENAME"
+>.exe</TT
+>
+but the <TT
+CLASS="FILENAME"
+>.exe</TT
+> need not be included in the command,
+so that traditional UNIX names can be used.  However, for programs that
+end in <TT
+CLASS="FILENAME"
+>.bat</TT
+> and <TT
+CLASS="FILENAME"
+>.com</TT
+>, you
+cannot omit the extension.  </P
 ><P
 >As a side effect, the <B
 CLASS="COMMAND"
@@ -452,7 +480,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN879"
+NAME="AEN886"
 >The /proc filesystem</A
 ></H2
 ><P
@@ -503,7 +531,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN892"
+NAME="AEN899"
 >The @pathnames</A
 ></H2
 ><P
@@ -535,7 +563,7 @@ CLASS="COMMAND"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN900"
+NAME="AEN907"
 ></A
 ><P
 ><B
