@@ -129,13 +129,14 @@ submissions must be bzip2'ed.</p>
 
 <p>Each package must contain a file called <tt>setup.hint</tt>.  This
 file is used for information that cannot be inferred just from the
-context of the file name or package name.  Each line in<tt> setup.hint
-</tt> is one of the following:
+context of the file name or package name.  A line in <tt>setup.hint</tt>
+will consist of one of the following:
 
 <pre>
+# comment
 @ <i>package</i>
-sdesc: <i>some text</i>
-ldesc: <i>some text</i>
+sdesc: <i>"some text"</i>
+ldesc: <i>"some text"</i>
 skip:
 curr: <i>version</i>
 prev: <i>version</i>
@@ -148,22 +149,28 @@ requires: <i>package[ package...]</i>
 the introducing field.  This usage is allowed but deprecated.  Please
 use colons in your setup.hint)</p>
 
-<p>A line that begins with a "<tt>@</tt>" behaves similarly to the setup.ini
-field (see below).  It overrides the package name for the enclosing
-directory.  This is an optional entry.  Do <em>not</em> use it unless your
-package name is different from the name of the directory where the package
-resides.  This option is intended only for older packages which did not follow
-the rule of the directory name matching the package name.</p>
+<p>Lines that begin with '#' are considered to be comments and are ignored
+by the setup.ini generator.</p>
+
+<p>A line that begins with a "<tt>@</tt>" behaves similarly to the
+setup.ini field (<a href="#setup.ini">see below</a>).  It overrides the
+package name for the enclosing directory.  This is an optional entry.
+It <em>not</em> is intended only for historical packages where the
+package name is different from the name of the directory where the
+package resides.  It should not be necessary for "modern" setup.hint
+files.</p>
 
 <p>The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate
 which versions should be used for which sections of that package.  Use
 these settings <em>only</em> if you need to circumvent the normal
 intuitive version numbering scheme.</p>
 
-<p>So, if you had previously released boffo-0.9-1 and now have a new
-boffo-1.0-1, there is no need to use <tt>curr</tt> or <tt>prev</tt>.
-It is obvious that boffo-1.0-1 is newer than boffo-0.9-1 and the
-setup.ini generator will do the right thing in this case.</p>
+<p>When should these fields be used?  If that you you had previously
+released boffo-0.9-1 and now have a new boffo-1.0-1.  In this case, the
+version numbering is obvious and there is no need to use <tt>curr</tt>
+or <tt>prev</tt>.  It is obvious that boffo-1.0-1 is newer than
+boffo-0.9-1 and the setup.ini generator will do the right thing in this
+case.</p>
 
 <p>However, if you had discovered a serious error in the boffo-1.0
 release, and then decided that you want to drop back to boffo-0.9-1, you
@@ -171,44 +178,62 @@ would include entries like this:
 
 <pre>
 prev: 1.0-1
-cur: 0.9-1
+curr: 0.9-1
 </pre>
 
-This usage should be very rare, however.
+This usage should be rare, however.
 
 <p>In general, you should trust the sutomatic setup.ini generator to "do
 the right thing" -- with one exception.  If you decide that you need to
 release a <i>test</i> version of your package, there is no way for the
 setup.ini generator to know that.</p>
 
-<p>So, you will have to put something like <tt>test: 1.9-1</tt> in your
+<p>So, you will have to put something like "<tt>test: 1.9-1</tt>" in your
 setup.hint file.  This will cause setup.exe to characterize the package
 as a "test" package.  With the current setup.exe implementation, it will
 also mean that it will be overlooked by most people during installation.
 So, unless you have made arrangements to advertise your test release,
-this option should also be used very sparingly.</p>
+this option should be used sparingly.</p>
 
-<p>If any of these settings are valid, they replace <em>all</em>
-versions in setup.ini.  So, if you include a <tt>test</tt> setting, and
-you have valid <tt>curr</tt> and/or <tt>prev</tt> settings, you
-<em>must</em> specify them also.  Otherwise, the <b>only</b> version
-that setup.exe will display will be the <tt>test</tt> version.</p>
+<p>Note that if any of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt>
+options are used, they will short circuit <em>all</em> of the
+automatic version detection used for generating setup.ini.  So, if you
+include a <tt>test</tt> option, and you have valid current and/or
+previous tar files, you <em>must</em> specify <tt>curr</tt> and/or
+<tt>prev</tt>.  Otherwise, the <b>only</b> version that setup.exe will
+display will be the <tt>test</tt> version.</p>
+
+<p>For example, if your setup.hint looks like this:
+
+<pre>
+test: 1.9-1
+</pre>
+
+then setup.ini will <em>not</em> contain the 0.9-1 or 1.0-1 versions.</p>
+
+<p>If you want all of the versions included, you must do this:
+
+<pre>
+prev: 0.9-1
+curr: 1.0-1
+test: 1.9-1
+</pre>
+</p>
 
 <p>The <tt>skip</tt> line indicates that that package should not appear in
 setup.ini.  It is intended for directories that exist in the hierarchy that
 should not be considered for inclusion in setup.ini.</p>
 
 <p><tt>sdesc</tt> and <tt>ldesc</tt> are both mandatory fields for
-setup.hint.  Your package <em>must</em>contain these fields.  The
-<tt>sdesc</tt> and <tt>ldesc</tt> texts are simply copied to setup.ini
-in the appropriate place.</p>
+setup.hint.  Your package <em>must</em> contain these fields.  In particular,
+the <tt>sdesc</tt> field is required for correct operation of setup.exe.
 
 <p><tt>sdesc</tt> is a one line description of the package.  This is the
 information that will be displayed when installing packages via
 setup.exe.</p>
 
 <p><tt>ldesc</tt> is a more descriptive, multi-line description of the
-package intended for future use in setup.exe.</p>
+package, intended for future use in setup.exe.</p>
 
 Please note that the package name should <em>not</em> be part of the
 description, e.g., this is incorrect:
@@ -254,40 +279,57 @@ mailing list first.  As of this writing, the current categories are:<br>
 <tr>
 <td>Doc</td>
 <td>Editors</td>
+<td>Games</td>
 <td>Graphics</td>
 <td>Interpreters</td>
-<td>Libs</td>
 </tr>
 <tr>
+<td>Libs</td>
 <td>Mail</td>
 <td>Net</td>
 <td>Shells</td>
 <td>System</td>
-<td>Text</td>
 </tr>
 <tr>
+<td>Text</td>
 <td>Utils</td>
 <td>Web</td>
 </tr>
 </table>
+</p>
 
-Note that category names may be multi-word, e.g., "ASCII Games" but, currently
+<p>Note that category names may be multi-word, e.g., "ASCII Games" but, currently
 all categories are only a single word.</p>
 
-<p>The <tt>requires</tt> line indicates the packages that this package relies on.
-A package can rely on multiple packages.  Multiple packages are
-separated by spaces.</p>
-<p>Do not enclose multiple package names within quotation marks.</p>
-<p>If your package is dependent on a file provided by another package
-that other package should be included here - this include
-cygwin1.dll!</p>
+<p>The <tt>requires</tt> line indicates the packages that this package
+relies on.  If your package is dependent on a file provided by another
+package that other package should be included here - this includes
+cygwin1.dll! A package can rely on multiple packages.  Multiple packages
+are separated by spaces.  Do not enclose multiple package names within
+quotation marks.</p>
+
+Example of a complete contrib/current/boffo/setup.hint:
+<tt>
+<pre>
+    category: Games Text
+    requires: ncurses5 cygwin
+    sdesc:    "A whackamole simulation in ASCII art"
+    ldesc:    "A whackamole simulation in ASCII art.
+    Intended for use on VT100 terminals at BAUD rates 1200 and
+    above.  Uses arrow keys for positioning over moles.  Space
+    bar whacks the mole.
+
+    No actual moles will be harmed during execution of this game."
+</pre>
+</tt>
+
 
 <h2><a id="setup.ini"><tt>setup.ini</tt></a></h2>
 
 <p>Note that <tt>setup.ini</tt> is automatically generated.  This
 section is for completeness, not instruction.
 
-<p>Setup reads a file called<tt> setup.ini </tt> that resides on all
+<p>Setup reads a file called <tt>setup.ini</tt> that resides on all
 cygwin FTP mirrors.  There are a two global parameters in this file,
 followed by a list of packages.  Any line beginning with<tt> # </tt> is
 ignored by setup and can be used to add commentary to the file at any
@@ -403,7 +445,15 @@ source:  latest/bash/bash-2.04-src.tar.bz2 1815177
   --datadir='$(prefix)/share'
   </pre>
   <li><p>All executables in your binary package are stripped (run 'strip' on them). Some makefiles have a install-strip command you can use to do this automatically when you setup your 'installed' tree.</p></li>
-  <li><p>Source packages are extracted in /usr/src. Include a 'root' directory with the same name as the archive root (ie foo-vendor-suffix). NOTE: The path in your tarball for a file that ends up as /var/foo.tmp is "var/foo.tmp"</p></li>
+  <li><p>Source packages are extracted in /usr/src.  On extraction, the tar file should put the sources to a directory with the same name as the package tar ball minus the -src.tar.bz2 part:<pre><tt>
+  boffo-1.0-1/Makefile.in
+  boffo-1.0-1/README
+  boffo-1.0-1/configure
+  boffo-1.0-1/configure.in
+  etc...
+</tt></pre></li>
+
+</p></li>
   <li><p>In your binary package, include a file /usr/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.</p></li>
   <li><p>In your binary package include a directory /usr/doc/foo-vendor/ that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc.</p></li>
   <li><p>In your source package include the same foo-vendor-suffix.README as used in the binary package.</p></li>
@@ -419,6 +469,7 @@ source:  latest/bash/bash-2.04-src.tar.bz2 1815177
 <p>So you've got a package you want to submit. Follow the following checklist before emailing cygwin-apps@cygwin.com and you'll almost certainly save time.</p>
 <ol>
   <li><p>Propose on cygwin-apps@cygwin.com that you are interested in becoming a package maintainer for package foo. Some packages cannot be distributed via cygwin's setup due to vendor licence limitations. Other packages may not be appropriate for cygwin. This step will save time if, for some reason we cannot accept the package.</p></li>
+  <li>If this is a new package, post a proposed <tt>setup.hint</tt> file as part of your proposal.  Include this file in the text of your message so that it can be commented on.  Do not submit it as an attachment.</li>
   <li><p>Make sure your package follows all the criteria listed <a href="#submitting">here</a>.</p></li>
   <li><p>Do you have the time to maintain the package? Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to cygwin at cygwin dot com (digest mode is fine) and when a <i>bug</i> is reported in your package, address the bug (if it's a cygwin-only bug) or pass back to the vendor. When a solution exists, create an updated package with the fix in it, and upload that. Note that you are not expected to be a helpdesk for the package - the users are pointed back at the vendors lists, once you've determined that the bug is not a cygwin-related bug.</p></li>
   <li><p>Look in the debian package list and identify the section that your package is present in there - if it's available via debian. If it's not, have a look and take a sensible guess.</p></li>
