@@ -11,13 +11,13 @@ $dbpass = "";
 $dbname = "cygwindb";
 
 if (!($dbh = mysql_connect ($dbhost, $dbuser, $dbpass))) {
-  printf ("Failed to connect to MySQL server `%s'", $dbhost);
+  printf ("connection failed for user `%s' on server `%s': %s", $dbuser, $dbhost, mysql_error ());
   exit (1);
-} elseif (!mysql_select_db ("cygwindb")) {
-  printf ("Failed to select database `%s' on MySQL server `%s'", $dbname, $dbhost);
+} elseif (!mysql_select_db ($dbname)) {
+  printf ("selection failed for database `%s' on server `%s;@ %s", $dbname, $dbhost, mysql_error ());
   exit (1);
 } else {
-  printf ("Connect to MySQL server `%s' as user `%s'", $dbhost, $dbuser);
+  printf ("successfully connected to server `%s' as user `%s'", $dbhost, $dbuser);
 }
 
 ?>
