@@ -85,6 +85,7 @@ while (<F>) {
     next if m@private/@;
     next if m@old/@;
     next if /md5.sum/;
+    next if /xfree/;
     $mtime = $now - (stat("$master/$_"))[9];
     next if $mtime < 7*$days;
     if (! $best_file || $best_mtime > $mtime) {
