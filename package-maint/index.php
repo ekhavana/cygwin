@@ -211,8 +211,19 @@
 		if (!isset($_REQUEST["PACKAGE_CATEGORY"]))
 			$_REQUEST["PACKAGE_CATEGORY"] = $category;
 		printsubs($step2ar);
-	} else
-		readfile("/home/nmlorg/PPL/maintainers.txt");
+	} else {
+		$fd = fopen("/home/nmlorg/PPL/maintainers.txt", "r");
+		while ($l = fgets($fd)) {
+			if ($l[0] == " ")
+				echo $l;
+			else {
+				$pack = strtok($l, " ");
+				$url = "<a href=\"?" . htmlentities("PACKAGE_NAME=" . $pack) . "\">" . $pack . "</a>";
+				echo $url . substr($l, strlen($pack));
+			}
+		}
+		fclose($fd);
+	}
 	if ($step2) {
 		if (!isset($_REQUEST["MESSAGE_CONTENTS"]))
 			$message = dosubs(grabtemplate($_REQUEST["SUBMISSION_TYPE"]));
