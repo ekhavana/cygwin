@@ -1,16 +1,27 @@
 #!/usr/bin/perl
 # -*- perl -*-
 #
-# Copyright 2000 Red Hat, Inc.
+# Copyright 2000,2001 Red Hat, Inc.
 #
 
-open(M, "mirrors.txt");
-$out = "mirrors.html";
-$state = "mirrors.state";
-$list = "mirrors.lst";
-$MINDAYS = 3;
+use strict;
 
-$header = '<HTML>
+use Net::FTP;
+use LWP::Simple;
+use File::Find;
+use File::stat;
+
+open(M, "mirrors.txt");
+my $out = "mirrors.html";
+my $state = "mirrors.state";
+my $list = "mirrors.lst";
+my $MINDAYS = 3;
+
+sub siteprint($$;@);
+
+$main::timeout = 120;
+
+my $header = '<HTML>
 <HEAD>
 <TITLE>Download Cygwin</TITLE>
 </HEAD>
@@ -34,7 +45,7 @@ the list please <a href="mailto:dj@cygnus.com">contact us</a>.
 <H3>Mirror Sites:</H3>
 ';
 
-$trailer = '
+my $trailer = '
 <P> Regardless of the origin of the tools, please be sure to read the <a
 href="download.html">download instructions</a> which explains how to get
 get everything working, starting with the installation process.
@@ -49,14 +60,15 @@ open(STDERR, ">&STDOUT");
 $| = 1;
 
 
-$summary .= "start at " . scalar localtime() . "\n";
-
-&ftp_debug(1);
+my $summary .= "start at " . scalar localtime() . "\n";
 
 #----------------------------------------------------------------------
 
+my $site;
+my %oldstate;
 open(STATE, $state);
 while (<STATE>) {
+    my $ok;
     ($site, $ok) = split;
     $oldstate{$site} = $ok;
 }
@@ -64,88 +76,68 @@ close(STATE);
 
 $| = 1;
 
-use IO::Socket;
-
-$days = 86400;
-$now = time;
-$master = <M>;
+my $days = 86400;
+my $now = time;
+my $master = <M>;
 $master =~ s/[\r\n]+$//;
-$best_mtime = 0;
-$best_file = undef;
-open(F, "cd $master; find * -type f -print |");
-while (<F>) {
-    s/[\r\n]+$//;
-    next if m@private/@;
-    next if m@old/@;
-    next if /md5.sum/;
-    next if /xfree/;
-    next if /mail-archives/;
-    next if /snapshots/;
-    $mtime = $now - (stat("$master/$_"))[9];
-    next if $mtime < $MINDAYS*$days;
-    if (! $best_file || $best_mtime > $mtime) {
-	$best_file = $_;
-	$best_mtime = $mtime;
-    }
-}
-close(F);
-print "Key file is $best_file\n";
+$main::best_mtime = 0;
+$main::main::best_file = undef;
+find({wanted=>\&wanted, follow_fast=>1, no_chdir=>1}, $master);
+substr($main::best_file, 0, length($master) + 1) = '';
+print "Key file is $main::best_file\n";
 
+my (@ok, $ok_count, $bad_count);
 $ok_count = $bad_count = 0;
 
 while (<M>) {
     next if /^#/;
-    $ok = 0;
-    ($url, $area, $region) = split(/[;\r\n]+/);
+    my $ok = 0;
+    my ($url, $area, $region) = split(/[;\r\n]+/);
     next unless $area;
     if ($url =~ /^\+/) {
 	$ok = 1;
 	$url =~ s/^\+//;
     }
     $url =~ s@/+$@@;
-    ($proto, $site, $dir) = $url =~ m@([a-z]+)://([^/]+)(.*)@;
+    my ($proto, $site, $dir) = $url =~ m@([a-z]+)://([^/]+)(.*)@;
     $dir = "/" unless $dir;
-    if (!$ok) {
-	$ok = &verify_with_timeout($proto, $site, "$dir/$best_file");
-    }
-    print "ok=$ok after verify\n";
+    $ok = verify_with_timeout($proto, $site, "$dir/$main::best_file") unless $ok;
     if ($ok == 2) {
 	$ok = $oldstate{$site} + 0;
-	print "too many anon users, assuming ok is $ok\n";
+	siteprint $site, $proto, "too many anon users, assuming ok";
     }
-    $oldstate = $oldstate{$site};
+    my $oldstate = $oldstate{$site};
     $oldstate{$site} = $ok;
     if ($oldstate) {
 	$ok = 1;
+	siteprint $site, $proto, "resetting status to $ok";
     }
 
     if ($ok) {
 	$summary .= "OK   $url\n";
 	$ok_count ++;
-	print "OK:  $url\n";
+	siteprint $site, $proto, "OK";
 	push(@ok, "$region;$area;$url;$site");
-    }
-    else
-    {
+    } else {
 	$summary .= "BAD  $url\n";
 	$bad_count ++;
-	print "BAD: $url\n";
+	siteprint $site, $proto, "BAD";
     }
 }
 
 close(M);
 
 open(STATE, ">$state");
-for $k (sort keys %oldstate) {
+for my $k (sort keys %oldstate) {
     print STATE "$k $oldstate{$k}\n";
 }
 close(STATE);
 
-$oldregion = '';
-$oldarea = '';
+my $oldregion = '';
+my $oldarea = '';
 
 open(SUMMARY, "| /usr/lib/sendmail -t -odi -oep -oi");
-print SUMMARY "To: cgf\@cygnus.com\n";
+print SUMMARY "To: cgf\@redhat.com\n";
 print SUMMARY "Subject: cygwin mirror summary\n";
 print SUMMARY "\n";
 print SUMMARY "\n$ok_count ok, $bad_count bad\n\n";
@@ -167,8 +159,8 @@ print LIST "# Do not edit - see warning in mirrors.html\n";
 print OUT $header;
 
 print OUT "<ul>";
-for $ok (sort @ok) {
-    ($region, $area, $url, $site) = split(';', $ok);
+for my $ok (sort @ok) {
+    my ($region, $area, $url, $site) = split(';', $ok);
     if ($region ne $oldregion) {
 	print OUT "\n</ul>" if $oldarea;
 	print OUT "\n<li>$region:\n";
@@ -199,41 +191,40 @@ exit(0);
 
 #---------------------------------------------------------------------
 
+sub siteprint($$;@) {
+    my $site = shift;
+    my $proto = shift;
+    print "$site($proto): @_\n";
+}
+
 sub verify_with_timeout {
     my ($proto, $site, $file) = @_;
-    pipe RH, WH;
-    my ($pid) = fork();
+    my $pid = fork();
     return 0 if $pid < 0;
     if ($pid == 0) {
-	# child;
-	close RH;
-	select(RH); $| = 1; select(STDOUT);
-	print "child starting\n";
+	$| = 1;
+	print "**********************\n";
+	siteprint $site, $proto, $file;
 	if ($proto eq "ftp") {
-	    print WH &verify_ftp($site, $file);
+	   exit verify_ftp($site, $file);
 	} else {
-	    print WH &verify_http($site, $file);
+	   exit verify_http($site, $file);
 	}
-	close WH;
-	print "child exiting\n";
-	exit 0;
     }
-    close WH;
-    print "parent waiting for child\n";
-    $rin = "";
-    vec($rin, fileno(RH), 1) = 1;
-    ($nfound, $timeleft) = select($rout = $rin, undef, undef, 120);
-    print "nfound = $nfound, timeleft = $timeleft\n";
-    if ($nfound) {
-	$rv = <RH>;
-	print "child sent `$rv'\n";
-    } else {
+    $SIG{ALRM} = sub {
+	kill 9, $pid;
+	siteprint $site, $proto, "timed out";
+    };
+    alarm($main::timeout);
+    my $rv;
+    if (waitpid($pid, 0) != $pid) {
 	$rv = 0;
-	print "child timeout\n";
+    } else {
+	$rv = $? >> 8;
     }
-    kill 9, $pid;
-    waitpid $pid, 0;;
-    close RH;
+    alarm(0);
+    undef $SIG{ALRM};
+    siteprint $site, $proto, "status $rv $file";
     return $rv;
 }
 
@@ -241,32 +232,18 @@ sub verify_with_timeout {
 
 sub verify_http {
     my ($site, $file) = @_;
-    print "starting verify of http://$site\n";
-    $http = IO::Socket::INET->new(PeerAddr => $site,
-				  PeerPort => 80,
-				  Proto => "tcp");
-    if (!defined $http) {
-	print "Unable to connect to $site:80\n";
-	return 0;
-    }
-    $http->autoflush(1);
-    print $http "HEAD $file HTTP/1.0\r\n";
-    print $http "Host: $site:80\r\n";
-    print $http "\r\n";
-    $status = <$http>;
-    0 while <$http>;
-    close $http;
-    return 1 if $status =~ / 200 /;
-    $status =~ s/[\r\n]+$//;
-    print "Status was $status\n";
-    return 0;
+    my $url = "http://$site/$file";
+    my $status = LWP::Simple::head($url) ? 1 : 0;
+    siteprint $site, 'http', "status $status";
+    return $status;
 }
 
 #---------------------------------------------------------------------
 
 sub congested {
-    if ($ftp_response_text =~ /too many|exceed|limit/) {
-	print "$site: congested\n";
+    my ($site, $msg) = @_;
+    if ($msg =~ /too many|exceed|limit/mi) {
+	siteprint $site, 'ftp', "status 2 - congested";
 	return 1;
     }
     return 0;
@@ -274,161 +251,44 @@ sub congested {
 
 sub verify_ftp {
     my ($site, $file) = @_;
-    print "starting verify of ftp://$site\n";
-    if (&ftp_open($site)) {
-	return 2 if &congested();
-	print "$site: can't open\n";
+    my $ftp = Net::FTP->new($site);
+    if (!$ftp) {
+	print $@;
+	return 2 if congested($site, $@);
+	siteprint $site, 'ftp', "status 0 - can't open";
 	return 0;
     }
-    print "$site is open\n";
-    if (&ftp_login("anonymous", "dj\@cygnus.com")) {
-	return 2 if &congested();
-	print "$site: can't login\n";
+    print $ftp->message;
+    siteprint $site, 'ftp', "open";
+    my $rc = $ftp->login('anonymous', 'sourcemaster@sourceware.org');
+    my $msg = $ftp->message;
+    print $msg;
+    if (!$rc) {
+	return 2 if congested($site, $msg);
+	siteprint $site, 'ftp', "status 0 - can't login";
 	return 0;
     }
-    if (&ftp_dir_open($file)) {
-	print "$site: can't dir\n";
+    my @a = $ftp->ls($file);
+    print "@a\n";
+    my $status = $@;
+    if (!$status) {
+	siteprint $site, 'ftp', "status 0 - $file not found";
 	return 0;
     }
-    ($basefile = $file) =~ s@.*/@@;
-    $found = 0;
-    while ($d = <$ftp_data>) {
-	$d =~ s/[\r\n\s\t]+$//;
-	if ($d =~ /$basefile$/) {
-	    $found = 1;
-	    print "found in $d\n";
-	}
+    $ftp->quit;
+    siteprint $site, 'ftp', "status $status";
+    return $status;
+}
+
+sub wanted {
+    return unless /\.tar/;
+    return if $File::Find::name =~ m@private|old|md5\.sum|xfree|mail-archives|snapshots@;
+    my $st = stat($File::Find::name);
+    return unless $st->size;
+    my $mtime = $now - $st->mtime;
+    next if $mtime < $MINDAYS * $days;
+    if (!$main::best_file || $main::best_mtime > $mtime) {
+	$main::best_file = $_;
+	$main::best_mtime = $mtime;
     }
-    &ftp_dir_close();
-    &ftp_close();
-    if ($found) {
-	return 1;
-    }
-    return 0;
-}
-
-######################################################################
-
-sub ftp_debug {
-    $ftp_debug_level = $_[0];
-}
-
-sub ftp_command {
-    my ($command) = @_;
-    if (defined $command) {
-	print "ftp > $command\n" if $ftp_debug_level;
-	print $ftp_control "$command\r\n";
-    }
-    $ftp_response_text = '';
-    do {
-	$ftp_response = <$ftp_control>;
-	$ftp_response_text .= $ftp_response;
-	print "ftp < $ftp_response" if $ftp_debug_level;
-	if (! $ftp_response) {
-	    print "FTP Error: EOF" if $ftp_debug_level;
-	    return 1;
-	}
-    } until $ftp_response =~ /^\d\d\d /;
-    $ftp_response =~ s/[\r\n]+$//;
-    if ($ftp_response =~ /^[4-9]/) {
-	print STDERR "FTP Error: $ftp_response\n";
-	return 1;
-    }
-    return 0;
-}
-
-sub ftp_open {
-    my ($site) = @_;
-    $ftp_save_site = $site;
-    $ftp_control = IO::Socket::INET->new(PeerAddr => $site,
-					 PeerPort => 21,
-					 Proto => "tcp");
-    if (!defined $ftp_control) {
-	print "unable to connect to $site: $!\n" if $ftp_debug_level;
-	return 1;
-    }
-    &ftp_command() && return 1;
-    return 0;
-}
-
-sub ftp_login {
-    my ($user, $password) = @_;
-    $ftp_save_user = $user;
-    $ftp_save_password = $password;
-    &ftp_command("USER $user") && return 1;
-    if ($ftp_response =~ /^331/) {
-	&ftp_command("PASS $password") && return 1;
-    }
-    &ftp_command("TYPE I") && return 1;
-    return 0;
-}
-
-sub ftp_cwd {
-    my ($dir) = @_;
-    $ftp_save_dir = $dir;
-    return &ftp_command("CWD $dir");
-}
-
-sub ftp_open_data_port {
-    return 0 if $ftp_data_port_ready;
-    &ftp_command("PASV") && return 1;
-    my ($h1,$h2,$h3,$h4,$p1,$p2) = $ftp_response =~ /\((\d+),(\d+),(\d+),(\d+),(\d+),(\d+)\)/;
-    $p1 = $p1 * 256 + $p2;
-    print "PASV: $h1.$h2.$h3.$h4 port $p1\n" if $ftp_debug_level > 1;
-    $ftp_data = IO::Socket::INET->new(PeerAddr => "$h1.$h2.$h3.$h4",
-				      PeerPort => $p1,
-				      Proto => "tcp");
-
-    if (! defined $ftp_data) {
-	return 1;
-    }
-    $ftp_data_port_ready = 1;
-    return 0;
-}
-
-
-sub ftp_close_data_port {
-    close $ftp_data;
-    $ftp_data_port_ready = 0;
-}
-
-sub ftp_get {
-    my ($remote_name, $local_file) = @_;
-    open(FTP_F, ">$local_file") || return 1;
-    if (&ftp_open_data_port()) {
-	print "ftp pasv failed: $ftp_response\n";
-	if ($ftp_response =~ /timeout/i) {
-	    print "ftp: attempting to re-establish the connection\n";
-	    &ftp_open($ftp_save_site) && return 1;
-	    &ftp_login($ftp_save_user, $ftp_save_password) && return 1;
-	    &ftp_cwd($ftp_save_dir) && return 1;
-	    &ftp_open_data_port() && return 1;
-	} else {
-	    return 1;
-	}
-    }
-    &ftp_command("RETR $remote_name") && return 1;
-    print FTP_F $ftp_buffer while read($ftp_data, $ftp_buffer, 4096) > 0;
-    close(FTP_F);
-    &ftp_close_data_port();
-    return &ftp_command();
-}
-
-sub ftp_close {
-    &ftp_command("quit");
-    close $ftp_control;
-    return;
-}
-
-sub ftp_dir_open {
-    my ($options) = @_;
-    &ftp_open_data_port() && return 1;
-    $options = " $options" if $options;
-    &ftp_command("LIST$options") && return 1;
-    $ftp_data_port_ready = 0;
-}
-
-sub ftp_dir_close {
-    &ftp_close_data_port();
-    return &ftp_command();
 }
