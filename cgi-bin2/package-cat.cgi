@@ -12,13 +12,14 @@ my $file = $html->param('file');
 use FindBin qw($Bin);
 
 print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
-      LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "FOO\n",
+      LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "\n",
 
 chdir("$Bin/../packages");
 if (!open(F, $file)) {
     print h1("Couldn't open file: $file");
 } else {
     $_ = join('', <F>);
+print substr($_, 0, 5), "<br>";
     s!($grep)!\<b\>$1\</b\>!mog if length($grep);
     print $_;
 }
