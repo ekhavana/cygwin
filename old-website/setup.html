@@ -252,12 +252,12 @@ source:  latest/bash/bash-2.04-src.tar.bz2 1815177
 <p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
 <ul>
   <li><p>Binary packages are extracted in /, include all file paths from the root in your archive.<p></li>
-  <li><p>Source packages are extracted in /usr/src. Include a 'root' directory with the same name as the archive root (ie foo-vendor-suffix).</p></li>
+  <li><p>Source packages are extracted in /usr/src. Include a 'root' directory with the same name as the archive root (ie foo-vendor-suffix). NOTE: The path in your tarball for a file that ends up as /var/foo.tmp is "var/foo.tmp"</p></li>
   <li><p>In your binary package, include a file /usr/doc/cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.</p></li>
-  <li><p>In your binary package include a file /usr/doc/foo-vendor that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc.</p></li>
+  <li><p>In your binary package include a directory /usr/doc/foo-vendor/ that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc.</p></li>
   <li><p>In your source package include the same foo-vendor-suffix.README as used in the binary package.</p></li>
   <li><p>Your source package should contain any patches you've applied to it pre-applied.</p></li>
-  <li><p>Include a single file foo-vendor-suffix.patch in your source package, that when applied will remove all the patches you've applied to the package, leaving it as the vendor distributes it. This file should extract as /usr/src/foo-vendor-suffix.patch.<p></li>
+  <li><p>Include a single file foo-vendor-suffix.patch in your source package, that when applied will remove all the patches you've applied to the package, leaving it as the vendor distributes it. This file should extract as /usr/src/foo-vendor-suffix.patch.<p><p>To create such a patch you might run <tt>diff -Nrup patched-src-dir vendor-src-dir &gt; foo-vendor-suffix.patch</tt></p><p>To apply the generated patch the user would run (from within the source tree) <tt>patch -p1 &lt; ../foo-vendor-suffix.patch</tt></p></li>
   <li><p>If you are not creating your package from an installed virtual root, be sure to check that the file permissions are appropriate.</p></li>
   <li><p>If the package has any global settings (ie in files in /etc) that are not overrideable on a per user basis (sshd, as a daemon, is an example of this) do not include the relevant config files in your package. Instead include a post-install script to install the settings files. Be sure that if you would overwrite an already present file that the user is offered the choice of keeping their own or overwriting with your defaults.</p></li>
   <li><p>Ensure that your package handles binary only systems, textmode only systems, and hybrid systems correctly.</p></li>
