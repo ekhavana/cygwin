@@ -21,7 +21,7 @@ primary, secondary">
 
 <h2>Cygwin/XFree86 - Development - xwinclip - Change Log</h2>
 
-<p>Last updated: 2002-06-10 2055 EDT</p>
+<p>Last updated: 2002-06-12 1316 EDT</p>
 
 <p>xwinclip binary and source code releases are available via the
 sources.redhat.com ftp <a href="http://cygwin.com/mirrors.html">mirror
@@ -64,6 +64,68 @@ href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-2002-.tar.bz2">xwincli
 </tbody>
 </table>
 -->
+
+
+<h4>Test05</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2002-06-12 1316 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test04</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-Test05.exe.bz2">xwinclip-Test05.exe.bz2</a>
+(4 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/xwinclip/xwinclip-20020612-1316.tar.bz2">xwinclip-20020612-1316.tar.bz2</a>
+(8 KiB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>xwinclip.c - Break this single source file into xwinclip.c,
+textconv.c, textconv.h, wndproc.c, wndproc.h, xevents.c, and
+xevents.h.  (Harold Hunt)</li>
+
+<li>xwinclip.c - Pause and loop to retry, after a delay, if we fail
+while opening the display.  (Harold Hunt)</li>
+
+<li>xwinclip.c - Remove a call to XSelectInput that was operating on
+our own window and always returning BadWindow.  Apparently the event
+mask for our own window has to be changed with
+XChangeWindowAttributes.  I've put a #if0'd example of using
+XChangeWindowAttributes into the file.  (Harold Hunt)</li>
+
+<li>xwinclip.c - Remove a call to XFlush.  It doesn't seem necessary
+to flush any events in our queue before we start processing events.
+However, I may have read somewhere that we have to do this, so I may
+have to re-add this call to XFlush later.  (Harold Hunt)</li>
+
+<li>xwinclip.c - Create an atom for WM_DELETE_WINDOW.  This will get
+is an X event when a window manager is about to kill us.  However, it
+does nothing for the case where the server is told to GiveUp ().
+(Harold Hunt)</li>
+
+<li>xwinclip.c - In CreateMessagingWindow, add a call to ShowWindow
+passing SW_HIDE and add a call to UpdateWindow.  I'm not sure, but
+these may be necessary to kick off Windows event processing.  On a
+strange note - the current xwinclip doesn't process any Windows
+messages.  (Harold Hunt)</li>
+
+<li>xevents.c - Add handling for WM_DELETE_WINDOW.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 <h4>Test04</h4>
