@@ -16,7 +16,7 @@
 
 <!--#include virtual="../../cygx-header.html" -->
 
-<p>Last updated: 2002-06-07 2235 EDT</p>
+<p>Last updated: 2002-06-08 2149 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -61,6 +61,50 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-
 -->
 
 
+<h4>Test57</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2002-06-08 2149 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test57.exe.bz2">XWin-Test57.exe.bz2</a>
+(1078 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020608-2149.tar.bz2">xwin-20020608-2149.tar.bz2</a>
+(72 KiB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winwndproc.c - Call DefWindowProc after processing WM_NCMOUSEMOVE
+messages.  This should fix the highlighting of the minimize and exit
+buttons in Windows XP.  (Jehan Bing)</li>
+
+<li>winwndproc.c, win.h, winallpriv.c - Make the cursor state
+variable, fCursor, a static local variable in
+winwndproc.c/winWindowProc (), rather than a member variable in the
+winPrivScreenRec structure.  This makes sense because the Windows
+cursor is either hidden or shown, as Windows does not hide or show the
+mouse cursor on a per-window basis.  This also greatly simplifies the
+handling of hiding and showing the Windows mouse cursor.  (Jehan
+Bing)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
 <h4>Test56</h4>
 <table>
 <tbody>
@@ -90,7 +134,7 @@ parameter that creates the Cygwin/XFree86 window that is the same size
 as the desktop, without a border.  The end effect is that you can
 still get to the taskbar (even with Auto Hide enabled) and easily
 switch to other application while not giving up any screen space to
-the title bar, borders, etc.  (Jehan)</li>
+the title bar, borders, etc.  (Jehan Bing)</li>
 
 <li>winkeybd.c - Disregard the bogus key releases that we see when
 losing the focus via Alt+Tab.  (Stuart Adamson)</li>
