@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# User this program to update the http://sourceware.cygnus.com/cygwin/faq/
+# area.  You'll need texi2html and makeinfo.  texi2html is at
+# http://texinfo.org/texi2html/
+#
+# Pass the path to the devo/winsup/doc directory
+#
+# When done, cvs add any new html files and cvs commit
+
+DOCDIR=$1
+
+if [ x"$DOCDIR" = x"" ]
+then
+  echo 'Usage: update <directory containing faq.texinfo>'
+  exit 0
+fi
+if [ ! -f "$DOCDIR/faq.texinfo" ]
+then
+  echo "$DOCDIR doesn't contain faq.texinfo"
+  exit 0
+fi
+
+cp $DOCDIR/*.texi* .
+
+echo
+echo Building HTML files
+echo
+texi2html -verbose -split_chapter faq.texinfo
+
+echo
+echo Building faq.txt
+echo
+makeinfo --verbose --no-split --no-headers -o faq.txt faq.texinfo
+
+rm *.texi*
+
+sed 's/HREF=/TARGET="lower" HREF=/' < faq_toc.html > faq_frtoc.html
+
+for f in faq*.html
+do
+  sed	-e 's@`\(ftp://[^'\'']*\)'\''@<a target="_top" href="\1">\1</a>@g' \
+	-e 's@`\(http://[^'\'']*\)'\''@<a target="_top" href="\1">\1</a>@g' \
+	-e 's@<!--#perl sub="header" arg="-n" arg="\(.*\)" -->@<title>\1</title>@' \
+	-e 's@<!--#perl sub="trailer" -->@@' \
+    < $f > $f.tmp
+  mv $f.tmp $f
+done

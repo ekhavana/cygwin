@@ -1,0 +1,1309 @@
+<title>The Cygwin Project FAQ 20.2 for Release B20.1.  - What Unix API calls are supported by Cygwin?</title>
+Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_3.html">previous</A>, <A HREF="faq_5.html">next</A>, <A HREF="faq_13.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H1><A NAME="SEC12" HREF="faq_toc.html#TOC12">What Unix API calls are supported by Cygwin?</A></H1>
+
+<P>
+This is the beginning of documentation listing the calls supported
+by the Cygwin library.
+
+</P>
+<P>
+All POSIX.1/1996 and ANSI C calls are listed in this file.  Note that
+while almost all POSIX.1/1990 calls are included in Cygwin, most
+POSIX.1/1996 calls are not (yet at least!).  Additional Unix
+compatibility calls and extended libc/libm calls are provided by
+Cygwin but may or may not be listed yet.
+
+</P>
+<P>
+To see if a function is implemented but not listed here, check for the
+presence of the call in the file winsup/cygwin.din in the sources.  In
+addition, you may want to read the source code corresponding to the call
+to verify that it is not a stub.  Finally, libc/libm functions
+(including extended calls not listed here) may be documented in the
+newlib texinfo documentation.
+
+</P>
+<P>
+Calls are implemented on both Windows 95 and NT unless otherwise
+noted.  Included are references to relevant standards, if any.
+Calls starting with "cygwin_" are Cygwin-specific calls.
+
+</P>
+
+
+<H2><A NAME="SEC13" HREF="faq_toc.html#TOC13">ANSI C Library Functions</A></H2>
+
+
+<UL>
+
+<LI>libc stdio (newlib/libc/stdio)
+
+
+<UL>
+<LI>clearerr: C 4.9.10.1
+
+<LI>fclose: C 4.9.5.1, P 8.2.3.2
+
+<LI>feof: C 4.9.10.2
+
+<LI>ferror: C 4.9.10.3
+
+<LI>fflush: C 4.9.5.2, P 8.2.3.4
+
+<LI>fgetc: C 4.9.7.1, P 8.2.3.5
+
+<LI>fgetpos: C 4.9.9.1
+
+<LI>fgets: C 4.9.7.2, P 8.2.3.5
+
+<LI>fopen: C 4.9.5.3, P 8.2.3.1
+
+<LI>fprintf: C 4.9.7.3, P 8.2.3.6
+
+<LI>fputc: C 4.9.7.3, P 8.2.3.6
+
+<LI>fputs: C 4.9.7.4, P 8.2.3.6
+
+<LI>fread: C 4.9.8.1, P 8.2.3.5
+
+<LI>freopen: C 4.9.5.4, P 8.2.3.3
+
+<LI>fscanf: C 4.9.6.2, P 8.2.3.7
+
+<LI>fseek: C 4.9.9.2, P 8.2.3.7
+
+<LI>fsetpos: C 4.9.9.3
+
+<LI>ftell: C 4.9.9.4, P 8.2.3.10
+
+<LI>fwrite: C 4.9.8.2, P 8.2.3.6
+
+<LI>getc: C 4.9.7.5, P 8.2.3.5
+
+<LI>getchar: C 4.9.7.6, P 8.2.3.5
+
+<LI>gets: C 4.9.7.7, P 8.2.3.5
+
+<LI>perror: C 4.9.10.4, P 8.2.3.8
+
+<LI>printf: C 4.9.6.3, P 8.2.3.6
+
+<LI>putc: C 4.9.7.8, P 8.2.3.6
+
+<LI>putchar: C 4.9.7.9, P 8.2.3.6
+
+<LI>puts: C 4.9.7.10, P 8.2.3.6
+
+<LI>remove: C 4.9.4.1, P 8.2.4
+
+<LI>rename: C 4.9.4.2, P 5.5.3.1
+
+<LI>rewind: C 4.9.9.5, P 8.2.3.7
+
+<LI>scanf: C 4.9.6.4, P 8.2.3.5
+
+<LI>setbuf: C 4.9.5.5
+
+<LI>setvbuf: C 4.9.5.6
+
+<LI>sprintf: C 4.9.6.5
+
+<LI>sscanf: C 4.9.6.6
+
+<LI>tmpfile: C 4.9.4.3, P 8.2.3.9
+
+<LI>tmpnam: C 4.9.4.4, P 8.2.5
+
+<LI>vfprintf: C 4.9.6.7
+
+<LI>ungetc: C 4.9.7.11
+
+<LI>vprintf: C 4.9.6.8
+
+<LI>vsprintf: C 4.9.6.9
+
+</UL>
+
+<LI>libc string (newlib/libc/string)
+
+
+<UL>
+<LI>memchr: C 4.11.5.1
+
+<LI>memcmp: C 4.11.4.1
+
+<LI>memcpy: C 4.11.2.1
+
+<LI>memmove: C 4.11.2.2
+
+<LI>memset: C 4.11.6.1
+
+<LI>strcat: C 4.11.3.1
+
+<LI>strchr: C 4.11.5.2
+
+<LI>strcmp: C 4.11.4.2
+
+<LI>strcoll: C 4.11.4.3
+
+<LI>strcpy: C 4.11.2.3
+
+<LI>strcspn: C 4.11.5.3
+
+<LI>strerror: C 4.11.6.2
+
+<LI>strlen: C 4.11.6.3
+
+<LI>strncat: C 4.11.3.2
+
+<LI>strncmp: C 4.11.3.2
+
+<LI>strncpy: C 4.11.2.4
+
+<LI>strpbrk: C 4.11.5.4
+
+<LI>strrchr: C 4.11.5.5
+
+<LI>strspn: C 4.11.5.6
+
+<LI>strstr: C 4.11.5.7
+
+<LI>strtok: C 4.11.5.8
+
+<LI>strxfrm: C 4.11.4.5
+
+</UL>
+
+<LI>libc stdlib (newlib/libc/stdlib, environ.cc, newlib/libc/include/machine/setjmp.h newlib/libc/include/assert.h)
+
+
+<UL>
+<LI>abort: C 4.10.4.1, P 8.2.3.12
+
+<LI>abs: C 4.10.6.1
+
+<LI>assert: C 4.2.1.1
+
+<LI>atexit: C 4.10.4.2
+
+<LI>atof: C 4.10.1.1
+
+<LI>atoi: C 4.10.1.2
+
+<LI>atol: C 4.10.1.3
+
+<LI>bsearch: C 4.10.5.1
+
+<LI>calloc: C 4.10.3.1
+
+<LI>div: C 4.10.6.2
+
+<LI>exit: C 4.10.4.3, P 8.2.3.12
+
+<LI>free: C 4.10.3.2
+
+<LI>getenv: C 4.10.4.4, P 4.6.1.1
+
+<LI>labs: C 4.10.6.3
+
+<LI>ldiv: C 4.10.6.2
+
+<LI>longjmp: C 4.6.2.1
+
+<LI>malloc: C 4.10.3.3
+
+<LI>mblen: C 4.10.7.1
+
+<LI>mbstowcs: C 4.10.8.1
+
+<LI>mbtowc: C 4.10.7.2
+
+<LI>qsort: 4.10.5.2
+
+<LI>rand: C 4.10.2.1
+
+<LI>realloc: C 4.10.3.4
+
+<LI>setjmp: C 4.6.1.1
+
+<LI>srand: C 4.10.2.2
+
+<LI>strtod: C 4.10.1.4
+
+<LI>strtol: C 4.10.1.5
+
+<LI>strtoul: C 4.10.1.6
+
+<LI>system: C 4.10.4.5
+
+<LI>wcstombs: C 4.10.8.2
+
+<LI>wctomb: C 4.10.7.3
+
+</UL>
+
+<LI>libc time (times.cc, newlib/libc/time)
+
+
+<UL>
+<LI>asctime: C 4.12.3.1
+
+<LI>gmtime: C 4.12.3.3
+
+<LI>localtime: C 4.12.3.4, P 8.1.1
+
+<LI>time: C 4.12.2.4, P 4.5.1.1
+
+<LI>clock: C 4.12.2.1
+
+<LI>ctime: C 4.12.3.2
+
+<LI>difftime: C 4.12.2.2
+
+<LI>mktime: C 4.12.2.3, P 8.1.1
+
+<LI>strftime: C 4.11.6.2
+
+</UL>
+
+<LI>libc signals (signal.cc, newlib/libc/signal)
+
+
+<UL>
+<LI>raise: C 4.7.2.1
+
+<LI>signal: C 4.7.1.1
+
+</UL>
+
+<LI>libc ctype (newlib/libc/ctype)
+
+
+<UL>
+<LI>isalnum: C 4.3.1.1
+
+<LI>isalpha: C 4.3.1.2
+
+<LI>iscntrl: C 4.3.1.3
+
+<LI>isdigit: C 4.3.1.4
+
+<LI>isgraph: C 4.3.1.5
+
+<LI>islower: C 4.3.1.6
+
+<LI>isprint: C 4.3.1.7
+
+<LI>ispunct: C 4.3.1.8
+
+<LI>isspace: C 4.3.1.9
+
+<LI>isupper: C 4.3.1.10
+
+<LI>isxdigit: C 4.3.1.11
+
+<LI>tolower: C 4.3.2.1
+
+<LI>toupper: C 4.3.2.2
+
+</UL>
+
+<LI>libm math (newlib/libm/math)
+
+
+<UL>
+<LI>acos: C 4.5.2.1
+
+<LI>asin: C 4.5.2.2
+
+<LI>atan: C 4.5.2.3
+
+<LI>atan2: C 4.5.2.4
+
+<LI>ceil: C 4.5.6.1
+
+<LI>cos: C 4.5.2.5
+
+<LI>cosh: C 4.5.3.2
+
+<LI>exp: C 4.5.4.1
+
+<LI>fabs: C 4.5.6.2
+
+<LI>floor: C 4.5.6.3
+
+<LI>fmod: C 4.5.6.4
+
+<LI>frexp: C 4.5.4.2
+
+<LI>ldexp: C 4.5.4.3
+
+<LI>log: C 4.5.4.4
+
+<LI>log10: C 4.5.4.5
+
+<LI>modf: C 4.5.4.6
+
+<LI>pow: C 4.5.5.1
+
+<LI>sin: C 4.5.2.6
+
+<LI>sinh: C 4.5.3.2
+
+<LI>sqrt: C 4.5.5.2
+
+<LI>tan: C 4.5.2.7
+
+<LI>tanh: C 4.5.3.3
+
+</UL>
+
+<LI>libc misc (newlib/libc/locale, gcc/ginclude/stdarg.h)
+
+
+<UL>
+<LI>localeconv: C 4.4.2.1
+
+<LI>setlocale: C 4.4.1.1, P 8.1.2.1
+
+<LI>va_arg: C 4.8.1.2
+
+<LI>va_end: C 4.8.1.3
+
+<LI>va_start: C 4.8.1.1
+
+</UL>
+
+
+
+<H2><A NAME="SEC14" HREF="faq_toc.html#TOC14">POSIX.1/96 Functions</A></H2>
+
+<LI>Process Primitives (Section 3)
+
+
+<UL>
+<LI>fork: P 3.1.1.1
+
+<LI>execl: P 3.1.2.1
+
+<LI>execle: P 3.1.2.1
+
+<LI>execlp: P 3.1.2.1
+
+<LI>execv: P 3.1.2.1
+
+<LI>execve: P 3.1.2.1
+
+<LI>execvp: P 3.1.2.1
+
+<LI>pthread_atfork: P96 3.1.3.1 -- unimplemented
+
+<LI>wait: P 3.2.1.1
+
+<LI>waitpid: P 3.2.1.1
+
+<LI>_exit: P 3.2.2.1
+
+<LI>kill: P 3.3.2.1
+
+<LI>sigemptyset: P 3.3.3.1
+
+<LI>sigfillset: P 3.3.3.1
+
+<LI>sigaddset: P 3.3.3.1
+
+<LI>sigdelset: P 3.3.3.1
+
+<LI>sigismember: P 3.3.3.1
+
+<LI>sigaction: P 3.3.4.1
+
+<LI>pthread_sigmask: P96 3.3.5.1
+
+<LI>sigprocmask: P 3.3.5.1
+
+<LI>sigpending: P 3.3.6.1
+
+<LI>sigsuspend: P 3.3.7.1
+
+<LI>sigwait: P96 3.3.8.1 -- unimplemented
+
+<LI>sigwaitinfo: P96 3.3.8.1 -- unimplemented
+
+<LI>sigtimedwait: P96 3.3.8.1 -- unimplemented
+
+<LI>sigqueue: P96 3.3.9.1 -- unimplemented
+
+<LI>pthread_kill: P96 3.3.10.1
+
+<LI>alarm: P 3.4.1.1
+
+<LI>pause: P 3.4.2.1
+
+<LI>sleep: P 3.4.3.1
+
+</UL>
+
+<LI>Process Environment (Section 4)
+
+
+<UL>
+<LI>getpid: P 4.1.1.1
+
+<LI>getppid: P 4.1.1.1
+
+<LI>getuid: P 4.2.1.1
+
+<LI>geteuid: P 4.2.1.1
+
+<LI>getgid: P 4.2.1.1
+
+<LI>getegid: P 4.2.1.1
+
+<LI>setuid: P 4.2.2.1 (stub, sets ENOSYS, returns zero)
+
+<LI>setgid: P 4.2.2.1 (stub, sets ENOSYS, returns zero)
+
+<LI>getgroups: P 4.2.3.1
+
+<LI>getlogin: P 4.2.4.1
+
+<LI>getlogin_r: P 4.2.4.1 -- unimplemented
+
+<LI>getpgrp: P 4.3.1.1
+
+<LI>setsid: P 4.3.2.1
+
+<LI>setpgid: P 4.3.3.1
+
+<LI>uname: P 4.4.1.1
+
+<LI>time: C 4.12.2.4, P 4.5.1.1
+
+<LI>times: P 4.5.2.1
+
+<LI>getenv: C 4.10.4.4, P 4.6.1.1
+
+<LI>ctermid: P 4.7.1.1
+
+<LI>ttyname: P 4.7.2.1
+
+<LI>ttyname_r: P 4.7.2.1 -- unimplemented
+
+<LI>isatty: P 4.7.2.1
+
+<LI>sysconf: P 4.8.1.1
+
+</UL>
+
+<LI>Files and Directories (Section 5)
+
+
+<UL>
+<LI>opendir: P 5.1.2.1
+
+<LI>readdir: P 5.1.2.1
+
+<LI>readdir_r: P96 5.1.2.1 -- unimplemented
+
+<LI>rewinddir: P 5.1.2.1
+
+<LI>closedir: P 5.1.2.1
+
+<LI>chdir: P 5.2.1.1
+
+<LI>getcwd: P 5.2.2.1
+
+<LI>open: P 5.3.1.1
+
+<LI>creat: P 5.3.2.1
+
+<LI>umask: P 5.3.3.1
+
+<LI>link: P 5.3.4.1 (copy file in Win 95, and when link fails in NT)
+
+<LI>mkdir: P 5.4.1.1
+
+<LI>mkfifo: P 5.4.2.1 -- unimplemented!!!
+
+<LI>unlink: P 5.5.1.1
+
+<LI>rmdir: P 5.5.2.1
+
+<LI>rename: C 4.9.4.2, P 5.5.3.1
+
+<LI>stat: P 5.6.2.1
+
+<LI>fstat: P 5.6.2.1
+
+<LI>access: P 5.6.3.1
+
+<LI>chmod: P 5.6.4.1
+
+<LI>fchmod: P96 5.6.4.1
+
+<LI>chown: P 5.6.5.1 (stub in Win 95; always returns zero)
+
+<LI>utime: P 5.6.6.1
+
+<LI>ftruncate: P96 5.6.7.1
+
+<LI>pathconf: P 5.7.1.1
+
+<LI>fpathconf: P 5.7.1.1
+
+</UL>
+
+<LI>Input and Output Primitives (Section 6)
+
+
+<UL>
+<LI>pipe: P 6.1.1.1
+
+<LI>dup: P 6.2.1.1
+
+<LI>dup2: P 6.2.1.1
+
+<LI>close: P 6.3.1.1
+
+<LI>read: P 6.4.1.1
+
+<LI>write: P 6.4.2.1
+
+<LI>fcntl: P 6.5.2.1 (note: fcntl(fd, F_GETLK,...) is not implemented (returns -1 with errno set to ENOSYS)).
+
+<LI>lseek: P 6.5.3.1 (note: only works correctly on binary files)
+
+<LI>fsync: P96 6.6.1.1
+
+<LI>fdatasync: P96 6.6.2.1 -- unimplemented
+
+<LI>aio_read: P96 6.7.2.1 -- unimplemented
+
+<LI>aio_write: P96 6.7.3.1 -- unimplemented
+
+<LI>lio_listio: P96 6.7.4.1 -- unimplemented
+
+<LI>aio_error: P96 6.7.5.1 -- unimplemented
+
+<LI>aio_return: P96 6.7.6.1 -- unimplemented
+
+<LI>aio_cancel: P96 6.7.7.1 -- unimplemented
+
+<LI>aio_suspend: P96 6.7.8.1 -- unimplemented
+
+<LI>aio_fsync: P96 6.7.9.1 -- unimplemented
+
+</UL>
+
+<LI>Device- and Class-Specific Functions (Section 7)
+
+
+<UL>
+<LI>cfgetispeed: P96 7.1.3.1
+
+<LI>cfgetospeed: P96 7.1.3.1
+
+<LI>cfsetispeed: P96 7.1.3.1
+
+<LI>cfsetospeed: P96 7.1.3.1
+
+<LI>tcdrain: P 7.2.2.1
+
+<LI>tcflow: P 7.2.2.1
+
+<LI>tcflush: P 7.2.2.1
+
+<LI>tcgetattr: P96 7.2.1.1
+
+<LI>tcgetpgrp: P 7.2.3.1
+
+<LI>tcsendbreak: P 7.2.2.1
+
+<LI>tcsetattr: P96 7.2.1.1
+
+<LI>tcsetpgrp: P 7.2.4.1
+
+</UL>
+
+<LI>Language-Specific Services for the C Programming Language
+
+(Section 8)
+
+<UL>
+<LI>abort: C 4.10.4.1, P 8.2.3.12
+
+<LI>asctime_r: P96 8.3.4.1 -- unimplemented
+
+<LI>ctime_r: P96 8.3.5.1 -- unimplemented
+
+<LI>exit: C 4.10.4.3, P 8.2.3.12
+
+<LI>fclose: C 4.9.5.1, P 8.2.3.2
+
+<LI>fdopen: P 8.2.2.1
+
+<LI>fflush: C 4.9.5.2, P 8.2.3.4
+
+<LI>fgetc: C 4.9.7.1, P 8.2.3.5
+
+<LI>fgets: C 4.9.7.2, P 8.2.3.5
+
+<LI>fileno: P 8.2.1.1
+
+<LI>flockfile: P96 8.2.6.1 -- unimplemented
+
+<LI>fopen: C 4.9.5.3, P 8.2.3.1
+
+<LI>fprintf: C 4.9.7.3, P 8.2.3.6
+
+<LI>fputc: C 4.9.7.3, P 8.2.3.6
+
+<LI>fputs: C 4.9.7.4, P 8.2.3.6
+
+<LI>fread: C 4.9.8.1, P 8.2.3.5
+
+<LI>freopen: C 4.9.5.4, P 8.2.3.3
+
+<LI>fscanf: C 4.9.6.2, P 8.2.3.7
+
+<LI>fseek: C 4.9.9.2, P 8.2.3.7
+
+<LI>ftell: C 4.9.9.4, P 8.2.3.10
+
+<LI>ftrylockfile: P96 8.2.6.1 -- unimplemented
+
+<LI>funlockfile: P96 8.2.6.1 -- unimplemented
+
+<LI>fwrite: C 4.9.8.2, P 8.2.3.6
+
+<LI>getc: C 4.9.7.5, P 8.2.3.5
+
+<LI>getc_unlocked: P96 8.2.7.1 -- unimplemented
+
+<LI>getchar: C 4.9.7.6, P 8.2.3.5
+
+<LI>getchar_unlocked: P96 8.2.7.1 -- unimplemented
+
+<LI>gets: C 4.9.7.7, P 8.2.3.5
+
+<LI>gmtime_r: P96 8.3.6.1 -- unimplemented
+
+<LI>localtime_r: P96 8.3.7.1 -- unimplemented
+
+<LI>perror: C 4.9.10.4, P 8.2.3.8
+
+<LI>printf: C 4.9.6.3, P 8.2.3.6
+
+<LI>putc: C 4.9.7.8, P 8.2.3.6
+
+<LI>putc_unlocked: P96 8.2.7.1 -- unimplemented
+
+<LI>putchar: C 4.9.7.9, P 8.2.3.6
+
+<LI>putchar_unlocked: P96 8.2.7.1 -- unimplemented
+
+<LI>puts: C 4.9.7.10, P 8.2.3.6
+
+<LI>rand_r: P96 8.3.8.1 -- unimplemented
+
+<LI>remove: C 4.9.4.1, P 8.2.4
+
+<LI>rewind: C 4.9.9.5, P 8.2.3.7
+
+<LI>scanf: C 4.9.6.4, P 8.2.3.5
+
+<LI>setlocale: C 4.4.1.1, P 8.1.2.1
+
+<LI>siglongjmp: P 8.3.1.1
+
+<LI>sigsetjmp: P 8.3.1.1
+
+<LI>strtok_r: P96 8.3.3.1 -- unimplemented
+
+<LI>tmpfile: C 4.9.4.3, P 8.2.3.9
+
+<LI>tmpnam: C 4.9.4.4, P 8.2.5
+
+<LI>tzset: P 8.3.2.1
+
+</UL>
+
+<LI>System Databases (Section 9)
+
+
+<UL>
+<LI>getgrgid: P 9.2.1.1
+
+<LI>getgrgid_r: P96 9.2.1.1 -- unimplemented
+
+<LI>getgrnam: P 9.2.1.1
+
+<LI>getgrnam_r: P96 9.2.1.1 -- unimplemented
+
+<LI>getpwnam: P 9.2.2.1
+
+<LI>getpwnam_r: P96 9.2.2.1 -- unimplemented
+
+<LI>getpwuid: P 9.2.2.1
+
+<LI>getpwuid_r: P96 9.2.2.1 -- unimplemented
+
+</UL>
+
+<LI>Synchronization (Section 11)
+
+
+<UL>
+<LI>pthread_cond_broadcast: P96 11.4.3.1 -- unimplemented
+
+<LI>pthread_cond_destroy: P96 11.4.2.1 -- unimplemented
+
+<LI>pthread_cond_init: P96 11.4.2.1 -- unimplemented
+
+<LI>pthread_cond_signal: P96 11.4.3.1 -- unimplemented
+
+<LI>pthread_cond_timedwait: P96 11.4.4.1 -- unimplemented
+
+<LI>pthread_cond_wait: P96 11.4.4.1 -- unimplemented
+
+<LI>pthread_condattr_destroy: P96 11.4.1.1 -- unimplemented
+
+<LI>pthread_condattr_getpshared: P96 11.4.1.1 -- unimplemented
+
+<LI>pthread_condattr_init: P96 11.4.1.1 -- unimplemented
+
+<LI>pthread_condattr_setpshared: P96 11.4.1.1 -- unimplemented
+
+<LI>pthread_mutex_destroy: P96 11.3.2.1
+
+<LI>pthread_mutex_init: P96 11.3.2.1
+
+<LI>pthread_mutex_lock: P96 11.3.3.1
+
+<LI>pthread_mutex_trylock: P96 11.3.3.1
+
+<LI>pthread_mutex_unlock: P96 11.3.3.1
+
+<LI>sem_close: P96 11.2.4.1 -- unimplemented
+
+<LI>sem_destroy: P96 11.2.2.1
+
+<LI>sem_getvalue: P96 11.2.8.1 -- unimplemented
+
+<LI>sem_init: P96 11.2.1.1
+
+<LI>sem_open: P96 11.2.3.1 -- unimplemented
+
+<LI>sem_post: P96 11.2.7.1
+
+<LI>sem_trywait: P96 11.2.6.1
+
+<LI>sem_unlink: P96 11.2.5.1 -- unimplemented
+
+<LI>sem_wait: P96 11.2.6.1
+
+</UL>
+
+<LI>Memory Management (Section 12)
+
+
+<UL>
+<LI>mlock: P96 12.1.2.1 -- unimplemented
+
+<LI>mlockall: P96 12.1.1.1 -- unimplemented
+
+<LI>mmap: P96 12.2.1.1
+
+<LI>mprotect: P96 12.2.3.1
+
+<LI>msync: P96 12.2.4.1
+
+<LI>munlock: P96 12.1.2.1 -- unimplemented
+
+<LI>munlockall: P96 12.1.1.1 -- unimplemented
+
+<LI>munmap: P96 12.2.2.1
+
+<LI>shm_open: P96 12.3.1.1 -- unimplemented
+
+<LI>shm_unlink: P96 12.3.2.1 -- unimplemented
+
+</UL>
+
+<LI>Execution Scheduling (Section 13)
+
+
+<UL>
+<LI>pthread_attr_getinheritsched: P96 13.5.1.1 -- unimplemented
+
+<LI>pthread_attr_getschedparam: P96 13.5.1.1 -- unimplemented
+
+<LI>pthread_attr_getschedpolicy: P96 13.5.1.1 -- unimplemented
+
+<LI>pthread_attr_getscope: P96 13.5.1.1 -- unimplemented
+
+<LI>pthread_attr_setinheritsched: P96 13.5.1.1 -- unimplemented
+
+<LI>pthread_attr_setschedparam: P96 13.5.1.1 -- unimplemented
+
+<LI>pthread_attr_setschedpolicy: P96 13.5.1.1 -- unimplemented
+
+<LI>pthread_attr_setscope: P96 13.5.1.1 -- unimplemented
+
+<LI>pthread_getschedparam: P96 13.5.2.1 -- unimplemented
+
+<LI>pthread_mutex_getprioceiling: P96 13.6.2.1 -- unimplemented
+
+<LI>pthread_mutex_setprioceiling: P96 13.6.2.1 -- unimplemented
+
+<LI>pthread_mutexattr_getprioceiling: P96 13.6.1.1 -- unimplemented
+
+<LI>pthread_mutexattr_getprotocol: P96 13.6.1.1 -- unimplemented
+
+<LI>pthread_mutexattr_setprioceiling: P96 13.6.1.1 -- unimplemented
+
+<LI>pthread_mutexattr_setprotocol: P96 13.6.1.1 -- unimplemented
+
+<LI>pthread_setschedparam: P96 13.5.2.1 -- unimplemented
+
+<LI>sched_get_priority_max: P96 13.3.6.1 -- unimplemented
+
+<LI>sched_get_priority_min: P96 13.3.6.1 -- unimplemented
+
+<LI>sched_getparam: P96 13.3.2.1 -- unimplemented
+
+<LI>sched_getscheduler: P96 13.3.4.1 -- unimplemented
+
+<LI>sched_rr_get_interval: P96 13.3.6.1 -- unimplemented
+
+<LI>sched_setparam: P96 13.3.1.1 -- unimplemented
+
+<LI>sched_setscheduler: P96 13.3.3.1 -- unimplemented
+
+<LI>sched_yield: P96 13.3.5.1 -- unimplemented
+
+</UL>
+
+<LI>Clocks and Timers (Section 14)
+
+
+<UL>
+<LI>clock_getres: P96 14.2.1.1 -- unimplemented
+
+<LI>clock_gettime: P96 14.2.1.1 -- unimplemented
+
+<LI>clock_settime: P96 14.2.1.1 -- unimplemented
+
+<LI>nanosleep: P96 14.2.5.1 -- unimplemented
+
+<LI>timer_create: P96 14.2.2.1 -- unimplemented
+
+<LI>timer_delete: P96 14.2.3.1 -- unimplemented
+
+<LI>timer_getoverrun: P96 14.2.4.1 -- unimplemented
+
+<LI>timer_gettime: P96 14.2.4.1 -- unimplemented
+
+<LI>timer_settime: P96 14.2.4.1 -- unimplemented
+
+</UL>
+
+<LI>Message Passing (Section 15)
+
+
+<UL>
+<LI>mq_close: P96 15.2.2.1 -- unimplemented
+
+<LI>mq_getattr: P96 15.2.8.1 -- unimplemented
+
+<LI>mq_notify: P96 15.2.6.1 -- unimplemented
+
+<LI>mq_open: P96 15.2.1.1 -- unimplemented
+
+<LI>mq_receive: P96 15.2.5.1 -- unimplemented
+
+<LI>mq_send: P96 15.2.4.1 -- unimplemented
+
+<LI>mq_setattr: P96 15.2.7.1 -- unimplemented
+
+<LI>mq_unlink: P96 15.2.3.1 -- unimplemented
+
+</UL>
+
+<LI>Thread Management (Section 16)
+
+
+<UL>
+<LI>pthread_attr_destroy: P96 16.2.1.1
+
+<LI>pthread_attr_getdetachstate: P96 16.2.1.1 -- unimplemented
+
+<LI>pthread_attr_getstackaddr: P96 16.2.1.1 -- unimplemented
+
+<LI>pthread_attr_getstacksize: P96 16.2.1.1
+
+<LI>pthread_attr_init: P96 16.2.1.1
+
+<LI>pthread_attr_setdetachstate: P96 16.2.1.1 -- unimplemented
+
+<LI>pthread_attr_setstackaddr: P96 16.2.1.1 -- unimplemented
+
+<LI>pthread_attr_setstacksize: P96 16.2.1.1
+
+<LI>pthread_create: P96 16.2.2.1
+
+<LI>pthread_detach: P96 16.2.4.1 -- unimplemented
+
+<LI>pthread_equal: P96 16.2.7.1
+
+<LI>pthread_exit: P96 16.2.5.1
+
+<LI>pthread_join: P96 16.2.3.1 -- unimplemented
+
+<LI>pthread_once: P96 16.2.8.1 -- unimplemented
+
+<LI>pthread_self: P96 16.2.6.1
+
+</UL>
+
+<LI>Thread-Specific Data (Section 17)
+
+
+<UL>
+<LI>pthread_getspecific: P96 17.1.2.1
+
+<LI>pthread_key_create: P96 17.1.1.1
+
+<LI>pthread_key_delete: P96 17.1.3.1
+
+<LI>pthread_setspecific: P96 17.1.2.1
+
+</UL>
+
+<LI>Thread Cancellation (Section 18)
+
+
+<UL>
+<LI>pthread_cancel: P96 18.2.1.1 -- unimplemented
+
+<LI>pthread_cleanup_pop: P96 18.2.3.1 -- unimplemented
+
+<LI>pthread_cleanup_push: P96 18.2.3.1 -- unimplemented
+
+<LI>pthread_setcancelstate: P96 18.2.2.1 -- unimplemented
+
+<LI>pthread_setcanceltype: P96 18.2.2.1 -- unimplemented
+
+<LI>pthread_testcancel: P96 18.2.2.1 -- unimplemented
+
+</UL>
+
+
+
+<H2><A NAME="SEC15" HREF="faq_toc.html#TOC15">Misc Functions</A></H2>
+
+<LI>Networking (net.cc) (Standardized by POSIX 1.g, which is probably still in draft?)
+
+
+<UL>
+<LI>accept
+
+<LI>bind
+
+<LI>connect
+
+<LI>getdomainname
+
+<LI>gethostbyaddr
+
+<LI>gethostbyname
+
+<LI>getpeername
+
+<LI>getprotobyname
+
+<LI>getprotobynumber
+
+<LI>getservbyname
+
+<LI>getservbyport
+
+<LI>getsockname
+
+<LI>getsockopt
+
+<LI>herror
+
+<LI>htonl
+
+<LI>htons
+
+<LI>inet_addr
+
+<LI>inet_makeaddr
+
+<LI>inet_netof
+
+<LI>inet_ntoa
+
+<LI>listen
+
+<LI>ntohl
+
+<LI>ntohs
+
+<LI>rcmd
+
+<LI>recv
+
+<LI>recvfrom
+
+<LI>rexec
+
+<LI>rresvport
+
+<LI>send
+
+<LI>sendto
+
+<LI>setsockopt
+
+<LI>shutdown
+
+<LI>socket
+
+<LI>socketpair
+
+</UL>
+
+Of these networking calls, rexec, rcmd and rresvport are implemented
+in MS IP stack but may not be implemented in other vendors' stacks.
+
+<LI>Other
+
+
+<UL>
+<LI>chroot (stub, sets ENOSYS, returns -1)
+
+<LI>closelog
+
+<LI>cwait
+
+<LI>cygwin_conv_to_full_posix_path
+
+<LI>cygwin_conv_to_full_win32_path
+
+<LI>cygwin_conv_to_posix_path
+
+<LI>cygwin_conv_to_win32_path
+
+<LI>cygwin_posix_path_list_p
+
+<LI>cygwin_posix_to_win32_path_list
+
+<LI>cygwin_posix_to_win32_path_list_buf_size
+
+<LI>cygwin_split_path
+
+<LI>cygwin_win32_to_posix_path_list
+
+<LI>cygwin_win32_to_posix_path_list_buf_size
+
+<LI>cygwin_winpid_to_pid
+
+<LI>dlclose
+
+<LI>dlerror
+
+<LI>dlfork
+
+<LI>dlopen
+
+<LI>dlsym
+
+<LI>endgrent
+
+<LI>endhostent
+
+<LI>ffs
+
+<LI>fstatfs
+
+<LI>ftime
+
+<LI>get_osfhandle
+
+<LI>getdtablesize
+
+<LI>getgrent
+
+<LI>gethostname
+
+<LI>getitimer
+
+<LI>getmntent
+
+<LI>getpagesize
+
+<LI>getpgid
+
+<LI>getpwent
+
+<LI>gettimeofday: BSD
+
+<LI>grantpt
+
+<LI>initgroups (stub)
+
+<LI>ioctl
+
+<LI>killpg
+
+<LI>login
+
+<LI>logout
+
+<LI>lstat
+
+<LI>mknod (stub, sets ENOSYS, returns -1)
+
+<LI>memccpy
+
+<LI>nice
+
+<LI>openlog
+
+<LI>pclose
+
+<LI>popen
+
+<LI>ptsname
+
+<LI>putenv
+
+<LI>random
+
+<LI>readv
+
+<LI>realpath
+
+<LI>regfree
+
+<LI>rexec
+
+<LI>select
+
+<LI>setegid: SVR4 (stub, sets ENOSYS, returns zero)@item endpwent
+
+<LI>setenv
+
+<LI>seterrno
+
+<LI>seteuid (stub, sets ENOSYS, returns zero)
+
+<LI>sethostent
+
+<LI>setitimer
+
+<LI>setmntent
+
+<LI>setmode
+
+<LI>setpassent
+
+<LI>setpgrp
+
+<LI>setpwent
+
+<LI>settimeofday: BSD (stub, set ENOSYS, return -1)
+
+<LI>sexecl
+
+<LI>sexecle
+
+<LI>sexeclp
+
+<LI>sexeclpe
+
+<LI>sexeclpe
+
+<LI>sexecp
+
+<LI>sexecv
+
+<LI>sexecve
+
+<LI>sexecvpe
+
+<LI>sigpause
+
+<LI>spawnl (spawn calls are from Windows C library)
+
+<LI>spawnle
+
+<LI>spawnlp
+
+<LI>spawnlpe
+
+<LI>spawnv
+
+<LI>spawnve
+
+<LI>spawnvp
+
+<LI>spawnvpe
+
+<LI>srandom
+
+<LI>statfs
+
+<LI>strsignal
+
+<LI>strtosigno
+
+<LI>swab
+
+<LI>syslog
+
+<LI>timezone
+
+<LI>truncate (SVR4/4.3+BSD)
+
+<LI>ttyslot
+
+<LI>unlockpt
+
+<LI>unsetenv
+
+<LI>usleep
+
+<LI>utimes
+
+<LI>vfork: stub that calls fork
+
+<LI>vhangup (stub, sets ENOSYS, returns -1)
+
+<LI>wait3
+
+<LI>wait4
+
+<LI>wcscmp
+
+<LI>wcslen
+
+<LI>wprintf
+
+<LI>writev
+
+</UL>
+
+</UL>
+
+<P><HR><P>
+Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_3.html">previous</A>, <A HREF="faq_5.html">next</A>, <A HREF="faq_13.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+

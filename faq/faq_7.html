@@ -1,0 +1,407 @@
+<title>The Cygwin Project FAQ 20.2 for Release B20.1.  - Using Cygwin Releases</title>
+Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_6.html">previous</A>, <A HREF="faq_8.html">next</A>, <A HREF="faq_13.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H1><A NAME="SEC31" HREF="faq_toc.html#TOC31">Using Cygwin Releases</A></H1>
+
+
+
+<H2><A NAME="SEC32" HREF="faq_toc.html#TOC32">Why aren't man, groff, etc. included in the betas?</A></H2>
+
+<P>
+For obvious reasons, it isn't feasible for us to maintain and provide
+binary distributions of every tool ported to work with the Cygwin
+tools.  Instead I think Cygnus should concentrate its efforts on the
+Cygwin library and the core development tools.  It's likely that a
+man command will get added once we get it working to our satisfaction.
+
+</P>
+<P>
+Other tools that have been ported should have their changes added to
+the official releases so they can be compiled straight from normal
+sources for that tool.  In cases where that isn't possible, someone
+else (possibly Cygnus if that made sense) could maintain the diffs and
+have them up for ftp.  Maybe we could keep a list of such tools on the
+Cygwin Web site...
+
+</P>
+
+
+<H2><A NAME="SEC33" HREF="faq_toc.html#TOC33">Where can I find "less"?</A></H2>
+
+<P>
+The less pager binary is available for the first time in the 20.1
+release.  You will get it if you upgrade.  It is also available from
+various ftp locations on the Net.  Search the mailing list archives for
+the details.
+
+</P>
+
+
+<H2><A NAME="SEC34" HREF="faq_toc.html#TOC34">Where can I find "more"?</A></H2>
+
+<P>
+If you are looking for the "more" pager, you should use the "less" pager
+instead.  See the last question and answer for more information.
+
+</P>
+
+
+<H2><A NAME="SEC35" HREF="faq_toc.html#TOC35">Where can I find "which"?</A></H2>
+
+<P>
+While we don't include a which command, you can use the bash built
+in "type" command which does something fairly similar.
+
+</P>
+
+
+<H2><A NAME="SEC36" HREF="faq_toc.html#TOC36">How can I access other drives?</A></H2>
+
+<P>
+The best way is to use the "mount" command to mount the drive letter so
+that you can refer to it with only single slashes:
+
+</P>
+
+<PRE>
+bash$ mkdir /c
+bash$ mount c:/ /c
+bash$ ls /c
+....
+</PRE>
+
+<P>
+This is done with textual substitution whenever a file is opened.
+So if you're going to do <CODE>ls /c/bar</CODE> on a mount like the above
+the guts will turn that into <CODE>ls c:/bar</CODE>.
+
+</P>
+<P>
+Note that you only need to mount drives once.  The mapping is kept
+in the registry so mounts stay valid pretty much indefinitely.
+You can only get rid of them with umount (or the registry editor).
+
+</P>
+<P>
+The '-b' option to mount mounts the mountpoint in binary mode where text
+and binary files are treated equivalently.  This should only be
+necessary for badly ported Unix programs where binary flags are missing
+from open calls.
+
+</P>
+<P>
+Since the beta 16 release, we also support a special means of accessing
+other drive letters without using the <CODE>mount</CODE> command.  This
+support may disappear in a future Cygwin release because of the
+collision between this scheme and UNC pathname support (one character
+machine names don't work currently).
+
+</P>
+<P>
+To do an "ls" on drive letter f:, do the following:
+
+</P>
+
+<PRE>
+bash$ ls //f/
+</PRE>
+
+<P>
+Note that you can also access UNC paths in the standard way.  Because of
+the drive letter shortcut mentioned above, machine names in UNC paths
+must be more than one character long.
+
+</P>
+
+
+<H2><A NAME="SEC37" HREF="faq_toc.html#TOC37">How can I copy and paste into Cygwin console windows?</A></H2>
+
+<P>
+Under Windows NT, open the properties dialog of the console window.
+The options contain a toggle button, named "Quick edit mode".  It must
+be ON.  Save the properties.
+
+</P>
+<P>
+Under Windows 9x, open the properties dialog of the console window.
+Select the Misc tab.  Uncheck Fast Pasting.  Check QuickEdit.
+
+</P>
+
+
+<H2><A NAME="SEC38" HREF="faq_toc.html#TOC38">What does "mount failed: Device or resource busy" mean?</A></H2>
+
+<P>
+This usually means that you are trying to mount to a location
+already in use by mount.  For example, if c: is mounted as '/'
+and you try to mount d: there as well, you will get this error
+message.  First "umount" the old location, then "mount" the new one and
+you should have better luck.
+
+</P>
+<P>
+If you are trying to umount '/' and are getting this message, you may
+need to run <CODE>regedit.exe</CODE> and change the "native" key for the '/'
+mount in one of the mount points kept under
+HKEY_CURRENT_USER/Software/Cygnus Solutions/CYGWIN.DLL setup/&#60;version&#62;
+where &#60;version&#62; is the latest registry version associated with the
+Cygwin library.
+
+</P>
+
+
+<H2><A NAME="SEC39" HREF="faq_toc.html#TOC39">How can I share files between Unix and Windows?</A></H2>
+
+<P>
+During development, we have both Unix boxes running Samba and
+NT/Windows 95/98 machines.  We often build with cross-compilers
+under Unix and copy binaries and source to the Windows system
+or just toy with them directly off the Samba-mounted partition.
+On dual-boot NT/Windows 9x machines, we usually use the FAT
+filesystem so we can also access the files under Windows 9x.
+
+</P>
+
+
+<H2><A NAME="SEC40" HREF="faq_toc.html#TOC40">Are mixed-case filenames possible with Cygwin?</A></H2>
+
+<P>
+Several Unix programs expect to be able to use to filenames
+spelled the same way, but with different case.  A prime example
+of this is perl's configuration script, which wants <CODE>Makefile</CODE> and
+<CODE>makefile</CODE>.  WIN32 can't tell the difference between files with
+just different case, so the configuration fails.
+
+</P>
+<P>
+In releases prior to beta 16, mount had a special mixed case option
+which renamed files in such a way as to allow mixed case filenames.
+We chose to remove the support when we rewrote the path handling
+code for beta 16.
+
+</P>
+
+
+<H2><A NAME="SEC41" HREF="faq_toc.html#TOC41">What about DOS special filenames?</A></H2>
+
+<P>
+Files cannot be named com1, lpt1, or aux (to name a few); either as
+the root filename or as the extension part.  If you do, you'll have
+trouble.  Unix programs don't avoid these names which can make things
+interesting.  E.g., the perl distribution has a file called
+<CODE>aux.sh</CODE>.  The perl configuration tries to make sure that
+<CODE>aux.sh</CODE> is there, but an operation on a file with the magic
+letters 'aux' in it will hang.
+
+</P>
+
+
+<H2><A NAME="SEC42" HREF="faq_toc.html#TOC42">When it hangs, how do I get it back?</A></H2>
+
+<P>
+If something goes wrong and the tools hang on you for some reason (easy
+to do if you try and read a file called aux.sh), first try hitting ^C to
+return to bash or the cmd prompt.
+
+</P>
+<P>
+If you start up another shell, and applications don't run, it's a good
+bet that the hung process is still running somewhere.  Use the Task
+Manager, pview, or a similar utility to kill the process.
+
+</P>
+<P>
+And, if all else fails, there's always the reset button/power switch.
+This should never be necessary under Windows NT.
+
+</P>
+
+
+<H2><A NAME="SEC43" HREF="faq_toc.html#TOC43">Why the weird directory structure?</A></H2>
+
+<P>
+Why are cpp.exe, cc1.exe, etc., not in the bin directory?
+
+</P>
+<P>
+Why more than one lib and include directory?
+
+</P>
+
+<PRE>
+H-i586-cygwin32\lib\gcc-lib\...\egcs-2.91.57\include
+x86-cygwin32\include
+x86-cygwin32\H-i586-cygwin32\i586-cygwin32\include
+</PRE>
+
+<P>
+This way multiple releases for different hosts and targets can all
+coexist in the same tree.  H-i586-cygwin32 means hosted on
+i586-cygwin32, common files shared by all hosts are in the top level
+directories, target-specific files are in the
+H-i586-cygwin32/i586-cygwin32
+directory, etc...
+
+</P>
+<P>
+If you had a server sharing files to a ppc NT machine and an x86 NT
+machine, you could have both an H-i586-cygwin32 and an
+H-powerpcle-cygwin32 directory without having to duplicate the top level
+files that are the same for both hosts.  If you built and installed an
+i586-cygwin32 x mips-elf cross-compiler, you would have an
+H-i586-cygwin32/mips-elf with its target-specific files and some
+mips-elf- prefixed binaries in H-i586-cygwin32/bin.
+
+</P>
+<P>
+Normally we also have another higher level directory that identifies the
+release.  Then multiple Cygwin releases can coexist with different
+dll versions, giving:
+
+</P>
+
+<PRE>
+cygnus/b19/H-i586-cygwin32
+cygnus/cygwin-b20/H-i586-cygwin32
+...
+</PRE>
+
+<P>
+In any case, this does add complexity to the directory structure but
+it's worth it for people with more complex installations.
+
+</P>
+
+
+<H2><A NAME="SEC44" HREF="faq_toc.html#TOC44">How do anti-virus programs like Cygwin?</A></H2>
+
+<P>
+One person reported that McAfee VirusScan for NT (and others?) is
+incompatible with Cygwin.  This is because it tries to scan the
+newly loaded shared memory in the cygwin.dll, which can cause fork()s
+to fail, wreaking havoc on many of the tools.
+
+</P>
+
+
+<H2><A NAME="SEC45" HREF="faq_toc.html#TOC45">Why can't I run bash as a shell under NT Emacs?</A></H2>
+
+<P>
+Place the following code in your startup file and try again:
+
+</P>
+
+<PRE>
+(load "comint")
+(fset 'original-comint-exec-1 (symbol-function 'comint-exec-1))
+(defun comint-exec-1 (name buffer command switches)
+  (let ((binary-process-input t)
+        (binary-process-output nil))
+    (original-comint-exec-1 name buffer command switches)))
+</PRE>
+
+
+
+<H2><A NAME="SEC46" HREF="faq_toc.html#TOC46">Where did the man/info pages go?</A></H2>
+
+<P>
+In order to save space and download times, we have stopped providing
+the man/info files for the tools with the binary install since we are
+not yet providing a man page or info reader.  Both types of
+documentation are available in a tar file available from the project ftp
+site.  Or consult the online documentation over the WWW.
+
+</P>
+
+
+<H2><A NAME="SEC47" HREF="faq_toc.html#TOC47">Why can't B20's "cygcheck -s" find cpp?</A></H2>
+
+<P>
+This is a confusingly worded warning that will be reworded in future
+versions.  In fact, cygcheck should normally *not* find cpp; if it does,
+it may be a problem (e.g. it might pick up Borland's cpp, which would
+cause problems).
+
+</P>
+
+
+<H2><A NAME="SEC48" HREF="faq_toc.html#TOC48">Why do I get a message saying Out of Queue slots?</A></H2>
+
+<P>
+"Out of queue slots!" generally occurs when you're trying to remove
+many files that you do not have permission to remove (either because
+you don't have permission, they are opened exclusively, etc).  What
+happens is Cygwin queues up these files with the supposition that it
+will be possible to delete these files in the future.  Assuming that
+the permission of an affected file does change later on, the file will
+be deleted as requested.  However, if too many requests come in to
+delete inaccessible files, the queue overflows and you get the message
+you're asking about.  Usually you can remedy this with a quick chmod,
+close of a file, or other such thing.  (Thanks to Larry Hall for
+this explanation).
+
+</P>
+
+
+<H2><A NAME="SEC49" HREF="faq_toc.html#TOC49">Why don't symlinks work on samba-mounted filesystems?</A></H2>
+
+<P>
+Mumit Khan writes (edited):
+
+</P>
+<P>
+Cygwin implements the symbolic links by adding a magic cookie to the
+file and then setting the SYSTEM attribute (this is just for
+efficiency). Samba servers support this SYSTEM attribute by setting
+the group execute bit on a file, so it does support the symbolic links
+already. Unfortunately, the reason you don't see it is because it's
+turned OFF by default.
+
+</P>
+<P>
+If you need to have symbolic support in the server, you can turn it on
+by the following in the Samba configuration file and then restarting
+it:
+
+</P>
+
+<PRE>
+   mask system = yes 
+   create mask = 0775
+</PRE>
+
+<P>
+the "create mask" can be anything as long as you *DON'T* mask out the
+group execute bit (ie., 010), which is what Samba server uses to
+support the SYSTEM attribute.
+
+</P>
+<P>
+Please consult your SAMBA docs before doing anything. I don't know how
+far back this support goes, but I remember it back in 1.9.x days.
+
+</P>
+
+
+<H2><A NAME="SEC50" HREF="faq_toc.html#TOC50">Why does df report sizes incorrectly.</A></H2>
+
+<P>
+There is a bug in the Win32 API function GetFreeDiskSpace that
+makes it return incorrect values for disks larger than 2 GB in size.
+Perhaps that may be your problem?
+
+</P>
+
+
+<H2><A NAME="SEC51" HREF="faq_toc.html#TOC51">Has the screen program been ported yet?</A></H2>
+
+<P>
+Screen requires either unix domain sockets or fifoes.  Neither of
+them have been implemented in Cygwin yet.
+
+</P>
+<P><HR><P>
+Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_6.html">previous</A>, <A HREF="faq_8.html">next</A>, <A HREF="faq_13.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+

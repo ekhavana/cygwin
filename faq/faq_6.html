@@ -1,0 +1,144 @@
+<title>The Cygwin Project FAQ 20.2 for Release B20.1.  - Installation and Setup</title>
+Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_5.html">previous</A>, <A HREF="faq_7.html">next</A>, <A HREF="faq_13.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H1><A NAME="SEC20" HREF="faq_toc.html#TOC20">Installation and Setup</A></H1>
+
+
+
+<H2><A NAME="SEC21" HREF="faq_toc.html#TOC21">Why is the install of the tools failing?</A></H2>
+
+<P>
+If you are getting an error message saying "The decompression of
+%s failed.  There may not be enough free disk space in the TEMP
+directory.", read on.
+
+</P>
+<P>
+InstallShield has a bug where it fails with this message if there
+are more than a certain number of files in your TEMP directory.
+You can also get this message if you have files in your TEMP dir
+named the same thing InstallShield wishes to name its files (probably
+from past runs of other InstallShield install scripts) which it cannot,
+for some reason, write over.  Perhaps this will be fixed in a future
+release of InstallShield.
+
+</P>
+<P>
+Until then, clearing out your TEMP directory entirely should do it.
+That will get rid of any files with conflicting names and solve the
+"too many files" problem as well.
+
+</P>
+
+
+<H2><A NAME="SEC22" HREF="faq_toc.html#TOC22">Help! I haven't created /tmp and tools are behaving strangely!</A></H2>
+
+<P>
+Many Unix tools (bash, byacc, etc.) expect that /tmp always exists.
+This is not guaranteed in Win32 land.  You should create /tmp or "mount"
+the directory of your choice to /tmp to avoid this problem.
+
+</P>
+
+
+<H2><A NAME="SEC23" HREF="faq_toc.html#TOC23">Why does bash spew out "49054596: No such file or directory"?</A></H2>
+
+<P>
+Are you sure you created a /tmp?  The bash shell will print a
+warning if it doesn't find a /tmp directory.
+
+</P>
+
+
+<H2><A NAME="SEC24" HREF="faq_toc.html#TOC24">How do I set /etc up?</A></H2>
+
+<P>
+If you want a valid /etc set up (so "ls -l" will display correct
+user information for example) and if you are running NT (preferably
+with an NTFS file system), you should just need to create the /etc
+directory on the filesystem mounted as / and then use mkpasswd and
+mkgroup to create /etc/passwd and /etc/group respectively.  Since
+Windows 95/98's Win32 API is less complete, you're out of luck if
+you're running Windows 95/98.
+
+</P>
+
+
+<H2><A NAME="SEC25" HREF="faq_toc.html#TOC25">Bash says that it can't vfork (or just hangs).  Why?</A></H2>
+
+<P>
+Most often this is because it can't find itself in the path.  Make sure
+that your path includes the directory where bash lives, before you start
+it.
+
+</P>
+<P>
+Also make sure you have a valid <CODE>/bin/sh.exe</CODE>.  If you get errors
+like 'no such file or directory' when you're trying to run a shell
+script, which you know is there, then your problem is probably that bash
+can't find <CODE>/bin/sh</CODE>.
+
+</P>
+
+
+<H2><A NAME="SEC26" HREF="faq_toc.html#TOC26">How can I get bash to read my .bashrc file on startup?</A></H2>
+
+<P>
+Your .bashrc is read from your home directory specified by the HOME
+environment variable.  It uses c:\ if HOME is not set.  So you need
+to set HOME correctly, or move your .bashrc to c:\.
+
+</P>
+
+
+<H2><A NAME="SEC27" HREF="faq_toc.html#TOC27">How can I get bash filename completion to be case insensitive?</A></H2>
+
+<P>
+"shopt -s nocaseglob" should do the trick.
+
+</P>
+
+
+<H2><A NAME="SEC28" HREF="faq_toc.html#TOC28">Can I use paths/filenames containing spaces in them?</A></H2>
+
+<P>
+Cygwin does support spaces in filenames and paths.  That said, some
+utilities that use the library may not, since files don't typically
+contain spaces in Unix.  If you stumble into problems with this, you
+will need to either fix the utilities or stop using spaces in filenames
+used by Cygwin tools.
+
+</P>
+
+
+<H2><A NAME="SEC29" HREF="faq_toc.html#TOC29">Why can't I cd into a shortcut to a directory?</A></H2>
+
+<P>
+Cygwin does not follow MS Windows Explorer Shortcuts (*.lnk
+files) yet.  It sees a shortcut as a regular file and this you
+cannot "cd" into it.
+
+</P>
+<P>
+Some people have suggested replacing the current symbolic link scheme
+with shortcuts.  The major problem with this is that .LNK files would
+then be used to symlink Cygwin paths that may or may not be valid
+under native Win32 non-Cygwin applications such as Explorer.
+
+</P>
+
+
+<H2><A NAME="SEC30" HREF="faq_toc.html#TOC30">I'm having basic problems with find.  Why?</A></H2>
+
+<P>
+Make sure you are using the find that came with the Cygwin tools
+and that you aren't picking up the Win32 find command instead.  You
+can verify that you are getting the right one by doing a "type find"
+in bash.
+
+</P>
+<P><HR><P>
+Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_5.html">previous</A>, <A HREF="faq_7.html">next</A>, <A HREF="faq_13.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+

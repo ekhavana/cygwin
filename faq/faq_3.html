@@ -1,0 +1,243 @@
+<title>The Cygwin Project FAQ 20.2 for Release B20.1.  - Installation Instructions</title>
+Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_2.html">previous</A>, <A HREF="faq_4.html">next</A>, <A HREF="faq_13.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+<P><HR><P>
+
+
+<H1><A NAME="SEC7" HREF="faq_toc.html#TOC7">Installation Instructions</A></H1>
+
+
+<H2><A NAME="SEC8" HREF="faq_toc.html#TOC8">Contents</A></H2>
+
+<P>
+The following packages are included in the full release:
+
+</P>
+<P>
+Development tools:
+binutils, bison, byacc, dejagnu, diff, expect, flex, gas, gcc, gdb,
+itcl, ld, libstdc++, make, patch, tcl, tix, tk
+
+</P>
+<P>
+User tools:
+ash, bash, bzip2, diff, fileutils, findutils, gawk, grep, gzip, m4,
+sed, shellutils, tar, textutils, time
+
+</P>
+<P>
+The user tools release only contains the user tools.
+
+</P>
+<P>
+Full source code is available for these tools.  It is split into
+these two units.
+
+</P>
+
+
+<H2><A NAME="SEC9" HREF="faq_toc.html#TOC9">Installing the binary release:</A></H2>
+
+<P>
+Important!  Be sure to remove any older versions of the Cygwin tools
+from your PATH environment variable so you do not execute them by
+mistake.
+
+</P>
+<P>
+Connect to one of the ftp servers listed above and cd to the directory
+containing the latest release.  On our primary server, that would be:
+
+</P>
+<P>
+<TT><a target="_top" href="ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/">ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/</a></TT>.
+
+</P>
+<P>
+If you want the development tools and the programs necessary to run
+the GNU configure mechanism, you should download the full binary release
+called <TT>`full.exe'</TT>.  If you only care about the user tools
+listed above, download <TT>`user.exe'</TT> instead.
+
+</P>
+<P>
+If you have an unreliable connection, download the appropriate binary in
+smaller chunks instead.  For the split cdk installer, get the files in
+the <TT>`full-split'</TT> subdirectory.  Once downloaded, combine the
+split files at the command prompt by doing a:
+
+</P>
+
+<PRE>
+copy /b xaa + xab + xac + ... + xak + xal full.exe
+del xa*.*
+</PRE>
+
+<P>
+A similar process can be used for the user tools.
+
+</P>
+<P>
+Once you have an install executable on your system, run it.  If
+a previous version of the software is detected, it will offer to
+uninstall it for you.
+
+</P>
+<P>
+Next it will ask you to choose an install location.  The default is
+<TT>`&#60;system-drive&#62;:\cygnus\cygwin-b20'</TT>.  Feel free to choose another
+location if you would prefer.
+
+</P>
+<P>
+Finally, it will ask you for the name of the Program Files folder
+shortcut to add.  By default, the installer will create
+a <TT>`Cygwin B20'</TT> entry in a
+folder called <TT>`Cygnus Solutions'</TT>.  When this step is completed, it
+will install the tools and exit.
+
+</P>
+<P>
+At this point, you should be able to look under the start menu and
+select "Cygwin B20".  This will pop up a bash shell with all special
+environment variables set up for you.  If you are running Windows 95 or
+98 and are faced with the error message "Out of environment space", you
+need to increase the amount of environment space in your config.sys and
+try again.  Adding the line <CODE>shell=C:\command.com /e:4096 /p</CODE>
+should do the trick if <CODE>C:</CODE> is your system drive letter.
+
+</P>
+<P>
+There are two remaining thing you should do from this prompt.
+First, you need to type <CODE>mkdir -p /tmp</CODE> to ensure that a directory
+for temporary files exists for programs that expect to find one there.
+
+</P>
+<P>
+Second, if you are installing the full distribution
+(<TT>`full.exe'</TT>), various programs will need to be able to find
+<TT>`/bin/sh'</TT>.  You should <TT>`mkdir -p /bin'</TT> and put a copy of
+<TT>`sh.exe'</TT> there, removing the older version, if present.  You can
+use the <TT>`mount'</TT> utility to select which drive letter is mounted as
+<TT>`/'</TT>. See the Frequently Asked Questions (FAQ) file for more
+information on <TT>`mount'</TT>.
+
+</P>
+<P>
+If you should ever want to uninstall the tools, you may do so
+via the "Add/Remove Programs" control panel.
+
+</P>
+
+
+<H2><A NAME="SEC10" HREF="faq_toc.html#TOC10">Installing the source code</A></H2>
+
+<P>
+Before downloading the source code corresponding to the release,
+you should install the latest release of the tools (either the full
+release or just the user tools).
+
+</P>
+<P>
+Create the directory that will house the source code.  <TT>`cd'</TT>
+there.
+
+</P>
+<P>
+Connect to one of the ftp servers listed above and cd to the directory
+containing the latest release.  On our primary server, that would be:
+
+</P>
+<P>
+<TT><a target="_top" href="ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/">ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/latest/</a></TT>.
+
+</P>
+<P>
+If you want the user tools source code, <TT>`cd'</TT> into the
+<TT>`user-src-split'</TT> subdirectory.  Download the files there.  If you
+want the development tools sources, <TT>`cd'</TT> into the
+<TT>`dev-src-split'</TT> subdirectory.  Download the files there.
+
+</P>
+<P>
+Back in the Windows command shell, for the user tools source:
+
+</P>
+
+<PRE>
+copy /b xba + xbb + xbc + xbd + xbe + xbf + xbg user-src.tar.bz2
+del xb*.*
+bunzip2 user-src.tar.bz2
+tar xvf user-src.tar
+</PRE>
+
+<P>
+For the development tools source:
+
+</P>
+
+<PRE>
+copy /b xca + xcb + xcc + xcd + ... + xck + xcl dev-src.tar.bz2
+del xc*.*
+bunzip2 dev-src.tar.bz2
+tar xvf dev-src.tar
+</PRE>
+
+<P>
+Both expand into a directory called <TT>`src'</TT>.
+
+</P>
+<P>
+Note: if you want the sources corresponding to everything in the
+full.exe binary installer, you will need to download and expand both
+the user-src.tar.bz2 and dev-src.tar.bz2 source archives!
+
+</P>
+<P>
+And you should be done...
+
+</P>
+
+
+<H2><A NAME="SEC11" HREF="faq_toc.html#TOC11">Upgrading to B20.1</A></H2>
+
+<P>
+If you downloaded the original B20.0 release, you should definitely at
+least upgrade the Cygwin library to the version present in B20.1.  To do
+this, download the file
+<TT><a target="_top" href="ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/cygwin-b20/cygwin1-20.1.dll.bz2">ftp://go.cygnus.com/pub/sourceware.cygnus.com/cygwin/cygwin-b20/cygwin1-20.1.dll.bz2</a></TT>,
+decompress it with bunzip2, and then install the dll, replacing
+the file cygwin-b20/H-i586-cygwin32/bin/cygwin1.dll in your original
+installation of 20.0.
+
+</P>
+<P>
+There are some additional patches in a few of the other tools
+(including a gcc change that makes -mno-cygwin find the correct header
+files).  In addition, the tools have been built with a compiled-in path
+of /cygnus/cygwin-b20/ which will make some tools such as bison find
+their library files without help from environment variables.
+To install the full 20.1 release, you will need to download the
+correct installer from scratch.  It will offer to uninstall the existing
+release and replace it with 20.1 (You should choose to uninstall b20 and
+proceed).
+
+</P>
+<P>
+We have diff files on the ftp site that can be used to upgrade the
+original B20.0 sources.  20.0-20.1-dev-src.diff.bz2 upgrades the
+development tools sources.  20.0-20.1-user-src.diff.bz2 upgrades the
+user tools sources.  They come compressed so you'll need to bunzip2 them
+before proceeding.  As an example, if the development tools are in the
+directory called "src" and the patch is in the directory above it, apply
+the patch as follows:
+
+</P>
+
+<PRE>
+cd src
+patch -p1 -E &#60; ../20.0-20.1-dev-src.diff
+</PRE>
+
+<P><HR><P>
+Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_2.html">previous</A>, <A HREF="faq_4.html">next</A>, <A HREF="faq_13.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+
