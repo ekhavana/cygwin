@@ -16,7 +16,7 @@
 
 <!--#include virtual="../../cygx-header.html" -->
 
-<p>Last updated: 2002-04-04 2206 EST</p>
+<p>Last updated: 2002-06-07 2235 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -31,7 +31,7 @@ href="http://cygwin.com/mirrors.html">closest mirror</a>.</p>
 <table>
 <tbody>
 
-<tr><td>Released: 2002-04-03 2033 EST</td></tr>
+<tr><td>Released: 2002-06-07 2235 EDT</td></tr>
 
 <tr><td>Committed to XFree86 CVS: not yet</td></tr>
 
@@ -42,8 +42,8 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test.exe.bz2">XWin-Test.exe.
 (1078 KiB)</td></tr>
 
 <tr><td>Download source: <a
-href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020403-2033.tar.bz2">xwin-20020403-2033.tar.bz2</a>
-(70 KiB)</td</tr>
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-20020607-2235.tar.bz2</a>
+(72 KiB)</td</tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -59,6 +59,75 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020403-2033.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test56</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2002-06-07 2235 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test56.exe.bz2">XWin-Test56.exe.bz2</a>
+(1078 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-20020607-2235.tar.bz2</a>
+(72 KiB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>InitOutput.c, win.h, wincreatewnd.c - Add a -nodecoration
+parameter that creates the Cygwin/XFree86 window that is the same size
+as the desktop, without a border.  The end effect is that you can
+still get to the taskbar (even with Auto Hide enabled) and easily
+switch to other application while not giving up any screen space to
+the title bar, borders, etc.  (Jehan)</li>
+
+<li>winkeybd.c - Disregard the bogus key releases that we see when
+losing the focus via Alt+Tab.  (Stuart Adamson)</li>
+
+<li>win.h, winkeybd.h, winkeybd.c, winwndproc.c - Release all pressed
+keys when the X server loses the keyboard focus.  (Stuart
+Adamson)</li>
+
+<li>InitOutput.c - Fix a typo that set iE3BTimeout to TRUE instead of
+the specified timeout parameter when using the 3 button mouse
+emulation timeout parameter with a single X screen.  (Stuart
+Adamson)</li>
+
+<li>wincursor.c - See if we are the foreground window before warping
+the Windows cursor position.  This fixes the new bug that occurs if
+you launch Cygwin/XFree86 and give another application the focus.  In
+that case the Windows mouse cursor would still jump to the center of
+the screen, even though the Cygwin/XFree86 window was not active.
+(Harold Hunt)</li>
+
+<li>winkeybd.h - Fix the bug where pressing both shift keys then
+releasing them both would still cause all keyboard input to be
+shift-modified.  The fix was to set the fixup for the non-extended
+VK_SHIFT key to KEY_ShiftL.  (Harold Hunt)</li>
+
+<li>wincreatewnd.c - Pass SW_SHOWNORMAL instead of SW_HIDE to
+ShowWindow when running a DirectDraw engine in fullscreen mode.  This
+fixes the bug where launching Cygwin/XFree86 then giving another
+application the focus before the Cygwin/XFree86 window was displayed
+would cause Cygwin/XFree86 to never display a window or register a
+window handle on the Windows taskbar.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 <h4>Test55</h4>
