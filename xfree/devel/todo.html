@@ -16,7 +16,7 @@
 
 <h2>Cygwin/X - Development - To-Do List</h2>
 
-<p>Last updated: 2003-09-22 1620 EDT (Harold L Hunt II)</p>
+<p>Last updated: 2003-12-27 1912 EST (Harold L Hunt II)</p>
 
 <p>Following is a list of open tasks on the Cygwin/X
 project:</p>
@@ -60,20 +60,6 @@ idea here is to add checks to any copying of data between offscreen
 and onscreen, as well as between areas on the screen; these checks
 test for differing visual types and convert the pixels and colors
 accordingly.</td>
-</tr>
-
-
-<tr valign="top">
-<td>-rootless and -multiwindow checks</td>
-
-<td>2003-09-22</td>
-
-<td>The -rootless and -multiwindow flags are not supposed to be used
-together.  Add simple checking to the -rootless processing to make
-sure that -multiwindow is FALSE before continuing with -rootless
-processing.  This will cause -multiwindow to overide -rootless.  Note
-that we are not causing an error here, but it may be a good idea to
-add a warning to the log file.</td>
 </tr>
 
 
@@ -139,22 +125,6 @@ running in fullscreen 8 bit color modes.</td>
 
 
 <tr valign="top">
-<td>DirectDraw header files</td>
-
-<td>2003-08-27</td>
-
-<td>We currently distribute xc/programs/Xserver/hw/xwin/ddraw.h and
-obj_base.h, which we got from the Wine project, in our CVS directory
-but the headers should be merged with the Cygwin w32api headers.
-Merging the headers into Cygwin's w32api package isn't as trivial as
-it may seem, as the w32api headers duplicate some of the functionality
-of the Wine headers; it seems that it would take several hours, if not
-a few days, to sort out the differences and develop a workable
-solution.</td>
-</tr>
-
-
-<tr valign="top">
 <td>Windows clipboard integration</td>
 
 <td>2003-08-27</td>
@@ -162,49 +132,6 @@ solution.</td>
 <td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/X
 clipboard manager, to handle data types other than XA_STRING and
 UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.</td>
-</tr>
-
-
-<tr valign="top">
-<td>Network transparent audio</td>
-
-<td>2003-08-27</td>
-
-<td>
-<table>
-<tr>
-<td>Work has begun on this task.  See Kevin Kuphal's <a
-href="http://www.sitecity.net/cygwin-audio/">Cygwin Network Audio
-Porting</a> site for more information.</td>
-</tr>
-
-<tr>
-<td>Cygwin/X needs the ability to play sounds from X clients or
-windowing systems (Gnome, KDE, CDE, etc.) running on machines across
-the network.  For example, you should hear, on your Cygwin/X
-machine, the sounds being played by KDE if you use XDMCP to logon to a
-KDE session on a remote machine.  Investigate the various network
-transparent audio systems, such as Gnome's <a
-href="http://www.tux.org/~ricdude/dev.html">Esound</a> (appears to be
-alive and well, contrary to the widely spread <a
-href="http://mail.gnome.org/archives/gnome-devel-list/2000-July/msg00266.html">reports
-of its impending death</a>), KDE's <a
-href="http://www.arts-project.org/">aRts</a> (analog realtime
-synthesizer), <a
-href="http://citeseer.nj.nec.com/levergood93audiofile.html">AudioFile</a>
-(developed by Digital Equipment Coroporation in 1993 by Jim Gettys, et
-al), and <a href="http://www.ncd.com/">Network Computing Devices,
-Inc.'s</a> <a href="http://radscan.com/nas.html">Network Audio
-System</a> described as ``the audio equivalent of an X Server''; NAS
-is a very active project, with a recent release seen on 2001-10-06.
-Linux's two primary sound driver systems may also be of interest: <a
-href="http://www.alsa-project.org/">ALSA</a> (Advanced Linux Sound
-Architecture), and <a href="http://www.opensound.com/">OSS</a> (Open
-Sound System).  There is a lot of material to process in order to
-understand this task, however, the return from completing this task
-would be highly beneficial.</td>
-</tr>
-</table>
 </tr>
 
 
