@@ -2,6 +2,7 @@
 
 use strict;
 use CGI qw':standard';
+use LWP::Simple;
 
 sub addfn($);
 
@@ -14,8 +15,10 @@ my $grep = $html->param('grep');
 $main::packages = ();
 use FindBin qw($Bin);
 
+my $header = LWP::Simple::get('http://cygwin.com/cygwin-header.html');
+
 print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
-      "<!--#include virtual=\"cygwin-header.html\" --></td></table>\n",
+      "$header</td></table>\n",
       "<table align=\"center\">\n",
       $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n",
       $html->h2({-align=>'center'}, 'Search Results'), "\n";
@@ -50,7 +53,9 @@ if (!%main::packages) {
     }
 }
 print "</table>";
-print "<!--#include virtual=\"cygwin-footer.html\" -->\n", $html->end_html;
+open(FOOTER, '../cygwin-footer.html');
+print <FOOTER>, $html->end_html;
+close FOOTER;
 
 sub addfn($) {
     $_[0] =~ m!^([^/]+)/! or return;
