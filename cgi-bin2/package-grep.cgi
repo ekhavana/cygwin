@@ -31,7 +31,7 @@ if ($@) {
     print $html->h2({-align=>'center'}, 'Search Results'), "\n";
     chdir("$Bin/../packages");
     for my $f (<*/*>) {
-	open(F, $f) or next;
+	open(F, '<', $f) or next;
 	while (<F>) {
 	    if (/$grep/o) {
 		addfn($f);
@@ -42,7 +42,7 @@ if ($@) {
     }
 
     my $index;
-    if (!open(INDEX, 'index.html')) {
+    if (!open(INDEX, '<', 'index.html')) {
 	%main::packages = ();
     } else {
 	$index = join('', <INDEX>);

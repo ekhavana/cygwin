@@ -15,7 +15,7 @@ print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</titl
       LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "\n";
 
 chdir("$Bin/../packages");
-if (!open(F, $file)) {
+if (!open(F, '<', $file)) {
     print h1("Couldn't open file: $file");
 } else {
     $_ = join('', <F>);
