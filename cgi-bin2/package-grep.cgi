@@ -1,6 +1,5 @@
 #!/usr/bin/perl
 
-BEGIN {exit(0)};
 use CGI;
 
 # Create one of our Objects
