@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 23 January 2002 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 24 January 2002 -->
 
 <TITLE>The Cygwin FAQ
  - Installation Instructions</TITLE>
@@ -22,25 +22,8 @@ choose the packages you wish to install, and update them individually.
 
 
 <P>
-The following packages are available with the current release:
-
-
-
-<PRE>
-
-ash autoconf automake bash binutils bison byacc bzip2 clear cpio cron
-crypt ctags cvs cygrunsrv cygwin dejagnu diff expect file fileutils
-findutils flex gawk gcc gdb gdbm gettext ghostscript gperf grep groff
-gzip inetutils irc jbigkit jpeg less libpng login lynx m4 make man
-mingw mingw-runtime mt mutt ncftp ncurses opengl openssh openssl patch
-pcre perl popt postgresql psutils python readline regex rsync rxvt sed
-sh-utils squid ssmtp tar tcltk tcsh termcap tetex texinfo textutils
-tiff time unzip vim w32api wget which xpm-nox zip zlib
-
-</PRE>
-
-<P>
-(This list becomes out of date as new packages are added.)
+For a searchable list of packages that can be installed with Cygwin,
+see <TT><a target="_top" href="http://cygwin.com/packages/">http://cygwin.com/packages/</a></TT>.
 
 
 <P>
@@ -65,13 +48,6 @@ mailing list.
 
 
 <H2><A NAME="SEC8" HREF="faq_toc.html#TOC8">Installation using the <SAMP>`setup.exe'</SAMP> program</A></H2>
-
-<P>
-<STRONG>IMPORTANT: First read the README file in the <SAMP>`latest'</SAMP>
-directory at any ftp mirror.  DO THIS NOW!  Information in the README
-file is not repeated here.  You can find a mirror site near you from
-<TT><a target="_top" href="http://cygwin.com/mirrors.html">http://cygwin.com/mirrors.html</a></TT>.</STRONG>
-
 
 <P>
 The <SAMP>`setup.exe'</SAMP> program is the recommended way to install Cygwin,
@@ -153,13 +129,15 @@ procedure should be a fairly safe way to do that:
 
 <LI>Re-activate your anti-virus software and scan everything
 
-in C:\cygwin (or wherever you chose to install).
+in C:\cygwin (or wherever you chose to install).  If you're concerned
+about a malicious package, say if a mirror is compromised, then you
+should scan your entire hard disk after running setup.
 
 </OL>
 
 <P>
-This should be safe, as long as nobody substitutes a malicious
-<CODE>setup.exe</CODE>!
+This should be safe provided setup.exe is not substituted by something
+malicious.
 
 
 
@@ -167,48 +145,65 @@ This should be safe, as long as nobody substitutes a malicious
 <H3><A NAME="SEC13" HREF="faq_toc.html#TOC13">What packages should I download?</A></H3>
 
 <P>
-Just get everything, if you have room for it.  But if you must be
-selective:
+When using <SAMP>`setup.exe'</SAMP> for the first time, the default is to
+install a minimal subset of packages.  If you want anything beyond
+that, you will have to select it explicitly.  See
+<TT><a target="_top" href="http://cygwin.com/packages/">http://cygwin.com/packages/</a></TT> for a searchable list of packages available.
 
-
-<DL COMPACT>
-
-<DT><SAMP>`cygwin'</SAMP>
-<DD>
-This is the minimum core, consisting of the cygwin1.dll and a few
-commands (like <CODE>mount</CODE>).  Not much else, and no shell!
-
-<DT><SAMP>`bash'</SAMP>
-<DD>
-This is the default interactive command shell for cygwin.  If you don't
-install <SAMP>`bash'</SAMP>, then the "Cygwin Bash Shell" shortcut that setup
-creates for you won't actually do anything.
-
-<DT><SAMP>`ash'</SAMP>
-<DD>
-This is often forgotten because it's not obvious that <SAMP>`ash'</SAMP>
-contains <CODE>/bin/sh</CODE>, which is essential for running scripts (and
-<SAMP>`make'</SAMP> and ...).
-
-</DL>
 
 <P>
-If you want to build programs, of course you'll need <SAMP>`gcc'</SAMP>, but
-you'll also need <SAMP>`binutils'</SAMP>, probably <SAMP>`make'</SAMP> and
-<SAMP>`fileutils'</SAMP>, and possibly lots more.  (Again, consider just getting
-everything!)
+If you want to build programs, of course you'll need <SAMP>`gcc'</SAMP>,
+<SAMP>`binutils'</SAMP>, <SAMP>`make'</SAMP> and probably other packages from the
+"Devel" category.
 
 
 
 
-<H3><A NAME="SEC14" HREF="faq_toc.html#TOC14">How much disk space does Cygwin require?</A></H3>
+<H3><A NAME="SEC14" HREF="faq_toc.html#TOC14">How do I just get everything?</A></H3>
 
 <P>
-All the packages listed above comprise about 55MB when downloaded.
-This expands to about 230MB in your "install root directory"
-(<CODE>C:\cygwin</CODE> by default).  If you download source archives for
-all packages, that's an additional 110MB.  These estimates are based
-on measurements taken 22 Sep 2001.
+In the past, the default was to install everything, much to the
+irritation of many users.  Now the default is to install only a basic
+core of packages.  At the moment, there is no easy way to get
+everything.  You must do the following:
+
+
+
+<OL>
+
+<LI>When the GUI says "Select packages to install", click on the
+
+"View" button until it says "Full".
+
+<LI>Wherever it says "Skip", click twice until it gives the
+
+version number of the package.  That means it will be downloaded and
+installed.
+
+</OL>
+
+<P>
+If a package you've selected for installation has prerequisites, those
+will automatically be installed too.  It's a lot of clicking but you
+only the first time.  Once you install a package, any subsequent
+updates to that package will be installed by default.  Note that new
+packages are added rather frequently, so you'll have to regularly
+check the list for any "Skip" entries if you want to stay up to date
+with a complete installation.
+
+
+<P>
+This should become much easier in a future version of <SAMP>`setup.exe'</SAMP>.
+
+
+
+
+<H3><A NAME="SEC15" HREF="faq_toc.html#TOC15">How much disk space does Cygwin require?</A></H3>
+
+<P>
+That depends, obviously, on what you've chosen to download and install.
+A full installation is probably 250-300MB installed, not including the
+package archives themselves or the source code.
 
 
 <P>
@@ -220,7 +215,7 @@ subdirectories there.
 
 
 
-<H3><A NAME="SEC15" HREF="faq_toc.html#TOC15">What if setup fails?</A></H3>
+<H3><A NAME="SEC16" HREF="faq_toc.html#TOC16">What if setup fails?</A></H3>
 
 <P>
 First, make sure that you are using the latest version of
@@ -264,17 +259,17 @@ what happened that wasn't supposed to happen, etc.
 
 
 
-<H3><A NAME="SEC16" HREF="faq_toc.html#TOC16">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
+<H3><A NAME="SEC17" HREF="faq_toc.html#TOC17">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
 
 <P>
-There is no difference as far as <CODE>setup.exe</CODE> is concerned, and you
-should not worry about this either.  The distinction is more historical
-than practical.
+There is no difference as far as <CODE>setup.exe</CODE> is concerned, and
+you should not worry about this either.  The distinction is
+historical, not practical.
 
 
 
 
-<H3><A NAME="SEC17" HREF="faq_toc.html#TOC17">My Windows logon name has a space in it, will this cause problems?</A></H3>
+<H3><A NAME="SEC18" HREF="faq_toc.html#TOC18">My Windows logon name has a space in it, will this cause problems?</A></H3>
 
 <P>
 Most definitely yes!  UNIX shells (and thus Cygwin) use the space
@@ -298,19 +293,18 @@ README file for that package.)
 
 
 
-<H3><A NAME="SEC18" HREF="faq_toc.html#TOC18">How do I uninstall individual packages?</A></H3>
+<H3><A NAME="SEC19" HREF="faq_toc.html#TOC19">How do I uninstall individual packages?</A></H3>
 
 <P>
 Run <CODE>setup.exe</CODE> as you would to install packages.  In the list of
-packages to install, click on the <SAMP>`Full/Part'</SAMP> button to get a
-full listing, if the package you want to uninstall is not already
-listed.  Click on the cycle glyph until the action reads
-<SAMP>`Uninstall'</SAMP>.  Proceed with <SAMP>`Next'</SAMP>.
+packages to install, browse the relevant category or click on the
+"View" button to get a full listing.  Click on the cycle glyph until
+the action reads "Uninstall".  Proceed by clicking "Next".
 
 
 
 
-<H3><A NAME="SEC19" HREF="faq_toc.html#TOC19">How do I uninstall <STRONG>all</STRONG> of Cygwin?</A></H3>
+<H3><A NAME="SEC20" HREF="faq_toc.html#TOC20">How do I uninstall <STRONG>all</STRONG> of Cygwin?</A></H3>
 
 <P>
 Setup has no automatic uninstall facility.  Just delete everything
@@ -341,7 +335,7 @@ would not have done any of these things for you.
 
 
 
-<H3><A NAME="SEC20" HREF="faq_toc.html#TOC20">Can I use setup to install snapshots?</A></H3>
+<H3><A NAME="SEC21" HREF="faq_toc.html#TOC21">Can I use setup to install snapshots?</A></H3>
 
 <P>
 No.  It used to be possible, but not any more.
