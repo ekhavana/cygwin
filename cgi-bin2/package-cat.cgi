@@ -19,7 +19,7 @@ if (!open(F, $file)) {
     print h1("Couldn't open file: $file");
 } else {
     $_ = join('', <F>);
-    s!$grep!\<b\>$grep\</b\>!mo if length($grep);
+    s!($grep)!\<b\>$1\</b\>!mo if length($grep);
     print $_;
 }
 
