@@ -438,11 +438,13 @@ source:  latest/bash/bash-2.04-src.tar.bz2 1815177
 </pre>
 
 <h2><a id="package_contents">Making Packages</a></h2>
-<p>The files paths within both the -src and the binary package files are quite important. Setup extracts into a predetermined directory, so you must structure your package contents accordingly.</p>
+<p>The files paths within both the -src and the binary package files are
+quite important.  Since setup.exe extracts into a predetermined
+directory, you must structure your package contents accordingly.</p>
 <p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
 <ul>
   <li><p>Binary packages are extracted in /, include all file paths from the root in your archive.</p></li>
-  <li><p>The package is configured using the following paths:</p>
+  <li><p>The package is configured using (at a minimum) the following paths:</p>
   <pre>
   --prefix=/usr
   --sysconfdir=/etc
