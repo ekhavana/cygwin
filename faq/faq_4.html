@@ -474,9 +474,9 @@ net release.)</STRONG>
 
 <LI>getegid: P 4.2.1.1
 
-<LI>setuid: P 4.2.2.1 (stub, sets ENOSYS, returns zero)
+<LI>setuid: P 4.2.2.1 (stub on 9X, sets ENOSYS, returns zero)
 
-<LI>setgid: P 4.2.2.1 (stub, sets ENOSYS, returns zero)
+<LI>setgid: P 4.2.2.1 (stub on 9X, sets ENOSYS, returns zero)
 
 <LI>getgroups: P 4.2.3.1
 
@@ -1103,7 +1103,25 @@ in MS IP stack but may not be implemented in other vendors' stacks.
 
 
 <UL>
-<LI>chroot (stub, sets ENOSYS, returns -1)
+<LI>acl
+
+<LI>aclcheck
+
+<LI>aclfrommode
+
+<LI>aclfrompbits
+
+<LI>aclfromtext
+
+<LI>aclsort
+
+<LI>acltomode
+
+<LI>acltopbits
+
+<LI>acltotext
+
+<LI>chroot (with restrictions)
 
 <LI>closelog
 
@@ -1117,11 +1135,15 @@ in MS IP stack but may not be implemented in other vendors' stacks.
 
 <LI>cygwin_conv_to_win32_path
 
+<LI>cygwin_logon_user
+
 <LI>cygwin_posix_path_list_p
 
 <LI>cygwin_posix_to_win32_path_list
 
 <LI>cygwin_posix_to_win32_path_list_buf_size
+
+<LI>cygwin_set_impersonation_token
 
 <LI>cygwin_split_path
 
@@ -1144,6 +1166,8 @@ in MS IP stack but may not be implemented in other vendors' stacks.
 <LI>endgrent
 
 <LI>endhostent
+
+<LI>facl
 
 <LI>ffs
 
@@ -1213,13 +1237,13 @@ in MS IP stack but may not be implemented in other vendors' stacks.
 
 <LI>select
 
-<LI>setegid: SVR4 (stub, sets ENOSYS, returns zero)@item endpwent
+<LI>setegid: SVR4 (stub on 9X, sets ENOSYS, returns zero)@item endpwent
 
 <LI>setenv
 
 <LI>seterrno
 
-<LI>seteuid (stub, sets ENOSYS, returns zero)
+<LI>seteuid (stub on 9X, sets ENOSYS, returns zero)
 
 <LI>sethostent
 

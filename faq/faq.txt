@@ -30,7 +30,7 @@ how the GNU General Public License may affect your use of these tools.
 application using Cygwin, you will need the proprietary-use license for
 the Cygwin library.  This is available for purchase; please contact
 sales@cygnus.com for more information.  All other questions should be
-sent to the project mailing list cygwin@sourceware.cygnus.com.
+sent to the project mailing list cygwin@sources.redhat.com.
 
    Note that when we say "free" we mean freedom, not price.  The goal of
 such freedom is that the people who use a given piece of software
@@ -100,14 +100,14 @@ FTP Sites
 automatically.  If you notice an error here, such as a broken link, a
 site that's down, or an ommission, please notify the FAQ maintainer.
 You can always find an up-to-date list of mirrors at
-`http://sourceware.cygnus.com/cygwin/mirrors.html'.)*
+`http://sources.redhat.com/cygwin/mirrors.html'.)*
 
    * North America:
         * California:
           `ftp://ftp.freesoftware.com/pub/sourceware/cygwin/'
 
-        * California : `ftp://sourceware.cygnus.com/pub/cygwin/' (This
-          is the "master" site, and is almost always too busy to permit
+        * California : `ftp://sources.redhat.com/pub/cygwin/' (This is
+          the "master" site, and is almost always too busy to permit
           logins.)
 
         * Tennessee: `ftp://ftp.sunsite.utk.edu/pub/cygwin/'
@@ -203,8 +203,8 @@ The Cygwin Project WWW Site
 ===========================
 
    The main WWW page for the Cygwin project is
-`http://sourceware.cygnus.com/cygwin/'.  There you will find a great
-many links to additional resources and related sites.
+`http://sources.redhat.com/cygwin/'.  There you will find a great many
+links to additional resources and related sites.
 
    You can find documentation for the individual GNU tools at
 `http://www.fsf.org/manual/'.  (You should read GNU manuals from a
@@ -291,8 +291,8 @@ installation.  You can, however, add and update packages later.  See
 below.
 
    Whichever you choose, the first step is to open an ftp mirror site
-near you from `http://sourceware.cygnus.com/cygwin/mirrors.html'.  Then
-go to the 'latest' directory, download `setup.exe' and save that to an
+near you from `http://sources.redhat.com/cygwin/mirrors.html'.  Then go
+to the 'latest' directory, download `setup.exe' and save that to an
 *empty temporary directory*.  While you're there, download the README
 file and read it.  Then read it again.
 
@@ -312,7 +312,7 @@ the default.
    At the next prompt, choose to install from the Internet ('i').  This
 is the default.
 
-   Setup will connect to sourceware.cygnus.com to read a list of mirror
+   Setup will connect to sources.redhat.com to read a list of mirror
 sites.  Choose one from the list, or choose 'other' to supply your own.
 If you supply your own, you must provide a full URL, not just the ftp
 hostname.  Setup will then proceed to download and install all packages
@@ -425,13 +425,13 @@ Error message: "Unable to retrieve the list of cygwin mirrors..."
 .................................................................
 
    This means that `setup.exe' could not make an http connection to
-`http://sourceware.cygnus.com/cygwin/mirrors.html'.  This is required
-for an internet ('i') install.  Either sourceware.cygnus.com was too
-busy, or there is a problem with your network.  Note that `setup.exe'
-has very limited proxy functionality for firewalls, and depends on IE4
-or later being installed and configured properly.  If you cannot get
-the internet installation to work, just download the packages yourself
-and do a directory ('d') install.
+`http://sources.redhat.com/cygwin/mirrors.html'.  This is required for
+an internet ('i') install.  Either sources.redhat.com was too busy, or
+there is a problem with your network.  Note that `setup.exe' has very
+limited proxy functionality for firewalls, and depends on IE4 or later
+being installed and configured properly.  If you cannot get the
+internet installation to work, just download the packages yourself and
+do a directory ('d') install.
 
 System hangs when unpacking tar archives
 ........................................
@@ -861,9 +861,9 @@ net release.)*
 
         `' getegid: P 4.2.1.1
 
-        `' setuid: P 4.2.2.1 (stub, sets ENOSYS, returns zero)
+        `' setuid: P 4.2.2.1 (stub on 9X, sets ENOSYS, returns zero)
 
-        `' setgid: P 4.2.2.1 (stub, sets ENOSYS, returns zero)
+        `' setgid: P 4.2.2.1 (stub on 9X, sets ENOSYS, returns zero)
 
         `' getgroups: P 4.2.3.1
 
@@ -1418,7 +1418,25 @@ net release.)*
      vendors' stacks.
 
    `' Other
-        `' chroot (stub, sets ENOSYS, returns -1)
+        `' acl
+
+        `' aclcheck
+
+        `' aclfrommode
+
+        `' aclfrompbits
+
+        `' aclfromtext
+
+        `' aclsort
+
+        `' acltomode
+
+        `' acltopbits
+
+        `' acltotext
+
+        `' chroot (with restrictions)
 
         `' closelog
 
@@ -1432,11 +1450,15 @@ net release.)*
 
         `' cygwin_conv_to_win32_path
 
+        `' cygwin_logon_user
+
         `' cygwin_posix_path_list_p
 
         `' cygwin_posix_to_win32_path_list
 
         `' cygwin_posix_to_win32_path_list_buf_size
+
+        `' cygwin_set_impersonation_token
 
         `' cygwin_split_path
 
@@ -1459,6 +1481,8 @@ net release.)*
         `' endgrent
 
         `' endhostent
+
+        `' facl
 
         `' ffs
 
@@ -1528,7 +1552,7 @@ net release.)*
 
         `' select
 
-        `' setegid: SVR4 (stub, sets ENOSYS, returns zero)
+        `' setegid: SVR4 (stub on 9X, sets ENOSYS, returns zero)
 
         `' endpwent
 
@@ -1536,7 +1560,7 @@ net release.)*
 
         `' seterrno
 
-        `' seteuid (stub, sets ENOSYS, returns zero)
+        `' seteuid (stub on 9X, sets ENOSYS, returns zero)
 
         `' sethostent
 
@@ -1642,18 +1666,18 @@ Where's the documentation?
 --------------------------
 
    There are links to quite a lot of it on the main Cygwin project web
-page: `http://sourceware.cygnus.com/cygwin/'.  Be sure to at least read
+page: `http://sources.redhat.com/cygwin/'.  Be sure to at least read
 any 'Release Notes' or 'Readme' or 'read this' links on the main web
 page, if there are any.
 
    There is a comprehensive Cygwin User's Guide at
-`http://sourceware.cygnus.com/cygwin/cygwin-ug-net/cygwin-ug-net.html'
-and an API Reference at
-`http://sourceware.cygnus.com/cygwin/cygwin-api/cygwin-api.html'.
+`http://sources.redhat.com/cygwin/cygwin-ug-net/cygwin-ug-net.html' and
+an API Reference at
+`http://sources.redhat.com/cygwin/cygwin-api/cygwin-api.html'.
 
    There is an interesting paper about Cygwin from the 1998 USENIX
 Windows NT Workshop Proceedings at
-`http://sourceware.cygnus.com/cygwin/usenix-98/cygwin.html'.
+`http://sources.redhat.com/cygwin/usenix-98/cygwin.html'.
 
    You can find documentation for the individual GNU tools at
 `http://www.fsf.org/manual/'.  (You should read GNU manuals from a
@@ -1664,17 +1688,17 @@ What Cygwin mailing lists can I join?
 -------------------------------------
 
    Comprehensive information about the Cygwin mailing lists can be
-found at `http://sourceware.cygnus.com/cygwin/lists.html'.
+found at `http://sources.redhat.com/cygwin/lists.html'.
 
    To subscribe to the main list, send a message to
-cygwin-subscribe@sourceware.cygnus.com.  To unsubscribe from the main
-list, send a message to cygwin-unsubscribe@sourceware.cygnus.com.  In
-both cases, the subject and body of the message are ignored.
+cygwin-subscribe@sources.redhat.com.  To unsubscribe from the main
+list, send a message to cygwin-unsubscribe@sources.redhat.com.  In both
+cases, the subject and body of the message are ignored.
 
    Similarly, to subscribe to the Cygwin annoucements list, send a
-message to cygwin-announce-subscribe@sourceware.cygnus.com.  To
+message to cygwin-announce-subscribe@sources.redhat.com.  To
 unsubscribe, send a message to
-cygwin-announce-unsubscribe@sourceware.cygnus.com.
+cygwin-announce-unsubscribe@sources.redhat.com.
 
    If you are going to help develop the Cygwin library by volunteering
 for the project, you will want to subscribe to the Cygwin developers
@@ -1685,8 +1709,8 @@ first two lists works for these as well.  Both cygwin-developers and
 cygwin-apps are by-approval lists.
 
    There is a searchable archive of the main mailing list at
-`http://sourceware.cygnus.com/ml/cygwin/'.  There is an alternate
-archive, also searchable, at `http://www.delorie.com/archives/'.
+`http://sources.redhat.com/ml/cygwin/'.  There is an alternate archive,
+also searchable, at `http://www.delorie.com/archives/'.
 
    Cygwin mailing lists are not gatewayed to USENET, so anti-spam
 measures in your email address are neither required nor appreciated.
@@ -1897,17 +1921,13 @@ need to turn off Windows logo for Keyrus to operate properly).
 Is it OK to have multiple copies of the DLL?
 --------------------------------------------
 
-   It is a very bad idea to have multiple *versions* of the cygwin DLL
-in your path.  They often conflict in funny ways.
+   You should only have one copy of the Cygwin DLL on your system.  If
+you have multiple versions, they will conflict and cause problems.
 
    If you get the error "shared region is corrupted" it means you have
-multiple versions of cygwin1.dll running at the same time.
-
-   If you do have multiple versions, get rid of (or rename) all the
-older versions, keeping only the newest one.
-
-   It should be OK to have multiple copies of the *same* DLL in your
-path, though.
+multiple versions of cygwin1.dll running at the same time.  This could
+happen, for example, if you update cygwin1.dll without exiting *all*
+Cygwin apps (including inetd) beforehand.
 
 Where can I find "more"?
 ------------------------
@@ -2008,9 +2028,6 @@ also access the files under Windows 9x.
 Are mixed-case filenames possible with Cygwin?
 ----------------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
-
    Several Unix programs expect to be able to use to filenames spelled
 the same way, but with different case.  A prime example of this is
 perl's configuration script, which wants `Makefile' and `makefile'.
@@ -2020,7 +2037,12 @@ so the configuration fails.
    In releases prior to beta 16, mount had a special mixed case option
 which renamed files in such a way as to allow mixed case filenames.  We
 chose to remove the support when we rewrote the path handling code for
-beta 16.
+beta 16.  The standard Windows apps - explorer.exe,
+cmd.exe/command.com, etc. - do not distinguish filenames that differed
+only in case, resulting in some (very) undesirable behavior.
+
+   Sergey Okhapkin had maintained a mixed-case patch ('coolview') until
+about B20.1, but this has not been updated to recent versions of Cygwin.
 
 What about DOS special filenames?
 ---------------------------------
@@ -2215,7 +2237,7 @@ much is going on).  They are only intended for those people who wish to
 contribute code to the project.  If you aren't going to be happy
 debugging problems in a buggy snapshot, avoid these and wait for a real
 release.  The snapshots are available from
-http://sourceware.cygnus.com/cygwin/snapshots/
+http://sources.redhat.com/cygwin/snapshots/
 
 How is the DOS/Unix CR/LF thing handled?
 ----------------------------------------
@@ -2275,37 +2297,12 @@ since they have no meaning to UNIX.
 Is the Cygwin library multi-thread-safe?
 ----------------------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
+   Multi-thread-safe support is turned on by default in 1.1.x releases
+(i.e., in the latest net release).  That does not mean that it is bug
+free!
 
-   No.
-
-   There is an experimental configure option (-enable-threadsafe), which
-allows you to build a DLL with some additional "thread safety" but there
-are no guarantees that this is 100% operational.  This option also
-enables limited "POSIX thread" support.  See the file cygwin.din for the
-list of POSIX thread functions provided.
-
-   Cygnus does not distribute a DLL with this option enabled, and,
-currently, has no plans to do so.
-
-   Cygwin is not multi-thread-safe because:
-
-   1) Newlib (out libc/libm) isn't reentrant (although it almost is).
-This would have to be fixed or we would have to switch to a libc/libm
-that is reentrant.
-
-   2) Cygwin locks shared memory areas (shared by multiple processes),
-but the per-process data is not locked.  Thus, different threads in a
-multi-threaded application would have access to it and give rise to
-nasty race-conditions.
-
-   The Mingw package (what you get when you invoke gcc with
--mno-cygwin) is multi-thread-safe because that configuration doesn't
-use Cygwin or newlib.  Instead, it uses Microsoft libraries which are
-multi-thread-safe for the most part.  So as long as the programmer
-avoids Microsoft APIs that aren't multi-thread-safe (most are ok), they
-should be fine.
+   There is also limited support for 'POSIX threads', see the file
+`cygwin.din' for the list of POSIX thread functions provided.
 
 Why is some functionality only supported in Windows NT?
 -------------------------------------------------------
@@ -2502,6 +2499,12 @@ net release.)*
 
    Did you explicitly call tzset() before checking the value of
 _timezone?  If not, you must do so.
+
+Is there a mouse interface?
+---------------------------
+
+   There is no way to capture mouse events from Cygwin.  There are
+currently no plans to add support for this.
 
 Programming Questions
 =====================
@@ -2786,7 +2789,7 @@ How do I build a DLL?
 net release.)*
 
    There's documentation that explains the process on the main Cygwin
-project web page (http://sourceware.cygnus.com/cygwin/).
+project web page (http://sources.redhat.com/cygwin/).
 
 How can I set a breakpoint at MainCRTStartup?
 ---------------------------------------------
@@ -2803,8 +2806,8 @@ How can I build a relocatable dll?
    *(Please note: This section has not yet been updated for the latest
 net release.  However, there was a discussion on the cygwin mailing
 list recently that addresses this issue.  Read
-`http://sourceware.cygnus.com/ml/cygwin/2000-06/msg00688.html' and
-related messages.)*
+`http://sources.redhat.com/ml/cygwin/2000-06/msg00688.html' and related
+messages.)*
 
    You must execute the following sequence of five commands, in this
 order:
@@ -2934,6 +2937,15 @@ handling-related info, to name two.  The strace mechanism is well
 documented in the Cygwin library sources in the file
 <CODE>winsup/include/sys/strace.h</CODE>.
 
+Why doesn't gdb handle signals?
+-------------------------------
+
+   Unfortunately, there is only minimal signal handling support in gdb
+currently.  Signal handling only works with Windows-type signals.
+SIGINT may work, SIGFPE may work, SIGSEGV definitely does.  You cannot
+'stop', 'print' or 'nopass' signals like SIGUSR1 or SIGHUP to the
+process being debugged.
+
 The linker complains that it can't find something.
 --------------------------------------------------
 
@@ -2976,9 +2988,6 @@ net release.)*
 Can I use my own malloc?
 ------------------------
 
-   *(Please note: This section has not yet been updated for the latest
-net release.)*
-
    If you define a function called `malloc' in your own code, and link
 with the DLL, the DLL *will* call your `malloc'.  Needless to say, you
 will run into serious problems if your malloc is buggy.
@@ -2988,6 +2997,14 @@ from in bash, the DLL will try and expand the wildcards on the command
 line.  This process uses `malloc' *before* your main line is started.
 If you have written your own `malloc' to need some initialization to
 occur after `main' is called, then this will surely break.
+
+   Moreover, there is an outstanding issue with `_malloc_r' in
+`newlib'.  This re-entrant version of `malloc' will be called directly
+from within `newlib', by-passing your custom version, and is probably
+incompatible with it.  But it may not be possible to replace
+`_malloc_r' too, because `cygwin1.dll' does not export it and Cygwin
+does not expect your program to replace it.  This is really a newlib
+issue, but we are open to suggestions on how to deal with it.
 
 Can I mix objects compiled with msvc++ and gcc?
 -----------------------------------------------

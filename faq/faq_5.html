@@ -15,22 +15,22 @@ Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_4.html">previous</A>, <A 
 
 <P>
 There are links to quite a lot of it on the main Cygwin project web
-page: <TT><a target="_top" href="http://sourceware.cygnus.com/cygwin/">http://sourceware.cygnus.com/cygwin/</a></TT>.  Be sure to at least
+page: <TT><a target="_top" href="http://sources.redhat.com/cygwin/">http://sources.redhat.com/cygwin/</a></TT>.  Be sure to at least
 read any 'Release Notes' or 'Readme' or 'read this' links on the main
 web page, if there are any.
 
 </P>
 <P>
 There is a comprehensive Cygwin User's Guide at
-<TT><a target="_top" href="http://sourceware.cygnus.com/cygwin/cygwin-ug-net/cygwin-ug-net.html">http://sourceware.cygnus.com/cygwin/cygwin-ug-net/cygwin-ug-net.html</a></TT>
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/cygwin-ug-net/cygwin-ug-net.html">http://sources.redhat.com/cygwin/cygwin-ug-net/cygwin-ug-net.html</a></TT>
 and an API Reference at
-<TT><a target="_top" href="http://sourceware.cygnus.com/cygwin/cygwin-api/cygwin-api.html">http://sourceware.cygnus.com/cygwin/cygwin-api/cygwin-api.html</a></TT>.
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/cygwin-api/cygwin-api.html">http://sources.redhat.com/cygwin/cygwin-api/cygwin-api.html</a></TT>.
 
 </P>
 <P>
 There is an interesting paper about Cygwin from the 1998 USENIX Windows
 NT Workshop Proceedings at
-<TT><a target="_top" href="http://sourceware.cygnus.com/cygwin/usenix-98/cygwin.html">http://sourceware.cygnus.com/cygwin/usenix-98/cygwin.html</a></TT>.
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/usenix-98/cygwin.html">http://sources.redhat.com/cygwin/usenix-98/cygwin.html</a></TT>.
 
 </P>
 <P>
@@ -46,20 +46,20 @@ for a list of them.)
 
 <P>
 Comprehensive information about the Cygwin mailing lists can be found at
-<TT><a target="_top" href="http://sourceware.cygnus.com/cygwin/lists.html">http://sourceware.cygnus.com/cygwin/lists.html</a></TT>.
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/lists.html">http://sources.redhat.com/cygwin/lists.html</a></TT>.
 
 </P>
 <P>
 To subscribe to the main list, send a message to
-cygwin-subscribe@sourceware.cygnus.com.  To unsubscribe from the 
-main list, send a message to cygwin-unsubscribe@sourceware.cygnus.com.
+cygwin-subscribe@sources.redhat.com.  To unsubscribe from the 
+main list, send a message to cygwin-unsubscribe@sources.redhat.com.
 In both cases, the subject and body of the message are ignored.
 
 </P>
 <P>
 Similarly, to subscribe to the Cygwin annoucements list, send a message
-to cygwin-announce-subscribe@sourceware.cygnus.com.  To unsubscribe,
-send a message to cygwin-announce-unsubscribe@sourceware.cygnus.com.
+to cygwin-announce-subscribe@sources.redhat.com.  To unsubscribe,
+send a message to cygwin-announce-unsubscribe@sources.redhat.com.
 
 </P>
 <P>
@@ -74,7 +74,7 @@ by-approval lists.
 </P>
 <P>
 There is a searchable archive of the main mailing list at
-<TT><a target="_top" href="http://sourceware.cygnus.com/ml/cygwin/">http://sourceware.cygnus.com/ml/cygwin/</a></TT>.  There is an alternate
+<TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/">http://sources.redhat.com/ml/cygwin/</a></TT>.  There is an alternate
 archive, also searchable, at <TT><a target="_top" href="http://www.delorie.com/archives/">http://www.delorie.com/archives/</a></TT>.
 
 </P>
@@ -374,23 +374,15 @@ properly).
 <H3><A NAME="SEC35" HREF="faq_toc.html#TOC35">Is it OK to have multiple copies of the DLL?</A></H3>
 
 <P>
-It is a very bad idea to have multiple *versions* of the cygwin DLL in
-your path.  They often conflict in funny ways.
+You should only have one copy of the Cygwin DLL on your system.  If you
+have multiple versions, they will conflict and cause problems.
 
 </P>
 <P>
 If you get the error "shared region is corrupted" it means you have
-multiple versions of cygwin1.dll running at the same time.
-
-</P>
-<P>
-If you do have multiple versions, get rid of (or rename) all the older
-versions, keeping only the newest one.
-
-</P>
-<P>
-It should be OK to have multiple copies of the *same* DLL in your path,
-though.
+multiple versions of cygwin1.dll running at the same time.  This could
+happen, for example, if you update cygwin1.dll without exiting <EM>all</EM>
+Cygwin apps (including inetd) beforehand.
 
 </P>
 
@@ -545,11 +537,6 @@ filesystem so we can also access the files under Windows 9x.
 <H3><A NAME="SEC42" HREF="faq_toc.html#TOC42">Are mixed-case filenames possible with Cygwin?</A></H3>
 
 <P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
-
-</P>
-<P>
 Several Unix programs expect to be able to use to filenames
 spelled the same way, but with different case.  A prime example
 of this is perl's configuration script, which wants <CODE>Makefile</CODE> and
@@ -559,9 +546,16 @@ just different case, so the configuration fails.
 </P>
 <P>
 In releases prior to beta 16, mount had a special mixed case option
-which renamed files in such a way as to allow mixed case filenames.
-We chose to remove the support when we rewrote the path handling
-code for beta 16.
+which renamed files in such a way as to allow mixed case filenames.  We
+chose to remove the support when we rewrote the path handling code for
+beta 16.  The standard Windows apps -- explorer.exe,
+cmd.exe/command.com, etc. -- do not distinguish filenames that differed
+only in case, resulting in some (very) undesirable behavior.
+
+</P>
+<P>
+Sergey Okhapkin had maintained a mixed-case patch ('coolview') until
+about B20.1, but this has not been updated to recent versions of Cygwin.
 
 </P>
 
@@ -849,7 +843,7 @@ is going on).  They are only intended for those people who wish to
 contribute code to the project.  If you aren't going to be happy
 debugging problems in a buggy snapshot, avoid these and wait for a real
 release.  The snapshots are available from
-http://sourceware.cygnus.com/cygwin/snapshots/
+http://sources.redhat.com/cygwin/snapshots/
 
 </P>
 
@@ -934,51 +928,14 @@ Explanation adapted from mailing list email by Earnie Boyd
 <H3><A NAME="SEC57" HREF="faq_toc.html#TOC57">Is the Cygwin library multi-thread-safe?</A></H3>
 
 <P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
+Multi-thread-safe support is turned on by default in 1.1.x releases
+(i.e., in the latest net release).  That does not mean that it is bug
+free!
 
 </P>
 <P>
-No.
-
-</P>
-<P>
-There is an experimental configure option (--enable-threadsafe), which
-allows you to build a DLL with some additional "thread safety" but there
-are no guarantees that this is 100% operational.  This option also
-enables limited "POSIX thread" support.  See the file cygwin.din for the
-list of POSIX thread functions provided.
-
-</P>
-<P>
-Cygnus does not distribute a DLL with this option enabled, and,
-currently, has no plans to do so.
-
-</P>
-<P>
-Cygwin is not multi-thread-safe because:
-
-</P>
-<P>
-1) Newlib (out libc/libm) isn't reentrant (although it almost is).
-This would have to be fixed or we would have to switch to a libc/libm
-that is reentrant.
-
-</P>
-<P>
-2) Cygwin locks shared memory areas (shared by multiple processes),
-but the per-process data is not locked.  Thus, different threads in a
-multi-threaded application would have access to it and give rise to
-nasty race-conditions.
-
-</P>
-<P>
-The Mingw package (what you get when you invoke gcc with -mno-cygwin) is
-multi-thread-safe because that configuration doesn't use Cygwin or
-newlib.  Instead, it uses Microsoft libraries which are
-multi-thread-safe for the most part.  So as long as the programmer
-avoids Microsoft APIs that aren't multi-thread-safe (most are ok), they
-should be fine.
+There is also limited support for 'POSIX threads', see the file
+<CODE>cygwin.din</CODE> for the list of POSIX thread functions provided.
 
 </P>
 
@@ -1264,11 +1221,20 @@ If not, you must do so.
 </P>
 
 
-<H2><A NAME="SEC68" HREF="faq_toc.html#TOC68">Programming Questions</A></H2>
+<H3><A NAME="SEC68" HREF="faq_toc.html#TOC68">Is there a mouse interface?</A></H3>
+
+<P>
+There is no way to capture mouse events from Cygwin.  There are
+currently no plans to add support for this.
+
+</P>
+
+
+<H2><A NAME="SEC69" HREF="faq_toc.html#TOC69">Programming Questions</A></H2>
 
 
 
-<H3><A NAME="SEC69" HREF="faq_toc.html#TOC69">Why are compiled executables so huge?!?</A></H3>
+<H3><A NAME="SEC70" HREF="faq_toc.html#TOC70">Why are compiled executables so huge?!?</A></H3>
 
 <P>
 By default, gcc compiles in all symbols.  You'll also find that gcc
@@ -1282,7 +1248,7 @@ package.
 </P>
 
 
-<H3><A NAME="SEC70" HREF="faq_toc.html#TOC70">Why is gcc failing?</A></H3>
+<H3><A NAME="SEC71" HREF="faq_toc.html#TOC71">Why is gcc failing?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1300,7 +1266,7 @@ see this message.
 </P>
 
 
-<H3><A NAME="SEC71" HREF="faq_toc.html#TOC71">Where is glibc?</A></H3>
+<H3><A NAME="SEC72" HREF="faq_toc.html#TOC72">Where is glibc?</A></H3>
 
 <P>
 Cygwin does not provide glibc.  It uses newlib instead, which provides
@@ -1310,7 +1276,7 @@ would be difficult.
 </P>
 
 
-<H3><A NAME="SEC72" HREF="faq_toc.html#TOC72">Why can't bison find bison.simple or bison.hairy?</A></H3>
+<H3><A NAME="SEC73" HREF="faq_toc.html#TOC73">Why can't bison find bison.simple or bison.hairy?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1328,7 +1294,7 @@ systems, you would want to set it to <CODE>C:/cygnus/cygwin-b20/share</CODE>.
 </P>
 
 
-<H3><A NAME="SEC73" HREF="faq_toc.html#TOC73">Why is make behaving badly?</A></H3>
+<H3><A NAME="SEC74" HREF="faq_toc.html#TOC74">Why is make behaving badly?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1365,7 +1331,7 @@ install sets MAKE_MODE to UNIX.
 </P>
 
 
-<H3><A NAME="SEC74" HREF="faq_toc.html#TOC74">Why the undefined reference to "WinMain@16"?</A></H3>
+<H3><A NAME="SEC75" HREF="faq_toc.html#TOC75">Why the undefined reference to "WinMain@16"?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1378,7 +1344,7 @@ Try adding an empty main() function to one of your sources.
 </P>
 
 
-<H3><A NAME="SEC75" HREF="faq_toc.html#TOC75">How do I use Win32 API calls?</A></H3>
+<H3><A NAME="SEC76" HREF="faq_toc.html#TOC76">How do I use Win32 API calls?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1454,7 +1420,7 @@ the file that makes the reference.
 </P>
 
 
-<H3><A NAME="SEC76" HREF="faq_toc.html#TOC76">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
+<H3><A NAME="SEC77" HREF="faq_toc.html#TOC77">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1469,7 +1435,7 @@ that don't need a UNIX emulation layer.
 </P>
 
 
-<H3><A NAME="SEC77" HREF="faq_toc.html#TOC77">How do I make the console window go away?</A></H3>
+<H3><A NAME="SEC78" HREF="faq_toc.html#TOC78">How do I make the console window go away?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1485,7 +1451,7 @@ It you are writing a GUI program, you should either compile with
 </P>
 
 
-<H3><A NAME="SEC78" HREF="faq_toc.html#TOC78">Why does make complain about a "missing separator"?</A></H3>
+<H3><A NAME="SEC79" HREF="faq_toc.html#TOC79">Why does make complain about a "missing separator"?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1500,7 +1466,7 @@ lines must start with tabs.
 </P>
 
 
-<H3><A NAME="SEC79" HREF="faq_toc.html#TOC79">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
+<H3><A NAME="SEC80" HREF="faq_toc.html#TOC80">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1518,7 +1484,7 @@ Win32 headers which are pretty complete.
 </P>
 
 
-<H3><A NAME="SEC80" HREF="faq_toc.html#TOC80">How do I link against .lib files?</A></H3>
+<H3><A NAME="SEC81" HREF="faq_toc.html#TOC81">How do I link against .lib files?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1565,7 +1531,7 @@ rewriting the runtime library in question from specs...
 </P>
 
 
-<H3><A NAME="SEC81" HREF="faq_toc.html#TOC81">How do I rebuild the tools on my NT box?</A></H3>
+<H3><A NAME="SEC82" HREF="faq_toc.html#TOC82">How do I rebuild the tools on my NT box?</A></H3>
 
 <P>
 <STRONG>Note:</STRONG> You must build in a directory <EM>outside</EM> the source
@@ -1611,7 +1577,7 @@ same time.
 </P>
 
 
-<H3><A NAME="SEC82" HREF="faq_toc.html#TOC82">How can I compile a powerpc NT toolchain?</A></H3>
+<H3><A NAME="SEC83" HREF="faq_toc.html#TOC83">How can I compile a powerpc NT toolchain?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1629,7 +1595,7 @@ Please send us patches if you do this work!
 </P>
 
 
-<H3><A NAME="SEC83" HREF="faq_toc.html#TOC83">How can I compile an Alpha NT toolchain?</A></H3>
+<H3><A NAME="SEC84" HREF="faq_toc.html#TOC84">How can I compile an Alpha NT toolchain?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1644,7 +1610,7 @@ for Alpha NT if someone contributes the changes to us.
 </P>
 
 
-<H3><A NAME="SEC84" HREF="faq_toc.html#TOC84">How can I adjust the heap/stack size of an application?</A></H3>
+<H3><A NAME="SEC85" HREF="faq_toc.html#TOC85">How can I adjust the heap/stack size of an application?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1663,7 +1629,7 @@ gcc as:
 </P>
 
 
-<H3><A NAME="SEC85" HREF="faq_toc.html#TOC85">How can I find out which dlls are needed by an executable?</A></H3>
+<H3><A NAME="SEC86" HREF="faq_toc.html#TOC86">How can I find out which dlls are needed by an executable?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1676,7 +1642,7 @@ objdump -p provides this information.
 </P>
 
 
-<H3><A NAME="SEC86" HREF="faq_toc.html#TOC86">How do I build a DLL?</A></H3>
+<H3><A NAME="SEC87" HREF="faq_toc.html#TOC87">How do I build a DLL?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1685,12 +1651,12 @@ net release.)</STRONG>
 </P>
 <P>
 There's documentation that explains the process on the main Cygwin
-project web page (http://sourceware.cygnus.com/cygwin/).
+project web page (http://sources.redhat.com/cygwin/).
 
 </P>
 
 
-<H3><A NAME="SEC87" HREF="faq_toc.html#TOC87">How can I set a breakpoint at MainCRTStartup?</A></H3>
+<H3><A NAME="SEC88" HREF="faq_toc.html#TOC88">How can I set a breakpoint at MainCRTStartup?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1704,13 +1670,13 @@ question.
 </P>
 
 
-<H3><A NAME="SEC88" HREF="faq_toc.html#TOC88">How can I build a relocatable dll?</A></H3>
+<H3><A NAME="SEC89" HREF="faq_toc.html#TOC89">How can I build a relocatable dll?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the
 latest net release.  However, there was a discussion on the cygwin
 mailing list recently that addresses this issue.  Read
-<TT><a target="_top" href="http://sourceware.cygnus.com/ml/cygwin/2000-06/msg00688.html">http://sourceware.cygnus.com/ml/cygwin/2000-06/msg00688.html</a></TT> and
+<TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/2000-06/msg00688.html">http://sources.redhat.com/ml/cygwin/2000-06/msg00688.html</a></TT> and
 related messages.)</STRONG>
 
 </P>
@@ -1852,7 +1818,7 @@ like -ltcl80 in your linker command.
 </P>
 
 
-<H3><A NAME="SEC89" HREF="faq_toc.html#TOC89">How can I debug what's going on?</A></H3>
+<H3><A NAME="SEC90" HREF="faq_toc.html#TOC90">How can I debug what's going on?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1870,7 +1836,7 @@ info would not be compatible with gdb).
 </P>
 
 
-<H3><A NAME="SEC90" HREF="faq_toc.html#TOC90">Can I use a system trace mechanism instead?</A></H3>
+<H3><A NAME="SEC91" HREF="faq_toc.html#TOC91">Can I use a system trace mechanism instead?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1900,7 +1866,19 @@ mechanism is well documented in the Cygwin library sources in the file
 </P>
 
 
-<H3><A NAME="SEC91" HREF="faq_toc.html#TOC91">The linker complains that it can't find something.</A></H3>
+<H3><A NAME="SEC92" HREF="faq_toc.html#TOC92">Why doesn't gdb handle signals?</A></H3>
+
+<P>
+Unfortunately, there is only minimal signal handling support in gdb
+currently.  Signal handling only works with Windows-type signals.
+SIGINT may work, SIGFPE may work, SIGSEGV definitely does.  You cannot
+'stop', 'print' or 'nopass' signals like SIGUSR1 or SIGHUP to the
+process being debugged.
+
+</P>
+
+
+<H3><A NAME="SEC93" HREF="faq_toc.html#TOC93">The linker complains that it can't find something.</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1919,7 +1897,7 @@ This is right <CODE>gcc hello.cc -lstdc++</CODE>.
 </P>
 
 
-<H3><A NAME="SEC92" HREF="faq_toc.html#TOC92">I use a function I know is in the API, but I still get a link</A></H3>
+<H3><A NAME="SEC94" HREF="faq_toc.html#TOC94">I use a function I know is in the API, but I still get a link</A></H3>
 <P>
 error.
 
@@ -1936,7 +1914,7 @@ the UNICODE stuff for it isn't filled in.
 </P>
 
 
-<H3><A NAME="SEC93" HREF="faq_toc.html#TOC93">Can you make DLLs that are linked against libc ?</A></H3>
+<H3><A NAME="SEC95" HREF="faq_toc.html#TOC95">Can you make DLLs that are linked against libc ?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1949,7 +1927,7 @@ Yes.
 </P>
 
 
-<H3><A NAME="SEC94" HREF="faq_toc.html#TOC94">Where is malloc.h?</A></H3>
+<H3><A NAME="SEC96" HREF="faq_toc.html#TOC96">Where is malloc.h?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1962,13 +1940,8 @@ Include stdlib.h instead of malloc.h.
 </P>
 
 
-<H3><A NAME="SEC95" HREF="faq_toc.html#TOC95">Can I use my own malloc?</A></H3>
+<H3><A NAME="SEC97" HREF="faq_toc.html#TOC97">Can I use my own malloc?</A></H3>
 
-<P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
-
-</P>
 <P>
 If you define a function called <CODE>malloc</CODE> in your own code, and link
 with the DLL, the DLL <EM>will</EM> call your <CODE>malloc</CODE>.  Needless to
@@ -1983,9 +1956,19 @@ If you have written your own <CODE>malloc</CODE> to need some initialization
 to occur after <CODE>main</CODE> is called, then this will surely break.
 
 </P>
+<P>
+Moreover, there is an outstanding issue with <CODE>_malloc_r</CODE> in
+<CODE>newlib</CODE>.  This re-entrant version of <CODE>malloc</CODE> will be called
+directly from within <CODE>newlib</CODE>, by-passing your custom version, and
+is probably incompatible with it.  But it may not be possible to replace
+<CODE>_malloc_r</CODE> too, because <CODE>cygwin1.dll</CODE> does not export it and
+Cygwin does not expect your program to replace it.  This is really a
+newlib issue, but we are open to suggestions on how to deal with it.
+
+</P>
 
 
-<H3><A NAME="SEC96" HREF="faq_toc.html#TOC96">Can I mix objects compiled with msvc++ and gcc?</A></H3>
+<H3><A NAME="SEC98" HREF="faq_toc.html#TOC98">Can I mix objects compiled with msvc++ and gcc?</A></H3>
 
 <P>
 Yes, but only if you are combining C object files.  MSVC C++ uses a
@@ -1995,7 +1978,7 @@ combining C++ objects.
 </P>
 
 
-<H3><A NAME="SEC97" HREF="faq_toc.html#TOC97">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
+<H3><A NAME="SEC99" HREF="faq_toc.html#TOC99">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2018,7 +2001,7 @@ data types, line numbers, local variables etc.
 </P>
 
 
-<H3><A NAME="SEC98" HREF="faq_toc.html#TOC98">Where can I find info on x86 assembly?</A></H3>
+<H3><A NAME="SEC100" HREF="faq_toc.html#TOC100">Where can I find info on x86 assembly?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2036,7 +2019,7 @@ downloadable PDF form on Intel's web site:
 </P>
 
 
-<H3><A NAME="SEC99" HREF="faq_toc.html#TOC99">Shell scripts aren't running properly from my makefiles?</A></H3>
+<H3><A NAME="SEC101" HREF="faq_toc.html#TOC101">Shell scripts aren't running properly from my makefiles?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2051,7 +2034,7 @@ Makefiles.
 </P>
 
 
-<H3><A NAME="SEC100" HREF="faq_toc.html#TOC100">What preprocessor do I need to know about?</A></H3>
+<H3><A NAME="SEC102" HREF="faq_toc.html#TOC102">What preprocessor do I need to know about?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2072,7 +2055,7 @@ be compiled with VC++.
 </P>
 
 
-<H3><A NAME="SEC101" HREF="faq_toc.html#TOC101">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
+<H3><A NAME="SEC103" HREF="faq_toc.html#TOC103">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2086,7 +2069,7 @@ from <TT><a target="_top" href="http://www.xraylith.wisc.edu/~khan/software/gnu-
 </P>
 
 
-<H3><A NAME="SEC102" HREF="faq_toc.html#TOC102">How should I port my Unix GUI to Windows?</A></H3>
+<H3><A NAME="SEC104" HREF="faq_toc.html#TOC104">How should I port my Unix GUI to Windows?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2115,7 +2098,7 @@ advantages inherent in using Cygwin.
 </P>
 
 
-<H3><A NAME="SEC103" HREF="faq_toc.html#TOC103">Why not use DJGPP ?</A></H3>
+<H3><A NAME="SEC105" HREF="faq_toc.html#TOC105">Why not use DJGPP ?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
