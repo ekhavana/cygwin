@@ -4,6 +4,8 @@ Cygwin/X Frequently Asked Questions
 Harold L Hunt, II
 
    Revision History
+   Revision 1.0.8 2003-12-22 Revised by: huntharo@msu.edu
+   Updated XDMCP entries and kdmrc locations.
    Revision 1.0.7 2003-12-18 Revised by:
    alexander.gottwald@s1999.tu-chemnitz.de
    Added troubleshooting info for Microsoft Services for Unix.
@@ -19,7 +21,7 @@ Harold L Hunt, II
    Updated the entries about non U.S. keyboard layouts. Added
    troubleshooting info for X11Forwarding and keyboard layouts.
    Revision 1.0.3 2003-03-28 Revised by: huntharo@msu.edu
-   Reviced q&a entries for showing 8-bit chars in bash and for enabling
+   Revised q&a entries for showing 8-bit chars in bash and for enabling
    XDMCP on remote machines.
    Revision 1.0.2 2002-05-26 Revised by: huntharo@msu.edu
    Add a q&a for TrackPoint mouse wheel emulation.
@@ -105,8 +107,8 @@ Questions and Answers
                 umlauts?
 
         4.8. [35]How do I put bash into "8 bit" mode?
-        4.9. [36]Why doesn't my Linux/UNIX/*NIX/*BSD machine present a
-                login screen when using -query for XDMCP?
+        4.9. [36]Why doesn't my Linux, UNIX, *NIX, or *BSD machine
+                present a login screen when using -query for XDMCP?
 
         4.10. [37]Why does Cygwin/X not display the XDM login prompt on
                 Solaris when I try to open an XDMCP session with a remote
@@ -517,16 +519,16 @@ set convert-meta off # to show it as character, not the octal representation
 
    See [111]Q: 4.7.
 
-   4.9. Why doesn't my Linux/UNIX/*NIX/*BSD machine present a login
+   4.9. Why doesn't my Linux, UNIX, *NIX, or *BSD machine present a login
    screen when using -query for XDMCP?
 
    [Mika Laitio] For security reasons, XDMCP is not enabled by default on
-   most Linux/UNIX/*NIX/*BSD distributions (RedHat, Mandrake, SuSE,
-   FreeBSD, NetBSD, etc.) by default. You have to manually enable remote
-   logins to your X Display Manager (xdm, kdm, or gdm). The location of
-   the proper config file is distribution/OS dependent, but a short list
-   of known config file locations is given in [112]Table 1. You must
-   change the line:
+   most Linux, UNIX, *NIX, and *BSD distributions (Red Hat, Mandrake,
+   SuSE, FreeBSD, NetBSD, etc.) by default. You have to manually enable
+   remote logins to your X Display Manager (xdm, kdm, or gdm). The
+   location of the proper config file is distribution/OS dependent, but a
+   short list of known config file locations is given in [112]Table 1.
+   You must change the line:
 [Xdmcp]
 Enable=false
 
@@ -534,11 +536,21 @@ Enable=false
 [Xdmcp]
 Enable=true
 
-   Table 1. Known XDM Configuration File Locations
-   Distribution/OS  Version  Display Manager          Location
-   Linux Mandrake   8.1      kdm             /usr/share/config/kdm/kdmrc
+     Tip: Changing anything other than the Xdmcp line shown above is
+     generally not needed and only makes it more likely that you will
+     make an incorrect change to a setting, which means that each of
+     these changed settings will have to be considered during the
+     process of debugging the problem. Thus, it is generally wise to not
+     change any other settings unless you really know what you are
+     doing, in which case you should not have to ask for help on the
+     mailing list.
+
+   Table 1. Known XDM, KDM, and GDM Configuration File Locations
+   Distribution/OS  Version  Display Manager             Location
    Debian GNU/Linux Unstable kdm             /etc/kde3/kdm/kdmrc
    Debian GNU/Linux Unstable gdm             /etc/X11/gdm/gdm.conf
+   Linux Mandrake   8.1      kdm             /usr/share/config/kdm/kdmrc
+   SuSE             8.2      kdm             /opt/kde3/share/config/kdm/kdmrc
 
    4.10. Why does Cygwin/X not display the XDM login prompt on Solaris
    when I try to open an XDMCP session with a remote Solaris machine?
@@ -1651,7 +1663,7 @@ References
   33. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-how-modmap-and-xdmcp
   34. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-bash-extended-chars
   35. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-bash-8bit
-  36. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-mandrake-8.1-xdmcp
+  36. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-xdmcp-enable
   37. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-solaris-fonts
   38. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-remote-solaris
   39. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-xdmcp-info
@@ -1734,7 +1746,7 @@ References
  116. http://www.xfree86.org/current/fonts.html
  117. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-solaris-fonts
  118. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#q-cde-via-xdmcp-hangs
- 119. http://www.linuxdoc.org/HOWTO/XDMCP-HOWTO/
+ 119. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
  120. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/dump.html#errors
  121. http://cygwin.com/ml/cygwin-xfree/
  122. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/faq/cygwin-xfree@cygwin.com
