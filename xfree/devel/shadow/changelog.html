@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2003-04-30 2025 EDT</p>
+<p>Last updated: 2003-05-01 1250 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -63,6 +63,76 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test83</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-05-01 1250 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test82</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-34</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test83.exe.bz2">XWin-Test83.exe.bz2</a>
+(1204 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030501-1250.tar.bz2">xwin-20030501-1250.tar.bz2</a>
+(111 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Test82
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test82-to-Test83.diff">xwin-Test82-to-Test83.diff</a>
+(10 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Fix the Exit confirmation dialog box so that the arrow keys, tab
+keys, and Enter/Escape keys all work.  Additionally, make the Exit
+confirmation dialog box get the keyboard focus when it is opened.  It
+was being set as the active window, but the keyboard focus was not
+being set properly.  (Harold L Hunt II)</li>
+
+<li>Make the Cancel button the default button on the Exit confirmation
+dialog box.  Thanks to Biju G C for giving me a heads-up on this one.
+(Harold L Hunt II)</li>
+
+<li>Fix the cursor hiding on the Exit confirmation dialog box that was
+occurring when no X Client windows were open in MultiWindow
+mode.  (Harold L Hunt II)</li>
+
+<li>Fix the Exit confirmation dialog box so that it doesn't prevent
+the keyboard focus from returning to X Client windows in MultiWindow
+mode when you dismiss the dialog box by closing it or by pressing
+Cancel.  (Harold L Hunt II)</li>
+
+<li>Change the root window title in MultiWindow mode to
+``Cygwin/XFree86'' from ``Cygwin/XFree86 rl''.  (Harold L Hunt
+II)</li>
+
+<li>Change MultiWindow mode to use XWin.log again, instead of
+XWinrl.log.  (Harold L Hunt II)</li>
+
+<li>Change the top-level window procedure for MultiWindow mode to
+share a global cursor hidden/shown flag with the root window
+procedure.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
 
 <h4>Test82</h4>
 <table>
