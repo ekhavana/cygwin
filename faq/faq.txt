@@ -175,9 +175,8 @@ see `http://cygwin.com/packages/'.
 
    Full source code is available for all packages and tools.
 
-   There is one recommended way to install Cygwin, which is to use the
-GUI installer `setup.exe'.  There are some variations on how you go
-about that.
+   There is only one recommended way to install Cygwin, which is to use
+the GUI installer "Cygwin Setup".  It is flexible and easy to use.
 
    Do it any other way, and you're on your own!  That said, keep in mind
 that the GUI installer is a "work in progress", so there might be a few
@@ -186,47 +185,49 @@ specific requirements.  If something doesn't work right for you, and
 it's not covered here or elsewhere, then by all means report it to the
 mailing list.
 
-Installation using the `setup.exe' program
-==========================================
+Installation using "Cygwin Setup"
+=================================
 
-   The `setup.exe' program is the recommended way to install Cygwin,
-but it is still a work in progress.  Expect features and functionality
-to change.  For this reason, it is a good idea to note the version and
-build time reported by `setup.exe' when you run it.  This will help
-diagnose problems, should you have any.  Check the cygwin mailing list
-for the latest news about `setup.exe'.
+   The Cygwin Setup program is the only recommended way to install
+Cygwin, but it is still a work in progress.  Expect features and
+functionality to change.  For this reason, it is a good idea to note
+the version and build time reported by Cygwin Setup when you run it.
+This will help diagnose problems, should you have any.  Check the
+cygwin mailing list for the latest news about Cygwin Setup.
 
 Why not install in C:\?
 -----------------------
 
-   The `setup.exe' program will prompt you for a "root" directory.  The
-default is `C:\cygwin', but you can change it.  You are urged not to
+   The Cygwin Setup program will prompt you for a "root" directory.
+The default is `C:\cygwin', but you can change it.  You are urged not to
 choose something like 'C:\' (the root directory on the system drive) for
 your Cygwin root.  If you do, then critical Cygwin system directories
 like 'etc', 'lib' and 'bin' could easily be corrupted by other
 (non-Cygwin) applications or packages that use \etc, \lib or \bin.
 Perhaps there is no conflict now, but who knows what you might install
 in the future?  It's also just good common sense to segregate your
-Cygwin "filesystems" from the rest of your Windows system disk.  (In
-the past, there had been genuine bugs that would cause problems for
-people who installed in C:\, but we believe those are gone now.)
+Cygwin "filesystems" from the rest of your Windows system disk.
 
-Can I use the new setup to update a B18, B19, B20, B20.1 or CD-ROM (1.0) installation of Cygwin?
-------------------------------------------------------------------------------------------------
+   (In the past, there had been genuine bugs that would cause problems
+for people who installed in C:\, but we believe those are gone now.)
 
-   No, you must start from scratch with the new setup.  The overall
-structure has changed so much that it would be silly to try to
-accomodate old installations of Cygwin.  You'll probably be much better
-off with a whole new installation anyway.  You may backup or rename your
-old installation first, or just install the new one somewhere else.  Be
-sure to make note of your current mount table, because this will be
-overwritten during the new setup.
+Can I use Cygwin Setup to update a B18, B19, B20, B20.1 or CD-ROM (1.0) installation of Cygwin?
+-----------------------------------------------------------------------------------------------
 
-   Once you've installed the latest net release, the new setup will
+   No, you must start from scratch with the new Cygwin Setup.  The
+overall structure has changed so much that it would be pointless to try
+to accomodate old installations of Cygwin.  You will probably be much
+better off with a whole new installation anyway.  You may backup or
+rename your old installation first, or just install the new one
+somewhere else.  Be sure to make note of your current mount table,
+because this will be overwritten during the new setup.  Make sure you
+don't end up with two different versions of `cygwin1.dll' in your path.
+
+   Once you've installed the latest net release, Cygwin Setup will
 update just the individual packages that need it.
 
-Is `setup.exe', or one of the packages, infected with a virus?
---------------------------------------------------------------
+Is Cygwin Setup, or one of the packages, infected with a virus?
+---------------------------------------------------------------
 
    Unlikely.  Unless you can confirm it, please don't report it to the
 mailing list.  Anti-virus products have been known to detect false
@@ -234,13 +235,14 @@ positives when extracting compressed tar archives.  If this causes
 problems for you, consider disabling your anti-virus software when
 running `setup'.  Read the next entry for a fairly safe way to do this.
 
-My computer hangs when I try to run `setup.exe'!
-------------------------------------------------
+My computer hangs when I run Cygwin Setup!
+------------------------------------------
 
-   Network Associates (formerly McAfee) products have been reported to
-"hang" when extracting Cygwin tar archives.  Consider disabling your
-anti-virus software when running `setup'.  The following procedure
-should be a fairly safe way to do that:
+   Both Network Associates (formerly McAfee) and Norton anti-virus
+products have been reported to "hang" when extracting Cygwin tar
+archives.  If this happens to you, consider disabling your anti-virus
+software when running Cygwin Setup.  The following procedure should be
+a fairly safe way to do that:
 
   1. Download `setup.exe' and scan it explicitly.
 
@@ -251,19 +253,19 @@ should be a fairly safe way to do that:
   4. Re-activate your anti-virus software and scan everything in
      C:\cygwin (or wherever you chose to install).  If you're concerned
      about a malicious package, say if a mirror is compromised, then you
-     should scan your entire hard disk after running setup.
+     should scan your entire hard disk after running Cygwin Setup.
 
 
-   This should be safe provided setup.exe is not substituted by
+   This should be safe, but only if Cygwin Setup is not substituted by
 something malicious.
 
 What packages should I download?
 --------------------------------
 
-   When using `setup.exe' for the first time, the default is to install
+   When using Cygwin Setup for the first time, the default is to install
 a minimal subset of packages.  If you want anything beyond that, you
 will have to select it explicitly.  See `http://cygwin.com/packages/'
-for a searchable list of packages available.
+for a searchable list of available packages.
 
    If you want to build programs, of course you'll need `gcc',
 `binutils', `make' and probably other packages from the "Devel"
@@ -275,10 +277,11 @@ How do I just get everything?
    In the past, the default was to install everything, much to the
 irritation of many users.  Now the default is to install only a basic
 core of packages.  At the moment, there is no easy way to get
-everything.  You must do the following:
+everything.  In the current version of Cygwin Setup, if you want
+everything, you must do the following:
 
-  1. When the GUI says "Select packages to install", click on the
-     "View" button until it says "Full".
+  1. When the Cygwin Setup says "Select packages to install", click on
+     the "View" button until it says "Full".
 
   2. Wherever it says "Skip", click twice until it gives the version
      number of the package.  That means it will be downloaded and
@@ -287,13 +290,13 @@ everything.  You must do the following:
 
    If a package you've selected for installation has prerequisites,
 those will automatically be installed too.  It's a lot of clicking but
-you only the first time.  Once you install a package, any subsequent
+only the first time.  Once you install a package, any subsequent
 updates to that package will be installed by default.  Note that new
-packages are added rather frequently, so you'll have to regularly check
-the list for any "Skip" entries if you want to stay up to date with a
-complete installation.
+packages are added regularly, so you will always have to check the list
+for any "Skip" entries if you want to stay up to date with a complete
+installation.
 
-   This should become much easier in a future version of `setup.exe'.
+   This should become much easier in a future version of Cygwin Setup.
 
 How much disk space does Cygwin require?
 ----------------------------------------
@@ -310,11 +313,10 @@ subdirectories there.
 What if setup fails?
 --------------------
 
-   First, make sure that you are using the latest version of
-`setup.exe'.  It's a work in progress, with improvements and bugfixes
-being made often.  The latest version is always available from the
-'Install Cygwin now' link on the Cygwin Home Page at
-`http://cygwin.com/'.
+   First, make sure that you are using the latest version of Cygwin
+Setup.  It is a work in progress, with improvements and bugfixes being
+made often.  The latest version is always available from the 'Install
+Cygwin now' link on the Cygwin Home Page at `http://cygwin.com/'.
 
    If you are downloading from the internet, setup will fail if it
 cannot download the list of mirrors at
@@ -343,9 +345,8 @@ what happened that wasn't supposed to happen, etc.
 What's the difference between packages in `latest' and `contrib'?
 -----------------------------------------------------------------
 
-   There is no difference as far as `setup.exe' is concerned, and you
-should not worry about this either.  The distinction is historical, not
-practical.
+   There is no difference as far as Cygwin Setup is concerned.  The
+distinction is historical, not practical.
 
 My Windows logon name has a space in it, will this cause problems?
 ------------------------------------------------------------------
@@ -367,7 +368,7 @@ README file for that package.)
 How do I uninstall individual packages?
 ---------------------------------------
 
-   Run `setup.exe' as you would to install packages.  In the list of
+   Run Cygwin Setup as you would to install packages.  In the list of
 packages to install, browse the relevant category or click on the
 "View" button to get a full listing.  Click on the cycle glyph until
 the action reads "Uninstall".  Proceed by clicking "Next".
@@ -418,9 +419,9 @@ else.  The following steps should work:
    The obvious warnings about updating the cygwin package and using
 developer snapshots apply:
 
-  1. Close all Cygwin apps, including shells and services (e.g. inetd),
-     before updating `cygwin1.dll'.  You may have to restart Windows to
-     clear the DLL from memory.
+  1. Close *all* Cygwin applications, including shells and services
+     (e.g. inetd), before updating `cygwin1.dll'.  You may have to
+     restart Windows to clear the DLL from memory.
 
   2. Snapshots are risky.  They have not been tested.  Use them *only*
      if there is a feature or bugfix that you need to try, and you are
@@ -1774,21 +1775,29 @@ Perhaps nobody knows the answer.
 Using Cygwin
 ============
 
-My application cannot locate cygncurses5.dll!!!
------------------------------------------------
+Why can't my application locate cygncurses5.dll?  or cygintl.dll?  or cygreadline5.dll?  or ...?
+------------------------------------------------------------------------------------------------
 
    If you upgraded recently, and suddenly vim (or some other Cygwin
-application) fails with this message, it means that you did not follow
-these instructions properly:
+application) cannot find `cygncurses5.dll', it means that you did not
+follow these instructions properly:
 `http://cygwin.com/ml/cygwin-announce/2001/msg00124.html'.  To repair
-the damage, you must run setup.exe again, and re-install the
+the damage, you must run Cygwin Setup again, and re-install the
 `libncurses5' package.
 
-   Note that setup won't show this option by default.  In the "Select
-packages to install" dialogue, click on the `Full/Part' button.  This
-lists all packages, even those that are already installed.  Scroll down
-to locate the `libncurses5' package.  Click on the "cycle" glyph until
-it says "Reinstall".  Continue with setup.
+   Note that Cygwin Setup won't show this option by default.  In the
+"Select packages to install" dialogue, click on the `Full/Part' button.
+This lists all packages, even those that are already installed.
+Scroll down to locate the `libncurses5' package.  Click on the "cycle"
+glyph until it says "Reinstall".  Continue with the installation.
+
+   Similarly, if something cannot find `cygintl.dll', then run Cygwin
+Setup and re-install the `libintl' and `libintl1' packages.
+
+   For a detailed explanation of the general problem, and how to extend
+it to other missing DLLs (like cygreadline5.dll) and identify their
+containing packages, see
+`http://cygwin.com/ml/cygwin/2002-01/msg01619.html'.
 
 Why is Cygwin suddenly _so_ slow?
 ---------------------------------
@@ -2354,7 +2363,8 @@ command shell by default.  Also, since Emacs is not a Cygwin
 application, it has no knowledge of Cygwin mounts.  With those points
 in mind, you need to add the following code to your ~/.emacs or
 ~/_emacs file in order to use bash.  This is particularly useful for
-the JDE package (`http://sunsite.dk/jde/').
+the JDEE package (`http://jdee.sunsite.dk/').  The following settings
+are for Emacs 21.1:
 
      	;; This assumes that Cygwin is installed in C:\cygwin (the
      	;; default) and that C:\cygwin\bin is not already in your
@@ -2367,7 +2377,6 @@ the JDE package (`http://sunsite.dk/jde/').
      	;; here.
      	;;
      	(setq process-coding-system-alist '(("bash" . undecided-unix)))
-     	(setq w32-quote-process-args ?\")
      	(setq shell-file-name "bash")
      	(setenv "SHELL" shell-file-name)
      	(setq explicit-shell-file-name shell-file-name)

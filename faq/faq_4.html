@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 24 January 2002 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 3 March 2002 -->
 
 <TITLE>The Cygwin FAQ
  - Question and Answers</TITLE>
@@ -197,24 +197,37 @@ nobody knows the answer.
 
 
 
-<H3><A NAME="SEC32" HREF="faq_toc.html#TOC32">My application cannot locate cygncurses5.dll!!!</A></H3>
+<H3><A NAME="SEC32" HREF="faq_toc.html#TOC32">Why can't my application locate cygncurses5.dll?  or cygintl.dll?  or cygreadline5.dll?  or ...?</A></H3>
 
 <P>
 If you upgraded recently, and suddenly vim (or some other Cygwin
-application) fails with this message, it means that you did not follow
-these instructions properly:
+application) cannot find <CODE>cygncurses5.dll</CODE>, it means that you did
+not follow these instructions properly:
 <TT><a target="_top" href="http://cygwin.com/ml/cygwin-announce/2001/msg00124.html">http://cygwin.com/ml/cygwin-announce/2001/msg00124.html</a></TT>.  To
-repair the damage, you must run setup.exe again, and re-install the
+repair the damage, you must run Cygwin Setup again, and re-install the
 <SAMP>`libncurses5'</SAMP> package.
 
 
 <P>
-Note that setup won't show this option by default.  In the "Select
-packages to install" dialogue, click on the <SAMP>`Full/Part'</SAMP>
+Note that Cygwin Setup won't show this option by default.  In the
+"Select packages to install" dialogue, click on the <SAMP>`Full/Part'</SAMP>
 button.  This lists all packages, even those that are already
 installed.  Scroll down to locate the <SAMP>`libncurses5'</SAMP> package.
 Click on the "cycle" glyph until it says "Reinstall".  Continue
-with setup.
+with the installation.
+
+
+<P>
+Similarly, if something cannot find <CODE>cygintl.dll</CODE>, then run
+Cygwin Setup and re-install the <SAMP>`libintl'</SAMP> and <SAMP>`libintl1'</SAMP>
+packages.
+
+
+<P>
+For a detailed explanation of the general problem, and how to extend
+it to other missing DLLs (like cygreadline5.dll) and identify their
+containing packages, see
+<TT><a target="_top" href="http://cygwin.com/ml/cygwin/2002-01/msg01619.html">http://cygwin.com/ml/cygwin/2002-01/msg01619.html</a></TT>.
 
 
 
@@ -1075,8 +1088,9 @@ The Windows port of GNU Emacs (aka "NT emacs") uses the Windows command
 shell by default.  Also, since Emacs is not a Cygwin application, it has
 no knowledge of Cygwin mounts.  With those points in mind, you need to
 add the following code to your ~/.emacs or ~/_emacs file in order to use
-bash.  This is particularly useful for the JDE package
-(<TT><a target="_top" href="http://sunsite.dk/jde/">http://sunsite.dk/jde/</a></TT>).
+bash.  This is particularly useful for the JDEE package
+(<TT><a target="_top" href="http://jdee.sunsite.dk/">http://jdee.sunsite.dk/</a></TT>).  The following settings are for
+Emacs 21.1:
 
 
 
@@ -1092,7 +1106,6 @@ bash.  This is particularly useful for the JDE package
 	;; here.
 	;;
 	(setq process-coding-system-alist '(("bash" . undecided-unix)))
-	(setq w32-quote-process-args ?\")
 	(setq shell-file-name "bash")
 	(setenv "SHELL" shell-file-name) 
 	(setq explicit-shell-file-name shell-file-name) 
