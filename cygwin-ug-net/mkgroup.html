@@ -1,17 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
->mkpasswd</TITLE
-><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="docbook.css"><META
-NAME="CREATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
-NAME="form"
-CONTENT="html"></HEAD
+>mkgroup</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+REL="HOME"
+TITLE="Cygwin User's Guide"
+HREF="cygwin-ug-net.html"><LINK
+REL="UP"
+TITLE="Cygwin Utilities"
+HREF="utils.html"><LINK
+REL="PREVIOUS"
+TITLE="kill"
+HREF="kill.html"><LINK
+REL="NEXT"
+TITLE="mkpasswd"
+HREF="mkpasswd.html"></HEAD
 ><BODY
+><DIV
+CLASS="NAVHEADER"
 ><TABLE
 WIDTH="100%"
 BORDER="0"
@@ -29,7 +38,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="utils382.html"
+HREF="kill.html"
 >Prev</A
 ></TD
 ><TD
@@ -42,17 +51,18 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="utils412.html"
+HREF="mkpasswd.html"
 >Next</A
 ></TD
 ></TR
 ></TABLE
 ><HR
 ALIGN="LEFT"
-WIDTH="100%"><H1
+WIDTH="100%"></DIV
+><H1
 ><A
-NAME="MKPASSWD"
->mkpasswd</A
+NAME="MKGROUP"
+>mkgroup</A
 ></H1
 ><TABLE
 BORDER="0"
@@ -62,35 +72,35 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->Usage: mkpasswd [options] [domain]
-This program prints a /etc/passwd file to stdout
-Options are
-   -l,--local              print local accounts
-   -d,--domain             print domain accounts (from current domain
-                           if no domain specified
-   -g,--local-groups       print local group information too
-   -?,--help               displays this message
-This program does only work on Windows NT</PRE
+>usage: mkgroup &#60;options&#62; [domain]
+This program prints group information to stdout
+Options:\n");
+    -l,--local           print pseudo group information if there is
+                         no domain
+    -d,--domain          print global group information from the domain
+                         specified (or from the current domain if there is
+                         no domain specified)
+    -?,--help            print this message</PRE
 ></TD
 ></TR
 ></TABLE
 ><P
 >The <B
 CLASS="COMMAND"
->mkpasswd</B
+>mkgroup</B
 > program can be used to help
 configure your Windows system to be more unix-like by creating an
 initial <TT
 CLASS="FILENAME"
->/etc/passwd</TT
-> substitute (some commands
-need this file) from your system information.  To initially set up
-your machine, you'd do something like this:</P
+>/etc/group</TT
+> substitute (some commands need this
+file) from your system information.  To initially set up your machine,
+you'd do something like this:</P
 ><DIV
 CLASS="EXAMPLE"
 ><P
 ><B
->Example 7-4. Setting up the passwd file</B
+>Example 7-3. Setting up the groups file</B
 ></P
 ><TABLE
 BORDER="0"
@@ -107,14 +117,14 @@ CLASS="PROMPT"
 <TT
 CLASS="PROMPT"
 >$</TT
-> mkpasswd &#62; /etc/passwd</PRE
+> mkgroup &#62; /etc/group</PRE
 ></TD
 ></TR
 ></TABLE
 ></DIV
 ><P
->Note that this information is static.  If you change the user
-information in your system, you'll need to regenerate the passwd file
+>Note that this information is static.  If you change the group
+information in your system, you'll need to regenerate the group file
 for it to have the new information.</P
 ><P
 >The <TT
@@ -126,6 +136,8 @@ CLASS="LITERAL"
 > options
 allow you to specify where the information comes from, either the
 local machine or the default (or given) domain.</P
+><DIV
+CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
@@ -139,7 +151,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="utils382.html"
+HREF="kill.html"
 >Prev</A
 ></TD
 ><TD
@@ -155,7 +167,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="utils412.html"
+HREF="mkpasswd.html"
 >Next</A
 ></TD
 ></TR
@@ -164,7 +176,7 @@ HREF="utils412.html"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->mkgroup</TD
+>kill</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -177,9 +189,10 @@ HREF="utils.html"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->mount</TD
+>mkpasswd</TD
 ></TR
 ></TABLE
+></DIV
 ></BODY
 ></HTML
 >

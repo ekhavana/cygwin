@@ -1,17 +1,26 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Environment Variables</TITLE
-><LINK
-REL="STYLESHEET"
-TYPE="text/css"
-HREF="docbook.css"><META
-NAME="CREATOR"
-CONTENT="Modular DocBook HTML Stylesheet version 1.08"><META
-NAME="form"
-CONTENT="html"></HEAD
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet version 1.13"><LINK
+REL="HOME"
+TITLE="Cygwin User's Guide"
+HREF="cygwin-ug-net.html"><LINK
+REL="UP"
+TITLE="Setting Up Cygwin"
+HREF="setup-net.html"><LINK
+REL="PREVIOUS"
+TITLE="Directory Structure"
+HREF="setup-dir.html"><LINK
+REL="NEXT"
+TITLE="Mount Table"
+HREF="setup-mount.html"></HEAD
 ><BODY
+><DIV
+CLASS="NAVHEADER"
 ><TABLE
 WIDTH="100%"
 BORDER="0"
@@ -29,7 +38,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="setup-net138.html"
+HREF="setup-dir.html"
 >Prev</A
 ></TD
 ><TD
@@ -42,14 +51,15 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="setup-net179.html"
+HREF="setup-mount.html"
 >Next</A
 ></TD
 ></TR
 ></TABLE
 ><HR
 ALIGN="LEFT"
-WIDTH="100%"><H1
+WIDTH="100%"></DIV
+><H1
 ><A
 NAME="SETUP-ENV"
 >Environment Variables</A
@@ -112,9 +122,11 @@ CLASS="FILENAME"
 a cygwin process first starts.</P
 ><P
 >The LD_LIBRARY_PATH environment variable is used by the Cygwin function
-<B
+<TT
 CLASS="FUNCTION"
+><B
 >dlopen ()</B
+></TT
 > as a list of directories to search for .dll files to load.  This
 environment variable is converted from Windows format (e.g. <TT
 CLASS="FILENAME"
@@ -157,7 +169,7 @@ unix-like ttys.  Defaults to not set.</P
 ><P
 >(no)binmode - if set, pipes and unspecified file opens default
 to binary mode (no CR/LF/Ctrl-Z translations) instead of text mode.
-Defaults to text mode.</P
+Defaults to not set (text mode).</P
 ><P
 >strace=n[:cache][,filename] - configures system tracing.  Off by
 default, setting various bits in n (a bit flag) enables various types
@@ -172,8 +184,8 @@ unix-like inode information.  Warning: this may create additional
 <I
 CLASS="EMPHASIS"
 >large</I
-> files on non-NTFS partitions.  This option only
-operates under Windows NT.  Defaults to not set. </P
+> files on non-NTFS partitions.  This option
+only operates under Windows NT.  Defaults to not set. </P
 ><P
 >(no)reset_com - if set, serial ports are reset to 9600-8-N-1
 with no flow control when used (warning: this is done at open time and
@@ -184,6 +196,8 @@ Win32 and POSIX) are cached.  Note that this is may cause problems if
 the mount table changes, as the cache is not invalidated and may
 contain values that depend on the previous mount table
 contents. Defaults to set.</P
+><DIV
+CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
@@ -197,7 +211,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="setup-net138.html"
+HREF="setup-dir.html"
 >Prev</A
 ></TD
 ><TD
@@ -213,7 +227,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="setup-net179.html"
+HREF="setup-mount.html"
 >Next</A
 ></TD
 ></TR
@@ -238,6 +252,7 @@ VALIGN="top"
 >Mount Table</TD
 ></TR
 ></TABLE
+></DIV
 ></BODY
 ></HTML
 >
