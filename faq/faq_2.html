@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 14 June 2002 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 27 July 2002 -->
 
 <TITLE>The Cygwin FAQ
  - Installation Instructions</TITLE>
@@ -90,8 +90,8 @@ much better off with a whole new installation anyway.  You may backup
 or rename your old installation first, or just install the new one
 somewhere else.  Be sure to make note of your current mount table,
 because this will be overwritten during the new setup.  Make sure you
-don't end up with two different versions of <SAMP>`cygwin1.dll'</SAMP> in your
-path.
+don't end up with two different versions of <SAMP>`cygwin1.dll'</SAMP> on your
+system.
 
 
 <P>
@@ -134,15 +134,14 @@ a fairly safe way to do that:
 
 <LI>Re-activate your anti-virus software and scan everything
 
-in C:\cygwin (or wherever you chose to install).  If you're concerned
-about a malicious package, say if a mirror is compromised, then you
-should scan your entire hard disk after running Cygwin Setup.
+in C:\cygwin (or wherever you chose to install), or your entire hard
+disk if you are paranoid.
 
 </OL>
 
 <P>
 This should be safe, but only if Cygwin Setup is not substituted by
-something malicious.
+something malicious, and no mirror has been compromised.
 
 
 
@@ -170,47 +169,65 @@ If you want to build programs, of course you'll need <SAMP>`gcc'</SAMP>,
 <P>
 In the past, the default was to install everything, much to the
 irritation of many users.  Now the default is to install only a basic
-core of packages.  At the moment, there is no easy way to get
-everything.  In the current version of Cygwin Setup, if you want
-everything, you must do the following:
+core of packages.  Cygwin Setup is designed to make it easy to browse
+categories and select what you want to install or omit from those
+categories.  It's also easy to install everything:
 
 
 
 <OL>
 
-<LI>When the Cygwin Setup says "Select packages to install", click on the
+<LI>At the "Select Packages" screen, in "Categories" view, at the line
 
-"View" button until it says "Full".
+marked "All", click on the word "default" so that it changes to
+"install".  (Be patient, there is some computing to do at this step.
+It may take a few seconds to register the change.)  This tells Setup
+to install <EM>everything</EM>, not just what it thinks you should have
+by default.
 
-<LI>Wherever it says "Skip", click twice until it gives the
+<LI>Now click on the "View" button (twice) until you get the
 
-version number of the package.  That means it will be downloaded and
-installed.
+"Partial" view.  This shows exactly which packages are about to be
+downloaded and installed.
 
 </OL>
 
 <P>
-If a package you've selected for installation has prerequisites, those
-will automatically be installed too.  It's a lot of clicking but only
-the first time.  Once you install a package, any subsequent updates to
-that package will be installed by default.  Note that new packages are
-added regularly, so you will always have to check the list for any
-"Skip" entries if you want to stay up to date with a complete
-installation.
+This procedure only works for packages that are currently available.
+There is no way to tell Cygwin Setup to install all packages by
+default from now on.  As new packages become available that would not
+be installed by default, you have to repeat the above procedure to get
+them.
 
 
 <P>
-This should become much easier in a future version of Cygwin Setup.
+In general, a better method (in my opinion), is to:
 
+
+
+<OL>
+
+<LI>First download &#38; install all packages that would normally be
+
+installed by default.  This includes fundamental packages and any
+updates to what you have already installed.  Then...
+
+<LI>Run Cygwin Setup again, and apply the above technique to get all
+
+new packages that would not be installed by default.  You can check
+the list in the Partial View before proceeding, in case there's
+something you really <EM>don't</EM> want.
+
+</OL>
 
 
 
 <H3><A NAME="SEC15" HREF="faq_toc.html#TOC15">How much disk space does Cygwin require?</A></H3>
 
 <P>
-That depends, obviously, on what you've chosen to download and install.
-A full installation is probably 250-300MB installed, not including the
-package archives themselves or the source code.
+That depends, obviously, on what you've chosen to download and
+install.  A full installation is probably close to 500MB installed,
+not including the package archives themselves or the source code.
 
 
 <P>
@@ -249,9 +266,9 @@ another mirror, or try again tomorrow.
 
 <P>
 If setup has otherwise behaved strangely, check the files
-<SAMP>`setup.log'</SAMP> and <SAMP>`setup.log.full'</SAMP> in the Cygwin root directory
-(<CODE>C:\cygwin</CODE> by default).  It may provide some clues as to what
-went wrong and why.
+<SAMP>`setup.log'</SAMP> and <SAMP>`setup.log.full'</SAMP> in <CODE>/var/log</CODE>
+(<CODE>C:\cygwin\var\log</CODE> by default).  It may provide some clues as
+to what went wrong and why.
 
 
 <P>
@@ -265,16 +282,7 @@ what happened that wasn't supposed to happen, etc.
 
 
 
-<H3><A NAME="SEC17" HREF="faq_toc.html#TOC17">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
-
-<P>
-There is no difference as far as Cygwin Setup is concerned.  The
-distinction is historical, not practical.
-
-
-
-
-<H3><A NAME="SEC18" HREF="faq_toc.html#TOC18">My Windows logon name has a space in it, will this cause problems?</A></H3>
+<H3><A NAME="SEC17" HREF="faq_toc.html#TOC17">My Windows logon name has a space in it, will this cause problems?</A></H3>
 
 <P>
 Most definitely yes!  UNIX shells (and thus Cygwin) use the space
@@ -298,7 +306,7 @@ README file for that package.)
 
 
 
-<H3><A NAME="SEC19" HREF="faq_toc.html#TOC19">How do I uninstall individual packages?</A></H3>
+<H3><A NAME="SEC18" HREF="faq_toc.html#TOC18">How do I uninstall individual packages?</A></H3>
 
 <P>
 Run Cygwin Setup as you would to install packages.  In the list of
@@ -309,7 +317,7 @@ the action reads "Uninstall".  Proceed by clicking "Next".
 
 
 
-<H3><A NAME="SEC20" HREF="faq_toc.html#TOC20">How do I uninstall <STRONG>all</STRONG> of Cygwin?</A></H3>
+<H3><A NAME="SEC19" HREF="faq_toc.html#TOC19">How do I uninstall <STRONG>all</STRONG> of Cygwin?</A></H3>
 
 <P>
 Setup has no automatic uninstall facility.  Just delete everything
@@ -340,19 +348,32 @@ would not have done any of these things for you.
 
 
 
-<H3><A NAME="SEC21" HREF="faq_toc.html#TOC21">Can I use setup to install snapshots?</A></H3>
+<H3><A NAME="SEC20" HREF="faq_toc.html#TOC20">How do I install snapshots?</A></H3>
 
 <P>
-No.  It used to be possible, but not any more.
+First, are you sure you want to do this?  Snapshots are risky.  They
+have not been tested.  Use them <STRONG>only</STRONG> if there is a feature or
+bugfix that you need to try, and you are willing to deal with any
+problems.
 
 
 <P>
-If experimenting with developer snapshots from
-<TT><a target="_top" href="http://cygwin.com/snapshots/">http://cygwin.com/snapshots/</a></TT>, you should generally install the
-full <CODE>cygwin-inst-YYYYMMDD.tar.bz2</CODE> update, rather than just the
-DLL, otherwise some components may be out of sync.  Cygwin tar won't be
+Before installing a snapshot, you must first Close <STRONG>all</STRONG> Cygwin
+applications, including shells and services (e.g. inetd, sshd), before
+updating <CODE>cygwin1.dll</CODE>.  You may have to restart Windows to clear
+the DLL from memory.
+
+
+<P>
+You cannot use Setup to install a snapshot.
+
+
+<P>
+You should generally install the full
+<CODE>cygwin-inst-YYYYMMDD.tar.bz2</CODE> update, rather than just the DLL,
+otherwise some components may be out of sync.  Cygwin tar won't be
 able to update <CODE>/usr/bin/cygwin1.dll</CODE>, but it should succeed with
-everything else.  The following steps should work:
+everything else.
 
 
 
@@ -372,32 +393,6 @@ everything else.  The following steps should work:
 
 Windows command shell to move <CODE>C:\cygwin\tmp\usr\bin\cygwin1.dll</CODE>
 to <CODE>C:\cygwin\bin\cygwin1.dll</CODE>.
-
-</OL>
-
-<P>
-The obvious warnings about updating the cygwin package and using developer
-snapshots apply:
-
-
-
-<OL>
-
-<LI>Close <STRONG>all</STRONG> Cygwin applications, including shells and services
-
-(e.g. inetd), before updating <CODE>cygwin1.dll</CODE>.  You may have to
-restart Windows to clear the DLL from memory.
-
-<LI>Snapshots are risky.  They have not been tested.  Use them
-
-<STRONG>only</STRONG> if there is a feature or bugfix that you need to try,
-and you are willing to deal with any problems.
-
-<LI>If you cannot download a snapshot from the main ftp distribution
-
-site, use a mirror, and look in the <SAMP>`snapshots'</SAMP> directory.  You may
-have to hunt for one that has a copy of the latest snapshot.  Start at
-<TT><a target="_top" href="http://cygwin.com/mirrors.html">http://cygwin.com/mirrors.html</a></TT>.
 
 </OL>
 
