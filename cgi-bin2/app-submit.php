@@ -1,4 +1,3 @@
-#!/usr/bin/php
 <?
 # Copyright 2003 Daniel Reed <n@ml.org>
 # This program is free software; you can redistribute it and/or modify it under 
