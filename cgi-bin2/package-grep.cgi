@@ -6,7 +6,7 @@ use CGI ':standard';
 my $html = new CGI;
 
 # Get our data
-my $grep = param('grep');
+my $grep = $html->param('grep');
 
 use FindBin qw($Bin);
 
