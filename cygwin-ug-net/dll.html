@@ -167,11 +167,11 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->ld --dll -o mydll.dll mydll.o -e _mydll_init@12 --base-file mydll.base
-dlltool --base-file=mydll.base --def mydll.def --output-exp mydll.exp --dllname mydll.dll
-ld --dll -o mydll.dll mydll.o -e _mydll_init@12 --base-file mydll.base mydll.exp
-dlltool --base-file=mydll.base --def mydll.def --output-exp mydll.exp --dllname mydll.dll
-ld --dll -o mydll.dll mydll.o -e _mydll_init@12 mydll.exp</PRE
+>gcc -s -Wl,--base-file,mydll.base -o mydll.dll mydll.o -Wl,-e,_mydll_init@12 
+dlltool --base-file mydll.base --def mydll.def --output-exp mydll.exp --dllname mydll.dll
+gcc -s -Wl,--base-file,mydll.base,mydll.exp -o mydll.dll mydll.o -Wl,-e,_mydll_init@12
+dlltool --base-file mydll.base --def mydll.def --output-exp mydll.exp --dllname mydll.dll
+gcc -Wl,mydll.exp -o mydll.dll mydll.o -Wl,-e,_mydll_init@12</PRE
 ></TD
 ></TR
 ></TABLE
