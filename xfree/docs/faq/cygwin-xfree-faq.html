@@ -44,6 +44,40 @@ COLSPAN="3"
 ><TR
 ><TD
 ALIGN="LEFT"
+>Revision 1.0.13</TD
+><TD
+ALIGN="LEFT"
+>2004-02-29</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Replaced XF86Config with the new commandline options.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+>Revision 1.0.12</TD
+><TD
+ALIGN="LEFT"
+>2004-02-28</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Added ForwardX11Trusted to ssh section.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
 >Revision 1.0.11</TD
 ><TD
 ALIGN="LEFT"
@@ -1287,9 +1321,10 @@ CLASS="answer"
 ><P
 ><B
 > </B
->There is limited support for configuration via XF86Config. This
-includes the path settings for FontPath and RgbPath and the
-configuration of on U.S. keyboard layouts. For more information see
+>The configfile support was only limited. Because of this and extra
+dependencies it was removed again. But most of the options which were 
+configurable in the configfile are now available as commandline options.
+For more information on configuring other keyboard layout see
 <A
 HREF="cygwin-xfree-faq.html#q-non-U.S.-keyboard-layout"
 >Q: 4.1.1.</A
@@ -1491,68 +1526,43 @@ CLASS="answer"
 Some keyboard layouts are configured according to the Windows keyboard settings.
 For these layouts no special change is needed.
 
-For all other layouts there is the possibility to configure the layout via a
-configfile. A sample file can be obtained from <A
-HREF="http://www.tu-chemnitz.de/~goal/xfree/XF86Config.bz2"
-TARGET="_top"
->here</A
->. Unpack the file and copy it to 
-<TT
-CLASS="filename"
->/etc/X11/XF86Config</TT
->.
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;$ cd /tmp
-$ wget http://www.tu-chemnitz.de/~goal/xfree/XF86Config.bz2
-$ bzip2 -d XF86Config.bz2
-$ cp XF86Config /etc/X11/XF86Config
-</PRE
-></TD
-></TR
-></TABLE
->
+For all other layouts there is the possibility to configure the layout via 
+commandline options.
 </P
 ><P
->&#13;The sample configures a german layout. To configure it for your layout, change
-these lines from the <SPAN
-CLASS="QUOTE"
->"InputDevice"</SPAN
-> section.
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;    Option "XkbRules"   "xfree86"
-    Option "XkbModel"   "pc105"
-    Option "XkbLayout"  "<VAR
+>&#13;The mainoption for changing the layout is 
+<VAR
+CLASS="parameter"
+>-xkblayout <VAR
 CLASS="replaceable"
->de</VAR
->"
-</PRE
-></TD
-></TR
-></TABLE
->
-Instead of <SPAN
-CLASS="QUOTE"
->"de"</SPAN
-> set <SPAN
-CLASS="QUOTE"
->"XkbLayout"</SPAN
-> to the code which
-represents your keyboard layout (e.g. Australia = au, Deutschland = de,
-France = fr, Japan = jp, United Kingdom = uk).
+>countrycode</VAR
+></VAR
+> 
+where <VAR
+CLASS="replaceable"
+>countrycode</VAR
+> is in most cases the 2 character
+code which also represents the country in internet adresses (e.g. 
+Australia = au, Deutschland = de, France = fr, Japan = jp, United Kingdom = uk).
+</P
+><P
+>&#13;Other options for tweaking the XKB layout are
+<VAR
+CLASS="parameter"
+>-xkbmodel</VAR
+>,<VAR
+CLASS="parameter"
+>-xkbvariant</VAR
+>,
+<VAR
+CLASS="parameter"
+>-xkboptions</VAR
+> and <VAR
+CLASS="parameter"
+>-xkbrules</VAR
+>. 
+These are the counterparts for the similar named options known from the 
+XF86Config file.
 </P
 ><P
 >If the loading fails, check <A
@@ -2028,6 +2038,32 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >ForwardX11 yes</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+><P
+>&#13;Starting with OpenSSH 3.8 you will need the switch <SPAN
+CLASS="QUOTE"
+>"ForwardX11Trusted
+yes"</SPAN
+> in the client configuration to allow remote clients full access 
+to the xserver. Without it some clients will fail with a similar error:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+> X Error of failed request: BadAtom (invalid Atom parameter)
+  Major opcode of failed request: 18 (X_ChangeProperty)
+  Atom id in failed request: 0x114
+  Serial number of failed request: 370
+  Current serial number in output stream: 372
+</PRE
 ></TD
 ></TR
 ></TABLE
@@ -3445,7 +3481,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN648"
+NAME="AEN661"
 ></A
 ><P
 ><B
