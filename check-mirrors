@@ -108,7 +108,7 @@ while (<M>) {
     }
     my $oldstate = $oldstate{$site};
     $oldstate{$site} = $ok;
-    if ($oldstate) {
+    if (!$ok && $oldstate) {
 	$ok = 1;
 	siteprint $site, $proto, "resetting status to $ok";
     }
@@ -234,7 +234,11 @@ sub verify_http {
     my ($site, $file) = @_;
     my $url = "http://$site/$file";
     my $status = LWP::Simple::head($url) ? 1 : 0;
-    siteprint $site, 'http', "status $status";
+    if ($status) {
+	print $file, "\n";
+    } else {
+	siteprint $site, 'http', "$file not found";
+    }
     return $status;
 }
 
@@ -255,7 +259,7 @@ sub verify_ftp {
     if (!$ftp) {
 	print $@;
 	return 2 if congested($site, $@);
-	siteprint $site, 'ftp', "status 0 - can't open";
+	siteprint $site, 'ftp', "can't open";
 	return 0;
     }
     print $ftp->message;
@@ -265,18 +269,17 @@ sub verify_ftp {
     print $msg;
     if (!$rc) {
 	return 2 if congested($site, $msg);
-	siteprint $site, 'ftp', "status 0 - can't login";
+	siteprint $site, 'ftp', "can't login";
 	return 0;
     }
     my @a = $ftp->ls($file);
     print "@a\n";
     my $status = @a;
     if (!$status) {
-	siteprint $site, 'ftp', "status 0 - $file not found";
+	siteprint $site, 'ftp', "$file not found";
 	return 0;
     }
     $ftp->quit;
-    siteprint $site, 'ftp', "status $status";
     return $status;
 }
 
