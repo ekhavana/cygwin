@@ -17,7 +17,6 @@ $main::packages = ();
 $main::count = 0;
 use FindBin qw($Bin);
 
-
 print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
       LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "</td></table>\n",
       "<table>\n",
