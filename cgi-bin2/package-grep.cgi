@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 
-BEGIN {exit(0)};
+qwer BEGIN {exit(0)};
 use CGI qw':standard';
 
 # Create one of our Objects
