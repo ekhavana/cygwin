@@ -1,3 +1,65 @@
+<h4>Release 6.7.0.0-4</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-04-13 2100 EDT</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winmultiwindowwindow.c, winmultiwindowwndproc.c,
+winwin32rootless.c, winwin32rootlesswndproc.c - Fix MWExtWM resource
+leak.  (Kensuke Matsuzaki)</li>
+
+<li>XWin.man - Add missing documentation for command-line parameters.
+(Rodrigo Medina)</li>
+
+<li>XWin.man - Rework some parts of the document, remove outdated
+information, update other outdated information.  (Harold L Hunt II -
+CodeWeavers)</li>
+
+<li>XWinrc.man - New man page for .XWinrc file.  (Rodrigo Medina)</li>
+
+<li>winengine.c - The fix reportedly in 6.7-3 for ShadowGDI being
+forced when not required was not actually in that release; include
+that fix in this release.  (Harold L Hunt II - CodeWeavers)</li>
+
+<li>winshadgdi.c/winActivateAppShadowGDI - Turn back on the manually
+minimizing and restoring of our window when using the ShadowGDI engine
+in fullscreen mode.  We perform the restoring or minimizing manually
+for ShadowGDI in fullscreen modes so that this engine will perform
+just like ShadowDD and ShadowDDNL in fullscreen mode; if we do not do
+this then our fullscreen window will appear in the z-order when it is
+deactivated and it can be uncovered by resizing or minimizing another
+window that is on top of it, which is not how the DirectDraw engines
+work.  (Harold L Hunt II - CodeWeavers)</li>
+
+<li>InitOutput.c - Adjust link to FAQ.  (Alexander Gottwald)</li>
+
+<li>winkeybd.c - Fix rare segfault caused by uninitialized event
+queue.  Happened if FatalError Messagebox appeared because of missing
+font "fixed".  (Alexander Gottwald)</li>
+
+<li>InitOutput.c - Fix segfault if LogInit fails.  (Alexander
+Gottwald)</li>
+
+<li>winmsg.c, winmsg.h - New function winDebug which logs messages
+with verbosity level 3.  (Alexander Gottwald)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
 <h4>Release 6.7.0.0-3</h4>
 <table>
 <tbody>
