@@ -86,7 +86,7 @@ sending HTML content to Cygwin mailing lists.
 </P>
 
 
-<H3><A NAME="SEC24" HREF="faq_toc.html#TOC24">Why won't you/the mailing list answer my questions?</A></H3>
+<H3><A NAME="SEC24" HREF="faq_toc.html#TOC24">Posting Guidelines (Or: Why won't you/the mailing list answer my questions?)</A></H3>
 
 <P>
 If you follow these guidelines, you are much more likely to get a
@@ -375,9 +375,17 @@ properly).
 
 <P>
 It is a very bad idea to have multiple *versions* of the cygwin DLL in
-your path.  They often conflict in funny ways.  If you have multiple
-versions, get rid of (or rename) all the older versions, keeping only
-the newest one.
+your path.  They often conflict in funny ways.
+
+</P>
+<P>
+If you get the error "shared region is corrupted" it means you have
+multiple versions of cygwin1.dll running at the same time.
+
+</P>
+<P>
+If you do have multiple versions, get rid of (or rename) all the older
+versions, keeping only the newest one.
 
 </P>
 <P>
@@ -596,60 +604,66 @@ This should never be necessary under Windows NT.
 <H3><A NAME="SEC45" HREF="faq_toc.html#TOC45">Why the weird directory structure?</A></H3>
 
 <P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
+Why do /lib and /usr/lib (and /bin, /usr/bin) point to the same thing?
 
 </P>
 <P>
-Why are cpp.exe, cc1.exe, etc., not in the bin directory?
+Why use mounts instead of symbolic links?
 
 </P>
 <P>
-Why more than one lib and include directory?
-
-</P>
-
-<PRE>
-H-i586-cygwin32\lib\gcc-lib\...\egcs-2.91.57\include
-x86-cygwin32\include
-x86-cygwin32\H-i586-cygwin32\i586-cygwin32\include
-</PRE>
-
-<P>
-This way multiple releases for different hosts and targets can all
-coexist in the same tree.  H-i586-cygwin32 means hosted on
-i586-cygwin32, common files shared by all hosts are in the top level
-directories, target-specific files are in the
-H-i586-cygwin32/i586-cygwin32
-directory, etc...
+Can I use a disk root (e.g., C:\) as Cygwin root?  Why is this discouraged?
 
 </P>
 <P>
-If you had a server sharing files to a ppc NT machine and an x86 NT
-machine, you could have both an H-i586-cygwin32 and an
-H-powerpcle-cygwin32 directory without having to duplicate the top level
-files that are the same for both hosts.  If you built and installed an
-i586-cygwin32 x mips-elf cross-compiler, you would have an
-H-i586-cygwin32/mips-elf with its target-specific files and some
-mips-elf- prefixed binaries in H-i586-cygwin32/bin.
-
-</P>
-<P>
-Normally we also have another higher level directory that identifies the
-release.  Then multiple Cygwin releases can coexist with different
-dll versions, giving:
+After a new installation in the default location, your mount points will
+look something like this:
 
 </P>
 
 <PRE>
-cygnus/b19/H-i586-cygwin32
-cygnus/cygwin-b20/H-i586-cygwin32
-...
+Device              Directory           Type         Flags
+C:\cygwin\bin       /usr/bin            user         binmode
+C:\cygwin\lib       /usr/lib            user         binmode
+C:\cygwin           /                   user         binmode
 </PRE>
 
 <P>
-In any case, this does add complexity to the directory structure but
-it's worth it for people with more complex installations.
+Note that /bin and /usr/bin point to the same location, as do /lib and
+/usr/lib.  This is intentional, and you should not undo these mounts
+unless you <EM>really</EM> know what you are doing.
+
+</P>
+<P>
+Various applications and packages may expect to be installed in /lib or
+/usr/lib (similarly /bin or /usr/bin).  Rather than distinguish between
+them and try to keep track of them (possibly requiring the occasional
+duplication or symbolic link), it was decided to maintain only one
+actual directory, with equivalent ways to access it.
+
+</P>
+<P>
+Symbolic links had been considered for this purpose, but were dismissed
+because they do not always work on Samba drives.  Also, mounts are
+faster to process because no disk access is required to resolve them.
+
+</P>
+<P>
+Note that non-cygwin applications will not observe Cygwin mounts (or
+symlinks for that matter).  For example, if you use WinZip to unpack the
+tar distribution of a Cygwin package, it may not get installed to the
+correct Cygwin path.  <EM>So don't do this!</EM>
+
+</P>
+<P>
+It is strongly recommended not to make the Cygwin root directory the
+same as your drive's root directory, unless you know what you are doing
+and are prepared to deal with the consequences.  It is generally easier
+to maintain the Cygwin hierarchy if it is isolated from, say, C:\.  For
+one thing, you avoid possible collisions with other (non-cygwin)
+applications that may create (for example) \bin and \lib directories.
+(Maybe you have nothing like that installed now, but who knows about
+things you might add in the future?)
 
 </P>
 
@@ -755,7 +769,7 @@ file:
 </P>
 
 <PRE>
-	mask system = yes
+	map system = yes
 	create mask = 0775
 </PRE>
 
@@ -1286,7 +1300,17 @@ see this message.
 </P>
 
 
-<H3><A NAME="SEC71" HREF="faq_toc.html#TOC71">Why can't bison find bison.simple or bison.hairy?</A></H3>
+<H3><A NAME="SEC71" HREF="faq_toc.html#TOC71">Where is glibc?</A></H3>
+
+<P>
+Cygwin does not provide glibc.  It uses newlib instead, which provides
+much (but not all) of the same functionality.  Porting glibc to Cygwin
+would be difficult.
+
+</P>
+
+
+<H3><A NAME="SEC72" HREF="faq_toc.html#TOC72">Why can't bison find bison.simple or bison.hairy?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1304,7 +1328,7 @@ systems, you would want to set it to <CODE>C:/cygnus/cygwin-b20/share</CODE>.
 </P>
 
 
-<H3><A NAME="SEC72" HREF="faq_toc.html#TOC72">Why is make behaving badly?</A></H3>
+<H3><A NAME="SEC73" HREF="faq_toc.html#TOC73">Why is make behaving badly?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1341,7 +1365,7 @@ install sets MAKE_MODE to UNIX.
 </P>
 
 
-<H3><A NAME="SEC73" HREF="faq_toc.html#TOC73">Why the undefined reference to "WinMain@16"?</A></H3>
+<H3><A NAME="SEC74" HREF="faq_toc.html#TOC74">Why the undefined reference to "WinMain@16"?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1354,7 +1378,7 @@ Try adding an empty main() function to one of your sources.
 </P>
 
 
-<H3><A NAME="SEC74" HREF="faq_toc.html#TOC74">How do I use Win32 API calls?</A></H3>
+<H3><A NAME="SEC75" HREF="faq_toc.html#TOC75">How do I use Win32 API calls?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1430,7 +1454,7 @@ the file that makes the reference.
 </P>
 
 
-<H3><A NAME="SEC75" HREF="faq_toc.html#TOC75">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
+<H3><A NAME="SEC76" HREF="faq_toc.html#TOC76">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1445,7 +1469,7 @@ that don't need a UNIX emulation layer.
 </P>
 
 
-<H3><A NAME="SEC76" HREF="faq_toc.html#TOC76">How do I make the console window go away?</A></H3>
+<H3><A NAME="SEC77" HREF="faq_toc.html#TOC77">How do I make the console window go away?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1461,7 +1485,7 @@ It you are writing a GUI program, you should either compile with
 </P>
 
 
-<H3><A NAME="SEC77" HREF="faq_toc.html#TOC77">Why does make complain about a "missing separator"?</A></H3>
+<H3><A NAME="SEC78" HREF="faq_toc.html#TOC78">Why does make complain about a "missing separator"?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1476,7 +1500,7 @@ lines must start with tabs.
 </P>
 
 
-<H3><A NAME="SEC78" HREF="faq_toc.html#TOC78">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
+<H3><A NAME="SEC79" HREF="faq_toc.html#TOC79">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1494,7 +1518,7 @@ Win32 headers which are pretty complete.
 </P>
 
 
-<H3><A NAME="SEC79" HREF="faq_toc.html#TOC79">How do I link against .lib files?</A></H3>
+<H3><A NAME="SEC80" HREF="faq_toc.html#TOC80">How do I link against .lib files?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1541,7 +1565,7 @@ rewriting the runtime library in question from specs...
 </P>
 
 
-<H3><A NAME="SEC80" HREF="faq_toc.html#TOC80">How do I rebuild the tools on my NT box?</A></H3>
+<H3><A NAME="SEC81" HREF="faq_toc.html#TOC81">How do I rebuild the tools on my NT box?</A></H3>
 
 <P>
 <STRONG>Note:</STRONG> You must build in a directory <EM>outside</EM> the source
@@ -1562,9 +1586,32 @@ make &#62; make.log 2&#62;&#38;1
 make install &#62; install.log 2&#62;&#38;1
 </PRE>
 
+<P>
+This will normally attempt to build the documentation, which
+additionally requires texinfo, texi2html, db2html and possibly others.
+These tools are not included in the Cygwin distribution, but are readily
+obtainable (or build OOTB).
+
+</P>
+<P>
+To check a cygwin1.dll, run "make check" in the winsup/cygwin directory.
+If that works, install everything <EM>except</EM> the dll (if you can).
+Then, close down all cygwin programs (including bash windows, inetd,
+etc.), save your old dll, and copy the new dll to <EM>all</EM> the
+places where the old dll was (if there is more than one on your
+machine).  Then start up a bash window and see what happens.  (Or better,
+run a cygwin program from the Windows command prompt.)
+
+</P>
+<P>
+If you get the error "shared region is corrupted" it means that two
+different versions of cygwin1.dll are running on your machine at the
+same time.
+
+</P>
 
 
-<H3><A NAME="SEC81" HREF="faq_toc.html#TOC81">How can I compile a powerpc NT toolchain?</A></H3>
+<H3><A NAME="SEC82" HREF="faq_toc.html#TOC82">How can I compile a powerpc NT toolchain?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1582,7 +1629,7 @@ Please send us patches if you do this work!
 </P>
 
 
-<H3><A NAME="SEC82" HREF="faq_toc.html#TOC82">How can I compile an Alpha NT toolchain?</A></H3>
+<H3><A NAME="SEC83" HREF="faq_toc.html#TOC83">How can I compile an Alpha NT toolchain?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1597,7 +1644,7 @@ for Alpha NT if someone contributes the changes to us.
 </P>
 
 
-<H3><A NAME="SEC83" HREF="faq_toc.html#TOC83">How can I adjust the heap/stack size of an application?</A></H3>
+<H3><A NAME="SEC84" HREF="faq_toc.html#TOC84">How can I adjust the heap/stack size of an application?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1616,7 +1663,7 @@ gcc as:
 </P>
 
 
-<H3><A NAME="SEC84" HREF="faq_toc.html#TOC84">How can I find out which dlls are needed by an executable?</A></H3>
+<H3><A NAME="SEC85" HREF="faq_toc.html#TOC85">How can I find out which dlls are needed by an executable?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1629,7 +1676,7 @@ objdump -p provides this information.
 </P>
 
 
-<H3><A NAME="SEC85" HREF="faq_toc.html#TOC85">How do I build a DLL?</A></H3>
+<H3><A NAME="SEC86" HREF="faq_toc.html#TOC86">How do I build a DLL?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1643,7 +1690,7 @@ project web page (http://sourceware.cygnus.com/cygwin/).
 </P>
 
 
-<H3><A NAME="SEC86" HREF="faq_toc.html#TOC86">How can I set a breakpoint at MainCRTStartup?</A></H3>
+<H3><A NAME="SEC87" HREF="faq_toc.html#TOC87">How can I set a breakpoint at MainCRTStartup?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1657,11 +1704,14 @@ question.
 </P>
 
 
-<H3><A NAME="SEC87" HREF="faq_toc.html#TOC87">How can I build a relocatable dll?</A></H3>
+<H3><A NAME="SEC88" HREF="faq_toc.html#TOC88">How can I build a relocatable dll?</A></H3>
 
 <P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
+<STRONG>(Please note: This section has not yet been updated for the
+latest net release.  However, there was a discussion on the cygwin
+mailing list recently that addresses this issue.  Read
+<TT><a target="_top" href="http://sourceware.cygnus.com/ml/cygwin/2000-06/msg00688.html">http://sourceware.cygnus.com/ml/cygwin/2000-06/msg00688.html</a></TT> and
+related messages.)</STRONG>
 
 </P>
 <P>
@@ -1802,7 +1852,7 @@ like -ltcl80 in your linker command.
 </P>
 
 
-<H3><A NAME="SEC88" HREF="faq_toc.html#TOC88">How can I debug what's going on?</A></H3>
+<H3><A NAME="SEC89" HREF="faq_toc.html#TOC89">How can I debug what's going on?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1820,7 +1870,7 @@ info would not be compatible with gdb).
 </P>
 
 
-<H3><A NAME="SEC89" HREF="faq_toc.html#TOC89">Can I use a system trace mechanism instead?</A></H3>
+<H3><A NAME="SEC90" HREF="faq_toc.html#TOC90">Can I use a system trace mechanism instead?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1850,7 +1900,7 @@ mechanism is well documented in the Cygwin library sources in the file
 </P>
 
 
-<H3><A NAME="SEC90" HREF="faq_toc.html#TOC90">The linker complains that it can't find something.</A></H3>
+<H3><A NAME="SEC91" HREF="faq_toc.html#TOC91">The linker complains that it can't find something.</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1869,7 +1919,7 @@ This is right <CODE>gcc hello.cc -lstdc++</CODE>.
 </P>
 
 
-<H3><A NAME="SEC91" HREF="faq_toc.html#TOC91">I use a function I know is in the API, but I still get a link</A></H3>
+<H3><A NAME="SEC92" HREF="faq_toc.html#TOC92">I use a function I know is in the API, but I still get a link</A></H3>
 <P>
 error.
 
@@ -1886,7 +1936,7 @@ the UNICODE stuff for it isn't filled in.
 </P>
 
 
-<H3><A NAME="SEC92" HREF="faq_toc.html#TOC92">Can you make DLLs that are linked against libc ?</A></H3>
+<H3><A NAME="SEC93" HREF="faq_toc.html#TOC93">Can you make DLLs that are linked against libc ?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1899,7 +1949,7 @@ Yes.
 </P>
 
 
-<H3><A NAME="SEC93" HREF="faq_toc.html#TOC93">Where is malloc.h?</A></H3>
+<H3><A NAME="SEC94" HREF="faq_toc.html#TOC94">Where is malloc.h?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1912,7 +1962,7 @@ Include stdlib.h instead of malloc.h.
 </P>
 
 
-<H3><A NAME="SEC94" HREF="faq_toc.html#TOC94">Can I use my own malloc?</A></H3>
+<H3><A NAME="SEC95" HREF="faq_toc.html#TOC95">Can I use my own malloc?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1935,13 +1985,8 @@ to occur after <CODE>main</CODE> is called, then this will surely break.
 </P>
 
 
-<H3><A NAME="SEC95" HREF="faq_toc.html#TOC95">Can I mix objects compiled with msvc++ and gcc?</A></H3>
+<H3><A NAME="SEC96" HREF="faq_toc.html#TOC96">Can I mix objects compiled with msvc++ and gcc?</A></H3>
 
-<P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
-
-</P>
 <P>
 Yes, but only if you are combining C object files.  MSVC C++ uses a
 different mangling scheme than GNU C++, so you will have difficulties
@@ -1950,7 +1995,7 @@ combining C++ objects.
 </P>
 
 
-<H3><A NAME="SEC96" HREF="faq_toc.html#TOC96">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
+<H3><A NAME="SEC97" HREF="faq_toc.html#TOC97">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1973,7 +2018,7 @@ data types, line numbers, local variables etc.
 </P>
 
 
-<H3><A NAME="SEC97" HREF="faq_toc.html#TOC97">Where can I find info on x86 assembly?</A></H3>
+<H3><A NAME="SEC98" HREF="faq_toc.html#TOC98">Where can I find info on x86 assembly?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -1991,7 +2036,7 @@ downloadable PDF form on Intel's web site:
 </P>
 
 
-<H3><A NAME="SEC98" HREF="faq_toc.html#TOC98">Shell scripts aren't running properly from my makefiles?</A></H3>
+<H3><A NAME="SEC99" HREF="faq_toc.html#TOC99">Shell scripts aren't running properly from my makefiles?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2006,7 +2051,7 @@ Makefiles.
 </P>
 
 
-<H3><A NAME="SEC99" HREF="faq_toc.html#TOC99">What preprocessor do I need to know about?</A></H3>
+<H3><A NAME="SEC100" HREF="faq_toc.html#TOC100">What preprocessor do I need to know about?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2027,7 +2072,7 @@ be compiled with VC++.
 </P>
 
 
-<H3><A NAME="SEC100" HREF="faq_toc.html#TOC100">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
+<H3><A NAME="SEC101" HREF="faq_toc.html#TOC101">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2041,7 +2086,7 @@ from <TT><a target="_top" href="http://www.xraylith.wisc.edu/~khan/software/gnu-
 </P>
 
 
-<H3><A NAME="SEC101" HREF="faq_toc.html#TOC101">How should I port my Unix GUI to Windows?</A></H3>
+<H3><A NAME="SEC102" HREF="faq_toc.html#TOC102">How should I port my Unix GUI to Windows?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
@@ -2070,7 +2115,7 @@ advantages inherent in using Cygwin.
 </P>
 
 
-<H3><A NAME="SEC102" HREF="faq_toc.html#TOC102">Why not use DJGPP ?</A></H3>
+<H3><A NAME="SEC103" HREF="faq_toc.html#TOC103">Why not use DJGPP ?</A></H3>
 
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
