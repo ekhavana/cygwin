@@ -1,8 +1,8 @@
 #!/usr/bin/perl
 
 use strict;
-use CGI qw':standard';
 use LWP::Simple;
+use CGI;
 
 sub addfn($);
 
@@ -19,7 +19,7 @@ my $header = LWP::Simple::get('http://cygwin.com/cygwin-header.html');
 
 print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
       "$header</td></table>\n",
-      "<table align=\"center\">\n",
+      "<table>\n",
       $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n",
       $html->h2({-align=>'center'}, 'Search Results'), "\n";
 
