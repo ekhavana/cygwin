@@ -119,9 +119,16 @@ directory on the mirror</P
 ></LI
 ><LI
 ><P
+>Change current ftp directory to <TT
+CLASS="filename"
+>cygwin/latest/</TT
+>.</P
+></LI
+><LI
+><P
 >Download the following files from <TT
 CLASS="filename"
->cygwin/</TT
+>cygwin/latest/</TT
 >, saving them to
 <TT
 CLASS="filename"
@@ -173,9 +180,9 @@ stand alone ftp client.
 ><P
 ><TT
 CLASS="filename"
->binutils/binutils-20010425-2-src.tar.gz</TT
+>binutils/binutils-20010914-1-src.tar.bz2</TT
 >
-(9.1 MB; required, necessary to build gcc and
+(7.5 MB; required, necessary to build gcc and
 Cygwin/XFree86)</P
 ></LI
 ><LI
@@ -384,6 +391,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;[harold@MyCrossHost harold]$ cd /cygwin/i686-pc-cygwin/
+
 [harold@MyCrossHost /cygwin/i686-pc-cygwin/]$
 </PRE
 ></TD
@@ -402,14 +410,17 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf 
-cygwin-lib.tgz
-[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf 
-cygwin-include.tgz
+>&#13;[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-lib.tgz
+
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-include.tgz
 </PRE
 ></TD
 ></TR
 ></TABLE
+></LI
+><LI
+><P
+>Obtaining Cygwin headers and libs is now complete.</P
 ></LI
 ></OL
 ></DIV
@@ -457,6 +468,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;[harold@MyCrossHost harold]$ cd /cygwin/src/
+
 [harold@MyCrossHost src]$
 </PRE
 ></TD
@@ -465,7 +477,7 @@ CLASS="screen"
 ></LI
 ><LI
 ><P
->Extract the binutils-20010425-2-src.tar.gz and gcc-2.95.3-5-src.tar.bz2
+>Extract the binutils-20010914-1-src.tar.bz2 and gcc-2.95.3-5-src.tar.bz2
 archives:</P
 ><TABLE
 BORDER="0"
@@ -475,12 +487,13 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost src]$ tar -xzf 
-binutils-20010425-2-src.tar.gz
-[harold@MyCrossHost src]$ bunzip2 
-gcc-2.95.3-5-src.tar.bz2
-[harold@MyCrossHost src]$ tar -xf 
-gcc-2.95.3-5-src.tar
+>&#13;[harold@MyCrossHost src]$ bunzip2 binutils-20010914-1-src.tar.bz2
+
+[harold@MyCrossHost src]$ tar -xf binutils-20010914-1-src.tar
+
+[harold@MyCrossHost src]$ bunzip2 gcc-2.95.3-5-src.tar.bz2
+
+[harold@MyCrossHost src]$ tar -xf gcc-2.95.3-5-src.tar
 </PRE
 ></TD
 ></TR
@@ -490,7 +503,7 @@ gcc-2.95.3-5-src.tar
 ><P
 >Change the current directory to the <TT
 CLASS="filename"
->/cygwin/src/binutils-20010425-2</TT
+>/cygwin/src/binutils-20010914-1</TT
 >
 directory:</P
 ><TABLE
@@ -501,8 +514,10 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost src]$ cd /cygwin/src/binutils-20010425-2
-[harold@MyCrossHost binutils-20010425-2]$ 
+>&#13;[harold@MyCrossHost src]$ cd binutils-20010914-1
+
+[harold@MyCrossHost binutils-20010914-1]$ 
+
 </PRE
 ></TD
 ></TR
@@ -523,8 +538,10 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost binutils-20010425-2]$ mkdir build
-[harold@MyCrossHost binutils-20010425-2]$ cd build
+>&#13;[harold@MyCrossHost binutils-20010914-1]$ mkdir build
+
+[harold@MyCrossHost binutils-20010914-1]$ cd build
+
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -545,6 +562,7 @@ CLASS="screen"
 >&#13;[harold@MyCrossHost build]$ ../configure 
 --prefix=/cygwin --exec-prefix=/cygwin 
 --target=i686-pc-cygwin --host=i686-pc-linux &gt; configure.log 2&gt;&amp;1
+
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -563,6 +581,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;[harold@MyCrossHost build]$ make all &gt; all.log 2&gt;&amp;1
+
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -581,6 +600,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;[harold@MyCrossHost build]$ make install &gt; install.log 2&gt;&amp;1
+
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -604,6 +624,7 @@ WIDTH="100%"
 CLASS="screen"
 >&#13;[harold@MyCrossHost build]$ 
 PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
+
 [harold@MyCrossHost build]$ 
 </PRE
 ></TD
@@ -614,7 +635,7 @@ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
 ><P
 >Change the current directory to the <TT
 CLASS="filename"
->/cygwin/src/binutils-20010425-2</TT
+>/cygwin/src/binutils-20010914-1</TT
 >
 directory:</P
 ><TABLE
@@ -625,7 +646,8 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;[harold@MyCrossHost src]$ cd /cygwin/src/gcc-2.95.3-5
+>&#13;[harold@MyCrossHost build]$ cd ../../gcc-2.95.3-5
+
 [harold@MyCrossHost gcc-2.95.3-5]$ 
 </PRE
 ></TD
@@ -648,7 +670,9 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;[harold@MyCrossHost gcc-2.95.3-5]$ mkdir build
+
 [harold@MyCrossHost gcc-2.95.3-5]$ cd build
+
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -670,6 +694,7 @@ CLASS="screen"
 --prefix=/cygwin --exec-prefix=/cygwin 
 --target=i686-pc-cygwin --host=i686-pc-linux 
 --enable-haifa &gt; configure.log 2&gt;&amp;1
+
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -688,6 +713,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;[harold@MyCrossHost build]$ make all &gt; all.log 2&gt;&amp;1
+
 [harold@MyCrossHost build]$
 </PRE
 ></TD
@@ -706,11 +732,16 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;[harold@MyCrossHost build]$ make install &gt; install.log 2&gt;&amp;1
+
 [harold@MyCrossHost build]$
 </PRE
 ></TD
 ></TR
 ></TABLE
+></LI
+><LI
+><P
+>Building binutils and gcc is now complete.</P
 ></LI
 ></OL
 ></DIV
@@ -803,6 +834,29 @@ only.</P
 ></LI
 ><LI
 ><P
+>Always remember to set your <TT
+CLASS="envar"
+>PATH</TT
+> environment variable to include the Cygwin binutils and gcc binary directories:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;[harold@MyCrossHost std]$
+PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
+
+[harold@MyCrossHost std]$
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
 >When building the entire tree, you must pass
 <TT
 CLASS="parameter"
@@ -832,6 +886,7 @@ CLASS="screen"
 >&#13;[harold@MyCrossHost std]$ make World 
 BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1" 
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1
+
 [harold@MyCrossHost std]$
 </PRE
 ></TD
@@ -863,6 +918,7 @@ WIDTH="100%"
 CLASS="screen"
 >&#13;[harold@MyCrossHost Xserver]$ make World 
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1
+
 [harold@MyCrossHost Xserver]$
 </PRE
 ></TD
@@ -904,6 +960,7 @@ CLASS="screen"
 >&#13;[harold@MyCrossHost debug]$ makeg World 
 BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1" 
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1
+
 [harold@MyCrossHost debug]$
 </PRE
 ></TD
@@ -935,6 +992,7 @@ WIDTH="100%"
 CLASS="screen"
 >&#13;[harold@MyCrossHost Xserver]$ makeg World 
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; World.log 2&gt;&amp;1
+
 [harold@MyCrossHost Xserver]$
 </PRE
 ></TD
@@ -998,6 +1056,7 @@ CLASS="screen"
 >&#13;[harold@MyCrossHost std]$ make install install.man 
 DESTDIR=/stagingdir 
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; install.log 2&gt;&amp;1
+
 [harold@MyCrossHost std]$
 </PRE
 ></TD
@@ -1062,6 +1121,7 @@ CLASS="screen"
 >&#13;[harold@MyCrossHost debug]$ makeg install install.man 
 DESTDIR=/stagingdir 
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" &gt; install.log 2&gt;&amp;1
+
 [harold@MyCrossHost debug]$
 </PRE
 ></TD

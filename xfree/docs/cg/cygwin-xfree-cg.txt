@@ -356,6 +356,8 @@ $ make World > World.log 2>&1
 
 Harold@MyWindowsHost ~/x-devel/build/std
 $
+
+    8. Standard build is now complete.
      _________________________________________________________________
 
 Debug Build
@@ -439,6 +441,8 @@ $ ./config/util/makeg.sh World > World.log 2>&1
 
 Harold@MyWindowsHost ~/x-devel/build/debug
 $
+
+    8. Debug build is now complete.
      _________________________________________________________________
 
 Installing a local build
@@ -636,7 +640,8 @@ Obtaining binutils and gcc Source
     2. Visit the [42]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
-    4. Download the following files from cygwin/, saving them to
+    4. Change current ftp directory to cygwin/latest/.
+    5. Download the following files from cygwin/latest/, saving them to
        /cygwin/src/ The compressed file size appears after each file in
        the list below.
 
@@ -649,7 +654,7 @@ Obtaining binutils and gcc Source
      file link and choosing a command such as Save Target As... or Save
      Link As... from the context sensitive menu. Better yet, download
      your files with a stand alone ftp client.
-          + binutils/binutils-20010425-2-src.tar.gz (9.1 MB; required,
+          + binutils/binutils-20010914-1-src.tar.bz2 (7.5 MB; required,
             necessary to build gcc and Cygwin/XFree86)
           + gcc/gcc-2.95.3-5-src.tar.bz2 (8.1 MB; required, necessary to
             build Cygwin/XFree86)
@@ -724,14 +729,16 @@ $
        directory in your build host root directory:
 
 [harold@MyCrossHost harold]$ cd /cygwin/i686-pc-cygwin/
+
 [harold@MyCrossHost /cygwin/i686-pc-cygwin/]$
 
     9. Extract the cygwin-lib.tgz and cygwin-include.tgz archives:
 
-[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf
-cygwin-lib.tgz
-[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf
-cygwin-include.tgz
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-lib.tgz
+
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-include.tgz
+
+   10. Obtaining Cygwin headers and libs is now complete.
      _________________________________________________________________
 
 Building binutils and gcc
@@ -745,29 +752,34 @@ Building binutils and gcc
        build host root directory:
 
 [harold@MyCrossHost harold]$ cd /cygwin/src/
+
 [harold@MyCrossHost src]$
 
-    3. Extract the binutils-20010425-2-src.tar.gz and
+    3. Extract the binutils-20010914-1-src.tar.bz2 and
        gcc-2.95.3-5-src.tar.bz2 archives:
 
-[harold@MyCrossHost src]$ tar -xzf
-binutils-20010425-2-src.tar.gz
-[harold@MyCrossHost src]$ bunzip2
-gcc-2.95.3-5-src.tar.bz2
-[harold@MyCrossHost src]$ tar -xf
-gcc-2.95.3-5-src.tar
+[harold@MyCrossHost src]$ bunzip2 binutils-20010914-1-src.tar.bz2
+
+[harold@MyCrossHost src]$ tar -xf binutils-20010914-1-src.tar
+
+[harold@MyCrossHost src]$ bunzip2 gcc-2.95.3-5-src.tar.bz2
+
+[harold@MyCrossHost src]$ tar -xf gcc-2.95.3-5-src.tar
 
     4. Change the current directory to the
-       /cygwin/src/binutils-20010425-2 directory:
+       /cygwin/src/binutils-20010914-1 directory:
 
-[harold@MyCrossHost src]$ cd /cygwin/src/binutils-20010425-2
-[harold@MyCrossHost binutils-20010425-2]$
+[harold@MyCrossHost src]$ cd binutils-20010914-1
+
+[harold@MyCrossHost binutils-20010914-1]$
 
     5. Create a build directory and change the current directory to that
        directory:
 
-[harold@MyCrossHost binutils-20010425-2]$ mkdir build
-[harold@MyCrossHost binutils-20010425-2]$ cd build
+[harold@MyCrossHost binutils-20010914-1]$ mkdir build
+
+[harold@MyCrossHost binutils-20010914-1]$ cd build
+
 [harold@MyCrossHost build]$
 
     6. Configure binutils:
@@ -775,16 +787,19 @@ gcc-2.95.3-5-src.tar
 [harold@MyCrossHost build]$ ../configure
 --prefix=/cygwin --exec-prefix=/cygwin
 --target=i686-pc-cygwin --host=i686-pc-linux > configure.log 2>&1
+
 [harold@MyCrossHost build]$
 
     7. Build binutils:
 
 [harold@MyCrossHost build]$ make all > all.log 2>&1
+
 [harold@MyCrossHost build]$
 
     8. Install binutils:
 
 [harold@MyCrossHost build]$ make install > install.log 2>&1
+
 [harold@MyCrossHost build]$
 
     9. Modify the PATH environment variable to include the directories
@@ -792,19 +807,23 @@ gcc-2.95.3-5-src.tar
 
 [harold@MyCrossHost build]$
 PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
+
 [harold@MyCrossHost build]$
 
    10. Change the current directory to the
-       /cygwin/src/binutils-20010425-2 directory:
+       /cygwin/src/binutils-20010914-1 directory:
 
-[harold@MyCrossHost src]$ cd /cygwin/src/gcc-2.95.3-5
+[harold@MyCrossHost build]$ cd ../../gcc-2.95.3-5
+
 [harold@MyCrossHost gcc-2.95.3-5]$
 
    11. Create a build directory and change the current directory to that
        directory:
 
 [harold@MyCrossHost gcc-2.95.3-5]$ mkdir build
+
 [harold@MyCrossHost gcc-2.95.3-5]$ cd build
+
 [harold@MyCrossHost build]$
 
    12. Configure gcc:
@@ -813,17 +832,22 @@ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
 --prefix=/cygwin --exec-prefix=/cygwin
 --target=i686-pc-cygwin --host=i686-pc-linux
 --enable-haifa > configure.log 2>&1
+
 [harold@MyCrossHost build]$
 
    13. Build gcc:
 
 [harold@MyCrossHost build]$ make all > all.log 2>&1
+
 [harold@MyCrossHost build]$
 
    14. Install gcc:
 
 [harold@MyCrossHost build]$ make install > install.log 2>&1
+
 [harold@MyCrossHost build]$
+
+   15. Building binutils and gcc is now complete.
      _________________________________________________________________
 
 Obtaining the Source Code
@@ -855,24 +879,34 @@ Building Cygwin/XFree86
        certainly won't want to install the build of lndir mentioned in
        [46]the section called Native Compiling as that executable is for
        Cygwin only.
-    4. When building the entire tree, you must pass IMAKE_DEFINES and
+    4. Always remember to set your PATH environment variable to include
+       the Cygwin binutils and gcc binary directories:
+
+[harold@MyCrossHost std]$
+PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
+
+[harold@MyCrossHost std]$
+
+    5. When building the entire tree, you must pass IMAKE_DEFINES and
        BOOTSTRAPCFLAGS to make to cause the build system to build for the
        target, Cygwin, platform:
 
 [harold@MyCrossHost std]$ make World
 BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1"
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+
 [harold@MyCrossHost std]$
 
-    5. When rebuilding individual elements of the tree after doing a
+    6. When rebuilding individual elements of the tree after doing a
        build of the entire tree, you must pass IMAKE_DEFINES to make to
        cause the build system to build for the target, Cygwin, platform:
 
 [harold@MyCrossHost Xserver]$ make World
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+
 [harold@MyCrossHost Xserver]$
 
-    6. When building a debug version of the entire tree, use makeg, which
+    7. When building a debug version of the entire tree, use makeg, which
        should generally already be installed, and pass IMAKE_DEFINES and
        BOOTSTRAPCFLAGS to makeg to cause the build system to build for
        the target, Cygwin, platform:
@@ -880,18 +914,20 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
 [harold@MyCrossHost debug]$ makeg World
 BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1"
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+
 [harold@MyCrossHost debug]$
 
-    7. When rebuilding debug versions of individual elements of the tree
+    8. When rebuilding debug versions of individual elements of the tree
        after doing a debug build of the entire tree, you must pass
        IMAKE_DEFINES to makeg to cause the build system to build for the
        target, Cygwin, platform:
 
 [harold@MyCrossHost Xserver]$ makeg World
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+
 [harold@MyCrossHost Xserver]$
 
-    8. When installing a standard build of the entire tree, you must pass
+    9. When installing a standard build of the entire tree, you must pass
        DESTDIR and IMAKE_DEFINES to make to install the target platform
        build into /stagingdir and to cause the build system to build a
        few remaining programs for the target, Cygwin, platform:
@@ -905,9 +941,10 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
 [harold@MyCrossHost std]$ make install install.man
 DESTDIR=/stagingdir
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
+
 [harold@MyCrossHost std]$
 
-    9. When installing a debug build of the entire tree, you must pass
+   10. When installing a debug build of the entire tree, you must pass
        DESTDIR and IMAKE_DEFINES to makeg to install the target platform
        build into /stagingdir and to cause the build system to build
        debug versions of a few remaining programs for the target, Cygwin,
@@ -922,6 +959,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
 [harold@MyCrossHost debug]$ makeg install install.man
 DESTDIR=/stagingdir
 IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
+
 [harold@MyCrossHost debug]$
      _________________________________________________________________
 
