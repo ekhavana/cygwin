@@ -1,8 +1,12 @@
+
 Cygwin/XFree86 Frequently Asked Questions
 
 Harold L Hunt, II
 
    Revision History
+   Revision 1.0.3 2003-03-28 Revised by: huntharo@msu.edu
+   Reviced q&a entries for showing 8-bit chars in bash and for enabling
+   XDMCP on remote machines.
    Revision 1.0.2 2002-05-26 Revised by: huntharo@msu.edu
    Add a q&a for TrackPoint mouse wheel emulation.
    Revision 1.0.1 2001-10-22 Revised by: huntharo@msu.edu
@@ -29,7 +33,6 @@ Harold L Hunt, II
    [2]Bibliography
    [3]Glossary
    A. [4]GNU Free Documentation License
-     _________________________________________________________________
 
 Questions and Answers
 
@@ -88,8 +91,8 @@ Questions and Answers
                 umlauts?
 
         4.8. [35]How do I put bash into "8 bit" mode?
-        4.9. [36]Why doesn't Linux-Mandrake 8.1 present a login screen
-                when using -query for XDMCP?
+        4.9. [36]Why doesn't my Linux/UNIX/*NIX/*BSD machine present a
+                login screen when using -query for XDMCP?
 
         4.10. [37]Why does Cygwin/XFree86 not display the XDM login
                 prompt on Solaris when I try to open an XDMCP session
@@ -463,31 +466,48 @@ Questions and Answers
    4.7. I have installed a modmap for my non-U.S. keyboard layout, but
    how do I get bash to display accents and/or umlauts?
 
-   Add the following two lines to .inputrc in your Cygwin home directory
-   (e.g. /home/harold/):
+   (Heinz Peter Hippenstiel) Add the following lines to .inputrc in your
+   Cygwin home directory (e.g. /home/harold/):
+set meta-flag on
+set output-meta on # to show 8-bit characters
+set convert-meta off # to show it as character, not the octal representation
 
-   set output-meta On # to show 8-bit characters
-
-   set convert-meta Off # to show it as character, not the octal
-   representation
+# Mapping for German umlauts
+"\M-a": "ä"
+"\M-A": "Ä"
+"\M-o": "ö"
+"\M-O": "Ö"
+"\M-u": "ü"
+"\M-U": "Ü"
+"\M-s": "ß"
+# (TODO: Mapping for accents?)
 
    4.8. How do I put bash into "8 bit" mode?
 
    See [103]Q: 4.7.
 
-   4.9. Why doesn't Linux-Mandrake 8.1 present a login screen when using
-   -query for XDMCP?
+   4.9. Why doesn't my Linux/UNIX/*NIX/*BSD machine present a login
+   screen when using -query for XDMCP?
 
-   [Mika Laitio] For whatever reason, XDMCP is not enabled by default
-   when using [104]Linux-Mandrake 8.1's default X Display Manager, kdm.
-   You can enable XDMCP for kdm by editing the file
-   /usr/share/config/kdm/kdmrc and changing:
+   [Mika Laitio] For security reasons, XDMCP is not enabled by default on
+   most Linux/UNIX/*NIX/*BSD distributions (RedHat, Mandrake, SuSE,
+   FreeBSD, NetBSD, etc.) by default. You have to manually enable remote
+   logins to your X Display Manager (xdm, kdm, or gdm). The location of
+   the proper config file is distribution/OS dependent, but a short list
+   of known config file locations is given in [104]Table 1. You must
+   change the line:
 [Xdmcp]
 Enable=false
 
    to:
 [Xdmcp]
 Enable=true
+
+   Table 1. Known XDM Configuration File Locations
+   Distribution/OS  Version  Display Manager          Location
+   Linux Mandrake   8.1      kdm             /usr/share/config/kdm/kdmrc
+   Debian GNU/Linux Unstable kdm             /etc/kde3/kdm/kdmrc
+   Debian GNU/Linux Unstable gdm             /etc/X11/gdm/gdm.conf
 
    4.10. Why does Cygwin/XFree86 not display the XDM login prompt on
    Solaris when I try to open an XDMCP session with a remote Solaris
@@ -1560,7 +1580,7 @@ References
  101. http://www.jwz.org/xkeycaps/
  102. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-xdmcp
  103. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-bash-extended-chars
- 104. http://linux-mandrake.com/
+ 104. file://localhost/home/public/documents/cygx/build/faq/dump.html#tbl-config-files
  105. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-remote-solaris
  106. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-cde-via-xdmcp-hangs
  107. http://www.xfree86.org/current/Xserver.1.html
