@@ -1,3 +1,48 @@
+<h4>Release 4.3.0-37</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-11 0215 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040111-0215.tar.bz2">xwin-20040111-0215.tar.bz2</a>
+(134 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-36
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-36-to-4.3.0-37.diff">xwin-4.3.0-36-to-4.3.0-37.diff</a>
+(14 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>InitOutput.c, win.h, winclipboardthread.c, winwndproc.c - Remove
+the winDeinitClipboard function since it is no longer needed due to
+the OsVendorReset function.  (Harold L Hunt II)</li>
+
+<li>winclipboardxevents.c/winClipboardFlushXEvents - Move variable
+declarations into the event loop so that they are reinitialized for
+each event that is processed.  Remove all calls to pthread_exit and
+replace them with an abort section in each event that frees allocated
+resources and sends a SelectionNotify message when the
+SelectionRequest event is being aborted.  Make sure that
+CloseClipboard will always be called if OpenClipboard has been called.
+Review the entire function to make sure that the responses to failures
+are appropriate.  The result of this audit is that the clipboard code
+should not shut down as often from encountering minor errors.  (Harold
+L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-36</h4>
 <table>
 <tbody>
