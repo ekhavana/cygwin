@@ -14,8 +14,8 @@ REL="UP"
 TITLE="Setting Up Cygwin"
 HREF="setup-net.html"><LINK
 REL="PREVIOUS"
-TITLE="Environment Variables"
-HREF="setup-env.html"><LINK
+TITLE="Changing Cygwin's Maximum Memory"
+HREF="setup-maxmem.html"><LINK
 REL="NEXT"
 TITLE="Customizing bash"
 HREF="setup-files.html"></HEAD
@@ -46,7 +46,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="setup-env.html"
+HREF="setup-maxmem.html"
 ACCESSKEY="P"
 >&#60;&#60;&#60; Previous</A
 ></TD
@@ -491,7 +491,7 @@ entries are well known entries.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN235"
+NAME="AEN253"
 ></A
 ><P
 ><B
@@ -518,7 +518,7 @@ corinna::1000:547:Corinna Vinschen:/home/corinna:/bin/tcsh</PRE
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN238"
+NAME="AEN256"
 ></A
 ><P
 ><B
@@ -714,7 +714,7 @@ user and a group:</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN283"
+NAME="AEN301"
 ></A
 ><P
 ><B
@@ -736,7 +736,7 @@ CLASS="SCREEN"
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN286"
+NAME="AEN304"
 ></A
 ><P
 ><B
@@ -835,7 +835,7 @@ for fun.</P
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN305"
+NAME="AEN323"
 ></A
 ><P
 ><B
@@ -861,7 +861,7 @@ Guest:*:501:546:,S-1-5-21-1844237615-436374069-1060284298-501:/home/Guest:/bin/b
 ><DIV
 CLASS="EXAMPLE"
 ><A
-NAME="AEN308"
+NAME="AEN326"
 ></A
 ><P
 ><B
@@ -1384,6 +1384,120 @@ This also applies to the subprocesses which switched the user context
 without a password.  People using network home drives are typically not
 able to access it when trying to login using ssh or rsh without password.</P
 ></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="NTSEC-RELEASE1.3.20"
+></A
+>Special values of user and group
+ids</H2
+><P
+>If the current user is not present in <TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>,
+that user's user id is set to a special value of 400.  The user name for
+the current user will always be shown correctly.  If another user
+(or a Windows group, treated as a user) is not present in
+<TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>, the user id of that user will have a
+special value of -1 (which would be shown by <B
+CLASS="COMMAND"
+>ls</B
+> as
+65535).  The user name shown in this case will be '????????'.</P
+><P
+>If the current user is not present in <TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>,
+that user's login group id is set to a special value of 401.  If another
+user is not present in <TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>, that user's login
+group id is set to a special value of -1.  If the user is present in
+<TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>, but that user's group is not in
+<TT
+CLASS="FILENAME"
+>/etc/group</TT
+> and is not the login group of that user,
+the group id is set to a special value of -1.  The name of this group
+(id -1) will be shown as '????????'.
+In releases of Cygwin before 1.3.20, the group id 401 had a group name
+'None'.  Since Cygwin release 1.3.20, the group id 401 is shown as
+'mkpasswd', indicating the command that should be run to alleviate the
+situation.</P
+><P
+>Also, since Cygwin release 1.3.20, if the current user is present in
+<TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>, but that user's login group is not
+present in <TT
+CLASS="FILENAME"
+>/etc/group</TT
+>, the group name will be shown
+as 'mkgroup', again indicating the appropriate command.</P
+><P
+>To summarize:</P
+><P
+></P
+><UL
+COMPACT="COMPACT"
+><LI
+><P
+>If the current user doesn't show up in
+<TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>, it's <I
+CLASS="EMPHASIS"
+>group</I
+> will
+be named 'mkpasswd'.</P
+></LI
+><LI
+><P
+>Otherwise, if the login group of the current user isn't
+in <TT
+CLASS="FILENAME"
+>/etc/group</TT
+>, it will be named 'mkgroup'.</P
+></LI
+><LI
+><P
+>Otherwise a group not in <TT
+CLASS="FILENAME"
+>/etc/group</TT
+>
+will be shown as '????????' and a user not in
+<TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+> will be shown as "????????".</P
+></LI
+></UL
+><P
+>Note that, since the special user and group names are just indicators,
+nothing prevents you from actually having a user named `mkpasswd' in
+<TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+> (or a group named `mkgroup' in
+<TT
+CLASS="FILENAME"
+>/etc/group</TT
+>).  If you do that, however, be aware of
+the possible confusion.</P
+></DIV
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -1401,7 +1515,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="setup-env.html"
+HREF="setup-maxmem.html"
 ACCESSKEY="P"
 >&#60;&#60;&#60; Previous</A
 ></TD
@@ -1429,7 +1543,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Environment Variables</TD
+>Changing Cygwin's Maximum Memory</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"

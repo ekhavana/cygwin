@@ -1,0 +1,266 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<HTML
+><HEAD
+><TITLE
+>Changing Cygwin's Maximum Memory</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
+"><LINK
+REL="HOME"
+TITLE="Cygwin User's Guide"
+HREF="cygwin-ug-net.html"><LINK
+REL="UP"
+TITLE="Setting Up Cygwin"
+HREF="setup-net.html"><LINK
+REL="PREVIOUS"
+TITLE="Environment Variables"
+HREF="setup-env.html"><LINK
+REL="NEXT"
+TITLE="NT security and the ntsec usage"
+HREF="ntsec.html"></HEAD
+><BODY
+CLASS="SECT1"
+BGCOLOR="#FFFFFF"
+TEXT="#000000"
+LINK="#0000FF"
+VLINK="#840084"
+ALINK="#0000FF"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="setup-env.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Setting Up Cygwin</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="ntsec.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="SETUP-MAXMEM"
+></A
+>Changing Cygwin's Maximum Memory</H1
+><P
+>By default no Cygwin program can allocate more than 384 MB of memory 
+(program+data).  You should not need to change this default in most 
+circumstances.  However, if you need to use more real or virtual memory in 
+your machine you may add an entry in the either the 
+<TT
+CLASS="LITERAL"
+>HKEY_LOCAL_MACHINE</TT
+> (to change the limit for all users) or 
+<TT
+CLASS="LITERAL"
+>HKEY_CURRENT_USER</TT
+> (for just the current user) section of 
+the registry. </P
+><P
+>Add the <TT
+CLASS="LITERAL"
+>DWORD</TT
+> value <TT
+CLASS="LITERAL"
+>heap_chunk_in_mb</TT
+> 
+and set it to the desired memory limit in decimal MB. It is preferred to do 
+this in Cygwin using the <B
+CLASS="COMMAND"
+>regtool</B
+> program included in the 
+Cygwin package.
+(For more information about <B
+CLASS="COMMAND"
+>regtool</B
+> or the other Cygwin 
+utilities, see <A
+HREF="using-utils.html"
+>the Section called <I
+>Cygwin Utilities</I
+> in the chapter called <I
+>Using Cygwin</I
+></A
+> or use each the
+<TT
+CLASS="LITERAL"
+>--help</TT
+> option of each util.)  You should always be careful 
+when using <B
+CLASS="COMMAND"
+>regtool</B
+> since damaging your system registry can 
+result in an unusable system.  This example sets memory limit to 1024 MB:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>regtool -i set /HKLM/Software/Cygnus\ Solutions/Cygwin/heap_chunk_in_mb 1024
+regtool -v list /HKLM/Software/Cygnus\ Solutions/Cygwin</PRE
+></TD
+></TR
+></TABLE
+></P
+><P
+>Exit all running Cygwin processes and restart them. Memory can be allocated up 
+to the size of the system swap space minus any the size of any running 
+processes. The system swap should be at least as large as the physically 
+installed RAM and can be modified under the System category of the 
+Control Panel.  </P
+><P
+>Here is a small program written by DJ Delorie that tests the 
+memory allocation limit on your system:
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>main()
+{
+  unsigned int bit=0x40000000, sum=0;
+  char *x;
+  
+  while (bit &#62; 4096) 
+  {
+    x = malloc(bit);
+    if (x)
+    sum += bit;
+    bit &#62;&#62;= 1;
+  }
+  printf("%08x bytes (%.1fMb)\n", sum, sum/1024.0/1024.0);
+  return 0;
+}</PRE
+></TD
+></TR
+></TABLE
+>
+
+You can compile this program using:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>gcc max_memory.c -o max_memory.exe</PRE
+></TD
+></TR
+></TABLE
+>
+
+Run the program and it will output the maximum amount of allocatable memory.</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="setup-env.html"
+ACCESSKEY="P"
+>&#60;&#60;&#60; Previous</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="ntsec.html"
+ACCESSKEY="N"
+>Next &#62;&#62;&#62;</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Environment Variables</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="setup-net.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>NT security and the <TT
+CLASS="LITERAL"
+>ntsec</TT
+> usage</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

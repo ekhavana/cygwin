@@ -139,7 +139,17 @@ NAME="DLL-BUILD"
 ></A
 >Building DLLs</H2
 ><P
->OK, let's go through a simple example of how to build a dll.
+>This page gives only a few simple examples of gcc's DLL-building 
+capabilities. To begin an exploration of the many additional options,
+see the gcc documentation and website, currently at 
+<A
+HREF="http://gcc.gnu.org/"
+TARGET="_top"
+>http://gcc.gnu.org/</A
+>
+
+<P
+>Let's go through a simple example of how to build a dll.
 For this example, we'll use a single file
 <TT
 CLASS="FILENAME"
@@ -157,10 +167,14 @@ CLASS="FILENAME"
 CLASS="FILENAME"
 >mydll.dll</TT
 >).</P
-><P
+>
+
+<P
 >Fortunately, with the latest gcc and binutils the process for building a dll
 is now pretty simple. Say you want to build this minimal function in mydll.c:</P
-><TABLE
+>
+
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -178,9 +192,13 @@ hello()
 ></TD
 ></TR
 ></TABLE
-><P
+>
+
+<P
 >First compile mydll.c to object code:</P
-><TABLE
+>
+
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -192,9 +210,13 @@ CLASS="SCREEN"
 ></TD
 ></TR
 ></TABLE
-><P
+>
+
+<P
 >Then, tell gcc that it is building a shared library:</P
-><TABLE
+>
+
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -206,10 +228,14 @@ CLASS="SCREEN"
 ></TD
 ></TR
 ></TABLE
-><P
+>
+
+<P
 >That's it! To finish up the example, you can now link to the
 dll with a simple program:</P
-><TABLE
+>
+
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -225,9 +251,13 @@ main ()
 ></TD
 ></TR
 ></TABLE
-><P
+>
+
+<P
 >Then link to your dll with a command like:</P
-><TABLE
+>
+
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -239,10 +269,14 @@ CLASS="SCREEN"
 ></TD
 ></TR
 ></TABLE
-><P
+>
+
+<P
 >However, if you are building a dll as an export library,
 you will probably want to use the complete syntax:</P
-><TABLE
+>
+
+<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -259,11 +293,14 @@ CLASS="SCREEN"
 ></TD
 ></TR
 ></TABLE
-><P
+>
+
+<P
 >Where ${module} is the name of your DLL, ${old_lib} are all
 your object files, bundled together in static libs or single object
 files and the ${dependency_libs} are import libs you need to
 link against, e.g '-lpng -lz -L/usr/local/special -lmyspeciallib'.</P
+></P
 ></DIV
 ><DIV
 CLASS="SECT2"
