@@ -1,3 +1,71 @@
+<h4>Release 4.3.0-61</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-03-25 0055 EST</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winclipboardwndproc.c, winclipboardxevents.c - Attempt to fix
+clipboard deadlock that was causing hangs.  The nature of the fix was
+to stop calling XPeekIfEvent since it will block until the specified
+type of event is seen.  Instead, we call XSync to flush output events
+and wait for them to be processed, then we do our own little loop with
+a call to select() using a timeout of 3 seconds from when we started
+(the timeout is adjusted after each call to select()).  This should
+alleviate problems with XPeekIfEvent not returning.  Finally, since we
+can detect whether the SelectionNotify event has arrived now, I added
+code to paste NULL to the Win32 clipboard if the X11 application never
+returns any useful clipboard data; this should prevent Win32
+applications from freezing when there are problems pasting from X11 to
+Win32.  (Harold L Hunt II - CodeWeavers)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 4.3.0-60</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-03-23 1945 EST</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winmultiwindowicons.c - Use PixmapBytePad to calculate the length
+of a line in the icon that miGetImage will return.  Our own
+calculation was not allocating enough memory per line and miGetImage
+was walking off the end of that memory when Windows is running in 24
+bit color and using multi-window mode.  (Fabrizio Gennari)</li>
+
+<li>XWin.rc, winresource.h, wintrayicon.c, winwndproc.c - Change
+Show/Hide Root Window menu items to a single item with a check box.
+(Harold L Hunt II - CodeWeavers)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-59</h4>
 <table>
 <tbody>
