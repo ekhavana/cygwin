@@ -9,22 +9,22 @@
 <h1 align=center>Cygwin Package Contributor's Guide</h1>
 
 <p>This document is intended for people who post packages to
-sources.redhat.com, and thus need to make them available through the
+sourceware.org, and thus need to make them available through the
 standard Cygwin setup program.  This documents the syntax of the
 setup.hint file, the program that automatically generates it on a regular
 basis, the layout required for packages, and the related policies to
-ensure good behaviour from the setup.exe program.</p> <p><a href="http://sources.redhat.com/cygwin-apps/setup.html">Setup.exe</a> depends
+ensure good behaviour from the setup.exe program.</p> <p><a href="http://sourceware.org/cygwin-apps/setup.html">Setup.exe</a> depends
 on certain conventions being followed.  If they are not followed, bad
 things may happen to the users of setup.exe.  Where a convention can be
 ignored, should circumstances warrent, this document will specify
-that. Setup.exe has it's own homepage <a href="http://sources.redhat.com/cygwin-apps/setup.html">http://sources.redhat.com/cygwin-apps/setup.html</a>. If you are interested in adding features to setup.exe, or in manually creating a setup.ini file, you should consult the setup.exe homepage.</p>
+that. Setup.exe has it's own homepage <a href="http://sourceware.org/cygwin-apps/setup.html">http://sourceware.org/cygwin-apps/setup.html</a>. If you are interested in adding features to setup.exe, or in manually creating a setup.ini file, you should consult the setup.exe homepage.</p>
 <p>The mailing list cygwin-apps@cygwin.com is the correct place to discuss any package creation or maintenance issues.  It is not a place for end user bug reports - direct those to cygwin at cygwin dot com instead.</p>
 <h2>Contents</h2>
 <ul>
   <li><p><a href="#naming">package naming</a></p></li>
-  <li><p><a href="#sources.redhat.com">Sources.redhat.com</a></p></li>
+  <li><p><a href="#sourceware.org">Sources.redhat.com</a></p></li>
   <li><p><a href="#setup.hint">setup.hint</a></p></li>
-  <li><p><a href="http://sources.redhat.com/cygwin-apps/setup.html#setup.ini">setup.ini</a></p></li>
+  <li><p><a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a></p></li>
   <li><p><a href="#package_contents">making packages</a></p></li>
   <li><p><a href="#postinstall">Creating a package postinstall script</a></p></li>
   <li><p><a href="#submitting">Submitting a package</a></p></li>
@@ -64,12 +64,12 @@ section for information on the "external-source:" option.</p>
 
 <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.
 
-<h2><a id="sources.redhat.com" name="sources.redhat.com">Automatic setup.ini generation on sources.redhat.com</a></h2>
+<h2><a id="sourceware.org" name="sourceware.org">Automatic setup.ini generation on sourceware.org</a></h2>
 
-<p>A script runs on sources.redhat.com which collects information from
+<p>A script runs on sourceware.org which collects information from
 (currently) the <tt>release</tt> directory in the
 ftp download area.  Information from subdirectories of these directories
-is parsed to automatically generate the default <a href="http://sources.redhat.com/cygwin-apps/setup.html#setup.ini">
+is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">
 setup.ini</a> file which is used by the cygwin setup.exe program for
 installation control.  If you are responsible for maintaining a cygwin
 package, it is important that you understand how this process works.</p>
@@ -166,7 +166,7 @@ use colons in your setup.hint for everything but '#' and "@'.)</p>
 by the setup.ini generator.</p>
 
 <p>A line that begins with a "<tt>@</tt>" behaves similarly to the
-setup.ini field (<a href="http://sources.redhat.com/cygwin-apps/setup.html#setup.ini">see below</a>).  It overrides the
+setup.ini field (<a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">see below</a>).  It overrides the
 package name for the enclosing directory.  This is an optional entry.
 It is intended only for historical packages where the package name is
 different from the name of the directory in which the package resides.  This
@@ -563,9 +563,9 @@ directory, you must structure your package contents accordingly.</p>
     process.</p>
   </ol>
   <li><p>You can adapt 
-  <a href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&cvsroot=cygwin-apps">this</a>
+  <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&cvsroot=cygwin-apps">this</a>
   generic readme file for script-driven -src packages.</p>
-  <li><p><a href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&cvsroot=cygwin-apps">Here</a>
+  <li><p><a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&cvsroot=cygwin-apps">Here</a>
   is an example build script
   which can be adapted for your package.  By carefully modifying the details of
   this script, it can create the binary and -src packages for you, once you've
@@ -600,7 +600,7 @@ directory, you must structure your package contents accordingly.</p>
     unpacks into <tt>boffo-1.0/</tt>, so you've been doing all of your work
     in <tt>~/sources/boffo-1.0/</tt>.  That's good.</p>
     <li><p>Place a copy of <tt>boffo-1.0.tar.bz2</tt> in <tt>~/sources</tt>
-    <li>copy <a href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&cvsroot=cygwin-apps"><tt>generic-build-script</tt></a>
+    <li>copy <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&cvsroot=cygwin-apps"><tt>generic-build-script</tt></a>
     into <tt>~/sources/</tt> and rename it <tt>boffo-1.0-1.sh</tt>.  Carefully
     adapt this script for your purposes.  However, it should auto detect
     most of what it needs to know: the package name, vendor version, release
@@ -610,7 +610,7 @@ directory, you must structure your package contents accordingly.</p>
     Usually, a '<tt>make distclean</tt>' will do the trick, but not always.</p>
     <li><p>Ensure that you've put any cygwin-specific readme files, setup.hint files,
     etc, into <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/</tt>.  You can adapt
-    <a href="http://sources.redhat.com/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&cvsroot=cygwin-apps"><tt>this generic readme file</tt></a>
+    <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&cvsroot=cygwin-apps"><tt>this generic readme file</tt></a>
     for this purpose.  The build script
     expects that the cygwin-specific README file will be named
     <tt>.../CYGWIN-PATCHES/&lt;package&gt;.README</tt>.  In this example, it would
@@ -675,8 +675,8 @@ bug is not a cygwin-related bug.</p></li>
   <li><p>Look in the debian package list and identify the section that your package is present in there - if it's available via debian. If it's not, have a look and take a sensible guess.</p></li>
   <li><p>Create setup.hint file following the documentation on this web page.  Opinion on whether to mark your initial version as a <tt>Test</tt> version is currently mixed. If you have doubts about the stability of your initial offering you may decide to mark it as <tt>Test</tt>.  Then, once the package has no major bug reports from users, a current package may be introduced.  Otherwise, it is perfectly acceptable to forgo the <tt>Test</tt> designation in your first release.</p></li>
   <li><p>If possible, place the package files in a web accessible http/ftp site somewhere.</p></li>
-  <li><p>Announce on cygwin-apps@cygwin.com that you have the package ready for uploading.  Add the URLs to all package files to your mail or, if you can't provide it on a web page, someone with upload privileges will contact you to get access to the package files to upload them to sources.redhat.com for you.</p></li>
-  <li><p>Delete your temporary copy once they have been uploaded to sources.redhat.com.</p></li>
+  <li><p>Announce on cygwin-apps@cygwin.com that you have the package ready for uploading.  Add the URLs to all package files to your mail or, if you can't provide it on a web page, someone with upload privileges will contact you to get access to the package files to upload them to sourceware.org for you.</p></li>
+  <li><p>Delete your temporary copy once they have been uploaded to sourceware.org.</p></li>
   <li><p>Announce via cygwin-announce@cygwin.com that the new package, is available. Use a recent cygwin-announce message from one of the core maintainers as a template for your announcement.</p><p>Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</p></li>
 </ol>
 <p>NOTE: On any major version upgrade, you may want to mark the release as <tt>Test</tt>.
