@@ -1108,17 +1108,17 @@ net release.)*
         `' getpwuid_r: P96 9.2.2.1 - unimplemented
 
    `' Synchronization (Section 11)
-        `' pthread_cond_broadcast: P96 11.4.3.1 - unimplemented
+        `' pthread_cond_broadcast: P96 11.4.3.1
 
-        `' pthread_cond_destroy: P96 11.4.2.1 - unimplemented
+        `' pthread_cond_destroy: P96 11.4.2.1
 
-        `' pthread_cond_init: P96 11.4.2.1 - unimplemented
+        `' pthread_cond_init: P96 11.4.2.1
 
-        `' pthread_cond_signal: P96 11.4.3.1 - unimplemented
+        `' pthread_cond_signal: P96 11.4.3.1
 
-        `' pthread_cond_timedwait: P96 11.4.4.1 - unimplemented
+        `' pthread_cond_timedwait: P96 11.4.4.1
 
-        `' pthread_cond_wait: P96 11.4.4.1 - unimplemented
+        `' pthread_cond_wait: P96 11.4.4.1
 
         `' pthread_condattr_destroy: P96 11.4.1.1 - unimplemented
 
@@ -1186,7 +1186,7 @@ net release.)*
 
         `' pthread_attr_getscope: P96 13.5.1.1 - unimplemented
 
-        `' pthread_attr_setinheritsched: P96 13.5.1.1 - unimplemented
+        `' pthread_attr_setinheritsched: P96 13.5.1.1
 
         `' pthread_attr_setschedparam: P96 13.5.1.1 - unimplemented
 
@@ -1194,7 +1194,7 @@ net release.)*
 
         `' pthread_attr_setscope: P96 13.5.1.1 - unimplemented
 
-        `' pthread_getschedparam: P96 13.5.2.1 - unimplemented
+        `' pthread_getschedparam: P96 13.5.2.1
 
         `' pthread_mutex_getprioceiling: P96 13.6.2.1 - unimplemented
 
@@ -1210,7 +1210,7 @@ net release.)*
 
         `' pthread_mutexattr_setprotocol: P96 13.6.1.1 - unimplemented
 
-        `' pthread_setschedparam: P96 13.5.2.1 - unimplemented
+        `' pthread_setschedparam: P96 13.5.2.1
 
         `' sched_get_priority_max: P96 13.3.6.1 - unimplemented
 
@@ -3007,10 +3007,21 @@ than rewriting the runtime library in question from specs...
 How do I rebuild the tools on my NT box?
 ----------------------------------------
 
-   *Note:* You must build in a directory _outside_ the source tree.
+   Install all required components in one directory (we'll call it
+/src).  Ideally, you should check out what you need from CVS
+(`http://cygwin.com/cvs.html') but otherwise, you can install the
+appropriate source packages from the cygwin distribution.
 
-   Assuming that you have the src installed as /src, will build in the
-directory /obj, and want to install the tools in /install:
+   As of this writing, you need to install at least the cygwin source
+package and the w32api source package.
+
+   It is possible that the cygwin source package may require a newer
+version of the w32api package since the release of the packages is not
+always in lock step (another reason to just use CVS).
+
+   You _must_ build cygwin in a separate directory from the source.
+So, create something like a /obj directory.  You'll be performing your
+build in that directory:
 
      bash
      cd /obj
@@ -3018,10 +3029,11 @@ directory /obj, and want to install the tools in /install:
      make > make.log 2>&1
      make install > install.log 2>&1
 
-   Normally, this will also attempt to build the documentation, which
-additionally requires db2html, and possibly other tools, which are not
-included in the Cygwin distribution.  You can get db2html as part of
-docbook, from `http://sources.redhat.com/docbook-tools/'.
+   Normally, this procedure will also attempt to build the
+documentation, which additionally requires db2html, and possibly other
+tools, which are not included in the Cygwin distribution.  You can get
+db2html as part of docbook, from
+`http://sources.redhat.com/docbook-tools/'.
 
    To check a cygwin1.dll, run "make check" in the winsup/cygwin
 directory.  If that works, install everything _except_ the dll (if you

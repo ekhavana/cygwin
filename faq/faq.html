@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 21 March 2002 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 14 June 2002 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -1553,17 +1553,17 @@ net release.)</STRONG>
 
 
 <UL>
-<LI>pthread_cond_broadcast: P96 11.4.3.1 -- unimplemented
+<LI>pthread_cond_broadcast: P96 11.4.3.1
 
-<LI>pthread_cond_destroy: P96 11.4.2.1 -- unimplemented
+<LI>pthread_cond_destroy: P96 11.4.2.1
 
-<LI>pthread_cond_init: P96 11.4.2.1 -- unimplemented
+<LI>pthread_cond_init: P96 11.4.2.1
 
-<LI>pthread_cond_signal: P96 11.4.3.1 -- unimplemented
+<LI>pthread_cond_signal: P96 11.4.3.1
 
-<LI>pthread_cond_timedwait: P96 11.4.4.1 -- unimplemented
+<LI>pthread_cond_timedwait: P96 11.4.4.1
 
-<LI>pthread_cond_wait: P96 11.4.4.1 -- unimplemented
+<LI>pthread_cond_wait: P96 11.4.4.1
 
 <LI>pthread_condattr_destroy: P96 11.4.1.1 -- unimplemented
 
@@ -1641,7 +1641,7 @@ net release.)</STRONG>
 
 <LI>pthread_attr_getscope: P96 13.5.1.1 -- unimplemented
 
-<LI>pthread_attr_setinheritsched: P96 13.5.1.1 -- unimplemented
+<LI>pthread_attr_setinheritsched: P96 13.5.1.1
 
 <LI>pthread_attr_setschedparam: P96 13.5.1.1 -- unimplemented
 
@@ -1649,7 +1649,7 @@ net release.)</STRONG>
 
 <LI>pthread_attr_setscope: P96 13.5.1.1 -- unimplemented
 
-<LI>pthread_getschedparam: P96 13.5.2.1 -- unimplemented
+<LI>pthread_getschedparam: P96 13.5.2.1
 
 <LI>pthread_mutex_getprioceiling: P96 13.6.2.1 -- unimplemented
 
@@ -1663,7 +1663,7 @@ net release.)</STRONG>
 
 <LI>pthread_mutexattr_setprotocol: P96 13.6.1.1 -- unimplemented
 
-<LI>pthread_setschedparam: P96 13.5.2.1 -- unimplemented
+<LI>pthread_setschedparam: P96 13.5.2.1
 
 <LI>sched_get_priority_max: P96 13.3.6.1 -- unimplemented
 
@@ -4137,13 +4137,27 @@ rewriting the runtime library in question from specs...
 <H3><A NAME="SEC102" HREF="faq.html#TOC102">How do I rebuild the tools on my NT box?</A></H3>
 
 <P>
-<STRONG>Note:</STRONG> You must build in a directory <EM>outside</EM> the source
-tree.
+Install all required components in one directory (we'll call it /src).
+Ideally, you should check out what you need from CVS (<TT><a target="_top" href="http://cygwin.com/cvs.html">http://cygwin.com/cvs.html</a></TT>) but
+otherwise, you can install the appropriate source packages from the
+cygwin distribution.
 
 
 <P>
-Assuming that you have the src installed as /src, will build in
-the directory /obj, and want to install the tools in /install:
+As of this writing, you need to install at least the cygwin source
+package and the w32api source package.
+
+
+<P>
+It is possible that the cygwin source package may require a newer
+version of the w32api package since the release of the packages is
+not always in lock step (another reason to just use CVS).
+
+
+<P>
+You <EM>must</EM> build cygwin in a separate directory from the source.
+So, create something like a /obj directory.  You'll be performing
+your build in that directory:
 
 
 
@@ -4156,9 +4170,9 @@ make install &#62; install.log 2&#62;&#38;1
 </PRE>
 
 <P>
-Normally, this will also attempt to build the documentation, which
-additionally requires db2html, and possibly other tools, which are not
-included in the Cygwin distribution.  You can get db2html as part of
+Normally, this procedure will also attempt to build the documentation,
+which additionally requires db2html, and possibly other tools, which are
+not included in the Cygwin distribution.  You can get db2html as part of
 docbook, from <TT><a target="_top" href="http://sources.redhat.com/docbook-tools/">http://sources.redhat.com/docbook-tools/</a></TT>.
 
 
@@ -5245,7 +5259,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 21 March 2002 using
+This document was generated on 14 June 2002 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
