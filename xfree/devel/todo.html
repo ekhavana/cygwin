@@ -14,7 +14,7 @@
 
 <h2>Cygwin/XFree86 - Development - To-Do List</h2>
 
-<p>Last updated: 2003-06-01 1655 EDT</p>
+<p>Last updated: 2003-08-27 2253 EDT</p>
 
 <p>Following is a list of open tasks on the Cygwin/XFree86
 project:</p>
@@ -40,6 +40,17 @@ project:</p>
 </tr>
 -->
 
+<tr valign="top">
+<td>DirectDraw windowed PseudoColor</td>
+
+<td>Figure out a satisfactory solution for enabling DirectDraw engines
+to support PseudoColor visuals when running in 8 bit color modes.
+DirectDraw reserves the first ten and the last ten colors in each
+DirectDrawPalette object when running in windowed mode.  Therefore,
+PseudoColor visuals are only supported with DirectDraw engines when
+running in fullscreen 8 bit color modes.</td>
+</tr>
+
 
 <tr valign="top">
 <td>DirectDraw header files</td>
@@ -60,15 +71,7 @@ solution.</td>
 
 <td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/XFree86
 clipboard manager, to handle data types other than XA_STRING and
-UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.  Embed
-the xwinclip functionality within XWin.exe.  The later task may be
-rather difficult, as there are numerous collisions between the X
-client headers and the X Server headers that must be prevented.  One
-method of preventing collisions may be to break the win.h header into
-multiple files, and to add a list of only the necessary includes to
-the top each .c file.  Any embedded clipboard support will need a
-command line option that can disable the built-in clipboard
-manager.</td>
+UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.</td>
 </tr>
 
 
@@ -110,18 +113,6 @@ understand this task, however, the return from completing this task
 would be highly beneficial.</td>
 </tr>
 </table>
-</tr>
-
-
-<tr valign="top">
-<td>DirectDraw windowed PseudoColor</td>
-
-<td>Figure out a satisfactory solution for enabling DirectDraw engines
-to support PseudoColor visuals when running in 8 bit color modes.
-DirectDraw reserves the first ten and the last ten colors in each
-DirectDrawPalette object when running in windowed mode.  Therefore,
-PseudoColor visuals are only supported with DirectDraw engines when
-running in fullscreen 8 bit color modes.</td>
 </tr>
 
 
