@@ -44,6 +44,23 @@ COLSPAN="3"
 ><TR
 ><TD
 ALIGN="LEFT"
+>Revision 1.0.15</TD
+><TD
+ALIGN="LEFT"
+>2003-03-09</TD
+><TD
+ALIGN="LEFT"
+>Revised by: huntharo@msu.edu</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Add answer for font problems.  Remove an old entry.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
 >Revision 1.0.14</TD
 ><TD
 ALIGN="LEFT"
@@ -850,16 +867,11 @@ CLASS="errorname"
 ></DT
 ><DT
 >8.13. <A
-HREF="cygwin-x-faq.html#q-error-negative-sized-edge"
->Fatal server error: negative sized edge?</A
-></DT
-><DT
->8.14. <A
 HREF="cygwin-x-faq.html#q-error-env-space"
 >Out of environment space</A
 ></DT
 ><DT
->8.15. <A
+>8.14. <A
 HREF="cygwin-x-faq.html#q-too-many-parameters"
 >Too many parameters</A
 ></DT
@@ -3064,8 +3076,133 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Nudge the mailing list if a new answer is not provided by
-2003/01/31.</P
+>This error occurs for one of two reasons:</P
+><OL
+COMPACT="COMPACT"
+TYPE="1"
+><LI
+><P
+>You do not have the XFree86-fnts package installed.  This is
+rarely the problem; but in the event that it is the problem, just
+rerun Cygwin's <B
+CLASS="command"
+>setup.exe</B
+>, select the
+XFree86-fnts package and install it.</P
+></LI
+><LI
+><P
+>The mount point for
+<TT
+CLASS="filename"
+>/usr/X11R6/lib/X11/fonts</TT
+> was invalid at
+the time that Cygwin's <B
+CLASS="command"
+>setup.exe</B
+> installed the
+XFree86-fnts package.  You can confirm that this is the problem by
+running <B
+CLASS="command"
+>mount</B
+> from a Cygwin shell and checking
+the disk path returned for the
+<TT
+CLASS="filename"
+>/usr/X11R6/lib/X11/fonts</TT
+> mount point.
+You have this problem if the mount point is not pointing to a valid
+folder on your system, or if there are not about 400 files in the
+<TT
+CLASS="filename"
+>misc/</TT
+> subdirectory of that folder on your
+system.</P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>You cannot reliably fix this problem by deleting your
+Cygwin installation and reinstalling it.  The mount points that
+Cygwin was using will be left in your system settings and the
+invalid mount point for
+<TT
+CLASS="filename"
+>/usr/X11R6/lib/X11/fonts</TT
+> will be used
+again when you perform the reinstallation.  You SHOULD follow the
+instructions below to fix the problem.</P
+></BLOCKQUOTE
+></DIV
+><P
+>To fix the problem, perform the following steps:</P
+><OL
+COMPACT="COMPACT"
+TYPE="a"
+><LI
+><P
+>Open a Cygwin shell and run <B
+CLASS="command"
+>umount
+/usr/X11R6/lib/X11/fonts</B
+>.</P
+></LI
+><LI
+><P
+>Close the Cygwin shell.</P
+></LI
+><LI
+><P
+>Run Cygwin's <B
+CLASS="command"
+>setup.exe</B
+>.</P
+></LI
+><LI
+><P
+>For each of the following packages, if they are marked Keep,
+then select Reinstall, otherwise leave them as they are:</P
+><UL
+COMPACT="COMPACT"
+><LI
+><P
+>XFree86-f100</P
+></LI
+><LI
+><P
+>XFree86-fcyr</P
+></LI
+><LI
+><P
+>XFree86-fenc</P
+></LI
+><LI
+><P
+>XFree86-fnts</P
+></LI
+><LI
+><P
+>XFree86-fscl</P
+></LI
+></UL
+></LI
+><LI
+><P
+>Allow Cygwin's <B
+CLASS="command"
+>setup.exe</B
+> to download and
+reinstall the fonts packages.  The key to fixing this problem is that
+the files were previously untarred into an invalid location; removing
+the mount point for the fonts directory should result in the files
+being untarred to a valid location.</P
+></LI
+></OL
+></LI
+></OL
 ></DIV
 ></DIV
 ><DIV
@@ -3093,10 +3230,26 @@ CLASS="answer"
 ><P
 ><B
 > </B
->See <A
+>These warnings are generally harmless since they indicate that
+default search paths for fonts do not actually contain fonts; this is
+only a problem if the <TT
+CLASS="filename"
+>misc</TT
+> path does not contain
+fonts and/or all of the paths do not contain fonts.  For example, this
+message is generally useless if it only notifies you that
+<TT
+CLASS="filename"
+>/usr/X11R6/lib/X11/fonts/100dpi</TT
+> (optional 100 dpi
+fonts) is being removed.</P
+><P
+>If you are getting these message and the X Server is also
+failing to start, then see <A
 HREF="cygwin-x-faq.html#q-error-font-eof"
 >Q: 8.5.</A
->.</P
+>
+for information on how to fix your fonts.</P
 ></DIV
 ></DIV
 ><DIV
@@ -3394,41 +3547,10 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-error-negative-sized-edge"
-></A
-><B
->8.13. </B
->Fatal server error: negative sized edge?</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->A compilation bug, due to the -ansi build flag, in the Type1
-font library caused this bug to be present in all Cygwin/X
-<TT
-CLASS="filename"
->XWin.exe</TT
-> builds between 2001-05-06 and
-2001-08-03.  The -ansi build flag was removed on 2001-08-03 and
-subsequent builds do not contain the bug.  All Server Test Series
-releases from Test23 to Test41 contain the bug.  Test42 was the first
-recent Server Test Series release that did not contain the bug.
-Remedy the bug by either installing the most recent Server Test Series
-release or by updating your entire Cygwin/X installation.</P
-></DIV
-></DIV
-><DIV
-CLASS="qandaentry"
-><DIV
-CLASS="question"
-><P
-><A
 NAME="q-error-env-space"
 ></A
 ><B
->8.14. </B
+>8.13. </B
 >Out of environment space</P
 ></DIV
 ><DIV
@@ -3453,7 +3575,7 @@ CLASS="question"
 NAME="q-too-many-parameters"
 ></A
 ><B
->8.15. </B
+>8.14. </B
 >Too many parameters</P
 ></DIV
 ><DIV
@@ -3463,7 +3585,7 @@ CLASS="answer"
 > </B
 >See <A
 HREF="cygwin-x-faq.html#q-error-env-space"
->Q: 8.14.</A
+>Q: 8.13.</A
 ></P
 ></DIV
 ></DIV
@@ -3552,7 +3674,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN674"
+NAME="AEN716"
 ></A
 ><P
 ><B
