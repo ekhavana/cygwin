@@ -1,0 +1,1228 @@
+
+Cygwin/XFree86 Frequently Asked Questions
+
+Harold L Hunt, II
+
+   Revision History
+   Revision 0.0.3 2001-06-10 Revised by: huntharo@msu.edu
+   Added a q&a to the Installation section regarding web browsers that
+   automatically decompress bzip2 files. Updated the answer for the error
+   message STATUS_INTEGER_DIVIDE_BY_ZERO to indicate that 8 bit color is
+   now supported.
+   Revision 0.0.2 2001-06-03 Revised by: huntharo@msu.edu
+   Revision 0.0.1 2001-05-23 Revised by: huntharo@msu.edu
+   Revision 0.0.0 2001-05-22 Revised by: huntharo@msu.edu
+     _________________________________________________________________
+
+   Table of Contents
+   [1]Questions and Answers
+   [2]Bibliography
+   [3]Glossary
+   A. [4]GNU Free Documentation License
+     _________________________________________________________________
+
+Questions and Answers
+
+   1. [5]General Information
+
+        1.1. [6]What is Cygwin/XFree86?
+        1.2. [7]What is Cygwin?
+        1.3. [8]What is the X Window System®?
+        1.4. [9]What is XFree86?
+        1.5. [10]What is an X Server?
+        1.6. [11]What is an X client?
+        1.7. [12]Why port XFree86 to Microsoft Windows?
+        1.8. [13]Is there a Cygwin/XFree86 newsgroup?
+        1.9. [14]Is there a Cygwin/XFree86 mailing list?
+
+   2. [15]Installation
+
+        2.1. [16]What versions of Windows does Cygwin/XFree86 run on?
+        2.2. [17]How is Cygwin/XFree86 installed?
+        2.3. [18]Which archives do I need to download and install?
+        2.4. [19]Can I use WinZip to extract Cygwin/XFree86 archives?
+        2.5. [20]bunzip2 reports: "It is possible that the compressed
+                file(s) have become corrupted."
+
+   3. [21]Configuration
+
+        3.1. [22]Why isn't there an XF86Config file?
+        3.2. [23]What are the command line arguments for XWin.exe?
+        3.3. [24]Why does XWin.exe ignore the display depth that I pass
+                on the command line?
+
+        3.4. [25]I have a two button mouse, can I emulate a three button
+                mouse?
+
+   4. [26]Usage
+
+        4.1. [27]Why is twm the only window manager included with
+                Cygwin/XFree86?
+
+        4.2. [28]What precompiled window managers are available?
+        4.3. [29]How do I use a non-U.S. keyboard layout?
+        4.4. [30]Where can I find an xmodmap for my non-U.S. keyboard
+                layout?
+
+        4.5. [31]How do I get my non-U.S. keyboard modmap to be installed
+                when using xdmcp?
+
+        4.6. [32]I have installed a modmap for my non-U.S. keyboard
+                layout, but how do I get bash to display accents and/or
+                umlauts?
+
+        4.7. [33]How do I put bash into "8 bit" mode?
+
+   5. [34]Troubleshooting
+
+        5.1. [35]I have a specific error message, what does it mean?
+
+   6. [36]Error and Warning Messages
+
+        6.1. [37]_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set
+                to root
+
+        6.2. [38]error opening security policy file
+                /usr/X11R6/lib/X11/xserver/SecurityPolicy
+
+        6.3. [39]Fatal server error: could not open default font 'fixed'
+        6.4. [40]Could not init font path element
+                /usr/X11R6/lib/X11/fonts/*/, removing from list!
+
+        6.5. [41]The procedure entry point _check_for_executable could
+                not be located
+
+        6.6. [42]Exception: STATUS_INTEGER_DIVIDE_BY_ZERO
+        6.7. [43]XDMCP fatal error: Session declined No valid address
+        6.8. [44]Xlib: connection to "local_host_name_or_ip_address:0.0"
+                refused by server Xlib: Maximum number of clients reached
+
+        6.9. [45]Cannot Open Display: 127.0.0.1:0.0
+
+   7. [46]Contributing
+
+        7.1. [47]Where do I get the Cygwin/XFree86 source code?
+        7.2. [48]Do I need to be a member of XFree86 to contribute to
+                Cygwin/XFree86?
+
+        7.3. [49]Are there editors for Windows that understand and
+                preserveUNIX end of line characters?
+
+        7.4. [50]How should I generate patches for Cygwin/XFree86?
+        7.5. [51]Where do I submit patches for Cygwin/XFree86?
+        7.6. [52]Where does Cygwin/XFree86's X Server source reside in
+                the XFree86 source tree?
+
+        7.7. [53]How is compilation of Cygwin/XFree86 configured?
+        7.8. [54]How do I compile Cygwin/XFree86 after I have unpacked a
+                source snapshot or after I have checked out the XFree86
+                CVS tree?
+
+        7.9. [55]How do I recompile just XWin.exe if I have confined my
+                changes to xc/programs/Xserver/hw/xwin/?
+
+        7.10. [56]Why doesn't XFree86 use GNU's autoconf?
+        7.11. [57]What compiler does Cygwin/XFree86 use, and which
+                compilers are supported?
+
+        7.12. [58]Is cross-compiling from a non-Cygwin platform
+                supported?
+
+        7.13. [59]Where can I get help for installing DocBook on Cygwin?
+        7.14. [60]How can I build a debug version of the XFree86 CVS
+                tree?
+
+   8. [61]Licenses, Patents, Trademarks, and Copyrights
+
+        8.1. [62]What licenses apply to Cygwin/XFree86 source code?
+        8.2. [63]What licenses apply to the XFree86 source code?
+        8.3. [64]What license applies to Cygwin source code?
+        8.4. [65]Whom holds the copyright on the Cygwin/XFree86 source
+                code?
+
+        8.5. [66]Whom holds the copyright on the XFree86 source code?
+        8.6. [67]Whom holds the copyright on the Cygwin source code?
+        8.7. [68]What license applies to Motif?
+        8.8. [69]Isn't "XWin" trademarked by StarNet Communications?
+
+1. General Information
+
+   1.1. What is Cygwin/XFree86?
+
+   Cygwin/XFree86 is a port of XFree86 to Cygwin; Cygwin provides a
+   UNIX-like API on the Win32 platform. At the time of writing, supported
+   Win32 platforms are Windows 95, Windows 98, Windows Me, Windows NT
+   4.0, and Windows 2000. Windows CE, Windows 3.1, Windows 3.11, and
+   Windows NT 3.51 are not supported.
+
+   1.2. What is Cygwin?
+
+   Cygwin tools are, in the words of the [70]Cygwin homepage, "ports of
+   the popular GNU development tools and utilities for Windows 95, 98,
+   and NT. They function by using the Cygwin library which provides a
+   UNIX-like API on top of the Win32 API." Cygwin provides the compiler
+   (gcc), libraries, headers, and other utilities which build and support
+   the operation of Cygwin/XFree86.
+
+   1.3. What is the X Window System®?
+
+   [ScheiflerGettys92]
+
+   The X Window System, or X, is a network-transparent window system.
+   With X, multiple applications can run simultaneously in windows,
+   generating text and graphics in monochrome or color on a bitmap
+   display. Network transparency means that application programs can run
+   on machines scattered through the network.
+
+   1.4. What is XFree86?
+
+   XFree86, in the words of the XFree86 homepage, is "a freely
+   redistributable open-source implementation of the X Window System that
+   runs on UNIX(R) and UNIX-like (like Linux, the BSDs, Mac OS X (aka
+   Darwin) and Solaris x86 series) operating systems and OS/2."
+
+   1.5. What is an X Server?
+
+   An X Server is a program that provides display and user input services
+   to other programs. In comparison, a file server provides other
+   programs with access to file storage devices. File servers are
+   typically located in a remote location and you use the services of a
+   file server from the machine that you are located at. In contrast, an
+   X Server is typically running on the machine that you are located at;
+   display and user input services may be requested by programs running
+   on your machine, as well as by programs running on remote machines.
+
+   1.6. What is an X client?
+
+   An X client is a program that utilizes the display and user input
+   services provided by an X Server. X clients may run on the same or
+   disparate machine as the X Server that is providing display and user
+   input services.
+
+   1.7. Why port XFree86 to Microsoft Windows?
+
+   Porting XFree86 to Microsoft Windows benefits many people and projects
+   in many ways:
+     * Prior to Cygwin/XFree86 only commercial, closed source X Servers
+       were available for Microsoft Windows.
+     * An X Server on Windows may be used to display the output of
+       programs running on remote UNIX machines.
+     * Cygwin/XFree86, in conjunction with Cygwin, provides a complete
+       compatibility layer for compiling and running UNIX applications on
+       Microsoft Windows.
+
+   1.8. Is there a Cygwin/XFree86 newsgroup?
+
+   No, Cygwin/XFree86 does not have a newsgroup; however, we do have a
+   mailing list. See [71]Q: 1.9.
+
+   1.9. Is there a Cygwin/XFree86 mailing list?
+
+   Yes, Cygwin/XFree86 has a mailing list, namely,
+   cygwin-xfree@cygwin.com. Visit the [72]Cygwin Mailing Lists page to
+   subscribe to cygwin-xfree@cygwin.com as well as to read and search an
+   online archive of the mailing list traffic.
+
+     Tip: Post your X-related inquires to cygwin-xfree@cygwin.com only;
+     do not post nor cross post your inquires to the cygwin@cygwin.com
+     mailing list. Cygwin's mailing list is only for Cygwin API related
+     inquires that are not handled by another more-specific list.
+
+2. Installation
+
+   2.1. What versions of Windows does Cygwin/XFree86 run on?
+
+   Cygwin/XFree86 supports Windows 95, Windows 98, Windows Me, Windows NT
+   4.0, and Windows 2000 as of 2001-05-19. Windows XP will be supported
+   when it is officially released.
+
+   Cygwin/XFree86 requires Cygwin to compile and run. Cygwin is not
+   currently available on Microsoft Windows CE, therefore Cygwin/XFree86
+   is not currently available on Microsoft Windows CE.
+
+   2.2. How is Cygwin/XFree86 installed?
+
+   The [73]Cygwin/XFree86 User's Guide thoroughly documents the
+   installation process.
+
+   2.3. Which archives do I need to download and install?
+
+   The [74]Cygwin/XFree86 User's Guide lists the archives that need to be
+   downloaded and installed.
+
+   2.4. Can I use WinZip to extract Cygwin/XFree86 archives?
+
+   No. WinZip is not aware of Cygwin's symlink handling, nor does WinZip
+   properly handle the end of line characters in Cygwin/XFree86's
+   archives. Extracting Cygwin/XFree86's archives with a utility other
+   than Cygwin's tar and bzip2 will likely result in the X Server
+   reporting that it cannot open a font file on startup; the server will
+   shutdown immediately after giving this error.
+
+   2.5. bunzip2 reports: "It is possible that the compressed file(s) have
+   become corrupted."
+
+   Short answer: the bzip2 files on the server are not corrupt.
+
+   Downloading the Cygwin/XFree86 archives using a web browser causes all
+   sorts of problems, as web browsers sometimes attempt to "help" you by
+   automatically decompressing downloaded files. However, the automatic
+   decompression is broken in that the decompression process usually
+   fails to remove the .bz2 extension from the decompressed file. You may
+   be able to simply rename the downloaded file, leaving off the .bz2
+   extension; if that method fails, you will have to redownload the
+   files, by using either a standard ftp client (e.g. ftp including with
+   Cygwin), or by using your web browser and right-clicking the link to
+   each file and choosing Save Target As..., Save Link As..., or a
+   similarly named command. Choosing Save Target As..., Save Link As...,
+   or a similarly named command instructs the web browser to save the
+   file directly, without passing the file through any interpretation
+   steps, thus preventing the web browser from automatically
+   decompressing the files.
+
+3. Configuration
+
+   3.1. Why isn't there an XF86Config file?
+
+   Cygwin/XFree86 uses an entirely different server executable than
+   XFree86. Cygwin/XFree86 queries Windows for configuration information
+   and accesses your hardware in a device independent manner through the
+   Win32 API, whereas the XFree86 server must read detailed information
+   about your hardware from a configuration file.
+
+   3.2. What are the command line arguments for XWin.exe?
+
+   The [75]Cygwin/XFree86 User's Guide documents the command line
+   arguments for XWin.exe.
+
+   3.3. Why does XWin.exe ignore the display depth that I pass on the
+   command line?
+
+   When running in windowed mode or GDI-based fullscreen mode, XWin.exe
+   must run the X Server at whatever display depth Windows is currently
+   using; in these cases the display depth passed on the command line is
+   ignored. XWin.exe only uses the display depth parameter when running
+   in a DirectDraw-based fullscreen mode, as DirectDraw allows
+   applications to change the display resolution and depth when running
+   in fullscreen mode.
+
+   3.4. I have a two button mouse, can I emulate a three button mouse?
+
+   Yes. Pass the -emulate3buttons timeout_in_milliseconds parameter to
+   XWin.exe, where timeout_in_milliseconds is the, optional, maximum
+   number of milliseconds between a button release and opposite button
+   press that will trigger an emulated third button press.
+
+4. Usage
+
+   4.1. Why is twm the only window manager included with Cygwin/XFree86?
+
+   twm resides in the XFree86 source tree, therefore it is compiled and
+   released with Cygwin/XFree86 automatically. Other window managers are
+   available, but they reside in other source trees and are therefore not
+   released with the core Cygwin/XFree86 archives.
+
+   4.2. What precompiled window managers are available?
+
+   XFCE and vtwm are available
+
+   4.3. How do I use a non-U.S. keyboard layout?
+
+   See [76]Q: 4.4. to obtain a modmap for your keyboard layout.
+
+   4.4. Where can I find an xmodmap for my non-U.S. keyboard layout?
+
+   You can try using an xmodmap file for your keyboard layout from a
+   GNU/Linux distribution (e.g. RedHat).
+
+   Or, you can use xkeycaps to automatically generate a modmap for one of
+   over 208 different layouts. See the [77]xkeycaps home page to download
+   and for more information.
+
+   4.5. How do I get my non-U.S. keyboard modmap to be installed when
+   using xdmcp?
+
+   This answer assumes that your non-U.S. keyboard modmap is located in
+   /etc/X11 and is called xmodmap.country_code, where country_code is
+   your two-letter standardized country code (e.g. Australia = au,
+   Deutschland = de, France = fr, Japan = jp, United Kingdom = uk).
+
+   First, you must create a script that tells xmodmap to load the modmap
+   for your non-U.S. keyboard layout. One way to run xmodmap on X Server
+   startup when using [78]xdmcp is to add the following two lines to
+   /etc/X11/xdm/XSetup:
+
+   #!/bin/sh
+
+   /usr/X11R6/bin/xmodmap /etc/X11/xmodmap.country_code
+
+   Now you must tell xdm to run the screen setup script on startup. In
+   /etc/X11/xdm/xdm-config, add the following line:
+
+   DisplayManager*setup: /etc/X11/xdm/Xsetup
+
+   4.6. I have installed a modmap for my non-U.S. keyboard layout, but
+   how do I get bash to display accents and/or umlauts?
+
+   Add the following two lines to .inputrc in your Cygwin home directory
+   (e.g. /home/harold/):
+
+   set output-meta On # to show 8-bit characters
+
+   set convert-meta Off # to show it as character, not the octal
+   representation
+
+   4.7. How do I put bash into "8 bit" mode?
+
+   See [79]Q: 4.6.
+
+5. Troubleshooting
+
+   5.1. I have a specific error message, what does it mean?
+
+   See the Error and Warning Messages section for help with specific
+   error messages. Return here if you do not find help for the error
+   message that you have.
+
+6. Error and Warning Messages
+
+   6.1. _XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root
+
+   This warning message can be ignored; it does not cause any known
+   problems.
+
+   6.2. error opening security policy file
+   /usr/X11R6/lib/X11/xserver/SecurityPolicy
+
+   From [80]xfree86.org, "This is a only a warning message, and is mostly
+   harmless. If your server is failing to startup, this is not the
+   reason. Check the other messages."
+
+   6.3. Fatal server error: could not open default font 'fixed'
+
+   This error results from the end of line characters on the font files
+   being incorrect; this is almost always caused by extracting the
+   Cygwin/XFree86 archives using a non-Cygwin aware archival program,
+   such as WinZip. See [81]Q: 2.4.
+
+   6.4. Could not init font path element /usr/X11R6/lib/X11/fonts/*/,
+   removing from list!
+
+   See [82]Q: 6.3. and [83]Q: 2.4.
+
+   6.5. The procedure entry point _check_for_executable could not be
+   located
+
+   Programs that you are attempting to use were compiled against a newer
+   version of Cygwin than is currently on your system. Run Cygwin's setup
+   program to update your installation to the latest version.
+
+   6.6. Exception: STATUS_INTEGER_DIVIDE_BY_ZERO
+
+   You are most likely running your primary Windows® display at a bit
+   depth that requires palettized color, most likely 8 bits per pixel, in
+   conjunction with a release of Cygwin/XFree86 that does not support
+   palettized color modes. Palettized color support was added to
+   Cygwin/XFree86 on 2001-06-05. You may either install a newer version
+   of Cygwin/XFree86 that supports palettized color, or you may run your
+   primary Windows display at 15, 16, 24, or 32 bits per pixel.
+
+   6.7. XDMCP fatal error: Session declined No valid address
+
+   Cygwin/XFree86 is sometimes unable to determine which local network
+   interface's address should be reported to the [84]XDMCP server; in
+   these cases you need to pass -from local_host_name_or_ip_address to
+   XWin.exe to specify which interface address to report.
+
+   6.8. Xlib: connection to "local_host_name_or_ip_address:0.0" refused
+   by server Xlib: Maximum number of clients reached
+
+   Cygwin/XFree86 uses a value defined at compile time for the maximum
+   number of client connections allowed; the default value is defined by
+   MAXCLIENTS in xc/programs/Xserver/include/misc.h. MAXCLIENTS defaults
+   to 256, but some users have received the above error when roughly 25
+   clients have connected; report your error to the
+   cygwin-xfree@cygwin.com mailing list if you encounter this error
+   message with fewer than 256 client connections.
+
+   6.9. Cannot Open Display: 127.0.0.1:0.0
+
+   Certain classes of software, such as that used for [85]Virtual Private
+   Networking and [86]fire-walling may cause the IP address 127.0.0.1, or
+   other local adapter addresses, to be redirected, to become inoperable
+   in some way, or to be operated in a manner that violates the defined
+   operation of IP address.
+
+   As a potential remedy, try removing all instances of such software;
+   this may not always fix the problem though, as some software may leave
+   artifacts even after uninstallation is completed. The only way to be
+   sure that you have not found a Cygwin/XFree86 bug is to install
+   Windows on a freshly formatted hard drive, followed by Cygwin and
+   Cygwin/XFree86, and finally add your other software one application at
+   a time until Cygwin/XFree86 stops working.
+
+   Some products that have been reported to cause problems:
+
+     Note: These products may not cause problems in all configurations.
+     However, the Cygwin/XFree86 project has neither the time, ability,
+     nor resources to help you correctly configure your third-party
+     software.
+
+     * Aventail Connect
+     * Zonealarm PC Firewall from Zonelab
+
+7. Contributing
+
+   7.1. Where do I get the Cygwin/XFree86 source code?
+
+   Cygwin/XFree86 source code is contained in, and distributed with, the
+   XFree86 source tree. Periodically the Cygwin/XFree86 project releases
+   a snapshot of the XFree86 source code that is known to compile.
+   Read-only [87]CVS access to the XFree86 source tree is also available
+   from the XFree86 project.
+
+   7.2. Do I need to be a member of XFree86 to contribute to
+   Cygwin/XFree86?
+
+   No. Cygwin/XFree86 only needs one developer that is a member of the
+   XFree86 organization; as of 2001-05-22 we have three members. XFree86
+   members have very few privileges over non-members; specifically,
+   XFree86 members do not generally have CVS write access, so you aren't
+   really missing out on anything if you aren't an XFree86 member.
+
+   Exceptional Cygwin/XFree86 contributers may occasionally be nominated
+   for membership to XFree86.
+
+   7.3. Are there editors for Windows that understand and preserveUNIX
+   end of line characters?
+
+   Yes. Emacs and XEmacs are available for Windows; they both understand
+   and preserver UNIX end of line characters.
+
+   See the [88]GNU Mirror List for a mirror near you; Emacs is located
+   under gnu/pub/windows/emacs/.
+
+   See the [89]XEmacs Download Page to download XEmacs for Windows.
+
+   7.4. How should I generate patches for Cygwin/XFree86?
+
+   Only submit patches that have UNIX end of line characters. See [90]Q:
+   7.3. for information on editors for Windows that are aware of UNIX end
+   of line characters.
+
+   Generally it is better for us if you generate your patches against the
+   XFree86 CVS tree. For example, run cvs -z4 diff -U3 hw/xwin/ from
+   xc/programs/Xserver/ to generate a diff file for all the modified
+   files in hw/xwin/. CVS is smart enough to only generate diffs for
+   files that are in the CVS repository; for example, CVS diff will not
+   create diffs for Emacs temporary files.
+
+   In the case that you have modified a single file, create the diff with
+   cvs -z4 diff -U3 file_name.
+
+   7.5. Where do I submit patches for Cygwin/XFree86?
+
+   Submit patches for Cygwin/XFree86 to the cygwin-xfree@cygwin.com
+   mailing list.
+
+   See [91]Q: 7.4. for more information on generating patches.
+
+   7.6. Where does Cygwin/XFree86's X Server source reside in the XFree86
+   source tree?
+
+   Cygwin/XFree86's X Server source code resides primarily in
+   xc/programs/Xserver/hw/xwin/.
+
+   7.7. How is compilation of Cygwin/XFree86 configured?
+
+   XFree86 uses platform independent Imakefiles to generate platform
+   dependent Makefiles. Cygwin/XFree86 specific parameters used to
+   compile the Makefiles are contained in /xc/config/cf/cygwin.cf.
+
+   7.8. How do I compile Cygwin/XFree86 after I have unpacked a source
+   snapshot or after I have checked out the XFree86 CVS tree?
+
+   Note: Capitalization is important in the following command.
+
+   Open a Cygwin window, change to the xc/ directory, and run make World;
+   not that capitalization is important.
+
+   7.9. How do I recompile just XWin.exe if I have confined my changes to
+   xc/programs/Xserver/hw/xwin/?
+
+   Note: Capitalization is important in the following commands.
+
+   Change the current directory to xc/programs/Xserver/hw/xwin/.
+
+   Run make Makefile if you have modified hw/xwin/Imakefile.
+
+   Run make depend if you have modified the list of included files in any
+   of the source files in hw/xwin/.
+
+   Change the current directory to xc/programs/Xserver/.
+
+   Run make XWin.exe to rebuild the server executable.
+
+   7.10. Why doesn't XFree86 use GNU's autoconf?
+
+   XFree86 does not use autoconf because autoconf was not available when
+   the X Window System project was started in 1984.
+
+   7.11. What compiler does Cygwin/XFree86 use, and which compilers are
+   supported?
+
+   Cygwin/XFree86 uses the gcc compiler from the Free Software
+   Foundation. Cygwin/XFree86 source code is mostly ANSI C compliant, but
+   we cannot guarantee that Cygwin/XFree86 will compile with any other
+   compiler, nor can we afford to support compilers other than gcc.
+
+   See the [92]GCC Home Page for more information on gcc.
+
+   7.12. Is cross-compiling from a non-Cygwin platform supported?
+
+   Cross-compiling from a non-Cygwin platform is not for beginners; as
+   such, you should only be cross-compiling if you know what you are
+   doing. You may submit simple questions regarding cross-compiling to
+   the Cygwin/XFree86 mailing, but do not always expect an answer, as we
+   may not currently have a subscriber that is actively cross-compiling.
+
+   See [93]CrossGCC Frequently Asked Questions for more information on
+   cross compiling with gcc.
+
+   7.13. Where can I get help for installing DocBook on Cygwin?
+
+   See [94]SGML for Windows NT: Setting up a free SGML editing and
+   publishing system on Windows NT/Cygwin by Markus Hoenicka.
+
+   7.14. How can I build a debug version of the XFree86 CVS tree?
+
+   Simple: instead of running make World from xc/, run
+   config/util/makeg.sh World from xc/ instead. makeg.sh is a script that
+   wraps make and creates a debug build for you, without you having to
+   change any configuration files. Essentially, makeg.sh passes -g to gcc
+   for every object and executable target.
+
+8. Licenses, Patents, Trademarks, and Copyrights
+
+   8.1. What licenses apply to Cygwin/XFree86 source code?
+
+   Cygwin/XFree86 proper isn't covered by a single license, as
+   Cygwin/XFree86 is made up of two parts that are covered by distinct
+   licenses: Cygwin and XFree86.
+
+   See [95]Q: 8.2. and [96]Q: 8.3. for more information regarding the
+   licenses that apply to Cygwin/XFree86.
+
+   8.2. What licenses apply to the XFree86 source code?
+
+   XFree86 source code is generally licensed under an [97]X11 style
+   license, which is [98]certified by the Free Software Foundation as
+   compatible with the GNU GPL.
+
+   8.3. What license applies to Cygwin source code?
+
+   Cygwin source code is licensed under a modified version of the GNU
+   GPL. Cygwin's modification specifically allows third-party software
+   under an open source license to be linked with Cygwin without
+   requiring that the source code for the third-party software be
+   distributed under the terms of the GNU GPL. Cygwin's developers went
+   to great trouble to obtain this modification and should be thanked for
+   doing so, as without it the modification, Cygwin/XFree86 linking to
+   Cygwin would be the subject of endless discussion.
+
+   8.4. Whom holds the copyright on the Cygwin/XFree86 source code?
+
+   Cygwin/XFree86 proper doesn't have a single copyright holder, as
+   Cygwin/XFree86 is made up of two parts, namely Cygwin and XFree86,
+   that follow different schemes in regards to whom will hold the
+   copyright on source code.
+
+   See [99]Q: 8.5. and [100]Q: 8.6. for more information regarding whom
+   holds the copyright on Cygwin/XFree86 source code.
+
+   8.5. Whom holds the copyright on the XFree86 source code?
+
+   Each source code file in XFree86 typically has its own license and
+   copyright statement. Therefore, there is not a general rule for
+   determining whom holds the copyright on a particular XFree86 source
+   file, as each author is free to assign the copyright to someone else,
+   to some group, or to keep the copyright themselves. You must inspect
+   the source code file in question to determine whom holds the copyright
+   for that file.
+
+   8.6. Whom holds the copyright on the Cygwin source code?
+
+   [101]RedHat owns the copyright on the Cygwin source code. RedHat
+   requires that copyright be assigned to RedHat for non-trivial changes
+   to Cygwin. You must fill out a copyright transfer form if you are
+   going to contribute substantial changes to Cygwin.
+
+   8.7. What license applies to Motif?
+
+   Motif is a closed source product produced by [102]The Open Group.
+   However, The Open Group released [103]Open Motif on 2000-05-15 under a
+   public license, [104]The Open Group Public License, that allows Open
+   Motif to be distributed with and used on Open Source platforms.
+   Cygwin/XFree86 may qualify as a platform that Open Motif can be
+   distributed with and used on, but work has yet to begin on determining
+   if that is the case. Furthermore, no work has been done, as of
+   2001-05-24, to build Open Motif with Cygwin/XFree86.
+
+   8.8. Isn't "XWin" trademarked by StarNet Communications?
+
+   No. A quick search at the [105]United States Patent and Trademark
+   Office for "XWin" turns up one dead record and one live record. The
+   live record is for a logo belonging to a rock crusher manufacturer
+   based out of Belgium. Neither trademark affects Cygwin/XFree86, as the
+   dead record is no longer enforceable, while the live record is in an
+   unrelated and distinct industry; there cannot be confusion between
+   rock crushers and computer programs.
+
+Bibliography
+
+Books
+
+   [ScheiflerGettys92] Robert W. Scheifler, James Gettys, Jim Flowers,
+   and David Rosenthal, 1992, 1-55558-088-2, Butterworth-Heinemann, X
+   Window System: The Complete Reference to Xlib, X Protocol, ICCCM, and
+   XLFD.
+
+   [Richter99] Jeffrey Richter, 1999, 1-57231-996-8, Microsoft® Press,
+   Programming Applications for Microsoft® Windows®: Mastering the
+   critical building blocks of 32-bit and 64-bit Windows®-based
+   applications.
+
+   [Petzold99] Charles Petzold, 1999, 1-57231-995-X, Microsoft® Press,
+   Programming Windows: The definitive guide to the Win32® API.
+
+   [McKay99] Everett N. McKay, 1999, 0-7356-0586-6, Microsoft® Press,
+   Developing User Interfaces for Microsoft® Windows®: Practical and
+   effective methods for improving the user experience.
+
+   [JonesOhlund99] Anthony Jones and Jim Ohlund, 1999, 0-7356-0560-2,
+   Microsoft® Press, Network Programming for Microsoft® Windows®: Clear,
+   practical guide to Microsoft's networking APIs.
+
+   [Yuan01] Feng Yuan, 2001, 0-13-086985-6, Prentice Hall PTR, Windows®
+   Graphics Programming: Win32® GDI and DirectDraw®.
+
+   [CohenWoodring98] Aaron Cohen and Mike Woodring, 1998, 1-56592-296-4,
+   O'Reilly & Associates, Inc., Win32® Multithreaded Programming:
+   Building Thread-Safe Applications.
+
+   [CameronRosenblattRaymond96] Debra Cameron, Bill Rosenblatt, and Eric
+   Raymond, 1996, 1991, 1-56592-152-6, O'Reilly & Associates, Inc.,
+   Learning GNU Emacs: UNIX Text Processing.
+
+   [Lewine91] Edited by Dale Dougherty, Donald A. Lewine, 1991,
+   0-937175-73-0, O'Reilly & Associates, Inc., POSIX Programmer's Guide:
+   Writing Portable UNIX Programs.
+
+   [KernighanRitchie88] Brian W. Kernighan and Dennis M. Ritchie, 1998,
+   1978, 0-13-110370-9, Prentice Hall PTR, The C Programming Language:
+   ANSI C.
+
+Glossary
+
+F
+
+   firewall
+          Firewall software attempts to protect an internal network from
+          intrusions originating from an external network.
+
+V
+
+   Virtual Private Network (VPN)
+          Virtual Private Networks are encrypted tunnels through which
+          private data can be safely transmitted over a private network
+          (e.g. the Internet).
+
+X
+
+   X Display Manager (XDM)
+          An X Display Manager presents a graphical login screen to X
+          users. Often an XDM will allow the user to select a desktop
+          environment or window manager to be for their login session.
+          Some X Display Managers are xdm, gdm (Gnome Display Manager),
+          and kdm (KDE Display Manager).
+
+   X Display Manager Control Protocol (XDMCP)
+          XDMCP allows XDM to process logins for users remote to the
+          machine that XDM is running on; login sessions will be run on
+          the machine running XDM. For example, at a university you may
+          use XDMCP to login to an X session running on an engineering
+          department computer from your dorm room.
+
+          See Also: [106]X Display Manager.
+     _________________________________________________________________
+
+A. GNU Free Documentation License
+
+   Version 1.1, March 2000
+
+     Copyright (C) 2000 Free Software Foundation, Inc. 59 Temple Place,
+     Suite 330, Boston, MA 02111-1307 USA Everyone is permitted to copy
+     and distribute verbatim copies of this license document, but
+     changing it is not allowed.
+     _________________________________________________________________
+
+0. PREAMBLE
+
+   The purpose of this License is to make a manual, textbook, or other
+   written document "free" in the sense of freedom: to assure everyone
+   the effective freedom to copy and redistribute it, with or without
+   modifying it, either commercially or noncommercially. Secondarily,
+   this License preserves for the author and publisher a way to get
+   credit for their work, while not being considered responsible for
+   modifications made by others.
+
+   This License is a kind of "copyleft", which means that derivative
+   works of the document must themselves be free in the same sense. It
+   complements the GNU General Public License, which is a copyleft
+   license designed for free software.
+
+   We have designed this License in order to use it for manuals for free
+   software, because free software needs free documentation: a free
+   program should come with manuals providing the same freedoms that the
+   software does. But this License is not limited to software manuals; it
+   can be used for any textual work, regardless of subject matter or
+   whether it is published as a printed book. We recommend this License
+   principally for works whose purpose is instruction or reference.
+     _________________________________________________________________
+
+1. APPLICABILITY AND DEFINITIONS
+
+   This License applies to any manual or other work that contains a
+   notice placed by the copyright holder saying it can be distributed
+   under the terms of this License. The "Document", below, refers to any
+   such manual or work. Any member of the public is a licensee, and is
+   addressed as "you".
+
+   A "Modified Version" of the Document means any work containing the
+   Document or a portion of it, either copied verbatim, or with
+   modifications and/or translated into another language.
+
+   A "Secondary Section" is a named appendix or a front-matter section of
+   the Document that deals exclusively with the relationship of the
+   publishers or authors of the Document to the Document's overall
+   subject (or to related matters) and contains nothing that could fall
+   directly within that overall subject. (For example, if the Document is
+   in part a textbook of mathematics, a Secondary Section may not explain
+   any mathematics.) The relationship could be a matter of historical
+   connection with the subject or with related matters, or of legal,
+   commercial, philosophical, ethical or political position regarding
+   them.
+
+   The "Invariant Sections" are certain Secondary Sections whose titles
+   are designated, as being those of Invariant Sections, in the notice
+   that says that the Document is released under this License.
+
+   The "Cover Texts" are certain short passages of text that are listed,
+   as Front-Cover Texts or Back-Cover Texts, in the notice that says that
+   the Document is released under this License.
+
+   A "Transparent" copy of the Document means a machine-readable copy,
+   represented in a format whose specification is available to the
+   general public, whose contents can be viewed and edited directly and
+   straightforwardly with generic text editors or (for images composed of
+   pixels) generic paint programs or (for drawings) some widely available
+   drawing editor, and that is suitable for input to text formatters or
+   for automatic translation to a variety of formats suitable for input
+   to text formatters. A copy made in an otherwise Transparent file
+   format whose markup has been designed to thwart or discourage
+   subsequent modification by readers is not Transparent. A copy that is
+   not "Transparent" is called "Opaque".
+
+   Examples of suitable formats for Transparent copies include plain
+   ASCII without markup, Texinfo input format, LaTeX input format, SGML
+   or XML using a publicly available DTD, and standard-conforming simple
+   HTML designed for human modification. Opaque formats include
+   PostScript, PDF, proprietary formats that can be read and edited only
+   by proprietary word processors, SGML or XML for which the DTD and/or
+   processing tools are not generally available, and the
+   machine-generated HTML produced by some word processors for output
+   purposes only.
+
+   The "Title Page" means, for a printed book, the title page itself,
+   plus such following pages as are needed to hold, legibly, the material
+   this License requires to appear in the title page. For works in
+   formats which do not have any title page as such, "Title Page" means
+   the text near the most prominent appearance of the work's title,
+   preceding the beginning of the body of the text.
+     _________________________________________________________________
+
+2. VERBATIM COPYING
+
+   You may copy and distribute the Document in any medium, either
+   commercially or noncommercially, provided that this License, the
+   copyright notices, and the license notice saying this License applies
+   to the Document are reproduced in all copies, and that you add no
+   other conditions whatsoever to those of this License. You may not use
+   technical measures to obstruct or control the reading or further
+   copying of the copies you make or distribute. However, you may accept
+   compensation in exchange for copies. If you distribute a large enough
+   number of copies you must also follow the conditions in section 3.
+
+   You may also lend copies, under the same conditions stated above, and
+   you may publicly display copies.
+     _________________________________________________________________
+
+3. COPYING IN QUANTITY
+
+   If you publish printed copies of the Document numbering more than 100,
+   and the Document's license notice requires Cover Texts, you must
+   enclose the copies in covers that carry, clearly and legibly, all
+   these Cover Texts: Front-Cover Texts on the front cover, and
+   Back-Cover Texts on the back cover. Both covers must also clearly and
+   legibly identify you as the publisher of these copies. The front cover
+   must present the full title with all words of the title equally
+   prominent and visible. You may add other material on the covers in
+   addition. Copying with changes limited to the covers, as long as they
+   preserve the title of the Document and satisfy these conditions, can
+   be treated as verbatim copying in other respects.
+
+   If the required texts for either cover are too voluminous to fit
+   legibly, you should put the first ones listed (as many as fit
+   reasonably) on the actual cover, and continue the rest onto adjacent
+   pages.
+
+   If you publish or distribute Opaque copies of the Document numbering
+   more than 100, you must either include a machine-readable Transparent
+   copy along with each Opaque copy, or state in or with each Opaque copy
+   a publicly-accessible computer-network location containing a complete
+   Transparent copy of the Document, free of added material, which the
+   general network-using public has access to download anonymously at no
+   charge using public-standard network protocols. If you use the latter
+   option, you must take reasonably prudent steps, when you begin
+   distribution of Opaque copies in quantity, to ensure that this
+   Transparent copy will remain thus accessible at the stated location
+   until at least one year after the last time you distribute an Opaque
+   copy (directly or through your agents or retailers) of that edition to
+   the public.
+
+   It is requested, but not required, that you contact the authors of the
+   Document well before redistributing any large number of copies, to
+   give them a chance to provide you with an updated version of the
+   Document.
+     _________________________________________________________________
+
+4. MODIFICATIONS
+
+   You may copy and distribute a Modified Version of the Document under
+   the conditions of sections 2 and 3 above, provided that you release
+   the Modified Version under precisely this License, with the Modified
+   Version filling the role of the Document, thus licensing distribution
+   and modification of the Modified Version to whoever possesses a copy
+   of it. In addition, you must do these things in the Modified Version:
+    A. Use in the Title Page (and on the covers, if any) a title distinct
+       from that of the Document, and from those of previous versions
+       (which should, if there were any, be listed in the History section
+       of the Document). You may use the same title as a previous version
+       if the original publisher of that version gives permission.
+    B. List on the Title Page, as authors, one or more persons or
+       entities responsible for authorship of the modifications in the
+       Modified Version, together with at least five of the principal
+       authors of the Document (all of its principal authors, if it has
+       less than five).
+    C. State on the Title page the name of the publisher of the Modified
+       Version, as the publisher.
+    D. Preserve all the copyright notices of the Document.
+    E. Add an appropriate copyright notice for your modifications
+       adjacent to the other copyright notices.
+    F. Include, immediately after the copyright notices, a license notice
+       giving the public permission to use the Modified Version under the
+       terms of this License, in the form shown in the Addendum below.
+    G. Preserve in that license notice the full lists of Invariant
+       Sections and required Cover Texts given in the Document's license
+       notice.
+    H. Include an unaltered copy of this License.
+    I. Preserve the section entitled "History", and its title, and add to
+       it an item stating at least the title, year, new authors, and
+       publisher of the Modified Version as given on the Title Page. If
+       there is no section entitled "History" in the Document, create one
+       stating the title, year, authors, and publisher of the Document as
+       given on its Title Page, then add an item describing the Modified
+       Version as stated in the previous sentence.
+    J. Preserve the network location, if any, given in the Document for
+       public access to a Transparent copy of the Document, and likewise
+       the network locations given in the Document for previous versions
+       it was based on. These may be placed in the "History" section. You
+       may omit a network location for a work that was published at least
+       four years before the Document itself, or if the original
+       publisher of the version it refers to gives permission.
+    K. In any section entitled "Acknowledgements" or "Dedications",
+       preserve the section's title, and preserve in the section all the
+       substance and tone of each of the contributor acknowledgements
+       and/or dedications given therein.
+    L. Preserve all the Invariant Sections of the Document, unaltered in
+       their text and in their titles. Section numbers or the equivalent
+       are not considered part of the section titles.
+    M. Delete any section entitled "Endorsements". Such a section may not
+       be included in the Modified Version.
+    N. Do not retitle any existing section as "Endorsements" or to
+       conflict in title with any Invariant Section.
+
+   If the Modified Version includes new front-matter sections or
+   appendices that qualify as Secondary Sections and contain no material
+   copied from the Document, you may at your option designate some or all
+   of these sections as invariant. To do this, add their titles to the
+   list of Invariant Sections in the Modified Version's license notice.
+   These titles must be distinct from any other section titles.
+
+   You may add a section entitled "Endorsements", provided it contains
+   nothing but endorsements of your Modified Version by various
+   parties--for example, statements of peer review or that the text has
+   been approved by an organization as the authoritative definition of a
+   standard.
+
+   You may add a passage of up to five words as a Front-Cover Text, and a
+   passage of up to 25 words as a Back-Cover Text, to the end of the list
+   of Cover Texts in the Modified Version. Only one passage of
+   Front-Cover Text and one of Back-Cover Text may be added by (or
+   through arrangements made by) any one entity. If the Document already
+   includes a cover text for the same cover, previously added by you or
+   by arrangement made by the same entity you are acting on behalf of,
+   you may not add another; but you may replace the old one, on explicit
+   permission from the previous publisher that added the old one.
+
+   The author(s) and publisher(s) of the Document do not by this License
+   give permission to use their names for publicity for or to assert or
+   imply endorsement of any Modified Version.
+     _________________________________________________________________
+
+5. COMBINING DOCUMENTS
+
+   You may combine the Document with other documents released under this
+   License, under the terms defined in section 4 above for modified
+   versions, provided that you include in the combination all of the
+   Invariant Sections of all of the original documents, unmodified, and
+   list them all as Invariant Sections of your combined work in its
+   license notice.
+
+   The combined work need only contain one copy of this License, and
+   multiple identical Invariant Sections may be replaced with a single
+   copy. If there are multiple Invariant Sections with the same name but
+   different contents, make the title of each such section unique by
+   adding at the end of it, in parentheses, the name of the original
+   author or publisher of that section if known, or else a unique number.
+   Make the same adjustment to the section titles in the list of
+   Invariant Sections in the license notice of the combined work.
+
+   In the combination, you must combine any sections entitled "History"
+   in the various original documents, forming one section entitled
+   "History"; likewise combine any sections entitled "Acknowledgements",
+   and any sections entitled "Dedications". You must delete all sections
+   entitled "Endorsements."
+     _________________________________________________________________
+
+6. COLLECTIONS OF DOCUMENTS
+
+   You may make a collection consisting of the Document and other
+   documents released under this License, and replace the individual
+   copies of this License in the various documents with a single copy
+   that is included in the collection, provided that you follow the rules
+   of this License for verbatim copying of each of the documents in all
+   other respects.
+
+   You may extract a single document from such a collection, and
+   distribute it individually under this License, provided you insert a
+   copy of this License into the extracted document, and follow this
+   License in all other respects regarding verbatim copying of that
+   document.
+     _________________________________________________________________
+
+7. AGGREGATION WITH INDEPENDENT WORKS
+
+   A compilation of the Document or its derivatives with other separate
+   and independent documents or works, in or on a volume of a storage or
+   distribution medium, does not as a whole count as a Modified Version
+   of the Document, provided no compilation copyright is claimed for the
+   compilation. Such a compilation is called an "aggregate", and this
+   License does not apply to the other self-contained works thus compiled
+   with the Document, on account of their being thus compiled, if they
+   are not themselves derivative works of the Document.
+
+   If the Cover Text requirement of section 3 is applicable to these
+   copies of the Document, then if the Document is less than one quarter
+   of the entire aggregate, the Document's Cover Texts may be placed on
+   covers that surround only the Document within the aggregate. Otherwise
+   they must appear on covers around the whole aggregate.
+     _________________________________________________________________
+
+8. TRANSLATION
+
+   Translation is considered a kind of modification, so you may
+   distribute translations of the Document under the terms of section 4.
+   Replacing Invariant Sections with translations requires special
+   permission from their copyright holders, but you may include
+   translations of some or all Invariant Sections in addition to the
+   original versions of these Invariant Sections. You may include a
+   translation of this License provided that you also include the
+   original English version of this License. In case of a disagreement
+   between the translation and the original English version of this
+   License, the original English version will prevail.
+     _________________________________________________________________
+
+9. TERMINATION
+
+   You may not copy, modify, sublicense, or distribute the Document
+   except as expressly provided for under this License. Any other attempt
+   to copy, modify, sublicense or distribute the Document is void, and
+   will automatically terminate your rights under this License. However,
+   parties who have received copies, or rights, from you under this
+   License will not have their licenses terminated so long as such
+   parties remain in full compliance.
+     _________________________________________________________________
+
+10. FUTURE REVISIONS OF THIS LICENSE
+
+   The Free Software Foundation may publish new, revised versions of the
+   GNU Free Documentation License from time to time. Such new versions
+   will be similar in spirit to the present version, but may differ in
+   detail to address new problems or concerns. See
+   [107]http://www.gnu.org/copyleft/.
+
+   Each version of the License is given a distinguishing version number.
+   If the Document specifies that a particular numbered version of this
+   License "or any later version" applies to it, you have the option of
+   following the terms and conditions either of that specified version or
+   of any later version that has been published (not as a draft) by the
+   Free Software Foundation. If the Document does not specify a version
+   number of this License, you may choose any version ever published (not
+   as a draft) by the Free Software Foundation.
+     _________________________________________________________________
+
+How to use this License for your documents
+
+   To use this License in a document you have written, include a copy of
+   the License in the document and put the following copyright and
+   license notices just after the title page:
+
+     Copyright (c) YEAR YOUR NAME. Permission is granted to copy,
+     distribute and/or modify this document under the terms of the GNU
+     Free Documentation License, Version 1.1 or any later version
+     published by the Free Software Foundation; with the Invariant
+     Sections being LIST THEIR TITLES, with the Front-Cover Texts being
+     LIST, and with the Back-Cover Texts being LIST. A copy of the
+     license is included in the section entitled "GNU Free Documentation
+     License".
+
+   If you have no Invariant Sections, write "with no Invariant Sections"
+   instead of saying which ones are invariant. If you have no Front-Cover
+   Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts
+   being LIST"; likewise for Back-Cover Texts.
+
+   If your document contains nontrivial examples of program code, we
+   recommend releasing these examples in parallel under your choice of
+   free software license, such as the GNU General Public License, to
+   permit their use in free software.
+
+References
+
+   1. file://localhost/home/public/documents/cygx/build/faq/dump.html#qanda
+   2. file://localhost/home/public/documents/cygx/build/faq/dump.html#biblio
+   3. file://localhost/home/public/documents/cygx/build/faq/dump.html#glossary
+   4. file://localhost/home/public/documents/cygx/build/faq/dump.html#gfdl
+   5. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN34
+   6. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN37
+   7. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN42
+   8. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN50
+   9. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN59
+  10. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN65
+  11. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN70
+  12. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN75
+  13. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN89
+  14. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-mailing-list
+  15. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN102
+  16. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN105
+  17. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN111
+  18. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN117
+  19. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-winzip
+  20. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-bunzip2
+  21. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN143
+  22. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN146
+  23. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN151
+  24. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN157
+  25. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN162
+  26. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN169
+  27. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN172
+  28. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN179
+  29. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN184
+  30. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-modmap-obtaining
+  31. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN199
+  32. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-bash-8bit
+  33. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN234
+  34. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN241
+  35. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN244
+  36. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN248
+  37. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN251
+  38. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN257
+  39. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-font-eof
+  40. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN273
+  41. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN282
+  42. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN288
+  43. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN295
+  44. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN304
+  45. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN312
+  46. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN330
+  47. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN333
+  48. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN339
+  49. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-editors
+  50. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-contrib-diff
+  51. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN375
+  52. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN382
+  53. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN388
+  54. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN394
+  55. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN403
+  56. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN422
+  57. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN430
+  58. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN440
+  59. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN448
+  60. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN454
+  61. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN467
+  62. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN470
+  63. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-license-xfree
+  64. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-license-cygwin
+  65. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN496
+  66. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-xfree
+  67. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-cygwin
+  68. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN515
+  69. file://localhost/home/public/documents/cygx/build/faq/dump.html#AEN523
+  70. http://cygwin.com/
+  71. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-mailing-list
+  72. http://cygwin.com/lists.html
+  73. http://www.msu.edu/~huntharo/xwin/docs/ug/cygwin-xfree-ug.html
+  74. http://www.msu.edu/~huntharo/xwin/docs/ug/cygwin-xfree-ug.html
+  75. http://www.msu.edu/~huntharo/xwin/docs/ug/cygwin-xfree-ug.html
+  76. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-modmap-obtaining
+  77. http://www.jwz.org/xkeycaps/
+  78. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-xdmcp
+  79. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-bash-8bit
+  80. file://localhost/home/public/documents/cygx/build/faq/xfree86.org
+  81. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-winzip
+  82. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-error-font-eof
+  83. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-winzip
+  84. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-xdmcp
+  85. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-vpn
+  86. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-firewall
+  87. http://xfree86.org/cvs/
+  88. http://www.gnu.org/order/ftp.html
+  89. http://xemacs.org/Download/index.html
+  90. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-editors
+  91. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-contrib-diff
+  92. http://gcc.gnu.org/
+  93. http://www.objsw.com/CrossGCC/
+  94. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+  95. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-license-xfree
+  96. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-license-cygwin
+  97. http://www.x.org/terms.htm
+  98. http://www.fsf.org/philosophy/license-list.html#GPLCompatibleLicenses
+  99. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-xfree
+ 100. file://localhost/home/public/documents/cygx/build/faq/dump.html#q-copyright-cygwin
+ 101. http://redhat.com/
+ 102. http://www.opengroup.org/
+ 103. http://www.opengroup.org/openmotif/
+ 104. http://www.opengroup.org/openmotif/license
+ 105. http://www.uspto.gov/
+ 106. file://localhost/home/public/documents/cygx/build/faq/dump.html#gloss-xdm
+ 107. http://www.gnu.org/copyleft/
