@@ -1,0 +1,123 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+   <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=iso-8859-1">
+   <META NAME="GENERATOR" CONTENT="Mozilla/4.07C-SGI [en] (X11; I; IRIX64 6.5 IP28) [Netscape]">
+</HEAD>
+<BODY>
+<B>/dev/pmap and /dev/fastio in XF86SUP.SYS driver:</B>
+<P>>
+<BR>> At first glance I recognized the OS/2 DosDevIOCtl(..) - calls as
+Windows
+<BR>> DeviceIOControl(..) calls(Yahoooo! :-) ). I thought that it should
+be easy
+<BR>> to copy the code from OS/2 and modify it.
+<P>The IOCtl interface is the least problem. You have to provide the functions
+<BR>that the xf86sup.sys driver provides. There are two areas:
+<P>Fast I/O access:
+<BR>XFree86 uses inlined assembler instructions to access I/O ports.
+<BR>It is almost impossible to get rid of that without rewriting large
+parts
+<BR>of the code entirely, and even worse - emulations of I/O instructions
+<BR>(I believe WNT also provides some way to access I/O through call gates
+-
+<BR>OS/2 provides ring 2 for I/O processes) is so incredibly slow that
+it will
+<BR>degrade the performance fast video cards by an order of magnitude,
+or even
+<BR>worse. That is, the only way to do it fast, is to have the CPU execute
+the
+<BR>in/out assembler instructions directly, without any trapping and intercepting
+<BR>of the kernel. That is possible by patching the EFLAGS IOPL bits of
+the
+<BR>running X server. Changing these bits is only possible in kernel mode
+ring 0.
+<BR>The xf86sup.sys driver provides a way to patch these bits of the running
+<BR>process permanently. You have to provide comparable code.
+<P>Linear video memory:
+<BR>All modern cards nowadays can map their video memory linearly into
+the
+<BR>process's (i.e. X server's) address space. Certain functions like bitblt
+and
+<BR>linedraw are meanwhile handled by programming of the video accelerator,
+which
+<BR>will then perform the operation transparently from the CPU. But not
+all
+<BR>possible operations can be handled this way. The X server has highly
+optimized
+<BR>routines for such missing operations that operate directly on the flat
+<BR>video memory in its address space. The xf86sup driver has a method
+to map the
+<BR>video memory somewhere into the process's address space and to return
+a
+<BR>linear 32 bit pointer to the base of this memory which the X server
+will
+<BR>then use for its operations.
+<P>> But ... First the PMAP problem. If PMAP has to map Video Card Memory
+<BR>> into user space, then we must use other means than a simple mapping.
+In
+<BR>> Windows 95 it seems to be prohibited, because a driver can claim
+ownership
+<BR>> of the memory. I assume that VDD (core display graphics driver) and
+the
+<BR>> minidriver for the Video card (vendor supplied part of the display
+graphics
+<BR>> driver) has taken this ownership. ( :-/ ) There are a services in
+the VflatD
+<BR>> driver that provide read and write service to the video card memory
+.
+<P>The video subsystem in OS/2 likewise claims ownership of the video memory,
+<BR>and the OS/2 API functions work similarly to the ones in WinXX in that
+they
+<BR>prevent mapping of such claimed memory. However - this is the important
+<BR>thing in OS/2, and the reason why I run the server in a fullscreen
+session -
+<BR>the video driver will save the whole card and memory context of the
+video
+<BR>memory (at least it is supposed to according to programming requirements
+for
+<BR>a video driver) before switching into a fullscreen session and restores
+it
+<BR>after returning from it. During a fullscreen session, the memory may
+be still
+<BR>claimed formally by the driver, but xf86sup.sys uses standard driver
+helper
+<BR>functions to bypass this, and despite provide a flat pointer to video
+memory
+<BR>to the server. The server itself knows that it mustn't access the video
+memory
+<BR>when it is switched away (when I switch back to presentation manager),
+so
+<BR>you have two subsystems that concurrently, but exclusively access the
+same
+<BR>memory. This works because of WinOS/2, surprisingly. WinOS/2 fullscreen
+sessions
+<BR>do exactly the same operation in order to run side-by-side with PM.
+<P>> Second FASTIO can get into problems if the I/O ports are for accessing
+<BR>> video port, then again VDD and the minidriver has probalbly claimed
+the
+<BR>> ownership. ( :-( )The VDD and the minidriver provide services, so
+it is
+<BR>> possible to write and read from the video I/O ports.
+<P>See above. You must get it fast, even without any overhead by calling
+a
+<BR>procedure or even worse by going through a call gate or doing a ring
+<BR>transition otherwise, because it will degrade performance faster than
+you'll
+<BR>be able to comprehend.
+<P>> How are X using the mapped video memory? It sound as a silly question,
+<BR>> but how can X and Windows coexist on the same screen if X writes
+in all the
+<BR>> video memory.
+<P>See above.
+<P>> Are the drivers going to give XFree86 the whole screen, so windows
+is
+<BR>> completely out of sight?
+<P>see above.
+<P>> How is X working on OS/2?
+<BR>>
+<P>Holger
+<P>--
+<BR>Signature fault - code dumbed
+</BODY>
+</HTML>
