@@ -42,6 +42,7 @@ for f in faq*.html
 do
   sed	-e 's@`\(ftp://[^'\'']*\)'\''@<a target="_top" href="\1">\1</a>@g' \
 	-e 's@`\(http://[^'\'']*\)'\''@<a target="_top" href="\1">\1</a>@g' \
+	-e 's@`\(mailto:\)\([^'\'']*\)'\''@<a href="\1\2">\2</a>@g' \
 	-e 's@<!--#perl sub="header" arg="-n" arg="\(.*\)" -->@<title>\1</title>@' \
 	-e 's@<!--#perl sub="trailer" -->@@' \
     < $f > $f.tmp
