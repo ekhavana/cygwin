@@ -92,24 +92,8 @@ NAME="AEN692"
 exactly what's in the file on disk and the converse is true for writing.
 The situation is different in the DOS/Windows world where a file can
 be opened in one of two modes, binary or text.  In the binary mode the
-system behaves exactly as in UNIX.  However in text mode there are
-major differences:</P
-><P
-></P
-><OL
-COMPACT="COMPACT"
-TYPE="a"
-><LI
-><P
->On writing in text mode, a NL (\n, ^J) is transformed into the 
-sequence CR (\r, ^M) NL.</P
-></LI
-><LI
-><P
->On reading in text mode, a CR followed by an NL is deleted and a ^Z
-character signals the end of file.</P
-></LI
-></OL
+system behaves exactly as in UNIX.  However on writing in text mode, a
+NL (\n, ^J) is transformed into the sequence CR (\r, ^M) NL.</P
 ><P
 >This can wreak havoc with the seek/fseek calls since the number
 of bytes actually in the file may differ from that seen by the
@@ -162,7 +146,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN712"
+NAME="AEN707"
 >The default Cygwin behavior</A
 ></H2
 ><P
@@ -294,7 +278,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN748"
+NAME="AEN743"
 >Example</A
 ></H2
 ><P
@@ -339,7 +323,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN759"
+NAME="AEN754"
 >Binary or text?</A
 ></H2
 ><P
@@ -353,12 +337,8 @@ should work well in the default mode. </P
 Windows programs, since Windows programs will usually use the CRLF
 format.  Unfortunately you may still have some problems with text
 mode.  First, some of the utilities included with Cygwin do not yet
-specify binary mode when they should, e.g. <B
-CLASS="COMMAND"
->cat</B
-> will
-not work with binary files (input will stop at ^Z, CRs will be
-introduced in the output). Second, you will introduce CRs in text
+specify binary mode when they should.
+Second, you will introduce CRs in text
 files you write, which can cause problems when moving them back to a
 UNIX system. </P
 ><P
@@ -388,7 +368,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN768"
+NAME="AEN762"
 >Programming</A
 ></H2
 ><P
