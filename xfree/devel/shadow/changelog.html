@@ -17,7 +17,7 @@
 
 <!--#include virtual="../../cygx-header.html" -->
 
-<p>Last updated: 2001-10-03 0056 EDT</p>
+<p>Last updated: 2001-10-20 1622 EDT</p>
 
 <p>As you can see from the change log entries below, we have one guy
 spending way too much time in front of his computer.  Help this guy
@@ -66,13 +66,103 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-2001-.tar.bz2">xwin-2001-.ta
 -->
 
 
+<h4>Test50</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-10-20 1622 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test50.exe.bz2">XWin-Test50.exe.bz2</a>
+(1067 KB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20011020-1622.tar.bz2">xwin-20011020-1622.tar.bz2</a>
+(68 KB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>General - The NativeGDI engine can now create the familiar X
+background pattern that is used to fill the initial X Server screen.
+However, an all white pattern, instead of the correct pattern, is
+being used to fill the server screen.  I can't find the mistake in
+winfillsp.c, wingetsp.c, or winsetsp.c, so I'm making this release to
+see if anyone can find the mistake.</li>
+
+<li>winwndproc.c/winWindowProc () - Replace #if
+!WIN_NATIVE_GDI_SUPPORT checks with checks for pScreenInfo->dwEngine
+== WIN_SERVER_NATIVE_GDI.  Certain sections of winWindowProc (), such
+as mouse input, cannot yet be processed by the NativeGDI engine.
+Prohibiting user input causes the server startup process to be the
+same every time, which makes debugging possible.</li>
+
+<li>win.h/WIN_NATIVE_GDI_SUPPORT - Set to YES, again.  This works now
+because we are no longer omitting sections of winwndproc.c (see
+above).</li>
+
+<li>win.h/DEBUG_MSG () - Make the macro accept a format string and a
+variable list of data parameters in a similar manner to printf ().
+DEBUG_MSG () sends a text message to the Win32 API's MessageBox ()
+function.</li>
+
+<li>winpixmap.c/winCreatePixmap () - Call
+winnativegdi.c/winCreateDIBNativeGDI () for device independent bitmap
+(DIB) creation.</li>
+
+<li>winnativegdi.c/winCreateDIBNativeGDI () - Setup a simple black and
+white color table for monochrome DIBs.</li>
+
+<li>win.h - Remove duplicate #include of stdio.h</li>
+
+<li>win.h - Move debugging message macros to after stdio.h in
+included.</li>
+
+<li>win.h/winPrivPixmapRec - Change the pixmap bits pointer from void
+* to BYTE *.</li>
+
+<li>winfillsp.c, wingetsp.c, winsetsp.c, wingc.c - Don't select the
+drawable bitmap in wingc.c, rather, select and deselect the drawable
+bitmap in the function that operates upon it.  A given bitmap can only
+be selected into one device context (hdc) at a time; selecting bitmaps
+in wingc.c/winValidateGC () could cause a bitmap to be selected into
+more than one hdc at a time which would cause graphics operations to
+fail.</li>
+
+<li>winfillsp.c, winsetsp.c - Check for a failure from SelectObject ()
+when selecting bitmaps into a device context; this is a sanity check
+to make sure that a bitmap was deselected after a previous
+operation.</li>
+
+<li>winwndproc./winWindowProc (), winshaddd.c/winCloseScreenShadowDD
+(), winshadddnl.c/winCloseScreenShadowDDNL (),
+winshadgdi.c/winCloseScreenShadowGDI (),
+winpfbdd.c/winCloseScreenPrimaryDD () - Remove #if 0'd code for
+clipboard chain functionality that was moved to the <a
+href="http://xfree86.cygwin.com/devel/xwinclip/">xwinclip
+program</a>.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
 <h4>Test49</h4>
 <table>
 <tbody>
 
 <tr><td>Released: 2001-10-03 0056 EDT</td></tr>
 
-<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+<tr><td>Committed to XFree86 CVS: 2001-10-04 1603 EDT</td></tr>
 
 <tr><td>Basis: XFree86 CVS</td></tr>
 
