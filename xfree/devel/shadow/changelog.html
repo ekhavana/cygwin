@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2003-01-17 0153 EST</p>
+<p>Last updated: 2003-01-20 0108 EST</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -63,6 +63,65 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test73</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-01-20 0108 EST</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test72</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-21</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test73.exe.bz2">XWin-Test73.exe.bz2</a>
+(1201 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030120-0108.tar.bz2">xwin-20030120-0108.tar.bz2</a>
+(106 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Test72
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test72-to-Test73.diff.bz2">xwin-Test72-to-Test73.diff.bz2</a>
+(16 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Preliminary integration of the <em>xwinclip</em> functionality
+into the main server executable.  This functionality is accessible via
+the <em>-clipboard</em> command-line parameter.  (Harold Hunt)</li>
+
+<li>Delay the execution of the Multi-Window Window Manager thread
+until the X Server has finished starting up.  (Harold Hunt)</li>
+
+<li>Restructure the way that the Multi-Window Window Manager handles
+fatal errors.  Return FALSE when we encounter an initialization error
+so that the server can make a clean exit, instead of aborting
+immediately by calling exit (1).  For later errors, call pthread_exit
+(NULL) instead of exit (1) so that only the Multi-Window Window
+Manager aborts; there is no need to kill the X Server process since
+work could still be recovered without the window manager module.
+(Harold Hunt)</li>
+
+<li>Destroy the pthread mutex and condition variables, used for
+synchronization in the Multi-Window Window Manager, upon X Server
+exit.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
 
 
 <h4>Test72</h4>
