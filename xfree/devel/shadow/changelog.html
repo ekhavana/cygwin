@@ -16,7 +16,7 @@
 
 <!--#include virtual="../../cygx-header.html" -->
 
-<p>Last updated: 2001-10-30 1000 EST</p>
+<p>Last updated: 2001-11-11 1200 EST</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -61,13 +61,91 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-2001-.tar.bz2">xwin-2001-.ta
 -->
 
 
+<h4>Test52</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2001-11-11 1200 EST</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test52.exe.bz2">XWin-Test52.exe.bz2</a>
+(1074 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20011111-1200.tar.bz2">xwin-20011111-1200.tar.bz2</a>
+(69 KiB)</td</tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>InitOutput.c - ddxProcessArgument () - Add an undocumented
+parameter, -ignoreinput, to allow programmers to see how the
+non-NativeGDI engines behave when they do not receive input
+events.</li>
+
+<li>win.h - Remove a duplicate declaration for winRestoreModeKeyStates
+().</li>
+
+<li>win.h - Add defines for ABS_AUTOHIDE and ABS_ALWAYSONTOP that
+should be in Cygwin's w32api shellapi.h</li>
+
+<li>winengine.c - New file.  Move winDetectSupportedEngines () and
+winSetEngine () here from winscrinit.c</li>
+
+<li>wincreatewnd.c - New file.  Move winCreateBoundingWindowFullScreen
+() and winCreateBoundingWindowWindowed () here from winscrinit.c</li>
+
+<li>wincreatewnd.c - Add a function, winAdjustForAutoHide (), to
+detect the location of auto-hide Window's TaskBars then back away one
+pixel from those edges of the screen to allow the TaskBars to popup
+when the mouse is moved over them.</li>
+
+<li>winkeybd.c - winKeybdReleaseModifierKeys () - Don't check which
+modifier keys are down when we lose focus, just release them all; this
+doesn't have any adverse effect and it makes the code simpler.</li>
+
+<li>winkeybd.c - Add a function, winSendKeyEvent ()to simplify sending
+a keystroke event.</li>
+
+<li>winscrinit.c - Move winPaintBackground () to winmisc.c</li>
+
+<li>winwndproc.c - winWindowProc () - Remove duplicate checks for
+pScreenPriv == NULL.</li>
+
+<li>winwndproc.c - winWindowProc () - Only reload the privates
+property when the window handle has changed.  I think I did this
+correctly this time around.</li>
+
+<li>winwndproc.c - winWindowProc () - WM_HOTKEY - Create an engine
+specific function to handle the Alt+Tab hotkey.  Move the Primary FB
+engine's funtionality into that new engine specific function.  Set all
+other engine's function to perform no operation.</li>
+
+<li>winwndproc.c - winWindowProc () - Change the check on input events
+from pScreenInfo->dwEngine == WIN_ENGINE_NATIVE_GDI to
+pScreenInfo->fIgnoreInput.</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
 <h4>Test51</h4>
 <table>
 <tbody>
 
 <tr><td>Released: 2001-10-30 1000 EST</td></tr>
 
-<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+<tr><td>Committed to XFree86 CVS: 2001-11-01 0724 EST</td></tr>
 
 <tr><td>Basis: XFree86 CVS</td></tr>
 
