@@ -56,9 +56,13 @@ details on how to generate a binary tar file.</p>
 should contain the source files needed to rebuild the package.  While
 installing these files is optional under setup.exe, the inclusion of a
 source tar file is part of the totality that makes up a cygwin package
-and so, these files are <em>not</em> optional.  See the <a
+and so, these files are <em>not</em> optional.  In some cases, there 
+may be multiple packages generated from the same source; for instance,
+one might have a "boffo" package and its associate shared library in
+"libboffo7", where both are generated from the same -src tarball.  See the <a
 href="#srcpackage_contents"> making packages</a> section below for more
-details on the contents of a -src tar file..</p>
+details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a>
+section for information on the "external-source:" option.</p>
 
 <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.
 
@@ -153,6 +157,7 @@ prev: <i>version</i>
 test: <i>version</i>
 category: <i>name1[ name2...]</i>
 requires: <i>package[ package...]</i>
+external-source: <i>package</i>
 </pre>
 
 <p>(You may see some older setup.hint files which lack the colons after
@@ -357,6 +362,90 @@ package names within quotation marks.</p>
 <p>Notice that we didn't use the <tt>prev</tt>, <tt>curr</tt>,
 <tt>test</tt>, or <tt>@</tt> options.  Instead, we relied on the
 automatic setup.ini generator to do as much as possible for us.</p>
+
+<h3><a id="advanced_setup.hint" name="advanced_setup.hint"><tt>setup.hint (Advanced Options)</tt></a></h2>
+
+
+<p>The <tt>external-source</tt> line is used when multiple installation 
+packages are generated from a single -src package.  For example, suppose
+the <tt>boffo</tt> package contains the executables and documentation for 
+boffo, but there is also a shared library <tt>cygboffo-7.dll</tt> that 
+might be used by other packages; say, the <tt>fobbo</tt> program.  It 
+would be nice to separate that <tt>cygboffo-7.dll</tt> shared library 
+into a second installation package, so that users of the <tt>fobbo</tt>
+program can install <em>just</em> the library, and not the entire 
+<tt>boffo</tt> package.  However, all of the <tt>boffo</tt> executables 
+and the DLL are generated from the same source.  To support this usage,
+the <tt>boffo</tt> maintainer would create three packages:</p>
+
+<UL>
+<LI><tt>boffo-2.4.1-2.tar.bz2</tt>: an installable package that contains
+all of the normal contents of <tt>boffo</tt> -- except for the shared library.
+<LI><tt>libboffo7-2.4.1-2.tar.bz2</tt>: an installable package that contains
+only the shared library from <tt>boffo</tt>
+<LI><tt>boffo-2.4.1-2-src.tar.bz2</tt>: the -src tarball for boffo.
+</UL>
+
+<p><tt>boffo-2.4.1-2.tar.bz2</tt>, <tt>boffo-2.4.1-2-src.tar.bz2</tt>,
+and the boffo <tt>setup.hint</tt> 
+would go into the <tt>release/boffo/</tt> subdirectory on the cygwin 
+server.  <tt>libboffo7-2.4.1-2.tar.bz2</tt> would go into a separate 
+subdirectory, such as <tt>release/boffo/libboffo7/</tt>, along with
+a separate libboffo7 <tt>setup.hint</tt>.  The two <tt>setup.hint</tt>
+files would look something like this:</p>
+
+<center>
+<table border=2 >
+<tr>
+<td><center><tt>boffo</tt> setup.hint</center></td>
+<td><center><tt>libboffo7</tt> setup.hint</center></td>
+</tr>
+<tr>
+<td>
+<tt>category: Games Text</tt><br>
+<tt>requires: libboffo7 libncurses6 cygwin</tt><br> 
+<tt>sdesc: "A whackamole simulation in ASCII art"</tt><br>
+<tt>ldesc: "A whackamole simulation in ASCII art.
+<tt>Intended for use on VT100 terminals at BAUD rates 1200 and
+<tt>above.  Uses arrow keys for positioning over moles.  Space
+<tt>bar whacks the mole.<br><br>
+<tt>No actual moles will be harmed during execution of this game."</tt><br>
+</td>
+<td>
+<tt>category: Games Text</tt><br>
+<tt>requires: cygwin</tt><br>
+<tt><b>external-source: boffo</b></tt><br>
+<tt>sdesc: "Runtime library for a whackamole simulation in ASCII art"</tt><br>
+<tt>ldesc: "A whackamole simulation in ASCII art.
+<tt>Intended for use on VT100 terminals at BAUD rates 1200 and
+<tt>above.  Uses arrow keys for positioning over moles.  Space
+<tt>bar whacks the mole.<br><br>
+<tt>No actual moles will be harmed during execution of this game."</tt><br>
+</td>
+</tr>
+</table>
+</center>
+
+<p>The setup.ini generated from these setup.hint files will include these lines
+(only relevant lines shown):</p>
+<pre></tt>
+@ boffo
+requires: libboffo7 libncurses6 cygwin
+version: 2.4.1-2
+install: release/boffo/boffo-2.4.1-2.tar.bz2
+source: release/boffo/boffo-2.4.1-2-src.tar.bz2
+
+@ libboffo7
+requires: cygwin
+version: 2.4.1-2
+install: release/boffo/libboffo7/libboffo7-2.4.1-2.tar.bz2
+source: release/boffo/boffo-2.4.1-2-src.tar.bz2
+</tt>
+</pre>
+
+<p>Note that both packages point to the same -src tarball.  Also, it is required
+that the version strings match (libboffo7-5.2 won't point to boffo-1.4-src).  The
+same logic is used to "match up" prev: and test: versions.</p>
 
 <h2><a id="package_contents" name="package_contents">Making Packages</a></h2>
 <p>The files paths within both the -src and the binary package files are
