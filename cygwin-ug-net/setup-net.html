@@ -245,9 +245,23 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >Just Me</TT
 > are especially for multiuser systems
-or Domain users. If you have a single-user workstation, this 
-option probably does not concern you. If you are seeking to rollout
-Cygwin on a large Domain, you will want to see <A
+or Domain users. If you have access to a user account that is a local 
+Administrator or a member of the Administrators group, it is best to
+install for <TT
+CLASS="LITERAL"
+>All Users</TT
+>. You should only install for
+<TT
+CLASS="LITERAL"
+>Just Me</TT
+> if you do not have write access to 
+<TT
+CLASS="LITERAL"
+>HKEY_LOCAL_MACHINE</TT
+> in the registry or the 
+All Users Start Menu, even if you are the only user planning to use 
+Cygwin on the machine.  If you are seeking to rollout
+Cygwin on a large Domain, you will want to read <A
 HREF="ntsec.html"
 >the section called <I
 >NT security and the <TT
@@ -256,8 +270,8 @@ CLASS="LITERAL"
 > usage</I
 ></A
 >
-in the Cygwin User's Guide and possibly consult the Cygwin
-mailing list archives about others' experiences.</P
+in the Cygwin User's Guide and consult the Cygwin mailing list archives 
+about others' experiences.</P
 ><P
 >The <TT
 CLASS="LITERAL"
@@ -284,7 +298,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN158"
+NAME="AEN161"
 >Local Package Directory</A
 ></H2
 ><P
@@ -296,7 +310,7 @@ CLASS="LITERAL"
 CLASS="COMMAND"
 >setup.exe</B
 > stores the packages before they are
-installed. The cache should not be the same folder as the Cygwin
+installed. The cache must not be the same folder as the Cygwin
 root. Within the cache, a separate directory is created for each
 Cygwin mirror, which allows <B
 CLASS="COMMAND"
@@ -312,20 +326,18 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN164"
+NAME="AEN167"
 >Connection Method</A
 ></H2
 ><P
->For most users, the <TT
+>The <TT
 CLASS="LITERAL"
 >Direct Connection</TT
-> method
-of downloading is the best choice. If you have a proxy server,
-you can use the <TT
-CLASS="LITERAL"
->Use IE5 Settings</TT
-> if it is 
-already set up in Internet Exlporer, or manually type it into 
+> method of downloading will 
+directly download the packages, while the IE5 method will leverage your 
+IE5 cache for performance. If your organisation uses a proxy server or
+auto-configuration scripts, the IE5 method also uses these settings.
+If you have a proxy server, you can manually type it into 
 the <TT
 CLASS="LITERAL"
 >Use Proxy</TT
@@ -341,7 +353,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN171"
+NAME="AEN173"
 >Choosing Mirrors</A
 ></H2
 ><P
@@ -365,7 +377,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN176"
+NAME="AEN178"
 >Choosing Packages</A
 ></H2
 ><P
@@ -375,20 +387,28 @@ CLASS="COMMAND"
 > downloads a 
 small text file called <TT
 CLASS="LITERAL"
->setup.ini</TT
+>setup.bz2</TT
 > that contains a list
 of packages available from that site along with some basic information about
-each package (version number, dependencies, checksum, etc.) which 
-<B
+each package which <B
 CLASS="COMMAND"
 >setup.exe</B
-> parses and uses to create the chooser window.</P
+> parses and uses to create the 
+chooser window. For details about the format of this file, see
+<A
+HREF="http://sources.redhat.com/cygwin-apps/setup.html#setup.ini"
+TARGET="_top"
+>http://sources.redhat.com/cygwin-apps/setup.html</A
+>.</P
 ><P
 >The chooser is the most complex part of <B
 CLASS="COMMAND"
 >setup.exe</B
 >. 
-Packages are divided into categories. By default <B
+Packages are grouped into categories, and one package may belong to multiple 
+categories (assigned by the volunteer package maintainer). Each package
+can be found under any of those categories in the heirarchial chooser view.
+By default <B
 CLASS="COMMAND"
 >setup.exe</B
 >
@@ -396,7 +416,7 @@ will install only the packages in the <TT
 CLASS="LITERAL"
 >Base</TT
 > category
-and their dependencies, resulting in a very basic Cygwin installation.
+and their dependencies, resulting in a minimal Cygwin installation.
 However, this will not include many commonly used tools such as 
 <B
 CLASS="COMMAND"
@@ -508,7 +528,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN212"
+NAME="AEN215"
 >Download and Installation Progress</A
 ></H2
 ><P
@@ -533,7 +553,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN218"
+NAME="AEN221"
 >Icons</A
 ></H2
 ><P
@@ -553,7 +573,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN223"
+NAME="AEN226"
 >Post-Install Scripts</A
 ></H2
 ><P
@@ -563,24 +583,21 @@ CLASS="COMMAND"
 > will run any post-install
 scripts to finish correctly setting up installed packages. Since each
 script is run separately, several windows may pop up. If you are 
-interested in what is being done, the scripts are kept in the 
-<TT
-CLASS="LITERAL"
->/etc/postinstall/</TT
-> directory, renamed with a 
-<TT
-CLASS="LITERAL"
->done</TT
-> extension after being run. When the last
-post-install script is completed, <B
+interested in what is being done, see the Cygwin Package Contributor's
+Guide at <A
+HREF="http://cygwin.com/setup.html"
+TARGET="_top"
+>http://cygwin.com/setup.html</A
+>
+When the last post-install script is completed, <B
 CLASS="COMMAND"
 >setup.exe</B
-> will
-display a box announcing the completion. A few packages, such as
+> 
+will display a box announcing the completion. A few packages, such as
 the OpenSSH server, require some manual site-specific configuration. 
 Relevant documentation can be found in the <TT
 CLASS="LITERAL"
->/usr/doc/Cygwin</TT
+>/usr/doc/Cygwin/</TT
 > 
 directory.</P
 ></DIV
