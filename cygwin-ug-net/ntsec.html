@@ -149,14 +149,14 @@ have to change the primary group by hand if `None' as primary group is
 not what you want (and I'm sure, it's not what you want!)</p><p>Look at the following examples, which were parts of my files before
 storing SIDs in /etc/passwd and /etc/group had been introduced (See next
 chapter for details).  With the exception of my personal user entry, all
-entries are well known entries.</p><div class="example"><a name="id2711134"></a><p class="title"><b>Example 2.1. /etc/passwd</b></p><pre class="screen">
+entries are well known entries.</p><div class="example"><a name="id2728337"></a><p class="title"><b>Example 2.1. /etc/passwd</b></p><pre class="screen">
 everyone:*:0:0:::
 system:*:18:18:::
 administrator::500:544::/home/root:/bin/bash
 guest:*:501:546:::
 administrators:*:544:544::/home/root:
 corinna::1000:547:Corinna Vinschen:/home/corinna:/bin/tcsh
-</pre></div><div class="example"><a name="id2711150"></a><p class="title"><b>Example 2.2. /etc/group</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id2728353"></a><p class="title"><b>Example 2.2. /etc/group</b></p><pre class="screen">
 everyone::0:
 system::18:
 none::513:
@@ -194,9 +194,9 @@ root::0:513:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh
 root::500:513::/home/root:/bin/sh
 </pre></li><li><p>As in U*X systems UIDs and GIDs numbering scheme now
 don't influence each other. So it's possible to have same Id's for a
-user and a group:</p><div class="example"><a name="id2711372"></a><p class="title"><b>Example 2.3. /etc/passwd:</b></p><pre class="screen">
+user and a group:</p><div class="example"><a name="id2728575"></a><p class="title"><b>Example 2.3. /etc/passwd:</b></p><pre class="screen">
 root::0:0:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh
-</pre></div><div class="example"><a name="id2711386"></a><p class="title"><b>Example 2.4. /etc/group:</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id2728589"></a><p class="title"><b>Example 2.4. /etc/group:</b></p><pre class="screen">
 root:S-1-5-32-544:0:
 </pre></div></li></ul></div><p>The tools <span><b class="command">mkpasswd</b></span> and <span><b class="command">mkgroup</b></span>
 create the needed entries by default. If you don't want that you can use
@@ -217,13 +217,13 @@ database, NOT from the passwd file!</p><p>As in the previous chapter I give my p
 <tt class="filename">/etc/passwd</tt> and <tt class="filename">/etc/group</tt> as
 examples.  Please note that I've changed these files heavily!  There's no
 need to change them that way, it's just for testing purposes and...
-for fun.</p><div class="example"><a name="id2711501"></a><p class="title"><b>Example 2.5. /etc/passwd</b></p><pre class="screen">
+for fun.</p><div class="example"><a name="id2728704"></a><p class="title"><b>Example 2.5. /etc/passwd</b></p><pre class="screen">
 root:*:0:0:Administrators group,S-1-5-32-544::
 SYSTEM:*:18:18:,S-1-5-18:/home/system:/bin/bash
 admin:*:500:513:,S-1-5-21-1844237615-436374069-1060284298-500:/home/Administrator:/bin/bash
 corinna:*:100:0:Corinna Vinschen,S-1-5-21-1844237615-436374069-1060284298-1003:/home/corinna:/bin/tcsh
 Guest:*:501:546:,S-1-5-21-1844237615-436374069-1060284298-501:/home/Guest:/bin/bash
-</pre></div><div class="example"><a name="id2711519"></a><p class="title"><b>Example 2.6. /etc/group</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id2728722"></a><p class="title"><b>Example 2.6. /etc/group</b></p><pre class="screen">
 root:S-1-5-32-544:0:
 local:S-1-2-0:2:
 network:S-1-5-2:3:
@@ -418,20 +418,30 @@ etc.
 
 </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-switch"></a>Switching User
 Context</h3></div></div><div></div></div><p>
-Since Cygwin release 1.3.3, applications having the
-<span><b class="command">Create a process level token</b></span> user right can switch user
+Since Cygwin release 1.3.3, applications that are members of the
+Administrators group and have the <span><b class="command">Create a token
+object</b></span>, <span><b class="command">Replace a process level token</b></span> and
+<span><b class="command">Increase Quota</b></span> user rights can switch user
 context without giving a password by just calling the usual
 <span><b class="command">setuid</b></span>, <span><b class="command">seteuid</b></span>,
-<span><b class="command">setgid</b></span> and <span><b class="command">setegid</b></span> functions.  This is
-typically only given to the SYSTEM user. However, this now allows to switch
-the user context using e. g. rhosts authentication or (when running sshd
-under SYSTEM account as service) public key authentication.
+<span><b class="command">setgid</b></span> and <span><b class="command">setegid</b></span> functions.  
 </p><p>
-An important restriction of this method is that a process started under
-SYSTEM account can't access network shares which require authentication.
-This also applies to the subprocesses which switched the user context 
-without a password.  People using network home drives are typically not
-able to access it when trying to login using ssh or rsh without password.
+On NT and Windows 2000 the <tt class="systemitem">SYSTEM</tt> user has these privileges and can
+run services such as <span><b class="command">sshd</b></span>. However, on Windows 2003
+<tt class="systemitem">SYSTEM</tt> lacks the
+<span><b class="command">Create a token object</b></span> right, so it is necessary to
+create a special user with all the necessary rights, as
+well as <span><b class="command">Logon as a service</b></span>, to run such services.
+For security reasons this user should be denied the rights to logon
+interactively or over the network. All this is done by configuration
+scripts such as <span><b class="command">ssh-host-config</b></span>.
+</p><p>
+An important restriction of this method is that a process started
+without a password cannot access network shares which require
+authentication.  This also applies to subprocesses which switched user
+context without a password.  Therefore, when using
+<span><b class="command">ssh</b></span> or <span><b class="command">rsh</b></span> without a password, it
+is typically not possible to access network drives.
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-ids"></a>Special values of user and group
 ids</h3></div></div><div></div></div><p>
 If the current user is not present in <tt class="filename">/etc/passwd</tt>,

@@ -27,7 +27,7 @@ provide command-line utilities.  A few Windows tools, such as
 may conflict with the Cygwin versions; make sure that you use the full 
 path (<span><b class="command">/usr/bin/find</b></span>) or that your Cygwin 
 <tt class="literal">bin</tt> directory comes first in your <tt class="envar">PATH</tt>.
-</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2719339"></a>Pathnames</h3></div></div><div></div></div><p>
+</p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2736584"></a>Pathnames</h3></div></div><div></div></div><p>
 Windows programs do not understand POSIX pathnames, so any arguments 
 that reference the filesystem must be in Windows (or DOS) format or 
 translated.  Cygwin provides the <span><b class="command">cygpath</b></span> utility for 
@@ -47,7 +47,7 @@ which <span><b class="command">cygpath</b></span> can translate from a POSIX pat
 </pre><p>
 Since using quoting and subshells is somewhat awkward, it is often 
 preferable to use <span><b class="command">cygpath</b></span> in shell scripts.
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2719420"></a>Console Programs</h3></div></div><div></div></div><p>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2736666"></a>Console Programs</h3></div></div><div></div></div><p>
 Another issue is receiving output from or giving input to the console-based 
 Windows programs.  Unfortunately, interacting with Windows console 
 applications is not a simple matter of using a translation utility. Windows 
@@ -74,7 +74,7 @@ a native-Windows version of the popular X11 terminal emulator (it is not
 necessary to set <tt class="envar">CYGWIN=tty</tt> with <span><b class="command">rxvt</b></span>). 
 Using <span><b class="command">rxvt.exe</b></span> provides the most Unix-like environment, 
 but expect some compatibility problems with Windows programs.
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2719505"></a>Cygwin and Windows Networking</h3></div></div><div></div></div><p>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2736751"></a>Cygwin and Windows Networking</h3></div></div><div></div></div><p>
 Many popular Cygwin packages, such as <tt class="systemitem">ncftp</tt>, 
 <tt class="systemitem">lynx</tt>, and <tt class="systemitem">wget</tt>, require a 
 network connection.  Since Cygwin relies on Windows for connectivity, 
@@ -100,7 +100,7 @@ NTLM Authorization Proxy Server</a> or the no-charge
 <a href="http://www.hummingbird.com/products/nc/socks/index.html" target="_top">
 Hummingbird SOCKS Proxy</a> may allow you to use Cygwin network
 programs in your environment.
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2719603"></a>The cygutils package</h3></div></div><div></div></div><p>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2736848"></a>The cygutils package</h3></div></div><div></div></div><p>
 The optional <tt class="systemitem">cygutils</tt> package contains miscellaneous tools that are
 small enough to not require their own package. It is not included in a
 default Cygwin install; select it from the Utils category in 
@@ -114,7 +114,7 @@ endings, but <tt class="systemitem">cygutils</tt> provides several dedicated pro
 <span><b class="command">conv</b></span>, <span><b class="command">d2u</b></span>, <span><b class="command">dos2unix</b></span>, 
 <span><b class="command">u2d</b></span>, and <span><b class="command">unix2dos</b></span>. Use the
 <tt class="literal">--help</tt> switch for usage information. 
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2719694"></a>Creating shortcuts with cygutils</h3></div></div><div></div></div><p>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2736940"></a>Creating shortcuts with cygutils</h3></div></div><div></div></div><p>
 Another problem area is between Unix-style links, which link one file
 to another, and Microsoft .lnk files, which provide a shortcut to a
 file.  They seem similar at first glance but, in reality, are fairly 
@@ -134,7 +134,7 @@ be no different than standard Cygwin symlinks. Therefore these two types
 of links are treated differently.  Unfortunately, this means that the 
 usual Unix way of creating and using symlinks does not work with 
 Windows shortcuts. 
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2719742"></a>Printing with cygutils</h3></div></div><div></div></div><p>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2736988"></a>Printing with cygutils</h3></div></div><div></div></div><p>
 There are several options for printing from Cygwin, including the 
 <span><b class="command">lpr</b></span> found in <tt class="systemitem">cygutils</tt> (not to be confused with the 
 native Windows <span><b class="command">lpr.exe</b></span>). The easiest way to use <tt class="systemitem">cygutils</tt>' 

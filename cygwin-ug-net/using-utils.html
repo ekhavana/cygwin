@@ -52,7 +52,7 @@ The <tt class="literal">-f</tt> option helps you to track down which package a
 file came from, and <tt class="literal">-l</tt> lists all files in a package.
 For example, to find out about <tt class="filename">/usr/bin/less</tt> and its
 package:
-</p><div class="example"><a name="id2715604"></a><p class="title"><b>Example 3.3. Example <span>cygcheck</span> usage</b></p><pre class="screen">
+</p><div class="example"><a name="id2732895"></a><p class="title"><b>Example 3.3. Example <span>cygcheck</span> usage</b></p><pre class="screen">
 $ cygcheck.exe -f /usr/bin/less
 less-381-1
 
@@ -138,7 +138,7 @@ usage message if no filename argument was given.  It can be used in
 make file rules converting variables that may be omitted
 to a proper format.  Note that <span><b class="command">cygpath</b></span> output may 
 contain spaces (C:\Program Files) so should be enclosed in quotes.
-</p><div class="example"><a name="id2715935"></a><p class="title"><b>Example 3.4. Example <span>cygpath</span> usage</b></p><pre class="screen">
+</p><div class="example"><a name="id2733204"></a><p class="title"><b>Example 3.4. Example <span>cygpath</span> usage</b></p><pre class="screen">
 
 #!/bin/sh
 if [ "${1}" = "" ];
@@ -273,7 +273,7 @@ To get a list of running programs and their Cygwin pids, use the Cygwin
 <span class="emphasis"><em>all</em></span> windows pids.</p><p>The <span><b class="command">kill -l</b></span> option prints the name of the
 given signal, or a list of all signal names if no signal is given.</p><p>To send a specific signal, use the <tt class="literal">-signN</tt>
 option, either with a signal number or a signal name (minus the "SIG"
-part), like these examples:</p><div class="example"><a name="id2716388"></a><p class="title"><b>Example 3.5. Using the kill command</b></p><pre class="screen">
+part), like these examples:</p><div class="example"><a name="id2733650"></a><p class="title"><b>Example 3.5. Using the kill command</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill 123</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill -1 123</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill -HUP 123</tt></b>
@@ -341,7 +341,7 @@ include Windows security information.
 It can also be used on the Win9x series (Windows 95, 98, and Me) to
 create a file with the correct format.
 To initially set up your machine if you are a local user, you'd do
-something like this:</p><div class="example"><a name="id2716560"></a><p class="title"><b>Example 3.6. Setting up the groups file for local accounts</b></p><pre class="screen">
+something like this:</p><div class="example"><a name="id2733808"></a><p class="title"><b>Example 3.6. Setting up the groups file for local accounts</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkdir /etc</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkgroup -l &gt; /etc/group</tt></b>
 </pre></div><p>Note that this information is static.  If you change the group
@@ -399,7 +399,7 @@ On the Win9x series (Windows 95, 98, and Me) the password field must be
 replaced by the output of <b class="userinput"><tt>crypt your_password</tt></b>
 if remote access is desired.
 To initially set up your machine if you are a local user, you'd do
-something like this:</p><div class="example"><a name="id2716767"></a><p class="title"><b>Example 3.7. Setting up the passwd file for local accounts</b></p><pre class="screen">
+something like this:</p><div class="example"><a name="id2734033"></a><p class="title"><b>Example 3.7. Setting up the passwd file for local accounts</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkdir /etc</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkpasswd -l &gt; /etc/passwd</tt></b>
 </pre></div><p>Note that this information is static.  If you change the user
@@ -425,7 +425,7 @@ SIDs, see <a href="ntsec.html" title="NT security and usage of ntsec">the sectio
 use the specified prefix instead of the account home dir or <tt class="literal">/home/
 </tt>. For example, this command:
 
-</p><div class="example"><a name="id2716911"></a><p class="title"><b>Example 3.8. Using an alternate home root</b></p><pre class="screen">
+</p><div class="example"><a name="id2734177"></a><p class="title"><b>Example 3.8. Using an alternate home root</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkpasswd -l -p "$(cygpath -H)" &gt; /etc/passwd</tt></b>
 </pre></div><p>
 
@@ -460,8 +460,8 @@ and shares onto Cygwin's simulated POSIX directory tree, much like as is
 done by mount commands on typical UNIX systems.  Please see
 <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> for more information on the concepts
 behind the Cygwin POSIX file system and strategies for using
-mounts. To remove mounts, use <span><b class="command">umount</b></span></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2717039"></a>Using mount</h4></div></div><div></div></div><p>If you just type <span><b class="command">mount</b></span> with no parameters, it
-will display the current mount table for you.</p><div class="example"><a name="id2717054"></a><p class="title"><b>Example 3.9. Displaying the current set of mount points</b></p><pre class="screen">
+mounts. To remove mounts, use <span><b class="command">umount</b></span></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2734286"></a>Using mount</h4></div></div><div></div></div><p>If you just type <span><b class="command">mount</b></span> with no parameters, it
+will display the current mount table for you.</p><div class="example"><a name="id2734301"></a><p class="title"><b>Example 3.9. Displaying the current set of mount points</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount</tt></b>
 c:\cygwin\bin on /usr/bin type system (binmode)
 c:\cygwin\lib on /usr/lib type system (binmode)
@@ -476,7 +476,7 @@ to the current user.</p><p>The <span><b class="command">mount</b></span> utility
 adding new mounts to the mount table.  The following example
 demonstrates how to mount the directory
 <tt class="filename">\\pollux\home\joe\data</tt> to <tt class="filename">/data</tt>.
-</p><div class="example"><a name="id2717124"></a><p class="title"><b>Example 3.10. Adding mount points</b></p><pre class="screen">
+</p><div class="example"><a name="id2734371"></a><p class="title"><b>Example 3.10. Adding mount points</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>ls /data</tt></b>
 ls: /data: No such file or directory
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount \\pollux\home\joe\data /data</tt></b>
@@ -538,7 +538,7 @@ most of the options are duplicates of other mount flags):</p><pre class="screen"
   nosuid     - no suid files are allowed (currently unimplemented)
   managed    - directory is managed by cygwin.  Mixed case and special
                characters in filenames are allowed.
-</pre></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2717350"></a>Cygdrive mount points</h4></div></div><div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
+</pre></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2734597"></a>Cygdrive mount points</h4></div></div><div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
 from a particular Win32 path to a POSIX one, Cygwin will, instead,
 convert to a POSIX path using a default mount point:
 <tt class="filename">/cygdrive</tt>.  For example, if Cygwin accesses
@@ -547,7 +547,7 @@ mount table, then <tt class="filename">z:\</tt> will be accessible as
 <tt class="filename">/cygdrive/z</tt>.  The <span><b class="command">mount</b></span> utility 
 can be used to change this default automount prefix through the use of the
 "--change-cygdrive-prefix" option.  In the following example, we will
-set the automount prefix to <tt class="filename">/</tt>:</p><div class="example"><a name="id2717402"></a><p class="title"><b>Example 3.11. Changing the default prefix</b></p><pre class="screen">
+set the automount prefix to <tt class="filename">/</tt>:</p><div class="example"><a name="id2734648"></a><p class="title"><b>Example 3.11. Changing the default prefix</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount --change-cygdrive-prefix /</tt></b>
 </pre></div><p>Note that if you set a new prefix in this manner, you can
 specify the <tt class="literal">-s</tt> flag to make this the system-wide default 
@@ -555,7 +555,7 @@ prefix.  By default, the cygdrive-prefix applies only to the system-wide setting
 You can always see the user and system cygdrive prefixes with the 
 <tt class="literal">-p</tt> option.  Using the <tt class="literal">-b</tt>
 flag with <tt class="literal">--change-cygdrive-prefix</tt> makes all new 
-automounted filesystems default to binary mode file accesses.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2717460"></a>Limitations</h4></div></div><div></div></div><p>Limitations: there is a hard-coded limit of 30 mount
+automounted filesystems default to binary mode file accesses.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2734707"></a>Limitations</h4></div></div><div></div></div><p>Limitations: there is a hard-coded limit of 30 mount
 points.  Also, although you can mount to pathnames that do not start
 with "/", there is no way to make use of such mount points.</p><p>Normally the POSIX mount point in Cygwin is an existing empty
 directory, as in standard UNIX. If this is the case, or if there is a
