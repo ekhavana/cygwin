@@ -86,8 +86,10 @@ C:\cygwin           /                   user         binmode
 
 <P>
 Note that /bin and /usr/bin point to the same location, as do /lib and
-/usr/lib.  This is intentional.  Currently, <CODE>setup.exe</CODE> creates
-only binary mounts, but future versions will be more flexible.
+/usr/lib.  This is intentional, and you should not undo these mounts
+unless you <EM>really</EM> know what you are doing.  Currently,
+<CODE>setup.exe</CODE> creates only binary mounts, but future versions will be
+more flexible.
 
 </P>
 <P>
@@ -223,18 +225,101 @@ to delete some things by hand.
 
 <P>
 Later versions of <CODE>setup.exe</CODE> permit you to add and/or update
-packages to an existing cygwin installation.  For the time being, the
-procedure is sufficiently well described in these messages from the cygwin
-mailing list:
+packages to an existing cygwin installation.
+
+</P>
+<P>
+To update your installation, create an empty directory, cd to it, and
+download the latest version of <CODE>setup.exe</CODE> from the <CODE>latest</CODE>
+directory at a Cygwin mirror near you.
+
+</P>
+<P>
+Once you've downloaded <CODE>setup.exe</CODE>, type
+
+<PRE>
+	./setup &#60;pkg&#62;
+</PRE>
+
+<P>
+where "&#60;pkg&#62;" is the name of the package you wish to update, such as
+"cygwin" or "gdb" or "make" or ...
+
+</P>
+<P>
+Answer the questions as you did when you first installed Cygwin.  This
+will update the package.  As with the initial installation, you can
+update from the (i)nternet or from the (d)irectory.  The latter requires
+that you download the <CODE>.tar.gz</CODE> file of the package ahead of time,
+along with <CODE>setup.exe</CODE>.
+
+</P>
+<P>
+If you are updating "cygwin", then you must close <STRONG>all</STRONG> Cygwin
+applications (including <CODE>inetd</CODE>, for example), and run
+<CODE>setup.exe</CODE> from the Windows command prompt.
+
+</P>
+<P>
+If you supply the <CODE>-u</CODE> option to <CODE>setup.exe</CODE>, then
+<CODE>setup.exe</CODE> will only update the package if an older version is
+currently installed.  For example:
+
+<PRE>
+	./setup -u gdb
+</PRE>
+
+<P>
+However, if you currently have a development snapshot installed, setup
+may fail to update the package, because development snapshots have their
+version numbers "bumped" to the next release number.  In this case, you
+should not use <CODE>-u</CODE>.  Omitting <CODE>-u</CODE> forces <CODE>setup.exe</CODE> to
+perform the update, regardless of whether <CODE>setup.exe</CODE> deems it
+necessary.
 
 </P>
 
-<UL>
-<LI><TT><a target="_top" href="http://sourceware.cygnus.com/ml/cygwin/2000-05/msg00433.html">http://sourceware.cygnus.com/ml/cygwin/2000-05/msg00433.html</a></TT>
 
-<LI><TT><a target="_top" href="http://sourceware.cygnus.com/ml/cygwin/2000-05/msg00445.html">http://sourceware.cygnus.com/ml/cygwin/2000-05/msg00445.html</a></TT>
+<H3><A NAME="SEC13" HREF="faq_toc.html#TOC13">Problems running <CODE>setup.exe</CODE></A></H3>
 
-</UL>
+
+
+<H4><A NAME="SEC14" HREF="faq_toc.html#TOC14">Error message: "Unable to retrieve the list of cygwin mirrors..."</A></H4>
+
+<P>
+This means that <CODE>setup.exe</CODE> could not make an http connection to
+<TT><a target="_top" href="http://sourceware.cygnus.com/cygwin/mirrors.html">http://sourceware.cygnus.com/cygwin/mirrors.html</a></TT>.  This is
+required for an (i)nternet install.  Either sourceware.cygnus.com was
+too busy, or there is a problem with your network.  Note that
+<CODE>setup.exe</CODE> has very limited proxy functionality for firewalls, and
+depends on IE4 or later being installed and configured properly.  If you
+cannot get the (i)nternet installation to work, just download the
+packages yourself and do a (d)irectory install.
+
+</P>
+
+
+<H4><A NAME="SEC15" HREF="faq_toc.html#TOC15">System hangs when unpacking tar archives</A></H4>
+
+<P>
+Your anti-virus software is interfering with <CODE>setup.exe</CODE>.  You will
+have to disable it before running setup.  In that case, you will
+probably want to:
+
+</P>
+
+<OL>
+<LI>download all the .tar.gz files for the packages, along with <CODE>setup.exe</CODE>
+
+<LI>scan it all for viruses
+
+<LI>disable the anti-virus software
+
+<LI>perform a (d)irectory install
+
+<LI>scan everything below your Cygwin root directory (<CODE>C:\cygwin</CODE> by default)
+
+</OL>
 
 <P><HR><P>
 Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_2.html">previous</A>, <A HREF="faq_4.html">next</A>, <A HREF="faq_9.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
