@@ -1,4 +1,110 @@
-<h4>Release 6.7.0.0-4</h4>
+<h4>Release 6.7-5</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-04-23 1500 EDT</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winwin32rootless.c, winprefs.c, winmultiwindowwndproc.c,
+winmultiwindowwindow.c - LoadImage() g_hiconX because it is
+DestroyIcon()d cannot use LoadIcon().  Fix off-by-one class naming
+problem. More error checking on icon and menu creation.  (Earle
+F. Philhower III)</li>
+
+<li>winwin32rootless.c, winwin32rootlesswindow.c - Fix debug
+message. Fix GDI leak because of off-by-one class naming problem and
+DeleteObject instead of DestroyIcon.  (Kensuke Matsuzaki)</li>
+
+<li>winmultiwindowicons.c - Apply Kensuke's GDI leak fix
+[DeleteObject(icon)->DestroyIcon(icon)].  (Earle F. Philhower
+III)</li>
+
+<li>XWinrc.man - Added TRAYICON, SILENTEXIT, icon file reading info,
+and a small example.  Still needs work but has all keywords
+present.  (Earle F. Philhower III)</li>
+
+<li>InitOutput.c, winglobals.c, winprocarg.c - Make --help and
+--version available.  (Alexander Gottwald)</li>
+
+<li>winmultiwindowwindow.c - Explicitly reset the system menu to
+WS_POPUP when creating.  (Earle F. Philhower III)</li>
+
+<li>General (xorg-x11-etc) - Bugzilla #533: fix slash/questionmark key
+for abnt2 keyboard.  (Alexander Gottwald)</li>
+
+<li>winglobals.c - Set default loglevel to 2.  (Alexander
+Gottwald)</li>
+
+<li>win.h, wincursor.c - Enable hardware (== Windows) cursor for all
+display modes.  (Alexander Gottwald)</li>
+
+<li>winglobals.c, winprocarg.c, winscrinit.c - Add commandline option
+to enable software cursor.  Use winDebug and winErrorFVerb instead of
+ErrorF to set explicit loglevels.  (Alexander Gottwald)</li>
+
+<li>winvalargs.c, winengine.c - Use winDebug and winErrorFVerb instead
+of ErrorF to set explicit loglevels.  (Alexander Gottwald)</li>
+
+<li>Xserver/GL/windows[Imakefile, glwindows.h, indirect.c,
+wincursor.c] - Removed code for hardware cursor since it's now in
+hw/xwin.  (Alexander Gottwald)</li>
+
+<li>InitOutput.c, XWin.man - Document the -swcursor switch.
+(Alexander Gottwald)</li>
+
+<li>Imakefile, win.h, wincursor.c, winmultiwindowwndproc.c, winpriv.c,
+winscrinit.c, winwin32rootlesswndproc.c, winwin32rootlesscursor.c -
+MWExtWM uses common hardware(windows) cursor code too, and
+winwin32rootlesscursor.c is removed.  Clean up unused variables.
+Modify comment(winMWExtWM* -> win*).  Fix the problem that cursor
+doesn't change when cursor move in a window.  (Kensuke Matsuzaki)</li>
+
+<li>winvalargs.c - Allow screen combinations with 'XWin -query host
+-screen 0 -screen 1 -multiwindow'.  This gives an Xdmcp session and a
+second screen where I can display single windows.  (Alexander
+Gottwald)</li>
+
+<li>XWin.man - Fix typo.  (Rodrigo Medina)</li>
+
+<li>XWin.man, XWinrc.man - Fix spacing after sentences (use standard
+two-spaces after period).  (Harold L Hunt II)</li>
+
+<li>win.h - Add prototype for winFixClipboardChain.  (Dan Wilks)</li>
+
+<li>winclipboard.h - Add definition WM_WM_REINIT a private windows
+message that the clipboard window uses to reinitialize the clipboard
+viewer chain.  (Dan Wilks)</li>
+
+<li>winwndproc.c/winWindowProc - Call winFixClipboardChain on
+application activation/deactivation to ensure that XWin is still in
+the clipboard chain.  (Dan Wilks)</li>
+
+<li>winclipboardinit.c - Added references to g_fClipboard and
+g_hwndClipboard for winFixClipboardChain to use.
+(winFixClipboardChain): New function.  Ensures that XWin is still in
+the Windows clipboard chain if we're using the internal clipboard.
+(Dan Wilks)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc - Process
+WM_WM_REINIT and force ourselves back into the clipboard chain.  (Dan
+Wilks)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+<h4>Release 6.7-4</h4>
 <table>
 <tbody>
 
@@ -60,7 +166,7 @@ with verbosity level 3.  (Alexander Gottwald)</li>
 
 
 
-<h4>Release 6.7.0.0-3</h4>
+<h4>Release 6.7-3</h4>
 <table>
 <tbody>
 
@@ -121,7 +227,7 @@ it doesn't need to be.  (Harold L Hunt II)</li>
 
 
 
-<h4>Release 6.7.0.0-2</h4>
+<h4>Release 6.7-2</h4>
 <table>
 <tbody>
 
@@ -145,7 +251,7 @@ it doesn't need to be.  (Harold L Hunt II)</li>
 
 
 
-<h4>Release 6.7.0.0-1</h4>
+<h4>Release 6.7-1</h4>
 <table>
 <tbody>
 
