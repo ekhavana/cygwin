@@ -118,25 +118,11 @@ minimizes the scope of problems that you may encounter, which can
 greatly ease debugging of new features and other code
 modifications.</P
 ><P
->It is highly recommended to get the XFree86 <A
-HREF="glossary.html#gloss-cvs"
-><I
-CLASS="glossterm"
->CVS</I
-></A
-> tree by using the CVS <A
-HREF="glossary.html#gloss-pserver"
-><I
-CLASS="glossterm"
->pserver</I
-></A
-> method.  CVS
-pserver is the easiest CVS method to use for anonymous access to
-public CVS trees, as you need only type in a well-known password to
-download the CVS tree.  CVS pserver is rarely used to control checkins
-to CVS trees, as the passwords are stored and sent as plain text;
-thus, pserver is extremely insecure.  However, security does not
-matter for a public read-only CVS tree.</P
+>It is recommended that you use CVS over <B
+CLASS="command"
+>ssh</B
+>,
+which requires that you have the openssh package installed.</P
 ><P
 >Follow these steps to checkout the XFree86 CVS tree:</P
 ><OL
@@ -243,10 +229,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~/x-devel
-$ CVSROOT=:pserver:anoncvs@anoncvs.xfree86.org:/cvs
-
-Username@CygwinHost ~/x-devel
-$ export CVSROOT
+$ export CVSROOT=anoncvs@anoncvs.xfree86.org:/cvs
 
 Username@CygwinHost ~/x-devel
 $
@@ -257,11 +240,11 @@ $
 ></LI
 ><LI
 ><P
->Login to the CVS server, using password
-<SPAN
-CLASS="QUOTE"
->"anoncvs"</SPAN
->:</P
+>Set the <VAR
+CLASS="envar"
+>CVS_RSH</VAR
+> environment variable to tell CVS
+to use ssh:</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -271,9 +254,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~/x-devel
-$ cvs login
-(Logging in to anoncvs@anoncvs.xfree86.org)
-CVS password:
+$ export CVS_RSH=ssh
 
 Username@CygwinHost ~/x-devel
 $ 

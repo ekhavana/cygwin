@@ -609,13 +609,8 @@ Obtaining the Source Code
    minimizes the scope of problems that you may encounter, which can
    greatly ease debugging of new features and other code modifications.
 
-   It is highly recommended to get the XFree86 [75]CVS tree by using the
-   CVS [76]pserver method. CVS pserver is the easiest CVS method to use
-   for anonymous access to public CVS trees, as you need only type in a
-   well-known password to download the CVS tree. CVS pserver is rarely
-   used to control checkins to CVS trees, as the passwords are stored and
-   sent as plain text; thus, pserver is extremely insecure. However,
-   security does not matter for a public read-only CVS tree.
+   It is recommended that you use CVS over ssh, which requires that you
+   have the openssh package installed.
 
    Follow these steps to checkout the XFree86 CVS tree:
     1. Open a Cygwin bash shell by double clicking the Cygwin icon on
@@ -648,20 +643,15 @@ $
        repository:
 
 Username@CygwinHost ~/x-devel
-$ CVSROOT=:pserver:anoncvs@anoncvs.xfree86.org:/cvs
-
-Username@CygwinHost ~/x-devel
-$ export CVSROOT
+$ export CVSROOT=anoncvs@anoncvs.xfree86.org:/cvs
 
 Username@CygwinHost ~/x-devel
 $
 
-    5. Login to the CVS server, using password "anoncvs":
+    5. Set the CVS_RSH environment variable to tell CVS to use ssh:
 
 Username@CygwinHost ~/x-devel
-$ cvs login
-(Logging in to anoncvs@anoncvs.xfree86.org)
-CVS password:
+$ export CVS_RSH=ssh
 
 Username@CygwinHost ~/x-devel
 $
@@ -1063,7 +1053,7 @@ $
 
 Keeping your source code tree updated
 
-   [77]CVS makes keeping your source code tree up to date easy. You may
+   [75]CVS makes keeping your source code tree up to date easy. You may
    update your entire source code tree at once, or you can update
    individual directories or files, if you so choose.
      _________________________________________________________________
@@ -1182,7 +1172,7 @@ Cross Compiling
    There are a whole new class of problems that can happen when cross
    compiling that are simply not an issue when building on Cygwin. You
    should be familiar with building Cygwin/XFree86 on Cygwin, as
-   described in [78]the Section called Native Compiling, before
+   described in [76]the Section called Native Compiling, before
    attempting to cross compile Cygwin/XFree86.
      _________________________________________________________________
 
@@ -1191,12 +1181,12 @@ Obtaining binutils and gcc Source
    binutils and gcc source code releases that are known to compile on
    Cygwin and distributed by the Cygwin project. Therefore, it is highly
    recommended that you obtain the binutils and gcc sources from the
-   [79]Cygwin mirror network.
+   [77]Cygwin mirror network.
 
    Follow these steps to download Cygwin/XFree86 binaries:
     1. Create a directory to store the binutils and gcc sources in, such
        as /cygwin/src/
-    2. Visit the [80]Cygwin mirrors page to find your closest mirror
+    2. Visit the [78]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
     4. Change current ftp directory to cygwin/release/.
@@ -1412,7 +1402,7 @@ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
 Building Cygwin/XFree86
 
    Building the source code when cross compiling XFree86 is nearly
-   identical to the process described below in [81]the Section called
+   identical to the process described below in [79]the Section called
    Native Compiling of the Native Compiling section. One divergence from
    the aforementioned instructions is that you will be using a bash shell
    on your cross compiling host, rather than on your native Cygwin host;
@@ -1420,7 +1410,7 @@ Building Cygwin/XFree86
     1. lndir should generally already be installed if your build host
        already has the X Window System installed. If you do not have
        lndir, you can build it for your build host by following the
-       instructions in [82]the Section called Building and Installing
+       instructions in [80]the Section called Building and Installing
        lndir.
     2. When building the entire tree, you must pass CROSSCOMPILEDIR to
        make to cause the build system to build for the target, Cygwin,
@@ -1495,7 +1485,7 @@ CROSSCOMPILEDIR="/cygwin/bin" > install.log 2>&1
 Packaging a Cygwin/XFree86 Distribution
 
    Cygwin/XFree86 uses the standard XFree86 distribution build scripts.
-   You will need to start by downloading the XFree86 util [83]CVS module.
+   You will need to start by downloading the XFree86 util [81]CVS module.
    The following instructions are paraphrased from bindist-notes in the
    XFree86 devel CVS module, with adaptations to make them Cygwin/XFree86
    specific.
@@ -1503,7 +1493,7 @@ Packaging a Cygwin/XFree86 Distribution
        xc/config/cf/host.def.
     2. Build and install the extract tool from the utils module.
     3. Run a full build of the XFree86 CVS tree, following the
-       instructions in [84]the Section called Native Compiling.
+       instructions in [82]the Section called Native Compiling.
     4. Install the full build of XFree86 to a staging directory:
 
 Username@CygwinHost ~/x-devel/build/std
@@ -1597,7 +1587,7 @@ Chapter 3. Documentation
 Overview
 
    Cygwin/XFree86 documentation is written in XML according to the
-   [85]DocBook document type definition (DTD). These XML input files are
+   [83]DocBook document type definition (DTD). These XML input files are
    then compiled using an autoconf and automake build system. We
    currently build the following output formats: HTML, PDF, PS, RTF, and
    TXT.
@@ -1608,13 +1598,13 @@ Obtaining the Source Code
    Cygwin/XFree86 documentation source code is distributed in a tarred
    and gzipped archive, seperately from the Cygwin/XFree86 X Server
    source code. The documentation source code is not, as of 2002-01-06,
-   distributed as part of any [86]CVS tree. Updates to the documentation
+   distributed as part of any [84]CVS tree. Updates to the documentation
    source code are periodically released via the sources.redhat.com
    mirror network.
 
    Follow these steps to checkout the Cygwin/XFree86 documentation source
    code:
-    1. Find your closest sources.redhat.com mirror from the [87]mirror
+    1. Find your closest sources.redhat.com mirror from the [85]mirror
        list.
     2. Change to the xfree/devel/documentation/ directory.
     3. Download the latest version of the documentation source code
@@ -1635,7 +1625,7 @@ cygwin-xfree-doc-0.9.6  cygwin-xfree-doc-0.9.6.tar.gz
 
 Setting Up a DocBook Build Environment
 
-   Setup a DocBook build environment on Cygwin by consulting the [88]SGML
+   Setup a DocBook build environment on Cygwin by consulting the [86]SGML
    for Windows NT: Setting up a free SGML editing and publishing system
    on Windows NT/Cygwin document.
      _________________________________________________________________
@@ -1789,7 +1779,7 @@ B
 
    Bitmap (X)
           X pixel map with bit depth equal to one. X pixel maps of bit
-          depth not equal to one are called [89]pixmaps.
+          depth not equal to one are called [87]pixmaps.
 
 C
 
@@ -1812,7 +1802,7 @@ C
    Concurrent Versions System (CVS)
           CVS is an open source version control system used by the
           majority of open source projects. More information can be found
-          at the [90]CVS project homepage.
+          at the [88]CVS project homepage.
 
 D
 
@@ -1851,10 +1841,10 @@ M
 O
 
    Offscreen Framebuffer
-          Essentially a [91]bitmap, in the Windows sense, of size and
+          Essentially a [89]bitmap, in the Windows sense, of size and
           color format that can be displayed on the screen. An offscreen
           framebuffer may be identical in size and color format to the
-          [92]primary framebuffer, but this is not always required.
+          [90]primary framebuffer, but this is not always required.
 
    OS Layer (OS)
           X Server layer that depends on the operating system; but not
@@ -1864,18 +1854,18 @@ P
 
    Pixmap
           X pixel map with bit depth not equal to one. X pixel maps of
-          bit depth one are called [93]bitmaps.
+          bit depth one are called [91]bitmaps.
 
    Primary Framebuffer
-          The block of memory, essentially a [94]bitmap, that describes
+          The block of memory, essentially a [92]bitmap, that describes
           what is currently being displayed on the screen. Any updates to
           the primary framebuffer will be displayed on the screen after
           the next screen refresh.
 
    Privates
           Additional information associated with internal X Server
-          structures, such as [95]colormaps, [96]GCs, [97]pixmaps, or
-          [98]screens.
+          structures, such as [93]colormaps, [94]GCs, [95]pixmaps, or
+          [96]screens.
 
    pserver
           CVS pserver, short for "password server", is one of the user
@@ -1894,8 +1884,8 @@ S
           Cygwin/XFree86 X Server may have several screens.
 
    Shadow
-          X Server shadow layer that allows [99]FB to draw to an
-          offscreen framebuffer and occasionally call a [100]DDX function
+          X Server shadow layer that allows [97]FB to draw to an
+          offscreen framebuffer and occasionally call a [98]DDX function
           that transfers the updated regions to the screen.
 
 X
@@ -1914,7 +1904,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [101]X Display Manager.
+          See Also: [99]X Display Manager.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -2241,7 +2231,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [102]http://www.gnu.org/copyleft/.
+   [100]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -2355,30 +2345,28 @@ References
   73. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-dix-layer
   74. http://xfree86.org/cvs/
   75. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  76. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pserver
-  77. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  78. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  79. http://cygwin.com/mirrors.html
-  80. http://cygwin.com/mirrors.html
-  81. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  82. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-lndir
-  83. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  84. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  85. http://docbook.org/
-  86. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  87. http://cygwin.com/mirrors.html
-  88. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
-  89. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
-  90. http://www.cvshome.org/
-  91. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
-  92. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
-  93. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-x
-  94. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
-  95. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-colormap
-  96. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-gc
-  97. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
-  98. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-screen
-  99. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
- 100. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-ddx-layer
- 101. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
- 102. http://www.gnu.org/copyleft/
+  76. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  77. http://cygwin.com/mirrors.html
+  78. http://cygwin.com/mirrors.html
+  79. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  80. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-lndir
+  81. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  82. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  83. http://docbook.org/
+  84. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  85. http://cygwin.com/mirrors.html
+  86. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+  87. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  88. http://www.cvshome.org/
+  89. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
+  90. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
+  91. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-x
+  92. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
+  93. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-colormap
+  94. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-gc
+  95. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  96. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-screen
+  97. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
+  98. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-ddx-layer
+  99. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
+ 100. http://www.gnu.org/copyleft/
