@@ -66,6 +66,6 @@ sub addfn($) {
 
 sub findheader {
     my $p = shift;
-    my $header = ($_[0] =~ m!^.*<a href=.*?>$p</a>.*?<td.*?>([^><]+)<!m)[0];
+    my $header = ($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0];
     return $header || '';
 }
