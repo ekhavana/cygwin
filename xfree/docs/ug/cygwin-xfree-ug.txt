@@ -40,8 +40,8 @@ Harold L Hunt, II
         [18]Remote Sessions via XDMCP
         [19]Displaying Remote Clients
 
-              [20]Unsecure Telnet
-              [21]Secure ssh
+              [20]Secure ssh
+              [21]Unsecure Telnet
 
    A. [22]GNU Free Documentation License
 
@@ -549,50 +549,52 @@ Displaying Remote Clients
 
    Displaying remote X clients with Cygwin/X is nearly identical to
    displaying remote X clients with any other X Server. You may use the
-   unsecure telnet session, or the secure ssh method.
-     _________________________________________________________________
-
-Unsecure Telnet
-
-   On your Windows machine:
-    1. Launch Cygwin/X
-    2. In an X terminal type /usr/X11R6/bin/xhost
-       remote_hostname_or_ip_address
-    3. In an X terminal type /usr/bin/telnet
-       remote_hostname_or_ip_address. Use the explicit path to ensure
-       that Cygwin's telnet is run instead of Microsoft's telnet;
-       Microsoft's telnet will crash on startup when run from Cygwin/X.
-    4. Login to your remote machine via your telnet session
-    5. In your telnet session type,
-       DISPLAY=windows_hostname_or_ip_address:0.0
-    6. In your telnet session type, export DISPLAY
-    7. You can now launch remote X clients in your telnet session, for
-       example, xterm& will launch an xterm running on your remote host
-       that will display on your Cygwin/X screen.
-    8. Launch other remote clients in the same manner; I recommend
-       starting the remote clients in the background, by appending & to
-       the command name, so that you don't have to open several telnet
-       sessions.
+   secure ssh method, or the unsecure telnet method (not recommended).
      _________________________________________________________________
 
 Secure ssh
 
    On your Windows machine:
-    1. Launch Cygwin/X
-    2. Run the following in an X terminal:
+    1. Make sure you have the openssh package installed.
+    2. Launch Cygwin/X
+    3. Run the following in an X terminal:
 
 Username@CygwinHost ~
 $ ssh -X -l username remote_hostname_or_ip_address
 
-    3. Enter your password when prompted by ssh.
-    4. Your ssh session should now show you a shell prompt for your
+    4. Enter your password when prompted by ssh.
+    5. Your ssh session should now show you a shell prompt for your
        remote machine.
-    5. You can now launch remote X clients in your ssh session, for
+    6. You can now launch remote X clients in your ssh session, for
        example, xterm& will launch an xterm running on your remote host
        that will display on your Cygwin/X screen.
-    6. Launch other remote clients in the same manner. I recommend
+    7. Launch other remote clients in the same manner. I recommend
        starting the remote clients in the background, by appending & to
        the command name, so that you don't have to open several ssh
+       sessions.
+     _________________________________________________________________
+
+Unsecure Telnet
+
+   On your Windows machine:
+    1. Make sure you have the inetutils package installed.
+    2. Launch Cygwin/X
+    3. In an X terminal type /usr/X11R6/bin/xhost
+       remote_hostname_or_ip_address
+    4. In an X terminal type /usr/bin/telnet
+       remote_hostname_or_ip_address. Use the explicit path to ensure
+       that Cygwin's telnet is run instead of Microsoft's telnet;
+       Microsoft's telnet will crash on startup when run from Cygwin/X.
+    5. Login to your remote machine via your telnet session
+    6. In your telnet session type,
+       DISPLAY=windows_hostname_or_ip_address:0.0
+    7. In your telnet session type, export DISPLAY
+    8. You can now launch remote X clients in your telnet session, for
+       example, xterm& will launch an xterm running on your remote host
+       that will display on your Cygwin/X screen.
+    9. Launch other remote clients in the same manner; I recommend
+       starting the remote clients in the background, by appending & to
+       the command name, so that you don't have to open several telnet
        sessions.
      _________________________________________________________________
 
@@ -978,8 +980,8 @@ References
   17. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-shared-memory
   18. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-session
   19. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps
-  20. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps-telnet
-  21. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps-ssh
+  20. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps-ssh
+  21. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps-telnet
   22. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl
   23. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-preamble
   24. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-applicability-and-definitions
@@ -993,7 +995,7 @@ References
   32. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-termination
   33. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-future-revisions-of-this-license
   34. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-using-for-your-documents
-  35. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#AEN391
+  35. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#AEN396
   36. http://cygwin.com/
   37. http://cygwin.com/
   38. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using
