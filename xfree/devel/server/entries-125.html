@@ -1,3 +1,71 @@
+<h4>Release 4.3.0-48</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-02-28 1445 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040228-1445.tar.bz2">xwin-20040228-1445.tar.bz2</a>
+(137 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-47
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-47-to-4.3.0-48.diff">xwin-4.3.0-47-to-4.3.0-48.diff</a>
+(64 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winprefs* - Rename the WINMULTIWINDOWPREFS structure to WINPREFS,
+since it is used even when MultiWindow mode is disabled.  (Harold L
+Hunt II - CodeWeavers)</li>
+
+<li>winmultiwindowclass.c, winmultiwindowclass.h,
+winmultiwindowicons.c - Identify these files for renaming since they
+are not dependent upon MultiWindow mode being enabled.  Do not perform
+the actual rename; instead, write this message in hopes that someone
+else performs the rename in CVS in a manner that preserves
+history.  (Harold L Hunt II - CodeWeavers)</li>
+
+<li>win.h, winclipboard.h, winwindow.h - Remove WIN_*_SUPPORT flags.
+(Harold L Hunt II - CodeWeavers)</li>
+
+<li>xc/config/cf/cygwin.cf - Remove the inclusion of xfree86.cf;
+including xfree86.cf forced us to have several lines of code that
+prevented drivers from being compiled, and forced us to define values
+for certain #defines so that they would not be overridden.  Removing
+xfree86.cf and restructuring the file led to a decrease in size of
+about 30%.  (Harold L Hunt II - CodeWeavers)</li>
+
+<li>xc/config/cf/cygwin.cf - Add the build flags removed from win.h in
+the form BuildXWinFoo.  Add defines for the various build options,
+such as XWIN_FOO, which are added to the defines passed to the
+compiler when building the server.  This allows us to remove the build
+flags from the hw/xwin headers and it also allows us to refer to the
+BuildXWin* flags in Xserver/Imakefile, which means that we should no
+longer have to update that file by hand when enabling and disabling
+certain features.  (Harold L Hunt II - CodeWeavers)</li>
+
+<li>General - The above changes required extensive rewriting of
+cygwin.cf, which means that I may have accidentally broken or disabled
+something that was working previously.  Please verify that things work
+as they should.  Note that removing xfree86.cf causes 'xdpyinfo' to
+report our vendor string as "The X.Org Group" and our vendor release
+number as "6600"; this is different from the previous vendor of
+XFree86 with version 4.3.0.1 or some such.  (Harold L Hunt II -
+CodeWeavers)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-47</h4>
 <table>
 <tbody>
