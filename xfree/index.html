@@ -3,7 +3,7 @@
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
    <meta name="Generator" content="Microsoft Word 97">
-   <meta name="GENERATOR" content="Mozilla/4.7C-SGI [en] (X11; I; IRIX64 6.5 IP28) [Netscape]">
+   <meta name="GENERATOR" content="Microsoft FrontPage 4.0">
    <title>XFree86/Cygwin project</title>
 <script ><!-- 
 // foo
@@ -20,14 +20,14 @@ function finish() {
 
 <center>
 <h6>
-<img SRC="xfree.gif" height=67 width=576></h6></center>
+<img border="0" src="xfree.gif" width="632" height="157"></h6></center>
 
 <dl>
 <dt>
 &nbsp;</dt>
 
 <dt>
-Last updated January 31, 2000</dt>
+Last updated February 24, 2000</dt>
 </dl>
 
 <hr SIZE=9 WIDTH="100%">
@@ -46,8 +46,10 @@ Hans de Bok's GDI/VNC based X-server version 2.0 is released on Jan 31,
 based X-server.</a></li>
 
 <li>
-Karra is working on a GPL'ed <a href="http://sourceware.cygnus.com/ml/cygwin-xfree/1999-q4/msg00203.html">DirectX
-3.0 based Framebuffer X-server</a>.</li>
+<a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree/pre-alpha-cygwin-xfree-b20.1.tar.bz2">Alpha
+version of X-server released</a> (<b>XWin</b>).&nbsp; Binaries were compiled
+from XFree86 3.9.18 public snapshots and DirectX code contributed by Karra.
+Please read the announcement in mail-list archive.</li>
 
 <li>
 <a href="http://sourceware.cygnus.com/cygwin/xfree/faq.html">FAQ</a> -
@@ -59,8 +61,8 @@ What is it?</h2>
 It was my personal idea, to port <a href="http://www.xfree86.org/">XFree86</a>,
 <b>the
 free and optimized X11R6</b> implementation to Windows 9x/NT.&nbsp; Later
-Chris Faylor, Manager Win32, Cygnus Solutions, provided resources by offering
-access to <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">Cygnus'
+Chris Faylor, Manager Win32, Red Hat Inc., provided resources by offering
+access to <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">Red Hat's
 Sourceware Server</a> and <a href="http://sourceware.cygnus.com/cygwin/lists.html">cygwin-xfree</a>
 mailing list. XFree86 source code and patches for Cygwin are available
 via FTP from <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">ftp://sourceware.cygnus.com/pub/cygwin/xfree</a>.
@@ -68,32 +70,32 @@ via FTP from <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">ftp://source
 B20.1. Few years ago, it would not have been feasible to compile XFree86
 on Windows. Cygwin B20.1 makes it possible.
 <p><a href="mailto:fortinj@ibm.net">John Fortin</a> later joined Cygwin-xfree
-project. He is working on porting <a href="http://www.ggi-project.org/">GGI
-(General Graphical Interface),</a> and DirectX. He plans to use XGGI as
-a full-screen X-server.
+project. He ported <a href="http://www.ggi-project.org/">GGI
+(General Graphical Interface),</a> and DirectX to Cygwin. John also wrote
+DirectX interface for GGI libraries, as a result <a href="sourceware.cygnus.com/ml/cygwin-xfree/2000-q1/msg00056.html">XGGI</a>
+now functions on Windows.
 <p>&nbsp;XFree86 is not just yet another program, it is an entire window
 management environment, that usually runs in Unix environments. We are
-talking about 100MB of source code, much of which highly hardware dependent,
+talking about&nbsp; over 100MB of source code, much of which highly hardware dependent,
 e.g. the X Servers which access the video hardware of the PC directly.
 <h2>
 What is Cygwin-XFree?</h2>
-Cygwin-XFree is the nickname of Xfree86 to Cygwin porting project.
+Cygwin-XFree is the nickname of XFree86 to Cygwin porting project.&nbsp;
 <h2>
 What is the status?</h2>
-Following the approaches Holger Veit took for OS/2, XFree86 source code
-had been patched. It compiles without problems using <a href="http://sourceware.cygnus.com/cygwin">Cygwin
-B20.1</a> and <a href="ftp://ftp.xraylith.wisc.edu/pub/khan/gnu-win32/cygwin/gcc-2.95/">GCC-2.95</a>.
-Please read "Resource Requirements" for details.
-<p><b>The X-servers are not functional yet</b>. We need to port <a href="http://borneo.gmd.de/~veit/os2/xf86sup.html">Holger
-Veit?s XF86SUP.SYS driver for OS/2</a> to Windows or, write an similar
-driver. XF86SUP.SYS driver provides access to I/O ports and mapping of
-video cards physical memory to a user area, known as /dev/mem and /dev/iopl
-on some UNIX. XFree86 servers need these features.&nbsp; Please read<a href="xf86sup.html">
-Holger Veit's E-Mail,</a> which explains why /dev/mem and /dev/iopl features
-are needed.
+Source code of XFree86 had been patched for Cygwin and new source code to
+support DirectX had been added to XFree86 source tree. It compiles without problems using <a href="http://sourceware.cygnus.com/cygwin">Cygwin
+B20.1</a>&nbsp; and <a href="ftp://ftp.xraylith.wisc.edu/pub/khan/gnu-win32/cygwin/gcc-2.95/">GCC-2.95.2</a>.
+Please read &quot;<b>Resource Requirements</b>&quot; for details.
+<h2>
+How can I help?</h2>
+<p><i><font color="#800080">We need contributors for fixing bugs and adding new
+feature.</font></i>&nbsp; One of the desired feature is; integration of X
+Desktop with Windows Desktop, so X and Win32 can share the same desktop.
+<p>The patched source is available at <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">ftp://sourceware.cygnus.com/pub/cygwin/xfree</a>
 <p><b><font size=+2>FAQ</font></b>
 <p><a href="http://sourceware.cygnus.com/cygwin/xfree/faq.html">A brief
-FAQ convering most general topics, including installation and troubleshooting.</a>
+FAQ covering most general topics, including installation and troubleshooting.</a>
 <h2>
 List of archives</h2>
 
@@ -101,8 +103,8 @@ List of archives</h2>
 <li>
 By default, the URL points to the <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">Sourceware
 FTP server</a>. It contains XFree86 source code patched for Cygwin B20.1
-and pre compiled libraries and clients. Note: as mentioned above, X-server
-executable are not functional yet.</li>
+and pre compiled libraries and clients. Note: X-server
+executables are in Alpha stage therefore not recommended for production use, yet.</li>
 
 <h1>
 <b><font size=+1>X11R6.x precompiled libs and clients:</font></b></h1>
@@ -114,7 +116,7 @@ The X11R6.x libs and clients for Cygwin B20.1 <a href="ftp://sourceware.cygnus.c
 libs and clients from XFree86 3.9.16
 <ul>
 <li>
-The X11R6.x libs and clinets for Cygwin v 1.0 (CD version) <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree/cygwin-xfree-4.0-cygwin-v-1.tar.bz2">cygwin-xfree-4.0-cygwin-v-1.tar.bz2</a></li>
+The X11R6.x libs and clients for Cygwin v 1.0 (CD version) <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree/cygwin-xfree-4.0-cygwin-v-1.tar.bz2">cygwin-xfree-4.0-cygwin-v-1.tar.bz2</a></li>
 </ul>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; cygwin-xfree-4.0-cygwin-v-1.tar.bz2
 contains:
@@ -132,23 +134,6 @@ Screen Saver,&nbsp; XF86Misc and XFree86 Video Libraries, built as DLLs.
 clients founds in XFRee86 4.0 Developers Snapshots, built as DLLs.
 <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <i>cygwin-xfree-4.0-cygwin-v-1.tar.bz2
 will also work with Cygwin Development Snapshots.</i>
-<h2>
-How can I help?</h2>
-You can help by porting Holger Veit?s <a href="http://borneo.gmd.de/~veit/os2/xf86sup.html">XF86SUP.SYS</a>
-driver (XFree86/OS2 support driver) to Windows. It should be compiled using
-MSVC or MingW32 for performance reasons. This driver is need to provide
-/dev/mmap and /dev/iopl features missing on Windows 9x/NT.
-<p>A few developers asked programming related questions about Holger Veit's
-XF86SUP.SYS driver.
-<br>Here is <a href="xf86sup.html">a copy of one of his E-Mail</a> . You
-may find it useful because it answers some basic programming related questions.
-<p>Since the patched source is available, you might consider recompiling
-the code yourself (Consult Resource Requirements below) and fix bugs and
-improve certain parts. Before you start reinventing wheels that might turn
-out making the system incompatible, please contact me before doing so.
-I'll be available as the mediator between XFree86/Cygwin and general XFree86.
-<p>If you are the first to help port XFree86 to Windows, you will be mentioned
-on the list!
 <h2>
 Which are the available information channels?</h2>
 There is a <a href="http://sourceware.cygnus.com/cygwin/lists.html">mailing
@@ -180,29 +165,40 @@ Windows 9x/NT 4.0. or Windows 2000.</li>
 
 <li>
 Cygwin B20.1. (A latest <a href="http://sourceware.cygnus.com/cygwin/snapshots/">Cygwin
-Development Snapshot</a> is preferred due to improved socket functions).</li>
+Development Snapshot</a> is preferred due to improved socket functions,
+stability and enhanced functionalties).</li>
 
 <li>
-Download xc-1 to xc-3.tar.bz2 from <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">ftp://sourceware.cygnus.com/pub/cygwin/xfree</a>
-or the <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree/cygwin-xfree-diff.tar.bz2">cygwin-xfree-diff.tar.bz2</a>&nbsp;&nbsp;
-if you already have XFree86 3.3.5 code base from<a href="http://www.xfree86.org">
-XFree86.org</a>.</li>
+Download X3.9.18-1&nbsp; to X3.9.18-3.tar.bz2 from <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree">ftp://sourceware.cygnus.com/pub/cygwin/xfree</a>
+&nbsp;</li>
 
 <li>
 Please mount Cygwin disk as binary before extracting and compiling XFree86
 source code, i.e. umount / then mount -b c: /, otherwise most of the code
-in xc/programs/Xserver will fail to compile and report "syntex" errors.</li>
+in xc/programs/Xserver will fail to compile and report &quot;syntax&quot; errors.</li>
 
 <li>
 For network connectivity, you need Windows TCP/IP installed</li>
 
 <li>
-<a href="ftp://ftp.xraylith.wisc.edu/pub/khan/gnu-win32/cygwin/gcc-2.95/">EGCS
-1.1.2 or GCC 2.95</a> for Cygwin</li>
+<a href="ftp://ftp.xraylith.wisc.edu/pub/khan/gnu-win32/cygwin/gcc-2.95/">GCC 2.95.2</a> for Cygwin&nbsp;
+(EGCS 1.1.2 may not work because DirectX libraries for Cygwin require GCC
+2.95.x)</li>
 
 <li>
 <a href="ftp://sourceware.cygnus.com/pub/cygwin/xfree/">libcrypt</a> to
 compile xdm security features.</li>
+
+<li>
+IPC library for Cygwin from <a href="http://cygutils.netpedia.net">http://cygutils.netpedia.net</a>.&nbsp;
+Please rename libcygipc.a to libipc.a and in include/sys folder rename ipc.h to
+cygipc.h.</li>
+
+<li>
+John Fortin port of DirectX for Cygwin.&nbsp; It is available at <a href="http://pws.pserv.net/thefortins/cyg-directx.html">http://pws.pserv.net/thefortins/cyg-directx.html</a></li>
+
+<li>
+Install libcrypt and IPC in \cygnus\cygwin-b20\H-i586-cygwin32\i586-cygwin32.</li>
 
 <li>
 You may also need <a href="http://www.geocities.com/ResearchTriangle/Forum/6298/">Patch.exe</a>.
@@ -221,7 +217,8 @@ Developers participating in this project:</h2>
 <a href="mailto:ssiddiqi@inspirepharm.com">Suhaib M. Siddiqi</a></li>
 
 <li>
-<a href="mailto:fortinj@ibm.net">John Fortin</a></li>
+<a href="mailto:fortinj@ibm.net">John Fortin</a> (wrote DirectX interface for
+GGI libraries and ported DirectX to Cygwin)</li>
 
 <li>
 <a href="mailto:mmacdona@tsi.gte.com">Mike MacDonald</a></li>
@@ -229,25 +226,28 @@ Developers participating in this project:</h2>
 <li>
 <a href="hans.de.bok@phillips.com">Hans de Bok</a> (contributed VNC port
 to GDI as a stand-alone X-server)</li>
+
+<li>
+D. Karra (contributed DirectX code for XFree86 3.9.18)</li>
 </ul>
 </ul>
 
 <h2>
 Acknowledgments:</h2>
 <a href="http://www.nanotech.wisc.edu/~khan/">Mumit Khan</a> deserves many
-thanks for his work with GCC, without it would have been a very difficult
+thanks for his work on GCC, without it would have been a very difficult
 task to compile XFree86 on Windows.
 <p>Thanks to <a href="http://miracle.geol.msu.ru/sos/">Sergey Orkhapin</a>
 for his initial work on X11R6.4, which helped a great deal.
 <p><a href="mailto:cgf@cygnus.com">Chris Faylor</a> for providing access
 to Sourceware Server, which allowed to exchange code base and patches with
 other developers.
-<p>Many more names may be listed here as we make progress.
 <p>
 <hr>
 <address>
 Please send Cygwin-XFree related questions and observations to the <a href="mailto:cygwin-xfree@sourceware.cygnus.com">Cygwin-xfree</a>
-Mailing List.</address>
+Mailing List. Cygwin is a Trademark of Red Hat Inc.&nbsp; XFree86 and XFree are
+owned by XFree86 Inc.</address>
 
 <address>
 Please send news, announcements, and technical problems (bad html, broken
