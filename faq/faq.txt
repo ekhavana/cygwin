@@ -99,7 +99,7 @@ FTP Sites
    *(Please note: The mirrors listed in this section are not monitored
 automatically.  If you notice an error here, such as a broken link, a
 site that's down, or an ommission, please notify the FAQ maintainer at
-`mailto:starksb@ebi.ac.uk'.  You can always find an up-to-date list of
+`starksb@ebi.ac.uk'.  You can always find an up-to-date list of
 mirrors at `http://sources.redhat.com/cygwin/mirrors.html'.)*
 
    *You must read the file `latest/README' before downloading and
@@ -351,6 +351,25 @@ What's the difference between packages in `latest' and `contrib'?
    Good question!  That very issue is sometimes debated on the
 `cygwin-apps' mailing list.  Check the list archives if you want to
 know more.
+
+How do I uninstall Cygwin?
+--------------------------
+
+   Setup has no automatic uninstall facility.  Just delete everything
+manually:
+
+   * Cygwin shortcuts on the Desktop and Start Menu
+
+   * The registry tree `Software\Cygnus Solutions' under
+     `HKEY_LOCAL_MACHINE' and/or `HKEY_CURRENT_USER'.
+
+   * Anything under the Cygwin root folder, `C:\cygwin' by default.
+
+   * Anything created by setup in its temporary working directory.
+
+   It's up to you to deal with other changes you made to your system,
+such as installing the inetd service, altering system paths, etc.  Setup
+would not have done any of these things for you.
 
 What Unix API calls are supported by Cygwin?
 ********************************************
@@ -2812,10 +2831,8 @@ thing that needs things from it.
    This is wrong `gcc -lstdc++ hello.cc'.  This is right `gcc hello.cc
 -lstdc++'.
 
-I use a function I know is in the API, but I still get a link
--------------------------------------------------------------
-
-   error.
+I use a function I know is in the API, but I still get a link error.
+--------------------------------------------------------------------
 
    *(Please note: This section has not yet been updated for the latest
 net release.)*
