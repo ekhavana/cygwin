@@ -4,7 +4,7 @@
 >Special filenames</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.52"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.54"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -129,12 +129,33 @@ CLASS="FILENAME"
 >,
 <TT
 CLASS="FILENAME"
+>/dev/zero</TT
+>, <TT
+CLASS="FILENAME"
 >/dev/tty</TT
-> and
+>,
+<TT
+CLASS="FILENAME"
+>/dev/ttyX</TT
+>, <TT
+CLASS="FILENAME"
+>/dev/ptmx</TT
+>,
 <TT
 CLASS="FILENAME"
 >/dev/comX</TT
-> (the serial ports).
+> (the serial ports),
+<TT
+CLASS="FILENAME"
+>/dev/windows</TT
+> (the windows message queue),
+<TT
+CLASS="FILENAME"
+>/dev/random</TT
+> and <TT
+CLASS="FILENAME"
+>/dev/urandom</TT
+>.
 These devices cannot be seen with the command <B
 CLASS="COMMAND"
 >ls /dev</B
@@ -142,14 +163,97 @@ CLASS="COMMAND"
 although commands such as <B
 CLASS="COMMAND"
 >ls /dev/tty</B
-> work fine.&#13;</P
+> work fine.</P
+><P
+>However, on Windows NT/W2K there are different devices which are
+supported but have to be created as mount points. These are the raw block
+special devices and tape devices. These devices need a special handling
+which is enabled through the mount points. The usage of the native Windows
+device names is not sufficent.</P
+><P
+>NT/W2K supports raw block special device support for partitions
+and drives. The device names for partitions is the drive letter
+with leading <TT
+CLASS="FILENAME"
+>\\.\</TT
+>, so the floppy would be
+<TT
+CLASS="FILENAME"
+>\\.\A:</TT
+>, the first partition typically
+<TT
+CLASS="FILENAME"
+>\\.\C:</TT
+>. Complete drives (except floppies
+which are supported as partitions only) are named
+<TT
+CLASS="FILENAME"
+>\\.\PHYSICALDRIVEx</TT
+>. The <TT
+CLASS="LITERAL"
+>x</TT
+>
+is the drive number which you can check in the disk manager.
+Each drive line has prepended the text "Disk x".</P
+><P
+>To access tape drives, NT/W2K uses the file name
+<TT
+CLASS="FILENAME"
+>\\.\TAPEx</TT
+>. For example the first installed tape device
+is named <TT
+CLASS="FILENAME"
+>\\.\tape0</TT
+>.</P
+><P
+>To access those devices you have to mount them and you have to
+use the posix name of the device to be recognized by Cygwin.
+The naming convention is simple: The name has to begin with
+<TT
+CLASS="FILENAME"
+>/dev/</TT
+> and the rest is as you like. The only
+exception are tape devices. To identify if the tape device is
+used as a rewind or a no-rewind device the name must not begin with
+<TT
+CLASS="LITERAL"
+>n</TT
+> (rewind) or has to begin with <TT
+CLASS="LITERAL"
+>n</TT
+>
+(no-rewind).</P
+><P
+>Some examples:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>mount -b //./A: /dev/fd0              # mount floppy as raw block special
+mount -b //./physicaldrive1 /dev/hdb  # mount "Disk 1"
+mount -b //./tape0 /dev/st0           # mount first tape as the rewind device...
+mount -b //./tape0 /dev/nst0          # ...and as the no-rewind device</PRE
+></TD
+></TR
+></TABLE
+><P
+>Note the usage of the <TT
+CLASS="LITERAL"
+>-b</TT
+> option. It is best to
+include the -b option when mounting these devices to ensure that all
+file I/O is in "binary mode".</P
 ></DIV
 ><DIV
 CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN779"
+NAME="AEN802"
 >The .exe extension</A
 ></H2
 ><P
@@ -291,7 +395,7 @@ CLASS="SECT2"
 ><H2
 CLASS="SECT2"
 ><A
-NAME="AEN812"
+NAME="AEN835"
 >The @pathnames</A
 ></H2
 ><P

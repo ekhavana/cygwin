@@ -4,7 +4,7 @@
 >NT security and the ntsec usage</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.52"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.54"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -287,9 +287,11 @@ set </P
 ></UL
 ><P
 >The two important types of ACEs are the `access allowed ACE' and the
-`access denied ACE'. The ntsec patch only uses `access allowed ACEs'.</P
+`access denied ACE'. The ntsec patch only used `access allowed ACEs' up
+to Cygwin version 1.1.0. Later versions use `access denied ACEs' as well
+to reflect the UNIX permissions as good as possible.</P
 ><P
->The possible permissions on objects are more complicated than in
+>The possible permissions on objects are more detailed than in
 UNIX. For example, the permission to delete an object is different
 from the write permission.</P
 ><P
@@ -302,8 +304,8 @@ The ntsec patch tries to do this in cygwin.</P
 >You ask "Mostly? Why mostly???" Because there's a leak in the NT model.
 I will describe that in detail in chapter 4.</P
 ><P
->The creation of explicit object security is a bit complicated, so
-typically only two simple variations are used:</P
+>Creating  explicit object security is not that easy so you will often
+see only two simple variations in use:</P
 ><P
 ></P
 ><UL
@@ -320,10 +322,10 @@ COMPACT="COMPACT"
 ><P
 >For parameters to functions that create or open securable objects another
 data structure is used, the `security attributes' (SA). This structure
-contains an SD and a flag, that specifies whether the returned handle
-to the created or opened object is inherited to child processes or not.
-This property is not important for the ntsec patch description, so in
-this document SDs and SAs are more or less identical.</P
+contains an SD and a flag that specifies whether the returned handle
+to the object is inherited to child processes or not.
+This property is not important for the ntsec patch description so in
+this document the difference between SDs and SAs is ignored.</P
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -597,7 +599,7 @@ COMPACT="COMPACT"
 ><LI
 ><P
 >Accounts (users and groups) may get another name in
-cygwin that their NT account name. The name in <TT
+cygwin than their NT account name. The name in <TT
 CLASS="FILENAME"
 >/etc/passwd</TT
 >
@@ -648,11 +650,11 @@ CLASS="SCREEN"
 CLASS="COMMAND"
 >telnet</B
 > etc. you have to remain the name unchanged or
-you have to use a special version of <B
+you have to use the special version of <B
 CLASS="COMMAND"
 >login</B
-> which will
-be part of the release 1.1 soon.</P
+> which is
+part of the standard Cygwin distribution since 1.1.</P
 ></LI
 ><LI
 ><P
@@ -822,7 +824,7 @@ are granted. Later ACEs are then not taken into account.</P
 ></LI
 ><LI
 ><P
->ALl access denied ACEs _should_ precede any
+>All access denied ACEs _should_ precede any
 access allowed ACE.</P
 ></LI
 ></UL

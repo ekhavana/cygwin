@@ -4,7 +4,7 @@
 >Cygwin Utilities</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.52"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.54"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -639,7 +639,7 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage passwd [name]
-      passwd [-x max] [-n min] [-i inact] [-L len] 
+      passwd [-x max] [-n min] [-i inact] [-L len]
       passwd {-l|-u|-S} name
   -x max   set max age of passwords
   -n min   set min age of passwords
@@ -690,14 +690,14 @@ password and exits.</P
 changed by the administrators with the <TT
 CLASS="LITERAL"
 >-x</TT
->, 
+>,
 <TT
 CLASS="LITERAL"
 >-n</TT
 > and <TT
 CLASS="LITERAL"
 >-i</TT
-> options.  The 
+> options.  The
 <TT
 CLASS="LITERAL"
 >-x</TT
@@ -710,7 +710,7 @@ password is required to be changed.  The <TT
 CLASS="LITERAL"
 >-n</TT
 > option is
-used to set the minimum number of days before a password may be changed.  
+used to set the minimum number of days before a password may be changed.
 The user will not be permitted to change the password until
 <I
 CLASS="EMPHASIS"
@@ -738,14 +738,14 @@ CLASS="EMPHASIS"
 password length are 0 to 14.  In any of the above cases, a value of 0
 means `no restrictions'.</P
 ><P
->Account maintenance: User accounts may be locked and unlocked with the 
+>Account maintenance: User accounts may be locked and unlocked with the
 <TT
 CLASS="LITERAL"
 >-l</TT
 > and <TT
 CLASS="LITERAL"
 >-u</TT
-> flags.  The 
+> flags.  The
 <TT
 CLASS="LITERAL"
 >-l</TT
@@ -816,7 +816,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1024"
+NAME="AEN1049"
 >Using mount</A
 ></H3
 ><P
@@ -874,7 +874,7 @@ CLASS="COMMAND"
 >mount</B
 > utility is also the mechanism for
 adding new mounts to the mount table.  The following example
-demonstrates how to mount the directory 
+demonstrates how to mount the directory
 <TT
 CLASS="FILENAME"
 >C:\cygnus\cygwin-b20\H-i586-cygwin32\bin</TT
@@ -882,7 +882,7 @@ CLASS="FILENAME"
 to <TT
 CLASS="FILENAME"
 >/bin</TT
-> and the network directory 
+> and the network directory
 <TT
 CLASS="FILENAME"
 >\\pollux\home\joe\data</TT
@@ -1025,7 +1025,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1066"
+NAME="AEN1091"
 >Cygdrive mount points</A
 ></H3
 ><P
@@ -1108,7 +1108,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1084"
+NAME="AEN1109"
 >Limitations</A
 ></H3
 ><P
@@ -1191,10 +1191,12 @@ WIDTH="100%"
 ><PRE
 CLASS="SCREEN"
 >Usage ps [-aefl] [-u uid]
+  -a, -e   show processes of all users
   -f       show process uids, ppids
   -l       show process uids, ppids, pgids, winpids
-  -u uid   list processes owned by uid
-  -a, -e   show processes of all users</PRE
+  -s	   short process listing
+  -u uid   show processes owned by uid
+  -W	   show all windows processes, not just cygwin processes</PRE
 ></TD
 ></TR
 ></TABLE
@@ -1288,11 +1290,14 @@ WIDTH="100%"
 CLASS="SCREEN"
 >Usage strace [-m mask] [-o output-file] [ft] program [args...]
 
+-b n		  use buffer of size 'n' when writing output file
+-d		  include delta time in usecs for each line (default)
+-f		  follow all forks and execs
 -m mask		  mask for reporting cygwin events (default 1)
+-n		  convert Win32 error messages to text
 -o output-file	  output file to hold strace events (default stderr)
 -f		  follow forked subprocesses
--t		  convert Win32 error messages to text
--s		  remove mount point from system-wide registry location</PRE
+-u		  include time in usecs since start for each line (default)</PRE
 ></TD
 ></TR
 ></TABLE
@@ -1317,7 +1322,7 @@ WIDTH="100%"
 CLASS="SCREEN"
 >  Bit			Explanation
 0x00000001		All strace output is collected
-0x00000002		Unusual or weird phenomenon
+0x00000008		Unusual or weird phenomenon
 0x00000010		System calls
 0x00000020		argv/envp printout at startup
 0x00000040		Information useful for DLL debugging
@@ -1349,23 +1354,27 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->regtool -h  - print this message
-regtool [-v] list [key]  - list subkeys and values
-regtool [-v] add [key\subkey]  - add new subkey
-regtool [-v] remove [key]  - remove key
-regtool [-v|-q] check [key]  - exit 0 if key exists, 1 if not
-regtool [-i|-s|-e|-m] set [key\value] [data ...]  - set value
+>Regtool Copyright (c) 2000 Red Hat Inc
+ regtool -h  - print this message
+ regtool [-v|-p|-k|-l] list [key]  - list subkeys and values
+     -p=postfix, like ls -p, appends / postfix to key names
+     -k=keys, lists only keys
+     -l=values, lists only values
+ regtool [-v] add [key\subkey]  - add new subkey
+ regtool [-v] remove [key]  - remove key
+ regtool [-v|-q] check [key]  - exit 0 if key exists, 1 if not
+ regtool [-i|-s|-e|-m] set [key\value] [data ...]  - set value
      -i=integer -s=string -e=expand-string -m=multi-string
-regtool [-v] unset [key\value]  - removes value from key
-regtool [-q] get [key\value]  - prints value to stdout
+ regtool [-v] unset [key\value]  - removes value from key
+ regtool [-q] get [key\value]  - prints value to stdout
      -q=quiet, no error msg, just return nonzero exit if key/value missing
-keys are like \prefix\key\key\key\value, where prefix is any of:
+ keys are like \prefix\key\key\key\value, where prefix is any of:
    root     HKCR  HKEY_CLASSES_ROOT
    config   HKCC  HKEY_CURRENT_CONFIG
    user     HKCU  HKEY_CURRENT_USER
    machine  HKLM  HKEY_LOCAL_MACHINE
    users    HKU   HKEY_USERS
-example: \user\software\Microsoft\Clock\iFormat</PRE
+ example: \user\software\Microsoft\Clock\iFormat</PRE
 ></TD
 ></TR
 ></TABLE

@@ -5,7 +5,7 @@
 variable</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.52"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.54"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -149,13 +149,39 @@ STYLE="list-style-type: disc"
 ><P
 ><I
 CLASS="FIRSTTERM"
->(no)glob</I
+>error_start:filepath</I
+> - if set, runs <TT
+CLASS="FILENAME"
+>filepath</TT
+>
+when cygwin encounters a fatal error.  This is useful for debugging.
+<TT
+CLASS="FILENAME"
+>filepath</TT
+> is usually set to the path to the <TT
+CLASS="FILENAME"
+>gdb</TT
+>
+program.</P
+><P
+><I
+CLASS="FIRSTTERM"
+>(no)glob[:ignorecase]</I
 > - if set, command line arguments
 containing UNIX-style file wildcard characters (brackets, question mark,
 asterisk, escaped with \) are expanded into lists of files that match 
 those wildcards.
 This is applicable only to programs running from a DOS command line prompt.
 Default is set.</P
+><P
+>This option also accepts an optional <TT
+CLASS="LITERAL"
+>[no]ignorecase</TT
+> modifer.
+If supplied, wildcard matching is case insensitive.  The default is <TT
+CLASS="LITERAL"
+>noignorecase</TT
+></P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
@@ -203,7 +229,7 @@ CLASS="FIRSTTERM"
 >(no)ntsec</I
 > - if set, use the NT security
 model to set UNIX-like permissions on files and processes. The
-file permissions can only be set on NTFS partitions. FAT and SAMBA doesn't
+file permissions can only be set on NTFS partitions. FAT doesn't
 support the NT file security. For more information, read the documentation
 in [<SPAN
 CLASS="CITATION"
@@ -215,43 +241,25 @@ STYLE="list-style-type: disc"
 ><P
 ><I
 CLASS="FIRSTTERM"
->(no)reset_com</I
-> - if set, serial ports are reset
-to 9600-8-N-1 with no flow control when used. This is done at open
-time and when handles are inherited.  Defaults to set.</P
+>(no)smbntsec</I
+> - if set, use `ntsec' on remote
+drives as well (this is the default). If you encounter problems with NT shares
+or Samba drives, setting this to `nosmbntsec' could help. In that case the
+permission and owner/group information is faked as on FAT partitions.
+A reason for a non working ntsec on remote drives could be insufficient
+permissions of the users. Since the needed user rights are somewhat dangerous
+(SeRestorePrivilege) it's not always an option to grant that rights to users.
+However, this shouldn't be a problem in NT domain environments.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
 ><P
 ><I
 CLASS="FIRSTTERM"
->strace=n[:cache][,filename]</I
-> - configures system
-tracing.  Off by default, setting various bits in <TT
-CLASS="LITERAL"
->n</TT
-> (a
-bit flag) enables various types of system messages.  Setting
-<TT
-CLASS="LITERAL"
->n</TT
-> to 1 enables most messages.  Other values can be found
-in <TT
-CLASS="FILENAME"
->sys/strace.h</TT
->.  The <TT
-CLASS="LITERAL"
->:cache</TT
-> option
-lets you specify how many lines to cache before flushing the output
-(example: <TT
-CLASS="LITERAL"
->strace=1:20</TT
->).  The <TT
-CLASS="LITERAL"
->filename</TT
->
-option lets you send the messages to a file instead of the screen. </P
+>(no)reset_com</I
+> - if set, serial ports are reset
+to 9600-8-N-1 with no flow control when used. This is done at open
+time and when handles are inherited.  Defaults to set.</P
 ></LI
 ><LI
 STYLE="list-style-type: disc"
