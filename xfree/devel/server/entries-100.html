@@ -1,3 +1,90 @@
+<h4>Release 4.3.0-34</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-10 0200 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040110-0200.tar.bz2">xwin-20040110-0200.tar.bz2</a>
+(134 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-33
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-33-to-4.3.0-34.diff">xwin-4.3.0-33-to-4.3.0-34.diff</a>
+(64 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winwndproc.c/winWindowProc/WM_DISPLAYCHANGE - Save value of
+SM_C*VIRTUALSCREEN when fMultipleMonitors is true, instead of
+SM_C*SCREEN.  (Harold L Hunt II)</li>
+
+<li>winclipboardwrappers.c/winProcEstablishConnection - Change delay
+in starting clipboard client from the 3rd call to the 4th call when
+using Xdmcp.  Should fix the problem reported by Andrew Braverman; if
+not, I'll have to make a much more robust system for starting the
+clipboard client when using Xdmcp.  (Harold L Hunt II)</li>
+
+<li>winclipboardwrappers.c/winProcSetSelectionOwner - Always advertise
+CF_TEXT clipboard format, optionally advertise CF_UNICODETEXT format.
+(Harold L Hunt II)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_RENDERFORMAT - If
+wParam is CF_UNICODETEXT, pass TRUE for Unicode support flag
+(regardless of fUnicodeSupport value) when calling
+winClipboardFlushXEvents.  (Harold L Hunt II)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_DESTROYCLIPBOARD -
+Add new handling for this message; we are supposed to process this
+message for delayed rendering support.  (Harold L Hunt II)</li>
+
+<li>General Clipboard - Restructure the clipboard system to run a
+single thread, regardless of the number of screens created in the
+current process; the reason for this is that X selections are
+per-display, not per-screen, thus there is no reason to have one
+thread per screen for managing the clipboard integration.  Changing
+from per-screen to one thread greatly simplified the clipboard
+handling code and reduced the likelihood of errors due to interaction
+between multiple clipboard client threads.  (Harold L Hunt II)</li>
+
+<li>winclipboardwrappers.c/winProcSetSelectionOwner - Track whether
+the PRIMARY and CLIPBOARD selections are owned and if they are
+transitioning from owned to not owned.  When one of PRIMARY or
+CLIPBOARD is still owned the Win32 clipboard is not disowned; if both
+PRIMARY and CLIPBOARD are not owned and a transition from one being
+owned to being disowned is detected, then the Win32 clipboard is
+disowned.  The user-level change is that you can select text in
+certain X11 apps (which usually sets both the PRIMARY and CLIPBOARD
+selections), click elsewhere to unselect the text (frees ownership of
+one of the selections but not the other) and still paste the text in
+Win32.  The previous behavior would not allow you to paste the text in
+Win32 if the selection was no longer highlighted.  (Harold L Hunt
+II)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_DRAWCLIPBOARD - We
+cannot bail out when NULL == GetClipboardOwner() because some
+applications deal with the clipboard in a manner that causes the
+clipboard owner to be NULL when they are in fact taking ownership.
+One example of this is the Win32 native compile of emacs.  Without
+this fix, text could not be copied from the Win32 compile of emacs and
+pasted within Cygwin/X.  (Harold L Hunt II)</li>
+
+<li>InitOutput.c - Remember to delete the functions that were moved to
+the new file called winprocarg.c.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
+
 <h4>Release 4.3.0-33</h4>
 <table>
 <tbody>
