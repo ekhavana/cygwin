@@ -443,7 +443,10 @@ quite important.  Since setup.exe extracts into a predetermined
 directory, you must structure your package contents accordingly.</p>
 <p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
 <ul>
-  <li><p>Binary packages are extracted in /, include all file paths from the root in your archive.</p></li>
+  <li><p>Binary packages are extracted in /, include all file paths from
+  the root in your archive, e.g.:<pre><tt>  usr/bin/boffo.exe
+  usr/share/boffo/boffo.dat
+  etc...</tt></pre></p></li>
   <li><p>The package is configured using (at a minimum) the following paths:</p>
   <pre>  --prefix=/usr
   --sysconfdir=/etc
@@ -451,7 +454,7 @@ directory, you must structure your package contents accordingly.</p>
   --localstatedir=/var
   --datadir='$(prefix)/share'</pre></li>
   <li><p>All executables in your binary package are stripped (run 'strip' on them). Some makefiles have a install-strip command you can use to do this automatically when you setup your 'installed' tree.</p></li>
-  <li><p>Source packages are extracted in /usr/src.  On extraction, the tar file should put the sources to a directory with the same name as the package tar ball minus the -src.tar.bz2 part:<pre><tt>  boffo-1.0-1/Makefile.in
+  <li><p>Source packages are extracted in /usr/src.  On extraction, the tar file should put the sources in a directory with the same name as the package tar ball minus the -src.tar.bz2 part:<pre><tt>  boffo-1.0-1/Makefile.in
   boffo-1.0-1/README
   boffo-1.0-1/configure
   boffo-1.0-1/configure.in
