@@ -1,6 +1,13 @@
-<title>The Cygwin FAQ </title>
+<HTML>
+<HEAD>
+<!-- Created by texi2html 1.56k from faq.texinfo on 25 August 2000 -->
+
+<TITLE>The Cygwin FAQ
+</TITLE>
+</HEAD>
+<BODY>
 <H1>The Cygwin FAQ</H1>
-<H2>(Only partially updated for the latest net release.)</H2>
+<H2>(Not completely updated for the latest net release, but still useful!)</H2>
 <ADDRESS>You can always find the latest version of this FAQ at <TT><a target="_top" href="http://sources.redhat.com/cygwin/faq/">http://sources.redhat.com/cygwin/faq/</a></TT>.</ADDRESS>
 <P>
 <P><HR><P>
@@ -21,14 +28,12 @@
 <LI><A NAME="TOC8" HREF="faq.html#SEC8">Contents</A>
 <LI><A NAME="TOC9" HREF="faq.html#SEC9">Installation using the <CODE>setup.exe</CODE> program</A>
 <UL>
-<LI><A NAME="TOC10" HREF="faq.html#SEC10">Internet installation with <CODE>setup.exe</CODE></A>
-<LI><A NAME="TOC11" HREF="faq.html#SEC11">Directory installation with <CODE>setup.exe</CODE></A>
-<LI><A NAME="TOC12" HREF="faq.html#SEC12">Adding or updating packages</A>
-<LI><A NAME="TOC13" HREF="faq.html#SEC13">Problems running <CODE>setup.exe</CODE></A>
-<UL>
-<LI><A NAME="TOC14" HREF="faq.html#SEC14">Error message: "Unable to retrieve the list of cygwin mirrors..."</A>
-<LI><A NAME="TOC15" HREF="faq.html#SEC15">System hangs when unpacking tar archives</A>
-</UL>
+<LI><A NAME="TOC10" HREF="faq.html#SEC10">Why not install in C:\?</A>
+<LI><A NAME="TOC11" HREF="faq.html#SEC11">Can I use the new setup to update a B18, B19, B20, B20.1 or CD-ROM (1.0) installation of Cygwin?</A>
+<LI><A NAME="TOC12" HREF="faq.html#SEC12">The README says I should turn off anti-virus software.  Isn't that dangerous?</A>
+<LI><A NAME="TOC13" HREF="faq.html#SEC13">What packages should I download?</A>
+<LI><A NAME="TOC14" HREF="faq.html#SEC14">What if setup fails?</A>
+<LI><A NAME="TOC15" HREF="faq.html#SEC15">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A>
 </UL>
 </UL>
 <LI><A NAME="TOC16" HREF="faq.html#SEC16">What Unix API calls are supported by Cygwin?</A>
@@ -197,7 +202,7 @@ The Cygwin tools are ports of the popular GNU development tools
 for Windows NT, 95, and 98.  They run thanks to the Cygwin library which
 provides the UNIX system calls and environment these programs expect.
 
-</P>
+
 <P>
 With these tools installed, it is possible to write Win32 console or
 GUI applications that make use of the standard Microsoft Win32 API
@@ -211,7 +216,7 @@ interest in the many standard Unix utilities provided with the package.
 They can be used both from the bash shell (provided) or from the
 standard Windows command shell.
 
-</P>
+
 
 
 <H2><A NAME="SEC2" HREF="faq.html#TOC2">Is it free software?</A></H2>
@@ -224,7 +229,7 @@ shareware.  You don't have to pay anyone to use it but you should be
 sure to read the copyright section of the FAQ more more information on
 how the GNU General Public License may affect your use of these tools.
 
-</P>
+
 <P>
 In particular, if you intend to port a proprietary (non-GPL'd)
 application using Cygwin, you will need the proprietary-use license 
@@ -233,7 +238,7 @@ contact sales@cygnus.com for more information.
 All other questions should be sent to the project
 mailing list cygwin@sources.redhat.com.
 
-</P>
+
 <P>
 Note that when we say "free" we mean freedom, not price.  The goal of
 such freedom is that the people who use a given piece of software
@@ -241,7 +246,7 @@ should be able to change it to fit their needs, learn from it, share
 it with their friends, etc.  The Cygwin license allows you those
 freedoms, so it is free software.
 
-</P>
+
 <P>
 The Cygwin 1.0 product is a "commercial" distribution of cygwin.  As
 such, it includes such non-software things as printed manuals, support,
@@ -256,7 +261,7 @@ charge a fee for it.  Plus, it provides income for the cygwin project so
 we can continue working on it.  For further details about the commercial
 product, see <TT><a target="_top" href="http://www.cygnus.com/cygwin/">http://www.cygnus.com/cygwin/</a></TT>.
 
-</P>
+
 
 
 <H2><A NAME="SEC3" HREF="faq.html#TOC3">A brief history of the project</A></H2>
@@ -265,13 +270,13 @@ product, see <TT><a target="_top" href="http://www.cygnus.com/cygwin/">http://ww
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 The first thing done was to enhance the development tools (gcc, gdb,
 gas, et al) so that they could generate/interpret Win32 native object
 files.
 
-</P>
+
 <P>
 The next task was to port the tools to Win NT/95.  We could have done
 this by rewriting large portions of the source to work within the
@@ -283,7 +288,7 @@ spawn, signals, select, sockets, etc.).  We call this new interface the
 Cygwin API.  Once written, it was possible to build working Win32
 tools using unix-hosted cross-compilers, linking against this library.
 
-</P>
+
 <P>
 From this point, we pursued the goal of producing native tools capable of
 rebuilding themselves under Windows 95 and NT (this is often
@@ -298,7 +303,7 @@ Windows 95 and NT look like a flavor of UNIX from the perspective of the
 GNU configure mechanism.  Self hosting was achieved as of the beta 17.1
 release.
 
-</P>
+
 <P>
 After adding Windows 98 support to Cygwin in mid-1998, we added support
 for the native Microsoft libraries in the compiler which allows
@@ -316,11 +321,15 @@ that do not need the UNIX emulation layer.
 <P>
 <EM>(Please note: The mirrors listed in this section are not monitored
 automatically.  If you notice an error here, such as a broken link, a
-site that's down, or an ommission, please notify the FAQ maintainer.
-You can always find an up-to-date list of mirrors at
-<TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.)</EM>
+site that's down, or an ommission, please notify the FAQ maintainer at
+<TT><a href="mailto:starksb@ebi.ac.uk">starksb@ebi.ac.uk</a></TT>.  You can always find an up-to-date list of
+mirrors at <TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.)</EM>
 
-</P>
+
+<P>
+<STRONG>You must read the file <CODE>latest/README</CODE> before downloading
+and installing Cygwin.  It contains important setup instructions.</STRONG>
+
 
 
 <UL>
@@ -426,11 +435,11 @@ The main WWW page for the Cygwin project is
 <TT><a target="_top" href="http://sources.redhat.com/cygwin/">http://sources.redhat.com/cygwin/</a></TT>.  There you will find a
 great many links to additional resources and related sites.
 
-</P>
+
 <P>
 You can find documentation for the individual GNU tools at
 <TT><a target="_top" href="http://www.fsf.org/manual/">http://www.fsf.org/manual/</a></TT>.  (You should read GNU manuals from a
-local mirror, check <TT><a target="_top" href="http://www.fsf.org/server/list-mirrors.html">http://www.fsf.org/server/list-mirrors.html</a></TT>
+local mirror.  Check <TT><a target="_top" href="http://www.fsf.org/server/list-mirrors.html">http://www.fsf.org/server/list-mirrors.html</a></TT>
 for a list of them.)
 
 
@@ -444,43 +453,57 @@ Unlike previous net releases such as B20.1 and earlier, there is no
 monolithic "full" or "usertools" installation.  Rather, you can pick and
 choose the packages you wish to install, and update them individually.
 
-</P>
-<P>
-The following packages are available with the latest net release:
 
-</P>
 <P>
-ash, bash, binutils, bison, byacc, bzip2, clear, common, cygwin,
-dejagnu, diff, expect, fileutils, findutils, flex, gawk, gcc, gdb,
-gperf, grep, groff, gzip, inetutils, less, libpng, login, m4, make, man,
-opengl, patch, sed, shellutils, tar, tcltk, termcap, texinfo, textutils,
-time, zlib
+The following packages are available with the current release, in their
+respective directories:
 
-</P>
+
+<DL COMPACT>
+
+<DT><SAMP>`latest'</SAMP>
+<DD>
+bison common diff flex gperf inetutils make opengl shellutils texinfo
+ash byacc crypt expect gawk grep less man patch tar textutils bash bzip2
+cygwin fileutils gcc groff login sed tcltk time binutils clear dejagnu
+findutils gdb gzip m4 mt termcap vim
+
+<DT><SAMP>`contrib'</SAMP>
+<DD>
+cvs gdbm jbigkit jpeg libpng tiff zlib
+
+</DL>
+
 <P>
 Full source code is available for all packages and tools.
 
-</P>
-<P>
-There are a few different ways to install the Cygwin net release, and
-we'll try to cover them all here.  It is strongly recommended to use the
-automatic <CODE>setup.exe</CODE> program if you can.
 
-</P>
+<P>
+There is one recommended way to install Cygwin, which is to use the GUI
+installer <CODE>setup.exe</CODE>.  There are some variations on how you go
+about that.
+
+
+<P>
+Do it any other way, and you're on your own!  That said, keep in mind
+that the GUI installer is a "work in progress", so there might be a few
+difficulties, especially if you are behind a firewall or have other
+specific requirements.  If something doesn't work right for you, and
+it's not covered here or elsewhere, then by all means report it to the
+mailing list.
+
+
 
 
 <H2><A NAME="SEC9" HREF="faq.html#TOC9">Installation using the <CODE>setup.exe</CODE> program</A></H2>
 
 <P>
-<STRONG>IMPORTANT: If you run <CODE>setup.exe</CODE> on an existing Cygwin
-installation, Setup will overwrite the contents of mounted directories.
-There is no recovery from this.  If you are upgrading from an older
-version of Cygwin, you may wish to back up your current installation and
-unmount old mount points in order to isolate them.  Then you can
-re-install Cygwin in a new location with new mount points, if this is
-what you want.</STRONG>
+<STRONG>IMPORTANT: First read the README file in the <CODE>latest</CODE>
+directory at any ftp mirror.  DO THIS NOW!  Information in the README
+file is not repeated here.  You can find a mirror site near you from
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.</STRONG>
 
-</P>
+
 <P>
 The <CODE>setup.exe</CODE> program is the recommended way to install Cygwin,
 but it is still a work in progress.  Expect features and functionality
@@ -489,293 +512,127 @@ build time reported by <CODE>setup.exe</CODE> when you run it.  This will help
 diagnose problems, should you have any.  Check the cygwin mailing list
 for the latest news about <CODE>setup.exe</CODE>.
 
-</P>
-<P>
-You have a few options when using <CODE>setup.exe</CODE>.  
 
-</P>
+
+
+<H3><A NAME="SEC10" HREF="faq.html#TOC10">Why not install in C:\?</A></H3>
+
 <P>
 The <CODE>setup.exe</CODE> program will prompt you for a "root" directory.
-The default is 'C:\cygwin', but you can change it.  (You are strongly
-urged <STRONG>not</STRONG> to choose something like 'C:\'.)  It will contain the
-necessary files and directory structure, and will be mounted to '/' as
-part of the installation process.
+The default is 'C:\cygwin', but you can change it.  You are urged not to
+choose something like 'C:\' (the root directory on the system drive) for
+your Cygwin root.  If you do, then critical Cygwin system directories
+like 'etc', 'lib' and 'bin' could easily be corrupted by other (non-Cygwin)
+applications or packages that use \etc, \lib or \bin.  Perhaps there is
+no conflict now, but who knows what you might install in the future?
+It's also just good common sense to segregate your Cygwin "filesystems"
+from the rest of your Windows system disk.  (In the past, there had been
+genuine bugs that would cause problems for people who installed in C:\,
+but we believe those are gone now.)
 
-</P>
-<P>
-After a new installation in the default location, your mount points will
-look something like this:
 
-</P>
 
-<PRE>
-Device              Directory           Type         Flags
-C:\cygwin\bin       /usr/bin            user         binmode
-C:\cygwin\lib       /usr/lib            user         binmode
-C:\cygwin           /                   user         binmode
-</PRE>
+
+<H3><A NAME="SEC11" HREF="faq.html#TOC11">Can I use the new setup to update a B18, B19, B20, B20.1 or CD-ROM (1.0) installation of Cygwin?</A></H3>
 
 <P>
-Note that /bin and /usr/bin point to the same location, as do /lib and
-/usr/lib.  This is intentional, and you should not undo these mounts
-unless you <EM>really</EM> know what you are doing.  Currently,
-<CODE>setup.exe</CODE> creates only binary mounts, but future versions will
-probably be more flexible.
+No, you must start from scratch with the new setup.  The overall
+structure has changed so much that it would be silly to try to
+accomodate old installations of Cygwin.  You'll probably be much better
+off with a whole new installation anyway.  You may backup or rename your
+old installation first, or just install the new one somewhere else.  Be
+sure to make note of your current mount table, because this will be
+overwritten during the new setup.
 
-</P>
-<P>
-You can let <CODE>setup.exe</CODE> download all the files for you on the fly.
-This is the 'internet' installation.  Or you can download all (or some)
-of the packages ahead of time, and instruct <CODE>setup.exe</CODE> to install
-Cygwin from those files.  This is the 'directory' installation.  You
-must use this method if you want to install only a subset of the
-available packages.
-
-</P>
-<P>
-Note that you cannot combine methods.  If you use the directory
-installation, <CODE>setup.exe</CODE> will install <STRONG>only</STRONG> the packages
-it finds in the directory; it will not also be able to download packages
-from the internet in the same pass.  If you have not carefully chosen
-which packages to download, you may not end up with a working Cygwin
-installation.  You can, however, add and update packages later.  See
-below.
-
-</P>
-<P>
-Whichever you choose, the first step is to open an ftp mirror site near
-you from <TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.  Then
-go to the 'latest' directory, download <CODE>setup.exe</CODE> and save that to
-an <STRONG>empty temporary directory</STRONG>.  While you're there, download the
-README file and read it.  Then read it again.
-
-</P>
-<P>
-Then proceed according to your choice below.
-
-</P>
-
-
-<H3><A NAME="SEC10" HREF="faq.html#TOC10">Internet installation with <CODE>setup.exe</CODE></A></H3>
 
 <P>
-Shut down <STRONG>all cygwin applications</STRONG> (including inetd, etc.).
-
-</P>
-<P>
-Then, in a <STRONG>Windows command prompt</STRONG> ("MS-DOS Prompt" in Windows
-95/98), '<CODE>cd</CODE>' to the temporary directory and type
-'<CODE>setup.exe</CODE>'.
-
-</P>
-<P>
-When prompted, specify the location of the root directory, or accept the
-default.
-
-</P>
-<P>
-At the next prompt, choose to install from the Internet ('i').  This is
-the default.
-
-</P>
-<P>
-Setup will connect to sources.redhat.com to read a list of mirror
-sites.  Choose one from the list, or choose 'other' to supply your own.
-If you supply your own, you must provide a full URL, not just the ftp
-hostname.  Setup will then proceed to download and install all packages
-from the ftp site.  Of course this may take a while if you have a slow
-connection.
-
-</P>
-<P>
-When finished, Setup will have created a "Cygnus Solutions" folder on
-your Start Menu, containing a shortcut to <CODE>cygwin.bat</CODE>, which
-invokes bash with various environment variables set correctly.  The
-"Uninstall Cygwin" shortcut, if present, is unlikely to do a proper
-job.  If you want to completely uninstall Cygwin, you will probably have
-to delete some things by hand.
-
-</P>
-<P>
-Once setup is complete you may remove the temporary directory.  It will
-contain <CODE>setup.exe</CODE>, the downloaded <CODE>.tar.gz</CODE> files, and a
-setup log file, which is not needed, but may contain helpful diagnostics
-if your installation failed for some reason.
-
-</P>
+Once you've installed the latest net release, the new setup will update
+just the individual packages that need it.
 
 
-<H3><A NAME="SEC11" HREF="faq.html#TOC11">Directory installation with <CODE>setup.exe</CODE></A></H3>
+
+
+<H3><A NAME="SEC12" HREF="faq.html#TOC12">The README says I should turn off anti-virus software.  Isn't that dangerous?</A></H3>
 
 <P>
-Before proceeding, you must download packages into the temporary
-directory containing <CODE>setup.exe</CODE>.  These are in subdirectories of
-'latest' and end in .tar.gz and not in -src.tar.gz.  If there is more
-than one in a given directory, pick the one with the highest version
-number.  Put them together in the temporary directory containing
-<CODE>setup.exe</CODE>.  You may preserve the directory structure of 'latest',
-and include the -src.tar.gz files, without ill effect.
+Only Network Associates (formerly McAfee) products have been reported to
+"hang" when extracting Cygwin tar archives.  Other products should not
+cause problems, if you prefer to keep them running.
 
-</P>
-<P>
-Whatever subset you think is appropriate, it <STRONG>must</STRONG> contain the
-'cygwin' package, or you will not end up with a working Cygwin
-installation.
-
-</P>
-<P>
-When you have all the necessary tar files together with
-<CODE>setup.exe</CODE>, proceed as you would for an internet installation,
-except choose directory installation ('d') when prompted.  Setup will
-install all the tar files that it finds there.  Here are the gory
-details again:
-
-</P>
-<P>
-Shut down <STRONG>all cygwin applications</STRONG> (including inetd, etc.).
-
-</P>
-<P>
-Then, in a <STRONG>Windows command prompt</STRONG> ("MS-DOS Prompt" in Windows
-95/98), '<CODE>cd</CODE>' to the temporary directory and type
-'<CODE>setup.exe</CODE>'.
-
-</P>
-<P>
-When prompted, specify the location of the root directory, or accept the
-default.
-
-</P>
-<P>
-At the next prompt, choose to install from the current directory ('d').
-This is <STRONG>not</STRONG> the default.
-
-</P>
-<P>
-When finished, Setup will have created a "Cygnus Solutions" folder on
-your Start Menu, containing a shortcut to <CODE>cygwin.bat</CODE>, which
-invokes bash with various environment variables set correctly.  The
-"Uninstall Cygwin" shortcut, if present, is unlikely to do a proper
-job.  If you want to completely uninstall Cygwin, you will probably have
-to delete some things by hand.
-
-</P>
-<P>
-Once setup is complete you may remove the temporary directory.  It will
-contain <CODE>setup.exe</CODE>, the downloaded <CODE>.tar.gz</CODE> files, and a
-setup log file, which is not needed, but may contain helpful diagnostics
-if your installation failed for some reason.
-
-</P>
-
-
-<H3><A NAME="SEC12" HREF="faq.html#TOC12">Adding or updating packages</A></H3>
 
 <P>
-Later versions of <CODE>setup.exe</CODE> permit you to add and/or update
-packages to an existing cygwin installation.
+Otherwise, you can download <CODE>setup.exe</CODE> and scan it.  Then turn off
+the anti-virus software, then run setup to download and extract all the
+tar files.  Then re-activate your anti-virus software and scan
+everything in C:\cygwin (or wherever you chose to install).  This should
+be safe.  (As long as nobody substitutes a malicious setup.exe ...)
 
-</P>
-<P>
-<STRONG>You cannot use this method to update a B18, B19, B20, B20.1 or
-CD-ROM (1.0) installation of Cygwin.  You must have previously installed
-a net release of Cygwin 1.1.0 or greater, using <CODE>setup.exe</CODE>, before
-you can update packages with 'setup -u'.</STRONG>
 
-</P>
-<P>
-To update your installation, create an empty temporary directory, and
-download the latest version of <CODE>setup.exe</CODE> to it from a Cygwin
-mirror near you.
 
-</P>
-<P>
-Then, in a <STRONG>Windows command prompt</STRONG> ("MS-DOS Prompt" in Windows
-95/98), '<CODE>cd</CODE>' to the temporary directory and type
 
-<PRE>
-	setup -u &#60;pkg&#62;
-</PRE>
+<H3><A NAME="SEC13" HREF="faq.html#TOC13">What packages should I download?</A></H3>
 
 <P>
-where "&#60;pkg&#62;" is the name of the package you wish to update, such as
-"cygwin" or "gdb" or "make" or ...
-
-</P>
-<P>
-Specify the root directory as you did when you first installed Cygwin.
-This will update the package.  As with the initial installation, you can
-update from the internet ('i') or from the directory ('d').  The latter
-requires that you download the <CODE>.tar.gz</CODE> file of the package ahead
-of time, along with <CODE>setup.exe</CODE>.
-
-</P>
-<P>
-If you are updating the package "cygwin", then you must close
-<STRONG>all</STRONG> Cygwin applications (including <CODE>inetd</CODE>, for example),
-before running setup.
-
-</P>
-<P>
-You can omit the '-u' option, which will force setup to install the
-latest package (from internet or directory), regardless of whether
-<CODE>setup.exe</CODE> believes it is necessary.  You <STRONG>must</STRONG> omit '-u'
-if you are updating from a development snapshot, because development
-snapshots have their version numbers "bumped" to the next release
-number.  In this case, <CODE>setup.exe</CODE> will think your installation is
-already up-to-date.
-
-</P>
-<P>
-Once setup is complete you may remove the temporary directory.  It will
-contain <CODE>setup.exe</CODE>, the downloaded <CODE>.tar.gz</CODE> files, and a
-setup log file, which is not needed, but may contain helpful diagnostics
-if your installation failed for some reason.
-
-</P>
+Just get everything, if you have room for it.  But if you must be
+selective:
 
 
-<H3><A NAME="SEC13" HREF="faq.html#TOC13">Problems running <CODE>setup.exe</CODE></A></H3>
+<DL COMPACT>
 
+<DT><SAMP>`cygwin'</SAMP>
+<DD>
+This is the minimum core, consisting of the cygwin1.dll and a few
+commands (like <CODE>mount</CODE>).  Not much else, and no shell!
 
+<DT><SAMP>`bash'</SAMP>
+<DD>
+This is the default interactive command shell for cygwin.  If you don't
+install <SAMP>`bash'</SAMP>, then the "Cygwin Bash Shell" shortcut that setup
+creates for you won't actually do anything.
 
-<H4><A NAME="SEC14" HREF="faq.html#TOC14">Error message: "Unable to retrieve the list of cygwin mirrors..."</A></H4>
+<DT><SAMP>`ash'</SAMP>
+<DD>
+This is often forgotten because it's not obvious that <SAMP>`ash'</SAMP>
+contains <CODE>/bin/sh</CODE>, which is essential for running scripts, (and
+<CODE>make</CODE> and ...).
+
+</DL>
 
 <P>
-This means that <CODE>setup.exe</CODE> could not make an http connection to
-<TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.  This is
-required for an internet ('i') install.  Either sources.redhat.com was
-too busy, or there is a problem with your network.  Note that
-<CODE>setup.exe</CODE> has very limited proxy functionality for firewalls, and
-depends on IE4 or later being installed and configured properly.  If you
-cannot get the internet installation to work, just download the
-packages yourself and do a directory ('d') install.
-
-</P>
+If you want to build programs, of course you'll need <SAMP>`gcc'</SAMP>, but
+you'll also need <SAMP>`binutils'</SAMP>, probably <SAMP>`make'</SAMP> and
+<SAMP>`fileutils'</SAMP>, and possibly lots more.  (Again, consider just getting
+everything!)
 
 
-<H4><A NAME="SEC15" HREF="faq.html#TOC15">System hangs when unpacking tar archives</A></H4>
+
+
+<H3><A NAME="SEC14" HREF="faq.html#TOC14">What if setup fails?</A></H3>
 
 <P>
-Your anti-virus software is interfering with <CODE>setup.exe</CODE>.  You will
-have to disable it before running setup.  In that case, you will
-probably want to:
+If you are downloading from the internet, setup will fail if it cannot
+download the list of mirrors at
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.  It could be that
+the network is too busy.  Similarly for an ftp download site that isn't
+working.  Try another mirror, or try again later.
 
-<OL>
-<LI>download all the .tar.gz files for the packages, along with <CODE>setup.exe</CODE>
 
-<LI>scan it all for viruses
+<P>
+If setup refuses to download a package that you know needs to be
+upgraded, try deleting that package's entry from /etc/setup.  If you are
+reacting quickly to an announcement on the mailing list, it could be
+that the mirror you are using doesn't have the latest copy yet.  Try
+another mirror, or try again tomorrow.
 
-<LI>disable the anti-virus software
 
-<LI>perform a directory ('d') install
 
-<LI>re-enable the anti-virus software
 
-<LI>scan everything below your Cygwin root directory (<CODE>C:\cygwin</CODE> by default)
+<H3><A NAME="SEC15" HREF="faq.html#TOC15">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
 
-</OL>
-
+<P>
+Good question!  That very issue is sometimes debated on the
+<SAMP>`cygwin-apps'</SAMP> mailing list.  Check the list archives if you want to
+know more.
 
 
 <H1><A NAME="SEC16" HREF="faq.html#TOC16">What Unix API calls are supported by Cygwin?</A></H1>
@@ -784,7 +641,7 @@ probably want to:
 This is the beginning of documentation listing the calls supported
 by the Cygwin library.
 
-</P>
+
 <P>
 All POSIX.1/1996 and ANSI C calls are listed in this file.  Note that
 while almost all POSIX.1/1990 calls are included in Cygwin, most
@@ -792,7 +649,7 @@ POSIX.1/1996 calls are not (yet at least!).  Additional Unix
 compatibility calls and extended libc/libm calls are provided by
 Cygwin but may or may not be listed yet.
 
-</P>
+
 <P>
 To see if a function is implemented but not listed here, check for the
 presence of the call in the file winsup/cygwin.din in the sources.  In
@@ -801,13 +658,13 @@ to verify that it is not a stub.  Finally, libc/libm functions
 (including extended calls not listed here) may be documented in the
 newlib texinfo documentation.
 
-</P>
+
 <P>
 Calls are implemented on both Windows 95 and NT unless otherwise
 noted.  Included are references to relevant standards, if any.
 Calls starting with "cygwin_" are Cygwin-specific calls.
 
-</P>
+
 
 
 <H2><A NAME="SEC17" HREF="faq.html#TOC17">ANSI C Library Functions</A></H2>
@@ -816,7 +673,7 @@ Calls starting with "cygwin_" are Cygwin-specific calls.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 
 <UL>
 
@@ -1166,7 +1023,7 @@ net release.)</STRONG>
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <LI>Process Primitives (Section 3)
 
 
@@ -1796,7 +1653,7 @@ net release.)</STRONG>
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <LI>Networking (net.cc) (Standardized by POSIX 1.g, which is probably still in draft?)
 
 
@@ -2136,27 +1993,27 @@ page: <TT><a target="_top" href="http://sources.redhat.com/cygwin/">http://sourc
 read any 'Release Notes' or 'Readme' or 'read this' links on the main
 web page, if there are any.
 
-</P>
+
 <P>
 There is a comprehensive Cygwin User's Guide at
 <TT><a target="_top" href="http://sources.redhat.com/cygwin/cygwin-ug-net/cygwin-ug-net.html">http://sources.redhat.com/cygwin/cygwin-ug-net/cygwin-ug-net.html</a></TT>
 and an API Reference at
 <TT><a target="_top" href="http://sources.redhat.com/cygwin/cygwin-api/cygwin-api.html">http://sources.redhat.com/cygwin/cygwin-api/cygwin-api.html</a></TT>.
 
-</P>
+
 <P>
 There is an interesting paper about Cygwin from the 1998 USENIX Windows
 NT Workshop Proceedings at
 <TT><a target="_top" href="http://sources.redhat.com/cygwin/usenix-98/cygwin.html">http://sources.redhat.com/cygwin/usenix-98/cygwin.html</a></TT>.
 
-</P>
+
 <P>
 You can find documentation for the individual GNU tools at
 <TT><a target="_top" href="http://www.fsf.org/manual/">http://www.fsf.org/manual/</a></TT>.  (You should read GNU manuals from a
 local mirror, check <TT><a target="_top" href="http://www.fsf.org/server/list-mirrors.html">http://www.fsf.org/server/list-mirrors.html</a></TT>
 for a list of them.)
 
-</P>
+
 
 
 <H3><A NAME="SEC23" HREF="faq.html#TOC23">What Cygwin mailing lists can I join?</A></H3>
@@ -2165,20 +2022,20 @@ for a list of them.)
 Comprehensive information about the Cygwin mailing lists can be found at
 <TT><a target="_top" href="http://sources.redhat.com/cygwin/lists.html">http://sources.redhat.com/cygwin/lists.html</a></TT>.
 
-</P>
+
 <P>
 To subscribe to the main list, send a message to
 cygwin-subscribe@sources.redhat.com.  To unsubscribe from the 
 main list, send a message to cygwin-unsubscribe@sources.redhat.com.
 In both cases, the subject and body of the message are ignored.
 
-</P>
+
 <P>
 Similarly, to subscribe to the Cygwin annoucements list, send a message
 to cygwin-announce-subscribe@sources.redhat.com.  To unsubscribe,
 send a message to cygwin-announce-unsubscribe@sources.redhat.com.
 
-</P>
+
 <P>
 If you are going to help develop the Cygwin library by volunteering for
 the project, you will want to subscribe to the Cygwin developers list,
@@ -2188,19 +2045,19 @@ to cygwin-apps.  The same mechanism as described for the first two lists
 works for these as well.  Both cygwin-developers and cygwin-apps are
 by-approval lists.
 
-</P>
+
 <P>
 There is a searchable archive of the main mailing list at
 <TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/">http://sources.redhat.com/ml/cygwin/</a></TT>.  There is an alternate
 archive, also searchable, at <TT><a target="_top" href="http://www.delorie.com/archives/">http://www.delorie.com/archives/</a></TT>.
 
-</P>
+
 <P>
 Cygwin mailing lists are not gatewayed to USENET, so anti-spam measures
 in your email address are neither required nor appreciated.  Also, avoid
 sending HTML content to Cygwin mailing lists.
 
-</P>
+
 
 
 <H3><A NAME="SEC24" HREF="faq.html#TOC24">Posting Guidelines (Or: Why won't you/the mailing list answer my questions?)</A></H3>
@@ -2210,7 +2067,7 @@ If you follow these guidelines, you are much more likely to get a
 helpful response from the Cygwin developers and/or the Cygwin community at
 large:
 
-</P>
+
 
 <UL>
 <LI>Read the User's Guide and the FAQ first.
@@ -2276,7 +2133,7 @@ unwelcome.  For example, the following are off-topic:
 If you do not follow the above guidelines, you may still elicit a
 response, but you may not appreciate it!
 
-</P>
+
 <P>
 Inquiries about support contracts and commercial licensing should go to
 info@cygnus.com.  If you want to purchase the Cygwin 1.0 CD-ROM, visit
@@ -2285,12 +2142,12 @@ cygwin-info@cygnus.com.  While not strictly <EM>unappreciated</EM> in the
 main cygwin list, you'll get the information you need more quickly if
 you write to the correct address in the first place.
 
-</P>
+
 <P>
 Beyond that, perhaps nobody has time to answer your question.  Perhaps
 nobody knows the answer.
 
-</P>
+
 
 
 <H2><A NAME="SEC25" HREF="faq.html#TOC25">Using Cygwin</A></H2>
@@ -2305,7 +2162,7 @@ If you look at the "Cygwin 1.1.0" (or similar) shortcut created in the
 <CODE>C:\cygwin\bin\cygwin.bat</CODE> (assuming your root is
 <CODE>C:\cygwin</CODE>).  The contents should look something like this:
 
-</P>
+
 
 <PRE>
 	@echo off
@@ -2323,7 +2180,7 @@ directories.  (And you must not omit the Windows system directories!)
 Otherwise you will likely encounter all sorts of problems
 running Cygwin applications.
 
-</P>
+
 <P>
 If you haven't messed up the default mounts, then <CODE>/bin</CODE> and
 <CODE>/usr/bin</CODE> are the same location, so you only need one of them in
@@ -2332,7 +2189,7 @@ additional Cygwin applications that are not part of the core net
 release.  (That is, anything not found in an ftp mirror of <CODE>latest</CODE>
 and installed by <CODE>setup.exe</CODE>.)
 
-</P>
+
 
 
 <H3><A NAME="SEC27" HREF="faq.html#TOC27">How do I convert between Windows and UNIX paths?</A></H3>
@@ -2355,7 +2212,7 @@ Note that bash interprets the backslash '\' as an escape character, so
 you must type it twice in the bash shell if you want it to be recognised
 as such.
 
-</P>
+
 
 
 <H3><A NAME="SEC28" HREF="faq.html#TOC28">How do I set /etc up?</A></H3>
@@ -2364,7 +2221,7 @@ as such.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 If you want a valid /etc set up (so "ls -l" will display correct
 user information for example) and if you are running NT (preferably
@@ -2374,7 +2231,7 @@ mkgroup to create /etc/passwd and /etc/group respectively.  Since
 Windows 95/98's Win32 API is less complete, you're out of luck if
 you're running Windows 95/98.
 
-</P>
+
 
 
 <H3><A NAME="SEC29" HREF="faq.html#TOC29">Why doesn't bash read my .bashrc file on startup?</A></H3>
@@ -2385,7 +2242,7 @@ environment variable.  It uses /.bashrc if HOME is not set.  So you need
 to set HOME correctly, or move your .bashrc to the top of the drive
 mounted as / in Cygwin.
 
-</P>
+
 
 
 <H3><A NAME="SEC30" HREF="faq.html#TOC30">How can I get bash filename completion to be case insensitive?</A></H3>
@@ -2393,7 +2250,7 @@ mounted as / in Cygwin.
 <P>
 "shopt -s nocaseglob" should do the trick.
 
-</P>
+
 
 
 <H3><A NAME="SEC31" HREF="faq.html#TOC31">Can I use paths/filenames containing spaces in them?</A></H3>
@@ -2405,7 +2262,7 @@ contain spaces in Unix.  If you stumble into problems with this, you
 will need to either fix the utilities or stop using spaces in filenames
 used by Cygwin tools.
 
-</P>
+
 <P>
 In particular, bash interprets space as a word separator.  You would have
 to quote a filename containing spaces, or escape the space character.
@@ -2430,14 +2287,14 @@ or
 Cygwin does not follow MS Windows Explorer Shortcuts (*.lnk files).  It
 sees a shortcut as a regular file and this you cannot "cd" into it.
 
-</P>
+
 <P>
 Some people have suggested replacing the current symbolic link scheme
 with shortcuts.  The major problem with this is that .LNK files would
 then be used to symlink Cygwin paths that may or may not be valid
 under native Win32 non-Cygwin applications such as Explorer.
 
-</P>
+
 
 
 <H3><A NAME="SEC33" HREF="faq.html#TOC33">I'm having basic problems with find.  Why?</A></H3>
@@ -2447,7 +2304,7 @@ Make sure you are using the find that came with Cygwin and that you
 aren't picking up the Win32 find command instead.  You can verify that
 you are getting the right one by doing a "type find" in bash.
 
-</P>
+
 
 
 <H3><A NAME="SEC34" HREF="faq.html#TOC34">Why don't cursor keys work under Win95/Win98?</A></H3>
@@ -2456,7 +2313,7 @@ you are getting the right one by doing a "type find" in bash.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Careful examination shows that they not just non-functional, but
 rather behave strangely, for example, with NumLock off, keys on numeric
@@ -2469,7 +2326,7 @@ other programs). The cause of this problem is Microsoft keyboard
 localizer which by default installed in 'autoexec.bat'. Corresponding
 line looks like:
 
-</P>
+
 
 <PRE>
 keyb ru,,C:\WINDOWS\COMMAND\keybrd3.sys
@@ -2486,7 +2343,7 @@ Reference URL is http://www.hnet.ru/software/contrib/Utils/KeyRus/
 (note the you may need to turn off Windows logo for Keyrus to operate
 properly).
 
-</P>
+
 
 
 <H3><A NAME="SEC35" HREF="faq.html#TOC35">Is it OK to have multiple copies of the DLL?</A></H3>
@@ -2495,14 +2352,14 @@ properly).
 You should only have one copy of the Cygwin DLL on your system.  If you
 have multiple versions, they will conflict and cause problems.
 
-</P>
+
 <P>
 If you get the error "shared region is corrupted" it means you have
 multiple versions of cygwin1.dll running at the same time.  This could
 happen, for example, if you update cygwin1.dll without exiting <EM>all</EM>
 Cygwin apps (including inetd) beforehand.
 
-</P>
+
 
 
 <H3><A NAME="SEC36" HREF="faq.html#TOC36">Where can I find "more"?</A></H3>
@@ -2511,7 +2368,7 @@ Cygwin apps (including inetd) beforehand.
 If you are looking for the "more" pager, you should use the "less" pager
 instead.
 
-</P>
+
 
 
 <H3><A NAME="SEC37" HREF="faq.html#TOC37">Where can I find "which"?</A></H3>
@@ -2520,7 +2377,7 @@ instead.
 There is no "which" command with Cygwin.  However, you can use the bash
 shell builtin "type" which does something similar.
 
-</P>
+
 
 
 <H3><A NAME="SEC38" HREF="faq.html#TOC38">How can I access other drives?</A></H3>
@@ -2528,12 +2385,12 @@ shell builtin "type" which does something similar.
 <P>
 You have some flexibility here.
 
-</P>
+
 <P>
 Cygwin has a builtin "cygdrive prefix" for drives that are not mounted.
 You can access any drive, say Z:, as '/cygdrive/z/'.
 
-</P>
+
 <P>
 In some applications (notably bash), you can use the familiar windows
 &#60;drive&#62;:/path/, using posix forward-slashes ('/') instead of Windows
@@ -2560,7 +2417,7 @@ and
 for a default setup.  (You could also use backward-slashes in the
 Windows path, but these would have to be escaped from the shell.)
 
-</P>
+
 <P>
 <STRONG>Warning:</STRONG> There is some ambiguity in going from a Windows path
 to the posix path, because different posix paths, through different
@@ -2569,7 +2426,7 @@ because different mount points may be binmode or textmode, so the
 behaviour of Cygwin apps will vary depending on the posix path used to
 get there.
 
-</P>
+
 <P>
 You can avoid the ambiguity of Windows paths, and avoid typing
 "/cygdrive", by explicitly mounting drives to posix paths.  For example:
@@ -2585,7 +2442,7 @@ Note that you only need to mount drives once.  The mapping is kept
 in the registry so mounts stay valid pretty much indefinitely.
 You can only get rid of them with umount (or the registry editor).
 
-</P>
+
 <P>
 The '-b' option to mount mounts the mountpoint in binary mode
 ("binmode") where text and binary files are treated equivalently.  This
@@ -2595,7 +2452,7 @@ flags are missing from open calls.  It is also the setting for /,
 new mounts is text mode ("textmode"), which is also the mode for all
 "cygdrive" mounts.
 
-</P>
+
 
 
 <H3><A NAME="SEC39" HREF="faq.html#TOC39">How can I copy and paste into Cygwin console windows?</A></H3>
@@ -2605,12 +2462,12 @@ Under Windows NT, open the properties dialog of the console window.
 The options contain a toggle button, named "Quick edit mode".  It must
 be ON.  Save the properties.
 
-</P>
+
 <P>
 Under Windows 9x, open the properties dialog of the console window.
 Select the Misc tab.  Uncheck Fast Pasting.  Check QuickEdit.
 
-</P>
+
 
 
 <H3><A NAME="SEC40" HREF="faq.html#TOC40">What does "mount failed: Device or resource busy" mean?</A></H3>
@@ -2619,7 +2476,7 @@ Select the Misc tab.  Uncheck Fast Pasting.  Check QuickEdit.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 This usually means that you are trying to mount to a location
 already in use by mount.  For example, if c: is mounted as '/'
@@ -2627,7 +2484,7 @@ and you try to mount d: there as well, you will get this error
 message.  First "umount" the old location, then "mount" the new one and
 you should have better luck.
 
-</P>
+
 <P>
 If you are trying to umount '/' and are getting this message, you may
 need to run <CODE>regedit.exe</CODE> and change the "native" key for the '/'
@@ -2636,7 +2493,7 @@ HKEY_CURRENT_USER/Software/Cygnus Solutions/CYGWIN.DLL setup/&#60;version&#62;
 where &#60;version&#62; is the latest registry version associated with the
 Cygwin library.
 
-</P>
+
 
 
 <H3><A NAME="SEC41" HREF="faq.html#TOC41">How can I share files between Unix and Windows?</A></H3>
@@ -2649,7 +2506,7 @@ or just toy with them directly off the Samba-mounted partition.
 On dual-boot NT/Windows 9x machines, we usually use the FAT
 filesystem so we can also access the files under Windows 9x.
 
-</P>
+
 
 
 <H3><A NAME="SEC42" HREF="faq.html#TOC42">Are mixed-case filenames possible with Cygwin?</A></H3>
@@ -2661,7 +2518,7 @@ of this is perl's configuration script, which wants <CODE>Makefile</CODE> and
 <CODE>makefile</CODE>.  WIN32 can't tell the difference between files with
 just different case, so the configuration fails.
 
-</P>
+
 <P>
 In releases prior to beta 16, mount had a special mixed case option
 which renamed files in such a way as to allow mixed case filenames.  We
@@ -2670,12 +2527,12 @@ beta 16.  The standard Windows apps -- explorer.exe,
 cmd.exe/command.com, etc. -- do not distinguish filenames that differed
 only in case, resulting in some (very) undesirable behavior.
 
-</P>
+
 <P>
 Sergey Okhapkin had maintained a mixed-case patch ('coolview') until
 about B20.1, but this has not been updated to recent versions of Cygwin.
 
-</P>
+
 
 
 <H3><A NAME="SEC43" HREF="faq.html#TOC43">What about DOS special filenames?</A></H3>
@@ -2689,7 +2546,7 @@ interesting.  E.g., the perl distribution has a file called
 <CODE>aux.sh</CODE> is there, but an operation on a file with the magic
 letters 'aux' in it will hang.
 
-</P>
+
 
 
 <H3><A NAME="SEC44" HREF="faq.html#TOC44">When it hangs, how do I get it back?</A></H3>
@@ -2699,18 +2556,18 @@ If something goes wrong and the tools hang on you for some reason (easy
 to do if you try and read a file called aux.sh), first try hitting ^C to
 return to bash or the cmd prompt.
 
-</P>
+
 <P>
 If you start up another shell, and applications don't run, it's a good
 bet that the hung process is still running somewhere.  Use the Task
 Manager, pview, or a similar utility to kill the process.
 
-</P>
+
 <P>
 And, if all else fails, there's always the reset button/power switch.
 This should never be necessary under Windows NT.
 
-</P>
+
 
 
 <H3><A NAME="SEC45" HREF="faq.html#TOC45">Why the weird directory structure?</A></H3>
@@ -2718,20 +2575,20 @@ This should never be necessary under Windows NT.
 <P>
 Why do /lib and /usr/lib (and /bin, /usr/bin) point to the same thing?
 
-</P>
+
 <P>
 Why use mounts instead of symbolic links?
 
-</P>
+
 <P>
 Can I use a disk root (e.g., C:\) as Cygwin root?  Why is this discouraged?
 
-</P>
+
 <P>
 After a new installation in the default location, your mount points will
 look something like this:
 
-</P>
+
 
 <PRE>
 Device              Directory           Type         Flags
@@ -2745,7 +2602,7 @@ Note that /bin and /usr/bin point to the same location, as do /lib and
 /usr/lib.  This is intentional, and you should not undo these mounts
 unless you <EM>really</EM> know what you are doing.
 
-</P>
+
 <P>
 Various applications and packages may expect to be installed in /lib or
 /usr/lib (similarly /bin or /usr/bin).  Rather than distinguish between
@@ -2753,20 +2610,20 @@ them and try to keep track of them (possibly requiring the occasional
 duplication or symbolic link), it was decided to maintain only one
 actual directory, with equivalent ways to access it.
 
-</P>
+
 <P>
 Symbolic links had been considered for this purpose, but were dismissed
 because they do not always work on Samba drives.  Also, mounts are
 faster to process because no disk access is required to resolve them.
 
-</P>
+
 <P>
 Note that non-cygwin applications will not observe Cygwin mounts (or
 symlinks for that matter).  For example, if you use WinZip to unpack the
 tar distribution of a Cygwin package, it may not get installed to the
 correct Cygwin path.  <EM>So don't do this!</EM>
 
-</P>
+
 <P>
 It is strongly recommended not to make the Cygwin root directory the
 same as your drive's root directory, unless you know what you are doing
@@ -2777,7 +2634,7 @@ applications that may create (for example) \bin and \lib directories.
 (Maybe you have nothing like that installed now, but who knows about
 things you might add in the future?)
 
-</P>
+
 
 
 <H3><A NAME="SEC46" HREF="faq.html#TOC46">How do anti-virus programs like Cygwin?</A></H3>
@@ -2788,7 +2645,7 @@ incompatible with Cygwin.  This is because it tries to scan the
 newly loaded shared memory in the cygwin.dll, which can cause fork()s
 to fail, wreaking havoc on many of the tools.
 
-</P>
+
 <P>
 There are also reports of NAI VirusScan causing the system to hang when
 unpacking tar.gz archives.  This is surely a bug in VirusScan, and
@@ -2796,7 +2653,7 @@ should be reported to NAI.  The only workaround is to disable VirusScan
 when accessing these files.  This can be an issue during setup, and is
 discussed in that FAQ entry.
 
-</P>
+
 
 
 <H3><A NAME="SEC47" HREF="faq.html#TOC47">Why can't I run bash as a shell under NT Emacs?</A></H3>
@@ -2805,11 +2662,11 @@ discussed in that FAQ entry.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Place the following code in your startup file and try again:
 
-</P>
+
 
 <PRE>
 (load "comint")
@@ -2847,7 +2704,7 @@ This may generate warnings:
 The <CODE>install-info</CODE> command cannot parse these files, so you will
 have to add their entries to <CODE>/usr/info/dir</CODE> by hand.
 
-</P>
+
 
 
 <H3><A NAME="SEC49" HREF="faq.html#TOC49">Why do I get a message saying Out of Queue slots?</A></H3>
@@ -2856,7 +2713,7 @@ have to add their entries to <CODE>/usr/info/dir</CODE> by hand.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 "Out of queue slots!" generally occurs when you're trying to remove
 many files that you do not have permission to remove (either because
@@ -2870,7 +2727,7 @@ you're asking about.  Usually you can remedy this with a quick chmod,
 close of a file, or other such thing.  (Thanks to Larry Hall for
 this explanation).
 
-</P>
+
 
 
 <H3><A NAME="SEC50" HREF="faq.html#TOC50">Why don't symlinks work on samba-mounted filesystems?</A></H3>
@@ -2881,7 +2738,7 @@ enable this attribute by default.  To enable it, consult your Samba
 documentation and then add these lines to your samba configuration
 file:
 
-</P>
+
 
 <PRE>
 	map system = yes
@@ -2891,7 +2748,7 @@ file:
 <P>
 Note that the 0775 can be anything as long as the 0010 bit is set.
 
-</P>
+
 
 
 <H3><A NAME="SEC51" HREF="faq.html#TOC51">Why does df report sizes incorrectly.</A></H3>
@@ -2900,13 +2757,13 @@ Note that the 0775 can be anything as long as the 0010 bit is set.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 There is a bug in the Win32 API function GetFreeDiskSpace that
 makes it return incorrect values for disks larger than 2 GB in size.
 Perhaps that may be your problem?
 
-</P>
+
 
 
 <H3><A NAME="SEC52" HREF="faq.html#TOC52">Has the screen program been ported yet?</A></H3>
@@ -2915,12 +2772,12 @@ Perhaps that may be your problem?
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Screen requires either unix domain sockets or fifoes.  Neither of
 them have been implemented in Cygwin yet.
 
-</P>
+
 
 
 <H2><A NAME="SEC53" HREF="faq.html#TOC53">Cygwin API Questions</A></H2>
@@ -2933,26 +2790,26 @@ them have been implemented in Cygwin yet.
 There's a C library which provides a Unix-style API.  The
 applications are linked with it and voila - they run on Windows.
 
-</P>
+
 <P>
 The aim is to add all the goop necessary to make your apps run on
 Windows into the C library.  Then your apps should run on Unix and
 Windows with no changes at the source level.
 
-</P>
+
 <P>
 The C library is in a DLL, which makes basic applications quite small.
 And it allows relatively easy upgrades to the Win32/Unix translation
 layer, providing that dll changes stay backward-compatible.
 
-</P>
+
 <P>
 For a good overview of Cygwin, you may want to read the paper on Cygwin
 published by the Usenix Association in conjunction with the 2d Usenix NT
 Symposium in August 1998.  It is available in html format on the project
 WWW site.
 
-</P>
+
 
 
 <H3><A NAME="SEC55" HREF="faq.html#TOC55">Are development snapshots for the Cygwin library available?</A></H3>
@@ -2966,7 +2823,6 @@ debugging problems in a buggy snapshot, avoid these and wait for a real
 release.  The snapshots are available from
 http://sources.redhat.com/cygwin/snapshots/
 
-</P>
 
 
 
@@ -2976,18 +2832,18 @@ http://sources.redhat.com/cygwin/snapshots/
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Let's start with some background.
 
-</P>
+
 <P>
 In UNIX, a file is a file and what the file contains is whatever the
 program/programmer/user told it to put into it.  In Windows, a file is
 also a file and what the file contains depends not only on the
 program/programmer/user but also the file processing mode.
 
-</P>
+
 <P>
 When processing in text mode, certain values of data are treated
 specially.  A \n (new line) written to the file will prepend a \r
@@ -2998,7 +2854,7 @@ This tends to confuse programs dependant on ftell() and fseek().  A
 Ctrl-Z encountered while reading a file sets the End Of File flags even
 though it truly isn't the end of file.
 
-</P>
+
 <P>
 One of Cygwin's goals is to make it possible to easily mix Cygwin-ported
 Unix programs with generic Windows programs.  As a result, Cygwin opens
@@ -3007,7 +2863,7 @@ tools, tools that deal with binaries (e.g. objdump) operate in unix
 binary mode and tools that deal with text files (e.g. bash) operate in
 text mode.
 
-</P>
+
 <P>
 Some people push the notion of globally setting the default processing
 mode to binary via mount point options or by setting the CYGWIN32
@@ -3018,7 +2874,7 @@ you, you would have to remove the \r from the relevant text files,
 especially scripts and startup resource files.  This is a porter "cop
 out", forcing the user to deal with the \r for the porter.
 
-</P>
+
 <P>
 It is rather easy for the porter to fix the source code by supplying the
 appropriate file processing mode switches to the open/fopen functions.
@@ -3028,22 +2884,22 @@ the second argument of an <CODE>open</CODE> call, or <CODE>"b"</CODE> to second
 argument of an <CODE>fopen</CODE> call.  You can also call <CODE>setmode (fd,
 O_BINARY)</CODE>.
 
-</P>
+
 <P>
 Note that because the open/fopen switches are defined by ANSI, they
 exist under most flavors of Unix; open/fopen will just ignore the switch
 since they have no meaning to UNIX.
 
-</P>
+
 <P>
 Also note that <CODE>lseek</CODE> only works in binary mode.
 
-</P>
+
 <P>
 Explanation adapted from mailing list email by Earnie Boyd
 &#60;earnie_boyd@yahoo.com&#62;.
 
-</P>
+
 
 
 <H3><A NAME="SEC57" HREF="faq.html#TOC57">Is the Cygwin library multi-thread-safe?</A></H3>
@@ -3053,12 +2909,12 @@ Multi-thread-safe support is turned on by default in 1.1.x releases
 (i.e., in the latest net release).  That does not mean that it is bug
 free!
 
-</P>
+
 <P>
 There is also limited support for 'POSIX threads', see the file
 <CODE>cygwin.din</CODE> for the list of POSIX thread functions provided.
 
-</P>
+
 
 
 <H3><A NAME="SEC58" HREF="faq.html#TOC58">Why is some functionality only supported in Windows NT?</A></H3>
@@ -3069,14 +2925,14 @@ Windows 9x: n.
 8 bit operating system originally coded for a 4 bit microprocessor,
 written by a 2 bit company that can't stand 1 bit of competition.
 
-</P>
+
 <P>
 But seriously, Windows 9x lacks most of the security-related calls and
 has several other deficiencies with respect to its version of the Win32
 API.  See the calls.texinfo document for more information as to what
 is not supported in Win 9x.
 
-</P>
+
 
 
 <H3><A NAME="SEC59" HREF="faq.html#TOC59">How is fork() implemented?</A></H3>
@@ -3087,11 +2943,11 @@ of fork() (like old Unix versions used to do).  Because of this it
 can be a little slow.  In most cases, you are better off using the
 spawn family of calls if possible.
 
-</P>
+
 <P>
 Here's how it works:
 
-</P>
+
 <P>
 Parent initializes a space in the Cygwin process table for child.
 Parent creates child suspended using Win32 CreateProcess call, giving
@@ -3109,7 +2965,7 @@ child, releases the mutex the child is waiting on and returns from the
 fork call.  Child wakes from blocking on mutex, recreates any mmapped
 areas passed to it via shared area and then returns from fork itself.
 
-</P>
+
 
 
 <H3><A NAME="SEC60" HREF="faq.html#TOC60">How does wildcarding (globbing) work?</A></H3>
@@ -3118,7 +2974,7 @@ areas passed to it via shared area and then returns from fork itself.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 If an application using CYGWIN.DLL starts up, and can't find the
 <CODE>PID</CODE> environment variable, it assumes that it has been started
@@ -3126,19 +2982,19 @@ from the a DOS style command prompt.  This is pretty safe, since the
 rest of the tools (including bash) set PID so that a new process knows
 what PID it has when it starts up.
 
-</P>
+
 <P>
 If the DLL thinks it has come from a DOS style prompt, it runs a
 `globber' over the arguments provided on the command line.  This means
 that if you type <CODE>LS *.EXE</CODE> from DOS, it will do what you might
 expect.
 
-</P>
+
 <P>
 Beware: globbing uses <CODE>malloc</CODE>.  If your application defines
 <CODE>malloc</CODE>, that will get used.  This may do horrible things to you.
 
-</P>
+
 
 
 <H3><A NAME="SEC61" HREF="faq.html#TOC61">How do symbolic links work?</A></H3>
@@ -3154,7 +3010,7 @@ filesystems do not enable the system attribute by default, symlinks do
 not work on network drives unless you explicitly enable this
 attribute.
 
-</P>
+
 
 
 <H3><A NAME="SEC62" HREF="faq.html#TOC62">Why do some files, which are not executables have the 'x' type.</A></H3>
@@ -3163,12 +3019,12 @@ attribute.
 When working out the unix-style attribute bits on a file, the library
 has to fill out some information not provided by the WIN32 API.  
 
-</P>
+
 <P>
 It guesses that files ending in .exe and .bat are executable, as are
 ones which have a "#!" as their first characters.
 
-</P>
+
 
 
 <H3><A NAME="SEC63" HREF="faq.html#TOC63">How secure is Cygwin in a multi-user environment?</A></H3>
@@ -3184,11 +3040,11 @@ priveledge of another cygwin program running on the machine.
 This is because cygwin has shared state that is accessible by 
 all processes.
 
-</P>
+
 <P>
 (Thanks to Tim Newsham (newsham@lava.net) for this explanation).
 
-</P>
+
 
 
 <H3><A NAME="SEC64" HREF="faq.html#TOC64">How do the net-related functions work?</A></H3>
@@ -3197,17 +3053,17 @@ all processes.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 The network support in Cygwin is supposed to provide the Unix API, not
 the Winsock API.
 
-</P>
+
 <P>
 There are differences between the semantics of functions with the same
 name under the API.
 
-</P>
+
 <P>
 E.g., the select system call on Unix can wait on a standard file handles
 and handles to sockets.  The select call in winsock can only wait on
@@ -3215,19 +3071,19 @@ sockets.  Because of this, cygwin.dll does a lot of nasty stuff behind
 the scenes, trying to persuade various winsock/win32 functions to do what
 a Unix select would do.
 
-</P>
+
 <P>
 If you are porting an application which already uses Winsock, then
 using the net support in Cygwin is wrong.
 
-</P>
+
 <P>
 But you can still use native Winsock, and use Cygwin.  The functions
 which cygwin.dll exports are called 'cygwin_&#60;name&#62;'.  There
 are a load of defines which map the standard Unix names to the names
 exported by the dll -- check out include/netdb.h:
 
-</P>
+
 
 <PRE>
 ..etc..
@@ -3247,7 +3103,7 @@ The idea is that you'll get the Unix-&#62;Cygwin mapping if you include
 the standard Unix header files.  If you use this, you won't need to
 link with libwinsock.a - all the net stuff is inside the dll.
 
-</P>
+
 <P>
 The mywinsock.h file is a standard winsock.h which has been hacked to
 remove the bits which conflict with the standard Unix API, or are
@@ -3255,11 +3111,11 @@ defined in other headers.  E.g., in mywinsock.h, the definition of
 struct hostent is removed.  This is because on a Unix box, it lives in
 netdb.  It isn't a good idea to use it in your applications.
 
-</P>
+
 <P>
 As of the b19 release, this information may be slightly out of date.
 
-</P>
+
 
 
 <H3><A NAME="SEC65" HREF="faq.html#TOC65">I don't want Unix sockets, how do I use normal Win32 winsock?</A></H3>
@@ -3268,14 +3124,14 @@ As of the b19 release, this information may be slightly out of date.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 To use the vanilla Win32 winsock, you just need to #define Win32_Winsock
 and #include "windows.h" at the top of your source file(s).  You'll also
 want to add -lwsock32 to the compiler's command line so you link against
 libwsock32.a.
 
-</P>
+
 
 
 <H3><A NAME="SEC66" HREF="faq.html#TOC66">What version numbers are associated with Cygwin?</A></H3>
@@ -3284,7 +3140,7 @@ libwsock32.a.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 There is a cygwin.dll major version number that gets incremented
 every time we make a new Cygwin release available.  This
@@ -3293,7 +3149,7 @@ number is "19").  There is also a cygwin.dll minor version number.  If
 we release an update of the library for an existing release, the minor
 number would be incremented.
 
-</P>
+
 <P>
 There are also Cygwin API major and minor numbers.  The major number
 tracks important non-backward-compatible interface changes to the API.
@@ -3302,19 +3158,19 @@ with the latest DLL.  The minor number tracks significant API additions
 or changes that will not break older executables but may be required by
 newly compiled ones.
 
-</P>
+
 <P>
 Then there is a shared memory region compatibity version number.  It is
 incremented when incompatible changes are made to the shared memory
 region or to any named shared mutexes, semaphores, etc.
 
-</P>
+
 <P>
 Finally there is a mount point registry version number which keeps track
 of non-backwards-compatible changes to the registry mount table layout.
 This has been "B15.0" since the beta 15 release.
 
-</P>
+
 
 
 <H3><A NAME="SEC67" HREF="faq.html#TOC67">Why isn't _timezone set correctly?</A></H3>
@@ -3323,12 +3179,12 @@ This has been "B15.0" since the beta 15 release.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Did you explicitly call tzset() before checking the value of _timezone?
 If not, you must do so.
 
-</P>
+
 
 
 <H3><A NAME="SEC68" HREF="faq.html#TOC68">Is there a mouse interface?</A></H3>
@@ -3337,7 +3193,7 @@ If not, you must do so.
 There is no way to capture mouse events from Cygwin.  There are
 currently no plans to add support for this.
 
-</P>
+
 
 
 <H2><A NAME="SEC69" HREF="faq.html#TOC69">Programming Questions</A></H2>
@@ -3350,12 +3206,12 @@ currently no plans to add support for this.
 By default, gcc compiles in all symbols.  You'll also find that gcc
 creates large executables on UNIX.
 
-</P>
+
 <P>
 If that bothers you, just use the 'strip' program, part of the binutils
 package.
 
-</P>
+
 
 
 <H3><A NAME="SEC71" HREF="faq.html#TOC71">Where is glibc?</A></H3>
@@ -3365,7 +3221,7 @@ Cygwin does not provide glibc.  It uses newlib instead, which provides
 much (but not all) of the same functionality.  Porting glibc to Cygwin
 would be difficult.
 
-</P>
+
 
 
 <H3><A NAME="SEC72" HREF="faq.html#TOC72">Why is make behaving badly?</A></H3>
@@ -3374,7 +3230,7 @@ would be difficult.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Starting with the beta 19 release, make defaults to a win32 mode in
 which backslashes in filenames are permitted and cmd.exe/command.com
@@ -3383,7 +3239,7 @@ allowed among other restrictions.  For this reason, you must set
 the environment variable MAKE_MODE to UNIX to run make on ordinary Unix
 Makefiles.  Here is the full scoop:
 
-</P>
+
 <P>
 MAKE_MODE selects between native Win32 make mode (the default) and
 a Unix mode where it behaves like a Unix make.  The Unix mode does
@@ -3391,7 +3247,7 @@ allow specifying Win32-style paths but only containing forward slashes
 as the path separator.  The path list separator character is a colon
 in Unix mode.
 
-</P>
+
 <P>
 Win32 mode expects path separators to be either / or \.  Thus no
 Unix-style \s as escape are allowed.  Win32 mode also uses
@@ -3402,7 +3258,7 @@ make might want to use this mode but no one should expect Unix
 Makefiles to compile in this mode.  That is why the default b19
 install sets MAKE_MODE to UNIX.
 
-</P>
+
 
 
 <H3><A NAME="SEC73" HREF="faq.html#TOC73">Why the undefined reference to "WinMain@16"?</A></H3>
@@ -3411,11 +3267,11 @@ install sets MAKE_MODE to UNIX.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Try adding an empty main() function to one of your sources.
 
-</P>
+
 
 
 <H3><A NAME="SEC74" HREF="faq.html#TOC74">How do I use Win32 API calls?</A></H3>
@@ -3424,35 +3280,35 @@ Try adding an empty main() function to one of your sources.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 It's pretty simple actually.  Cygwin tools require that you explicitly
 link the import libraries for whatever Win32 API functions that you
 are going to use, with the exception of kernel32, which is linked
 automatically (because the startup and/or built-in code uses it).
 
-</P>
+
 <P>
 For example, to use graphics functions (GDI) you must link
 with gdi32 like this:
 
-</P>
+
 <P>
 gcc -o foo.exe foo.o bar.o -lgdi32
 
-</P>
+
 <P>
 or (compiling and linking in one step):
 
-</P>
+
 <P>
 gcc -o foo.exe foo.c bar.c -lgdi32
 
-</P>
+
 <P>
 The following libraries are available for use in this way:
 
-</P>
+
 <P>
 advapi32  largeint  ole32     scrnsave  vfw32
 cap       lz32      oleaut32  shell32   win32spl
@@ -3467,14 +3323,14 @@ icmp      odbc32    rpcndr    uuid
 imm32     odbccp32  rpcns4    vdmdbg
 kernel32  oldnames  rpcrt4    version
 
-</P>
+
 <P>
 The regular setup allows you to use the option -mwindows on the
 command line to include a set of the basic libraries (and also
 make your program a GUI program instead of a console program),
 including user32, gdi32 and, IIRC, comdlg32.
 
-</P>
+
 <P>
 Note that you should never include -lkernel32 on your link line
 unless you are invoking ld directly.  Do not include the same import
@@ -3482,7 +3338,7 @@ library twice on your link line.  Finally, it is a good idea to
 put import libraries last on your link line, or at least after
 all the object files and static libraries that reference them.
 
-</P>
+
 <P>
 The first two are related to problems the linker has (as of b18 at least)
 when import libraries are referenced twice.  Tables get messed up and
@@ -3491,7 +3347,7 @@ gcc processes the files listed on the command line in sequence and
 will only resolve references to libraries if they are given after
 the file that makes the reference.
 
-</P>
+
 
 
 <H3><A NAME="SEC75" HREF="faq.html#TOC75">How do I compile a Win32 executable that doesn't use Cygwin?</A></H3>
@@ -3501,13 +3357,13 @@ The -mno-cygwin flag to gcc makes gcc link against standard Microsoft
 DLLs instead of Cygwin.  This is desirable for native Windows programs
 that don't need a UNIX emulation layer.
 
-</P>
+
 <P>
 This is not to be confused with 'MinGW' (Minimalist GNU for Windows),
 which is a completely separate effort.  That project's home page is
 <TT><a target="_top" href="http://www.mingw.org/index.shtml">http://www.mingw.org/index.shtml</a></TT>.
 
-</P>
+
 
 
 <H3><A NAME="SEC76" HREF="faq.html#TOC76">How do I make the console window go away?</A></H3>
@@ -3518,7 +3374,7 @@ It you are writing a GUI program, you should either compile with
 -mwindows as explained above, or add the string
 "-Wl,--subsystem,windows" to the GCC commandline.
 
-</P>
+
 
 
 <H3><A NAME="SEC77" HREF="faq.html#TOC77">Why does make complain about a "missing separator"?</A></H3>
@@ -3528,7 +3384,7 @@ This problem usually occurs as a result of someone editing a Makefile
 with a text editor that replaces tab characters with spaces.  Command
 lines must start with tabs.  This is not specific to Cygwin.
 
-</P>
+
 
 
 <H3><A NAME="SEC78" HREF="faq.html#TOC78">Why can't we redistribute Microsoft's Win32 headers?</A></H3>
@@ -3541,7 +3397,7 @@ give them to you, but you can't give them to anyone else, which is
 something that Cygnus (err... Red Hat) can't agree to.  Fortunately, we
 have our own Win32 headers which are pretty complete.
 
-</P>
+
 
 
 <H3><A NAME="SEC79" HREF="faq.html#TOC79">How do I link against .lib files?</A></H3>
@@ -3550,7 +3406,7 @@ have our own Win32 headers which are pretty complete.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 1. Build a C file with a function table.  Put all functions you intend
 to use in that table.  This forces the linker to include all the object
@@ -3560,11 +3416,11 @@ include an object file.
 3. Build a .def with all the exports you need.
 4. Link with your .lib using link.exe.
 
-</P>
+
 <P>
 or
 
-</P>
+
 <P>
 1. Extract all the object files from the .lib using LIB.EXE.
 2. Build a dummy C file referencing all the functions you need, either
@@ -3574,21 +3430,21 @@ with a direct call or through an initialized function pointer.
 5. Write a .def.
 6. Link.
 
-</P>
+
 <P>
 You can use these methods to use MSVC (and many other runtime libs)
 with Cygwin development tools.
 
-</P>
+
 <P>
 Note that this is a lot of work (half a day or so), but much less than
 rewriting the runtime library in question from specs...
 
-</P>
+
 <P>
 (thanks to Jacob Navia (root@jacob.remcomp.fr) for this explanation)
 
-</P>
+
 
 
 <H3><A NAME="SEC80" HREF="faq.html#TOC80">How do I rebuild the tools on my NT box?</A></H3>
@@ -3597,12 +3453,12 @@ rewriting the runtime library in question from specs...
 <STRONG>Note:</STRONG> You must build in a directory <EM>outside</EM> the source
 tree.
 
-</P>
+
 <P>
 Assuming that you have the src installed as /src, will build in
 the directory /obj, and want to install the tools in /install:
 
-</P>
+
 
 <PRE>
 bash
@@ -3618,7 +3474,7 @@ additionally requires texinfo, texi2html, db2html and possibly others.
 These tools are not included in the Cygwin distribution, but are readily
 obtainable (or build OOTB).
 
-</P>
+
 <P>
 To check a cygwin1.dll, run "make check" in the winsup/cygwin directory.
 If that works, install everything <EM>except</EM> the dll (if you can).
@@ -3628,13 +3484,13 @@ places where the old dll was (if there is more than one on your
 machine).  Then start up a bash window and see what happens.  (Or better,
 run a cygwin program from the Windows command prompt.)
 
-</P>
+
 <P>
 If you get the error "shared region is corrupted" it means that two
 different versions of cygwin1.dll are running on your machine at the
 same time.
 
-</P>
+
 
 
 <H3><A NAME="SEC81" HREF="faq.html#TOC81">How can I compile a powerpc NT toolchain?</A></H3>
@@ -3643,7 +3499,7 @@ same time.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Unfortunately, this will be difficult.  It hasn't been built for
 some time (late 1996) since Microsoft has dropped development of
@@ -3652,7 +3508,7 @@ changed for x86 and not updated for ppc so the ppc specific support would
 have to be rewritten.  We don't know of any other incompatibilities.
 Please send us patches if you do this work!
 
-</P>
+
 
 
 <H3><A NAME="SEC82" HREF="faq.html#TOC82">How can I compile an Alpha NT toolchain?</A></H3>
@@ -3661,13 +3517,13 @@ Please send us patches if you do this work!
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 We have not ported the tools to Alpha NT and do not have plans to
 do so at the present time.  We would be happy to add support
 for Alpha NT if someone contributes the changes to us.
 
-</P>
+
 
 
 <H3><A NAME="SEC83" HREF="faq.html#TOC83">How can I adjust the heap/stack size of an application?</A></H3>
@@ -3676,17 +3532,17 @@ for Alpha NT if someone contributes the changes to us.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Pass heap/stack linker arguments to gcc.  To create foo.exe with
 a heap size of 1024 and a stack size of 4096, you would invoke
 gcc as:
 
-</P>
+
 <P>
 <CODE>gcc -Wl,--heap,1024,--stack,4096 -o foo foo.c</CODE>
 
-</P>
+
 
 
 <H3><A NAME="SEC84" HREF="faq.html#TOC84">How can I find out which dlls are needed by an executable?</A></H3>
@@ -3695,11 +3551,11 @@ gcc as:
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 objdump -p provides this information.
 
-</P>
+
 
 
 <H3><A NAME="SEC85" HREF="faq.html#TOC85">How do I build a DLL?</A></H3>
@@ -3708,12 +3564,12 @@ objdump -p provides this information.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 There's documentation that explains the process on the main Cygwin
 project web page (http://sources.redhat.com/cygwin/).
 
-</P>
+
 
 
 <H3><A NAME="SEC86" HREF="faq.html#TOC86">How can I set a breakpoint at MainCRTStartup?</A></H3>
@@ -3722,12 +3578,12 @@ project web page (http://sources.redhat.com/cygwin/).
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Set a breakpoint at *0x401000 in gdb and then run the program in
 question.
 
-</P>
+
 
 
 <H3><A NAME="SEC87" HREF="faq.html#TOC87">How can I build a relocatable dll?</A></H3>
@@ -3739,12 +3595,12 @@ mailing list recently that addresses this issue.  Read
 <TT><a target="_top" href="http://sources.redhat.com/ml/cygwin/2000-06/msg00688.html">http://sources.redhat.com/ml/cygwin/2000-06/msg00688.html</a></TT> and
 related messages.)</STRONG>
 
-</P>
+
 <P>
 You must execute the following sequence of five commands, in this
 order:
 
-</P>
+
 
 <PRE>
 $(LD) -s --base-file BASEFILE --dll -o DLLNAME OBJS LIBS -e ENTRY
@@ -3763,59 +3619,59 @@ $(LD) EXPFILE --dll -o DLLNAME OBJS LIBS -e ENTRY
 <P>
 In this example, $(LD) is the linker, ld.
 
-</P>
+
 <P>
 $(DLLTOOL) is dlltool.
 
-</P>
+
 <P>
 $(AS) is the assembler, as.
 
-</P>
+
 <P>
 DLLNAME is the name of the DLL you want to create, e.g., tcl80.dll.
 
-</P>
+
 <P>
 OBJS is the list of object files you want to put into the DLL.
 
-</P>
+
 <P>
 LIBS is the list of libraries you want to link the DLL against.  For
 example, you may or may not want -lcygwin.  You may want -lkernel32.
 Tcl links against -lcygwin -ladvapi32 -luser32 -lgdi32 -lcomdlg32
 -lkernel32.
 
-</P>
+
 <P>
 DEFFILE is the name of your definitions file.  A simple DEFFILE would
 consist of "EXPORTS" followed by a list of all symbols which should
 be exported from the DLL.  Each symbol should be on a line by itself.
 Other programs will only be able to access the listed symbols.
 
-</P>
+
 <P>
 BASEFILE is a temporary file that is used during this five stage
 process, e.g., tcl.base.
 
-</P>
+
 <P>
 EXPFILE is another temporary file, e.g., tcl.exp.
 
-</P>
+
 <P>
 ENTRY is the name of the function which you want to use as the entry
 point.  This function should be defined using the WINAPI attribute,
 and should take three arguments:
         int WINAPI startup (HINSTANCE, DWORD, LPVOID)
 
-</P>
+
 <P>
 This means that the actual symbol name will have an appended @12, so if
 your entry point really is named <SAMP>`startup'</SAMP>, the string you should
 use for ENTRY in the above examples would be <SAMP>`startup@12'</SAMP>.
 
-</P>
+
 <P>
 If your DLL calls any Cygwin API functions, the entry function will need
 to initialize the Cygwin impure pointer.  You can do that by declaring
@@ -3823,7 +3679,7 @@ a global variable <SAMP>`_impure_ptr'</SAMP>, and then initializing it in the
 entry function.  Be careful not to export the global variable
 <SAMP>`_impure_ptr'</SAMP> from your DLL; that is, do not put it in DEFFILE.
 
-</P>
+
 
 <PRE>
 /* This is a global variable.  */
@@ -3844,7 +3700,7 @@ this is important.  Note that if you specify a --subsytem &#60;x&#62; flag to ld
 the -e entry must come after the subsystem flag, since the subsystem flag
 sets a different default entry point.
 
-</P>
+
 <P>
 You may put an optional `--image-base BASEADDR' on the $(LD) lines.
 This will set the default image base.  Programs using this DLL will
@@ -3852,7 +3708,7 @@ start up a bit faster if each DLL occupies a different portion of the
 address space.  Each DLL starts at the image base, and continues for
 whatever size it occupies.
 
-</P>
+
 <P>
 Now that you've built your DLL, you may want to build a library so
 that other programs can link against it.  This is not required: you
@@ -3860,22 +3716,22 @@ could always use the DLL via LoadLibrary.  However, if you want to be
 able to link directly against the DLL, you need to create a library.
 Do that like this:
 
-</P>
+
 <P>
 $(DLLTOOL) --as=$(AS) --dllname DLLNAME --def DEFFILE --output-lib LIBFILE
 
-</P>
+
 <P>
 $(DLLTOOL), $(AS), DLLNAME, and DEFFILE are the same as above.  Make
 sure you use the same DLLNAME and DEFFILE, or things won't work right.
 
-</P>
+
 <P>
 LIBFILE is the name of the library you want to create, e.g.,
 libtcl80.a.  You can then link against that library using something
 like -ltcl80 in your linker command.
 
-</P>
+
 
 
 <H3><A NAME="SEC88" HREF="faq.html#TOC88">How can I debug what's going on?</A></H3>
@@ -3888,7 +3744,7 @@ for them when you run your program.  This is normal since these dlls
 don't contain debugging information (and even if they did, that debug
 info would not be compatible with gdb).
 
-</P>
+
 
 
 <H3><A NAME="SEC89" HREF="faq.html#TOC89">Can I use a system trace mechanism instead?</A></H3>
@@ -3899,7 +3755,7 @@ programs with various debug and trace messages enabled.  For information
 on using <CODE>strace</CODE>, see the Cygwin User's Guide or the file
 <CODE>winsup/utils/utils.sgml</CODE>.
 
-</P>
+
 <P>
 Alternatively, you can set the <CODE>STRACE</CODE> environment variable to
 <CODE>1</CODE>, and get a whole load of debug information on your screen
@@ -3911,7 +3767,7 @@ You can set it to <CODE>0x10</CODE> for information about syscalls or
 strace mechanism is well documented in the Cygwin library sources in the
 file <CODE>winsup/cygwin/include/sys/strace.h</CODE>.
 
-</P>
+
 
 
 <H3><A NAME="SEC90" HREF="faq.html#TOC90">Why doesn't gdb handle signals?</A></H3>
@@ -3923,7 +3779,7 @@ SIGINT may work, SIGFPE may work, SIGSEGV definitely does.  You cannot
 'stop', 'print' or 'nopass' signals like SIGUSR1 or SIGHUP to the
 process being debugged.
 
-</P>
+
 
 
 <H3><A NAME="SEC91" HREF="faq.html#TOC91">The linker complains that it can't find something.</A></H3>
@@ -3932,34 +3788,34 @@ process being debugged.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 A common error is to put the library on the command line before
 the thing that needs things from it.
 
-</P>
+
 <P>
 This is wrong <CODE>gcc -lstdc++ hello.cc</CODE>.
 This is right <CODE>gcc hello.cc -lstdc++</CODE>.
 
-</P>
+
 
 
 <H3><A NAME="SEC92" HREF="faq.html#TOC92">I use a function I know is in the API, but I still get a link</A></H3>
 <P>
 error.
 
-</P>
+
 <P>
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 The function probably isn't declared in the header files, or
 the UNICODE stuff for it isn't filled in.
 
-</P>
+
 
 
 <H3><A NAME="SEC93" HREF="faq.html#TOC93">Can you make DLLs that are linked against libc ?</A></H3>
@@ -3968,11 +3824,11 @@ the UNICODE stuff for it isn't filled in.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Yes.
 
-</P>
+
 
 
 <H3><A NAME="SEC94" HREF="faq.html#TOC94">Where is malloc.h?</A></H3>
@@ -3981,11 +3837,11 @@ Yes.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Include stdlib.h instead of malloc.h.
 
-</P>
+
 
 
 <H3><A NAME="SEC95" HREF="faq.html#TOC95">Can I use my own malloc?</A></H3>
@@ -3995,7 +3851,7 @@ If you define a function called <CODE>malloc</CODE> in your own code, and link
 with the DLL, the DLL <EM>will</EM> call your <CODE>malloc</CODE>.  Needless to
 say, you will run into serious problems if your malloc is buggy.
 
-</P>
+
 <P>
 If you run any programs from the DOS command prompt, rather than from in
 bash, the DLL will try and expand the wildcards on the command line.
@@ -4003,7 +3859,7 @@ This process uses <CODE>malloc</CODE> <EM>before</EM> your main line is started.
 If you have written your own <CODE>malloc</CODE> to need some initialization
 to occur after <CODE>main</CODE> is called, then this will surely break.
 
-</P>
+
 <P>
 Moreover, there is an outstanding issue with <CODE>_malloc_r</CODE> in
 <CODE>newlib</CODE>.  This re-entrant version of <CODE>malloc</CODE> will be called
@@ -4013,7 +3869,7 @@ is probably incompatible with it.  But it may not be possible to replace
 Cygwin does not expect your program to replace it.  This is really a
 newlib issue, but we are open to suggestions on how to deal with it.
 
-</P>
+
 
 
 <H3><A NAME="SEC96" HREF="faq.html#TOC96">Can I mix objects compiled with msvc++ and gcc?</A></H3>
@@ -4023,7 +3879,7 @@ Yes, but only if you are combining C object files.  MSVC C++ uses a
 different mangling scheme than GNU C++, so you will have difficulties
 combining C++ objects.
 
-</P>
+
 
 
 <H3><A NAME="SEC97" HREF="faq.html#TOC97">Can I use the gdb debugger to debug programs built by VC++?</A></H3>
@@ -4033,7 +3889,7 @@ No, not for full (high level source language) debugging.
 The Microsoft compilers generate a different type of debugging
 symbol information, which gdb does not understand.
 
-</P>
+
 <P>
 However, the low-level (assembly-type) symbols generated by
 Microsoft compilers are coff, which gdb DOES understand.
@@ -4041,7 +3897,7 @@ Therefore you should at least be able to see all of your
 global symbols; you just won't have any information about
 data types, line numbers, local variables etc.
 
-</P>
+
 
 
 <H3><A NAME="SEC98" HREF="faq.html#TOC98">Where can I find info on x86 assembly?</A></H3>
@@ -4050,11 +3906,11 @@ data types, line numbers, local variables etc.
 CPU reference manuals for Intel's current chips are available in
 downloadable PDF form on Intel's web site:
 
-</P>
+
 <P>
 <TT><a target="_top" href="http://developer.intel.com/design/pro/manuals/">http://developer.intel.com/design/pro/manuals/</a></TT>
 
-</P>
+
 
 
 <H3><A NAME="SEC99" HREF="faq.html#TOC99">Shell scripts aren't running properly from my makefiles?</A></H3>
@@ -4063,13 +3919,13 @@ downloadable PDF form on Intel's web site:
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 You need to have . (dot) in your $PATH.  You should NOT need to add
 /bin/sh in front of each and every shell script invoked in your
 Makefiles.
 
-</P>
+
 
 
 <H3><A NAME="SEC100" HREF="faq.html#TOC100">What preprocessor do I need to know about?</A></H3>
@@ -4078,19 +3934,19 @@ Makefiles.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 We use _WIN32 to signify access to the Win32 API and __CYGWIN__ for
 access to the Cygwin environment provided by the dll.
 
-</P>
+
 <P>
 We chose _WIN32 because this is what Microsoft defines in VC++ and
 we thought it would be a good idea for compatibility with VC++ code
 to follow their example.  We use _MFC_VER to indicate code that should
 be compiled with VC++.
 
-</P>
+
 
 
 <H3><A NAME="SEC101" HREF="faq.html#TOC101">Where can I get f77 and objc components for B20 EGCS 1.1?</A></H3>
@@ -4099,12 +3955,12 @@ be compiled with VC++.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 B20-compatible versions of the f77 and objc components are available
 from <TT><a target="_top" href="http://www.xraylith.wisc.edu/~khan/software/gnu-win32/">http://www.xraylith.wisc.edu/~khan/software/gnu-win32/</a></TT>.
 
-</P>
+
 
 
 <H3><A NAME="SEC102" HREF="faq.html#TOC102">How should I port my Unix GUI to Windows?</A></H3>
@@ -4113,11 +3969,11 @@ from <TT><a target="_top" href="http://www.xraylith.wisc.edu/~khan/software/gnu-
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 There are two basic strategies for porting Unix GUIs to Windows.
 
-</P>
+
 <P>
 The first is to use a portable graphics library such as tcl/tk, X11, or
 V (and others?).  Typically, you will end up with a GUI on Windows that
@@ -4125,7 +3981,7 @@ requires some runtime support.  With tcl/tk, you'll want to include the
 necessary library files and the tcl/tk DLLs.  In the case of X11, you'll
 need everyone using your program to have an X11 server installed.
 
-</P>
+
 <P>
 The second method is to rewrite your GUI using Win32 API calls (or MFC
 with VC++).  If your program is written in a fairly modular fashion, you
@@ -4133,7 +3989,7 @@ may still want to use Cygwin if your program contains a lot of shared
 (non-GUI-related) code.  That way you still gain some of the portability
 advantages inherent in using Cygwin.
 
-</P>
+
 
 
 <H3><A NAME="SEC103" HREF="faq.html#TOC103">Why not use DJGPP ?</A></H3>
@@ -4146,7 +4002,7 @@ the applications are native WIN32.   Applications compiled with the
 Cygwin tools can access the Win32 API functions, so you can write
 programs which use the Windows GUI.
 
-</P>
+
 <P>
 You can get more info on DJGPP by following
 <TT><a target="_top" href="http://www.delorie.com/">http://www.delorie.com/</a></TT>.
@@ -4162,7 +4018,7 @@ You can get more info on DJGPP by following
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 While this problem may have been worse under B19, Control-c's in bash
 under Win 95 may still be able to lock up the Win 95 kernel, freezing
@@ -4171,7 +4027,7 @@ version of Win 95 by installing the USB patch available on OSR2 CDs or
 on MSDN subscription CDs.  More information about OSR2 and the USB patch
 is available from <TT><a target="_top" href="http://www.compuclinic.com/osr2faq/index.html">http://www.compuclinic.com/osr2faq/index.html</a></TT>.
 
-</P>
+
 
 
 <H2><A NAME="SEC106" HREF="faq.html#TOC106">Some programs can't deal with // pathname scheme in arguments</A></H2>
@@ -4180,7 +4036,7 @@ is available from <TT><a target="_top" href="http://www.compuclinic.com/osr2faq/
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 gcc and other tools aren't fully compatible with the current pathname
 scheme: it can't grok an argument of -I//d/foo which means it is vital
@@ -4194,7 +4050,7 @@ paths with single slashes are used.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 
 
 <H2><A NAME="SEC108" HREF="faq.html#TOC108">Release Beta 20.1 (Dec 4 1998)</A></H2>
@@ -4202,12 +4058,12 @@ net release.)</STRONG>
 <P>
 This is a bug fix update to the Beta 20 release.
 
-</P>
+
 <P>
 The main change is an improved version of the Cygwin library although
 there are also a couple of other minor changes to the tools.
 
-</P>
+
 
 
 <H3><A NAME="SEC109" HREF="faq.html#TOC109">Changes in specific tools:</A></H3>
@@ -4216,31 +4072,31 @@ there are also a couple of other minor changes to the tools.
 The "-mno-cygwin" flag to gcc now include the correct headers.  In 20.0,
 it included the Cygwin headers which was incorrect.
 
-</P>
+
 <P>
 The "-pipe" flag to gcc works correctly now.
 
-</P>
+
 <P>
 The cygcheck program now reassures users that not finding cpp is the
 correct behavior.
 
-</P>
+
 <P>
 The "-b" flag to md5sum can now be used to generate correct checksums
 of binary files.
 
-</P>
+
 <P>
 The libtermcap library has been added to the compiler tools sources.
 It is the new source of the termcap library and /etc/termcap file.
 
-</P>
+
 <P>
 The less pager (using libtermcap) has been added to the binary
 distribution.
 
-</P>
+
 
 
 <H3><A NAME="SEC110" HREF="faq.html#TOC110">Changes in the Cygwin API (cygwin.dll):</A></H3>
@@ -4251,60 +4107,60 @@ releases.  The library is now much more stable under Windows 9x and the
 bugs affecting configures under 9x (and NT to a lesser extent) have
 also been fixed.
 
-</P>
+
 <P>
 The bug that made it necessary to start the value of the CYGWIN
 environment variable with two leading spaces has been fixed.
 
-</P>
+
 <P>
 The serial support in the select call has been fixed.
 
-</P>
+
 <P>
 Handling of DLLs loaded by non-cygwin apps has been improved.  Bugs in
 dlopen have been fixed.
 
-</P>
+
 <P>
 Passing _SC_CHILD_MAX to the sysconf function now yields CHILD_MAX (63)
 instead of _POSIX_CHILD_MAX (3).
 
-</P>
+
 <P>
 Several minor path bugs have been fixed.  Including the one that
 caused "mkdir a/" to fail.
 
-</P>
+
 <P>
 The include file sys/sysmacros.h has been added.  Added missing protos
 for wcslen and wcscmp to wchar.h.
 
-</P>
+
 <P>
 __P is now defined in include/sys/cdefs.h.  To support that last change,
 the top-level Makefile.in now sets CC_FOR_TARGET and CXX_FOR_TARGET
 differently.
 
-</P>
+
 <P>
 Cygwin now exports the following newlib bessel functions: j1, jn, y1,
 yn.
 
-</P>
+
 <P>
 Several tty ioctl options have been added: TCGETA, TCSETA, TCSETAW, and
 TCSETAF.
 
-</P>
+
 <P>
 Several functions cope with NULL pointer references more gracefully.
 
-</P>
+
 <P>
 Problems with execution of relative paths via #! should be fixed.
 
-</P>
+
 
 
 <H2><A NAME="SEC111" HREF="faq.html#TOC111">Release Beta 20 (Oct 30 1998)</A></H2>
@@ -4315,7 +4171,7 @@ EGCS-based compiler and updated tools, this release includes a new
 version of the Cygwin library that contains many improvements and
 bugfixes over the last one.
 
-</P>
+
 
 
 <H3><A NAME="SEC112" HREF="faq.html#TOC112">The project has a new name!</A></H3>
@@ -4327,7 +4183,7 @@ you should now refer to the tools as "the Cygwin toolset", the library
 as "the Cygwin library" or "the Cygwin DLL", and the library's interface
 as "the Cygwin API".
 
-</P>
+
 <P>
 Because of this name change, we have changed any aspects of the library
 that involved the name "Cygwin32".  For example, the CYGWIN32
@@ -4341,7 +4197,7 @@ those "32"s.  Thanks and I apologize for the hassle this may cause
 people.  We would have changed the name to "Bob" but that name's already
 taken by Microsoft...  :-)
 
-</P>
+
 <P>
 Why change it?  For one thing, not all of the software included in the
 distributions is GNU software, including the Cygwin library itself.  So
@@ -4349,13 +4205,13 @@ calling the project "GNU-Win32" has always been a bit of a misnomer.  In
 addition, we think that calling the tools the "Cygwin tools" that use
 the "Cygwin library" will be less confusing to people.
 
-</P>
+
 <P>
 Also notice that we are now on the spiffy new sourceware.cygnus.com
 web/ftp site.  The old address will work for some unknown period of
 time (hopefully at least until we get all of the mirrors adjusted).
 
-</P>
+
 
 
 <H3><A NAME="SEC113" HREF="faq.html#TOC113">Changes in specific tools:</A></H3>
@@ -4365,34 +4221,34 @@ The latest public EGCS release is now the basis for the compiler used
 in Cygwin distributions.  As a result, EGCS 1.1 is the compiler in this
 release, with a few additional x86/Cygwin-related patches.
 
-</P>
+
 <P>
 Those of you who are more interested in native Windows development than
 in porting Unix programs will be glad to know that a new gcc flag
 "-mno-cygwin" will link in the latest Mingw32 libs and produce an
 executable that does not use Cygwin.
 
-</P>
+
 <P>
 All of the other development tools have been updated to their latest
 versions.  The linker (ld) includes many important bug fixes.  It is now
 possible to safely strip a DLL with a .reloc section.  The windres
 resource compiler is significantly improved.
 
-</P>
+
 <P>
 Beta 20 also includes upgrades to a number of packages: ash-0.3.2-4,
 bash 2.02.1, grep-2.2, ncurses 4.2, and less 332.  We have added bzip2
 0.9.0 to the distribution.  And you'll now find that the df utility
 has joined its other friends from the fileutils package.
 
-</P>
+
 <P>
 The sh executable is still ash from the Debian Linux distribution but no
 longer has the problematic quoting bug that was present in the Beta 19
 release.  Control-Cs in the bash shell no longer kill background tasks.
 
-</P>
+
 <P>
 Tcl/tk are upgraded to version 8.1a2 (with additional patches).
 Compatible versions of tix and itcl are included.  These all include
@@ -4400,7 +4256,7 @@ Cygwin-compatible configury files so you can do a Unix-style build of
 the Win32 ports of tcl/tk.  expect has been upgraded to 5.26 with some
 additional Cygwin patches.
 
-</P>
+
 <P>
 In response to customer requests and feedback, Cygnus has developed a
 better graphical front end to GDB than GDBtk or WinGDB.  This tcl-based
@@ -4410,19 +4266,19 @@ into GDB are part of the GPL'd source base.  But the tcl scripts are not
 being made available to the net at this time.  For this reason, you will
 only find a command-line version of gdb in this Cygwin release.
 
-</P>
+
 <P>
 DJ Delorie has written a new "cygcheck" program that will print out
 useful information about how your Cygwin environment is set up, what
 DLLs a named executable is loading from where, etc.  We hope this will
 make it easier to help diagnose common setup problems.
 
-</P>
+
 <P>
 The ps utility has been upgraded.  It now has several options including
 shorter and longer output formats.
 
-</P>
+
 
 
 <H3><A NAME="SEC114" HREF="faq.html#TOC114">Changes in the Cygwin API (cygwin.dll):</A></H3>
@@ -4433,7 +4289,7 @@ You can use the new "cygwin1.dll" with your old B19-compiled executables
 if you move the old "cygwinb19.dll" out of the way and install a copy
 of "cygwin1.dll" as "cygwinb19.dll".
 
-</P>
+
 <P>
 Quite a lot of the Cygwin internals have been rewritten or modified to
 address various issues.  If you have a question about specific changes,
@@ -4441,19 +4297,19 @@ the winsup/ChangeLog file in the development tools sources lists all
 changes made to the DLL over the last three years.  Following are a few
 highlights:
 
-</P>
+
 <P>
 We are now using a new versioning scheme for Cygwin.  There is now a
 separate version number for the DLL, the API, the shared memory region
 interfaces, and the registry interface.  This will hopefully make it
 easier for multiple Cygwin toolsets to coexist in one user environment.
 
-</P>
+
 <P>
 Windows 98 is now supported (it is like Windows 95 from Cygwin's
 perspective).  We still recommend upgrading to Windows NT.
 
-</P>
+
 <P>
 While there is still a lot left to do in improving Cygwin's runtime
 performance, we have put some effort into this prior to the B20 release.
@@ -4461,53 +4317,53 @@ Hopefully you will find that the latest version of Cygwin is faster than
 ever.  In addition, we have plugged several nasty handle leaks
 associated with opening/closing files and with using ttys.
 
-</P>
+
 <P>
 The lseek call now uses WriteFile to fill gaps with zeros whenever a
 write is done past an EOF, rather than leaving "undefined" data as Win32
 specifies.
 
-</P>
+
 <P>
 Significant work has been done to improve the Cygwin header files.
 
-</P>
+
 <P>
 The Cygwin Support for Unix-style serial I/O is much improved.
 
-</P>
+
 <P>
 Path handling has had another round of fixes/rewrites.  We no longer use
 NT Extended Attributes by default for storing Unix permissions/execute
 status because the file NT creates on FAT partitions is not scalable to
 thousands of files (everything slows to a crawl).
 
-</P>
+
 <P>
 Signal handling has also gotten a fair amount of attention.
 Unfortunately, there are still some problems combining itimers and
 Windows 9x.
 
-</P>
+
 <P>
 The number of ttys has been upped from 16 to 128.
 
-</P>
+
 <P>
 New API calls included in the DLL: sethostent, endhostent.
 
-</P>
+
 <P>
 As mentioned earlier, all cygwin32_-prefixed functions are now exported
 with a cygwin_ prefix instead.  Please adjust your code to call the
 newly named functions.
 
-</P>
+
 <P>
 reads of `slow' devices are now correctly interrupted by signals, i.e.
 a read will receive an EINTR.
 
-</P>
+
 
 
 <H2><A NAME="SEC115" HREF="faq.html#TOC115">Release Beta 19 (Feb 26 1998)</A></H2>
@@ -4518,7 +4374,7 @@ Cygwin32 library.  Because the Cygwin API has changed in incompatible
 ways, the dll has been renamed cygwinb19.dll to avoid invalidating
 previously built executables.
 
-</P>
+
 <P>
 Note that a B19-compiled application exec()ing a B18-compiled
 application will treat the B18-compiled executable as an ordinary
@@ -4528,12 +4384,12 @@ is that different shared memory areas are used by the different versions
 of the cygwin library.  This may or may not be of importance to you
 depending on what you're doing.
 
-</P>
+
 <P>
 The Beta 19 release of the Cygwin32 library continues to be licensed
 under the GNU General Public License (GPL).
 
-</P>
+
 <P>
 The PE format definition used by the compiler tools now matches
 Microsoft's more closely.  This should allow better interoperability
@@ -4542,14 +4398,14 @@ remains to be done in this area.  This change invalidates all previously
 built object (.o) and static library (.a) files so be sure to
 delete/rebuild old .o and .a files you are using!
 
-</P>
+
 <P>
 Finally, old symlinks are invalidated by this release.  The "system"
 attribute is now used to mark symlinks which significantly speeds
 up fstat and other file related calls.  Either recreate old ones or
 set their "system" attribute flag so they will be recognized properly.
 
-</P>
+
 <P>
 The new installer takes care of all environment variable settings
 automatically by installing a shortcut in program files that pulls
@@ -4557,7 +4413,7 @@ up a bash prompt with all the correct environment variables set.
 As a result, the setup process should be much cleaner than in the last
 release.
 
-</P>
+
 <P>
 For those of you who end up moving the tools around, the batch file
 that sets up the default environment is called cygnus.bat and is
@@ -4568,7 +4424,7 @@ path (no special environment variables are needed).  The only exception
 is MAKE_MODE which needs to be set if you want to get ordinary Unix-like
 make behavior -- see the make notes below for more information.
 
-</P>
+
 
 
 <H3><A NAME="SEC116" HREF="faq.html#TOC116">Changes in specific tools:</A></H3>
@@ -4579,50 +4435,50 @@ It can be used to compile windows resources from a textual rc file
 into a COFF file.  The sources are in the binutils subdirectory of
 the sources.
 
-</P>
+
 <P>
 We have upgraded many of the utilities.  Beta 19 includes bash 2.01.1,
 fileutils 3.16, gawk 3.0.3, patch 2.5, shellutils 1.16, tar 1.12,
 textutils 1.22, and texinfo 3.11.  Bash under Cygwin32 now includes
 working job control among other improvements.
 
-</P>
+
 <P>
 The sh executable is now ash 0.2 from the Debian Linux distribution.
 Using this more minimal shell as /bin/sh.exe speeds up configures
 significantly.
 
-</P>
+
 <P>
 Bison 1.25 has been added.
 
-</P>
+
 <P>
 Tcl/tk are upgraded to version 8.0.  Compatible versions of tix and
 itcl have been added.  These all include Cygwin32-compatible configury
 files so you can do a Unix-style build of the Win32 ports of tcl/tk.
 
-</P>
+
 <P>
 Expect 5.21.3 is included and basically works.
 
-</P>
+
 <P>
 The binaries have been compiled with i686 optimizations turned on
 which may result in a speed increase on Pentium-based systems
 although the tools should work on i386 and later chips.
 
-</P>
+
 <P>
 The linker (ld) has been enhanced -- it will now add the idata3
 terminator automatically when linking dlls.
 
-</P>
+
 <P>
 kill now supports signal names in arguments.  ps now shows process
 start time information.
 
-</P>
+
 <P>
 Although the default install of the tools should hide this detail, the
 make utility now defaults to a Win32 mode which uses cmd.exe/command.com
@@ -4631,7 +4487,7 @@ To build Unix programs, you need to set the MAKE_MODE environment
 variable to "UNIX".  This way you will get the old behavior of using
 sh.exe as the subshell.
 
-</P>
+
 
 
 <H3><A NAME="SEC117" HREF="faq.html#TOC117">Changes in the Cygwin32 API (cygwin.dll):</A></H3>
@@ -4642,27 +4498,27 @@ Unix compatability calls.  It no longer contains exports for libgcc.a.
 This should result in a more stable interface.  See the calls.texinfo
 document for interface documentation.
 
-</P>
+
 <P>
 There is now only one environment variable called CYGWIN32 that controls
 the overall behavior of the dll:
 
-</P>
+
 <P>
         set CYGWIN32=[no]title [no]strip_title [no]binmode [no]glob
                 strace=mask:cache,file [no]tty
 
-</P>
+
 <P>
 So if you "set CYGWIN32=title tty", then you would get tty support
 (see below) and have the current running process listed in the title
 bar.
 
-</P>
+
 <P>
 B19 adds support for:
 
-</P>
+
 <P>
 * tty and pseudo-tty devices.  For now, ttys default to off because
 taking over the console causes problems with using non-Cygwin console
@@ -4677,11 +4533,11 @@ receive a SIGWINCH signal when the screen size changes.
 &#60;ESC&#62;[n1;n2r and setting the console title using xterm escape sequence:
 &#60;ESC&#62;]2;new title^G .
 
-</P>
+
 <P>
 The following calls have been added:
 
-</P>
+
 <P>
 * ptsname, grantpt, unlockpt
 * login, logout, ttyslot, ctermid
@@ -4700,58 +4556,58 @@ The following calls have been added:
 * initgroups (stub), getgroups
 * random, srandom
 
-</P>
+
 <P>
 The following calls have been removed:
 
-</P>
+
 <P>
 * ScreenCols, ScreenGetCursor, ScreenRows, ScreenSetCursor
 * getkey, kbhit
 * crypt (stub)
 * all libgcc.a exports
 
-</P>
+
 <P>
 The Winsock dll (wsock32.dll) is no longer implicitly linked into
 the Cygwin32 dll.  Instead, it is explicitly loaded with LoadLibrary
 the first time a process calls a Cygwin32 networking function.  This
 speeds up most processes significantly (configures by about 20%).
 
-</P>
+
 <P>
 The signal-related code has been rewritten from scratch.  Ditto for
 most of the path handling code.
 
-</P>
+
 <P>
 The globbing and getopt code has been replaced with BSD-derived
 code.  The regexp code has been replaced with Henry Spencer's PD
 implementation.
 
-</P>
+
 <P>
 Doug Lea's malloc is now being used as the default malloc exported by
 cygwin.  This malloc balances speed and compactness very nicely but is
 more unforgiving when attempts are made to free already freed memory,
 i.e., a segmentation violation will occur.
 
-</P>
+
 <P>
 The bsearch call has been rewritten.
 
-</P>
+
 <P>
 Alt Gr-key behavior has been changed in this release.  The left alt-key
 still produces ESC-key sequence.  The right alt (Alt Gr)-key now
 produces characters according to national keyboard layouts.
 
-</P>
+
 <P>
 Processes no longer write their name in the title bar unless you include
 "title" in the CYGWIN32 environment variable (see above).
 
-</P>
+
 <P>
 Multiple cygwin.dlls no longer use the same memory space unless they are
 identical (built at the same time).  This allows multiple dlls with
@@ -4760,12 +4616,12 @@ facilitates debugging a buggy cygwin.dll.  By keeping only a single copy
 of the latest cygwin.dll on your system, you can be assured of having
 all cygwin processes exist in the same shared memory space.
 
-</P>
+
 <P>
 The slash mount no longer defaults to C:.  It now defaults to the
 system drive letter (where the OS is installed).
 
-</P>
+
 <P>
 The standard dl* dynamic library loader functions are now available.
 Cygwin32 B19 now correctly copies data after a fork and automatically
@@ -4776,13 +4632,13 @@ Handles gotten from dlopen or dlsym in the parent will be accessible in a
 forked child.  The LD_LIBRARY_PATH environment variable is used in the dlopen
 search.
 
-</P>
+
 <P>
 Include the file &#60;cygwin32/cygwin_dll.h&#62; in a cygwin32 created .dll and
 use the line DECLARE_CYGWIN_DLL(dll-entry-point) to produce .dlls that
 can be used with these functions.
 
-</P>
+
 
 
 <H2><A NAME="SEC118" HREF="faq.html#TOC118">Release Beta 18 (May 6 1997)</A></H2>
@@ -4792,7 +4648,7 @@ This is a major release.  The new cygwin.dll is still
 backwards-compatible with previously linked applications but
 contains significant changes.
 
-</P>
+
 <P>
 We have completely changed the installation process to make
 use of an InstallShield5-based installer.  This should reduce the
@@ -4802,7 +4658,7 @@ by hand, as explained in the README.txt accompanying the distribution.
 (Future gnu-win32 installers may include the capability to do this
 automatically).
 
-</P>
+
 
 
 <H3><A NAME="SEC119" HREF="faq.html#TOC119">Changes in specific tools:</A></H3>
@@ -4811,58 +4667,58 @@ automatically).
 GCC compilation times have been improved by 20-30% by using spawn()
 instead of fork().
 
-</P>
+
 <P>
 GCC accepts both Win32 and POSIX paths/path lists in its
 environment variables (COMPILER_PATH, LIBRARY_PATH, C_INCLUDE_PATH,
 CPLUS_INCLUDE_PATH, OBJC_INCLUDE_PATH)
 
-</P>
+
 <P>
 GDB comes with a tcl/tk-based GUI (gdbtk).  You can still invoke the
 command line gdb by invoking it with "gdb -nw".
 
-</P>
+
 <P>
 Bash verifies that /tmp exists and is a directory upon startup.
 It complains if this isn't the case.
 
-</P>
+
 <P>
 Running gcc or ld with "-s" used to create invalid executables.
 The bug in bfd that was responsible for this has been fixed.
 
-</P>
+
 <P>
 The conflict between String.h and string.h (and other such pairs
 of header files) where you include one and get the other has been
 fixed.
 
-</P>
+
 <P>
 The top level install-sh script tries to install foo.exe if asked
 to install foo when foo's not present.  This fixes many installs
 of Unix software.
 
-</P>
+
 <P>
 Dlltool has preliminary support for the IMPORT declaration in .def files
 when invoked with -I.  Feel free to experiment with it but once this
 functionality is tested more extensively this flag may go away.
 
-</P>
+
 <P>
 Time is upgraded to version 1.7.
 
-</P>
+
 <P>
 Make is upgraded to version 3.75.
 
-</P>
+
 <P>
 Make accepts both Win32 and POSIX path lists in the VPATH variable.
 
-</P>
+
 
 
 <H3><A NAME="SEC120" HREF="faq.html#TOC120">Changes in the Cygwin32 API (cygwin.dll):</A></H3>
@@ -4870,7 +4726,7 @@ Make accepts both Win32 and POSIX path lists in the VPATH variable.
 <P>
 The following is now supported:
 
-</P>
+
 <P>
 * UNC paths
 * Reverse index escapes in console code
@@ -4878,11 +4734,11 @@ The following is now supported:
 * Directory symlinks.
 * Reparenting of child processes.
 
-</P>
+
 <P>
 The following calls have been added:
 
-</P>
+
 <P>
 * mmap(), mprotect(), msync(), munmap().  fork() changed to support these.
 * fsync(), statfs(), fstatfs().
@@ -4895,53 +4751,53 @@ spawnvp(), spawnvpe().
 * Under NT only, chown(), getgrgid(), getgrnam(), endgrent(), getgrent(),
 setpwend(), getpwent(), endpwent().  Win95 still has these as stubs.
 
-</P>
+
 <P>
 Significantly better signals / exception handling support added.
 The kill signal works much better now (control-C works in bash).
 
-</P>
+
 <P>
 Shell scripts now run the shell specified after the #! instead of
 always defaulting to /bin/sh.
 
-</P>
+
 <P>
 Floating point registers are now properly initialized in the crt0.o.
 
-</P>
+
 <P>
 Opening non-disk files such as com ports no longer check to see
 if they are symlinks or executables.
 
-</P>
+
 <P>
 The console title now is set to the name of the running process.
 
-</P>
+
 <P>
 Winsock is now initialized upon app startup.
 
-</P>
+
 <P>
 Moved reent_data from private address space to cygwin.dll.
 
-</P>
+
 <P>
 The system() call now invokes spawnvp() instead of fork()/exec().
 
-</P>
+
 <P>
 Support for NT extended attributes has been added but is disabled
 for now because it slowed things down too much.  We want to use them to
 remember info about symlink and executable status of files.
 
-</P>
+
 <P>
 Under NT only, utilities mkpasswd and mkgroup can generate a valid
 /etc/passwd and /etc/group.
 
-</P>
+
 <P>
 Earlier releases stored mount points in the registry under
 "Cygnus Support".  This changed to "Cygnus Solutions" starting
@@ -4949,12 +4805,12 @@ with beta 18.  Either use a registry editor (regedit under NT)
 to rename the old entry or just redo your mount points and the
 cygwin.dll will automatically create the new one for you.
 
-</P>
+
 <P>
 Mount points can now be up to MAX_PATH in length instead of 30
 characters.
 
-</P>
+
 
 
 <H2><A NAME="SEC121" HREF="faq.html#TOC121">Release Beta 17.1 (Dec 10 1996)</A></H2>
@@ -4962,11 +4818,11 @@ characters.
 <P>
 A patch has been applied to make Win 95 configure work again.
 
-</P>
+
 <P>
 ld has been changed to make "a.exe" be the default executable name.
 
-</P>
+
 
 
 <H2><A NAME="SEC122" HREF="faq.html#TOC122">Release Beta 17 (Dec 7 1996)</A></H2>
@@ -4976,7 +4832,7 @@ It is now possible to rebuild the tools natively under x86 NT when
 the full Cygnus Developers' Kit (CDK) and the User Tools are both
 installed correctly.
 
-</P>
+
 <P>
 While the cygwin.dll underwent substantial changes, none of them
 prevent you from using previously built applications  The new dll
@@ -4984,13 +4840,13 @@ is compatible with beta 16 to the best of our knowledge.  Beta 14-built
 programs will continue to fail with the beta 17 dll -- you will have to
 relink them before they will work.
 
-</P>
+
 <P>
 The winsup files that make up the Cygwin32 API are now under the
 GNU General Public License.  See the accompanying press release
 for more information.
 
-</P>
+
 
 
 <H3><A NAME="SEC123" HREF="faq.html#TOC123">Changes in specific tools:</A></H3>
@@ -5001,24 +4857,24 @@ Gcc now links by default against -lkernel32 and also against
 change is that when creating an executable, gcc will now create
 foo.exe when given a -o argument of foo.
 
-</P>
+
 <P>
 Dlltool has patches to make it better handle the --subsystem argument
 that allows choosing console vs. GUI among other options.
 ld has been changed to have a much larger stack reserve size.  This
 is necessary when rebuilding the toolchain natively under NT.
 
-</P>
+
 <P>
 The C++ headers can now be found given a correctly set GCC_EXEC_PREFIX
 environment variable.
 
-</P>
+
 <P>
 New versions of fileutils and make are included.  Findutils has been
 added.
 
-</P>
+
 
 
 <H3><A NAME="SEC124" HREF="faq.html#TOC124">Changes in the Cygwin32 API (cygwin.dll):</A></H3>
@@ -5032,14 +4888,14 @@ programs that try to include specific headers should continue to work.
 Having more complete headers should make Win32 native programming
 easier.
 
-</P>
+
 <P>
 Select has been rewritten from scratch.  The new one can deal with
 all sockets, handles and sockets always ready, all handles.  Handles
 and sockets with timeout not implemented yet.  Select now does
 blocking and doesn't spin cpu.
 
-</P>
+
 <P>
 File handling has been largely rewritten:
 The fhandler array has been moved into local memory instead of shared
@@ -5048,52 +4904,52 @@ to support this.  There is now fairly complete ansi/vt100 console support.
 Some new file locking support has been added.  Arrow keys are now
 supported.
 
-</P>
+
 <P>
 Process handling much improved.
 
-</P>
+
 <P>
 Significant serious bugs in fork() fixed.
 
-</P>
+
 <P>
 The system() call now works.
 
-</P>
+
 <P>
 unlink() now chmods read-only files to writable before attempting to
 delete a file.  This fixes the outstanding problem where rm can't
 delete read-only files saying "out of queue slots" repeatedly.
 
-</P>
+
 <P>
 Text mode read has been rewritten.
 
-</P>
+
 <P>
 New syslog code allows logging to event log under NT, file under Win 95.
 
-</P>
+
 <P>
 Symlinks are enabled.
 
-</P>
+
 <P>
 readv() and writev() have been written and exported.
 
-</P>
+
 <P>
 For MS compatibility, we now export functions in the dll as _funcname
 in addition to funcname.  I would suggest not making use of this fact
 unless you are building code that already accesses C library calls
 in this way.
 
-</P>
+
 <P>
 Almost all of the source code is now in C++ files.
 
-</P>
+
 
 
 <H2><A NAME="SEC125" HREF="faq.html#TOC125">Release Beta 16 (Aug 30 1996)</A></H2>
@@ -5103,103 +4959,103 @@ Path handling has been completely rewritten.  To refer to drive Q: in
 bash, you can now refer to //q/.  Alternatively, type "mount Q: /q" to
 have drive Q: show up as /q.
 
-</P>
+
 <P>
 We now pass the Plum Hall positive C conformance tests on the
 i386 under Windows 95 and NT 4.0b2.
 
-</P>
+
 <P>
 Fork was previously not accessible inside the dll.  This is no
 longer the case which should allow us to add working system and popen
 calls.
 
-</P>
+
 <P>
 getdomainname works (it used to just return "cygnus.com") by getting
 information from registry.
 
-</P>
+
 <P>
 Fixed readdir bug that set errno improperly.  This fixed the problem
 with diff not working across directories.
 
-</P>
+
 <P>
 Better error checking in signal functions.  Initialize winsock in
 cygwin32_socket with checkinit call (fixes bug that required calling any
 function that did this first).
 
-</P>
+
 <P>
 New functions: sigaddset, sigismember, sigfillset, sigemptyset.
 
-</P>
+
 <P>
 Removed extra underscores present in sysdef files.
 
-</P>
+
 <P>
 There is a now a major and a minor version number associated with
 the cygwin.dll.  The major number changes only when incompatible changes
 are made, the minor number changes when significant changes are made
 to the dll that don't require relinking of old apps.
 
-</P>
+
 <P>
 Changed value of HZ in include/sys/param.h to correct value of 1000.
 (Fixes bug people reported about "time sleep 5" returning 50).
 
-</P>
+
 <P>
 Assorted exception handling fixes for both i386 and ppc processors.
 
-</P>
+
 <P>
 Assorted time-related fixes required for Cygnus Kerberos work.
 New time functions: gmtime, corelocaltime
 
-</P>
+
 <P>
 Assorted spawn and fork fixes.
 
-</P>
+
 <P>
 Pseudo-Unix process handling added -- new ps and kill commands added
 
-</P>
+
 <P>
 Control-Z's are now handled as a valid EOF token in files opened as
 text.
 lseek now always operates in binary mode.
 
-</P>
+
 <P>
 Select revamped.
 
-</P>
+
 <P>
 Various other changes.  For more detailed information, consult the file
 in the source code winsup/ChangeLog.
 
-</P>
+
 <P>
 Preprocessor define scheme changed.  Apps should now use _WIN32
 instead of __WIN32__ to check for access to Win32 API and __CYGWIN32__
 to check for presence of the Cygwin32 environment.
 
-</P>
+
 <P>
 We are no longer including GNU findutils, GNU dbm, GNU bison,
 GNU less, ncurses, ftp, finger, rcl, cvtres, or V.  This may or may not
 change in the future.
 
-</P>
+
 <P>
 You must relink old apps you built with prior releases with the new
 cygwin.dll.
 
-</P>
+
 
 
 <H2><A NAME="SEC126" HREF="faq.html#TOC126">Release Beta 14 (April 10 1996)</A></H2>
@@ -5208,20 +5064,20 @@ cygwin.dll.
 Some bugs have been fixed.  GDBM and m4 are in the release.  GCC now
 uses the standard install directories for cc1 etc.
 
-</P>
+
 <P>
 A port of V to gnu-win32 is included.  You can now write graphics
 applications which will run on Unix or Windows unchanged.  Some parts of
 V work on the PPC too.
 
-</P>
+
 <P>
 If you call any programs from the standard DOS shell, then the DLL will
 expand all the wildcards (glob) found in the arguments on the command
 line.  So ls *.exe will do what you think it should, even if you're not
 in bash.
 
-</P>
+
 <P>
 ncurses and less are included. The DLL's emulation of a vt100 isn't complete,
 so ncurses doesn't do all that it should. Hence less is more or less
@@ -5229,36 +5085,36 @@ useless.  This can be fixed with a new DLL.  (If you want to use
 something which uses curses, be sure to set your TERM and HOME
 envirionment variables)
 
-</P>
+
 <P>
 If you leave out main, then the libraries will try and call WinMain in the
 usual way.
 
-</P>
+
 <P>
 ^C works much better on Windows 95.  It's still not quite right, but at
 least most times it quits what you're doing, and most times doesn't
 crash your machine.
 
-</P>
+
 <P>
 You can start more than one concurrent bash session. 
 
-</P>
+
 <P>
 Some networking support has been added.  Even though telnet.exe is provided,
 I know that it doesn't work, so please don't send me bug reports.
 
-</P>
+
 <P>
 You will have to relink your applications to go with the new DLL.
 
-</P>
+
 <P>
 The DLL is released in its own .zip file too, so you don't have to
 download a load of other stuff if you dont want to.
 
-</P>
+
 
 
 <H2><A NAME="SEC127" HREF="faq.html#TOC127">Release Beta 13 (Feb 9 1996)</A></H2>
@@ -5266,75 +5122,75 @@ download a load of other stuff if you dont want to.
 <P>
 Files are opened in binary mode, unless the registry is fiddled with.
 
-</P>
+
 <P>
 The `cat &#62;foo &#60;&#60;EOF bug is fixed.
 
-</P>
+
 <P>
 The symlink cookie has changed, so old links wont work any more.
 
-</P>
+
 <P>
 Two resource tools are provided (untested).
 
-</P>
+
 <P>
 More windows header files are provided. WxWindows almost compiles.
 
-</P>
+
 <P>
 You can get to a raw floppy with `/dev/fd0 or `/dev/fd1.
 
-</P>
+
 <P>
 You can have two filenames with the same name and different case in
 the same directory.
 
-</P>
+
 <P>
 Stat now fills in the st_nlink field for directories, so find works
 better.
 
-</P>
+
 <P>
 This version is much more stable than any previous version, and will
 stay running long enough to configure and build itself on my NT box.
 
-</P>
+
 <P>
 This version is also available in PowerPC versions.  The PowerPC
 compiler doesn't do stack probing, so some applications won't work, or
 they'll only work on some input data - e.g. the demo "hello world" will
 compile, but gcc will crash compiling the dhrystone benchmark.
 
-</P>
+
 <P>
 There's a new registry variable "fmode=binary" which controls
 whether the tools always open files in binary mode (unless overridden
 with O_TEXT), or always open files in text mode (unless overridden with
 O_BINARY).
 
-</P>
+
 <P>
 Filesystems can be mounted with the mixed_case flag.  This allows
 you to use filenames with the same spelling, but different case in the
 same directory.
 
-</P>
+
 <P>
 I haven't tested or even used some of the packages that I've
 provided.  I compiled them, and then fixed the obvious "the file should
 have been opened in binary mode" problems.
 
-</P>
+
 <P>
 I've already had reports of some of it not working correctly on
 Windows 95.  I don't have a simple to use Windows 95 configuration, but
 when I did try "it worked for me".  This may be another manifestation
 of the bug which makes bash hang sometimes under NT.
 
-</P>
+
 
 
 <H2><A NAME="SEC128" HREF="faq.html#TOC128">Release Beta 12 (Jan 3 1996)</A></H2>
@@ -5342,27 +5198,27 @@ of the bug which makes bash hang sometimes under NT.
 <P>
 You can call non- gnu-win32 applications from bash.
 
-</P>
+
 <P>
 You can mount other directories using the <CODE>mount</CODE> command.
 
-</P>
+
 <P>
 Minimal ANSI terminal emulation included.
 
-</P>
+
 <P>
 Packages split into smaller and more logical lumps.
 
-</P>
+
 <P>
 /d&#60;name&#62; mechanism gone.
 
-</P>
+
 <P>
 Initial support for the PowerPC added.
 
-</P>
+
 
 
 <H2><A NAME="SEC129" HREF="faq.html#TOC129">Release Beta 11 (Jan 3 1996)</A></H2>
@@ -5370,7 +5226,7 @@ Initial support for the PowerPC added.
 <P>
 Something broke on the way to the ftp site.
 
-</P>
+
 
 
 <H2><A NAME="SEC130" HREF="faq.html#TOC130">Release Beta 10 (Dec 5 1995)</A></H2>
@@ -5378,40 +5234,40 @@ Something broke on the way to the ftp site.
 <P>
 You can pass environment variables around in bash.
 
-</P>
+
 <P>
 Lots more stuff provided precompiled.
 
-</P>
+
 <P>
 Diffs to standard FSF release provided.
 
-</P>
+
 <P>
 It self-hosts.
 
-</P>
+
 <P>
 It supports symbolic links.
 
-</P>
+
 <P>
 The directory layout has changed to be more unix like.
 
-</P>
+
 <P>
 The way that you get to non-c drives is new - i:\foo.cc
 is now /di/foo.cc
 
-</P>
+
 <P>
 Nasty bug found and fixed in fork.
 
-</P>
+
 <P>
 CPP will now search the directories you supply in env names.
 
-</P>
+
 
 
 <H2><A NAME="SEC131" HREF="faq.html#TOC131">Release Beta 9</A></H2>
@@ -5424,24 +5280,24 @@ e.g., ls goes from 82,949 bytes to 26,624.
 This is the first stage in greatly speeding up 
 some of the stuff that's going on behind the curtain.
 
-</P>
+
 <P>
 Different processes communicate using shared memory.
 
-</P>
+
 <P>
 Some trivial use of the registry is made.
 
-</P>
+
 <P>
 DLLTOOL is now *much* faster.
 
-</P>
+
 <P>
 Some small problems have been fixed in the way that DLLs were
 layed out.	
 
-</P>
+
 
 
 <H2><A NAME="SEC132" HREF="faq.html#TOC132">Release Beta 8</A></H2>
@@ -5449,24 +5305,24 @@ layed out.
 <P>
 GDB works.
 
-</P>
+
 <P>
 GCC now emits debug info which can make **huge** executables
 Fortunately, strip works too.
 
-</P>
+
 <P>
 More work has been done to make quoting work.
 
-</P>
+
 <P>
 Simple termios support added to newlib.
 
-</P>
+
 <P>
 Much nicer way of describing paths, eg //c/foo is c:\foo.
 
-</P>
+
 
 
 <H2><A NAME="SEC133" HREF="faq.html#TOC133">Release Beta 7</A></H2>
@@ -5474,16 +5330,16 @@ Much nicer way of describing paths, eg //c/foo is c:\foo.
 <P>
 Works again on Win 95 (which is why -6 wasn't advertised).
 
-</P>
+
 <P>
 Permissions are faked better.
 
-</P>
+
 <P>
 Source of demos available without having to ftp the entire win32
 binary tree. 
 
-</P>
+
 
 
 <H2><A NAME="SEC134" HREF="faq.html#TOC134">Release Beta 6</A></H2>
@@ -5492,7 +5348,7 @@ binary tree.
 Can now generate DLLs, tiny demo included.
 tcl, byacc, fileutils, diff, make included.
 
-</P>
+
 
 
 <H2><A NAME="SEC135" HREF="faq.html#TOC135">Release Beta 5</A></H2>
@@ -5501,31 +5357,31 @@ tcl, byacc, fileutils, diff, make included.
 Bug preventing anything from running on recent versions
 of Win95 fixed.
 
-</P>
+
 <P>
 vfork and exec oddities fixed.
 
-</P>
+
 <P>
 Import libraries are now really libraries and not
 just .o files.
 
-</P>
+
 <P>
 Debugging info stripped from images and libraries;
 it's just bloat until gdb works.
 
-</P>
+
 <P>
 I've filled in the four major import libraries.
 
-</P>
+
 <P>
 The win*.h files are now installed into &#60;foo&#62;/include
 rather that &#60;foo&#62;/include/sys, so more things will
 compile out of the box.
 
-</P>
+
 
 
 <H2><A NAME="SEC136" HREF="faq.html#TOC136">Release Beta 4</A></H2>
@@ -5534,36 +5390,36 @@ compile out of the box.
 PE support is fixed. Programs run on
 NT 3.1, NT 3.5, NT 3.51 and Windows 95.
 
-</P>
+
 <P>
 You can build GUI programs.
 
-</P>
+
 <P>
 .DEF files for three other DLL's started.
 
-</P>
+
 <P>
 New GUI demo program. 
 
-</P>
+
 <P>
 C library distinguishes between text and binary files
 consequently the text files generated by the
 tools have the familiar ^M at the end of the line
 which DOS likes so much.
 
-</P>
+
 <P>
 Doug Evans of Cygnus has added a load
 of fancy support for execve, opendir and 
 various other cool things.
 
-</P>
+
 <P>
 Exception handling is better.
 
-</P>
+
 
 
 <H2><A NAME="SEC137" HREF="faq.html#TOC137">Release Beta 3</A></H2>
@@ -5578,7 +5434,7 @@ Was so long ago we don't remember.
 <STRONG>(Please note: This section has not yet been updated for the latest
 net release.)</STRONG>
 
-</P>
+
 <P>
 Chris Faylor (cgf@cygnus.com) is behind many of the recent
 changes in Cygwin.  Prior to joining Cygnus, he contributed significant
@@ -5587,7 +5443,7 @@ mechanism, and rewrote the signal-related code from scratch as a Net
 contributor.  In addition to continuing to make technical contributions,
 Chris is also currently the group's manager.
 
-</P>
+
 <P>
 Geoffrey Noer (noer@cygnus.com) took over the Cygwin project from its'
 initial author Steve Chamberlain in mid-1996.  As maintainer, he
@@ -5597,7 +5453,7 @@ code improvements himself; wrote a paper on Cygwin for the
 1998 Usenix NT Symposium; authored the project WWW pages, FAQ, README;
 etc.
 
-</P>
+
 <P>
 DJ Delorie (dj@cygnus.com) has done important work in profiling Cygwin,
 worked on the Dejagnu automated testing framework, merged the dlltool
@@ -5605,7 +5461,7 @@ functionality into ld, wrote a good deal of the Cygwin Users' Guide,
 authored the cygcheck utility, and made automated snapshots available
 from our project WWW page.
 
-</P>
+
 <P>
 Steve Chamberlain (sac@transmeta.com) designed and implemented
 Cygwin in 1995-1996 while working for Cygnus.  He worked with the Net
@@ -5613,13 +5469,13 @@ to improve the technology, ported/integrated many of the user tools
 for the first time to Cygwin, and produced all of the releases up to
 beta 14.
 
-</P>
+
 <P>
 Marco Fuykschot (marco@ddi.nl) and Peter Boncz (boncz@ddi.nl) of
 Data Distilleries contributed nearly all of the changes required to
 make Cygwin thread-safe.  They also provided the pthreads interface.
 
-</P>
+
 <P>
 Sergey Okhapkin (sos@prospect.com.ru) has been an invaluable Net
 contributor.  He implemented the tty/pty support, has played a
@@ -5628,24 +5484,24 @@ made countless contributions throughout the library.  He also provided
 binaries of the development snapshots to the Net after the beta 19
 release.
 
-</P>
+
 <P>
 Mumit Khan (khan@xraylith.wisc.edu) has been most helpful on the EGCS
 end of things, providing quite a large number of stabilizing patches to
 the compiler tools for the B20 release.
 
-</P>
+
 <P>
 Corinna Vinschen &#60;corinna@vinschen.de&#62; has contributed several
 useful fixes to the path handling code, console support, improved security
 handling, and raw device support.
 
-</P>
+
 <P>
 Philippe Giacinti (giac@dalim.de) contributed the implementation of
 dlopen, dlclose, dlsym, dlfork, and dlerror in Cygwin.
 
-</P>
+
 <P>
 Many other people at Cygnus have made important contributions to Cygwin.
 Tobin Brockett wrote the InstallShield-based installer for the beta 19
@@ -5658,7 +5514,7 @@ things.  Kim Knuttila and Michael Meissner put in many long hours
 working on the now-defunct PowerPC port.  Jason Molenda and Mark Eichin
 have also made important contributions.
 
-</P>
+
 <P>
 Please note that those of us here at Cygnus that work on Cygwin try to
 be as responsive as possible and deal with patches and questions as we
@@ -5667,7 +5523,7 @@ email that is sent to the main mailing list.  Making Net releases of the
 Win32 tools and helping people on the Net out is not our primary job
 function, so some email will have to go unanswered.
 
-</P>
+
 <P>
 Many thanks to everyone using the tools for their many contributions in
 the form of advice, bug reports, and code fixes.  Keep them coming!
@@ -5687,7 +5543,7 @@ requirements, the basic rule is if you give out any binaries, you must
 also make the source available.  For the full details, be sure to
 read the text of the GNU GPL which follows.
 
-</P>
+
 <P>
 The Cygwin API library found in the winsup subdirectory of the
 source code is also covered by the GNU GPL.  By default, all
@@ -5697,20 +5553,20 @@ so that compiled executables do not make use of the Cygwin library,
 your compiled programs will also have to be free software distributed
 under the GPL with source code available to all.
 
-</P>
+
 <P>
 Cygwin is currently available for proprietary use only through a
 proprietary-use license.  Please contact sales@cygnus.com for
 more information.
 
-</P>
+
 <P>
 In accordance with section 10 of the GPL, Cygnus permits programs whose
 sources are distributed under a license that complies with the Open
 Source definition to be linked with libcygwin.a without libcygwin.a
 itself causing the resulting program to be covered by the GNU GPL.
 
-</P>
+
 <P>
 This means that you can port an Open Source(tm) application to cygwin,
 and distribute that executable as if it didn't include a copy of
@@ -5719,12 +5575,12 @@ DLL itself.  If you distribute a (possibly modified) version of the DLL
 you must adhere to the terms of the GPL, i.e., you must provide sources
 for the cygwin DLL.
 
-</P>
+
 <P>
 See http://www.opensource.org/osd.html for the precise Open Source
 Definition referenced above.
 
-</P>
+
 
 
 <H2><A NAME="SEC141" HREF="faq.html#TOC141">GNU GENERAL PUBLIC LICENSE</A></H2>
@@ -6073,7 +5929,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 27 July 2000 using the
-<A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>
-translator version 1.52.</P>
-
+This document was generated on 25 August 2000 using
+<A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
+</BODY>
+</HTML>

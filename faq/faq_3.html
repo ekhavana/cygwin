@@ -1,4 +1,11 @@
-<title>The Cygwin FAQ  - Installation Instructions</title>
+<HTML>
+<HEAD>
+<!-- Created by texi2html 1.56k from faq.texinfo on 25 August 2000 -->
+
+<TITLE>The Cygwin FAQ
+ - Installation Instructions</TITLE>
+</HEAD>
+<BODY>
 Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_2.html">previous</A>, <A HREF="faq_4.html">next</A>, <A HREF="faq_9.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
 <P><HR><P>
 
@@ -13,43 +20,57 @@ Unlike previous net releases such as B20.1 and earlier, there is no
 monolithic "full" or "usertools" installation.  Rather, you can pick and
 choose the packages you wish to install, and update them individually.
 
-</P>
-<P>
-The following packages are available with the latest net release:
 
-</P>
 <P>
-ash, bash, binutils, bison, byacc, bzip2, clear, common, cygwin,
-dejagnu, diff, expect, fileutils, findutils, flex, gawk, gcc, gdb,
-gperf, grep, groff, gzip, inetutils, less, libpng, login, m4, make, man,
-opengl, patch, sed, shellutils, tar, tcltk, termcap, texinfo, textutils,
-time, zlib
+The following packages are available with the current release, in their
+respective directories:
 
-</P>
+
+<DL COMPACT>
+
+<DT><SAMP>`latest'</SAMP>
+<DD>
+bison common diff flex gperf inetutils make opengl shellutils texinfo
+ash byacc crypt expect gawk grep less man patch tar textutils bash bzip2
+cygwin fileutils gcc groff login sed tcltk time binutils clear dejagnu
+findutils gdb gzip m4 mt termcap vim
+
+<DT><SAMP>`contrib'</SAMP>
+<DD>
+cvs gdbm jbigkit jpeg libpng tiff zlib
+
+</DL>
+
 <P>
 Full source code is available for all packages and tools.
 
-</P>
-<P>
-There are a few different ways to install the Cygwin net release, and
-we'll try to cover them all here.  It is strongly recommended to use the
-automatic <CODE>setup.exe</CODE> program if you can.
 
-</P>
+<P>
+There is one recommended way to install Cygwin, which is to use the GUI
+installer <CODE>setup.exe</CODE>.  There are some variations on how you go
+about that.
+
+
+<P>
+Do it any other way, and you're on your own!  That said, keep in mind
+that the GUI installer is a "work in progress", so there might be a few
+difficulties, especially if you are behind a firewall or have other
+specific requirements.  If something doesn't work right for you, and
+it's not covered here or elsewhere, then by all means report it to the
+mailing list.
+
+
 
 
 <H2><A NAME="SEC9" HREF="faq_toc.html#TOC9">Installation using the <CODE>setup.exe</CODE> program</A></H2>
 
 <P>
-<STRONG>IMPORTANT: If you run <CODE>setup.exe</CODE> on an existing Cygwin
-installation, Setup will overwrite the contents of mounted directories.
-There is no recovery from this.  If you are upgrading from an older
-version of Cygwin, you may wish to back up your current installation and
-unmount old mount points in order to isolate them.  Then you can
-re-install Cygwin in a new location with new mount points, if this is
-what you want.</STRONG>
+<STRONG>IMPORTANT: First read the README file in the <CODE>latest</CODE>
+directory at any ftp mirror.  DO THIS NOW!  Information in the README
+file is not repeated here.  You can find a mirror site near you from
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.</STRONG>
 
-</P>
+
 <P>
 The <CODE>setup.exe</CODE> program is the recommended way to install Cygwin,
 but it is still a work in progress.  Expect features and functionality
@@ -58,293 +79,128 @@ build time reported by <CODE>setup.exe</CODE> when you run it.  This will help
 diagnose problems, should you have any.  Check the cygwin mailing list
 for the latest news about <CODE>setup.exe</CODE>.
 
-</P>
-<P>
-You have a few options when using <CODE>setup.exe</CODE>.  
 
-</P>
+
+
+<H3><A NAME="SEC10" HREF="faq_toc.html#TOC10">Why not install in C:\?</A></H3>
+
 <P>
 The <CODE>setup.exe</CODE> program will prompt you for a "root" directory.
-The default is 'C:\cygwin', but you can change it.  (You are strongly
-urged <STRONG>not</STRONG> to choose something like 'C:\'.)  It will contain the
-necessary files and directory structure, and will be mounted to '/' as
-part of the installation process.
+The default is 'C:\cygwin', but you can change it.  You are urged not to
+choose something like 'C:\' (the root directory on the system drive) for
+your Cygwin root.  If you do, then critical Cygwin system directories
+like 'etc', 'lib' and 'bin' could easily be corrupted by other (non-Cygwin)
+applications or packages that use \etc, \lib or \bin.  Perhaps there is
+no conflict now, but who knows what you might install in the future?
+It's also just good common sense to segregate your Cygwin "filesystems"
+from the rest of your Windows system disk.  (In the past, there had been
+genuine bugs that would cause problems for people who installed in C:\,
+but we believe those are gone now.)
 
-</P>
-<P>
-After a new installation in the default location, your mount points will
-look something like this:
 
-</P>
 
-<PRE>
-Device              Directory           Type         Flags
-C:\cygwin\bin       /usr/bin            user         binmode
-C:\cygwin\lib       /usr/lib            user         binmode
-C:\cygwin           /                   user         binmode
-</PRE>
+
+<H3><A NAME="SEC11" HREF="faq_toc.html#TOC11">Can I use the new setup to update a B18, B19, B20, B20.1 or CD-ROM (1.0) installation of Cygwin?</A></H3>
 
 <P>
-Note that /bin and /usr/bin point to the same location, as do /lib and
-/usr/lib.  This is intentional, and you should not undo these mounts
-unless you <EM>really</EM> know what you are doing.  Currently,
-<CODE>setup.exe</CODE> creates only binary mounts, but future versions will
-probably be more flexible.
+No, you must start from scratch with the new setup.  The overall
+structure has changed so much that it would be silly to try to
+accomodate old installations of Cygwin.  You'll probably be much better
+off with a whole new installation anyway.  You may backup or rename your
+old installation first, or just install the new one somewhere else.  Be
+sure to make note of your current mount table, because this will be
+overwritten during the new setup.
 
-</P>
-<P>
-You can let <CODE>setup.exe</CODE> download all the files for you on the fly.
-This is the 'internet' installation.  Or you can download all (or some)
-of the packages ahead of time, and instruct <CODE>setup.exe</CODE> to install
-Cygwin from those files.  This is the 'directory' installation.  You
-must use this method if you want to install only a subset of the
-available packages.
-
-</P>
-<P>
-Note that you cannot combine methods.  If you use the directory
-installation, <CODE>setup.exe</CODE> will install <STRONG>only</STRONG> the packages
-it finds in the directory; it will not also be able to download packages
-from the internet in the same pass.  If you have not carefully chosen
-which packages to download, you may not end up with a working Cygwin
-installation.  You can, however, add and update packages later.  See
-below.
-
-</P>
-<P>
-Whichever you choose, the first step is to open an ftp mirror site near
-you from <TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.  Then
-go to the 'latest' directory, download <CODE>setup.exe</CODE> and save that to
-an <STRONG>empty temporary directory</STRONG>.  While you're there, download the
-README file and read it.  Then read it again.
-
-</P>
-<P>
-Then proceed according to your choice below.
-
-</P>
-
-
-<H3><A NAME="SEC10" HREF="faq_toc.html#TOC10">Internet installation with <CODE>setup.exe</CODE></A></H3>
 
 <P>
-Shut down <STRONG>all cygwin applications</STRONG> (including inetd, etc.).
-
-</P>
-<P>
-Then, in a <STRONG>Windows command prompt</STRONG> ("MS-DOS Prompt" in Windows
-95/98), '<CODE>cd</CODE>' to the temporary directory and type
-'<CODE>setup.exe</CODE>'.
-
-</P>
-<P>
-When prompted, specify the location of the root directory, or accept the
-default.
-
-</P>
-<P>
-At the next prompt, choose to install from the Internet ('i').  This is
-the default.
-
-</P>
-<P>
-Setup will connect to sources.redhat.com to read a list of mirror
-sites.  Choose one from the list, or choose 'other' to supply your own.
-If you supply your own, you must provide a full URL, not just the ftp
-hostname.  Setup will then proceed to download and install all packages
-from the ftp site.  Of course this may take a while if you have a slow
-connection.
-
-</P>
-<P>
-When finished, Setup will have created a "Cygnus Solutions" folder on
-your Start Menu, containing a shortcut to <CODE>cygwin.bat</CODE>, which
-invokes bash with various environment variables set correctly.  The
-"Uninstall Cygwin" shortcut, if present, is unlikely to do a proper
-job.  If you want to completely uninstall Cygwin, you will probably have
-to delete some things by hand.
-
-</P>
-<P>
-Once setup is complete you may remove the temporary directory.  It will
-contain <CODE>setup.exe</CODE>, the downloaded <CODE>.tar.gz</CODE> files, and a
-setup log file, which is not needed, but may contain helpful diagnostics
-if your installation failed for some reason.
-
-</P>
+Once you've installed the latest net release, the new setup will update
+just the individual packages that need it.
 
 
-<H3><A NAME="SEC11" HREF="faq_toc.html#TOC11">Directory installation with <CODE>setup.exe</CODE></A></H3>
+
+
+<H3><A NAME="SEC12" HREF="faq_toc.html#TOC12">The README says I should turn off anti-virus software.  Isn't that dangerous?</A></H3>
 
 <P>
-Before proceeding, you must download packages into the temporary
-directory containing <CODE>setup.exe</CODE>.  These are in subdirectories of
-'latest' and end in .tar.gz and not in -src.tar.gz.  If there is more
-than one in a given directory, pick the one with the highest version
-number.  Put them together in the temporary directory containing
-<CODE>setup.exe</CODE>.  You may preserve the directory structure of 'latest',
-and include the -src.tar.gz files, without ill effect.
+Only Network Associates (formerly McAfee) products have been reported to
+"hang" when extracting Cygwin tar archives.  Other products should not
+cause problems, if you prefer to keep them running.
 
-</P>
-<P>
-Whatever subset you think is appropriate, it <STRONG>must</STRONG> contain the
-'cygwin' package, or you will not end up with a working Cygwin
-installation.
-
-</P>
-<P>
-When you have all the necessary tar files together with
-<CODE>setup.exe</CODE>, proceed as you would for an internet installation,
-except choose directory installation ('d') when prompted.  Setup will
-install all the tar files that it finds there.  Here are the gory
-details again:
-
-</P>
-<P>
-Shut down <STRONG>all cygwin applications</STRONG> (including inetd, etc.).
-
-</P>
-<P>
-Then, in a <STRONG>Windows command prompt</STRONG> ("MS-DOS Prompt" in Windows
-95/98), '<CODE>cd</CODE>' to the temporary directory and type
-'<CODE>setup.exe</CODE>'.
-
-</P>
-<P>
-When prompted, specify the location of the root directory, or accept the
-default.
-
-</P>
-<P>
-At the next prompt, choose to install from the current directory ('d').
-This is <STRONG>not</STRONG> the default.
-
-</P>
-<P>
-When finished, Setup will have created a "Cygnus Solutions" folder on
-your Start Menu, containing a shortcut to <CODE>cygwin.bat</CODE>, which
-invokes bash with various environment variables set correctly.  The
-"Uninstall Cygwin" shortcut, if present, is unlikely to do a proper
-job.  If you want to completely uninstall Cygwin, you will probably have
-to delete some things by hand.
-
-</P>
-<P>
-Once setup is complete you may remove the temporary directory.  It will
-contain <CODE>setup.exe</CODE>, the downloaded <CODE>.tar.gz</CODE> files, and a
-setup log file, which is not needed, but may contain helpful diagnostics
-if your installation failed for some reason.
-
-</P>
-
-
-<H3><A NAME="SEC12" HREF="faq_toc.html#TOC12">Adding or updating packages</A></H3>
 
 <P>
-Later versions of <CODE>setup.exe</CODE> permit you to add and/or update
-packages to an existing cygwin installation.
+Otherwise, you can download <CODE>setup.exe</CODE> and scan it.  Then turn off
+the anti-virus software, then run setup to download and extract all the
+tar files.  Then re-activate your anti-virus software and scan
+everything in C:\cygwin (or wherever you chose to install).  This should
+be safe.  (As long as nobody substitutes a malicious setup.exe ...)
 
-</P>
-<P>
-<STRONG>You cannot use this method to update a B18, B19, B20, B20.1 or
-CD-ROM (1.0) installation of Cygwin.  You must have previously installed
-a net release of Cygwin 1.1.0 or greater, using <CODE>setup.exe</CODE>, before
-you can update packages with 'setup -u'.</STRONG>
 
-</P>
-<P>
-To update your installation, create an empty temporary directory, and
-download the latest version of <CODE>setup.exe</CODE> to it from a Cygwin
-mirror near you.
 
-</P>
-<P>
-Then, in a <STRONG>Windows command prompt</STRONG> ("MS-DOS Prompt" in Windows
-95/98), '<CODE>cd</CODE>' to the temporary directory and type
 
-<PRE>
-	setup -u &#60;pkg&#62;
-</PRE>
+<H3><A NAME="SEC13" HREF="faq_toc.html#TOC13">What packages should I download?</A></H3>
 
 <P>
-where "&#60;pkg&#62;" is the name of the package you wish to update, such as
-"cygwin" or "gdb" or "make" or ...
-
-</P>
-<P>
-Specify the root directory as you did when you first installed Cygwin.
-This will update the package.  As with the initial installation, you can
-update from the internet ('i') or from the directory ('d').  The latter
-requires that you download the <CODE>.tar.gz</CODE> file of the package ahead
-of time, along with <CODE>setup.exe</CODE>.
-
-</P>
-<P>
-If you are updating the package "cygwin", then you must close
-<STRONG>all</STRONG> Cygwin applications (including <CODE>inetd</CODE>, for example),
-before running setup.
-
-</P>
-<P>
-You can omit the '-u' option, which will force setup to install the
-latest package (from internet or directory), regardless of whether
-<CODE>setup.exe</CODE> believes it is necessary.  You <STRONG>must</STRONG> omit '-u'
-if you are updating from a development snapshot, because development
-snapshots have their version numbers "bumped" to the next release
-number.  In this case, <CODE>setup.exe</CODE> will think your installation is
-already up-to-date.
-
-</P>
-<P>
-Once setup is complete you may remove the temporary directory.  It will
-contain <CODE>setup.exe</CODE>, the downloaded <CODE>.tar.gz</CODE> files, and a
-setup log file, which is not needed, but may contain helpful diagnostics
-if your installation failed for some reason.
-
-</P>
+Just get everything, if you have room for it.  But if you must be
+selective:
 
 
-<H3><A NAME="SEC13" HREF="faq_toc.html#TOC13">Problems running <CODE>setup.exe</CODE></A></H3>
+<DL COMPACT>
 
+<DT><SAMP>`cygwin'</SAMP>
+<DD>
+This is the minimum core, consisting of the cygwin1.dll and a few
+commands (like <CODE>mount</CODE>).  Not much else, and no shell!
 
+<DT><SAMP>`bash'</SAMP>
+<DD>
+This is the default interactive command shell for cygwin.  If you don't
+install <SAMP>`bash'</SAMP>, then the "Cygwin Bash Shell" shortcut that setup
+creates for you won't actually do anything.
 
-<H4><A NAME="SEC14" HREF="faq_toc.html#TOC14">Error message: "Unable to retrieve the list of cygwin mirrors..."</A></H4>
+<DT><SAMP>`ash'</SAMP>
+<DD>
+This is often forgotten because it's not obvious that <SAMP>`ash'</SAMP>
+contains <CODE>/bin/sh</CODE>, which is essential for running scripts, (and
+<CODE>make</CODE> and ...).
+
+</DL>
 
 <P>
-This means that <CODE>setup.exe</CODE> could not make an http connection to
-<TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.  This is
-required for an internet ('i') install.  Either sources.redhat.com was
-too busy, or there is a problem with your network.  Note that
-<CODE>setup.exe</CODE> has very limited proxy functionality for firewalls, and
-depends on IE4 or later being installed and configured properly.  If you
-cannot get the internet installation to work, just download the
-packages yourself and do a directory ('d') install.
-
-</P>
+If you want to build programs, of course you'll need <SAMP>`gcc'</SAMP>, but
+you'll also need <SAMP>`binutils'</SAMP>, probably <SAMP>`make'</SAMP> and
+<SAMP>`fileutils'</SAMP>, and possibly lots more.  (Again, consider just getting
+everything!)
 
 
-<H4><A NAME="SEC15" HREF="faq_toc.html#TOC15">System hangs when unpacking tar archives</A></H4>
+
+
+<H3><A NAME="SEC14" HREF="faq_toc.html#TOC14">What if setup fails?</A></H3>
 
 <P>
-Your anti-virus software is interfering with <CODE>setup.exe</CODE>.  You will
-have to disable it before running setup.  In that case, you will
-probably want to:
+If you are downloading from the internet, setup will fail if it cannot
+download the list of mirrors at
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/mirrors.html">http://sources.redhat.com/cygwin/mirrors.html</a></TT>.  It could be that
+the network is too busy.  Similarly for an ftp download site that isn't
+working.  Try another mirror, or try again later.
 
-<OL>
-<LI>download all the .tar.gz files for the packages, along with <CODE>setup.exe</CODE>
 
-<LI>scan it all for viruses
+<P>
+If setup refuses to download a package that you know needs to be
+upgraded, try deleting that package's entry from /etc/setup.  If you are
+reacting quickly to an announcement on the mailing list, it could be
+that the mirror you are using doesn't have the latest copy yet.  Try
+another mirror, or try again tomorrow.
 
-<LI>disable the anti-virus software
 
-<LI>perform a directory ('d') install
 
-<LI>re-enable the anti-virus software
 
-<LI>scan everything below your Cygwin root directory (<CODE>C:\cygwin</CODE> by default)
+<H3><A NAME="SEC15" HREF="faq_toc.html#TOC15">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
 
-</OL>
-
+<P>
+Good question!  That very issue is sometimes debated on the
+<SAMP>`cygwin-apps'</SAMP> mailing list.  Check the list archives if you want to
+know more.
 <P><HR><P>
 Go to the <A HREF="faq_1.html">first</A>, <A HREF="faq_2.html">previous</A>, <A HREF="faq_4.html">next</A>, <A HREF="faq_9.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
-
+</BODY>
+</HTML>
