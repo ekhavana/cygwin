@@ -1,3 +1,60 @@
+<h4>Release 4.3.0-40</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-12 1745 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040112-1745.tar.bz2">xwin-20040112-1745.tar.bz2</a>
+(134 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-39
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-39-to-4.3.0-40.diff">xwin-4.3.0-39-to-4.3.0-40.diff</a>
+(14 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>winmultiwindowwindow.c/winReorderWindowsMultiWindow - Fix the
+problem that XWin crashes when multiple XWin processes exist.
+(Kensuke Matsuzaki)</li>
+
+<li>InitOutput.c, winclipboardthread.c, winglobals.c,
+winmultiwindowwm.c - Move calls to setlocale () from
+winclipboardthread.c and winmultiwindowwm.c to InitOutput.c and only
+call it on the first server generation.  Remove the g_fCalledSetLocale
+global variable.  Make sure to call XInitThreads () before calling
+XSupportsLocale ().  This may help fix the crash on startup reported
+by Lester Ingber.  (Harold L Hunt II)</li>
+
+<li>winclipboardwrappers.c/winProcSetSelectionOwner - Reinitialize the
+local list of selection owners when the server generation changes.
+This fixes the crash where copying text in X11 followed by copying an
+image in Win32 followed by an X Server reset causes XWin.exe to
+segfault; this was reported by Alexander Gottwald.  (Harold L Hunt
+II)</li>
+
+<li>winmultiwindowwm.c - Move the global variable g_nQueueSize into
+the WMMsgQueueRec structure so that it is stored per instance of the
+multi-window window manager thread.  (Harold L Hunt II)</li>
+
+<li>winmultiwindowwm.c/winInitWM - Zero memory allocated for
+WMProcArgRec, WMInfoRec, and XMsgProcArgRec structures.  This should
+help prevent problems with unintialized variables in these structures.
+(Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-39</h4>
 <table>
 <tbody>
