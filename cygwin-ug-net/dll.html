@@ -169,8 +169,8 @@ gcc -c mydll.c</PRE
 ></TR
 ></TABLE
 ><P
->Unfortunately, the process for building a dll is, well, convoluted.
-You have to run five commands, like this:</P
+>Fortunately, with the latest gcc and binutils the process for building a dll
+is now much simpler. Say you want to build this minimal function in mydll.c:</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -179,74 +179,67 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="SCREEN"
->gcc -s -Wl,--base-file,mydll.base -o mydll.dll mydll.o -Wl,-e,_mydll_init@12 
-dlltool --base-file mydll.base --def mydll.def --output-exp mydll.exp --dllname mydll.dll
-gcc -s -Wl,--base-file,mydll.base,mydll.exp -o mydll.dll mydll.o -Wl,-e,_mydll_init@12
-dlltool --base-file mydll.base --def mydll.def --output-exp mydll.exp --dllname mydll.dll
-gcc -Wl,mydll.exp -o mydll.dll mydll.o -Wl,-e,_mydll_init@12</PRE
-></TD
-></TR
-></TABLE
-><P
->The extra steps give <TT
-CLASS="FILENAME"
->dlltool</TT
-> the
-opportunity to generate the extra sections (exports and relocation)
-that a dll needs.  After this, you build the import library:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
->dlltool --def mydll.def --dllname mydll.dll --output-lib mydll.a</PRE
-></TD
-></TR
-></TABLE
-><P
->Now, when you build your program, you link against the import
-library:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
->gcc -o myprog myprog.o mydll.a</PRE
-></TD
-></TR
-></TABLE
-><P
->Note that we linked with <B
-CLASS="COMMAND"
->-e _mydll_init@12</B
->.
-This tells the OS what the DLL's "entry point" is, and this is a
-special function that coordinates bringing the dll to life withing the
-OS.  The minimum function looks like this:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="SCREEN"
->#include &#60;windows.h&#62;
-
-int WINAPI
+>int WINAPI
 mydll_init(HANDLE h, DWORD reason, void *foo)
 {
   return 1;
-}  </PRE
+}</PRE
 ></TD
 ></TR
 ></TABLE
+><P
+>First compile mydll.c to object code:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>gcc -c mydll.c</PRE
+></TD
+></TR
+></TABLE
+><P
+>Then, tell gcc that it is building a shared library:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>gcc -shared -o mydll.dll mydll.o</PRE
+></TD
+></TR
+></TABLE
+><P
+>That's it! However, if you are building a dll as an export library,
+you will probably want to use the complete syntax:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>gcc -shared -o cyg${module}.dll \
+    -Wl,--out-implib=lib${module}.dll.a \
+    -Wl,--export-all-symbols \
+    -Wl,--enable-auto-import \
+    -Wl,--whole-archive ${old_lib} \
+    -Wl,--no-whole-archive ${dependency_libs}</PRE
+></TD
+></TR
+></TABLE
+><P
+>Where ${module} is the name of your DLL, ${old_lib} are all
+your object files, bundled together in static libs or single object
+files and the ${dependency_libs} are import libs you need to
+link against, e.g '-lpng -lz -L/usr/local/special -lmyspeciallib'.</P
 ></DIV
 ><DIV
 CLASS="SECT2"
