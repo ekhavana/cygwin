@@ -14,10 +14,11 @@ my $grep = $html->param('grep');
 $main::packages = ();
 use FindBin qw($Bin);
 
-print $html->header, $html->start_html('Package List Search Results'), "\n",
+print $html->header, "\n<html>\n<title>Package List Search Results</title>\n",
       "<!--#include virtual=\"cygwin-header.html\" -->\n",
-      $html->h1({-align=>'center'},
-      'Cygwin Package List'), $html->h2({-align=>'center'}, 'Search Results');
+      $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n",
+      $html->h2({-align=>'center'}, 'Search Results'), "\n";
+
 chdir("$Bin/../packages");
 for my $f (<*/*>) {
     open(F, $f) or next;
