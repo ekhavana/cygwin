@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 30 September 2004 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 2 December 2004 -->
 
 <TITLE>The Cygwin FAQ
  - Installation Instructions</TITLE>
@@ -291,21 +291,69 @@ you are much better off if you can avoid the problem entirely.
 
 
 <P>
-In particular, the environment variables <SAMP>`USER'</SAMP> and <SAMP>`HOME'</SAMP> are
-set for you in /etc/profile.  By default these derive from your Windows
-logon name.  You may edit this file and set them explicitly to something
-without spaces.
+On Windows NT/2000/XP you have two choices:
+
+<OL>
+
+<LI>You can rename the user in the Windows User Manager GUI and then
+
+run mkpasswd.
+
+<LI>You can simply edit the /etc/passwd file and change the Cygwin user name
+
+(first field). It's also a good idea to avoid spaces in the home directory.
+
+</OL>
+
+<P>
+On Windows 95/98/ME you can create a new user and run mkpasswd, 
+or you can delete the offending entry from /etc/passwd. 
+Cygwin will then use the name in the default entry with uid 500.
+
+
+
+
+<H3><A NAME="SEC18" HREF="faq_toc.html#TOC18">My <SAMP>`HOME'</SAMP> environment variable is not what I want.</A></H3>
+
+<P>
+When starting Cygwin from Windows, <SAMP>`HOME'</SAMP> is determined as follows
+in order of decreasing priority:
+
+
+
+<OL>
+
+<LI><SAMP>`HOME'</SAMP> from the Windows environment, translated to POSIX form.
+
+<LI>The entry in /etc/passwd
+
+<LI><SAMP>`HOMEDRIVE'</SAMP> and <SAMP>`HOMEPATH'</SAMP> from the Windows environment
+
+<LI>/
+
+</OL>
+
+<P>
+When using Cygwin from the network (telnet, ssh,...), <SAMP>`HOME'</SAMP> is set 
+from /etc/passwd.
 
 
 <P>
-(If you use the <SAMP>`login'</SAMP> package or anything else that reads
-/etc/passwd, you may need to make corresponding changes there.  See the
-README file for that package.)
+If your <SAMP>`HOME'</SAMP> is set to a value such as /cygdrive/c, it is likely 
+that it was set in Windows. Start a DOS Command Window and type 
+"set HOME" to verify if this is the case.
+
+
+<P>
+Access to shared drives is often restricted when starting from the network,
+thus Domain users may wish to have a different <SAMP>`HOME'</SAMP> in the 
+Windows environment (on shared drive) than in /etc/passwd (on local drive).
+Note that ssh only considers /etc/passwd, disregarding <SAMP>`HOME'</SAMP>. 
 
 
 
 
-<H3><A NAME="SEC18" HREF="faq_toc.html#TOC18">How do I uninstall individual packages?</A></H3>
+<H3><A NAME="SEC19" HREF="faq_toc.html#TOC19">How do I uninstall individual packages?</A></H3>
 
 <P>
 Run Cygwin Setup as you would to install packages.  In the list of
@@ -316,7 +364,7 @@ the action reads "Uninstall".  Proceed by clicking "Next".
 
 
 
-<H3><A NAME="SEC19" HREF="faq_toc.html#TOC19">How do I uninstall <STRONG>all</STRONG> of Cygwin?</A></H3>
+<H3><A NAME="SEC20" HREF="faq_toc.html#TOC20">How do I uninstall <STRONG>all</STRONG> of Cygwin?</A></H3>
 
 <P>
 Setup has no automatic uninstall facility.  Just delete everything
@@ -347,7 +395,7 @@ would not have done any of these things for you.
 
 
 
-<H3><A NAME="SEC20" HREF="faq_toc.html#TOC20">How do I install snapshots?</A></H3>
+<H3><A NAME="SEC21" HREF="faq_toc.html#TOC21">How do I install snapshots?</A></H3>
 
 <P>
 First, are you sure you want to do this?  Snapshots are risky.  They
@@ -397,7 +445,7 @@ to <CODE>C:\cygwin\bin\cygwin1.dll</CODE>.
 
 
 
-<H3><A NAME="SEC21" HREF="faq_toc.html#TOC21">Can Cygwin Setup maintain a "mirror"?</A></H3>
+<H3><A NAME="SEC22" HREF="faq_toc.html#TOC22">Can Cygwin Setup maintain a "mirror"?</A></H3>
 
 <P>
 NO.  Cygwin Setup cannot do this for you.  Use a tool designed for

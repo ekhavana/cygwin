@@ -293,14 +293,45 @@ character as a word delimiter.  Under certain circumstances, it is
 possible to get around this with various shell quoting mechanisms, but
 you are much better off if you can avoid the problem entirely.
 
-   In particular, the environment variables `USER' and `HOME' are set
-for you in /etc/profile.  By default these derive from your Windows
-logon name.  You may edit this file and set them explicitly to something
-without spaces.
+   On Windows NT/2000/XP you have two choices:
+  1. You can rename the user in the Windows User Manager GUI and then
+     run mkpasswd.
 
-   (If you use the `login' package or anything else that reads
-/etc/passwd, you may need to make corresponding changes there.  See the
-README file for that package.)
+  2. You can simply edit the /etc/passwd file and change the Cygwin
+     user name (first field). It's also a good idea to avoid spaces in
+     the home directory.
+
+
+   On Windows 95/98/ME you can create a new user and run mkpasswd, or
+you can delete the offending entry from /etc/passwd.  Cygwin will then
+use the name in the default entry with uid 500.
+
+My `HOME' environment variable is not what I want.
+--------------------------------------------------
+
+   When starting Cygwin from Windows, `HOME' is determined as follows
+in order of decreasing priority:
+
+  1. `HOME' from the Windows environment, translated to POSIX form.
+
+  2. The entry in /etc/passwd
+
+  3. `HOMEDRIVE' and `HOMEPATH' from the Windows environment
+
+  4. /
+
+
+   When using Cygwin from the network (telnet, ssh,...), `HOME' is set
+from /etc/passwd.
+
+   If your `HOME' is set to a value such as /cygdrive/c, it is likely
+that it was set in Windows. Start a DOS Command Window and type "set
+HOME" to verify if this is the case.
+
+   Access to shared drives is often restricted when starting from the
+network, thus Domain users may wish to have a different `HOME' in the
+Windows environment (on shared drive) than in /etc/passwd (on local
+drive).  Note that ssh only considers /etc/passwd, disregarding `HOME'.
 
 How do I uninstall individual packages?
 ---------------------------------------
@@ -379,17 +410,19 @@ Where's the documentation?
 --------------------------
 
    If you have installed Cygwin, you can find lots of documentation in
-`/usr/share/doc/'.  Many packages ship with standard documentation, you
-can find this in a directory `/usr/share/doc/_package_name_'.  In
-addition, some packages have Cygwin specific instructions in a file
+`/usr/share/doc/'.  Many packages ship with standard documentation,
+which you can find in `/usr/share/doc/_package_name_' or by using the
+`man' or `info' tools. (Hint: use `cygcheck -l _package_name_' to list
+what man pages the package includes.)  In addition, some packages have
+Cygwin specific instructions in a file
 `/usr/share/doc/Cygwin/_package_name_.README'.  Some older packages
 still keep their documentation in `/usr/doc/' instead of
 `/usr/share/doc/'.
 
-   There are links to quite a lot of it on the main Cygwin project web
-page: `http://cygwin.com/'.  Be sure to at least read any 'Release
-Notes' or 'Readme' or 'read this' links on the main web page, if there
-are any.
+   There are links to quite a lot of documentation on the main Cygwin
+project web page, `http://cygwin.com/', including this FAQ.  Be sure to
+at least read any 'Release Notes' or 'Readme' or 'read this' links on
+the main web page, if there are any.
 
    There is a comprehensive Cygwin User's Guide at
 `http://cygwin.com/cygwin-ug-net/cygwin-ug-net.html' and an API
@@ -824,22 +857,32 @@ does not seem to be available on Win9x.)  Type
    You may need to press the formfeed button on your printer or append
 the formfeed character to your file.
 
-Why don't international (8-bit) characters work?
-------------------------------------------------
+Why don't international (Unicode) characters work?
+--------------------------------------------------
 
-   Before you can type international characters (Једц) in bash, you must
-add the following lines to your `~/.inputrc' file:
+   Internationalization is a complex issue. The short answer is that
+Cygwin is not Unicode-aware, so things that might work in Linux will
+not necessarily work on Cygwin. However, some things do work. To type
+international characters (Једц) in `bash', add the following lines to
+your `~/.inputrc' file and restart `bash':
 
      	set meta-flag on
              set convert-meta off
              set output-meta on
+     	set input-meta on
+     	set kanji-code sjis
+     	set meta-flag on
 
    These are options to the `readline' library, which you can read
 about in the `bash(1)' and `readline(3)' man pages. Other tools that do
-not use `readline' for display, such as less and ls, require additional
-settings, which could be put in your `~/.bashrc':
+not use `readline' for display, such as `less' and `ls', require
+additional settings, which could be put in your `~/.bashrc':
      alias less='/bin/less -r'
      alias ls='/bin/ls -F --color=tty --show-control-chars'
+     export LANG="ja_JP.SJIS"
+     export OUTPUT_CHARSET="sjis"
+   These examples use the Japanese Shift-JIS character set, obviously
+you will want to change them for your own locale.
 
 Why don't cursor keys work under Win95/Win98?
 ---------------------------------------------
@@ -2272,6 +2315,15 @@ Known Problems in the Latest Net Release
 Aware of the problem, no solution known.
 ========================================
 
+Hangs with Hyperthreaded Processor
+----------------------------------
+
+   Some users using processors with Intel's Hyperthreading turned on
+have reported hangs that do not appear with Hyperthreading off. So far
+the Cygwin developers have not been able to reproduce this problem.
+See `http://www.cygwin.com/ml/cygwin/2004-07/msg01100.html' and related
+messages for details.
+
 Pipe key (`|') doesn't work on non-US keyboards in Win9x/ME
 -----------------------------------------------------------
 
@@ -2289,11 +2341,6 @@ class.  Details at
 
 On Win9x, scp leaves ssh processes running.
 -------------------------------------------
-
-Fixed in the Next Release
-=========================
-
-   (Nothing to report.)
 
 History
 *******
