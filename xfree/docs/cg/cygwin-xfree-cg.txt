@@ -1148,8 +1148,8 @@ Obtaining binutils and gcc Source
     2. Visit the [81]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
-    4. Change current ftp directory to cygwin/latest/.
-    5. Download the following files from cygwin/latest/, saving them to
+    4. Change current ftp directory to cygwin/release/.
+    5. Download the following files from cygwin/release/, saving them to
        /cygwin/src/ The compressed file size appears after each file in
        the list below.
 
@@ -1162,7 +1162,7 @@ Obtaining binutils and gcc Source
      file link and choosing a command such as Save Target As... or Save
      Link As... from the context sensitive menu. Better yet, download
      your files with a stand alone ftp client.
-          + binutils/binutils-20010914-1-src.tar.bz2 (7.5 MiB; required,
+          + binutils/binutils-20011002-1-src.tar.bz2 (7.5 MiB; required,
             necessary to build gcc and Cygwin/XFree86)
           + gcc/gcc-2.95.3-5-src.tar.bz2 (8.1 MiB; required, necessary to
             build Cygwin/XFree86)
@@ -1202,7 +1202,7 @@ $
     3. Create an archive of the contents of the /lib directory:
 
 Username@CygwinHost /
-$ tar -czf cygwin-lib.tgz lib/
+$ tar czf cygwin-lib.tgz lib/
 
 Username@CygwinHost /
 $
@@ -1219,7 +1219,7 @@ $
     5. Create an archive of the contents of the /usr/include directory:
 
 Username@CygwinHost /usr
-$ tar -czf cygwin-include.tgz include/
+$ tar czf cygwin-include.tgz include/
 
 Username@CygwinHost /usr
 $
@@ -1242,9 +1242,9 @@ $
 
     9. Extract the cygwin-lib.tgz and cygwin-include.tgz archives:
 
-[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-lib.tgz
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar xzf cygwin-lib.tgz
 
-[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar -xzf cygwin-include.tgz
+[harold@MyCrossHost /cygwin/i686-pc-cygwin/]$ tar xzf cygwin-include.tgz
 
    10. Obtaining Cygwin headers and libs is now complete.
      _________________________________________________________________
@@ -1263,30 +1263,30 @@ Building binutils and gcc
 
 [harold@MyCrossHost src]$
 
-    3. Extract the binutils-20010914-1-src.tar.bz2 and
+    3. Extract the binutils-20011002-1-src.tar.bz2 and
        gcc-2.95.3-5-src.tar.bz2 archives:
 
-[harold@MyCrossHost src]$ bunzip2 binutils-20010914-1-src.tar.bz2
+[harold@MyCrossHost src]$ bunzip2 binutils-20011002-1-src.tar.bz2
 
-[harold@MyCrossHost src]$ tar -xf binutils-20010914-1-src.tar
+[harold@MyCrossHost src]$ tar xf binutils-20011002-1-src.tar
 
 [harold@MyCrossHost src]$ bunzip2 gcc-2.95.3-5-src.tar.bz2
 
-[harold@MyCrossHost src]$ tar -xf gcc-2.95.3-5-src.tar
+[harold@MyCrossHost src]$ tar xf gcc-2.95.3-5-src.tar
 
     4. Change the current directory to the
-       /cygwin/src/binutils-20010914-1 directory:
+       /cygwin/src/binutils-20011002-1 directory:
 
-[harold@MyCrossHost src]$ cd binutils-20010914-1
+[harold@MyCrossHost src]$ cd binutils-20011002-1
 
-[harold@MyCrossHost binutils-20010914-1]$
+[harold@MyCrossHost binutils-20011002-1]$
 
     5. Create a build directory and change the current directory to that
        directory:
 
-[harold@MyCrossHost binutils-20010914-1]$ mkdir build
+[harold@MyCrossHost binutils-20011002-1]$ mkdir build
 
-[harold@MyCrossHost binutils-20010914-1]$ cd build
+[harold@MyCrossHost binutils-20011002-1]$ cd build
 
 [harold@MyCrossHost build]$
 
@@ -1319,7 +1319,7 @@ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
 [harold@MyCrossHost build]$
 
    10. Change the current directory to the
-       /cygwin/src/binutils-20010914-1 directory:
+       /cygwin/src/binutils-20011002-1 directory:
 
 [harold@MyCrossHost build]$ cd ../../gcc-2.95.3-5
 
