@@ -5,7 +5,7 @@
 >Installing Cygwin/XFree86</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.74b"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"/><LINK
 REL="HOME"
 TITLE="Cygwin/XFree86 User's Guide"
 HREF="cygwin-xfree-ug.html"/><LINK
@@ -82,9 +82,9 @@ CLASS="QUOTE"
 >"ports of
 the popular GNU development tools and utilities for Windows 95, 98,
 and NT. They function by using the Cygwin library which provides a
-<SPAN
+<ACRONYM
 CLASS="acronym"
->UNIX</SPAN
+>UNIX</ACRONYM
 >-like API on top of the Win32 API."</SPAN
 >  Cygwin
 allows the compilation of the XFree86 source on Win32; several patches
@@ -201,9 +201,9 @@ installations.  Leave <SPAN
 CLASS="guilabel"
 >Default Text File Type</SPAN
 > as
-<SPAN
+<ACRONYM
 CLASS="acronym"
->UNIX</SPAN
+>UNIX</ACRONYM
 >.  If you have several users on your NT
 machine, and you are logged in with local administrative privileges,
 you may wish to set <SPAN
@@ -311,6 +311,14 @@ required, executables for xterm, twm, etc.)</P
 ><P
 ><TT
 CLASS="filename"
+>XFree86-bin-icons</TT
+> (3 KiB;
+optional, adds icons for X Clients to the Start menu)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
 >XFree86-doc</TT
 > (1.26 MiB;
 optional, formatted documentation)</P
@@ -404,6 +412,15 @@ files)</P
 ><P
 ><TT
 CLASS="filename"
+>XFree86-lib-compat</TT
+> (1.5 MiB;
+optional, runtime libraries (DLLs) for X Clients compiled for Cygwin/XFree86
+version 4.2.0)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
 >XFree86-man</TT
 > (548 KiB;
 optional, <B
@@ -475,32 +492,37 @@ required, the Cygwin/XFree86 X Server)</P
 CLASS="filename"
 >XFree86-xwinclip</TT
 > (6 KiB;
-optional, provides clipboard integration between Windows and Cygwin/XFree86)</P
+legacy, provides clipboard integration between Windows and Cygwin/XFree86,
+which is now handled by the <VAR
+CLASS="parameter"
+>-clipboard</VAR
+>
+command-line parameter)</P
 ></LI
 ></UL
 ></LI
 ><LI
 ><P
->You must select the <TT
+>You must select the <VAR
 CLASS="literal"
->XFree86-base</TT
+>XFree86-base</VAR
 > package,
-which is located in the <TT
+which is located in the <VAR
 CLASS="literal"
->XFree86</TT
+>XFree86</VAR
 > category.  The
-<TT
+<VAR
 CLASS="literal"
->XFree86-base</TT
+>XFree86-base</VAR
 > package is a helper package that
 automatically selects a working set of packages for you that will
 allow Cygwin/XFree86 to work.  You may also want to ensure that the
-<TT
+<VAR
 CLASS="literal"
->inetutils</TT
-> and <TT
+>inetutils</VAR
+> and <VAR
 CLASS="literal"
->openssh</TT
+>openssh</VAR
 > packages
 are selected if you wish to use <B
 CLASS="command"

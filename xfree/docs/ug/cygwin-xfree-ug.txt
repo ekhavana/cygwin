@@ -1,3 +1,4 @@
+
 Cygwin/XFree86 User's Guide
 
 Harold L Hunt, II
@@ -33,29 +34,32 @@ Harold L Hunt, II
 
         [13]Switching Out of Cygwin/XFree86
         [14]Stopping Cygwin/XFree86
-        [15]Remote Sessions via XDMCP
-        [16]Displaying Remote Clients
+        [15]Window Managers
+        [16]Windows Clipboard Integration
+        [17]Shared Memory Support (MIT-SHM Extension)
+        [18]Remote Sessions via XDMCP
+        [19]Displaying Remote Clients
 
-              [17]Unsecure Telnet
-              [18]Secure ssh
+              [20]Unsecure Telnet
+              [21]Secure ssh
 
-   A. [19]GNU Free Documentation License
+   A. [22]GNU Free Documentation License
 
-        0. [20]PREAMBLE
-        1. [21]APPLICABILITY AND DEFINITIONS
-        2. [22]VERBATIM COPYING
-        3. [23]COPYING IN QUANTITY
-        4. [24]MODIFICATIONS
-        5. [25]COMBINING DOCUMENTS
-        6. [26]COLLECTIONS OF DOCUMENTS
-        7. [27]AGGREGATION WITH INDEPENDENT WORKS
-        8. [28]TRANSLATION
-        9. [29]TERMINATION
-        10. [30]FUTURE REVISIONS OF THIS LICENSE
-        [31]How to use this License for your documents
+        0. [23]PREAMBLE
+        1. [24]APPLICABILITY AND DEFINITIONS
+        2. [25]VERBATIM COPYING
+        3. [26]COPYING IN QUANTITY
+        4. [27]MODIFICATIONS
+        5. [28]COMBINING DOCUMENTS
+        6. [29]COLLECTIONS OF DOCUMENTS
+        7. [30]AGGREGATION WITH INDEPENDENT WORKS
+        8. [31]TRANSLATION
+        9. [32]TERMINATION
+        10. [33]FUTURE REVISIONS OF THIS LICENSE
+        [34]How to use this License for your documents
 
    List of Tables
-   3-1. [32]Parameter Descriptions
+   3-1. [35]Parameter Descriptions
      _________________________________________________________________
 
 Chapter 1. Cygwin/XFree86 Overview
@@ -79,7 +83,7 @@ Cygwin/XFree86 Contents
 Installing Cygwin/XFree86
 
    Cygwin tools are, in the words of the Cygwin development homepage,
-   [33]http://cygwin.com/, "ports of the popular GNU development tools
+   [36]http://cygwin.com/, "ports of the popular GNU development tools
    and utilities for Windows 95, 98, and NT. They function by using the
    Cygwin library which provides a UNIX-like API on top of the Win32
    API." Cygwin allows the compilation of the XFree86 source on Win32;
@@ -89,7 +93,7 @@ Installing Cygwin/XFree86
 
    Cygwin has a nice setup program that downloads and installs the
    necessary Cygwin packages for you.
-    1. Open the Cygwin, [34]http://cygwin.com/ page in your web browser
+    1. Open the Cygwin, [37]http://cygwin.com/ page in your web browser
     2. Click the "Install Cygwin Now" link in the upper-right hand corner
        of the page; or, click the "Install" link next to "Latest net
        release:", which should be near the top of the page in the main
@@ -132,6 +136,8 @@ Installing Cygwin/XFree86
        beyond the scope of this document.
           + XFree86-bin (8.7 MiB; required, executables for xterm, twm,
             etc.)
+          + XFree86-bin-icons (3 KiB; optional, adds icons for X Clients
+            to the Start menu)
           + XFree86-doc (1.26 MiB; optional, formatted documentation)
           + XFree86-etc (470 KiB; required, configuration files for the X
             Server and programs in XFree86-bin)
@@ -147,6 +153,9 @@ Installing Cygwin/XFree86
           + XFree86-jdoc (84 KiB; optional, XFree86 Japanese
             documentation)
           + XFree86-lib (83 KiB; required, X11R6/lib/ files)
+          + XFree86-lib-compat (1.5 MiB; optional, runtime libraries
+            (DLLs) for X Clients compiled for Cygwin/XFree86 version
+            4.2.0)
           + XFree86-man (548 KiB; optional, man pages)
           + XFree86-nest (1.1 MiB; optional, Xnest nested X Server)
           + XFree86-prog (595 KiB; optional, additional files needed to
@@ -160,8 +169,9 @@ Installing Cygwin/XFree86
             (Xvfb) server)
           + XFree86-xserv (1.19 MiB; required, the Cygwin/XFree86 X
             Server)
-          + XFree86-xwinclip (6 KiB; optional, provides clipboard
-            integration between Windows and Cygwin/XFree86)
+          + XFree86-xwinclip (6 KiB; legacy, provides clipboard
+            integration between Windows and Cygwin/XFree86, which is now
+            handled by the -clipboard command-line parameter)
    16. You must select the XFree86-base package, which is located in the
        XFree86 category. The XFree86-base package is a helper package
        that automatically selects a working set of packages for you that
@@ -184,7 +194,7 @@ Installing Cygwin/XFree86
        [cyi11complete.png]
 
    You have now successfully installed Cygwin/XFree86. Proceed to
-   [35]Chapter 4 for instructions on how to use Cygwin/XFree86.
+   [38]Chapter 4 for instructions on how to use Cygwin/XFree86.
      _________________________________________________________________
 
 Chapter 3. Configuring Cygwin/XFree86
@@ -206,23 +216,119 @@ Command Line Parameters
    the syntax for XWin.exe parameters.
 
    XWin.exe
-   [-screen screen_number width height ...]
+   [-clipboard]
+   [-clipupdates clip_updates_above_n ]
+   [-emulate3buttons timeout_in_milliseconds ]
    [-engine engine_number ]
    [-fullscreen [-depth depth_in_bits_per_pixel ] [-refresh
    refresh_rate_in_herz ] ]
-   [-nodecoration]
+   [-ignoreinput]
    [-lesspointer]
-   [-emulate3buttons timeout_in_milliseconds ]
-   [-[no]winkill]
+   [-multiwindow]
+   [-multimonitors]
+   [-nodecoration]
+   [-rootless]
+   [-screen screen_number width height ...]
+   [-scrollbars]
+   [-[no]trayicon]
    [-[no]unixkill]
+   [-[no]winkill]
+   [-xf86config windows_path_to_config_file [-keyboard
+   keyboard_device_from_xf86config ] ]
 
    Below is an example command line for XWin.exe.
 
    XWin.exe -screen 0 800 600 -fullscreen -depth 32 -refresh 85
-   -emulate3buttons 100 -nowinkill -unixkill
+   -emulate3buttons 100 -nowinkill -unixkill 
 
    Table 3-1. Parameter Descriptions
    Parameter Description
+
+   [-clipboard]
+
+   Enables the integrated version of xwinclip, which provides integration
+   between the Cygwin/XFree86 clipboard and Windows clipboard. Do not use
+   in conjunction with the xwinclip program.
+
+   [-clipupdates clip_updates_above_n ]
+
+   Groups together the regions in each update to the screen when there
+   are more than the specified number of regions in an update. This works
+   by fitting a clipping region around the updated regions, then
+   transferring that entire region of the shadow frame buffer to the
+   screen, rather than making many individual calls to transfer small
+   portions of the shadow frame buffer to the screen. This has a
+   diminished effect on NT-based platforms because they already group GDI
+   operations together in a batch, which has a similar effect.
+
+   [-emulate3buttons timeout_in_milliseconds ]
+
+   Note: scroll wheel mice often allow you to click the scroll wheel for
+   middle mouse button functionality. Thus, most users with a scroll
+   wheel mouse will not need to use this parameter.
+
+   This option allows users with a two-button mouse to emulate a third
+   mouse button by pressing both mouse buttons within the optional
+   timeout specified in milliseconds. The default timeout is 50
+   milliseconds.
+
+   [-engine engine_number ]
+
+   Do not use this parameter unless you are a Cygwin/XFree86 developer or
+   are instructed by a Cygwin/XFree86 developer to do so.
+
+   Cygwin/XFree86's default behavior is to determine if DirectDraw or
+   DirectDraw4 are present, then to examine the -depth and -fullscreen
+   parameters to determine the engine with optimum performance that
+   supports the specified depth and window configuration.
+
+   [-fullscreen [-depth depth_in_bits_per_pixel ] [-refresh
+   refresh_rate_in_herz ] ]
+
+   The -fullscreen parameter tells Cygwin/XFree86 to open a given screen
+   in fullscreen mode.
+
+   The -depth parameter can only be used with -fullscreen and a
+   DirectDraw based engine to specify the display depth that should be
+   used for the fullscreen Cygwin/XFree86 screen.
+
+   The -refresh parameter can only be used with -fullscreen and a
+   DirectDraw based engine to specify the refresh rate that should be
+   used for the fullscreen Cygwin/XFree86 screen.
+
+   [-ignoreinput]
+
+   Ignore keyboard and mouse input. This is usually only use for testing
+   and debugging purposes.
+
+   [-lesspointer]
+
+   Hide the Windows mouse cursor when the mouse is over any
+   Cygwin/XFree86 window (regardless of whether that window is active or
+   inactive). This prevents the Windows mouse cursor from being placed
+   overtop of the X cursor.
+
+   [-multimonitors]
+
+   Create a root window that covers all monitors on a system with
+   multiple monitors.
+
+   [-multiwindow]
+
+   Start the integrated Windows-based window manager, which launches each
+   top-level X window in its own Windows window. Not to be used together
+   with -rootless nor -fullscreen.
+
+   [-nodecoration]
+
+   Do not give the Cygwin/XFree86 window a Windows window border, title
+   bar, etc. This parameter only applies to windowed mode screens, i.e.,
+   this parameter is ignored when the -fullscreen parameter is specified.
+
+   [-rootless]
+
+   Use a transparent root window with an external window manager (such as
+   twm). Not to be used with -multiwindow nor with -fullscreen.
 
    [-screen screen_number width height ...]
 
@@ -244,67 +350,35 @@ Command Line Parameters
    the first -screen parameter will apply only to the immediately
    preceeding -screen parameter.
 
-   [-engine engine_number ]
+   [-scrollbars]
 
-   Do not use this parameter unless you are a Cygwin/XFree86 developer or
-   are instructed by a Cygwin/XFree86 developer to do so.
+   Enable resizing of the server display window. Do not use in
+   conjunction with -multiwindow nor with -rootless.
 
-   Cygwin/XFree86's default behavior is to determine if DirectDraw or
-   DirectDraw4 are present, then to examine the -depth and -fullscreen
-   parameters to determine the engine with optimum performance that
-   supports the specified depth and window configuration.
+   [-[no]trayicon]
 
-   [-fullscreen]
-
-   This parameter tells Cygwin/XFree86 to open a given screen in
-   fullscreen mode.
-
-   [-depth depth_in_bits_per_pixel ]
-
-   This parameter can only be used with -fullscreen and a DirectDraw
-   based engine to specify the display depth that should be used for the
-   fullscreen Cygwin/XFree86 screen.
-
-   [-refresh refresh_rate_in_herz ]
-
-   This parameter can only be used with -fullscreen and a DirectDraw
-   based engine to specify the refresh rate that should be used for the
-   fullscreen Cygwin/XFree86 screen.
-
-   [-emulate3buttons timeout_in_milliseconds ]
-
-   Note: scroll wheel mice often allow you to click the scroll wheel for
-   middle mouse button functionality. Thus, most users with a scroll
-   wheel mouse will not need to use this parameter.
-
-   This option allows users with a two-button mouse to emulate a third
-   mouse button by pressing both mouse buttons within the optional
-   timeout specified in milliseconds. The default timeout is 50
-   milliseconds.
-
-   [-nodecoration]
-
-   Do not give the Cygwin/XFree86 window a Windows window border, title
-   bar, etc. This parameter only applies to windowed mode screens, i.e.,
-   this parameter is ignored when the -fullscreen parameter is specified.
-
-   [-lesspointer]
-
-   Hide the Windows mouse cursor when the mouse is over any
-   Cygwin/XFree86 window (regardless of whether that window is active or
-   inactive). This prevents the Windows mouse cursor from being placed
-   overtop of the X cursor.
-
-   [-[no]winkill]
-
-   Enable or disable the Alt-F4 key combo as a signal to exit
-   Cygwin/XFree86. The Alt-F4 key combo is enabled by default.
+   Enable or disable the tray icon; the default is to enable the tray
+   icon.
 
    [-[no]unixkill]
 
    Enable or disable the Ctrl-Alt-Backspace key combo as a signal to exit
    Cygwin/XFree86. The Ctrl-Alt-Backspace key combo is disabled by
    default.
+
+   [-[no]winkill]
+
+   Enable or disable the Alt-F4 key combo as a signal to exit
+   Cygwin/XFree86. The Alt-F4 key combo is enabled by default.
+
+   [-xf86config windows_path_to_config_file [-keyboard
+   keyboard_device_from_xf86config ] ]
+
+   -xf86config allows you to specify a XF86Config-style configuration
+   file.
+
+   -keyboard allows you to specify a keyboard device from the
+   configuration file.
      _________________________________________________________________
 
 Chapter 4. Using Cygwin/XFree86
@@ -320,7 +394,7 @@ startxwin.bat
 
    startxwin.bat - Use a MS-DOS batch file as the startup script. An
    example startxwin.bat is included in XFree86-startup-scripts, which is
-   extracted according to the instructions in [36]the Section called
+   extracted according to the instructions in [39]the Section called
    Installing Cygwin/XFree86 in Chapter 2. Run
    /usr/X11R6/bin/startxwin.bat by double-clicking it in Windows
    Explorer.
@@ -330,7 +404,7 @@ startxwin.sh
 
    startxwin.sh - Use an sh shell script as the startup script. An
    example startxwin.sh is included in XFree86-startup-scripts, which is
-   extracted according to the instructions in [37]the Section called
+   extracted according to the instructions in [40]the Section called
    Installing Cygwin/XFree86 in Chapter 2. Run
    /usr/X11R6/bin/startxwin.sh in a Cygwin shell:
 Username@CygwinHost ~
@@ -382,6 +456,70 @@ Stopping Cygwin/XFree86
    Server, in addition to the default Alt-F4 key combination.
      _________________________________________________________________
 
+Window Managers
+
+   Cygwin/XFree86 works with window managers in a couple of different
+   ways:
+     * Internal window manager (a.k.a. MultiWindow Mode) that creates a
+       Windows window for each top-level X window. The internal window
+       manager is launched using the -multiwindow command-line parameter
+       to XWin.exe. See [41]the Section called Command Line Parameters in
+       Chapter 3 for more information on the -multiwindow command-line
+       parameter.
+     * External local window managers (e.g. twm, mwm (part of the lesstif
+       package)). These local window managers must be installed on
+       Cygwin; they are run locally and cannot be used together with the
+       internal window manager.
+     * Remote window managers via an XDMCP session, which you can read
+       more about in [42]the Section called Remote Sessions via XDMCP.
+     * Remote window manager launched through an ssh tunnel. This is not
+       Cygwin/XFree86-specific, so you should be able to find information
+       about launching remote window managers from other sources. See
+       [43]the Section called Secure ssh for more information on using
+       ssh.
+     _________________________________________________________________
+
+Windows Clipboard Integration
+
+   The X Window System, and thus Cygwin/XFree86, uses its own internal
+   clipboard system that is distinct from the clipboard system used by
+   Windows. Copying and pasting text between these two clipboard systems
+   requires a clipboard integration program that watches for updates to
+   either clipboard and copies data between them when either one is
+   updated.
+
+   Cygwin/XFree86 has an internal clipboard integration system that is
+   envoked via the -clipboard command-line parameter. See [44]the Section
+   called Command Line Parameters in Chapter 3 for more information on
+   the -clipboard command-line parameter.
+
+     Note: Clipboard integration between the X Window System and Windows
+     is not easy to provide. As of 2003-09-19, the Cygwin/XFree86
+     clipboard integration still suffers from a shortcoming that causes
+     selected selected in X programs to be immediately unhighlighted.
+     This issue is very well known and will take somewhere between 40
+     and 120 hours of programming to fix; no one has the time to fix it.
+     Please do not report this to the mailing list as a bug.
+
+   Cygwin/XFree86 also has a legacy external clipboard integration system
+   that consists of a stand-alone executable called xwinclip. xwinclip
+   can be installed via Cygwin's setup.exe.
+     _________________________________________________________________
+
+Shared Memory Support (MIT-SHM Extension)
+
+   As of 2003-09-19, shared memory support (i.e. the MIT-SHM Extension)
+   is enabled in the default distribution of Cygwin/XFree86. However, the
+   shared memory support is only enabled at runtime if the Cygwin IPC
+   Daemon (i.e., ipc-daemon2) is running. The Cygwin IPC Daemon is
+   available via the cygipc package from Cygwin's setup.exe.
+
+   The Cygwin IPC Daemon can be installed a service on NT-based platforms
+   and there are some options for starting it automatically on
+   non-NT-based platforms as well. Please see the cygipc documentation
+   (e.g. /usr/share/doc/cygipc-2.01/README) for more information.
+     _________________________________________________________________
+
 Remote Sessions via XDMCP
 
    Cygwin/XFree86 can be used login to one or several remote sessions
@@ -407,11 +545,11 @@ Remote Sessions via XDMCP
 
    Note that the :display_number parameter is a general X Server
    parameter, not specific to Cygwin/XFree86. Further documentation of
-   the :display_number parameter can be found in the [38]X Server
+   the :display_number parameter can be found in the [45]X Server
    documentation. XDMCP is a complex system that is not specific to
    Cygwin/XFree86; further discussion of XDMCP is beyond the scope of
-   this document. You may wish to read the [39]Linux XDMCP HOWTO or the
-   [40]X Server XDMCP Options for more information.
+   this document. You may wish to read the [46]Linux XDMCP HOWTO or the
+   [47]X Server XDMCP Options for more information.
      _________________________________________________________________
 
 Displaying Remote Clients
@@ -790,7 +928,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [41]http://www.gnu.org/copyleft/.
+   [48]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -829,44 +967,51 @@ How to use this License for your documents
 
 References
 
-   1. file://localhost/home/public/documents/cygx/build/ug/dump.html#overview
-   2. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup
-   3. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-project-contents
-   4. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
-   5. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure
-   6. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure-cygwin-xfree-overview
-   7. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure-cygwin-xfree-options
-   8. file://localhost/home/public/documents/cygx/build/ug/dump.html#using
-   9. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting
-  10. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-bat
-  11. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-sh
-  12. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-startx
-  13. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-switching
-  14. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-stopping
-  15. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-session
-  16. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps
-  17. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps-telnet
-  18. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps-ssh
-  19. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl
-  20. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-preamble
-  21. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-applicability-and-definitions
-  22. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-verbation-copying
-  23. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-copying-in-quantity
-  24. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-modifications
-  25. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-combining-documents
-  26. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-collections-of-documents
-  27. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-aggregation-with-independent-works
-  28. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-translation
-  29. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-termination
-  30. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-future-revisions-of-this-license
-  31. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-using-for-your-documents
-  32. file://localhost/home/public/documents/cygx/build/ug/dump.html#AEN356
-  33. http://cygwin.com/
-  34. http://cygwin.com/
-  35. file://localhost/home/public/documents/cygx/build/ug/dump.html#using
-  36. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
-  37. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
-  38. http://www.xfree86.org/current/Xserver.1.html
-  39. http://www.linuxdoc.org/HOWTO/XDMCP-HOWTO/
-  40. http://www.xfree86.org/current/Xserver.1.html#sect6
-  41. http://www.gnu.org/copyleft/
+   1. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#overview
+   2. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#setup
+   3. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#setup-project-contents
+   4. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#setup-cygwin-xfree-installing
+   5. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#configure
+   6. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#configure-cygwin-xfree-overview
+   7. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#configure-cygwin-xfree-options
+   8. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using
+   9. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-starting
+  10. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-starting-bat
+  11. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-starting-sh
+  12. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-starting-startx
+  13. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-switching
+  14. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-stopping
+  15. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-window-managers
+  16. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-clipboard-integration
+  17. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-shared-memory
+  18. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-session
+  19. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps
+  20. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps-telnet
+  21. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps-ssh
+  22. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl
+  23. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-preamble
+  24. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-applicability-and-definitions
+  25. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-verbation-copying
+  26. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-copying-in-quantity
+  27. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-modifications
+  28. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-combining-documents
+  29. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-collections-of-documents
+  30. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-aggregation-with-independent-works
+  31. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-translation
+  32. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-termination
+  33. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-future-revisions-of-this-license
+  34. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#gfdl-using-for-your-documents
+  35. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#AEN391
+  36. http://cygwin.com/
+  37. http://cygwin.com/
+  38. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using
+  39. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#setup-cygwin-xfree-installing
+  40. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#setup-cygwin-xfree-installing
+  41. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#configure-cygwin-xfree-options
+  42. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-session
+  43. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#using-remote-apps-ssh
+  44. file://localhost/home/harold/x-devel/xoncygwin/cygwin-xfree-doc/build/ug/dump.html#configure-cygwin-xfree-options
+  45. http://www.xfree86.org/current/Xserver.1.html
+  46. http://www.linuxdoc.org/HOWTO/XDMCP-HOWTO/
+  47. http://www.xfree86.org/current/Xserver.1.html#sect6
+  48. http://www.gnu.org/copyleft/

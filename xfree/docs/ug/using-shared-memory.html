@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Switching Out of Cygwin/XFree86</TITLE
+>Shared Memory Support (MIT-SHM Extension)</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.7"/><LINK
@@ -13,11 +13,11 @@ REL="UP"
 TITLE="Using Cygwin/XFree86"
 HREF="using.html"/><LINK
 REL="PREVIOUS"
-TITLE="Using Cygwin/XFree86"
-HREF="using.html"/><LINK
+TITLE="Windows Clipboard Integration"
+HREF="using-clipboard-integration.html"/><LINK
 REL="NEXT"
-TITLE="Stopping Cygwin/XFree86"
-HREF="using-stopping.html"/></HEAD
+TITLE="Remote Sessions via XDMCP"
+HREF="using-remote-session.html"/></HEAD
 ><BODY
 CLASS="sect1"
 ><DIV
@@ -40,7 +40,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="using.html"
+HREF="using-clipboard-integration.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -54,7 +54,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="using-stopping.html"
+HREF="using-remote-session.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -68,20 +68,39 @@ CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
-NAME="using-switching"
->Switching Out of Cygwin/XFree86</A
+NAME="using-shared-memory"
+>Shared Memory Support (MIT-SHM Extension)</A
 ></H1
 ><P
->Press
+>As of 2003-09-19, shared memory support (i.e. the MIT-SHM
+Extension) is enabled in the default distribution of Cygwin/XFree86.
+However, the shared memory support is only enabled at runtime if the
+Cygwin IPC Daemon (i.e., <B
+CLASS="command"
+>ipc-daemon2</B
+>) is running.
+The Cygwin IPC Daemon is available via the
+<TT
+CLASS="filename"
+>cygipc</TT
+> package from Cygwin's
 <B
-CLASS="keycap"
->Alt</B
->-<B
-CLASS="keycap"
->Tab</B
-> to
-switch from Cygwin/XFree86 to your Windows desktop or other running Windows
-applications.</P
+CLASS="command"
+>setup.exe</B
+>.</P
+><P
+>The Cygwin IPC Daemon can be installed a service on NT-based
+platforms and there are some options for starting it automatically on
+non-NT-based platforms as well.  Please see the
+<TT
+CLASS="filename"
+>cygipc</TT
+> documentation
+(e.g. <TT
+CLASS="filename"
+>/usr/share/doc/cygipc-2.01/README</TT
+>) for more
+information.</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -99,7 +118,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="using.html"
+HREF="using-clipboard-integration.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -117,7 +136,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="using-stopping.html"
+HREF="using-remote-session.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -127,7 +146,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Using Cygwin/XFree86</TD
+>Windows Clipboard Integration</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -141,7 +160,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Stopping Cygwin/XFree86</TD
+>Remote Sessions via XDMCP</TD
 ></TR
 ></TABLE
 ></DIV

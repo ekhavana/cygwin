@@ -5,7 +5,7 @@
 >Command Line Parameters</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.74b"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"/><LINK
 REL="HOME"
 TITLE="Cygwin/XFree86 User's Guide"
 HREF="cygwin-xfree-ug.html"/><LINK
@@ -88,57 +88,59 @@ CLASS="command"
 ><B
 CLASS="command"
 >XWin.exe</B
-> <BR/> [-screen
-<TT
+> <BR/> [-clipboard]<BR/> [-clipupdates
+<VAR
 CLASS="replaceable"
-><I
->screen_number</I
-></TT
+>clip_updates_above_n</VAR
 >
-<TT
+]<BR/> [-emulate3buttons 
+<VAR
 CLASS="replaceable"
-><I
->width</I
-></TT
+>timeout_in_milliseconds</VAR
 >
-<TT
+]<BR/> [-engine
+<VAR
 CLASS="replaceable"
-><I
->height</I
-></TT
->
-...]<BR/> [-engine
-<TT
-CLASS="replaceable"
-><I
->engine_number</I
-></TT
+>engine_number</VAR
 >
 ]<BR/> [-fullscreen
  [-depth
-<TT
+<VAR
 CLASS="replaceable"
-><I
->depth_in_bits_per_pixel</I
-></TT
+>depth_in_bits_per_pixel</VAR
 >
 ]
  [-refresh
-<TT
+<VAR
 CLASS="replaceable"
-><I
->refresh_rate_in_herz</I
-></TT
+>refresh_rate_in_herz</VAR
 >
 ]
-]<BR/> [-nodecoration]<BR/> [-lesspointer]<BR/> [-emulate3buttons 
-<TT
+]<BR/> [-ignoreinput]<BR/> [-lesspointer]<BR/> [-multiwindow]<BR/> [-multimonitors]<BR/> [-nodecoration]<BR/> [-rootless]<BR/> [-screen
+<VAR
 CLASS="replaceable"
-><I
->timeout_in_milliseconds</I
-></TT
+>screen_number</VAR
 >
-]<BR/> [-[no]winkill]<BR/> [-[no]unixkill]</P
+<VAR
+CLASS="replaceable"
+>width</VAR
+>
+<VAR
+CLASS="replaceable"
+>height</VAR
+>
+...]<BR/> [-scrollbars]<BR/> [-[no]trayicon]<BR/> [-[no]unixkill]<BR/> [-[no]winkill]<BR/> [-xf86config
+<VAR
+CLASS="replaceable"
+>windows_path_to_config_file</VAR
+>
+ [-keyboard
+<VAR
+CLASS="replaceable"
+>keyboard_device_from_xf86config</VAR
+>
+]
+]<BR/></P
 ><P
 >Below is an example command line for
 <B
@@ -148,18 +150,16 @@ CLASS="command"
 ><DIV
 CLASS="informalexample"
 ><A
-NAME="AEN352"
+NAME="AEN387"
 ></A
 ><P
 ><B
 CLASS="command"
 >&#13;XWin.exe
-<TT
+<VAR
 CLASS="parameter"
-><I
 >-screen 0 800 600 -fullscreen -depth 32 -refresh 85
--emulate3buttons 100 -nowinkill -unixkill</I
-></TT
+-emulate3buttons 100 -nowinkill -unixkill</VAR
 >
 </B
 > </P
@@ -167,7 +167,7 @@ CLASS="parameter"
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN356"
+NAME="AEN391"
 ></A
 ><P
 ><B
@@ -175,50 +175,296 @@ NAME="AEN356"
 ></P
 ><TABLE
 BORDER="1"
+FRAME="border"
 CLASS="CALSTABLE"
-><THEAD
+><COL/><COL/><THEAD
 ><TR
 ><TH
-ALIGN="LEFT"
-VALIGN="MIDDLE"
 >Parameter</TH
 ><TH
-ALIGN="LEFT"
-VALIGN="MIDDLE"
 >Description</TH
 ></TR
 ></THEAD
 ><TBODY
+VALIGN="top"
 ><TR
 ><TD
-ALIGN="LEFT"
-VALIGN="TOP"
+>&#13;<P
+>[-clipboard]</P
+>
+</TD
+><TD
+>&#13;<P
+>Enables the integrated version of <B
+CLASS="command"
+>xwinclip</B
+>,
+which provides integration between the Cygwin/XFree86 clipboard and
+Windows clipboard.  Do not use in conjunction with the
+<B
+CLASS="command"
+>xwinclip</B
+> program.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-clipupdates
+<VAR
+CLASS="replaceable"
+>clip_updates_above_n</VAR
+>
+]</P
+>
+</TD
+><TD
+>&#13;<P
+>Groups together the regions in each update to the screen when
+there are more than the specified number of regions in an update.
+This works by fitting a clipping region around the updated regions,
+then transferring that entire region of the shadow frame buffer to the
+screen, rather than making many individual calls to transfer small
+portions of the shadow frame buffer to the screen.  This has a
+diminished effect on NT-based platforms because they already group GDI
+operations together in a batch, which has a similar effect.</P
+>
+
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-emulate3buttons 
+<VAR
+CLASS="replaceable"
+>timeout_in_milliseconds</VAR
+>
+]</P
+>
+</TD
+><TD
+>&#13;<P
+>Note: scroll wheel mice often allow you to click the scroll
+wheel for middle mouse button functionality.  Thus, most users with a
+scroll wheel mouse will not need to use this parameter.</P
+>
+
+<P
+>This option allows users with a two-button mouse to emulate a
+third mouse button by pressing both mouse buttons within the optional
+timeout specified in milliseconds.  The default timeout is 50
+milliseconds.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-engine
+<VAR
+CLASS="replaceable"
+>engine_number</VAR
+>
+]</P
+>
+</TD
+><TD
+>&#13;<P
+>Do not use this parameter unless you are a Cygwin/XFree86 developer
+or are instructed by a Cygwin/XFree86 developer to do so.</P
+>
+
+<P
+>Cygwin/XFree86's default behavior is to determine if DirectDraw or
+DirectDraw4 are present, then to examine the
+<VAR
+CLASS="parameter"
+>-depth</VAR
+> and <VAR
+CLASS="parameter"
+>-fullscreen</VAR
+>
+parameters to determine the engine with optimum performance that
+supports the specified depth and window configuration.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-fullscreen
+ [-depth
+<VAR
+CLASS="replaceable"
+>depth_in_bits_per_pixel</VAR
+>
+]
+ [-refresh
+<VAR
+CLASS="replaceable"
+>refresh_rate_in_herz</VAR
+>
+]
+]</P
+>
+</TD
+><TD
+>&#13;<P
+>The <VAR
+CLASS="parameter"
+>-fullscreen</VAR
+> parameter tells Cygwin/XFree86
+to open a given screen in fullscreen mode.</P
+>
+
+<P
+>The <VAR
+CLASS="parameter"
+>-depth</VAR
+> parameter can only be used
+with <VAR
+CLASS="parameter"
+>-fullscreen</VAR
+> and a DirectDraw based engine
+to specify the display depth that should be used for the fullscreen
+Cygwin/XFree86 screen.</P
+>
+
+<P
+>The <VAR
+CLASS="parameter"
+>-refresh</VAR
+> parameter can only be used
+with <VAR
+CLASS="parameter"
+>-fullscreen</VAR
+> and a DirectDraw based engine
+to specify the refresh rate that should be used for the fullscreen
+Cygwin/XFree86 screen.</P
+>
+
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-ignoreinput]</P
+>
+</TD
+><TD
+>&#13;<P
+>Ignore keyboard and mouse input.  This is usually only use for
+testing and debugging purposes.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-lesspointer]</P
+>
+</TD
+><TD
+>&#13;<P
+>Hide the Windows mouse cursor when the mouse is over any
+Cygwin/XFree86 window (regardless of whether that window is active or
+inactive).  This prevents the Windows mouse cursor from being placed
+overtop of the X cursor.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-multimonitors]</P
+>
+</TD
+><TD
+>&#13;<P
+>Create a root window that covers all monitors on a system with
+multiple monitors.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-multiwindow]</P
+>
+</TD
+><TD
+>&#13;<P
+>Start the integrated Windows-based window manager, which
+launches each top-level X window in its own Windows window.  Not to
+be used together with -rootless nor -fullscreen.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-nodecoration]</P
+>
+</TD
+><TD
+>&#13;<P
+>Do not give the Cygwin/XFree86 window a Windows window border, title
+bar, etc.  This parameter only applies to windowed mode screens, i.e.,
+this parameter is ignored when the
+<VAR
+CLASS="parameter"
+>-fullscreen</VAR
+> parameter is specified.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-rootless]</P
+>
+</TD
+><TD
+>&#13;<P
+>Use a transparent root window with an external window manager
+(such as <B
+CLASS="command"
+>twm</B
+>).  Not to be used with
+<VAR
+CLASS="parameter"
+>-multiwindow</VAR
+> nor with
+<VAR
+CLASS="parameter"
+>-fullscreen</VAR
+>.</P
+>
+
+</TD
+></TR
+><TR
+><TD
 >&#13;<P
 >[-screen
-<TT
+<VAR
 CLASS="replaceable"
-><I
->screen_number</I
-></TT
+>screen_number</VAR
 >
-<TT
+<VAR
 CLASS="replaceable"
-><I
->width</I
-></TT
+>width</VAR
 >
-<TT
+<VAR
 CLASS="replaceable"
-><I
->height</I
-></TT
+>height</VAR
 >
 ...]</P
 >
 </TD
 ><TD
-ALIGN="LEFT"
-VALIGN="TOP"
 >&#13;<P
 >This parameter does not have to be specified.  Cygwin/XFree86's
 default behavior is to create a single screen that is roughly the
@@ -237,274 +483,68 @@ screens feature.</P
 
 <P
 >Screen specific parameters, such as
-<TT
+<VAR
 CLASS="parameter"
-><I
->-fullscreen</I
-></TT
+>-fullscreen</VAR
 >, can be applied as a default to all
 screens by placing those screen specific parameters before any
-<TT
+<VAR
 CLASS="parameter"
-><I
->-screen</I
-></TT
+>-screen</VAR
 > parameter.  Screen specific parameters
-placed after the first <TT
+placed after the first <VAR
 CLASS="parameter"
-><I
->-screen</I
-></TT
+>-screen</VAR
 > parameter will
 apply only to the immediately preceeding
-<TT
+<VAR
 CLASS="parameter"
-><I
->-screen</I
-></TT
+>-screen</VAR
 > parameter.</P
 >
 </TD
 ></TR
 ><TR
 ><TD
-ALIGN="LEFT"
-VALIGN="TOP"
 >&#13;<P
->[-engine
-<TT
-CLASS="replaceable"
-><I
->engine_number</I
-></TT
->
-]</P
+>[-scrollbars]</P
 >
 </TD
 ><TD
-ALIGN="LEFT"
-VALIGN="TOP"
 >&#13;<P
->Do not use this parameter unless you are a Cygwin/XFree86 developer
-or are instructed by a Cygwin/XFree86 developer to do so.</P
+>Enable resizing of the server display window.  Do not use in
+conjunction with <VAR
+CLASS="parameter"
+>-multiwindow</VAR
+> nor with
+<VAR
+CLASS="parameter"
+>-rootless</VAR
+>.</P
 >
 
-<P
->Cygwin/XFree86's default behavior is to determine if DirectDraw or
-DirectDraw4 are present, then to examine the
-<TT
-CLASS="parameter"
-><I
->-depth</I
-></TT
-> and <TT
-CLASS="parameter"
-><I
->-fullscreen</I
-></TT
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-[no]trayicon]</P
 >
-parameters to determine the engine with optimum performance that
-supports the specified depth and window configuration.</P
+</TD
+><TD
+>&#13;<P
+>Enable or disable the tray icon; the default is to enable the
+tray icon.</P
 >
 </TD
 ></TR
 ><TR
 ><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->[-fullscreen]</P
->
-</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->This parameter tells Cygwin/XFree86 to open a given screen in
-fullscreen mode.</P
->
-</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->[-depth
-<TT
-CLASS="replaceable"
-><I
->depth_in_bits_per_pixel</I
-></TT
->
-]</P
->
-</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->This parameter can only be used with
-<TT
-CLASS="parameter"
-><I
->-fullscreen</I
-></TT
-> and a DirectDraw based engine to
-specify the display depth that should be used for the fullscreen
-Cygwin/XFree86 screen.</P
->
-</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->[-refresh
-<TT
-CLASS="replaceable"
-><I
->refresh_rate_in_herz</I
-></TT
->
-]</P
->
-</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->This parameter can only be used with
-<TT
-CLASS="parameter"
-><I
->-fullscreen</I
-></TT
-> and a DirectDraw based engine to
-specify the refresh rate that should be used for the fullscreen
-Cygwin/XFree86 screen.</P
->
-</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->[-emulate3buttons 
-<TT
-CLASS="replaceable"
-><I
->timeout_in_milliseconds</I
-></TT
->
-]</P
->
-</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->Note: scroll wheel mice often allow you to click the scroll
-wheel for middle mouse button functionality.  Thus, most users with a
-scroll wheel mouse will not need to use this parameter.</P
->
-
-<P
->This option allows users with a two-button mouse to emulate a
-third mouse button by pressing both mouse buttons within the optional
-timeout specified in milliseconds.  The default timeout is 50
-milliseconds.</P
->
-</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->[-nodecoration]</P
->
-</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->Do not give the Cygwin/XFree86 window a Windows window border, title
-bar, etc.  This parameter only applies to windowed mode screens, i.e.,
-this parameter is ignored when the
-<TT
-CLASS="parameter"
-><I
->-fullscreen</I
-></TT
-> parameter is specified.</P
->
-</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->[-lesspointer]</P
->
-</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->Hide the Windows mouse cursor when the mouse is over any
-Cygwin/XFree86 window (regardless of whether that window is active or
-inactive).  This prevents the Windows mouse cursor from being placed
-overtop of the X cursor.</P
->
-</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->[-[no]winkill]</P
->
-</TD
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
->&#13;<P
->Enable or disable the
-<B
-CLASS="keycap"
->Alt</B
->-<B
-CLASS="keycap"
->F4</B
-> key combo
-as a signal to exit Cygwin/XFree86.  The
-<B
-CLASS="keycap"
->Alt</B
->-<B
-CLASS="keycap"
->F4</B
-> key combo
-is enabled by default.</P
->
-</TD
-></TR
-><TR
-><TD
-ALIGN="LEFT"
-VALIGN="TOP"
 >&#13;<P
 >[-[no]unixkill]</P
 >
 </TD
 ><TD
-ALIGN="LEFT"
-VALIGN="TOP"
 >&#13;<P
 >Enable or disable the
 <B
@@ -529,6 +569,69 @@ CLASS="keycap"
 >Backspace</B
 >
 key combo is disabled by default.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-[no]winkill]</P
+>
+</TD
+><TD
+>&#13;<P
+>Enable or disable the
+<B
+CLASS="keycap"
+>Alt</B
+>-<B
+CLASS="keycap"
+>F4</B
+> key combo
+as a signal to exit Cygwin/XFree86.  The
+<B
+CLASS="keycap"
+>Alt</B
+>-<B
+CLASS="keycap"
+>F4</B
+> key combo
+is enabled by default.</P
+>
+</TD
+></TR
+><TR
+><TD
+>&#13;<P
+>[-xf86config
+<VAR
+CLASS="replaceable"
+>windows_path_to_config_file</VAR
+>
+ [-keyboard
+<VAR
+CLASS="replaceable"
+>keyboard_device_from_xf86config</VAR
+>
+]
+]</P
+>
+</TD
+><TD
+>&#13;<P
+><VAR
+CLASS="parameter"
+>-xf86config</VAR
+> allows you to specify a
+XF86Config-style configuration file.</P
+>
+
+<P
+><VAR
+CLASS="parameter"
+>-keyboard</VAR
+> allows you to specify a
+keyboard device from the configuration file.</P
 >
 </TD
 ></TR

@@ -5,7 +5,7 @@
 >Remote Sessions via XDMCP</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.74b"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.7"/><LINK
 REL="HOME"
 TITLE="Cygwin/XFree86 User's Guide"
 HREF="cygwin-xfree-ug.html"/><LINK
@@ -13,8 +13,8 @@ REL="UP"
 TITLE="Using Cygwin/XFree86"
 HREF="using.html"/><LINK
 REL="PREVIOUS"
-TITLE="Stopping Cygwin/XFree86"
-HREF="using-stopping.html"/><LINK
+TITLE="Shared Memory Support (MIT-SHM Extension)"
+HREF="using-shared-memory.html"/><LINK
 REL="NEXT"
 TITLE="Displaying Remote Clients"
 HREF="using-remote-apps.html"/></HEAD
@@ -40,7 +40,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="using-stopping.html"
+HREF="using-shared-memory.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -78,33 +78,25 @@ using XDMCP (X Display Manager Control Protocol).</P
 >Start Cygwin/XFree86 with a command similar to the following to login
 to a single remote session using XDMCP:</P
 ><P
->&#13;<TT
+>&#13;<KBD
 CLASS="userinput"
-><B
 >XWin.exe -query
-<TT
+<VAR
 CLASS="replaceable"
-><I
->remote_hostname_or_ip_address</I
-></TT
-></B
-></TT
+>remote_hostname_or_ip_address</VAR
+></KBD
 >
 </P
 ><P
 >You may login to several remote sesstions with a single or
 multiple hosts using XDMCP.  Each session will need a seperate display
-number, specified by the <TT
+number, specified by the <VAR
 CLASS="parameter"
-><I
->:display_number</I
-></TT
+>:display_number</VAR
 >
-parameter, such as <TT
+parameter, such as <VAR
 CLASS="parameter"
-><I
->:0</I
-></TT
+>:0</VAR
 >.  A display number is not
 the same as a screen number, as a single display can have multiple
 screens associated with it.  Each display listens on a different
@@ -112,46 +104,34 @@ network port number, so each display can connect to multiple machines.
 Start Cygwin/XFree86 with command lines similar to the following to login
 to several remote sessions using XDMCP:</P
 ><P
->&#13;<TT
+>&#13;<KBD
 CLASS="userinput"
-><B
 >XWin.exe :0 -query
-<TT
+<VAR
 CLASS="replaceable"
-><I
->remote_hostname_or_ip_address_0</I
-></TT
-></B
-></TT
+>remote_hostname_or_ip_address_0</VAR
+></KBD
 >
 </P
 ><P
->&#13;<TT
+>&#13;<KBD
 CLASS="userinput"
-><B
 >XWin.exe :1 -query
-<TT
+<VAR
 CLASS="replaceable"
-><I
->remote_hostname_or_ip_address_1</I
-></TT
-></B
-></TT
+>remote_hostname_or_ip_address_1</VAR
+></KBD
 >
 </P
 ><P
->Note that the <TT
+>Note that the <VAR
 CLASS="parameter"
-><I
->:display_number</I
-></TT
+>:display_number</VAR
 > parameter
 is a general X Server parameter, not specific to Cygwin/XFree86.  Further
-documentation of the <TT
+documentation of the <VAR
 CLASS="parameter"
-><I
->:display_number</I
-></TT
+>:display_number</VAR
 > parameter
 can be found in the <A
 HREF="http://www.xfree86.org/current/Xserver.1.html"
@@ -188,7 +168,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="using-stopping.html"
+HREF="using-shared-memory.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -216,7 +196,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Stopping Cygwin/XFree86</TD
+>Shared Memory Support (MIT-SHM Extension)</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
