@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 20 September 2001 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 21 September 2001 -->
 
 <TITLE>The Cygwin FAQ
  - Installation Instructions</TITLE>
@@ -28,19 +28,19 @@ The following packages are available with the current release:
 
 <PRE>
 
-ash autoconf automake bash binutils bison byacc bzip2 clear cpio crypt
-cvs cygrunsrv cygwin dejagnu diff expect file fileutils findutils flex
-gawk gcc gdb gdbm gettext ghostscript gperf grep groff gzip inetutils
-irc jbigkit jpeg less libpng login lynx m4 make man mingw mt mutt ncftp
-ncurses newlib-man opengl openssh openssl patch pcre perl popt
-postgresql python readline regex rxvt sed sh-utils squid ssmtp tar tcltk
-tcsh termcap tetex-beta texinfo textutils tiff time unzip vim w32api
-wget which xpm xpm-nox zip zlib
+ash autoconf automake bash binutils bison byacc bzip2 clear cpio cron
+crypt ctags cvs cygrunsrv cygwin dejagnu diff expect file fileutils
+findutils flex gawk gcc gdb gdbm gettext ghostscript gperf grep groff
+gzip inetutils irc jbigkit jpeg less libpng login lynx m4 make man
+mingw mingw-runtime mt mutt ncftp ncurses opengl openssh openssl patch
+pcre perl popt postgresql psutils python readline regex rsync rxvt sed
+sh-utils squid ssmtp tar tcltk tcsh termcap tetex texinfo textutils
+tiff time unzip vim w32api wget which xpm-nox zip zlib
 
 </PRE>
 
 <P>
-(This list is almost certainly out of date as new packages are added.)
+(This list becomes out of date as new packages are added.)
 
 
 <P>
@@ -121,30 +121,50 @@ just the individual packages that need it.
 
 
 
-<H3><A NAME="SEC10" HREF="faq_toc.html#TOC10">The README says I should turn off anti-virus software.  Isn't that dangerous?</A></H3>
+<H3><A NAME="SEC10" HREF="faq_toc.html#TOC10">Is <CODE>setup.exe</CODE>, or one of the packages, infected with a virus?</A></H3>
 
 <P>
-Only Network Associates (formerly McAfee) products have been reported to
-"hang" when extracting Cygwin tar archives.  Other products have been
-reported to detect false positives in Cygwin files.  Depending on how
-your anti-virus software is configured, it may then delete the file(s)
-without prompting you.  Any problems will depend on the particular
-engine and/or signature file in use, and possibly other factors.  If you
-don't mind <EM>this</EM> risk, then just leave your anti-virus software
-running.
+Unlikely.  Unless you can confirm it, please don't report it to the
+mailing list.  Anti-virus products have been known to detect false
+positives when extracting compressed tar archives.  If this causes
+problems for you, consider disabling your anti-virus software when
+running <CODE>setup</CODE>.  Read the next entry for a fairly safe way to do
+this.
 
+
+
+
+<H3><A NAME="SEC11" HREF="faq_toc.html#TOC11">My computer hangs when I try to run <CODE>setup.exe</CODE>!</A></H3>
 
 <P>
-Otherwise, you can download <CODE>setup.exe</CODE> and scan it.  Then turn off
-the anti-virus software, then run setup to download and extract all the
-tar files.  Then re-activate your anti-virus software and scan
-everything in C:\cygwin (or wherever you chose to install).  This should
-be safe, as long as nobody substitutes a malicious <CODE>setup.exe</CODE>!
+Network Associates (formerly McAfee) products have been reported to
+"hang" when extracting Cygwin tar archives.  Consider disabling your
+anti-virus software when running <CODE>setup</CODE>.  The following
+procedure should be a fairly safe way to do that:
+
+
+
+<OL>
+<LI>Download <CODE>setup.exe</CODE> and scan it explicitly.
+
+<LI>Turn off the anti-virus software.
+
+<LI>Run setup to download and extract all the tar files.
+
+<LI>Re-activate your anti-virus software and scan everything
+
+in C:\cygwin (or wherever you chose to install).
+
+</OL>
+
+<P>
+This should be safe, as long as nobody substitutes a malicious
+<CODE>setup.exe</CODE>!
 
 
 
 
-<H3><A NAME="SEC11" HREF="faq_toc.html#TOC11">What packages should I download?</A></H3>
+<H3><A NAME="SEC12" HREF="faq_toc.html#TOC12">What packages should I download?</A></H3>
 
 <P>
 Just get everything, if you have room for it.  But if you must be
@@ -181,7 +201,7 @@ everything!)
 
 
 
-<H3><A NAME="SEC12" HREF="faq_toc.html#TOC12">What if setup fails?</A></H3>
+<H3><A NAME="SEC13" HREF="faq_toc.html#TOC13">What if setup fails?</A></H3>
 
 <P>
 First, make sure that you are using the latest version of
@@ -225,7 +245,7 @@ what happened that wasn't supposed to happen, etc.
 
 
 
-<H3><A NAME="SEC13" HREF="faq_toc.html#TOC13">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
+<H3><A NAME="SEC14" HREF="faq_toc.html#TOC14">What's the difference between packages in <SAMP>`latest'</SAMP> and <SAMP>`contrib'</SAMP>?</A></H3>
 
 <P>
 There is no difference as far as <CODE>setup.exe</CODE> is concerned, and you
@@ -235,7 +255,7 @@ than practical.
 
 
 
-<H3><A NAME="SEC14" HREF="faq_toc.html#TOC14">My Windows logon name has a space in it, will this cause problems?</A></H3>
+<H3><A NAME="SEC15" HREF="faq_toc.html#TOC15">My Windows logon name has a space in it, will this cause problems?</A></H3>
 
 <P>
 Most definitely yes!  UNIX shells (and thus Cygwin) use the space
@@ -259,7 +279,19 @@ README file for that package.)
 
 
 
-<H3><A NAME="SEC15" HREF="faq_toc.html#TOC15">How do I uninstall Cygwin?</A></H3>
+<H3><A NAME="SEC16" HREF="faq_toc.html#TOC16">How do I uninstall individual packages?</A></H3>
+
+<P>
+Run <CODE>setup.exe</CODE> as you would to install packages.  In the list of
+packages to install, click on the <SAMP>`Full/Part'</SAMP> button to get a
+full listing, if the package you want to uninstall is not already
+listed.  Click on the cycle glyph until the action reads
+<SAMP>`Uninstall'</SAMP>.  Proceed with <SAMP>`Next'</SAMP>.
+
+
+
+
+<H3><A NAME="SEC17" HREF="faq_toc.html#TOC17">How do I uninstall <STRONG>all</STRONG> of Cygwin?</A></H3>
 
 <P>
 Setup has no automatic uninstall facility.  Just delete everything
@@ -290,7 +322,7 @@ would not have done any of these things for you.
 
 
 
-<H3><A NAME="SEC16" HREF="faq_toc.html#TOC16">Can I use setup to install snapshots?</A></H3>
+<H3><A NAME="SEC18" HREF="faq_toc.html#TOC18">Can I use setup to install snapshots?</A></H3>
 
 <P>
 No.  It used to be possible, but not any more.
@@ -338,10 +370,10 @@ snapshots apply:
 (e.g. inetd), before updating <CODE>cygwin1.dll</CODE>.  You may have to
 restart Windows to clear the DLL from memory.
 
-<LI>Snapshots are risky.  They have not been tested.  Use them <STRONG>only</STRONG> if
+<LI>Snapshots are risky.  They have not been tested.  Use them
 
-there is a feature or bugfix that you need to try, and you are willing
-to deal with any problems.
+<STRONG>only</STRONG> if there is a feature or bugfix that you need to try,
+and you are willing to deal with any problems.
 
 <LI>If you cannot download a snapshot from the main ftp distribution
 
