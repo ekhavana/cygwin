@@ -105,7 +105,7 @@ The icon can be even changed while the application is running and this
 is properly handled.  Icons are properly freed when a window and its
 associated class are destroyed.  This entry encompasses a flurry of
 emails and patches that I cannot possibly recount here; hopefully no
-one feels slighted by this bried summary.  (Earle F. Philhower III,
+one feels slighted by this brief summary.  (Earle F. Philhower III,
 Ralf Habacker, Colin Harrison)</li>
 
 <li> Set XIconSizes() to the Windows approved 16, 32, and 48.  It
@@ -138,7 +138,7 @@ attribute.  (Biju G C, Harold L Hunt II)</li>
 <li>winmultiwindowwindow.c/winTopLevelWindowProc() - Let
 DefaultWindowProc() handle the Alt+F4 key combo in the WM_*KEYDOWN
 messages.  This allows a user to close a top-level X window (which has
-an associated Widnows window) by pressing Alt+F4.  Note that this
+an associated Windows window) by pressing Alt+F4.  Note that this
 happens regardless of the -[no]winkill command-line parameter.  This
 is the desired behavior since -[no]winkill should only affect the
 behavior of the root-level window, not the individual X Client
@@ -154,7 +154,7 @@ the next change log entry.  (Biju G C, Harold L Hunt II)</li>
 PostMessage() instead of passing WM_CLOSE.  This patch causes the end
 result that, in MultiWindow mode, selecting Close from the system menu
 for non-root-level Windows window causes that particular X Client to
-be killed.  The previous result was that the XWin.exe procss was
+be killed.  The previous result was that the XWin.exe process was
 exited without displaying the Exit Confirmation dialog box.  This must
 have been a frustrating situation indeed and it makes this bug a
 marvelous catch on Biju's part.  NOTE: The system menu can be opened
