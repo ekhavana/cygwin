@@ -1,12 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Cygwin Utilities</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -21,16 +19,9 @@ REL="NEXT"
 TITLE="Programming with Cygwin"
 HREF="programming.html"></HEAD
 ><BODY
-CLASS="SECT1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
-SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -48,22 +39,20 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="using-cygwinenv.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Using Cygwin</TD
+>Chapter 3. Using Cygwin</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="programming.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -76,8 +65,8 @@ CLASS="SECT1"
 CLASS="SECT1"
 ><A
 NAME="USING-UTILS"
-></A
->Cygwin Utilities</H1
+>Cygwin Utilities</A
+></H1
 ><P
 >Cygwin comes with a number of command-line utilities that are
 used to manage the UNIX emulation portion of the Cygwin environment.
@@ -105,8 +94,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="CYGCHECK"
-></A
->cygcheck</H2
+>cygcheck</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -226,8 +215,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="CYGPATH"
-></A
->cygpath</H2
+>cygpath</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -370,12 +359,9 @@ CLASS="COMMAND"
 contain spaces (C:\Program Files) so should be enclosed in quotes.</P
 ><DIV
 CLASS="EXAMPLE"
-><A
-NAME="AEN901"
-></A
 ><P
 ><B
->Example 3. Example cygpath usage</B
+>Example 3-3. Example cygpath usage</B
 ></P
 ><TABLE
 BORDER="0"
@@ -464,8 +450,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="DUMPER"
-></A
->dumper</H2
+>dumper</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -559,8 +545,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="GETFACL"
-></A
->getfacl</H2
+>getfacl</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -603,14 +589,12 @@ the filename, the owner, the group, and both the ACL and the default ACL, if
 it exists. For more information on Cygwin and Windows ACLs, see
 see <A
 HREF="ntsec.html"
->the Section called <I
+>the section called <I
 >NT security and the <TT
 CLASS="LITERAL"
 >ntsec</TT
 > usage</I
-> in the chapter called <I
->Setting Up Cygwin</I
-></A
+> in Chapter 2</A
 > in the Cygwin User's Guide.
 The format for ACL output is as follows:
 <TABLE
@@ -647,8 +631,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="KILL"
-></A
->kill</H2
+>kill</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -758,12 +742,9 @@ option, either with a signal number or a signal name (minus the "SIG"
 part), like these examples:</P
 ><DIV
 CLASS="EXAMPLE"
-><A
-NAME="AEN970"
-></A
 ><P
 ><B
->Example 4. Using the kill command</B
+>Example 3-4. Using the kill command</B
 ></P
 ><TABLE
 BORDER="0"
@@ -870,8 +851,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="MKGROUP"
-></A
->mkgroup</H2
+>mkgroup</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -886,6 +867,7 @@ This program prints a /etc/group file to stdout
 
 Options:
    -l,--local             print local group information
+   -c,--current           print current group, if a domain account
    -d,--domain            print global group information from the domain
                           specified (or from the current domain if there is
                           no domain specified)
@@ -911,23 +893,18 @@ configure your Windows system to be more UNIX-like by creating an
 initial <TT
 CLASS="FILENAME"
 >/etc/group</TT
-> substitute (some commands need this
-file) from your system information. It only works on the NT series
-(Windows NT, 2000, and XP). <B
-CLASS="COMMAND"
->mkgroup</B
-> does not work on 
-the Win9x series (Windows 95, 98, and Me) because they lack the security model 
-to support it. To initially set up your machine, you'd do something like 
-this:</P
+>.
+Its use is essential on the NT series (Windows NT, 2000, and XP) to
+include Windows security information.
+It can also be used on the Win9x series (Windows 95, 98, and Me) to
+create a file with the correct format.
+To initially set up your machine if you are a local user, you'd do
+something like this:</P
 ><DIV
 CLASS="EXAMPLE"
-><A
-NAME="AEN991"
-></A
 ><P
 ><B
->Example 5. Setting up the groups file</B
+>Example 3-5. Setting up the groups file for local accounts</B
 ></P
 ><TABLE
 BORDER="0"
@@ -971,27 +948,46 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >-l</TT
 > options
-allow you to specify where the information comes from, either the
-local machine or the default (or given) domain.  The <TT
+allow you to specify where the information comes from, the
+local machine or the domain (default or given), or both.
+With the  <TT
+CLASS="LITERAL"
+>-d</TT
+> option the program contacts the Domain
+Controller, which my be unreachable or have restricted access.
+An entry for the current domain user can then be created by using the
+option <TT
+CLASS="LITERAL"
+>-c</TT
+> together with <TT
+CLASS="LITERAL"
+>-l</TT
+>,
+but <TT
+CLASS="LITERAL"
+>-c</TT
+> has no effect when used with <TT
+CLASS="LITERAL"
+>-d</TT
+>.
+The <TT
 CLASS="LITERAL"
 >-o</TT
->
-option allows for special cases (such as multiple domains) where the GIDs 
-might match otherwise. The <TT
+> option allows for special cases
+(such as multiple domains) where the GIDs might match otherwise.
+The <TT
 CLASS="LITERAL"
 >-s</TT
 >
 option omits the NT Security Identifier (SID).  For more information on 
 SIDs, see <A
 HREF="ntsec.html"
->the Section called <I
+>the section called <I
 >NT security and the <TT
 CLASS="LITERAL"
 >ntsec</TT
 > usage</I
-> in the chapter called <I
->Setting Up Cygwin</I
-></A
+> in Chapter 2</A
 > in the Cygwin User's Guide.  The
 <TT
 CLASS="LITERAL"
@@ -1005,7 +1001,9 @@ gr_mem (last) field.  Note that this can greatly increase
 the time for <B
 CLASS="COMMAND"
 >mkgroup</B
-> to run in a large domain.</P
+> to run in a large domain.
+Having gr_mem fields is helpful when a domain user logs in remotely
+while the local machine is disconnected from the Domain Controller.</P
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -1013,8 +1011,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="MKPASSWD"
-></A
->mkpasswd</H2
+>mkpasswd</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -1029,6 +1027,7 @@ This program prints a /etc/passwd file to stdout
 
 Options:
    -l,--local              print local user accounts
+   -c,--current            print current account, if a domain account
    -d,--domain             print domain accounts (from current domain
                            if no domain specified)
    -o,--id-offset offset   change the default offset (10000) added to uids
@@ -1056,23 +1055,28 @@ configure your Windows system to be more UNIX-like by creating an
 initial <TT
 CLASS="FILENAME"
 >/etc/passwd</TT
-> substitute (some commands
-need this file) from your system information. It only works on the NT series
-(Windows NT, 2000, and XP). <B
-CLASS="COMMAND"
->mkpasswd</B
-> does not work on 
-the Win9x series (Windows 95, 98, and Me) because they lack the security model 
-to support it. To initially set up your machine, you'd do something like 
-this:</P
+> from your system information.
+Its use is essential on the NT series (Windows NT, 2000, and XP) to
+include Windows security information, but the actual passwords are
+determined by Windows, not by the content of <TT
+CLASS="FILENAME"
+>/etc/passwd</TT
+>.
+On the Win9x series (Windows 95, 98, and Me) the password field must be
+replaced by the output of <TT
+CLASS="USERINPUT"
+><B
+>crypt your_password</B
+></TT
+>
+if remote access is desired.
+To initially set up your machine if you are a local user, you'd do
+something like this:</P
 ><DIV
 CLASS="EXAMPLE"
-><A
-NAME="AEN1015"
-></A
 ><P
 ><B
->Example 6. Setting up the passwd file</B
+>Example 3-6. Setting up the passwd file for local accounts</B
 ></P
 ><TABLE
 BORDER="0"
@@ -1116,13 +1120,34 @@ CLASS="LITERAL"
 CLASS="LITERAL"
 >-l</TT
 > options
-allow you to specify where the information comes from, either the
-local machine or the default (or given) domain.  The <TT
+allow you to specify where the information comes from, the
+local machine or the domain (default or given), or both.
+With the  <TT
+CLASS="LITERAL"
+>-d</TT
+> option the program contacts the Domain
+Controller, which my be unreachable or have restricted access.
+An entry for the current domain user can then be created by using the
+option <TT
+CLASS="LITERAL"
+>-c</TT
+> together with <TT
+CLASS="LITERAL"
+>-l</TT
+>,
+but <TT
+CLASS="LITERAL"
+>-c</TT
+> has no effect when used with <TT
+CLASS="LITERAL"
+>-d</TT
+>.
+The <TT
 CLASS="LITERAL"
 >-o</TT
->
-option allows for special cases (such as multiple domains) where the UIDs
-might match otherwise.  The <TT
+> option allows for special cases
+(such as multiple domains) where the UIDs might match otherwise.
+The <TT
 CLASS="LITERAL"
 >-g</TT
 > option creates a local
@@ -1139,14 +1164,12 @@ CLASS="LITERAL"
 option omits the NT Security Identifier (SID).  For more information on
 SIDs, see <A
 HREF="ntsec.html"
->the Section called <I
+>the section called <I
 >NT security and the <TT
 CLASS="LITERAL"
 >ntsec</TT
 > usage</I
-> in the chapter called <I
->Setting Up Cygwin</I
-></A
+> in Chapter 2</A
 > in the Cygwin User's Guide.  The
 <TT
 CLASS="LITERAL"
@@ -1162,12 +1185,9 @@ CLASS="LITERAL"
 
 <DIV
 CLASS="EXAMPLE"
-><A
-NAME="AEN1034"
-></A
 ><P
 ><B
->Example 7. Using an alternate home root</B
+>Example 3-7. Using an alternate home root</B
 ></P
 ><TABLE
 BORDER="0"
@@ -1193,15 +1213,12 @@ CLASS="USERINPUT"
 >
 
 would put local users' home directories in the Windows 'Profiles' directory. 
-The <TT
+On Win9x machines the <TT
 CLASS="LITERAL"
 >-u</TT
-> option allows <B
-CLASS="COMMAND"
->mkpasswd</B
-> to 
-search for a specific username, greatly reducing the amount of time it 
-takes in a large domain.</P
+> option creates an entry for
+the specified user. On the NT series it restricts the output to that user,
+greatly reducing the amount of time it takes in a large domain.</P
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -1209,8 +1226,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="MOUNT"
-></A
->mount</H2
+>mount</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -1250,7 +1267,7 @@ and shares onto Cygwin's simulated POSIX directory tree, much like as is
 done by mount commands on typical UNIX systems.  Please see
 <A
 HREF="using.html#MOUNT-TABLE"
->the Section called <I
+>the section called <I
 >The Cygwin Mount Table</I
 ></A
 > for more information on the concepts
@@ -1264,9 +1281,9 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1048"
-></A
->Using mount</H3
+NAME="AEN1167"
+>Using mount</A
+></H3
 ><P
 >If you just type <B
 CLASS="COMMAND"
@@ -1275,12 +1292,9 @@ CLASS="COMMAND"
 will display the current mount table for you.</P
 ><DIV
 CLASS="EXAMPLE"
-><A
-NAME="AEN1052"
-></A
 ><P
 ><B
->Example 8. Displaying the current set of mount points</B
+>Example 3-8. Displaying the current set of mount points</B
 ></P
 ><TABLE
 BORDER="0"
@@ -1336,12 +1350,9 @@ CLASS="FILENAME"
 >.</P
 ><DIV
 CLASS="EXAMPLE"
-><A
-NAME="AEN1064"
-></A
 ><P
 ><B
->Example 9. Adding mount points</B
+>Example 3-9. Adding mount points</B
 ></P
 ><TABLE
 BORDER="0"
@@ -1487,9 +1498,9 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1094"
-></A
->Cygdrive mount points</H3
+NAME="AEN1213"
+>Cygdrive mount points</A
+></H3
 ><P
 >Whenever Cygwin cannot use any of the existing mounts to convert
 from a particular Win32 path to a POSIX one, Cygwin will, instead,
@@ -1521,12 +1532,9 @@ CLASS="FILENAME"
 >:</P
 ><DIV
 CLASS="EXAMPLE"
-><A
-NAME="AEN1103"
-></A
 ><P
 ><B
->Example 10. Changing the default prefix</B
+>Example 3-10. Changing the default prefix</B
 ></P
 ><TABLE
 BORDER="0"
@@ -1550,7 +1558,7 @@ CLASS="USERINPUT"
 ></TABLE
 ></DIV
 ><P
->Note that you if you set a new prefix in this manner, you can
+>Note that if you set a new prefix in this manner, you can
 specify the <TT
 CLASS="LITERAL"
 >-s</TT
@@ -1575,9 +1583,9 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1113"
-></A
->Limitations</H3
+NAME="AEN1232"
+>Limitations</A
+></H3
 ><P
 >Limitations: there is a hard-coded limit of 30 mount
 points.  Also, although you can mount to pathnames that do not start
@@ -1647,8 +1655,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="PASSWD"
-></A
->passwd</H2
+>passwd</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -1804,8 +1812,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="PS"
-></A
->ps</H2
+>ps</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -1906,8 +1914,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="REGTOOL"
-></A
->regtool</H2
+>regtool</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2121,8 +2129,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="SETFACL"
-></A
->setfacl</H2
+>setfacl</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2167,14 +2175,12 @@ or it will add, modify, or delete ACL entries.
 For more information on Cygwin and Windows ACLs, see
 see <A
 HREF="ntsec.html"
->the Section called <I
+>the section called <I
 >NT security and the <TT
 CLASS="LITERAL"
 >ntsec</TT
 > usage</I
-> in the chapter called <I
->Setting Up Cygwin</I
-></A
+> in Chapter 2</A
 > in the Cygwin User's Guide.</P
 ><P
 >Acl_entries are one or more comma-separated ACL entries 
@@ -2362,8 +2368,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="SSP"
-></A
->ssp</H2
+>ssp</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2687,8 +2693,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="STRACE"
-></A
->strace</H2
+>strace</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2797,8 +2803,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="UMOUNT"
-></A
->umount</H2
+>umount</A
+></H2
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2861,7 +2867,7 @@ CLASS="LITERAL"
 ><P
 >See <A
 HREF="using-utils.html#MOUNT"
->the Section called <I
+>the section called <I
 >mount</I
 ></A
 > for more information on the mount
@@ -2873,7 +2879,6 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -2885,8 +2890,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="using-cygwinenv.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -2894,7 +2898,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
-ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -2903,8 +2906,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="programming.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -2923,7 +2925,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="using.html"
-ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD

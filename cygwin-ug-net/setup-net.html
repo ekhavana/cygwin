@@ -1,12 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Setting Up Cygwin</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -17,16 +15,9 @@ REL="NEXT"
 TITLE="Environment Variables"
 HREF="setup-env.html"></HEAD
 ><BODY
-CLASS="CHAPTER"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
-SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -44,8 +35,7 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="highlights.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
@@ -58,8 +48,7 @@ ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="setup-env.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -71,16 +60,53 @@ CLASS="CHAPTER"
 ><H1
 ><A
 NAME="SETUP-NET"
-></A
->Setting Up Cygwin</H1
+>Chapter 2. Setting Up Cygwin</A
+></H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="setup-net.html#AEN115"
+>Internet Setup</A
+></DT
+><DT
+><A
+HREF="setup-env.html"
+>Environment Variables</A
+></DT
+><DT
+><A
+HREF="setup-maxmem.html"
+>Changing Cygwin's Maximum Memory</A
+></DT
+><DT
+><A
+HREF="ntsec.html"
+>NT security and the <TT
+CLASS="LITERAL"
+>ntsec</TT
+> usage</A
+></DT
+><DT
+><A
+HREF="setup-files.html"
+>Customizing bash</A
+></DT
+></DL
+></DIV
 ><DIV
 CLASS="SECT1"
 ><H1
 CLASS="SECT1"
 ><A
 NAME="AEN115"
-></A
->Internet Setup</H1
+>Internet Setup</A
+></H1
 ><P
 >To install the Cygwin net release, go to <A
 HREF="http://cygwin.com/"
@@ -97,6 +123,467 @@ CLASS="COMMAND"
 > which can
 be run to download a complete cygwin installation via the internet.
 Follow the instructions on each screen to install Cygwin.</P
+><P
+>The <B
+CLASS="COMMAND"
+>setup.exe</B
+> installer is designed to be easy
+for new users to understand while remaining flexible for the 
+experienced. The volunteer development team is constantly working
+on <B
+CLASS="COMMAND"
+>setup.exe</B
+>; before requesting a new feature,
+check the wishlist in the CVS <TT
+CLASS="LITERAL"
+>README</TT
+>. It may
+already be present in the CVS version!</P
+><P
+>Since the default value for each option is the logical choice for
+most installations, you can get a working minimal Cygwin environment
+installed by simply clicking the <TT
+CLASS="LITERAL"
+>Next</TT
+> button
+at each page. The only exception to this is choosing a Cygwin mirror,
+which you can choose by experimenting with those listed at
+<A
+HREF="http://cygwin.com/mirrors.html"
+TARGET="_top"
+>http://cygwin.com/mirrors.html</A
+>. For more details about each of page of the 
+<B
+CLASS="COMMAND"
+>setup.exe</B
+> installation, read on below.</P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN129"
+>Download Source</A
+></H2
+><P
+>Cygwin uses packages to manage installing various software. When
+the default <TT
+CLASS="LITERAL"
+>Install from Internet</TT
+> option is chosen,
+<B
+CLASS="COMMAND"
+>setup.exe</B
+> creates a local directory to store
+the packages before actually installing the contents. 
+<TT
+CLASS="LITERAL"
+>Download from Internet</TT
+> performs only the first
+part (storing the packages locally), while 
+<TT
+CLASS="LITERAL"
+>Install from Local Directory</TT
+> performs only the 
+second (installing the contents of the packages). </P
+><P
+>The <TT
+CLASS="LITERAL"
+>Download from Internet</TT
+> option is mainly
+for creating a base Cygwin package tree on one computer for 
+installation on several machines with 
+<TT
+CLASS="LITERAL"
+>Install from Local Directory</TT
+>.
+Though this provides some basic mirroring functionality, if you
+are managing a wide Cygwin installation we recommend using a mirroring
+tool such as <B
+CLASS="COMMAND"
+>wget</B
+>. A helpful user on the Cygwin
+mailing list created a simple demonstration script to accomplish
+this; search the list for <B
+CLASS="COMMAND"
+>mkcygwget</B
+> for ideas.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN141"
+>Selecting an Install Directory</A
+></H2
+><P
+>The <TT
+CLASS="LITERAL"
+>Root Directory</TT
+> for Cygwin (default
+<TT
+CLASS="LITERAL"
+>C:\cygwin</TT
+>) will become <TT
+CLASS="LITERAL"
+>/</TT
+> 
+within your Cygwin installation. You must have write access to
+the parent directory, and any ACLs on the parent directory will
+determine access to installed files.</P
+><P
+>The <TT
+CLASS="LITERAL"
+>Install For</TT
+> options of 
+<TT
+CLASS="LITERAL"
+>All Users</TT
+> or 
+<TT
+CLASS="LITERAL"
+>Just Me</TT
+> are especially for multiuser systems
+or Domain users. If you have a single-user workstation, this 
+option probably does not concern you. If you are seeking to rollout
+Cygwin on a large Domain, you will want to see <A
+HREF="ntsec.html"
+>the section called <I
+>NT security and the <TT
+CLASS="LITERAL"
+>ntsec</TT
+> usage</I
+></A
+>
+in the Cygwin User's Guide and possibly consult the Cygwin
+mailing list archives about others' experiences.</P
+><P
+>The <TT
+CLASS="LITERAL"
+>Default Text File Type</TT
+> should be left on
+<TT
+CLASS="LITERAL"
+>Unix</TT
+> (that is, <TT
+CLASS="LITERAL"
+>\n</TT
+>) unless you
+have a very good reason to switch it to 
+<TT
+CLASS="LITERAL"
+>DOS</TT
+> (that is, <TT
+CLASS="LITERAL"
+>\r\n</TT
+>).</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN158"
+>Local Package Directory</A
+></H2
+><P
+>The <TT
+CLASS="LITERAL"
+>Local Package Directory</TT
+> is the cache where 
+<B
+CLASS="COMMAND"
+>setup.exe</B
+> stores the packages before they are
+installed. The cache should not be the same folder as the Cygwin
+root. Within the cache, a separate directory is created for each
+Cygwin mirror, which allows <B
+CLASS="COMMAND"
+>setup.exe</B
+> to use 
+multiple mirrors and custom packages. After installing Cygwin,
+the cache is no longer necessary, but you may want to retain the
+packages as backups, for installing Cygwin to another system,
+or in case you need to reinstall a package.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN164"
+>Connection Method</A
+></H2
+><P
+>For most users, the <TT
+CLASS="LITERAL"
+>Direct Connection</TT
+> method
+of downloading is the best choice. If you have a proxy server,
+you can use the <TT
+CLASS="LITERAL"
+>Use IE5 Settings</TT
+> if it is 
+already set up in Internet Exlporer, or manually type it into 
+the <TT
+CLASS="LITERAL"
+>Use Proxy</TT
+> section. Unfortunately, 
+<B
+CLASS="COMMAND"
+>setup.exe</B
+> does not currently support password
+authorization for proxy servers.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN171"
+>Choosing Mirrors</A
+></H2
+><P
+>Since there is no way of knowing from where you will be downloading
+Cygwin, you need to choose at least one mirror site.  Cygwin mirrors 
+are geographically distributed around the world; check the list at <A
+HREF="http://cygwin.com/mirrors.html"
+TARGET="_top"
+>http://cygwin.com/mirrors.html</A
+>
+to find one near you. You can select multiple mirrors by holding down
+<TT
+CLASS="LITERAL"
+>CTRL</TT
+> and clicking on each one. If you have the URL of 
+an unlisted mirror (for example, if your organization has an internal Cygwin 
+mirror) you can add it.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN176"
+>Choosing Packages</A
+></H2
+><P
+>For each selected mirror site, <B
+CLASS="COMMAND"
+>setup.exe</B
+> downloads a 
+small text file called <TT
+CLASS="LITERAL"
+>setup.ini</TT
+> that contains a list
+of packages available from that site along with some basic information about
+each package (version number, dependencies, checksum, etc.) which 
+<B
+CLASS="COMMAND"
+>setup.exe</B
+> parses and uses to create the chooser window.</P
+><P
+>The chooser is the most complex part of <B
+CLASS="COMMAND"
+>setup.exe</B
+>. 
+Packages are divided into categories. By default <B
+CLASS="COMMAND"
+>setup.exe</B
+>
+will install only the packages in the <TT
+CLASS="LITERAL"
+>Base</TT
+> category
+and their dependencies, resulting in a very basic Cygwin installation.
+However, this will not include many commonly used tools such as 
+<B
+CLASS="COMMAND"
+>gcc</B
+> (which you will find in the <TT
+CLASS="LITERAL"
+>Devel</TT
+> 
+category). </P
+><P
+>You can change <B
+CLASS="COMMAND"
+>setup.exe</B
+>'s view style, which is helpful
+if you know the name of a package you want to install but not which 
+category it is in. 
+Click on the <TT
+CLASS="LITERAL"
+>View</TT
+> button and it will rotate between 
+<TT
+CLASS="LITERAL"
+>Category</TT
+> (the default), <TT
+CLASS="LITERAL"
+>Full</TT
+> (all 
+packages), and <TT
+CLASS="LITERAL"
+>Partial</TT
+> (only packages to be upgraded).
+If you are familiar with Unix, you will probably want to at least glance 
+through the <TT
+CLASS="LITERAL"
+>Full</TT
+> listing for your favorite tools.</P
+><P
+>Once you have an existing Cygwin installation, the <B
+CLASS="COMMAND"
+>setup.exe</B
+>
+chooser is also used to manage your Cygwin installation. 
+Information on installed packages is kept in the
+<TT
+CLASS="LITERAL"
+>/etc/setup/</TT
+> directory of your Cygwin installation; if 
+<B
+CLASS="COMMAND"
+>setup.exe</B
+> cannot find this directory it will act just like
+you had no Cygwin installation.  If <B
+CLASS="COMMAND"
+>setup.exe</B
+>
+finds a newer version of an installed package available, it will automatically 
+mark it to be upgraded. 
+To <TT
+CLASS="LITERAL"
+>Uninstall</TT
+>, <TT
+CLASS="LITERAL"
+>Reinstall</TT
+>, or get the
+<TT
+CLASS="LITERAL"
+>Source</TT
+> for an existing package, click on 
+<TT
+CLASS="LITERAL"
+>Keep</TT
+> to toggle it. 
+Also, to avoid the need to reboot after upgrading, make sure
+to close all Cygwin windows and stop all Cygwin processes before 
+<B
+CLASS="COMMAND"
+>setup.exe</B
+> begins to install the upgraded package.</P
+><P
+>The final feature of the <B
+CLASS="COMMAND"
+>setup.exe</B
+> chooser is for
+<TT
+CLASS="LITERAL"
+>Previous</TT
+> and <TT
+CLASS="LITERAL"
+>Experimental</TT
+> packages.
+By default the chooser shows only the current version of each package,
+though mirrors have at least one previous version and occasionally there
+is a testing or beta version of a package available. To see these package,
+click on the <TT
+CLASS="LITERAL"
+>Prev</TT
+> or <TT
+CLASS="LITERAL"
+>Exp</TT
+> radio button.
+Be warned, however, that the next time you run <B
+CLASS="COMMAND"
+>setup.exe</B
+> 
+it will try to replace old or experimental versions with the latest. </P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN212"
+>Download and Installation Progress</A
+></H2
+><P
+>First, <B
+CLASS="COMMAND"
+>setup.exe</B
+> will download all selected packages
+to the local directory chosen earlier. Before installing, 
+<B
+CLASS="COMMAND"
+>setup.exe</B
+> performs a checksum on each package. If the
+local directory is a slow medium (such as a network drive) this can take
+a long time. During the download and installation, <B
+CLASS="COMMAND"
+>setup.exe</B
+>
+show progress bars for the current task and total remaining disk space.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN218"
+>Icons</A
+></H2
+><P
+>You may choose to install shortcuts on the Desktop and/or Start Menu
+to start a <TT
+CLASS="LITERAL"
+>bash</TT
+> shell. If you prefer to use a different
+shell or the native Windows version of <TT
+CLASS="LITERAL"
+>rxvt</TT
+>, you can
+use these shortcuts as a guide to creating your own. </P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN223"
+>Post-Install Scripts</A
+></H2
+><P
+>Last of all, <B
+CLASS="COMMAND"
+>setup.exe</B
+> will run any post-install
+scripts to finish correctly setting up installed packages. Since each
+script is run separately, several windows may pop up. If you are 
+interested in what is being done, the scripts are kept in the 
+<TT
+CLASS="LITERAL"
+>/etc/postinstall/</TT
+> directory, renamed with a 
+<TT
+CLASS="LITERAL"
+>done</TT
+> extension after being run. When the last
+post-install script is completed, <B
+CLASS="COMMAND"
+>setup.exe</B
+> will
+display a box announcing the completion. A few packages, such as
+the OpenSSH server, require some manual site-specific configuration. 
+Relevant documentation can be found in the <TT
+CLASS="LITERAL"
+>/usr/doc/Cygwin</TT
+> 
+directory.</P
+></DIV
 ></DIV
 ></DIV
 ><DIV
@@ -104,7 +591,6 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -116,8 +602,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="highlights.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -125,7 +610,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
-ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -134,8 +618,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="setup-env.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR

@@ -1,12 +1,10 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <HTML
 ><HEAD
 ><TITLE
 >Building and Using DLLs</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -20,16 +18,9 @@ REL="NEXT"
 TITLE="Defining Windows Resources"
 HREF="windres.html"></HEAD
 ><BODY
-CLASS="SECT1"
-BGCOLOR="#FFFFFF"
-TEXT="#000000"
-LINK="#0000FF"
-VLINK="#840084"
-ALINK="#0000FF"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
-SUMMARY="Header navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -47,22 +38,20 @@ ALIGN="left"
 VALIGN="bottom"
 ><A
 HREF="gdb.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="80%"
 ALIGN="center"
 VALIGN="bottom"
->Programming with Cygwin</TD
+>Chapter 4. Programming with Cygwin</TD
 ><TD
 WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
 HREF="windres.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ></TABLE
@@ -75,8 +64,8 @@ CLASS="SECT1"
 CLASS="SECT1"
 ><A
 NAME="DLL"
-></A
->Building and Using DLLs</H1
+>Building and Using DLLs</A
+></H1
 ><P
 >DLLs are Dynamic Link Libraries, which means that they're linked
 into your program at run time instead of build time.  There are three
@@ -136,8 +125,8 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="DLL-BUILD"
-></A
->Building DLLs</H2
+>Building DLLs</A
+></H2
 ><P
 >This page gives only a few simple examples of gcc's DLL-building 
 capabilities. To begin an exploration of the many additional options,
@@ -146,9 +135,8 @@ see the gcc documentation and website, currently at
 HREF="http://gcc.gnu.org/"
 TARGET="_top"
 >http://gcc.gnu.org/</A
->
-
-<P
+>&#13;</P
+><P
 >Let's go through a simple example of how to build a dll.
 For this example, we'll use a single file
 <TT
@@ -167,14 +155,10 @@ CLASS="FILENAME"
 CLASS="FILENAME"
 >mydll.dll</TT
 >).</P
->
-
-<P
+><P
 >Fortunately, with the latest gcc and binutils the process for building a dll
 is now pretty simple. Say you want to build this minimal function in mydll.c:</P
->
-
-<TABLE
+><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -192,13 +176,9 @@ hello()
 ></TD
 ></TR
 ></TABLE
->
-
-<P
+><P
 >First compile mydll.c to object code:</P
->
-
-<TABLE
+><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -210,13 +190,9 @@ CLASS="SCREEN"
 ></TD
 ></TR
 ></TABLE
->
-
-<P
+><P
 >Then, tell gcc that it is building a shared library:</P
->
-
-<TABLE
+><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -228,14 +204,10 @@ CLASS="SCREEN"
 ></TD
 ></TR
 ></TABLE
->
-
-<P
+><P
 >That's it! To finish up the example, you can now link to the
 dll with a simple program:</P
->
-
-<TABLE
+><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -251,13 +223,9 @@ main ()
 ></TD
 ></TR
 ></TABLE
->
-
-<P
+><P
 >Then link to your dll with a command like:</P
->
-
-<TABLE
+><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -269,14 +237,10 @@ CLASS="SCREEN"
 ></TD
 ></TR
 ></TABLE
->
-
-<P
+><P
 >However, if you are building a dll as an export library,
 you will probably want to use the complete syntax:</P
->
-
-<TABLE
+><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -293,14 +257,11 @@ CLASS="SCREEN"
 ></TD
 ></TR
 ></TABLE
->
-
-<P
+><P
 >Where ${module} is the name of your DLL, ${old_lib} are all
 your object files, bundled together in static libs or single object
 files and the ${dependency_libs} are import libs you need to
 link against, e.g '-lpng -lz -L/usr/local/special -lmyspeciallib'.</P
-></P
 ></DIV
 ><DIV
 CLASS="SECT2"
@@ -308,14 +269,14 @@ CLASS="SECT2"
 CLASS="SECT2"
 ><A
 NAME="DLL-LINK"
-></A
->Linking Against DLLs</H2
+>Linking Against DLLs</A
+></H2
 ><P
 >If you have an existing DLL already, you need to build a
 Cygwin-compatible import library.  If you have the source to compile
 the DLL, see <A
 HREF="dll.html#DLL-BUILD"
->the Section called <I
+>the section called <I
 >Building DLLs</I
 ></A
 > for details on having 
@@ -372,7 +333,6 @@ CLASS="NAVFOOTER"
 ><HR
 ALIGN="LEFT"
 WIDTH="100%"><TABLE
-SUMMARY="Footer navigation table"
 WIDTH="100%"
 BORDER="0"
 CELLPADDING="0"
@@ -384,8 +344,7 @@ ALIGN="left"
 VALIGN="top"
 ><A
 HREF="gdb.html"
-ACCESSKEY="P"
->&#60;&#60;&#60; Previous</A
+>Prev</A
 ></TD
 ><TD
 WIDTH="34%"
@@ -393,7 +352,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="cygwin-ug-net.html"
-ACCESSKEY="H"
 >Home</A
 ></TD
 ><TD
@@ -402,8 +360,7 @@ ALIGN="right"
 VALIGN="top"
 ><A
 HREF="windres.html"
-ACCESSKEY="N"
->Next &#62;&#62;&#62;</A
+>Next</A
 ></TD
 ></TR
 ><TR
@@ -418,7 +375,6 @@ ALIGN="center"
 VALIGN="top"
 ><A
 HREF="programming.html"
-ACCESSKEY="U"
 >Up</A
 ></TD
 ><TD
