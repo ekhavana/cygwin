@@ -1,3 +1,78 @@
+<h4>Release 6.7-8</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-05-04 1730 EDT</td></tr>
+
+<tr><td>Download source: Now available as src package via setup.exe</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>windialogs.c - Let the number-of-client display show at least 0
+clients.  (Alexander Gottwald)</li>
+
+<li>winmsg.h, winmsg.c - New function winW32Error which prints the
+error string with FormatMessage.  (Alexander Gottwald)</li>
+
+<li>wincursor.c - Fix severe GDI leak.  GetIconInfo allocated new
+bitmaps which were never deleted.  (Alexander Gottwald)</li>
+
+<li>Xserver/GL/windows/indirect.c - Rename winErrorMessage to
+glWinErrorMessage print GetLastError() if FormatMessage fails.  This
+will at least give some information if the 1024 byte buffer is to
+small for some messages.  (Alexander Gottwald)</li>
+
+<li>wincursor.c - Always free the bitmaps from GetIconInfo.  (Earle
+F. Philhower III)</li>
+
+<li>wincursor.c - Disable extensive cursor debug-logging.  If a
+problem arises it can be easily switched on again.  (Alexander
+Gottwald)</li>
+
+<li>wincursor.c, winmsg.c, winmsg.h - simplify use of winW32Error
+function.  (Alexander Gottwald)</li>
+
+<li>winshadgdi.c - Make shadow GDI work with wine.  (Alexander
+Gottwald)</li>
+
+<li>winshadgdi.c - Fix wrong color depths for wine.  (Alexander
+Gottwald)</li>
+
+<li>winshadgdi.c - Remove warning about weired biHeight signedness.
+This has never been a problem in the last two years.  (Alexander
+Gottwald)</li>
+
+<li>General - Replace ErrorF with winDebug in all CYGDEBUG sections.
+(Alexander Gottwald)</li>
+
+<li>winmessages.h, winwndproc.c, winmultiwindowwndproc.c - Move window
+to top if WM_WINDOWPOSCHANGING without NOZORDER is received.  Print
+message information WindowProc functions if CYGDEBUG is enabled.
+(Alexander Gottwald)</li>
+
+<li>winmultiwindowwm.c - Silence warning about winDebug.  winmsg.h and
+win.h can not be included because of conflicting symbol names.
+(Alexander Gottwald)</li>
+
+<li>winconfig.c - Fix Japanese jp106 layout.  Reported by takuma and
+Munehiro (haro) Matsuda.  (Alexander Gottwald)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc - Don't try to set
+the "next window" in the clipboard chain to ourself.  Fixes another
+hang when using -clipboard.  (Dan Wilks - Intuit)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 6.7-7</h4>
 <table>
 <tbody>
