@@ -1,13 +1,13 @@
 <HTML>
 <HEAD>
 <!-- This HTML file has been created by texi2html 1.51
-     from readme.texinfo on 30 October 1998 -->
+     from readme.texinfo on 9 November 1998 -->
 
-<TITLE>README 20.0 for Cygwin B20 Release.
+<TITLE>README 20.1 for Cygwin B20.0 Release.
 </TITLE>
 </HEAD>
 <BODY>
-<H1>README 20.0 for Cygwin B20 Release.</H1>
+<H1>README 20.1 for Cygwin B20.0 Release.</H1>
 <P>
 <P><HR><P>
 
@@ -466,9 +466,9 @@ shorter and longer output formats.
 
 <P>
 This version of Cygwin is backwards-compatible with the beta 19 release.
-If you rename the cygwin1.dll included as part of B20 to
-"cygwinb19.dll", the old executables should be able to function with the
-new version of the library.
+You can use the new "cygwin1.dll" with your old B19-compiled executables
+if you move the old "cygwinb19.dll" out of the way and install a copy
+of "cygwin1.dll" as "cygwinb19.dll".
 
 </P>
 <P>
@@ -576,11 +576,24 @@ that when attempting to configure/build UNIX packages, that only normal
 paths with single slashes are used.
 
 </P>
+
+
+<H2><A NAME="SEC16" HREF="readme_toc.html#TOC16">The CYGWIN variable doesn't work correctly in B20</A></H2>
+
+<P>
+Due to a bug for Cygwin B20, you need to leave two empty spaces after
+the equals sign in your set command for the CYGWIN environment variable
+to work correctly.  For example, "set CYGWIN=  tty strip_title" at the
+DOS prompt before invoking bash will enable the tty layer and strip the
+path used in command shell window titles.
+
+</P>
+
 <P>
 Geoffrey Noer
 noer@cygnus.com
 <P><HR><P>
-This document was generated on 30 October 1998 using the
+This document was generated on 9 November 1998 using the
 <A HREF="http://wwwcn.cern.ch/dci/texi2html/">texi2html</A>
 translator version 1.51.</P>
 </BODY>
