@@ -20,7 +20,7 @@ if (!open(F, $file)) {
 } else {
     $_ = join('', <F>);
     s!$grep!\<b\>$grep\</b\>!mo if length($grep);
-    print "<pre><tt>\n", $_, "</tt></pre>\n";
+    print $_;
 }
 
 print "</table>";
