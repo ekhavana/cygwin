@@ -13,7 +13,7 @@
 
 <!--#include virtual="../cygx-header.html" -->
 
-<p>Last updated: 2001-10-03 0056 EDT</p>
+<p>Last updated: 2001-10-27 1304 EDT</p>
 
 <p>Following is a list of open tasks on the Cygwin/XFree86
 project:</p>
@@ -57,10 +57,10 @@ display area will have changed from 1280x1024 to 1024x768, and the
 device context and/or DirectDraw surface handles may need to be
 changed to point to the internal display.  Currently switching from
 the monitor to the internal display will cause the Cygwin/XFree86
-window to cease refreshing; the window will only be filled with
-white.  Switching from the internal display to the external monitor
-shows the Cygwin/XFree86 window with the content stretched to fit the
-now larger window.</td>
+window to cease refreshing; the window will only be filled with white.
+Switching from the internal display to the external monitor shows the
+Cygwin/XFree86 window with the content stretched to fit the now larger
+window.</td>
 </tr>
 
 
@@ -69,11 +69,11 @@ now larger window.</td>
 
 <td>Extend <a href="xwinclip/">xwinclip</a>, the Cygwin/XFree86
 clipboard manager, to handle data types other than XA_STRING and
-UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.  Embed the
-xwinclip functionality within XWin.exe.  The later task may be rather
-difficult, as there are numerous collisions between the X client
-headers and the X Server headers that must be prevented.  One method
-of preventing collisions may be to break the win.h header into
+UTF8_STRING; for example, BITMAP, COMPOUND_TEXT, PIXMAP, etc.  Embed
+the xwinclip functionality within XWin.exe.  The later task may be
+rather difficult, as there are numerous collisions between the X
+client headers and the X Server headers that must be prevented.  One
+method of preventing collisions may be to break the win.h header into
 multiple files, and to add a list of only the necessary includes to
 the top each .c file.  Any embedded clipboard support will need a
 command line option that can disable the built-in clipboard
@@ -84,15 +84,25 @@ manager.</td>
 <tr valign="top">
 <td>Network transparent audio</td>
 
+<td>
+<table>
+<tr>
+<td>Work has begun on this task.  See Kevin Kuphal's <a
+href="http://www.sitecity.net/cygwin-audio/">Cygwin Network Audio
+Porting</a> site for more information.</td>
+</tr>
+
+<tr>
 <td>Cygwin/XFree86 needs the ability to play sounds from X clients or
 windowing systems (Gnome, KDE, CDE, etc.) running on machines across
 the network.  For example, you should hear, on your Cygwin/XFree86
 machine, the sounds being played by KDE if you use XDMCP to logon to a
 KDE session on a remote machine.  Investigate the various network
 transparent audio systems, such as Gnome's <a
-href="http://www.tux.org/~ricdude/dev.html">Esound</a> (<a
-href="http://mail.gnome.org/archives/gnome-devel-list/2000-July/msg00266.html">appears
-to be dead</a>, perhaps to be replaced by aRts), KDE's <a
+href="http://www.tux.org/~ricdude/dev.html">Esound</a> (appears to be
+alive and well, contrary to the widely spread <a
+href="http://mail.gnome.org/archives/gnome-devel-list/2000-July/msg00266.html">reports
+of its impending death</a>), KDE's <a
 href="http://www.arts-project.org/">aRts</a> (analog realtime
 synthesizer), <a
 href="http://citeseer.nj.nec.com/levergood93audiofile.html">AudioFile</a>
@@ -108,14 +118,15 @@ Sound System).  There is a lot of material to process in order to
 understand this task, however, the return from completing this task
 would be highly beneficial.</td>
 </tr>
-
+</table>
+</tr>
 
 <tr valign="top">
 <td>Windowed mode window size</td>
 
-<td>Currently we subtract one pixel off the bottom edge of a windowed
-X Server if the window height is as tall as the screen; this is soley
-to allow hidden Start bars to "pop up" when you bump the mouse against
+<td>Currently we subtract one pixel off the bottom edge of a windowed X
+Server if the window height is as tall as the screen; this is soley to
+allow hidden Start bars to "pop up" when you bump the mouse against
 them.  Needless to say, this is a horrible kludge, as it doesn't even
 check to see if the Start bar is at that bottom of the screen (could
 be on the left side, right side, or top of the screen).  Furthermore,
