@@ -56,7 +56,7 @@ loaded in same order.
 
 In your dll code you must <P>
 
-1) <tt>#include &#60;cygwin32/cygwin_dll.h&#62;</tt> <P>
+1) <tt>#include &#60;cygwin/cygwin_dll.h&#62;</tt> <P>
 
 	then use the declaration macro: <P>
 		
@@ -64,7 +64,7 @@ In your dll code you must <P>
 
 Note that the fixup to terminate import section is included in macro. <P>
 
-2) In the link phase use <tt>"__cygwin32_dll_entry@12"</tt> as entry point.
+2) In the link phase use <tt>"__cygwin_dll_entry@12"</tt> as entry point.
 Note that you may have to perform 3 link passes. <P>
 
 3) dlfork is a new Cygwin-specific function.  Its prototype is in
