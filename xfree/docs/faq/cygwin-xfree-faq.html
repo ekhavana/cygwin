@@ -44,6 +44,26 @@ COLSPAN="3"
 ><TR
 ><TD
 ALIGN="LEFT"
+>Revision 1.0.14</TD
+><TD
+ALIGN="LEFT"
+>2004-03-08</TD
+><TD
+ALIGN="LEFT"
+>Revised by: alexander.gottwald@s1999.tu-chemnitz.de</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+COLSPAN="3"
+>Changed the OpenSSH config file location.
+Reported by tulitanssi &lt;at&gt; luukku &lt;dot&gt; com
+Marked Alt-Gr with XP Powertoys as solved.
+Added section about wrong AltGr key name.</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
 >Revision 1.0.13</TD
 ><TD
 ALIGN="LEFT"
@@ -560,6 +580,12 @@ HREF="cygwin-xfree-faq.html#q-xkb-not-working"
 HREF="cygwin-xfree-faq.html#alt-gr-win-xp-powertoys"
 >I have Windows XP with Powertoys installed and AltGr does not work. 
 What can I do?</A
+></DT
+><DT
+>4.1.7. <A
+HREF="cygwin-xfree-faq.html#alt-gr-with-old-x"
+>AltGr does not work properly when connecting to other unices or to old
+XFree86.</A
 ></DT
 ></DL
 ></DD
@@ -1787,13 +1813,58 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Unfortunately there is not much you can do. Somehow Powertoys on Windows
-XP causes the algorithm for AltGr detection to fail. So the easy solution is
-to disable Powertoys.</P
+>This problem is solved in recent Cygwin/X releases. Use cygwin setup to
+upgrade the XFree86-xserv package.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
 ><P
->The second (and hard) solution is to debug the keyboardhandling code and
-determine how the two messages which are sent by Windows when AltGr is pressed
-can be distinguished from a combined Alt and Control press.</P
+><A
+NAME="alt-gr-with-old-x"
+></A
+><B
+>4.1.7. </B
+>AltGr does not work properly when connecting to other unices or to old
+XFree86.</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>The older X11 releases on the various commercial unices define the AltGr
+key as ModeSwitch, MetaR, AltR or similar. Cygwin/X expects it to be 
+ISO_Level3_Switch. For reasons unknown to us this is reset when loggin into 
+the remote host. As far as we don't have access to such a machine we are unable
+to track this down and find a reason. 
+</P
+><P
+>&#13;Sometimes it does help to run <TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>DISPLAY=:0.0 setxkbmap <VAR
+CLASS="replaceable"
+>languagecode</VAR
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+from a cygwin shell. For more information see <A
+HREF="cygwin-xfree-faq.html#q-non-U.S.-keyboard-layout"
+>Q: 4.1.1.</A
+>.
+</P
 ></DIV
 ></DIV
 ></DIV
@@ -2006,7 +2077,7 @@ CLASS="filename"
 > and 
 <TT
 CLASS="filename"
->/etc/ssh/ssh_config</TT
+>/etc/ssh_config</TT
 >. The file in the home directory 
 overrides settings in the global one.
 
@@ -3481,7 +3552,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN661"
+NAME="AEN674"
 ></A
 ><P
 ><B
