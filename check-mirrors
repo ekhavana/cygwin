@@ -283,7 +283,7 @@ sub verify_ftp {
     my @a = $ftp->ls($file);
     my $status = "@a";
     print "$status\n";
-    if (!$status || $status =~ /not found/i) {
+    if (!$status || $status =~ /not found|no such file/i) {
 	siteprint $site, 'ftp', "$file not found";
 	return 0;
     }
