@@ -36,15 +36,16 @@ com instead.</p>
 ports of existing packages (i.e.  bash 2.04 becomes 2.04-1, 2.04-2, etc,
 until bash 2.05 is ported, which would be 2.05-1, etc).  Some packages
 also use a YYMMDD format for their versions, e.g.  binutils-20010901-1.tar.bz2.
-The first release of a package should have a -1 suffix.
+The first release of a package should have a -1 suffix.</p>
 
-A package currently consists of three files:
+<p>A complete package currently consists of three files:
 
 <ul>
 <li>a binary tar file
 <li>a source tar file
 <li>a setup.hint file
 </ul>
+</p>
 
 <p>Binary tar files are named "package-version.tar.bz2".  They generally
 contain the executable files that will be installed on a user's system
@@ -54,11 +55,11 @@ details on how to generate a binary tar file.</p>
 
 <p>Source tar files are named "package-version-src.tar.bz2".  Source tar files
 should contain the source files needed to rebuild the package.  While
-installing these files is optional under setup.exe, the inclusion of
-is part of the totality that makes up a cygwin package and so, these
-files are <em>not</em> optional.  See the <a href="#package_contents">
-making packages</a> section below for more details on the contents of
-a -src tar file..</p>
+installing these files is optional under setup.exe, the inclusion of a
+source tar file is part of the totality that makes up a cygwin package
+and so, these files are <em>not</em> optional.  See the <a
+href="#package_contents"> making packages</a> section below for more
+details on the contents of a -src tar file..</p>
 
 <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.
 
@@ -79,7 +80,7 @@ package name.  For example, the <tt>boffo</tt> package will live in the
 All new packages will follow the rule of package name == directory name.
 
 <p>Each directory contains <a href="#naming">source and binary tar
-files</a> which have been been compressed using bzip2.  The required format <a
+files</a> which have been been compressed using bzip2.  The required <a
 href="#naming">format of these filenames</a> is: <tt>package-version[<i>-src</i>].tar.bz2</tt> .
 The contents of these files is discussed <a href="#package_contents">
 below</a>.
@@ -107,12 +108,12 @@ boffo-1.0-1.tar.bz2  boffo-1.0-1-src.tar.bz2  setup.hint
 
 <p>Setup is currently unable to list more than three versions of each
 package.  Therefore you should not keep more than three versions of each
-package around: The current version, the previous stable version, and
-one test version.  By keeping a previous stable version around, you
-isolate yourself (somewhat) from problems with partial mirrors.  When
-you add a new "current" version, you can either keep the old "previous"
-version, or make the old current version the new previous version,
-depending on how stable they each were.</p>
+package around: The current version, the previous stable version, and,
+optionally, one test version.  By keeping a previous stable version
+around, you isolate yourself (somewhat) from problems with partial
+mirrors.  When you add a new "current" version, you can either keep the
+old "previous" version, or make the old current version the new previous
+version, depending on how stable they each were.</p>
 
 <p>Test versions are specified via the setup.hint file as described <a
 href="#setup.hint">below</a>.  It is not required that your package have
