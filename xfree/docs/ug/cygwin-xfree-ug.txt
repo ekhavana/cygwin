@@ -16,57 +16,54 @@ Harold L Hunt, II
    2. [2]Setting Up Cygwin/XFree86
 
         [3]Cygwin/XFree86 Contents
-        [4]Downloading Cygwin
-        [5]Installing Cygwin
-        [6]Downloading Cygwin/XFree86
-        [7]Installing Cygwin/XFree86
+        [4]Installing Cygwin/XFree86
 
-   3. [8]Configuring Cygwin/XFree86
+   3. [5]Configuring Cygwin/XFree86
 
-        [9]Configuration Overview
-        [10]Command Line Parameters
+        [6]Configuration Overview
+        [7]Command Line Parameters
 
-   4. [11]Using Cygwin/XFree86
+   4. [8]Using Cygwin/XFree86
 
-        [12]Starting Cygwin/XFree86
+        [9]Starting Cygwin/XFree86
 
-              [13]startxwin.bat
-              [14]startxwin.sh
-              [15]startx
+              [10]startxwin.bat
+              [11]startxwin.sh
+              [12]startx
 
-        [16]Switching Out of Cygwin/XFree86
-        [17]Stopping Cygwin/XFree86
-        [18]Remote Sessions via XDMCP
-        [19]Displaying Remote Clients
+        [13]Switching Out of Cygwin/XFree86
+        [14]Stopping Cygwin/XFree86
+        [15]Remote Sessions via XDMCP
+        [16]Displaying Remote Clients
 
-              [20]Unsecure Telnet
-              [21]Secure ssh
+              [17]Unsecure Telnet
+              [18]Secure ssh
 
-   A. [22]GNU Free Documentation License
+   A. [19]GNU Free Documentation License
 
-        0. [23]PREAMBLE
-        1. [24]APPLICABILITY AND DEFINITIONS
-        2. [25]VERBATIM COPYING
-        3. [26]COPYING IN QUANTITY
-        4. [27]MODIFICATIONS
-        5. [28]COMBINING DOCUMENTS
-        6. [29]COLLECTIONS OF DOCUMENTS
-        7. [30]AGGREGATION WITH INDEPENDENT WORKS
-        8. [31]TRANSLATION
-        9. [32]TERMINATION
-        10. [33]FUTURE REVISIONS OF THIS LICENSE
-        [34]How to use this License for your documents
+        0. [20]PREAMBLE
+        1. [21]APPLICABILITY AND DEFINITIONS
+        2. [22]VERBATIM COPYING
+        3. [23]COPYING IN QUANTITY
+        4. [24]MODIFICATIONS
+        5. [25]COMBINING DOCUMENTS
+        6. [26]COLLECTIONS OF DOCUMENTS
+        7. [27]AGGREGATION WITH INDEPENDENT WORKS
+        8. [28]TRANSLATION
+        9. [29]TERMINATION
+        10. [30]FUTURE REVISIONS OF THIS LICENSE
+        [31]How to use this License for your documents
 
    List of Tables
-   3-1. [35]Parameter Descriptions
+   3-1. [32]Parameter Descriptions
      _________________________________________________________________
 
 Chapter 1. Cygwin/XFree86 Overview
 
    Cygwin/XFree86 is a port of XFree86 to Cygwin; Cygwin provides a
-   UNIX-like API on the Win32 platform. As of 2001-07-01 the supported
+   UNIX-like API on the Win32 platform. As of 2003-01-01 the supported
    Win32 platforms are Windows 95, Windows 98, Windows Me, Windows NT
-   4.0, and Windows 2000.
+   4.0, Windows 2000, and Windows XP.
      _________________________________________________________________
 
 Chapter 2. Setting Up Cygwin/XFree86
@@ -79,10 +76,10 @@ Cygwin/XFree86 Contents
    Win32 platform.
      _________________________________________________________________
 
-Downloading Cygwin
+Installing Cygwin/XFree86
 
    Cygwin tools are, in the words of the Cygwin development homepage,
-   [36]http://cygwin.com/, "ports of the popular GNU development tools
+   [33]http://cygwin.com/, "ports of the popular GNU development tools
    and utilities for Windows 95, 98, and NT. They function by using the
    Cygwin library which provides a UNIX-like API on top of the Win32
    API." Cygwin allows the compilation of the XFree86 source on Win32;
@@ -92,12 +89,7 @@ Downloading Cygwin
 
    Cygwin has a nice setup program that downloads and installs the
    necessary Cygwin packages for you.
-
-     Tip: Be sure to use setup.exe version 2.13 or greater if you intend
-     to save the downloaded packages to a Samba share; some versions of
-     Samba have a problem with prior versions of setup.exe.
-
-    1. Open the Cygwin, [37]http://cygwin.com/ page in your web browser
+    1. Open the Cygwin, [34]http://cygwin.com/ page in your web browser
     2. Click the "Install Cygwin Now" link in the upper-right hand corner
        of the page; or, click the "Install" link next to "Latest net
        release:", which should be near the top of the page in the main
@@ -105,234 +97,94 @@ Downloading Cygwin
        Cygwin server; save setup.exe to the directory that you would like
        to store the downloaded packages in (e.g. c:\cyginstall); do not
        save setup.exe to c:\cygwin, as that is the default directory for
-       the extraction and installation of the downloaded packages. At the
-       time of writing, a full download of all Cygwin packages takes 25
-       MiB of disk space.
+       the extraction and installation of the downloaded packages.
     3. Run setup.exe, you will see the welcome screen:
-       Cygwin Download - Installation welcome screen
-    4. Click Next to proceed to the next screen
-    5. Choose, Download from Internet, this will save the package files
-       to your download directory so that you can install Cygwin on any
-       number of machines:
-       Cygwin Download - Download or install packages
-    6. Click Next to proceed to the next screen
-    7. Local Package Directory should default to the directory that you
-       ran setup.exe from:
-       Cygwin Download - Local package directory
-    8. Click Next to proceed to the next screen
-    9. Choose your proxy setup, or, just choose Direct Connection to
-       limit the scope of download problems:
-       Cygwin Download - Proxy settings
-   10. Click Next to proceed to the next screen
-   11. Select your nearest mirror for downloading:
-       Cygwin Download - Choose mirror
-   12. Click Next to proceed to the next screen; setup will download a
-       list of available packages as it moves to the next screen
-   13. The default selection of packages should be okay for most users.
-       However, you may wish to ensure that the inetutils and openssh
-       packages are selected if you wish to use telnet and ssh to connect
-       to remote machines.
-       Cygwin Download - Choose packages to download
-   14. Click Next to begin the download process, you may want to try
-       another mirror if you see a "Connecting" message on this screen
-       for a long period of time:
-       Cygwin Download - Downloading packages
-   15. You should receive a message that the download has completed; you
-       now have all of the packages necessary for installation of Cygwin:
-       Cygwin Download - Installation complete
-     _________________________________________________________________
-
-Installing Cygwin
-
-   You may install the downloaded Cygwin packages on any number of the
-   machines by simply copying your download directory to that machine, or
-   making the download directory accessible via a network share, and
-   following the installation steps below. The following installation
-   steps assume that you are installing Cygwin on the same machine that
-   you used to download the Cygwin packages.
-
-   Follow these steps to install Cygwin:
-    1. Run setup.exe from your download directory (e.g. c:\cyginstall),
-       you will get the same welcome screen as before:
-       Cygwin Install - Installation welcome screen
-    2. Click Next to proceed to the next screen
-    3. Choose Install from Local Directory:
-       Cygwin Install - Download or install packages
-    4. Click Next to proceed to the next screen
-    5. Local Package Directory should default to the directory that you
-       ran setup.exe from, which should also be the same directory that
-       you previously downloaded the packages to:
-       Cygwin Install - Local package directory
-    6. Click Next to proceed to the next screen
+       [cyi01welcome.png]
+    4. Click Next to proceed to the next screen.
+    5. Choose, Install from Internet, this will still save the package
+       files to your download directory so that you can install Cygwin on
+       any number of machines:
+       [cyi02installoption.png]
+    6. Click Next to proceed to the next screen.
     7. The default Install Root is c:\cygwin; this should be fine for
        most installations. Leave Default Text File Type as UNIX. If you
        have several users on your NT machine, and you are logged in with
        local administrative privileges, you may wish to set Install For
        to All, but the default of Just Me will work fine for single user
        machines.
-       Cygwin Install - Install root, default text mode, and multi user
-       or single user
-    8. Click Next to proceed to the next screen
-    9. All downloaded packages, with an installed size of 175 MiB as of
-       2001-04-19, are selected for installation by default; I do not
-       recommend changing the list of packages to install unless you
-       really know what you are doing:
-       Cygwin Install - Select packages to install
-   10. Click Next to proceed with the installation
-       Cygwin Install - Installing
-   11. I highly recommend allowing Cygwin Setup to create Desktop and
-       Start Menu icons for you; these icons simply launch a bash shell:
-       Cygwin Install - Create icons
-   12. Click Next to finish Cygwin Setup:
-       Cygwin Install - Installation complete
-     _________________________________________________________________
-
-Downloading Cygwin/XFree86
-
-   Cygwin/XFree86 is comprised of several binary tarballs.
-
-   Follow these steps to download Cygwin/XFree86 binaries:
-    1. Visit the [38]Cygwin mirrors page to find your closest mirror
-    2. The ftp url for your mirror site should take you to the cygwin/
-       directory on the mirror
-    3. Download the following files from xfree/binaries/4.2.0, saving
-       them to the tmp directory in the root of your Cygwin installation
-       directory (e.g. c:\cygwin). The full path that you save the files
-       to will look like c:\cygwin\tmp. The compressed file size appears
-       after each file; as of 2002-01-23 you will need approximately 29.2
-       MiB of disk space to download the required files, your download
-       size will vary if you choose to download any optional files.
-
-     Downloading with a Web Browser: Some web browsers automatically
-     decompress saved files when you use the left mouse button to follow
-     the link to a file; gunzip will report, "gunzip: extract.exe.gz:
-     not in gzip format", when attempting to decompress a file that has
-     been decompressed by your web browser. Prevent your files from
-     being automatically decompressed by clicking the right mouse button
-     on a file link and choosing a command such as Save Target As... or
-     Save Link As... from the context sensitive menu. Better yet,
-     download your files with a stand alone ftp client.
-          + extract.exe.gz (61.9 KiB; required, used by the installation
-            script)
-          + startup-scripts.tgz (1.99 KiB; required, example X Server and
-            client startup scripts)
-          + Xbin.tgz (10.6 MiB; required, executables for xterm, twm,
+       [cyi03installto.png]
+    8. Click Next to proceed to the next screen.
+    9. Local Package Directory should default to the directory that you
+       ran setup.exe from:
+       [cyi04directory.png]
+   10. Click Next to proceed to the next screen.
+   11. Choose your proxy setup, or, just choose Direct Connection to
+       limit the scope of download problems:
+       [cyi05proxy.png]
+   12. Click Next to proceed to the next screen.
+   13. Select your nearest mirror for downloading:
+       [cyi06mirror.png]
+   14. Click Next to proceed to the next screen; setup will download a
+       list of available packages as it moves to the next screen.
+   15. On the next screen you will select the packages that will be
+       downloaded and installed. A listing of the Cygwin/XFree86 packages
+       is given below; a listing of the general Cygwin packages would be
+       beyond the scope of this document.
+          + XFree86-bin (8.7 MiB; required, executables for xterm, twm,
             etc.)
-          + Xdoc.tgz (1.51 MiB; required, formatted documentation)
-          + Xetc.tgz (542 KiB; required, configuration files for the X
-            Server and programs in Xbin.tgz)
-          + Xf100.tgz (11.6 MiB; optional, 100 dpi fonts (75 dpi fonts
+          + XFree86-doc (1.26 MiB; optional, formatted documentation)
+          + XFree86-etc (470 KiB; required, configuration files for the X
+            Server and programs in XFree86-bin)
+          + XFree86-f100 (11.9 MiB; optional, 100 dpi fonts (75 dpi fonts
             are used by default))
-          + Xfcyr.tgz (360 KiB; optional, Cyrillic fonts)
-          + Xfenc.tgz (330 KiB; required, font encodings)
-          + Xfnts.tgz (15.4 MiB; required, 75 dpi fonts)
-          + Xfscl.tgz (2.16 MiB; optional, Speedo and Type1 scalable
+          + XFree86-fcyr (364 KiB; optional, Cyrillic fonts)
+          + XFree86-fenc (337 KiB; required, font encodings)
+          + XFree86-fnts (15.9 MiB; required, 75 dpi fonts)
+          + XFree86-fscl (1.96 MiB; optional, Speedo and Type1 scalable
             fonts)
-          + Xfsrv.tgz (212 KiB; optional, X Font Server)
-          + Xhtml.tgz (1.17 MiB; optional, documentation html format)
-          + Xinstall.sh (35.3 KiB; required, XFree86 installation script)
-          + Xjdoc.tgz (104 KiB; optional, XFree86 Japanese documentation)
-          + Xlib.tgz (107 KiB; required, X11R6/lib/ files)
-          + Xman.tgz (761 KiB; required, man pages)
-          + Xnest.tgz (1.11 MiB; optional, Xnest nested X Server)
-          + Xprog.tgz (761 KiB; optional, additional files needed to
+          + XFree86-fsrv (202 KiB; optional, X Font Server)
+          + XFree86-html (904 KiB; optional, documentation html format)
+          + XFree86-jdoc (84 KiB; optional, XFree86 Japanese
+            documentation)
+          + XFree86-lib (83 KiB; required, X11R6/lib/ files)
+          + XFree86-man (548 KiB; optional, man pages)
+          + XFree86-nest (1.1 MiB; optional, Xnest nested X Server)
+          + XFree86-prog (595 KiB; optional, additional files needed to
             compile programs for Cygwin/XFree86)
-          + Xprt.tgz (845 KiB; optional, X Print (Xprt) server)
-          + Xps.tgz (5.65 MiB; optional, documentation in Postscript
+          + XFree86-prt (791 KiB; optional, X Print (Xprt) server)
+          + XFree86-ps (4.41 MiB; optional, documentation in Postscript
             format)
-          + Xvfb.tgz (1.22 MiB; optional, X Virtual Frame Buffer (Xvfb)
-            server)
-          + Xxserv.tgz (1.22 MiB; required, the Cygwin/XFree86 X Server)
-    4. Download of Cygwin/XFree86 binaries is now complete
-     _________________________________________________________________
+          + XFree86-startup-scripts (10 KiB; required, example X Server
+            and client startup scripts)
+          + XFree86-vfb (1.22 MiB; optional, X Virtual Frame Buffer
+            (Xvfb) server)
+          + XFree86-xserv (1.19 MiB; required, the Cygwin/XFree86 X
+            Server)
+          + XFree86-xwinclip (6 KiB; optional, provides clipboard
+            integration between Windows and Cygwin/XFree86)
+   16. You must select the XFree86-base package, which is located in the
+       XFree86 category. The XFree86-base package is a helper package
+       that automatically selects a working set of packages for you that
+       will allow Cygwin/XFree86 to work. You may also want to ensure
+       that the inetutils and openssh packages are selected if you wish
+       to use telnet and ssh to connect to remote machines.
+       [cyi07packages.png]
+   17. Click Next to begin the download process, you may want to try
+       another mirror if you see a "Connecting" message on this screen
+       for a long period of time:
+       [cyi08downloading.png]
+   18. After the packages are downloaded, setup will automatically begin
+       go to install them:
+       [cyi09installing.png]
+   19. I highly recommend allowing Cygwin Setup to create Desktop and
+       Start Menu icons for you; these icons simply launch a bash shell:
+       [cyi10createicons.png]
+   20. Click Next to proceed to the next screen.
+   21. You should receive a message that the installation has completed.
+       [cyi11complete.png]
 
-Installing Cygwin/XFree86
-
-   Cygwin/XFree86 binaries are installed by the Xinstall.sh script.
-
-   Follow these steps to install Cygwin/XFree86 binaries:
-    1. Launch your Cygwin environment, using either the icon on your
-       Desktop, the icon in your Start Menu, or by running cygwin.bat
-       from your Cygwin directory (e.g. c:\cygwin); you should see a
-       window like the following:
-
-Username@CygwinHost ~
-$
-
-    2. Change the current directory to the tmp directory in your Cygwin
-       root directory:
-
-Username@CygwinHost ~
-$ cd /tmp
-
-Username@CygwinHost /tmp
-$
-
-    3. Extract the extract.exe.gz archive:
-
-Username@CygwinHost /tmp
-$ gunzip extract.exe.gz
-
-Username@CygwinHost /tmp
-$
-
-    4. Copy the extract.exe file to /bin:
-
-Username@CygwinHost /tmp
-$ cp extract.exe /bin
-
-Username@CygwinHost /tmp
-$
-
-    5. Run the Xinstall.sh script. Follow the step-by-step instructions
-       that the script provides:
-
-Username@CygwinHost /tmp
-$ ./Xinstall.sh
-
-                Welcome to the XFree86 4.2.0 installer
-
-You are strongly advised to backup your existing XFree86 installation
-before proceeding.  This includes the /usr/X11R6 and /etc/X11
-directories.  The installation process will overwrite existing files
-in those directories, and this may include some configuration files
-that may have been customised.
-
-If you are installing a version different from 4.2.0, you
-may need an updated version of this installer script.
-
-Do you wish to continue? (y/n) [n] y
-
-...
-
-Username@CygwinHost /tmp
-$
-
-    6. Copy startup-scripts.tgz to /usr/X11R6/bin:
-
-Username@CygwinHost /tmp
-$ cp startup-scripts.tgz /usr/X11R6/bin
-
-Username@CygwinHost /tmp
-$
-
-    7. Change the current directory to /usr/X11R6/bin:
-
-Username@CygwinHost /tmp
-$ cd /usr/X11R6/bin
-
-Username@CygwinHost /usr/X11R6/bin
-$
-
-    8. Extract startup-scripts.tgz:
-
-Username@CygwinHost /usr/X11R6/bin
-$ tar -xzf startup-scripts.tgz
-
-Username@CygwinHost /usr/X11R6/bin
-$
-
-    9. Installation of Cygwin/XFree86 binaries is now complete.
+   You have now successfully installed Cygwin/XFree86. Proceed to
+   [35]Chapter 4 for instructions on how to use Cygwin/XFree86.
      _________________________________________________________________
 
 Chapter 3. Configuring Cygwin/XFree86
@@ -467,8 +319,8 @@ Starting Cygwin/XFree86
 startxwin.bat
 
    startxwin.bat - Use a MS-DOS batch file as the startup script. An
-   example startxwin.bat is included in startup-scripts.tgz, which is
-   extracted according to the instructions in [39]the Section called
+   example startxwin.bat is included in XFree86-startup-scripts, which is
+   extracted according to the instructions in [36]the Section called
    Installing Cygwin/XFree86 in Chapter 2. Run
    /usr/X11R6/bin/startxwin.bat by double-clicking it in Windows
    Explorer.
@@ -477,8 +329,8 @@ startxwin.bat
 startxwin.sh
 
    startxwin.sh - Use an sh shell script as the startup script. An
-   example startxwin.sh is included in startup-scripts.tgz, which is
-   extracted according to the instructions in [40]the Section called
+   example startxwin.sh is included in XFree86-startup-scripts, which is
+   extracted according to the instructions in [37]the Section called
    Installing Cygwin/XFree86 in Chapter 2. Run
    /usr/X11R6/bin/startxwin.sh in a Cygwin shell:
 Username@CygwinHost ~
@@ -555,11 +407,11 @@ Remote Sessions via XDMCP
 
    Note that the :display_number parameter is a general X Server
    parameter, not specific to Cygwin/XFree86. Further documentation of
-   the :display_number parameter can be found in the [41]X Server
+   the :display_number parameter can be found in the [38]X Server
    documentation. XDMCP is a complex system that is not specific to
    Cygwin/XFree86; further discussion of XDMCP is beyond the scope of
-   this document. You may wish to read the [42]Linux XDMCP HOWTO or the
-   [43]X Server XDMCP Options for more information.
+   this document. You may wish to read the [39]Linux XDMCP HOWTO or the
+   [40]X Server XDMCP Options for more information.
      _________________________________________________________________
 
 Displaying Remote Clients
@@ -938,7 +790,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [44]http://www.gnu.org/copyleft/.
+   [41]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -980,44 +832,41 @@ References
    1. file://localhost/home/public/documents/cygx/build/ug/dump.html#overview
    2. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup
    3. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-project-contents
-   4. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-downloading
-   5. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-installing
-   6. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-downloading
-   7. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
-   8. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure
-   9. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure-cygwin-xfree-overview
-  10. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure-cygwin-xfree-options
-  11. file://localhost/home/public/documents/cygx/build/ug/dump.html#using
-  12. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting
-  13. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-bat
-  14. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-sh
-  15. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-startx
-  16. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-switching
-  17. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-stopping
-  18. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-session
-  19. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps
-  20. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps-telnet
-  21. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps-ssh
-  22. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl
-  23. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-preamble
-  24. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-applicability-and-definitions
-  25. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-verbation-copying
-  26. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-copying-in-quantity
-  27. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-modifications
-  28. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-combining-documents
-  29. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-collections-of-documents
-  30. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-aggregation-with-independent-works
-  31. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-translation
-  32. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-termination
-  33. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-future-revisions-of-this-license
-  34. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-using-for-your-documents
-  35. file://localhost/home/public/documents/cygx/build/ug/dump.html#AEN484
-  36. http://cygwin.com/
-  37. http://cygwin.com/
-  38. http://cygwin.com/mirrors.html
-  39. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
-  40. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
-  41. http://www.xfree86.org/current/Xserver.1.html
-  42. http://www.linuxdoc.org/HOWTO/XDMCP-HOWTO/
-  43. http://www.xfree86.org/current/Xserver.1.html#sect6
-  44. http://www.gnu.org/copyleft/
+   4. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
+   5. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure
+   6. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure-cygwin-xfree-overview
+   7. file://localhost/home/public/documents/cygx/build/ug/dump.html#configure-cygwin-xfree-options
+   8. file://localhost/home/public/documents/cygx/build/ug/dump.html#using
+   9. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting
+  10. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-bat
+  11. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-sh
+  12. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-starting-startx
+  13. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-switching
+  14. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-stopping
+  15. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-session
+  16. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps
+  17. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps-telnet
+  18. file://localhost/home/public/documents/cygx/build/ug/dump.html#using-remote-apps-ssh
+  19. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl
+  20. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-preamble
+  21. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-applicability-and-definitions
+  22. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-verbation-copying
+  23. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-copying-in-quantity
+  24. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-modifications
+  25. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-combining-documents
+  26. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-collections-of-documents
+  27. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-aggregation-with-independent-works
+  28. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-translation
+  29. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-termination
+  30. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-future-revisions-of-this-license
+  31. file://localhost/home/public/documents/cygx/build/ug/dump.html#gfdl-using-for-your-documents
+  32. file://localhost/home/public/documents/cygx/build/ug/dump.html#AEN351
+  33. http://cygwin.com/
+  34. http://cygwin.com/
+  35. file://localhost/home/public/documents/cygx/build/ug/dump.html#using
+  36. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
+  37. file://localhost/home/public/documents/cygx/build/ug/dump.html#setup-cygwin-xfree-installing
+  38. http://www.xfree86.org/current/Xserver.1.html
+  39. http://www.linuxdoc.org/HOWTO/XDMCP-HOWTO/
+  40. http://www.xfree86.org/current/Xserver.1.html#sect6
+  41. http://www.gnu.org/copyleft/

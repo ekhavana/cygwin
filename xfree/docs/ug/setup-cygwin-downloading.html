@@ -5,8 +5,7 @@
 >Downloading Cygwin</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.72
-"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.74b"/><LINK
 REL="HOME"
 TITLE="Cygwin/XFree86 User's Guide"
 HREF="cygwin-xfree-ug.html"/><LINK
@@ -17,8 +16,8 @@ REL="PREVIOUS"
 TITLE="Setting Up Cygwin/XFree86"
 HREF="setup.html"/><LINK
 REL="NEXT"
-TITLE="Installing Cygwin"
-HREF="setup-cygwin-installing.html"/></HEAD
+TITLE="Configuring Cygwin/XFree86"
+HREF="configure.html"/></HEAD
 ><BODY
 CLASS="sect1"
 ><DIV
@@ -55,7 +54,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="setup-cygwin-installing.html"
+HREF="configure.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -95,25 +94,6 @@ run under Cygwin; those patches have been merged into the XFree86
 ><P
 >Cygwin has a nice setup program that downloads and installs
 the necessary Cygwin packages for you.</P
-><DIV
-CLASS="tip"
-><BLOCKQUOTE
-CLASS="tip"
-><P
-><B
->Tip: </B
->Be sure to use <TT
-CLASS="filename"
->setup.exe</TT
-> version 2.13
-or greater if you intend to save the downloaded packages to a Samba
-share; some versions of Samba have a problem with prior versions of
-<TT
-CLASS="filename"
->setup.exe</TT
->.</P
-></BLOCKQUOTE
-></DIV
 ><OL
 TYPE="1"
 ><LI
@@ -161,8 +141,7 @@ CLASS="filename"
 >c:\cygwin</TT
 >, as that is the default
 directory for the extraction and installation of the downloaded
-packages.  At the time of writing, a full download of all Cygwin
-packages takes 25 MiB of disk space.</P
+packages.</P
 ></LI
 ><LI
 ><P
@@ -175,35 +154,7 @@ screen:</P
 CLASS="mediaobject"
 ><P
 ><IMG
-SRC="figures/cyd1welcome.png"
-ALT="Cygwin Download - Installation welcome screen"
-></IMG
-></P
-></DIV
-></LI
-><LI
-><P
->Click <SPAN
-CLASS="guibutton"
->Next</SPAN
-> to proceed to the next screen</P
-></LI
-><LI
-><P
->Choose, <SPAN
-CLASS="guilabel"
->Download from Internet</SPAN
->, this will
-save the package files to your download directory so that you can
-install Cygwin on any number of machines:</P
-><DIV
-CLASS="mediaobject"
-><P
-><IMG
-SRC="figures/cyd2installoption.png"
-ALT="Cygwin Download - Download or install packages"
-></IMG
-></P
+SRC="figures/cyi01welcome.png"/></P
 ></DIV
 ></LI
 ><LI
@@ -212,7 +163,68 @@ ALT="Cygwin Download - Download or install packages"
 CLASS="guibutton"
 >Next</SPAN
 > to proceed to the next
-screen</P
+screen.</P
+></LI
+><LI
+><P
+>Choose, <SPAN
+CLASS="guilabel"
+>Install from Internet</SPAN
+>, this will
+still save the package files to your download directory so that you
+can install Cygwin on any number of machines:</P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="figures/cyi02installoption.png"/></P
+></DIV
+></LI
+><LI
+><P
+>Click <SPAN
+CLASS="guibutton"
+>Next</SPAN
+> to proceed to the next
+screen.</P
+></LI
+><LI
+><P
+>The default <SPAN
+CLASS="guilabel"
+>Install Root</SPAN
+> is <TT
+CLASS="filename"
+>c:\cygwin</TT
+>; this should be fine for most
+installations.  Leave <SPAN
+CLASS="guilabel"
+>Default Text File Type</SPAN
+> as
+<SPAN
+CLASS="acronym"
+>UNIX</SPAN
+>.  If you have several users on your NT
+machine, and you are logged in with local administrative privileges,
+you may wish to set <SPAN
+CLASS="guilabel"
+>Install For</SPAN
+> to All, but the
+default of Just Me will work fine for single user machines.</P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="figures/cyi03installto.png"/></P
+></DIV
+></LI
+><LI
+><P
+>Click <SPAN
+CLASS="guibutton"
+>Next</SPAN
+> to proceed to the next
+screen.</P
 ></LI
 ><LI
 ><P
@@ -228,10 +240,7 @@ CLASS="filename"
 CLASS="mediaobject"
 ><P
 ><IMG
-SRC="figures/cyd3directory.png"
-ALT="Cygwin Download - Local package directory"
-></IMG
-></P
+SRC="figures/cyi04directory.png"/></P
 ></DIV
 ></LI
 ><LI
@@ -240,7 +249,7 @@ ALT="Cygwin Download - Local package directory"
 CLASS="guibutton"
 >Next</SPAN
 > to proceed to the next
-screen</P
+screen.</P
 ></LI
 ><LI
 ><P
@@ -253,10 +262,7 @@ Connection</SPAN
 CLASS="mediaobject"
 ><P
 ><IMG
-SRC="figures/cyd4proxy.png"
-ALT="Cygwin Download - Proxy settings"
-></IMG
-></P
+SRC="figures/cyi05proxy.png"/></P
 ></DIV
 ></LI
 ><LI
@@ -265,7 +271,7 @@ ALT="Cygwin Download - Proxy settings"
 CLASS="guibutton"
 >Next</SPAN
 > to proceed to the next
-screen</P
+screen.</P
 ></LI
 ><LI
 ><P
@@ -274,10 +280,7 @@ screen</P
 CLASS="mediaobject"
 ><P
 ><IMG
-SRC="figures/cyd5mirror.png"
-ALT="Cygwin Download - Choose mirror"
-></IMG
-></P
+SRC="figures/cyi06mirror.png"/></P
 ></DIV
 ></LI
 ><LI
@@ -287,36 +290,234 @@ CLASS="guibutton"
 >Next</SPAN
 > to proceed to the next screen;
 setup will download a list of available packages as it moves to the
-next screen</P
+next screen.</P
 ></LI
 ><LI
 ><P
->The default selection of packages should be okay for most users.
-However, you may wish to ensure that the <TT
-CLASS="literal"
->inetutils</TT
+>On the next screen you will select the packages that will be
+downloaded and installed.  A listing of the Cygwin/XFree86 packages is
+given below; a listing of the general Cygwin packages would be
+beyond the scope of this document.</P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-bin</TT
+> (10.6 MiB;
+required, executables for xterm, twm, etc.)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-doc</TT
+> (1.51 MiB;
+required, formatted documentation)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-etc</TT
+> (542 KiB;
+required, configuration files for the X Server and programs in
+XFree86-bin)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-f100</TT
+> (11.6 MiB;
+optional, 100 dpi fonts (75 dpi fonts are used by default))</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-fcyr</TT
+> (360 KiB;
+optional, Cyrillic fonts)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-fenc</TT
+> (330 KiB;
+required, font encodings)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-fnts</TT
+> (15.4 MiB;
+required, 75 dpi fonts)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-fscl</TT
+> (2.16 MiB;
+optional, Speedo and Type1 scalable fonts)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-fsrv</TT
+> (212 KiB;
+optional, X Font Server)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-html</TT
+> (1.17 MiB;
+optional, documentation html format)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-jdoc</TT
+> (104 KiB;
+optional, XFree86 Japanese documentation)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-lib</TT
+> (107 KiB;
+required, <TT
+CLASS="filename"
+>X11R6/lib/</TT
 >
-and
+files)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-man</TT
+> (761 KiB;
+required, <B
+CLASS="command"
+>man</B
+> pages)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-nest</TT
+> (1.11 MiB;
+optional, <B
+CLASS="command"
+>Xnest</B
+> nested X Server)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-prog</TT
+> (761 KiB;
+optional, additional files needed to compile programs for
+Cygwin/XFree86)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-prt</TT
+> (845 KiB;
+optional, X Print (Xprt) server)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-ps</TT
+> (5.65 MiB;
+optional, documentation in Postscript format)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-startup-scripts</TT
+>
+(1.99 KiB; required, example X Server and
+client startup scripts)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-vfb</TT
+> (1.22 MiB;
+optional, X Virtual Frame Buffer (Xvfb) server)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-xserv</TT
+> (1.22 MiB;
+required, the Cygwin/XFree86 X Server)</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>XFree86-xwinclip</TT
+> (6 KiB;
+optional, provides clipboard integration between Windows and Cygwin/XFree86)</P
+></LI
+></UL
+></LI
+><LI
+><P
+>You must select the <TT
+CLASS="literal"
+>XFree86-base</TT
+> package,
+which is located in the <TT
+CLASS="literal"
+>XFree86</TT
+> category.  The
 <TT
 CLASS="literal"
+>XFree86-base</TT
+> package is a helper package that
+automatically selects a working set of packages for you that will
+allow Cygwin/XFree86 to work.  You may also want to ensure that the
+<TT
+CLASS="literal"
+>inetutils</TT
+> and <TT
+CLASS="literal"
 >openssh</TT
-> packages are selected if you wish to use
-<B
+> packages
+are selected if you wish to use <B
 CLASS="command"
 >telnet</B
-> and <B
+> and
+<B
 CLASS="command"
 >ssh</B
-> to connect to
-remote machines.</P
+> to connect to remote machines.</P
 ><DIV
 CLASS="mediaobject"
 ><P
 ><IMG
-SRC="figures/cyd6packages.png"
-ALT="Cygwin Download - Choose packages to download"
-></IMG
-></P
+SRC="figures/cyi07packages.png"/></P
 ></DIV
 ></LI
 ><LI
@@ -330,16 +531,47 @@ you may want to try another mirror if you see a
 CLASS="QUOTE"
 >"Connecting"</SPAN
 > message on this screen for a long period of
-time: </P
+time:</P
 ><DIV
 CLASS="mediaobject"
 ><P
 ><IMG
-SRC="figures/cyd7downloading.png"
-ALT="Cygwin Download - Downloading packages"
-></IMG
-></P
+SRC="figures/cyi08downloading.png"/></P
 ></DIV
+></LI
+><LI
+><P
+>After the packages are downloaded, setup will automatically
+begin go to install them:</P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="figures/cyi09installing.png"/></P
+></DIV
+></LI
+><LI
+><P
+>I highly recommend allowing Cygwin Setup to create Desktop and
+Start Menu icons for you; these icons simply launch a
+<SPAN
+CLASS="application"
+>bash</SPAN
+> shell:</P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="figures/cyi10createicons.png"/></P
+></DIV
+></LI
+><LI
+><P
+>Click <SPAN
+CLASS="guibutton"
+>Next</SPAN
+> to proceed to the next
+screen.</P
 ></LI
 ><LI
 ><P
@@ -350,10 +582,7 @@ Cygwin:</P
 CLASS="mediaobject"
 ><P
 ><IMG
-SRC="figures/cyd8complete.png"
-ALT="Cygwin Download - Installation complete"
-></IMG
-></P
+SRC="figures/cyi11complete.png"/></P
 ></DIV
 ></LI
 ></OL
@@ -392,7 +621,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="setup-cygwin-installing.html"
+HREF="configure.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -416,7 +645,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Installing Cygwin</TD
+>Configuring Cygwin/XFree86</TD
 ></TR
 ></TABLE
 ></DIV

@@ -708,60 +708,87 @@ Compiling Overview
 
    Compiling the XFree86 source code tree is a lot easier when you keep
    your builds in directories separate from the source code directory.
-   Keeping the source code and builds in separate directories allows you
-   to have many builds for different configurations, allows you to easily
-   delete a build, and keeps the source code tree clean and manageable.
+   Keeping the source code and builds in separate directories, using the
+   lndir.exe utility, allows you to have many builds for different
+   configurations, allows you to easily delete a build, and keeps the
+   source code tree clean and manageable.
+     _________________________________________________________________
 
-   A small utility, lndir.exe, is needed to keep your builds directories
-   separate from your source directory; lndir.exe works just like the
-   standard ln on UNIX, but lndir.exe creates links recursively for all
-   files and directories in the specified directory. The lndir.exe
-   utility is included with the XFree86 source code tree; but the catch
-   is that you need to build the tree before you get lndir.exe. lndir.exe
-   has been compiled and is available at
-   [77]http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2 (8 KiB). Download
-   the file, saving it to your Cygwin root directory (e.g. c:\cygwin),
-   then follow the simple instructions below to install the utility:
+Building and Installing lndir
+
+   The lndir utility allows you to keep your build directories separate
+   from your source directory; lndir works just like the standard ln
+   command on UNIX, but lndir creates links recursively for all files and
+   directories in the specified directory. The lndir utility is included
+   with the XFree86 source code tree and you can build lndir seperately
+   before you build the whole source code tree. Follow the simple
+   instructions below to build and install the utility:
     1. Launch a Cygwin bash prompt. You should see a screen similar to
        the following:
 
 Username@CygwinHost ~
 $
 
-    2. Change to your Cygwin root directory:
+    2. Change the current directory to your XFree86 development
+       directory:
 
 Username@CygwinHost ~
-$ cd /
+$ cd x-devel
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel
 $
 
-    3. Uncompress lndir.exe.bz2:
+    3. Change the current directory to config/util/ in the root of the
+       XFree86 source code tree, xc/:
 
-Username@CygwinHost /
-$ bunzip2 lndir.exe.bz2
+Username@CygwinHost ~/x-devel
+$ cd xc/config/util
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel/xc/config/util
 $
 
-    4. Copy lndir.exe to /bin:
+    4. Make a backup of the Makefile.ini file:
 
-Username@CygwinHost /
-$ cp lndir.exe /bin
+Username@CygwinHost ~/x-devel/xc/config/util
+$ cp Makefile.ini Makefile.bak
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel/xc/config/util
 $
 
-    5. Verify that lndir is working:
+    5. Change the CC variable in Makefile.ini from cc to gcc:
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel/xc/config/util
+$ sed "s/CC = cc/CC = gcc/" Makefile.bak > Makefile.ini
+
+Username@CygwinHost ~/x-devel/xc/config/util
+$
+
+    6. Build lndir:
+
+Username@CygwinHost ~/x-devel/xc/config/util
+$ make -f Makefile.ini lndir
+
+Username@CygwinHost ~/x-devel/xc/config/util
+$
+
+    7. Move lndir.exe to /bin:
+
+Username@CygwinHost ~/x-devel/xc/config/util
+$ mv lndir.exe /bin
+
+Username@CygwinHost ~/x-devel/xc/config/util
+$
+
+    8. Verify that lndir is working:
+
+Username@CygwinHost ~/x-devel/xc/config/util
 $ lndir
-usage: lndir.exe [-silent] [-ignorelinks] fromdir [todir]
+usage: lndir [-silent] [-ignorelinks] fromdir [todir]
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel/xc/config/util
 $
 
-    6. The lndir utility is now installed.
+    9. The lndir utility is now installed.
      _________________________________________________________________
 
 Standard Build
@@ -818,11 +845,20 @@ $
      4 KiB allocation units.
 
 Username@CygwinHost ~/x-devel/build/std
-$ lndir ../../xc/
+$ lndir ../../xc
 ../../xc/config:
 ../../../xc/config/cf:
 
 ...
+
+Username@CygwinHost ~/x-devel/build/std
+$
+
+       Alternatively, you can redirect the output of lndir to /dev/null,
+       which greatly speeds up the process of creating symlinks:
+
+Username@CygwinHost ~/x-devel/build/std
+$ lndir ../../xc > /dev/null
 
 Username@CygwinHost ~/x-devel/build/std
 $
@@ -892,8 +928,8 @@ $ cd debug
 Username@CygwinHost ~/x-devel/build/debug
 $
 
-    6. Create links to your source tree, using lndir, in your standard
-       build directory:
+    6. Create links to your source tree, using lndir, in your debug build
+       directory:
 
      Note: As of 2001-09-19, creating symlinks to the source tree
      creates 11,678 files in 1,524 folders, which is only 2.31 MiB of
@@ -901,11 +937,20 @@ $
      4 KiB allocation units.
 
 Username@CygwinHost ~/x-devel/build/debug
-$ lndir ../../xc/
+$ lndir ../../xc
 ../../xc/config:
 ../../../xc/config/cf:
 
 ...
+
+Username@CygwinHost ~/x-devel/build/debug
+$
+
+       Alternatively, you can redirect the output of lndir to /dev/null,
+       which greatly speeds up the process of creating symlinks:
+
+Username@CygwinHost ~/x-devel/build/debug
+$ lndir ../../xc > /dev/null
 
 Username@CygwinHost ~/x-devel/build/debug
 $
@@ -1012,7 +1057,7 @@ $
 
 Keeping your source code tree updated
 
-   [78]CVS makes keeping your source code tree up to date easy. You may
+   [77]CVS makes keeping your source code tree up to date easy. You may
    update your entire source code tree at once, or you can update
    individual directories or files, if you so choose.
      _________________________________________________________________
@@ -1131,7 +1176,7 @@ Cross Compiling
    There are a whole new class of problems that can happen when cross
    compiling that are simply not an issue when building on Cygwin. You
    should be familiar with building Cygwin/XFree86 on Cygwin, as
-   described in [79]the Section called Native Compiling, before
+   described in [78]the Section called Native Compiling, before
    attempting to cross compile Cygwin/XFree86.
      _________________________________________________________________
 
@@ -1140,12 +1185,12 @@ Obtaining binutils and gcc Source
    binutils and gcc source code releases that are known to compile on
    Cygwin and distributed by the Cygwin project. Therefore, it is highly
    recommended that you obtain the binutils and gcc sources from the
-   [80]Cygwin mirror network.
+   [79]Cygwin mirror network.
 
    Follow these steps to download Cygwin/XFree86 binaries:
     1. Create a directory to store the binutils and gcc sources in, such
        as /cygwin/src/
-    2. Visit the [81]Cygwin mirrors page to find your closest mirror
+    2. Visit the [80]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
     4. Change current ftp directory to cygwin/release/.
@@ -1361,96 +1406,82 @@ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
 Building Cygwin/XFree86
 
    Building the source code when cross compiling XFree86 is nearly
-   identical to the process described below in [82]the Section called
+   identical to the process described below in [81]the Section called
    Native Compiling of the Native Compiling section. One divergence from
    the aforementioned instructions is that you will be using a bash shell
    on your cross compiling host, rather than on your native Cygwin host;
    other divergences follow.
-    1. Download [83]host.def, and place the file in xc/config/cf.
-    2. lndir should generally already be installed if your build host
-       already has the X Window System installed. In any case, you
-       certainly won't want to install the build of lndir mentioned in
-       [84]the Section called Native Compiling as that executable is for
-       Cygwin only.
-    3. Always remember to set your PATH environment variable to include
-       the Cygwin binutils and gcc binary directories:
-
-[harold@CrossHost std]$ PATH=$PATH:/cygwin/bin:/cygwin/i686-pc-cygwin/bin
-
-[harold@CrossHost std]$
-
-    4. When building the entire tree, you must pass IMAKE_DEFINES and
-       BOOTSTRAPCFLAGS to make to cause the build system to build for the
-       target, Cygwin, platform:
+    1. lndir should generally already be installed if your build host
+       already has the X Window System installed. If you do not have
+       lndir, you can build it for your build host by following the
+       instructions in [82]the Section called Building and Installing
+       lndir.
+    2. When building the entire tree, you must pass CROSSCOMPILEDIR to
+       make to cause the build system to build for the target, Cygwin,
+       platform:
 
 [harold@CrossHost std]$ make World
-BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1"
-IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+CROSSCOMPILEDIR="/cygwin/bin" > World.log 2>&1
 
 [harold@CrossHost std]$
 
-    5. When rebuilding individual elements of the tree after doing a
-       build of the entire tree, you must pass IMAKE_DEFINES to make to
-       cause the build system to build for the target, Cygwin, platform:
+    3. When rebuilding individual directories of the tree after doing a
+       build of the entire tree, you can simply issue the make command:
 
-[harold@CrossHost Xserver]$ make World
-IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+[harold@CrossHost Xserver]$ make XWin.exe > XWin.log 2>&1
 
 [harold@CrossHost Xserver]$
 
-    6. When building a debug version of the entire tree, use makeg, which
-       should generally already be installed, and pass IMAKE_DEFINES and
-       BOOTSTRAPCFLAGS to makeg to cause the build system to build for
-       the target, Cygwin, platform:
+    4. When building a debug version of the entire tree, use makeg, which
+       should generally already be installed, and pass CROSSCOMPILEDIR to
+       makeg to cause the build system to build for the target, Cygwin,
+       platform:
 
 [harold@CrossHost debug]$ makeg World
-BOOTSTRAPCFLAGS="-D__CYGWIN__ -Ulinux -DCrossCompiling=1"
-IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+CROSSCOMPILEDIR="/cygwin/bin" > World.log 2>&1
 
 [harold@CrossHost debug]$
 
-    7. When rebuilding debug versions of individual elements of the tree
-       after doing a debug build of the entire tree, you must pass
-       IMAKE_DEFINES to makeg to cause the build system to build for the
-       target, Cygwin, platform:
+    5. When rebuilding individual directories of the tree after doing a
+       build of the entire tree, you can simply issue the makeg command:
 
-[harold@CrossHost Xserver]$ makeg World
-IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > World.log 2>&1
+[harold@CrossHost Xserver]$ makeg XWin.exe
+CROSSCOMPILEDIR="/cygwin/bin" > XWin.log 2>&1
 
 [harold@CrossHost Xserver]$
 
-    8. When installing a standard build of the entire tree, you must pass
-       DESTDIR and IMAKE_DEFINES to make to install the target platform
+    6. When installing a standard build of the entire tree, you must pass
+       DESTDIR and CROSSCOMPILEDIR to make to install the target platform
        build into /stagingdir and to cause the build system to build a
        few remaining programs for the target, Cygwin, platform:
 
      Tip: Never run make install install.man on your host platform
      without the DESTDIR parameter, as that will cause the Cygwin build
      of XFree86 to be installed over top of your local X Window System
-     installation, which would completely destroy your host systems' X
+     installation, which would completely destroy your host system's X
      Window System installation.
 
 [harold@CrossHost std]$ make install install.man
 DESTDIR=/stagingdir
-IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
+CROSSCOMPILEDIR="/cygwin/bin" > install.log 2>&1
 
 [harold@CrossHost std]$
 
-    9. When installing a debug build of the entire tree, you must pass
-       DESTDIR and IMAKE_DEFINES to makeg to install the target platform
-       build into /stagingdir and to cause the build system to build
-       debug versions of a few remaining programs for the target, Cygwin,
-       platform:
+    7. When installing a debug build of the entire tree, you must pass
+       DESTDIR and CROSSCOMPILEDIR to makeg to install the target
+       platform build into /stagingdir and to cause the build system to
+       build debug versions of a few remaining programs for the target,
+       Cygwin, platform:
 
      Tip: Never run makeg install install.man on your host platform
      without the DESTDIR parameter, as that will cause the Cygwin debug
      build of XFree86 to be installed over top of your local X Window
      System installation, which would completely destroy your host
-     systems' X Window System installation.
+     system's X Window System installation.
 
 [harold@CrossHost debug]$ makeg install install.man
 DESTDIR=/stagingdir
-IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
+CROSSCOMPILEDIR="/cygwin/bin" > install.log 2>&1
 
 [harold@CrossHost debug]$
      _________________________________________________________________
@@ -1458,7 +1489,7 @@ IMAKE_DEFINES="-D__CYGWIN__ -Ulinux" > install.log 2>&1
 Packaging a Cygwin/XFree86 Distribution
 
    Cygwin/XFree86 uses the standard XFree86 distribution build scripts.
-   You will need to start by downloading the XFree86 util [85]CVS module.
+   You will need to start by downloading the XFree86 util [83]CVS module.
    The following instructions are paraphrased from bindist-notes in the
    XFree86 devel CVS module, with adaptations to make them Cygwin/XFree86
    specific.
@@ -1466,7 +1497,7 @@ Packaging a Cygwin/XFree86 Distribution
        xc/config/cf/host.def.
     2. Build and install the extract tool from the utils module.
     3. Run a full build of the XFree86 CVS tree, following the
-       instructions in [86]the Section called Native Compiling.
+       instructions in [84]the Section called Native Compiling.
     4. Install the full build of XFree86 to a staging directory:
 
 Username@CygwinHost ~/x-devel/build/std
@@ -1560,7 +1591,7 @@ Chapter 3. Documentation
 Overview
 
    Cygwin/XFree86 documentation is written in XML according to the
-   [87]DocBook document type definition (DTD). These XML input files are
+   [85]DocBook document type definition (DTD). These XML input files are
    then compiled using an autoconf and automake build system. We
    currently build the following output formats: HTML, PDF, PS, RTF, and
    TXT.
@@ -1571,13 +1602,13 @@ Obtaining the Source Code
    Cygwin/XFree86 documentation source code is distributed in a tarred
    and gzipped archive, seperately from the Cygwin/XFree86 X Server
    source code. The documentation source code is not, as of 2002-01-06,
-   distributed as part of any [88]CVS tree. Updates to the documentation
+   distributed as part of any [86]CVS tree. Updates to the documentation
    source code are periodically released via the sources.redhat.com
    mirror network.
 
    Follow these steps to checkout the Cygwin/XFree86 documentation source
    code:
-    1. Find your closest sources.redhat.com mirror from the [89]mirror
+    1. Find your closest sources.redhat.com mirror from the [87]mirror
        list.
     2. Change to the xfree/devel/documentation/ directory.
     3. Download the latest version of the documentation source code
@@ -1598,7 +1629,7 @@ cygwin-xfree-doc-0.9.6  cygwin-xfree-doc-0.9.6.tar.gz
 
 Setting Up a DocBook Build Environment
 
-   Setup a DocBook build environment on Cygwin by consulting the [90]SGML
+   Setup a DocBook build environment on Cygwin by consulting the [88]SGML
    for Windows NT: Setting up a free SGML editing and publishing system
    on Windows NT/Cygwin document.
      _________________________________________________________________
@@ -1752,7 +1783,7 @@ B
 
    Bitmap (X)
           X pixel map with bit depth equal to one. X pixel maps of bit
-          depth not equal to one are called [91]pixmaps.
+          depth not equal to one are called [89]pixmaps.
 
 C
 
@@ -1775,7 +1806,7 @@ C
    Concurrent Versions System (CVS)
           CVS is an open source version control system used by the
           majority of open source projects. More information can be found
-          at the [92]CVS project homepage.
+          at the [90]CVS project homepage.
 
 D
 
@@ -1814,10 +1845,10 @@ M
 O
 
    Offscreen Framebuffer
-          Essentially a [93]bitmap, in the Windows sense, of size and
+          Essentially a [91]bitmap, in the Windows sense, of size and
           color format that can be displayed on the screen. An offscreen
           framebuffer may be identical in size and color format to the
-          [94]primary framebuffer, but this is not always required.
+          [92]primary framebuffer, but this is not always required.
 
    OS Layer (OS)
           X Server layer that depends on the operating system; but not
@@ -1827,18 +1858,18 @@ P
 
    Pixmap
           X pixel map with bit depth not equal to one. X pixel maps of
-          bit depth one are called [95]bitmaps.
+          bit depth one are called [93]bitmaps.
 
    Primary Framebuffer
-          The block of memory, essentially a [96]bitmap, that describes
+          The block of memory, essentially a [94]bitmap, that describes
           what is currently being displayed on the screen. Any updates to
           the primary framebuffer will be displayed on the screen after
           the next screen refresh.
 
    Privates
           Additional information associated with internal X Server
-          structures, such as [97]colormaps, [98]GCs, [99]pixmaps, or
-          [100]screens.
+          structures, such as [95]colormaps, [96]GCs, [97]pixmaps, or
+          [98]screens.
 
    pserver
           CVS pserver, short for "password server", is one of the user
@@ -1857,8 +1888,8 @@ S
           Cygwin/XFree86 X Server may have several screens.
 
    Shadow
-          X Server shadow layer that allows [101]FB to draw to an
-          offscreen framebuffer and occasionally call a [102]DDX function
+          X Server shadow layer that allows [99]FB to draw to an
+          offscreen framebuffer and occasionally call a [100]DDX function
           that transfers the updated regions to the screen.
 
 X
@@ -1877,7 +1908,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [103]X Display Manager.
+          See Also: [101]X Display Manager.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -2204,7 +2235,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [104]http://www.gnu.org/copyleft/.
+   [102]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -2319,31 +2350,29 @@ References
   74. http://xfree86.org/cvs/
   75. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
   76. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pserver
-  77. http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2
-  78. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  79. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  77. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  78. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  79. http://cygwin.com/mirrors.html
   80. http://cygwin.com/mirrors.html
-  81. http://cygwin.com/mirrors.html
-  82. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  83. http://www.msu.edu/~huntharo/xwin/host.def
+  81. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
+  82. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-compiling-lndir
+  83. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
   84. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  85. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  86. file://localhost/home/public/documents/cygx/build/cg/dump.html#prog-build-native
-  87. http://docbook.org/
-  88. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
-  89. http://cygwin.com/mirrors.html
-  90. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
-  91. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
-  92. http://www.cvshome.org/
-  93. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
-  94. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
-  95. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-x
-  96. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
-  97. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-colormap
-  98. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-gc
-  99. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
- 100. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-screen
- 101. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
- 102. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-ddx-layer
- 103. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
- 104. http://www.gnu.org/copyleft/
+  85. http://docbook.org/
+  86. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-cvs
+  87. http://cygwin.com/mirrors.html
+  88. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+  89. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  90. http://www.cvshome.org/
+  91. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
+  92. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-primary-framebuffer
+  93. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-x
+  94. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-bitmap-win32
+  95. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-colormap
+  96. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-gc
+  97. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-pixmap
+  98. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-screen
+  99. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-fb-layer
+ 100. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-ddx-layer
+ 101. file://localhost/home/public/documents/cygx/build/cg/dump.html#gloss-xdm
+ 102. http://www.gnu.org/copyleft/

@@ -5,8 +5,7 @@
 >Native Compiling</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.72
-"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.74b"/><LINK
 REL="HOME"
 TITLE="Cygwin/XFree86 Contributor's Guide"
 HREF="cygwin-xfree-cg.html"/><LINK
@@ -97,55 +96,58 @@ NAME="prog-compiling-overview"
 ><P
 >Compiling the XFree86 source code tree is a lot easier when you
 keep your builds in directories separate from the source code
-directory.  Keeping the source code and builds in separate directories
+directory.  Keeping the source code and builds in separate
+directories, using the <TT
+CLASS="filename"
+>lndir.exe</TT
+> utility,
 allows you to have many builds for different configurations, allows
 you to easily delete a build, and keeps the source code tree clean and
 manageable.</P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="prog-compiling-lndir"
+>Building and Installing <B
+CLASS="command"
+>lndir</B
+></A
+></H3
 ><P
->A small utility, <TT
-CLASS="filename"
->lndir.exe</TT
->, is needed to
-keep your builds directories separate from your source directory;
-<TT
-CLASS="filename"
->lndir.exe</TT
+>The <B
+CLASS="command"
+>lndir</B
+> utility allows you to keep your
+build directories separate from your source directory;
+<B
+CLASS="command"
+>lndir</B
 > works just like the standard
 <B
 CLASS="command"
 >ln</B
-> on <SPAN
+> command on <SPAN
 CLASS="acronym"
 >UNIX</SPAN
->, but <TT
-CLASS="filename"
->lndir.exe</TT
+>, but <B
+CLASS="command"
+>lndir</B
 >
 creates links recursively for all files and directories in the
-specified directory.  The <TT
-CLASS="filename"
->lndir.exe</TT
-> utility is
-included with the XFree86 source code tree; but the catch is that you
-need to build the tree before you get
-<TT
-CLASS="filename"
->lndir.exe</TT
->.  <TT
-CLASS="filename"
->lndir.exe</TT
->
-has been compiled and is available at <A
-HREF="http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2"
-TARGET="_top"
->http://www.msu.edu/~huntharo/xwin/lndir.exe.bz2</A
->
-(8 KiB).  Download the file, saving it to your Cygwin
-root directory (e.g. <TT
-CLASS="filename"
->c:\cygwin</TT
->), then follow the simple
-instructions below to install the utility:</P
+specified directory.  The <B
+CLASS="command"
+>lndir</B
+> utility is included
+with the XFree86 source code tree and you can build
+<B
+CLASS="command"
+>lndir</B
+> seperately before you build the
+whole source code tree.  Follow the simple instructions below to build
+and install the utility:</P
 ><OL
 TYPE="1"
 ><LI
@@ -172,7 +174,8 @@ $
 ></LI
 ><LI
 ><P
->Change to your Cygwin root directory:</P
+>Change the current directory to your XFree86 development
+directory:</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -182,9 +185,9 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~
-$ cd /
+$ cd x-devel
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel
 $ 
 </PRE
 ></TD
@@ -193,7 +196,14 @@ $
 ></LI
 ><LI
 ><P
->Uncompress lndir.exe.bz2:</P
+>Change the current directory to <TT
+CLASS="filename"
+>config/util/</TT
+> in the root of the XFree86
+source code tree, <TT
+CLASS="filename"
+>xc/</TT
+>:</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -202,10 +212,10 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;Username@CygwinHost /
-$ bunzip2 lndir.exe.bz2
+>&#13;Username@CygwinHost ~/x-devel
+$ cd xc/config/util
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel/xc/config/util
 $ 
 </PRE
 ></TD
@@ -214,7 +224,96 @@ $
 ></LI
 ><LI
 ><P
->Copy lndir.exe to <TT
+>Make a backup of the <TT
+CLASS="filename"
+>Makefile.ini</TT
+>
+file:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost ~/x-devel/xc/config/util
+$ cp Makefile.ini Makefile.bak
+
+Username@CygwinHost ~/x-devel/xc/config/util
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Change the <TT
+CLASS="parameter"
+><I
+>CC</I
+></TT
+> variable in
+<TT
+CLASS="filename"
+>Makefile.ini</TT
+> from <B
+CLASS="command"
+>cc</B
+> to
+<B
+CLASS="command"
+>gcc</B
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost ~/x-devel/xc/config/util
+$ sed "s/CC = cc/CC = gcc/" Makefile.bak &gt; Makefile.ini
+
+Username@CygwinHost ~/x-devel/xc/config/util
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Build <B
+CLASS="command"
+>lndir</B
+>:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost ~/x-devel/xc/config/util
+$ make -f Makefile.ini lndir
+
+Username@CygwinHost ~/x-devel/xc/config/util
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Move <TT
+CLASS="filename"
+>lndir.exe</TT
+> to <TT
 CLASS="filename"
 >/bin</TT
 >:</P
@@ -226,10 +325,10 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;Username@CygwinHost /
-$ cp lndir.exe /bin
+>&#13;Username@CygwinHost ~/x-devel/xc/config/util
+$ mv lndir.exe /bin
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel/xc/config/util
 $ 
 </PRE
 ></TD
@@ -250,11 +349,11 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;Username@CygwinHost /
+>&#13;Username@CygwinHost ~/x-devel/xc/config/util
 $ lndir
-usage: lndir.exe [-silent] [-ignorelinks] fromdir [todir]
+usage: lndir [-silent] [-ignorelinks] fromdir [todir]
 
-Username@CygwinHost /
+Username@CygwinHost ~/x-devel/xc/config/util
 $ 
 </PRE
 ></TD
@@ -426,11 +525,38 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~/x-devel/build/std
-$ lndir ../../xc/
+$ lndir ../../xc
 ../../xc/config:
 ../../../xc/config/cf:
 
 ...
+
+Username@CygwinHost ~/x-devel/build/std
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>Alternatively, you can redirect the output of <B
+CLASS="command"
+>lndir</B
+>
+to <TT
+CLASS="filename"
+>/dev/null</TT
+>, which greatly speeds up the process
+of creating symlinks:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost ~/x-devel/build/std
+$ lndir ../../xc &gt; /dev/null
 
 Username@CygwinHost ~/x-devel/build/std
 $ 
@@ -622,7 +748,7 @@ $
 <B
 CLASS="command"
 >lndir</B
->, in your standard build directory:</P
+>, in your debug build directory:</P
 ><DIV
 CLASS="note"
 ><BLOCKQUOTE
@@ -645,11 +771,38 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~/x-devel/build/debug
-$ lndir ../../xc/
+$ lndir ../../xc
 ../../xc/config:
 ../../../xc/config/cf:
 
 ...
+
+Username@CygwinHost ~/x-devel/build/debug
+$ 
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>Alternatively, you can redirect the output of <B
+CLASS="command"
+>lndir</B
+>
+to <TT
+CLASS="filename"
+>/dev/null</TT
+>, which greatly speeds up the process
+of creating symlinks:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost ~/x-devel/build/debug
+$ lndir ../../xc &gt; /dev/null
 
 Username@CygwinHost ~/x-devel/build/debug
 $ 
