@@ -1,3 +1,74 @@
+<h4>Release 4.3.0-22</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-11-09 1622 EST</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.3.0-22</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20031109-1622.tar.bz2">xwin-20031109-1622.tar.bz2</a>
+(130 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-20
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-20-to-4.3.0-22.diff">xwin-4.3.0-20-to-4.3.0-22.diff</a>
+(17 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>win.h, winkeybd.c, winmultiwindowwndproc.c, winwndproc.c - Remove
+winStoreModeKeyStates () function and stop storing mode key state
+within the hw/xwin layer.  Instead, query the internal X Server mode
+key state, when we know that no key press/release events are pending,
+and send key press/release events to get that state in sync with the
+Windows mode key states.  This removes the possibility that the
+hw/xwin and internal X Server mode key state vectors would get out of
+sync.  This is also a general cleanup that utilizes more existing code
+and removes some Cygwin-specific code.  (Takuma Murakami)</li>
+
+<li>winwndproc.c - Catch WM_ENDSESSION message and perform clean
+shutdown.  (Takuma Murakami)</li>
+
+<li>winwndproc.c - WM_*KEYDOWN - Discard key presses generated from
+Windows auto-repeat (these sorts of auto-repeats are handled by X).
+(Takuma Murakami)</li>
+
+<li>winmouse.c - Remap mouse buttons here when XFree86Server and
+XINPUT are defined, since this combination of flags prevents a lower
+layer from performing such remapping.  The end result is that
+remapping mouse buttons works for the first time.  (Takuma
+Murakami)</li>
+
+<li>winconfig.c - Load the US keyboard layout for Japanese keyboards.
+This ensures that WM_KEYUP messages are sent for the Caps Lock
+key.  (Takuma Murakami, Kensuke Matsuzaki)</li>
+
+<li>win.h, winengine.c, winmultiwindowwindow.c, winmultiwindowwm.c,
+winpfbdd.c, winshaddd.c, winshadddnl.c, winshadgdi.c, winwindow.h -
+Add an engine-specific function that is called after a Windows-window
+is created in -multiwindow mode.  This is a start for adding
+DirectDraw support to -multiwindow mode.  However, I got a little
+confused here and thought that one primary surface would need to be
+created per window, which is not correct.  There will be one primary
+surface with a clip list that causes blits to stay within the region
+of all of our visible windows.  In any case, this is a step in the
+right direction.  There code is currently disabled since the engine
+setting code only allows the GDI engine when -multiwindow is being
+used.  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+
 <h4>Release 4.3.0-21</h4>
 <table>
 <tbody>
