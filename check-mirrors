@@ -70,7 +70,6 @@ use IO::Socket;
 $days = 86400;
 $now = time;
 $master = <M>;
-$master = "/envy/dj/cygnus/sourceware/ftp";
 $master =~ s/[\r\n]+$//;
 $best_mtime = 0;
 $best_file = undef;
@@ -80,7 +79,7 @@ while (<F>) {
     next if m@private/@;
     next if /md5.sum/;
     $mtime = $now - (stat("$master/$_"))[9];
-    #next if $mtime < 7*$days;
+    next if $mtime < 7*$days;
     if (! $best_file || $best_mtime > $mtime) {
 	$best_file = $_;
 	$best_mtime = $mtime;
