@@ -94,13 +94,19 @@ $ok_count = $bad_count = 0;
 
 while (<M>) {
     next if /^#/;
+    $ok = 0;
     ($url, $area, $region) = split(/[;\r\n]+/);
     next unless $area;
+    if ($url =~ /^\+/) {
+	$ok = 1;
+	$url =~ s/^\+//;
+    }
     $url =~ s@/+$@@;
     ($proto, $site, $dir) = $url =~ m@([a-z]+)://([^/]+)(.*)@;
     $dir = "/" unless $dir;
-    $ok = 0;
-    $ok = &verify_with_timeout($proto, $site, "$dir/$best_file");
+    if (!$ok) {
+	$ok = &verify_with_timeout($proto, $site, "$dir/$best_file");
+    }
     print "ok=$ok after verify\n";
     if ($ok == 2) {
 	$ok = $oldstate{$site} + 0;
