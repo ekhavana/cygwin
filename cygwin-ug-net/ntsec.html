@@ -4,7 +4,7 @@
 >NT security and the ntsec usage</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.52"><LINK
 REL="HOME"
 TITLE="Cygwin User's Guide"
 HREF="cygwin-ug-net.html"><LINK
@@ -18,6 +18,7 @@ REL="NEXT"
 TITLE="Customizing bash"
 HREF="setup-files.html"></HEAD
 ><BODY
+CLASS="SECT1"
 ><DIV
 CLASS="NAVHEADER"
 ><TABLE
@@ -86,6 +87,9 @@ release 1.1</P
 ><P
 >Chapter five illustrates the permission mapping leak of Windows NT.</P
 ><P
+>Chapter six describes the new support of a setuid concept introduced
+with release 1.1.3.</P
+><P
 >Chapter six describes in short the new acl API since release 1.1</P
 ><P
 >The setting of UNIX like object permissions is controlled by the new
@@ -95,8 +99,7 @@ CLASS="ENVAR"
 > variable setting <TT
 CLASS="LITERAL"
 >(no)ntsec</TT
->.
-On NT ntsec is now turned on by default.</P
+>.</P
 ><DIV
 CLASS="SECT2"
 ><H2
@@ -998,6 +1001,241 @@ CLASS="COMMAND"
 ><P
 >Online man pages for the aforementioned commands and API calls
 can be found on eg. http://docs.sun.com</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="NTSEC-SETUID"
+>New setuid concept</A
+></H2
+><P
+>UNIX applications which have to switch the user context are using
+the <B
+CLASS="COMMAND"
+>setuid</B
+> and <B
+CLASS="COMMAND"
+>seteuid</B
+> calls which
+are not part of the Windows API.
+Nevertheless these calls are supported under Windows NT/W2K since Cygwin
+release 1.1.3.  Because of the nature of NT security an application which
+needs the ability has to be patched, though.</P
+><P
+>NT uses so called `access tokens' to identify a user and it's
+permissions. To switch the user context the application has to request
+such an `access token'. This is typically done by calling the NT API
+function <B
+CLASS="COMMAND"
+>LogonUser</B
+>. The access token is returned and
+either used in <B
+CLASS="COMMAND"
+>ImpersonateLoggedOnUser</B
+> to change user
+context of the current process or in <B
+CLASS="COMMAND"
+>CreateProcessAsUser</B
+>
+to change user context of a spawned child process. An important restriction
+is that the application using <B
+CLASS="COMMAND"
+>LogonUser</B
+> must have special
+permissions:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>"Act as part of the operating system"
+"Replace process level token"
+"Increase quotas"</PRE
+></TD
+></TR
+></TABLE
+><P
+>Note that administrators do not have all that user rights set by default.</P
+><P
+>Two new Cygwin calls are introduced to support porting
+<B
+CLASS="COMMAND"
+>setuid</B
+> applications with a minimum of effort. You only
+have to care to give Cygwin the right access token and then you can call
+<B
+CLASS="COMMAND"
+>seteuid</B
+> or <B
+CLASS="COMMAND"
+>setuid</B
+> as usual in POSIX
+applications. The call to <B
+CLASS="COMMAND"
+>sexec</B
+> is not needed
+anymore. Porting a <B
+CLASS="COMMAND"
+>setuid</B
+> application is illustrated by
+a short example:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>&#13;/* First include all needed cygwin stuff. */
+#ifdef __CYGWIN__
+#include &#60;windows.h&#62;
+#include &#60;sys/cygwin.h&#62;
+/* Use the following define to determine the Windows version */
+#define is_winnt        (GetVersion() &#60; 0x80000000)
+#endif
+
+[...]
+
+  struct passwd *user_pwd_entry = getpwnam (username);
+  char *cleartext_password = getpass ("Password:");
+
+[...]
+
+#ifdef __CYGWIN__
+  /* Patch the typical password test. */
+  if (is_winnt)
+    {
+      HANDLE token;
+
+      /* Try to get the access token from NT. */
+      token = cygwin_logon_user (user_pwd_entry, cleartext_password);
+      if (token == INVALID_HANDLE_VALUE)
+         error_exit;
+      /* Inform Cygwin about the new impersonation token.
+         Cygwin is able now, to switch to that user context by
+         setuid or seteuid calls. */
+      cygwin_set_impersonation_token (token);
+    }
+  else
+#endif /* CYGWIN */
+    /* Use standard method for W9X as well. */
+    hashed_password = crypt (cleartext_password, salt);
+    if (!user_pwd_entry ||
+        strcmp (hashed_password, user_pwd_entry-&#62;pw_password))
+      error_exit;
+
+[...]
+
+  /* Everything else remains the same! */
+
+  setegid (user_pwd_entry-&#62;pw_gid);
+  seteuid (user_pwd_entry-&#62;pw_uid);
+  execl ("/bin/sh", ...);&#13;</PRE
+></TD
+></TR
+></TABLE
+><P
+>The new Cygwin call to retrive an access token is defined as follows:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>#include &#60;windows.h&#62;
+#include &#60;sys/cygwin.h&#62;
+
+HANDLE
+cygwin_logon_user (struct passwd *pw, const char *cleartext_password)</PRE
+></TD
+></TR
+></TABLE
+><P
+>You can call that function as often as you want for different user
+logons and remeber the access tokens for further calls to the second function.</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>#include &#60;windows.h&#62;
+#include &#60;sys/cygwin.h&#62;
+
+void
+cygwin_set_impersonation_token (HANDLE hToken);</PRE
+></TD
+></TR
+></TABLE
+><P
+> is the call to inform Cygwin about the user context to which further
+calls to <B
+CLASS="COMMAND"
+>setuid</B
+>/<B
+CLASS="COMMAND"
+>seteuid</B
+> should switch to.
+While you need always the correct access token to do a
+<B
+CLASS="COMMAND"
+>setuid</B
+>/<B
+CLASS="COMMAND"
+>seteuid</B
+> to another users context,
+you are always able to use <B
+CLASS="COMMAND"
+>setuid</B
+>/<B
+CLASS="COMMAND"
+>seteuid</B
+>
+to return to your own user context by giving your own uid as parameter.</P
+><P
+>If you have remembered several access tokens from calls to
+<B
+CLASS="COMMAND"
+>cygwin_logon_user</B
+> you can switch to different user
+contexts by observing the following order:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>&#13;  cygwin_set_impersonation_token (user1_token);
+  seteuid (user1_uid);
+
+[...]
+
+  seteuid (own_uid);
+  cygwin_set_impersonation_token (user2_token);
+  seteuid (user2_uid);
+
+[...]
+
+  seteuid (own_uid);
+  cygwin_set_impersonation_token (user1_token);
+  seteuid (user1_uid);
+
+etc.&#13;</PRE
+></TD
+></TR
+></TABLE
 ></DIV
 ></DIV
 ><DIV
