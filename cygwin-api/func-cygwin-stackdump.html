@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->cygwin_posix_to_win32_path_list</TITLE
+>cygwin_stackdump</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
@@ -14,11 +14,11 @@ REL="UP"
 TITLE="Cygwin Functions"
 HREF="cygwin-functions.html"><LINK
 REL="PREVIOUS"
-TITLE="cygwin_posix_path_list_p"
-HREF="func-cygwin-posix-path-list-p.html"><LINK
+TITLE="cygwin_split_path"
+HREF="func-cygwin-split-path.html"><LINK
 REL="NEXT"
-TITLE="cygwin_posix_to_win32_path_list_buf_size"
-HREF="func-cygwin-posix-to-win32-path-list-buf-size.html"></HEAD
+TITLE="cygwin_win32_to_posix_path_list"
+HREF="func-cygwin-win32-to-posix-path-list.html"></HEAD
 ><BODY
 CLASS="SECT1"
 BGCOLOR="#FFFFFF"
@@ -46,7 +46,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="func-cygwin-posix-path-list-p.html"
+HREF="func-cygwin-split-path.html"
 ACCESSKEY="P"
 >&#60;&#60;&#60; Previous</A
 ></TD
@@ -60,7 +60,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="func-cygwin-posix-to-win32-path-list-buf-size.html"
+HREF="func-cygwin-win32-to-posix-path-list.html"
 ACCESSKEY="N"
 >Next &#62;&#62;&#62;</A
 ></TD
@@ -74,77 +74,24 @@ CLASS="SECT1"
 ><H1
 CLASS="SECT1"
 ><A
-NAME="FUNC-CYGWIN-POSIX-TO-WIN32-PATH-LIST">cygwin_posix_to_win32_path_list</H1
+NAME="FUNC-CYGWIN-STACKDUMP">cygwin_stackdump</H1
 ><DIV
 CLASS="FUNCSYNOPSIS"
 ><A
-NAME="AEN250"><P
+NAME="AEN292"><P
 ></P
 ><CODE
 CLASS="FUNCDEF"
 >extern "C" void
 <TT
 CLASS="FUNCTION"
->cygwin_posix_to_win32_path_list</TT
+>cygwin_stackdump</TT
 ></CODE
->(const char *<TT
-CLASS="PARAMETER"
-><I
->posix</I
-></TT
->, char *<TT
-CLASS="PARAMETER"
-><I
->win32</I
-></TT
->);<P
+>(void);<P
 ></P
 ></DIV
 ><P
->Given a POSIX path-style string (i.e. /foo:/bar) convert it to
-the equivalent Win32 path-style string (i.e. d:\;e:\bar).
-<TT
-CLASS="PARAMETER"
-><I
->win32</I
-></TT
-> must point to a sufficiently large
-buffer.</P
-><DIV
-CLASS="EXAMPLE"
-><A
-NAME="AEN259"><P
-><B
->Example 1. Example use of cygwin_posix_to_win32_path_list</B
-></P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="PROGRAMLISTING"
->char *_epath;
-char *_win32epath;
-_epath = _win32epath = getenv (NAME);
-/* If we have a POSIX path list, convert to win32 path list */
-if (_epath != NULL &#38;&#38; *_epath != 0
-    &#38;&#38; cygwin_posix_path_list_p (_epath))
-  {
-    _win32epath = (char *) xmalloc
-      (cygwin_posix_to_win32_path_list_buf_size (_epath));
-    cygwin_posix_to_win32_path_list (_epath, _win32epath);
-    }</PRE
-></TD
-></TR
-></TABLE
-></DIV
-><P
->See also <A
-HREF="func-cygwin-posix-to-win32-path-list-buf-size.html"
->cygwin_posix_to_win32_path_list_buf_size</A
-></P
+> Outputs a stackdump to stderr from the called location.</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -162,7 +109,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="func-cygwin-posix-path-list-p.html"
+HREF="func-cygwin-split-path.html"
 ACCESSKEY="P"
 >&#60;&#60;&#60; Previous</A
 ></TD
@@ -180,7 +127,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="func-cygwin-posix-to-win32-path-list-buf-size.html"
+HREF="func-cygwin-win32-to-posix-path-list.html"
 ACCESSKEY="N"
 >Next &#62;&#62;&#62;</A
 ></TD
@@ -190,7 +137,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->cygwin_posix_path_list_p</TD
+>cygwin_split_path</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -204,7 +151,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->cygwin_posix_to_win32_path_list_buf_size</TD
+>cygwin_win32_to_posix_path_list</TD
 ></TR
 ></TABLE
 ></DIV
