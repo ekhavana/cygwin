@@ -1,12 +1,12 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 26 September 2000 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 18 October 2000 -->
 
 <TITLE>The Cygwin FAQ
  - What is it?</TITLE>
 </HEAD>
 <BODY>
-Go to the first, previous, <A HREF="faq_2.html">next</A>, <A HREF="faq_9.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+Go to the first, previous, <A HREF="faq_2.html">next</A>, <A HREF="faq_8.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
 <P><HR><P>
 
 
@@ -35,7 +35,26 @@ standard Windows command shell.
 
 
 
-<H2><A NAME="SEC2" HREF="faq_toc.html#TOC2">Is it free software?</A></H2>
+<H2><A NAME="SEC2" HREF="faq_toc.html#TOC2">Where can I get it?</A></H2>
+
+<P>
+The main WWW page for the Cygwin project is
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/">http://sources.redhat.com/cygwin/</a></TT>.  There you should find
+everything you need for Cygwin, including links for download and setup,
+a current list of ftp mirror sites, a User's Guide, an API Reference,
+mailing lists and archives, and additional ported software.
+
+
+<P>
+You can find documentation for the individual GNU tools at
+<TT><a target="_top" href="http://www.fsf.org/manual/">http://www.fsf.org/manual/</a></TT>.  (You should read GNU manuals from a
+local mirror.  Check <TT><a target="_top" href="http://www.fsf.org/server/list-mirrors.html">http://www.fsf.org/server/list-mirrors.html</a></TT>
+for a list of them.)
+
+
+
+
+<H2><A NAME="SEC3" HREF="faq_toc.html#TOC3">Is it free software?</A></H2>
 
 <P>
 Yes.  Parts are GNU software (gcc, gas, ld, etc...), parts are covered
@@ -64,23 +83,26 @@ freedoms, so it is free software.
 
 
 <P>
-The Cygwin 1.0 product is a "commercial" distribution of cygwin.  As
-such, it includes such non-software things as printed manuals, support,
-and aggregation of useful utilities.  There is nothing (software-wise)
-in there that you can't already get off the net already, if you take the
-time to find and download everything (and usually, build it yourself),
-although the <EM>versions</EM> available for download may be different
-than those distributed with the commercial product.  We test it all to
-make sure it works together, and package it in a convenient form.  We
-consider such testing and packaging to be a valuable service and thus
-charge a fee for it.  Plus, it provides income for the cygwin project so
-we can continue working on it.  For further details about the commercial
-product, see <TT><a target="_top" href="http://www.cygnus.com/cygwin/">http://www.cygnus.com/cygwin/</a></TT>.
+The Cygwin 1.0 product was a "commercial" distribution of cygwin.  As
+such, it included such non-software things as printed manuals, support,
+and aggregation of useful utilities.  There was nothing (software-wise)
+in there that you couldn't get off the net already, if you took the time
+to find and download everything (and usually, build it yourself),
+although the <EM>versions</EM> available for download may have beeen
+different than those distributed with the commercial product.  We tested
+it all to make sure it worked together, and packaged it in a convenient
+form.  We considered such testing and packaging to be a valuable service
+and thus charged a fee for it.  Plus, it provided income for the cygwin
+project so we could continue working on it.  However, Red Hat is no
+longer offering Cygwin 1.0 on CD.  There are tentative plans to offer a
+new Cygwin CD sometime in early 2001.  So far, however, there are no
+definite plans.  The latest news about this can be found at
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/cygwin-cd.html">http://sources.redhat.com/cygwin/cygwin-cd.html</a></TT>.
 
 
 
 
-<H2><A NAME="SEC3" HREF="faq_toc.html#TOC3">Recent history of the project: What version <EM>is</EM> this, anyway?</A></H2>
+<H2><A NAME="SEC4" HREF="faq_toc.html#TOC4">Recent history of the project: What version <EM>is</EM> this, anyway?</A></H2>
 
 <P>
 Starting on April 17, 2000, the Cygwin team changed the procedure for
@@ -177,50 +199,11 @@ packages to the soureware web site.  The setup.exe program is the
 easiest way to determine what you need on your system.
 
 
-
-
-<H2><A NAME="SEC4" HREF="faq_toc.html#TOC4">Ancient history of the project</A></H2>
-
 <P>
-The first thing done was to enhance the development tools (gcc, gdb,
-gas, et al) so that they could generate/interpret Win32 native object
-files.
-
-
-<P>
-The next task was to port the tools to Win NT/95.  We could have done
-this by rewriting large portions of the source to work within the
-context of the Win32 API.  But this would have meant spending a huge
-amount of time on each and every tool.  Instead, we took a substantially
-different approach by writing a shared library (cygwin.dll) that adds
-the necessary unix-like functionality missing from the Win32 API (fork,
-spawn, signals, select, sockets, etc.).  We call this new interface the
-Cygwin API.  Once written, it was possible to build working Win32
-tools using unix-hosted cross-compilers, linking against this library.
-
-
-<P>
-From this point, we pursued the goal of producing native tools capable of
-rebuilding themselves under Windows 95 and NT (this is often
-called self-hosting).  Since neither OS ships with standard UNIX
-user tools (fileutils, textutils, bash, etc...), we had to get the
-GNU equivalents working with the Cygwin API.  Most of these tools were
-previously only built natively so we had to modify their configure
-scripts to be compatible with cross-compilation.  Other than the
-configuration changes, very few source-level changes had to be made.
-Running bash with the development tools and user tools in place,
-Windows 95 and NT look like a flavor of UNIX from the perspective of the
-GNU configure mechanism.  Self hosting was achieved as of the beta 17.1
-release.
-
-
-<P>
-After adding Windows 98 support to Cygwin in mid-1998, we added support
-for the native Microsoft libraries in the compiler which allows
-compilation of executables that do not use Cygwin.  This is important to
-those people who want to use the tools to develop Win32 applications
-that do not need the UNIX emulation layer.
+For some "ancient" history of the project (rather, just woefully out of
+date), visit the Project History page at
+<TT><a target="_top" href="http://sources.redhat.com/cygwin/history.html">http://sources.redhat.com/cygwin/history.html</a></TT>.
 <P><HR><P>
-Go to the first, previous, <A HREF="faq_2.html">next</A>, <A HREF="faq_9.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
+Go to the first, previous, <A HREF="faq_2.html">next</A>, <A HREF="faq_8.html">last</A> section, <A HREF="faq_toc.html">table of contents</A>.
 </BODY>
 </HTML>
