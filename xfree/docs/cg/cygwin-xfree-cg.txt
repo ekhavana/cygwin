@@ -710,9 +710,30 @@ Compiling Overview
    Compiling the XFree86 source code tree is a lot easier when you keep
    your builds in directories separate from the source code directory.
    Keeping the source code and builds in separate directories, using the
-   lndir.exe utility, allows you to have many builds for different
+   lndir utility, allows you to have many builds for different
    configurations, allows you to easily delete a build, and keeps the
    source code tree clean and manageable.
+     _________________________________________________________________
+
+Required Packages for Compiling
+
+   Many developer libraries and developer tools are required to build
+   Cygwin/XFree86. Several packages are required in addition to the
+   default packages installed by the Cygwin installer. Following is a
+   list of additional packages that are required to compile
+   Cygwin/XFree86 natively in Cygwin. Note that some of these packages
+   are meta packages that will automatically cause several other packages
+   to be selected for installation; do not unselect any of these
+   automatically selected packages.
+     * binutils
+     * byacc
+     * cvs
+     * diff
+     * flex
+     * gcc
+     * libncurses-devel
+     * make
+     * patch
      _________________________________________________________________
 
 Building and Installing lndir
@@ -748,31 +769,15 @@ $ cd xc/config/util
 Username@CygwinHost ~/x-devel/xc/config/util
 $
 
-    4. Make a backup of the Makefile.ini file:
+    4. Build lndir:
 
 Username@CygwinHost ~/x-devel/xc/config/util
-$ cp Makefile.ini Makefile.bak
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$
-
-    5. Change the CC variable in Makefile.ini from cc to gcc:
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$ sed "s/CC = cc/CC = gcc/" Makefile.bak > Makefile.ini
+$ make -f Makefile.ini CC=gcc CDEBUGFLAGS=-O2 lndir
 
 Username@CygwinHost ~/x-devel/xc/config/util
 $
 
-    6. Build lndir:
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$ make -f Makefile.ini lndir
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$
-
-    7. Move lndir.exe to /bin:
+    5. Move lndir.exe to /bin:
 
 Username@CygwinHost ~/x-devel/xc/config/util
 $ mv lndir.exe /bin
@@ -780,7 +785,7 @@ $ mv lndir.exe /bin
 Username@CygwinHost ~/x-devel/xc/config/util
 $
 
-    8. Verify that lndir is working:
+    6. Verify that lndir is working:
 
 Username@CygwinHost ~/x-devel/xc/config/util
 $ lndir
@@ -789,7 +794,7 @@ usage: lndir [-silent] [-ignorelinks] fromdir [todir]
 Username@CygwinHost ~/x-devel/xc/config/util
 $
 
-    9. The lndir utility is now installed.
+    7. The lndir utility is now installed.
      _________________________________________________________________
 
 Standard Build

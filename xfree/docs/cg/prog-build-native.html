@@ -97,13 +97,69 @@ NAME="prog-compiling-overview"
 >Compiling the XFree86 source code tree is a lot easier when you
 keep your builds in directories separate from the source code
 directory.  Keeping the source code and builds in separate
-directories, using the <TT
-CLASS="filename"
->lndir.exe</TT
-> utility,
-allows you to have many builds for different configurations, allows
-you to easily delete a build, and keeps the source code tree clean and
+directories, using the <B
+CLASS="command"
+>lndir</B
+> utility, allows you to
+have many builds for different configurations, allows you to easily
+delete a build, and keeps the source code tree clean and
 manageable.</P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="prog-compiling-required-packages"
+>Required Packages for Compiling</A
+></H3
+><P
+>Many developer libraries and developer tools are required to
+build Cygwin/XFree86.  Several packages are required in addition to the
+default packages installed by the Cygwin installer.  Following is a
+list of additional packages that are required to compile Cygwin/XFree86
+natively in Cygwin.  Note that some of these packages are meta
+packages that will automatically cause several other packages to be
+selected for installation; do not unselect any of these automatically
+selected packages.</P
+><UL
+><LI
+><P
+>binutils</P
+></LI
+><LI
+><P
+>byacc</P
+></LI
+><LI
+><P
+>cvs</P
+></LI
+><LI
+><P
+>diff</P
+></LI
+><LI
+><P
+>flex</P
+></LI
+><LI
+><P
+>gcc</P
+></LI
+><LI
+><P
+>libncurses-devel</P
+></LI
+><LI
+><P
+>make</P
+></LI
+><LI
+><P
+>patch</P
+></LI
+></UL
 ></DIV
 ><DIV
 CLASS="sect3"
@@ -224,66 +280,6 @@ $
 ></LI
 ><LI
 ><P
->Make a backup of the <TT
-CLASS="filename"
->Makefile.ini</TT
->
-file:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;Username@CygwinHost ~/x-devel/xc/config/util
-$ cp Makefile.ini Makefile.bak
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$ 
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->Change the <VAR
-CLASS="parameter"
->CC</VAR
-> variable in
-<TT
-CLASS="filename"
->Makefile.ini</TT
-> from <B
-CLASS="command"
->cc</B
-> to
-<B
-CLASS="command"
->gcc</B
->:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;Username@CygwinHost ~/x-devel/xc/config/util
-$ sed "s/CC = cc/CC = gcc/" Makefile.bak &gt; Makefile.ini
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$ 
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
 >Build <B
 CLASS="command"
 >lndir</B
@@ -297,7 +293,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~/x-devel/xc/config/util
-$ make -f Makefile.ini lndir
+$ make -f Makefile.ini CC=gcc CDEBUGFLAGS=-O2 lndir
 
 Username@CygwinHost ~/x-devel/xc/config/util
 $ 
