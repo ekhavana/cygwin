@@ -65,6 +65,7 @@ don't waste time working on something we can't integrate.  This also
 allows us to keep track of what's being worked on so efforts aren't
 duplicated.
 
+<H2>When you have finalized your changes</H2>
 <P>Once you've finished making and testing your changes, you should send
 a context diff to the cygwin-patches list.  As an example, if you
 modified winsup/syscalls.cc and have the original source file around
@@ -72,13 +73,13 @@ as /winsup/syscalls.cc-orig, you would do the following in bash:
 
 <p>
 <pre>
-      cd /c/src/winsup <br>
-      diff -up syscalls.cc-orig syscalls.cc &gt; syscalls.cc-patch 2&gt;&1 <br>
+      cd /c/src/winsup<br>
+      diff -up syscalls.cc-orig syscalls.cc &gt; syscalls.cc-patch 2&gt;&1<br>
 </pre>
 
 <P>Then send it to the cygwin-patches list in an email along with an
-explanation of what the change does.  This must include a ChangeLog
-entry.  If you have never used a ChangeLog before 1) refer to the <a
+explanation of what the change does.  <em>Make sure that you include a ChangeLog
+entry</em>.  If you have never used a ChangeLog before 1) refer to the <a
 href="http://www.gnu.org/prep/standards_39.html">GNU ChangeLog
 Standards</a> and 2) model your entry after other entries in the file
 winsup/ChangeLog.  Ideally, diffs should be sent as plain text with
@@ -100,7 +101,7 @@ with lists of functions.</p>
 <p><li>Diffs sent in uuencoded or otherwise encrypted fashion.</p>
 <p><li>Diffs sent in improper form:</p>
 <ul>
-<p><li>Not "unidiff" format (i.e., no -u).</p>
+<li>Not "unidiff" format (i.e., no -u).
 <p><li>Missing function names (i.e., no -p).</p>
 <p><li>Not an actual patch! (e.g., "I changed line 27 of foo.cc to this:")</p>
 </ul>
