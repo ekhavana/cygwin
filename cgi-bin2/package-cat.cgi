@@ -3,6 +3,8 @@
 use strict;
 use LWP::Simple;
 use CGI;
+use Cwd;
+use File::Basename;
 
 my $html = new CGI;
 
@@ -15,8 +17,12 @@ print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</titl
       LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "\n";
 
 chdir("$Bin/../packages");
-if (!open(F, '<', $file)) {
-    print h1("Couldn't open file: $file");
+my $here = getcwd;
+chdir dirname($file);
+my $there = getcwd;
+chdir $here;
+if (substr($there, 0, length($there)) . '/' ne "$here/" || !open(F, '<', $file)) {
+    print $html->h1("Couldn't open file: $file");
 } else {
     $_ = join('', <F>);
     s!($grep)!\<b\>$1\</b\>!mog if length($grep);
