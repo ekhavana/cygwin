@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2002-06-13 0102 EDT</p>
+<p>Last updated: 2002-06-14 0826 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -45,7 +45,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test.exe.bz2">XWin-Test.exe.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-20020607-2235.tar.bz2</a>
-(72 KiB)</td</tr>
+(72 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -61,6 +61,62 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test59</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2002-06-14 0826 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test58</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test59.exe.bz2">XWin-Test59.exe.bz2</a>
+(1051 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020608-0826.tar.bz2">xwin-20020608-0826.tar.bz2</a>
+(72 KiB)</td></tr>
+
+<tr><td>Download diff: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xc-config-cf-cygwin-20020614-0826.cf.diff">xc-config-cf-cygwin-20020614-0826.cf.diff</a>
+(1 KiB)</td></tr>
+
+<tr><td>Download diff: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xc-programs-Xserver-os-osinit-20020614-0826.c.diff">xc-programs-Xserver-os-osinit-20020614-0826.c.diff</a>
+(1 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>win.h, xc/config/cf/cygwin.cf - Stop building RANDR and disable
+Cygwin/XFree86's LAYER support.  These two extensions were causing KDE
+3.0 icons with alpha channels to not display.  RENDER is still
+enabled.  (Harold Hunt)</li>
+
+<li>xc/programs/Xserver/os/osinit.c - Don't close the stdin, stdout,
+stderr file handles on Cygwin.  We are no longer a command-line
+application so stdin, stdout, and stderr point to our first three file
+handles, rather than to their usual locations.  This keeps the log
+file from being closed when you run XWin.exe with 'start XWin.exe'.
+(Stuart Adamson)</li>
+
+<li>winwndproc.c - Call TrackMouseEvent to setup tracking for the
+WM_MOUSELEAVE message.  When we see a WM_MOUSELEAVE message we show
+the cursor if we are hiding it.  This will prevent cursors from
+disappearing when using the -lesspointer parameter.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 <h4>Test58</h4>
@@ -79,7 +135,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test58.exe.bz2">XWin-Test58.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020613-0102.tar.bz2">xwin-20020613-0102.tar.bz2</a>
-(72 KiB)</td</tr>
+(72 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -115,7 +171,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test57.exe.bz2">XWin-Test57.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020608-2149.tar.bz2">xwin-20020608-2149.tar.bz2</a>
-(72 KiB)</td</tr>
+(72 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -159,7 +215,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test56.exe.bz2">XWin-Test56.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-20020607-2235.tar.bz2</a>
-(72 KiB)</td</tr>
+(72 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -228,7 +284,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test55.exe.bz2">XWin-Test55.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020404-2206.tar.bz2">xwin-20020404-2206.tar.bz2</a>
-(70 KiB)</td</tr>
+(70 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -262,7 +318,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test54.exe.bz2">XWin-Test54.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020403-2033.tar.bz2">xwin-20020403-2033.tar.bz2</a>
-(70 KiB)</td</tr>
+(70 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -302,7 +358,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test53.exe.bz2">XWin-Test53.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20011111-1500.tar.bz2">xwin-20011111-1500.tar.bz2</a>
-(69 KiB)</td</tr>
+(69 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -350,7 +406,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test52.exe.bz2">XWin-Test52.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20011111-1200.tar.bz2">xwin-20011111-1200.tar.bz2</a>
-(69 KiB)</td</tr>
+(69 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -428,7 +484,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test51.exe.bz2">XWin-Test51.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20011030-1000.tar.bz2">xwin-20011030-1000.tar.bz2</a>
-(69 KiB)</td</tr>
+(69 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -473,7 +529,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test50.exe.bz2">XWin-Test50.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20011020-1622.tar.bz2">xwin-20011020-1622.tar.bz2</a>
-(68 KiB)</td</tr>
+(68 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -563,7 +619,7 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test49.exe.bz2">XWin-Test49.
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20011003-0056.tar.bz2">xwin-20011003-0056.tar.bz2</a>
-(68 KiB)</td</tr>
+(68 KiB)</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -603,7 +659,7 @@ with table lookup; table stored in new file winkeybd.h</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -643,7 +699,7 @@ downloading it, as it is quite broken.</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -676,7 +732,7 @@ downloading it, as it is quite broken.</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -746,7 +802,7 @@ break.  (Keith Packard)</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -776,7 +832,7 @@ square of getdtablesize () to setdtablesize ().</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -805,7 +861,7 @@ square of getdtablesize () to setdtablesize ().</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -873,7 +929,7 @@ shutdown key combo.</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -919,7 +975,7 @@ because the PseudoColor support is stable.</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -955,7 +1011,7 @@ fails.</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -991,7 +1047,7 @@ will happen if ia user runs /usr/X11R6/bin/X. (Harold Hunt)</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -1033,7 +1089,7 @@ Hunt)</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -1075,7 +1131,7 @@ function. (Harold Hunt)</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -1122,7 +1178,7 @@ GDI support into the current engine framework. (Harold Hunt)</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -1174,7 +1230,7 @@ and passing '-engine 1' to XWin.exe.</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
@@ -1218,7 +1274,7 @@ Hunt)</li>
 
 <tr><td>Download binary: no longer distributed</td></tr>
 
-<tr><td>Download source: no longer distributed</td</tr>
+<tr><td>Download source: no longer distributed</td></tr>
 
 <tr><td>Changes:</td></tr>
 
