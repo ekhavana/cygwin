@@ -1,3 +1,62 @@
+<h4>Release 4.3.0-32</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2004-01-05 1715 EST</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-20040105-1715.tar.bz2">xwin-20040105-1715.tar.bz2</a>
+(131 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Release 4.3.0-31
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/devel/server/xwin-4.3.0-31-to-4.3.0-32.diff">xwin-4.3.0-31-to-4.3.0-32.diff</a>
+(12 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>win.h/WIN_CLIPBOARD_AUTH_SUPPORT - Disable the new Xauth support
+for the clipboard integration manager with a build-time flag.  Be sure
+to delete ~/.Xauthority if you have one; X Client connections may be
+prevented if you do not delete this file.  (Harold L Hunt II)</li>
+
+<li>InitInput.c/InitInput - Only wrap ProcVector[X_SetSelectionOwner]
+when serverGeneration is 1, which prevents multiple wrapping of the
+function when the server resets (the ProcVector table is not
+re-initialized upon X Server reset).  (Harold L Hunt II)</li>
+
+<li>InitInput.c/winProcSetSelectionOwner - Use ((DrawablePtr)
+pWindow)->id instead of client->lastDrawableID for determing the ID of
+the window that the selection is being owned by.  (Harold L Hunt
+II)</li>
+
+<li>InitInput.c/winProcSetSelectionOwner - Detect when pWindow is
+None, in which case the selection is being unowned in X11; add code to
+release ownership of the Win32 clipboard if we currently own it.
+(Harold L Hunt II)</li>
+
+<li>InitInput.c/winProcSetSelectionOwner - Abort if IsWindow fails for
+the clipboard manager Win32 window handle; this may prevent problems
+when the X Server resets.  (Harold L Hunt II)</li>
+
+<li>winclipboardwndproc.c/winClipboardWindowProc/WM_DRAWCLIPBOARD -
+Don't call XSetSelectionOwner when GetClipboardOwner returns NULL,
+since this means that the Win32 clipboard is unowned; there are many
+reasons why the Win32 clipboard may be unowned, one of which is that
+we release ownership of it when the X11 selection is unowned (see
+above item).  (Harold L Hunt II)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
 <h4>Release 4.3.0-31</h4>
 <table>
 <tbody>
