@@ -288,7 +288,7 @@ sub wanted {
     my $mtime = $now - $st->mtime;
     next if $mtime < $MINDAYS * $days;
     if (!$main::best_file || $main::best_mtime > $mtime) {
-	$main::best_file = $_;
+	$main::best_file = $File::Find::name;
 	$main::best_mtime = $mtime;
     }
 }
