@@ -70,7 +70,7 @@ CLASS="LITERAL"
 > usage</A
 ></H1
 ><P
->The design goal of the ntsec patch was to get a more UNIX like
+>The design goal of ntsec is to get a more UNIX like
 permission structure based upon the security features of Windows NT.
 To describe the changes, I will give a short overview of NT security
 in chapter one.</P
@@ -286,7 +286,7 @@ set </P
 ></UL
 ><P
 >The two important types of ACEs are the `access allowed ACE' and the
-`access denied ACE'. The ntsec patch only used `access allowed ACEs' up
+`access denied ACE'. The ntsec functionality only used `access allowed ACEs' up
 to Cygwin version 1.1.0. Later versions also use `access denied ACEs' 
 to reflect the UNIX permissions as well as possible.</P
 ><P
@@ -298,7 +298,7 @@ from the write permission.</P
 to objects in a far more specific way. But what about cygwin? In a POSIX
 environment it would be fine to have the security behavior of a POSIX
 system. The NT security model is MOSTLY able to reproduce the POSIX model.
-The ntsec patch tries to do this in cygwin.</P
+The ntsec method tries to do this in cygwin.</P
 ><P
 >You ask "Mostly? Why mostly???" Because there's a leak in the NT model.
 I will describe that in detail in chapter 4.</P
@@ -323,7 +323,7 @@ COMPACT="COMPACT"
 data structure is used, the `security attributes' (SA). This structure
 contains an SD and a flag that specifies whether the returned handle
 to the object is inherited to child processes or not.
-This property is not important for the ntsec patch description so in
+This property is not important for ntsec so in
 this document the difference between SDs and SAs is ignored.</P
 ></DIV
 ><DIV
@@ -338,14 +338,14 @@ NAME="NTSEC-PROCESSES"
 >Any process started under control of cygwin has a semaphore attached
 to it, that is used for signaling purposes. The creation of this semaphore
 can be found in sigproc.cc, function `getsem'. The first parameter to the
-function call `CreateSemaphore' is an SA. Without ntsec patch this SA 
+function call `CreateSemaphore' is an SA. Without ntsec this SA 
 assigns default security to the semaphore. There is a simple disadvantage:
 Only the owner of the process may send signals to it. Or, in other words,
 if the owner of the process is not a member of the administrators' group,
 no administrator may kill the process! This is especially annoying, if
 processes are started via service manager.</P
 ><P
->The ntsec patch now assigns an SA to the process control semaphore, that
+>Ntsec now assigns an SA to the process control semaphore, that
 has each permission set for the user of the process, for the
 administrators' group and for `system', which is a synonym for the
 operating system itself. The creation of this SA is done by the function
@@ -434,7 +434,7 @@ in French, etc.), in domains it is named 'Domain Users'.  Unfortunately,
 the group `None' is never shown in the user admin tool outside of domains!
 This is very confusing but this seems to have no negative consequences.</P
 ><P
->To work correctly the ntsec patch depends on the files
+>To work correctly, ntsec depends on the files
 <TT
 CLASS="FILENAME"
 >/etc/passwd/</TT

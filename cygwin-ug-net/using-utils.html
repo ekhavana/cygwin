@@ -16,8 +16,8 @@ TITLE="The CYGWIN environment
 variable"
 HREF="using-cygwinenv.html"><LINK
 REL="NEXT"
-TITLE="Programming with Cygwin"
-HREF="programming.html"></HEAD
+TITLE="Using Cygwin effectively with Windows"
+HREF="using-effectively.html"></HEAD
 ><BODY
 ><DIV
 CLASS="NAVHEADER"
@@ -51,7 +51,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="programming.html"
+HREF="using-effectively.html"
 >Next</A
 ></TD
 ></TR
@@ -1251,6 +1251,7 @@ Display information about mounted filesystems, or mount a filesystem
   -h, --help                    output usage information and exit
   -m, --mount-commands          write mount commands to replace user and
                                 system mount points and cygdrive prefixes
+  -o, --options X[,X...]        specify mount options
   -p, --show-cygdrive-prefix    show user and/or system cygdrive path prefix
   -s, --system     (default)    add system-wide mount point
   -t, --text                    text files get \r\n line endings
@@ -1287,7 +1288,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1154"
+NAME="AEN1150"
 >Using mount</A
 ></H3
 ><P
@@ -1498,13 +1499,41 @@ to output a series of commands that could recreate both user and system mount
 points. You can save this output as a backup when experimenting with the
 mount table. It also makes moving your settings to a different machine
 much easier.</P
+><P
+>The <TT
+CLASS="LITERAL"
+>-o</TT
+> option is the method via which various options about
+the mount point may be recorded.  The following options are available (note that
+most of the options are duplicates of other mount flags):</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+>  user       - mount lives user-specific mount
+  system     - mount lives in system table (default)
+  binary     - files default to binary mode (default)
+  text       - files default to CRLF text mode line endings
+  exec       - files below mount point are all executable
+  notexec    - files below mount point are not executable
+  cygexec    - files below mount point are all cygwin executables
+  nosuid     - no suid files are allowed (currently unimplemented)
+  managed    - directory is managed by cygwin.  Mixed case and special
+               characters in filenames are allowed.</PRE
+></TD
+></TR
+></TABLE
 ></DIV
 ><DIV
 CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1200"
+NAME="AEN1199"
 >Cygdrive mount points</A
 ></H3
 ><P
@@ -1589,7 +1618,7 @@ CLASS="SECT3"
 ><H3
 CLASS="SECT3"
 ><A
-NAME="AEN1219"
+NAME="AEN1218"
 >Limitations</A
 ></H3
 ><P
@@ -2920,7 +2949,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="programming.html"
+HREF="using-effectively.html"
 >Next</A
 ></TD
 ></TR
@@ -2946,7 +2975,7 @@ HREF="using.html"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Programming with Cygwin</TD
+>Using Cygwin effectively with Windows</TD
 ></TR
 ></TABLE
 ></DIV

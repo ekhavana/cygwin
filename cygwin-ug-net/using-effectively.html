@@ -1,0 +1,570 @@
+<HTML
+><HEAD
+><TITLE
+>Using Cygwin effectively with Windows</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.44"><LINK
+REL="HOME"
+TITLE="Cygwin User's Guide"
+HREF="cygwin-ug-net.html"><LINK
+REL="UP"
+TITLE="Using Cygwin"
+HREF="using.html"><LINK
+REL="PREVIOUS"
+TITLE="Cygwin Utilities"
+HREF="using-utils.html"><LINK
+REL="NEXT"
+TITLE="Programming with Cygwin"
+HREF="programming.html"></HEAD
+><BODY
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="using-utils.html"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 3. Using Cygwin</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="programming.html"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"></DIV
+><DIV
+CLASS="SECT1"
+><H1
+CLASS="SECT1"
+><A
+NAME="USING-EFFECTIVELY"
+>Using Cygwin effectively with Windows</A
+></H1
+><P
+>Cygwin is not a full operating system, and so must rely on Windows for
+accomplishing some tasks. For example, Cygwin provides a POSIX view
+of the Windows filesystem, but does not provide filesystem drivers of 
+its own. Therefore part of using Cygwin effectively is learning to use
+Windows effectively. 
+Many Windows utilities provide a good way to interact with Cygwin's 
+predominately command-line environment. For example, 
+<B
+CLASS="COMMAND"
+>ipconfig.exe</B
+> provides information about network 
+configuration, and <B
+CLASS="COMMAND"
+>net.exe</B
+> views and configures
+network file and printer resources.  Most of these tools
+support the <TT
+CLASS="LITERAL"
+>/?</TT
+> switch to display usage information. </P
+><P
+>Unfortunately, no standard set of tools included with all versions of 
+Windows exists.  If you are unfamiliar with the tools available 
+on your system, here is a general guide.  Windows 95, 98, and ME have 
+very limited command-line configuration tools.  Windows NT 4.0 has much 
+better coverage, which Windows 2000 and XP expanded. 
+Microsoft also provides free downloads for Windows NT 4.0 (the Resource Kit 
+Support Tools), Windows 2000 (the Resource Kit Tools), and XP (the 
+Windows Support Tools). Additionally, many independent sites such as 
+<A
+HREF="http://download.com.com"
+TARGET="_top"
+>download.com</A
+>, 
+<A
+HREF="http://simtel.net"
+TARGET="_top"
+>simtel.net</A
+>, 
+and <A
+HREF="http://sysinternals.com"
+TARGET="_top"
+>sysinternals.com</A
+>
+provide command-line utilities.  A few Windows tools, such as 
+<B
+CLASS="COMMAND"
+>find.exe</B
+> and <B
+CLASS="COMMAND"
+>sort.exe</B
+>,
+may conflict with the Cygwin versions; make sure that you use the full 
+path (<B
+CLASS="COMMAND"
+>/usr/bin/find</B
+>) or that your Cygwin 
+<TT
+CLASS="LITERAL"
+>bin</TT
+> directory comes first in your <TT
+CLASS="ENVAR"
+>PATH</TT
+>.</P
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN1463"
+>Pathnames</A
+></H2
+><P
+>Windows programs do not understand POSIX pathnames, so any arguments 
+that reference the filesystem must be in Windows (or DOS) format or 
+translated.  Cygwin provides the <B
+CLASS="COMMAND"
+>cygpath</B
+> utility for 
+converting between Windows and POSIX paths. A complete description of its 
+options and examples of its usage are in <A
+HREF="using-utils.html#CYGPATH"
+>the section called <I
+>cygpath</I
+></A
+>, 
+including a shell script for starting Windows Explorer in any directory. 
+The same format works for most Windows programs, for example 
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="LITERAL"
+>notepad.exe "$(cygpath -aw "Desktop/Phone Numbers.txt")"</TT
+></PRE
+></TD
+></TR
+></TABLE
+>
+A few programs require a Windows-style, semicolon-delimited path list, 
+which <B
+CLASS="COMMAND"
+>cygpath</B
+> can translate from a POSIX path with the
+<TT
+CLASS="LITERAL"
+>-p</TT
+> option. For example, a Java compilation from 
+<B
+CLASS="COMMAND"
+>bash</B
+> might look like this: 
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="SCREEN"
+><TT
+CLASS="LITERAL"
+>javac -cp "$(cygpath -pw "$CLASSPATH")" hello.java</TT
+></PRE
+></TD
+></TR
+></TABLE
+>
+Since using quoting and subshells is somewhat awkward, it is often 
+preferable to use <B
+CLASS="COMMAND"
+>cygpath</B
+> in shell scripts.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN1476"
+>Console Programs</A
+></H2
+><P
+>Another issue is receiving output from or giving input to the console-based 
+Windows programs.  Unfortunately, interacting with Windows console 
+applications is not a simple matter of using a translation utility. Windows 
+console applications and designed to run under <B
+CLASS="COMMAND"
+>command.com</B
+> 
+or <B
+CLASS="COMMAND"
+>cmd.exe</B
+>, and some do not deal gracefully with other
+situations.  Cygwin can receive console input only if it
+is also running in a console (DOS box) since Windows does not provide
+any way to attach to the backend of the console device. Another
+traditional Unix input/output method, ptys (pseudo-terminals), are 
+supported by Cygwin but not entirely by Windows.  The basic problem is 
+that a Cygwin pty is a pipe and some Windows applications do not like 
+having their input or output redirected to pipes.  </P
+><P
+>To help deal with these issues, Cygwin supports customizable levels of 
+Windows verses Unix compatibility behavior.  To be most compatible with 
+Windows programs, use a DOS prompt, running only the occasional Cygwin 
+command or script. Next would be to run <B
+CLASS="COMMAND"
+>bash</B
+> with 
+the default DOS box. To make Cygwin more Unix compatible in this case, 
+set <TT
+CLASS="ENVAR"
+>CYGWIN=tty</TT
+> (see <A
+HREF="using-cygwinenv.html"
+>the section called <I
+>The <TT
+CLASS="ENVAR"
+>CYGWIN</TT
+> environment
+variable</I
+></A
+>).
+Alternatively, the optional <B
+CLASS="COMMAND"
+>rxvt</B
+> package provides 
+a native-Windows version of the popular X11 terminal emulator (it is not 
+necessary to set <TT
+CLASS="ENVAR"
+>CYGWIN=tty</TT
+> with <B
+CLASS="COMMAND"
+>rxvt</B
+>). 
+Using <B
+CLASS="COMMAND"
+>rxvt.exe</B
+> provides the most Unix-like environment, 
+but expect some compatibility problems with Windows programs.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN1489"
+>Cygwin and Windows Networking</A
+></H2
+><P
+>Many popular Cygwin packages, such as <B
+CLASS="COMMAND"
+>ncftp</B
+>, 
+<B
+CLASS="COMMAND"
+>lynx</B
+>, and <B
+CLASS="COMMAND"
+>wget</B
+>, require a 
+network connection.  Since Cygwin relies on Windows for connectivity, 
+if one of these tools is not working as expected you may need to 
+troubleshoot using Windows tools. The first test is to see if you
+can reach the URL's host with <B
+CLASS="COMMAND"
+>ping.exe</B
+>, one of the 
+few utilities included with every Windows version since Windows 95.
+If you chose to install the inetutils package, you may have both
+Windows and Cygwin versions of utilities such as <B
+CLASS="COMMAND"
+>ftp</B
+>
+and <B
+CLASS="COMMAND"
+>telnet</B
+>. If you are having problems using one
+of these programs, see if the alternate one works as expected. </P
+><P
+>There are a variety of other programs available for specific situations.
+If your system does not have an always-on network connection, you 
+may be interested in <B
+CLASS="COMMAND"
+>rasdial.exe</B
+> (or alternatives for
+Windows 95, 98, and ME) for automating dialup connections.  
+Users who frequently change their network 
+configuration can script these changes with <B
+CLASS="COMMAND"
+>netsh.exe</B
+> 
+(Windows 2000 and XP). For proxy users, the open source 
+<A
+HREF="http://apserver.sourceforge.net"
+TARGET="_top"
+>NTLM Authorization Proxy Server</A
+> or the no-charge
+<A
+HREF="http://www.hummingbird.com/products/nc/socks/index.html"
+TARGET="_top"
+>Hummingbird SOCKS Proxy</A
+> may allow you to use Cygwin network
+programs in your environment.</P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN1503"
+>The cygutils package</A
+></H2
+><P
+>The optional cygutils package contains miscellaneous tools that are
+small enough to not require their own package. It is not included in a
+default Cygwin install; select it from the Utils category in 
+<B
+CLASS="COMMAND"
+>setup.exe</B
+>. Several of the cygutils tools are useful
+for interacting with Windows. </P
+><P
+>One of the hassles of Unix-Windows interoperability is the different line 
+endings on text files.  As mentioned in <A
+HREF="using-textbinary.html"
+>the section called <I
+>Text and Binary modes</I
+></A
+>, 
+Unix tools such as <B
+CLASS="COMMAND"
+>tr</B
+> can convert between CRLF and LF 
+endings, but cygutils provides several dedicated programs: 
+<B
+CLASS="COMMAND"
+>conv</B
+>, <B
+CLASS="COMMAND"
+>d2u</B
+>, <B
+CLASS="COMMAND"
+>dos2unix</B
+>, 
+<B
+CLASS="COMMAND"
+>u2d</B
+>, and <B
+CLASS="COMMAND"
+>unix2dos</B
+>. Use the
+<TT
+CLASS="LITERAL"
+>--help</TT
+> switch for usage information. </P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN1516"
+>Creating shortcuts with cygutils</A
+></H2
+><P
+>Another problem area is between Unix-style links, which link one file
+to another, and Microsoft .lnk files, which provide a shortcut to a
+file.  They seem similar at first glance but, in reality, are fairly 
+different.  By default, Cygwin uses a mechanism that creates symbolic
+links that are compatible with standard Microsoft .lnk files. However,
+they do not include much of the information that is available in a 
+standard Microsoft shortcut, such as the working directory, an icon, 
+etc.  The cygutils package includes a <B
+CLASS="COMMAND"
+>mkshortcut</B
+> 
+utility for creating standard Microsoft .lnk files.</P
+><P
+>If Cygwin handled these native shortcuts like any other symlink, 
+you could not archive Microsoft .lnk files into <B
+CLASS="COMMAND"
+>tar</B
+>
+archives and keep all the information in them.  After unpacking, 
+these shortcuts would have lost all the extra information and would
+be no different than standard Cygwin symlinks. Therefore these two types 
+of links are treated differently.  Unfortunately, this means that the 
+usual Unix way of creating and using symlinks does not work with 
+Windows shortcuts. </P
+></DIV
+><DIV
+CLASS="SECT2"
+><H2
+CLASS="SECT2"
+><A
+NAME="AEN1522"
+>Printing with cygutils</A
+></H2
+><P
+>There are several options for printing from Cygwin, including the 
+<B
+CLASS="COMMAND"
+>lpr</B
+> found in cygutils (not to be confused with the 
+native Windows <B
+CLASS="COMMAND"
+>lpr.exe</B
+>). The easiest way to use cygutils' 
+<B
+CLASS="COMMAND"
+>lpr</B
+> is to specify a default device name in the 
+<TT
+CLASS="ENVAR"
+>PRINTER</TT
+> environment variable.  You may also specify a device 
+on the command line with the <TT
+CLASS="LITERAL"
+>-d</TT
+> or <TT
+CLASS="LITERAL"
+>-P</TT
+> 
+options, which will override the environment variable setting. </P
+><P
+>A device name 
+may be a UNC path (<TT
+CLASS="LITERAL"
+>\\server_name\printer_name</TT
+>), a reserved 
+DOS device name (<TT
+CLASS="LITERAL"
+>prn</TT
+>, <TT
+CLASS="LITERAL"
+>lpt1</TT
+>), or a 
+local port name that is mapped to a printer share. Note that forward slashes 
+may be used in a UNC path (<TT
+CLASS="LITERAL"
+>//server_name/printer_name</TT
+>),
+which is helpful when using <B
+CLASS="COMMAND"
+>lpr</B
+> from a shell that uses
+the backslash as an escape character. </P
+><P
+><B
+CLASS="COMMAND"
+>lpr</B
+> sends raw data to the printer; no formatting is done.
+Many, but not all, printers accept plain text as input. If your printer 
+supports PostScript, packages such as 
+<B
+CLASS="COMMAND"
+>a2ps</B
+> and <B
+CLASS="COMMAND"
+>enscript</B
+> can prepare text
+files for printing. The ghostscript package also provides some translation
+from PostScript to various native printer languages. Additionally, a native 
+Windows application for printing PostScript, <B
+CLASS="COMMAND"
+>gsprint</B
+>, is 
+available from the <A
+HREF="http://www.cs.wisc.edu/~ghost/"
+TARGET="_top"
+>Ghostscript
+website</A
+>.</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"><TABLE
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="using-utils.html"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-ug-net.html"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="programming.html"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Cygwin Utilities</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="using.html"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Programming with Cygwin</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
