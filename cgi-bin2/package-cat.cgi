@@ -12,7 +12,7 @@ my $file = $html->param('file');
 use FindBin qw($Bin);
 
 print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
-      LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "\n",
+      LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "FOO\n",
 
 chdir("$Bin/../packages");
 if (!open(F, $file)) {
