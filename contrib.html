@@ -5,13 +5,7 @@
 
 <body bg properties="fixed" bgcolor="#ffffff" link="#b07008" vlink="#000000">
 
-<font face="Verdana, Arial, Helvetica">
-<center>
-<h1>How can I help out?</h1>
-</center>
-</font>
-
-<font face="Verdana, Arial, Helvetica">
+<h1 align=center>How can I help out?</h1>
 
 <P>Part of the time put into this project has been
 paid for by Cygnus customers.  Some of the rest has been due to employees
@@ -32,19 +26,18 @@ completed and tested.  Note that these sources will usually compile,
 but they should always be assumed to be unstable and contain untested,
 experimental code.
 
-<P>To build the Cygwin32 library, start by building the comp-tools
-sources with the last release, substituting in the newlib and winsup
-sources from the snapshot location.  Minimal build instructions
-are included in the <a href="faq_toc.html">FAQ</a>.  If your object
-directory is /c/obj, the Cygwin32 dll you will build should be
-/c/obj/winsup/new-cygwinbxx.dll where xx represents the current
-version number.
+<P>To build the Cygwin32 library, start by building the comp-tools sources
+with the last release, substituting in the newlib and winsup sources
+from the snapshot location.  Minimal build instructions are included in
+the <a href="faq_toc.html">FAQ</a>.  If your object directory is /c/obj,
+the Cygwin dll you will build should be /c/obj/winsup/new-cygwinbxx.dll
+where xx represents the current version number.
 
 <P>Once you have a built comp-tools tree, if you make further changes
 to the winsup sources, you can rebuild the library by typing:
 
 <blockquote>
-	make all-target-winsup <br>
+	<tt>make all-target-winsup</tt>
 </blockquote>
 
 <P>Note that minimally, the top-level tree needs to contain:
@@ -93,10 +86,12 @@ a context diff to the cygwin32-developers list.  As an example, if you
 modified winsup/syscalls.cc and have the original source file around
 as /winsup/syscalls.cc-orig, you would do the following in bash:
 
-<blockquote>
-	cd /c/src/winsup <br>
-	diff -cp syscalls.cc-orig syscalls.cc > syscalls.cc-patch 2>&1 <br>
-</blockquote>
+<p>
+<pre>
+      cd /c/src/winsup <br>
+      diff -cp syscalls.cc-orig syscalls.cc > syscalls.cc-patch 2>&1 <br>
+</pre>
+
 
 <P>Then gzip and uuencode it and send it to the cygwin32-developers list
 in an email along with an explanation of what the change does.  This
@@ -112,8 +107,6 @@ as well as our own...
 <H2>What needs doing:</H2>
 
 <P>A fair amount of stuff.  Hopefully it will be listed here soon...
-
-</font>
 
 </body>
 </html>
