@@ -32,7 +32,9 @@ texi2html -verbose -monolithic faq.texinfo
 echo
 echo Building faq.txt
 echo
-makeinfo --verbose --no-split --no-headers -o faq.txt faq.texinfo
+makeinfo --verbose --no-split --no-headers -o faq.txt.in faq.texinfo
+sed -e 's@`mailto:@`@g' < faq.txt.in > faq.txt
+rm faq.txt.in
 
 rm *.texi*
 
@@ -48,3 +50,4 @@ do
     < $f > $f.tmp
   mv $f.tmp $f
 done
+
