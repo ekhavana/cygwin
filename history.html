@@ -5,28 +5,21 @@
 
 <body bg properties="fixed" bgcolor="#ffffff" link="#b07008" vlink="#000000">
 
-<font face="Verdana, Arial, Helvetica">
-<center>
-<h1>A Brief History of the GNU-Win32 Project</h1>
-</center>
-</FONT>
+<h1 align=center>A Brief History of the GNU-Win32 Project</h1>
 
-<font face="Verdana, Arial, Helvetica">
+<p>The first thing done was to enhance the development tools (gcc,
+gdb, gas, et al) so that they could generate/interpret Win32 native
+object files.
 
-<p>The first thing done was to enhance the development tools
-(gcc, gdb, gas, et al) so that they could generate/interpret
-Win32 native object files.
-
-<P>The next task was to port the tools to Win NT/95.  We could have done
-this by rewriting large portions of the source to work within the context
-of the Win32 API.  But this would have meant spending a huge
+<P>The next task was to port the tools to Win NT/95.  We could have
+done this by rewriting large portions of the source to work within the
+context of the Win32 API.  But this would have meant spending a huge
 amount of time on each and every tool.  Instead, we took a substantially
 different approach by writing a shared library (cygwin.dll) that adds
-the necessary UNIX-like functionality missing
-from the Win32 API (fork, spawn, signals, select, sockets, etc.).  We
-call this new interface the Cygwin32 API.  Once written, it was
-possible to build working Win32 tools using UNIX-hosted cross-compilers,
-linking against this library.
+the necessary UNIX-like functionality missing from the Win32 API (fork,
+spawn, signals, select, sockets, etc.).  We call this new interface
+the Cygwin32 API.  Once written, it was possible to build working Win32
+tools using UNIX-hosted cross-compilers, linking against this library.
 
 <P>From this point, we pursued the goal of producing native tools capable of
 rebuilding themselves under Windows 95 and NT (this is often
@@ -43,13 +36,11 @@ release.
 
 <P>The current release is beta 19.
 
-<P>At some point in the future (possibly in the b20 release),
-the compiler will optionally be able to generate vanilla Win32 executables
-that don't depend on the Cygwin32 POSIX-like layer.  Regardless of
-which libraries gcc links in by default, Cygwin32 will continue to be
-a major focus of the project and will still be easily usable.
-
-</font>
+<P>At some point in the future (possibly in the b20 release), the compiler
+will optionally be able to generate vanilla Win32 executables that don't
+depend on the Cygwin32 POSIX-like layer.  Regardless of which libraries
+gcc links in by default, Cygwin32 will continue to be a major focus of
+the project and will still be easily usable.
 
 </body>
 </html>
