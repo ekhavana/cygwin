@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2003-01-20 0108 EST</p>
+<p>Last updated: 2003-01-24 1105 EST</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -63,6 +63,73 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030113-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test74</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2003-01-24 1105 EST</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: Test73</td></tr>
+
+<tr><td>Cygwin setup.exe package: XFree86-xserv-4.2.0-22</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test74.exe.bz2">XWin-Test74.exe.bz2</a>
+(1201 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20030124-1105.tar.bz2">xwin-20030124-1105.tar.bz2</a>
+(95 KiB)</td></tr>
+
+<tr><td>Download xc/programs/Xserver/hw/xwin diff against Test73
+source code: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-Test73-to-Test74.diff.bz2">xwin-Test73-to-Test74.diff.bz2</a>
+(8 KiB)</td></tr>
+
+<tr><td>Download xc/lib/xtrans/Xtransutil.c diff against 2003-01-24
+XFree86 CVS: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xc-lib-xtrans-Xtransutil.c-20030124-1105.diff">xc-lib-xtrans-Xtransutil.c-20030124-1105.diff</a>
+(1 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>xc/lib/xtrans/Xtransutil.c - Remove Cygwin-specific defines of
+fchown and fchmod to chown and chmod, respectively.  It is not clear
+when these were added, but they are certainly no longer needed and are
+likely the cause of the first segfault that occurs if you debug
+XWin.exe under gdb.  (Takashi Sawanaka)</li>
+
+<li>Remove the condition variable used in the startup of the threaded
+clipboard manager and multi-window window manager; the condition
+variable was not needed and actually caused a race condition that
+could prevent either manager from starting up.  Instead, just use a
+mutex to hold the threads until the server has started, at which point
+the mutex is unlocked.  (Harold Hunt)</li>
+
+<li>winmultiwindowwm.c, winclipboardthread.c - Remove calls to
+_Xsetlocale and replace them with calls to setlocale, since
+_Xsetlocale is just defined to be setlocale.  (Kensuke Matsuzaki)</li>
+
+<li>Fix a problem where the server window would shrink each time the
+server was reset.  This problem only happened in non-rootless,
+non-fullscreen, non-nodecoration, and non-scrollbars modes.  In other
+words, it only happened when you ran the X Server in a single window
+that had a window border but no scrollbars.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
 
 
 <h4>Test73</h4>
