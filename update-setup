@@ -2,7 +2,15 @@
 # -*- perl -*-
 
 $ftptop = "/sourceware/ftp/anonftp/pub/cygwin";
+if (@ARGV > 0) {
+    $ftptop = shift;
+}
+
 $setupdirs = "contrib latest";
+if (@ARGV > 0) {
+    $setupdirs .= " " ."@ARGV"
+}
+
 $tmpfile = "/tmp/setup.ini.tmp";
 
 open (TMPFILE, ">$tmpfile");
