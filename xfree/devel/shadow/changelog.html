@@ -18,7 +18,7 @@
 
 <h2>Cygwin/XFree86 - Development - Server Test Series - Change Log</h2>
 
-<p>Last updated: 2002-06-14 0826 EDT</p>
+<p>Last updated: 2002-06-22 0007 EDT</p>
 
 <p>Server Test Series binary and source code releases are now
 available via the sources.redhat.com ftp <a
@@ -41,7 +41,7 @@ href="http://cygwin.com/mirrors.html">closest mirror</a>.</p>
 
 <tr><td>Download binary: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test.exe.bz2">XWin-Test.exe.bz2</a>
-(1078 KiB)</td></tr>
+(1070 KiB)</td></tr>
 
 <tr><td>Download source: <a
 href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-20020607-2235.tar.bz2</a>
@@ -61,6 +61,53 @@ href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020607-2235.tar.bz2">xwin-
 </tbody>
 </table>
 -->
+
+
+<h4>Test60</h4>
+<table>
+<tbody>
+
+<tr><td>Released: 2002-06-22 0007 EDT</td></tr>
+
+<tr><td>Committed to XFree86 CVS: not yet</td></tr>
+
+<tr><td>Basis: XFree86 CVS</td></tr>
+
+<tr><td>Download binary: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/XWin-Test60.exe.bz2">XWin-Test60.exe.bz2</a>
+(1070 KiB)</td></tr>
+
+<tr><td>Download source: <a
+href="http://www.msu.edu/~huntharo/xwin/shadow/xwin-20020622-0007.tar.bz2">xwin-20020622-0007.tar.bz2</a>
+(72 KiB)</td></tr>
+
+<tr><td>Changes:</td></tr>
+
+<tr>
+<td>
+<ul>
+
+<li>Do a clean before rebuilding the server to ensure that the RENDER
+extension is compiled in and enabled.  The RENDER extension is now
+reenabled.  Unfortunately, the RENDER extension is the cause of the
+display problem with KDE 3.0 icons that have alpha channels at a depth
+of 32 bits per pixel.  It was previously thought that the LAYER and
+RANDR extensions were causing the problem because a rebuild of the
+server with RENDER enabled did not actually have RENDER enabled, thus
+making it seem that RENDER was not causing the problem.  (Harold
+Hunt)</li>
+
+<li>wincreatwnd.c - Remove a seemingly erroneous return from
+winCreateBoundingWindowFullScreen when we are using the Shadow GDI
+engine.  This return was before we called UpdateWindow and
+BringWindowToTop.  This seems to have snuck in at some point during
+merging of my local 4.2.0 and main trees.  (Harold Hunt)</li>
+
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
 
 
 <h4>Test59</h4>
