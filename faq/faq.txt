@@ -153,18 +153,17 @@ Contents
 monolithic "full" or "usertools" installation.  Rather, you can pick and
 choose the packages you wish to install, and update them individually.
 
-   The following packages are available with the current release, in
-their respective directories:
+   The following packages are available with the current release:
 
-`latest'
-     ash autoconf bash binutils bison byacc bzip2 clear common crypt
-     cygwin dejagnu diff expect fileutils findutils flex gawk gcc gdb
-     gperf grep groff gzip inetutils less login m4 make man mt opengl
-     openssh openssl patch regex sed shellutils tar tcltk termcap
-     texinfo textutils time vim w32api
 
-`contrib'
-     cvs gdbm gettext jbigkit jpeg libpng ncurses readline tiff xpm zlib
+     ash autoconf automake bash binutils bison byacc bzip2 clear cpio crypt
+     cvs cygrunsrv cygwin dejagnu diff expect file fileutils findutils flex
+     gawk gcc gdb gdbm gettext ghostscript gperf grep groff gzip inetutils
+     irc jbigkit jpeg less libpng login lynx m4 make man mingw mt mutt ncftp
+     ncurses newlib-man opengl openssh openssl patch pcre perl popt
+     postgresql python readline regex rxvt sed sh-utils squid ssmtp tar tcltk
+     tcsh termcap tetex-beta texinfo textutils tiff time unzip vim w32api
+     wget which xpm xpm-nox zip zlib
 
    Full source code is available for all packages and tools.
 
@@ -301,13 +300,9 @@ what happened that wasn't supposed to happen, etc.
 What's the difference between packages in `latest' and `contrib'?
 -----------------------------------------------------------------
 
-   Good question!  That very issue has been debated on the
-`cygwin-apps' mailing list.  Check the list archives if you want to
-know more.  Start at `http://cygwin.com/lists.html'.
-
-   But it really doesn't matter, and there is no distinction as far as
-`setup.exe' is concerned.  By default, it will install all packages
-from both `latest' and `contrib' directories.
+   There is no difference as far as `setup.exe' is concerned, and you
+should not worry about this either.  The distinction is more historical
+than practical.
 
 My Windows logon name has a space in it, will this cause problems?
 ------------------------------------------------------------------
@@ -1663,7 +1658,9 @@ cygwin-apps are by-approval lists.
 
    There is a searchable archive of the main mailing list at
 `http://cygwin.com/ml/cygwin/'.  There is an alternate archive, also
-searchable, at `http://www.delorie.com/archives/'.
+searchable, at `http://www.delorie.com/archives/'.  You can also search
+at `http://www.google.com/' and include "cygwin" in the list of search
+terms.
 
    Cygwin mailing lists are not gatewayed to USENET, so anti-spam
 measures in your email address are neither required nor appreciated.
@@ -1744,29 +1741,19 @@ Using Cygwin
 How should I set my PATH?
 -------------------------
 
-   If you look at the "Cygwin 1.1.0" (or similar) shortcut created in
-the "Cygnus Solutions" programs folder, you'll see that it runs
-`C:\cygwin\bin\cygwin.bat' (assuming your root is `C:\cygwin').  The
-contents should look something like this:
+   This is done for you in the file /etc/profile, which is sourced by
+bash when you start it from the Desktop or Start Menu shortcut, created
+by `setup.exe'.  The line is
 
-     	@echo off
-     	SET MAKE_MODE=unix
-     	SET PATH=C:\cygwin\bin;C:\cygwin\usr\local\bin;%PATH%
-     	bash
+     	PATH="/usr/local/bin:/usr/bin:/bin:$PATH"
 
-   Effectively, this *prepends* /usr/bin and /usr/local/bin to your
+   Effectively, this *prepends* /usr/local/bin and /usr/bin to your
 Windows system path.  If you choose to reset your PATH, say in
-$HOME/.bashrc, then you should follow this rule.  You *must* have
-`/usr/bin' in your PATH *before* any Windows system directories.  (And
-you must not omit the Windows system directories!)  Otherwise you will
-likely encounter all sorts of problems running Cygwin applications.
-
-   If you haven't messed up the default mounts, then `/bin' and
-`/usr/bin' are the same location, so you only need one of them in your
-PATH.  You should use `/usr/local/bin' for installing additional Cygwin
-applications that are not part of the core net release.  (That is,
-anything not found in an ftp mirror of `latest' and installed by
-`setup.exe'.)
+$HOME/.bashrc, or by editing etc/profile directly, then you should
+follow this rule.  You *must* have `/usr/bin' in your PATH *before* any
+Windows system directories.  (And you must not omit the Windows system
+directories!)  Otherwise you will likely encounter all sorts of
+problems running Cygwin applications.
 
 Bash says "command not found", but it's right there!
 ----------------------------------------------------
@@ -1997,12 +1984,6 @@ Where can I find "more"?
 
    If you are looking for the "more" pager, you should use the "less"
 pager instead.
-
-Where can I find "which"?
--------------------------
-
-   There is no "which" command with Cygwin.  However, you can use the
-bash shell builtin "type" which does something similar.
 
 Why isn't package XXXX available in Cygwin?  (Or, why is your package so out of date?)
 --------------------------------------------------------------------------------------
