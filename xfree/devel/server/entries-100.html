@@ -48,7 +48,7 @@ breaking up the monolithic win.h header file.  (Harold L Hunt II)</li>
 
 <li>Xserver/dix/dispatch.c/Dispatch() - Add hook to OsVendorReset
 function that can be optionally defined in the DDX layer when
-DDXOSRESET is defined.  (Harold L Hunt II)<li>
+DDXOSRESET is defined.  (Harold L Hunt II)</li>
 
 <li>InitOutput.c/OsVendorReset() - New Function - Send a message to
 the clipboard client telling it to shutdown, then wait for the
@@ -87,6 +87,10 @@ error, which was likely causing some crashes.  The multi-window code
 needs additional work to confirm that it properly shuts down and exits
 both threads; something similar to the clipboard shutdown message in
 OsVendorReset will be needed.  (Harold L Hunt II)</li>
+
+<li>winclipboardxevents.c - Find and fix a last minute bug that caused
+Unicode clipboard translations to be broken.  (Kensuke Matsuzaki,
+Harold L Hunt II)</li>
 
 </ul>
 </td>
