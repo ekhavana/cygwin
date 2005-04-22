@@ -195,6 +195,12 @@ HREF="cygwin-x-faq.html#q-multihead"
 >I have a multihead system. Do I need special options to make it work?
 </A
 ></DT
+><DT
+>3.8. <A
+HREF="cygwin-x-faq.html#q-firewall"
+>I have a firewall. Is there anything I have to take care of?
+</A
+></DT
 ></DL
 ></DD
 ><DT
@@ -1359,6 +1365,52 @@ CLASS="parameter"
 > options</P
 ></DIV
 ></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-firewall"/><B
+>3.8. </B
+>I have a firewall. Is there anything I have to take care of?
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+><TT
+CLASS="filename"
+>XWin.exe</TT
+> uses port 6000/TCP by default. You will have to allow incoming and
+outgoing traffic on this port even if you are only using local clients. <TT
+CLASS="filename"
+>XWin.exe</TT
+> 
+has a builtin access control so you won't have to worry about opening the
+port. If you are still concerned about security, you may limit the allowed 
+hosts to 127.0.0.1 (localhost) and the local IP addresses.</P
+><P
+>&#13;If you use a different <TT
+CLASS="parameter"
+><I
+>DISPLAY</I
+></TT
+> variable check section 
+<A
+HREF="cygwin-x-faq.html#display-and-screen"
+>Q: 1.6.</A
+> for details about which ports are 
+used. For additional information about firewalls and XDMCP connections check 
+<A
+HREF="cygwin-x-faq.html#q-mandrake-8.1-xdmcp"
+>Q: 6.3.</A
+>.
+</P
+></DIV
+></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -2296,6 +2348,8 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>Disabled XDMCP on servers</P
+><P
 >[Mika Laitio] For security reasons, <A
 HREF="glossary.html#gloss-xdmcp"
 ><I
@@ -2447,6 +2501,8 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>XDMCP and firewalls</P
+><P
 ><A
 HREF="glossary.html#gloss-xdmcp"
 ><I
@@ -4051,7 +4107,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN784"/><P
+NAME="AEN797"/><P
 ><B
 >Example 1. Include Problems</B
 ></P
