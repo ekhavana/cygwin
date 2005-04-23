@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>NT security and usage of ntsec</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"><link rel="previous" href="setup-maxmem.html" title="Changing Cygwin's Maximum Memory"><link rel="next" href="setup-files.html" title="Customizing bash"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">NT security and usage of ntsec</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-maxmem.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Setting Up Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="setup-files.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ntsec"></a>NT security and usage of <tt class="literal">ntsec</tt></h2></div></div><div></div></div><p>The setting of UNIX like object permissions is controlled by the 
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>NT security and usage of ntsec</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.61.2"><link rel="home" href="index.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"><link rel="previous" href="setup-maxmem.html" title="Changing Cygwin's Maximum Memory"><link rel="next" href="setup-files.html" title="Customizing bash"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">NT security and usage of ntsec</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-maxmem.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Setting Up Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="setup-files.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ntsec"></a>NT security and usage of <tt class="literal">ntsec</tt></h2></div></div><div></div></div><p>The setting of UNIX like object permissions is controlled by the 
 <a href="using-cygwinenv.html" title="The CYGWIN environment
 variable"><tt class="envar">CYGWIN</tt> environment
 variable</a> setting <tt class="literal">(no)ntsec</tt> which is set to
@@ -119,7 +119,7 @@ are the main code. The reading and writing of the SDs is done by the
 functions `read_sd' and `write_sd'. `write_sd' uses the function `BackupRead'
 instead of the simpler function `SetFileSecurity' because the latter is
 unable to set owners different from the caller.</p><p>If you are creating a file `foo' outside of Cygwin, you will see something
-like the following on <span><b class="command">ls -ln</b></span>:</p><p>If your login is member of the administrators' group:</p><pre class="screen">
+like the following on <b class="command">ls -ln</b>:</p><p>If your login is member of the administrators' group:</p><pre class="screen">
   rwxrwxrwx 1  544  513  ... foo
 </pre><p>if not:</p><pre class="screen">
   rwxrwxrwx 1  1000  513  ... foo
@@ -144,19 +144,19 @@ A SID of e.g. the user `corinna' on my NT workstation:</p><pre class="screen">
 </pre><p>Note the last number: It's the RID 1000, Cygwin's UID.</p><p>Unfortunately, workstations and servers outside of domains are not
 able to set primary groups! In these cases, where there is no correlation
 of users to primary groups, NT returns 513 (None) as primary group,
-regardless of the membership to existing local groups.</p><p>When using <span><b class="command">mkpasswd  -l -g</b></span> on such systems, you
+regardless of the membership to existing local groups.</p><p>When using <b class="command">mkpasswd  -l -g</b> on such systems, you
 have to change the primary group by hand if `None' as primary group is
 not what you want (and I'm sure, it's not what you want!)</p><p>Look at the following examples, which were parts of my files before
 storing SIDs in /etc/passwd and /etc/group had been introduced (See next
 chapter for details).  With the exception of my personal user entry, all
-entries are well known entries.</p><div class="example"><a name="id2942353"></a><p class="title"><b>Example 2.1. /etc/passwd</b></p><pre class="screen">
+entries are well known entries.</p><div class="example"><a name="id4742111"></a><p class="title"><b>Example 2.1. /etc/passwd</b></p><pre class="screen">
 everyone:*:0:0:::
 system:*:18:18:::
 administrator::500:544::/home/root:/bin/bash
 guest:*:501:546:::
 administrators:*:544:544::/home/root:
 corinna::1000:547:Corinna Vinschen:/home/corinna:/bin/tcsh
-</pre></div><div class="example"><a name="id2942369"></a><p class="title"><b>Example 2.2. /etc/group</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id4742127"></a><p class="title"><b>Example 2.2. /etc/group</b></p><pre class="screen">
 everyone::0:
 system::18:
 none::513:
@@ -168,8 +168,8 @@ powerusers::547:
 to 547 (powerusers).  So all files I created inside of Cygwin were now owned
 by the powerusers group instead of None.  This is the way I liked it.</p><p>Groups may be mentioned in the passwd file, too. This has two
 advantages:</p><div class="itemizedlist"><ul type="disc" compact><li><p>Because NT assigns them to files as owners, a
-<span><b class="command">ls -l</b></span> is often more readable.</p></li><li><p>Moreover it's possible to assigned them to files as
-owners with Cygwin's <span><b class="command">chown</b></span>.</p></li></ul></div><p>The group `system' is the aforementioned synonym for the operating system
+<b class="command">ls -l</b> is often more readable.</p></li><li><p>Moreover it's possible to assigned them to files as
+owners with Cygwin's <b class="command">chown</b>.</p></li></ul></div><p>The group `system' is the aforementioned synonym for the operating system
 itself and is normally the owner of processes that are started through
 service manager. The same is true for files that are created by
 processes, which are started through service manager.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-sids"></a>NT SIDs in Cygwin</h3></div></div><div></div></div><p>In Cygwin release 1.1 a new technique of using the 
@@ -179,14 +179,14 @@ are saved in the last field of pw_gecos in <tt class="filename">/etc/passwd</tt>
 and in the gr_passwd field in <tt class="filename">/etc/group</tt>.</p><p>This has the following advantages:</p><div class="itemizedlist"><ul type="disc" compact><li><p>ntsec works better in domain environments.</p></li><li><p>Accounts (users and groups) may get another name in
 Cygwin than their NT account name. The name in <tt class="filename">/etc/passwd</tt>
 or <tt class="filename">/etc/group</tt> is transparently used by Cygwin
-applications (e.g. <span><b class="command">chown</b></span>, <span><b class="command">chmod</b></span>,
-<span><b class="command">ls</b></span>):</p><pre class="screen">
+applications (e.g. <b class="command">chown</b>, <b class="command">chmod</b>,
+<b class="command">ls</b>):</p><pre class="screen">
 root::500:513::/home/root:/bin/sh
 </pre><p>instead of</p><pre class="screen">
 adminstrator::500:513::/home/root:/bin/sh
 </pre><p>Caution: If you like to use the account as login account via
-<span><b class="command">telnet</b></span> etc. you have to remain the name unchanged or
-you have to use the special version of <span><b class="command">login</b></span> which is
+<b class="command">telnet</b> etc. you have to remain the name unchanged or
+you have to use the special version of <b class="command">login</b> which is
 part of the standard Cygwin distribution since 1.1.</p></li><li><p>Cygwin UIDs and GIDs are now not necessarily the RID
 part of the NT SID:</p><pre class="screen">
 root::0:513:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh
@@ -194,17 +194,17 @@ root::0:513:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh
 root::500:513::/home/root:/bin/sh
 </pre></li><li><p>As in U*X systems UIDs and GIDs numbering scheme now
 don't influence each other. So it's possible to have same Id's for a
-user and a group:</p><div class="example"><a name="id2942591"></a><p class="title"><b>Example 2.3. /etc/passwd:</b></p><pre class="screen">
+user and a group:</p><div class="example"><a name="id4742349"></a><p class="title"><b>Example 2.3. /etc/passwd:</b></p><pre class="screen">
 root::0:0:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh
-</pre></div><div class="example"><a name="id2942605"></a><p class="title"><b>Example 2.4. /etc/group:</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id4742363"></a><p class="title"><b>Example 2.4. /etc/group:</b></p><pre class="screen">
 root:S-1-5-32-544:0:
-</pre></div></li></ul></div><p>The tools <span><b class="command">mkpasswd</b></span> and <span><b class="command">mkgroup</b></span>
+</pre></div></li></ul></div><p>The tools <b class="command">mkpasswd</b> and <b class="command">mkgroup</b>
 create the needed entries by default. If you don't want that you can use
 the options <tt class="literal">-s</tt> or <tt class="literal">--no-sids</tt>. I suggest
 not to do this since ntsec works better when having the SIDs available.</p><p>Please note that the pw_gecos field in <tt class="filename">/etc/passwd</tt>
 is defined as a comma separated list. The SID has to be the last field!</p><p>As aforementioned you are able to use Cygwin account names different
 from the NT account names. If you want to login through `telnet' or something
-else you have to use the special <span><b class="command">login</b></span>. You may then
+else you have to use the special <b class="command">login</b>. You may then
 add another field to pw_gecos which contains the NT user name including
 it's domain. So you are able to login as each domain user. The syntax
 is easy: Just add an entry of the form U-ntdomain\ntusername to the pw_gecos
@@ -217,13 +217,13 @@ database, NOT from the passwd file!</p><p>As in the previous chapter I give my p
 <tt class="filename">/etc/passwd</tt> and <tt class="filename">/etc/group</tt> as
 examples.  Please note that I've changed these files heavily!  There's no
 need to change them that way, it's just for testing purposes and...
-for fun.</p><div class="example"><a name="id2942720"></a><p class="title"><b>Example 2.5. /etc/passwd</b></p><pre class="screen">
+for fun.</p><div class="example"><a name="id4742478"></a><p class="title"><b>Example 2.5. /etc/passwd</b></p><pre class="screen">
 root:*:0:0:Administrators group,S-1-5-32-544::
 SYSTEM:*:18:18:,S-1-5-18:/home/system:/bin/bash
 admin:*:500:513:,S-1-5-21-1844237615-436374069-1060284298-500:/home/Administrator:/bin/bash
 corinna:*:100:0:Corinna Vinschen,S-1-5-21-1844237615-436374069-1060284298-1003:/home/corinna:/bin/tcsh
 Guest:*:501:546:,S-1-5-21-1844237615-436374069-1060284298-501:/home/Guest:/bin/bash
-</pre></div><div class="example"><a name="id2942738"></a><p class="title"><b>Example 2.6. /etc/group</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id4742496"></a><p class="title"><b>Example 2.6. /etc/group</b></p><pre class="screen">
 root:S-1-5-32-544:0:
 local:S-1-2-0:2:
 network:S-1-5-2:3:
@@ -302,32 +302,32 @@ acltomode(3), aclfrommode(3),
 acltopbits(3), aclfrompbits(3),
 acltotext(3), aclfromtext(3)
 </pre><p>Like in Solaris, Cygwin has two new commands for working with
-ACLs on the command line: <span><b class="command">getfacl</b></span> and
-<span><b class="command">setfacl</b></span>.</p><p>Online man pages for the aforementioned commands and API calls can be
+ACLs on the command line: <b class="command">getfacl</b> and
+<b class="command">setfacl</b>.</p><p>Online man pages for the aforementioned commands and API calls can be
 found on <a href="http://docs.sun.com" target="_top">http://docs.sun.com</a> </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-setuid"></a>New setuid concept</h3></div></div><div></div></div><p>UNIX applications which have to switch the user context are using
-the <span><b class="command">setuid</b></span> and <span><b class="command">seteuid</b></span> calls which
+the <b class="command">setuid</b> and <b class="command">seteuid</b> calls which
 are not part of the Windows API.
 Nevertheless these calls are supported under Windows NT/W2K since Cygwin
 release 1.1.3.  Because of the nature of NT security an application which
 needs the ability has to be patched, though.</p><p>NT uses so-called `access tokens' to identify a user and it's
 permissions. To switch the user context the application has to request
 such an `access token'. This is typically done by calling the NT API
-function <span><b class="command">LogonUser</b></span>. The access token is returned and
-either used in <span><b class="command">ImpersonateLoggedOnUser</b></span> to change user
-context of the current process or in <span><b class="command">CreateProcessAsUser</b></span>
+function <b class="command">LogonUser</b>. The access token is returned and
+either used in <b class="command">ImpersonateLoggedOnUser</b> to change user
+context of the current process or in <b class="command">CreateProcessAsUser</b>
 to change user context of a spawned child process. An important restriction
-is that the application using <span><b class="command">LogonUser</b></span> must have special
+is that the application using <b class="command">LogonUser</b> must have special
 permissions:</p><pre class="screen">
 "Act as part of the operating system"
 "Replace process level token"
 "Increase quotas"
 </pre><p>Note that administrators do not have all these user rights set 
 by default.</p><p>Two new Cygwin calls are introduced to support porting
-<span><b class="command">setuid</b></span> applications with a minimum of effort. You only
+<b class="command">setuid</b> applications with a minimum of effort. You only
 give Cygwin the right access token and then you can call
-<span><b class="command">seteuid</b></span> or <span><b class="command">setuid</b></span> as usual in POSIX
-applications. The call to <span><b class="command">sexec</b></span> is not needed
-anymore. Porting a <span><b class="command">setuid</b></span> application is illustrated by
+<b class="command">seteuid</b> or <b class="command">setuid</b> as usual in POSIX
+applications. The call to <b class="command">sexec</b> is not needed
+anymore. Porting a <b class="command">setuid</b> application is illustrated by
 a short example:</p><pre class="screen">
 
 /* First include all needed cygwin stuff. */
@@ -391,12 +391,12 @@ logons and remember the access tokens for further calls to the second function.<
 void
 cygwin_set_impersonation_token (HANDLE hToken);
 </pre><p> is the call to inform Cygwin about the user context to which further
-calls to <span><b class="command">setuid</b></span>/<span><b class="command">seteuid</b></span> should switch to.
+calls to <b class="command">setuid</b>/<b class="command">seteuid</b> should switch to.
 While you always need the correct access token to do a
-<span><b class="command">setuid</b></span>/<span><b class="command">seteuid</b></span> to another user's context,
-you are always able to use <span><b class="command">setuid</b></span>/<span><b class="command">seteuid</b></span>
+<b class="command">setuid</b>/<b class="command">seteuid</b> to another user's context,
+you are always able to use <b class="command">setuid</b>/<b class="command">seteuid</b>
 to return to your own user context by giving your own uid as parameter.</p><p>If you have remembered several access tokens from calls to
-<span><b class="command">cygwin_logon_user</b></span> you can switch to different user
+<b class="command">cygwin_logon_user</b> you can switch to different user
 contexts by observing the following order:</p><pre class="screen">
 
   cygwin_set_impersonation_token (user1_token);
@@ -419,28 +419,28 @@ etc.
 </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-switch"></a>Switching User
 Context</h3></div></div><div></div></div><p>
 Since Cygwin release 1.3.3, applications that are members of the
-Administrators group and have the <span><b class="command">Create a token
-object</b></span>, <span><b class="command">Replace a process level token</b></span> and
-<span><b class="command">Increase Quota</b></span> user rights can switch user
+Administrators group and have the <b class="command">Create a token
+object</b>, <b class="command">Replace a process level token</b> and
+<b class="command">Increase Quota</b> user rights can switch user
 context without giving a password by just calling the usual
-<span><b class="command">setuid</b></span>, <span><b class="command">seteuid</b></span>,
-<span><b class="command">setgid</b></span> and <span><b class="command">setegid</b></span> functions.  
+<b class="command">setuid</b>, <b class="command">seteuid</b>,
+<b class="command">setgid</b> and <b class="command">setegid</b> functions.  
 </p><p>
 On NT and Windows 2000 the <tt class="systemitem">SYSTEM</tt> user has these privileges and can
-run services such as <span><b class="command">sshd</b></span>. However, on Windows 2003
+run services such as <b class="command">sshd</b>. However, on Windows 2003
 <tt class="systemitem">SYSTEM</tt> lacks the
-<span><b class="command">Create a token object</b></span> right, so it is necessary to
+<b class="command">Create a token object</b> right, so it is necessary to
 create a special user with all the necessary rights, as
-well as <span><b class="command">Logon as a service</b></span>, to run such services.
+well as <b class="command">Logon as a service</b>, to run such services.
 For security reasons this user should be denied the rights to logon
 interactively or over the network. All this is done by configuration
-scripts such as <span><b class="command">ssh-host-config</b></span>.
+scripts such as <b class="command">ssh-host-config</b>.
 </p><p>
 An important restriction of this method is that a process started
 without a password cannot access network shares which require
 authentication.  This also applies to subprocesses which switched user
 context without a password.  Therefore, when using
-<span><b class="command">ssh</b></span> or <span><b class="command">rsh</b></span> without a password, it
+<b class="command">ssh</b> or <b class="command">rsh</b> without a password, it
 is typically not possible to access network drives.
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-ids"></a>Special values of user and group
 ids</h3></div></div><div></div></div><p>
@@ -449,7 +449,7 @@ that user's user id is set to a special value of 400.  The user name for
 the current user will always be shown correctly.  If another user
 (or a Windows group, treated as a user) is not present in
 <tt class="filename">/etc/passwd</tt>, the user id of that user will have a
-special value of -1 (which would be shown by <span><b class="command">ls</b></span> as
+special value of -1 (which would be shown by <b class="command">ls</b> as
 65535).  The user name shown in this case will be '????????'.
 </p><p>
 If the current user is not present in <tt class="filename">/etc/passwd</tt>,

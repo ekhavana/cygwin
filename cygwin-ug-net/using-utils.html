@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Cygwin Utilities</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.65.1"><link rel="home" href="index.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter 3. Using Cygwin"><link rel="previous" href="using-cygserver.html" title="Cygserver"><link rel="next" href="using-effectively.html" title="Using Cygwin effectively with Windows"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Cygwin Utilities</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-cygserver.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Using Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="using-effectively.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-utils"></a>Cygwin Utilities</h2></div></div><div></div></div><p>Cygwin comes with a number of command-line utilities that are
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Cygwin Utilities</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.61.2"><link rel="home" href="index.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter 3. Using Cygwin"><link rel="previous" href="using-cygserver.html" title="Cygserver"><link rel="next" href="using-effectively.html" title="Using Cygwin effectively with Windows"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Cygwin Utilities</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-cygserver.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Using Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="using-effectively.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-utils"></a>Cygwin Utilities</h2></div></div><div></div></div><p>Cygwin comes with a number of command-line utilities that are
 used to manage the UNIX emulation portion of the Cygwin environment.
 While many of these reflect their UNIX counterparts, each was written
 specifically for Cygwin.  You may use the long or short option names 
@@ -21,38 +21,38 @@ Check system information or PROGRAM library dependencies
  -h, --help          give help about the info (not with -[cfl])
  -V, --version       output version information and exit
 </pre><p>
-The <span><b class="command">cygcheck</b></span> program is a diagnostic utility for
+The <b class="command">cygcheck</b> program is a diagnostic utility for
 dealing with Cygwin programs. If you are familiar with
-<span><b class="command">dpkg</b></span> or <span><b class="command">rpm</b></span>,
-<span><b class="command">cygcheck</b></span> is similar in many ways. (The major difference
-is that <span><b class="command">setup.exe</b></span> handles installing and uninstalling
+<b class="command">dpkg</b> or <b class="command">rpm</b>,
+<b class="command">cygcheck</b> is similar in many ways. (The major difference
+is that <b class="command">setup.exe</b> handles installing and uninstalling
 packages; see <a href="setup-net.html#internet-setup" title="Internet Setup">the section called &#8220;Internet Setup&#8221;</a> for more information.)
 </p><p>
 The <tt class="literal">-c</tt> option checks the version and status of 
 installed Cygwin packages. If you specify one or more package names,
-<span><b class="command">cygcheck</b></span> will limit its output to those packages,
+<b class="command">cygcheck</b> will limit its output to those packages,
 or with no arguments it lists all packages. A package will be marked
 <tt class="literal">Incomplete</tt> if files originally installed are no longer
 present. The best thing to do in that situation is reinstall the package
-with <span><b class="command">setup.exe</b></span>. To see which files are missing, use the
+with <b class="command">setup.exe</b>. To see which files are missing, use the
 <tt class="literal">-v</tt> option. If you do not need to know the status
-of each package and want <span><b class="command">cygcheck</b></span> to run faster, add the
-<tt class="literal">-d</tt> option and <span><b class="command">cygcheck</b></span> will only
+of each package and want <b class="command">cygcheck</b> to run faster, add the
+<tt class="literal">-d</tt> option and <b class="command">cygcheck</b> will only
 output the name and version for each package.
 </p><p>
 If you list one or more programs on the command line,
-<span><b class="command">cygcheck</b></span> will diagnose the runtime environment of that
+<b class="command">cygcheck</b> will diagnose the runtime environment of that
 program or programs, providing the names of DLL files on which the program
 depends.  If you specify the <tt class="literal">-s</tt> option,
-<span><b class="command">cygcheck</b></span> will give general system information.  If you
+<b class="command">cygcheck</b> will give general system information.  If you
 list one or more programs on the command line and specify
-<tt class="literal">-s</tt>, <span><b class="command">cygcheck</b></span> will report on
+<tt class="literal">-s</tt>, <b class="command">cygcheck</b> will report on
 both.</p><p>
 The <tt class="literal">-f</tt> option helps you to track down which package a
 file came from, and <tt class="literal">-l</tt> lists all files in a package.
 For example, to find out about <tt class="filename">/usr/bin/less</tt> and its
 package:
-</p><div class="example"><a name="id2946916"></a><p class="title"><b>Example 3.3. Example <span>cygcheck</span> usage</b></p><pre class="screen">
+</p><div class="example"><a name="id4746702"></a><p class="title"><b>Example 3.3. Example cygcheck usage</b></p><pre class="screen">
 $ cygcheck.exe -f /usr/bin/less
 less-381-1
 
@@ -73,11 +73,11 @@ reported which is usually not interesting, such as the internal
 version numbers of DLLs, additional information about recursive DLL
 usage, and if a file in one directory in the PATH also occurs in other
 directories on the PATH.  </p><p>The <tt class="literal">-r</tt> option causes
-<span><b class="command">cygcheck</b></span> to search your registry for information
+<b class="command">cygcheck</b> to search your registry for information
 that is relevent to Cygwin programs.  These registry entries are the
 ones that have "Cygwin" in the name.  If you are paranoid about
 privacy, you may remove information from this report, but please keep
-in mind that doing so makes it harder to diagnose your problems.</p><p>The <span><b class="command">cygcheck</b></span> program should be used to send
+in mind that doing so makes it harder to diagnose your problems.</p><p>The <b class="command">cygcheck</b> program should be used to send
 information about your system for troubleshooting when requested.  
 When asked to run this command save the output so that you can email it,
 for example:</p><pre class="screen">
@@ -107,11 +107,11 @@ System information:
   -P, --smprograms      output Start Menu `Programs' directory and exit
   -S, --sysdir          output system directory and exit
   -W, --windir          output `Windows' directory and exit
-</pre><p>The <span><b class="command">cygpath</b></span> program is a utility that
+</pre><p>The <b class="command">cygpath</b> program is a utility that
 converts Windows native filenames to Cygwin POSIX-style pathnames and
 vice versa.  It can be used when a Cygwin program needs to pass a file 
 name to a native Windows program, or expects to get a file name from a
-native Windows program.  Alternatively, <span><b class="command">cygpath</b></span> can 
+native Windows program.  Alternatively, <b class="command">cygpath</b> can 
 output information about the location of important system directories 
 in either format.  
 </p><p>The <tt class="literal">-u</tt> and <tt class="literal">-w</tt> options
@@ -133,13 +133,13 @@ any Windows short path in this mode.
 a path-style string rather than a single filename.  For example, the
 PATH environment variable is semicolon-delimited in Windows, but
 colon-delimited in UNIX.  By giving <tt class="literal">-p</tt> you are
-instructing <span><b class="command">cygpath</b></span> to convert between these
+instructing <b class="command">cygpath</b> to convert between these
 formats.</p><p>The <tt class="literal">-i</tt> option supresses the print out of the
 usage message if no filename argument was given.  It can be used in
 make file rules converting variables that may be omitted
-to a proper format.  Note that <span><b class="command">cygpath</b></span> output may 
+to a proper format.  Note that <b class="command">cygpath</b> output may 
 contain spaces (C:\Program Files) so should be enclosed in quotes.
-</p><div class="example"><a name="id2947226"></a><p class="title"><b>Example 3.4. Example <span>cygpath</span> usage</b></p><pre class="screen">
+</p><div class="example"><a name="id4747012"></a><p class="title"><b>Example 3.4. Example cygpath usage</b></p><pre class="screen">
 
 #!/bin/sh
 if [ "${1}" = "" ];
@@ -171,10 +171,10 @@ Dump core from WIN32PID to FILENAME.core
 -h, --help     output help information and exit
 -q, --quiet    be quiet while dumping (default)
 -v, --version  output version information and exit
-</pre><p>The <span><b class="command">dumper</b></span> utility can be used to create a
+</pre><p>The <b class="command">dumper</b> utility can be used to create a
 core dump of running Windows process. This core dump can be later loaded
-to <span><b class="command">gdb</b></span> and analyzed. One common way to use 
-<span><b class="command">dumper</b></span> is to plug it into cygwin's Just-In-Time 
+to <b class="command">gdb</b> and analyzed. One common way to use 
+<b class="command">dumper</b> is to plug it into cygwin's Just-In-Time 
 debugging facility by adding
 
 </p><pre class="screen">
@@ -186,15 +186,15 @@ to the <span class="emphasis"><em>CYGWIN</em></span> environment variable. Pleas
 path. If <tt class="literal">error_start</tt> is set this way, then dumper will
 be started whenever some program encounters a fatal error.
 </p><p>
-<span><b class="command">dumper</b></span> can be also be started from the command line to 
+<b class="command">dumper</b> can be also be started from the command line to 
 create a core dump of any running process. Unfortunately, because of a Windows 
-API limitation, when a core dump is created and <span><b class="command">dumper</b></span> 
+API limitation, when a core dump is created and <b class="command">dumper</b> 
 exits, the target process is terminated too.
 </p><p>
-To save space in the core dump, <span><b class="command">dumper</b></span> doesn't write those
+To save space in the core dump, <b class="command">dumper</b> doesn't write those
 portions of target process' memory space that are loaded from executable and
 dll files and are unchangeable, such as program code and debug info. Instead,
-<span><b class="command">dumper</b></span> saves paths to files which contain that data. When a
+<b class="command">dumper</b> saves paths to files which contain that data. When a
 core dump is loaded into gdb, it uses these paths to load appropriate files.
 That means that if you create a core dump on one machine and try to debug it on
 another, you'll need to place identical copies of the executable and dlls in 
@@ -215,9 +215,9 @@ When multiple files are specified on the command line, a blank
 line separates the ACLs for each file.
 </pre><p>
 For each argument that is a regular file, special file or
-directory, <span><b class="command">getfacl</b></span> displays the owner, the group, and the 
-ACL.  For directories <span><b class="command">getfacl</b></span> displays additionally the 
-default ACL.  With no options specified, <span><b class="command">getfacl</b></span> displays 
+directory, <b class="command">getfacl</b> displays the owner, the group, and the 
+ACL.  For directories <b class="command">getfacl</b> displays additionally the 
+default ACL.  With no options specified, <b class="command">getfacl</b> displays 
 the filename, the owner, the group, and both the ACL and the default ACL, if 
 it exists. For more information on Cygwin and Windows ACLs, see
 see <a href="ntsec.html" title="NT security and usage of ntsec">the section called &#8220;NT security and usage of ntsec&#8221;</a> in the Cygwin User's Guide.
@@ -249,15 +249,15 @@ Send signals to processes
  -s, --signal    send signal (use kill --list for a list)
  -h, --help      output usage information and exit
  -v, --version   output version information and exit
-</pre><p>The <span><b class="command">kill</b></span> program allows you to send arbitrary
+</pre><p>The <b class="command">kill</b> program allows you to send arbitrary
 signals to other Cygwin programs.  The usual purpose is to end a
 running program from some other window when ^C won't work, but you can
 also send program-specified signals such as SIGUSR1 to trigger actions
 within the program, like enabling debugging or re-opening log files.
-Each program defines the signals they understand.</p><p>You may need to specify the full path to use <span><b class="command">kill</b></span> 
-from within some shells, including <span><b class="command">bash</b></span>, the default Cygwin
-shell. This is because <span><b class="command">bash</b></span> defines a 
-<span><b class="command">kill</b></span> builtin function; see the <span><b class="command">bash</b></span>
+Each program defines the signals they understand.</p><p>You may need to specify the full path to use <b class="command">kill</b> 
+from within some shells, including <b class="command">bash</b>, the default Cygwin
+shell. This is because <b class="command">bash</b> defines a 
+<b class="command">kill</b> builtin function; see the <b class="command">bash</b>
 man page under <span class="emphasis"><em>BUILTIN COMMANDS</em></span> for more information.
 To make sure you are using the Cygwin version, try
 
@@ -265,16 +265,16 @@ To make sure you are using the Cygwin version, try
 $ /bin/kill --version
 </pre><p>
 
-which should give the Cygwin <span><b class="command">kill</b></span> version number and
+which should give the Cygwin <b class="command">kill</b> version number and
 copyright information.
 </p><p>Unless you specific the <tt class="literal">-f</tt> option, the "pid" values 
-used by <span><b class="command">kill</b></span> are the Cygwin pids, not the Windows pids.  
+used by <b class="command">kill</b> are the Cygwin pids, not the Windows pids.  
 To get a list of running programs and their Cygwin pids, use the Cygwin
-<span><b class="command">ps</b></span> program. <span><b class="command">ps -W</b></span> will display
-<span class="emphasis"><em>all</em></span> windows pids.</p><p>The <span><b class="command">kill -l</b></span> option prints the name of the
+<b class="command">ps</b> program. <b class="command">ps -W</b> will display
+<span class="emphasis"><em>all</em></span> windows pids.</p><p>The <b class="command">kill -l</b> option prints the name of the
 given signal, or a list of all signal names if no signal is given.</p><p>To send a specific signal, use the <tt class="literal">-signN</tt>
 option, either with a signal number or a signal name (minus the "SIG"
-part), like these examples:</p><div class="example"><a name="id2947672"></a><p class="title"><b>Example 3.5. Using the kill command</b></p><pre class="screen">
+part), like these examples:</p><div class="example"><a name="id4747458"></a><p class="title"><b>Example 3.5. Using the kill command</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill 123</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill -1 123</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill -HUP 123</tt></b>
@@ -334,7 +334,7 @@ Options:
    -v,--version           print version information and exit
 
 One of `-l' or `-d' must be given on NT/W2K.
-</pre><p>The <span><b class="command">mkgroup</b></span> program can be used to help
+</pre><p>The <b class="command">mkgroup</b> program can be used to help
 configure your Windows system to be more UNIX-like by creating an
 initial <tt class="filename">/etc/group</tt>.
 Its use is essential on the NT series (Windows NT, 2000, and XP) to
@@ -342,7 +342,7 @@ include Windows security information.
 It can also be used on the Win9x series (Windows 95, 98, and Me) to
 create a file with the correct format.
 To initially set up your machine if you are a local user, you'd do
-something like this:</p><div class="example"><a name="id2947830"></a><p class="title"><b>Example 3.6. Setting up the groups file for local accounts</b></p><pre class="screen">
+something like this:</p><div class="example"><a name="id4747616"></a><p class="title"><b>Example 3.6. Setting up the groups file for local accounts</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkdir /etc</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkgroup -l &gt; /etc/group</tt></b>
 </pre></div><p>Note that this information is static.  If you change the group
@@ -360,10 +360,10 @@ The <tt class="literal">-o</tt> option allows for special cases
 The <tt class="literal">-s</tt>
 option omits the NT Security Identifier (SID).  For more information on 
 SIDs, see <a href="ntsec.html" title="NT security and usage of ntsec">the section called &#8220;NT security and usage of ntsec&#8221;</a> in the Cygwin User's Guide.  The
-<tt class="literal">-u</tt> option causes <span><b class="command">mkgroup</b></span> to 
+<tt class="literal">-u</tt> option causes <b class="command">mkgroup</b> to 
 enumerate the users for each group, placing the group members in the 
 gr_mem (last) field.  Note that this can greatly increase
-the time for <span><b class="command">mkgroup</b></span> to run in a large domain.
+the time for <b class="command">mkgroup</b> to run in a large domain.
 Having gr_mem fields is helpful when a domain user logs in remotely
 while the local machine is disconnected from the Domain Controller.
 The <tt class="literal">-g</tt> option only prints the information for
@@ -390,7 +390,7 @@ Options:
    -v,--version            version information and exit
 
 One of `-l', `-d' or `-g' must be given on NT/W2K.
-</pre><p>The <span><b class="command">mkpasswd</b></span> program can be used to help
+</pre><p>The <b class="command">mkpasswd</b> program can be used to help
 configure your Windows system to be more UNIX-like by creating an
 initial <tt class="filename">/etc/passwd</tt> from your system information.
 Its use is essential on the NT series (Windows NT, 2000, and XP) to
@@ -400,7 +400,7 @@ On the Win9x series (Windows 95, 98, and Me) the password field must be
 replaced by the output of <b class="userinput"><tt>crypt your_password</tt></b>
 if remote access is desired.
 To initially set up your machine if you are a local user, you'd do
-something like this:</p><div class="example"><a name="id2948037"></a><p class="title"><b>Example 3.7. Setting up the passwd file for local accounts</b></p><pre class="screen">
+something like this:</p><div class="example"><a name="id4747824"></a><p class="title"><b>Example 3.7. Setting up the passwd file for local accounts</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkdir /etc</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkpasswd -l &gt; /etc/passwd</tt></b>
 </pre></div><p>Note that this information is static.  If you change the user
@@ -422,11 +422,11 @@ mount table so that, for example, two users who have a Windows home
 directory of H: could mount them differently.  The <tt class="literal">-s</tt>
 option omits the NT Security Identifier (SID).  For more information on
 SIDs, see <a href="ntsec.html" title="NT security and usage of ntsec">the section called &#8220;NT security and usage of ntsec&#8221;</a> in the Cygwin User's Guide.  The
-<tt class="literal">-p</tt> option causes <span><b class="command">mkpasswd</b></span> to
+<tt class="literal">-p</tt> option causes <b class="command">mkpasswd</b> to
 use the specified prefix instead of the account home dir or <tt class="literal">/home/
 </tt>. For example, this command:
 
-</p><div class="example"><a name="id2948181"></a><p class="title"><b>Example 3.8. Using an alternate home root</b></p><pre class="screen">
+</p><div class="example"><a name="id4747968"></a><p class="title"><b>Example 3.8. Using an alternate home root</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkpasswd -l -p "$(cygpath -H)" &gt; /etc/passwd</tt></b>
 </pre></div><p>
 
@@ -456,13 +456,13 @@ Display information about mounted filesystems, or mount a filesystem
                                 non-executables
   -X, --cygwin-executable       treat all files under mount point as cygwin
                                 executables
-</pre><p>The <span><b class="command">mount</b></span> program is used to map your drives
+</pre><p>The <b class="command">mount</b> program is used to map your drives
 and shares onto Cygwin's simulated POSIX directory tree, much like as is
 done by mount commands on typical UNIX systems.  Please see
 <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> for more information on the concepts
 behind the Cygwin POSIX file system and strategies for using
-mounts. To remove mounts, use <span><b class="command">umount</b></span></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2948312"></a>Using mount</h4></div></div><div></div></div><p>If you just type <span><b class="command">mount</b></span> with no parameters, it
-will display the current mount table for you.</p><div class="example"><a name="id2948327"></a><p class="title"><b>Example 3.9. Displaying the current set of mount points</b></p><pre class="screen">
+mounts. To remove mounts, use <b class="command">umount</b></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4748098"></a>Using mount</h4></div></div><div></div></div><p>If you just type <b class="command">mount</b> with no parameters, it
+will display the current mount table for you.</p><div class="example"><a name="id4748113"></a><p class="title"><b>Example 3.9. Displaying the current set of mount points</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount</tt></b>
 c:\cygwin\bin on /usr/bin type system (binmode)
 c:\cygwin\lib on /usr/lib type system (binmode)
@@ -473,11 +473,11 @@ d: on /d type user (binmode,noumount)
 <tt class="filename">/d</tt>.  Note that in this case, the root mount is a
 system-wide mount point that is visible to all users running Cygwin
 programs, whereas the <tt class="filename">/d</tt> mount is only visible
-to the current user.</p><p>The <span><b class="command">mount</b></span> utility is also the mechanism for
+to the current user.</p><p>The <b class="command">mount</b> utility is also the mechanism for
 adding new mounts to the mount table.  The following example
 demonstrates how to mount the directory
 <tt class="filename">\\pollux\home\joe\data</tt> to <tt class="filename">/data</tt>.
-</p><div class="example"><a name="id2948397"></a><p class="title"><b>Example 3.10. Adding mount points</b></p><pre class="screen">
+</p><div class="example"><a name="id4748184"></a><p class="title"><b>Example 3.10. Adding mount points</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>ls /data</tt></b>
 ls: /data: No such file or directory
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount \\pollux\home\joe\data /data</tt></b>
@@ -489,13 +489,13 @@ c:\cygwin\lib on /usr/lib type system (binmode)
 c:\cygwin on / type system (binmode)
 c: on /c type user (binmode,noumount)
 d: on /d type user (binmode,noumount)
-</pre></div><p>Note that <span><b class="command">mount</b></span> was invoked from the Windows
+</pre></div><p>Note that <b class="command">mount</b> was invoked from the Windows
 command shell in the previous example.  In many Unix shells, including
 bash, it is legal and convenient to use the forward "/" in Win32
-pathnames since the "\" is the shell's escape character. </p><p>The <tt class="literal">-s</tt> flag to <span><b class="command">mount</b></span> is used to add a mount
+pathnames since the "\" is the shell's escape character. </p><p>The <tt class="literal">-s</tt> flag to <b class="command">mount</b> is used to add a mount
 in the system-wide mount table used by all Cygwin users on the system,
 instead of the user-specific one.  System-wide mounts are displayed
-by <span><b class="command">mount</b></span> as being of the "system" type, as is the
+by <b class="command">mount</b> as being of the "system" type, as is the
 case for the <tt class="filename">/</tt> partition in the last example.
 Under Windows NT, only those users with Administrator priviledges are
 permitted to modify the system-wide mount table.</p><p>Note that a given POSIX path may only exist once in the user
@@ -505,7 +505,7 @@ the old mount to be silently replaced with the new one.  It will also
 silence warnings about the non-existence of directories at the Win32
 path location.</p><p>The <tt class="literal">-b</tt> flag is used to instruct Cygwin to treat binary and
 text files in the same manner by default.  Binary mode mounts are
-marked as "binmode" in the Flags column of <span><b class="command">mount</b></span>
+marked as "binmode" in the Flags column of <b class="command">mount</b>
 output.  By default, mounts are in text mode ("textmode" in the Flags
 column).</p><p>Normally, files ending in certain extensions (.exe, .com, .bat, .cmd) 
 are assumed to be executable.  Files whose first two characters begin with 
@@ -520,7 +520,7 @@ from setting up commands and environment variables for a normal Windows
 program, adding another small performance gain.  The opposite of these 
 flags is the <tt class="literal">-E</tt> flag, which means that no files should be 
 marked as executable.  </p><p>
-The <tt class="literal">-m</tt> option causes the <span><b class="command">mount</b></span> utility
+The <tt class="literal">-m</tt> option causes the <b class="command">mount</b> utility
 to output a series of commands that could recreate both user and system mount 
 points. You can save this output as a backup when experimenting with the
 mount table. It also makes moving your settings to a different machine
@@ -539,24 +539,26 @@ most of the options are duplicates of other mount flags):</p><pre class="screen"
   nosuid     - no suid files are allowed (currently unimplemented)
   managed    - directory is managed by cygwin.  Mixed case and special
                characters in filenames are allowed.
-</pre></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2948623"></a>Cygdrive mount points</h4></div></div><div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
+</pre></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4748410"></a>Cygdrive mount points</h4></div></div><div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
 from a particular Win32 path to a POSIX one, Cygwin will, instead,
 convert to a POSIX path using a default mount point:
 <tt class="filename">/cygdrive</tt>.  For example, if Cygwin accesses
 <tt class="filename">z:\foo</tt> and the z drive is not currently in the
 mount table, then <tt class="filename">z:\</tt> will be accessible as
-<tt class="filename">/cygdrive/z</tt>.  The <span><b class="command">mount</b></span> utility 
+<tt class="filename">/cygdrive/z</tt>.  The <b class="command">mount</b> utility 
 can be used to change this default automount prefix through the use of the
 "--change-cygdrive-prefix" option.  In the following example, we will
-set the automount prefix to <tt class="filename">/</tt>:</p><div class="example"><a name="id2948675"></a><p class="title"><b>Example 3.11. Changing the default prefix</b></p><pre class="screen">
+set the automount prefix to <tt class="filename">/</tt>:</p><div class="example"><a name="id4748461"></a><p class="title"><b>Example 3.11. Changing the default prefix</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount --change-cygdrive-prefix /</tt></b>
-</pre></div><p>Note that if you set a new prefix in this manner, you can
-specify the <tt class="literal">-s</tt> flag to make this the system-wide default 
-prefix.  By default, the cygdrive-prefix applies only to the system-wide setting.  
+</pre></div><p>Note that the cygdrive prefix can be set both per-user and system-wide, 
+and that as with all mounts, a user-specific mount takes precedence over the 
+system-wide setting.  The <b class="command">mount</b> utility creates system-wide 
+mounts by default if you do not specify a type.  Use the <tt class="literal">-s</tt> 
+or <tt class="literal">-u</tt> flag to indicate a system or user mount, respectively.
 You can always see the user and system cygdrive prefixes with the 
 <tt class="literal">-p</tt> option.  Using the <tt class="literal">-b</tt>
 flag with <tt class="literal">--change-cygdrive-prefix</tt> makes all new 
-automounted filesystems default to binary mode file accesses.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id2948733"></a>Limitations</h4></div></div><div></div></div><p>Limitations: there is a hard-coded limit of 30 mount
+automounted filesystems default to binary mode file accesses.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4748533"></a>Limitations</h4></div></div><div></div></div><p>Limitations: there is a hard-coded limit of 30 mount
 points.  Also, although you can mount to pathnames that do not start
 with "/", there is no way to make use of such mount points.</p><p>Normally the POSIX mount point in Cygwin is an existing empty
 directory, as in standard UNIX. If this is the case, or if there is a
@@ -569,15 +571,15 @@ for example to avoid cluttering the root directory with names
 such as
 <tt class="filename">a</tt>, <tt class="filename">b</tt>, <tt class="filename">c</tt>
 pointing to disks.
-Although <span><b class="command">mount</b></span> will give you a warning, most
+Although <b class="command">mount</b> will give you a warning, most
 everything will work properly when you refer to the mount point
 explicitly.  Some strange effects can occur however.
 For example if your current working directory is
 <tt class="filename">/dir</tt>,
 say, and <tt class="filename">/dir/mtpt</tt> is a mount point, then
-<tt class="filename">mtpt</tt> will not show up in an <span><b class="command">ls</b></span>
+<tt class="filename">mtpt</tt> will not show up in an <b class="command">ls</b>
 or
-<span><b class="command">echo *</b></span> command and <span><b class="command">find .</b></span> will
+<b class="command">echo *</b> command and <b class="command">find .</b> will
 not
 find <tt class="filename">mtpt</tt>.
 </p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="passwd"></a>passwd</h3></div></div><div></div></div><pre class="screen">
@@ -611,24 +613,24 @@ Other options:
 If no option is given, change USER's password.  If no user name is given,
 operate on current user.  System operations must not be mixed with user
 operations.  Don't specify a USER when triggering a system operation. 
-</pre><p> <span><b class="command">passwd</b></span> changes passwords for user accounts.
+</pre><p> <b class="command">passwd</b> changes passwords for user accounts.
 A normal user may only change the password for their own account,
 but administrators may change passwords on any account.
-<span><b class="command">passwd</b></span> also changes account information, such as
+<b class="command">passwd</b> also changes account information, such as
 password expiry dates and intervals.</p><p>For password changes, the user is first prompted for their old
 password, if one is present.  This password is then encrypted and
 compared against the stored password.  The user has only one chance to
 enter the correct password.  The administrators are permitted to
 bypass this step so that forgotten passwords may be changed.</p><p>The user is then prompted for a replacement password.
-<span><b class="command">passwd</b></span> will prompt twice for this replacement and 
+<b class="command">passwd</b> will prompt twice for this replacement and 
 compare the second entry against the first.  Both entries are required to 
 match in order for the password to be changed.</p><p>After the password has been entered, password aging information
 is checked to see if the user is permitted to change their password
-at this time.  If not, <span><b class="command">passwd</b></span> refuses to change the
+at this time.  If not, <b class="command">passwd</b> refuses to change the
 password and exits.</p><p>
 To get current password status information, use the
 <tt class="literal">-S</tt> option. Administrators can use
-<span><b class="command">passwd</b></span> to perform several account maintenance
+<b class="command">passwd</b> to perform several account maintenance
 functions (users may perform some of these functions on their own
 accounts).  Accounts may be locked with the <tt class="literal">-l</tt> flag
 and unlocked with the <tt class="literal">-u</tt> flag.  Similarly,
@@ -639,7 +641,7 @@ expiry, the <tt class="literal">-e</tt> option disables expiration, while the
 the system's normal aging rules.  Use <tt class="literal">-p</tt> to disable
 the password requirement for a user, or <tt class="literal">-P</tt> to require
 a password.
-</p><p>Administrators can also use <span><b class="command">passwd</b></span> to change
+</p><p>Administrators can also use <b class="command">passwd</b> to change
 system-wide password expiry and length requirements with the
 <tt class="literal">-i</tt>, <tt class="literal">-n</tt>, <tt class="literal">-x</tt>,
 and <tt class="literal">-L</tt> options.  The <tt class="literal">-i</tt>
@@ -672,13 +674,13 @@ Report process status
  -v, --version   output version information and exit
  -W, --windows   show windows as well as cygwin processes
 With no options, ps outputs the long format by default
-</pre><p>The <span><b class="command">ps</b></span> program gives the status of all the
+</pre><p>The <b class="command">ps</b> program gives the status of all the
 Cygwin processes running on the system (ps = "process status").  Due
 to the limitations of simulating a POSIX environment under Windows,
 there is little information to give.  
 </p><p>
 The PID column is the process ID you need to give to the 
-<span><b class="command">kill</b></span> command. The PPID is the parent process ID,
+<b class="command">kill</b> command. The PPID is the parent process ID,
 and PGID is the process group ID.  The WINPID column is the process 
 ID displayed by NT's Task Manager program. The TTY column gives which 
 pseudo-terminal a process is running on, or a <tt class="literal">'?'</tt>
@@ -690,7 +692,7 @@ words, in the background), <tt class="literal">I</tt> means waiting for
 input or interactive (foreground), and <tt class="literal">O</tt> means
 waiting to output. 
 </p><p>
-By default <span><b class="command">ps</b></span> will only show processes owned by the
+By default <b class="command">ps</b> will only show processes owned by the
 current user. With either the <tt class="literal">-a</tt> or <tt class="literal">-e</tt>
 option, all user's processes (and system processes) are listed. There are
 historical UNIX reasons for the synonomous options, which are functionally
@@ -700,9 +702,9 @@ mode, showing a "long" listing with all the above columns. The other display
 option is <tt class="literal">-s</tt>, which outputs a shorter listing of just
 PID, TTY, STIME, and COMMAND. The <tt class="literal">-u</tt> option allows you
 to show only processes owned by a specific user. The <tt class="literal">-W</tt>
-option causes <span><b class="command">ps</b></span> show non-Cygwin Windows processes as 
+option causes <b class="command">ps</b> show non-Cygwin Windows processes as 
 well as Cygwin processes. The WINPID is also the PID, and they can be killed
-with the Cygwin <span><b class="command">kill</b></span> command's <tt class="literal">-f</tt>
+with the Cygwin <b class="command">kill</b> command's <tt class="literal">-f</tt>
 option.
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="regtool"></a>regtool</h3></div></div><div></div></div><pre class="screen">
 Usage: regtool.exe [OPTION] (add | check | get | list | remove | unset) KEY
@@ -748,14 +750,14 @@ remote host in either \\hostname or hostname: format and prefix is any of:
 You can use forward slash ('/') as a separator instead of backslash, in
 that case backslash is treated as escape character
 Example: regtool.exe get '\user\software\Microsoft\Clock\iFormat'
-</pre><p>The <span><b class="command">regtool</b></span> program allows shell scripts
+</pre><p>The <b class="command">regtool</b> program allows shell scripts
 to access and modify the Windows registry.  Note that modifying the
 Windows registry is dangerous, and carelessness here can result
 in an unusable system.  Be careful.</p><p>The <tt class="literal">-v</tt> option means "verbose".  For most
 commands, this causes additional or lengthier messages to be printed.
 Conversely, the <tt class="literal">-q</tt> option supresses error messages,
 so you can use the exit status of the program to detect if a key
-exists or not (for example).</p><p>You must provide <span><b class="command">regtool</b></span> with an 
+exists or not (for example).</p><p>You must provide <b class="command">regtool</b> with an 
 <span class="emphasis"><em>action</em></span> following options (if any). Currently,
 the action must be <tt class="literal">add</tt>, <tt class="literal">set</tt>,
 <tt class="literal">check</tt>, <tt class="literal">get</tt>, <tt class="literal">list</tt>,
@@ -770,7 +772,7 @@ non-zero exit code.  If you give <tt class="literal">-q</tt>, it doesn't
 print the message but does return the non-zero exit code.</p><p>
 The <tt class="literal">list</tt> action lists the subkeys and values
 belonging to the given key. With <tt class="literal">list</tt>, the 
-<tt class="literal">-k</tt> option instructs <span><b class="command">regtool</b></span>
+<tt class="literal">-k</tt> option instructs <b class="command">regtool</b>
 to print only KEYs, and the <tt class="literal">-l</tt> option to print
 only VALUEs. The <tt class="literal">-p</tt> option postfixes a 
 <tt class="literal">'/'</tt> to each KEY, but leave VALUEs with no
@@ -784,7 +786,7 @@ that contains embedded environment variables.
 <tt class="literal">-i</tt> means the value is an integer (REG_DWORD).
 <tt class="literal">-m</tt> means it's a multi-string (REG_MULTI_SZ).  
 <tt class="literal">-s</tt> means the value is a string (REG_SZ).
-If you don't specify one of these, <span><b class="command">regtool</b></span> tries to
+If you don't specify one of these, <b class="command">regtool</b> tries to
 guess the type based on the value you give.  If it looks like a
 number, it's a DWORD.  If it starts with a percent, it's an expanding
 string.  If you give multiple values, it's a multi-string.  Else, it's
@@ -812,7 +814,7 @@ Modify file and directory access control lists (ACLs)
 
 At least one of (-d, -f, -m, -s) must be specified
 </pre><p>
-For each file given as parameter, <span><b class="command">setfacl</b></span> will 
+For each file given as parameter, <b class="command">setfacl</b> will 
 either replace its complete ACL (<tt class="literal">-s</tt>, <tt class="literal">-f</tt>), 
 or it will add, modify, or delete ACL entries.
 For more information on Cygwin and Windows ACLs, see
@@ -862,7 +864,7 @@ Take the Acl_entries from ACL_FILE one per line. Whitespace
 characters are ignored, and the character "#" may be used
 to start a comment.  The special filename "-" indicates
 reading from stdin. Note that you can use this with 
-<span><b class="command">getfacl</b></span> and <span><b class="command">setfacl</b></span> to copy 
+<b class="command">getfacl</b> and <b class="command">setfacl</b> to copy 
 ACLs from one file to another:
 </p><pre class="screen">
 $ getfacl source_file | setfacl -f - target_file
@@ -937,8 +939,8 @@ The SSP is a program that uses the Win32 debug API to run a program
 one ASM instruction at a time.  It records the location of each
 instruction used, how many times that instruction is used, and all
 function calls.  The results are saved in a format that is usable by
-the profiling program <span><b class="command">gprof</b></span>, although 
-<span><b class="command">gprof</b></span> will claim the values
+the profiling program <b class="command">gprof</b>, although 
+<b class="command">gprof</b> will claim the values
 are seconds, they really are instruction counts.  More on that later.
 </p><p>
 Because the SSP was originally designed to profile the cygwin DLL, it
@@ -947,7 +949,7 @@ You must specify the range of memory addresses to keep track of
 manually, but it's not hard to figure out what to specify.  Use the
 "objdump" program to determine the bounds of the target's ".text"
 section.  Let's say we're profiling cygwin1.dll.  Make sure you've
-built it with debug symbols (else <span><b class="command">gprof</b></span> won't run) 
+built it with debug symbols (else <b class="command">gprof</b> won't run) 
 and run objdump like this:
 
 </p><pre class="screen">
@@ -978,7 +980,7 @@ method).
 There are two basic ways to use SSP - either profiling a whole
 program, or selectively profiling parts of the program.
 </p><p>
-To profile a whole program, just run <span><b class="command">ssp</b></span> without options.  
+To profile a whole program, just run <b class="command">ssp</b> without options.  
 By default, it will step the whole program.  Here's a simple example, using 
 the numbers above:
 
@@ -989,15 +991,15 @@ $ ssp 0x61001000 0x61080000 hello.exe
 This will step the whole program.  It will take at least 8 minutes on
 a PII/300 (yes, really).  When it's done, it will create a file called
 "gmon.out".  You can turn this data file into a readable report with
-<span><b class="command">gprof</b></span>:
+<b class="command">gprof</b>:
 
 </p><pre class="screen">
 $ gprof -b cygwin1.dll
 </pre><p>
 
 The "-b" means 'skip the help pages'.  You can omit this until you're
-familiar with the report layout.  The <span><b class="command">gprof</b></span> documentation 
-explains a lot about this report, but <span><b class="command">ssp</b></span> changes a few 
+familiar with the report layout.  The <b class="command">gprof</b> documentation 
+explains a lot about this report, but <b class="command">ssp</b> changes a few 
 things.  For example, the first part of the report reports the amount of time 
 spent in each function, like this:
 
@@ -1035,7 +1037,7 @@ program.  Here's a sample program:
 Then, add the <tt class="literal">-d</tt> option to ssp to default to 
 *disabling* profiling.  The program will run at full speed until the first 
 OutputDebugString, then step until the second.
-You can then use <span><b class="command">gprof</b></span> (as usual) to see the performance 
+You can then use <b class="command">gprof</b> (as usual) to see the performance 
 profile for just that portion of the program's execution.
 </p><p>
 There are many options to ssp.  Since step-profiling makes your
@@ -1118,7 +1120,7 @@ Trace system calls and signals
     nomutex  0x10000 (_STRACE_NOMUTEX)  Don't use mutex for synchronization.
     malloc   0x20000 (_STRACE_MALLOC)   Trace malloc calls.
     thread   0x40000 (_STRACE_THREAD)   Thread-locking calls.
-</pre><p>The <span><b class="command">strace</b></span> program executes a program, and
+</pre><p>The <b class="command">strace</b> program executes a program, and
 optionally the children of the program, reporting any Cygwin DLL output
 from the program(s) to stdout, or to a file with the <tt class="literal">-o</tt>
 option.  With the <tt class="literal">-w</tt> option, you can start an strace
@@ -1127,12 +1129,12 @@ session in a new window, for example:
 </p><pre class="screen">
 $ strace -o tracing_output -w sh -c 'while true; do echo "tracing..."; done' &amp;
 </pre><p>
-This is particularly useful for <span><b class="command">strace</b></span> sessions that
+This is particularly useful for <b class="command">strace</b> sessions that
 take a long time to complete.
 </p><p>
-Note that <span><b class="command">strace</b></span> is a standalone Windows program and so does 
+Note that <b class="command">strace</b> is a standalone Windows program and so does 
 not rely on the Cygwin DLL itself (you can verify this with 
-<span><b class="command">cygcheck</b></span>). As a result it does not understand POSIX
+<b class="command">cygcheck</b>). As a result it does not understand POSIX
 pathnames or symlinks.  This program is mainly useful for debugging the 
 Cygwin DLL itself.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="umount"></a>umount</h3></div></div><div></div></div><pre class="screen">
 Usage: umount.exe [OPTION] [&lt;posixpath&gt;]
@@ -1146,12 +1148,12 @@ Unmount filesystems
   -u, --user                    remove user mount
   -U, --remove-user-mounts      remove all user mounts
   -v, --version                 output version information and exit
-</pre><p>The <span><b class="command">umount</b></span> program removes mounts from the
+</pre><p>The <b class="command">umount</b> program removes mounts from the
 mount table.  If you specify a POSIX path that corresponds to a
-current mount point, <span><b class="command">umount</b></span> will remove it from the
+current mount point, <b class="command">umount</b> will remove it from the
 system registry area.  (Administrator priviledges are required).
 The <tt class="literal">-u</tt> flag may be used to specify removing the mount 
-from the user-specific registry area instead.</p><p>The <span><b class="command">umount</b></span> utility may also be used to remove
+from the user-specific registry area instead.</p><p>The <b class="command">umount</b> utility may also be used to remove
 all mounts of a particular type.  With the extended options it is
 possible to remove all mounts (<tt class="literal">-A</tt>), all 
 cygdrive automatically-mounted mounts (<tt class="literal">-c</tt>), all
