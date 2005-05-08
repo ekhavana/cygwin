@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 25 March 2005 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 8 May 2005 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -118,7 +118,7 @@
 <LI><A NAME="TOC90" HREF="faq.html#SEC90">Why are compiled executables so huge?!?</A>
 <LI><A NAME="TOC91" HREF="faq.html#SEC91">Where is glibc?</A>
 <LI><A NAME="TOC92" HREF="faq.html#SEC92">Where is Objective C?</A>
-<LI><A NAME="TOC93" HREF="faq.html#SEC93">Why is make behaving badly?</A>
+<LI><A NAME="TOC93" HREF="faq.html#SEC93">Why does my make fail on Cygwin with an execvp error?</A>
 <LI><A NAME="TOC94" HREF="faq.html#SEC94">Why the undefined reference to <SAMP>`WinMain@16'</SAMP>?</A>
 <LI><A NAME="TOC95" HREF="faq.html#SEC95">How do I use Win32 API calls?</A>
 <LI><A NAME="TOC96" HREF="faq.html#SEC96">How do I compile a Win32 executable that doesn't use Cygwin?</A>
@@ -1569,6 +1569,14 @@ beforehand.
 
 
 <P>
+The only DLL that is sanctioned by the Cygwin project is the one that
+you get by running <TT><a target="_top" href="http://cygwin.com/setup.exe">http://cygwin.com/setup.exe</a></TT>, installed in the
+directory controlled by this program.  If you have other versions on
+your system and desire help from the cygwin project, you should delete
+or rename all DLLs that are not installed by <TT>`setup.exe'</TT>.
+
+
+<P>
 If you're trying to find multiple versions of the DLL that are causing
 this problem, reboot first, in case DLLs still loaded in memory are the
 cause.  Then use the Windows System find utility to search your whole
@@ -2610,48 +2618,44 @@ main GCC distribution, anyway.
 
 
 
-<H3><A NAME="SEC93" HREF="faq.html#TOC93">Why is make behaving badly?</A></H3>
+<H3><A NAME="SEC93" HREF="faq.html#TOC93">Why does my make fail on Cygwin with an execvp error?</A></H3>
 
 <P>
 First of all, if you are using <SAMP>`make -j[N]'</SAMP>, then stop.  It doesn't
-work well.
+work well. Also beware of using non-portable shell features in your
+Makefiles (see tips at <TT><a target="_top" href="http://cygwin.com/faq/faq_3.html#SEC46">http://cygwin.com/faq/faq_3.html#SEC46</a></TT>).
 
 
 <P>
-Otherwise, read on...
+Errors of <SAMP>`make: execvp: /bin/sh: Illegal Argument'</SAMP> or 
+<SAMP>`make: execvp: /bin/sh: Argument list too long'</SAMP> are often
+caused by the command-line being to long for the Windows execution model.
+To circumvent this, mount the path of the executable using the -X switch
+to enable cygexec for all executables in that folder; you will also need
+to exclude non-cygwin executables with the -x switch. Enabling cygexec
+causes cygwin executables to talk directly to one another, which increases
+the command-line limit. To enable cygexec for <SAMP>`/bin'</SAMP> and 
+<SAMP>`/usr/bin'</SAMP>, you can use these commands in a batch file:
+
+
+
+<PRE>
+mount -X -b -f c:\cygwin\bin /bin
+mount -X -b -f c:\cygwin\bin /usr/bin
+mount -x -b -f c:\cygwin\bin\strace.exe /usr/bin/strace.exe
+mount -x -b -f c:\cygwin\bin\strace.exe /bin/strace.exe
+mount -x -b -f c:\cygwin\bin\cygcheck.exe /usr/bin/cygcheck.exe
+mount -x -b -f c:\cygwin\bin\cygcheck.exe /bin/cygcheck.exe
+</PRE>
+
+<P>
+Note that you must specifically exclude <CODE>strace</CODE> and <CODE>cygcheck</CODE>,
+which are not linked to the Cygwin DLL.
 
 
 <P>
-Make has two operating modes, UNIX and WIN32.  You need to make sure
-that you are operating in the right mode.
-
-
-<P>
-In UNIX mode, make uses sh.exe as a subshell.  The path list separator
-is ':', '\' is the escape character, POSIX paths are expected, and
-Cygwin mounts will be understood.  Use this for Makefiles written for
-UNIX.
-
-
-<P>
-In WIN32 mode, make uses the "native" command shell (cmd.exe or
-command.com), with all the restrictions that implies.  The path list
-separator is ';', the path separator is '\', "copy" and "del" work, but
-the Cygwin mount table is not understood.  Use this for nmake-style
-Makefiles.
-
-
-<P>
-The default mode for the Net Release of make (the one installed by
-<CODE>setup.exe</CODE>) is UNIX.  The default mode for commercial releases to
-Redhat (formerly Cygnus) customers is WIN32.
-
-
-<P>
-You can override the default by setting the environment variable
-MAKE_MODE to "UNIX" (actually case is not significant) or "WIN32"
-(actually anything other than "UNIX").  You can also specify the options
---unix or --win32 on the make command line.
+(See <TT><a target="_top" href="http://www.cygwin.com/cygwin-ug-net/using-utils.html#mount">http://www.cygwin.com/cygwin-ug-net/using-utils.html#mount</a></TT> 
+for more information.)
 
 
 
@@ -4125,7 +4129,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 25 March 2005 using
+This document was generated on 8 May 2005 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>

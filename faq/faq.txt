@@ -956,6 +956,12 @@ running at the same time.  This could happen, for example, if you update
 cygwin1.dll without exiting _all_ Cygwin apps (including inetd)
 beforehand.
 
+   The only DLL that is sanctioned by the Cygwin project is the one that
+you get by running `http://cygwin.com/setup.exe', installed in the
+directory controlled by this program.  If you have other versions on
+your system and desire help from the cygwin project, you should delete
+or rename all DLLs that are not installed by `setup.exe'.
+
    If you're trying to find multiple versions of the DLL that are
 causing this problem, reboot first, in case DLLs still loaded in memory
 are the cause.  Then use the Windows System find utility to search your
@@ -1689,36 +1695,35 @@ building it, and once built there were problems using it.  It appears
 that there is only minimal support for the Objective C front-end in the
 main GCC distribution, anyway.
 
-3.4.6 Why is make behaving badly?
----------------------------------
+3.4.6 Why does my make fail on Cygwin with an execvp error?
+-----------------------------------------------------------
 
 First of all, if you are using `make -j[N]', then stop.  It doesn't
-work well.
+work well. Also beware of using non-portable shell features in your
+Makefiles (see tips at `http://cygwin.com/faq/faq_3.html#SEC46').
 
-   Otherwise, read on...
+   Errors of `make: execvp: /bin/sh: Illegal Argument' or `make:
+execvp: /bin/sh: Argument list too long' are often caused by the
+command-line being to long for the Windows execution model.  To
+circumvent this, mount the path of the executable using the -X switch
+to enable cygexec for all executables in that folder; you will also need
+to exclude non-cygwin executables with the -x switch. Enabling cygexec
+causes cygwin executables to talk directly to one another, which
+increases the command-line limit. To enable cygexec for `/bin' and
+`/usr/bin', you can use these commands in a batch file:
 
-   Make has two operating modes, UNIX and WIN32.  You need to make sure
-that you are operating in the right mode.
+     mount -X -b -f c:\cygwin\bin /bin
+     mount -X -b -f c:\cygwin\bin /usr/bin
+     mount -x -b -f c:\cygwin\bin\strace.exe /usr/bin/strace.exe
+     mount -x -b -f c:\cygwin\bin\strace.exe /bin/strace.exe
+     mount -x -b -f c:\cygwin\bin\cygcheck.exe /usr/bin/cygcheck.exe
+     mount -x -b -f c:\cygwin\bin\cygcheck.exe /bin/cygcheck.exe
 
-   In UNIX mode, make uses sh.exe as a subshell.  The path list
-separator is ':', '\' is the escape character, POSIX paths are
-expected, and Cygwin mounts will be understood.  Use this for Makefiles
-written for UNIX.
+   Note that you must specifically exclude `strace' and `cygcheck',
+which are not linked to the Cygwin DLL.
 
-   In WIN32 mode, make uses the "native" command shell (cmd.exe or
-command.com), with all the restrictions that implies.  The path list
-separator is ';', the path separator is '\', "copy" and "del" work, but
-the Cygwin mount table is not understood.  Use this for nmake-style
-Makefiles.
-
-   The default mode for the Net Release of make (the one installed by
-`setup.exe') is UNIX.  The default mode for commercial releases to
-Redhat (formerly Cygnus) customers is WIN32.
-
-   You can override the default by setting the environment variable
-MAKE_MODE to "UNIX" (actually case is not significant) or "WIN32"
-(actually anything other than "UNIX").  You can also specify the options
--unix or -win32 on the make command line.
+   (See `http://www.cygwin.com/cygwin-ug-net/using-utils.html#mount'
+for more information.)
 
 3.4.7 Why the undefined reference to `WinMain@16'?
 --------------------------------------------------
