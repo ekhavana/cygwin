@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from faq.texinfo on 8 May 2005 -->
+<!-- Created by texi2html 1.56k from faq.texinfo on 18 May 2005 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -654,37 +654,67 @@ the action reads "Uninstall".  Proceed by clicking "Next".
 <H3><A NAME="SEC20" HREF="faq.html#TOC20">How do I uninstall <STRONG>all</STRONG> of Cygwin?</A></H3>
 
 <P>
-Setup has no automatic uninstall facility.  Just delete everything
-manually:
+Setup has no automatic uninstall facility.  The recommended method to remove all 
+of Cygwin is as follows:
 
 
 
-<UL>
-<LI>Cygwin shortcuts on the Desktop and Start Menu
+<OL>
 
-<LI>The registry tree <SAMP>`Software\Cygnus Solutions'</SAMP> under
+<LI>Remove all Cygwin services.  If a service is currently running, it must
 
-<CODE>HKEY_LOCAL_MACHINE</CODE> and/or <CODE>HKEY_CURRENT_USER</CODE>.
+first be stopped with <SAMP>`cygrunsrv -E name'</SAMP>, where <SAMP>`name'</SAMP> 
+is the name of the service.  Then use <SAMP>`cygrunsrv -R name'</SAMP> to uninstall the 
+service from the registry.  Repeat this for all services that you installed.  
+Common services that might have been installed are <CODE>sshd</CODE>, <CODE>cron</CODE>, 
+<CODE>cygserver</CODE>, <CODE>inetd</CODE>, <CODE>apache</CODE>, and so on.
 
-<LI>Anything under the Cygwin root folder, <SAMP>`C:\cygwin'</SAMP> by
+<LI>Stop the X11 server if it is running, and terminate any Cygwin programs
 
-default.
-
-<LI>Anything created by setup in its temporary working directory.
-
-</UL>
-
-<P>
-It's up to you to deal with other changes you made to your system, such
-as installing the inetd service, altering system paths, etc.  Setup
-would not have done any of these things for you.
-
-
-<P>
-If you want to save your mount points for a later reinstall, save the
-output of <SAMP>`mount -m'</SAMP> as described at
+that might be running in the background.  Remove all mount information by typing 
+<SAMP>`umount -A'</SAMP> and then exit the command prompt and ensure that no Cygwin 
+processes remain.  Note: If you want to save your mount points for a later 
+reinstall, first save the output of <SAMP>`mount -m'</SAMP> as described at 
 <TT><a target="_top" href="http://cygwin.com/cygwin-ug-net/using-utils.html#mount">http://cygwin.com/cygwin-ug-net/using-utils.html#mount</a></TT>.
 
+<LI>Delete the Cygwin root folder and all subfolders.  If you get an error
+
+that an object is in use, then ensure that you've stopped all services and 
+closed all Cygwin programs.  If you get a 'Permission Denied' error then you 
+will need to modify the permissions and/or ownership of the files or folders 
+that are causing the error.  For example, sometimes files used by system 
+services end up owned by the SYSTEM account and not writable by regular users.  
+
+The quickest way to delete the entire tree if you run into this problem is to 
+change the ownership of all files and folders to your account.  To do this in 
+Windows Explorer, right click on the root Cygwin folder, choose Properties, then 
+the Security tab.  Select Advanced, then go to the Owner tab and make sure your 
+account is listed as the owner.  Select the 'Replace owner on subcontainers and 
+objects' checkbox and press Ok.  After Explorer applies the changes you should 
+be able to delete the entire tree in one operation.  Note that you can also 
+achieve this in Cygwin by typing <SAMP>`chown -R user /'</SAMP> or by using other tools 
+such as CACLS.EXE.
+
+<LI>Delete the Cygwin shortcuts on the Desktop and Start Menu, and anything
+
+left by setup.exe in the download directory.  However, if you plan to reinstall 
+Cygwin it's a good idea to keep your setup.exe download directory since you can 
+reinstall the packages left in its cache without redownloading them.
+
+<LI>If you added Cygwin to your system path, you should remove it unless you
+
+plan to reinstall Cygwin to the same location.  Similarly, if you set your 
+CYGWIN environment variable system-wide and don't plan to reinstall, you should 
+remove it.
+
+<LI>Finally, if you want to be thorough you can delete the registry tree
+
+<SAMP>`Software\Cygnus Solutions'</SAMP> under <CODE>HKEY_LOCAL_MACHINE</CODE> and/or 
+<CODE>HKEY_CURRENT_USER</CODE>.  However, if you followed the directions above you 
+will have already removed all the mount information which is typically the only 
+thing stored in the registry.
+
+</OL>
 
 
 
@@ -4129,7 +4159,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 8 May 2005 using
+This document was generated on 18 May 2005 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
