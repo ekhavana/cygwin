@@ -842,21 +842,13 @@ list: `http://cygwin.com/ml/cygwin/2000-11/msg01176.html'.
 3.2.15 Why doesn't `mkdir -p' work on a network share?
 ------------------------------------------------------
 
-Unfortunately, you cannot do something like this:
+Starting with `coreutils-5.3.0-6' and `cygwin-1.5.17', you can do
+something like this:
 
      bash$ mkdir -p //MACHINE/Share/path/to/new/dir
-     mkdir: cannot create directory `//MACHINE': No such file or directory
 
-   This is because mkdir checks for the existence of each directory on
-the path, creating them as necessary.  Since `//MACHINE' is not a
-directory (you can't cd to it either), mkdir tries to create it, and
-fails.
-
-   This might get fixed someday, but for now, you have to work around
-it:
-
-     bash$ cd //MACHINE/Share
-     bash$ mkdir -p path/to/new/dir
+   However, coreutils expects Unix path names, so something like `mkdir
+-p \\\\machine\\share\\path' will fail.
 
 3.2.16 Why doesn't my shell script work?
 ----------------------------------------

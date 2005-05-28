@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from ./faq.texinfo on 18 May 2005 -->
+<!-- Created by texi2html 1.56k from ./faq.texinfo on 28 May 2005 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -1368,31 +1368,19 @@ Vinschen for OpenSSH, see this message from the cygwin mailing list:
 <H3><A NAME="SEC45" HREF="faq0.html#TOC45">Why doesn't <SAMP>`mkdir -p'</SAMP> work on a network share?</A></H3>
 
 <P>
-Unfortunately, you cannot do something like this:
+Starting with <SAMP>`coreutils-5.3.0-6'</SAMP> and <SAMP>`cygwin-1.5.17'</SAMP>, you can
+do something like this:
 
 
 
 <PRE>
 bash$ mkdir -p //MACHINE/Share/path/to/new/dir
-mkdir: cannot create directory `//MACHINE': No such file or directory
 </PRE>
 
 <P>
-This is because mkdir checks for the existence of each directory on the
-path, creating them as necessary.  Since <SAMP>`//MACHINE'</SAMP> is not a
-directory (you can't cd to it either), mkdir tries to create it, and
-fails.
+However, coreutils expects Unix path names, so something like
+<SAMP>`mkdir -p \\\\machine\\share\\path'</SAMP> will fail. 
 
-
-<P>
-This might get fixed someday, but for now, you have to work around it:
-
-
-
-<PRE>
-bash$ cd //MACHINE/Share
-bash$ mkdir -p path/to/new/dir
-</PRE>
 
 
 
@@ -4159,7 +4147,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 18 May 2005 using
+This document was generated on 28 May 2005 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
