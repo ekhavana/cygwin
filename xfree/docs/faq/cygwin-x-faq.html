@@ -341,7 +341,7 @@ CLASS="replaceable"
 ></DT
 ><DT
 >6.3. <A
-HREF="cygwin-x-faq.html#q-mandrake-8.1-xdmcp"
+HREF="cygwin-x-faq.html#q-xdmcp-query"
 >I get no login screen when using <TT
 CLASS="parameter"
 ><I
@@ -351,16 +351,31 @@ CLASS="parameter"
 ></DT
 ><DT
 >6.4. <A
+HREF="cygwin-x-faq.html#q-mandrake-8.1-xdmcp"
+>XDMCP does not work with Mandrake 8.1</A
+></DT
+><DT
+>6.5. <A
+HREF="cygwin-x-faq.html#q-xdmcp-gdm"
+>Why does GDM not work with <TT
+CLASS="parameter"
+><I
+>-clipboard</I
+></TT
+></A
+></DT
+><DT
+>6.6. <A
 HREF="cygwin-x-faq.html#q-solaris-fonts"
 >I get no login screen for Solaris</A
 ></DT
 ><DT
->6.5. <A
+>6.7. <A
 HREF="cygwin-x-faq.html#q-remote-solaris"
 >XDMCP freezes with remote Solaris machine!</A
 ></DT
 ><DT
->6.6. <A
+>6.8. <A
 HREF="cygwin-x-faq.html#q-cde-via-xdmcp-hangs"
 >Login to <SPAN
 CLASS="acronym"
@@ -375,7 +390,7 @@ CLASS="glossterm"
 Cygwin/X.</A
 ></DT
 ><DT
->6.7. <A
+>6.9. <A
 HREF="cygwin-x-faq.html#q-xdmcp-info"
 >Where can I find more information about XDMCP.</A
 ></DT
@@ -1406,7 +1421,7 @@ HREF="cygwin-x-faq.html#display-and-screen"
 used. For additional information about firewalls and XDMCP connections check 
 <A
 HREF="cygwin-x-faq.html#q-mandrake-8.1-xdmcp"
->Q: 6.3.</A
+>Q: 6.4.</A
 >.
 </P
 ></DIV
@@ -2334,7 +2349,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-mandrake-8.1-xdmcp"/><B
+NAME="q-xdmcp-query"/><B
 >6.3. </B
 >I get no login screen when using <TT
 CLASS="parameter"
@@ -2401,6 +2416,36 @@ WIDTH="100%"
 CLASS="screen"
 >&#13;[Xdmcp]
 Enable=true
+</PRE
+></TD
+></TR
+></TABLE
+>
+or for xdm style configuration:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;DisplayManager.requestPort:     0
+</PRE
+></TD
+></TR
+></TABLE
+>
+to:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;!DisplayManager.requestPort:     0
 </PRE
 ></TD
 ></TR
@@ -2491,6 +2536,42 @@ VALIGN="TOP"
 ALIGN="LEFT"
 VALIGN="TOP"
 >/etc/X11/gdm/gdm.conf</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>Debian GNU/Linux</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>Unstable</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>xdm</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>/etc/X11/xdm/xdm-config</TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>Debian GNU/Linux</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>Unstable</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>wdm</TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+>/etc/X11/wdm/wdm-config</TD
 ></TR
 ></TBODY
 ></TABLE
@@ -2609,8 +2690,56 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-solaris-fonts"/><B
+NAME="q-mandrake-8.1-xdmcp"/><B
 >6.4. </B
+>XDMCP does not work with Mandrake 8.1</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>See <A
+HREF="cygwin-x-faq.html#q-xdmcp-query"
+>Q: 6.3.</A
+></P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-xdmcp-gdm"/><B
+>6.5. </B
+>Why does GDM not work with <TT
+CLASS="parameter"
+><I
+>-clipboard</I
+></TT
+></P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Newer versions of GDM have a more complex startup mechanism than the other
+display manager have. This interferes with the way the clipboard client is 
+started.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-solaris-fonts"/><B
+>6.6. </B
 >I get no login screen for Solaris</P
 ></DIV
 ><DIV
@@ -2620,11 +2749,11 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-x-faq.html#q-remote-solaris"
->Q: 6.5.</A
+>Q: 6.7.</A
 > and 
 <A
 HREF="cygwin-x-faq.html#q-cde-via-xdmcp-hangs"
->Q: 6.6.</A
+>Q: 6.8.</A
 ></P
 ></DIV
 ><DIV
@@ -2719,7 +2848,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-remote-solaris"/><B
->6.5. </B
+>6.7. </B
 >XDMCP freezes with remote Solaris machine!</P
 ></DIV
 ><DIV
@@ -2729,11 +2858,11 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-x-faq.html#q-solaris-fonts"
->Q: 6.4.</A
+>Q: 6.6.</A
 > and 
 <A
 HREF="cygwin-x-faq.html#q-cde-via-xdmcp-hangs"
->Q: 6.6.</A
+>Q: 6.8.</A
 ></P
 ></DIV
 ><DIV
@@ -2755,7 +2884,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-cde-via-xdmcp-hangs"/><B
->6.6. </B
+>6.8. </B
 >Login to <SPAN
 CLASS="acronym"
 >CDE</SPAN
@@ -2775,10 +2904,10 @@ CLASS="answer"
 > </B
 >See also <A
 HREF="cygwin-x-faq.html#q-solaris-fonts"
->Q: 6.4.</A
+>Q: 6.6.</A
 > and <A
 HREF="cygwin-x-faq.html#q-remote-solaris"
->Q: 6.5.</A
+>Q: 6.7.</A
 ></P
 ></DIV
 ><DIV
@@ -2801,7 +2930,7 @@ CLASS="question"
 ><P
 ><A
 NAME="q-xdmcp-info"/><B
->6.7. </B
+>6.9. </B
 >Where can I find more information about XDMCP.</P
 ></DIV
 ><DIV
@@ -4107,7 +4236,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN797"/><P
+NAME="AEN821"/><P
 ><B
 >Example 1. Include Problems</B
 ></P
