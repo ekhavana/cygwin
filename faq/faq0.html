@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from ./faq.texinfo on 28 May 2005 -->
+<!-- Created by texi2html 1.56k from ./faq.texinfo on 20 June 2005 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -76,9 +76,9 @@
 <LI><A NAME="TOC52" HREF="faq0.html#SEC52">Why isn't package XXXX available in Cygwin?  (Or, why is your package so out of date?)</A>
 <LI><A NAME="TOC53" HREF="faq0.html#SEC53">How can I access other drives?</A>
 <LI><A NAME="TOC54" HREF="faq0.html#SEC54">How can I copy and paste into Cygwin console windows?</A>
-<LI><A NAME="TOC55" HREF="faq0.html#SEC55">What does "mount failed: Device or resource busy" mean?</A>
+<LI><A NAME="TOC55" HREF="faq0.html#SEC55">What firewall should I use with Cygwin?</A>
 <LI><A NAME="TOC56" HREF="faq0.html#SEC56">How can I share files between Unix and Windows?</A>
-<LI><A NAME="TOC57" HREF="faq0.html#SEC57">Are mixed-case filenames possible with Cygwin?</A>
+<LI><A NAME="TOC57" HREF="faq0.html#SEC57">Is Cygwin case-sensitive? What are managed mounts?</A>
 <LI><A NAME="TOC58" HREF="faq0.html#SEC58">What about DOS special filenames?</A>
 <LI><A NAME="TOC59" HREF="faq0.html#SEC59">When it hangs, how do I get it back?</A>
 <LI><A NAME="TOC60" HREF="faq0.html#SEC60">Why the weird directory structure?</A>
@@ -127,7 +127,7 @@
 <LI><A NAME="TOC99" HREF="faq0.html#SEC99">How do I make the console window go away?</A>
 <LI><A NAME="TOC100" HREF="faq0.html#SEC100">Why does make complain about a "missing separator"?</A>
 <LI><A NAME="TOC101" HREF="faq0.html#SEC101">Why can't we redistribute Microsoft's Win32 headers?</A>
-<LI><A NAME="TOC102" HREF="faq0.html#SEC102">How do I link against <SAMP>`cygwin1.dll'</SAMP> with Visual Studio?</A>
+<LI><A NAME="TOC102" HREF="faq0.html#SEC102">How do I use <SAMP>`cygwin1.dll'</SAMP> with Visual Studio or MinGW?</A>
 <LI><A NAME="TOC103" HREF="faq0.html#SEC103">How do I link against a <SAMP>`.lib'</SAMP> file?</A>
 <LI><A NAME="TOC104" HREF="faq0.html#SEC104">How do I build Cygwin on my own?</A>
 <LI><A NAME="TOC105" HREF="faq0.html#SEC105">I may have found a bug in Cygwin, how can I debug it (the symbols in gdb look funny)?</A>
@@ -877,13 +877,14 @@ send a message to <A HREF="mailto:cygwin-announce-unsubscribe@cygwin.com">cygwin
 
 
 <P>
-If you are going to help develop the Cygwin library by volunteering for
-the project, you will want to subscribe to the Cygwin developers list,
-called cygwin-developers.  If you are contributing to Cygwin tools &#38;
-applications, rather than the library itself, then you should subscribe
-to cygwin-apps.  The same mechanism as described for the first two lists
-works for these as well.  Both cygwin-developers and cygwin-apps are
-by-approval lists.
+If you want to contribe to Cygwin tools &#38; applications, rather than
+the library itself, then you should subscribe to cygwin-apps. There
+is also a low-volume list called cygwin-developers which is reserved
+for knowledgeable people who regularly contribute to the Cygwin DLL.
+Please do not ask for read-only access to this mailing list.  Both
+cygwin-developers and cygwin-apps are by-approval lists.  The same
+mechanism as described for the first two lists works for these as
+well.  
 
 
 <P>
@@ -1744,28 +1745,25 @@ the following line to your .inputrc file:
 
 
 
-<H3><A NAME="SEC55" HREF="faq0.html#TOC55">What does "mount failed: Device or resource busy" mean?</A></H3>
+<H3><A NAME="SEC55" HREF="faq0.html#TOC55">What firewall should I use with Cygwin?</A></H3>
 
 <P>
-<STRONG>(Please note: This section has not yet been updated for the latest
-net release.)</STRONG>
-
-
-<P>
-This usually means that you are trying to mount to a location
-already in use by mount.  For example, if c: is mounted as '/'
-and you try to mount d: there as well, you will get this error
-message.  First "umount" the old location, then "mount" the new one and
-you should have better luck.
+We have had good reports about Kerio Personal Firewall, ZoneLabs
+Integrity Desktop, and the built-in firewall in Windows XP. Other
+well-known products including ZoneAlarm and Norton Internet Security have
+caused problems for some users but work fine for others. If you are
+having strange connection-related problems, disabling the firewall is a
+good troubleshooting step.
 
 
 <P>
-If you are trying to umount '/' and are getting this message, you may
-need to run <CODE>regedit.exe</CODE> and change the "native" key for the '/'
-mount in one of the mount points kept under
-HKEY_CURRENT_USER/Software/Red Hat, Inc./CYGWIN.DLL setup/&#60;version&#62;
-where &#60;version&#62; is the latest registry version associated with the
-Cygwin library.
+Cygwin uses sockets to implement many of its functions, such as IPC.
+Some overzealous firewalls install themselves deeply into the winsock
+stack (with the 'layered service provider' API) and install hooks
+throughout.  Sadly the mailing list archives are littered with examples
+of poorly written firewall-type software that causes things to break.
+Note that with many of these products, simply disabling the firewall
+does not remove these changes; it must be completely uninstalled.
 
 
 
@@ -1773,17 +1771,17 @@ Cygwin library.
 <H3><A NAME="SEC56" HREF="faq0.html#TOC56">How can I share files between Unix and Windows?</A></H3>
 
 <P>
-During development, we have both Unix boxes running Samba and
-NT/Windows 95/98 machines.  We often build with cross-compilers
-under Unix and copy binaries and source to the Windows system
-or just toy with them directly off the Samba-mounted partition.
-On dual-boot NT/Windows 9x machines, we usually use the FAT
-filesystem so we can also access the files under Windows 9x.
+During development, we have both Linix boxes running Samba and Windows
+machines.  We often build with cross-compilers under Linix and copy
+binaries and source to the Windows system or just toy with them
+directly off the Samba-mounted partition.  On dual-boot NT/Windows 9x
+machines, we usually use the FAT filesystem so we can also access the
+files under Windows 9x.
 
 
 
 
-<H3><A NAME="SEC57" HREF="faq0.html#TOC57">Are mixed-case filenames possible with Cygwin?</A></H3>
+<H3><A NAME="SEC57" HREF="faq0.html#TOC57">Is Cygwin case-sensitive? What are managed mounts?</A></H3>
 
 <P>
 Several Unix programs expect to be able to use to filenames
@@ -1794,18 +1792,23 @@ just different case, so the configuration fails.
 
 
 <P>
-In releases prior to beta 16, mount had a special mixed case option
-which renamed files in such a way as to allow mixed case filenames.  We
-chose to remove the support when we rewrote the path handling code for
-beta 16.  The standard Windows apps -- explorer.exe,
-cmd.exe/command.com, etc. -- do not distinguish filenames that differed
-only in case, resulting in some (very) undesirable behavior.
+To help with this problem, starting in <SAMP>`cygwin-1.5.0'</SAMP> it is
+possible to have a case sensitive Cygwin managed mount. This is an
+experimental feature and should be used with caution. You should only
+use it for directories that are initially unpopulated and are due to
+be completely managed by cygwin (hence the name).  So, the best use
+would be to create an empty directory, mount it, and then add files to
+it:  
 
 
-<P>
-Sergey Okhapkin had maintained a mixed-case patch ('coolview') until
-about B20.1, but this has not been updated to recent versions of Cygwin.
 
+<PRE>
+mkdir /managed-dir
+mount -o managed c:/cygwin/managed-dir /managed-dir
+cd /managed-dir/
+touch makefile
+touch Makefile
+</PRE>
 
 
 
@@ -2870,11 +2873,34 @@ have our own Win32 headers which are pretty complete.
 
 
 
-<H3><A NAME="SEC102" HREF="faq0.html#TOC102">How do I link against <SAMP>`cygwin1.dll'</SAMP> with Visual Studio?</A></H3>
+<H3><A NAME="SEC102" HREF="faq0.html#TOC102">How do I use <SAMP>`cygwin1.dll'</SAMP> with Visual Studio or MinGW?</A></H3>
 
 <P>
-To my knowledge, none of the Cygwin developers have done this, but we
-have this report from the mailing list that it can be done this way:
+If you want to load the DLL dynamically, read
+<CODE>winsup/cygwin/how-cygtls-works.txt</CODE> and the sample code in
+<CODE>winsup/testsuite/cygload</CODE> to understand how this works.
+The short version is:
+
+
+
+<OL>
+<LI>Make sure you have 4K of scratch space at the bottom of your stack.
+
+<LI>Invoke <CODE>cygwin_dll_init()</CODE>:
+
+
+<PRE>
+HMODULE h = LoadLibrary("cygwin1.dll");
+void (*init)() = GetProcAddress(h, "cygwin_dll_init");
+init();
+</PRE>
+
+</OL>
+
+<P>
+If you want to link statically from Visual Studio, to my knowledge
+none of the Cygwin developers have done this, but we have this report
+from the mailing list that it can be done this way:
 
 
 
@@ -4147,7 +4173,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 28 May 2005 using
+This document was generated on 20 June 2005 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
