@@ -310,6 +310,15 @@ HREF="cygwin-x-faq.html#remote"
 HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 >X11Forwarding does not work with OpenSSH under Cygwin</A
 ></DT
+><DT
+>5.2. <A
+HREF="cygwin-x-faq.html#AEN351"
+>Why do remote programs crash with <SPAN
+CLASS="errorname"
+>X Error of failed request: BadAtom</SPAN
+>?
+</A
+></DT
 ></DL
 ></DD
 ><DT
@@ -2240,6 +2249,63 @@ CLASS="screen"
 >
 
 Otherwise ask your you admin to change this for you.</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="AEN351"/><B
+>5.2. </B
+>Why do remote programs crash with <SPAN
+CLASS="errorname"
+>X Error of failed request: BadAtom</SPAN
+>?
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>Starting with OpenSSH 3.8 you will need to set
+<SPAN
+CLASS="QUOTE"
+>"ForwardX11Trusted yes"</SPAN
+> in the client configuration to
+allow remote clients full access to the xserver. Without it some
+clients will fail with a similar error:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+> X Error of failed request: BadAtom (invalid Atom parameter)
+  Major opcode of failed request: 18 (X_ChangeProperty)
+  Atom id in failed request: 0x114
+  Serial number of failed request: 370
+  Current serial number in output stream: 372
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;The commandline switch <TT
+CLASS="parameter"
+><I
+>-Y</I
+></TT
+> does the same.
+See also <A
+HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
+>Q: 5.1.</A
+> 
+</P
 ></DIV
 ></DIV
 ></DIV
@@ -4236,7 +4302,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN821"/><P
+NAME="AEN832"/><P
 ><B
 >Example 1. Include Problems</B
 ></P
