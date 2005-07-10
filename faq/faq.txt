@@ -997,18 +997,38 @@ are the cause.  Then use the Windows System find utility to search your
 whole machine, not just components in your PATH (as 'type' would do) or
 cygwin-mounted filesystems (as Cygwin 'find' would do).
 
-3.2.21 Where can I find "more"?
--------------------------------
-
-If you are looking for the "more" pager, you should use the "less" pager
-instead.
-
-3.2.22 Why isn't package XXXX available in Cygwin?  (Or, why is your package so out of date?)
----------------------------------------------------------------------------------------------
+3.2.21 Why isn't package XYZ available in Cygwin?
+-------------------------------------------------
 
 Probably because there is nobody willing or able to maintain it.  It
 takes time, and the priority for the Cygwin Team is the Cygwin package.
-The rest is a volunteer effort.  Want to contribute?  See below.
+The rest is a volunteer effort.  Want to contribute?  See
+`http://cygwin.com/setup.html'.
+
+3.2.22 Why is the Cygwin package of XYZ so out of date?
+-------------------------------------------------------
+
+(Also: Why is the version of package XYZ older than the version that I
+can download from the XYZ web site?  Why is the version of package XYZ
+older than the version that I installed on my linux system?  Is there
+something special about Cygwin which requires that only an older version
+of package XYZ will work on it?)
+
+   Every package in the Cygwin distribution has a maintainer who is
+responsible for sending out updates of the package.  This person is a
+volunteer who is rarely the same person as the official developer of the
+package.  If you notice that a version of a package seems to be out of
+date, the reason is usually pretty simple - the person who is
+maintaining the package hasn't gotten around to updating it yet. Rarely,
+the newer package actually requires complex changes that the maintainer
+is working out.
+
+   If you urgently need an update, sending a polite message to the
+cygwin mailing list pinging the maintainer is perfectly acceptable.
+There are no guarantees that the maintainer will have time to update
+the package or that you'll receive a response to your request, however.
+
+   Remeber that the operative term here is "volunteer".
 
 3.2.23 How can I access other drives?
 -------------------------------------
@@ -1088,23 +1108,28 @@ adding the following line to your .inputrc file:
 We have had good reports about Kerio Personal Firewall, ZoneLabs
 Integrity Desktop, and the built-in firewall in Windows XP. Other
 well-known products including ZoneAlarm and Norton Internet Security
-have caused problems for some users but work fine for others. If you are
-having strange connection-related problems, disabling the firewall is a
-good troubleshooting step.
+have caused problems for some users but work fine for others. At last
+report, Agnitum Outpost did not work with Cygwin.  If you are having
+strange connection-related problems, disabling the firewall is a good
+troubleshooting step (as is closing or disabling all other running
+applications, especially resource-intensive processes such as indexed
+search).
 
-   Cygwin uses sockets to implement many of its functions, such as IPC.
-Some overzealous firewalls install themselves deeply into the winsock
-stack (with the 'layered service provider' API) and install hooks
-throughout.  Sadly the mailing list archives are littered with examples
-of poorly written firewall-type software that causes things to break.
-Note that with many of these products, simply disabling the firewall
-does not remove these changes; it must be completely uninstalled.
+   On the whole, Cygwin doesn't care which firewall is used.  The few
+rare exceptions have to do with socket code.  Cygwin uses sockets to
+implement many of its functions, such as IPC.  Some overzealous
+firewalls install themselves deeply into the winsock stack (with the
+'layered service provider' API) and install hooks throughout.  Sadly
+the mailing list archives are littered with examples of poorly written
+firewall-type software that causes things to break.  Note that with
+many of these products, simply disabling the firewall does not remove
+these changes; it must be completely uninstalled.
 
 3.2.26 How can I share files between Unix and Windows?
 ------------------------------------------------------
 
-During development, we have both Linix boxes running Samba and Windows
-machines.  We often build with cross-compilers under Linix and copy
+During development, we have both Linux boxes running Samba and Windows
+machines.  We often build with cross-compilers under Linux and copy
 binaries and source to the Windows system or just toy with them
 directly off the Samba-mounted partition.  On dual-boot NT/Windows 9x
 machines, we usually use the FAT filesystem so we can also access the
@@ -1887,7 +1912,16 @@ Win32 headers which are pretty complete.
 3.4.15 How do I use `cygwin1.dll' with Visual Studio or MinGW?
 --------------------------------------------------------------
 
-If you want to load the DLL dynamically, read
+Before you begin, note that Cygwin is licensed under the GNU GPL (as
+indeed are all other Cygwin-based libraries).  That means that if your
+code links against the cygwin dll (and if your program is calling
+functions from Cygwin, it must, as a matter of fact, be linked against
+it), you must apply the GPL to your source as well.  Of course, this
+only matters if you plan to distribute your program in binary form.  For
+more information, see `http://gnu.org/licenses/gpl-faq.html'.  If that
+is not a problem, read on.
+
+   If you want to load the DLL dynamically, read
 `winsup/cygwin/how-cygtls-works.txt' and the sample code in
 `winsup/testsuite/cygload' to understand how this works.  The short
 version is:
@@ -1932,9 +1966,7 @@ from the mailing list that it can be done this way:
 
   5. Download crt0.c from the cygwin website and include it in
      your sources. Modify it to call my_crt0() instead of
-     cygwin_crt0().  Since you are using Cygwin source code, your
-     resulting program will be licensed under the GNU GPL. For more
-        information, see `http://gnu.org/licenses/gpl-faq.html'.
+     cygwin_crt0().
 
   6. Build your object files using the MS VC compiler cl.
 

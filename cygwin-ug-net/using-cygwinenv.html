@@ -108,13 +108,15 @@ checking is disabled again since it's not correctly implemented by Microsoft
 and it's behaviour is getting worse with each new OS version.  Unprivileged
 terminal server sessions are practically impossible with traverse checking
 switched on.  So, use at your own risk.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)tty</tt> - if set, Cygwin enables extra support
-(i.e., termios) for UNIX-like ttys. 
+(i.e., termios) for UNIX-like ttys in the Windows console. 
 It is not compatible with some Windows programs.
 Defaults to not set, in which case the tty is opened in text mode.
 Note that this has been changed such that ^D works as
 expected instead of ^Z, and is settable via <b class="command">stty</b>.
 This option must be specified before starting a Cygwin shell 
-and it cannot be changed in the shell.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)winsymlinks</tt> - if set, Cygwin creates
+and it cannot be changed in the shell.  It should not be set when using
+other terminals (i.e., rxvt or xterm). 
+</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)winsymlinks</tt> - if set, Cygwin creates
 symlinks as Windows shortcuts with a special header and the R/O attribute
 set. If not set, Cygwin creates symlinks as plain files with a magic number,
 a path and the system attribute set. Defaults to set.</p></li></ul></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="using-cygserver.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Special filenames </td><td width="20%" align="center"><a accesskey="h" href="index.html">Home</a></td><td width="40%" align="right" valign="top"> Cygserver</td></tr></table></div></body></html>

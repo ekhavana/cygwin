@@ -149,14 +149,14 @@ have to change the primary group by hand if `None' as primary group is
 not what you want (and I'm sure, it's not what you want!)</p><p>Look at the following examples, which were parts of my files before
 storing SIDs in /etc/passwd and /etc/group had been introduced (See next
 chapter for details).  With the exception of my personal user entry, all
-entries are well known entries.</p><div class="example"><a name="id4742111"></a><p class="title"><b>Example 2.1. /etc/passwd</b></p><pre class="screen">
+entries are well known entries.</p><div class="example"><a name="id4742146"></a><p class="title"><b>Example 2.1. /etc/passwd</b></p><pre class="screen">
 everyone:*:0:0:::
 system:*:18:18:::
 administrator::500:544::/home/root:/bin/bash
 guest:*:501:546:::
 administrators:*:544:544::/home/root:
 corinna::1000:547:Corinna Vinschen:/home/corinna:/bin/tcsh
-</pre></div><div class="example"><a name="id4742127"></a><p class="title"><b>Example 2.2. /etc/group</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id4742161"></a><p class="title"><b>Example 2.2. /etc/group</b></p><pre class="screen">
 everyone::0:
 system::18:
 none::513:
@@ -194,9 +194,9 @@ root::0:513:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh
 root::500:513::/home/root:/bin/sh
 </pre></li><li><p>As in U*X systems UIDs and GIDs numbering scheme now
 don't influence each other. So it's possible to have same Id's for a
-user and a group:</p><div class="example"><a name="id4742349"></a><p class="title"><b>Example 2.3. /etc/passwd:</b></p><pre class="screen">
+user and a group:</p><div class="example"><a name="id4742384"></a><p class="title"><b>Example 2.3. /etc/passwd:</b></p><pre class="screen">
 root::0:0:S-1-5-21-54355234-56236534-345635656-500:/home/root:/bin/sh
-</pre></div><div class="example"><a name="id4742363"></a><p class="title"><b>Example 2.4. /etc/group:</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id4742397"></a><p class="title"><b>Example 2.4. /etc/group:</b></p><pre class="screen">
 root:S-1-5-32-544:0:
 </pre></div></li></ul></div><p>The tools <b class="command">mkpasswd</b> and <b class="command">mkgroup</b>
 create the needed entries by default. If you don't want that you can use
@@ -217,13 +217,13 @@ database, NOT from the passwd file!</p><p>As in the previous chapter I give my p
 <tt class="filename">/etc/passwd</tt> and <tt class="filename">/etc/group</tt> as
 examples.  Please note that I've changed these files heavily!  There's no
 need to change them that way, it's just for testing purposes and...
-for fun.</p><div class="example"><a name="id4742478"></a><p class="title"><b>Example 2.5. /etc/passwd</b></p><pre class="screen">
+for fun.</p><div class="example"><a name="id4742512"></a><p class="title"><b>Example 2.5. /etc/passwd</b></p><pre class="screen">
 root:*:0:0:Administrators group,S-1-5-32-544::
 SYSTEM:*:18:18:,S-1-5-18:/home/system:/bin/bash
 admin:*:500:513:,S-1-5-21-1844237615-436374069-1060284298-500:/home/Administrator:/bin/bash
 corinna:*:100:0:Corinna Vinschen,S-1-5-21-1844237615-436374069-1060284298-1003:/home/corinna:/bin/tcsh
 Guest:*:501:546:,S-1-5-21-1844237615-436374069-1060284298-501:/home/Guest:/bin/bash
-</pre></div><div class="example"><a name="id4742496"></a><p class="title"><b>Example 2.6. /etc/group</b></p><pre class="screen">
+</pre></div><div class="example"><a name="id4742531"></a><p class="title"><b>Example 2.6. /etc/group</b></p><pre class="screen">
 root:S-1-5-32-544:0:
 local:S-1-2-0:2:
 network:S-1-5-2:3:

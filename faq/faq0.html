@@ -1,6 +1,6 @@
 <HTML>
 <HEAD>
-<!-- Created by texi2html 1.56k from ./faq.texinfo on 20 June 2005 -->
+<!-- Created by texi2html 1.56k from ./faq.texinfo on 10 July 2005 -->
 
 <TITLE>The Cygwin FAQ
 </TITLE>
@@ -72,8 +72,8 @@
 <LI><A NAME="TOC48" HREF="faq0.html#SEC48">Why don't international (Unicode) characters work?</A>
 <LI><A NAME="TOC49" HREF="faq0.html#SEC49">Why don't cursor keys work under Win95/Win98?</A>
 <LI><A NAME="TOC50" HREF="faq0.html#SEC50">Is it OK to have multiple copies of the DLL?</A>
-<LI><A NAME="TOC51" HREF="faq0.html#SEC51">Where can I find "more"?</A>
-<LI><A NAME="TOC52" HREF="faq0.html#SEC52">Why isn't package XXXX available in Cygwin?  (Or, why is your package so out of date?)</A>
+<LI><A NAME="TOC51" HREF="faq0.html#SEC51">Why isn't package XYZ available in Cygwin?</A>
+<LI><A NAME="TOC52" HREF="faq0.html#SEC52">Why is the Cygwin package of XYZ so out of date?</A>
 <LI><A NAME="TOC53" HREF="faq0.html#SEC53">How can I access other drives?</A>
 <LI><A NAME="TOC54" HREF="faq0.html#SEC54">How can I copy and paste into Cygwin console windows?</A>
 <LI><A NAME="TOC55" HREF="faq0.html#SEC55">What firewall should I use with Cygwin?</A>
@@ -1605,21 +1605,47 @@ cygwin-mounted filesystems (as Cygwin 'find' would do).
 
 
 
-<H3><A NAME="SEC51" HREF="faq0.html#TOC51">Where can I find "more"?</A></H3>
-
-<P>
-If you are looking for the "more" pager, you should use the "less" pager
-instead.
-
-
-
-
-<H3><A NAME="SEC52" HREF="faq0.html#TOC52">Why isn't package XXXX available in Cygwin?  (Or, why is your package so out of date?)</A></H3>
+<H3><A NAME="SEC51" HREF="faq0.html#TOC51">Why isn't package XYZ available in Cygwin?</A></H3>
 
 <P>
 Probably because there is nobody willing or able to maintain it.  It
 takes time, and the priority for the Cygwin Team is the Cygwin package.
-The rest is a volunteer effort.  Want to contribute?  See below.
+The rest is a volunteer effort.  Want to contribute?  See
+<STRONG><A HREF="http://cygwin.com/setup.html">http://cygwin.com/setup.html</A></STRONG>.
+
+
+
+
+<H3><A NAME="SEC52" HREF="faq0.html#TOC52">Why is the Cygwin package of XYZ so out of date?</A></H3>
+
+<P>
+(Also: Why is the version of package XYZ older than the version that I
+can download from the XYZ web site?  Why is the version of package XYZ
+older than the version that I installed on my linux system?  Is there
+something special about Cygwin which requires that only an older version
+of package XYZ will work on it?)
+
+
+<P>
+Every package in the Cygwin distribution has a maintainer who is
+responsible for sending out updates of the package.  This person is a
+volunteer who is rarely the same person as the official developer of the
+package.  If you notice that a version of a package seems to be out of
+date, the reason is usually pretty simple -- the person who is
+maintaining the package hasn't gotten around to updating it yet. Rarely,
+the newer package actually requires complex changes that the maintainer
+is working out. 
+
+
+<P>
+If you urgently need an update, sending a polite message to the cygwin
+mailing list pinging the maintainer is perfectly acceptable.  There are
+no guarantees that the maintainer will have time to update the package
+or that you'll receive a response to your request, however.
+
+
+<P>
+Remeber that the operative term here is "volunteer".
 
 
 
@@ -1751,12 +1777,17 @@ the following line to your .inputrc file:
 We have had good reports about Kerio Personal Firewall, ZoneLabs
 Integrity Desktop, and the built-in firewall in Windows XP. Other
 well-known products including ZoneAlarm and Norton Internet Security have
-caused problems for some users but work fine for others. If you are
-having strange connection-related problems, disabling the firewall is a
-good troubleshooting step.
+caused problems for some users but work fine for others. At last report,
+Agnitum Outpost did not work with Cygwin.  If you are having strange
+connection-related problems, disabling the firewall is a good
+troubleshooting step (as is closing or disabling all other running
+applications, especially resource-intensive processes such as indexed
+search).
 
 
 <P>
+On the whole, Cygwin doesn't care which firewall is used.  The few rare
+exceptions have to do with socket code.
 Cygwin uses sockets to implement many of its functions, such as IPC.
 Some overzealous firewalls install themselves deeply into the winsock
 stack (with the 'layered service provider' API) and install hooks
@@ -1771,8 +1802,8 @@ does not remove these changes; it must be completely uninstalled.
 <H3><A NAME="SEC56" HREF="faq0.html#TOC56">How can I share files between Unix and Windows?</A></H3>
 
 <P>
-During development, we have both Linix boxes running Samba and Windows
-machines.  We often build with cross-compilers under Linix and copy
+During development, we have both Linux boxes running Samba and Windows
+machines.  We often build with cross-compilers under Linux and copy
 binaries and source to the Windows system or just toy with them
 directly off the Samba-mounted partition.  On dual-boot NT/Windows 9x
 machines, we usually use the FAT filesystem so we can also access the
@@ -2876,6 +2907,17 @@ have our own Win32 headers which are pretty complete.
 <H3><A NAME="SEC102" HREF="faq0.html#TOC102">How do I use <SAMP>`cygwin1.dll'</SAMP> with Visual Studio or MinGW?</A></H3>
 
 <P>
+Before you begin, note that Cygwin is licensed under the GNU GPL (as
+indeed are all other Cygwin-based libraries).  That means that if your
+code links against the cygwin dll (and if your program is calling
+functions from Cygwin, it must, as a matter of fact, be linked against
+it), you must apply the GPL to your source as well.  Of course, this
+only matters if you plan to distribute your program in binary form.  For
+more information, see <STRONG><A HREF="http://gnu.org/licenses/gpl-faq.html">http://gnu.org/licenses/gpl-faq.html</A></STRONG>.  If
+that is not a problem, read on.
+
+
+<P>
 If you want to load the DLL dynamically, read
 <CODE>winsup/cygwin/how-cygtls-works.txt</CODE> and the sample code in
 <CODE>winsup/testsuite/cygload</CODE> to understand how this works.
@@ -2946,9 +2988,7 @@ void
 <LI>Download crt0.c from the cygwin website and include it in
 
        your sources. Modify it to call my_crt0() instead of
-       cygwin_crt0().  Since you are using Cygwin source code, your
-       resulting program will be licensed under the GNU GPL. For more
-       information, see <STRONG><A HREF="http://gnu.org/licenses/gpl-faq.html">http://gnu.org/licenses/gpl-faq.html</A></STRONG>.  
+       cygwin_crt0().  
 
 <LI>Build your object files using the MS VC compiler cl.
 
@@ -4173,7 +4213,7 @@ Public License instead of this License.
 </PRE>
 
 <P><HR><P>
-This document was generated on 20 June 2005 using
+This document was generated on 10 July 2005 using
 <A HREF="http://wwwinfo.cern.ch/dis/texi2html/">texi2html</A>&nbsp;1.56k.
 </BODY>
 </HTML>
