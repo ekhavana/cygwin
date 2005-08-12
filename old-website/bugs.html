@@ -67,14 +67,14 @@ Please <b>do not do this</b> unless specifically requested.</p>
 <li>Use a subject line that describes the issue well: <P>
 
 <ul>
-Good examples: <br>
+Good examples:<br>
 <blockquote>
 	"1.1.8: select bug (NT and 95)" <br>
 	"1.1.6: problem building perl" <br>
 	"1.1.8: question about catting binary files in bash"
 </blockquote>
 
-Bad examples: <br>
+Bad examples:<br>
 <blockquote>
 	"question?"<br>
 	"bug"<br>
@@ -89,7 +89,7 @@ Bad examples: <br>
 	(basically any single word subject)
 </blockquote>
 
-This also applies to general discussion.  It's very hard to follow
+This also applies to general non-problem-related discussion.  It's very hard to follow
 the list when most of the subject lines look very similar.
 </ul>
 
@@ -143,9 +143,10 @@ to occur in the thread that you created.</li><br>
 This means including a test case if at all possible.</li><br>
 
 <li>If you can't run cygcheck for some reason (and why shouldn't you be
-able to?  It's not a cygwin program), at the very least, always include
-which cygwin release you are using and give the operating system and its
-version number.  E.g.  "cygwin v1.3.33 under NT 4.0".</li><br>
+able to?  cygcheck is just a standard windows program which does not use
+the cygwin dll), at the very least, always include which cygwin release
+you are using and give the operating system and its version number.
+E.g.  "cygwin v1.3.33 under NT 4.0".</li><br>
 
 <li>Avoid the use of exclamation marks or multiple question marks.  They
 add nothing to the report and provide the impression that you are too
@@ -158,24 +159,18 @@ is cut and dry, to the point, and uses a minimum of extra
 words.</li><br>
 
 <li>Avoid expressions of incredulity "I can't believe that this is so broken!"
-or other editorializing.  This should go without saying, really, but, sadly,
-many people can't stop themselves from expressing their outrage.</li></br>
+or other editorializing.</li></br>
 
-<li>Reporting that your problem "works fine" on some "other" UNIX platform or
-used to work ok in a previous Cygwin release is marginally useful data.  However,
-this does <em>not</em> guarantee that you've uncovered a Cygwin problem.
-Cygwin can change its behavior between releases, sometimes to fix an
+<li>Minimize reporting that your problem "works fine" on some "other" UNIX platform or
+used to work ok in a previous Cygwin release.  This is marginally useful data but
+it does not <em>guarantee</em> that you've uncovered a Cygwin problem.
+Cygwin can change its behavior between releases; sometimes to fix an
 operational problem and sometimes, well... because we've introduced a bug.</p>
 <p>With regard to differing behavior from some flavor of UNIX:
 UNIXes vary in their behavior and Cygwin is basically a different flavor of UNIX.
-This is <em>particularly</em> true of programs which rely on specific
+One common source of differing behavior is with programs which rely on specific
 malloc behavior, like being able to free a pointer twice or being able to
 access memory after freeing.</p>
-<p>Another common problem is attempting to modify the contents of a C "string".
-On Cygwin (and many UNIXes) strings are stored in read-only memory.  So, it
-is not possible to modify them.  You can change this behavior with the gcc
-option <tt>-fwritable-strings</tt> but we suggest that it is better to change
-your program.</p>
 
 <p>Note that, "It worked in a previous version of cygwin" observations are only
 relevant for modern versions of cygwin.  The "B series" versions of Cygwin
