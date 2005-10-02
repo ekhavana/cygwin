@@ -101,7 +101,7 @@ The following three examples will not work as expected:
 mount -f -b /dev/nst0 /dev/tape     # DOES NOT WORK
 mount -f -b /device/tape0 /dev/tape # DOES NOT WORK
 ln -s /device/tape0 /dev/tape       # DOES NOT WORK
-</pre></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id4745135"></a>The .exe extension</h3></div></div><div></div></div><p> Executable program filenames end with <tt class="filename">.exe</tt>
+</pre></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id4745138"></a>The .exe extension</h3></div></div><div></div></div><p> Executable program filenames end with <tt class="filename">.exe</tt>
 but the <tt class="filename">.exe</tt> need not be included in the command,
 so that traditional UNIX names can be used.  However, for programs that
 end in <tt class="filename">.bat</tt> and <tt class="filename">.com</tt>, you
@@ -134,7 +134,7 @@ fail when working on a non-existing <tt class="filename">filename</tt> even if
 This problem can be solved by writing <b class="command">install</b> and
 <b class="command">strip</b> shell scripts to provide the extension ".exe"
 when needed.
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id4745354"></a>The /proc filesystem</h3></div></div><div></div></div><p>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id4745358"></a>The /proc filesystem</h3></div></div><div></div></div><p>
 Cygwin, like Linux and other similar operating systems, supports the
 <tt class="filename">/proc</tt> virtual filesystem. The files in this
 directory are representations of various aspects of your system,
@@ -152,7 +152,7 @@ The Cygwin <tt class="filename">/proc</tt> is not as complete as the
 one in Linux, but it provides significant capabilities. The
 <tt class="systemitem">procps</tt> package contains several utilities
 that use it.
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id4745428"></a>The @pathnames</h3></div></div><div></div></div><p>To circumvent the limitations on shell line length in the native
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id4745432"></a>The @pathnames</h3></div></div><div></div></div><p>To circumvent the limitations on shell line length in the native
 Windows command shells, Cygwin programs expand their arguments
 starting with "@" in a special way.  If a file
 <tt class="filename">pathname</tt> exists, the argument
@@ -161,7 +161,7 @@ starting with "@" in a special way.  If a file
 file to delimit strings containing blank space. 
 Embedded double quotes must be repeated.
 In the following example compare the behaviors of the bash built-in
-<b class="command">echo</b> and of the program <b class="command">/bin/echo</b>.</p><div class="example"><a name="id4745473"></a><p class="title"><b>Example 3.2.  Using @pathname</b></p><pre class="screen">
+<b class="command">echo</b> and of the program <b class="command">/bin/echo</b>.</p><div class="example"><a name="id4745476"></a><p class="title"><b>Example 3.2.  Using @pathname</b></p><pre class="screen">
 <tt class="prompt">bash$</tt> <b class="userinput"><tt>echo  'This   is   "a     long"  line' &gt; mylist</tt></b>
 <tt class="prompt">bash$</tt> <b class="userinput"><tt>echo @mylist</tt></b>
 @mylist

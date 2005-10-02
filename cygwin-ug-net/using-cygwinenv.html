@@ -70,12 +70,17 @@ asterisk, escaped with \) are expanded into lists of files that match
 those wildcards.
 This is applicable only to programs running from a DOS command line prompt.
 Default is set.</p><p>This option also accepts an optional <tt class="literal">[no]ignorecase</tt> modifer.
-If supplied, wildcard matching is case insensitive.  The default is <tt class="literal">noignorecase</tt></p></li><li style="list-style-type: disc"><p><tt class="envar">(no)ntea</tt> - if set, use the full NT Extended
-Attributes to store UNIX-like inode information.
-This option only operates under Windows NT. Defaults to not set. </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning!</h3><p>This may create additional
-<span class="emphasis"><em>large</em></span> files on non-NTFS partitions.</p></div></li><li style="list-style-type: disc"><p><tt class="envar">(no)ntsec</tt> - if set, use the NT security
+If supplied, wildcard matching is case insensitive.  The default is <tt class="literal">noignorecase</tt></p></li><li style="list-style-type: disc"><p><tt class="envar">(no)ntea</tt> - if set, use NT Extended Attributes to
+store UNIX-like inode information.
+This option only operates under Windows NT. Defaults to not set.
+Only FAT and NTFS support Extended Attributes, not FAT32, so it's
+of no use there.  Furthermore, on NTFS partitions ntsec, which provides
+real permissions, overrides ntea, which only provides faked permissions.
+So setting ntea only makes sense if you either have FAT partitions,
+or if you switch off ntsec explicitely. </p><div class="warning" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Warning!</h3><p>This may create additional
+<span class="emphasis"><em>large</em></span> files on FAT partitions.</p></div></li><li style="list-style-type: disc"><p><tt class="envar">(no)ntsec</tt> - if set, use the NT security
 model to set UNIX-like permissions on files and processes. The
-file permissions can only be set on NTFS partitions. FAT doesn't
+file permissions can only be set on NTFS partitions. FAT/FAT32 don't
 support the NT file security. Defaults to set. For more information, read
 the documentation in <a href="ntsec.html" title="NT security and usage of ntsec">the section called &#8220;NT security and usage of ntsec&#8221;</a>.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)smbntsec</tt> - if set, use <tt class="envar">ntsec</tt> on remote
 drives as well (default is "nosmbntesc"). When setting "smbntsec" there's
