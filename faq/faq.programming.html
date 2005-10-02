@@ -32,7 +32,7 @@ that there is only minimal support for the Objective C front-end in the
 main GCC distribution, anyway.
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.make-execvp"></a><b>6. </b></td><td align="left" valign="top"><p>Why does my make fail on Cygwin with an execvp error? </p></td></tr><tr class="answer"><td align="left" valign="top"><b></b></td><td align="left" valign="top"><p>First of all, if you are using <tt class="literal">make -j[N]</tt>, then stop.  It doesn't
 work well. Also beware of using non-portable shell features in your
-Makefiles (see tips at <a href="http://cygwin.com/faq/faq_3.html#SEC46" target="_top">http://cygwin.com/faq/faq_3.html#SEC46</a>).
+Makefiles (see tips at <a href="http://cygwin.com/faq/faq.using.html#faq.using.shell-scripts" target="_top">http://cygwin.com/faq/faq.using.html#faq.using.shell-scripts</a>).
 </p><p>Errors of <tt class="literal">make: execvp: /bin/sh: Illegal Argument</tt> or 
 <tt class="literal">make: execvp: /bin/sh: Argument list too long</tt> are often
 caused by the command-line being to long for the Windows execution model.
@@ -45,14 +45,23 @@ the command-line limit. To enable cygexec for <tt class="literal">/bin</tt> and
 </p><pre class="screen">
 mount -X -b -f c:\cygwin\bin /bin
 mount -X -b -f c:\cygwin\bin /usr/bin
-mount -x -b -f c:\cygwin\bin\strace.exe /usr/bin/strace.exe
-mount -x -b -f c:\cygwin\bin\strace.exe /bin/strace.exe
-mount -x -b -f c:\cygwin\bin\cygcheck.exe /usr/bin/cygcheck.exe
-mount -x -b -f c:\cygwin\bin\cygcheck.exe /bin/cygcheck.exe
-</pre><p>Note that you must specifically exclude <tt class="literal">strace</tt> and <tt class="literal">cygcheck</tt>,
-which are not linked to the Cygwin DLL.
-</p><p>(See <a href="http://www.cygwin.com/cygwin-ug-net/using-utils.html#mount" target="_top">http://www.cygwin.com/cygwin-ug-net/using-utils.html#mount</a> 
-for more information.)
+mount -x -b -f c:\cygwin\bin\tclsh84.exe /usr/bin/tclsh84.exe
+mount -x -b -f c:\cygwin\bin\tclsh84.exe /bin/tclsh84.exe
+mount -x -b -f c:\cygwin\bin\wish84.exe /usr/bin/wish84.exe
+mount -x -b -f c:\cygwin\bin\wish84.exe /bin/wish84.exe
+</pre><p>Note that if you have Tcl/Tk installed, you must specifically exclude 
+<tt class="literal">tclsh84</tt> and <tt class="literal">wish84</tt>, which are linked 
+to the Cygwin DLL but are not actually Cygwin programs. If you have added 
+other non-Cygwin programs to a path you want to mount cygexec, you can find
+them with a script like this:
+</p><pre class="screen">
+#!/bin/sh
+cd /bin; for f in `find . -type f -name '*.exe'`; do
+	cygcheck $f | (fgrep -qi cygwin1.dll || echo $f)
+done
+</pre><p>
+See <a href="http://www.cygwin.com/cygwin-ug-net/using-utils.html#mount" target="_top">http://www.cygwin.com/cygwin-ug-net/using-utils.html#mount</a> 
+for more information on using mount.
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.winmain"></a><b>7. </b></td><td align="left" valign="top"><p>Why the undefined reference to <tt class="literal">WinMain@16</tt>?</p></td></tr><tr class="answer"><td align="left" valign="top"><b></b></td><td align="left" valign="top"><p>If you're using <tt class="literal">gcc</tt>, try adding an empty main() function to one
 of your sources.  Or, perhaps you have <tt class="literal">-lm</tt> too early in the
 link command line.  It should be at the end:
@@ -254,11 +263,11 @@ same time. Remove all but one.
 symbols that you see in gdb are basically meaningless. It is also a good
 idea to use the latest code in case the bug has been fixed, so we
 recommend trying the latest snapshot from
-<a href="http://cygwin.com/snapshots/" target="_top">http://cygwin.com/snapshots/</a> or build the DLL from CVS.
+<a href="http://cygwin.com/snapshots/" target="_top">http://cygwin.com/snapshots/</a> or building the DLL from CVS.
 </p><p>To build a debugging version of the Cygwin DLL, you will need to follow
-the instructions at <a href="http://cygwin.com/faq/faq_3.html#SEC102" target="_top">http://cygwin.com/faq/faq_3.html#SEC102</a>. You
-can also contact the mailing list for pointers (a simple test case that
-demonstrates the bug is always welcome).
+the instructions at <a href="http://cygwin.com/faq/faq-nochunks.html#faq.programming.building-cygwin" target="_top">http://cygwin.com/faq/faq-nochunks.html#faq.programming.building-cygwin</a>. 
+You can also contact the mailing list for pointers (a simple test case that 
+demonstrates the bug is always welcome).  
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.compiling-unsupported"></a><b>19. </b></td><td align="left" valign="top"><p>How can I compile Cygwin for an unsupported platform (PowerPC, Alpha, ARM, Itanium)?</p></td></tr><tr class="answer"><td align="left" valign="top"><b></b></td><td align="left" valign="top"><p>Unfortunately, this will be difficult.  Exception handling and signals
 support semantics and args have been designed for x86 so you would need
 to write specific support for your platform.  We don't know of any other
