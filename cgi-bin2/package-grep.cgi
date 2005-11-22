@@ -4,30 +4,39 @@ use strict;
 use LWP::Simple;
 use CGI;
 use URI::Escape;
+use HTML::TreeBuilder;
 
 sub addfn($);
+sub save(\@@);
 
 # Create one of our Objects
 my $html = new CGI;
 
 # Get our data
 my $grep = $html->param('grep');
+my $text = $html->param('text');
 
 $main::packages = ();
 $main::count = 0;
 use FindBin qw($Bin);
+my @toprint;
 
-print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
-      LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "</td></table>\n",
-      "<table>\n",
-      $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n";
+if ($text) {
+    print $html->header(-type=>'text/plain');
+} else {
+    print $html->header, "\n<html>\n<head>\n",
+	  "<title>Package List Search Results</title>\n</head>\n",
+	  LWP::Simple::get('http://cygwin.com/cygwin-header.html'),
+	  "</td></table>\n", "<table>\n",
+	  $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n";
+}
 
 eval '"foo" =~ /$grep/o';
 if ($@ || $grep =~ m!\\.\\.!o) {
-    print $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $grep);
-    print $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>');
+    save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $grep);
+    save @toprint, $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>') unless $text;
 } else {
-    print $html->h2({-align=>'center'}, 'Search Results'), "\n";
+    save @toprint, $html->h2({-align=>'center'}, 'Search Results'), "\n" unless $text;
     chdir("$Bin/../packages");
     for my $f (<*/*>) {
 	open(F, '<', $f) or next;
@@ -48,21 +57,31 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 	close INDEX;
     }
 
-    print "Found <b>$main::count</b> matches for <b>$grep</b>.<br><br>\n";
+    save @toprint, "Found <b>$main::count</b> matches for <b>$grep</b>.<br><br>\n";
     if (%main::packages) {
 	for my $p (sort keys %main::packages) {
 	    for my $f (@{$main::packages{$p}}) {
-		print '<tr><td><img src="http://sources.redhat.com/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
+		save @toprint, '<tr><td><img src="http://sourceware.org/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
 		       '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		       uri_escape($grep) . '">' . $f . '</a></td><td align="left">' . findheader($p, $index) . "</td></tr>\n";
+		       uri_escape($grep) . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</td></tr>\n";
 	    }
 	}
     }
 }
-print "</table>";
-open(FOOTER, '../cygwin-footer.html');
-print <FOOTER>, $html->end_html;
-close FOOTER;
+push @toprint, "</table>";
+if (!$text) {
+    open(FOOTER, '../cygwin-footer.html');
+    push @toprint, <FOOTER>, $html->end_html;
+    close FOOTER;
+}
+
+if (!$text) {
+    print @toprint;
+} else {
+    my $tree = HTML::TreeBuilder->new_from_content(join('', @toprint));
+    print $tree->as_text;
+}
+exit 0;
 
 sub addfn($) {
     $main::count++;
@@ -71,7 +90,17 @@ sub addfn($) {
 }
 
 sub findheader {
+    my $text = shift;
     my $p = shift;
-    my $header = ($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0];
-    return $header || '';
+    my $header = ($text && "\t") . (($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '');
+    return $header;
+}
+
+sub save(\@@) {
+    my $arr = shift;
+    if ($text) {
+        push(@$arr, "<pre>", @_, "</pre>");
+    } else {
+        push(@$arr, @_);
+    }
 }
