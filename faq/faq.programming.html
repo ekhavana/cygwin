@@ -225,7 +225,14 @@ with Cygwin development tools.
 </p><p>Note that this is a lot of work (half a day or so), but much less than
 rewriting the runtime library in question from specs...
 </p><p>Thanks to Jacob Navia (root at jacob dot remcomp dot fr) for this explanation.
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.building-cygwin"></a><b>17. </b></td><td align="left" valign="top"><p>How do I build Cygwin on my own?</p></td></tr><tr class="answer"><td align="left" valign="top"><b></b></td><td align="left" valign="top"><p>First, you need to get the Cygwin source.  Ideally, you should check out
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.building-cygwin"></a><b>17. </b></td><td align="left" valign="top"><p>How do I build Cygwin on my own?</p></td></tr><tr class="answer"><td align="left" valign="top"><b></b></td><td align="left" valign="top"><p>First, you need to make sure you have the necessary build tools
+installed; you at least need <tt class="literal">gcc</tt>, <tt class="literal">make</tt>, 
+and <tt class="literal">perl</tt>. If you want to run the tests
+<tt class="literal">cocom</tt> and <tt class="literal">dejagnu</tt> are also required,
+and you need to have <tt class="literal">CYGWIN=server</tt> set as described at 
+<a href="http://www.cygwin.com/cygwin-ug-net/using-cygserver.html" target="_top">http://www.cygwin.com/cygwin-ug-net/using-cygserver.html</a>.
+
+Next, get the Cygwin source.  Ideally, you should check out
 what you need from CVS (<a href="http://cygwin.com/cvs.html" target="_top">http://cygwin.com/cvs.html</a>).  This is the
 <span class="emphasis"><em>preferred method</em></span> for acquiring the sources.  Otherwise, you can
 install the cygwin source package from the distribution.
@@ -246,10 +253,10 @@ mkdir /install
 cd build
 (../configure --prefix=/install -v; make) &gt;&amp; make.out
 make install &gt; install.log 2&gt;&amp;1
-</pre><p>Normally, this procedure ignore errors in building the documentation.
-which requires the <tt class="literal">docbook-xml</tt>, <tt class="literal">docbook-xsl</tt>, and
+</pre><p>Normally, this procedure ignores errors in building the documentation.
+which requires the <tt class="literal">docbook-xml42</tt>, <tt class="literal">docbook-xsl</tt>, and
 <tt class="literal">xmlto</tt> packages.  For more information on building the
-documentation, see the README included in the cygwin-doc package.
+documentation, see the README included in the <tt class="literal">cygwin-doc</tt> package.
 </p><p>To check a cygwin1.dll, run "make check" in the winsup/testsuite
 directory.  If that works, install everything <span class="emphasis"><em>except</em></span> the dll (if
 you can).  Then, close down all cygwin programs (including bash windows,
