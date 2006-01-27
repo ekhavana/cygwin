@@ -12,7 +12,7 @@ regular text files that cannot be used directly by GDB.
 </p><p>Before you can debug your program, you need to prepare your
 program for debugging.  What you need to do is add
 <tt class="literal">-g</tt> to all the other flags you use when compiling
-your sources to objects.</p><div class="example"><a name="id4751338"></a><p class="title"><b>Example 4.2. Compiling with -g</b></p><pre class="screen">
+your sources to objects.</p><div class="example"><a name="id4736265"></a><p class="title"><b>Example 4.2. Compiling with -g</b></p><pre class="screen">
 <tt class="prompt">$</tt> gcc -g -O2 -c myapp.c
 <tt class="prompt">$</tt> gcc -g myapp.c -o myapp
 </pre></div><p>What this does is add extra information to the objects (they get
@@ -39,7 +39,7 @@ your program run.  After it crashes, you can type
 variables.  There's also a <b class="command">print</b> that lets you look
 at individual variables or what pointers point to.</p><p>If your program is doing something unexpected, you can use the
 <b class="command">break</b> command to tell gdb to stop your program when it
-gets to a specific function or line number:</p><div class="example"><a name="id4751466"></a><p class="title"><b>Example 4.3. "break" in gdb</b></p><pre class="screen">
+gets to a specific function or line number:</p><div class="example"><a name="id4736392"></a><p class="title"><b>Example 4.3. "break" in gdb</b></p><pre class="screen">
 <tt class="prompt">(gdb)</tt> break my_function
 <tt class="prompt">(gdb)</tt> break 47
 </pre></div><p>Now, when you type <b class="command">run</b> your program will stop
@@ -49,7 +49,7 @@ the state of your program at that point, modify variables, and
 time.</p><p>Note that you may specify additional arguments to the
 <b class="command">run</b> command to provide command-line arguments to
 your program.  These two cases are the same as far as your program is
-concerned:</p><div class="example"><a name="id4751520"></a><p class="title"><b>Example 4.4. Debugging with command line arguments</b></p><pre class="screen">
+concerned:</p><div class="example"><a name="id4736446"></a><p class="title"><b>Example 4.4. Debugging with command line arguments</b></p><pre class="screen">
 <tt class="prompt">$</tt> myprog -t foo --queue 47
 
 <tt class="prompt">$</tt> gdb myprog

@@ -8,19 +8,37 @@ interchangeably; for example, <tt class="literal">--help</tt> and
 command-line utilities support the <tt class="literal">--help</tt> and
 <tt class="literal">--version</tt> options. 
 </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygcheck"></a>cygcheck</h3></div></div><div></div></div><pre class="screen">
-Usage: cygcheck [OPTIONS] [PROGRAM...]
-Check system information or PROGRAM library dependencies
+Usage: cygcheck PROGRAM [ -v ] [ -h ]
+       cygcheck -c [ PACKAGE ... ] [ -d ]
+       cygcheck -s [ -r ] [ -v ] [ -h ]
+       cygcheck -k
+       cygcheck -f FILE [ FILE ... ]
+       cygcheck -l [ PACKAGE ... ]
+       cygcheck -p REGEXP
+List system information, check installed packages, or query package database.
 
- -c, --check-setup   check packages installed via setup.exe
- -d, --dump-only     no integrity checking of package contents (requires -c)
- -s, --sysinfo       system information (not with -k)
- -v, --verbose       verbose output (indented) (for -[cfls] or programs)
- -r, --registry      registry search (requires -s)
- -k, --keycheck      perform a keyboard check session (not with -[scfl])
- -f, --find-package  find installed packages containing files (not with -[cl])
- -l, --list-package  list the contents of installed packages (not with -[cf])
- -h, --help          give help about the info (not with -[cfl])
- -V, --version       output version information and exit
+At least one command option or a PROGRAM is required, as shown above.
+
+  PROGRAM              list library (DLL) dependencies of PROGRAM
+  -c, --check-setup    show installed version of PACKAGE and verify integrity
+                       (or for all installed packages if none specified)
+  -d, --dump-only      just list packages, do not verify (with -c)
+  -s, --sysinfo        produce diagnostic system information (implies -c -d)
+  -r, --registry       also scan registry for Cygwin settings (with -s)
+  -k, --keycheck       perform a keyboard check session (must be run from a
+                       plain console only, not from a pty/rxvt/xterm)
+  -f, --find-package   find the package that FILE belongs to
+  -l, --list-package   list contents of PACKAGE (or all packages if none given)
+  -p, --package-query  search for REGEXP in the entire cygwin.com package
+                       repository (requies internet connectivity)
+  -v, --verbose        produce more verbose output
+  -h, --help           annotate output with explanatory comments when given
+                       with another command, otherwise print this help
+  -V, --version        print the version of cygcheck and exit
+
+Note: -c, -f, and -l only report on packages that are currently installed. To
+  search all official Cygwin packages use -p instead.  The -p REGEXP matches
+  package names, descriptions, and names of files/paths within all packages.
 </pre><p>
 The <b class="command">cygcheck</b> program is a diagnostic utility for
 dealing with Cygwin programs. If you are familiar with
@@ -53,11 +71,11 @@ The <tt class="literal">-f</tt> option helps you to track down which package a
 file came from, and <tt class="literal">-l</tt> lists all files in a package.
 For example, to find out about <tt class="filename">/usr/bin/less</tt> and its
 package:
-</p><div class="example"><a name="id4746779"></a><p class="title"><b>Example 3.3. Example cygcheck usage</b></p><pre class="screen">
-$ cygcheck.exe -f /usr/bin/less
+</p><div class="example"><a name="id4731512"></a><p class="title"><b>Example 3.3. Example cygcheck usage</b></p><pre class="screen">
+$ cygcheck -f /usr/bin/less
 less-381-1
 
-$ cygcheck.exe -l less
+$ cygcheck -l less
 /usr/bin/less.exe
 /usr/bin/lessecho.exe
 /usr/bin/lesskey.exe
@@ -78,7 +96,54 @@ directories on the PATH.  </p><p>The <tt class="literal">-r</tt> option causes
 that is relevent to Cygwin programs.  These registry entries are the
 ones that have "Cygwin" in the name.  If you are paranoid about
 privacy, you may remove information from this report, but please keep
-in mind that doing so makes it harder to diagnose your problems.</p><p>The <b class="command">cygcheck</b> program should be used to send
+in mind that doing so makes it harder to diagnose your problems.</p><p>In contrast to the other options that search the packages that are
+installed on your local system, the <tt class="literal">-p</tt> option can be used
+to search the entire official Cygwin package repository.  It takes as argument
+a Perl-compatible regular expression which is used to match package names, 
+package descriptions, and path/filenames of the contents of packages.  This
+feature requires an active internet connection, since it must query the
+<tt class="literal">cygwin.com</tt> web site.  In fact, it is equalivant to the
+search that is available on the <a href="http://cygwin.com/packages/" target="_top">Cygwin
+package listing</a> page.</p><p>For example, perhaps you are getting an error because you are missing a
+certain DLL and you want to know which package includes that file:
+</p><div class="example"><a name="id4731616"></a><p class="title"><b>Example 3.4. Searching all packages for a file</b></p><pre class="screen">
+$ cygcheck -p 'cygintl-2\.dll'
+Found 1 matches for 'cygintl-2\.dll'.
+
+libintl2-0.12.1-3         GNU Internationalization runtime library
+
+$ cygcheck -p 'libexpat.*\.a'
+Found 2 matches for 'libexpat.*\.a'.
+
+expat-1.95.7-1            XML parser library written in C
+expat-1.95.8-1            XML parser library written in C
+
+$ cygcheck -p '/ls\.exe'
+Found 2 matches for '/ls\.exe'.
+
+coreutils-5.2.1-5         GNU core utilities (includes fileutils, sh-utils and textutils)
+coreutils-5.3.0-6         GNU core utilities (includes fileutils, sh-utils and textutils)
+</pre></div><p>
+</p><p>Note that this option takes a regular expression, not a glob or wildcard.
+This means that you need to use <tt class="literal">.*</tt> if you want something
+similar to the wildcard <tt class="literal">*</tt> commonly used in filename globbing.
+Similarly, to match the period character you should use <tt class="literal">\.</tt>
+since the <tt class="literal">.</tt> character in a regexp is a metacharacter that
+will match any character.  Also be aware that the characters such as 
+<tt class="literal">\</tt> and <tt class="literal">*</tt> are shell metacharacters, so 
+they must be either escaped or quoted, as in the example above.</p><p>The third example above illustrates that if you want to match a whole 
+filename, you should include the <tt class="literal">/</tt> path seperator.  In the
+given example this ensures that filenames that happen to end in
+<tt class="literal">ls.exe</tt> such as <tt class="literal">ncftpls.exe</tt> are not shown.
+Note that this use does not mean "look for packages with <tt class="literal">ls</tt>
+in the root directory," since the <tt class="literal">/</tt> can match anywhere in the
+path.  It's just there to anchor the match so that it matches a full
+filename.</p><p>By default the matching is case-sensitive.  To get a case insensitive
+match, begin your regexp with <tt class="literal">(?i)</tt> which is a PCRE-specific
+feature.  For complete documentation on Perl-compatible regular expression
+syntax and options, read the <b class="command">perlre</b> manpage, or one of many
+websites such as <tt class="literal">perldoc.com</tt> that document the Perl
+language.</p><p>The <b class="command">cygcheck</b> program should be used to send
 information about your system for troubleshooting when requested.  
 When asked to run this command save the output so that you can email it,
 for example:</p><pre class="screen">
@@ -108,6 +173,13 @@ System information:
   -P, --smprograms      output Start Menu `Programs' directory and exit
   -S, --sysdir          output system directory and exit
   -W, --windir          output `Windows' directory and exit
+Other options:
+  -f, --file FILE       read FILE for input; use - to read from STDIN
+  -o, --option          read options from FILE as well (for use with --file)
+  -c, --close HANDLE    close HANDLE (for use in captured process)
+  -i, --ignore          ignore missing argument
+  -h, --help            output usage information and exit
+  -v, --version         output version information and exit
 </pre><p>The <b class="command">cygpath</b> program is a utility that
 converts Windows native filenames to Cygwin POSIX-style pathnames and
 vice versa.  It can be used when a Cygwin program needs to pass a file 
@@ -140,7 +212,7 @@ usage message if no filename argument was given.  It can be used in
 make file rules converting variables that may be omitted
 to a proper format.  Note that <b class="command">cygpath</b> output may 
 contain spaces (C:\Program Files) so should be enclosed in quotes.
-</p><div class="example"><a name="id4747088"></a><p class="title"><b>Example 3.4. Example cygpath usage</b></p><pre class="screen">
+</p><div class="example"><a name="id4731998"></a><p class="title"><b>Example 3.5. Example cygpath usage</b></p><pre class="screen">
 
 #!/bin/sh
 if [ "${1}" = "" ];
@@ -275,7 +347,7 @@ To get a list of running programs and their Cygwin pids, use the Cygwin
 <span class="emphasis"><em>all</em></span> windows pids.</p><p>The <b class="command">kill -l</b> option prints the name of the
 given signal, or a list of all signal names if no signal is given.</p><p>To send a specific signal, use the <tt class="literal">-signN</tt>
 option, either with a signal number or a signal name (minus the "SIG"
-part), like these examples:</p><div class="example"><a name="id4747534"></a><p class="title"><b>Example 3.5. Using the kill command</b></p><pre class="screen">
+part), like these examples:</p><div class="example"><a name="id4732445"></a><p class="title"><b>Example 3.6. Using the kill command</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill 123</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill -1 123</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>kill -HUP 123</tt></b>
@@ -343,7 +415,7 @@ include Windows security information.
 It can also be used on the Win9x series (Windows 95, 98, and Me) to
 create a file with the correct format.
 To initially set up your machine if you are a local user, you'd do
-something like this:</p><div class="example"><a name="id4747692"></a><p class="title"><b>Example 3.6. Setting up the groups file for local accounts</b></p><pre class="screen">
+something like this:</p><div class="example"><a name="id4732603"></a><p class="title"><b>Example 3.7. Setting up the groups file for local accounts</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkdir /etc</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkgroup -l &gt; /etc/group</tt></b>
 </pre></div><p>Note that this information is static.  If you change the group
@@ -401,7 +473,7 @@ On the Win9x series (Windows 95, 98, and Me) the password field must be
 replaced by the output of <b class="userinput"><tt>crypt your_password</tt></b>
 if remote access is desired.
 To initially set up your machine if you are a local user, you'd do
-something like this:</p><div class="example"><a name="id4747900"></a><p class="title"><b>Example 3.7. Setting up the passwd file for local accounts</b></p><pre class="screen">
+something like this:</p><div class="example"><a name="id4732810"></a><p class="title"><b>Example 3.8. Setting up the passwd file for local accounts</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkdir /etc</tt></b>
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkpasswd -l &gt; /etc/passwd</tt></b>
 </pre></div><p>Note that this information is static.  If you change the user
@@ -427,7 +499,7 @@ SIDs, see <a href="ntsec.html" title="NT security and usage of ntsec">the sectio
 use the specified prefix instead of the account home dir or <tt class="literal">/home/
 </tt>. For example, this command:
 
-</p><div class="example"><a name="id4748044"></a><p class="title"><b>Example 3.8. Using an alternate home root</b></p><pre class="screen">
+</p><div class="example"><a name="id4732954"></a><p class="title"><b>Example 3.9. Using an alternate home root</b></p><pre class="screen">
 <tt class="prompt">$</tt> <b class="userinput"><tt>mkpasswd -l -p "$(cygpath -H)" &gt; /etc/passwd</tt></b>
 </pre></div><p>
 
@@ -462,8 +534,8 @@ and shares onto Cygwin's simulated POSIX directory tree, much like as is
 done by mount commands on typical UNIX systems.  Please see
 <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> for more information on the concepts
 behind the Cygwin POSIX file system and strategies for using
-mounts. To remove mounts, use <b class="command">umount</b></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4748174"></a>Using mount</h4></div></div><div></div></div><p>If you just type <b class="command">mount</b> with no parameters, it
-will display the current mount table for you.</p><div class="example"><a name="id4748189"></a><p class="title"><b>Example 3.9. Displaying the current set of mount points</b></p><pre class="screen">
+mounts. To remove mounts, use <b class="command">umount</b></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4733084"></a>Using mount</h4></div></div><div></div></div><p>If you just type <b class="command">mount</b> with no parameters, it
+will display the current mount table for you.</p><div class="example"><a name="id4733100"></a><p class="title"><b>Example 3.10. Displaying the current set of mount points</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount</tt></b>
 c:\cygwin\bin on /usr/bin type system (binmode)
 c:\cygwin\lib on /usr/lib type system (binmode)
@@ -478,7 +550,7 @@ to the current user.</p><p>The <b class="command">mount</b> utility is also the 
 adding new mounts to the mount table.  The following example
 demonstrates how to mount the directory
 <tt class="filename">\\pollux\home\joe\data</tt> to <tt class="filename">/data</tt>.
-</p><div class="example"><a name="id4748260"></a><p class="title"><b>Example 3.10. Adding mount points</b></p><pre class="screen">
+</p><div class="example"><a name="id4733170"></a><p class="title"><b>Example 3.11. Adding mount points</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>ls /data</tt></b>
 ls: /data: No such file or directory
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount \\pollux\home\joe\data /data</tt></b>
@@ -541,7 +613,7 @@ most of the options are duplicates of other mount flags):</p><pre class="screen"
   nosuid     - no suid files are allowed (currently unimplemented)
   managed    - directory is managed by cygwin.  Mixed case and special
                characters in filenames are allowed.
-</pre></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4748487"></a>Cygdrive mount points</h4></div></div><div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
+</pre></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4733397"></a>Cygdrive mount points</h4></div></div><div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
 from a particular Win32 path to a POSIX one, Cygwin will, instead,
 convert to a POSIX path using a default mount point:
 <tt class="filename">/cygdrive</tt>.  For example, if Cygwin accesses
@@ -550,7 +622,7 @@ mount table, then <tt class="filename">z:\</tt> will be accessible as
 <tt class="filename">/cygdrive/z</tt>.  The <b class="command">mount</b> utility 
 can be used to change this default automount prefix through the use of the
 "--change-cygdrive-prefix" option.  In the following example, we will
-set the automount prefix to <tt class="filename">/</tt>:</p><div class="example"><a name="id4748538"></a><p class="title"><b>Example 3.11. Changing the default prefix</b></p><pre class="screen">
+set the automount prefix to <tt class="filename">/</tt>:</p><div class="example"><a name="id4733448"></a><p class="title"><b>Example 3.12. Changing the default prefix</b></p><pre class="screen">
 <tt class="prompt">c:\cygwin\&gt;</tt> <b class="userinput"><tt>mount --change-cygdrive-prefix /</tt></b>
 </pre></div><p>Note that the cygdrive prefix can be set both per-user and system-wide, 
 and that as with all mounts, a user-specific mount takes precedence over the 
@@ -560,7 +632,7 @@ or <tt class="literal">-u</tt> flag to indicate a system or user mount, respecti
 You can always see the user and system cygdrive prefixes with the 
 <tt class="literal">-p</tt> option.  Using the <tt class="literal">-b</tt>
 flag with <tt class="literal">--change-cygdrive-prefix</tt> makes all new 
-automounted filesystems default to binary mode file accesses.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4748610"></a>Limitations</h4></div></div><div></div></div><p>Limitations: there is a hard-coded limit of 30 mount
+automounted filesystems default to binary mode file accesses.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="id4733520"></a>Limitations</h4></div></div><div></div></div><p>Limitations: there is a hard-coded limit of 30 mount
 points.  Also, although you can mount to pathnames that do not start
 with "/", there is no way to make use of such mount points.</p><p>Normally the POSIX mount point in Cygwin is an existing empty
 directory, as in standard UNIX. If this is the case, or if there is a
@@ -1089,10 +1161,13 @@ Trace system calls and signals
                                numbers for Windows errors
   -o, --output=FILENAME        set output file to FILENAME
   -p, --pid=n                  attach to executing program with cygwin pid n
+  -q, --quiet                  toggle "quiet" flag.  Defaults to on if "-p",
+                               off otherwise.
   -S, --flush-period=PERIOD    flush buffered strace output every PERIOD secs
   -t, --timestamp              use an absolute hh:mm:ss timestamp insted of 
                                the default microsecond timestamp.  Implies -d
   -T, --toggle                 toggle tracing in a process already being
+  -u, --usecs                  toggle printing of microseconds timestamp
                                traced. Requires -p &lt;pid&gt;
   -v, --version                output version information and exit
   -w, --new-window             spawn program under test in a new window
@@ -1136,9 +1211,8 @@ take a long time to complete.
 </p><p>
 Note that <b class="command">strace</b> is a standalone Windows program and so does 
 not rely on the Cygwin DLL itself (you can verify this with 
-<b class="command">cygcheck</b>). As a result it does not understand POSIX
-pathnames or symlinks.  This program is mainly useful for debugging the 
-Cygwin DLL itself.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="umount"></a>umount</h3></div></div><div></div></div><pre class="screen">
+<b class="command">cygcheck</b>). As a result it does not understand symlinks.
+This program is mainly useful for debugging the Cygwin DLL itself.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="umount"></a>umount</h3></div></div><div></div></div><pre class="screen">
 Usage: umount.exe [OPTION] [&lt;posixpath&gt;]
 Unmount filesystems
 
