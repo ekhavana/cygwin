@@ -45,11 +45,13 @@ originally encoded in the firmware of IBM PCs by original
 equipment manufacturers (OEMs).  If you find that some characters 
 (especially non-US or 'graphical' ones) do not display correctly in 
 Cygwin, you can use this option to select an appropriate codepage.
-</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)envcache</tt> - If set, environment variable
+</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)dosfilewarning</tt> - If set, Cygwin will warn the
+first time a user uses an "MS-DOS" style path name rather than a POSIX-style
+path name.  Defaults to set.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)envcache</tt> - If set, environment variable
 conversions (between Win32 and POSIX) are cached.  Note that this is may
 cause problems if the mount table changes, as the cache is not invalidated
 and may contain values that depend on the previous mount table
-contents. Defaults to set.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)export</tt> - if set, the final values of these
+contents. Defaults to set.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)export</tt> - If set, the final values of these
 settings are re-exported to the environment as <tt class="envar">CYGWIN</tt> again.
 Defaults to off.</p></li><li style="list-style-type: disc"><p>
 <tt class="envar">error_start:Win32filepath</tt> - if set, runs 
@@ -59,11 +61,14 @@ usually set to the path to <b class="command">gdb</b> or
 <b class="command">dumper</b>, for example
 <tt class="filename">C:\cygwin\bin\gdb.exe</tt>. 
 There is no default set.
-</p></li><li style="list-style-type: disc"><p><tt class="envar">forkchunk:32768</tt> - causes <tt class="function">fork()</tt>
+</p></li><li style="list-style-type: disc"><p><tt class="envar">forkchunk:32768</tt> - causes the <tt class="function">fork()</tt>
 to copy memory some number of bytes at a time, in the above example 
 32768 bytes (32Kb) at a time. The default is to copy as many bytes as 
 possible, which is preferable in most cases but may slow some older systems
 down.
+</p></li><li style="list-style-type: disc"><p><tt class="envar">proc_retry:n</tt> - causes the <tt class="function">fork()</tt> and <tt class="function">exec*()</tt>
+to retry n times when a child process fails due to certain windows-specific errors.  These errors usually
+occur when processes are being started while a user is logging off.
 </p></li><li style="list-style-type: disc"><p><tt class="envar">(no)glob[:ignorecase]</tt> - if set, command line arguments
 containing UNIX-style file wildcard characters (brackets, question mark,
 asterisk, escaped with \) are expanded into lists of files that match 
@@ -104,7 +109,17 @@ reflects the name of the program currently running.  Default is not
 set.  Note that under Win9x the title bar is always enabled and it is
 stripped by default, but this is because of the way Win9x works.  In
 order not to strip, specify <tt class="literal">title</tt> or <tt class="literal">title
-nostrip_title</tt>.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)traverse</tt> - This option only affects NT systems.
+nostrip_title</tt>.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)transparent_exe</tt> - EXPERIMENTAL.  Only use this
+option if you're confident to be able to live with the consequences.  If
+set, several additional functions in Cygwin will handle files with .exe
+suffix transparently.  These functions are <tt class="function">link(2)</tt>,
+<tt class="function">open(2)</tt>, <tt class="function">rename(2)</tt>,
+<tt class="function">symlink(2)</tt>, <tt class="function">unlink(2)</tt>,
+<tt class="function">pathconf(3)</tt>.  So far, these functions have been
+treated as too dangerous to act on files with .exe suffix if the .exe
+suffix wasn't given explicitely in the file name argument, and this is
+still the case if the transparent_exe option is not set.  Default is not
+set.</p></li><li style="list-style-type: disc"><p><tt class="envar">(no)traverse</tt> - This option only affects NT systems.
 If set, Cygwin handles file permissions so that the parent directories'
 permissions are checked, as it's default on POSIX systems.  If not set,
 only the file's own permissions are taken into account.  This is the
