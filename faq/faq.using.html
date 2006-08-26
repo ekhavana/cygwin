@@ -150,11 +150,14 @@ must create the whatis database.  Just run the command
 </p><pre class="screen">
 	/usr/sbin/makewhatis
 </pre><p>(it may take a minute to complete).
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.using.chmod"></a><b>15. </b></td><td align="left" valign="top"><p>Why doesn't chmod work?</p></td></tr><tr class="answer"><td align="left" valign="top"><b></b></td><td align="left" valign="top"><p>The most common case is that your <tt class="literal">/etc/passwd</tt>
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.using.chmod"></a><b>15. </b></td><td align="left" valign="top"><p>Why doesn't <tt class="literal">chmod</tt> work?</p></td></tr><tr class="answer"><td align="left" valign="top"><b></b></td><td align="left" valign="top"><p>The most common case is that your <tt class="literal">/etc/passwd</tt>
 or <tt class="literal">/etc/group</tt> files are not properly set up. If 
 <tt class="literal">ls -l</tt> shows a group of <tt class="literal">mkpasswd</tt> 
 or <tt class="literal">mkgroup</tt>, you need to run one or both of those
 commands.
+</p><p>If you're using FAT32 instead of NTFS, <tt class="literal">chmod</tt> 
+will fail since FAT32 does not provide any security. You might consider 
+converting the drive to NTFS with <tt class="literal">CONVERT.EXE</tt>.
 </p><p>For other cases, understand that Cygwin attempts to show UNIX 
 permissions based on the security features of Windows, so the Windows 
 ACLs are likely the source of your problem.  See the Cygwin User's 
