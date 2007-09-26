@@ -121,10 +121,10 @@ padding-bottom: 10px;
 	<li>a setup.hint file</li>
       </ul>
       <p>Binary tar files are named "package-version-release.tar.bz2". They generally contain the executable files that will be installed on a user's system plus any auxilliary files needed by the package. See the <a href="#package_contents">making packages</a> section below for more details on how to generate a binary tar file.</p>
-      <p>Source tar files are named "package-version-release-src.tar.bz2". Source tar files should contain the source files needed to rebuild the package. While installing these files is optional under setup.exe, the inclusion of a source tar file is part of the totality that makes up a cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associate shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#srcpackage_contents">making packages</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
+      <p>Source tar files are named "package-version-release-src.tar.bz2". Source tar files should contain the source files needed to rebuild the package. While installing these files is optional under setup.exe, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associate shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#srcpackage_contents">making packages</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
       <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.</p>
       <h2><a id="sourceware.org" name="sourceware.org">Automatic setup.ini generation on sourceware.org</a></h2>
-      <p>A script runs on sourceware.org which collects information from (currently) the <tt>release</tt> directory in the ftp download area. Information from subdirectories of these directories is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a> file which is used by the cygwin setup.exe program for installation control. If you are responsible for maintaining a cygwin package, it is important that you understand how this process works.</p>
+      <p>A script runs on sourceware.org which collects information from (currently) the <tt>release</tt> directory in the ftp download area. Information from subdirectories of these directories is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a> file which is used by the Cygwin setup.exe program for installation control. If you are responsible for maintaining a Cygwin package, it is important that you understand how this process works.</p>
       <p>Packages are grouped by directory under <tt>release</tt>. The directory name is the same as the package name. For example, the <tt>boffo</tt> package will live in the <tt>boffo</tt> subdirectory. Exceptions to this rule are historical. All new packages will follow the rule of package name == directory name. However, for closely related groups of packages, it is acceptable to use a heirarchical tree under <tt>release/</tt>:</p>
 <pre>
 release/
@@ -257,7 +257,7 @@ category: "ASCII Games"
 </pre>
       <p>The above would place a package in a single category called "ASCII Games" rather than two categories "ASCII" and "Games".</p>
       <p>The <tt>requires</tt> line indicates the packages that this package relies on. If your package is dependent on a file provided by another package that other package should be included here. The requires field may be missing or empty if your package truly does not require any other package.</p>
-      <p>A package will probably require the <tt>cygwin</tt> package if it contain any DLLs or executable files since the <tt>cygwin</tt> package contains <tt>cygwin1.dll</tt>, which is required for most programs. However, the <tt>cygwin</tt> package would not be a required dependency for a package which contained only text files, as is the case with, for example, packages that consist entirely of man pages.</p>
+      <p>A package will probably require the <tt>Cygwin</tt> package if it contain any DLLs or executable files since the <tt>Cygwin</tt> package contains <tt>cygwin1.dll</tt>, which is required for most programs. However, the <tt>Cygwin</tt> package would not be a required dependency for a package which contained only text files, as is the case with, for example, packages that consist entirely of man pages.</p>
       <p>A package can rely on multiple other packages. Hierarchical dependencies should work correctly, however, it is best to always include specific dependencies, i.e. don't drop '<tt>bar</tt>' from your dependency list if your package requires it, even if you are including '<tt>foo</tt>' which relies on '<tt>bar</tt>'.</p>
       <p>Conversely, do not include package dependencies of <em>dependent</em> packages in your dependency list. If you think that another package has an incorrect dependency list, send email to cygwin-apps noting that fact.</p>
       <p>Multiple packages are separated by spaces. Do not enclose multiple package names within quotation marks.</p>
@@ -280,7 +280,7 @@ No actual moles will be harmed during execution of this game."
 	<li><tt>libboffo7-2.4.1-2.tar.bz2</tt>: an installable package that contains only the shared library from <tt>boffo</tt></li>
 	<li><tt>boffo-2.4.1-2-src.tar.bz2</tt>: the -src tarball for boffo.</li>
       </ul>
-      <p><tt>boffo-2.4.1-2.tar.bz2</tt>, <tt>boffo-2.4.1-2-src.tar.bz2</tt>, and the boffo <tt>setup.hint</tt> would go into the <tt>release/boffo/</tt> subdirectory on the cygwin server. <tt>libboffo7-2.4.1-2.tar.bz2</tt> would go into a separate subdirectory, such as <tt>release/boffo/libboffo7/</tt>, along with a separate libboffo7 <tt>setup.hint</tt>. The two <tt>setup.hint</tt> files would look something like this:</p>
+      <p><tt>boffo-2.4.1-2.tar.bz2</tt>, <tt>boffo-2.4.1-2-src.tar.bz2</tt>, and the boffo <tt>setup.hint</tt> would go into the <tt>release/boffo/</tt> subdirectory on the Cygwin server. <tt>libboffo7-2.4.1-2.tar.bz2</tt> would go into a separate subdirectory, such as <tt>release/boffo/libboffo7/</tt>, along with a separate libboffo7 <tt>setup.hint</tt>. The two <tt>setup.hint</tt> files would look something like this:</p>
       <center>
 	<table border="2">
 	  <tr>
@@ -362,7 +362,7 @@ etc...
 	<li>Ensure that your package handles binary only systems, textmode only systems, and hybrid systems correctly. </li>
       </ul>
       <h2><a id="srcpackage_contents" name="srcpackage_contents">Package Source</a></h2>
-      <p>There are two accepted ways to package the source code for cygwin packages.</p>
+      <p>There are two accepted ways to package the source code for Cygwin packages.</p>
       <h3>Method One</h3>
       <ul class="spaced">
 	<li>
@@ -376,7 +376,7 @@ etc...
 </pre>
 	</li>
 	<li>In your source package include the same foo-vendor-suffix.README as used in the binary package.</li>
-	<li>Your source package already be patched with any necessary cygwin specific changes. The user should be able to just ./configure; make; and go.</li>
+	<li>Your source package already be patched with any necessary Cygwin specific changes. The user should be able to just ./configure; make; and go.</li>
 	<li>Include a single file foo-vendor-release.patch in your source package, that when applied (in reverse: 'patch -R') will remove all the patches you've applied to the package, leaving it as the vendor distributes it. This file should extract as : <tt>/usr/src/foo-vendor-release.patch</tt> (that is, since setup.exe extracts everything into <tt>/usr/src</tt>, the patch should be a "top level" member of the -src tarball.)<br />
 	  <br />
 	  Optionally, this patch could also unpack inside the source tree:
@@ -397,12 +397,12 @@ etc...
 <pre>
 diff -Nrup vendor-src-dir patched-src-dir &gt; foo-vendor-release.patch
 </pre>
-	  To apply the generated patch (in reverse; that is, to remove the cygwin specific changes from the unpacked -src tarball) the user would run (from within the source tree)
+	  To apply the generated patch (in reverse; that is, to remove the Cygwin specific changes from the unpacked -src tarball) the user would run (from within the source tree)
 <pre>
 patch -R -p1 &lt; ../foo-vendor-release.patch
 </pre>
 	</li>
-	<li>In general, any cygwin-specific "packaging" files -- such as cygwin-specific READMEs, a copy of the setup.hint file for your package, etc. -- should unpack within a /CYGWIN-PATCHES/ subdirectory in your sources. Naturally, applying the patch (in reverse, as described above) would remove these files from the source tree.</li>
+	<li>In general, any Cygwin-specific "packaging" files -- such as cygwin-specific READMEs, a copy of the setup.hint file for your package, etc. -- should unpack within a /CYGWIN-PATCHES/ subdirectory in your sources. Naturally, applying the patch (in reverse, as described above) would remove these files from the source tree.</li>
 	<li>So, returning to the boffo example, boffo-1.0-1-src.tar.bz2 would contain:
 <pre>
 boffo-1.0-1.patch
@@ -413,7 +413,7 @@ boffo-1.0-1/Makefile.am
 boffo-1.0-1/Makefile.in
 boffo-1.0-1/boffo.c
 ...
-boffo-1.0-1/CYGWIN-PATCHES/boffo.README (cygwin-specific)
+boffo-1.0-1/CYGWIN-PATCHES/boffo.README (Cygwin-specific)
 boffo-1.0-1/CYGWIN-PATCHES/setup.hint
 ...
 </pre>
@@ -442,13 +442,13 @@ boffo-1.0-1/CYGWIN-PATCHES/setup.hint
 	<li>
 	  <b><i>Initial packaging procedure, script-based</i></b>
 	  <ul>
-	    <li>Suppose you've got your boffo package ported to cygwin. It took some work, but it now builds and runs. Further, suppose that the <tt>boffo-1.0.tar.bz2</tt> file that you downloaded from the boffo homepage unpacks into <tt>boffo-1.0/</tt>, so you've been doing all of your work in <tt>~/sources/boffo-1.0/</tt>. That's good.</li>
+	    <li>Suppose you've got your boffo package ported to Cygwin. It took some work, but it now builds and runs. Further, suppose that the <tt>boffo-1.0.tar.bz2</tt> file that you downloaded from the boffo homepage unpacks into <tt>boffo-1.0/</tt>, so you've been doing all of your work in <tt>~/sources/boffo-1.0/</tt>. That's good.</li>
 	    <li>Place a copy of <tt>boffo-1.0.tar.bz2</tt> in <tt>~/sources</tt></li>
 	    <li>copy <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>generic-build-script</tt></a> into <tt>~/sources/</tt> and rename it <tt>boffo-1.0-1.sh</tt>. Carefully adapt this script for your purposes. However, it should auto detect most of what it needs to know: the package name, vendor version, release number, etc.<br />
 	    <br />
 	    </li>
 	    <li>Clean up inside your <tt>~/sources/boffo-1.0/</tt> directory -- make sure that no files which are generated during the build process are lying around. Usually, a '<tt>make distclean</tt>' will do the trick, but not always.</li>
-	    <li>Ensure that you've put any cygwin-specific readme files, setup.hint files, etc, into <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/</tt>. You can adapt <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>this generic readme file</tt></a> for this purpose. The build script expects that the cygwin-specific README file will be named <tt>.../CYGWIN-PATCHES/&lt;package&gt;.README</tt>. In this example, it would be stored as <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/boffo.README</tt>. The build script will ensure that it gets installed as <tt>/usr/share/doc/Cygwin/boffo-1.0.README</tt></li>
+	    <li>Ensure that you've put any Cygwin-specific readme files, setup.hint files, etc, into <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/</tt>. You can adapt <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>this generic readme file</tt></a> for this purpose. The build script expects that the Cygwin-specific README file will be named <tt>.../CYGWIN-PATCHES/&lt;package&gt;.README</tt>. In this example, it would be stored as <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/boffo.README</tt>. The build script will ensure that it gets installed as <tt>/usr/share/doc/Cygwin/boffo-1.0.README</tt></li>
 	    <li>Prepare the staging location for the -src package (yes, do the -src package first): From the directory above your boffo-1.0 tree (e.g. <tt>~/sources/</tt> in our example) execute '<tt>./boffo-1.0-1.sh mkdirs</tt>'</li>
 	    <li>Create the -src package: '<tt>./boffo-1.0-1.sh spkg</tt>'</li>
 	    <li>Now, let's go somewhere else and unpack this new -src package:
@@ -475,9 +475,9 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
       <p>So you've got a package you want to submit. Follow the following checklist before emailing <tt>cygwin-apps&#64;cygwin&#46;com</tt> and you'll almost certainly save time.</p>
       <ol>
 	<li><i>Do you have the time to maintain the package?</i><br />
-	 Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to <tt>cygwin&#64;cygwin&#46;com</tt>. We'd prefer if you read the non-digest mode since prompt response to packaging issues is a plus. When a <i>bug</i> in your package is reported in the cygwin mailing list, address the bug (if it's a cygwin-only bug) or pass back to the vendor. When a solution exists, create an updated package with the fix in it, and send a notification that you need the package uploaded to cygwin-apps. Note that you are not expected to be a helpdesk for the package - the users should be pointed to the vendors lists if you've determined that the bug is not a cygwin-related bug.</li>
+	 Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to <tt>cygwin&#64;cygwin&#46;com</tt>. We'd prefer if you read the non-digest mode since prompt response to packaging issues is a plus. When a <i>bug</i> in your package is reported in the cygwin mailing list, address the bug (if it's a Cygwin-only bug) or pass back to the vendor. When a solution exists, create an updated package with the fix in it, and send a notification that you need the package uploaded to cygwin-apps. Note that you are not expected to be a helpdesk for the package - the users should be pointed to the vendors lists if you've determined that the bug is not a Cygwin-related bug.</li>
 	<li>
-	  Propose on <tt>cygwin-apps&#64;cygwin&#46;com</tt> that you are interested in becoming a package maintainer for package "foo" using a subject like "[<a href="http://cygwin.com/acronyms/#ITP">ITP</a>] foo 0.10". Some packages cannot be distributed via cygwin's setup due to vendor licence limitations. Other packages may not be appropriate for cygwin. This step will save time if, for some reason, we cannot accept the package.<br />
+	  Propose on <tt>cygwin-apps&#64;cygwin&#46;com</tt> that you are interested in becoming a package maintainer for package "foo" using a subject like "[<a href="http://cygwin.com/acronyms/#ITP">ITP</a>] foo 0.10". Some packages cannot be distributed via Cygwin's setup due to vendor licence limitations. Other packages may not be appropriate for Cygwin. This step will save time if, for some reason, we cannot accept the package.<br />
 	   Submission rules:
 	  <ul>
 	    <li><b>Include a complete <tt>setup.hint</tt> file as part of your proposal</b>. Include this file in the text of your message so that it can be commented on. Do not submit it as an attachment.</li>
@@ -531,7 +531,7 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
 	    <li><tt>myserver.com/whatever/foo/libfoo/libfoo-0.21.1-1.tar.bz2</tt></li>
 	  </ul>
 	</li>
-	<li>Do increase the version number no matter what (if upstream version didn't change, bump the cygwin release number): even if the package was bad, even if it was removed from the server for a security issue, even if has only been discussed in mailing list and never uploaded: it costs nothing and avoids confusion in both <tt>setup.exe</tt> and people mind.</li>
+	<li>Do increase the version number no matter what (if upstream version didn't change, bump the Cygwin release number): even if the package was bad, even if it was removed from the server for a security issue, even if has only been discussed in mailing list and never uploaded: it costs nothing and avoids confusion in both <tt>setup.exe</tt> and people mind.</li>
 	<li>Announce on <tt>cygwin-apps&#64;cygwin&#46;com</tt> that you have the package ready for uploading. Include in the mail the URLs of all the new package files.<br />
 	 Be concise in your message: as package mantainer you're trusted to know when and how your packages should be updated, no reason to explain it.<br />
 	 Just provide URLs for files that have actually changed, i.e. it is not necessary to provide a new link to a <tt>setup.hint</tt> file every time you update your packages unless the actual content changed (e.g. because version numbers are not parsable or ordered and have to be specified manually).<br />
@@ -559,7 +559,7 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
 	   (a couple of lines about what "foo" is)<br />
 	   (short changelog of important features or fixes; big emphasis for security fixes)<br />
 	  <br />
-	   If you have questions or comments, please send them to the Cygwin mailing list at: cygwin&#64;cygwin&#46;com .<br />
+	   If you have questions or comments, please send them to the cygwin mailing list at: cygwin&#64;cygwin&#46;com .<br />
 	  <br />
 	   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** CYGWIN-ANNOUNCE UNSUBSCRIBE INFO ***<br />
 	  <br />
