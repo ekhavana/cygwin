@@ -362,7 +362,7 @@ etc...
 	<li>Ensure that your package handles binary only systems, textmode only systems, and hybrid systems correctly. </li>
       </ul>
       <h2><a id="srcpackage_contents" name="srcpackage_contents">Package Source</a></h2>
-      <p>There are two accepted ways to package the source code for Cygwin packages.</p>
+      <p>There are three accepted ways to package the source code for Cygwin packages.</p>
       <h3>Method One</h3>
       <ul class="spaced">
 	<li>
@@ -420,6 +420,7 @@ boffo-1.0-1/CYGWIN-PATCHES/setup.hint
 	</li>
       </ul>
       <h3>Method Two</h3>
+      <p>This method is sometimes referred to as the "g-b-s" method, after the filename of the <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>generic-build-script</tt></a> template.</p>
       <ul class="spaced">
 	<li>In a packaging technique inspired by rpms and debs, you may create a -src tarball which simply contains:
 	  <ol>
@@ -466,6 +467,10 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
 	  </ul>
 	</li>
       </ul>
+      <h3>Method Three: cygport</h3>
+      <p>The technique of method two became popular to many maintainers, however it suffers from a number of drawbacks when applied on a wide scale.  The <tt>cygport</tt> <a href="http://cygwin-ports.cvs.sourceforge.net/*checkout*/cygwin-ports/cygport/README">README</a> explains a number of these problems.</p>
+      <p>The <tt>cygport</tt> framework is a response to these issues, and borrows concepts from the Gentoo portage system.  It separates the g-b-s into a small file containing the package-specific parts and moves the main script infrastructure into shared files.  For more information on using <tt>cygport</tt> consult the documentation and sample port files.</p>
+      <p>Source packages created with <tt>cygport</tt> have a similar structure to those created with method two, except that they contain a '<tt>boffo-1.0-1.cygport</tt>' file in place of the '<tt>boffo-1.0-1.sh</tt>' script.  The binary package is built by running '<tt>cygport boffo-1.0-1 all</tt>' instead of '<tt>./boffo-1.0-1.sh all</tt>', and so on for <tt>prep</tt>, <tt>compile</tt>, <tt>package</tt>, <tt>finish</tt>, etc.</p>
       <h2><a id="postinstall" name="postinstall">Creating a package postinstall script</a></h2>
       <p>If your package requires certain commands to be executed after the files in the package are installed, include them in a file in the package called /etc/postinstall/<var>package</var>.sh or /etc/postinstall/<var>package</var>.bat.</p>
       <p>If the file's name ends in ".sh", it is executed with the Cygwin shell; if it ends in ".bat", it is executed with the DOS command interpreter. If it doesn't end with either of these suffixes, it is ignored.</p>
