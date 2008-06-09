@@ -1,37 +1,188 @@
 #!/usr/bin/perl
-# -*- perl -*-
-#
-# Copyright 2000,2001 Red Hat, Inc.
-#
-
-use strict;
-
-use Net::FTP;
-use LWP::Simple;
+use DBI;
 use File::Find;
-use File::stat;
+use Mail::Send;
+use Getopt::Long;
+use HTTP::Status;
+use LWP::UserAgent;
+use CGI qw/:standard start_ul end_ul/;
 use Time::localtime;
 
-open(M, "mirrors.txt");
-my $out = "mirrors.html";
-my $state = "mirrors.state";
-my $list = "mirrors.lst";
-my $MINDAYS = 3;
+use constant {
+    MAXRETRY => 5,
+    FILE_OUTOFDATE => 'File(s) out of date',
+    SITE_OUTOFDATE => 'Site out of date',
+    TMPFILE => '/tmp/checkmirror.' . $$
+};
 
-sub siteprint($$;@);
+$SIG{TERM} = $SIG{HUP} = $SIG{INT} = $SIG{__DIE__} = sub {unlink TMPFILE};
+use integer;
+use strict;
 
-$main::timeout = 120;
+sub isgoodmirror($$);
+sub makeweb($);
+sub makemaster($);
+sub rsync($$);
+our $ex = 0;
 
-my $pretty_date = sprintf "%4d-%02d-%02d %02d:%02d", 1900 + localtime->year, localtime->mon + 1, localtime->mday, localtime->hour, localtime->min;
+my @email = ();
+my $flush = 0;
+my $webpage = '';
+my $match;
+my $master;
+my $summary = 1;
+my $nreferences = 3;
+GetOptions('mail|email=s'=>\@email, 'n|use-references=i'=>\$nreferences, 'master=s'=>\$master, 'match=s'=>\$match, 'summary!'=>\$summary, 'flush!'=>\$flush, 'webpage=s'=>\$webpage) or exit 1;
 
-my $header = '<HTML>
-<HEAD>
-<TITLE>Download Cygwin</TITLE>
-</HEAD>
+our $release_dir = shift;
+$release_dir .= '/' unless substr($release_dir, -1) eq '/';
 
-<!--#include virtual="cygwin-header.html"-->
+our $ua = LWP::UserAgent->new;
 
-<h2 align=middle>Mirror Sites as of ' . $pretty_date . ' GMT</h2>
+our %md5sums = ();
+our %visited = ();
+
+find(\&wanted, $release_dir);
+undef %visited;
+
+our @newest = ();
+for (sort {$b <=> $a} keys %md5sums) {
+    my $fn = $release_dir . '/' . $md5sums{$_};
+    open MD5SUM, '<', $fn or die "$0: *** couldn't open $fn - $!\n";
+    push @newest, [$md5sums{$_}, join('', <MD5SUM>)];
+    close MD5SUM;
+    last if @newest >= $nreferences;
+}
+undef %md5sums;
+
+my $dbh = DBI->connect('dbi:mysql:dbname=cygwin', 'root', 'stoptryingtolookatmysql');
+my $update = $dbh->prepare('UPDATE mirrors set lasterror = ?, count = ?, lastcheck = ? where url = ?');
+my $sth = $dbh->prepare("SELECT * FROM mirrors");
+$sth->execute();
+
+our %goodmirrors = ();
+our %badmirrors = ();
+my ($ngood, $nbad) = (0, 0);
+while (my $ref = $sth->fetchrow_hashref()) {
+    my $url = $ref->{url};
+    next if defined($match) && $url !~ /$match/o;
+    my $err = isgoodmirror($ref, $flush);
+    if (!length($err)) {
+	$ref->{count} = 0;
+	$ngood++;
+    } else {
+	$ref->{count}++ unless $flush;
+	$badmirrors{$url} = [$err, $ref->{count}];
+	$nbad++;
+    }
+
+    push @{$goodmirrors{$ref->{country}}{$ref->{region}}}, $ref
+	if !length($err) || $err eq FILE_OUTOFDATE;
+    next if $flush;
+    $ref->{lasterror} = $err;
+    $ref->{lastcheck} = time;
+    $update->execute($ref->{lasterror}, $ref->{count}, $ref->{lastcheck}, $url);
+}
+
+makeweb($webpage) if $webpage;
+makemaster($master) if $master;
+undef $dbh;
+
+if ($summary) {
+    my ($msg, $fh);
+    if (!@email) {
+	$fh = \*STDOUT;
+    } else {
+	$msg = Mail::Send->new(Subject=>'check-mirrors report');
+	$msg->to(@email);
+	$fh = $msg->open;
+    }
+
+    printf $fh <<EOF, $ngood, $nbad;
+    number of working mirrors:    %3d
+    number of nonworking mirrors: %3d
+EOF
+
+    if ($nbad) {
+	print $fh "\nError                                     Retries  URL\n";
+	for my $url (sort keys %badmirrors) {
+	    my ($err, $count) = @{$badmirrors{$url}};
+	    printf $fh "%-40.40s  %5d    %s\n", $err, $count, $url;
+	}
+    }
+    close $fh;
+}
+
+unlink TMPFILE;
+exit $ex;
+
+sub get($\$) {
+    my $url = shift;
+    my $value = shift;
+    return rsync($url, $value) if substr($url, 0, 6) eq 'rsync:';
+    my $req = HTTP::Request->new(GET => $url);
+    my $res = $ua->request($req);
+    if ($res->is_success) {
+	$$value = $res->content;
+	return '';
+    }
+    (my $message = $res->message) =~ s/^LWP:\S+\s+//o;
+    $message ||= $res->status_line;
+    chomp $message;
+    return $message;
+}
+
+sub isgoodmirror($$) {
+    my $ref = shift;
+    my $flush = shift;
+    return $ref->{lasterror} if $flush;
+    my $err;
+    for (@newest) {
+	my ($fn, $content) = @$_;
+	my $value;
+	my $url = $ref->{url} . 'release/' . $fn;
+	my $rc = get($url, $value);
+	if (length($rc)) {
+	    $err = $rc;
+	    last;
+	}
+	$err = ($ref->{count} >= MAXRETRY) ? SITE_OUTOFDATE : FILE_OUTOFDATE
+	    if $value ne $content && !defined($err);
+    }
+    return $err;
+}
+
+sub wanted {
+    next if -l $File::Find::name || -d _;
+    my @st;
+    my $md5sum =  $File::Find::dir . '/' . 'md5.sum';
+    my $md5sum_short = substr($md5sum, length($release_dir));
+    if (!defined($visited{$File::Find::dir})) {
+	@st = stat($md5sum);
+	return if !@st;
+	$visited{$File::Find::dir} = $st[9];
+	$md5sums{$st[9]} = $md5sum_short;
+    }
+    @st = stat($File::Find::dir);
+    return if !@st;
+    my $md5stat = $visited{$File::Find::dir};
+    delete $md5sums{$md5stat} if $st[9] > $md5stat && $md5sums{$md5stat} eq $md5sum_short;
+}
+
+sub reforder {
+    return $a->{'url'} cmp $b->{'url'}
+}
+
+sub makeweb($) {
+    my $file = shift;
+    my $page;
+    my $pretty_date = sprintf "%4d-%02d-%02d %02d:%02d", 1900 + localtime->year, localtime->mon + 1, localtime->mday, localtime->hour, localtime->min;
+    open X, '>', \$page;
+    print X "<html xmlns=\"http://www.w3.org/1999/xhtml\" lang=\"en-US\" xml:lang=\"en-US\">\n",
+	    "<head><title>Untitled Document</title>\n",
+	    "<!--#include virtual=\"cygwin-header.html\"-->\n",
+	    h2({-align=>'center'}, 'Mirror Sites as of ' . $pretty_date . ' GMT'),
+	    <<EOF, h3('Site List:'), "\n";
 
 <P>The following sites have generously agreed to mirror our main Cygwin
 ftp site.  To save you download time, please choose the one nearest
@@ -40,8 +191,9 @@ to you!
 <p><em>Note:</em> We maintain a list of sites who have indicated that
 they are acting as mirrors of the full cygwin FTP area.  We
 <em>automatically</em> poll this list on a regular basis to determine if these
-sites are currently available.  The list of sites below reflects all of
+sites are currently up-to-date.  The list of sites below reflects all of
 the sites who appear to be on-line and acting as mirrors.</p>
+
 <p>If you are a mirror site administrator and your site was previously
 listed but has dropped off that means that the automatic software has
 determined that you are not up-to-date.  Your site will be re-added
@@ -53,254 +205,80 @@ of time, that could mean that there is a problem.  Contact sourcemaster
 at this site to report this potential problem.  sourcemaster is also the
 place to send requests to be added to this list.</p>
 
-<H3>Site List:</H3>
-';
-
-my $trailer = '
-<P>Enjoy!
-
-<!--#include virtual="cygwin-footer.html"-->
-';
-
-open(STDOUT, "> /tmp/check-mirrors.out");
-open(STDERR, ">&STDOUT");
-$| = 1;
-
-my $summary .= "start at " . $pretty_date . "\n";
-
-#----------------------------------------------------------------------
-
-my $site;
-my %oldstate;
-open(STATE, $state);
-while (<STATE>) {
-    my $ok;
-    ($site, $ok) = split;
-    $oldstate{$site} = $ok;
+EOF
+    print X start_ul(), "\n";
+    for my $country (sort keys %goodmirrors) {
+	print X '<li>', $country, ":\n", start_ul(), "\n";
+	my $regions = $goodmirrors{$country};
+	for my $region (sort keys %{$regions}) {
+	    print X '<li>',$region, ': ';
+	    my @refs = sort reforder @{$regions->{$region}};
+	    while (my $ref = shift @refs) {
+		my ($proto, $purl) = $ref->{url} =~ m%^(.*?)://([^/]+)/%o;
+		print X a({href=>$ref->{url}}, $purl), "($proto)";
+		print X ', ' if @refs;
+	    }
+	    print X "</li>\n";
+	}
+	print X "</li>\n", end_ul(), "\n";
+    }
+    print X end_ul(), "\n", end_html(), "\n";
+    close X;
+    open F, '>', $file or do {
+	warn "$0: couldn't open $file for writing - $!\n";
+	$ex = 1;
+	return;
+    };
+    print F $page;
+    close F;
+    chmod 0755, $file;
 }
-close(STATE);
 
-$| = 1;
-
-my $days = 86400;
-my $now = time;
-my $master = <M>;
-$master =~ s/[\r\n]+$//;
-my $dir = ($master =~ m%/([^/]+)$%)[0];
-$main::best_mtime = 0;
-$main::main::best_file = undef;
-find({wanted=>\&wanted, follow_fast=>1, no_chdir=>1}, $master);
-substr($main::best_file, 0, length($master) + 1) = '';
-$main::best_file = "$dir/$main::best_file";
-print "Key file is $main::best_file\n";
-
-my (@ok, $ok_count, $bad_count);
-$ok_count = $bad_count = 0;
-
-while (<M>) {
-    next if /^#/;
-    my $ok = 0;
-    my ($url, $area, $region) = split(/[;\r\n]+/);
-    next unless $area;
-    if ($url =~ /^\+/) {
-	$ok = 1;
-	$url =~ s/^\+//;
-    }
-    $url =~ s@/+$@@;
-    my ($proto, $site, $dir) = $url =~ m@([a-z]+)://([^/]+)(.*)@;
-    $dir = "/" unless $dir;
-    $ok = verify_with_timeout($proto, $site, "$dir/$main::best_file") unless $ok;
-    if ($ok == 2) {
-	$ok = $oldstate{$site} + 0;
-	siteprint $site, $proto, "too many anon users, assuming ok";
-    }
-    my $oldstate = $oldstate{$site};
-    $oldstate{$site} = $ok;
-    if (!$ok && $oldstate) {
-	$ok = 1;
-	siteprint $site, $proto, "resetting status to $ok";
-    }
-
-    if ($ok) {
-	$summary .= "OK   $url\n";
-	$ok_count ++;
-	siteprint $site, $proto, "OK";
-	push(@ok, "$region;$area;$url;$site");
+sub rsync($$) {
+    my $url = shift;
+    my $value = shift;
+    my $err = '';
+    open RSYNC, '-|' or do {
+	open STDERR, '>&STDOUT';
+	open STDOUT, '>', '/dev/null';
+	open STDIN, '<', '/dev/null';
+	exec '/usr/bin/rsync', '-W', $url, TMPFILE or
+	  die "$0: couldn't execute rsync - $!\n";
+    };
+    my @errs = <RSYNC>;
+    close RSYNC;
+    if ($? != 0) {
+	$err = $errs[0];
+	chomp $err;
     } else {
-	$summary .= "BAD  $url\n";
-	$bad_count ++;
-	siteprint $site, $proto, "BAD";
+	open T, '<', TMPFILE or do {
+	    warn "$0: couldn't open " . TMPFILE . " - $!\n";
+	    return '';
+	};
+	$$value = join('', <T>);
+	close T;
     }
+    return $err;
 }
 
-close(M);
-
-open(STATE, ">$state");
-for my $k (sort keys %oldstate) {
-    print STATE "$k $oldstate{$k}\n";
-}
-close(STATE);
-
-my $oldregion = '';
-my $oldarea = '';
-
-open(SUMMARY, "| /usr/lib/sendmail -t -odi -oep -oi");
-print SUMMARY "To: cgf.mirrorcheck\@cgf.cx\n";
-print SUMMARY "Subject: cygwin mirror summary\n";
-print SUMMARY "\n";
-print SUMMARY "\n$ok_count ok, $bad_count bad\n\n";
-print SUMMARY $summary;
-print SUMMARY "done at ", $pretty_date, "\n";
-close SUMMARY;
-
-open(OUT, '>', $out);
-open(LIST, '>', $list);
-
-print OUT "\n";
-print OUT "<!-- WARNING: This file is generated by check-mirrors.\n";
-print OUT "     DO NOT EDIT or your changes will be lost!  Edit mirrors.txt\n";
-print OUT "     instead!  (a cron job runs regularly)  -->\n";
-print OUT "\n";
-
-print LIST "# Do not edit - see warning in mirrors.html\n";
-
-print OUT $header;
-
-print OUT "<ul>";
-for my $ok (sort @ok) {
-    my ($region, $area, $url, $site) = split(';', $ok);
-    if ($region ne $oldregion) {
-	print OUT "\n</ul>" if $oldarea;
-	print OUT "\n<li>$region:\n";
-	print OUT "\n<ul>";
-	$oldregion = $region;
-	$oldarea = '';
-    }
-    if ($area ne $oldarea) {
-	print OUT "<li>$area:\n";
-	$oldarea = '';
-    }
-    print OUT ",\n" if $oldarea;
-    print OUT "<a href=\"$url/\">$site</a>";
-    print LIST "$url;$site;$region;$area\n" unless $url =~ /^rsync:/;
-    $oldarea = $area;
-}
-print OUT "\n</ul>\n" if $oldarea;
-print OUT "</ul>\n" if $oldregion;
-
-print OUT $trailer;
-
-close(OUT);
-close(LIST);
-
-close(STDERR);
-close(STDOUT);
-exit(0);
-
-#---------------------------------------------------------------------
-
-sub siteprint($$;@) {
-    my $site = shift;
-    my $proto = shift;
-    print "$site($proto): @_\n";
-}
-
-sub verify_with_timeout {
-    my ($proto, $site, $file) = @_;
-    my $pid = fork();
-    return 0 if $pid < 0;
-    if ($pid == 0) {
-	$| = 1;
-	print "**********************\n";
-	siteprint $site, $proto, $file;
-	if ($proto eq "ftp") {
-	   exit verify_ftp($site, $file);
-	} else {
-	   exit verify_http($site, $file);
+sub makemaster($) {
+    my $file = shift;
+    my $master;
+    open MASTER, '>', $file or do {
+	warn "$0: couldn't open $file - $!\n";
+	$ex = 1;
+	return;
+    };
+    for my $country (sort keys %goodmirrors) {
+	my $regions = $goodmirrors{$country};
+	for my $region (sort keys %$regions) {
+	    for my $ref (sort reforder @{$regions->{$region}}) {
+		my ($proto, $purl) = $ref->{url} =~ m%^(.*?)://([^/]+)/%o;
+		next if $proto eq 'rsync';
+		print MASTER join(';', $ref->{url}, $purl, $ref->{'country'}, $ref->{'region'}), "\n";
+	    }
 	}
     }
-    $SIG{ALRM} = sub {
-	kill 9, $pid;
-	siteprint $site, $proto, "timed out";
-    };
-    alarm($main::timeout);
-    my $rv;
-    if (waitpid($pid, 0) != $pid) {
-	$rv = 0;
-    } else {
-	$rv = $? >> 8;
-    }
-    alarm(0);
-    undef $SIG{ALRM};
-    siteprint $site, $proto, "status $rv $file";
-    return $rv;
-}
-
-#---------------------------------------------------------------------
-
-sub verify_http {
-    my ($site, $file) = @_;
-    my $url = "http://$site/$file";
-    my @result = LWP::Simple::head($url);
-    my $status = @result == 5 ? 1 : 0;
-    if ($status) {
-	print "$file -- ", join(';', @result), "\n";
-    } else {
-	siteprint $site, 'http', "$file not found";
-    }
-    return $status;
-}
-
-#---------------------------------------------------------------------
-
-sub congested {
-    my ($site, $msg) = @_;
-    if ($msg =~ /too many|exceed|limit/mi) {
-	siteprint $site, 'ftp', "status 2 - congested";
-	return 1;
-    }
-    return 0;
-}
-
-sub verify_ftp {
-    my ($site, $file) = @_;
-    my $ftp = Net::FTP->new($site);
-    if (!$ftp) {
-	print $@;
-	return 2 if congested($site, $@);
-	siteprint $site, 'ftp', "can't open";
-	return 0;
-    }
-    print $ftp->message;
-    siteprint $site, 'ftp', "open";
-    my $rc = $ftp->login('anonymous', 'sourcemaster@sourceware.org');
-    my $msg = $ftp->message;
-    print $msg;
-    if (!$rc) {
-	return 2 if congested($site, $msg);
-	siteprint $site, 'ftp', "can't login";
-	return 0;
-    }
-    my @a = $ftp->ls($file);
-    my $status = "@a";
-    print "$status\n";
-    if (!$status || $status =~ /not found|no such file/i) {
-	siteprint $site, 'ftp', "$file not found";
-	return 0;
-    }
-    $ftp->quit;
-    return 1;
-}
-
-sub wanted {
-    return unless /\.tar/;
-    return if $File::Find::name =~ m@private|old|md5\.sum|xfree|mail-archives|snapshots@;
-    my $st = stat($File::Find::name);
-    return unless $st->size;
-    my $mtime = $now - $st->mtime;
-    next if $mtime < $MINDAYS * $days;
-    if (!$main::best_file || $main::best_mtime > $mtime) {
-	$main::best_file = $File::Find::name;
-	$main::best_mtime = $mtime;
-    }
+    close MASTER;
+    return;
 }
