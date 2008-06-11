@@ -243,7 +243,9 @@ sub rsync($$) {
     my $url = shift;
     my $value = shift;
     my $err = '';
+    unlink TMPFILE;
     open RSYNC, '-|' or do {
+	$SIG{TERM} = $SIG{HUP} = $SIG{INT} = $SIG{__DIE__} = 'IGNORE';
 	open STDERR, '>&STDOUT';
 	open STDOUT, '>', '/dev/null';
 	open STDIN, '<', '/dev/null';
@@ -255,11 +257,10 @@ sub rsync($$) {
     if ($? != 0) {
 	$err = $errs[0];
 	chomp $err;
+    } elsif (!open T, '<', TMPFILE) {
+	warn "$0: couldn't open " . TMPFILE . " - $!\n";
+	$err = 'File not transferred';
     } else {
-	open T, '<', TMPFILE or do {
-	    warn "$0: couldn't open " . TMPFILE . " - $!\n";
-	    return '';
-	};
 	$$value = join('', <T>);
 	close T;
     }
