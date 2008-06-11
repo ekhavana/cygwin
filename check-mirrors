@@ -10,6 +10,7 @@ use Time::localtime;
 
 use constant {
     MAXRETRY => 5,
+    NOCHECK_THRESHOLD => 100,
     FILE_OUTOFDATE => 'File(s) out of date',
     SITE_OUTOFDATE => 'Site out of date',
     TMPFILE => '/tmp/checkmirror.' . $$
@@ -65,7 +66,7 @@ our %badmirrors = ();
 my ($ngood, $nbad, $nood) = (0, 0, 0);
 while (my $ref = $sth->fetchrow_hashref()) {
     my $url = $ref->{url};
-    next if defined($match) && $url !~ /$match/o;
+    next if $ref->{count} >= NOCHECK_THRESHOLD || (defined($match) && $url !~ /$match/o);
     my $err = isgoodmirror($ref, $flush);
     if (!length($err)) {
 	$ref->{count} = 0;
