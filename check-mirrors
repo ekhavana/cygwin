@@ -62,7 +62,7 @@ $sth->execute();
 
 our %goodmirrors = ();
 our %badmirrors = ();
-my ($ngood, $nbad) = (0, 0);
+my ($ngood, $nbad, $nood) = (0, 0, 0);
 while (my $ref = $sth->fetchrow_hashref()) {
     my $url = $ref->{url};
     next if defined($match) && $url !~ /$match/o;
@@ -73,7 +73,11 @@ while (my $ref = $sth->fetchrow_hashref()) {
     } else {
 	$ref->{count}++ unless $flush;
 	$badmirrors{$url} = [$err, $ref->{count}];
-	$nbad++;
+	if ($err eq FILE_OUTOFDATE) {
+	    $nood++;
+	} else {
+	    $nbad++
+	}
     }
 
     push @{$goodmirrors{$ref->{country}}{$ref->{region}}}, $ref
@@ -98,9 +102,10 @@ if ($summary) {
 	$fh = $msg->open;
     }
 
-    printf $fh <<EOF, $ngood, $nbad;
-    number of working mirrors:    %3d
-    number of nonworking mirrors: %3d
+    printf $fh <<EOF, $ngood, $nood, $nbad;
+    Number of working mirrors:    .%3d
+    Number of out-of-date mirrors: %3d
+    Number of nonworking mirrors:  %3d
 EOF
 
     if ($nbad) {
