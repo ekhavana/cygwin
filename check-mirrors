@@ -107,7 +107,10 @@ if ($summary) {
     Number of working mirrors:    .%3d
     Number of out-of-date mirrors: %3d
     Number of nonworking mirrors:  %3d
+
+    Reference files:
 EOF
+    print $fh '    ', $_, "\n" for @newest;
 
     if ($nbad) {
 	print $fh "\nError                                     Retries  URL\n";
