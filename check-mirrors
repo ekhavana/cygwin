@@ -17,7 +17,8 @@ use constant {
     TMPFILE => '/tmp/checkmirror.' . $$
 };
 
-my %transient_failures = ( FILE_OUTOFDATE . '' => 1, SITE_TOOMANYUSERS . '' => 1);
+my $transient_failures = FILE_OUTOFDATE . '|' . SITE_TOOMANYUSERS . "Can't chdir";
+$transient_failures = qr/^(?:$transient_failures)/o;
 
 $SIG{TERM} = $SIG{HUP} = $SIG{INT} = $SIG{__DIE__} = sub {unlink TMPFILE};
 use integer;
@@ -77,7 +78,7 @@ while (my $ref = $sth->fetchrow_hashref()) {
     } else {
 	$ref->{count}++ unless $flush;
 	$badmirrors{$url} = [$err, $ref->{count}];
-	if ($transient_failures{$err}) {
+	if ($err =~ $transient_failures) {
 	    $nood++;
 	} else {
 	    $nbad++
@@ -270,7 +271,6 @@ sub rsync($$) {
 	$err = $errs[0];
 	chomp $err;
     } elsif (!open T, '<', TMPFILE) {
-	warn "$0: couldn't open " . TMPFILE . " - $!\n";
 	$err = 'File not transferred';
     } else {
 	$$value = join('', <T>);
