@@ -13,8 +13,11 @@ use constant {
     NOCHECK_THRESHOLD => 100,
     FILE_OUTOFDATE => 'File(s) out of date',
     SITE_OUTOFDATE => 'Site out of date',
+    SITE_TOOMANYUSERS => 'Too many users to login',
     TMPFILE => '/tmp/checkmirror.' . $$
 };
+
+my %transient_failures = (FILE_OUTOFDATE=>1, SITE_TOOMANYUSERS=>1);
 
 $SIG{TERM} = $SIG{HUP} = $SIG{INT} = $SIG{__DIE__} = sub {unlink TMPFILE};
 use integer;
@@ -74,7 +77,7 @@ while (my $ref = $sth->fetchrow_hashref()) {
     } else {
 	$ref->{count}++ unless $flush;
 	$badmirrors{$url} = [$err, $ref->{count}];
-	if ($err eq FILE_OUTOFDATE) {
+	if ($transient_failures{$err}) {
 	    $nood++;
 	} else {
 	    $nbad++
@@ -105,7 +108,7 @@ if ($summary) {
 
     printf $fh <<EOF, $ngood, $nood, $nbad;
 Number of working mirrors:     %3d
-Number of out-of-date mirrors: %3d
+Number of transient failures:  %3d
 Number of nonworking mirrors:  %3d
 
 Reference files:
@@ -162,6 +165,7 @@ sub isgoodmirror($$) {
     $err =~ s/\n+/ /og;
     $err =~ s/\t+/ /og;
     $err =~ s/\s\s+/ /og;
+    $err = SITE_TOOMANYUSERS if /maximum number of clients .* already connected/o;
     return $err;
 }
 
