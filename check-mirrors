@@ -17,7 +17,7 @@ use constant {
     TMPFILE => '/tmp/checkmirror.' . $$
 };
 
-my %transient_failures = ( (FILE_OUTOFDATE) => 1, (SITE_TOOMANYUSERS) => 1);
+my %transient_failures = ( FILE_OUTOFDATE . '' => 1, SITE_TOOMANYUSERS . '' => 1);
 
 $SIG{TERM} = $SIG{HUP} = $SIG{INT} = $SIG{__DIE__} = sub {unlink TMPFILE};
 use integer;
