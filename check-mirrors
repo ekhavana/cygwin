@@ -158,6 +158,10 @@ sub isgoodmirror($$) {
 	$err = ($ref->{count} >= MAXRETRY) ? SITE_OUTOFDATE : FILE_OUTOFDATE
 	    if $value ne $content && !defined($err);
     }
+    $err =~ s/\r+//og;
+    $err =~ s/\n+/ /og;
+    $err =~ s/\t+/ /og;
+    $err =~ s/\s\s+/ /og;
     return $err;
 }
 
