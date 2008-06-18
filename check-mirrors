@@ -165,7 +165,7 @@ sub isgoodmirror($$) {
     $err =~ s/\n+/ /og;
     $err =~ s/\t+/ /og;
     $err =~ s/\s\s+/ /og;
-    $err = SITE_TOOMANYUSERS if /maximum number of clients .* already connected/o;
+    $err = SITE_TOOMANYUSERS if $err =~ /maximum number of clients .* already connected/o;
     return $err;
 }
 
