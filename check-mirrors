@@ -78,10 +78,13 @@ while (my $ref = $sth->fetchrow_hashref()) {
     } else {
 	$ref->{count}++ unless $flush;
 	$badmirrors{$url} = [$err, $ref->{count}];
-	if ($err =~ $transient_failures) {
+	if ($err !~ $transient_failures) {
+	    $nbad++
+	} elsif ($ref->{count} <= MAXRETRY) {
 	    $nood++;
 	} else {
-	    $nbad++
+	    $err = SITE_OUTOFDATE;
+	    $nbad++;
 	}
     }
 
@@ -159,7 +162,7 @@ sub isgoodmirror($$) {
 	    $err = $rc;
 	    last;
 	}
-	$err = ($ref->{count} >= MAXRETRY) ? SITE_OUTOFDATE : FILE_OUTOFDATE
+	$err = FILE_OUTOFDATE
 	    if $value ne $content && !defined($err);
     }
     $err =~ s/\r+//og;
