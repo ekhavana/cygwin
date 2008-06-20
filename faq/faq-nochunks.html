@@ -6,8 +6,8 @@ Cygwin installed by the user?
 </a></dt><dt>4.23. <a href="faq-nochunks.html#faq.using.bundling-cygwin">
 Can I bundle Cygwin with my product for free?
 </a></dt><dt>4.24. <a href="faq-nochunks.html#faq.using.private-cygwin">
-So I can't install a private version of the Cygwin DLL that doesn't
-conflict with the system cygwin?
+So I can't install a private version of the Cygwin DLL without
+conflictng with the system cygwin?
 </a></dt><dt>4.25. <a href="faq-nochunks.html#faq.using.older-cygwin-conflict">
 But doesn't that mean that if some application installs an older Cygwin
 DLL on top of a newer DLL, my application will break?
@@ -501,8 +501,8 @@ Cygwin installed by the user?
 </a></dt><dt>4.23. <a href="faq-nochunks.html#faq.using.bundling-cygwin">
 Can I bundle Cygwin with my product for free?
 </a></dt><dt>4.24. <a href="faq-nochunks.html#faq.using.private-cygwin">
-So I can't install a private version of the Cygwin DLL that doesn't
-conflict with the system cygwin?
+So I can't install a private version of the Cygwin DLL without
+conflictng with the system cygwin?
 </a></dt><dt>4.25. <a href="faq-nochunks.html#faq.using.older-cygwin-conflict">
 But doesn't that mean that if some application installs an older Cygwin
 DLL on top of a newer DLL, my application will break?
@@ -768,7 +768,7 @@ running at the same time.  This could happen, for example, if you update
 cygwin1.dll without exiting <span class="emphasis"><em>all</em></span> Cygwin apps (including inetd)
 beforehand.
 </p><p>The only DLL that is sanctioned by the Cygwin project is the one that
-you get by running <a class="ulink" href="http://cygwin.com/setup.exe" target="_top">http://cygwin.com/setup.exe</a>, installed in the
+you get by running <a class="ulink" href="http://cygwin.com/setup.exe" target="_top">setup.exe</a>, installed in the
 directory controlled by this program.  If you have other versions on
 your system and desire help from the cygwin project, you should delete
 or rename all DLLs that are not installed by <code class="filename">setup.exe</code>.
@@ -786,25 +786,30 @@ Third party developers who wish to use Cygwin should check if
 there is a version of cygwin installed and use the installed
 version if it is newer, or conditionally upgrade if it is not.
 (If you write a tool to make this easy, consider contributing
-it to cygwin for others to use.)
+it for others to use)
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.using.bundling-cygwin"></a><p><b>4.23.</b></p></td><td align="left" valign="top"><p>
 Can I bundle Cygwin with my product for free?
 </p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>
-Only if you comply with Cygwin's license very carefully.  If you choose
-to distribute cygwin1.dll, you must be willing to distribute the exact
-source code used to build that copy of cygwin1.dll as per the terms of
-the GPL.  If you ship applications that link with cygwin1.dll, you must
-either provide those applications' source code under a GPL-compatible
-license, *or* purchase a cygwin license from Red Hat.
+Only if you comply with Cygwin's <a class="ulink" href="http://cygwin.com/license.html" target="_top">license</a> very carefully.  If you
+choose to distribute cygwin1.dll, you must be willing to distribute the
+exact source code used to build that copy of cygwin1.dll as per the
+terms of the GPL.  If you ship applications that link with cygwin1.dll,
+you must either provide those applications' source code under a
+GPL-compatible license, *or* purchase a cygwin license from Red Hat.
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.using.private-cygwin"></a><p><b>4.24.</b></p></td><td align="left" valign="top"><p>
-So I can't install a private version of the Cygwin DLL that doesn't
-conflict with the system cygwin?
+So I can't install a private version of the Cygwin DLL without
+conflictng with the system cygwin?
 </p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>
-You can have two different versions of the Cygwin DLL installed on your
-system at the same time but they must be run serially.  This means that
-you can't be running programs using both versions of Cygwin at the same
-time.  Please be aware that currently both versions will use the same
-mount table entries although this wil change in Cygwin version 1.7.x.
+Actually, if you are very careful, you can have two different versions
+of the Cygwin DLL installed on your system at the same time but they
+must be run serially.  This means that you can't be running programs
+using both versions of Cygwin at the same time.  Please be aware that
+currently both versions will use the same mount table entries although
+this wil change in Cygwin version 1.7.x.
+</p><p>
+This usage is not recommeded for novices.  Only limited support will be
+provided in the <a class="ulink" href="http://cygwin.com/lists.html" target="_top">mailing lists</a>
+if you run into problems.
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.using.older-cygwin-conflict"></a><p><b>4.25.</b></p></td><td align="left" valign="top"><p>
 But doesn't that mean that if some application installs an older Cygwin
 DLL on top of a newer DLL, my application will break?
