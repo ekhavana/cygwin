@@ -17,7 +17,7 @@ use constant {
     TMPFILE => '/tmp/checkmirror.' . $$
 };
 
-my $transient_failures = '\Q' . join('\E|\Q', FILE_OUTOFDATE, SITE_TOOMANYUSERS, "Can't chdir") . '\E';
+my $transient_failures = join('|', map(quotemeta($_), FILE_OUTOFDATE, SITE_TOOMANYUSERS, "Can't chdir"));
 $transient_failures = qr/^(?:$transient_failures)/o;
 
 $SIG{TERM} = $SIG{HUP} = $SIG{INT} = $SIG{__DIE__} = sub {unlink TMPFILE};
