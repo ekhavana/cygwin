@@ -13,7 +13,7 @@ use constant {
     NOCHECK_THRESHOLD => 100,
     FILE_OUTOFDATE => 'File(s) out of date',
     SITE_OUTOFDATE => 'Site out of date',
-    SITE_TOOMANYUSERS => 'Too many users to login',
+    SITE_TOOMANYUSERS => 'too many users to login',
     TMPFILE => '/tmp/checkmirror.' . $$
 };
 
@@ -169,7 +169,7 @@ sub isgoodmirror($$) {
     $err =~ s/\n+/ /og;
     $err =~ s/\t+/ /og;
     $err =~ s/\s\s+/ /og;
-    $err = SITE_TOOMANYUSERS if $err =~ /maximum number of clients .* already connected/o;
+    $err = SITE_TOOMANYUSERS if $err =~ /too many users|too many connected users|maximum number of clients .* already connected/io;
     return $err;
 }
 
