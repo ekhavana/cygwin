@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>The CYGWIN environment variable</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.71.1"><link rel="start" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter&#160;3.&#160;Using Cygwin"><link rel="prev" href="using-specialnames.html" title="Special filenames"><link rel="next" href="using-cygserver.html" title="Cygserver"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The <code class="envar">CYGWIN</code> environment
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>The CYGWIN environment variable</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><link rel="start" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter&#160;3.&#160;Using Cygwin"><link rel="prev" href="using-specialnames.html" title="Special filenames"><link rel="next" href="using-cygserver.html" title="Cygserver"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The <code class="envar">CYGWIN</code> environment
 variable</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;3.&#160;Using Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="using-cygserver.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-cygwinenv"></a>The <code class="envar">CYGWIN</code> environment
 variable</h2></div></div></div><p>The <code class="envar">CYGWIN</code> environment variable is used to configure
 many global settings for the Cygwin runtime system. It contains the options
@@ -26,7 +26,7 @@ the case of the path as saved on the disk.
 ignores case. That's the default for native Windows applications as well.</p></li><li style="list-style-type: disc"><p><code class="envar">adjust</code> behaves mostly invisible. The POSIX input
 path is internally adjusted in case, so that the resulting DOS path uses the
 correct case throughout. You can see the result when changing the directory
-using a wrong case and calling <span><strong class="command">/bin/pwd</strong></span> afterwards.</p></li><li style="list-style-type: disc"><p><code class="envar">strict</code> results in a error message if the case
+using a wrong case and calling <span class="command"><strong>/bin/pwd</strong></span> afterwards.</p></li><li style="list-style-type: disc"><p><code class="envar">strict</code> results in a error message if the case
 isn't correct. Trying to open a file <code class="filename">Foo</code> while a file
 <code class="filename">fOo</code> exists results in a "no such file or directory"
 error. Trying to create a file <code class="filename">BAR</code> while a file
@@ -44,18 +44,20 @@ originally encoded in the firmware of IBM PCs by original
 equipment manufacturers (OEMs).  If you find that some characters 
 (especially non-US or 'graphical' ones) do not display correctly in 
 Cygwin, you can use this option to select an appropriate codepage.
-</p></li><li style="list-style-type: disc"><p><code class="envar">(no)envcache</code> - If set, environment variable
+</p></li><li style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
+first time a user uses an "MS-DOS" style path name rather than a POSIX-style
+path name.  Defaults to set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)envcache</code> - If set, environment variable
 conversions (between Win32 and POSIX) are cached.  Note that this is may
 cause problems if the mount table changes, as the cache is not invalidated
 and may contain values that depend on the previous mount table
-contents. Defaults to set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)export</code> - if set, the final values of these
+contents. Defaults to set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)export</code> - If set, the final values of these
 settings are re-exported to the environment as <code class="envar">CYGWIN</code> again.
 Defaults to off.</p></li><li style="list-style-type: disc"><p>
 <code class="envar">error_start:Win32filepath</code> - if set, runs 
 <code class="filename">Win32filepath</code> when cygwin encounters a fatal error,
 which is useful for debugging.  <code class="filename">Win32filepath</code> is
-usually set to the path to <span><strong class="command">gdb</strong></span> or
-<span><strong class="command">dumper</strong></span>, for example
+usually set to the path to <span class="command"><strong>gdb</strong></span> or
+<span class="command"><strong>dumper</strong></span>, for example
 <code class="filename">C:\cygwin\bin\gdb.exe</code>. 
 There is no default set.
 </p></li><li style="list-style-type: disc"><p><code class="envar">forkchunk:32768</code> - causes the <code class="function">fork()</code>
@@ -84,7 +86,7 @@ or if you switch off ntsec explicitely. </p><div class="warning" style="margin-l
 model to set UNIX-like permissions on files and processes. The
 file permissions can only be set on NTFS partitions. FAT/FAT32 don't
 support the NT file security. Defaults to set. For more information, read
-the documentation in <a href="ntsec.html" title="NT security and usage of ntsec">the section called &#8220;NT security and usage of <code class="literal">ntsec</code>&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)smbntsec</code> - if set, use <code class="envar">ntsec</code> on remote
+the documentation in <a class="xref" href="ntsec.html" title="NT security and usage of ntsec">the section called &#8220;NT security and usage of <code class="literal">ntsec</code>&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)smbntsec</code> - if set, use <code class="envar">ntsec</code> on remote
 drives as well (default is "nosmbntesc"). When setting "smbntsec" there's
 a chance that you get problems with Samba shares so you should use this
 option with care.  One reason for a non working <code class="envar">ntsec</code> on
@@ -106,31 +108,12 @@ reflects the name of the program currently running.  Default is not
 set.  Note that under Win9x the title bar is always enabled and it is
 stripped by default, but this is because of the way Win9x works.  In
 order not to strip, specify <code class="literal">title</code> or <code class="literal">title
-nostrip_title</code>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)transparent_exe</code> - EXPERIMENTAL.  Only use this
-option if you're confident to be able to live with the consequences.  If
-set, several additional functions in Cygwin will handle files with .exe
-suffix transparently.  These functions are <code class="function">link(2)</code>,
-<code class="function">open(2)</code>, <code class="function">rename(2)</code>,
-<code class="function">symlink(2)</code>, <code class="function">unlink(2)</code>,
-<code class="function">pathconf(3)</code>.  So far, these functions have been
-treated as too dangerous to act on files with .exe suffix if the .exe
-suffix wasn't given explicitely in the file name argument, and this is
-still the case if the transparent_exe option is not set.  Default is not
-set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)traverse</code> - This option only affects NT systems.
-If set, Cygwin handles file permissions so that the parent directories'
-permissions are checked, as it's default on POSIX systems.  If not set,
-only the file's own permissions are taken into account.  This is the
-default on Windows and called "bypass traverse checking".  Default was
-"traverse" in version 1.5.13 and 1.5.14.  Beginning with 1.5.15, traverse
-checking is disabled again since it's not correctly implemented by Microsoft
-and it's behaviour is getting worse with each new OS version.  Unprivileged
-terminal server sessions are practically impossible with traverse checking
-switched on.  So, use at your own risk.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)tty</code> - if set, Cygwin enables extra support
+nostrip_title</code>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)tty</code> - if set, Cygwin enables extra support
 (i.e., termios) for UNIX-like ttys in the Windows console. 
 It is not compatible with some Windows programs.
 Defaults to not set, in which case the tty is opened in text mode.
 Note that this has been changed such that ^D works as
-expected instead of ^Z, and is settable via <span><strong class="command">stty</strong></span>.
+expected instead of ^Z, and is settable via <span class="command"><strong>stty</strong></span>.
 This option must be specified before starting a Cygwin shell 
 and it cannot be changed in the shell.  It should not be set when using
 other terminals (i.e., rxvt or xterm). 
