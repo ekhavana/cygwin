@@ -169,7 +169,7 @@ sub isgoodmirror($$) {
     $err =~ s/\n+/ /og;
     $err =~ s/\t+/ /og;
     $err =~ s/\s\s+/ /og;
-    $err = SITE_TOOMANYUSERS if $err =~ /too many users|too many connected users|maximum number of clients .* already connected/io;
+    $err = SITE_TOOMANYUSERS if $err =~ /\d users.* already logged in|too busy|too many users|too many connected users|maximum number of clients .* already connected/io;
     return $err;
 }
 
