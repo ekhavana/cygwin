@@ -76,6 +76,7 @@ while (my $ref = $sth->fetchrow_hashref()) {
     if (!length($err)) {
 	$ref->{count} = 0;
 	$ngood++;
+	$ref->{transient} = ' ';
     } else {
 	$ref->{count}++ unless $flush;
 	$badmirrors{$url} = [$err, $ref->{count}];
@@ -88,10 +89,9 @@ while (my $ref = $sth->fetchrow_hashref()) {
 	    $err = SITE_OUTOFDATE;
 	    $nbad++;
 	}
+	$ref->{transient} = $istransient ? '*' : '!';
+	push(@{$badmirrors{$url}}, $istransient);
     }
-
-    $ref->{transient} = $istransient ? '*' : ' ';
-    push(@{$badmirrors{$url}}, $istransient);
     push @{$goodmirrors{$ref->{country}}{$ref->{region}}}, $ref
 	if !length($err) || $istransient;
     next if $flush;
