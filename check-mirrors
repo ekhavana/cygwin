@@ -61,7 +61,7 @@ for (sort {$b <=> $a} keys %md5sums) {
 undef %md5sums;
 
 my $dbh = DBI->connect('dbi:mysql:dbname=cygwin', 'root', 'stoptryingtolookatmysql');
-my $update = $dbh->prepare('UPDATE mirrors set lasterror = ?, count = ?, lastcheck = ? where url = ?');
+my $update = $dbh->prepare('UPDATE mirrors set lasterror = ?, count = ?, lastcheck = ?, transient = ? where url = ?');
 my $sth = $dbh->prepare("SELECT * FROM mirrors");
 $sth->execute();
 
@@ -72,6 +72,7 @@ while (my $ref = $sth->fetchrow_hashref()) {
     my $url = $ref->{url};
     next if $ref->{count} >= NOCHECK_THRESHOLD || (defined($match) && $url !~ /$match/o);
     my $err = isgoodmirror($ref, $flush);
+    my $istransient = 0;
     if (!length($err)) {
 	$ref->{count} = 0;
 	$ngood++;
@@ -79,8 +80,9 @@ while (my $ref = $sth->fetchrow_hashref()) {
 	$ref->{count}++ unless $flush;
 	$badmirrors{$url} = [$err, $ref->{count}];
 	if ($err !~ $transient_failures) {
-	    $nbad++
+	    $nbad++;
 	} elsif ($ref->{count} <= MAXRETRY) {
+	    $istransient = 1;
 	    $nood++;
 	} else {
 	    $err = SITE_OUTOFDATE;
@@ -88,12 +90,14 @@ while (my $ref = $sth->fetchrow_hashref()) {
 	}
     }
 
+    $ref->{transient} = $istransient ? '*' : ' ';
+    push(@{$badmirrors{$url}}, $istransient);
     push @{$goodmirrors{$ref->{country}}{$ref->{region}}}, $ref
-	if !length($err) || $err eq FILE_OUTOFDATE;
+	if !length($err) || $istransient;
     next if $flush;
     $ref->{lasterror} = $err;
     $ref->{lastcheck} = time;
-    $update->execute($ref->{lasterror}, $ref->{count}, $ref->{lastcheck}, $url);
+    $update->execute($ref->{lasterror}, $ref->{count}, $ref->{lastcheck}, $ref->{transient}, $url);
 }
 
 makeweb($webpage) if $webpage;
@@ -122,8 +126,8 @@ EOF
     if ($nbad) {
 	print $fh "\nError                                     Retries  URL\n";
 	for my $url (sort keys %badmirrors) {
-	    my ($err, $count) = @{$badmirrors{$url}};
-	    printf $fh "%-40.40s  %5d    %s\n", $err, $count, $url;
+	    my ($err, $count, $istransient) = @{$badmirrors{$url}};
+	    printf $fh "%-40.40s%1.1s  %5d    %s\n", $err, $istransient, $count, $url;
 	}
     }
     close $fh;
