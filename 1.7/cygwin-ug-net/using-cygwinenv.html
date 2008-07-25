@@ -4,19 +4,7 @@ variable</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-
 variable</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-implemented-options"></a>Implemented options</h3></div></div></div><p>The <code class="envar">CYGWIN</code> environment variable is used to configure
 many global settings for the Cygwin runtime system. It contains the options
 listed below, separated by blank characters. Many options can be turned off
-by prefixing with <code class="literal">no</code>.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">(no)binmode</code> - if set, non-disk 
-(e.g. pipe and COM ports) file opens default to binary mode 
-(no CRLF translation) instead of text mode.  Defaults to set (binary
-mode).  By default, devices are opened in binary mode, so this option
-has little effect on normal cygwin operations.  Sockets are always
-in binary mode.
-
-It does affect two things, however.  For non-NTFS filesystems, this
-option will control the line endings for standard output/input/error
-for redirection from the Windows command shell.  It will also affect
-the default translation mode of a pipe, although most shells set the
-pipe to binary by default.
-</p></li><li style="list-style-type: disc"><p><code class="envar">codepage:[ansi|oem|utf8]</code> - This option controls
+by prefixing with <code class="literal">no</code>.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">codepage:[ansi|oem|utf8]</code> - This option controls
 which single- or multibyte character set is used for file and console
 operations.  Windows is using UTF-16 characters internally and this
 option specifies how 8-byte character sets are converted to UTF-16 and
@@ -91,7 +79,10 @@ set. If not set, Cygwin creates symlinks as plain files with a magic number,
 a path and the system attribute set. Defaults to not set since plain
 file symlinks are faster to write and faster to read.</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Removed options</h3></div></div></div><p>
 Some CYGWIN options have been removed in Cygwin 1.7 for one reason or another.
-These removed options are listed below.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">check_case</code> - This option has been removed in favor of
+These removed options are listed below.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">(no)binmode</code> - This option has been removed because
+all file opens default to binary mode, unless the open mode has been specified
+explicitely in the open(2) call.
+</p></li><li style="list-style-type: disc"><p><code class="envar">check_case</code> - This option has been removed in favor of
 real case sensitivity and the per-mount option "posix=[0|1]".  For more
 information, read the documentation in <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> and
 <a href="using-specialnames.html#pathnames-casesensitive" title="Case sensitive filenames">the section called &#8220;Case sensitive filenames&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntea</code> -  This option has been removed since it
