@@ -64,11 +64,24 @@ posix=[0|1].  The meaning of the options is as follows.</p><pre class="screen">
   posix=0  - Switch off case sensitivity for paths under this mount point.
   posix=1  - Switch on case sensitivity for paths under this mount point
 	     (default).
-</pre><p>Note that nouser mount points are not overridable by a later call
-to mount(2).  This is only possible for user mount points.  Mount points
-are by default nouser mount points, unless you specify the option user. 
-In contrast, all mount points in the user specific fstab file are user
-mount points.</p><p>The fifth and sixth field are ignored.  They are
+</pre><p>Normally, files ending in certain extensions (.exe, .com, .bat, .btm,
+.cmd) are assumed to be executable.  Files whose first two characters begin
+with '#!' are also considered to be executable.
+The <code class="literal">exec</code> option is used to instruct Cygwin that the
+mounted file is "executable".  If the <code class="literal">exec</code> option is used
+with a directory then all files in the directory are executable.
+This option allows other files to be marked as executable and avoids the
+overhead of opening each file to check for a '#!'.  The
+<code class="literal">cygexec</code> option is very similar to <code class="literal">exec</code>,
+but also prevents Cygwin from setting up commands and environment variables
+for a normal Windows program, adding another small performance gain.  The
+opposite of these options is the <code class="literal">notexec</code> option, which
+means that no files should be marked as executable under that mount point.
+</p><p>Note that nouser mount points are not overridable by a later call
+to <span><strong class="command">mount</strong></span>.  This is only possible for user mount points. 
+Mount points given in <code class="filename">/etc/fstab</code> are by default nouser
+mount points, unless you specify the option user.  In contrast, all mount
+points in the user specific fstab file are user mount points.</p><p>The fifth and sixth field are ignored.  They are
 so far only specified to keep a Linux-like fstab file layout.</p><p>Note that you don't have to specify an fstab entry for the root dir,
 unless you want to have the root dir pointing to somewhere entirely
 different (hopefully you know what you're doing), or if you want to

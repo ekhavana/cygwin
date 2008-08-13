@@ -560,38 +560,31 @@ up as file owners in <span><strong class="command">ls -l</strong></span> output.
 Usage: mount [OPTION] [&lt;win32path&gt; &lt;posixpath&gt;]
 Display information about mounted filesystems, or mount a filesystem
 
-  -b, --binary     (default)    text files are equivalent to binary files
-                                (newline = \n)
   -c, --change-cygdrive-prefix  change the cygdrive path prefix to &lt;posixpath&gt;
   -f, --force                   force mount, don't warn about missing mount
                                 point directories
   -h, --help                    output usage information and exit
-  -m, --mount-commands          write mount commands to replicate user and
-                                system mount points and cygdrive prefixes
+  -m, --mount-entries           write fstab entries to replicate mount points
+                                and cygdrive prefixes
   -o, --options X[,X...]        specify mount options
   -p, --show-cygdrive-prefix    show user and/or system cygdrive path prefix
-  -s, --system     (default)    add system-wide mount point
-  -t, --text                    text files get \r\n line endings
-  -u, --user                    add user-only mount point
   -v, --version                 output version information and exit
-  -x, --executable              treat all files under mount point as executables
-  -E, --no-executable           treat all files under mount point as 
-                                non-executables
-  -X, --cygwin-executable       treat all files under mount point as cygwin
-                                executables
 </pre><p>The <span><strong class="command">mount</strong></span> program is used to map your drives
 and shares onto Cygwin's simulated POSIX directory tree, much like as is
-done by mount commands on typical UNIX systems.  Please see
-<a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> for more information on the concepts
-behind the Cygwin POSIX file system and strategies for using
-mounts. To remove mounts, use <span><strong class="command">umount</strong></span></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="utils-mount"></a>Using mount</h4></div></div></div><p>If you just type <span><strong class="command">mount</strong></span> with no parameters, it
+done by mount commands on typical UNIX systems.  However, in contrast to
+mount points given in <code class="filename">/etc/fstab</code>, mount points
+created or changed with <span><strong class="command">mount</strong></span> are not persistent.  They
+disappear immediately after the last process of the current user exited.
+Please see <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> for more information on the
+concepts behind the Cygwin POSIX file system and strategies for using
+mounts. To remove mounts temporarily, use <span><strong class="command">umount</strong></span></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="utils-mount"></a>Using mount</h4></div></div></div><p>If you just type <span><strong class="command">mount</strong></span> with no parameters, it
 will display the current mount table for you.</p><div class="example"><a name="utils-mount-ex"></a><p class="title"><b>Example&#160;3.10.&#160;Displaying the current set of mount points</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount</code></strong>
-c:\cygwin\bin on /usr/bin type system (binmode)
-c:\cygwin\lib on /usr/lib type system (binmode)
-c:\cygwin on / type system (binmode)
-c: on /c type user (binmode,noumount)
-d: on /d type user (binmode,noumount)
+c:\cygwin\bin on /usr/bin type ntfs (binary)
+c:\cygwin\lib on /usr/lib type ntfs (binary)
+c:\cygwin on / type ntfs (binary)
+c: on /c type ntfs (binary,user,noumount)
+d: on /d type fat (binary,user,noumount)
 </pre></div></div><br class="example-break"><p>In this example, c:\cygwin is the POSIX root and D drive is mapped to
 <code class="filename">/d</code>.  Note that in this case, the root mount is a
 system-wide mount point that is visible to all users running Cygwin
@@ -599,70 +592,52 @@ programs, whereas the <code class="filename">/d</code> mount is only visible
 to the current user.</p><p>The <span><strong class="command">mount</strong></span> utility is also the mechanism for
 adding new mounts to the mount table.  The following example
 demonstrates how to mount the directory
-<code class="filename">\\pollux\home\joe\data</code> to <code class="filename">/data</code>.
+<code class="filename">\\pollux\home\joe\data</code> to <code class="filename">/data</code>
+for the duration of the current session.
 </p><div class="example"><a name="utils-mount-add-ex"></a><p class="title"><b>Example&#160;3.11.&#160;Adding mount points</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>ls /data</code></strong>
 ls: /data: No such file or directory
-<code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount \\pollux\home\joe\data /data</code></strong>
+<code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount //pollux/home/joe/data /data</code></strong>
 mount: warning - /data does not exist!
 <code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount</code></strong>
-\\pollux\home\joe\data on /data type sytem (binmode)
-c:\cygwin\bin on /usr/bin type system (binmode)
-c:\cygwin\lib on /usr/lib type system (binmode)
-c:\cygwin on / type system (binmode)
-c: on /c type user (binmode,noumount)
-d: on /d type user (binmode,noumount)
-</pre></div></div><br class="example-break"><p>Note that <span><strong class="command">mount</strong></span> was invoked from the Windows
-command shell in the previous example.  In many Unix shells, including
-bash, it is legal and convenient to use the forward "/" in Win32
-pathnames since the "\" is the shell's escape character. </p><p>The <code class="literal">-s</code> flag to <span><strong class="command">mount</strong></span> is used to add a mount
-in the system-wide mount table used by all Cygwin users on the system,
-instead of the user-specific one.  System-wide mounts are displayed
-by <span><strong class="command">mount</strong></span> as being of the "system" type, as is the
-case for the <code class="filename">/</code> partition in the last example.
-Under Windows NT, only those users with Administrator priviledges are
-permitted to modify the system-wide mount table.</p><p>Note that a given POSIX path may only exist once in the user
-table and once in the global, system-wide table.  Attempts to replace
-the mount will fail with a busy error.  The <code class="literal">-f</code> (force) flag causes
-the old mount to be silently replaced with the new one.  It will also
-silence warnings about the non-existence of directories at the Win32
-path location.</p><p>The <code class="literal">-b</code> flag is used to instruct Cygwin to treat binary and
-text files in the same manner by default.  Binary mode mounts are
-marked as "binmode" in the Flags column of <span><strong class="command">mount</strong></span>
-output.  By default, mounts are in text mode ("textmode" in the Flags
-column).</p><p>Normally, files ending in certain extensions (.exe, .com, .bat, .cmd) 
-are assumed to be executable.  Files whose first two characters begin with 
-'#!' are also considered to be executable.  
-The <code class="literal">-x</code> flag is used to instruct Cygwin that the 
-mounted file is "executable".  If the <code class="literal">-x</code> flag is used 
-with a directory then all files in the directory are executable.  
-This option allows other files to be marked as executable and avoids the 
-overhead of opening each file to check for a '#!'.  The <code class="literal">-X</code>
-option is very similar to <code class="literal">-x</code>, but also prevents Cygwin
-from setting up commands and environment variables for a normal Windows 
-program, adding another small performance gain.  The opposite of these 
-flags is the <code class="literal">-E</code> flag, which means that no files should be 
-marked as executable.  </p><p>
-The <code class="literal">-m</code> option causes the <span><strong class="command">mount</strong></span> utility
-to output a series of commands that could recreate both user and system mount 
-points. You can save this output as a backup when experimenting with the
-mount table. It also makes moving your settings to a different machine
-much easier.
-</p><p>
+\\pollux\home\joe\data on /data type smbfs (binary)
+c:\cygwin\bin on /usr/bin type ntfs (binary)
+c:\cygwin\lib on /usr/lib type ntfs (binary)
+c:\cygwin on / type ntfs (binary)
+c: on /c type ntfs (binary,user,noumount)
+d: on /d type fat (binary,user,noumount)
+</pre></div></div><br class="example-break"><p>A given POSIX path may only exist once in the mount table.  Attempts to
+replace the mount will fail with a busy error.  The <code class="literal">-f</code>
+(force) option causes the old mount to be silently replaced with the new one,
+provided the old mount point was a user mount point.  It's not valid to
+replace system-wide mount points.  Additionally, the <code class="literal">-f</code>
+option will silence warnings about the non-existence of directories at the
+Win32 path location.</p><p>
 The <code class="literal">-o</code> option is the method via which various options about
 the mount point may be recorded.  The following options are available (note that
 most of the options are duplicates of other mount flags):</p><pre class="screen">
-  user       - mount lives user-specific mount
-  system     - mount lives in system table (default)
-  binary     - files default to binary mode (default)
-  text       - files default to CRLF text mode line endings
-  exec       - files below mount point are all executable
-  notexec    - files below mount point are not executable
-  cygexec    - files below mount point are all cygwin executables
-  nosuid     - no suid files are allowed (currently unimplemented)
-  managed    - directory is managed by cygwin.  Mixed case and special
-               characters in filenames are allowed.
-</pre></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="utils-cygdrive"></a>Cygdrive mount points</h4></div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
+  acl        - Use the filesystem's access control lists (ACLs) to
+               implement real POSIX permissions (default).
+  noacl      - Ignore ACLs and fake POSIX permissions.
+  binary     - Files default to binary mode (default).
+  text       - Files default to CRLF text mode line endings.
+  exec       - Treat all files below mount point as executable.
+  notexec    - Treat all files below mount point as not executable.
+  cygexec    - Treat all files below mount point as cygwin executables.
+  nosuid     - No suid files are allowed (currently unimplemented)
+  posix=0    - Switch off case sensitivity for paths under this mount point.
+  posix=1    - Switch on case sensitivity for paths under this mount point
+               (default).
+</pre><p>For a more complete description of the mount options and the
+<code class="filename">/etc/fstab</code> file, see
+<a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p><p>Note that all mount points added with <span><strong class="command">mount</strong></span> are
+user mount points.  System mount points can only be specified in
+the <code class="filename">/etc/fstab</code> file.</p><p>
+The <code class="literal">-m</code> option causes the <span><strong class="command">mount</strong></span> utility
+to output the current mount table in a series of fstab entries.  This allows
+You can save this output as a backup when experimenting with the mount table.
+Copy the output to <code class="filename">/etc/fstab</code> to restore the old state.
+It also makes moving your settings to a different machine much easier.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="utils-cygdrive"></a>Cygdrive mount points</h4></div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
 from a particular Win32 path to a POSIX one, Cygwin will, instead,
 convert to a POSIX path using a default mount point:
 <code class="filename">/cygdrive</code>.  For example, if Cygwin accesses
@@ -1298,24 +1273,13 @@ This program is mainly useful for debugging the Cygwin DLL itself.</p></div><div
 Usage: umount.exe [OPTION] [&lt;posixpath&gt;]
 Unmount filesystems
 
-  -A, --remove-all-mounts       remove all mounts
-  -c, --remove-cygdrive-prefix  remove cygdrive prefix
   -h, --help                    output usage information and exit
-  -s, --system                  remove system mount (default)
-  -S, --remove-system-mounts    remove all system mounts
-  -u, --user                    remove user mount
   -U, --remove-user-mounts      remove all user mounts
   -v, --version                 output version information and exit
 </pre><p>The <span><strong class="command">umount</strong></span> program removes mounts from the
-mount table.  If you specify a POSIX path that corresponds to a
-current mount point, <span><strong class="command">umount</strong></span> will remove it from the
-system registry area.  (Administrator priviledges are required).
-The <code class="literal">-u</code> flag may be used to specify removing the mount 
-from the user-specific registry area instead.</p><p>The <span><strong class="command">umount</strong></span> utility may also be used to remove
-all mounts of a particular type.  With the extended options it is
-possible to remove all mounts (<code class="literal">-A</code>), all 
-cygdrive automatically-mounted mounts (<code class="literal">-c</code>), all
-mounts in the current user's registry area (<code class="literal">-U</code>), 
-or all mounts in the system-wide registry area (<code class="literal">-S</code>) 
-(with Administrator privileges).</p><p>See <a href="using-utils.html#mount" title="mount">the section called &#8220;mount&#8221;</a> for more information on the mount
+mount table in the current session.  If you specify a POSIX path that
+corresponds to a current mount point, <span><strong class="command">umount</strong></span> will
+remove it from the current mount table.  Note that you can only remove
+user mount points.  The <code class="literal">-U</code> flag may be used to
+specify removing all user mount points from the current user session.</p><p>See <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> for more information on the mount
 table.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-cygserver.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="using-effectively.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Cygserver&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Using Cygwin effectively with Windows</td></tr></table></div></body></html>
