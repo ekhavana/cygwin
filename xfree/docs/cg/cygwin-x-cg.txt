@@ -1,14 +1,15 @@
+Cygwin/X Contributor's Guide
 
-Cygwin/X Contributor's GuideHarold L Hunt, II
+Harold L Hunt, II
 
      Copyright (c) 2001 Harold L Hunt II. Permission is granted to copy,
      distribute and/or modify this document under the terms of the GNU
      Free Documentation License, Version 1.1 or any later version
      published by the Free Software Foundation; with no Invariant
-     Sections, with no Front-Cover Texts, and with no Back-Cover Texts.
-     A copy of the license is included in the section entitled "GNU Free
+     Sections, with no Front-Cover Texts, and with no Back-Cover Texts. A
+     copy of the license is included in the section entitled "GNU Free
      Documentation License".
-  _______________________________________________________________________
+     __________________________________________________________________
 
    Table of Contents
    1. [1]Overview
@@ -26,131 +27,177 @@ Cygwin/X Contributor's GuideHarold L Hunt, II
         [10]Native Compiling
 
               [11]Compiling the Source Code
-              [12]Installing a local build
-              [13]Keeping your source code tree updated
+              [12]Running a local build
+              [13]Installing a local build
+              [14]Keeping your source code tree updated
 
-        [14]Cross Compiling
+        [15]Cross Compiling
 
-              [15]Obtaining binutils and gcc Source
-              [16]Obtaining Cygwin Headers and Libs
-              [17]Building binutils and gcc
-              [18]Creating Links for binutils and gcc
-              [19]Building Cygwin/X
+              [16]Obtaining binutils and gcc Source
+              [17]Obtaining Cygwin Headers and Libs
+              [18]Building binutils and gcc
+              [19]Creating Links for binutils and gcc
+              [20]Building Cygwin/X
 
-        [20]Packaging a Cygwin/X Distribution
+        [21]Packaging a Cygwin/X Distribution
 
-   3. [21]Documentation
+   3. [22]Documentation
 
-        [22]Overview
-        [23]Obtaining the Source Code
+        [23]Overview
+        [24]Obtaining the Source Code
 
-              [24]Source of latest cygwin-x-doc release
-              [25]Source from CVS
+              [25]Source of latest cygwin-x-doc release
+              [26]Source from CVS
 
-        [26]Setting Up a DocBook Build Environment
-        [27]Building the Documentation
-        [28]Packaging a Documentation Distribution
+        [27]Setting Up a DocBook Build Environment
 
-   4. [29]Web Site Maintenance
-   [30]Bibliography
-   [31]Glossary
-   A. [32]GNU Free Documentation License
+              [28]Required Packages for building documentation
 
-        0. [33]PREAMBLE
-        1. [34]APPLICABILITY AND DEFINITIONS
-        2. [35]VERBATIM COPYING
-        3. [36]COPYING IN QUANTITY
-        4. [37]MODIFICATIONS
-        5. [38]COMBINING DOCUMENTS
-        6. [39]COLLECTIONS OF DOCUMENTS
-        7. [40]AGGREGATION WITH INDEPENDENT WORKS
-        8. [41]TRANSLATION
-        9. [42]TERMINATION
-        10. [43]FUTURE REVISIONS OF THIS LICENSE
-        [44]How to use this License for your documents
-     _________________________________________________________________
+        [29]Building the Documentation
+        [30]Packaging a Documentation Distribution
+
+   4. [31]Web Site Maintenance
+   [32]Bibliography
+   [33]Glossary
+   A. [34]GNU Free Documentation License
+
+        0. [35]PREAMBLE
+        1. [36]APPLICABILITY AND DEFINITIONS
+        2. [37]VERBATIM COPYING
+        3. [38]COPYING IN QUANTITY
+        4. [39]MODIFICATIONS
+        5. [40]COMBINING DOCUMENTS
+        6. [41]COLLECTIONS OF DOCUMENTS
+        7. [42]AGGREGATION WITH INDEPENDENT WORKS
+        8. [43]TRANSLATION
+        9. [44]TERMINATION
+        10. [45]FUTURE REVISIONS OF THIS LICENSE
+        [46]How to use this License for your documents
+     __________________________________________________________________
 
 Chapter 1. Overview
 
-The Cygwin/X project can use your help! We will do everything we can to make
-experienced contributers productive as soon as possible. We also want to
-make it as easy as possible for new contributers to make Cygwin/X their
-first open source project.
+   The Cygwin/X project can use your help! We will do everything we can to
+   make experienced contributors productive as soon as possible. We also
+   want to make it as easy as possible for new contributers to make
+   Cygwin/X their first open source project.
 
-Cygwin/X is part of the vast number of open source/free software programs
-that provide compatibility with closed source/commercial software products.
-Cygwin/X enables the coexistence of closed software and open software during
-the period of transition from an almost completely closed software market to
-an almost completely open software market.
+   Anyone who despaired of touching the monolithic tree will find things
+   much easier now with modular X. If you want to see Cygwin/X stay
+   current and add new features, then WE NEED YOU.
 
-Join in the excitement of opening your Windows machine to the X Window
-System.
+   Cygwin/X is part of the vast number of open source/free software
+   programs that provide compatibility with closed source/commercial
+   software products. Cygwin/X enables the coexistence of closed software
+   and open software during the period of transition from an almost
+   completely closed software market to an almost completely open software
+   market.
 
-We need [45]programmers, [46]documentation writers, and [47]website
-maintainers.
-     _________________________________________________________________
+   Join in the excitement of opening your Windows machine to the X Window
+   System.
+
+   We need [47]programmers, [48]documentation writers, and [49]website
+   maintainers.
+     __________________________________________________________________
 
 Chapter 2. Programming
 
 Overview
 
-This chapter provides a consolidated overview of all of the information
-needed to begin making source code contributions to Cygwin/X. Creating a
-source code contribution for Cygwin/X requires an amazingly small amount of
-information; however, prior to this document that tiny amount of information
-was difficult to obtain, as it was scattered across several documents and
-source code files. New programmers with no open source project experience,
-as well as programming gurus, will be able to make source code contributions
-to Cygwin/X after reading this chapter. Programming gurus are great; our
-intention is to create more of them.
+   This chapter provides a consolidated overview of all of the information
+   needed to begin making source code contributions to Cygwin/X. Creating
+   a source code contribution for Cygwin/X requires an amazingly small
+   amount of information; however, prior to this document that tiny amount
+   of information was difficult to obtain, as it was scattered across
+   several documents and source code files. New programmers with no open
+   source project experience, as well as programming gurus, will be able
+   to make source code contributions to Cygwin/X after reading this
+   chapter. Programming gurus are great; our intention is to create more
+   of them.
 
-Downloading the X Window System source code tree can take anywhere from 10
-minutes to 10 hours, depending upon the speed of your network connection. If
-you have an active network connection at your disposal you may want to skip
-ahead to [48]the Section called Obtaining the Source Code and start
-downloading the source code tree now. You will find it advantageous to have
-a source code tree as you read the other sections.
-     _________________________________________________________________
+   This document is primarily focused on the Cygwin/X server; most other
+   components are extremely stable and work out-of-the-box on Cygwin
+
+   The primary source of information on developing for X is the [50]X.Org
+   developer startpage
+
+   Downloading the X Window System source code tree can take anywhere from
+   10 minutes to 10 hours, depending upon the speed of your network
+   connection. If you have an active network connection at your disposal
+   you may want to skip ahead to [51]the Section called Obtaining the
+   Source Code and start downloading the source code tree now. You will
+   find it advantageous to have a source code tree as you read the other
+   sections.
+     __________________________________________________________________
 
 Source Code Tree Layout
 
-Descriptions of Important xc Directories and Subdirectories
-     * config
-          + cf contains generic and platform specific imake configuration
-            settings, build rules, and other macros. Cygwin/X specific
-            settings, build rules, and shared library template are
-            contained in cygwin.cf, cygwin.rules, and cygwin.tmpl,
-            respectively. Settings in cygwin.cf can be overridden for a
-            single build host by creating a file called host.def that
-            defines any host specific settings. xorgsite.def may be used
-            as a template for host.def; simply copy xorgsite.def to
-            host.def, then edit and/or uncomment any settings that you
-            wish to override.
-          + imake contains source code for the imake utility that is used
-            to combine the configuration files in cf with the Imakefile
-            in a given directory to produce a Makefile that will work
-            correctly for a given platform; in our case, that platform is
-            Cygwin. Any build problems with imake will stop compilation
-            of the X Window System CVS tree, as there will not be any
-            Makefile's to operate on. This directory will therefore be of
-            interest only when imake fails to build.
-          + makedepend contains source code for the makedepend utility
-            that scans the included files in the .c and .h used by a
-            project to determine which files the build targets depend
-            upon. This directory will only be of interest when makedepend
-            fails to build.
-          + util contains a few general utilities, such as lndir.
+   Descriptions of Important xserver Directories and Subdirectories
+     * cfb* contains deprecated [52]color framebuffer drawing procedures
+       that are not compatible with the [53]Shadow drawing system that
+       Cygwin/X depends upon. This directory is of no interest to Cygwin/X
+       programmers.
+     * dix contains [drawing] [54]device independent X routines. main.c
+       contains the main entry-point function for the Cygwin/X X Server.
+       The X Server startup procedure can be followed by examining main.
+     * fb contains the modern framebuffer drawing procedures used by
+       Cygwin/X. This directory is maintained by Keith Packard and is only
+       of interest to Cygwin/X programmers when it fails to build.
+     * hw contains [drawing] hardware dependent functions.
+          + vfb contains the Virtual Framebuffer X Server. The vfb server
+            draws to a system memory framebuffer with the primary purpose
+            of allowing X clients to run on a machine that does not have
+            display hardware.
+          + xfree86 contains source code for the X Window System servers
+            that run on various operating systems that generally have
+            low-level access to the graphics hardware. Cygwin/X does not
+            have low-level access to the graphics hardware, thus Cygwin/X
+            is not able to utilize the X Window System server.
+          + xnest contains source code for the Nested X Server which runs
+            inside of another X Server. xnest is not generally of interest
+            to Cygwin/X programmers.
+          + xwin contains the source code for the Cygwin/X X Server. This
+            is the primary directory that Cygwin/X programmers are
+            interested in.
+     * include contains header files specific to the X Server program,
+       such as graphics context structures. This directory is useful to
+       Cygwin/X programmers when they need to lookup the name or data type
+       of members of various X Server structures.
+     * mi contains [55]machine independent drawing routines. These drawing
+       routines are used by the Cygwin/X Native GDI X Server engine. In
+       turn, the machine independent routines depend in winGetSpans,
+       winFillSpans, and winSetSpans, which are implemented in the Native
+       GDI engine.
+     * miext contains various machine independent X extensions.
+          + layer contains source code for the layer extension. This
+            extension is supported by Cygwin/X, however, this directory
+            will be of interest only when layer fails to build.
+          + shadow contains source code for the shadow extension that the
+            Cygwin/X X Server depends upon. This directory is of primary
+            importance to Cygwin/X, but it is maintained by other
+            programmers and is only of direct interest to Cygwin/X
+            programmers when it fails to build. The shadow extension does
+            three things:
+              1. Allows the fb graphics routines to draw to an offscreen
+                 framebuffer.
+              2. Keeps track of the regions of the offscreen framebuffer
+                 that have been drawn on.
+              3. Calls one of Cygwin/X's engine dependent ShadowUpdate ()
+                 functions to transfer the updated regions of the
+                 offscreen framebuffer to the screen.
+     * os contains [56]operating system dependent X Server functions.
+       However, the functions in the os have been written in such a way
+       that they are actually compatible with most UNIX-style operating
+       systems, include Cygwin.
+
+   Other components of interest
      * doc
           + hardcopy contains precompiled PostScript documentation for
             various components of the X Window System. Cygwin/X-specific
             documentation is not contained in this directory. This
             directory is of little interest to Cygwin/X programmers.
-          + specs contains the sources to build the documents in
-            hardcopy. This directory is of little interest to Cygwin/X
-            programmers.
-          + util contains a few awk scripts for use in building
-            documentation. This directory is of little interest to
-            Cygwin/X programmers.
+          + specs contains the sources to build the documents in hardcopy.
+            This directory is of little interest to Cygwin/X programmers.
      * fonts contains font definition files used to compile fonts. This
        directory is of little interest to Cygwin/X programmers.
      * include contains various X Window System headers that are not
@@ -161,148 +208,79 @@ Descriptions of Important xc Directories and Subdirectories
        however, we do have to link to several of these libraries to get
        our X Server to build. These libraries are maintained by various
        developers from the X Window System project and there are
-       occasional synchronizations with [49]The Open Group's [50]X.org.
+       occasional synchronizations with [57]The Open Group's [58]X.org.
        Cygwin/X programmers occasionally need to fix Cygwin-related build
        errors that occur in these libraries.
-     * nls contains locale definition files. This directory is of little
-       interest to Cygwin/X programmers.
-     * programs
-          + Xserver contains the heart of Cygwin/X, namely, the Cygwin/X
-            X Server.
-               o cfb* contains deprecated [51]color framebuffer drawing
-                 procedures that are not compatible with the [52]Shadow
-                 drawing system that Cygwin/X depends upon. This
-                 directory is of no interest to Cygwin/X programmers.
-               o dix contains [drawing] [53]device independent X
-                 routines. main.c contains the main entry-point function
-                 for the Cygwin/X X Server. The X Server startup
-                 procedure can be followed by examining main.
-               o fb contains the modern framebuffer drawing procedures
-                 used by Cygwin/X. This directory is maintained by Keith
-                 Packard and is only of interest to Cygwin/X programmers
-                 when it fails to build.
-               o hw contains [drawing] hardware dependent functions.
-                    # vfb contains the Virtual Framebuffer X Server. The
-                      vfb server draws to a system memory framebuffer
-                      with the primary purpose of allowing X clients to
-                      run on a machine that does not have display
-                      hardware.
-                    # xfree86 contains source code for the X Window
-                      System servers that run on various operating
-                      systems that generally have low-level access to the
-                      graphics hardware. Cygwin/X does not have low-level
-                      access to the graphics hardware, thus Cygwin/X is
-                      not able to utilize the X Window System server.
-                    # xnest contains source code for the Nested X Server
-                      which runs inside of another X Server. xnest is not
-                      generally of interest to Cygwin/X programmers.
-                    # xwin contains the source code for the Cygwin/X X
-                      Server. This is the primary directory that Cygwin/X
-                      programmers are interested in.
-               o include contains header files specific to the X Server
-                 program, such as graphics context structures. This
-                 directory is useful to Cygwin/X programmers when they
-                 need to lookup the name or data type of members of
-                 various X Server structures.
-               o mi contains [54]machine independent drawing routines.
-                 These drawing routines are used by the Cygwin/X Native
-                 GDI X Server engine. In turn, the machine independent
-                 routines depend in winGetSpans, winFillSpans, and
-                 winSetSpans, which are implemented in the Native GDI
-                 engine.
-               o miext contains various machine independent X extensions.
-                    # layer contains source code for the layer extension.
-                      This extension is supported by Cygwin/X, however,
-                      this directory will be of interest only when layer
-                      fails to build.
-                    # shadow contains source code for the shadow
-                      extension that the Cygwin/X X Server depends upon.
-                      This directory is of primary importance to
-                      Cygwin/X, but it is maintained by other programmers
-                      and is only of direct interest to Cygwin/X
-                      programmers when it fails to build. The shadow
-                      extension does three things:
-                        1. Allows the fb graphics routines to draw to an
-                           offscreen framebuffer.
-                        2. Keeps track of the regions of the offscreen
-                           framebuffer that have been drawn on.
-                        3. Calls one of Cygwin/X's engine dependent
-                           ShadowUpdate () functions to transfer the
-                           updated regions of the offscreen framebuffer
-                           to the screen.
-               o os contains [55]operating system dependent X Server
-                 functions. However, the functions in the os have been
-                 written in such a way that they are actually compatible
-                 with most UNIX-style operating systems, include Cygwin.
-     * util contains a few utilities for programmers, such as a memory
-       leak counter. Cygwin/X has never used these utilities, thus this
-       directory is of little interest to Cygwin/X programmers.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Cygwin/X X Server Architecture
 
-Cygwin/X's X Server architecture was heavily inspired by [56]Angebranndt94,
-the Definition of the Porting Layer for the X v11 Sample Server.
-     _________________________________________________________________
+   Cygwin/X's X Server architecture was heavily inspired by
+   [59]Angebranndt94, the Definition of the Porting Layer for the X v11
+   Sample Server.
+     __________________________________________________________________
 
 Server Privates
 
-X Servers use various structures to pass information around to functions.
-Some of those structures are colormaps, [57]graphics contexts (GCs),
-[58]pixmaps, and [59]screens. The X protocol defines the contents of each of
-these structures, however, the X Server implementation and various X Server
-libraries ([60]MI, [61]FB, [62]Shadow, etc.) may require additional
-information to be associated with these internal structures. For example,
-the Cygwin/X X Server must associate a Windows window handle (hwnd) with
-each X Server screen that is open.
+   X Servers use various structures to pass information around to
+   functions. Some of those structures are colormaps, [60]graphics
+   contexts (GCs), [61]pixmaps, and [62]screens. The X protocol defines
+   the contents of each of these structures, however, the X Server
+   implementation and various X Server libraries ([63]MI, [64]FB,
+   [65]Shadow, etc.) may require additional information to be associated
+   with these internal structures. For example, the Cygwin/X X Server must
+   associate a Windows window handle (hwnd) with each X Server screen that
+   is open.
 
-[63]Privates are the mechanism provided by the X protocol for associating
-additional information with internal X Server structures. Privates
-originally consisted of a single pointer member contained in each structure,
-usually named devPrivate or devPriv. This original specification only
-allowed one of the X Server layers (mi, fb, shadow, etc.) to have privates
-associated with an internal structure. Privates have since been revised.
+   [66]Privates are the mechanism provided by the X protocol for
+   associating additional information with internal X Server structures.
+   Privates originally consisted of a single pointer member contained in
+   each structure, usually named devPrivate or devPriv. This original
+   specification only allowed one of the X Server layers (mi, fb, shadow,
+   etc.) to have privates associated with an internal structure. Privates
+   have since been revised.
 
-The current privates implementation requires that each X Server layer call a
-function on startup to indicate that that layer will require privates and to
-obtain an index into the array of privates that that layer's privates will
-be stored at. Modern privates are generally stored in an array of type
-DevUnion pointed to by a structure member named devPrivates; DevUnion is
-defined in xc/programs/Xserver/include/miscstruct.h. There are two different
-memory allocation schemes for devPrivates.
+   The current privates implementation requires that each X Server layer
+   call a function on startup to indicate that that layer will require
+   privates and to obtain an index into the array of privates that that
+   layer's privates will be stored at. Modern privates are generally
+   stored in an array of type DevUnion pointed to by a structure member
+   named devPrivates; DevUnion is defined in xserver/include/miscstruct.h.
+   There are two different memory allocation schemes for devPrivates.
 
-Memory for privates structures can either be preallocated or allocated upon
-use. Preallocation, the preferred method for GCs, pixmaps, and windows,
-requires that the size of the privates memory needed be specified during X
-Server initialization. Preallocation allows the [64]DIX layer to allocate
-all memory needed for a given internal structure, including all privates
-memory, as a single contiguous block of memory; this greatly reduces memory
-fragmentation. Allocation upon use, used by screens, requires the [65]DDX
-structure creation function to allocate memory for the privates;
-winScreenInit calling winAllocatePrivates, which allocates screen privates
-memory directly, is an example of this. Allocation upon use can optionally
-and non-optimally be used by GCs, pixmaps, and windows.
-     _________________________________________________________________
+   Memory for privates structures can either be preallocated or allocated
+   upon use. Preallocation, the preferred method for GCs, pixmaps, and
+   windows, requires that the size of the privates memory needed be
+   specified during X Server initialization. Preallocation allows the
+   [67]DIX layer to allocate all memory needed for a given internal
+   structure, including all privates memory, as a single contiguous block
+   of memory; this greatly reduces memory fragmentation. Allocation upon
+   use, used by screens, requires the [68]DDX structure creation function
+   to allocate memory for the privates; winScreenInit calling
+   winAllocatePrivates, which allocates screen privates memory directly,
+   is an example of this. Allocation upon use can optionally and
+   non-optimally be used by GCs, pixmaps, and windows.
+     __________________________________________________________________
 
 Macros
 
-Three macros are provided for each class of privates that make setting up
-and using the privates easier. The macros for screen privates are examined
-as an example.
+   Three macros are provided for each class of privates that make setting
+   up and using the privates easier. The macros for screen privates are
+   examined as an example.
 
    winPrivScreenPtr winGetScreenPriv(ScreenPtr pScreen);
 
-   winGetScreenPriv takes a non-NULL pointer to a screen, a ScreenPtr,
-   and returns the pointer stored in the DDX privates for that screen.
-   Passing a NULL or invalid ScreenPtr to winGetScreenPriv will cause an
-   access violation, crashing the Cygwin/X X Server.
+   winGetScreenPriv takes a non-NULL pointer to a screen, a ScreenPtr, and
+   returns the pointer stored in the DDX privates for that screen. Passing
+   a NULL or invalid ScreenPtr to winGetScreenPriv will cause an access
+   violation, crashing the Cygwin/X X Server.
 
    void winSetScreenPriv(ScreenPtr pScreen, void * pvPrivates);
 
-   winSetScreenPriv takes a non-NULL pointer to a screen, a ScreenPtr,
-   and sets the DDX privates pointer to the value of the pvPrivates
-   parameter. Passing a NULL or invalid ScreenPtr to winSetScreenPriv
-   will cause an access violation, crashing the Cygwin/X X Server.
+   winSetScreenPriv takes a non-NULL pointer to a screen, a ScreenPtr, and
+   sets the DDX privates pointer to the value of the pvPrivates parameter.
+   Passing a NULL or invalid ScreenPtr to winSetScreenPriv will cause an
+   access violation, crashing the Cygwin/X X Server.
 
    void winScreenPriv(ScreenPtr pScreen);
 
@@ -313,56 +291,61 @@ as an example.
    the ANSI C rule that all variables must be declared at the top of a
    scope block. Passing a NULL or invalid ScreenPtr to winScreenPriv will
    cause an access violation, crashing the Cygwin/X X Server.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Engine System
 
-The Cygwin/X X Server uses several methods of drawing graphics on the
-display device; each of these different drawing methods is referred to as an
-engine. Each of the engines can be classified as either a Shadow FB engine,
-a Native GDI engine, or as a Primary FB engine. It should be noted that the
-Primary FB engine is deprecated and is discussed here only for completeness.
-The engines are discussed in the following sections, in order of importance.
-     _________________________________________________________________
+   The Cygwin/X X Server uses several methods of drawing graphics on the
+   display device; each of these different drawing methods is referred to
+   as an engine. Each of the engines can be classified as either a Shadow
+   FB engine, a Native GDI engine, or as a Primary FB engine. It should be
+   noted that the Primary FB engine is deprecated and is discussed here
+   only for completeness. The engines are discussed in the following
+   sections, in order of importance.
+     __________________________________________________________________
 
 Shadow FB Engines
 
-The Shadow FB engines use Keith Packard's [66]FB drawing procedures wrapped
-with his [67]Shadow layer that allows drawing to an [68]offscreen
-framebuffer with periodic updates of the [69]primary framebuffer.
-     _________________________________________________________________
+   The Shadow FB engines use Keith Packard's [69]FB drawing procedures
+   wrapped with his [70]Shadow layer that allows drawing to an
+   [71]offscreen framebuffer with periodic updates of the [72]primary
+   framebuffer.
+     __________________________________________________________________
 
 Native GDI Engine
 
-The Native GDI engine will eventually translate individual X graphics calls
-into their GDI equivalent. Some X graphics calls do not translate directly
-to a GDI call so they may be passed through the MI layer to change them into
-a serious of lower level calls that are supported. Currently, the Native GDI
-engine passes all X graphics calls through the MI layer to convert them into
-three functions: FillSpans, GetSpans, and SetSpans. The functionality of
-those three functions, as of 2001-10-28, is limited to the functionality
-needed to draw the familiar X background pattern upon X Server startup.
-     _________________________________________________________________
+   The Native GDI engine will eventually translate individual X graphics
+   calls into their GDI equivalent. Some X graphics calls do not translate
+   directly to a GDI call so they may be passed through the MI layer to
+   change them into a serious of lower level calls that are supported.
+   Currently, the Native GDI engine passes all X graphics calls through
+   the MI layer to convert them into three functions: FillSpans, GetSpans,
+   and SetSpans. The functionality of those three functions, as of
+   2001-10-28, is limited to the functionality needed to draw the familiar
+   X background pattern upon X Server startup.
+     __________________________________________________________________
 
 Primary FB Engine
 
-The Primary FB engine is deprecated. Primary FB works in the same manner
-that the original Cygwin/X X Server worked, namely, it uses
-IDirectDrawSurface_Lock to obtain a pointer to the [70]primary framebuffer
-memory at server startup. This memory pointer is held until the X Server
-shuts down. This technique does not work on all versions of Windows.
+   The Primary FB engine is deprecated. Primary FB works in the same
+   manner that the original Cygwin/X X Server worked, namely, it uses
+   IDirectDrawSurface_Lock to obtain a pointer to the [73]primary
+   framebuffer memory at server startup. This memory pointer is held until
+   the X Server shuts down. This technique does not work on all versions
+   of Windows.
 
-Locking the primary framebuffer on Windows 95/98/Me causes the Win16Mutex to
-be obtained by the program that locks the primary framebuffer; the
-Win16Mutex is not released until the primary framebuffer is unlocked. The
-Win16Mutex is a semaphore introduced in Windows 95 that prevents 16 bit
-Windows code from being reentered by different threads or processes. For
-compatibility reasons, all GDI operations in Windows 95/98/Me are written in
-16 bit code, thus requiring that the Win16Mutex be obtained before
-performing those operations. All of this leads to the following situation on
-Windows 95/98/Me:
-    1. The primary framebuffer is locked, causing the Cygwin/X X Server
-       to hold the Win16Mutex.
+   Locking the primary framebuffer on Windows 95/98/Me causes the
+   Win16Mutex to be obtained by the program that locks the primary
+   framebuffer; the Win16Mutex is not released until the primary
+   framebuffer is unlocked. The Win16Mutex is a semaphore introduced in
+   Windows 95 that prevents 16 bit Windows code from being reentered by
+   different threads or processes. For compatibility reasons, all GDI
+   operations in Windows 95/98/Me are written in 16 bit code, thus
+   requiring that the Win16Mutex be obtained before performing those
+   operations. All of this leads to the following situation on Windows
+   95/98/Me:
+    1. The primary framebuffer is locked, causing the Cygwin/X X Server to
+       hold the Win16Mutex.
     2. Windows switches the Cygwin/X X Server out of the current process
        slot; another process is switched in.
     3. The newly selected process makes a GDI function call.
@@ -373,57 +356,58 @@ Windows 95/98/Me:
        Win16Mutex has been deadlocked and the Windows machine is frozen
        with no way to recover.
 
-   Windows NT/2000/XP do not contain any 16 bit code, so the Win16Mutex
-   is not an issue; thus, the Primary FB engine works fine on those
-   operating systems. However, drawing directly to the primary
-   framebuffer suffers performance problems. For example, on some systems
-   writing to the primary framebuffer requires doing memory reads and
-   writes across the PCI bus which is only 32 bits wide and features a
-   clock speed of 33 MHz, as opposed to accessing system memory, which is
-   attached to a 64 bit wide bus that runs at between 100 and 266
-   (effective) MHz. Furthermore, accessing the primary framebuffer memory
-   requires several synchronization steps that take many clock cycles to
-   complete. The end result is that the Primary FB engine is several
-   times slower than the Shadow FB engines.
+   Windows NT/2000/XP do not contain any 16 bit code, so the Win16Mutex is
+   not an issue; thus, the Primary FB engine works fine on those operating
+   systems. However, drawing directly to the primary framebuffer suffers
+   performance problems. For example, on some systems writing to the
+   primary framebuffer requires doing memory reads and writes across the
+   PCI bus which is only 32 bits wide and features a clock speed of 33
+   MHz, as opposed to accessing system memory, which is attached to a 64
+   bit wide bus that runs at between 100 and 266 (effective) MHz.
+   Furthermore, accessing the primary framebuffer memory requires several
+   synchronization steps that take many clock cycles to complete. The end
+   result is that the Primary FB engine is several times slower than the
+   Shadow FB engines.
 
-   The Primary FB engine also has several unique issues that are
-   difficult to program around. Development of the Primary FB engine has
-   ceased, due to the difficulty of maintaining it, coupled with the fact
-   that Primary FB does not run on Windows 95/98/Me and with the poor
-   performance of Primary FB. The Primary FB source code has been left in
-   place so that future programmers can enable it and see the poor
-   performance of the engine for themselves.
-     _________________________________________________________________
+   The Primary FB engine also has several unique issues that are difficult
+   to program around. Development of the Primary FB engine has ceased, due
+   to the difficulty of maintaining it, coupled with the fact that Primary
+   FB does not run on Windows 95/98/Me and with the poor performance of
+   Primary FB. The Primary FB source code has been left in place so that
+   future programmers can enable it and see the poor performance of the
+   engine for themselves.
+     __________________________________________________________________
 
 User Input
 
-User input is processed using the [71]MI layer's user input system. Any
-queued Win32 user input messages, as well as other Win32 messages, are
-handled when hw/xwin/winwakeup.c's winWakeupHandler function is called by
-the [72]OS layer os/WaitFor.c's WaitForSomething function and when the
-[73]DIX layer dix/dispatch.c's Dispatch function calls hw/xwin/InitInput.c's
-ProcessInputEvents function. Each Win32 user input message typically queues
-an input event, or several input events, using the MI layer's mi/mieq.c's
-mieqEnqueue function. Enqueued MI input events are processed in
-ProcessInputEvents by calling mi/mieq.c's mieqProcessInputEvents; the cursor
-position is updated on the screen by calling mipointer.c's miPointerUpdate.
-     _________________________________________________________________
+   User input is processed using the [74]MI layer's user input system. Any
+   queued Win32 user input messages, as well as other Win32 messages, are
+   handled when hw/xwin/winwakeup.c's winWakeupHandler function is called
+   by the [75]OS layer os/WaitFor.c's WaitForSomething function and when
+   the [76]DIX layer dix/dispatch.c's Dispatch function calls
+   hw/xwin/InitInput.c's ProcessInputEvents function. Each Win32 user
+   input message typically queues an input event, or several input events,
+   using the MI layer's mi/mieq.c's mieqEnqueue function. Enqueued MI
+   input events are processed in ProcessInputEvents by calling mi/mieq.c's
+   mieqProcessInputEvents; the cursor position is updated on the screen by
+   calling mipointer.c's miPointerUpdate.
+     __________________________________________________________________
 
 Keyboard
 
-Win32 keyboard messages are processed in winwndproc.c's winWindowProc. The
-messages processed are:
+   Win32 keyboard messages are processed in winwndproc.c's winWindowProc.
+   The messages processed are:
      * WM_SYSKEYDOWN
      * WM_KEYDOWN
      * WM_SYSKEYUP
      * WM_KEYUP
 
-   The WM_SYSKEY* messages are generated when the user presses a key
-   while holding down the Alt key or when the user presses a key after
-   pressing and releasing the F10 key. Processing for WM_SYSKEYDOWN and
-   WM_KEYDOWN (respectively WM_SYSKEYUP, WM_KEYUP) messages are identical
-   because the X Server does not distinguish between a normal key press
-   and a key press when the Alt key is down.
+   The WM_SYSKEY* messages are generated when the user presses a key while
+   holding down the Alt key or when the user presses a key after pressing
+   and releasing the F10 key. Processing for WM_SYSKEYDOWN and WM_KEYDOWN
+   (respectively WM_SYSKEYUP, WM_KEYUP) messages are identical because the
+   X Server does not distinguish between a normal key press and a key
+   press when the Alt key is down.
 
    Win32 uses virtual key codes to identify which key is being pressed or
    released. Virtual key codes follow the idea that the same virtual key
@@ -432,10 +416,10 @@ messages processed are:
    virtual key code. Virtual key codes are accompanied by other state
    information, such as the extended flag, that distinguishes between the
    multiple keys with the same label. For example, the left Ctrl key does
-   not have the extended flag asserted, while the right Ctrl key does
-   have the extended flag asserted. However, virtual key codes are not
-   the way that key presses have traditionally been identified on
-   personal computers and in the X Protocol.
+   not have the extended flag asserted, while the right Ctrl key does have
+   the extended flag asserted. However, virtual key codes are not the way
+   that key presses have traditionally been identified on personal
+   computers and in the X Protocol.
 
    Personal computers and the X Protocol use scan codes to identify which
    key is being pressed. Each key on the keyboard generates a specified
@@ -444,41 +428,40 @@ messages processed are:
    example, the left and right Ctrl keys generate distinct scan codes,
    even though their functionality is the same. Scan codes do not have
    additional state information, as the multiple keys with the same label
-   will each generate a unique scan code. There is some debate as to
-   which of virtual key codes or scan codes is the better system.
+   will each generate a unique scan code. There is some debate as to which
+   of virtual key codes or scan codes is the better system.
 
-   The X Protocol expects that keyboard input will be based on a scan
-   code system. There are two methods of sending a scan codes from a
-   virtual key code message. The first method is to create a static table
-   that links the normal and extended state of each virtual key code to a
-   scan code. This method seems valid, but the method does not work
-   reliably for users with non-U.S. keyboard layouts. The second method
-   simply pulls the scan code out of the lParam of the keyboard messages;
-   this method works reliably for non-U.S. keyboard layouts. However,
-   there are further concerns for non-U.S. keyboard layouts.
+   The X Protocol expects that keyboard input will be based on a scan code
+   system. There are two methods of sending a scan codes from a virtual
+   key code message. The first method is to create a static table that
+   links the normal and extended state of each virtual key code to a scan
+   code. This method seems valid, but the method does not work reliably
+   for users with non-U.S. keyboard layouts. The second method simply
+   pulls the scan code out of the lParam of the keyboard messages; this
+   method works reliably for non-U.S. keyboard layouts. However, there are
+   further concerns for non-U.S. keyboard layouts.
 
    Non-U.S. keyboard layouts typically use the right Alt key as a sort of
-   shift key to access an additional row of symbols from the `, 1, 2,
-   ..., 0 keys, as well as accented forms of standard alphabetic
-   characters, such as á, ä, å, ú and additional alphabetic characters,
-   such as ß. Non-U.S. keyboards typically label the right Alt key as
-   AltGr or AltLang; the Gr is short for "grave", which is the name of
-   one of the accent symbols. The X Protocol and Win32 methods of
-   handling the AltGr key are not directly compatible with one another.
+   shift key to access an additional row of symbols from the `, 1, 2, ...,
+   0 keys, as well as accented forms of standard alphabetic characters,
+   such as á, ä, å, ú and additional alphabetic characters, such as ß.
+   Non-U.S. keyboards typically label the right Alt key as AltGr or
+   AltLang; the Gr is short for "grave", which is the name of one of the
+   accent symbols. The X Protocol and Win32 methods of handling the AltGr
+   key are not directly compatible with one another.
 
    The X Protocol handles AltGr presses and releases in much the same way
    as any other key press and release. Win32, however, generates a fake
-   Ctrl press and release for each AltGr press and release. The X
-   Protocol does not expect this fake Ctrl press and release, so care
-   must be taken to discard the fake Ctrl press and release. Fake Ctrl
-   presses and releases are detected and discarded by passing each
-   keyboard message to winkeybd.c's winIsFakeCtrl_L function.
-   winIsFakeCtrl_L detects the fake key presses and releases by comparing
-   the timestamps of the AltGr message with the timestamp of any
-   preceding or trailing Ctrl message. Two real key events will never
-   have the same timestamp, but the fake key events have the same
-   timestamp as the AltGr messages, so the fake messages can be easily
-   identified.
+   Ctrl press and release for each AltGr press and release. The X Protocol
+   does not expect this fake Ctrl press and release, so care must be taken
+   to discard the fake Ctrl press and release. Fake Ctrl presses and
+   releases are detected and discarded by passing each keyboard message to
+   winkeybd.c's winIsFakeCtrl_L function. winIsFakeCtrl_L detects the fake
+   key presses and releases by comparing the timestamps of the AltGr
+   message with the timestamp of any preceding or trailing Ctrl message.
+   Two real key events will never have the same timestamp, but the fake
+   key events have the same timestamp as the AltGr messages, so the fake
+   messages can be easily identified.
 
    Special keyboard considerations must be handled the Cygwin/X X Server
    losses or gains the keyboard focus. For example, the user can switch
@@ -487,15 +470,14 @@ messages processed are:
    toggle message, so it will continue to function as if Num Lock was in
    its previous state. Thus, the state of any mode keys such as Num Lock,
    Caps Lock, Scroll Lock, and Kana Lock must be stored upon loss of
-   keyboard focus; the stored state of each mode key must then be
-   compared to that key's current state, toggling the key if its state
-   has changed.
-     _________________________________________________________________
+   keyboard focus; the stored state of each mode key must then be compared
+   to that key's current state, toggling the key if its state has changed.
+     __________________________________________________________________
 
 Mouse
 
-Win32 mouse messages are processed in winwndproc.c's winWindowProc. The
-messages processed are:
+   Win32 mouse messages are processed in winwndproc.c's winWindowProc. The
+   messages processed are:
      * WM_MOUSEMOVE
      * WM_NCMOUSEMOVE
      * WM_LBUTTON*
@@ -513,9 +495,9 @@ messages processed are:
 
    Three-button mouse emulation is supported for users that do not have a
    three button mouse. When three-button mouse emulation is disabled,
-   mouse button presses and releases are handled trivially in
-   winmouse.c's winMouseButtonsHandle by simply passing the event to
-   mieqEnqueue. Three-button mouse emulation is quite complicated.
+   mouse button presses and releases are handled trivially in winmouse.c's
+   winMouseButtonsHandle by simply passing the event to mieqEnqueue.
+   Three-button mouse emulation is quite complicated.
 
    Three-button mouse emulation is handled by starting a timer when the
    left or right mouse buttons are pressed; the button event is sent as a
@@ -533,523 +515,172 @@ messages processed are:
    considered by Win32 to be one unit of motion for the mouse wheel; any
    remainder of the wheel delta must be preserved and added to the next
    mouse wheel message.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Obtaining the Source Code
 
-     Cross Compiling: Obtaining the source code when cross compiling X
-     Window System is nearly identical to the process described below.
-     The only divergence from the following instructions is that you
-     will be using a bash shell on your cross compiling host, rather
-     than on your native Cygwin host.
-
    Cygwin/X source code is contained in, and distributed with, the X
-   Window System source code tree. Read-only [74]CVS access to the X
-   Window System source tree is also available.
+   Window System source code tree.
 
-   There are two versions of the source available in CVS.
+   The source code for the packages distributed via Cygwin setup is also
+   available via Cygwin setup. This may have multiple patches applied on
+   top of the X Window System source code, and should be the starting
+   point for new developers.
 
-   Stable: The stable branch is located in the CYGWIN branch of CVS. Only
-   bugfixes and small enhancements are allowed for the stable branch. The
-   CYGWIN branch will follow the stable releases from Xorg. All releases
-   are done from from CYGWIN branch.
-$ cvs -d :pserver:anoncvs@cvs.freedesktop.org:/cvs/xorg login
-CVS password: <hit return>
-$ cvs -d :pserver:anoncvs@cvs.freedesktop.org:/cvs/xorg co -r CYGWIN xc
+   Read-only [77]git access to the X Window System source tree is also
+   available.
 
-   Devel: The development branch is locate in the HEAD branch of CVS.
-$ cvs -d :pserver:anoncvs@cvs.freedesktop.org:/cvs/xorg login
-CVS password: <hit return>
-$ cvs -d :pserver:anoncvs@cvs.freedesktop.org:/cvs/xorg co xc
-     _________________________________________________________________
+   The CYGWIN branch exists in git for historical reasons. Current
+   development follows the mainline.
+
+$ git clone git://git.freedesktop.org/git/xorg/xserver
+     __________________________________________________________________
 
 Native Compiling
 
 Compiling the Source Code
 
-Compiling Cygwin/X doesn't have to be hard, although the X Window System
-source code tree contains over 250 MiB of data. There are a few simple
-techniques that make building the source code, keeping the source code up to
-date, and keeping the source code organized much easier.
-     _________________________________________________________________
-
-Compiling Overview
-
-Compiling the X Window System source code tree is a lot easier when you keep
-your builds in directories separate from the source code directory. Keeping
-the source code and builds in separate directories, using the lndir utility,
-allows you to have many builds for different configurations, allows you to
-easily delete a build, and keeps the source code tree clean and manageable.
-     _________________________________________________________________
+   Compiling Cygwin/X doesn't have to be hard, although the X Window
+   System source code tree is reasonably large. There are a few simple
+   techniques that make building the source code, keeping the source code
+   up to date, and keeping the source code organized much easier.
+     __________________________________________________________________
 
 Required Packages for Compiling
 
-Many developer libraries and developer tools are required to build Cygwin/X.
-Several packages are required in addition to the default packages installed
-by the Cygwin installer. Following is a list of additional packages that are
-required to compile Cygwin/X natively in Cygwin. Note that some of these
-packages are meta packages that will automatically cause several other
-packages to be selected for installation; do not unselect any of these
-automatically selected packages.
+   Many developer libraries and developer tools are required to build
+   Cygwin/X. Several packages are required in addition to the default
+   packages installed by the Cygwin installer. Following is a list of
+   additional packages that are required to compile Cygwin/X natively in
+   Cygwin. Note that some of these packages are meta packages that will
+   automatically cause several other packages to be selected for
+   installation; do not unselect any of these automatically selected
+   packages.
+     * autoconf
+     * automake
      * binutils
-     * bison
-     * byacc
      * bzip2
-     * cvs
      * diffutils
-     * expat
      * fileutils
      * findutils
      * flex
      * gawk
      * gcc
-     * libfontconfig-devel
-     * libfreetype2-devel
-     * libncurses-devel
+     * git
      * make
      * patch
-     * pcre
-     * pcre-devel
-     * perl
      * sed
      * tar
-     * termcap
-     * terminfo
      * zlib
-     _________________________________________________________________
-
-Building and Installing lndir
-
-The lndir utility allows you to keep your build directories separate from
-your source directory; lndir works just like the standard ln command on
-UNIX, but lndir creates links recursively for all files and directories in
-the specified directory. The lndir utility is included with the X Window
-System source code tree and you can build lndir seperately before you build
-the whole source code tree. Follow the simple instructions below to build
-and install the utility:
-    1. Launch a Cygwin bash prompt. You should see a screen similar to
-       the following:
-
-Username@CygwinHost ~
-$
-
-    2. Change the current directory to your X Window System development
-       directory:
-
-Username@CygwinHost ~
-$ cd x-devel
-
-Username@CygwinHost ~/x-devel
-$
-
-    3. Change the current directory to config/util/ in the root of the X
-       Window System source code tree, xc/:
-
-Username@CygwinHost ~/x-devel
-$ cd xc/config/util
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$
-
-    4. Build lndir:
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$ make -f Makefile.ini CC=gcc CDEBUGFLAGS=-O2 lndir
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$
-
-    5. Move lndir.exe to /bin:
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$ mv lndir.exe /bin
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$
-
-    6. Verify that lndir is working:
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$ lndir
-usage: lndir [-silent] [-ignorelinks] fromdir [todir]
-
-Username@CygwinHost ~/x-devel/xc/config/util
-$
-
-    7. The lndir utility is now installed.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Standard Build
 
-Follow these steps to create a standard, non-debug, build:
+   Follow these steps to create a standard, non-debug, build:
     1. Change the current directory to your X Window System development
        directory:
 
 Username@CygwinHost ~
 $ cd x-devel
 
-Username@CygwinHost ~/x-devel
-$
+Username@CygwinHost ~/xserver
+$ ./configure --prefix=/usr
+[lots of output]
+$ make
+[lots more output]
 
-    2. Create a directory to house your builds, ~/x-devel/build is
-       recommended:
 
-Username@CygwinHost ~/x-devel
-$ mkdir build
+       Standard build is now complete.
 
-Username@CygwinHost ~/x-devel
-$
-
-    3. Change the current directory to your build directory:
-
-Username@CygwinHost ~/x-devel
-$ cd build
-
-Username@CygwinHost ~/x-devel/build
-$
-
-    4. Create a directory for your standard build, std is recommended:
-
-Username@CygwinHost ~/x-devel/build
-$ mkdir std
-
-Username@CygwinHost ~/x-devel/build
-$
-
-    5. Change the current directory to your standard build directory:
-
-Username@CygwinHost ~/x-devel/build
-$ cd std
-
-Username@CygwinHost ~/x-devel/build/std
-$
-
-    6. Create symlinks to your source tree, using lndir, in your standard
-       build directory:
-
-     Note: As of 2001-09-19, creating symlinks to the source tree
-     creates 11,678 files in 1,524 folders, which is only 2.31 MiB of
-     data, but requires 45.6 MiB of storage space on a file system using
-     4 KiB allocation units.
-
-Username@CygwinHost ~/x-devel/build/std
-$ lndir ../../xc
-../../xc/config:
-../../../xc/config/cf:
-
-...
-
-Username@CygwinHost ~/x-devel/build/std
-$
-
-       Alternatively, you can redirect the output of lndir to /dev/null,
-       which greatly speeds up the process of creating symlinks:
-
-Username@CygwinHost ~/x-devel/build/std
-$ lndir ../../xc > /dev/null
-
-Username@CygwinHost ~/x-devel/build/std
-$
-
-    7. Run a standard build of the entire tree, which takes between 30
-       minutes and 5 hours, saving the output of the build commands to
-       World.log:
-
-     Note: As of 2001-09-19, a standard build of the entire tree
-     requires 234 MiB of storage space on a file system using 4 KiB
-     allocation units; that is in addition to the 45.6 MiB of previously
-     generated symlinks.
-     As a benchmark, a standard build runs for 30 minutes on a machine
-     with a 1.2 GHz Atlhon, 256 MiB DDR RAM, and a 7200 RPM ATA/100 HD.
-
-Username@CygwinHost ~/x-devel/build/std
-$ make World > World.log 2>&1
-
-Username@CygwinHost ~/x-devel/build/std
-$
-
-    8. Standard build is now complete.
-     _________________________________________________________________
+     Note: XXX: Add figures for normal diskspace occupied by source,
+     additional diskspace occupied by build, and a benchmark time for the
+     build to complete
+     XXX: Describe configure option for specifying a builddir
+     __________________________________________________________________
 
 Debug Build
 
-Follow these steps to create a build with debugging information:
+   Follow these steps to create a build with debugging information:
     1. Change the current directory to your X Window System development
        directory:
 
 Username@CygwinHost ~
 $ cd x-devel
 
-Username@CygwinHost ~/x-devel
-$
+Username@CygwinHost ~/xserver
+$ ./configure --prefix=/usr --enable-debug CFLAGS="-g -O0"
+[lots of output]
+$ make
+[lots more
 
-    2. If you have not already done so, create a directory to house your
-       builds, ~/x-devel/build is recommended:
+       Debug build is now complete.
+     __________________________________________________________________
 
-Username@CygwinHost ~/x-devel
-$ mkdir build
+Running a local build
 
-Username@CygwinHost ~/x-devel
-$
-
-    3. Change the current directory to your build directory:
-
-Username@CygwinHost ~/x-devel
-$ cd build
-
-Username@CygwinHost ~/x-devel/build
-$
-
-    4. Create a directory for your debug build, debug is recommended:
-
-Username@CygwinHost ~/x-devel/build
-$ mkdir debug
-
-Username@CygwinHost ~/x-devel/build
-$
-
-    5. Change the current directory to your debug build directory:
-
-Username@CygwinHost ~/x-devel/build
-$ cd debug
-
-Username@CygwinHost ~/x-devel/build/debug
-$
-
-    6. Create links to your source tree, using lndir, in your debug build
+   Follow these steps to run the built X server:
+    1. Change the current directory to your X Window System development
        directory:
 
-     Note: As of 2001-09-19, creating symlinks to the source tree
-     creates 11,678 files in 1,524 folders, which is only 2.31 MiB of
-     data, but requires 45.6 MiB of storage space on a file system using
-     4 KiB allocation units.
-
-Username@CygwinHost ~/x-devel/build/debug
-$ lndir ../../xc
-../../xc/config:
-../../../xc/config/cf:
-
-...
-
-Username@CygwinHost ~/x-devel/build/debug
+Username@CygwinHost ~
+$ cd xserver
+Username@CygwinHost ~/xserver
 $
 
-       Alternatively, you can redirect the output of lndir to /dev/null,
-       which greatly speeds up the process of creating symlinks:
+    2. Invoke the hw/xwin/Xwin executable:
 
-Username@CygwinHost ~/x-devel/build/debug
-$ lndir ../../xc > /dev/null
+Username@CygwinHost ~/xserver
+$ hw/xwin/XWin
 
-Username@CygwinHost ~/x-devel/build/debug
-$
-
-    7. Run a debug build of the entire tree, which takes between 30
-       minutes and 5 hours, saving the output of the build commands to
-       World.log:
-
-     Note: As of 2001-06-12, a debug build of the entire tree requires
-     566.5 MiB of storage space on a file system using 4 KiB allocation
-     units; that is in addition to the 45.6 MiB of previously generated
-     symlinks.
-     As a benchmark, a debug build runs for 71 minutes on a machine with
-     a 1.2 GHz Atlhon, 256 MiB DDR RAM, and a 7200 RPM ATA/100 HD. You
-     may have noticed that the standard build time and the debug build
-     time are identical.
-
-Username@CygwinHost ~/x-devel/build/debug
-$ ./config/util/makeg.sh World > World.log 2>&1
-
-Username@CygwinHost ~/x-devel/build/debug
-$
-
-    8. Debug build is now complete.
-     _________________________________________________________________
+       The X server you have built will now attempt to run.
+     __________________________________________________________________
 
 Installing a local build
 
-Installing a local build enables you to verify that a build of the entire
-source tree is operational. It is wise to verify the operation of full
-builds of the source tree from time to time, as full builds will
-occasionally be broken by changes that other developers are making to the X
-Window System source code tree.
+   Installing a local build enables you to verify that a build of the
+   entire source tree is operational. It is wise to verify the operation
+   of full builds of the source tree from time to time, as full builds
+   will occasionally be broken by changes that other developers are making
+   to the X Window System source code tree.
 
-Installing a local build on top of an existing build is not a good idea, as
-this can mask problems that occurred during the build process, or it can
-cause problems that are unrelated to the build process; either situation is
-undesirable. It is generally a good idea to move your old installation out
-of the way before installing a local build, and these instructions will
-assume that you desire to do so. Follow the instructions below to install a
-local build:
-    1. Move the /etc/X11 directory to /etc/X11_build-prefix_date_time:
-
-Username@CygwinHost ~
-$ mv /etc/X11 /etc/X11_build-prefix_date_time
-
-Username@CygwinHost ~
-$
-
-    2. Move the /usr/X11R6 directory to
-       /usr/X11R6_build-prefix_date_time:
-
-Username@CygwinHost ~
-$ mv /usr/X11R6 /usr/X11R6_build-prefix_date_time
-
-Username@CygwinHost ~
-$
-
-    3. Change the current directory to your desired X Window System build
+   Installing a local build on top of an existing build is not a good
+   idea, as this can mask problems that occurred during the build process,
+   or it can cause problems that are unrelated to the build process;
+   either situation is undesirable. It is generally a good idea to move
+   your old installation out of the way before installing a local build,
+   and these instructions will assume that you desire to do so. Follow the
+   instructions below to install a local build:
+    1. Change the current directory to your desired X Window System build
        directory:
 
 Username@CygwinHost ~
-$ cd ~/x-devel/build/build-prefix
+$ cd ~/xserver/build/build-prefix
 
-Username@CygwinHost ~/x-devel/build/build-prefix
+Username@CygwinHost ~/xserver/build/build-prefix
 $
 
-    4. Make the install target, which installs binaries, fonts,
-       libraries, and configuration files; in short, install installs
-       everything except the man pages:
+    2. Make the install target, which installs everything:
 
-     Note: As of 2001-06-12, the install target copies 5,074 files in 83
-     folders into /usr/X11R6, requiring 89.2 MiB of storage space for a
-     standard build or 177 MiB of storage space for a debug build, and
-     276 files in 39 folders into /etc/X11, requiring 2.57 MiB of
-     storage space. All stated storage requirements are for a file
-     system using 4 KiB allocation units.
-     As a benchmark, install runs for 20 minutes on a machine with a 1.2
-     GHz Atlhon, 256 MiB DDR RAM, and a 7200 RPM ATA/100 HD. Standard
-     and debug installs both complete in the stated time.
+Username@CygwinHost ~/xserver/build/build-prefix
+$ make install
 
-Username@CygwinHost ~/x-devel/build/build-prefix
-$ make install > install.log 2>&1
-
-Username@CygwinHost ~/x-devel/build/build-prefix
+Username@CygwinHost ~/xserver/build/build-prefix
 $
-
-    5. Make the install.man target, which only installs the man pages:
-
-     Note: As of 2001-06-12, the install.man target copies 541 files in
-     3 folders into /usr/X11R6/man, requiring 4.22 MiB of storage space,
-     and 544 files in 1 folder into /usr/X11R6/lib/X11/doc, requiring
-     4.76 MiB of storage space. All stated storage requirements are for
-     a file system using 4 KiB allocation units.
-     As a benchmark, install.man runs for 2 minutes on a machine with a
-     1.2 GHz Atlhon, 256 MiB DDR RAM, and a 7200 RPM ATA/100 HD.
-
-Username@CygwinHost ~/x-devel/build/build-prefix
-$ make install.man > install.man.log 2>&1
-
-Username@CygwinHost ~/x-devel/build/build-prefix
-$
-     _________________________________________________________________
+     __________________________________________________________________
 
 Keeping your source code tree updated
 
-[75]CVS makes keeping your source code tree up to date easy. You may update
-your entire source code tree at once, or you can update individual
-directories or files, if you so choose.
-     _________________________________________________________________
-
-Update the entire source code tree
-    1. Change the current directory to your X Window System development
-       directory:
-
-Username@CygwinHost ~
-$ cd x-devel
-
-Username@CygwinHost ~/x-devel
-$
-
-    2. Change the current directory to the root of the X Window System
-       source code tree, xc/:
-
-Username@CygwinHost ~/x-devel
-$ cd xc
-
-Username@CygwinHost ~/x-devel/xc
-$
-
-    3. To update your entire X Window System source code tree, run the
-       following command:
-
-     Tip: The -zn parameter specifies the compression level to use, from
-     1 to 9, with 9 being maximum compression.
-     The -d parameter instructs cvs to rebuild the directory list, which
-     causes new directories in the source code tree to be downloaded
-     (new directories are skipped if you do not specify -d).
-
-Username@CygwinHost ~/x-devel/xc
-$ cvs -z4 update -d > cvs-update.log 2>&1
-
-Username@CygwinHost ~/x-devel/xc
-$
-
-    4. Search cvs-update.log for any lines containing conflict. Examine
-       each line that contains conflict; resolve those lines that are
-       true conflicts. grep will not display any information if no line
-       in cvs-update.log contains conflict.
-
-Username@CygwinHost ~/x-devel/xc
-$ grep conflict cvs-update.log
-
-Username@CygwinHost ~/x-devel/xc
-$
-     _________________________________________________________________
-
-Update a single file or directory
-    1. Change the current directory to your X Window System development
-       directory:
-
-Username@CygwinHost ~
-$ cd x-devel
-
-Username@CygwinHost ~/x-devel
-$
-
-    2. Change the current directory to the directory that contains the
-       file you wish to update, or change the current directory to the
-       directory that you wish to update:
-
-Username@CygwinHost ~/x-devel
-$ cd xc/directory_to_update
-
-Username@CygwinHost ~/x-devel/xc/directory_to_update
-$
-
-    3. To update a single file, or a set of specified files, run the
-       following command:
-
-     Tip: The -zn parameter specifies the compression level to use, from
-     1 to 9, with 9 being maximum compression.
-
-Username@CygwinHost ~/x-devel/xc/directory_to_update
-$ cvs -z4 update filename_1 [filename_2 ...]
-
-Username@CygwinHost ~/x-devel/xc/directory_to_update
-$
-
-    4. To update a single directory, and its subdirectories, run the
-       following command:
-
-     Note: The -zn parameter specifies the compression level to use,
-     from 1 to 9, with 9 being maximum compression.
-     The -d parameter instructs cvs to rebuild the directory list, which
-     causes new directories in the source code tree to be downloaded
-     (new directories are skipped if you do not specify -d).
-
-Username@CygwinHost ~/x-devel/xc/directory_to_update
-$ cvs -z4 update -d
-
-Username@CygwinHost ~/x-devel/xc/directory_to_update
-$
-     _________________________________________________________________
+   [78]git makes keeping your source code tree up to date easy. Consult
+   the git documentation for details.
+     __________________________________________________________________
 
 Cross Compiling
 
-Cross compiling is the act of the building source code on one system, the
-build host, into executables or libraries to be run on a different host, the
-native host. The build host and the native host may differ in operating
-system and/or processor type. Cross compiling is done for several reasons:
+   Cross compiling is the act of the building source code on one system,
+   the build host, into executables or libraries to be run on a different
+   host, the native host. The build host and the native host may differ in
+   operating system and/or processor type. Cross compiling is done for
+   several reasons:
      * The native host is grossly under powered, such as a handheld
        computer.
      * The user happens to have greatly more compiling power available on
@@ -1061,21 +692,21 @@ system and/or processor type. Cross compiling is done for several reasons:
    There are a whole new class of problems that can happen when cross
    compiling that are simply not an issue when building on Cygwin. You
    should be familiar with building Cygwin/X on Cygwin, as described in
-   [76]the Section called Native Compiling, before attempting to cross
+   [79]the Section called Native Compiling, before attempting to cross
    compile Cygwin/X.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Obtaining binutils and gcc Source
 
-binutils and gcc source code releases that are known to compile on Cygwin
-and distributed by the Cygwin project. Therefore, it is highly recommended
-that you obtain the binutils and gcc sources from the [77]Cygwin mirror
-network.
+   binutils and gcc source code releases that are known to compile on
+   Cygwin are distributed by the Cygwin project. Therefore, it is highly
+   recommended that you obtain the binutils and gcc sources from the
+   [80]Cygwin mirror network.
 
-Follow these steps to download Cygwin/X binaries:
+   Follow these steps to download Cygwin/X binaries:
     1. Create a directory to store the binutils and gcc sources in, such
        as /home/my_login/cygwin/src/
-    2. Visit the [78]Cygwin mirrors page to find your closest mirror
+    2. Visit the [81]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
     4. Change current ftp directory to cygwin/release/.
@@ -1096,27 +727,27 @@ Follow these steps to download Cygwin/X binaries:
             necessary to build gcc and Cygwin/X)
           + gcc/gcc-3.3.1-1-src.tar.bz2 (21.9 MiB; required, necessary to
             build Cygwin/X)
-     _________________________________________________________________
+     __________________________________________________________________
 
 Obtaining Cygwin Headers and Libs
 
-The simplest method of building a cross compiler for Cygwin requires that
-you have the Cygwin headers and libraries available at the time of building
-the cross compiler. Cygwin headers and libraries are installed when Cygwin
-is installed, so the headers and libraries can be obtained from an existing
-Cygwin installation.
+   The simplest method of building a cross compiler for Cygwin requires
+   that you have the Cygwin headers and libraries available at the time of
+   building the cross compiler. Cygwin headers and libraries are installed
+   when Cygwin is installed, so the headers and libraries can be obtained
+   from an existing Cygwin installation.
 
-     Don't simply copy the headers and libraries: Some of the headers
-     and libraries are symbolic links to other headers or libraries.
-     Copying these files using a program that is not aware of Cygwin's
-     symlink emulation will result in some of the header and library
-     files being broken. The method described below will preserve the
-     symbolic links used by the header and library files.
+     Don't simply copy the headers and libraries: Some of the headers and
+     libraries are symbolic links to other headers or libraries. Copying
+     these files using a program that is not aware of Cygwin's symlink
+     emulation will result in some of the header and library files being
+     broken. The method described below will preserve the symbolic links
+     used by the header and library files.
 
     1. Launch your Cygwin environment, using either the icon on your
-       Desktop, the icon in your Start Menu, or by running cygwin.bat
-       from your Cygwin directory (e.g. c:\cygwin); you should see a
-       window like the following:
+       Desktop, the icon in your Start Menu, or by running cygwin.bat from
+       your Cygwin directory (e.g. c:\cygwin); you should see a window
+       like the following:
 
 Username@CygwinHost ~
 $
@@ -1173,16 +804,16 @@ $
 
     9. Extract the cygwin-lib.tgz and cygwin-include.tgz archives:
 
-[harold@CrossHost /home/my_login/cygwin/i686-pc-cygwin/]$ tar xzf cygwin-lib.tg
-z
+[harold@CrossHost /home/my_login/cygwin/i686-pc-cygwin/]$ tar xzf cygwin-lib.tgz
 
-[harold@CrossHost /home/my_login/cygwin/i686-pc-cygwin/]$ tar xzf cygwin-includ
-e.tgz
+[harold@CrossHost /home/my_login/cygwin/i686-pc-cygwin/]$ tar xzf cygwin-include
+.tgz
 
    10. Obtaining Cygwin headers and libs is now complete.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Building binutils and gcc
+
     1. Open a shell on your cross compiling build host; you should see a
        window like the following:
 
@@ -1212,6 +843,7 @@ Building binutils and gcc
 [harold@CrossHost src]$ cd binutils-20030901-1
 
 [harold@CrossHost binutils-20030901-1]$
+
 
     5. Create a build directory and change the current directory to that
        directory:
@@ -1288,25 +920,24 @@ PATH=$PATH:/home/my_login/cygwin/bin:/home/my_login/cygwin/i686-pc-cygwin/bin
 [harold@CrossHost build]$
 
    15. Building binutils and gcc is now complete.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Creating Links for binutils and gcc
 
-Links to the executables in /home/my_login/cygwin/bin must be created in the
-/home/my_login/cygwin/i686-pc-cygwin/bin directory; these are required for
-the build system to find the build executables (e.g. gcc, cpp, etc.). Each
-of the build executables in /home/my_login/cygwin/bin is prefixed with
-i686-pc-cygwin (e.g. i686-pc-cygwin-cpp) whereas the build system expects
-the executables to have no prefix (e.g. cpp).
+   Links to the executables in /home/my_login/cygwin/bin must be created
+   in the /home/my_login/cygwin/i686-pc-cygwin/bin directory; these are
+   required for the build system to find the build executables (e.g. gcc,
+   cpp, etc.). Each of the build executables in /home/my_login/cygwin/bin
+   is prefixed with i686-pc-cygwin (e.g. i686-pc-cygwin-cpp) whereas the
+   build system expects the executables to have no prefix (e.g. cpp).
 
-Creating links to the build executables and dropping the prefix from the
-name of each build executables link is done by a script that was provided by
-the XFree86 cross-compiling community and slightly modified by Alexander
-Gottwald. The text of this script is below, save it in a file on your cross
-compiling host called cross-links.sh. Note that the location of the script
-does not matter, since it contains a reference to the location of the build
-tools in the CYGROOT variable.
-
+   Creating links to the build executables and dropping the prefix from
+   the name of each build executables link is done by a script that was
+   provided by the XFree86 cross-compiling community and slightly modified
+   by Alexander Gottwald. The text of this script is below, save it in a
+   file on your cross compiling host called cross-links.sh. Note that the
+   location of the script does not matter, since it contains a reference
+   to the location of the build tools in the CYGROOT variable.
 #!/bin/bash
 
 #
@@ -1327,153 +958,117 @@ ln -s gcc cc
 
    Finally, run the cross-links.sh script. There should now be several
    links in the /home/my_login/cygwin/i686-pc-cygwin/bin directory.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Building Cygwin/X
 
-Building the source code when cross compiling X Window System is nearly
-identical to the process described below in [79]the Section called Native
-Compiling of the Native Compiling section. One divergence from the
-aforementioned instructions is that you will be using a bash shell on your
-cross compiling host, rather than on your native Cygwin host; other
-divergences follow.
-    1. lndir should generally already be installed if your build host
-       already has the X Window System installed. If you do not have
-       lndir, you can build it for your build host by following the
-       instructions in [80]the Section called Building and Installing
-       lndir.
-    2. When building the entire tree, you must pass CROSSCOMPILEDIR to
-       make to cause the build system to build for the target, Cygwin,
-       platform:
+   Building the source code when cross compiling X Window System is nearly
+   identical to the process described below in [82]the Section called
+   Native Compiling of the Native Compiling section. One divergence from
+   the aforementioned instructions is that you will be using a bash shell
+   on your cross compiling host, rather than on your native Cygwin host;
+   other divergences follow.
 
-[harold@CrossHost std]$ make World
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" > World.log 2>&1
+     Note: XXX: THIS IS UNTESTED
 
-[harold@CrossHost std]$
-
-    3. When rebuilding individual directories of the tree after doing a
-       build of the entire tree, you can simply issue the make command:
-
-[harold@CrossHost std]$ cd programs/Xserver
-
-[harold@CrossHost Xserver]$ make XWin.exe > XWin.log 2>&1
-
-[harold@CrossHost Xserver]$
-
-    4. When building a debug version of the entire tree, use makeg, which
-       should generally already be installed, and pass CROSSCOMPILEDIR to
-       makeg to cause the build system to build for the target, Cygwin,
-       platform:
-
-[harold@CrossHost debug]$ makeg World
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" > World.log 2>&1
-
-[harold@CrossHost debug]$
-
-    5. When rebuilding individual directories of the tree after doing a
-       build of the entire tree, you can simply issue the makeg command:
-
-[harold@CrossHost std]$ cd programs/Xserver
-
-[harold@CrossHost Xserver]$ makeg XWin.exe
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" > XWin.log 2>&1
-
-[harold@CrossHost Xserver]$
-
-    6. When installing a standard build of the entire tree, you must pass
-       DESTDIR and CROSSCOMPILEDIR to make to install the target platform
-       build into /stagingdir and to cause the build system to build a
-       few remaining programs for the target, Cygwin, platform:
-
-     Tip: Never run make install install.man on your host platform
-     without the DESTDIR parameter, as that will cause the Cygwin build
-     of X Window System to be installed over top of your local X Window
-     System installation, which would completely destroy your host
-     system's X Window System installation.
-
-[harold@CrossHost std]$ make install install.man
-DESTDIR=/stagingdir
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" > install.log 2>&1
-
-[harold@CrossHost std]$
-
-    7. When installing a debug build of the entire tree, you must pass
-       DESTDIR and CROSSCOMPILEDIR to makeg to install the target
-       platform build into /stagingdir and to cause the build system to
-       build debug versions of a few remaining programs for the target,
+    1. When configuring, you must pass --target=i686-pc-cygwin to
+       ./configure to cause the build system to build for the target,
        Cygwin, platform:
+    2. When configuring, you must pass --prefix=/stagingdir to ./configure
+       to cause the build system to be configured to install the target
+       platform build into /stagingdir.
+       OR, when installing a build, you must pass DESTDIR to make install
+       to install the target platform build into /stagingdir.
 
-     Tip: Never run makeg install install.man on your host platform
-     without the DESTDIR parameter, as that will cause the Cygwin debug
-     build of X Window System to be installed over top of your local X
-     Window System installation, which would completely destroy your
-     host system's X Window System installation.
-
-[harold@CrossHost debug]$ makeg install install.man
-DESTDIR=/stagingdir
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" > install.log 2>&1
-
-[harold@CrossHost debug]$
-     _________________________________________________________________
+     Tip: Never run make install on your host platform without the
+     DESTDIR parameter, as that will cause the Cygwin build of X Window
+     System to be installed over top of your local X Window System
+     installation, which would completely destroy your host system's X
+     Window System installation.
+     __________________________________________________________________
 
 Packaging a Cygwin/X Distribution
 
-Cygwin/X uses a custom build and packaging script that automates all of the
-tasks required to build, create binary packages, and source code packages.
+   Cygwin/X uses a cygport build and packaging script that automates all
+   of the tasks required to build, create binary packages, and source code
+   packages.
 
      Note: These instructions assume that you want to build a
      distribution from the source packages available from Cygwin's
-     setup.exe. You can use these instructions to build a distribution
-     from CVS instead by just replacing references to /usr/src/xc with
-     the path to the xc/ directory that you checked out of CVS.
+     setup.exe.
 
-    1. Wait for these instructions to be updated, sometime after
-       2004-04-03.
-     _________________________________________________________________
+     You can a similar technique to build a distribution from X.Org
+     release tarballs instead.
+
+    1. Unpack xorg-server-x.x.x-x-src.tar.bz2 (if you use setup to install
+       this source package, it will be automatically unpacked under
+       /usr/src)
+
+Username@CygwinHost /usr/src
+$ tar -jxf xorg-server-x.x.x-x-src.tar.bz2
+
+    2. Invoke cygport on the .cygport file contained in the source package
+       unpacked above. This will create the source and binary packages
+       xorg-server-1.5.3-X-src.tar.bz2 and xorg-server-1.5.3-X.tar.bz2
+
+Username@CygwinHost /usr/src
+$ cygport xorg-server-x.x.x-x.cygport all
+     __________________________________________________________________
 
 Chapter 3. Documentation
 
 Overview
 
-Cygwin/X documentation is written in XML according to the [81]DocBook
-document type definition (DTD). These XML input files are then compiled
-using an autoconf and automake build system. We currently build the
-following output formats: HTML, PDF, PS, RTF, and TXT.
-     _________________________________________________________________
+   Cygwin/X documentation is written in XML according to the [83]DocBook
+   document type definition (DTD). These XML input files are then compiled
+   using an autoconf and automake build system. We currently build the
+   following output formats: HTML, PDF, PS, RTF, and TXT.
+     __________________________________________________________________
 
 Obtaining the Source Code
 
 Source of latest cygwin-x-doc release
 
-To obtain the source of the latest release of the cygwin-x-doc package start
-the cygwin setup, select directories and mirror and select the package
-cygwin-x-doc from the category X11. Mark the checkbox labelled src and
-install. This will install the documentation source in
-/usr/cvs/cygwin-x-doc.
-     _________________________________________________________________
+   To obtain the source of the latest release of the cygwin-x-doc package
+   start the cygwin setup, select directories and mirror and select the
+   package cygwin-x-doc from the category X11. Mark the checkbox labelled
+   src and install. This will install the documentation source in
+   /usr/cvs/cygwin-x-doc.
+     __________________________________________________________________
 
 Source from CVS
 
-The documentation source code is available from freedesktop.org cvs too. The
-obtain them please follow these rules:
-
+   The documentation source code is available from freedesktop.org cvs
+   too. The obtain them please follow these rules:
 $ cvs -d :pserver:anoncvs@pdx.freedesktop.org:/cvs/xserver login
 CVS password: <hit return>
 $ cvs -d :pserver:anoncvs@pdx.freedesktop.org:/cvs/xserver co cygwin-x-doc
 
    You should now have the sources in an directory called cygwin-x-doc.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Setting Up a DocBook Build Environment
 
-Setup a DocBook build environment on Cygwin by consulting the [82]SGML for
-Windows NT: Setting up a free SGML editing and publishing system on Windows
-NT/Cygwin document.
-     _________________________________________________________________
+   Setup a DocBook build environment on Cygwin
+     __________________________________________________________________
+
+Required Packages for building documentation
+
+     * openjade
+     * jadetex (no offical package for this)
+     * docbook-dsssl (no offical package for this and getting the
+       stylesheets set up properly is a black art)
+
+     Note: A useful, if slightly dated, introduction to setting up a
+     docbook build environment and editing tools can be found in the
+     [84]SGML for Windows NT: Setting up a free SGML editing and
+     publishing system on Windows NT/Cygwin document.
+     __________________________________________________________________
 
 Building the Documentation
 
-Follow these instructions to build the Cygwin/X documentation source code:
+   Follow these instructions to build the Cygwin/X documentation source
+   code:
     1. Open a shell on your documentation build host; you should see a
        window like the following:
 
@@ -1509,22 +1104,23 @@ $ ../configure
 Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
 $
 
+     Note: Use ./configure --enable-hardcopy to enable building of all
+     documentation formats, otherwise just HTML will be built
     5. Build the documentation:
 
 Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
 $ make all
 
     6. Building the documentation is now complete.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Packaging a Documentation Distribution
 
-Follow these instructions to build a Cygwin/X documentation source code
-distribution:
+   Follow these instructions to build a Cygwin/X documentation source code
+   distribution:
     1. Edit the version tag in the third line of the file configure.in to
        indicated a new version, or to add a branch name to the
-       distribution. The line containing the version tag should look
-       like:
+       distribution. The line containing the version tag should look like:
 
 AM_INIT_AUTOMAKE(cygwin-x-doc, 1.0.0)
 
@@ -1534,8 +1130,8 @@ AM_INIT_AUTOMAKE(cygwin-x-doc, 1.0.0)
 Username@CygwinHost ~
 $
 
-    3. Change the current directory to the documentation source code
-       build directory:
+    3. Change the current directory to the documentation source code build
+       directory:
 
 Username@CygwinHost ~
 $ cd cygwin-x-doc-1.0.0/build
@@ -1552,27 +1148,28 @@ $ make distcheck
        in the current directory in a file called
        cygwin-x-doc-1.0.0.tar.gz.
     6. Building the documentation is now complete.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Chapter 4. Web Site Maintenance
 
-Foo!
-     _________________________________________________________________
+   Foo! Bar!
+     __________________________________________________________________
 
-BibliographyArticles
+Bibliography
+
+Articles
 
    [Angebranndt94] Definition of the Porting Layer for the X v11 Sample
    Server, Angebranndt94, Susan Angebranndt, Raymond Drewry, Philip
    Karlton, Todd Newman, Robert W. Scheifler, Keith Packard, and David P.
    Wiggins, 1994.
-  _______________________________________________________________________
+     __________________________________________________________________
 
 Books
 
-   [ScheiflerGettys92] Robert W. Scheifler, James Gettys, Jim Flowers,
-   and David Rosenthal, 1992, 1-55558-088-2, Butterworth-Heinemann, X
-   Window System: The Complete Reference to Xlib, X Protocol, ICCCM, and
-   XLFD.
+   [ScheiflerGettys92] Robert W. Scheifler, James Gettys, Jim Flowers, and
+   David Rosenthal, 1992, 1-55558-088-2, Butterworth-Heinemann, X Window
+   System: The Complete Reference to Xlib, X Protocol, ICCCM, and XLFD.
 
    [Richter99] Jeffrey Richter, 1999, 1-57231-996-8, Microsoft Press,
    Programming Applications for Microsoft Windows: Mastering the critical
@@ -1617,7 +1214,7 @@ B
 
    Bitmap (X)
           X pixel map with bit depth equal to one. X pixel maps of bit
-          depth not equal to one are called [83]pixmaps.
+          depth not equal to one are called [85]pixmaps.
 
 C
 
@@ -1636,11 +1233,6 @@ C
           X Server colormap. Contains a table translating index values to
           red, green, blue 3-tuples that will be displayed on the screen
           when a given index value is contained in a bitmap.
-
-   Concurrent Versions System (CVS)
-          CVS is an open source version control system used by the
-          majority of open source projects. More information can be found
-          at the [84]CVS project homepage.
 
 D
 
@@ -1668,6 +1260,10 @@ G
           graphics operation to perform, such as the foreground and
           background colors, fill style, stipple, and tile.
 
+   git (git)
+          git is an open source distributed version control system. More
+          information can be found at the [86]git project homepage.
+
 M
 
    Machine Independent Layer (MI)
@@ -1679,39 +1275,31 @@ M
 O
 
    Offscreen Framebuffer
-          Essentially a [85]bitmap, in the Windows sense, of size and
+          Essentially a [87]bitmap, in the Windows sense, of size and
           color format that can be displayed on the screen. An offscreen
           framebuffer may be identical in size and color format to the
-          [86]primary framebuffer, but this is not always required.
+          [88]primary framebuffer, but this is not always required.
 
    OS Layer (OS)
-          X Server layer that depends on the operating system; but not
-          the hardware.
+          X Server layer that depends on the operating system; but not the
+          hardware.
 
 P
 
    Pixmap
-          X pixel map with bit depth not equal to one. X pixel maps of
-          bit depth one are called [87]bitmaps.
+          X pixel map with bit depth not equal to one. X pixel maps of bit
+          depth one are called [89]bitmaps.
 
    Primary Framebuffer
-          The block of memory, essentially a [88]bitmap, that describes
+          The block of memory, essentially a [90]bitmap, that describes
           what is currently being displayed on the screen. Any updates to
           the primary framebuffer will be displayed on the screen after
           the next screen refresh.
 
    Privates
           Additional information associated with internal X Server
-          structures, such as [89]colormaps, [90]GCs, [91]pixmaps, or
-          [92]screens.
-
-   pserver
-          CVS pserver, short for "password server", is one of the user
-          authentication methods supported by CVS. CVS pserver is not
-          secure, as passwords are transmitted and stored as plain text.
-          However, CVS pserver is desirable for read-only anonymous
-          access to open source CVS trees, as CVS pserver is by far the
-          easiest method to use.
+          structures, such as [91]colormaps, [92]GCs, [93]pixmaps, or
+          [94]screens.
 
 S
 
@@ -1722,9 +1310,9 @@ S
           may have several screens.
 
    Shadow
-          X Server shadow layer that allows [93]FB to draw to an
-          offscreen framebuffer and occasionally call a [94]DDX function
-          that transfers the updated regions to the screen.
+          X Server shadow layer that allows [95]FB to draw to an offscreen
+          framebuffer and occasionally call a [96]DDX function that
+          transfers the updated regions to the screen.
 
 X
 
@@ -1742,173 +1330,180 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [95]X Display Manager.
-     _________________________________________________________________
+          See Also: [97]X Display Manager.
+     __________________________________________________________________
 
 Appendix A. GNU Free Documentation License
 
-Version 1.1, March 2000
+   Version 1.1, March 2000
 
      Copyright (C) 2000 Free Software Foundation, Inc. 59 Temple Place,
      Suite 330, Boston, MA 02111-1307 USA Everyone is permitted to copy
      and distribute verbatim copies of this license document, but
      changing it is not allowed.
-     _________________________________________________________________
+     __________________________________________________________________
 
 0. PREAMBLE
 
-The purpose of this License is to make a manual, textbook, or other written
-document "free" in the sense of freedom: to assure everyone the effective
-freedom to copy and redistribute it, with or without modifying it, either
-commercially or noncommercially. Secondarily, this License preserves for the
-author and publisher a way to get credit for their work, while not being
-considered responsible for modifications made by others.
+   The purpose of this License is to make a manual, textbook, or other
+   written document "free" in the sense of freedom: to assure everyone the
+   effective freedom to copy and redistribute it, with or without
+   modifying it, either commercially or noncommercially. Secondarily, this
+   License preserves for the author and publisher a way to get credit for
+   their work, while not being considered responsible for modifications
+   made by others.
 
-This License is a kind of "copyleft", which means that derivative works of
-the document must themselves be free in the same sense. It complements the
-GNU General Public License, which is a copyleft license designed for free
-software.
+   This License is a kind of "copyleft", which means that derivative works
+   of the document must themselves be free in the same sense. It
+   complements the GNU General Public License, which is a copyleft license
+   designed for free software.
 
-We have designed this License in order to use it for manuals for free
-software, because free software needs free documentation: a free program
-should come with manuals providing the same freedoms that the software does.
-But this License is not limited to software manuals; it can be used for any
-textual work, regardless of subject matter or whether it is published as a
-printed book. We recommend this License principally for works whose purpose
-is instruction or reference.
-     _________________________________________________________________
+   We have designed this License in order to use it for manuals for free
+   software, because free software needs free documentation: a free
+   program should come with manuals providing the same freedoms that the
+   software does. But this License is not limited to software manuals; it
+   can be used for any textual work, regardless of subject matter or
+   whether it is published as a printed book. We recommend this License
+   principally for works whose purpose is instruction or reference.
+     __________________________________________________________________
 
 1. APPLICABILITY AND DEFINITIONS
 
-This License applies to any manual or other work that contains a notice
-placed by the copyright holder saying it can be distributed under the terms
-of this License. The "Document", below, refers to any such manual or work.
-Any member of the public is a licensee, and is addressed as "you".
+   This License applies to any manual or other work that contains a notice
+   placed by the copyright holder saying it can be distributed under the
+   terms of this License. The "Document", below, refers to any such manual
+   or work. Any member of the public is a licensee, and is addressed as
+   "you".
 
-A "Modified Version" of the Document means any work containing the Document
-or a portion of it, either copied verbatim, or with modifications and/or
-translated into another language.
+   A "Modified Version" of the Document means any work containing the
+   Document or a portion of it, either copied verbatim, or with
+   modifications and/or translated into another language.
 
-A "Secondary Section" is a named appendix or a front-matter section of the
-Document that deals exclusively with the relationship of the publishers or
-authors of the Document to the Document's overall subject (or to related
-matters) and contains nothing that could fall directly within that overall
-subject. (For example, if the Document is in part a textbook of mathematics,
-a Secondary Section may not explain any mathematics.) The relationship could
-be a matter of historical connection with the subject or with related
-matters, or of legal, commercial, philosophical, ethical or political
-position regarding them.
+   A "Secondary Section" is a named appendix or a front-matter section of
+   the Document that deals exclusively with the relationship of the
+   publishers or authors of the Document to the Document's overall subject
+   (or to related matters) and contains nothing that could fall directly
+   within that overall subject. (For example, if the Document is in part a
+   textbook of mathematics, a Secondary Section may not explain any
+   mathematics.) The relationship could be a matter of historical
+   connection with the subject or with related matters, or of legal,
+   commercial, philosophical, ethical or political position regarding
+   them.
 
-The "Invariant Sections" are certain Secondary Sections whose titles are
-designated, as being those of Invariant Sections, in the notice that says
-that the Document is released under this License.
+   The "Invariant Sections" are certain Secondary Sections whose titles
+   are designated, as being those of Invariant Sections, in the notice
+   that says that the Document is released under this License.
 
-The "Cover Texts" are certain short passages of text that are listed, as
-Front-Cover Texts or Back-Cover Texts, in the notice that says that the
-Document is released under this License.
+   The "Cover Texts" are certain short passages of text that are listed,
+   as Front-Cover Texts or Back-Cover Texts, in the notice that says that
+   the Document is released under this License.
 
-A "Transparent" copy of the Document means a machine-readable copy,
-represented in a format whose specification is available to the general
-public, whose contents can be viewed and edited directly and
-straightforwardly with generic text editors or (for images composed of
-pixels) generic paint programs or (for drawings) some widely available
-drawing editor, and that is suitable for input to text formatters or for
-automatic translation to a variety of formats suitable for input to text
-formatters. A copy made in an otherwise Transparent file format whose markup
-has been designed to thwart or discourage subsequent modification by readers
-is not Transparent. A copy that is not "Transparent" is called "Opaque".
+   A "Transparent" copy of the Document means a machine-readable copy,
+   represented in a format whose specification is available to the general
+   public, whose contents can be viewed and edited directly and
+   straightforwardly with generic text editors or (for images composed of
+   pixels) generic paint programs or (for drawings) some widely available
+   drawing editor, and that is suitable for input to text formatters or
+   for automatic translation to a variety of formats suitable for input to
+   text formatters. A copy made in an otherwise Transparent file format
+   whose markup has been designed to thwart or discourage subsequent
+   modification by readers is not Transparent. A copy that is not
+   "Transparent" is called "Opaque".
 
-Examples of suitable formats for Transparent copies include plain ASCII
-without markup, Texinfo input format, LaTeX input format, SGML or XML using
-a publicly available DTD, and standard-conforming simple HTML designed for
-human modification. Opaque formats include PostScript, PDF, proprietary
-formats that can be read and edited only by proprietary word processors,
-SGML or XML for which the DTD and/or processing tools are not generally
-available, and the machine-generated HTML produced by some word processors
-for output purposes only.
+   Examples of suitable formats for Transparent copies include plain ASCII
+   without markup, Texinfo input format, LaTeX input format, SGML or XML
+   using a publicly available DTD, and standard-conforming simple HTML
+   designed for human modification. Opaque formats include PostScript,
+   PDF, proprietary formats that can be read and edited only by
+   proprietary word processors, SGML or XML for which the DTD and/or
+   processing tools are not generally available, and the machine-generated
+   HTML produced by some word processors for output purposes only.
 
-The "Title Page" means, for a printed book, the title page itself, plus such
-following pages as are needed to hold, legibly, the material this License
-requires to appear in the title page. For works in formats which do not have
-any title page as such, "Title Page" means the text near the most prominent
-appearance of the work's title, preceding the beginning of the body of the
-text.
-     _________________________________________________________________
+   The "Title Page" means, for a printed book, the title page itself, plus
+   such following pages as are needed to hold, legibly, the material this
+   License requires to appear in the title page. For works in formats
+   which do not have any title page as such, "Title Page" means the text
+   near the most prominent appearance of the work's title, preceding the
+   beginning of the body of the text.
+     __________________________________________________________________
 
 2. VERBATIM COPYING
 
-You may copy and distribute the Document in any medium, either commercially
-or noncommercially, provided that this License, the copyright notices, and
-the license notice saying this License applies to the Document are
-reproduced in all copies, and that you add no other conditions whatsoever to
-those of this License. You may not use technical measures to obstruct or
-control the reading or further copying of the copies you make or distribute.
-However, you may accept compensation in exchange for copies. If you
-distribute a large enough number of copies you must also follow the
-conditions in section 3.
+   You may copy and distribute the Document in any medium, either
+   commercially or noncommercially, provided that this License, the
+   copyright notices, and the license notice saying this License applies
+   to the Document are reproduced in all copies, and that you add no other
+   conditions whatsoever to those of this License. You may not use
+   technical measures to obstruct or control the reading or further
+   copying of the copies you make or distribute. However, you may accept
+   compensation in exchange for copies. If you distribute a large enough
+   number of copies you must also follow the conditions in section 3.
 
-You may also lend copies, under the same conditions stated above, and you
-may publicly display copies.
-     _________________________________________________________________
+   You may also lend copies, under the same conditions stated above, and
+   you may publicly display copies.
+     __________________________________________________________________
 
 3. COPYING IN QUANTITY
 
-If you publish printed copies of the Document numbering more than 100, and
-the Document's license notice requires Cover Texts, you must enclose the
-copies in covers that carry, clearly and legibly, all these Cover Texts:
-Front-Cover Texts on the front cover, and Back-Cover Texts on the back
-cover. Both covers must also clearly and legibly identify you as the
-publisher of these copies. The front cover must present the full title with
-all words of the title equally prominent and visible. You may add other
-material on the covers in addition. Copying with changes limited to the
-covers, as long as they preserve the title of the Document and satisfy these
-conditions, can be treated as verbatim copying in other respects.
+   If you publish printed copies of the Document numbering more than 100,
+   and the Document's license notice requires Cover Texts, you must
+   enclose the copies in covers that carry, clearly and legibly, all these
+   Cover Texts: Front-Cover Texts on the front cover, and Back-Cover Texts
+   on the back cover. Both covers must also clearly and legibly identify
+   you as the publisher of these copies. The front cover must present the
+   full title with all words of the title equally prominent and visible.
+   You may add other material on the covers in addition. Copying with
+   changes limited to the covers, as long as they preserve the title of
+   the Document and satisfy these conditions, can be treated as verbatim
+   copying in other respects.
 
-If the required texts for either cover are too voluminous to fit legibly,
-you should put the first ones listed (as many as fit reasonably) on the
-actual cover, and continue the rest onto adjacent pages.
+   If the required texts for either cover are too voluminous to fit
+   legibly, you should put the first ones listed (as many as fit
+   reasonably) on the actual cover, and continue the rest onto adjacent
+   pages.
 
-If you publish or distribute Opaque copies of the Document numbering more
-than 100, you must either include a machine-readable Transparent copy along
-with each Opaque copy, or state in or with each Opaque copy a
-publicly-accessible computer-network location containing a complete
-Transparent copy of the Document, free of added material, which the general
-network-using public has access to download anonymously at no charge using
-public-standard network protocols. If you use the latter option, you must
-take reasonably prudent steps, when you begin distribution of Opaque copies
-in quantity, to ensure that this Transparent copy will remain thus
-accessible at the stated location until at least one year after the last
-time you distribute an Opaque copy (directly or through your agents or
-retailers) of that edition to the public.
+   If you publish or distribute Opaque copies of the Document numbering
+   more than 100, you must either include a machine-readable Transparent
+   copy along with each Opaque copy, or state in or with each Opaque copy
+   a publicly-accessible computer-network location containing a complete
+   Transparent copy of the Document, free of added material, which the
+   general network-using public has access to download anonymously at no
+   charge using public-standard network protocols. If you use the latter
+   option, you must take reasonably prudent steps, when you begin
+   distribution of Opaque copies in quantity, to ensure that this
+   Transparent copy will remain thus accessible at the stated location
+   until at least one year after the last time you distribute an Opaque
+   copy (directly or through your agents or retailers) of that edition to
+   the public.
 
-It is requested, but not required, that you contact the authors of the
-Document well before redistributing any large number of copies, to give them
-a chance to provide you with an updated version of the Document.
-     _________________________________________________________________
+   It is requested, but not required, that you contact the authors of the
+   Document well before redistributing any large number of copies, to give
+   them a chance to provide you with an updated version of the Document.
+     __________________________________________________________________
 
 4. MODIFICATIONS
 
-You may copy and distribute a Modified Version of the Document under the
-conditions of sections 2 and 3 above, provided that you release the Modified
-Version under precisely this License, with the Modified Version filling the
-role of the Document, thus licensing distribution and modification of the
-Modified Version to whoever possesses a copy of it. In addition, you must do
-these things in the Modified Version:
+   You may copy and distribute a Modified Version of the Document under
+   the conditions of sections 2 and 3 above, provided that you release the
+   Modified Version under precisely this License, with the Modified
+   Version filling the role of the Document, thus licensing distribution
+   and modification of the Modified Version to whoever possesses a copy of
+   it. In addition, you must do these things in the Modified Version:
     A. Use in the Title Page (and on the covers, if any) a title distinct
        from that of the Document, and from those of previous versions
        (which should, if there were any, be listed in the History section
        of the Document). You may use the same title as a previous version
        if the original publisher of that version gives permission.
-    B. List on the Title Page, as authors, one or more persons or
-       entities responsible for authorship of the modifications in the
-       Modified Version, together with at least five of the principal
-       authors of the Document (all of its principal authors, if it has
-       less than five).
+    B. List on the Title Page, as authors, one or more persons or entities
+       responsible for authorship of the modifications in the Modified
+       Version, together with at least five of the principal authors of
+       the Document (all of its principal authors, if it has less than
+       five).
     C. State on the Title page the name of the publisher of the Modified
        Version, as the publisher.
     D. Preserve all the copyright notices of the Document.
-    E. Add an appropriate copyright notice for your modifications
-       adjacent to the other copyright notices.
+    E. Add an appropriate copyright notice for your modifications adjacent
+       to the other copyright notices.
     F. Include, immediately after the copyright notices, a license notice
        giving the public permission to use the Modified Version under the
        terms of this License, in the form shown in the Addendum below.
@@ -1928,8 +1523,8 @@ these things in the Modified Version:
        the network locations given in the Document for previous versions
        it was based on. These may be placed in the "History" section. You
        may omit a network location for a work that was published at least
-       four years before the Document itself, or if the original
-       publisher of the version it refers to gives permission.
+       four years before the Document itself, or if the original publisher
+       of the version it refers to gives permission.
     K. In any section entitled "Acknowledgements" or "Dedications",
        preserve the section's title, and preserve in the section all the
        substance and tone of each of the contributor acknowledgements
@@ -1957,118 +1552,126 @@ these things in the Modified Version:
 
    You may add a passage of up to five words as a Front-Cover Text, and a
    passage of up to 25 words as a Back-Cover Text, to the end of the list
-   of Cover Texts in the Modified Version. Only one passage of
-   Front-Cover Text and one of Back-Cover Text may be added by (or
-   through arrangements made by) any one entity. If the Document already
-   includes a cover text for the same cover, previously added by you or
-   by arrangement made by the same entity you are acting on behalf of,
-   you may not add another; but you may replace the old one, on explicit
+   of Cover Texts in the Modified Version. Only one passage of Front-Cover
+   Text and one of Back-Cover Text may be added by (or through
+   arrangements made by) any one entity. If the Document already includes
+   a cover text for the same cover, previously added by you or by
+   arrangement made by the same entity you are acting on behalf of, you
+   may not add another; but you may replace the old one, on explicit
    permission from the previous publisher that added the old one.
 
    The author(s) and publisher(s) of the Document do not by this License
    give permission to use their names for publicity for or to assert or
    imply endorsement of any Modified Version.
-     _________________________________________________________________
+     __________________________________________________________________
 
 5. COMBINING DOCUMENTS
 
-You may combine the Document with other documents released under this
-License, under the terms defined in section 4 above for modified versions,
-provided that you include in the combination all of the Invariant Sections
-of all of the original documents, unmodified, and list them all as Invariant
-Sections of your combined work in its license notice.
+   You may combine the Document with other documents released under this
+   License, under the terms defined in section 4 above for modified
+   versions, provided that you include in the combination all of the
+   Invariant Sections of all of the original documents, unmodified, and
+   list them all as Invariant Sections of your combined work in its
+   license notice.
 
-The combined work need only contain one copy of this License, and multiple
-identical Invariant Sections may be replaced with a single copy. If there
-are multiple Invariant Sections with the same name but different contents,
-make the title of each such section unique by adding at the end of it, in
-parentheses, the name of the original author or publisher of that section if
-known, or else a unique number. Make the same adjustment to the section
-titles in the list of Invariant Sections in the license notice of the
-combined work.
+   The combined work need only contain one copy of this License, and
+   multiple identical Invariant Sections may be replaced with a single
+   copy. If there are multiple Invariant Sections with the same name but
+   different contents, make the title of each such section unique by
+   adding at the end of it, in parentheses, the name of the original
+   author or publisher of that section if known, or else a unique number.
+   Make the same adjustment to the section titles in the list of Invariant
+   Sections in the license notice of the combined work.
 
-In the combination, you must combine any sections entitled "History" in the
-various original documents, forming one section entitled "History"; likewise
-combine any sections entitled "Acknowledgements", and any sections entitled
-"Dedications". You must delete all sections entitled "Endorsements."
-     _________________________________________________________________
+   In the combination, you must combine any sections entitled "History" in
+   the various original documents, forming one section entitled "History";
+   likewise combine any sections entitled "Acknowledgements", and any
+   sections entitled "Dedications". You must delete all sections entitled
+   "Endorsements."
+     __________________________________________________________________
 
 6. COLLECTIONS OF DOCUMENTS
 
-You may make a collection consisting of the Document and other documents
-released under this License, and replace the individual copies of this
-License in the various documents with a single copy that is included in the
-collection, provided that you follow the rules of this License for verbatim
-copying of each of the documents in all other respects.
+   You may make a collection consisting of the Document and other
+   documents released under this License, and replace the individual
+   copies of this License in the various documents with a single copy that
+   is included in the collection, provided that you follow the rules of
+   this License for verbatim copying of each of the documents in all other
+   respects.
 
-You may extract a single document from such a collection, and distribute it
-individually under this License, provided you insert a copy of this License
-into the extracted document, and follow this License in all other respects
-regarding verbatim copying of that document.
-     _________________________________________________________________
+   You may extract a single document from such a collection, and
+   distribute it individually under this License, provided you insert a
+   copy of this License into the extracted document, and follow this
+   License in all other respects regarding verbatim copying of that
+   document.
+     __________________________________________________________________
 
 7. AGGREGATION WITH INDEPENDENT WORKS
 
-A compilation of the Document or its derivatives with other separate and
-independent documents or works, in or on a volume of a storage or
-distribution medium, does not as a whole count as a Modified Version of the
-Document, provided no compilation copyright is claimed for the compilation.
-Such a compilation is called an "aggregate", and this License does not apply
-to the other self-contained works thus compiled with the Document, on
-account of their being thus compiled, if they are not themselves derivative
-works of the Document.
+   A compilation of the Document or its derivatives with other separate
+   and independent documents or works, in or on a volume of a storage or
+   distribution medium, does not as a whole count as a Modified Version of
+   the Document, provided no compilation copyright is claimed for the
+   compilation. Such a compilation is called an "aggregate", and this
+   License does not apply to the other self-contained works thus compiled
+   with the Document, on account of their being thus compiled, if they are
+   not themselves derivative works of the Document.
 
-If the Cover Text requirement of section 3 is applicable to these copies of
-the Document, then if the Document is less than one quarter of the entire
-aggregate, the Document's Cover Texts may be placed on covers that surround
-only the Document within the aggregate. Otherwise they must appear on covers
-around the whole aggregate.
-     _________________________________________________________________
+   If the Cover Text requirement of section 3 is applicable to these
+   copies of the Document, then if the Document is less than one quarter
+   of the entire aggregate, the Document's Cover Texts may be placed on
+   covers that surround only the Document within the aggregate. Otherwise
+   they must appear on covers around the whole aggregate.
+     __________________________________________________________________
 
 8. TRANSLATION
 
-Translation is considered a kind of modification, so you may distribute
-translations of the Document under the terms of section 4. Replacing
-Invariant Sections with translations requires special permission from their
-copyright holders, but you may include translations of some or all Invariant
-Sections in addition to the original versions of these Invariant Sections.
-You may include a translation of this License provided that you also include
-the original English version of this License. In case of a disagreement
-between the translation and the original English version of this License,
-the original English version will prevail.
-     _________________________________________________________________
+   Translation is considered a kind of modification, so you may distribute
+   translations of the Document under the terms of section 4. Replacing
+   Invariant Sections with translations requires special permission from
+   their copyright holders, but you may include translations of some or
+   all Invariant Sections in addition to the original versions of these
+   Invariant Sections. You may include a translation of this License
+   provided that you also include the original English version of this
+   License. In case of a disagreement between the translation and the
+   original English version of this License, the original English version
+   will prevail.
+     __________________________________________________________________
 
 9. TERMINATION
 
-You may not copy, modify, sublicense, or distribute the Document except as
-expressly provided for under this License. Any other attempt to copy,
-modify, sublicense or distribute the Document is void, and will
-automatically terminate your rights under this License. However, parties who
-have received copies, or rights, from you under this License will not have
-their licenses terminated so long as such parties remain in full compliance.
-     _________________________________________________________________
+   You may not copy, modify, sublicense, or distribute the Document except
+   as expressly provided for under this License. Any other attempt to
+   copy, modify, sublicense or distribute the Document is void, and will
+   automatically terminate your rights under this License. However,
+   parties who have received copies, or rights, from you under this
+   License will not have their licenses terminated so long as such parties
+   remain in full compliance.
+     __________________________________________________________________
 
 10. FUTURE REVISIONS OF THIS LICENSE
 
-The Free Software Foundation may publish new, revised versions of the GNU
-Free Documentation License from time to time. Such new versions will be
-similar in spirit to the present version, but may differ in detail to
-address new problems or concerns. See [96]http://www.gnu.org/copyleft/.
+   The Free Software Foundation may publish new, revised versions of the
+   GNU Free Documentation License from time to time. Such new versions
+   will be similar in spirit to the present version, but may differ in
+   detail to address new problems or concerns. See
+   [98]http://www.gnu.org/copyleft/.
 
-Each version of the License is given a distinguishing version number. If the
-Document specifies that a particular numbered version of this License "or
-any later version" applies to it, you have the option of following the terms
-and conditions either of that specified version or of any later version that
-has been published (not as a draft) by the Free Software Foundation. If the
-Document does not specify a version number of this License, you may choose
-any version ever published (not as a draft) by the Free Software Foundation.
-     _________________________________________________________________
+   Each version of the License is given a distinguishing version number.
+   If the Document specifies that a particular numbered version of this
+   License "or any later version" applies to it, you have the option of
+   following the terms and conditions either of that specified version or
+   of any later version that has been published (not as a draft) by the
+   Free Software Foundation. If the Document does not specify a version
+   number of this License, you may choose any version ever published (not
+   as a draft) by the Free Software Foundation.
+     __________________________________________________________________
 
 How to use this License for your documents
 
-To use this License in a document you have written, include a copy of the
-License in the document and put the following copyright and license notices
-just after the title page:
+   To use this License in a document you have written, include a copy of
+   the License in the document and put the following copyright and license
+   notices just after the title page:
 
      Copyright (c) YEAR YOUR NAME. Permission is granted to copy,
      distribute and/or modify this document under the terms of the GNU
@@ -2081,8 +1684,8 @@ just after the title page:
 
    If you have no Invariant Sections, write "with no Invariant Sections"
    instead of saying which ones are invariant. If you have no Front-Cover
-   Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts
-   being LIST"; likewise for Back-Cover Texts.
+   Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts being
+   LIST"; likewise for Back-Cover Texts.
 
    If your document contains nontrivial examples of program code, we
    recommend releasing these examples in parallel under your choice of
@@ -2091,99 +1694,101 @@ just after the title page:
 
 References
 
-   1. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#overview
-   2. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#programming
-   3. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-overview
-   4. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-tree-layout
-   5. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-server-architecture
-   6. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-server-architecture-privates
-   7. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-server-architecture-engines
-   8. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-server-architecture-input
-   9. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-obtaining-source
-  10. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-build-native
-  11. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-compiling
-  12. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-compiling-install
-  13. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-tree-update
-  14. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-build-cross
-  15. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-cross-obtaining-compiler-source
-  16. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
-  17. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-cross-building-binutils-and-gcc
-  18. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-cross-tool-links
-  19. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-cross-build
-  20. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-distribution
-  21. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#documentation
-  22. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#docs-overview
-  23. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#docs-obtaining-source
-  24. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#docs-obtaining-source-release
-  25. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#docs-obtaining-source-cvs
-  26. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#docs-docbook
-  27. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#docs-build
-  28. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#docs-distribution
-  29. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#website
-  30. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#biblio
-  31. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#glossary
-  32. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl
-  33. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-preamble
-  34. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-applicability-and-definitions
-  35. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-verbation-copying
-  36. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-copying-in-quantity
-  37. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-modifications
-  38. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-combining-documents
-  39. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-collections-of-documents
-  40. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-aggregation-with-independent-works
-  41. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-translation
-  42. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-termination
-  43. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-future-revisions-of-this-license
-  44. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gfdl-using-for-your-documents
-  45. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#programming
-  46. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#documentation
-  47. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#website
-  48. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-obtaining-source
-  49. http://www.opengroup.org/
-  50. http://www.x.org/
-  51. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-cfb-layer
-  52. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-shadow-layer
-  53. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-dix-layer
-  54. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-mi-layer
-  55. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-os-layer
-  56. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#porting-layer-definition
-  57. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-gc
-  58. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-pixmap
-  59. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-screen
-  60. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-mi-layer
-  61. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-fb-layer
-  62. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-shadow-layer
-  63. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-privates
-  64. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-dix-layer
-  65. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-ddx-layer
-  66. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-fb-layer
-  67. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-shadow-layer
-  68. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-offscreen-framebuffer
-  69. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-primary-framebuffer
-  70. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-primary-framebuffer
-  71. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-mi-layer
-  72. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-os-layer
-  73. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-dix-layer
-  74. http://freedesktop.org/Software/xorg
-  75. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-cvs
-  76. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-build-native
-  77. http://cygwin.com/mirrors.html
-  78. http://cygwin.com/mirrors.html
-  79. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-build-native
-  80. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#prog-compiling-lndir
-  81. http://docbook.org/
-  82. http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
-  83. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-pixmap
-  84. http://www.cvshome.org/
-  85. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-bitmap-win32
-  86. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-primary-framebuffer
-  87. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-bitmap-x
-  88. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-bitmap-win32
-  89. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-colormap
-  90. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-gc
-  91. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-pixmap
-  92. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-screen
-  93. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-fb-layer
-  94. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-ddx-layer
-  95. file://localhost/mnt/d/ago/cygwin-x-doc/build/cg/dump.html#gloss-xdm
-  96. http://www.gnu.org/copyleft/
+   1. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#overview
+   2. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#programming
+   3. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-overview
+   4. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-tree-layout
+   5. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-server-architecture
+   6. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-server-architecture-privates
+   7. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-server-architecture-engines
+   8. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-server-architecture-input
+   9. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-obtaining-source
+  10. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-build-native
+  11. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-compiling
+  12. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-compiling-executing
+  13. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-compiling-install
+  14. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-tree-update
+  15. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-build-cross
+  16. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-obtaining-compiler-source
+  17. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
+  18. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-building-binutils-and-gcc
+  19. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-tool-links
+  20. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-build
+  21. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-distribution
+  22. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#documentation
+  23. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-overview
+  24. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-obtaining-source
+  25. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-obtaining-source-release
+  26. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-obtaining-source-cvs
+  27. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-docbook
+  28. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-docbook-required-packages
+  29. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-build
+  30. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-distribution
+  31. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#website
+  32. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#biblio
+  33. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#glossary
+  34. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl
+  35. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-preamble
+  36. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-applicability-and-definitions
+  37. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-verbation-copying
+  38. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-copying-in-quantity
+  39. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-modifications
+  40. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-combining-documents
+  41. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-collections-of-documents
+  42. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-aggregation-with-independent-works
+  43. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-translation
+  44. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-termination
+  45. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-future-revisions-of-this-license
+  46. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-using-for-your-documents
+  47. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#programming
+  48. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#documentation
+  49. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#website
+  50. http://www.x.org/wiki/DeveloperStart
+  51. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-obtaining-source
+  52. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-cfb-layer
+  53. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-shadow-layer
+  54. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-dix-layer
+  55. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-mi-layer
+  56. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-os-layer
+  57. http://www.opengroup.org/
+  58. http://www.x.org/
+  59. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#porting-layer-definition
+  60. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-gc
+  61. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-pixmap
+  62. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-screen
+  63. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-mi-layer
+  64. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-fb-layer
+  65. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-shadow-layer
+  66. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-privates
+  67. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-dix-layer
+  68. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-ddx-layer
+  69. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-fb-layer
+  70. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-shadow-layer
+  71. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-offscreen-framebuffer
+  72. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-primary-framebuffer
+  73. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-primary-framebuffer
+  74. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-mi-layer
+  75. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-os-layer
+  76. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-dix-layer
+  77. http://xorg.freedesktop.org/wiki/
+  78. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-git
+  79. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-build-native
+  80. http://cygwin.com/mirrors.html
+  81. http://cygwin.com/mirrors.html
+  82. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-build-native
+  83. http://docbook.org/
+  84. http://web.archive.org/web/20050320030737/http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+  85. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-pixmap
+  86. http://git.or.cz/
+  87. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-bitmap-win32
+  88. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-primary-framebuffer
+  89. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-bitmap-x
+  90. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-bitmap-win32
+  91. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-colormap
+  92. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-gc
+  93. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-pixmap
+  94. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-screen
+  95. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-fb-layer
+  96. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-ddx-layer
+  97. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-xdm
+  98. http://www.gnu.org/copyleft/

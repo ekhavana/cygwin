@@ -1,12 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
 >Source Code Tree Layout</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
 REL="HOME"
 TITLE="Cygwin/X Contributor's Guide"
 HREF="cygwin-x-cg.html"/><LINK
@@ -70,259 +69,16 @@ CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
-NAME="prog-tree-layout"/>Source Code Tree Layout</H1
+NAME="prog-tree-layout"
+>Source Code Tree Layout</A
+></H1
 ><P
 ><B
 >Descriptions of Important <TT
 CLASS="filename"
->xc</TT
+>xserver</TT
 > Directories and Subdirectories</B
 ></P
-><UL
-><LI
-><P
-><TT
-CLASS="filename"
->config</TT
-></P
-><UL
-><LI
-><P
-><TT
-CLASS="filename"
->cf</TT
-> contains generic and
-platform specific imake configuration settings, build rules, and other
-macros.  Cygwin/X specific settings, build rules, and shared library
-template are contained in <TT
-CLASS="filename"
->cygwin.cf</TT
->,
-<TT
-CLASS="filename"
->cygwin.rules</TT
->, and
-<TT
-CLASS="filename"
->cygwin.tmpl</TT
->, respectively.  Settings in
-<TT
-CLASS="filename"
->cygwin.cf</TT
-> can be overridden for a single build
-host by creating a file called <TT
-CLASS="filename"
->host.def</TT
-> that
-defines any host specific settings.
-<TT
-CLASS="filename"
->xorgsite.def</TT
-> may be used as a template for
-<TT
-CLASS="filename"
->host.def</TT
->; simply copy
-<TT
-CLASS="filename"
->xorgsite.def</TT
-> to <TT
-CLASS="filename"
->host.def</TT
->,
-then edit and/or uncomment any settings that you wish to
-override.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->imake</TT
-> contains source
-code for the <B
-CLASS="command"
->imake</B
-> utility that is used to combine
-the configuration files in <TT
-CLASS="filename"
->cf</TT
->
-with the <TT
-CLASS="filename"
->Imakefile</TT
-> in a given directory to
-produce a <TT
-CLASS="filename"
->Makefile</TT
-> that will work correctly for a
-given platform; in our case, that platform is Cygwin.  Any build
-problems with <B
-CLASS="command"
->imake</B
-> will stop compilation of the
-X Window System CVS tree, as there will not be any
-<TT
-CLASS="filename"
->Makefile</TT
->'s to operate on.  This directory will
-therefore be of interest only when <B
-CLASS="command"
->imake</B
-> fails to
-build.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->makedepend</TT
-> contains
-source code for the <B
-CLASS="command"
->makedepend</B
-> utility that scans
-the included files in the <TT
-CLASS="filename"
->.c</TT
-> and
-<TT
-CLASS="filename"
->.h</TT
-> used by a project to determine which files the
-build targets depend upon.  This directory will only be of interest
-when <B
-CLASS="command"
->makedepend</B
-> fails to build.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->util</TT
-> contains a few
-general utilities, such as <B
-CLASS="command"
->lndir</B
->.</P
-></LI
-></UL
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->doc</TT
-></P
-><UL
-><LI
-><P
-><TT
-CLASS="filename"
->hardcopy</TT
-> contains
-precompiled PostScript documentation for various components of the X
-Window System.  Cygwin/X-specific documentation is not contained in
-this directory.  This directory is of little interest to Cygwin/X
-programmers.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->specs</TT
-> contains the
-sources to build the documents in <TT
-CLASS="filename"
->hardcopy</TT
->.  This directory is of little
-interest to Cygwin/X programmers.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->util</TT
-> contains a few awk
-scripts for use in building documentation.  This directory is of little
-interest to Cygwin/X programmers.</P
-></LI
-></UL
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->fonts</TT
-> contains font
-definition files used to compile fonts.  This directory is of little
-interest to Cygwin/X programmers.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->include</TT
-> contains various
-X Window System headers that are not generally specific to any one
-client or library (i.e. <TT
-CLASS="filename"
->X.h</TT
->,
-<TT
-CLASS="filename"
->Xproto.h</TT
->, and
-<TT
-CLASS="filename"
->keysymdef.h</TT
->).</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->lib</TT
-> contains both X
-client and X Server libraries.  Cygwin/X does not generally call any
-functions in these libraries directly; however, we do have to link to
-several of these libraries to get our X Server to build.  These
-libraries are maintained by various developers from the X Window System
-project and there are occasional synchronizations with <A
-HREF="http://www.opengroup.org/"
-TARGET="_top"
->The Open Group</A
->'s <A
-HREF="http://www.x.org/"
-TARGET="_top"
->X.org</A
->.  Cygwin/X programmers
-occasionally need to fix Cygwin-related build errors that occur in
-these libraries.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->nls</TT
-> contains locale
-definition files.  This directory is of little interest to Cygwin/X
-programmers.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->programs</TT
-></P
-><UL
-><LI
-><P
-><TT
-CLASS="filename"
->Xserver</TT
-> contains the
-heart of Cygwin/X, namely, the Cygwin/X X Server.</P
 ><UL
 ><LI
 ><P
@@ -364,14 +120,14 @@ routines.  <TT
 CLASS="filename"
 >main.c</TT
 > contains the
-<TT
+<CODE
 CLASS="function"
->main</TT
+>main</CODE
 > entry-point function for the Cygwin/X X
 Server.  The X Server startup procedure can be followed by examining
-<TT
+<CODE
 CLASS="function"
->main</TT
+>main</CODE
 >.</P
 ></LI
 ><LI
@@ -458,16 +214,16 @@ CLASS="glossterm"
 > drawing
 routines.  These drawing routines are used by the Cygwin/X Native GDI
 X Server engine.  In turn, the machine independent routines depend in
-<TT
+<CODE
 CLASS="function"
->winGetSpans</TT
->, <TT
+>winGetSpans</CODE
+>, <CODE
 CLASS="function"
->winFillSpans</TT
+>winFillSpans</CODE
 >,
-and <TT
+and <CODE
 CLASS="function"
->winSetSpans</TT
+>winSetSpans</CODE
 >, which are implemented in the
 Native GDI engine.</P
 ></LI
@@ -541,13 +297,47 @@ Server functions.  However, the functions in the <TT
 CLASS="filename"
 >os</TT
 > have been written in such a way that
-they are actually compatible with most <SPAN
+they are actually compatible with most <ACRONYM
 CLASS="acronym"
->UNIX</SPAN
+>UNIX</ACRONYM
 >-style operating systems,
 include Cygwin.</P
 ></LI
 ></UL
+><P
+><B
+>Other components of interest</B
+></P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>doc</TT
+></P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>hardcopy</TT
+> contains
+precompiled PostScript documentation for various components of the X
+Window System.  Cygwin/X-specific documentation is not contained in
+this directory.  This directory is of little interest to Cygwin/X
+programmers.</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>specs</TT
+> contains the
+sources to build the documents in <TT
+CLASS="filename"
+>hardcopy</TT
+>.  This directory is of little
+interest to Cygwin/X programmers.</P
 ></LI
 ></UL
 ></LI
@@ -555,11 +345,52 @@ include Cygwin.</P
 ><P
 ><TT
 CLASS="filename"
->util</TT
-> contains a few
-utilities for programmers, such as a memory leak counter.  Cygwin/X
-has never used these utilities, thus this directory is of little
+>fonts</TT
+> contains font
+definition files used to compile fonts.  This directory is of little
 interest to Cygwin/X programmers.</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>include</TT
+> contains various
+X Window System headers that are not generally specific to any one
+client or library (i.e. <TT
+CLASS="filename"
+>X.h</TT
+>,
+<TT
+CLASS="filename"
+>Xproto.h</TT
+>, and
+<TT
+CLASS="filename"
+>keysymdef.h</TT
+>).</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>lib</TT
+> contains both X
+client and X Server libraries.  Cygwin/X does not generally call any
+functions in these libraries directly; however, we do have to link to
+several of these libraries to get our X Server to build.  These
+libraries are maintained by various developers from the X Window System
+project and there are occasional synchronizations with <A
+HREF="http://www.opengroup.org/"
+TARGET="_top"
+>The Open Group</A
+>'s <A
+HREF="http://www.x.org/"
+TARGET="_top"
+>X.org</A
+>.  Cygwin/X programmers
+occasionally need to fix Cygwin-related build errors that occur in
+these libraries.</P
 ></LI
 ></UL
 ></DIV

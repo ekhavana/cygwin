@@ -1,12 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
 >Packaging a Cygwin/X Distribution</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
 REL="HOME"
 TITLE="Cygwin/X Contributor's Guide"
 HREF="cygwin-x-cg.html"/><LINK
@@ -69,9 +68,11 @@ CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
-NAME="prog-distribution"/>Packaging a Cygwin/X Distribution</H1
+NAME="prog-distribution"
+>Packaging a Cygwin/X Distribution</A
+></H1
 ><P
->Cygwin/X uses a custom build and packaging script that
+>Cygwin/X uses a cygport build and packaging script that
 automates all of the tasks required to build, create binary packages,
 and source code packages.</P
 ><DIV
@@ -86,24 +87,66 @@ from the source packages available from Cygwin's
 <B
 CLASS="command"
 >setup.exe</B
->.  You can use these instructions to build
-a distribution from CVS instead by just replacing references to
-<TT
-CLASS="filename"
->/usr/src/xc</TT
-> with the path to the
-<TT
-CLASS="filename"
->xc/</TT
-> directory that you checked out of CVS.</P
+>.
+</P
+><P
+>&#13;You can a similar technique to build a distribution from X.Org release
+tarballs instead.
+</P
 ></BLOCKQUOTE
 ></DIV
 ><OL
 TYPE="1"
 ><LI
 ><P
->Wait for these instructions to be updated, sometime after
-2004-04-03.</P
+>Unpack <TT
+CLASS="filename"
+>xorg-server-x.x.x-x-src.tar.bz2</TT
+> (if you use setup to install this source package, it will be automatically unpacked under <TT
+CLASS="filename"
+>/usr/src</TT
+>)</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost /usr/src
+$ tar -jxf xorg-server-x.x.x-x-src.tar.bz2
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Invoke cygport on the .cygport file contained in the source package unpacked above.  This will create the source and binary packages <TT
+CLASS="filename"
+>xorg-server-1.5.3-X-src.tar.bz2</TT
+> and <TT
+CLASS="filename"
+>xorg-server-1.5.3-X.tar.bz2</TT
+>
+
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost /usr/src
+$ cygport xorg-server-x.x.x-x.cygport all
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
 ></LI
 ></OL
 ></DIV

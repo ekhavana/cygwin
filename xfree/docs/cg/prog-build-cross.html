@@ -1,12 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
 >Cross Compiling</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
 REL="HOME"
 TITLE="Cygwin/X Contributor's Guide"
 HREF="cygwin-x-cg.html"/><LINK
@@ -69,7 +68,9 @@ CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
-NAME="prog-build-cross"/>Cross Compiling</H1
+NAME="prog-build-cross"
+>Cross Compiling</A
+></H1
 ><P
 >Cross compiling is the act of the building source code on one
 system, the build host, into executables or libraries to be run on a
@@ -107,10 +108,12 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-obtaining-compiler-source"/>Obtaining binutils and gcc Source</H2
+NAME="prog-cross-obtaining-compiler-source"
+>Obtaining binutils and gcc Source</A
+></H2
 ><P
 >binutils and gcc source code releases that are known to
-compile on Cygwin and distributed by the Cygwin project.
+compile on Cygwin are distributed by the Cygwin project.
 Therefore, it is highly recommended that you obtain the binutils and
 gcc sources from the <A
 HREF="http://cygwin.com/mirrors.html"
@@ -234,7 +237,9 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-obtaining-cygwin-headers-and-libs"/>Obtaining Cygwin Headers and Libs</H2
+NAME="prog-cross-obtaining-cygwin-headers-and-libs"
+>Obtaining Cygwin Headers and Libs</A
+></H2
 ><P
 >The simplest method of building a cross compiler for Cygwin
 requires that you have the Cygwin headers and libraries available at
@@ -458,7 +463,9 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-building-binutils-and-gcc"/>Building binutils and gcc</H2
+NAME="prog-cross-building-binutils-and-gcc"
+>Building binutils and gcc</A
+></H2
 ><OL
 TYPE="1"
 ><LI
@@ -636,9 +643,9 @@ CLASS="screen"
 ></LI
 ><LI
 ><P
->Modify the <TT
+>Modify the <CODE
 CLASS="envar"
->PATH</TT
+>PATH</CODE
 > environment variable to include
 the directories that the binutils executables were installed in:</P
 ><TABLE
@@ -777,7 +784,9 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-tool-links"/>Creating Links for binutils and gcc</H2
+NAME="prog-cross-tool-links"
+>Creating Links for binutils and gcc</A
+></H2
 ><P
 >Links to the executables in
 <TT
@@ -870,7 +879,9 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="prog-cross-build"/>Building Cygwin/X</H2
+NAME="prog-cross-build"
+>Building Cygwin/X</A
+></H2
 ><P
 >Building the source code when cross compiling X Window System is nearly
 identical to the process described below in
@@ -887,172 +898,61 @@ CLASS="command"
 > shell on your cross
 compiling host, rather than on your native Cygwin host; other
 divergences follow.</P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+XXX: THIS IS UNTESTED
+</P
+></BLOCKQUOTE
+></DIV
 ><OL
 TYPE="1"
 ><LI
 ><P
-><B
-CLASS="command"
->lndir</B
-> should generally already be installed
-if your build host already has the X Window System installed.  If you
-do not have <B
-CLASS="command"
->lndir</B
->, you can build it for your build
-host by following the instructions in <A
-HREF="prog-build-native.html#prog-compiling-lndir"
->the Section called <I
->Building and Installing <B
-CLASS="command"
->lndir</B
-></I
-></A
->.</P
-></LI
-><LI
-><P
->When building the entire tree, you must pass
-<TT
+>When configuring, you must pass
+<CODE
 CLASS="parameter"
-><I
->CROSSCOMPILEDIR</I
-></TT
+>--target=i686-pc-cygwin</CODE
 > to <B
 CLASS="command"
->make</B
+>./configure</B
 > to
 cause the build system to build for the target, Cygwin,
 platform:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;[harold@CrossHost std]$ make World 
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" &gt; World.log 2&gt;&amp;1
-
-[harold@CrossHost std]$
-</PRE
-></TD
-></TR
-></TABLE
 ></LI
 ><LI
 ><P
->When rebuilding individual directories of the tree after doing a
-build of the entire tree, you can simply issue the
-<B
-CLASS="command"
->make</B
-> command:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;[harold@CrossHost std]$ cd programs/Xserver
-
-[harold@CrossHost Xserver]$ make XWin.exe &gt; XWin.log 2&gt;&amp;1
-
-[harold@CrossHost Xserver]$
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->When building a debug version of the entire tree, use
-<B
-CLASS="command"
->makeg</B
->, which should generally already be installed,
-and pass <TT
+>When configuring, you must pass
+<CODE
 CLASS="parameter"
-><I
->CROSSCOMPILEDIR</I
-></TT
-> to
-<B
-CLASS="command"
->makeg</B
-> to cause the build system to build for the
-target, Cygwin, platform:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;[harold@CrossHost debug]$ makeg World 
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" &gt; World.log 2&gt;&amp;1
-
-[harold@CrossHost debug]$
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->When rebuilding individual directories of the tree after doing a
-build of the entire tree, you can simply issue the
-<B
-CLASS="command"
->makeg</B
-> command:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;[harold@CrossHost std]$ cd programs/Xserver
-
-[harold@CrossHost Xserver]$ makeg XWin.exe
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" &gt; XWin.log 2&gt;&amp;1
-
-[harold@CrossHost Xserver]$
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->When installing a standard build of the entire tree, you must
-pass <TT
-CLASS="parameter"
-><I
->DESTDIR</I
-></TT
-> and
-<TT
-CLASS="parameter"
-><I
->CROSSCOMPILEDIR</I
-></TT
+>--prefix=/stagingdir</CODE
 > to <B
 CLASS="command"
->make</B
+>./configure</B
+> to
+cause the build system to be configured to install the target platform build into
+<TT
+CLASS="filename"
+>/stagingdir</TT
+>.</P
+><P
+>OR, when installing a build, you must
+pass <CODE
+CLASS="parameter"
+>DESTDIR</CODE
+> to <B
+CLASS="command"
+>make install</B
 > to
 install the target platform build into <TT
 CLASS="filename"
 >/stagingdir</TT
-> and to cause
-the build system to build a few remaining programs for the target,
-Cygwin, platform:</P
+>.</P
 ><DIV
 CLASS="tip"
 ><BLOCKQUOTE
@@ -1062,101 +962,17 @@ CLASS="tip"
 >Tip: </B
 >Never run <B
 CLASS="command"
->make install install.man</B
+>make install</B
 > on your
-host platform without the <TT
+host platform without the <CODE
 CLASS="parameter"
-><I
->DESTDIR</I
-></TT
+>DESTDIR</CODE
 > parameter, as
 that will cause the Cygwin build of X Window System to be installed over top
 of your local X Window System installation, which would completely
 destroy your host system's X Window System installation.</P
 ></BLOCKQUOTE
 ></DIV
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;[harold@CrossHost std]$ make install install.man 
-DESTDIR=/stagingdir 
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" &gt; install.log 2&gt;&amp;1
-
-[harold@CrossHost std]$
-</PRE
-></TD
-></TR
-></TABLE
-></LI
-><LI
-><P
->When installing a debug build of the entire tree, you must pass
-<TT
-CLASS="parameter"
-><I
->DESTDIR</I
-></TT
-> and
-<TT
-CLASS="parameter"
-><I
->CROSSCOMPILEDIR</I
-></TT
-> to <B
-CLASS="command"
->makeg</B
-> to
-install the target platform build into <TT
-CLASS="filename"
->/stagingdir</TT
-> and to cause
-the build system to build debug versions of a few remaining programs
-for the target, Cygwin, platform:</P
-><DIV
-CLASS="tip"
-><BLOCKQUOTE
-CLASS="tip"
-><P
-><B
->Tip: </B
->Never run <B
-CLASS="command"
->makeg install install.man</B
-> on your
-host platform without the <TT
-CLASS="parameter"
-><I
->DESTDIR</I
-></TT
-> parameter, as
-that will cause the Cygwin debug build of X Window System to be installed
-over top of your local X Window System installation, which would
-completely destroy your host system's X Window System
-installation.</P
-></BLOCKQUOTE
-></DIV
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;[harold@CrossHost debug]$ makeg install install.man 
-DESTDIR=/stagingdir 
-CROSSCOMPILEDIR="/home/my_login/cygwin/i686-pc-cygwin/bin" &gt; install.log 2&gt;&amp;1
-
-[harold@CrossHost debug]$
-</PRE
-></TD
-></TR
-></TABLE
 ></LI
 ></OL
 ></DIV

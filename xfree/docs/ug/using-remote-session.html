@@ -1,12 +1,11 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
 >Remote Sessions via XDMCP</TITLE
 ><META
 NAME="GENERATOR"
-CONTENT="Modular DocBook HTML Stylesheet Version 1.76b+
-"/><LINK
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
 REL="HOME"
 TITLE="Cygwin/X User's Guide"
 HREF="cygwin-x-ug.html"/><LINK
@@ -69,7 +68,9 @@ CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
-NAME="using-remote-session"/>Remote Sessions via XDMCP</H1
+NAME="using-remote-session"
+>Remote Sessions via XDMCP</A
+></H1
 ><P
 >Cygwin/X can be used login to one or several remote sessions
 using XDMCP (X Display Manager Control Protocol).</P
@@ -77,33 +78,27 @@ using XDMCP (X Display Manager Control Protocol).</P
 >Start Cygwin/X with a command similar to the following to login
 to a single remote session using XDMCP:</P
 ><P
->&#13;<TT
+>&#13;<KBD
 CLASS="userinput"
-><B
 >XWin.exe -query
 <TT
 CLASS="replaceable"
 ><I
 >remote_hostname_or_ip_address</I
 ></TT
-></B
-></TT
+></KBD
 >
 </P
 ><P
 >You may login to several remote sesstions with a single or
 multiple hosts using XDMCP.  Each session will need a seperate display
-number, specified by the <TT
+number, specified by the <CODE
 CLASS="parameter"
-><I
->:display_number</I
-></TT
+>:display_number</CODE
 >
-parameter, such as <TT
+parameter, such as <CODE
 CLASS="parameter"
-><I
->:0</I
-></TT
+>:0</CODE
 >.  A display number is not
 the same as a screen number, as a single display can have multiple
 screens associated with it.  Each display listens on a different
@@ -111,46 +106,38 @@ network port number, so each display can connect to multiple machines.
 Start Cygwin/X with command lines similar to the following to login
 to several remote sessions using XDMCP:</P
 ><P
->&#13;<TT
+>&#13;<KBD
 CLASS="userinput"
-><B
 >XWin.exe :0 -query
 <TT
 CLASS="replaceable"
 ><I
 >remote_hostname_or_ip_address_0</I
 ></TT
-></B
-></TT
+></KBD
 >
 </P
 ><P
->&#13;<TT
+>&#13;<KBD
 CLASS="userinput"
-><B
 >XWin.exe :1 -query
 <TT
 CLASS="replaceable"
 ><I
 >remote_hostname_or_ip_address_1</I
 ></TT
-></B
-></TT
+></KBD
 >
 </P
 ><P
->Note that the <TT
+>Note that the <CODE
 CLASS="parameter"
-><I
->:display_number</I
-></TT
+>:display_number</CODE
 > parameter
 is a general X Server parameter, not specific to Cygwin/X.  Further
-documentation of the <TT
+documentation of the <CODE
 CLASS="parameter"
-><I
->:display_number</I
-></TT
+>:display_number</CODE
 > parameter
 can be found in the <A
 HREF="http://freedesktop.org/~xorg/X11R6.7.0/doc/Xserver.1.html"
