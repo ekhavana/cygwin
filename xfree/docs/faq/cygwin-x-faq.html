@@ -180,6 +180,27 @@ HREF="cygwin-x-faq.html#q-cant-read-lock-file"
 HREF="cygwin-x-faq.html#q-where-are-my-fonts"
 >My favourite font has gone! The font Emacs uses is just boxes</A
 ></DT
+><DT
+>3.6. <A
+HREF="cygwin-x-faq.html#q-where-is-xxyzy"
+>Where has <B
+CLASS="command"
+>xhost</B
+>/<B
+CLASS="command"
+>xlsfonts</B
+>/etc. gone?</A
+></DT
+><DT
+>3.7. <A
+HREF="cygwin-x-faq.html#q-how-do-i-get-rid-of-xterm-menu"
+>How do I get rid of that menu at the top of my xterm?</A
+></DT
+><DT
+>3.8. <A
+HREF="cygwin-x-faq.html#q-"
+>ssh -X now says "Warning: untrusted X11 forwarding setup failed: xauth key data not generated"</A
+></DT
 ></DL
 ></DD
 ><DT
@@ -350,7 +371,7 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN396"
+HREF="cygwin-x-faq.html#AEN423"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
@@ -1347,8 +1368,12 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Try starting the server with -nolock
-</P
+>Try <B
+CLASS="command"
+>rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp</B
+></P
+><P
+>Try starting the server with -nolock</P
 ><P
 >Technical details: The X server attempts to create a lock file in
 /tmp by creating the file under a temporary name, then renaming it to
@@ -1391,6 +1416,96 @@ Only minimal fonts will be installed after the upgrade.
 >&#13;To provide the font emacs wants to use by default you will probably want
 to install font-adobe-dpi100 and/or font-adobe-dpi75
 </P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-where-is-xxyzy"
+></A
+><B
+>3.6. </B
+>Where has <B
+CLASS="command"
+>xhost</B
+>/<B
+CLASS="command"
+>xlsfonts</B
+>/etc. gone?</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>Previously all the X utility programs were contained in a single package, xorg-x11-bin, which needed to be updated when any of the programs it contained was.  In modular X each of these programs can be found in a separate package, usually named <B
+CLASS="command"
+>xhost</B
+>/<B
+CLASS="command"
+>xlsfont</B
+>/etc.</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-how-do-i-get-rid-of-xterm-menu"
+></A
+><B
+>3.7. </B
+>How do I get rid of that menu at the top of my xterm?</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>Run it as <B
+CLASS="command"
+>xterm +tb</B
+>, or add "XTerm*toolBar: false" to <TT
+CLASS="filename"
+>~/.Xdefaults</TT
+></P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-"
+></A
+><B
+>3.8. </B
+>ssh -X now says "Warning: untrusted X11 forwarding setup failed: xauth key data not generated"</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>See <A
+HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
+>Q: 6.1.</A
+>.  See <A
+HREF="http://cygwin.com/ml/cygwin-xfree/2008-11/msg00154.html"
+TARGET="_top"
+>point 3 in this mail</A
+>.  Use ssh -Y.</P
+><P
+>Technical details: ssh tried to run <B
+CLASS="command"
+>xauth generate</B
+> to create a untrusted cookie for the sesion, which failed because the server isn't compiled with the XCSECURITY extension built-in.</P
 ></DIV
 ></DIV
 ></DIV
@@ -2510,7 +2625,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN396"
+NAME="AEN423"
 ></A
 ><B
 >6.2. </B
@@ -4484,7 +4599,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN856"
+NAME="AEN883"
 ></A
 ><P
 ><B
