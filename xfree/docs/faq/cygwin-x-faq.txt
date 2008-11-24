@@ -365,6 +365,12 @@ Questions and Answers
    X.Org now uses the prefix /usr not /usr/X11R6. So startxwin.bat has
    moved from /usr/X11R6/bin/startxwin.bat to /usr/bin/startxwin.bat.
 
+   A "XWin Server" shortcut to this batch file is created on the Start
+   menu, under "Cygwin-X"
+
+   startxwin.bat and the Start menu link to it are now installed by the
+   xinit package.
+
    3.4. Fatal server error: Can't read lock file /tmp/.X0-lock
 
    Try rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp
@@ -395,12 +401,12 @@ Questions and Answers
 
    Previously all the X utility programs were contained in a single
    package, xorg-x11-bin, which needed to be updated when any of the
-   programs it contained was. In modular X each of these programs can be
-   found in a separate package, usually named xhost/xlsfont/etc.
+   programs it contained was updated. In modular X each of these programs
+   can be found in a separate package, usually named xhost/xlsfont/etc.
 
    3.7. How do I get rid of that menu at the top of my xterm?
 
-   Run it as xterm +tb, or add "XTerm*toolBar: false" to ~/.Xdefaults
+   Run it as xterm +tb, or add XTerm*toolBar: false to ~/.Xdefaults
 
    3.8. ssh -X now says "Warning: untrusted X11 forwarding setup failed:
    xauth key data not generated"
@@ -408,7 +414,7 @@ Questions and Answers
    See [120]Q: 6.1.. See [121]point 3 in this mail. Use ssh -Y.
 
    Technical details: ssh tried to run xauth generate to create a
-   untrusted cookie for the sesion, which failed because the server isn't
+   untrusted cookie for the session, which failed because the server isn't
    compiled with the XCSECURITY extension built-in.
 
 4. Configuration
@@ -500,13 +506,13 @@ xmodmap -e "keycode 22 = BackSpace"
 
    Other options for tweaking the XKB layout are -xkbmodel,-xkbvariant,
    -xkboptions and -xkbrules. These are the counterparts for the similar
-   named options known from the XF86Config file.
+   named options known from the xorg.conf file.
 
    If the loading fails, check [126]Q: 5.1.6.
 
    5.1.2. I there a way to add a layout to the list of autodetected?
 
-   If your keyboard layout is not automaticly detected you can send the
+   If your keyboard layout is not automatically detected you can send the
    required information for including it into Cygwin/X to
    cygwin-xfree@cygwin.com. Please include the following information in
    your mail:
@@ -845,7 +851,7 @@ DisplayManager.requestPort:     0
    The Fatal Error is a general error message. More specific information
    what caused this is available in /var/log/XWin.log. Please check the
    common error messages in [153]the Section called Error and Warning
-   Messages. If you're error is not mentioned proceed with [154]Q: 8.4.
+   Messages. If your error is not mentioned proceed with [154]Q: 8.4.
 
    8.2. Is there a log file that I can look at for diagnostic information
    and error messages?
@@ -1819,7 +1825,7 @@ References
   48. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-bash-8bit
   49. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#remote
   50. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-ssh-no-x11forwarding
-  51. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN423
+  51. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN440
   52. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#xdmcp
   53. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xdmcp-no-valid-address
   54. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-audit-client-rejected

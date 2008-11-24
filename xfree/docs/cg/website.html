@@ -69,7 +69,42 @@ NAME="website"
 ></A
 >Chapter 4. Web Site Maintenance</H1
 ><P
->Foo! Bar!</P
+>&#13;The Cygwin/X web site is stored in sourceware.org CVS.
+The CVS root is ext:sourceware.org:/cvs/cygwin/htdocs/xfree.
+</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="updating-documentation-on-website"
+>Updating the documentation on the web site</A
+></H1
+><P
+>&#13;A simple way of updating the documentation from the cywin-x-doc package shown on the web site
+is to build the documentation directly into a CVS checkout of web-site and then check it in.
+</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ cvs co ext:user@sourceware.org:/cvs/cygwin/htdocs/xfree 
+[...]
+$ cd xfree/docs
+$ path-to-cygwin-x-doc/configure --enable-hardcopy
+$ make
+$ cvs up
+[...]
+$ cvs ci
+</PRE
+></TD
+></TR
+></TABLE
+></DIV
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"

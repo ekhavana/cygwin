@@ -57,22 +57,25 @@ Harold L Hunt, II
         [30]Packaging a Documentation Distribution
 
    4. [31]Web Site Maintenance
-   [32]Bibliography
-   [33]Glossary
-   A. [34]GNU Free Documentation License
 
-        0. [35]PREAMBLE
-        1. [36]APPLICABILITY AND DEFINITIONS
-        2. [37]VERBATIM COPYING
-        3. [38]COPYING IN QUANTITY
-        4. [39]MODIFICATIONS
-        5. [40]COMBINING DOCUMENTS
-        6. [41]COLLECTIONS OF DOCUMENTS
-        7. [42]AGGREGATION WITH INDEPENDENT WORKS
-        8. [43]TRANSLATION
-        9. [44]TERMINATION
-        10. [45]FUTURE REVISIONS OF THIS LICENSE
-        [46]How to use this License for your documents
+        [32]Updating the documentation on the web site
+
+   [33]Bibliography
+   [34]Glossary
+   A. [35]GNU Free Documentation License
+
+        0. [36]PREAMBLE
+        1. [37]APPLICABILITY AND DEFINITIONS
+        2. [38]VERBATIM COPYING
+        3. [39]COPYING IN QUANTITY
+        4. [40]MODIFICATIONS
+        5. [41]COMBINING DOCUMENTS
+        6. [42]COLLECTIONS OF DOCUMENTS
+        7. [43]AGGREGATION WITH INDEPENDENT WORKS
+        8. [44]TRANSLATION
+        9. [45]TERMINATION
+        10. [46]FUTURE REVISIONS OF THIS LICENSE
+        [47]How to use this License for your documents
      __________________________________________________________________
 
 Chapter 1. Overview
@@ -96,7 +99,7 @@ Chapter 1. Overview
    Join in the excitement of opening your Windows machine to the X Window
    System.
 
-   We need [47]programmers, [48]documentation writers, and [49]website
+   We need [48]programmers, [49]documentation writers, and [50]website
    maintainers.
      __________________________________________________________________
 
@@ -118,13 +121,13 @@ Overview
    This document is primarily focused on the Cygwin/X server; most other
    components are extremely stable and work out-of-the-box on Cygwin
 
-   The primary source of information on developing for X is the [50]X.Org
+   The primary source of information on developing for X is the [51]X.Org
    developer startpage
 
    Downloading the X Window System source code tree can take anywhere from
    10 minutes to 10 hours, depending upon the speed of your network
    connection. If you have an active network connection at your disposal
-   you may want to skip ahead to [51]the Section called Obtaining the
+   you may want to skip ahead to [52]the Section called Obtaining the
    Source Code and start downloading the source code tree now. You will
    find it advantageous to have a source code tree as you read the other
    sections.
@@ -133,11 +136,11 @@ Overview
 Source Code Tree Layout
 
    Descriptions of Important xserver Directories and Subdirectories
-     * cfb* contains deprecated [52]color framebuffer drawing procedures
-       that are not compatible with the [53]Shadow drawing system that
+     * cfb* contains deprecated [53]color framebuffer drawing procedures
+       that are not compatible with the [54]Shadow drawing system that
        Cygwin/X depends upon. This directory is of no interest to Cygwin/X
        programmers.
-     * dix contains [drawing] [54]device independent X routines. main.c
+     * dix contains [drawing] [55]device independent X routines. main.c
        contains the main entry-point function for the Cygwin/X X Server.
        The X Server startup procedure can be followed by examining main.
      * fb contains the modern framebuffer drawing procedures used by
@@ -163,7 +166,7 @@ Source Code Tree Layout
        such as graphics context structures. This directory is useful to
        Cygwin/X programmers when they need to lookup the name or data type
        of members of various X Server structures.
-     * mi contains [55]machine independent drawing routines. These drawing
+     * mi contains [56]machine independent drawing routines. These drawing
        routines are used by the Cygwin/X Native GDI X Server engine. In
        turn, the machine independent routines depend in winGetSpans,
        winFillSpans, and winSetSpans, which are implemented in the Native
@@ -185,7 +188,7 @@ Source Code Tree Layout
               3. Calls one of Cygwin/X's engine dependent ShadowUpdate ()
                  functions to transfer the updated regions of the
                  offscreen framebuffer to the screen.
-     * os contains [56]operating system dependent X Server functions.
+     * os contains [57]operating system dependent X Server functions.
        However, the functions in the os have been written in such a way
        that they are actually compatible with most UNIX-style operating
        systems, include Cygwin.
@@ -208,7 +211,7 @@ Source Code Tree Layout
        however, we do have to link to several of these libraries to get
        our X Server to build. These libraries are maintained by various
        developers from the X Window System project and there are
-       occasional synchronizations with [57]The Open Group's [58]X.org.
+       occasional synchronizations with [58]The Open Group's [59]X.org.
        Cygwin/X programmers occasionally need to fix Cygwin-related build
        errors that occur in these libraries.
      __________________________________________________________________
@@ -216,23 +219,23 @@ Source Code Tree Layout
 Cygwin/X X Server Architecture
 
    Cygwin/X's X Server architecture was heavily inspired by
-   [59]Angebranndt94, the Definition of the Porting Layer for the X v11
+   [60]Angebranndt94, the Definition of the Porting Layer for the X v11
    Sample Server.
      __________________________________________________________________
 
 Server Privates
 
    X Servers use various structures to pass information around to
-   functions. Some of those structures are colormaps, [60]graphics
-   contexts (GCs), [61]pixmaps, and [62]screens. The X protocol defines
+   functions. Some of those structures are colormaps, [61]graphics
+   contexts (GCs), [62]pixmaps, and [63]screens. The X protocol defines
    the contents of each of these structures, however, the X Server
-   implementation and various X Server libraries ([63]MI, [64]FB,
-   [65]Shadow, etc.) may require additional information to be associated
+   implementation and various X Server libraries ([64]MI, [65]FB,
+   [66]Shadow, etc.) may require additional information to be associated
    with these internal structures. For example, the Cygwin/X X Server must
    associate a Windows window handle (hwnd) with each X Server screen that
    is open.
 
-   [66]Privates are the mechanism provided by the X protocol for
+   [67]Privates are the mechanism provided by the X protocol for
    associating additional information with internal X Server structures.
    Privates originally consisted of a single pointer member contained in
    each structure, usually named devPrivate or devPriv. This original
@@ -252,10 +255,10 @@ Server Privates
    upon use. Preallocation, the preferred method for GCs, pixmaps, and
    windows, requires that the size of the privates memory needed be
    specified during X Server initialization. Preallocation allows the
-   [67]DIX layer to allocate all memory needed for a given internal
+   [68]DIX layer to allocate all memory needed for a given internal
    structure, including all privates memory, as a single contiguous block
    of memory; this greatly reduces memory fragmentation. Allocation upon
-   use, used by screens, requires the [68]DDX structure creation function
+   use, used by screens, requires the [69]DDX structure creation function
    to allocate memory for the privates; winScreenInit calling
    winAllocatePrivates, which allocates screen privates memory directly,
    is an example of this. Allocation upon use can optionally and
@@ -306,9 +309,9 @@ Engine System
 
 Shadow FB Engines
 
-   The Shadow FB engines use Keith Packard's [69]FB drawing procedures
-   wrapped with his [70]Shadow layer that allows drawing to an
-   [71]offscreen framebuffer with periodic updates of the [72]primary
+   The Shadow FB engines use Keith Packard's [70]FB drawing procedures
+   wrapped with his [71]Shadow layer that allows drawing to an
+   [72]offscreen framebuffer with periodic updates of the [73]primary
    framebuffer.
      __________________________________________________________________
 
@@ -329,7 +332,7 @@ Primary FB Engine
 
    The Primary FB engine is deprecated. Primary FB works in the same
    manner that the original Cygwin/X X Server worked, namely, it uses
-   IDirectDrawSurface_Lock to obtain a pointer to the [73]primary
+   IDirectDrawSurface_Lock to obtain a pointer to the [74]primary
    framebuffer memory at server startup. This memory pointer is held until
    the X Server shuts down. This technique does not work on all versions
    of Windows.
@@ -380,11 +383,11 @@ Primary FB Engine
 
 User Input
 
-   User input is processed using the [74]MI layer's user input system. Any
+   User input is processed using the [75]MI layer's user input system. Any
    queued Win32 user input messages, as well as other Win32 messages, are
    handled when hw/xwin/winwakeup.c's winWakeupHandler function is called
-   by the [75]OS layer os/WaitFor.c's WaitForSomething function and when
-   the [76]DIX layer dix/dispatch.c's Dispatch function calls
+   by the [76]OS layer os/WaitFor.c's WaitForSomething function and when
+   the [77]DIX layer dix/dispatch.c's Dispatch function calls
    hw/xwin/InitInput.c's ProcessInputEvents function. Each Win32 user
    input message typically queues an input event, or several input events,
    using the MI layer's mi/mieq.c's mieqEnqueue function. Enqueued MI
@@ -527,7 +530,7 @@ Obtaining the Source Code
    top of the X Window System source code, and should be the starting
    point for new developers.
 
-   Read-only [77]git access to the X Window System source tree is also
+   Read-only [78]git access to the X Window System source tree is also
    available.
 
    The CYGWIN branch exists in git for historical reasons. Current
@@ -670,7 +673,7 @@ $
 
 Keeping your source code tree updated
 
-   [78]git makes keeping your source code tree up to date easy. Consult
+   [79]git makes keeping your source code tree up to date easy. Consult
    the git documentation for details.
      __________________________________________________________________
 
@@ -692,7 +695,7 @@ Cross Compiling
    There are a whole new class of problems that can happen when cross
    compiling that are simply not an issue when building on Cygwin. You
    should be familiar with building Cygwin/X on Cygwin, as described in
-   [79]the Section called Native Compiling, before attempting to cross
+   [80]the Section called Native Compiling, before attempting to cross
    compile Cygwin/X.
      __________________________________________________________________
 
@@ -701,12 +704,12 @@ Obtaining binutils and gcc Source
    binutils and gcc source code releases that are known to compile on
    Cygwin are distributed by the Cygwin project. Therefore, it is highly
    recommended that you obtain the binutils and gcc sources from the
-   [80]Cygwin mirror network.
+   [81]Cygwin mirror network.
 
    Follow these steps to download Cygwin/X binaries:
     1. Create a directory to store the binutils and gcc sources in, such
        as /home/my_login/cygwin/src/
-    2. Visit the [81]Cygwin mirrors page to find your closest mirror
+    2. Visit the [82]Cygwin mirrors page to find your closest mirror
     3. The ftp url for your mirror site should take you to the cygwin/
        directory on the mirror
     4. Change current ftp directory to cygwin/release/.
@@ -963,7 +966,7 @@ ln -s gcc cc
 Building Cygwin/X
 
    Building the source code when cross compiling X Window System is nearly
-   identical to the process described below in [82]the Section called
+   identical to the process described below in [83]the Section called
    Native Compiling of the Native Compiling section. One divergence from
    the aforementioned instructions is that you will be using a bash shell
    on your cross compiling host, rather than on your native Cygwin host;
@@ -1019,7 +1022,7 @@ Chapter 3. Documentation
 
 Overview
 
-   Cygwin/X documentation is written in XML according to the [83]DocBook
+   Cygwin/X documentation is written in XML according to the [84]DocBook
    document type definition (DTD). These XML input files are then compiled
    using an autoconf and automake build system. We currently build the
    following output formats: HTML, PDF, PS, RTF, and TXT.
@@ -1033,18 +1036,21 @@ Source of latest cygwin-x-doc release
    start the cygwin setup, select directories and mirror and select the
    package cygwin-x-doc from the category X11. Mark the checkbox labelled
    src and install. This will install the documentation source in
-   /usr/cvs/cygwin-x-doc.
+   /usr/src/cygwin-x-doc.
      __________________________________________________________________
 
 Source from CVS
 
-   The documentation source code is available from freedesktop.org cvs
-   too. The obtain them please follow these rules:
-$ cvs -d :pserver:anoncvs@pdx.freedesktop.org:/cvs/xserver login
+   The documentation source code is available from sourceware.org CVS. To
+   obtain them please use the follow commands:
+$ cvs -d :pserver:anoncvs@sourceware.org:/cvs/cygwin-xfree login
 CVS password: <hit return>
-$ cvs -d :pserver:anoncvs@pdx.freedesktop.org:/cvs/xserver co cygwin-x-doc
+$ cvs -d :pserver:anoncvs@sourceware.org:/cvs/cygwin-xfree co doc
 
-   You should now have the sources in an directory called cygwin-x-doc.
+   You should now have the sources in an directory called doc.
+
+   If you just want to look at the Cygwin/X documentation source, use the
+   [85]CVSweb interface to the Cygwin/X documentation tree.
      __________________________________________________________________
 
 Setting Up a DocBook Build Environment
@@ -1061,7 +1067,7 @@ Required Packages for building documentation
 
      Note: A useful, if slightly dated, introduction to setting up a
      docbook build environment and editing tools can be found in the
-     [84]SGML for Windows NT: Setting up a free SGML editing and
+     [86]SGML for Windows NT: Setting up a free SGML editing and
      publishing system on Windows NT/Cygwin document.
      __________________________________________________________________
 
@@ -1152,7 +1158,23 @@ $ make distcheck
 
 Chapter 4. Web Site Maintenance
 
-   Foo! Bar!
+   The Cygwin/X web site is stored in sourceware.org CVS. The CVS root is
+   ext:sourceware.org:/cvs/cygwin/htdocs/xfree.
+     __________________________________________________________________
+
+Updating the documentation on the web site
+
+   A simple way of updating the documentation from the cywin-x-doc package
+   shown on the web site is to build the documentation directly into a CVS
+   checkout of web-site and then check it in.
+$ cvs co ext:user@sourceware.org:/cvs/cygwin/htdocs/xfree
+[...]
+$ cd xfree/docs
+$ path-to-cygwin-x-doc/configure --enable-hardcopy
+$ make
+$ cvs up
+[...]
+$ cvs ci
      __________________________________________________________________
 
 Bibliography
@@ -1214,7 +1236,7 @@ B
 
    Bitmap (X)
           X pixel map with bit depth equal to one. X pixel maps of bit
-          depth not equal to one are called [85]pixmaps.
+          depth not equal to one are called [87]pixmaps.
 
 C
 
@@ -1262,7 +1284,7 @@ G
 
    git (git)
           git is an open source distributed version control system. More
-          information can be found at the [86]git project homepage.
+          information can be found at the [88]git project homepage.
 
 M
 
@@ -1275,10 +1297,10 @@ M
 O
 
    Offscreen Framebuffer
-          Essentially a [87]bitmap, in the Windows sense, of size and
+          Essentially a [89]bitmap, in the Windows sense, of size and
           color format that can be displayed on the screen. An offscreen
           framebuffer may be identical in size and color format to the
-          [88]primary framebuffer, but this is not always required.
+          [90]primary framebuffer, but this is not always required.
 
    OS Layer (OS)
           X Server layer that depends on the operating system; but not the
@@ -1288,18 +1310,18 @@ P
 
    Pixmap
           X pixel map with bit depth not equal to one. X pixel maps of bit
-          depth one are called [89]bitmaps.
+          depth one are called [91]bitmaps.
 
    Primary Framebuffer
-          The block of memory, essentially a [90]bitmap, that describes
+          The block of memory, essentially a [92]bitmap, that describes
           what is currently being displayed on the screen. Any updates to
           the primary framebuffer will be displayed on the screen after
           the next screen refresh.
 
    Privates
           Additional information associated with internal X Server
-          structures, such as [91]colormaps, [92]GCs, [93]pixmaps, or
-          [94]screens.
+          structures, such as [93]colormaps, [94]GCs, [95]pixmaps, or
+          [96]screens.
 
 S
 
@@ -1310,8 +1332,8 @@ S
           may have several screens.
 
    Shadow
-          X Server shadow layer that allows [95]FB to draw to an offscreen
-          framebuffer and occasionally call a [96]DDX function that
+          X Server shadow layer that allows [97]FB to draw to an offscreen
+          framebuffer and occasionally call a [98]DDX function that
           transfers the updated regions to the screen.
 
 X
@@ -1330,7 +1352,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [97]X Display Manager.
+          See Also: [99]X Display Manager.
      __________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -1655,7 +1677,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [98]http://www.gnu.org/copyleft/.
+   [100]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -1694,101 +1716,103 @@ How to use this License for your documents
 
 References
 
-   1. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#overview
-   2. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#programming
-   3. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-overview
-   4. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-tree-layout
-   5. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-server-architecture
-   6. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-server-architecture-privates
-   7. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-server-architecture-engines
-   8. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-server-architecture-input
-   9. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-obtaining-source
-  10. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-build-native
-  11. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-compiling
-  12. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-compiling-executing
-  13. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-compiling-install
-  14. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-tree-update
-  15. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-build-cross
-  16. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-obtaining-compiler-source
-  17. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
-  18. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-building-binutils-and-gcc
-  19. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-tool-links
-  20. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-cross-build
-  21. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-distribution
-  22. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#documentation
-  23. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-overview
-  24. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-obtaining-source
-  25. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-obtaining-source-release
-  26. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-obtaining-source-cvs
-  27. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-docbook
-  28. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-docbook-required-packages
-  29. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-build
-  30. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#docs-distribution
-  31. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#website
-  32. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#biblio
-  33. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#glossary
-  34. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl
-  35. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-preamble
-  36. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-applicability-and-definitions
-  37. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-verbation-copying
-  38. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-copying-in-quantity
-  39. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-modifications
-  40. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-combining-documents
-  41. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-collections-of-documents
-  42. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-aggregation-with-independent-works
-  43. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-translation
-  44. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-termination
-  45. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-future-revisions-of-this-license
-  46. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gfdl-using-for-your-documents
-  47. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#programming
-  48. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#documentation
-  49. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#website
-  50. http://www.x.org/wiki/DeveloperStart
-  51. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-obtaining-source
-  52. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-cfb-layer
-  53. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-shadow-layer
-  54. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-dix-layer
-  55. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-mi-layer
-  56. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-os-layer
-  57. http://www.opengroup.org/
-  58. http://www.x.org/
-  59. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#porting-layer-definition
-  60. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-gc
-  61. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-pixmap
-  62. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-screen
-  63. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-mi-layer
-  64. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-fb-layer
-  65. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-shadow-layer
-  66. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-privates
-  67. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-dix-layer
-  68. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-ddx-layer
-  69. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-fb-layer
-  70. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-shadow-layer
-  71. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-offscreen-framebuffer
-  72. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-primary-framebuffer
-  73. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-primary-framebuffer
-  74. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-mi-layer
-  75. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-os-layer
-  76. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-dix-layer
-  77. http://xorg.freedesktop.org/wiki/
-  78. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-git
-  79. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-build-native
-  80. http://cygwin.com/mirrors.html
+   1. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#overview
+   2. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#programming
+   3. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-overview
+   4. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-tree-layout
+   5. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-server-architecture
+   6. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-server-architecture-privates
+   7. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-server-architecture-engines
+   8. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-server-architecture-input
+   9. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-obtaining-source
+  10. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-build-native
+  11. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-compiling
+  12. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-compiling-executing
+  13. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-compiling-install
+  14. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-tree-update
+  15. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-build-cross
+  16. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-cross-obtaining-compiler-source
+  17. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-cross-obtaining-cygwin-headers-and-libs
+  18. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-cross-building-binutils-and-gcc
+  19. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-cross-tool-links
+  20. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-cross-build
+  21. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-distribution
+  22. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#documentation
+  23. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-overview
+  24. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-obtaining-source
+  25. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-obtaining-source-release
+  26. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-obtaining-source-cvs
+  27. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-docbook
+  28. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-docbook-required-packages
+  29. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-build
+  30. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-distribution
+  31. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#website
+  32. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#updating-documentation-on-website
+  33. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#biblio
+  34. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#glossary
+  35. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl
+  36. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-preamble
+  37. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-applicability-and-definitions
+  38. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-verbation-copying
+  39. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-copying-in-quantity
+  40. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-modifications
+  41. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-combining-documents
+  42. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-collections-of-documents
+  43. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-aggregation-with-independent-works
+  44. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-translation
+  45. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-termination
+  46. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-future-revisions-of-this-license
+  47. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gfdl-using-for-your-documents
+  48. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#programming
+  49. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#documentation
+  50. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#website
+  51. http://www.x.org/wiki/DeveloperStart
+  52. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-obtaining-source
+  53. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-cfb-layer
+  54. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-shadow-layer
+  55. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-dix-layer
+  56. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-mi-layer
+  57. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-os-layer
+  58. http://www.opengroup.org/
+  59. http://www.x.org/
+  60. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#porting-layer-definition
+  61. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-gc
+  62. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-pixmap
+  63. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-screen
+  64. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-mi-layer
+  65. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-fb-layer
+  66. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-shadow-layer
+  67. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-privates
+  68. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-dix-layer
+  69. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-ddx-layer
+  70. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-fb-layer
+  71. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-shadow-layer
+  72. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-offscreen-framebuffer
+  73. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-primary-framebuffer
+  74. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-primary-framebuffer
+  75. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-mi-layer
+  76. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-os-layer
+  77. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-dix-layer
+  78. http://xorg.freedesktop.org/wiki/
+  79. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-git
+  80. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-build-native
   81. http://cygwin.com/mirrors.html
-  82. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#prog-build-native
-  83. http://docbook.org/
-  84. http://web.archive.org/web/20050320030737/http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
-  85. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-pixmap
-  86. http://git.or.cz/
-  87. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-bitmap-win32
-  88. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-primary-framebuffer
-  89. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-bitmap-x
-  90. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-bitmap-win32
-  91. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-colormap
-  92. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-gc
-  93. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-pixmap
-  94. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-screen
-  95. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-fb-layer
-  96. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-ddx-layer
-  97. file://localhost/home/jon/cygwin-x-doc/cygwin-x-doc-1.1.0/cygwin-x-doc-1.1.0/.build/cg/dump.html#gloss-xdm
-  98. http://www.gnu.org/copyleft/
+  82. http://cygwin.com/mirrors.html
+  83. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-build-native
+  84. http://docbook.org/
+  85. http://sourceware.org/cgi-bin/cvsweb.cgi/doc/?cvsroot=cygwin-xfree
+  86. http://web.archive.org/web/20050320030737/http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+  87. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-pixmap
+  88. http://git.or.cz/
+  89. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-win32
+  90. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-primary-framebuffer
+  91. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-x
+  92. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-win32
+  93. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-colormap
+  94. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-gc
+  95. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-pixmap
+  96. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-screen
+  97. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-fb-layer
+  98. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-ddx-layer
+  99. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-xdm
+ 100. http://www.gnu.org/copyleft/

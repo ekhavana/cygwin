@@ -371,7 +371,7 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN423"
+HREF="cygwin-x-faq.html#AEN440"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
@@ -1290,7 +1290,10 @@ CLASS="command"
 >startxwin.bat</B
 > script used to set several enviroment
 variables used by the X server to specify the location of files it needs to access.  Specifically 
-this batch file would set XKEYSYMDB to <TT
+this batch file would set <CODE
+CLASS="parameter"
+>XKEYSYMDB</CODE
+> to <TT
 CLASS="filename"
 >/usr/X11R6/lib/X11/XKeysymDB</TT
 >.
@@ -1303,7 +1306,19 @@ CLASS="filename"
 >&#13;If you are (perhaps unintentionally) using a copy of the old <B
 CLASS="command"
 >startxwin.bat</B
-> (perhaps under another name) to start the X server, remove the environment variables XAPPLRESDIR, XCMSDB, XNLSPATH and XKEYSYMDB from it, or (preferrably)
+> (perhaps under another name) to start the X server, remove the environment variables <CODE
+CLASS="parameter"
+>XAPPLRESDIR</CODE
+>, <CODE
+CLASS="parameter"
+>XCMSDB</CODE
+>, <CODE
+CLASS="parameter"
+>XNLSPATH</CODE
+> and <CODE
+CLASS="parameter"
+>XKEYSYMDB</CODE
+> from it, or (preferrably)
 use the updated <B
 CLASS="command"
 >startxwin.bat</B
@@ -1336,7 +1351,13 @@ CLASS="answer"
 ><B
 > </B
 >
-X.Org now uses the prefix /usr not /usr/X11R6. So <B
+X.Org now uses the prefix <TT
+CLASS="filename"
+>/usr</TT
+> not <TT
+CLASS="filename"
+>/usr/X11R6</TT
+>. So <B
 CLASS="command"
 >startxwin.bat</B
 >
@@ -1348,6 +1369,18 @@ CLASS="filename"
 CLASS="filename"
 >/usr/bin/startxwin.bat</TT
 >.
+</P
+><P
+>&#13;A "XWin Server" shortcut to this batch file is created on the Start menu, under "Cygwin-X" 
+</P
+><P
+>&#13;<B
+CLASS="command"
+>startxwin.bat</B
+> and the Start menu link to it are now installed by the <TT
+CLASS="filename"
+>xinit</TT
+> package.
 </P
 ></DIV
 ></DIV
@@ -1376,7 +1409,10 @@ CLASS="command"
 >Try starting the server with -nolock</P
 ><P
 >Technical details: The X server attempts to create a lock file in
-/tmp by creating the file under a temporary name, then renaming it to
+<TT
+CLASS="filename"
+>/tmp</TT
+> by creating the file under a temporary name, then renaming it to
 the proper name. If this rename fails it attempts to read the existing
 lock file to determine the pid of an already running server.  The failure
 case appears to be that lock file was created successfully, but the rename
@@ -1410,11 +1446,20 @@ CLASS="answer"
 Only minimal fonts will be installed after the upgrade.
 </P
 ><P
->&#13;Font packages are now named font-&lt;author/class&gt;-&lt;fonttype&gt;
+>&#13;Font packages are now named <TT
+CLASS="filename"
+>font-&lt;author/class&gt;-&lt;fonttype&gt;</TT
+>
 </P
 ><P
 >&#13;To provide the font emacs wants to use by default you will probably want
-to install font-adobe-dpi100 and/or font-adobe-dpi75
+to install <TT
+CLASS="filename"
+>font-adobe-dpi100</TT
+> and/or <TT
+CLASS="filename"
+>font-adobe-dpi75</TT
+>
 </P
 ></DIV
 ></DIV
@@ -1441,7 +1486,10 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Previously all the X utility programs were contained in a single package, xorg-x11-bin, which needed to be updated when any of the programs it contained was.  In modular X each of these programs can be found in a separate package, usually named <B
+>Previously all the X utility programs were contained in a single package, <TT
+CLASS="filename"
+>xorg-x11-bin</TT
+>, which needed to be updated when any of the programs it contained was updated.  In modular X each of these programs can be found in a separate package, usually named <B
 CLASS="command"
 >xhost</B
 >/<B
@@ -1470,7 +1518,10 @@ CLASS="answer"
 >Run it as <B
 CLASS="command"
 >xterm +tb</B
->, or add "XTerm*toolBar: false" to <TT
+>, or add <CODE
+CLASS="parameter"
+>XTerm*toolBar: false</CODE
+> to <TT
 CLASS="filename"
 >~/.Xdefaults</TT
 ></P
@@ -1505,7 +1556,7 @@ TARGET="_top"
 >Technical details: ssh tried to run <B
 CLASS="command"
 >xauth generate</B
-> to create a untrusted cookie for the sesion, which failed because the server isn't compiled with the XCSECURITY extension built-in.</P
+> to create a untrusted cookie for the session, which failed because the server isn't compiled with the XCSECURITY extension built-in.</P
 ></DIV
 ></DIV
 ></DIV
@@ -1872,7 +1923,7 @@ CLASS="parameter"
 CLASS="parameter"
 >-xkbrules</CODE
 >.  These are the counterparts for the
-similar named options known from the XF86Config file.</P
+similar named options known from the xorg.conf file.</P
 ><P
 >If the loading fails, check <A
 HREF="cygwin-x-faq.html#q-xkb-not-working"
@@ -1897,7 +1948,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->If your keyboard layout is not automaticly detected you can send 
+>If your keyboard layout is not automatically detected you can send 
 the required information for including it into Cygwin/X to cygwin-xfree@cygwin.com. 
 Please include the following information in your mail:</P
 ><UL
@@ -2625,7 +2676,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN423"
+NAME="AEN440"
 ></A
 ><B
 >6.2. </B
@@ -3360,7 +3411,7 @@ CLASS="emphasis"
 >Error and Warning Messages</I
 ></SPAN
 ></A
->. If you're error is not mentioned 
+>. If your error is not mentioned 
 proceed with <A
 HREF="cygwin-x-faq.html#q-error-message-not-listed"
 >Q: 8.4.</A
@@ -4599,7 +4650,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN883"
+NAME="AEN900"
 ></A
 ><P
 ><B
