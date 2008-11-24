@@ -198,8 +198,17 @@ HREF="cygwin-x-faq.html#q-how-do-i-get-rid-of-xterm-menu"
 ></DT
 ><DT
 >3.8. <A
-HREF="cygwin-x-faq.html#q-"
+HREF="cygwin-x-faq.html#q-ssh-y"
 >ssh -X now says "Warning: untrusted X11 forwarding setup failed: xauth key data not generated"</A
+></DT
+><DT
+>3.9. <A
+HREF="cygwin-x-faq.html#q-nedit-wont-start"
+>&#13;<B
+CLASS="command"
+>nedit</B
+> fails to start with an error message 
+</A
 ></DT
 ></DL
 ></DD
@@ -371,7 +380,7 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN440"
+HREF="cygwin-x-faq.html#AEN452"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
@@ -1533,7 +1542,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-"
+NAME="q-ssh-y"
 ></A
 ><B
 >3.8. </B
@@ -1557,6 +1566,80 @@ TARGET="_top"
 CLASS="command"
 >xauth generate</B
 > to create a untrusted cookie for the session, which failed because the server isn't compiled with the XCSECURITY extension built-in.</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-nedit-wont-start"
+></A
+><B
+>3.9. </B
+>
+<B
+CLASS="command"
+>nedit</B
+> fails to start with an error message 
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ nedit
+X Error of failed request:  BadMatch (invalid parameter attributes)
+  Major opcode of failed request:  70 (X_PolyFillRectangle)
+  Serial number of failed request:  some number
+  Current serial number in output stream:  some other number
+</PRE
+></TD
+></TR
+></TABLE
+>
+<B
+CLASS="command"
+>nedit</B
+> needs rebuilding with a patch to work around an issue <TT
+CLASS="filename"
+>lesstif</TT
+>
+has with current X servers.
+</P
+><P
+>&#13;Until this happemns, you can work around the issue by adding <CODE
+CLASS="parameter"
+>XLIB_SKIP_ARGB_VISUALS</CODE
+>
+to your enviroment, e.g.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ export XLIB_SKIP_ARGB_VISUALS=1
+$ nedit
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
 ></DIV
 ></DIV
 ></DIV
@@ -2676,7 +2759,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN440"
+NAME="AEN452"
 ></A
 ><B
 >6.2. </B
@@ -4650,7 +4733,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN900"
+NAME="AEN912"
 ></A
 ><P
 ><B
