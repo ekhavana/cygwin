@@ -61,19 +61,32 @@ option allows to write Windows Dynamically Linked Libraries (DLLs).  The
 resource compiler <span><strong class="command">windres</strong></span> is also provided.
 </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-ex-unix"></a>Quick Start Guide for those more experienced with UNIX</h2></div></div></div><p>
 If you are an experienced UNIX user who misses a powerful command-line
-environment, you will enjoy Cygwin. Note that there are some workarounds
+environment, you will enjoy Cygwin.
+Developers coming from a UNIX background will find a set of utilities
+they are already comfortable using, including a working UNIX shell.  The
+compiler tools are the standard GNU compilers most people will have previously
+used under UNIX, only ported to the Windows host.  Programmers wishing to port
+UNIX software to Windows NT will find that the Cygwin library provides
+an easy way to port many UNIX packages, with only minimal source code
+changes.
+</p><p>
+Note that there are some workarounds
 that cause Cygwin to behave differently than most UNIX-like operating
 systems; these are described in more detail in 
 <a href="#using-effectively" title="Using Cygwin effectively with Windows">the section called &#8220;Using Cygwin effectively with Windows&#8221;</a>.
 </p><p>
-Any time you want to update or install a Cygwin package, use the
-graphical <span><strong class="command">setup.exe</strong></span> program. By default,
-<span><strong class="command">setup.exe</strong></span> only installs a minimal set of packages, 
-so look around and choose your favorite utilities on the package
-selection screen. You may also search for specfic tools on the Cygwin
-website's <a href="http://cygwin.com/packages/" target="_top">Setup Package
-Search</a> For more information about what each option in
-<span><strong class="command">setup.exe</strong></span> means, see <a href="#internet-setup" title="Internet Setup">the section called &#8220;Internet Setup&#8221;</a>. 
+Use the graphical command <span><strong class="command">setup.exe</strong></span> any time you want
+to update or install a Cygwin package.  This program must be run
+manually every time you want to check for updated packages since Cygwin
+does not currently include a mechanism for automatically detecting
+package updates.
+</p><p>
+By default, <span><strong class="command">setup.exe</strong></span> only installs a minimal subset of
+packages.  Add any other packages by clicking on the <code class="literal">+</code>
+next to the Category name and selecting the package from the displayed
+list.  You may search for specfic tools by using the
+<a href="http://cygwin.com/packages/" target="_top">Setup Package Search</a>
+at the Cygwin web site.
 </p><p>
 Another option is to install everything by clicking on the
 <code class="literal">Default</code> field next to the <code class="literal">All</code>
@@ -84,13 +97,8 @@ entire categories or packages from the categories themselves.
 After installation, you can find Cygwin-specific documentation in
 the <code class="literal">/usr/share/doc/Cygwin/</code> directory.
 </p><p>
-Developers coming from a UNIX background will find a set of utilities
-they are already comfortable using, including a working UNIX shell.  The
-compiler tools are the standard GNU compilers most people will have previously
-used under UNIX, only ported to the Windows host.  Programmers wishing to port
-UNIX software to Windows NT will find that the Cygwin library provides
-an easy way to port many UNIX packages, with only minimal source code
-changes.
+For more information about what each option in
+<span><strong class="command">setup.exe</strong></span> means, see <a href="#internet-setup" title="Internet Setup">the section called &#8220;Internet Setup&#8221;</a>.
 </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="are-free"></a>Are the Cygwin tools free software?</h2></div></div></div><p>Yes. Parts are <a href="http://www.gnu.org/" target="_top">GNU</a> software 
 (<span><strong class="command">gcc</strong></span>, <span><strong class="command">gas</strong></span>, <span><strong class="command">ld</strong></span>, etc.),
 parts are covered by the standard 
@@ -618,14 +626,13 @@ is converted from Windows format to UNIX format when a Cygwin process
 first starts.  Most Cygwin applications do not make use of the
 <code class="function">dlopen ()</code> call and do not need this variable.
 </p></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-maxmem"></a>Changing Cygwin's Maximum Memory</h2></div></div></div><p>
-By default no Cygwin program can allocate more than 384 MB of memory 
-(program+data).  You should not need to change this default in most 
-circumstances.  However, if you need to use more real or virtual memory in 
-your machine you may add an entry in the either the 
-<code class="literal">HKEY_LOCAL_MACHINE</code> (to change the limit for all users) or 
-<code class="literal">HKEY_CURRENT_USER</code> (for just the current user) section of 
-the registry. 
-</p><p>
+Cygwin's heap is extensible.  However, it does start out at a fixed size
+and attempts to extend it may run into memory which has been previously
+allocated by Windows.  In some cases, this problem can be solved by
+adding an entry in the either the <code class="literal">HKEY_LOCAL_MACHINE</code>
+(to change the limit for all users) or
+<code class="literal">HKEY_CURRENT_USER</code> (for just the current user) section
+of the registry.  </p><p>
 Add the <code class="literal">DWORD</code> value <code class="literal">heap_chunk_in_mb</code> 
 and set it to the desired memory limit in decimal MB. It is preferred to do 
 this in Cygwin using the <span><strong class="command">regtool</strong></span> program included in the 
@@ -1773,7 +1780,37 @@ expected instead of ^Z, and is settable via <span><strong class="command">stty</
 This option must be specified before starting a Cygwin shell 
 and it cannot be changed in the shell.  It should not be set when using
 other terminals (i.e., rxvt or xterm). 
-</p></li><li style="list-style-type: disc"><p><code class="envar">(no)winsymlinks</code> - if set, Cygwin creates
+</p></li><li style="list-style-type: disc"><p><code class="envar">(no)upcaseenv</code> - if set, Cygwin converts all
+environment variables to all-uppercase, when a Cygwin process is started
+from a non-Cygwin native Windows process.  This is how it has been done
+until Cygwin 1.5.  If not set, Cygwin does not change the case of environment
+variables, except for a restricted set to maintain minimal backward
+compatibility and for correct handling of certain essential variables.
+The current list of always uppercased variables is:</p><pre class="screen">
+  ALLUSERSPROFILE
+  COMMONPROGRAMFILES
+  COMPUTERNAME
+  COMSPEC
+  HOME
+  HOMEDRIVE
+  HOMEPATH
+  NUMBER_OF_PROCESSORS
+  OS
+  PATH
+  PATHEXT
+  PROCESSOR_ARCHITECTURE
+  PROCESSOR_IDENTIFIER
+  PROCESSOR_LEVEL
+  PROCESSOR_REVISION
+  PROGRAMFILES
+  SYSTEMDRIVE
+  SYSTEMROOT
+  TEMP
+  TERM
+  TMP
+  TMPDIR
+  WINDIR
+</pre><p>Defaults to not set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)winsymlinks</code> - if set, Cygwin creates
 symlinks as Windows shortcuts with a special header and the R/O attribute
 set. If not set, Cygwin creates symlinks as plain files with a magic number,
 a path and the system attribute set. Defaults to not set since plain
@@ -2643,6 +2680,9 @@ User operations:
                            password aging rule.
   -p, --pwd-not-required   no password required for USER.
   -P, --pwd-required       password is required for USER.
+  -R, --reg-store-pwd      enter password to store it in the registry for
+                           later usage by services to be able to switch
+                           to this user context with network credentials."
 
 System operations:
   -i, --inactive NUM       set NUM of days before inactive accounts are disabled
@@ -2660,6 +2700,15 @@ Other options:
 If no option is given, change USER's password.  If no user name is given,
 operate on current user.  System operations must not be mixed with user
 operations.  Don't specify a USER when triggering a system operation. 
+
+Don't specify a user or any other option together with the -R option.
+Non-Admin users can only store their password if cygserver is running and
+the CYGWIN environment variable is set to contain the word 'server'.
+Note that storing even obfuscated passwords in the registry is not overly
+secure.  Use this feature only if the machine is adequately locked down.
+Don't use this feature if you don't need network access within a remote
+session.  You can delete your stored password by using `passwd -R' and
+specifying an empty password.
 </pre><p> <span><strong class="command">passwd</strong></span> changes passwords for user accounts.
 A normal user may only change the password for their own account,
 but administrators may change passwords on any account.
@@ -2706,7 +2755,30 @@ are 0 to 999.  The <code class="literal">-L</code> option sets the minimum lengt
 allowed passwords for users who don't belong to the administrators group
 to <span class="emphasis"><em>LEN</em></span> characters.  Allowed values for the minimum
 password length are 0 to 14.  In any of the above cases, a value of 0
-means `no restrictions'.</p><p>Limitations: Users may not be able to change their password on
+means `no restrictions'.</p><p>Users can use the <span><strong class="command">passwd -R</strong></span> to enter
+a password which then gets stored in a special area of the registry,
+which is also used by Windows to store passwords of accounts running
+Windows services.  When a privileged Cygwin application calls the
+<span><strong class="command">set{e}uid(user_id)</strong></span> system call, Cygwin checks if a
+password for that user has been stored in this registry area.  If so, it
+uses this password to switch to this user account using that password.
+This allows to logon through, for instance, <span><strong class="command">ssh</strong></span> with
+public key authentication and to get a full qualified user token with
+all credentials for network access.  However, the method has some
+drawbacks security-wise.  This is explained in more detail in the
+<a href="#ntsec" title="NT security">the section called &#8220;NT security&#8221;</a> section.</p><p>Please note that storing password in that registry area is a
+privileged operation which only administrative accounts are allowed to
+do.  If normal, non-admin users should be allowed to enter their
+passwords using <span><strong class="command">passwd -R</strong></span>, it's required to run
+<span><strong class="command">cygserver</strong></span> as a service under the LocalSystem account
+and the environment variable CYGWIN
+(see <a href="#using-cygwinenv" title="The CYGWIN environment
+variable">the section called &#8220;The <code class="envar">CYGWIN</code> environment
+variable&#8221;</a>)
+must be set to contain the "server" setting before running
+<span><strong class="command">passwd -R</strong></span>.  This only affects storing passwords.
+Using passwords in privileged processes does not require
+<span><strong class="command">cygserver</strong></span> to run.</p><p>Limitations: Users may not be able to change their password on
 some systems.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ps"></a>ps</h3></div></div></div><pre class="screen">
 Usage: ps [-aefls] [-u UID]
 Report process status
