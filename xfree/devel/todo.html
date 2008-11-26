@@ -22,10 +22,11 @@
 
     <h2>Cygwin/X - Development - To-Do List</h2>
 
-    <p>Last updated: 2003-03-25 1350 EST (Harold L Hunt II)</p>
-
     <p>Following is a list of open tasks on the Cygwin/X
-    project:</p>
+    project:<p>
+    <i>Please note that presence on this list doesn't guarantee that a task
+    desirable, practical or even possible.</i>
+    <p>
 
     <table border="0"
            cellpadding="5">
@@ -52,30 +53,114 @@
                         -->
 
             <tr valign="top">
-                <td>About: Links to ChangeLog, User's Guide,
-                etc.</td>
+              <td>Stability Testing</td>
+              
+              <td>2008-11-26</td>
+              
+              <td>Upgrade to modular X11R7.4 has inevitably
+                  introduced some bugs. We need to find them
+                  and fix them.</td>
+            </tr>
 
-                <td>2004-03-25</td>
+            <tr valign="top">
+              <td>-mwextwm mode and xwinwm</td>
+              
+              <td>2008-11-26</td>
+              
+              <td>Needs fixing to build, and work again</td>
+            </tr>
 
-                <td>Create an About dialog box that has links to
-                open the ChangeLog
-                (/usr/X11R6/share/doc/XFree86-xserv/changelog.html),
-                /tmp/XWin.log, and, if they are present, the User's
-                Guide, Contributor's Guide, and Frequently Asked
-                Questions using cygwin_conv_to_win32_path() and
-                ShellExecute(). See the cygstart source in the
-                cygutils package if you need a simple example of
-                how to do this.</td>
+            <tr valign="top">
+              <td>Command line parameters</td>
+              
+              <td>2008-11-26</td>
+              
+              <td>-help, the man page, and the user guide all
+              need updating and synchronizing with what the source actually does</td>
+            </tr>
+
+            <tr valign="top">
+              <td>XVideo?</td>
+              
+              <td>2008-11-26</td>
+              
+              <td>The XVideo extension is currently disabled.  There is some
+skeleton code in the server, but it doesn't do anything yet.
+                Possible to map Xv/XvMC to some DirectX or DxVA API?
+              </td>
+            </tr>
+
+            <tr valign="top">
+                <td>Composite</td>
+
+                <td>2008-11-26</td>
+
+                <td>Find and fix Composite bugs in rooted mode.
+                  Cunning plans for compositing in multiwindow mode (using Win2K+ window transparency)?
+                </td>
+            </tr>
+
+            <tr valign="top">
+                <td>Windows display size changes while running.
+                    Monitor count/position changes while running.</td>
+
+                <td>2008-11-26</td>
+
+                <td>Use RandR (resize and rotate) to pass changes
+                to the display size (e.g. from 1024 x 768 to 1280 x
+                1024) to the X Server and all running applications.
+                This should be straightforward to do; you can use the
+                WM_DISPLAYCHANGE handling code that is in place for
+                detecting display changes
+                and just pass these values to RandR to let it do
+                its thing.</td>
+            </tr>
+
+            <tr valign="top">
+                <td>Improve Windows clipboard integration</td>
+
+                <td>2008-11-26</td>
+
+                <td>Stamp out remainng clipboard bugs.
+
+                  Extend the
+                Cygwin/X clipboard manager, to handle data types
+                other than XA_STRING, COMPOUND_TEXT, and
+                UTF8_STRING; for example, BITMAP, PIXMAP, etc.</td>
+            </tr>
+
+            <tr valign="top">
+                <td>User's Guide - Document .XWinrc</td>
+
+                <td>2008-11-26</td>
+
+                <td>Documentation needs to be added to the User's
+                Guide for Earle F Philhower III's .XWinrc
+                mechanism. 
+                This task is greatly simplied by the fact that
+                Earle provided comments in the
+                example /etc/X11/system.Xwinrc file.
+                Perhaps a pointer to 'man XWinrc' and some examples.
+                </td>
+            </tr>
+
+            <tr valign="top">
+                <td>GUI mechanism for opening the log file</td>
+
+                <td>2008-11-26</td>
+
+                <td>Add an item to the tray-icon right-click menu
+                to open the log file (in Notepad)
+                (probably by using ShellExecute()?)</td>
             </tr>
 
             <tr valign="top">
                 <td>FatalError Dialog Box</td>
 
-                <td>2004-03-25</td>
+                <td>2008-11-26</td>
 
                 <td>Change the FatalError message box to a dialog
-                box with links to open the same files described in
-                the About box topic.</td>
+                box with helpful links?</td>
             </tr>
 
             <tr valign="top">
@@ -177,20 +262,6 @@
             </tr>
 
             <tr valign="top">
-                <td>Windows display size changes while running</td>
-
-                <td>2004-03-04</td>
-
-                <td>Use RandR (resize and rotate) to pass changes
-                to the display size (e.g. 1024 x 768 --&gt; 1280 x
-                1024) to the X Server and all running applications.
-                This should be very easy to do; you can use the
-                code that is in place for detecting display changes
-                and just pass these values to RandR to let it do
-                its thing.</td>
-            </tr>
-
-            <tr valign="top">
                 <td>Emulate PseudoColor on TrueColor</td>
 
                 <td>2003-09-23</td>
@@ -210,32 +281,6 @@
             </tr>
 
             <tr valign="top">
-                <td>Windows clipboard integration</td>
-
-                <td>2004-01-07</td>
-
-                <td>Extend <a href="xwinclip/">xwinclip</a>, the
-                Cygwin/X clipboard manager, to handle data types
-                other than XA_STRING, COMPOUND_TEXT, and
-                UTF8_STRING; for example, BITMAP, PIXMAP, etc.</td>
-            </tr>
-
-            <tr valign="top">
-                <td>User's Guide - Document .XWinrc</td>
-
-                <td>2003-09-22</td>
-
-                <td>Documentation needs to be added to the User's
-                Guide for Earle F Philhower III's .XWinrc
-                mechanism. The documentation source is available
-                via CVS in the 'xoncygwin' project on sourceforge.
-                This task is greatly simplied by the fact that
-                Earle provided comments in his
-                <a href="http://www.msu.edu/~huntharo/xwin/server/example.XWinrc">
-                example .XWinrc file</a>.</td>
-            </tr>
-
-            <tr valign="top">
                 <td>DirectDraw windowed PseudoColor</td>
 
                 <td>2003-08-27</td>
@@ -250,6 +295,8 @@
                 in fullscreen 8 bit color modes.</td>
             </tr>
         </tbody>
-    </table><!--#include virtual="../cygx-footer.html" -->
+    </table>
+    <p>Last updated: $Date$ ($Author$)</p>
+    <!--#include virtual="../cygx-footer.html" -->
     </body>
 </html>
