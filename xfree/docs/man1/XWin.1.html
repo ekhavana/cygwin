@@ -1,0 +1,392 @@
+<HTML><HEAD><TITLE>Manpage of XWIN</TITLE>
+</HEAD><BODY>
+<H1>XWIN</H1>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.5.3<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+XWin - X Server for the Cygwin environment on Microsoft Windows
+<P>
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>XWin</B>
+
+[ options ] ...
+<P>
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<I>XWin is an X Server for the X Window System on the Cygwin environment</I>
+
+running on Microsoft Windows.
+<P>
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>MODES</H2>
+
+<I>XWin</I> can operate in five different and incompatible modes:
+<BR>
+
+* <I>Single Window</I>: This is the default option.  The X server
+appears as a single Windows window and all X windows are contained
+within this window.  This mode requires an external window manager.
+<BR>
+
+* <I>No Decoration</I>: This mode is like single window mode except
+that the X server window does not have a title bar or border, thus
+maximizing the amount of space available for X windows within the X
+server window.  This mode requires an external window manager.
+<BR>
+
+* <I>Full Screen</I>: This mode is like single window mode except that
+the X server window takes the full screen, covering completely the
+Windows desktop.  This mode requires an external window manager.
+<BR>
+
+* <I>Rootless</I>: The X server works on a window covering the whole
+screen but the root window (traditionally covered with an X hatch
+pattern) is hidden from view.  This mode requires an external window
+manager.
+<BR>
+
+* <I>Multi-Window</I>: In this mode <I>XWin</I> uses its own integrated
+window manager in order to handle the top-level X windows, in such a
+way that they appear as normal Windows windows.
+<P>
+
+NOTE: <I>Multi-Window</I> mode will crash if an external window manager
+such as <I>twm</I> or <I>fvwm</I> is launched since <I>Multi-Window</I>
+uses its own internal window manager; all other modes require an
+external window manager in order to move, resize, and perform other
+operations on the individual X windows.
+<P>
+<P>
+<A NAME="lbAF">&nbsp;</A>
+<H2>LOG</H2>
+
+As it runs <I>XWin</I> writes messages indicating the most relevant events
+to  the console
+from which it was called and to a log file that by default is located at
+<I>/var/log/XWin.0.log</I>.  This file is mainly for debugging purposes.
+<P>
+<P>
+<A NAME="lbAG">&nbsp;</A>
+<H2>PREFERENCES FILE</H2>
+
+On startup <I>XWin</I> looks for the file <I>$HOME/.XWinrc</I> or, if
+the previous file does not exist,
+<I>/etc/X11/system.XWinrc</I>.  <I>.XWinrc</I> allows setting
+preferences for the following:
+<BR>
+
+1- To include items into the menu associated with the <I>XWin</I> icon
+which is in the <I>Windows</I> system tray.  This functions in all
+modes that have a tray icon.
+<BR>
+
+2- To include items in the menu which is associated with the Windows
+window that <I>XWin -multiwindow</I> produces for each top-level X
+window.  That can be done both for the generic case and for particular
+programs.
+<BR>
+
+3- To change the icon that is associated to the Windows window that
+<I>XWin -multiwindow</I> produces for each top-level X-window.  Again,
+that can be done both for the generic case and for particular
+programs.
+<P>
+
+The format of the <I>.XWinrc</I> file is given in the man page <A HREF="../man5/XWinrc.5.html">XWinrc</A>(5).
+<P>
+<P>
+<A NAME="lbAH">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+In addition to the normal server options described in the <I><A HREF="../man1/Xserver.1.html">Xserver</A>(1)</I>
+manual page, <I>XWin</I> accepts the following command line switches,
+<I>all</I> of which are optional:
+<DL COMPACT>
+<DT><B>-clipboard</B>
+
+<DD>
+Enables the integration
+between the Cygwin/X clipboard and Windows clipboard.  Do not use in
+conjunction with the <I>xwinclip</I> program.
+<DT><B>-clipupdates </B><I>num_boxes</I>
+
+<DD>
+Specify an optional threshold, above which the boxes in a shadow
+update operation will be collected into a GDI clipping region.  The
+clipping region is then used to do a single bit block transfer that is
+constrained to the updated area by the clipping region.  There is some
+overhead involved in creating, installing, destroying, and removing
+the clipping region, thus there may not be much benefit for a small
+number of boxes (less than 10).  It is even possible that this
+functionality does not provide a benefit at any number of boxes; we
+can only determine the usefulness of this feature through testing.
+This parameter works in conjunction with engines 1, 2, and 4 (Shadow
+GDI, Shadow DirectDraw, and Shadow DirectDraw Non-Locking,
+respectively).
+<DT><B>-emulate3buttons </B><I>timeout</I>
+
+<DD>
+Emulate a three button mouse; pressing both buttons within
+<I>timeout</I>
+
+milliseconds causes an emulated middle button press.  The default 
+<I>timeout</I>
+
+is 50 milliseconds.  Note that most mice with scroll wheel have middle
+button functionality, usually you will need this option only if you have
+a two button mouse without scroll wheel.
+<DT><B>-emulatepseudo</B>
+
+<DD>
+Create a depth 8 PseudoColor visual when running in depths 15, 16, 24,
+or 32, collectively known as TrueColor depths.
+<BR>&nbsp;At&nbsp;this&nbsp;date&nbsp;(April&nbsp;2004)&nbsp;this&nbsp;option&nbsp;is&nbsp;not&nbsp;still&nbsp;operative.
+<DT><B>-engine </B><I>engine_type_id</I>
+
+<DD>
+This option, which is intended for Cygwin/X developers,
+overrides the server's automatically supported engine type.  This
+parameter will be ignored if the specified engine type is not
+supported on the current system.  The supported engine type ids are 1
+- Shadow GDI, 2 - Shadow DirectDraw, and 4 - Shadow DirectDraw4.
+Additionally, there is a barely functional experimental engine type id
+16 - Native GDI.
+<DT><B>-fullscreen [-depth </B><I>depth</I>] [-refresh <I>rate_in_Hz</I>]
+
+<DD>
+Run the server in fullscreen mode, as opposed to the default windowed
+mode.
+<DT><B>-depth </B><I>depth</I>
+
+<DD>
+Specify the color depth, in bits per pixel, to use when running in
+fullscreen with a DirectDraw engine.  This parameter is ignored if
+<B>-fullscreen</B> is not specified.
+<DT><B>-refresh </B><I>rate_in_Hz</I>
+
+<DD>
+Specify an optional refresh rate to use when running in
+fullscreen with a DirectDraw engine.  This parameter is ignored if
+<B>-fullscreen</B> is not specified.
+<DT><B>-help</B>
+
+<DD>
+Write a help text to the console and to the log file.
+<DT><B>-ignoreinput</B>
+
+<DD>
+Ignore keyboard and mouse input.  This is usually only used for testing
+and debugging purposes.
+<DT><B>-[no]keyhook</B>
+
+<DD>
+Enable [disable] a low-level keyboard hook for catching
+special key combinations like Alt+Tab and passing them to the X
+Server instead of letting <I>Windows</I> handle them.
+<DT><B>-lesspointer</B>
+
+<DD>
+Hide the Windows mouse cursor when the mouse is over any Cygwin/X
+window (regardless of whether that window is active or inactive).  This
+prevents the Windows mouse cursor from being placed overtop of the X
+cursor.
+<DT><B>-logfile </B><I>File_Name</I>
+
+<DD>
+Change the log file from the default located at <I>/var/log/XWin.0.log</I> to
+the one indicated by <I>File_Name</I>.
+<DT><B>-logverbose </B><I>level</I>
+
+<DD>
+Control the degree of verbosity of the log messages with the integer
+parameter <I>level</I>.  For <I>level</I>=0 only fatal errors are
+reported, for <I>level</I>=1 (default) simple information about
+configuration is also given, for <I>level</I>=2 a detailed log
+information (including trace and debug output) is produced.  Bigger
+values will yield a still more detailed debug output.  At this date
+(April 2004) the option is still not fully operative; the default
+value is 2 and the output is insensitive to the level value.
+<DT><B>-multimonitors</B>
+
+<DD>
+Create a root window that covers all monitors on a system with
+multiple monitors.
+<DT><B>-multiwindow</B>
+
+<DD>
+Start the integrated <I>Windowsi</I>-based window manager, which launches each
+top-level X window in its own <I>Windows</I> window.  Not to be used together
+with <B>-rootless</B> nor <B>-fullscreen</B>.
+<DT><B>-nodecoration</B>
+
+<DD>
+Do not give the Cygwin/X window a Windows window border, title bar,
+etc.  This parameter only applies to windowed mode screens, i.e., this
+parameter is ignored when the <B>-fullscreen</B> parameter is specified.
+<DT><B>-nounicodeclipboard</B>
+
+<DD>
+Do not use Unicode clipboard even if NT-based platform.
+<DT><B>-rootless</B>
+
+<DD>
+Run the server in rootless mode.  Not to be used with <B>-multiwindow</B>
+nor with <B>-fullscreen</B>.
+<DT><B>-screen </B><I>screen_number</I> <I>width</I> <I>height</I>
+
+<DD>
+This parameter may be used to specify the
+<I>screen_number,</I>
+
+<I>height,</I>
+
+and
+<I>width</I>
+
+of one or several Cygwin/X screens; each Cygwin/X screen will be
+opened in its own window.  When using multiple screens, be sure not to
+duplicate any screen numbers.
+<I>XWin</I>
+
+default behavior is to create a single screen that is roughly
+the size of the current Windows display area.
+Screen specific parameters, such as <B>-fullscreen</B>, can be applied as a
+default to all screens by placing those screen specific parameters
+before any <B>-screen</B> parameter.  Screen specific parameters placed after
+the first <B>-screen</B> parameter will apply only to the immediately
+preceeding <B>-screen</B> parameter.
+<DT><B>-scrollbars</B>
+
+<DD>
+In windowed mode, allow screens bigger than the Windows desktop.
+Moreover, if the window has decorations, one can now resize it.
+<DT><B>-[no]trayicon</B>
+
+<DD>
+Do not create a tray icon.  Default is to create one
+icon per screen.  You can globally disable tray icons with
+<B>-notrayicon</B>, then enable it for specific screens with
+<B>-trayicon</B> for those screens.
+<DT><B>-[no]unixkill</B>
+
+<DD>
+Enable or disable the <I>Ctrl-Alt-Backspace</I> key combination as a
+signal to exit the X Server.  The <I>Ctrl-Alt-Backspace</I> key combination
+is disabled by default.
+<DT><B>-[no]winkill</B>
+
+<DD>
+Enable or disable the <I>Alt-F4</I> key combination as a signal to exit the
+X Server.
+The <I>Alt-F4</I> key combination is enabled by default.
+<DT><B>-swcursor</B>
+
+<DD>
+Disable the usage of the windows cursor and use the X11 software cursor instead.
+<B>-silent-dup-error</B>
+
+If another instance of XWin with the same display number is found running,
+exit silently and don't display the error messge.
+<DT><B>-xkblayout </B><I>layout</I>
+
+<DD>
+<DT><B>-xkbmodel </B><I>model</I>
+
+<DD>
+<DT><B>-xkboptions </B><I>option</I>
+
+<DD>
+<DT><B>-xkbrules </B><I>rule</I>
+
+<DD>
+<DT><B>-xkbvariant </B><I>variant</I>
+
+<DD>
+These options implement the xkeyboard extension for loading
+a particular keyboard map as the X server starts.  The behavior is similar
+to the <I>setxkbmap</I> program.  The layout data is located at
+<I>/usr/share/X11/xkb/</I>.  Additional information is found in the
+README files therein and in the man page of <I>setxkbmap</I>.  For example
+in order to load a German layout for a pc105 keyboard one uses
+the options:
+<BR>
+
+<I> -xkblayout de -xkbmodel pc105</I>
+
+</DL>
+<P>
+
+Alternatively one may use the <I>setxkbmap</I> program after XWin is
+running or even the <I>xmodmap</I> program for loading the old-style
+keyboard maps.
+<P>
+<P>
+<A NAME="lbAI">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+X(7), Xserver(1), xdm(1), xinit(1), <A HREF="../man5/XWinrc.5.html">XWinrc</A>(5), setxkbmap(1)
+<P>
+<P>
+<A NAME="lbAJ">&nbsp;</A>
+<H2>BUGS</H2>
+
+<I>XWin</I>
+
+and this man page still have many limitations.  Some of the more obvious
+ones are:
+<BR>
+
+- The display mode can not be changed once the X server has started.
+<BR>
+
+- The XWin software is developing rapidly; it is therefore likely that
+this man page is not up to date.  It is always prudent to 
+look also at the output of <I>XWin -help</I> and to the Cygwin/X User Guide
+at /usr/share/doc/cygwin-x-doc-x.x.x/ug/cygwin-x-ug.xxx in order to
+check the options that are operative.
+<P>
+<P>
+<A NAME="lbAK">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+This list is by no means complete, but direct contributors to the
+Cygwin/X project include (in alphabetical order by last name): Stuart
+Adamson, Michael Bax, Jehan Bing, Lev Bishop, Dr. Peter Busch, Biju G
+C, Robert Collins, Nick Crabtree, Early Ehlinger, Christopher Faylor,
+John Fortin, Brian Genisio, Fabrizio Gennari, Alexander Gottwald, Ralf
+Habacker, Colin Harrison, Matthieu Herrb, Alan Hourihane, Pierre A
+Humblet, Harold L Hunt II, Dakshinamurthy Karra, Kensuke Matsuzaki,
+Takuma Murakami, Earle F. Philhower III, Benjamin Riefenstahl, Suhaib
+Siddiqi, Jack Tanner, and Nicholas Wourms.
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">MODES</A><DD>
+<DT><A HREF="#lbAF">LOG</A><DD>
+<DT><A HREF="#lbAG">PREFERENCES FILE</A><DD>
+<DT><A HREF="#lbAH">OPTIONS</A><DD>
+<DT><A HREF="#lbAI">SEE ALSO</A><DD>
+<DT><A HREF="#lbAJ">BUGS</A><DD>
+<DT><A HREF="#lbAK">AUTHORS</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://localhost/cgi-bin/man/man2html">man2html</A>,
+using the manual pages.<BR>
+Time: 02:16:56 GMT, November 28, 2008
+</BODY>
+</HTML>
