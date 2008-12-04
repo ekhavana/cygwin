@@ -157,7 +157,10 @@ HREF="cygwin-x-faq.html#modular"
 ><DT
 >3.1. <A
 HREF="cygwin-x-faq.html#q-x-is-broke"
->What happened to my X server?
+>What happened to my X server? Where did <TT
+CLASS="filename"
+>/usr/X11R6/</TT
+> go?
 </A
 ></DT
 ><DT
@@ -168,7 +171,10 @@ HREF="cygwin-x-faq.html#q-i-cant-type-anything"
 ><DT
 >3.3. <A
 HREF="cygwin-x-faq.html#q-whereis-startxwin-bat"
->I can't find startxwin.bat to start the X server</A
+>I can't find <B
+CLASS="command"
+>startxwin.bat</B
+> to start the X server</A
 ></DT
 ><DT
 >3.4. <A
@@ -380,7 +386,7 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN452"
+HREF="cygwin-x-faq.html#AEN471"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
@@ -1254,7 +1260,10 @@ NAME="q-x-is-broke"
 ></A
 ><B
 >3.1. </B
->What happened to my X server?
+>What happened to my X server? Where did <TT
+CLASS="filename"
+>/usr/X11R6/</TT
+> go?
 </P
 ></DIV
 ><DIV
@@ -1352,7 +1361,10 @@ NAME="q-whereis-startxwin-bat"
 ></A
 ><B
 >3.3. </B
->I can't find startxwin.bat to start the X server</P
+>I can't find <B
+CLASS="command"
+>startxwin.bat</B
+> to start the X server</P
 ></DIV
 ><DIV
 CLASS="answer"
@@ -1410,14 +1422,56 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>Possible workarounds:</P
+><OL
+COMPACT="COMPACT"
+TYPE="1"
+><LI
+><P
 >Try <B
 CLASS="command"
 >rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp</B
 ></P
+></LI
+><LI
 ><P
->Try starting the server with -nolock</P
+>Try starting the server with <CODE
+CLASS="parameter"
+>-nolock</CODE
+> (e.g. if you use <TT
+CLASS="filename"
+>startxwin.bat</TT
+> or <TT
+CLASS="filename"
+>startxwin.sh</TT
+> to start the server, add <CODE
+CLASS="parameter"
+>-nolock</CODE
+> to the <B
+CLASS="command"
+>XWin</B
+> line in that script; if you use <B
+CLASS="command"
+>xinit</B
+> or <B
+CLASS="command"
+>startx</B
+>, run it as <B
+CLASS="command"
+>xinit -- -nolock</B
+> or  <B
+CLASS="command"
+>startx -- -nolock</B
+>)</P
+></LI
+></OL
 ><P
->Technical details: The X server attempts to create a lock file in
+>Technical details: 
+The cause of this problem is not understood at present, but may be related
+to permissions on /tmp, or not having administrator rights.
+</P
+><P
+>&#13;The X server attempts to create a lock file in
 <TT
 CLASS="filename"
 >/tmp</TT
@@ -1427,10 +1481,6 @@ lock file to determine the pid of an already running server.  The failure
 case appears to be that lock file was created successfully, but the rename
 failed, despite the fact that no old lock file exists, which we then fail
 to read.
-</P
-><P
->&#13;The cause of this problem is not understood at present, but may be related
-to permissions on /tmp.
 </P
 ></DIV
 ></DIV
@@ -1669,7 +1719,7 @@ CLASS="answer"
 > </B
 >No.  But most of the options which were configurable in the
 configfile are now available as
-commandline options.  For more information on configuring other
+command line options.  For more information on configuring other
 keyboard layouts see <A
 HREF="cygwin-x-faq.html#q-non-U.S.-keyboard-layout"
 >Q: 5.1.1.</A
@@ -2063,14 +2113,26 @@ CLASS="screen"
 ></LI
 ><LI
 ><P
->The XKB layout code for this layout if you know it.</P
+>The XKB layout code for this layout if you know it.  Please experiment 
+with <B
+CLASS="command"
+>setxkbmap</B
+> or  <CODE
+CLASS="parameter"
+>-xkblayout</CODE
+> (as
+described in <A
+HREF="cygwin-x-faq.html#q-non-U.S.-keyboard-layout"
+>Q: 5.1.1.</A
+>) to find a XKB layout
+code which works for you, otherwise the  maintainers will have to guess it.</P
 ></LI
 ><LI
 ><P
 >A description how the layout looks like. This makes it easy to identify
 the matching XKB layout code. Many layouts are available from the 
 <A
-HREF="http://www.microsoft.com/globaldev/reference/keyboards.aspx"
+HREF="http://www.microsoft.com/globaldev/reference/keyboards.mspx"
 TARGET="_top"
 >&#13;Microsoft Global Dev</A
 > website. Just add a link to your layout.</P
@@ -2095,11 +2157,12 @@ CLASS="answer"
 ><P
 ><B
 > </B
->You can try using an xmodmap file for your keyboard layout from
-a GNU/Linux distribution (e.g. RedHat).
-
-XXX: This answer needs updating.  The package xkeyboard-config should 
-contain the any needed layout</P
+>This question should be obsolete
+The package <TT
+CLASS="filename"
+>xkeyboard-config</TT
+> should contain just about
+any needed layout</P
 ></DIV
 ><DIV
 CLASS="answer"
@@ -2334,7 +2397,7 @@ CLASS="answer"
 >The older X11 releases on the various commercial unices define
 the AltGr key as ModeSwitch, MetaR, AltR or similar.  Cygwin/X expects
 it to be ISO_Level3_Switch.  For reasons unknown to us this is reset
-when loggin into the remote host.  As far as we don't have access to
+when logging into the remote host.  As far as we don't have access to
 such a machine we are unable to track this down and find a
 reason.</P
 ><P
@@ -2759,7 +2822,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN452"
+NAME="AEN471"
 ></A
 ><B
 >6.2. </B
@@ -4188,7 +4251,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->This error occurs for one of two reasons:</P
+>This error occurs for one of three reasons:</P
 ><OL
 COMPACT="COMPACT"
 TYPE="1"
@@ -4280,6 +4343,28 @@ the mount point for the fonts directory should result in the files
 being untarred to a valid location.</P
 ></LI
 ></OL
+></LI
+><LI
+><P
+>You chose "DOS/text" as the "Default Text File type" during Cygwin setup, ignoring the advice that the Default Text File Type should be left on Unix/binary unless you have a very good reason to switch it to DOS/text.</P
+><P
+>Open a Cygwin shell and run.</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;umount /usr/share/fonts/
+mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>Reinstall your fonts</P
 ></LI
 ></OL
 ></DIV
@@ -4733,7 +4818,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN912"
+NAME="AEN936"
 ></A
 ><P
 ><B
