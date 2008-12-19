@@ -592,7 +592,7 @@ programs, whereas the <code class="filename">/d</code> mount is only visible
 to the current user.</p><p>The <span><strong class="command">mount</strong></span> utility is also the mechanism for
 adding new mounts to the mount table.  The following example
 demonstrates how to mount the directory
-<code class="filename">\\pollux\home\joe\data</code> to <code class="filename">/data</code>
+<code class="filename">//pollux/home/joe/data</code> to <code class="filename">/data</code>
 for the duration of the current session.
 </p><div class="example"><a name="utils-mount-add-ex"></a><p class="title"><b>Example&#160;3.11.&#160;Adding mount points</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>ls /data</code></strong>
@@ -600,10 +600,10 @@ ls: /data: No such file or directory
 <code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount //pollux/home/joe/data /data</code></strong>
 mount: warning - /data does not exist!
 <code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount</code></strong>
-\\pollux\home\joe\data on /data type smbfs (binary)
-c:\cygwin\bin on /usr/bin type ntfs (binary)
-c:\cygwin\lib on /usr/lib type ntfs (binary)
-c:\cygwin on / type ntfs (binary)
+//pollux/home/joe/data on /data type smbfs (binary)
+c:/cygwin/bin on /usr/bin type ntfs (binary)
+c:/cygwin/lib on /usr/lib type ntfs (binary)
+c:/cygwin on / type ntfs (binary)
 c: on /c type ntfs (binary,user,noumount)
 d: on /d type fat (binary,user,noumount)
 </pre></div></div><br class="example-break"><p>A given POSIX path may only exist once in the mount table.  Attempts to
@@ -696,7 +696,7 @@ User operations:
   -P, --pwd-required       password is required for USER.
   -R, --reg-store-pwd      enter password to store it in the registry for
                            later usage by services to be able to switch
-                           to this user context with network credentials."
+                           to this user context with network credentials.
 
 System operations:
   -i, --inactive NUM       set NUM of days before inactive accounts are disabled

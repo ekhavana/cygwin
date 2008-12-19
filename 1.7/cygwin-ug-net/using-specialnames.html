@@ -177,11 +177,11 @@ does not.  In the same situation the function call
 <code class="filename">filename.exe</code>.  The two files can be distinguished
 by examining their inodes, as demonstrated below.
 </p><pre class="screen">
-<code class="prompt">C:\&gt;</code> <strong class="userinput"><code>ls * </code></strong>
+<code class="prompt">bash$</code> <strong class="userinput"><code>ls * </code></strong>
 a      a.exe     b.exe
-<code class="prompt">C:\&gt;</code> <strong class="userinput"><code>ls -i a a.exe</code></strong>
+<code class="prompt">bash$</code> <strong class="userinput"><code>ls -i a a.exe</code></strong>
 445885548 a       435996602 a.exe
-<code class="prompt">C:\&gt;</code> <strong class="userinput"><code>ls -i b b.exe</code></strong>
+<code class="prompt">bash$</code> <strong class="userinput"><code>ls -i b b.exe</code></strong>
 432961010 b       432961010 b.exe
 </pre><p>
 If a shell script <code class="filename">myprog</code> and a program
@@ -200,21 +200,46 @@ for example the command <strong class="userinput"><code>cat /proc/cpuinfo</code>
 displays information such as what model and speed processor you have.
 </p><p>
 One unique aspect of the Cygwin <code class="filename">/proc</code> filesystem
-is <code class="filename">/proc/registry</code>, which displays the Windows
-registry with each <code class="literal">KEY</code> as a directory and each
-<code class="literal">VALUE</code> as a file. As anytime you deal with the
-Windows registry, use caution since changes may result in an unstable
-or broken system.  There are additionally subdirectories called
+is <code class="filename">/proc/registry</code>, see next section.
+</p><p>
+The Cygwin <code class="filename">/proc</code> is not as complete as the
+one in Linux, but it provides significant capabilities. The
+<code class="systemitem">procps</code> package contains several utilities
+that use it.
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-proc-registry"></a>The /proc/registry filesystem</h3></div></div></div><p>
+The <code class="filename">/proc/registry</code> filesystem provides read-only
+access to the Windows registry.  It displays each <code class="literal">KEY</code>
+as a directory and each <code class="literal">VALUE</code> as a file.  As anytime
+you deal with the Windows registry, use caution since changes may result
+in an unstable or broken system.  There are additionally subdirectories called
 <code class="filename">/proc/registry32</code> and <code class="filename">/proc/registry64</code>.
 They are identical to <code class="filename">/proc/registry</code> on 32 bit
 host OSes.  On 64 bit host OSes, <code class="filename">/proc/registry32</code>
 opens the 32 bit processes view on the registry, while
 <code class="filename">/proc/registry64</code> opens the 64 bit processes view.
 </p><p>
-The Cygwin <code class="filename">/proc</code> is not as complete as the
-one in Linux, but it provides significant capabilities. The
-<code class="systemitem">procps</code> package contains several utilities
-that use it.
+Reserved characters ('/', '\', ':', and '%') or reserved names
+(<code class="filename">.</code> and <code class="filename">..</code>) are converted by
+percent-encoding:
+</p><pre class="screen">
+<code class="prompt">bash$</code> <strong class="userinput"><code>regtool list -v '\HKEY_LOCAL_MACHINE\SYSTEM\MountedDevices'</code></strong>
+...
+\DosDevices\C: (REG_BINARY) = cf a8 97 e8 00 08 fe f7
+...
+<code class="prompt">bash$</code> <strong class="userinput"><code>cd /proc/registry/HKEY_LOCAL_MACHINE/SYSTEM</code></strong>
+<code class="prompt">bash$</code> <strong class="userinput"><code>ls -l MountedDevices</code></strong>
+...
+-r--r----- 1 Admin SYSTEM  12 Dec 10 11:20 %5CDosDevices%5CC%3A
+...
+<code class="prompt">bash$</code> <strong class="userinput"><code>od -t x1 MountedDevices/%5CDosDevices%5CC%3A</code></strong>
+0000000 cf a8 97 e8 00 08 fe f7 01 00 00 00
+</pre><p>
+The unnamed (default) value of a key can be accessed using the filename
+<code class="filename">@</code>.
+</p><p>
+If a registry key contains a subkey and a value with the same name
+<code class="filename">foo</code>, Cygwin displays the subkey as
+<code class="filename">foo</code> and the value as <code class="filename">foo%val</code>.
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-at"></a>The @pathnames</h3></div></div></div><p>To circumvent the limitations on shell line length in the native
 Windows command shells, Cygwin programs expand their arguments
 starting with "@" in a special way.  If a file
@@ -228,6 +253,7 @@ In the following example compare the behaviors of the bash built-in
 <code class="prompt">bash$</code> <strong class="userinput"><code>echo  'This   is   "a     long"  line' &gt; mylist</code></strong>
 <code class="prompt">bash$</code> <strong class="userinput"><code>echo @mylist</code></strong>
 @mylist
+<code class="prompt">bash$</code> <strong class="userinput"><code>cmd</code></strong>
 <code class="prompt">c:\&gt;</code> <strong class="userinput"><code>c:\cygwin\bin\echo @mylist</code></strong>
 This is a     long line
 </pre></div></div><br class="example-break"></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-filemodes.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="using-cygwinenv.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">File permissions&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;The <code class="envar">CYGWIN</code> environment
