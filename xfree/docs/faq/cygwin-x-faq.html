@@ -386,7 +386,7 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN471"
+HREF="cygwin-x-faq.html#AEN474"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
@@ -677,6 +677,12 @@ HREF="cygwin-x-faq.html#q-error-env-space"
 >9.13. <A
 HREF="cygwin-x-faq.html#q-too-many-parameters"
 >Too many parameters</A
+></DT
+><DT
+>9.14. <A
+HREF="cygwin-x-faq.html#q-xcb-lock-assertion"
+>&#13;"xcb_xlib_lock: Assertion '!c-&gt;xlib.lock' failed." or "xcb_xlib_unlock: Assertion 'c-&gt;xlib.lock' failed."
+</A
 ></DT
 ></DL
 ></DD
@@ -1341,6 +1347,15 @@ use the updated <B
 CLASS="command"
 >startxwin.bat</B
 >.
+</P
+><P
+>&#13;If <B
+CLASS="command"
+>echo $XKEYSYMDB</B
+> outputs something, you have something else setting <CODE
+CLASS="parameter"
+>XKEYSYMDB</CODE
+> in your environment.  Find it and remove it.
 </P
 ><P
 >These variables were always being set to the defaults, so they can simply be removed.
@@ -2822,7 +2837,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN471"
+NAME="AEN474"
 ></A
 ><B
 >6.2. </B
@@ -4733,6 +4748,55 @@ HREF="cygwin-x-faq.html#q-error-env-space"
 ></P
 ></DIV
 ></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-xcb-lock-assertion"
+></A
+><B
+>9.14. </B
+>
+"xcb_xlib_lock: Assertion '!c-&gt;xlib.lock' failed." or "xcb_xlib_unlock: Assertion 'c-&gt;xlib.lock' failed."
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Both of these represent bugs in a caller of libX11, and <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>not</I
+></SPAN
+> in libX11
+or libxcb. The first assertion means that a caller attempted to lock
+the display while already locked. The second assertion means that a
+caller attempted to unlock the display without having it locked. 
+</P
+><P
+>&#13;If you encounter such bugs, please report a bug against the offending 
+software (which is <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>not</I
+></SPAN
+> libX11 or libxcb)
+</P
+><P
+>&#13;This error can be worked around by using <B
+CLASS="command"
+>export LIBXCB_ALLOW_SLOPPY_LOCK=1</B
+>
+</P
+></DIV
+></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -4818,7 +4882,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN936"
+NAME="AEN949"
 ></A
 ><P
 ><B
@@ -5013,34 +5077,6 @@ CLASS="acronym"
 >UNIX</ACRONYM
 > end of
 line characters.</P
-><P
->Generally it is better for us if you generate your patches
-against the X.org CVS tree.  For example, run <B
-CLASS="command"
->cvs -z4 diff
--U3 hw/xwin/</B
-> from <TT
-CLASS="filename"
->xc/programs/Xserver/</TT
-> to generate a diff
-file for all the modified files in <TT
-CLASS="filename"
->hw/xwin/</TT
->.  CVS is smart enough to only
-generate diffs for files that are in the CVS repository; for example,
-CVS diff will not create diffs for Emacs temporary files.</P
-><P
->In the case that you have modified a single file, create the
-diff with <B
-CLASS="command"
->cvs -z4 diff -U3
-<TT
-CLASS="replaceable"
-><I
->file_name</I
-></TT
-></B
->.</P
 ></DIV
 ></DIV
 ><DIV
