@@ -105,69 +105,152 @@ selected packages.</P
 ><UL
 ><LI
 ><P
->autoconf</P
+>Required and useful tools:</P
+><P
+>&#13;autoconf, 
+automake,
+binutils,
+bzip2,
+diffutils,
+fileutils,
+findutils,
+flex,
+gawk,
+gcc,
+git,
+libtool,
+make,
+patch,
+pkg-config,
+sed,
+tar
+</P
 ></LI
 ><LI
 ><P
->automake</P
+>Required protocol headers:</P
+><P
+>&#13;bigreqsproto,
+damageproto,
+evieext,
+fixesproto,
+fontsproto,
+glproto,
+inputproto,
+kbproto,
+randrproto,
+recordproto,
+renderproto,
+resourceproto,
+scrnsaverproto,
+xcmiscproto,
+xextproto,
+xproto
+</P
 ></LI
 ><LI
 ><P
->binutils</P
+>Required development libraries:</P
+><P
+>&#13;libfontenc-devel,
+libfreetype2-devel,
+libgetaddrinfo-devel,
+libGL-devel,
+libpixman1-devel,
+libX11-devel,
+libXau-devel,
+libXdmcp-devel,
+libXext-devel,
+libXfont-devel,
+minires-devel,
+openssl-devel,
+zlib
+</P
 ></LI
 ><LI
 ><P
->bzip2</P
-></LI
-><LI
+>Other miscellaneous required pacakges :</P
 ><P
->diffutils</P
-></LI
-><LI
-><P
->fileutils</P
-></LI
-><LI
-><P
->findutils</P
-></LI
-><LI
-><P
->flex</P
-></LI
-><LI
-><P
->gawk</P
-></LI
-><LI
-><P
->gcc</P
-></LI
-><LI
-><P
->git</P
-></LI
-><LI
-><P
->make</P
-></LI
-><LI
-><P
->patch</P
-></LI
-><LI
-><P
->sed</P
-></LI
-><LI
-><P
->tar</P
-></LI
-><LI
-><P
->zlib</P
+>&#13;xorg-util-macros,
+xtrans
+</P
 ></LI
 ></UL
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+The /usr/share/doc/Cygwin/xorg-server-n.n.n.README file installed with the X server
+binary package lists up-to-date runtime and build requirements.
+</P
+></BLOCKQUOTE
+></DIV
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="prog-compiling-environment-setup"
+>Compilation environment setup</A
+></H3
+><DIV
+CLASS="sect4"
+><H4
+CLASS="sect4"
+><A
+NAME="prog-compiling-libXfont-linkage-issue"
+>libXfont linkage issue</A
+></H4
+><P
+>&#13;libXfont must be statically linked for the server to start correctly, otherwise
+it fails with errors loading all fonts, including the mandatory fixed font.
+</P
+><P
+>&#13;This is due to limitations of Cygwin's current weak symbol handling which requires
+static linking to work correctly.  For example, in libXfont the RegisterFPEFunctions
+function is defined weak and should be overloaded with RegisterFPEFunctions defined
+in dix/dixfont.c in the xserver.
+However, such overloading will only currently work for Cygwin when libXfont is statically
+linked with the X server, and not as a shared libary.
+</P
+><P
+>&#13;We can't ship a static-only libXfont in Cygwin because xfs requires it shared,
+otherwise you get multiple definitions during linking, thanks to the xtrans code.
+So when building the X server, you must prepare your compilation environment so
+that the libXfont shared libary is not linked with.
+</P
+><P
+>&#13;A quick and dirty way of achieving this is to move libXFont.la and libXfont.dll.a
+aside whilst building the X server.
+</P
+><P
+>&#13;<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;mv /usr/lib/libXFont.la    /usr/lib/libXFont.la.old
+mv /usr/lib/libXFont.dll.a /usr/lib/libXFont.dll.a.old
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+><P
+>&#13;A cleaner way is to generate customized .pc file for libXfont and arrange for that
+to be in your PKG_CONFIG_PATH when ./configuring the X server.  See the .cygport file
+for an example of how to achieve that.
+</P
+></DIV
 ></DIV
 ><DIV
 CLASS="sect3"
@@ -195,7 +278,7 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~
-$ cd x-devel
+$ cd ~/xserver
 
 Username@CygwinHost ~/xserver
 $ ./configure --prefix=/usr
@@ -219,7 +302,7 @@ CLASS="note"
 >
 The unpacked source occupies approximately 80MB of disk space.
 Building the source requires approximately an additional 160MB.
-On my ageing 2.2MHz Athlon64 3500+, the build takes about 20 minutes.
+On my ageing 2.2MHz Athlon64 3500+, a full build takes about 20 minutes.
 </P
 ><P
 >XXX: Describe configure option for specifying a builddir</P
@@ -254,13 +337,13 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~
-$ cd x-devel
+$ cd ~/xserver
 
 Username@CygwinHost ~/xserver
 $ ./configure --prefix=/usr --enable-debug CFLAGS="-g -O0"
 [lots of output]
 $ make
-[lots more 
+[lots more output]
 </PRE
 ></TD
 ></TR
@@ -335,19 +418,9 @@ NAME="prog-compiling-install"
 >Installing a local build</A
 ></H2
 ><P
->Installing a local build enables you to verify that a build of
-the entire source tree is operational.  It is wise to verify the
-operation of full builds of the source tree from time to time, as full
-builds will occasionally be broken by changes that other developers
-are making to the X Window System source code tree.</P
-><P
->Installing a local build on top of an existing build is not a
-good idea, as this can mask problems that occurred during the build
-process, or it can cause problems that are unrelated to the build
-process; either situation is undesirable.  It is generally a good
-idea to move your old installation out of the way before installing a
-local build, and these instructions will assume that you desire to do
-so.  Follow the instructions below to install a local build:</P
+>&#13;Installing a local build installs the built X server(s) and associated
+man pages.
+</P
 ><OL
 TYPE="1"
 ><LI
