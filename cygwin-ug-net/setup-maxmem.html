@@ -1,12 +1,13 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Changing Cygwin's Maximum Memory</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="prev" href="setup-env.html" title="Environment Variables"><link rel="next" href="ntsec.html" title="NT security"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Changing Cygwin's Maximum Memory</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-env.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;2.&#160;Setting Up Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-maxmem"></a>Changing Cygwin's Maximum Memory</h2></div></div></div><p>
-Cygwin's heap is extensible.  However, it does start out at a fixed size
-and attempts to extend it may run into memory which has been previously
-allocated by Windows.  In some cases, this problem can be solved by
-adding an entry in the either the <code class="literal">HKEY_LOCAL_MACHINE</code>
-(to change the limit for all users) or
-<code class="literal">HKEY_CURRENT_USER</code> (for just the current user) section
-of the registry.  </p><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Changing Cygwin's Maximum Memory</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><link rel="start" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="prev" href="setup-env.html" title="Environment Variables"><link rel="next" href="ntsec.html" title="NT security and usage of ntsec"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Changing Cygwin's Maximum Memory</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-env.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;2.&#160;Setting Up Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-maxmem"></a>Changing Cygwin's Maximum Memory</h2></div></div></div><p>
+By default no Cygwin program can allocate more than 384 MB of memory 
+(program+data).  You should not need to change this default in most 
+circumstances.  However, if you need to use more real or virtual memory in 
+your machine you may add an entry in the either the 
+<code class="literal">HKEY_LOCAL_MACHINE</code> (to change the limit for all users) or 
+<code class="literal">HKEY_CURRENT_USER</code> (for just the current user) section of 
+the registry. 
+</p><p>
 Add the <code class="literal">DWORD</code> value <code class="literal">heap_chunk_in_mb</code> 
 and set it to the desired memory limit in decimal MB. It is preferred to do 
 this in Cygwin using the <span class="command"><strong>regtool</strong></span> program included in the 
@@ -18,8 +19,8 @@ when using <span class="command"><strong>regtool</strong></span> since damaging 
 result in an unusable system.  This example sets memory limit to 1024 MB:
 
 </p><pre class="screen">
-regtool -i set /HKLM/Software/Cygwin/heap_chunk_in_mb 1024
-regtool -v list /HKLM/Software/Cygwin
+regtool -i set /HKLM/Software/Cygnus\ Solutions/Cygwin/heap_chunk_in_mb 1024
+regtool -v list /HKLM/Software/Cygnus\ Solutions/Cygwin
 </pre><p>
 </p><p>
 Exit all running Cygwin processes and restart them. Memory can be allocated up 
@@ -55,4 +56,4 @@ gcc max_memory.c -o max_memory.exe
 </pre><p>
 
 Run the program and it will output the maximum amount of allocatable memory.
-</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup-env.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="setup-net.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Environment Variables&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;NT security</td></tr></table></div></body></html>
+</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup-env.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="setup-net.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Environment Variables&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;NT security and usage of <code class="literal">ntsec</code></td></tr></table></div></body></html>

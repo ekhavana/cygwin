@@ -1,8 +1,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Chapter&#160;3.&#160;Using Cygwin</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="prev" href="setup-files.html" title="Customizing bash"><link rel="next" href="using-textbinary.html" title="Text and Binary modes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&#160;3.&#160;Using Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-files.html">Prev</a>&#160;</td><th width="60%" align="center">&#160;</th><td width="20%" align="right">&#160;<a accesskey="n" href="using-textbinary.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="using"></a>Chapter&#160;3.&#160;Using Cygwin</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="using.html#using-pathnames">Mapping path names</a></span></dt><dd><dl><dt><span class="sect2"><a href="using.html#pathnames-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="using.html#mount-table">The Cygwin Mount Table</a></span></dt><dt><span class="sect2"><a href="using.html#pathnames-additional">Additional Path-related Information</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-textbinary.html">Text and Binary modes</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-textbinary.html#textbin-issue">The Issue</a></span></dt><dt><span class="sect2"><a href="using-textbinary.html#textbin-default">The default Cygwin behavior</a></span></dt><dt><span class="sect2"><a href="using-textbinary.html#textbin-example">Example</a></span></dt><dt><span class="sect2"><a href="using-textbinary.html#textbin-question">Binary or text?</a></span></dt><dt><span class="sect2"><a href="using-textbinary.html#textbin-devel">Programming</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-filemodes.html">File permissions</a></span></dt><dt><span class="sect1"><a href="using-specialnames.html">Special filenames</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-specialnames.html#pathnames-dosdevices">DOS devices</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#pathnames-specialchars">Special characters in filenames</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#pathnames-casesensitive">Case sensitive filenames</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#pathnames-posixdevices">POSIX devices</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#pathnames-exe">The .exe extension</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#pathnames-proc">The /proc filesystem</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#pathnames-at">The @pathnames</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-cygwinenv.html">The CYGWIN environment
-variable</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-cygwinenv.html#cygwinenv-implemented-options">Implemented options</a></span></dt><dt><span class="sect2"><a href="using-cygwinenv.html#cygwinenv-removed-options">Removed options</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-cygserver.html">Cygserver</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-cygserver.html#what-is-cygserver">What is Cygserver?</a></span></dt><dt><span class="sect2"><a href="using-cygserver.html#cygserver-command-line">Cygserver command line options</a></span></dt><dt><span class="sect2"><a href="using-cygserver.html#start-cygserver">How to start Cygserver</a></span></dt><dt><span class="sect2"><a href="using-cygserver.html#use-cygserver">How to use the Cygserver services</a></span></dt><dt><span class="sect2"><a href="using-cygserver.html#cygserver-config">The Cygserver configuration file</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-utils.html">Cygwin Utilities</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-utils.html#cygcheck">cygcheck</a></span></dt><dt><span class="sect2"><a href="using-utils.html#cygpath">cygpath</a></span></dt><dt><span class="sect2"><a href="using-utils.html#dumper">dumper</a></span></dt><dt><span class="sect2"><a href="using-utils.html#getfacl">getfacl</a></span></dt><dt><span class="sect2"><a href="using-utils.html#kill">kill</a></span></dt><dt><span class="sect2"><a href="using-utils.html#mkgroup">mkgroup</a></span></dt><dt><span class="sect2"><a href="using-utils.html#mkpasswd">mkpasswd</a></span></dt><dt><span class="sect2"><a href="using-utils.html#mount">mount</a></span></dt><dt><span class="sect2"><a href="using-utils.html#passwd">passwd</a></span></dt><dt><span class="sect2"><a href="using-utils.html#ps">ps</a></span></dt><dt><span class="sect2"><a href="using-utils.html#regtool">regtool</a></span></dt><dt><span class="sect2"><a href="using-utils.html#setfacl">setfacl</a></span></dt><dt><span class="sect2"><a href="using-utils.html#ssp">ssp</a></span></dt><dt><span class="sect2"><a href="using-utils.html#strace">strace</a></span></dt><dt><span class="sect2"><a href="using-utils.html#umount">umount</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-effectively.html">Using Cygwin effectively with Windows</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-effectively.html#using-pathnames-effectively">Pathnames</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#using-console">Console Programs</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#using-net">Cygwin and Windows Networking</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#using-cygutils">The cygutils package</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#using-shortcuts">Creating shortcuts with cygutils</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#using-printing">Printing with cygutils</a></span></dt></dl></dd></dl></div><p>This chapter explains some key differences between the Cygwin
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Chapter&#160;3.&#160;Using Cygwin</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"><link rel="start" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="prev" href="setup-files.html" title="Customizing bash"><link rel="next" href="using-textbinary.html" title="Text and Binary modes"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter&#160;3.&#160;Using Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-files.html">Prev</a>&#160;</td><th width="60%" align="center">&#160;</th><td width="20%" align="right">&#160;<a accesskey="n" href="using-textbinary.html">Next</a></td></tr></table><hr></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="using"></a>Chapter&#160;3.&#160;Using Cygwin</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="using.html#using-pathnames">Mapping path names</a></span></dt><dd><dl><dt><span class="sect2"><a href="using.html#id317205">Introduction</a></span></dt><dt><span class="sect2"><a href="using.html#mount-table">The Cygwin Mount Table</a></span></dt><dt><span class="sect2"><a href="using.html#id317466">Additional Path-related Information</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-textbinary.html">Text and Binary modes</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-textbinary.html#id317551">The Issue</a></span></dt><dt><span class="sect2"><a href="using-textbinary.html#id317629">The default Cygwin behavior</a></span></dt><dt><span class="sect2"><a href="using-textbinary.html#id317769">Example</a></span></dt><dt><span class="sect2"><a href="using-textbinary.html#id317822">Binary or text?</a></span></dt><dt><span class="sect2"><a href="using-textbinary.html#id317863">Programming</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-filemodes.html">File permissions</a></span></dt><dt><span class="sect1"><a href="using-specialnames.html">Special filenames</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-specialnames.html#id318040">DOS devices</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#id318090">POSIX devices</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#id318321">The .exe extension</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#id318506">The /proc filesystem</a></span></dt><dt><span class="sect2"><a href="using-specialnames.html#id318568">The @pathnames</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-cygwinenv.html">The <code class="envar">CYGWIN</code> environment
+variable</a></span></dt><dt><span class="sect1"><a href="using-cygserver.html">Cygserver</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-cygserver.html#what-is-cygserver">What is Cygserver?</a></span></dt><dt><span class="sect2"><a href="using-cygserver.html#cygserver-command-line">Cygserver command line options</a></span></dt><dt><span class="sect2"><a href="using-cygserver.html#start-cygserver">How to start Cygserver</a></span></dt><dt><span class="sect2"><a href="using-cygserver.html#use-cygserver">How to use the Cygserver services</a></span></dt><dt><span class="sect2"><a href="using-cygserver.html#cygserver-config">The Cygserver configuration file</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-utils.html">Cygwin Utilities</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-utils.html#cygcheck">cygcheck</a></span></dt><dt><span class="sect2"><a href="using-utils.html#cygpath">cygpath</a></span></dt><dt><span class="sect2"><a href="using-utils.html#dumper">dumper</a></span></dt><dt><span class="sect2"><a href="using-utils.html#getfacl">getfacl</a></span></dt><dt><span class="sect2"><a href="using-utils.html#kill">kill</a></span></dt><dt><span class="sect2"><a href="using-utils.html#mkgroup">mkgroup</a></span></dt><dt><span class="sect2"><a href="using-utils.html#mkpasswd">mkpasswd</a></span></dt><dt><span class="sect2"><a href="using-utils.html#mount">mount</a></span></dt><dt><span class="sect2"><a href="using-utils.html#passwd">passwd</a></span></dt><dt><span class="sect2"><a href="using-utils.html#ps">ps</a></span></dt><dt><span class="sect2"><a href="using-utils.html#regtool">regtool</a></span></dt><dt><span class="sect2"><a href="using-utils.html#setfacl">setfacl</a></span></dt><dt><span class="sect2"><a href="using-utils.html#ssp">ssp</a></span></dt><dt><span class="sect2"><a href="using-utils.html#strace">strace</a></span></dt><dt><span class="sect2"><a href="using-utils.html#umount">umount</a></span></dt></dl></dd><dt><span class="sect1"><a href="using-effectively.html">Using Cygwin effectively with Windows</a></span></dt><dd><dl><dt><span class="sect2"><a href="using-effectively.html#id322841">Pathnames</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#id322908">Console Programs</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#id322975">Cygwin and Windows Networking</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#id323054">The cygutils package</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#id323130">Creating shortcuts with cygutils</a></span></dt><dt><span class="sect2"><a href="using-effectively.html#id323166">Printing with cygutils</a></span></dt></dl></dd></dl></div><p>This chapter explains some key differences between the Cygwin
 environment and traditional UNIX systems. It assumes a working
-knowledge of standard UNIX commands.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-pathnames"></a>Mapping path names</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-intro"></a>Introduction</h3></div></div></div><p>Cygwin supports both Win32- and POSIX-style paths, where
+knowledge of standard UNIX commands.</p><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-pathnames"></a>Mapping path names</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id317205"></a>Introduction</h3></div></div></div><p>Cygwin supports both Win32- and POSIX-style paths, where
 directory delimiters may be either forward or back slashes.  UNC
 pathnames (starting with two slashes and a network name) are also
 supported.</p><p>POSIX operating systems (such as Linux) do not have the concept
@@ -14,78 +14,35 @@ the existance of a single unified POSIX file system structure, Cygwin
 maintains a special internal POSIX view of the Win32 file system
 that allows these programs to successfully run under Windows.  Cygwin
 uses this mapping to translate from POSIX to Win32 paths as
-necessary.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mount-table"></a>The Cygwin Mount Table</h3></div></div></div><p>The <code class="filename">/etc/fstab</code> file is used to map Win32
-drives and network shares into Cygwin's internal POSIX directory tree.
-This is a similar concept to the typical UNIX fstab file.  The mount
-points stored in <code class="filename">/etc/fstab</code> are globally set for
-all users.  Sometimes there's a requirement to have user specific
-mount points.  The Cygwin DLL supports user specific fstab files.
-These are stored in the directory <code class="filename">/etc/fstab.d</code>
-and the name of the file is the Cygwin username of the user, as it's
-stored in the <code class="filename">/etc/passwd</code> file.  The content of the
-user specifc file is identical to the system-wide
-<code class="filename">fstab</code> file.</p><p>The file fstab contains descriptive information about the various file
-systems.  fstab is only read by programs, and not written; it is the
-duty of the system administrator to properly create and maintain this
-file.  Each filesystem is described on a separate line; fields on each
-line are separated by tabs or spaces.  Lines starting with '#' are
-comments.</p><p>The first field describes the block special device or
-remote filesystem to be mounted.  On Cygwin, this is the native Windows
-path which the mount point links in.  As path separator you MUST use a
-slash.  Usage of a backslash might lead to unexpected results.  UNC
-paths (using slashes, not backslashes) are allowed.  If the path
-contains spaces these can be escaped as <code class="literal">'\040'</code>.</p><p>The second field describes the mount point for the filesystem. 
-If the name of the mount point contains spaces these can be
-escaped as '\040'.</p><p>The third field describes the type of the filesystem.
-Cygwin supports any string here, since the file system type is usually
-not evaluated.  The noticable exception is the file system type
-cygdrive.  This type is used to set the cygdrive prefix.</p><p>The fourth field describes the mount options associated
-with the filesystem.  It is formatted as a comma separated list of
-options.  It contains at least the type of mount (binary or text) plus
-any additional options appropriate to the filesystem type.  Recognized
-options are binary, text, nouser, user, exec, notexec, cygexec, nosuid,
-posix=[0|1].  The meaning of the options is as follows.</p><pre class="screen">
-  acl      - Cygwin uses the filesystem's access control lists (ACLs) to
-             implement real POSIX permissions (default).  This flag only
-	     affects filesystems supporting ACLs (NTFS) and is ignored
-	     otherwise.
-  noacl    - Cygwin ignores filesystem ACLs and only fakes a subset of
-	     permission bits based on the DOS readonly attribute.  This
-	     behaviour is the default on FAT and FAT32.  The flag is
-	     ignored on NFS filesystems.
-  binary   - Files default to binary mode (default).
-  text     - Files default to CRLF text mode line endings.
-  nouser   - Mount is a system-wide mount.
-  user     - Mount is a user mount.
-  exec     - Treat all files below mount point as executable.
-  notexec  - Treat all files below mount point as not executable.
-  cygexec  - Treat all files below mount point as cygwin executables.
-  nosuid   - No suid files are allowed (currently unimplemented).
-  posix=0  - Switch off case sensitivity for paths under this mount point.
-  posix=1  - Switch on case sensitivity for paths under this mount point
-	     (default).
-</pre><p>Normally, files ending in certain extensions (.exe, .com, .bat, .btm,
-.cmd) are assumed to be executable.  Files whose first two characters begin
-with '#!' are also considered to be executable.
-The <code class="literal">exec</code> option is used to instruct Cygwin that the
-mounted file is "executable".  If the <code class="literal">exec</code> option is used
-with a directory then all files in the directory are executable.
-This option allows other files to be marked as executable and avoids the
-overhead of opening each file to check for a '#!'.  The
-<code class="literal">cygexec</code> option is very similar to <code class="literal">exec</code>,
-but also prevents Cygwin from setting up commands and environment variables
-for a normal Windows program, adding another small performance gain.  The
-opposite of these options is the <code class="literal">notexec</code> option, which
-means that no files should be marked as executable under that mount point.
-</p><p>Note that nouser mount points are not overridable by a later call
-to <span class="command"><strong>mount</strong></span>.  This is only possible for user mount points. 
-Mount points given in <code class="filename">/etc/fstab</code> are by default nouser
-mount points, unless you specify the option user.  In contrast, all mount
-points in the user specific fstab file are user mount points.</p><p>The fifth and sixth field are ignored.  They are
-so far only specified to keep a Linux-like fstab file layout.</p><p>Note that you don't have to specify an fstab entry for the root dir,
-unless you want to have the root dir pointing to somewhere entirely
-different (hopefully you know what you're doing), or if you want to
-mount the root dir with special options (for instance, as text mount).</p><p>Example entries:</p><div class="itemizedlist"><ul type="disc" compact><li><p>Just a normal mount point:</p><pre class="screen">c:/foo /bar fat32 binary 0 0</pre></li><li><p>A mount point for a managed, textmode mount:</p><pre class="screen">C:/foo /bar/baz ntfs text,managed 0 0</pre></li><li><p>A mount point for a Windows directory with spaces in it:</p><pre class="screen">C:/Documents\040and\040Settings /docs ext3 binary 0 0</pre></li><li><p>A mount point for a remote directory:</p><pre class="screen">//server/share/subdir /srv/subdir smbfs binary 0 0</pre></li><li><p>This is just a comment:</p><pre class="screen"># This is just a comment</pre></li><li><p>Set the cygdrive prefix to /mnt:</p><pre class="screen">none /mnt cygdrive binary 0 0</pre></li></ul></div><p>Whenever Cygwin generates a Win32 path from a POSIX one, it uses
+necessary.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mount-table"></a>The Cygwin Mount Table</h3></div></div></div><p>The <span class="command"><strong>mount</strong></span> utility program is used to
+to map Win32 drives and network shares into Cygwin's internal POSIX
+directory tree.  This is a similar concept to the typical UNIX mount
+program.  For those people coming from a Windows background, the
+<span class="command"><strong>mount</strong></span> utility is very similar to the old DOS
+<span class="command"><strong>join</strong></span>, in that it makes your drive letters appear as
+subdirectories somewhere else.</p><p>The mapping is stored in the current user's Cygwin
+<em class="firstterm">mount table</em> in the Windows registry so that the
+information will be retrieved next time the user logs in.  Because it
+is sometimes desirable to have system-wide as well as user-specific
+mounts, there is also a system-wide mount table that all Cygwin users
+inherit.  The system-wide table may only be modified by a user with
+the appropriate privileges (Administrator privileges in Windows
+NT).</p><p>The current user's table is located under
+"HKEY_CURRENT_USER/Software/Cygnus Solutions/Cygwin/mounts
+v&lt;version&gt;"
+where &lt;version&gt; is the latest registry version associated with
+the Cygwin library (this version is not the same as the release
+number).  The system-wide table is located under the same subkeys
+under HKEY_LOCAL_SYSTEM.  The user mount table takes precedence over 
+the system-wide table if a path is mounted in both.  This includes the
+setting of the cygdrive prefix.</p><p>The <span class="command"><strong>mount</strong></span> command can set the POSIX root
+<code class="filename">/</code> to any directory in the Windows file system.
+In absence of such a mount, Cygwin maps <code class="filename">/</code> to the
+root of the current Windows working directory (for example, 
+<code class="filename">H:\</code> or <code class="filename">\\computer\share</code>). 
+Normally Cygwin's <span class="command"><strong>setup.exe</strong></span> creates the initial
+mount point for the POSIX root. 
+</p><p>Whenever Cygwin generates a Win32 path from a POSIX one, it uses
 the longest matching prefix in the mount table.  Thus, if
 <code class="filename">C:</code> is mounted as <code class="filename">/c</code> and also
 as <code class="filename">/</code>, then Cygwin would translate
@@ -93,10 +50,15 @@ as <code class="filename">/</code>, then Cygwin would translate
 This translation is normally only used when trying to derive the
 POSIX equivalent current directory.  Otherwise, the handling of MS-DOS
 filenames bypasses the mount table.
-</p><p>If you want to see the current set of mount points valid in your
-session, you can invoking the Cygwin tool <span class="command"><strong>mount</strong></span> without
-arguments:</p><div class="example"><a name="pathnames-mount-ex"></a><p class="title"><b>Example&#160;3.1.&#160;Displaying the current set of mount points</b></p><div class="example-contents"><pre class="screen">
-<code class="prompt">bash-3.2$</code> <strong class="userinput"><code>mount</code></strong>
+</p><p>Invoking <span class="command"><strong>mount</strong></span> without any arguments displays
+Cygwin's current set of mount points.
+In the following example, the C
+drive is the POSIX root and D drive is mapped to
+<code class="filename">/d</code>.  Note that in this case, the root mount is a
+system-wide mount point that is visible to all users running Cygwin
+programs, whereas the <code class="filename">/d</code> mount is only visible
+to the current user.</p><div class="example"><a name="id317372"></a><p class="title"><b>Example&#160;3.1.&#160;Displaying the current set of mount points</b></p><div class="example-contents"><pre class="screen">
+<code class="prompt">c:\&gt;</code> <strong class="userinput"><code>mount</code></strong>
 f:\cygwin\bin on /usr/bin type system (binmode)
 f:\cygwin\lib on /usr/lib type system (binmode)
 f:\cygwin on / type system (binmode)
@@ -105,18 +67,22 @@ c: on /cygdrive/c type user (binmode,noumount)
 e: on /cygdrive/e type user (binmode,noumount)
 </pre></div></div><br class="example-break"><p>You can also use the <span class="command"><strong>mount</strong></span> command to add
 new mount points, and the <span class="command"><strong>umount</strong></span> to delete
-them.  However, since they are only noted in memory, these mount
-points will disappear as soon as your last Cygwin process ends.
-See <a class="xref" href="using-utils.html#mount" title="mount">the section called &#8220;mount&#8221;</a> and <a class="xref" href="using-utils.html#umount" title="umount">the section called &#8220;umount&#8221;</a> for more
-information.</p><p>Whenever Cygwin cannot use any of the existing mounts to convert
+them.  See <a class="xref" href="using-utils.html#mount" title="mount">the section called &#8220;mount&#8221;</a> and <a class="xref" href="using-utils.html#umount" title="umount">the section called &#8220;umount&#8221;</a> for more
+information on how to use these utilities to set up your Cygwin POSIX
+file system.</p><p>Whenever Cygwin cannot use any of the existing mounts to convert
 from a particular Win32 path to a POSIX one, Cygwin will
 automatically default to an imaginary mount point under the default POSIX
 path <code class="filename">/cygdrive</code>.  For example, if Cygwin accesses
 <code class="filename">Z:\foo</code> and the Z drive is not currently in the
 mount table, then <code class="filename">Z:\</code> would be automatically
 converted to <code class="filename">/cygdrive/Z</code>.  The default
-prefix of <code class="filename">/cygdrive</code> may be changed in the fstab file
-as outlined above.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-additional"></a>Additional Path-related Information</h3></div></div></div><p>The <span class="command"><strong>cygpath</strong></span> program provides the ability to
+prefix of <code class="filename">/cygdrive</code> may be changed (see the
+<a class="xref" href="using-utils.html#mount" title="mount">the section called &#8220;mount&#8221;</a> for more information).</p><p>It is possible to assign some special attributes to each mount
+point.  Automatically mounted partitions are displayed as "auto"
+mounts.  Mounts can also be marked as either "textmode" or "binmode"
+-- whether text files are read in the same manner as binary files by
+default or not (see <a class="xref" href="using-textbinary.html" title="Text and Binary modes">the section called &#8220;Text and Binary modes&#8221;</a> for more
+information on text and binary modes.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id317466"></a>Additional Path-related Information</h3></div></div></div><p>The <span class="command"><strong>cygpath</strong></span> program provides the ability to
 translate between Win32 and POSIX pathnames in shell scripts. See
 <a class="xref" href="using-utils.html#cygpath" title="cygpath">the section called &#8220;cygpath&#8221;</a> for the details.</p><p>The <code class="envar">HOME</code>, <code class="envar">PATH</code>, and
 <code class="envar">LD_LIBRARY_PATH</code> environment variables are automatically
