@@ -1555,7 +1555,11 @@ the above list, including the directory
 either.</p><p>However, native NTFS symlinks and reparse points are transparent
 when accessing the above files so all these files as well as
 <code class="filename">/etc</code> itself may be NTFS symlinks or reparse
-points.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-dosdevices"></a>DOS devices</h3></div></div></div><p>Filenames invalid under Win32 are not necessarily invalid
+points.</p><p>Last but not least, make sure that these files are world-readable.
+Every process of any user account has to read these files potentially,
+so world-readability is essential.  The only exception are the user
+specific files <code class="filename">/etc/fstab.d/$USER</code>, which only have
+to be readable by the $USER user account itself.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-dosdevices"></a>DOS devices</h3></div></div></div><p>Filenames invalid under Win32 are not necessarily invalid
 under Cygwin since release 1.7.0.  There are a couple of rules which
 apply to Windows filenames.  First of all, DOS device names like
 <code class="filename">AUX</code>, <code class="filename">COM1</code>,
