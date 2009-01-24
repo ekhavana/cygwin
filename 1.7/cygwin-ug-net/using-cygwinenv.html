@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>The CYGWIN environment variable</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.71.1"><link rel="start" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter&#160;3.&#160;Using Cygwin"><link rel="prev" href="using-specialnames.html" title="Special filenames"><link rel="next" href="using-cygserver.html" title="Cygserver"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The <code class="envar">CYGWIN</code> environment
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>The CYGWIN environment variable</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter&#160;3.&#160;Using Cygwin"><link rel="prev" href="using-specialnames.html" title="Special filenames"><link rel="next" href="using-cygserver.html" title="Cygserver"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The CYGWIN environment
 variable</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;3.&#160;Using Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="using-cygserver.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-cygwinenv"></a>The <code class="envar">CYGWIN</code> environment
 variable</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-implemented-options"></a>Implemented options</h3></div></div></div><p>The <code class="envar">CYGWIN</code> environment variable is used to configure
 many global settings for the Cygwin runtime system. It contains the options
@@ -34,8 +34,8 @@ Defaults to off.</p></li><li style="list-style-type: disc"><p>
 <code class="envar">error_start:Win32filepath</code> - if set, runs 
 <code class="filename">Win32filepath</code> when cygwin encounters a fatal error,
 which is useful for debugging.  <code class="filename">Win32filepath</code> is
-usually set to the path to <span><strong class="command">gdb</strong></span> or
-<span><strong class="command">dumper</strong></span>, for example
+usually set to the path to <span class="command"><strong>gdb</strong></span> or
+<span class="command"><strong>dumper</strong></span>, for example
 <code class="filename">C:\cygwin\bin\gdb.exe</code>. 
 There is no default set.
 </p></li><li style="list-style-type: disc"><p><code class="envar">forkchunk:32768</code> - causes the <code class="function">fork()</code>
@@ -54,14 +54,7 @@ This is applicable only to programs running from a DOS command line prompt.
 Default is set.</p><p>This option also accepts an optional <code class="literal">[no]ignorecase</code> modifer.
 If supplied, wildcard matching is case insensitive.  The default is <code class="literal">noignorecase</code></p></li><li style="list-style-type: disc"><p><code class="envar">(no)reset_com</code> - if set, serial ports are reset
 to 9600-8-N-1 with no flow control when used. This is done at open
-time and when handles are inherited.  Defaults to set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)server</code> - if set, allows client applications
-to use the Cygserver facilities.  This option must be enabled explicitely
-on the client side, otherwise your applications won't be able to use the
-XSI IPC function calls (<code class="function">msgget</code>,
-<code class="function">semget</code>, <code class="function">shmget</code>, and friends)
-successfully.  These function calls will return with
-<code class="literal">ENOSYS</code>, "Bad system call".
-</p></li><li style="list-style-type: disc"><p><code class="envar">(no)strip_title</code> - if set, strips the directory
+time and when handles are inherited.  Defaults to set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)strip_title</code> - if set, strips the directory
 part off the window title, if any.  Default is not set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)title</code> - if set, the title bar
 reflects the name of the program currently running.  Default is not
 set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)tty</code> - if set, Cygwin enables extra support
@@ -69,7 +62,7 @@ set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)tty</c
 It is not compatible with some Windows programs.
 Defaults to not set, in which case the tty is opened in text mode.
 Note that this has been changed such that ^D works as
-expected instead of ^Z, and is settable via <span><strong class="command">stty</strong></span>.
+expected instead of ^Z, and is settable via <span class="command"><strong>stty</strong></span>.
 This option must be specified before starting a Cygwin shell 
 and it cannot be changed in the shell.  It should not be set when using
 other terminals (i.e., rxvt or xterm). 
@@ -114,15 +107,20 @@ all file opens default to binary mode, unless the open mode has been specified
 explicitely in the open(2) call.
 </p></li><li style="list-style-type: disc"><p><code class="envar">check_case</code> - This option has been removed in favor of
 real case sensitivity and the per-mount option "posix=[0|1]".  For more
-information, read the documentation in <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> and
-<a href="using-specialnames.html#pathnames-casesensitive" title="Case sensitive filenames">the section called &#8220;Case sensitive filenames&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntea</code> -  This option has been removed since it
+information, read the documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> and
+<a class="xref" href="using-specialnames.html#pathnames-casesensitive" title="Case sensitive filenames">the section called &#8220;Case sensitive filenames&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntea</code> -  This option has been removed since it
 only fakes security which is considered dangerous and useless.  It also
 created an uncontrollably large file on FAT and was entirely useless
 on FAT32.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntsec</code> - This option has been removed in favor of
 the per-mount option "acl"/"noacl".  For more information, read the
-documentation in <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)smbntsec</code> - This option has been removed in favor of
+documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)server</code> - Originally this option had to be
+enabled on the client side to use features only available when running
+<span class="command"><strong>cygserver</strong></span>.  This option has been removed because Cygwin now
+always tries to contact cygserver if a function is called which requires
+cygserver being available.  For more information, read the documentation
+in <a class="xref" href="using-cygserver.html" title="Cygserver">the section called &#8220;Cygserver&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)smbntsec</code> - This option has been removed in favor of
 the per-mount option "acl"/"noacl".  For more information, read the
-documentation in <a href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)transparent_exe</code> - This option has been removed
+documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)transparent_exe</code> - This option has been removed
 because the behaviour it switched on is now the standard behaviour in
 Cygwin.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)traverse</code> - This option has been removed because
 traverse checking is not quite correctly implemented by Microsoft and
