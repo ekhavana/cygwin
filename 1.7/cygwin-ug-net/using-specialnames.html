@@ -50,7 +50,7 @@ only differ by case, like <code class="filename">Abc</code> and
 <code class="filename">aBc</code>.  While NTFS (and some remote filesystems)
 support case-sensitivity, the NT kernel starting with Windows XP does
 not support it by default.  Rather, you have to tweak a registry setting
-and reboot.  For that reason, case-sensitivity is not supported by Cygwin,
+and reboot.  For that reason, case-sensitivity can not be supported by Cygwin,
 unless you change that registry value.</p><p>If you really want case-sensitivity in Cygwin, you can switch it
 on by setting the registry value</p><pre class="screen">
 HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\obcaseinsensitive
@@ -59,8 +59,9 @@ this registry value also on Windows NT4 and Windows 2000, which usually
 both don't know this registry key.  If you want case-sensitivity on these
 systems, create that registry value and set it to 0.  On these systems
 (and *only* on these systems) you don't have to reboot to bring it
-into effect.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
-Note that when installing Microsoft's Services For Unix (SFU), you're asked if
+into effect, rather stopping all Cygwin processes and then restarting them
+is sufficient.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+When installing Microsoft's Services For Unix (SFU), you're asked if
 you want to use case-sensitive filenames.  If you answer "yes" at this point,
 the installer will change the aforementioned registry value to 0, too.  So, if
 you have SFU installed, there's some chance that the registry value is already
@@ -73,14 +74,18 @@ at your own risk.  You have been warned!</p><p>Even if you use case-sensitivity,
 case-insensitivity for certain paths for better interoperability with
 native Win32 applications (even if it's just Windows Explorer).  You can do
 this on a per-mount point base, by using the "posix=0" mount option in
-/etc/fstab, or your /etc/fstab.d/$USER file.</p><p>For a start, it might be best to switch the cygdrive path to
-case-insensitivity, because the default Windows $PATH variable is not
-always using the correct case by default.  As a result, your shell will
-claim that it can't find Windows commands like <span class="command"><strong>attrib</strong></span>
-or <span class="command"><strong>net</strong></span>.  Here's an example how you can switch the
-cygdrive prefix to case-insensitivity:</p><div class="example"><a name="mount-caseinsensitive"></a><p class="title"><b>Example&#160;3.2.&#160;Example mount point to enforce case-insensitivity on cygdrive paths</b></p><div class="example-contents"><pre class="screen">
-none /cygdrive cygdrive binary,posix=0 0 0
-</pre></div></div><br class="example-break"><p>Note that mount points as well as device names and virtual
+<code class="filename">/etc/fstab</code>, or your <code class="filename">/etc/fstab.d/$USER</code>
+file.</p><p><code class="filename">/cygdrive</code> paths are case-insensitive by default.
+The reason is that the native Windows %PATH% environment variable is not
+always using the correct case for all paths in it.  As a result, if you use
+case-sensitivity on the <code class="filename">/cygdrive</code> prefix, your shell
+might claim that it can't find Windows commands like <span class="command"><strong>attrib</strong></span>
+or <span class="command"><strong>net</strong></span>.  To ease the pain the <code class="filename">/cygdrive</code>
+path is case-insensitive by default and you have to use the "posix=1" setting
+explicitely in <code class="filename">/etc/fstab</code> or
+<code class="filename">/etc/fstab.d/$USER</code> to switch it to case-sensitivity,
+or you have to make sure that the native Win32 %PATH% environment variable
+is using the correct case for all paths throughout.</p><p>Note that mount points as well as device names and virtual
 paths like /proc are always case-sensitive!  The only exception are
 the subdirs and filenames under /proc/registry, /proc/registry32
 and /proc/registry64.  Registry access is always case-insensitive.
@@ -278,7 +283,7 @@ starting with "@" in a special way.  If a file
 file to delimit strings containing blank space. 
 Embedded double quotes must be repeated.
 In the following example compare the behaviors of the bash built-in
-<span class="command"><strong>echo</strong></span> and of the program <span class="command"><strong>/bin/echo</strong></span>.</p><div class="example"><a name="pathnames-at-ex"></a><p class="title"><b>Example&#160;3.3.&#160; Using @pathname</b></p><div class="example-contents"><pre class="screen">
+<span class="command"><strong>echo</strong></span> and of the program <span class="command"><strong>/bin/echo</strong></span>.</p><div class="example"><a name="pathnames-at-ex"></a><p class="title"><b>Example&#160;3.2.&#160; Using @pathname</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">bash$</code> <strong class="userinput"><code>echo  'This   is   "a     long"  line' &gt; mylist</code></strong>
 <code class="prompt">bash$</code> <strong class="userinput"><code>echo @mylist</code></strong>
 @mylist
