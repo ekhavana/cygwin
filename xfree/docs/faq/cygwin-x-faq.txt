@@ -1,8 +1,4 @@
 Cygwin/X Frequently Asked Questions
-
-Harold L Hunt, II
-
-Alexander Gottwald
      __________________________________________________________________
 
    Table of Contents
@@ -117,67 +113,69 @@ Questions and Answers
         7.5. [58]Why does GDM not work with -clipboard
         7.6. [59]I get no login screen for Solaris
         7.7. [60]XDMCP freezes with remote Solaris machine!
-        7.8. [61]Login to CDE on Solaris via [62]XDMCP hangs Cygwin/X.
-        7.9. [63]Where can I find more information about XDMCP.
+        7.8. [61]Login to CDE on Solaris via XDMCP hangs Cygwin/X.
+        7.9. [62]Where can I find more information about XDMCP.
 
-   8. [64]Troubleshooting
+   8. [63]Troubleshooting
 
-        8.1. [65]Cygwin/X failed with "Fatal Error". What does this mean?
-        8.2. [66]Is there a log file that I can look at for diagnostic
+        8.1. [64]Cygwin/X failed with "Fatal Error". What does this mean?
+        8.2. [65]Is there a log file that I can look at for diagnostic
                 information and error messages?
 
-        8.3. [67]I have a specific error message, what does it mean?
-        8.4. [68]I have a specific error message that is not addressed in
+        8.3. [66]I have a specific error message, what does it mean?
+        8.4. [67]I have a specific error message that is not addressed in
                 the Error and Warning Messages section.
 
-        8.5. [69]My bug report the Cygwin/X mailing list was ignored. What
+        8.5. [68]My bug report the Cygwin/X mailing list was ignored. What
                 do I do now?
 
-        8.6. [70]Why does Cygwin/X freeze right after startup?
-        8.7. [71]Cygwin/X has very poor performance. What's the reason?
-        8.8. [72]I have Microsoft Services for Unix installed and can't
+        8.6. [69]Why does Cygwin/X freeze right after startup?
+        8.7. [70]Cygwin/X has very poor performance. What's the reason?
+        8.8. [71]I have Microsoft Services for Unix installed and can't
                 type anything. Help me!!!
 
-        8.9. [73]Cygwin/X is extremely slow, especially when using XDMCP
+        8.9. [72]Cygwin/X is extremely slow, especially when using XDMCP
                 to connect to remote machines.
 
-        8.10. [74]IBM ThinkPad's with a TrackPoint mouse doesn't allow
+        8.10. [73]IBM ThinkPad's with a TrackPoint mouse doesn't allow
                 simulated mouse wheel scrolling.
 
-        8.11. [75]Why is the root window not shown in normal mode?
-        8.12. [76]Why is the cross the default cursor in multiwindow mode?
-        8.13. [77]How can I adjust the linewidth in bash after resizing
+        8.11. [74]Why is the root window not shown in normal mode?
+        8.12. [75]Why is the cross the default cursor in multiwindow mode?
+        8.13. [76]How can I adjust the linewidth in bash after resizing
                 XTerm?
 
-        8.14. [78]Why do some menus not work if Num-Lock is on?
+        8.14. [77]Why do some menus not work if Num-Lock is on?
 
-   9. [79]Error and Warning Messages
+   9. [78]Error and Warning Messages
 
-        9.1. [80]_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set
+        9.1. [79]_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set
                 to root
 
-        9.2. [81]error opening security policy file
+        9.2. [80]error opening security policy file
                 /usr/X11R6/lib/X11/xserver/SecurityPolicy
 
-        9.3. [82]Duplicate invocation on display number: 0. Exiting.
-        9.4. [83]Fatal server error: could not open default font 'fixed'
-        9.5. [84]Could not init font path element /usr/share/fonts/*/,
+        9.3. [81]Duplicate invocation on display number: 0. Exiting.
+        9.4. [82]Fatal server error: could not open default font 'fixed'
+        9.5. [83]Could not init font path element /usr/share/fonts/*/,
                 removing from list!
 
-        9.6. [85]The procedure entry point _check_for_executable could not
+        9.6. [84]The procedure entry point _check_for_executable could not
                 be located
 
-        9.7. [86]cygX11-6.dll not found after installation or upgrade
-        9.8. [87]Exception: STATUS_ACCESS_VIOLATION
-        9.9. [88]Xlib: connection to "local_host_name_or_ip_address:0.0"
+        9.7. [85]cygX11-6.dll not found after installation or upgrade
+        9.8. [86]Exception: STATUS_ACCESS_VIOLATION
+        9.9. [87]Xlib: connection to "local_host_name_or_ip_address:0.0"
                 refused by server Xlib: Maximum number of clients reached
 
-        9.10. [89]XIO: fatal IO error 104 (Connection reset by peer) on X
+        9.10. [88]XIO: fatal IO error 104 (Connection reset by peer) on X
                 server "127.0.0.1:0.0"
 
-        9.11. [90]Cannot Open Display: 127.0.0.1:0.0
-        9.12. [91]Out of environment space
-        9.13. [92]Too many parameters
+        9.11. [89]Cannot Open Display: 127.0.0.1:0.0
+        9.12. [90]Out of environment space
+        9.13. [91]Too many parameters
+        9.14. [92]"xcb_xlib_lock: Assertion '!c->xlib.lock' failed." or
+                "xcb_xlib_unlock: Assertion 'c->xlib.lock' failed."
 
    10. [93]Porting Software
 
@@ -358,6 +356,9 @@ Questions and Answers
    remove the environment variables XAPPLRESDIR, XCMSDB, XNLSPATH and
    XKEYSYMDB from it, or (preferrably) use the updated startxwin.bat.
 
+   If echo $XKEYSYMDB outputs something, you have something else setting
+   XKEYSYMDB in your environment. Find it and remove it.
+
    These variables were always being set to the defaults, so they can
    simply be removed. See [120]Q: 8.8. for the reason why you might need
    to set them.
@@ -400,8 +401,20 @@ Questions and Answers
 
    Font packages are now named font-<author/class>-<fonttype>
 
-   To provide the font emacs wants to use by default you will probably
-   want to install font-adobe-dpi100 and/or font-adobe-dpi75
+   Some packages dependencies have not yet been updated for the fonts they
+   require, so you may need to manually install the needed fonts. For
+   example, to provide the font emacs wants to use by default you will
+   probably want to install font-adobe-dpi75 (or font-adobe-dpi100 if you
+   like large fonts). This package provides the courier, helvetica, new
+   century schoolbook and times font families.
+
+   The lucida font family is provided by the package font-bh-dpi75 (or
+   font-bh-dpi100). The monospaced version, lucida typewriter is provided
+   by the package font-bh-lucidatypewriter-dpi75 (or
+   font-bh-lucidatypewriter-dpi100).
+
+   Note that after installing fonts you will need to restart the X server
+   or run xset fp default; xset fp rehash to make the new fonts available
 
    3.6. Where has xhost/xlsfonts/etc. gone?
 
@@ -595,7 +608,7 @@ mount -b -u "$(cygpath -m /tmp)" /tmp
    Not all keyboard layouts are tested very well and some contain errors
    or do not work at all. To test if the compiling of your layout works
    start
-xkbcomp -w 3 -xkm -m de /etc/X11/xkb/keymap/xfree86 localhost:0.0
+setxkbmap de -print | xkbcomp -w3 -xkm - localhost:0.0
 
    (replace the "de" with your layout code). This may produce warnings,
    but must not produce errors. If there are errors then please report
@@ -607,7 +620,7 @@ xkbcomp -w 3 -xkm -m de /etc/X11/xkb/keymap/xfree86 localhost:0.0
    work. What can I do?
 
    This problem is solved in recent Cygwin/X releases. Use cygwin setup to
-   upgrade the xorg-x11-server package.
+   upgrade the xorg-server package.
 
    5.1.8. AltGr does not work properly when connecting to other unices or
    to old XFree86.
@@ -817,8 +830,13 @@ DisplayManager.requestPort:     0
    7.5. Why does GDM not work with -clipboard
 
    Newer versions of GDM have a more complex startup mechanism than the
-   other display manager have. This interferes with the way the clipboard
-   client is started.
+   other display manager have. This can interfere with the way the
+   clipboard integration client is started.
+
+   Workaround: add (or modify) this section in the gdm.conf (or
+   /etc/gdm/custom.conf) file.
+[daemon]
+KillInitClients=false
 
    7.6. I get no login screen for Solaris
 
@@ -857,16 +875,16 @@ DisplayManager.requestPort:     0
    important to you, or change your Solaris machines to use XFree86
    instead of the Solaris X Window System.
 
-   7.8. Login to CDE on Solaris via [150]XDMCP hangs Cygwin/X.
+   7.8. Login to CDE on Solaris via XDMCP hangs Cygwin/X.
 
-   See also [151]Q: 7.6. and [152]Q: 7.7.
+   See also [150]Q: 7.6. and [151]Q: 7.7.
 
-   Install the [153]recommended set of patches for your version of
+   Install the [152]recommended set of patches for your version of
    Solaris.
 
    7.9. Where can I find more information about XDMCP.
 
-   See the [154]Linux XDMCP HOWTO for more information about XDMCP.
+   See the [153]Linux XDMCP HOWTO for more information about XDMCP.
 
 8. Troubleshooting
 
@@ -874,14 +892,14 @@ DisplayManager.requestPort:     0
 
    The Fatal Error is a general error message. More specific information
    what caused this is available in /var/log/XWin.log. Please check the
-   common error messages in [155]the Section called Error and Warning
-   Messages. If your error is not mentioned proceed with [156]Q: 8.4.
+   common error messages in [154]the Section called Error and Warning
+   Messages. If your error is not mentioned proceed with [155]Q: 8.4.
 
    8.2. Is there a log file that I can look at for diagnostic information
    and error messages?
 
    Yes. The Cygwin/X log file is located at /var/log/XWin.log. You will
-   find solutions to the most common error messages in [157]the Section
+   find solutions to the most common error messages in [156]the Section
    called Error and Warning Messages.
 
    8.3. I have a specific error message, what does it mean?
@@ -893,9 +911,9 @@ DisplayManager.requestPort:     0
    8.4. I have a specific error message that is not addressed in the Error
    and Warning Messages section.
 
-   Search the [158]Cygwin/X mailing list archives to see if the error
+   Search the [157]Cygwin/X mailing list archives to see if the error
    message has already been reported and/or addressed. Report the error
-   message to the [159]Cygwin/X mailing list, how the error message was
+   message to the [158]Cygwin/X mailing list, how the error message was
    caused, and the behavior of the X Server after the error message was
    generated (exit, freeze, etc.), only if the error message has not been
    reported, if the circumstances that produced the error message are
@@ -908,7 +926,7 @@ DisplayManager.requestPort:     0
    now?
 
    Some bug reports are deliberately ignored by project members if the bug
-   in question was recently dealt with; did you [160]search the mailing
+   in question was recently dealt with; did you [159]search the mailing
    list archives for a solution to your problem before submitting your bug
    report? Some bug reports are ignored if they do not contain sufficient
    information to understand the situation that produces the bug; did your
@@ -957,8 +975,8 @@ mount -b -u "$(cygpath -m /tmp)" /tmp
    drivers and software packages can consume an incredible amount of
    system resources and processing time. One known example of such a
    program is ATI2evxx.exe, a utility installed with some ATI Technologies
-   graphics card drivers. [161]Answers That Work has information on
-   ATI2evxx.exe on their [162]Task List Programs - A page. You may want to
+   graphics card drivers. [160]Answers That Work has information on
+   ATI2evxx.exe on their [161]Task List Programs - A page. You may want to
    try disabling, one-by-one, ATI2evxx.exe and other such programs until
    you find the program that is causing the slowdown.
 
@@ -979,7 +997,7 @@ XNLSPATH
    8.9. Cygwin/X is extremely slow, especially when using XDMCP to connect
    to remote machines.
 
-   see [163]Q: 8.7..
+   see [162]Q: 8.7..
 
    8.10. IBM ThinkPad's with a TrackPoint mouse doesn't allow simulated
    mouse wheel scrolling.
@@ -1103,7 +1121,7 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
    do not contain fonts.
 
    If you are getting these message and the X Server is also failing to
-   start, then see [164]Q: 9.4. for information on how to fix your fonts.
+   start, then see [163]Q: 9.4. for information on how to fix your fonts.
 
    9.6. The procedure entry point _check_for_executable could not be
    located
@@ -1136,19 +1154,19 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    Cygwin/X queries getdtablesize () for the maximum number of client
    connections allowed; by default Cygwin returns 32 from getdtablesize
-   (). Cygwin/X [165]Server Test Series release [166]Test44, released on
+   (). Cygwin/X [164]Server Test Series release [165]Test44, released on
    2001-08-15, changes the maximum number of clients from 32 to 1024 by
    passing the square of getdtablesize () to setdtablesize ().
 
    9.10. XIO: fatal IO error 104 (Connection reset by peer) on X server
    "127.0.0.1:0.0"
 
-   See [167]Q: 9.9.
+   See [166]Q: 9.9.
 
    9.11. Cannot Open Display: 127.0.0.1:0.0
 
-   Certain classes of software, such as that used for [168]Virtual Private
-   Networking and [169]fire-walling may cause the IP address 127.0.0.1, or
+   Certain classes of software, such as that used for [167]Virtual Private
+   Networking and [168]fire-walling may cause the IP address 127.0.0.1, or
    other local adapter addresses, to be redirected, to become inoperable
    in some way, or to be operated in a manner that violates the defined
    operation of IP address.
@@ -1173,17 +1191,31 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
    9.12. Out of environment space
 
    Increase your Windows environment space by following the
-   [170]instructions provided by Microsoft.
+   [169]instructions provided by Microsoft.
 
    9.13. Too many parameters
 
-   See [171]Q: 9.12.
+   See [170]Q: 9.12.
+
+   9.14. "xcb_xlib_lock: Assertion '!c->xlib.lock' failed." or
+   "xcb_xlib_unlock: Assertion 'c->xlib.lock' failed."
+
+   Both of these represent bugs in a caller of libX11, and not in libX11
+   or libxcb. The first assertion means that a caller attempted to lock
+   the display while already locked. The second assertion means that a
+   caller attempted to unlock the display without having it locked.
+
+   If you encounter such bugs, please report a bug against the offending
+   software (which is not libX11 or libxcb)
+
+   This error can be worked around by using export
+   LIBXCB_ALLOW_SLOPPY_LOCK=1
 
 10. Porting Software
 
    10.1. Is there a list of software that has been ported to Cygwin/X?
 
-   Yes, see the [172]Cygwin/X - Ported Software page.
+   Yes, see the [171]Cygwin/X - Ported Software page.
 
    10.2. How do I start porting software to Cygwin/X?
 
@@ -1225,7 +1257,7 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    11.1. Are there step-by-step instructions for contributing to Cygwin/X?
 
-   Yes. The [173]Cygwin/X Contributor's Guide has step-by-step
+   Yes. The [172]Cygwin/X Contributor's Guide has step-by-step
    instructions for obtaining the source, building the source, building
    debug versions of the source, and even cross-compiling under Linux.
 
@@ -1237,26 +1269,16 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    11.3. How should I generate patches for Cygwin/X?
 
-   Only submit patches that have UNIX end of line characters. See [174]Q:
+   Only submit patches that have UNIX end of line characters. See [173]Q:
    11.2. for information on editors for Windows that are aware of UNIX end
    of line characters.
-
-   Generally it is better for us if you generate your patches against the
-   X.org CVS tree. For example, run cvs -z4 diff -U3 hw/xwin/ from
-   xc/programs/Xserver/ to generate a diff file for all the modified files
-   in hw/xwin/. CVS is smart enough to only generate diffs for files that
-   are in the CVS repository; for example, CVS diff will not create diffs
-   for Emacs temporary files.
-
-   In the case that you have modified a single file, create the diff with
-   cvs -z4 diff -U3 file_name.
 
    11.4. Where do I submit patches for Cygwin/X?
 
    Submit patches for Cygwin/X to the cygwin-xfree@cygwin.com mailing
    list.
 
-   See [175]Q: 11.3. for more information on generating patches.
+   See [174]Q: 11.3. for more information on generating patches.
 
    11.5. Why doesn't the X Window System use GNU's autoconf?
 
@@ -1274,16 +1296,16 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
    guarantee that Cygwin/X will compile with any other compiler, nor can
    we afford the time to support compilers other than gcc.
 
-   See the [176]GCC Home Page for more information on gcc.
+   See the [175]GCC Home Page for more information on gcc.
 
    11.7. Is cross-compiling from a non-Cygwin platform supported?
 
    Cross-compiling from a non-Cygwin platform is described in the
-   [177]Cygwin/X Contributor's Guide
+   [176]Cygwin/X Contributor's Guide
 
    11.8. Where can I get help for installing DocBook on Cygwin?
 
-   See [178]SGML for Windows NT: Setting up a free SGML editing and
+   See [177]SGML for Windows NT: Setting up a free SGML editing and
    publishing system on Windows NT/Cygwin by Markus Hoenicka.
 
 12. Licenses, Patents, Trademarks, and Copyrights
@@ -1294,13 +1316,13 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
    up of two parts that are covered by distinct licenses: Cygwin and the X
    Window System.
 
-   See [179]Q: 12.2. and [180]Q: 12.3. for more information regarding the
+   See [178]Q: 12.2. and [179]Q: 12.3. for more information regarding the
    licenses that apply to Cygwin/X.
 
    12.2. What licenses apply to the X Window System source code?
 
-   X Window System source code is generally licensed under an [181]X11
-   style license, which is [182]certified by the Free Software Foundation
+   X Window System source code is generally licensed under an [180]X11
+   style license, which is [181]certified by the Free Software Foundation
    as compatible with the GNU GPL.
 
    12.3. What license applies to Cygwin source code?
@@ -1321,7 +1343,7 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
    follows a different scheme in regards to who will hold the copyright on
    source code.
 
-   See [183]Q: 12.5. and [184]Q: 12.6. for more information regarding who
+   See [182]Q: 12.5. and [183]Q: 12.6. for more information regarding who
    holds the copyright on Cygwin/X source code.
 
    12.5. Who holds the copyright on the X Window System source code?
@@ -1336,26 +1358,26 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    12.6. Who holds the copyright on the Cygwin source code?
 
-   [185]RedHat owns the copyright on the Cygwin source code. RedHat
+   [184]RedHat owns the copyright on the Cygwin source code. RedHat
    requires that copyright be assigned to RedHat for non-trivial changes
    to Cygwin. You must fill out a copyright transfer form if you are going
    to contribute substantial changes to Cygwin.
 
    12.7. What license applies to Motif?
 
-   Motif is a closed source product produced by [186]The Open Group.
-   However, The Open Group released [187]Open Motif on 2000-05-15 under a
-   public license, [188]The Open Group Public License, that allows Open
+   Motif is a closed source product produced by [185]The Open Group.
+   However, The Open Group released [186]Open Motif on 2000-05-15 under a
+   public license, [187]The Open Group Public License, that allows Open
    Motif to be distributed with and used on Open Source platforms. As of
    2001-07-10, Cygwin/X does not qualify as a platform that Open Motif can
-   be distributed with and used on. However, the [189]Open Motif FAQ
+   be distributed with and used on. However, the [188]Open Motif FAQ
    states, "[...] we hope to be able to make a distribution under a
    license complying with the Open Source guidelines sometime in the
    future. For now this is as close as to Open Source as we could get."
 
    12.8. Isn't "XWin" trademarked by StarNet Communications?
 
-   No. A quick search at the [190]United States Patent and Trademark
+   No. A quick search at the [189]United States Patent and Trademark
    Office for "XWin" turns up one dead record and one live record. The
    live record is for a logo belonging to a rock crusher manufacturer
    based out of Belgium. Neither trademark affects Cygwin/X, as the dead
@@ -1437,7 +1459,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [191]X Display Manager.
+          See Also: [190]X Display Manager.
 
    X11 Forwarding
           Some SSH programs like OpenSSH provide a feature where in
@@ -1770,7 +1792,7 @@ A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [192]http://www.gnu.org/copyleft/.
+   [191]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -1860,7 +1882,7 @@ References
   49. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-bash-8bit
   50. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#remote
   51. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-ssh-no-x11forwarding
-  52. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN471
+  52. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN490
   53. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#xdmcp
   54. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xdmcp-no-valid-address
   55. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-audit-client-rejected
@@ -1870,37 +1892,37 @@ References
   59. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-solaris-fonts
   60. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-remote-solaris
   61. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-cde-via-xdmcp-hangs
-  62. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#gloss-xdmcp
-  63. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xdmcp-info
-  64. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#troubleshooting
-  65. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-fatal-error
-  66. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-log-file-location
-  67. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-message-interpretation
-  68. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-message-not-listed
-  69. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-but-report-ignored
-  70. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#freeze-at-startup
-  71. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#poor-performance
-  72. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#microsoft-services-for-unix
-  73. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-tasklist-programs-slow
-  74. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-trackpoint
-  75. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#no-rootwindow-with-run
-  76. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#cross-as-pointer
-  77. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#xterm-not-resizing
-  78. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#numlock-modifier
-  79. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#errors
-  80. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-owner-tmp-.X11-unix
-  81. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-security-policy
-  82. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#duplicate-invocation
-  83. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-font-eof
-  84. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-removing-font-path-element
-  85. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-procedure-entry-point-missing
-  86. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#cygX11-6.dll-missing
-  87. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-status-access-violation
-  88. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-max-clients
-  89. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xio-fatal-io-error-104
-  90. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-cannot-open-display
-  91. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-env-space
-  92. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-too-many-parameters
+  62. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xdmcp-info
+  63. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#troubleshooting
+  64. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-fatal-error
+  65. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-log-file-location
+  66. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-message-interpretation
+  67. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-message-not-listed
+  68. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-but-report-ignored
+  69. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#freeze-at-startup
+  70. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#poor-performance
+  71. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#microsoft-services-for-unix
+  72. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-tasklist-programs-slow
+  73. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-trackpoint
+  74. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#no-rootwindow-with-run
+  75. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#cross-as-pointer
+  76. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#xterm-not-resizing
+  77. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#numlock-modifier
+  78. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#errors
+  79. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-owner-tmp-.X11-unix
+  80. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-security-policy
+  81. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#duplicate-invocation
+  82. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-font-eof
+  83. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-removing-font-path-element
+  84. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-procedure-entry-point-missing
+  85. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#cygX11-6.dll-missing
+  86. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-status-access-violation
+  87. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-max-clients
+  88. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xio-fatal-io-error-104
+  89. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-cannot-open-display
+  90. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-env-space
+  91. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-too-many-parameters
+  92. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xcb-lock-assertion
   93. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#porting
   94. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-ported-software-list
   95. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-how-to-port
@@ -1958,46 +1980,45 @@ References
  147. http://freedesktop.org/~xorg/X11R6.7.0/doc/fonts.html
  148. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-solaris-fonts
  149. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-cde-via-xdmcp-hangs
- 150. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#gloss-xdmcp
- 151. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-solaris-fonts
- 152. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-remote-solaris
- 153. http://www.sun.com/bigadmin/patches/indexRec.html
- 154. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
- 155. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#errors
- 156. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-message-not-listed
- 157. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#errors
- 158. http://cygwin.com/ml/cygwin-xfree/
- 159. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/cygwin-xfree@cygwin.com
- 160. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/project-url-ml-search;
- 161. http://www.answersthatwork.com/
- 162. http://www.answersthatwork.com/Tasklist_pages/tasklist_a.htm
- 163. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#poor-performance
- 164. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-font-eof
- 165. http://x.cygwin.com/devel/server/
- 166. http://x.cygwin.com/devel/server/changelog.html
- 167. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-max-clients
- 168. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#gloss-vpn
- 169. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#gloss-firewall
- 170. http://support.microsoft.com/support/kb/articles/Q230/2/05.ASP
- 171. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-env-space
- 172. http://x.cygwin.com/ported-software.html
- 173. http://x.cygwin.com/docs/cg/cygwin-x-cg.html
- 174. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-editors
- 175. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-contrib-diff
- 176. http://gcc.gnu.org/
- 177. http://x.cygwin.com/docs/cg/cygwin-x-cg.html
- 178. http://web.archive.org/web/20050320030737/http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
- 179. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-license-x-window-system
- 180. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-license-cygwin
- 181. http://www.x.org/terms.htm
- 182. http://www.fsf.org/philosophy/license-list.html#GPLCompatibleLicenses
- 183. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-copyright-x-window-system
- 184. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-copyright-cygwin
- 185. http://redhat.com/
- 186. http://www.opengroup.org/
- 187. http://www.opengroup.org/openmotif/
- 188. http://www.opengroup.org/openmotif/license
- 189. http://www.opengroup.org/openmotif/faq.html
- 190. http://www.uspto.gov/
- 191. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#gloss-xdm
- 192. http://www.gnu.org/copyleft/
+ 150. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-solaris-fonts
+ 151. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-remote-solaris
+ 152. http://www.sun.com/bigadmin/patches/indexRec.html
+ 153. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
+ 154. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#errors
+ 155. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-message-not-listed
+ 156. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#errors
+ 157. http://cygwin.com/ml/cygwin-xfree/
+ 158. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/cygwin-xfree@cygwin.com
+ 159. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/project-url-ml-search;
+ 160. http://www.answersthatwork.com/
+ 161. http://www.answersthatwork.com/Tasklist_pages/tasklist_a.htm
+ 162. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#poor-performance
+ 163. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-font-eof
+ 164. http://x.cygwin.com/devel/server/
+ 165. http://x.cygwin.com/devel/server/changelog.html
+ 166. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-max-clients
+ 167. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#gloss-vpn
+ 168. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#gloss-firewall
+ 169. http://support.microsoft.com/support/kb/articles/Q230/2/05.ASP
+ 170. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-error-env-space
+ 171. http://x.cygwin.com/ported-software.html
+ 172. http://x.cygwin.com/docs/cg/cygwin-x-cg.html
+ 173. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-editors
+ 174. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-contrib-diff
+ 175. http://gcc.gnu.org/
+ 176. http://x.cygwin.com/docs/cg/cygwin-x-cg.html
+ 177. http://web.archive.org/web/20050320030737/http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+ 178. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-license-x-window-system
+ 179. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-license-cygwin
+ 180. http://www.x.org/terms.htm
+ 181. http://www.fsf.org/philosophy/license-list.html#GPLCompatibleLicenses
+ 182. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-copyright-x-window-system
+ 183. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-copyright-cygwin
+ 184. http://redhat.com/
+ 185. http://www.opengroup.org/
+ 186. http://www.opengroup.org/openmotif/
+ 187. http://www.opengroup.org/openmotif/license
+ 188. http://www.opengroup.org/openmotif/faq.html
+ 189. http://www.uspto.gov/
+ 190. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#gloss-xdm
+ 191. http://www.gnu.org/copyleft/

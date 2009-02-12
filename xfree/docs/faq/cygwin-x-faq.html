@@ -21,18 +21,6 @@ CLASS="title"
 NAME="article-info"
 >Cygwin/X Frequently Asked Questions</A
 ></H1
-><H3
-CLASS="author"
-><A
-NAME="AEN5"
->Harold L Hunt, II</A
-></H3
-><H3
-CLASS="author"
-><A
-NAME="AEN10"
->Alexander Gottwald</A
-></H3
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -386,7 +374,7 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN474"
+HREF="cygwin-x-faq.html#AEN490"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
@@ -459,13 +447,7 @@ HREF="cygwin-x-faq.html#q-cde-via-xdmcp-hangs"
 >Login to <ACRONYM
 CLASS="acronym"
 >CDE</ACRONYM
-> on Solaris via <A
-HREF="glossary.html#gloss-xdmcp"
-><I
-CLASS="glossterm"
->XDMCP</I
-></A
-> hangs
+> on Solaris via XDMCP hangs
 Cygwin/X.</A
 ></DT
 ><DT
@@ -1526,14 +1508,66 @@ CLASS="filename"
 >
 </P
 ><P
->&#13;To provide the font emacs wants to use by default you will probably want
+>&#13;Some packages dependencies have not yet been updated for the fonts they
+require, so you may need to manually install the needed fonts.  For example,
+to provide the font emacs wants to use by default you will probably want
 to install <TT
 CLASS="filename"
 >font-adobe-dpi75</TT
-> or <TT
+>
+(or <TT
 CLASS="filename"
 >font-adobe-dpi100</TT
+> if you like large fonts).
+This package provides the <CODE
+CLASS="parameter"
+>courier</CODE
+>, 
+<CODE
+CLASS="parameter"
+>helvetica</CODE
+>,
+<CODE
+CLASS="parameter"
+>new century schoolbook</CODE
 >
+and <CODE
+CLASS="parameter"
+>times</CODE
+> font families.
+</P
+><P
+>&#13;The <CODE
+CLASS="parameter"
+>lucida</CODE
+> font family is provided by the package
+<TT
+CLASS="filename"
+>font-bh-dpi75</TT
+>
+(or <TT
+CLASS="filename"
+>font-bh-dpi100</TT
+>).
+The monospaced version, <CODE
+CLASS="parameter"
+>lucida typewriter</CODE
+> is provided by the package
+<TT
+CLASS="filename"
+>font-bh-lucidatypewriter-dpi75</TT
+>
+(or <TT
+CLASS="filename"
+>font-bh-lucidatypewriter-dpi100</TT
+>).
+</P
+><P
+>&#13;Note that after installing fonts you will need to restart the X server or run
+<B
+CLASS="command"
+>xset fp default; xset fp rehash</B
+> to make the new fonts available
 </P
 ></DIV
 ></DIV
@@ -2387,7 +2421,7 @@ CLASS="answer"
 ><B
 > </B
 >This problem is solved in recent Cygwin/X releases. Use cygwin setup to
-upgrade the xorg-x11-server package.
+upgrade the xorg-server package.
 </P
 ></DIV
 ></DIV
@@ -2837,7 +2871,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN474"
+NAME="AEN490"
 ></A
 ><B
 >6.2. </B
@@ -3311,8 +3345,33 @@ CLASS="answer"
 > </B
 >
 Newer versions of GDM have a more complex startup mechanism than the other
-display manager have. This interferes with the way the clipboard client is 
-started.
+display manager have. This can interfere with the way the clipboard integration
+client is started.
+</P
+><P
+>&#13;Workaround: add (or modify) this section in the <TT
+CLASS="filename"
+>gdm.conf</TT
+> 
+(or <TT
+CLASS="filename"
+>/etc/gdm/custom.conf</TT
+>) file.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;[daemon]
+KillInitClients=false
+</PRE
+></TD
+></TR
+></TABLE
+>
 </P
 ></DIV
 ></DIV
@@ -3472,13 +3531,7 @@ NAME="q-cde-via-xdmcp-hangs"
 >Login to <ACRONYM
 CLASS="acronym"
 >CDE</ACRONYM
-> on Solaris via <A
-HREF="glossary.html#gloss-xdmcp"
-><I
-CLASS="glossterm"
->XDMCP</I
-></A
-> hangs
+> on Solaris via XDMCP hangs
 Cygwin/X.</P
 ></DIV
 ><DIV
@@ -4882,7 +4935,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN949"
+NAME="AEN968"
 ></A
 ><P
 ><B
