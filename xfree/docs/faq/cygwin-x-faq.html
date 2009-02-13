@@ -374,7 +374,7 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN490"
+HREF="cygwin-x-faq.html#AEN499"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
@@ -1419,17 +1419,34 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Possible workarounds:</P
+>The cause of this problem is not well understood at present.  Possible causes:</P
 ><OL
 COMPACT="COMPACT"
 TYPE="1"
 ><LI
 ><P
->Try <B
-CLASS="command"
->rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp</B
+> <TT
+CLASS="filename"
+>/tmp</TT
+> resides on a FAT filesystem</P
+></LI
+><LI
+><P
+>Bad permissions on <TT
+CLASS="filename"
+>/tmp</TT
 ></P
 ></LI
+><LI
+><P
+>Not having administrator rights</P
+></LI
+></OL
+><P
+>Possible workarounds:</P
+><OL
+COMPACT="COMPACT"
+TYPE="1"
 ><LI
 ><P
 >Try starting the server with <CODE
@@ -1461,23 +1478,29 @@ CLASS="command"
 >startx -- -nolock</B
 >)</P
 ></LI
+><LI
+><P
+>Try <B
+CLASS="command"
+>rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp</B
+></P
+></LI
 ></OL
 ><P
->Technical details: 
-The cause of this problem is not understood at present, but may be related
-to permissions on /tmp, or not having administrator rights.
-</P
-><P
->&#13;The X server attempts to create a lock file in
+>Technical details:
+The X server attempts to create a lock file in
 <TT
 CLASS="filename"
 >/tmp</TT
-> by creating the file under a temporary name, then renaming it to
-the proper name. If this rename fails it attempts to read the existing
-lock file to determine the pid of an already running server.  The failure
+> by creating the file under a temporary name,
+then renaming it to the proper name (by hard linking it under the correct name, then unlinking
+it from the temporary name). If this rename fails it attempts to read the existing
+lock file to determine the pid of an already running server.
+
+The failure
 case appears to be that lock file was created successfully, but the rename
 failed, despite the fact that no old lock file exists, which we then fail
-to read.
+to read (hence the error message).
 </P
 ></DIV
 ></DIV
@@ -2871,7 +2894,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN490"
+NAME="AEN499"
 ></A
 ><B
 >6.2. </B
@@ -4935,7 +4958,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN968"
+NAME="AEN977"
 ></A
 ><P
 ><B
