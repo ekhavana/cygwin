@@ -13,9 +13,8 @@ REL="UP"
 TITLE="Programming"
 HREF="programming.html"/><LINK
 REL="PREVIOUS"
-TITLE="Cygwin/X X Server
-Architecture"
-HREF="prog-server-architecture.html"/><LINK
+TITLE="Prerequisites for Building the Source Code"
+HREF="prog-build-prerequisites.html"/><LINK
 REL="NEXT"
 TITLE="Native Compiling"
 HREF="prog-build-native.html"/></HEAD
@@ -41,7 +40,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="prog-server-architecture.html"
+HREF="prog-build-prerequisites.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -78,11 +77,13 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="prog-source-cygwin-setup"
->Obtaining the source code via Cygwin setup</A
+>Obtaining via Cygwin setup</A
 ></H2
 ><P
 >&#13;The source code for the packages distributed via Cygwin setup is also
 available via Cygwin setup.
+To install the source for the X server, run Cygwin setup and tick the
+'Src?' check-box for the 'xorg-server' package.
 </P
 ><P
 >&#13;This may have multiple patches applied on
@@ -91,7 +92,7 @@ point for new developers.
 </P
 ><P
 >&#13;On installing the source code package, setup will unpack it under
-/usr/src.  You should find the stock X.org xorg-server-n.n.n.tar.bz2 archive,
+/usr/src.  You should find the stock X.Org xorg-server-n.n.n.tar.bz2 archive,
 plus a number of .patch files, and a .cygport file which automates the distribution
 build and packaging tasks.
 </P
@@ -118,7 +119,7 @@ $ cd xorg-server-n.n.n-n/src/xorg-server-n.n.n/
 
 Username@CygwinHost /usr/src/xorg-server-n.n.n-n/src/xorg-server-n.n.n/
 $ ./autogen.sh -V
-[more output as autoconfiguration scripts are regnerated]
+[more output as autoconfiguration scripts are regenerated]
 </PRE
 ></TD
 ></TR
@@ -144,9 +145,27 @@ CLASS="note"
 ><B
 >Note: </B
 >
-It is necessary to run the package's autogen.sh script to 
+It is necessary to run the package's autogen.sh script to
 regenerate the configure script and Makefiles if the patches modify the
 autoconf or automake source files
+</P
+></BLOCKQUOTE
+></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+For details of using cygport to generate packages for distribution, see
+<A
+HREF="prog-distribution.html"
+>the Section called <I
+>Packaging a Cygwin/X Distribution</I
+></A
+>
 </P
 ></BLOCKQUOTE
 ></DIV
@@ -156,20 +175,69 @@ CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
+NAME="prog-source-cygports"
+>Obtaining from subversion</A
+></H2
+><P
+>&#13;The patches applied to the stock X.Org archive and the packaging script
+for the packages distributed via Cygwin setup are held in a subversion repository.
+Intermediate versions between released packages can be obtained from there.
+</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost ~
+$ svn checkout https://cygwin-ports.svn.sourceforge.net/svnroot/cygwin-ports/ports/trunk/xorg/xorg-server
+
+Username@CygwinHost ~
+$ cd xorg-server
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;This will obtain the .patch files, and a .cygport file.
+You can then add the stock X.Org xorg-server-n.n.n.tar.bz2 archive, either by downloading it with
+'cygport xorg-server-n.n.n-n.cygport download' or by copying it into that directory if you have already
+downloaded it, and proceed as in
+<A
+HREF="prog-obtaining-source.html#prog-source-cygwin-setup"
+>the Section called <I
+>Obtaining via Cygwin setup</I
+></A
+>
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
 NAME="prog-source-xorg"
->Obtaining the source code from X.org</A
+>Obtaining from X.Org</A
 ></H2
 ><P
 >Cygwin/X source code is contained in, and distributed with, the
 <A
 HREF="http://xorg.freedesktop.org/wiki/Releases/Download"
 TARGET="_top"
->&#13;X Window System </A
-> source code tree.
+>&#13;X Window System source code releases</A
+>.
 </P
 ><P
->Read-only access to the X Window System git source
-tree hosted on 
+>Read-only access to the
+<A
+HREF="http://cgit.freedesktop.org/xorg/xserver/"
+TARGET="_top"
+>&#13;X Window System git source
+</A
+>.
+tree hosted on
 <A
 HREF="http://freedesktop.org/Software/xorg"
 TARGET="_top"
@@ -208,7 +276,7 @@ CLASS="emphasis"
 <A
 HREF="http://cgit.freedesktop.org/xorg/xserver/"
 TARGET="_top"
->&#13;cgit interface to the X.org tree
+>&#13;cgit interface to the X.Org tree
 </A
 >.
 Most of the Cygwin/X-specific code is in the
@@ -237,7 +305,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="prog-server-architecture.html"
+HREF="prog-build-prerequisites.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -265,8 +333,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Cygwin/X X Server
-Architecture</TD
+>Prerequisites for Building the Source Code</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
