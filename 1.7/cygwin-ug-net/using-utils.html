@@ -147,7 +147,7 @@ language.</p><p>The <span class="command"><strong>cygcheck</strong></span> progr
 information about your system for troubleshooting when requested.  
 When asked to run this command save the output so that you can email it,
 for example:</p><pre class="screen">
-<code class="prompt">C:\cygwin&gt;</code> <strong class="userinput"><code>cygcheck -s -v -r -h &gt; cygcheck_output.txt</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>cygcheck -s -v -r -h &gt; cygcheck_output.txt</code></strong>
 </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygpath"></a>cygpath</h3></div></div></div><pre class="screen">
 Usage: cygpath (-d|-m|-u|-w|-t TYPE) [-f FILE] [OPTION]... NAME...
        cygpath [-c HANDLE] 
@@ -579,7 +579,7 @@ Please see <a class="xref" href="using.html#mount-table" title="The Cygwin Mount
 concepts behind the Cygwin POSIX file system and strategies for using
 mounts. To remove mounts temporarily, use <span class="command"><strong>umount</strong></span></p><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="utils-mount"></a>Using mount</h4></div></div></div><p>If you just type <span class="command"><strong>mount</strong></span> with no parameters, it
 will display the current mount table for you.</p><div class="example"><a name="utils-mount-ex"></a><p class="title"><b>Example&#160;3.9.&#160;Displaying the current set of mount points</b></p><div class="example-contents"><pre class="screen">
-<code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>mount</code></strong>
 c:\cygwin\bin on /usr/bin type ntfs (binary)
 c:\cygwin\lib on /usr/lib type ntfs (binary)
 c:\cygwin on / type ntfs (binary)
@@ -595,11 +595,11 @@ demonstrates how to mount the directory
 <code class="filename">//pollux/home/joe/data</code> to <code class="filename">/data</code>
 for the duration of the current session.
 </p><div class="example"><a name="utils-mount-add-ex"></a><p class="title"><b>Example&#160;3.10.&#160;Adding mount points</b></p><div class="example-contents"><pre class="screen">
-<code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>ls /data</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>ls /data</code></strong>
 ls: /data: No such file or directory
-<code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount //pollux/home/joe/data /data</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>mount //pollux/home/joe/data /data</code></strong>
 mount: warning - /data does not exist!
-<code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>mount</code></strong>
 //pollux/home/joe/data on /data type smbfs (binary)
 c:/cygwin/bin on /usr/bin type ntfs (binary)
 c:/cygwin/lib on /usr/lib type ntfs (binary)
@@ -646,17 +646,19 @@ mount table, then <code class="filename">z:\</code> will be accessible as
 <code class="filename">/cygdrive/z</code>.  The <span class="command"><strong>mount</strong></span> utility 
 can be used to change this default automount prefix through the use of the
 "--change-cygdrive-prefix" option.  In the following example, we will
-set the automount prefix to <code class="filename">/</code>:</p><div class="example"><a name="utils-cygdrive-ex"></a><p class="title"><b>Example&#160;3.11.&#160;Changing the default prefix</b></p><div class="example-contents"><pre class="screen">
-<code class="prompt">c:\cygwin\&gt;</code> <strong class="userinput"><code>mount --change-cygdrive-prefix /</code></strong>
+set the automount prefix to <code class="filename">/mnt</code>:</p><div class="example"><a name="utils-cygdrive-ex"></a><p class="title"><b>Example&#160;3.11.&#160;Changing the default prefix</b></p><div class="example-contents"><pre class="screen">
+<code class="prompt">$</code> <strong class="userinput"><code>mount --change-cygdrive-prefix /mnt</code></strong>
 </pre></div></div><br class="example-break"><p>Note that the cygdrive prefix can be set both per-user and system-wide, 
 and that as with all mounts, a user-specific mount takes precedence over the 
 system-wide setting.  The <span class="command"><strong>mount</strong></span> utility creates system-wide 
-mounts by default if you do not specify a type.  Use the <code class="literal">-s</code> 
-or <code class="literal">-u</code> flag to indicate a system or user mount, respectively.
+mounts by default if you do not specify a type.
 You can always see the user and system cygdrive prefixes with the 
-<code class="literal">-p</code> option.  Using the <code class="literal">-b</code>
+<code class="literal">-p</code> option.  Using the <code class="literal">--options</code>
 flag with <code class="literal">--change-cygdrive-prefix</code> makes all new 
-automounted filesystems default to binary mode file accesses.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="utils-limitations"></a>Limitations</h4></div></div></div><p>Limitations: there is a hard-coded limit of 30 mount
+automounted filesystems default to this set of options.  For instance
+(using the short form of the command line flags)</p><div class="example"><a name="utils-cygdrive-ex2"></a><p class="title"><b>Example&#160;3.12.&#160;Changing the default prefix with specific mount options</b></p><div class="example-contents"><pre class="screen">
+<code class="prompt">$</code> <strong class="userinput"><code>mount -c /mnt -o binary,noacl</code></strong>
+</pre></div></div><br class="example-break"></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="utils-limitations"></a>Limitations</h4></div></div></div><p>Limitations: there is a hard-coded limit of 30 mount
 points.  Also, although you can mount to pathnames that do not start
 with "/", there is no way to make use of such mount points.</p><p>Normally the POSIX mount point in Cygwin is an existing empty
 directory, as in standard UNIX. If this is the case, or if there is a
