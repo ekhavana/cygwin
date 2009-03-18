@@ -20,9 +20,9 @@ equipment manufacturers (OEMs).</p><p>If you find that some characters (especial
 do not display correctly in Cygwin, you can use this option to select an
 appropriate codepage.  Finally, <code class="envar">utf8</code> treats all file names
 and console characters as UTF-8 chars.  Please note that, for correct
-operation, you have to set the environment variable LC_CTYPE to "C-UTF-8"
-for the time being.  The reason is that newlib's multibyte conversion
-functions require this setting.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
+operation, you have to set the environment variable LANG or LC_ALL to
+somthing like "en_US.UTF-8", otherwise many applications will not be
+able to recognize UTF-8 strings correctly.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
 first time a user uses an "MS-DOS" style path name rather than a POSIX-style
 path name.  Defaults to set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)envcache</code> - If set, environment variable
 conversions (between Win32 and POSIX) are cached.  Note that this may

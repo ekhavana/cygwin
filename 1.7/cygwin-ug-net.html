@@ -1,5 +1,5 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Cygwin User's Guide</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="cygwin-ug-net"></a>Cygwin User's Guide</h1></div><div><div class="legalnotice"><a name="legal"></a><p>Copyright © 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Red Hat, Inc.</p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#overview">1. Cygwin Overview</a></span></dt><dd><dl><dt><span class="sect1"><a href="#what-is-it">What is it?</a></span></dt><dt><span class="sect1"><a href="#ov-ex-win">Quick Start Guide for those more experienced with Windows</a></span></dt><dt><span class="sect1"><a href="#ov-ex-unix">Quick Start Guide for those more experienced with UNIX</a></span></dt><dt><span class="sect1"><a href="#are-free">Are the Cygwin tools free software?</a></span></dt><dt><span class="sect1"><a href="#brief-history">A brief history of the Cygwin project</a></span></dt><dt><span class="sect1"><a href="#highlights">Highlights of Cygwin Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-hi-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#ov-hi-perm">Permissions and Security</a></span></dt><dt><span class="sect2"><a href="#ov-hi-files">File Access</a></span></dt><dt><span class="sect2"><a href="#ov-hi-textvsbinary">Text Mode vs. Binary Mode</a></span></dt><dt><span class="sect2"><a href="#ov-hi-ansiclib">ANSI C Library</a></span></dt><dt><span class="sect2"><a href="#ov-hi-process">Process Creation</a></span></dt><dt><span class="sect2"><a href="#ov-hi-signals">Signals</a></span></dt><dt><span class="sect2"><a href="#ov-hi-sockets">Sockets</a></span></dt><dt><span class="sect2"><a href="#ov-hi-select">Select</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#setup-net">2. Setting Up Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does that all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></dd><dt><span class="chapter"><a href="#using">3. Using Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#using-pathnames">Mapping path names</a></span></dt><dd><dl><dt><span class="sect2"><a href="#pathnames-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#mount-table">The Cygwin Mount Table</a></span></dt><dt><span class="sect2"><a href="#cygdrive">The cygdrive path prefix</a></span></dt><dt><span class="sect2"><a href="#pathnames-additional">Additional Path-related Information</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-textbinary">Text and Binary modes</a></span></dt><dd><dl><dt><span class="sect2"><a href="#textbin-issue">The Issue</a></span></dt><dt><span class="sect2"><a href="#textbin-default">The default Cygwin behavior</a></span></dt><dt><span class="sect2"><a href="#textbin-example">Example</a></span></dt><dt><span class="sect2"><a href="#textbin-question">Binary or text?</a></span></dt><dt><span class="sect2"><a href="#textbin-devel">Programming</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-filemodes">File permissions</a></span></dt><dt><span class="sect1"><a href="#using-specialnames">Special filenames</a></span></dt><dd><dl><dt><span class="sect2"><a href="#pathnames-etc">Special files in /etc</a></span></dt><dt><span class="sect2"><a href="#pathnames-dosdevices">DOS devices</a></span></dt><dt><span class="sect2"><a href="#pathnames-specialchars">Special characters in filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-casesensitive">Case sensitive filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-posixdevices">POSIX devices</a></span></dt><dt><span class="sect2"><a href="#pathnames-exe">The .exe extension</a></span></dt><dt><span class="sect2"><a href="#pathnames-proc">The /proc filesystem</a></span></dt><dt><span class="sect2"><a href="#pathnames-proc-registry">The /proc/registry filesystem</a></span></dt><dt><span class="sect2"><a href="#pathnames-at">The @pathnames</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-cygwinenv">The CYGWIN environment
-variable</a></span></dt><dd><dl><dt><span class="sect2"><a href="#cygwinenv-implemented-options">Implemented options</a></span></dt><dt><span class="sect2"><a href="#cygwinenv-removed-options">Removed options</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-cygserver">Cygserver</a></span></dt><dd><dl><dt><span class="sect2"><a href="#what-is-cygserver">What is Cygserver?</a></span></dt><dt><span class="sect2"><a href="#cygserver-command-line">Cygserver command line options</a></span></dt><dt><span class="sect2"><a href="#start-cygserver">How to start Cygserver</a></span></dt><dt><span class="sect2"><a href="#cygserver-config">The Cygserver configuration file</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-utils">Cygwin Utilities</a></span></dt><dd><dl><dt><span class="sect2"><a href="#cygcheck">cygcheck</a></span></dt><dt><span class="sect2"><a href="#cygpath">cygpath</a></span></dt><dt><span class="sect2"><a href="#dumper">dumper</a></span></dt><dt><span class="sect2"><a href="#getfacl">getfacl</a></span></dt><dt><span class="sect2"><a href="#kill">kill</a></span></dt><dt><span class="sect2"><a href="#mkgroup">mkgroup</a></span></dt><dt><span class="sect2"><a href="#mkpasswd">mkpasswd</a></span></dt><dt><span class="sect2"><a href="#mount">mount</a></span></dt><dt><span class="sect2"><a href="#passwd">passwd</a></span></dt><dt><span class="sect2"><a href="#ps">ps</a></span></dt><dt><span class="sect2"><a href="#regtool">regtool</a></span></dt><dt><span class="sect2"><a href="#setfacl">setfacl</a></span></dt><dt><span class="sect2"><a href="#ssp">ssp</a></span></dt><dt><span class="sect2"><a href="#strace">strace</a></span></dt><dt><span class="sect2"><a href="#umount">umount</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-effectively">Using Cygwin effectively with Windows</a></span></dt><dd><dl><dt><span class="sect2"><a href="#using-pathnames-effectively">Pathnames</a></span></dt><dt><span class="sect2"><a href="#using-console">Console Programs</a></span></dt><dt><span class="sect2"><a href="#using-net">Cygwin and Windows Networking</a></span></dt><dt><span class="sect2"><a href="#using-cygutils">The cygutils package</a></span></dt><dt><span class="sect2"><a href="#using-shortcuts">Creating shortcuts with cygutils</a></span></dt><dt><span class="sect2"><a href="#using-printing">Printing with cygutils</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#programming">4. Programming with Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#gcc">Using GCC with Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#gcc-cons">Console Mode Applications</a></span></dt><dt><span class="sect2"><a href="#gcc-gui">GUI Mode Applications</a></span></dt></dl></dd><dt><span class="sect1"><a href="#gdb">Debugging Cygwin Programs</a></span></dt><dt><span class="sect1"><a href="#dll">Building and Using DLLs</a></span></dt><dd><dl><dt><span class="sect2"><a href="#dll-build">Building DLLs</a></span></dt><dt><span class="sect2"><a href="#dll-link">Linking Against DLLs</a></span></dt></dl></dd><dt><span class="sect1"><a href="#windres">Defining Windows Resources</a></span></dt></dl></dd></dl></div><div class="list-of-examples"><p><b>List of Examples</b></p><dl><dt>2.1. <a href="#ntsec-passwd">/etc/passwd:</a></dt><dt>2.2. <a href="#ntsec-passwd-tweaked">/etc/passwd, tweaked:</a></dt><dt>2.3. <a href="#ntsec-group-tweaked">/etc/group, tweaked:</a></dt><dt>3.1. <a href="#pathnames-mount-ex">Displaying the current set of mount points</a></dt><dt>3.2. <a href="#pathnames-at-ex"> Using @pathname</a></dt><dt>3.3. <a href="#utils-cygcheck-ex">Example cygcheck usage</a></dt><dt>3.4. <a href="#utils-search-ex">Searching all packages for a file</a></dt><dt>3.5. <a href="#utils-cygpath-ex">Example cygpath usage</a></dt><dt>3.6. <a href="#utils-kill-ex">Using the kill command</a></dt><dt>3.7. <a href="#utils-mkgroup-ex">Setting up group entry for current user with different domain/group separator</a></dt><dt>3.8. <a href="#utils-althome-ex">Using an alternate home root</a></dt><dt>3.9. <a href="#utils-mount-ex">Displaying the current set of mount points</a></dt><dt>3.10. <a href="#utils-mount-add-ex">Adding mount points</a></dt><dt>3.11. <a href="#utils-cygdrive-ex">Changing the default prefix</a></dt><dt>3.12. <a href="#utils-cygdrive-ex2">Changing the default prefix with specific mount options</a></dt><dt>4.1. <a href="#gcc-hello-world">Building Hello World with GCC</a></dt><dt>4.2. <a href="#gdb-g">Compiling with -g</a></dt><dt>4.3. <a href="#gdb-break">"break" in gdb</a></dt><dt>4.4. <a href="#gdb-cliargs">Debugging with command line arguments</a></dt></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="overview"></a>Chapter 1. Cygwin Overview</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#what-is-it">What is it?</a></span></dt><dt><span class="sect1"><a href="#ov-ex-win">Quick Start Guide for those more experienced with Windows</a></span></dt><dt><span class="sect1"><a href="#ov-ex-unix">Quick Start Guide for those more experienced with UNIX</a></span></dt><dt><span class="sect1"><a href="#are-free">Are the Cygwin tools free software?</a></span></dt><dt><span class="sect1"><a href="#brief-history">A brief history of the Cygwin project</a></span></dt><dt><span class="sect1"><a href="#highlights">Highlights of Cygwin Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-hi-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#ov-hi-perm">Permissions and Security</a></span></dt><dt><span class="sect2"><a href="#ov-hi-files">File Access</a></span></dt><dt><span class="sect2"><a href="#ov-hi-textvsbinary">Text Mode vs. Binary Mode</a></span></dt><dt><span class="sect2"><a href="#ov-hi-ansiclib">ANSI C Library</a></span></dt><dt><span class="sect2"><a href="#ov-hi-process">Process Creation</a></span></dt><dt><span class="sect2"><a href="#ov-hi-signals">Signals</a></span></dt><dt><span class="sect2"><a href="#ov-hi-sockets">Sockets</a></span></dt><dt><span class="sect2"><a href="#ov-hi-select">Select</a></span></dt></dl></dd></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="what-is-it"></a>What is it?</h2></div></div></div><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Cygwin User's Guide</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="cygwin-ug-net"></a>Cygwin User's Guide</h1></div><div><div class="legalnotice"><a name="legal"></a><p>Copyright © 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Red Hat, Inc.</p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#overview">1. Cygwin Overview</a></span></dt><dd><dl><dt><span class="sect1"><a href="#what-is-it">What is it?</a></span></dt><dt><span class="sect1"><a href="#ov-ex-win">Quick Start Guide for those more experienced with Windows</a></span></dt><dt><span class="sect1"><a href="#ov-ex-unix">Quick Start Guide for those more experienced with UNIX</a></span></dt><dt><span class="sect1"><a href="#are-free">Are the Cygwin tools free software?</a></span></dt><dt><span class="sect1"><a href="#brief-history">A brief history of the Cygwin project</a></span></dt><dt><span class="sect1"><a href="#highlights">Highlights of Cygwin Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-hi-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#ov-hi-perm">Permissions and Security</a></span></dt><dt><span class="sect2"><a href="#ov-hi-files">File Access</a></span></dt><dt><span class="sect2"><a href="#ov-hi-textvsbinary">Text Mode vs. Binary Mode</a></span></dt><dt><span class="sect2"><a href="#ov-hi-ansiclib">ANSI C Library</a></span></dt><dt><span class="sect2"><a href="#ov-hi-process">Process Creation</a></span></dt><dt><span class="sect2"><a href="#ov-hi-signals">Signals</a></span></dt><dt><span class="sect2"><a href="#ov-hi-sockets">Sockets</a></span></dt><dt><span class="sect2"><a href="#ov-hi-select">Select</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ov-new1.7">What's new and what changed in Cygwin 1.7</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-new1.7-os">OS releated changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-file">File Access related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-net">Network related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-device">Device related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-posix">Other POSIX related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-sec">Security related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-misc">Miscellanous</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#setup-net">2. Setting Up Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does that all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></dd><dt><span class="chapter"><a href="#using">3. Using Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#using-pathnames">Mapping path names</a></span></dt><dd><dl><dt><span class="sect2"><a href="#pathnames-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#mount-table">The Cygwin Mount Table</a></span></dt><dt><span class="sect2"><a href="#cygdrive">The cygdrive path prefix</a></span></dt><dt><span class="sect2"><a href="#pathnames-additional">Additional Path-related Information</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-textbinary">Text and Binary modes</a></span></dt><dd><dl><dt><span class="sect2"><a href="#textbin-issue">The Issue</a></span></dt><dt><span class="sect2"><a href="#textbin-default">The default Cygwin behavior</a></span></dt><dt><span class="sect2"><a href="#textbin-example">Example</a></span></dt><dt><span class="sect2"><a href="#textbin-question">Binary or text?</a></span></dt><dt><span class="sect2"><a href="#textbin-devel">Programming</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-filemodes">File permissions</a></span></dt><dt><span class="sect1"><a href="#using-specialnames">Special filenames</a></span></dt><dd><dl><dt><span class="sect2"><a href="#pathnames-etc">Special files in /etc</a></span></dt><dt><span class="sect2"><a href="#pathnames-dosdevices">DOS devices</a></span></dt><dt><span class="sect2"><a href="#pathnames-specialchars">Special characters in filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-casesensitive">Case sensitive filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-posixdevices">POSIX devices</a></span></dt><dt><span class="sect2"><a href="#pathnames-exe">The .exe extension</a></span></dt><dt><span class="sect2"><a href="#pathnames-proc">The /proc filesystem</a></span></dt><dt><span class="sect2"><a href="#pathnames-proc-registry">The /proc/registry filesystem</a></span></dt><dt><span class="sect2"><a href="#pathnames-at">The @pathnames</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-cygwinenv">The CYGWIN environment
+variable</a></span></dt><dd><dl><dt><span class="sect2"><a href="#cygwinenv-implemented-options">Implemented options</a></span></dt><dt><span class="sect2"><a href="#cygwinenv-removed-options">Removed options</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-cygserver">Cygserver</a></span></dt><dd><dl><dt><span class="sect2"><a href="#what-is-cygserver">What is Cygserver?</a></span></dt><dt><span class="sect2"><a href="#cygserver-command-line">Cygserver command line options</a></span></dt><dt><span class="sect2"><a href="#start-cygserver">How to start Cygserver</a></span></dt><dt><span class="sect2"><a href="#cygserver-config">The Cygserver configuration file</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-utils">Cygwin Utilities</a></span></dt><dd><dl><dt><span class="sect2"><a href="#cygcheck">cygcheck</a></span></dt><dt><span class="sect2"><a href="#cygpath">cygpath</a></span></dt><dt><span class="sect2"><a href="#dumper">dumper</a></span></dt><dt><span class="sect2"><a href="#getfacl">getfacl</a></span></dt><dt><span class="sect2"><a href="#kill">kill</a></span></dt><dt><span class="sect2"><a href="#mkgroup">mkgroup</a></span></dt><dt><span class="sect2"><a href="#mkpasswd">mkpasswd</a></span></dt><dt><span class="sect2"><a href="#mount">mount</a></span></dt><dt><span class="sect2"><a href="#passwd">passwd</a></span></dt><dt><span class="sect2"><a href="#ps">ps</a></span></dt><dt><span class="sect2"><a href="#regtool">regtool</a></span></dt><dt><span class="sect2"><a href="#setfacl">setfacl</a></span></dt><dt><span class="sect2"><a href="#ssp">ssp</a></span></dt><dt><span class="sect2"><a href="#strace">strace</a></span></dt><dt><span class="sect2"><a href="#umount">umount</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-effectively">Using Cygwin effectively with Windows</a></span></dt><dd><dl><dt><span class="sect2"><a href="#using-pathnames-effectively">Pathnames</a></span></dt><dt><span class="sect2"><a href="#using-console">Console Programs</a></span></dt><dt><span class="sect2"><a href="#using-net">Cygwin and Windows Networking</a></span></dt><dt><span class="sect2"><a href="#using-cygutils">The cygutils package</a></span></dt><dt><span class="sect2"><a href="#using-shortcuts">Creating shortcuts with cygutils</a></span></dt><dt><span class="sect2"><a href="#using-printing">Printing with cygutils</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#programming">4. Programming with Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#gcc">Using GCC with Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#gcc-cons">Console Mode Applications</a></span></dt><dt><span class="sect2"><a href="#gcc-gui">GUI Mode Applications</a></span></dt></dl></dd><dt><span class="sect1"><a href="#gdb">Debugging Cygwin Programs</a></span></dt><dt><span class="sect1"><a href="#dll">Building and Using DLLs</a></span></dt><dd><dl><dt><span class="sect2"><a href="#dll-build">Building DLLs</a></span></dt><dt><span class="sect2"><a href="#dll-link">Linking Against DLLs</a></span></dt></dl></dd><dt><span class="sect1"><a href="#windres">Defining Windows Resources</a></span></dt></dl></dd></dl></div><div class="list-of-examples"><p><b>List of Examples</b></p><dl><dt>2.1. <a href="#ntsec-passwd">/etc/passwd:</a></dt><dt>2.2. <a href="#ntsec-passwd-tweaked">/etc/passwd, tweaked:</a></dt><dt>2.3. <a href="#ntsec-group-tweaked">/etc/group, tweaked:</a></dt><dt>3.1. <a href="#pathnames-mount-ex">Displaying the current set of mount points</a></dt><dt>3.2. <a href="#pathnames-at-ex"> Using @pathname</a></dt><dt>3.3. <a href="#utils-cygcheck-ex">Example cygcheck usage</a></dt><dt>3.4. <a href="#utils-search-ex">Searching all packages for a file</a></dt><dt>3.5. <a href="#utils-cygpath-ex">Example cygpath usage</a></dt><dt>3.6. <a href="#utils-kill-ex">Using the kill command</a></dt><dt>3.7. <a href="#utils-mkgroup-ex">Setting up group entry for current user with different domain/group separator</a></dt><dt>3.8. <a href="#utils-althome-ex">Using an alternate home root</a></dt><dt>3.9. <a href="#utils-mount-ex">Displaying the current set of mount points</a></dt><dt>3.10. <a href="#utils-mount-add-ex">Adding mount points</a></dt><dt>3.11. <a href="#utils-cygdrive-ex">Changing the default prefix</a></dt><dt>3.12. <a href="#utils-cygdrive-ex2">Changing the default prefix with specific mount options</a></dt><dt>4.1. <a href="#gcc-hello-world">Building Hello World with GCC</a></dt><dt>4.2. <a href="#gdb-g">Compiling with -g</a></dt><dt>4.3. <a href="#gdb-break">"break" in gdb</a></dt><dt>4.4. <a href="#gdb-cliargs">Debugging with command line arguments</a></dt></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="overview"></a>Chapter 1. Cygwin Overview</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#what-is-it">What is it?</a></span></dt><dt><span class="sect1"><a href="#ov-ex-win">Quick Start Guide for those more experienced with Windows</a></span></dt><dt><span class="sect1"><a href="#ov-ex-unix">Quick Start Guide for those more experienced with UNIX</a></span></dt><dt><span class="sect1"><a href="#are-free">Are the Cygwin tools free software?</a></span></dt><dt><span class="sect1"><a href="#brief-history">A brief history of the Cygwin project</a></span></dt><dt><span class="sect1"><a href="#highlights">Highlights of Cygwin Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-hi-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#ov-hi-perm">Permissions and Security</a></span></dt><dt><span class="sect2"><a href="#ov-hi-files">File Access</a></span></dt><dt><span class="sect2"><a href="#ov-hi-textvsbinary">Text Mode vs. Binary Mode</a></span></dt><dt><span class="sect2"><a href="#ov-hi-ansiclib">ANSI C Library</a></span></dt><dt><span class="sect2"><a href="#ov-hi-process">Process Creation</a></span></dt><dt><span class="sect2"><a href="#ov-hi-signals">Signals</a></span></dt><dt><span class="sect2"><a href="#ov-hi-sockets">Sockets</a></span></dt><dt><span class="sect2"><a href="#ov-hi-select">Select</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ov-new1.7">What's new and what changed in Cygwin 1.7</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-new1.7-os">OS releated changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-file">File Access related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-net">Network related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-device">Device related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-posix">Other POSIX related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-sec">Security related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-misc">Miscellanous</a></span></dt></dl></dd></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="what-is-it"></a>What is it?</h2></div></div></div><p>
 Cygwin is a Linux-like environment for Windows. It consists of a DLL
 (<code class="filename">cygwin1.dll</code>), which acts as an emulation layer
 providing substantial <a class="ulink" href="http://www.pasc.org/#POSIX" target="_top">POSIX</a>
@@ -266,7 +266,7 @@ can be restricted as it is intended.  This includes not only POSIX paths but
 Win32 paths containing drive letter and/or backslashes as well as UNC paths
 (<code class="filename">//server/share</code> or <code class="filename">\\server\share</code>).
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-textvsbinary"></a>Text Mode vs. Binary Mode</h3></div></div></div><p>Interoperability with other Win32 programs such as text editors was
-critical to the success of the port of the development tools.  Most Red Hat
+critical to the success in the early days of Cygwin.  Most Red Hat
 customers upgrading from the older DOS-hosted toolchains expected the new
 Win32-hosted ones to continue to work with their old development
 sources.</p><p>Unfortunately, UNIX and Win32 use different end-of-line terminators in
@@ -275,8 +275,8 @@ the fly by Cygwin into a single newline when reading in text mode.</p><p>This so
 violating the POSIX standard that states that text and binary mode will be
 identical. Consequently, processes that attempt to lseek through text files can
 no longer rely on the number of bytes read as an accurate indicator of position
-in the file.  For this reason, the CYGWIN environment variable can be
-set to override this behavior.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-ansiclib"></a>ANSI C Library</h3></div></div></div><p>We chose to include Red Hat's own existing ANSI C library
+in the file.  For this reason, Cygwin allows to choose the mode in which to
+read a file in several ways.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-ansiclib"></a>ANSI C Library</h3></div></div></div><p>We chose to include Red Hat's own existing ANSI C library
 "newlib" as part of the library, rather than write all of the lib C
 and math calls from scratch.  Newlib is a BSD-derived ANSI C library,
 previously only used by cross-compilers for embedded systems
@@ -390,7 +390,239 @@ respective type with the appropriate Win32 API call.  As soon as a
 thread identifies a ready descriptor, that thread signals the main
 thread to wake up.  This case is now the same as the first one since
 we know at least one descriptor is ready.  So select returns, after
-polling all of the file descriptors one last time.</p></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="setup-net"></a>Chapter 2. Setting Up Cygwin</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does that all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="internet-setup"></a>Internet Setup</h2></div></div></div><p>To install the Cygwin net release, go to <a class="ulink" href="http://cygwin.com/" target="_top">http://cygwin.com/</a> and click on <a class="ulink" href="http://cygwin.com/setup.exe" target="_top">"Install Cygwin Now!"</a>.  This will
+polling all of the file descriptors one last time.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin 1.7</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-os"></a>OS releated changes</h3></div></div></div><pre class="screen">
+- Windows 95, 98 and Me are not supported anymore.  The new Cywin 1.7 DLL
+  will not run on any of these systems.
+</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-file"></a>File Access related changes</h3></div></div></div><pre class="screen">
+- Mount points are no longer stored in the registry.  Use /etc/fstab
+  and /etc/fstab.d/$USER instead.  Mount points created with mount(1)
+  are only local to the current session and disappear when the last
+  Cygwin process in the session exits.
+
+- PATH_MAX is now 4096.  Internally, path names can be as long as the
+  underlying OS can handle (32K).
+  
+- UTF-8 filenames are supported now.  So far, this requires to set
+  the environment variable CYGWIN to contain "codepage:utf8". but this
+  will likely disappear at one point.  The setting of $LANG or $LC_CTYPE
+  will be used instead.
+
+- struct dirent now supports d_type, filled out with DT_REG or DT_DIR.
+  All other file types return as DT_UNKNOWN for performance reasons.
+
+- The CYGWIN environment variable options "ntsec" and "smbntsec" have
+  been replaced by the per-mount option "acl"/"noacl".
+
+- The CYGWIN environment variable option "ntea" has been removed without
+  substitute.
+
+- The CYGWIN environment variable option "check_case" has been removed
+  in favor of real case-sensitivity on file systems supporting it.
+
+- Creating filenames with special DOS characters '"', '*', ':', '&lt;',
+  '&gt;', '|' is supported.
+
+- Creating files with special DOS device filename components ("aux",
+  "nul", "prn") is supported.
+
+- File name are case sensitive if the OS and the underlying file system
+  supports it.  Works on NTFS and NFS.  Does not work on FAT and Samba
+  shares.  Requires to change a registry key (see the user's guide).
+  Can be switched off on a per-mount base.
+
+- Due to the above changes, managed mounts have been removed. 
+
+- Incoming DOS paths are always handled case-insensitive and get no POSIX
+  permission, as if they are mounted with noacl,posix=0 mount flags.
+
+- unlink(2) and rmdir(2) try very hard to remove files/directories even
+  if they are currently accessed or locked.  This is done by utilizing
+  the hidden recycle bin directories and marking the files for deletion.
+
+- rename(2) rewritten to be more POSIX conformant.
+
+- Add st_birthtim member to struct stat.
+
+- File locking is now advisory, not mandatory anymore.  The fcntl(2) and
+  the new lockf(2) APIs create and maintain locks with POSIX semantics,
+  the flock(2) API creates and maintains locks with BSD semantics.
+  POSIX and BSD locks are independent of each other.
+
+- Implement atomic O_APPEND mode.
+
+- New open(2) flags O_DIRECTORY, O_EXEC and O_SEARCH.
+
+- Handle NTFS native symlinks available since Vista/2008 as symlinks
+  (but don't create Vista/2008 symlinks due to unfortunate OS restrictions).
+
+- Recognize NFS shares and handle them using native mechanisms.
+  Recognize and create real symlinks on NFS shares.  Get correct
+  stat(2) information and set real mode bits on open(2), mkdir(2)
+  and chmod(2).
+
+- Recognize Netapp DataOnTap drives and fix inode number handling.
+
+- Recognize Samba version beginning with Samba 3.0.28a using the new
+  extended version information negotiated with the Samba developers.
+
+- List servers of all accessible domains and workgroups in // instead of
+  just the servers in the own domain/workgroup.
+
+- Support Linux-like extended attributes ([fl]getxattr, [fl]listxattr,
+  [fl]setxattr, [fl]removexattr).
+
+- New file conversion API for conversion from Win32 to POSIX path and
+  vice versa (cygwin_conv_path, cygwin_create_path, cygwin_conv_path_list).
+
+- New openat family of functions: openat, faccessat, fchmodat, fchownat,
+  fstatat, futimesat, linkat, mkdirat, mkfifoat, mknodat, readlinkat, renameat,
+  symlinkat, unlinkat.
+
+- Other new APIs: posix_fadvise, posix_fallocate, funopen, fopencookie,
+  open_memstream, open_wmemstream, fmemopen, fdopendir.
+</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-net"></a>Network related changes</h3></div></div></div><pre class="screen">
+- New implementation for blocking sockets and select on sockets which
+  is supposed to allow POSIX-compatible sharing of sockets between
+  threads and processes.
+
+- send/sendto/sendmsg now send data in 64K chunks to circumvent an
+  internal buffer problem in WinSock (KB 201213).
+
+- New send/recv option MSG_DONTWAIT.
+
+- IPv6 support.  New API getaddrinfo, getnameinfo, freeaddrinfo,
+  gai_strerror, in6addr_any, in6addr_loopback.  On IPv6-less systems,
+  replacement functions are available for IPv4.  On systems with IPv6
+  enabled, the underlying WinSock functions are used.  While I tried
+  hard to get the functionality as POSIXy as possible, keep in mind that
+  a *fully* conformant implementation of getaddrinfo and other stuff is
+  only available starting with Windows Vista/2008.
+
+- Resolver functions (res_init, res_query, res_search, res_querydomain,
+  res_mkquery, res_send, dn_comp, dn_expand) are now part of Cygwin.
+  Applications don't have to link against minires anymore.  Actually,
+  this *is* the former libminires.a.
+
+- rcmd is now implemented inside of Cygwin, instead of calling the
+  WinSock function.  This allows rsh(1) usage on Vista/2008, which
+  dropped this function from WinSock.
+
+- Define multicast structures in netinet/in.h.  Note that fully
+  conformant multicast support is only available beginning with Vista/2008.
+
+- Improve get_ifconf.  Redefine struct ifreq and subsequent datastructures
+  to be able to keep more information.  Support SIOCGIFINDEX, SIOCGIFDSTADDR
+  and the Cygwin specific SIOCGIFFRNDLYNAM.  Support real interface flags
+  on systems supporting them.
+
+- Other new APIs: bindresvport, bindresvport_sa, gethostbyname2, iruserok_sa,
+  rcmd_af, rresvport_af.  getifaddrs, freeifaddrs, if_nametoindex,
+  if_indextoname, if_nameindex, if_freenameindex.
+
+- Add /proc/net/if_inet6.
+</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-device"></a>Device related changes</h3></div></div></div><pre class="screen">
+- Reworked pipe implementation which uses overlapped IO to create
+  more reliable interruptible pipes and fifos.
+
+- The CYGWIN environment variable option "binmode" has been removed.
+
+- Improved fifo handling by using native Windows named pipes.
+
+- Detect when a stdin/stdout which looks like a pipe is really a tty.
+  Among other things, this allows a debugged application to recognize that
+  it is using the same tty as the debugger.
+
+- Support UTF-8 in console window.
+
+- Support up to 64 serial interfaces using /dev/ttyS0 - /dev/ttyS63.
+
+- Support up to 128 raw disk drives /dev/sda - /dev/sddx.
+
+- New API: cfmakeraw, posix_openpt.
+</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-posix"></a>Other POSIX related changes</h3></div></div></div><pre class="screen">
+- Allow multiple concurrent read locks per thread for pthread_rwlock_t.
+
+- Implement pthread_kill(thread, 0) as per POSIX.
+
+- New API for POSIX IPC:
+  Named semaphores: sem_open, sem_close, sem_unlink.
+  Message queues: mq_open, mq_getattr, mq_setattr, mq_notify, mq_send,
+  mq_timedsend, mq_receive, mq_timedreceive, mq_close, mq_unlink.
+  Shared memory: shm_open, shm_unlink.
+
+- Only declare expected functions in &lt;strings.h&gt;, don't include
+  &lt;string.h&gt; from here.
+
+- New APIs: _Exit, confstr, insque, remque, sys_sigabbrev,
+  posix_madvise, posix_memalign, reallocf,
+  exp10, exp10f, pow10, pow10f, lrint, lrintf, rint, rintf, llrint, llrintf,
+  llrintl, lrintl, rintl,
+  mbsnrtowcs, strcasestr, stpcpy, stpncpy, wcpcpy, wcpncpy, wcsnlen,
+  wcsnrtombs, wcsftime, wcstod, wcstof, wcstoimax, wcstok, wcstol, wcstoll,
+  wcstoul, wcstoull, wcstoumax, wcsxfrm, wcscasecmp, wcsncasecmp,
+  fgetwc, fgetws, fputwc, fputws, fwide, getwc, getwchar, putwc, putwchar,
+  ungetwc, asnprintf, dprintf, vasnprintf, vdprintf,
+  wprintf, fwprintf, swprintf, vwprintf, vfwprintf, vswprintf,
+  wscanf, fwscanf, swscanf, vwscanf, vfwscanf, vswscanf.
+</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-sec"></a>Security related changes</h3></div></div></div><pre class="screen">
+- Getting a domain user's groups is hopefully more bulletproof now.
+
+- Cygwin now comes with a real LSA authentication package.  This must
+  be manually installed by a privileged user using the /bin/cyglsa-config
+  script.  The advantages and disadvantages are noted in
+  http://cygwin.com/ml/cygwin-developers/2006-11/msg00000.html
+
+- Cygwin now allows to store and use user passwords in a hidden area of
+  the registry.  This is tried first when Cygwin is called by privileged
+  processes to switch the user context.  This allows, for instance,
+  ssh public key sessions with full network credentials to access shares
+  on other machines.
+
+- The mkpasswd and mkgroup tools have changed behaviour and a couple of
+  new options to ease consistent usage in multi-machine or multi-domain
+  environments.
+</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-misc"></a>Miscellanous</h3></div></div></div><pre class="screen">
+- New ldd utility, similar to Linux.
+
+- Fallout from the long path names: If the current working directory is
+  longer than 260 bytes, or if the current working directory is a virtual
+  path (like /proc, /cygdrive, //server), don't call native Win32 programs
+  since they don't understand these paths.
+
+- On the first usage of a DOS path (C:\foo, \\foo\bar), the Cygwin DLL
+  emits a scary warning that DOS paths shouldn't be used.  There's also
+  the new CYGWIN=nodosfilewarning setting to disable that.
+
+- The CYGWIN environment variable option "server" has been removed.
+  Cygwin automatically uses cygserver if it's available.
+
+- Allow environment of arbitrary size instead of a maximum of 32K.
+
+- Don't force uppercase environment when started from a non-Cygwin process.
+  Except for certain Windows and POSIX variables which are always uppercased,
+  preserve environment case.  Switch back to old behaviour with the new
+  CYGWIN=upcaseenv setting.
+
+- Detect and report a missing DLL on process startup.
+
+- Add /proc/registry32 and /proc/registry64 paths to access 32 bit and
+  64 bit registry on 64 bit systems.
+
+- Add the ability to distinguish registry keys and registry values with the
+  same name in the same registry subtree.  The key is called "foo" and the
+  value will be called "foo%val" in this case.
+
+- Align /proc/cpuinfo more closly to Linux content.
+
+- Add /proc/$PID/mounts entries and a symlink /proc/mounts pointing to
+  /proc/self/mounts as on Linux.
+
+- Optimized strstr and memmem implementation.
+
+- Remove backwards compatibility with old signal masks (some *very* old
+  programs which use signal masks may no longer work correctly).
+
+</pre></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="setup-net"></a>Chapter 2. Setting Up Cygwin</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does that all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="internet-setup"></a>Internet Setup</h2></div></div></div><p>To install the Cygwin net release, go to <a class="ulink" href="http://cygwin.com/" target="_top">http://cygwin.com/</a> and click on <a class="ulink" href="http://cygwin.com/setup.exe" target="_top">"Install Cygwin Now!"</a>.  This will
 download a GUI installer called <span class="command"><strong>setup.exe</strong></span> which can
 be run to download a complete cygwin installation via the internet.
 Follow the instructions on each screen to install Cygwin.
@@ -1466,12 +1698,12 @@ with a directory displayed by <span class="command"><strong>mount</strong></span
 default is specified by the mount flag.  If the file is a symbolic link,
 the mode of the target file system applies.</p></li><li><p>If the file is specified via a MS-DOS pathname (i.e., it contains a
 backslash or a colon), the default is binary.
-</p></li><li><p>Pipes and non-file devices are opened in binary mode,
-except if the <code class="envar">CYGWIN</code> environment variable contains
-<code class="literal">nobinmode</code>.  Sockets are always opened in binary
-mode.</p></li><li><p> When redirecting, the Cygwin shells uses rules (a-e). For
-these shells the relevant value of <code class="envar">CYGWIN</code> is that at the time
-the shell was launched and not that at the time the program is executed.
+</p></li><li><p>Pipes, sockets and non-file devices are opened in binary mode.
+For pipes opened through the pipe() system call you can use the setmode()
+function (see <a class="xref" href="#textbin-devel" title="Programming">the section called &#8220;Programming&#8221;</a> to switch to textmode.
+For pipes opened through popen(), you can simply specify text or binary
+mode just like in calls to fopen().</p></li><li><p>Sockets and other non-file devices are always opened in binary mode.
+</p></li><li><p> When redirecting, the Cygwin shells uses rules (a-d).
 Non-Cygwin shells always pipe and redirect with binary mode. With
 non-Cygwin shells the commands <span class="command"><strong> cat filename | program </strong></span>
 and <span class="command"><strong> program &lt; filename </strong></span> are not equivalent when
@@ -1497,44 +1729,59 @@ REM Remove \r from the file given as argument
 @echo off
 tr -d \r &lt; %1 &gt; %1.nocr
 
-</pre><p> work fine. In the first case (assuming the pipes are binary)
-we rely on <span class="command"><strong>gunzip</strong></span> to set its output to binary mode,
-possibly overriding the mode used by the shell.
+</pre><p> work fine. In the first case we rely on <span class="command"><strong>gunzip</strong></span> to
+set its output to binary mode, possibly overriding the mode used by the shell.
 In the second case we rely on the DOS shell to redirect in binary mode.
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="textbin-question"></a>Binary or text?</h3></div></div></div><p>UNIX programs that have been written for maximum portability
 will know the difference between text and binary files and act
-appropriately under Cygwin.  For those programs, the text mode default
-is a good choice.  Programs included in official Cygwin distributions
-should work well in the default mode. </p><p>Text mode makes it much easier to mix files between Cygwin and
-Windows programs, since Windows programs will usually use the CRLF
-format.  Unfortunately you may still have some problems with text
-mode.  First, some of the utilities included with Cygwin do not yet
-specify binary mode when they should.
-Second, you will introduce CRs in text
-files you write, which can cause problems when moving them back to a
-UNIX system. </p><p>If you are mounting a remote file system from a UNIX machine,
-or moving files back and forth to a UNIX machine, you may want to
-access the files in binary mode. The text files found there will normally
-be in UNIX NL format, and you would want any files put there by Cygwin
-programs to be stored in a format understood by UNIX.
-Be sure to remove CRs from all Makefiles and
-shell scripts and make sure that you only edit the files with
-DOS/Windows editors that can cope with and preserve NL terminated lines.
-</p><p>Note that you can decide this on a disk by disk basis (for
-example, mounting local disks in text mode and network disks in binary
-mode).  You can also partition a disk, for example by mounting
-<code class="filename">c:</code> in text mode, and <code class="filename">c:\home</code>
-in binary mode.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="textbin-devel"></a>Programming</h3></div></div></div><p>In the <code class="function">open()</code> function call, binary mode can be
+appropriately under Cygwin.  Most programs included in the official
+Cygwin distributions should work well in the default mode. </p><p>Binmode is the best choice usually since it's faster and
+easier to handle, unless you want to exchange files with native Win32
+applications.  It makes most sense to keep the Cygwin distribution
+and your Cygwin home directory in binmode and generate text files in
+binmode (with UNIX LF lineendings).  Most Windows applications can
+handle binmode files just fine.  A notable exception is the mini-editor
+<span class="command"><strong>Notepad</strong></span>, which handles UNIX lineendings incorrectly
+and only produces output files with DOS CRLF lineendings.</p><p>You can convert files between CRLF and LF lineendings by using
+certain tools in the Cygwin distribution like <span class="command"><strong>d2u</strong></span> and
+<span class="command"><strong>u2d</strong></span> from the cygutils package.  You can also specify
+a directory in the mount table to be mounted in textmode so you can use
+that directory for exchange purposes.</p><p>As application programmer you can decide on a file by file base,
+or you can specify default open modes depending on the purpose for which
+the application open files.  See the next section for a description of
+your choices.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="textbin-devel"></a>Programming</h3></div></div></div><p>In the <code class="function">open()</code> function call, binary mode can be
 specified with the flag <code class="literal">O_BINARY</code> and text mode with
 <code class="literal">O_TEXT</code>. These symbols are defined in
-<code class="filename">fcntl.h</code>.</p><p>In the <code class="function">fopen()</code> function call, binary mode can be
-specified by adding a <code class="literal">b</code> to the mode string. Text mode is specified
-by adding a <code class="literal">t</code> to the mode string.</p><p>The mode of a file can be changed by the call
+<code class="filename">fcntl.h</code>.</p><p>In the <code class="function">fopen()</code> and <code class="function">popen()</code>
+function calls, binary mode can be specified by adding a <code class="literal">b</code>
+to the mode string. Text mode is specified by adding a <code class="literal">t</code>
+to the mode string.</p><p>The mode of a file can be changed by the call
 <code class="function">setmode(fd,mode)</code> where <code class="literal">fd</code> is a file
 descriptor (an integer) and <code class="literal">mode</code> is
 <code class="literal">O_BINARY</code> or <code class="literal">O_TEXT</code>. The function
 returns <code class="literal">O_BINARY</code> or <code class="literal">O_TEXT</code> depending
-on the mode before the call, and <code class="literal">EOF</code> on error.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-filemodes"></a>File permissions</h2></div></div></div><p>On FAT or FAT32 filesystems, files are always readable, and Cygwin
+on the mode before the call, and <code class="literal">EOF</code> on error.</p><p>There's also a convenient way to set the default open modes used
+in an application by just linking against various object files provided
+by Cygwin.  For instance, if you want to make sure that all files are
+always opened in binary mode by an application, regardless of the mode
+of the underlying mount point, just add the file
+<code class="filename">/lib/binmode.o</code> to the link stage of the application
+in your project, like this:</p><pre class="screen">
+  $ gcc my_tiny_app.c /lib/binmode.o -o my_tiny_app
+</pre><p>This adds code which sets the default open mode for all files
+opened by <span class="command"><strong>my_tiny_app</strong></span> to binary for reading and
+writing.</p><p>Cygwin provides the following object files to set the default open mode
+just by linking an application against them:</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><pre class="screen">
+/lib/automode.o      -  Open files for reading in textmode
+                        Open files for writing in binary mode
+</pre></li><li style="list-style-type: disc"><pre class="screen">
+/lib/binmode.o       -  Open files for reading and writing in binary mode
+</pre></li><li style="list-style-type: disc"><pre class="screen">
+/lib/textmode.o      -  Open files for reading and writing in textmode
+</pre></li><li style="list-style-type: disc"><pre class="screen">
+/lib/textreadmode.o  -  Open files for reading in textmode
+                        Keep default behaviour for writing.
+</pre></li></ul></div></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-filemodes"></a>File permissions</h2></div></div></div><p>On FAT or FAT32 filesystems, files are always readable, and Cygwin
 uses the DOS read-only attribute to determine if they are writable. Files are
 considered to be executable if the filename ends with .bat, .com or .exe, or
 if its content starts with #!. Consequently <span class="command"><strong>chmod</strong></span> can
@@ -1647,10 +1894,12 @@ Read on for more information.</p></div><div class="sect2" lang="en"><div class="
 directory as Cygwin automatically simulates it internally. 
 These devices cannot be seen with the command <span class="command"><strong>ls /dev/</strong></span>
 although commands such as <span class="command"><strong>ls /dev/tty</strong></span> work fine.
-If you want to be able to see all devices in
+If you want to be able to see all well-known devices in
 <code class="filename">/dev/</code>, you can use Igor Pechtchanski's
 <a class="ulink" href="http://cygwin.com/ml/cygwin/2004-03/txt00028.txt" target="_top">create_devices.sh</a>
-script.
+script.  This script does not add the raw disk devices, though.  Again,
+it's not necessary to see an existing device in /dev to access it.  The script
+is just for the fun of it.
 </p><p>
 Cygwin supports the following character devices commonly found on POSIX systems:
 </p><pre class="screen">
@@ -1706,46 +1955,71 @@ from the POSIX namespace to the internal NT namespace.
 E.g. the first harddisk is the NT internal device \device\harddisk0\partition0
 or the first partition on the third harddisk is \device\harddisk2\partition1.
 The first floppy in the system is \device\floppy0, the first CD-ROM is
-\device\cdrom0 and the first tape drive is \device\tape0.  The mapping
-to the POSIX /dev namespace is as follows:
+\device\cdrom0 and the first tape drive is \device\tape0.</p><p>The mapping from physical device to the name of the device in the
+internal NT namespace can be found in various places.  For hard disks and
+CD/DVD drives the Windows "Disk management" (part of the "Computer Management"
+console) shoes the mapping "Disk 0" is \device\harddisk0, "CD-ROM 2" is
+\device\cdrom2.  Another place to find this mapping is the "Device Management"
+console.  Disks have a "Location" number, tapes have a "Tape Symbolic Name",
+etc.  Unfortunately the places where to find this information is not very
+well-defined.</p><p>
+For external disks (USB-drives, CF-cards in a cardreader, etc) you can use
+Cygwin to find out the mapping.  <code class="filename">/proc/partitions</code>
+contains a list of raw drives known to Cygwin.  The <span class="command"><strong>df</strong></span>
+command shows a list of drives and their respective sizes.  If you match
+the information between <code class="filename">/proc/partitions</code> and the
+<span class="command"><strong>df</strong></span> output, you should be able to figure out which
+external drive corresponds to which raw disk device name.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Apart from tape devices which are not block devices and are
+by default accessed directly, accessing mass storage devices raw
+is something you should only do if you know what you're doing and know how to
+handle the information.  <span class="bold"><strong>Writing</strong></span> to a raw
+mass storage device you should only do if you
+<span class="bold"><strong>really</strong></span> know what you're doing and are aware
+of the fact that any mistake can destroy important information, for the
+device, and for you.  So, please, handle this ability with care.
+<span class="bold"><strong>You have been warned.</strong></span></p></div><p>
+Last but not least, the mapping from POSIX /dev namespace to internal
+NT namespace is as follows:
 </p><pre class="screen">
-/dev/st0	\device\tape0, rewind
-/dev/nst0	\device\tape0, no-rewind
-/dev/st1	\device\tape1
-/dev/nst1	\device\tape1
+POSIX device name     Internal NT device name
+
+/dev/st0	      \device\tape0, rewind
+/dev/nst0	      \device\tape0, no-rewind
+/dev/st1	      \device\tape1
+/dev/nst1	      \device\tape1
 ...
 /dev/st15
 /dev/nst15
 
-/dev/fd0	\device\floppy0
-/dev/fd1	\device\floppy1
+/dev/fd0	      \device\floppy0
+/dev/fd1	      \device\floppy1
 ...
 /dev/fd15
 
-/dev/sr0	\device\cdrom0
-/dev/sr1	\device\cdrom1
+/dev/sr0	      \device\cdrom0
+/dev/sr1	      \device\cdrom1
 ...
 /dev/sr15
 
-/dev/scd0	\device\cdrom0
-/dev/scd1	\device\cdrom1
+/dev/scd0	      \device\cdrom0
+/dev/scd1	      \device\cdrom1
 ...
 /dev/scd15
 
-/dev/sda	\device\harddisk0\partition0	(whole disk)
-/dev/sda1	\device\harddisk0\partition1	(first partition)
+/dev/sda	      \device\harddisk0\partition0	(whole disk)
+/dev/sda1	      \device\harddisk0\partition1	(first partition)
 ...
-/dev/sda15	\device\harddisk0\partition15	(fifteenth partition)
+/dev/sda15	      \device\harddisk0\partition15	(fifteenth partition)
 
-/dev/sdb	\device\harddisk1\partition0
-/dev/sdb1	\device\harddisk1\partition1
+/dev/sdb	      \device\harddisk1\partition0
+/dev/sdb1	      \device\harddisk1\partition1
 
 [up to]
 
-/dev/sddx	\device\harddisk127\partition0
-/dev/sddx1	\device\harddisk127\partition1
+/dev/sddx	      \device\harddisk127\partition0
+/dev/sddx1	      \device\harddisk127\partition1
 ...
-/dev/sddx15	\device\harddisk127\partition15
+/dev/sddx15	      \device\harddisk127\partition15
 </pre><p>
 if you don't like these device names, feel free to create symbolic
 links as they are created on Linux systems for convenience:
@@ -1864,9 +2138,9 @@ equipment manufacturers (OEMs).</p><p>If you find that some characters (especial
 do not display correctly in Cygwin, you can use this option to select an
 appropriate codepage.  Finally, <code class="envar">utf8</code> treats all file names
 and console characters as UTF-8 chars.  Please note that, for correct
-operation, you have to set the environment variable LC_CTYPE to "C-UTF-8"
-for the time being.  The reason is that newlib's multibyte conversion
-functions require this setting.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
+operation, you have to set the environment variable LANG or LC_ALL to
+somthing like "en_US.UTF-8", otherwise many applications will not be
+able to recognize UTF-8 strings correctly.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
 first time a user uses an "MS-DOS" style path name rather than a POSIX-style
 path name.  Defaults to set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)envcache</code> - If set, environment variable
 conversions (between Win32 and POSIX) are cached.  Note that this may
@@ -2124,7 +2398,7 @@ At least one command option or a PROGRAM is required, as shown above.
   -f, --find-package   find the package that FILE belongs to
   -l, --list-package   list contents of PACKAGE (or all packages if none given)
   -p, --package-query  search for REGEXP in the entire cygwin.com package
-                       repository (requies internet connectivity)
+                       repository (requires internet connectivity)
   -v, --verbose        produce more verbose output
   -h, --help           annotate output with explanatory comments when given
                        with another command, otherwise print this help
