@@ -86,9 +86,10 @@ Cygwin has to make an educated guess which charset to use to convert
 the environment itself.  The only reproducible way to do that in the absence
 of <code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>, or <code class="envar">LANG</code>,
 is to use the current Windows ANSI codepage.</p><p>As long as the environment only contains ASCII characters, this is
-no problem.  But if it does, and you're planning to use, say, UTF-8,
-the environment will result in invalid characters in the UTF-8 charset.
-This would be especially a problem in variables like <code class="envar">PATH</code>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Per POSIX, the name of an environment variable should only
+no problem.  But if it contains native characters, and you're planning
+to use, say, UTF-8, the environment will result in invalid characters in
+the UTF-8 charset.  This would be especially a problem in variables like
+<code class="envar">PATH</code>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Per POSIX, the name of an environment variable should only
 consist of valid ASCII characters, and only of uppercase letters, digits, and
 the underscore for maximum portablilty.</p></div><p>And here's another problem when switching charsets on the fly.
 Symbolic links.  A symbolic link contains the filename of the target
