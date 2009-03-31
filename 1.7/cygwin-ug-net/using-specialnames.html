@@ -16,26 +16,27 @@ Windows path, strips off the innermost directory component and adds
 well as the innermost directory (<code class="filename">bin</code>) is stripped
 off: <code class="filename">C:\cygwin\</code>.  Then "etc" and the filename to
 look for is attached: <code class="filename">C:\cygwin\etc\fstab</code>.  So the
-/etc directory must be parallel to the directory in which the cygwn1.dll
+/etc directory must be parallel to the directory in which the cygwin1.dll
 exists and <code class="filename">/etc</code> must not be a Cygwin symlink
 pointing to another directory.  Consequentially none of the files from
-the above list, including the directory
-<code class="filename">/etc/fstab.d</code>is allowed to be a Cygwin symlink
-either.</p><p>However, native NTFS symlinks and reparse points are transparent
+the above list, including the directory <code class="filename">/etc/fstab.d</code>
+is allowed to be a Cygwin symlink either.</p><p>However, native NTFS symlinks and reparse points are transparent
 when accessing the above files so all these files as well as
 <code class="filename">/etc</code> itself may be NTFS symlinks or reparse
 points.</p><p>Last but not least, make sure that these files are world-readable.
 Every process of any user account has to read these files potentially,
 so world-readability is essential.  The only exception are the user
 specific files <code class="filename">/etc/fstab.d/$USER</code>, which only have
-to be readable by the $USER user account itself.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-dosdevices"></a>DOS devices</h3></div></div></div><p>Filenames invalid under Win32 are not necessarily invalid
-under Cygwin since release 1.7.0.  There are a couple of rules which
-apply to Windows filenames.  First of all, DOS device names like
+to be readable by the $USER user account itself.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-dosdevices"></a>Invalid filenames</h3></div></div></div><p>Filenames invalid under Win32 are not necessarily invalid
+under Cygwin since release 1.7.0.  There are a few rules which
+apply to Windows filenames.  Most notably, DOS device names like
 <code class="filename">AUX</code>, <code class="filename">COM1</code>,
 <code class="filename">LPT1</code> or <code class="filename">PRN</code> (to name a few)
-cannot be used in a native Win32 application, even with an
-extension (<code class="filename">prn.txt</code>).  Cygwin can handle files with
-these names just fine.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-specialchars"></a>Special characters in filenames</h3></div></div></div><p>Win32 filenames can't contain trailing dots and spaces for backward
+cannot be used as filename or extension in a native Win32 application.
+So filenames like <code class="filename">prn.txt</code> or <code class="filename">foo.aux</code>
+are invalid filenames for native Win32 applications.</p><p>This restriction doesn't apply to Cygwin applications.  Cygwin
+can create and access files with such names just fine.  Just don't try
+to use these files with native Win32 aqpplications...</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-specialchars"></a>Forbidden characters in filenames</h3></div></div></div><p>Win32 filenames can't contain trailing dots and spaces for backward
 compatibility.  When trying to create files with trailing dots or spaces,
 all of them are removed before the file is created.  This restriction does
 only affect native Win32 applications.  Cygwin applications can create and
@@ -44,7 +45,37 @@ access files with trailing dots and spaces without problems.</p><p>Some characte
 </pre><p>Cygwin can't fix this, but it has a method to workaround this
 restriction.  All of the above characters, except for the backslash,
 are converted to special UNICODE characters in the range 0xf000 to 0xf0ff
-(the "Private use area") when creating or accessing files.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-casesensitive"></a>Case sensitive filenames</h3></div></div></div><p>In the Win32 subsystem filenames are only case-preserved, but not
+(the "Private use area") when creating or accessing files.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-unusual"></a>Filenames with unusual (foreign) characters</h3></div></div></div><p> Windows filesystems use the Unicode character set in the UTF-16
+encoding to store filename information.  If you don't use the UTF-8
+character set (see <a class="xref" href="setup-locale.html" title="Internationalization">the section called &#8220;Internationalization&#8221;</a>) then there's a
+chance that a filename is using one or more characters which have no
+representation in the character set you're using.</p><p>For instance, there are no chinese characters in the ISO-8859-1
+character set.  So, converting a filename containing a chinese character
+to ISO-8859-1 leaves you with a wrongly converted filename, for instance
+containing a question mark '?' as replacement for the unconvertable
+character.  When trying to access the file, Cygwin has to convert the
+filename back to UTF-16.  However, this doesn't result in the original
+filename because the question mark will not translate back to the original
+chinese character, but to a simple question mark instead.  This in turn
+results in strange "File not found" messages.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>To avoid this scenario altogether, just use always UTF-8 as
+character set.</p></div><p>If you don't want or can't use UTF-8 as character set for whatever
+reason, you will nevertheless be able to access the file.  How does that
+work?  When Cygwin converts the filename from UTF-16 to your character
+set, it recognizes characters which can't be converted.  If that occurs,
+Cygwin replaces the non-convertible character with a special character
+sequence.  The sequence starts with an ASCII SO character (hex code
+0x0e, equivalent Control-N), followed by the UTF-8 representation of the
+character.  The result is a filename containing some ugly looking
+characters.  While it doesn't <span class="emphasis"><em>look</em></span> nice, it
+<span class="emphasis"><em>is</em></span> nice, because Cygwin knows how to convert this
+filename back to UTF-16.  The filename will be converted using your
+usual character set.  However, when Cygwin recognizes an ASCII SO
+character, it skips over the ASCII SO and handles the following bytes as
+a UTF-8 character.  Thus, the filename is symmetrically converted back to
+UTF-16 and you can access the file.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Please be aware that this method is not entirely foolproof.
+In some character set combinations it might not work for certain native
+characters.</p><p>Only by using the UTF-8 charset you can avoid this problem safely.
+</p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-casesensitive"></a>Case sensitive filenames</h3></div></div></div><p>In the Win32 subsystem filenames are only case-preserved, but not
 case-sensitive.  You can't access two files in the same directory which
 only differ by case, like <code class="filename">Abc</code> and
 <code class="filename">aBc</code>.  While NTFS (and some remote filesystems)
@@ -58,7 +89,7 @@ HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\kernel\obcaseinsensitive
 this registry value also on Windows NT4 and Windows 2000, which usually
 both don't know this registry key.  If you want case-sensitivity on these
 systems, create that registry value and set it to 0.  On these systems
-(and *only* on these systems) you don't have to reboot to bring it
+(and <span class="bold"><strong>only</strong></span> on these systems) you don't have to reboot to bring it
 into effect, rather stopping all Cygwin processes and then restarting them
 is sufficient.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
 When installing Microsoft's Services For Unix (SFU), you're asked if

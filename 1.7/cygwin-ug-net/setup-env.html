@@ -10,9 +10,16 @@ The <code class="envar">CYGWIN</code> variable is used to configure many global
 settings for the Cygwin runtime system.  Initially you can leave
 <code class="envar">CYGWIN</code> unset or set it to <code class="literal">tty</code> (e.g.
 to support job control with ^Z etc...) using a syntax like this in the
-DOS shell, before launching bash.  </p><pre class="screen">
+DOS shell, before launching bash.</p><pre class="screen">
 <code class="prompt">C:\&gt;</code> <strong class="userinput"><code>set CYGWIN=tty notitle glob</code></strong>
 </pre><p>
+Locale support is controlled by the <code class="envar">LANG</code> and
+<code class="envar">LC_xxx</code> environment variables.  You can set all of them
+but Cygwin itself only honors the variables <code class="envar">LC_ALL</code>,
+<code class="envar">LC_CTYPE</code>, and <code class="envar">LANG</code>, in this order, according
+to the POSIX standard.  The first one found rules.  For a more detailed
+description see <a class="xref" href="setup-locale.html" title="Internationalization">the section called &#8220;Internationalization&#8221;</a>.
+</p><p>
 The <code class="envar">PATH</code> environment variable is used by Cygwin
 applications as a list of directories to search for executable files
 to run.  This environment variable is converted from Windows format

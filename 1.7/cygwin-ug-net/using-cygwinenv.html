@@ -4,25 +4,7 @@ variable</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-
 variable</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-implemented-options"></a>Implemented options</h3></div></div></div><p>The <code class="envar">CYGWIN</code> environment variable is used to configure
 many global settings for the Cygwin runtime system. It contains the options
 listed below, separated by blank characters. Many options can be turned off
-by prefixing with <code class="literal">no</code>.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">codepage:[ansi|oem|utf8]</code> - This option controls
-which single- or multibyte character set is used for file and console
-operations.  Windows is using UTF-16 characters internally and this
-option specifies how 8-byte character sets are converted to UTF-16 and
-vice versa.  The default setting is <code class="envar">ansi</code> which means,
-conversion is based on the current ANSI codepage, typically 1252 in
-many Western language versions of Windows.  The name originates from the
-ANSI Latin1 (ISO 8859-1) standard, used in Windows 1.0, though the
-character sets have since diverged from any standard.  The second
-setting selects an older, DOS-based character set, containing various
-line drawing and special characters.  It is called <code class="envar">oem</code>
-since it was originally encoded in the firmware of IBM PCs by original
-equipment manufacturers (OEMs).</p><p>If you find that some characters (especially non-US or 'graphical' ones)
-do not display correctly in Cygwin, you can use this option to select an
-appropriate codepage.  Finally, <code class="envar">utf8</code> treats all file names
-and console characters as UTF-8 chars.  Please note that, for correct
-operation, you have to set the environment variable LANG or LC_ALL to
-somthing like "en_US.UTF-8", otherwise many applications will not be
-able to recognize UTF-8 strings correctly.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
+by prefixing with <code class="literal">no</code>.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
 first time a user uses an "MS-DOS" style path name rather than a POSIX-style
 path name.  Defaults to set.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)envcache</code> - If set, environment variable
 conversions (between Win32 and POSIX) are cached.  Note that this may
@@ -100,7 +82,10 @@ The current list of always uppercased variables is:</p><pre class="screen">
 symlinks as Windows shortcuts with a special header and the R/O attribute
 set. If not set, Cygwin creates symlinks as plain files with a magic number,
 a path and the system attribute set. Defaults to not set since plain
-file symlinks are faster to write and faster to read.</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Removed options</h3></div></div></div><p>
+file symlinks are faster to write and faster to read.  The new style of
+plain file symlinks is incompatible with older Cygwin releases because
+the new symlinks use UTF-16 to encode the target filename, while the
+old symlinks used the current ANSI or OEM charset.</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Removed options</h3></div></div></div><p>
 Some CYGWIN options have been removed in Cygwin 1.7 for one reason or another.
 These removed options are listed below.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">(no)binmode</code> - This option has been removed because
 all file opens default to binary mode, unless the open mode has been specified
@@ -108,7 +93,13 @@ explicitely in the open(2) call.
 </p></li><li style="list-style-type: disc"><p><code class="envar">check_case</code> - This option has been removed in favor of
 real case sensitivity and the per-mount option "posix=[0|1]".  For more
 information, read the documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> and
-<a class="xref" href="using-specialnames.html#pathnames-casesensitive" title="Case sensitive filenames">the section called &#8220;Case sensitive filenames&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntea</code> -  This option has been removed since it
+<a class="xref" href="using-specialnames.html#pathnames-casesensitive" title="Case sensitive filenames">the section called &#8220;Case sensitive filenames&#8221;</a>.</p></li><li style="list-style-type: disc"><p><code class="envar">codepage:[ansi|oem]</code> - This option controled
+which character set is used for file and console operations.  Since Cygwin
+is now doing all character conversion by itself, depending on the
+application call to the <code class="function">setlocale()</code> function, and in
+turn by the setting of the environment variables <code class="envar">$LANG</code>,
+<code class="envar">$LC_ALL</code>, or <code class="envar">$LC_CTYPE</code>, this setting
+got useless.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntea</code> -  This option has been removed since it
 only fakes security which is considered dangerous and useless.  It also
 created an uncontrollably large file on FAT and was entirely useless
 on FAT32.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntsec</code> - This option has been removed in favor of

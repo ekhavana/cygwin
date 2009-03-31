@@ -84,7 +84,14 @@ determine whether or not the file is a symbolic link.  The shortcut style
 symlinks are Windows shortcut files with a special header and the
 Readonly DOS attribute set.  The advantage of file symlinks is speed,
 the advantage of shortcut symlinks is the fact that they can be utilized
-by non-Cygwin Win32 tools as well.</p><p>Hard links are fully supported on NTFS and NFS file systems.  On FAT
+by non-Cygwin Win32 tools as well.</p><p>Starting with Cygwin 1.7, symbolic links are using UTF-16 to encode
+the filename of the target file, to better support internationalization.
+Symlinks created by older Cygwin releases can be read just fine.  However,
+you could run into problems with them if you're now using another character
+set than the one you used when creating these symlinks
+(see <a class="xref" href="setup-locale.html#setup-locale-problems" title="Potential Problems">the section called &#8220;Potential Problems&#8221;</a>.  Please note that this
+new UTF-16 style of symlinks is not compatible with older Cygwin release,
+which can't read the target filename correctly.</p><p>Hard links are fully supported on NTFS and NFS file systems.  On FAT
 and some other file systems, the call falls back to simply copying the file,
 a strategy that works in many cases.</p><p>On file systems which don't support unique persistent file IDs (FAT,
 older Samba shares) the inode number for a file is calculated by hashing its

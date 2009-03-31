@@ -708,6 +708,10 @@ System operations:
   -L, --length LEN         set system minimum password length to LEN.
 
 Other options:
+  -d, --logonserver SERVER connect to SERVER (e.g. domain controller).
+                           Default server is the local system, unless
+                           changing the current user, in which case the
+                           default is the content of $LOGONSERVER.
   -S, --status             display password status for USER (locked, expired,
                            etc.) plus global system password settings.
   -h, --help               output usage information and exit.
@@ -718,8 +722,7 @@ operate on current user.  System operations must not be mixed with user
 operations.  Don't specify a USER when triggering a system operation. 
 
 Don't specify a user or any other option together with the -R option.
-Non-Admin users can only store their password if cygserver is running and
-the CYGWIN environment variable is set to contain the word 'server'.
+Non-Admin users can only store their password if cygserver is running.
 Note that storing even obfuscated passwords in the registry is not overly
 secure.  Use this feature only if the machine is adequately locked down.
 Don't use this feature if you don't need network access within a remote
@@ -771,10 +774,19 @@ are 0 to 999.  The <code class="literal">-L</code> option sets the minimum lengt
 allowed passwords for users who don't belong to the administrators group
 to <span class="emphasis"><em>LEN</em></span> characters.  Allowed values for the minimum
 password length are 0 to 14.  In any of the above cases, a value of 0
-means `no restrictions'.</p><p>Users can use the <span class="command"><strong>passwd -R</strong></span> to enter
-a password which then gets stored in a special area of the registry,
-which is also used by Windows to store passwords of accounts running
-Windows services.  When a privileged Cygwin application calls the
+means `no restrictions'.</p><p>
+All operations affecting the current user are by default run against
+the logon server of the current user (taken from the environment
+variable <code class="envar">LOGONSERVER</code>.  When password or account information
+of other users should be changed, the default server is the local system.
+To change a user account on a remote machine, use the <code class="literal">-d</code>
+option to specify the machine to run the command against.  Note that the
+current user must be a valid member of the administrators group on the remote
+machine to perform such actions.
+</p><p>Users can use the <span class="command"><strong>passwd -R</strong></span> to enter
+a password which then gets stored in a special area of the registry on the
+local system, which is also used by Windows to store passwords of accounts
+running Windows services.  When a privileged Cygwin application calls the
 <span class="command"><strong>set{e}uid(user_id)</strong></span> system call, Cygwin checks if a
 password for that user has been stored in this registry area.  If so, it
 uses this password to switch to this user account using that password.
@@ -787,12 +799,8 @@ privileged operation which only administrative accounts are allowed to
 do.  If normal, non-admin users should be allowed to enter their
 passwords using <span class="command"><strong>passwd -R</strong></span>, it's required to run
 <span class="command"><strong>cygserver</strong></span> as a service under the LocalSystem account
-and the environment variable CYGWIN
-(see <a class="xref" href="using-cygwinenv.html" title="The CYGWIN environment variable">the section called &#8220;The CYGWIN environment
-variable&#8221;</a>)
-must be set to contain the "server" setting before running
-<span class="command"><strong>passwd -R</strong></span>.  This only affects storing passwords.
-Using passwords in privileged processes does not require
+before running <span class="command"><strong>passwd -R</strong></span>.  This only affects storing
+passwords.  Using passwords in privileged processes does not require
 <span class="command"><strong>cygserver</strong></span> to run.</p><p>Limitations: Users may not be able to change their password on
 some systems.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ps"></a>ps</h3></div></div></div><pre class="screen">
 Usage: ps [-aefls] [-u UID]
