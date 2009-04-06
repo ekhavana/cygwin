@@ -20,14 +20,15 @@ usually set to the path to <span class="command"><strong>gdb</strong></span> or
 <span class="command"><strong>dumper</strong></span>, for example
 <code class="filename">C:\cygwin\bin\gdb.exe</code>. 
 There is no default set.
-</p></li><li style="list-style-type: disc"><p><code class="envar">forkchunk:32768</code> - causes the <code class="function">fork()</code>
+</p></li><li style="list-style-type: disc"><p><code class="envar">forkchunk:32768</code> - causes <code class="function">fork()</code>
 to copy memory some number of bytes at a time, in the above example 
 32768 bytes (32Kb) at a time. The default is to copy as many bytes as 
 possible, which is preferable in most cases but may slow some older systems
 down.
-</p></li><li style="list-style-type: disc"><p><code class="envar">proc_retry:n</code> - causes the <code class="function">fork()</code> and <code class="function">exec*()</code>
-to retry n times when a child process fails due to certain windows-specific errors.  These errors usually
-occur when processes are being started while a user is logging off.
+</p></li><li style="list-style-type: disc"><p><code class="envar">proc_retry:n</code> - causes <code class="function">fork()</code> and
+<code class="function">exec*()</code> to retry n times when a child process fails
+due to certain windows-specific errors.  These errors usually occur when
+processes are being started while a user is logging off.
 </p></li><li style="list-style-type: disc"><p><code class="envar">(no)glob[:ignorecase]</code> - if set, command line arguments
 containing UNIX-style file wildcard characters (brackets, question mark,
 asterisk, escaped with \) are expanded into lists of files that match 
@@ -50,11 +51,11 @@ and it cannot be changed in the shell.  It should not be set when using
 other terminals (i.e., rxvt or xterm). 
 </p></li><li style="list-style-type: disc"><p><code class="envar">(no)upcaseenv</code> - if set, Cygwin converts all
 environment variables to all-uppercase, when a Cygwin process is started
-from a non-Cygwin native Windows process.  This is how it has been done
-until Cygwin 1.5.  If not set, Cygwin does not change the case of environment
-variables, except for a restricted set to maintain minimal backward
-compatibility and for correct handling of certain essential variables.
-The current list of always uppercased variables is:</p><pre class="screen">
+from a non-Cygwin native Windows process.  This was the default behavior in
+releases prior to Cygwin 1.7.  If not set, Cygwin does not change the case
+of environment variables, except for a restricted set to maintain minimal
+backward compatibility and for correct handling of certain essential
+variables.  The current list of always uppercased variables is:</p><pre class="screen">
   ALLUSERSPROFILE
   COMMONPROGRAMFILES
   COMPUTERNAME
@@ -85,9 +86,10 @@ a path and the system attribute set. Defaults to not set since plain
 file symlinks are faster to write and faster to read.  The new style of
 plain file symlinks is incompatible with older Cygwin releases because
 the new symlinks use UTF-16 to encode the target filename, while the
-old symlinks used the current ANSI or OEM charset.</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Removed options</h3></div></div></div><p>
-Some CYGWIN options have been removed in Cygwin 1.7 for one reason or another.
-These removed options are listed below.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">(no)binmode</code> - This option has been removed because
+old symlinks used the current ANSI or OEM charset.</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Obsolete options</h3></div></div></div><p>
+Certain CYGWIN options available in past releases have been removed in
+Cygwin 1.7 for one reason or another.  These obsolete options are listed
+below.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">(no)binmode</code> - This option has been removed because
 all file opens default to binary mode, unless the open mode has been specified
 explicitely in the open(2) call.
 </p></li><li style="list-style-type: disc"><p><code class="envar">check_case</code> - This option has been removed in favor of
@@ -99,7 +101,7 @@ is now doing all character conversion by itself, depending on the
 application call to the <code class="function">setlocale()</code> function, and in
 turn by the setting of the environment variables <code class="envar">$LANG</code>,
 <code class="envar">$LC_ALL</code>, or <code class="envar">$LC_CTYPE</code>, this setting
-got useless.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntea</code> -  This option has been removed since it
+became superfluous.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntea</code> -  This option has been removed since it
 only fakes security which is considered dangerous and useless.  It also
 created an uncontrollably large file on FAT and was entirely useless
 on FAT32.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)ntsec</code> - This option has been removed in favor of
@@ -115,4 +117,5 @@ documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin
 because the behaviour it switched on is now the standard behaviour in
 Cygwin.</p></li><li style="list-style-type: disc"><p><code class="envar">(no)traverse</code> - This option has been removed because
 traverse checking is not quite correctly implemented by Microsoft and
-it's behaviour is getting worse with each new OS version.</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="using-cygserver.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Special filenames&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Cygserver</td></tr></table></div></body></html>
+it's behaviour has been getting worse with each new OS version.  This
+complicates its usage so the option has been removed for now.</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="using-cygserver.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Special filenames&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Cygserver</td></tr></table></div></body></html>

@@ -27,7 +27,7 @@ At least one command option or a PROGRAM is required, as shown above.
   -r, --registry       also scan registry for Cygwin settings (with -s)
   -k, --keycheck       perform a keyboard check session (must be run from a
                        plain console only, not from a pty/rxvt/xterm)
-  -f, --find-package   find the package that FILE belongs to
+  -f, --find-package   find the package to which FILE belongs
   -l, --list-package   list contents of PACKAGE (or all packages if none given)
   -p, --package-query  search for REGEXP in the entire cygwin.com package
                        repository (requires internet connectivity)
@@ -296,7 +296,7 @@ ACL.  For directories <span class="command"><strong>getfacl</strong></span> disp
 default ACL.  With no options specified, <span class="command"><strong>getfacl</strong></span> displays 
 the filename, the owner, the group, and both the ACL and the default ACL, if 
 it exists. For more information on Cygwin and Windows ACLs, see
-see <a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called &#8220;Using Windows security in Cygwin&#8221;</a> in the Cygwin User's Guide.
+<a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called &#8220;Using Windows security in Cygwin&#8221;</a> in the Cygwin User's Guide.
 The format for ACL output is as follows:
 </p><pre class="screen">
      # file: filename
@@ -350,7 +350,7 @@ To get a list of running programs and their Cygwin pids, use the Cygwin
 <span class="emphasis"><em>all</em></span> windows pids.</p><p>The <span class="command"><strong>kill -l</strong></span> option prints the name of the
 given signal, or a list of all signal names if no signal is given.</p><p>To send a specific signal, use the <code class="literal">-signN</code>
 option, either with a signal number or a signal name (minus the "SIG"
-part), like these examples:</p><div class="example"><a name="utils-kill-ex"></a><p class="title"><b>Example&#160;3.6.&#160;Using the kill command</b></p><div class="example-contents"><pre class="screen">
+part), as shown in these examples:</p><div class="example"><a name="utils-kill-ex"></a><p class="title"><b>Example&#160;3.6.&#160;Using the kill command</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>kill 123</code></strong>
 <code class="prompt">$</code> <strong class="userinput"><code>kill -1 123</code></strong>
 <code class="prompt">$</code> <strong class="userinput"><code>kill -HUP 123</code></strong>
@@ -446,25 +446,25 @@ With the <code class="literal">-d/-D</code> options the program contacts a Domai
 Controller, which my be unreachable or have restricted access.
 Comma-separated from the machine or domain, you can specify an offset
 which is used as base added to the group's RID to compute the gid
-(offset + RID = gid).  This allows to create the same gids every time you
+(offset + RID = gid).  This allows you to create the same gids every time you
 re-run <span class="command"><strong>mkgroup</strong></span>.
 For very simple needs, an entry for the current user's group can be
 created by using the option <code class="literal">-c</code> or <code class="literal">-C</code>.
 If you want to use one of the <code class="literal">-D</code>, <code class="literal">-L</code>
 or <code class="literal">-C</code> options, but you don't like the backslash as
 domain/group separator, you can specify another separator using the
-<code class="literal">-S</code> option, for instance</p><div class="example"><a name="utils-mkgroup-ex"></a><p class="title"><b>Example&#160;3.7.&#160;Setting up group entry for current user with different domain/group separator</b></p><div class="example-contents"><pre class="screen">
+<code class="literal">-S</code> option, for instance:</p><div class="example"><a name="utils-mkgroup-ex"></a><p class="title"><b>Example&#160;3.7.&#160;Setting up group entry for current user with different domain/group separator</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>mkgroup -C -S+ &gt; /etc/group</code></strong>
 <code class="prompt">$</code> <strong class="userinput"><code>cat /etc/group</code></strong>
 DOMAIN+my_group:S-1-5-21-2913048732-1697188782-3448811101-1144:11144:
 </pre></div></div><br class="example-break"><p>The <code class="literal">-o</code> option allows for special cases
 (such as multiple domains) where the GIDs might match otherwise.
 The <code class="literal">-g</code> option only prints the information for one group.
-The <code class="literal">-U</code> option allows to enumerate the standard UNIX
+The <code class="literal">-U</code> option allows you to enumerate the standard UNIX
 groups on a Samba machine.  It's used together with
 <code class="literal">-l samba-server</code> or <code class="literal">-L samba-server</code>.
 The normal UNIX groups are usually not enumerated, but they can show
-up as group in <span class="command"><strong>ls -l</strong></span> output.
+up as a group in <span class="command"><strong>ls -l</strong></span> output.
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mkpasswd"></a>mkpasswd</h3></div></div></div><pre class="screen">
 Usage: mkpasswd [OPTIONS]...
 Print /etc/passwd file to stdout
@@ -533,7 +533,7 @@ option <code class="literal">-c</code> or  <code class="literal">-C</code>.
 If you want to use one of the <code class="literal">-D</code>, <code class="literal">-L</code>
 or <code class="literal">-C</code> options, but you don't like the backslash as
 domain/group separator, you can specify another separator using the
-<code class="literal">-S</code> option, simialar to the <span class="command"><strong>mkgroup</strong></span>.
+<code class="literal">-S</code> option, similar to the <span class="command"><strong>mkgroup</strong></span>.
 The <code class="literal">-o</code> option allows for special cases
 (such as multiple domains) where the UIDs might match otherwise.
 The <code class="literal">-m</code> option bypasses the current
@@ -551,7 +551,7 @@ use the specified prefix instead of the account home dir or <code class="literal
 would put local users' home directories in the Windows 'Profiles' directory. 
 The <code class="literal">-u</code> option creates just an entry for
 the specified user.
-The <code class="literal">-U</code> option allows to enumerate the standard UNIX
+The <code class="literal">-U</code> option allows you to enumerate the standard UNIX
 users on a Samba machine.  It's used together with
 <code class="literal">-l samba-server</code> or <code class="literal">-L samba-server</code>.
 The normal UNIX users are usually not enumerated, but they can show
@@ -634,7 +634,7 @@ most of the options are duplicates of other mount flags):</p><pre class="screen"
 user mount points.  System mount points can only be specified in
 the <code class="filename">/etc/fstab</code> file.</p><p>
 The <code class="literal">-m</code> option causes the <span class="command"><strong>mount</strong></span> utility
-to output the current mount table in a series of fstab entries.  This allows
+to output the current mount table in a series of fstab entries.
 You can save this output as a backup when experimenting with the mount table.
 Copy the output to <code class="filename">/etc/fstab</code> to restore the old state.
 It also makes moving your settings to a different machine much easier.</p></div><div class="sect3" lang="en"><div class="titlepage"><div><div><h4 class="title"><a name="utils-cygdrive"></a>Cygdrive mount points</h4></div></div></div><p>Whenever Cygwin cannot use any of the existing mounts to convert
@@ -790,11 +790,11 @@ running Windows services.  When a privileged Cygwin application calls the
 <span class="command"><strong>set{e}uid(user_id)</strong></span> system call, Cygwin checks if a
 password for that user has been stored in this registry area.  If so, it
 uses this password to switch to this user account using that password.
-This allows to logon through, for instance, <span class="command"><strong>ssh</strong></span> with
-public key authentication and to get a full qualified user token with
+This allows you to logon through, for instance, <span class="command"><strong>ssh</strong></span> with
+public key authentication and get a full qualified user token with
 all credentials for network access.  However, the method has some
-drawbacks security-wise.  This is explained in more detail in the
-<a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called &#8220;Using Windows security in Cygwin&#8221;</a> section.</p><p>Please note that storing password in that registry area is a
+drawbacks security-wise.  This is explained in more detail in
+<a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called &#8220;Using Windows security in Cygwin&#8221;</a>.</p><p>Please note that storing passwords in that registry area is a
 privileged operation which only administrative accounts are allowed to
 do.  If normal, non-admin users should be allowed to enter their
 passwords using <span class="command"><strong>passwd -R</strong></span>, it's required to run
@@ -835,7 +835,7 @@ words, in the background), <code class="literal">I</code> means waiting for
 input or interactive (foreground), and <code class="literal">O</code> means
 waiting to output. 
 </p><p>
-By default <span class="command"><strong>ps</strong></span> will only show processes owned by the
+By default, <span class="command"><strong>ps</strong></span> will only show processes owned by the
 current user. With either the <code class="literal">-a</code> or <code class="literal">-e</code>
 option, all user's processes (and system processes) are listed. There are
 historical UNIX reasons for the synonomous options, which are functionally
@@ -911,16 +911,16 @@ in an unusable system.  Be careful.</p><p>The <code class="literal">-v</code> op
 commands, this causes additional or lengthier messages to be printed.
 Conversely, the <code class="literal">-q</code> option supresses error messages,
 so you can use the exit status of the program to detect if a key
-exists or not (for example).</p><p>The <code class="literal">-w</code> option allows to access the 64 bit view
-on the registry.  Several subkeys exist in a 32 bit and a 64 bit version
+exists or not (for example).</p><p>The <code class="literal">-w</code> option allows you to access the 64 bit view
+of the registry.  Several subkeys exist in a 32 bit and a 64 bit version
 when running on Windows 64.  Since Cygwin is running in 32 bit mode, it
-has only access to the 32 bit view of these registry keys.  When using
-the <code class="literal">-w</code> the 64 bit view is used and
+only has access to the 32 bit view of these registry keys.  When using
+the <code class="literal">-w</code> switch, the 64 bit view is used and
 <span class="command"><strong>regtool</strong></span> can access the entire registry.
 This option is simply ignored when running on 32 bit Windows versions.
-</p><p>The <code class="literal">-W</code> option allows to access the 32 bit view
-on the registry.  The purpose of this  option is mainly symmetry.  It
-allows to create OS agnostic scripts which would also work in a hypothetic
+</p><p>The <code class="literal">-W</code> option allows you to access the 32 bit view
+on the registry.  The purpose of this option is mainly for symmetry.  It
+permits creation of OS agnostic scripts which would also work in a hypothetical
 64 bit version of Cygwin.</p><p>You must provide <span class="command"><strong>regtool</strong></span> with an 
 <span class="emphasis"><em>action</em></span> following options (if any). Currently,
 the action must be <code class="literal">add</code>, <code class="literal">set</code>,
@@ -929,7 +929,7 @@ the action must be <code class="literal">add</code>, <code class="literal">set</
 </p><p>The <code class="literal">add</code> action adds a new key.  The 
 <code class="literal">check</code> action checks to see if a key exists (the 
 exit code of the program is zero if it does, nonzero if it does not).
-The <code class="literal">get</code> action gets the value of a value of a key,
+The <code class="literal">get</code> action gets the value of a key,
 and prints it (and nothing else) to stdout.  Note: if the value
 doesn't exist, an error message is printed and the program returns a
 non-zero exit code.  If you give <code class="literal">-q</code>, it doesn't

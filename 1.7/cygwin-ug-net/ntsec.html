@@ -90,9 +90,9 @@ SYSTEM                          S-1-5-18   A special account which has all
 </pre><p>For a full list please refer to the MSDN document <a class="ulink" href="http://msdn.microsoft.com/en-us/library/aa379649.aspx" target="_top">Well-known
 SIDs</a>.  The Cygwin package called "csih" provides a tool,
 /usr/lib/csih/getAccountName.exe, which can be used to print the
-(possibly localized) name for the various well-known SIDS.</p><p>Naturally well-known SIDs are the same on each machine, so they are
+(possibly localized) name for the various well-known SIDS.</p><p>Naturally, well-known SIDs are the same on each machine, so they are
 not unique to a machine or domain.  They have the same meaning across
-the Windows network.</p><p>Additionally there are a couple of well-known builtin groups,
+the Windows network.</p><p>Additionally, there are a couple of well-known builtin groups,
 which have the same SID on every machine and which have certain user
 rights by default:</p><pre class="screen">
 administrators                  S-1-5-32-544
@@ -121,7 +121,7 @@ POSIX.  For example, the permission to delete an object is different
 from the permission to change object data, and even changing object data
 can be separated into different permission bits for different kind of
 data.  But there's a problem with the definition of a "correct" ACL
-which disallows to map certain POSIX permissions cleanly.  See
+which disallows mapping of certain POSIX permissions cleanly.  See
 <a class="xref" href="ntsec.html#ntsec-mapping" title="The POSIX permission mapping leak">the section called &#8220;The POSIX permission mapping leak&#8221;</a>.</p><p>POSIX is able to create only three different permissions?  Not quite.
 Newer operating systems and file systems on POSIX systems also provide
 access control lists.  Two different APIs exist for accessing these
@@ -182,27 +182,30 @@ FOO\Administrator.  And the domain user BAR\corinna can now happily
 pretend to be Thursday Next, but will wake up sooner or later finding
 out she's still actually the domain user BAR\corinna...</p><p>Do I have to mention that you can also rename groups in
 <code class="filename">/etc/group</code>?  As long as the SID is present and correct,
-all is well.  This allows for instance to rename the "Administrators" group
-to "root" as well:</p><div class="example"><a name="ntsec-group-tweaked"></a><p class="title"><b>Example&#160;2.3.&#160;/etc/group, tweaked:</b></p><div class="example-contents"><pre class="screen">
+all is well.  This allows you to, for instance, rename the "Administrators"
+group to "root" as well:</p><div class="example"><a name="ntsec-group-tweaked"></a><p class="title"><b>Example&#160;2.3.&#160;/etc/group, tweaked:</b></p><div class="example-contents"><pre class="screen">
 root:S-1-5-32-544:544:
-</pre></div></div><br class="example-break"><p>Last but not least you can also change the primary group of a user
+</pre></div></div><br class="example-break"><p>Last but not least, you can also change the primary group of a user
 in <code class="filename">/etc/passwd</code>.  The only requirement is that the user
 is actually a member of the new primary group in Windows.  For instance,
 normal users in a domain environment are members in the group "Domain Users",
-which in turn is member of the well-known group "Users".  So, if it's
-more feasible in your environment that the user's primary group is
+which in turn belongs to the well-known group "Users".  So, if it's
+more convenient in your environment for the user's primary group to be
 "Users", just set the user's primary group in <code class="filename">/etc/passwd</code>
 to the Cygwin uid of "Users" (see in <code class="filename">/etc/group</code>,
 default 545) and let the user create files with a default group ownership
-of "Users".</p><p>However, here's a WARNING: If you want to do similar changes to
-your files, please do that only if you're feeling comfortable with the
-concepts.  Otherwise don't be surprised if some stuff doesn't work
-anymore.  If you screwed up things, revert to <code class="filename">/etc/passwd</code>
-and <code class="filename">/etc/group</code> files created by mkpasswd
-and mkgroup.  Especially don't change the UID or the name of user
-SYSTEM.  Even if that works mostly, some Cygwin applications running as
-local service under that account could suddenly start behaving
-strangely.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-ids"></a>Special values of user and group ids</h3></div></div></div><p>If the current user is not present in
+of "Users".</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
+If you wish to make these kind of changes to /etc/passwd and /etc/group,
+do so only if you feel comfortable with the concepts.  Otherwise, do not
+be surprised if things break in either subtle or surprising ways!  If you
+do screw things up, revert to copies of <code class="filename">/etc/passwd</code>
+and <code class="filename">/etc/group</code> files created by
+<span class="command"><strong>mkpasswd</strong></span> and <span class="command"><strong>mkgroup</strong></span>.  (Make
+backup copies of these files before modifying them.)  Especially, don't
+change the UID or the name of the user SYSTEM.  It may mostly work, but
+some Cygwin applications running as a local service under that account
+could suddenly start behaving strangely.
+</p></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-ids"></a>Special values of user and group ids</h3></div></div></div><p>If the current user is not present in
 <code class="filename">/etc/passwd</code>, that user's uid is set to a
 special value of 400.  The user name for the current user will always be
 shown correctly.  If another user (or a Windows group, treated as a
@@ -243,7 +246,7 @@ nothing prevents you from actually having a user named `mkpasswd' in
 <code class="filename">/etc/group</code>).  If you do that, however, be aware of
 the possible confusion.
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-mapping"></a>The POSIX permission mapping leak</h3></div></div></div><p>As promised earlier, here's the problem when trying to map the
-POSIX permission model on the Windows permission model.</p><p>There's a leak in the definition of a "correct" ACL which
+POSIX permission model onto the Windows permission model.</p><p>There's a leak in the definition of a "correct" ACL which
 disallows a certain POSIX permission setting.  The official
 documentation explains in short the following:</p><div class="itemizedlist"><ul type="disc" compact><li><p>The requested permissions are checked against all
 ACEs of the user as well as all groups the user is member of.  The
@@ -266,7 +269,8 @@ even <span class="bold"><strong>think</strong></span> of pressing OK...</p><p>Ca
 of POSIX permissions. Example:</p><pre class="screen">
 rw-r-xrw-
 </pre><p>Ok, so here's the first try to create a matching ACL, assuming
-the Windows permissions only have three bits, as their POSIX pendants:</p><pre class="screen">
+the Windows permissions only have three bits, as their POSIX counterpart:
+</p><pre class="screen">
 UserAllow:   110
 GroupAllow:  101
 OthersAllow: 110
@@ -296,7 +300,7 @@ aren't able (or willing) to deal with that order.</p></div><div class="sect2" la
 "Switch User" feature, which switches the entire desktop to another user
 while leaving the original user's desktop "suspended".  Another Windows
 feature (since Windows 2000) is the "Run as..." context menu entry,
-which allows to start an application using another user account when
+which allows you to start an application using another user account when
 right-clicking on applications and shortcuts.</p><p>On POSIX systems, this operation can be performed by processes
 running under the privileged user accounts (usually the "root" user
 account) on a per-process basis.  This is called "switching the user
@@ -310,7 +314,7 @@ permissions.  Usually the access token is created at logon time and then
 it's attached to the starting process.  Every new process within a session
 inherits the access token from its parent process.  Every thread can
 get its own access token, which allows, for instance, to define threads
-with restricted permissions.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-logonuser"></a>Switching the user context with password authentication</h3></div></div></div><p>To switch the user context the process has to request such an access
+with restricted permissions.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-logonuser"></a>Switching the user context with password authentication</h3></div></div></div><p>To switch the user context, the process has to request such an access
 token for the new user.  This is typically done by calling the Win32 API
 function <span class="command"><strong>LogonUser</strong></span> with the user name and the user's
 cleartext password as arguments.  If the user exists and the password was
@@ -324,13 +328,14 @@ attached to other access tokens which plays an important role in the UAC
 (User Access Control) facility of Vista and later.  However, none of
 these extensions to the original concept are important for this
 documentation.</p><p>Back to this logon with password, how can this be used to
-implement <span class="command"><strong>set(e)uid</strong></span>?  Well, it requires to patch the
-calling application.  Two Cygwin functions have been introduced to support
-porting <span class="command"><strong>setuid</strong></span> applications which only require login
-with passwords.  You only give Cygwin the right access token and then
-you can call <span class="command"><strong>seteuid</strong></span> or <span class="command"><strong>setuid</strong></span> as
-usual in POSIX applications.  Porting such a <span class="command"><strong>setuid</strong></span>
-application is illustrated by a short example:</p><pre class="screen">
+implement <span class="command"><strong>set(e)uid</strong></span>?  Well, it requires modification
+of the calling application.  Two Cygwin functions have been introduced
+to support porting <span class="command"><strong>setuid</strong></span> applications which only
+require login with passwords.  You only give Cygwin the right access
+token and then you can call <span class="command"><strong>seteuid</strong></span> or
+<span class="command"><strong>setuid</strong></span> as usual in POSIX applications.  Porting such
+a <span class="command"><strong>setuid</strong></span> application is illustrated by a short
+example:</p><pre class="screen">
 
 /* First include all needed cygwin stuff. */
 #ifdef __CYGWIN__
@@ -375,24 +380,23 @@ application is illustrated by a short example:</p><pre class="screen">
   execl ("/bin/sh", ...);
 
 
-</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-nopasswd1"></a>Switching the user context without password, Method 1: Create a token from scratch</h3></div></div></div><p>So far unfortunate for the implementation of a
-<span class="command"><strong>set(e)uid</strong></span> call is the fact that the calling process
-needs the password of the user it wants to switch to.  Applications like
+</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-nopasswd1"></a>Switching the user context without password, Method 1: Create a token from scratch</h3></div></div></div><p>An unfortunate aspect of the implementation of
+<span class="command"><strong>set(e)uid</strong></span> is the fact that the calling process
+requires the password of the user to which to switch.  Applications such as
 <span class="command"><strong>sshd</strong></span> wishing to switch the user context after a
-successful public key authentication, or <span class="command"><strong>cron</strong></span> which
-has to switch the user without any authentication are stuck here.  But
-there are other ways to get new user tokens.</p><p>One way is just to create a user token from scratch.  This is
+successful public key authentication, or the <span class="command"><strong>cron</strong></span>
+application which, again, wants to switch the user without any authentication
+are stuck here.  But there are other ways to get new user tokens.</p><p>One way is just to create a user token from scratch.  This is
 accomplished by using an (officially undocumented) function on the NT
-function level.  The NT function level is closer to the actual kernel
-than the Win32 level.  Actually the Win32 functions are implemented
-using the NT functions.  The function we're interested in is
-<span class="command"><strong>NtCreateToken</strong></span>.  This function allows to specify
-user, groups, permissions and almost everything you need to create
-a user token, without the need to specify the user password.  The
+function level.  The NT function level is used to implement the Win32
+level, and, as such is closer to the kernel than the Win32 level.  The
+function of interest, <span class="command"><strong>NtCreateToken</strong></span>, allows you to
+specify user, groups, permissions and almost everything you need to
+create a user token, without the need to specify the user password.  The
 only restriction for using this function is that the calling process
-needs the "Create a token object" user right, which only the
-SYSTEM user account has by default, and which is considered the most
-dangerous right a user can have on Windows systems.</p><p>That sounds good.  We just start the servers which have to switch
+needs the "Create a token object" user right, which only the SYSTEM user
+account has by default, and which is considered the most dangerous right
+a user can have on Windows systems.</p><p>That sounds good.  We just start the servers which have to switch
 the user context (<span class="command"><strong>sshd</strong></span>, <span class="command"><strong>inetd</strong></span>,
 <span class="command"><strong>cron</strong></span>, ...) as Windows services under the SYSTEM
 (or LocalSystem in the GUI) account and everything just works.
@@ -400,19 +404,19 @@ Unfortunately that's too simple.  Using <span class="command"><strong>NtCreateTo
 has a few drawbacks.</p><p>First of all, beginning with Windows Server 2003,
 the permission "Create a token object" gets explicitely removed from
 the SYSTEM user's access token, when starting services under that
-account.  That requires to create a new account with this specific
+account.  That requires us to create a new account with this specific
 permission just to run this kind of services.  But that's a minor
 problem.</p><p>A more important problem is that using <span class="command"><strong>NtCreateToken</strong></span>
 is not sufficient to create a new logon session for the new user.  What
-does that mean?  Every logon usually creates also a new logon session.
+does that mean?  Every logon usually creates a new logon session.
 A logon session has a couple of attributes which are unique to the
 session.  One of these attributes is the fact, that Windows functions
 identify the user domain and user name not by the SID of the access
-token owner, but only by the logon session the process is running under.</p><p>What that means is this.  Consider a service started under the
-SYSTEM account (up to Windows XP) switches the user context to
-DOMAIN\my_user using a token created directly by calling the
-<span class="command"><strong>NtCreateToken</strong></span> function.  A process running under this
-new access token might want to know under which user account it's
+token owner, but only by the logon session the process is running under.</p><p>This has the following unfortunate consequence.  Consider a
+service started under the SYSTEM account (up to Windows XP) switches the
+user context to DOMAIN\my_user using a token created directly by calling
+the <span class="command"><strong>NtCreateToken</strong></span> function.  A process running under
+this new access token might want to know under which user account it's
 running.  The corresponding SID is returned correctly, for instance
 S-1-5-21-1234-5678-9012-77777.  However, if the same process asks the OS
 for the user name of this SID something wierd happens.  For instance,
@@ -441,7 +445,7 @@ path as in</p><pre class="screen">
 bash$ grep foo //server/share/foofile
 </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-nopasswd2"></a>Switching the user context without password, Method 2: LSA authentication package</h3></div></div></div><p>Caveat: The method described in this chapter only works starting
 with Windows 2000.  Windows NT4 users have to use one of the other
-methods described in this document.</p><p>So we're looking for another way to switch the user context without
+methods described in this document.</p><p>We're looking for another way to switch the user context without
 having to provide the password.  Another technique is to create an
 LSA authentication package.  LSA is an acronym for "Local Security Authority"
 which is a protected part of the operating system which only allows changes
@@ -473,11 +477,11 @@ access problem.  Not being able to access network shares without
 having to specify a cleartext password on the command line or in a 
 script is a harsh problem for automated logons for testing purposes
 and similar stuff.</p><p>Fortunately there is a solution, but it has its own drawbacks.
-But first thing first, how does it work?  The title of this section
+But, first things first, how does it work?  The title of this section
 says it all.  Instead of trying to logon without password, we just logon
 with password.  The password gets stored two-way encrypted in a hidden,
 obfuscated area of the registry, the LSA private registry area.  This
-part of the registry contains for instance the passwords of the Windows
+part of the registry contains, for instance, the passwords of the Windows
 services which run under some non-default user account.</p><p>So what we do is to utilize this registry area for the purpose of
 <span class="command"><strong>set(e)uid</strong></span>.  The Cygwin command <span class="command"><strong><a class="link" href="using-utils.html#passwd" title="passwd">passwd</a> -R</strong></span> allows a user to specify
 his/her password for storage in this registry area.  When this user
@@ -514,7 +518,7 @@ adequately locked down to prevent malicious access, you can safely use
 this method.  If your machine is part of a network which has
 dedicated administrators, and you're not one of these administrators,
 but you (think you) can trust your administrators, you can probably
-safely use this method.</p><p>In all other cases, don't use this method.  You have been warned.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-setuid-impl"></a>Switching the user context, how does that all fit together?</h3></div></div></div><p>Now we learned about four different ways to switch the user
+safely use this method.</p><p>In all other cases, don't use this method.  You have been warned.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-setuid-impl"></a>Switching the user context, how does it all fit together?</h3></div></div></div><p>Now we learned about four different ways to switch the user
 context using the <span class="command"><strong>set(e)uid</strong></span> system call, but
 how does <span class="command"><strong>set(e)uid</strong></span> really work?  Which method does it
 use now?</p><p>The answer is, all four of them.  So here's a brief overview

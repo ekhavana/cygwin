@@ -37,9 +37,9 @@ typically like this</p><pre class="screen">
 </pre><p>to switch to another locale according to the settings of the
 internationalization environment variables.
 </p></li><li style="list-style-type: disc"><p>
-Assuming you set one of the aforementioned environment variables to some
-valid POSIX locale value, other than "C" and "POSIX", and assuming you
-call an application which calls <code class="function">setlocale</code> as above.</p><p>Assuming further you're living in Japan.  So you might want to use
+Assume that you've set one of the aforementioned environment variables to some
+valid POSIX locale value, other than "C" and "POSIX", and assume that you
+call an application which calls <code class="function">setlocale</code> as above.</p><p>Assume further that you're living in Japan.  You might want to use
 the language code "ja" and the territory "JP", thus setting, say,
 <code class="envar">LANG</code> to "ja_JP".  You didn't set a character set, so
 what will Cygwin use now?  Easy!  It will use the default Windows ANSI
@@ -72,7 +72,7 @@ Unicode character.</p><pre class="screen">
   set LANG=es_MX.UTF-8
 </pre><p>For a description of the Unicode standard, see the homepage of the
 <a class="ulink" href="http://www.unicode.org/" target="_top">Unicode Consortium</a>.
-</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems</h3></div></div></div><p>
+</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems when using Locales</h3></div></div></div><p>
 You can set the above internationalization variables not only in
 <code class="filename">Cygwin.bat</code> or in the Windows environment, but also
 in your Cygwin shell on the fly, even switch to yet another character
@@ -91,22 +91,20 @@ to use, say, UTF-8, the environment will result in invalid characters in
 the UTF-8 charset.  This would be especially a problem in variables like
 <code class="envar">PATH</code>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Per POSIX, the name of an environment variable should only
 consist of valid ASCII characters, and only of uppercase letters, digits, and
-the underscore for maximum portablilty.</p></div><p>And here's another problem when switching charsets on the fly.
-Symbolic links.  A symbolic link contains the filename of the target
-file the symlink points to.  When a symlink had been created with older
-versions of Cygwin, the current ANSI or OEM character set had been used
-to store the target filename, dependent on the old <code class="envar">CYGWIN</code>
-environment variable setting <code class="envar">codepage</code>
-(see <a class="xref" href="using-cygwinenv.html#cygwinenv-removed-options" title="Removed options">the section called &#8220;Removed options&#8221;</a>.  If the target
-filename contains non-ASCII characters and you use another
-character set than your default ANSI/OEM charset, the target filename of
-the symlink is now potentially an invalid character sequence in the new
-character set.  This behaviour is not different from the behaviour in other
-Operating Systems.  So, if you suddenly can't access a symlink anymore
-which worked all these years before, maybe it's because you switched to
+the underscore for maximum portablilty.</p></div><p>Symbolic links, too, may pose a problem when switching charsets on
+the fly.  A symbolic link contains the filename of the target file the
+symlink points to.  When a symlink had been created with older versions
+of Cygwin, the current ANSI or OEM character set had been used to store
+the target filename, dependent on the old <code class="envar">CYGWIN</code>
+environment variable setting <code class="envar">codepage</code> (see <a class="xref" href="using-cygwinenv.html#cygwinenv-removed-options" title="Obsolete options">the section called &#8220;Obsolete options&#8221;</a>.  If the target filename
+contains non-ASCII characters and you use another character set than
+your default ANSI/OEM charset, the target filename of the symlink is now
+potentially an invalid character sequence in the new character set.
+This behaviour is not different from the behaviour in other Operating
+Systems.  So, if you suddenly can't access a symlink anymore which
+worked all these years before, maybe it's because you switched to
 another character set.  This doesn't occur with symlinks created with
-Cygwin 1.7 or later.
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-missing"></a>What does not work?</h3></div></div></div><p>
+Cygwin 1.7 or later.  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-missing"></a>What does not work?</h3></div></div></div><p>
 Except for <code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>,
 and <code class="envar">LANG</code>, all other LC_xxx environment variables,
 <code class="envar">LC_COLLATE</code>, <code class="envar">LC_MESSAGES</code>,
@@ -116,8 +114,8 @@ supports different character sets, it does <span class="emphasis"><em>not</em></
 real localization so far.  There's no support for locale-specific monetary
 symbols, for a decimalpoint other than '.', no support for native time
 formats, and no support for native language sorting orders.
-</p><p>However, internationalization is work in progress and we would be glad
-for coding help in this area.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-charsetlist"></a>List of supported character sets</h3></div></div></div><p>Last but not least, here's the list of currently supported character
+</p><p>Cygwin's internationalization support is work in progress and we would
+be glad for coding help in this area.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-charsetlist"></a>List of supported character sets</h3></div></div></div><p>Last but not least, here's the list of currently supported character
 sets.  The left-hand expression is the name of the charset, as you would use
 it in the internationalization environment variables as outlined above.
 </p><p>The right-hand side is the number of the equivalent Windows
@@ -175,9 +173,8 @@ oif the "CPxxx" style charsets, always use them with the trailing "CP".</p><p>Th
     SJIS                    932 (ANSI/OEM Japanese)
     GBK                     936 (ANSI/OEM Simplified Chinese)
     Big5                    950 (ANSI/OEM Traditional Chinese)
-    JIS                   50220 (ISO2022 Japanese w/o halfwidth Katakana)
-    eucJP                 51932 (EUC Japanese)
-    eucKR                 51949 (EUC Korean)
+    eucJP                 20932 (EUC Japanese)
+    eucKR                   949 (EUC Korean)
 
     UTF-8                 65001 (UTF-8)
 </pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup-maxmem.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="setup-net.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Changing Cygwin's Maximum Memory&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Using Windows security in Cygwin</td></tr></table></div></body></html>
