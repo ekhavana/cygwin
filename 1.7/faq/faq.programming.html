@@ -61,12 +61,12 @@ cd /bin; for f in `find . -type f -name '*.exe'`; do
 	cygcheck $f | (fgrep -qi cygwin1.dll || echo $f)
 done
 </pre><p>
-See <a class="ulink" href="http://cygwin.com/cygwin-ug-net/using.html#mount-table" target="_top">http://cygwin.com/cygwin-ug-net/using.html#mount-table</a> 
+See <a class="ulink" href="http://cygwin.com/1.7/cygwin-ug-net/using.html#mount-table" target="_top">http://cygwin.com/1.7/cygwin-ug-net/using.html#mount-table</a> 
 for more information on using mount.
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.ipc"></a><p><b>7.</b></p></td><td align="left" valign="top"><p>How can I use IPC, or why do I get a <code class="literal">Bad system call</code>
 error?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>
 Try running cygserver.  Read 
-<a class="ulink" href="http://cygwin.com/cygwin-ug-net/using-cygserver.html" target="_top">http://cygwin.com/cygwin-ug-net/using-cygserver.html</a>. If you're
+<a class="ulink" href="http://cygwin.com/1.7/cygwin-ug-net/using-cygserver.html" target="_top">http://cygwin.com/1.7/cygwin-ug-net/using-cygserver.html</a>. If you're
 trying to use PostgreSQL, also read 
 <code class="literal">/usr/share/doc/Cygwin/postgresql-*.README</code>.
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.winmain"></a><p><b>8.</b></p></td><td align="left" valign="top"><p>Why the undefined reference to <code class="literal">WinMain@16</code>?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>If you're using <code class="literal">gcc</code>, try adding an empty main() function to one
@@ -257,7 +257,7 @@ support semantics and args have been designed for x86 so you would need
 to write specific support for your platform.  We don't know of any other
 incompatibilities. Please send us patches if you do this work!
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.adjusting-heap"></a><p><b>21.</b></p></td><td align="left" valign="top"><p>How can I adjust the heap/stack size of an application?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>If you need to change the maximum amount of memory available to Cygwin, see
-<a class="ulink" href="http://cygwin.com/cygwin-ug-net/setup-maxmem.html" target="_top">http://cygwin.com/cygwin-ug-net/setup-maxmem.html</a>. Otherwise,
+<a class="ulink" href="http://cygwin.com/1.7/cygwin-ug-net/setup-maxmem.html" target="_top">http://cygwin.com/1.7/cygwin-ug-net/setup-maxmem.html</a>. Otherwise,
 just pass heap/stack linker arguments to gcc.  To create foo.exe with
 a heap size of 200MB and a stack size of 8MB, you would invoke
 gcc as:
@@ -266,7 +266,7 @@ gcc as:
 </p><p><code class="literal">cygcheck</code> will do this much more concisely, and operates
 recursively, provided the command is in your path.
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.dll-building"></a><p><b>23.</b></p></td><td align="left" valign="top"><p>How do I build a DLL?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>There's documentation that explains the process in the Cygwin User's
-Guide here: <a class="ulink" href="http://cygwin.com/cygwin-ug-net/dll.html" target="_top">http://cygwin.com/cygwin-ug-net/dll.html</a>
+Guide here: <a class="ulink" href="http://cygwin.com/1.7/cygwin-ug-net/dll.html" target="_top">http://cygwin.com/1.7/cygwin-ug-net/dll.html</a>
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.breakpoint"></a><p><b>24.</b></p></td><td align="left" valign="top"><p>How can I set a breakpoint at MainCRTStartup?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p><span class="bold"><strong>(Please note: This section has not yet been updated for the latest net release.)</strong></span>
 </p><p>Set a breakpoint at *0x401000 in gdb and then run the program in
 question.

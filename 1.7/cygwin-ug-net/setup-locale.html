@@ -72,7 +72,32 @@ Unicode character.</p><pre class="screen">
   set LANG=es_MX.UTF-8
 </pre><p>For a description of the Unicode standard, see the homepage of the
 <a class="ulink" href="http://www.unicode.org/" target="_top">Unicode Consortium</a>.
-</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems when using Locales</h3></div></div></div><p>
+</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-console"></a>The Windows Console character set</h3></div></div></div><p>Most of the time the Windows console is used to run Cygwin applications.
+While terminal emulations like <span class="command"><strong>xterm</strong></span> or
+<span class="command"><strong>mintty</strong></span> have a distinct way to set the character set
+used for in- and output, the Windows console hasn't such a way, since it's
+not an application in its own right.</p><p>This problem is solved in Cygwin as follows.  When the first Cygwin
+process is started in a Windows console (either explicitely from cmd.exe,
+or implicitly by, for instance, clicking on the Cygwin desktop icon, or
+running the Cygwin.bat file), the Console character set is determined by the
+setting of the aforementioned internationalization environment variables,
+the same way as described in <a class="xref" href="setup-locale.html#setup-locale-how" title="How to set the locale">the section called &#8220;How to set the locale&#8221;</a>.
+</p><p>However, in contrast to the application's character set, which is
+determined by the <code class="function">setlocale</code> call, the console
+character set stays fixed for all subsequent Cygwin processes started
+from this first Cygwin process in the console.  So, for instance, if
+<code class="envar">LANG</code> was set to "en_US.UTF-8" when the first Cygwin process
+started, the console is a UTF-8 terminal for the entire Cygwin process
+tree started from this first Cygwin process.</p><p>You're asking "What is that good for?  Why not switch the console
+character set with the applications requirements?  After all, the
+application knows if it uses localization or not."  That's true, but
+what if the non-localized application calls a remote application which
+itself is localized?  This can happen with <span class="command"><strong>ssh</strong></span> or
+<span class="command"><strong>rlogin</strong></span>.  Both commands don't have and don't need
+localization and they never call <code class="function">setlocale</code>.  This
+would have the unfortunate effect, that the console would run with the
+ASCII character set alone.  Native characters printed from the remote
+application would not show up correctly on your local console.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems when using Locales</h3></div></div></div><p>
 You can set the above internationalization variables not only in
 <code class="filename">Cygwin.bat</code> or in the Windows environment, but also
 in your Cygwin shell on the fly, even switch to yet another character
