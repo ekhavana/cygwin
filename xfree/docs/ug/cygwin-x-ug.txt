@@ -2,13 +2,15 @@ Cygwin/X User's Guide
 
 Harold L Hunt, II
 
-     Copyright (c) 2000 Harold L Hunt II. Permission is granted to copy,
-     distribute and/or modify this document under the terms of the GNU
-     Free Documentation License, Version 1.1 or any later version
-     published by the Free Software Foundation; with no Invariant
-     Sections, with no Front-Cover Texts, and with no Back-Cover Texts. A
-     copy of the license is included in the section entitled "GNU Free
-     Documentation License".
+Jon Turney
+
+     Copyright (c) 2000 Harold L Hunt II. Copyright (C) 2009 Jon Turney.
+     Permission is granted to copy, distribute and/or modify this
+     document under the terms of the GNU Free Documentation License,
+     Version 1.1 or any later version published by the Free Software
+     Foundation; with no Invariant Sections, with no Front-Cover Texts,
+     and with no Back-Cover Texts. A copy of the license is included in
+     the section entitled "GNU Free Documentation License".
      __________________________________________________________________
 
    Table of Contents
@@ -90,12 +92,10 @@ Installing Cygwin/X
    Cygwin has a nice setup program that downloads and installs the
    necessary Cygwin packages for you.
     1. Open the Cygwin, [37]http://cygwin.com/ page in your web browser
-    2. Click the "Install Cygwin Now" link in the upper-right hand corner
-       of the page; or, click the "Install" link next to "Latest net
-       release:", which should be near the top of the page in the main
-       content area. This link downloads setup.exe from the primary Cygwin
-       server; save setup.exe to the directory that you would like to
-       store the downloaded packages in (e.g. c:\cyginstall); do not save
+    2. Click the [38]"Install Cygwin Now" link in the upper-right hand
+       corner of the page. This link downloads setup.exe from the primary
+       Cygwin server; save setup.exe to the directory that you would like
+       to store the downloaded packages in (e.g. c:\download); do not save
        setup.exe to c:\cygwin, as that is the default directory for the
        extraction and installation of the downloaded packages.
     3. Run setup.exe, you will see the welcome screen:
@@ -107,18 +107,16 @@ Installing Cygwin/X
        [cyi02installoption.png]
     6. Click Next to proceed to the next screen.
     7. The default Install Root is c:\cygwin; this should be fine for most
-       installations. Leave Default Text File Type as UNIX. If you have
-       several users on your NT machine, and you are logged in with local
-       administrative privileges, you may wish to set Install For to All,
-       but the default of Just Me will work fine for single user machines.
+       installations. Leave Default Text File Type as UNIX. Leave Install
+       For set to All unless you lack local administrative privileges.
        [cyi03installto.png]
     8. Click Next to proceed to the next screen.
     9. Local Package Directory should default to the directory that you
        ran setup.exe from:
        [cyi04directory.png]
    10. Click Next to proceed to the next screen.
-   11. Choose your proxy setup, or, just choose Direct Connection to limit
-       the scope of download problems:
+   11. Choose your proxy setup, or, just choose Direct Connection if no
+       proxy is needed:
        [cyi05proxy.png]
    12. Click Next to proceed to the next screen.
    13. Select your nearest mirror for downloading:
@@ -130,32 +128,32 @@ Installing Cygwin/X
        given below; a listing of the general Cygwin packages would be
        beyond the scope of this document.
        Cygwin/X packages are located in the X11 category.
-          + xorg-x11-server (required, the Cygwin/X X Server)
-          + xinit (optional, scripts for starting the X server: xinit,
+          + xorg-server (required, the Cygwin/X X Server)
+          + xinit (required, scripts for starting the X server: xinit,
             startx, startwin.sh, startxwin.bat (and a shortcut on the
             Start Menu to run it), startxdmcp.bat )
-          + xorg-x11-docs (optional, man pages)
+          + xorg-docs (optional, man pages)
           + X-start-menu-icons (optional, adds icons for X Clients to the
             Start menu)
-          + You may also select any x client programs you want to use, and
+          + You may also select any X client programs you want to use, and
             any fonts you would like to have available.
-   16. You may also want to ensure that the inetutils and openssh packages
-       are selected if you wish to use telnet and ssh to connect to remote
-       machines.
+          + You may also want to ensure that the inetutils or openssh
+            packages are selected if you wish to use telnet or ssh
+            connections to run remote X clients.
        [cyi07packages.png]
-   17. Click Next to begin the download process, you may want to try
+   16. Click Next to begin the download process, you may want to try
        another mirror if you see a "Connecting" message on this screen for
        a long period of time:
        [cyi08downloading.png]
-   18. After the packages are downloaded, setup will automatically begin
-       go to install them:
+   17. After the packages are downloaded, setup will automatically begin
+       to install them:
        [cyi09installing.png]
-   19. I highly recommend allowing Cygwin Setup to create Desktop and
+   18. I highly recommend allowing Cygwin Setup to create Desktop and
        Start Menu icons for you; these icons simply launch a bash shell:
        [cyi10createicons.png]
-   20. Click Finish to close the setup program.
+   19. Click Finish to close the setup program.
 
-   You have now successfully installed Cygwin/X. Proceed to [38]Chapter 4
+   You have now successfully installed Cygwin/X. Proceed to [39]Chapter 4
    for instructions on how to use Cygwin/X.
      __________________________________________________________________
 
@@ -398,34 +396,35 @@ Starting Cygwin/X
 
 startxwin.bat
 
-   startxwin.bat - Use a MS-DOS batch file as the startup script. An
-   example startxwin.bat is included in xorg-xinit, which is extracted
-   according to the instructions in [39]the Section called Installing
-   Cygwin/X in Chapter 2. Run /usr/bin/startxwin.bat by double-clicking it
-   in Windows Explorer.
+   Use a MS-DOS batch file as the startup script. An example startxwin.bat
+   is included in xorg-xinit, which is installed by following the
+   instructions in [40]the Section called Installing Cygwin/X in Chapter
+   2. Run /usr/bin/startxwin.bat by using the "XWin Server" shortcut under
+   "Cygwin-X" on the Start Menu, or starting it from a MS-DOS shell, or
+   double-clicking it in Windows Explorer.
      __________________________________________________________________
 
 startxwin.sh
 
-   startxwin.sh - Use an sh shell script as the startup script. An example
-   startxwin.sh is included in xorg-xinit, which is extracted according to
-   the instructions in [40]the Section called Installing Cygwin/X in
-   Chapter 2. Run /usr/bin/startxwin.sh in a Cygwin shell:
+   Use a sh shell script as the startup script. An example startxwin.sh is
+   included in xorg-xinit, which is installed by following the
+   instructions in [41]the Section called Installing Cygwin/X in Chapter
+   2. Run /usr/bin/startxwin.sh in a Cygwin shell:
 Username@CygwinHost ~
 $ sh /usr/bin/startxwin.sh
      __________________________________________________________________
 
 startx
 
-   startx - Use the standard X Window System startx script with its
-   attendant ~/.xinitrc configuration file. First you need to create
-   ~/.xinitrc from the template in /etc/X11/xinit/:
-Username@CygwinHost ~
-$ cp /etc/X11/xinit/xinitrc ~/.xinitrc
-
-   Now you may customize ~/.xinitrc and then start Cygwin/X with:
+   Use the standard X Window System startx script with its attendant
+   ~/.xinitrc configuration file. Run startx in a Cygwin shell:
 Username@CygwinHost ~
 $ startx
+
+   You may create a ~/.xinitrc from the template in /etc/X11/xinit/ and
+   then customize ~/.xinitrc as required
+Username@CygwinHost ~
+$ cp /etc/X11/xinit/xinitrc ~/.xinitrc
      __________________________________________________________________
 
 Switching Out of Cygwin/X
@@ -450,7 +449,7 @@ Window Managers
      * Internal window manager (a.k.a. MultiWindow Mode) that creates a
        Windows window for each top-level X window. The internal window
        manager is launched using the -multiwindow command-line parameter
-       to XWin.exe. See [41]the Section called Command Line Parameters in
+       to XWin.exe. See [42]the Section called Command Line Parameters in
        Chapter 3 for more information on the -multiwindow command-line
        parameter.
      * External local window managers (e.g. twm, mwm (part of the lesstif
@@ -458,10 +457,10 @@ Window Managers
        they are run locally and cannot be used together with the internal
        window manager.
      * Remote window managers via an XDMCP session, which you can read
-       more about in [42]the Section called Remote Sessions via XDMCP.
+       more about in [43]the Section called Remote Sessions via XDMCP.
      * Remote window manager launched through an ssh tunnel. This is not
        Cygwin/X-specific, so you should be able to find information about
-       launching remote window managers from other sources. See [43]the
+       launching remote window managers from other sources. See [44]the
        Section called Secure ssh for more information on using ssh.
      __________________________________________________________________
 
@@ -474,7 +473,7 @@ Windows Clipboard Integration
    clipboard and copies data between them when either one is updated.
 
    Cygwin/X has an internal clipboard integration system that is envoked
-   via the -clipboard command-line parameter. See [44]the Section called
+   via the -clipboard command-line parameter. See [45]the Section called
    Command Line Parameters in Chapter 3 for more information on the
    -clipboard command-line parameter.
      __________________________________________________________________
@@ -520,10 +519,10 @@ Remote Sessions via XDMCP
 
    Note that the :display_number parameter is a general X Server
    parameter, not specific to Cygwin/X. Further documentation of the
-   :display_number parameter can be found in the [45]X Server manual page.
+   :display_number parameter can be found in the [46]X Server manual page.
    XDMCP is a complex system that is not specific to Cygwin/X; further
    discussion of XDMCP is beyond the scope of this document. You may wish
-   to read the [46]Linux XDMCP HOWTO or the [47]X Server XDMCP Options for
+   to read the [47]Linux XDMCP HOWTO or the [48]X Server XDMCP Options for
    more information.
      __________________________________________________________________
 
@@ -901,7 +900,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [48]http://www.gnu.org/copyleft/.
+   [49]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -974,17 +973,18 @@ References
   32. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-termination
   33. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-future-revisions-of-this-license
   34. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-using-for-your-documents
-  35. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#AEN290
+  35. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#AEN293
   36. http://cygwin.com/
   37. http://cygwin.com/
-  38. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using
-  39. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#setup-cygwin-x-installing
+  38. http://cygwin.com/setup.exe
+  39. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using
   40. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#setup-cygwin-x-installing
-  41. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
-  42. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-session
-  43. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps-ssh
-  44. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
-  45. http://freedesktop.org/~xorg/X11R6.7.0/doc/Xserver.1.html
-  46. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
-  47. http://freedesktop.org/~xorg/X11R6.7.0/doc/Xserver.1.html#sect6
-  48. http://www.gnu.org/copyleft/
+  41. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#setup-cygwin-x-installing
+  42. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
+  43. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-session
+  44. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps-ssh
+  45. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
+  46. http://freedesktop.org/~xorg/X11R6.7.0/doc/Xserver.1.html
+  47. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
+  48. http://freedesktop.org/~xorg/X11R6.7.0/doc/Xserver.1.html#sect6
+  49. http://www.gnu.org/copyleft/

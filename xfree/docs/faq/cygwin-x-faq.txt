@@ -376,24 +376,27 @@ Questions and Answers
 
    3.4. Fatal server error: Can't read lock file /tmp/.X0-lock
 
+   The cause of this problem is not well understood at present. Possible
+   causes:
+    1. /tmp resides on a FAT filesystem
+    2. Bad permissions on /tmp
+    3. Not having administrator rights
+
    Possible workarounds:
-    1. Try rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp
-    2. Try starting the server with -nolock (e.g. if you use startxwin.bat
+    1. Try starting the server with -nolock (e.g. if you use startxwin.bat
        or startxwin.sh to start the server, add -nolock to the XWin line
        in that script; if you use xinit or startx, run it as xinit --
        -nolock or startx -- -nolock)
+    2. Try rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp
 
-   Technical details: The cause of this problem is not understood at
-   present, but may be related to permissions on /tmp, or not having
-   administrator rights.
-
-   The X server attempts to create a lock file in /tmp by creating the
-   file under a temporary name, then renaming it to the proper name. If
-   this rename fails it attempts to read the existing lock file to
-   determine the pid of an already running server. The failure case
-   appears to be that lock file was created successfully, but the rename
-   failed, despite the fact that no old lock file exists, which we then
-   fail to read.
+   Technical details: The X server attempts to create a lock file in /tmp
+   by creating the file under a temporary name, then renaming it to the
+   proper name (by hard linking it under the correct name, then unlinking
+   it from the temporary name). If this rename fails it attempts to read
+   the existing lock file to determine the pid of an already running
+   server. The failure case appears to be that lock file was created
+   successfully, but the rename failed, despite the fact that no old lock
+   file exists, which we then fail to read (hence the error message).
 
    3.5. My favourite font has gone! The font Emacs uses is just boxes
 
@@ -552,7 +555,7 @@ xmodmap -e "keycode 22 = BackSpace"
    cygwin-xfree@cygwin.com. Please include the following information in
    your mail:
      * The windows keyboard layout code and the layout name
-       You will find it in /var/log/XWin.log in lines similar to these:
+       You will find it in /var/log/XWin.0.log in lines similar to these:
 
 (--) winConfigKeyboard - Layout: "00001809" (00001809)
 (EE) Keyboardlayout "Irish" (00001809) is unknown
@@ -739,6 +742,13 @@ X11Forwarding yes
 
    Otherwise ask your you admin to change this for you.
 
+   A6:
+
+   [Frederick W. Wheeler] If the remote machine is a Windows machine using
+   Cygwin OpenSSH server, make sure the Cygwin xauth package is installed
+   on the remote machine. The OpenSSH server needs to be able to run xauth
+   to do X11 Forwarding.
+
    6.2. Why do remote programs crash with X Error of failed request:
    BadAtom?
 
@@ -891,14 +901,14 @@ KillInitClients=false
    8.1. Cygwin/X failed with "Fatal Error". What does this mean?
 
    The Fatal Error is a general error message. More specific information
-   what caused this is available in /var/log/XWin.log. Please check the
+   what caused this is available in /var/log/XWin.0.log. Please check the
    common error messages in [154]the Section called Error and Warning
    Messages. If your error is not mentioned proceed with [155]Q: 8.4.
 
    8.2. Is there a log file that I can look at for diagnostic information
    and error messages?
 
-   Yes. The Cygwin/X log file is located at /var/log/XWin.log. You will
+   Yes. The Cygwin/X log file is located at /var/log/XWin.0.log. You will
    find solutions to the most common error messages in [156]the Section
    called Error and Warning Messages.
 
@@ -919,8 +929,8 @@ KillInitClients=false
    reported, if the circumstances that produced the error message are
    significantly different from other reports, or if you have additional
    information regarding the error message to contribute. Please include
-   /var/log/XWin.log in your mail. This may help us identify the cause of
-   your problem quicker.
+   /var/log/XWin.0.log in your mail. This may help us identify the cause
+   of your problem quicker.
 
    8.5. My bug report the Cygwin/X mailing list was ignored. What do I do
    now?
@@ -938,7 +948,7 @@ KillInitClients=false
    8.6. Why does Cygwin/X freeze right after startup?
 
    Zone Alarm 5 is known to break Cygwin/X. As a result you'll see this
-   line (or a similar) as last output in /var/log/XWin.log
+   line (or a similar) as last output in /var/log/XWin.0.log
 Rules = "xorg" Model = "pc101" Layout = "us" Variant = "(null)" Options = "(null
 )"
 
@@ -1882,7 +1892,7 @@ References
   49. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-bash-8bit
   50. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#remote
   51. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-ssh-no-x11forwarding
-  52. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN490
+  52. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN506
   53. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#xdmcp
   54. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xdmcp-no-valid-address
   55. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-audit-client-rejected
