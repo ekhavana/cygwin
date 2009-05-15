@@ -57,7 +57,10 @@ character.  When trying to access the file, Cygwin has to convert the
 filename back to UTF-16.  However, this doesn't result in the original
 filename because the question mark will not translate back to the original
 Chinese character, but to a simple question mark instead.  This in turn
-results in strange "File not found" messages.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>To avoid this scenario altogether, always use UTF-8 as the
+results in strange "File not found" messages.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>In the default "C" locale, Cygwin creates filenames using
+the UTF-8 charset.  This will always result in some valid filename by
+default, but again might impose problems when switching to a non-"C"
+or non-"UTF-8" charset.</p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>To avoid this scenario altogether, always use UTF-8 as the
 character set.</p></div><p>If you don't want or can't use UTF-8 as character set for whatever
 reason, you will nevertheless be able to access the file.  How does that
 work?  When Cygwin converts the filename from UTF-16 to your character

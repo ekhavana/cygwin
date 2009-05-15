@@ -618,16 +618,17 @@ the mount point may be recorded.  The following options are available (note that
 most of the options are duplicates of other mount flags):</p><pre class="screen">
   acl        - Use the filesystem's access control lists (ACLs) to
                implement real POSIX permissions (default).
-  noacl      - Ignore ACLs and fake POSIX permissions.
   binary     - Files default to binary mode (default).
-  text       - Files default to CRLF text mode line endings.
-  exec       - Treat all files below mount point as executable.
-  notexec    - Treat all files below mount point as not executable.
   cygexec    - Treat all files below mount point as cygwin executables.
+  exec       - Treat all files below mount point as executable.
+  noacl      - Ignore ACLs and fake POSIX permissions.
   nosuid     - No suid files are allowed (currently unimplemented)
+  notexec    - Treat all files below mount point as not executable.
+  override   - Override immutable mount points.
   posix=0    - Switch off case sensitivity for paths under this mount point.
   posix=1    - Switch on case sensitivity for paths under this mount point
                (default).
+  text       - Files default to CRLF text mode line endings.
 </pre><p>For a more complete description of the mount options and the
 <code class="filename">/etc/fstab</code> file, see
 <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p><p>Note that all mount points added with <span class="command"><strong>mount</strong></span> are
