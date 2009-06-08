@@ -560,6 +560,11 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
 
 - Support UTF-8 in console window.
 
+- In the console window the backspace key now emits DEL (0x7f) instead
+  of BS (0x08), Alt-Backspace emits ESC-DEL (0x1b,0x7f) instead of DEL
+  (0x7f), same as the Linux console and xterm.
+  Control-Space now emits an ASCII NUL (0x0) character.
+
 - Support up to 64 serial interfaces using /dev/ttyS0 - /dev/ttyS63.
 
 - Support up to 128 raw disk drives /dev/sda - /dev/sddx.
@@ -1008,7 +1013,7 @@ supports all relevant default ANSI codepages...</p><div class="note" style="marg
 <a class="xref" href="#setup-locale-charsetlist" title="List of supported character sets">the section called &#8220;List of supported character sets&#8221;</a>
 </p></div></li><li style="list-style-type: disc"><p>
 You don't want to use the default Windows codepage as character set?
-In that case you have to specify the charset explicitely.  For instance,
+In that case you have to specify the charset explicitly.  For instance,
 assume you're from Italy and don't want to use the default Windows codepage
 1252, but the more portable ISO-8859-15 character set.  What you can do is
 to set the <code class="envar">LANG</code> variable in the
@@ -1543,7 +1548,7 @@ the user context (<span class="command"><strong>sshd</strong></span>, <span clas
 (or LocalSystem in the GUI) account and everything just works.
 Unfortunately that's too simple.  Using <span class="command"><strong>NtCreateToken</strong></span>
 has a few drawbacks.</p><p>First of all, beginning with Windows Server 2003,
-the permission "Create a token object" gets explicitely removed from
+the permission "Create a token object" gets explicitly removed from
 the SYSTEM user's access token, when starting services under that
 account.  That requires us to create a new account with this specific
 permission just to run this kind of services.  But that's a minor
@@ -1920,7 +1925,7 @@ point.  For instance this:</p><pre class="screen">
   none /cygdrive cygdrive binary 0 0
   D:   /cygdrive/d somefs text 0 0
 </pre><p>will not make file access using the /mnt/d path prefix suddenly using
-textmode.  If you want to mount any drive explicitely in another mode than
+textmode.  If you want to mount any drive explicitly in another mode than
 the cygdrive prefix, use a distinct path prefix:</p><pre class="screen">
   none /cygdrive cygdrive binary 0 0
   D:   /mnt/d somefs text 0 0
@@ -2188,7 +2193,7 @@ case-sensitivity on the <code class="filename">/cygdrive</code> prefix, your she
 might claim that it can't find Windows commands like <span class="command"><strong>attrib</strong></span>
 or <span class="command"><strong>net</strong></span>.  To ease the pain, the <code class="filename">/cygdrive</code>
 path is case-insensitive by default and you have to use the "posix=1" setting
-explicitely in <code class="filename">/etc/fstab</code> or
+explicitly in <code class="filename">/etc/fstab</code> or
 <code class="filename">/etc/fstab.d/$USER</code> to switch it to case-sensitivity,
 or you have to make sure that the native Win32 %PATH% environment variable
 is using the correct case for all paths throughout.</p><p>Note that mount points as well as device names and virtual
@@ -2515,7 +2520,7 @@ Certain CYGWIN options available in past releases have been removed in
 Cygwin 1.7 for one reason or another.  These obsolete options are listed
 below.</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p><code class="envar">(no)binmode</code> - This option has been removed because
 all file opens default to binary mode, unless the open mode has been specified
-explicitely in the open(2) call.
+explicitly in the open(2) call.
 </p></li><li style="list-style-type: disc"><p><code class="envar">check_case</code> - This option has been removed in favor of
 real case sensitivity and the per-mount option "posix=[0|1]".  For more
 information, read the documentation in <a class="xref" href="#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> and
@@ -2592,7 +2597,7 @@ complicates its usage so the option has been removed for now.</p></li></ul></div
     Force logging to stderr.  This is the default if stderr is connected to
     a tty.  Otherwise, the default is logging to the system log.  By using
     the -e, -E, -y, -Y options (or the appropriate settings in the
-    configuration file), you can explicitely set the logging output as you
+    configuration file), you can explicitly set the logging output as you
     like, even to both, stderr and syslog.
     Configuration file option:  kern.log.stderr
   </p></li><li><pre class="screen">-E, --no-stderr</pre><p>  
@@ -2835,6 +2840,11 @@ Path conversion options:
   -l, --long-name       print Windows long form of NAMEs (with -w, -m only)
   -p, --path            NAME is a PATH list (i.e., '/bin:/usr/bin')
   -s, --short-name      print DOS (short) form of NAMEs (with -w, -m only)
+  -C, --codepage CP     print DOS, Windows, or mixed pathname in Windows
+                        codepage CP.  CP can be a numeric codepage identifier,
+                        or one of the reserved words ANSI, OEM, or UTF8.
+                        If this option is missing, cygpath defaults to the
+                        character set defined by the current locale.
 System information:
   -A, --allusers        use `All Users' instead of current user for -D, -P
   -D, --desktop         output `Desktop' directory and exit
@@ -2869,7 +2879,21 @@ character.</p><p> In combination with the <code class="literal">-w</code> option
 the <code class="literal">-l</code> and <code class="literal">-s</code> options to use normal
 (long) or DOS-style (short) form. The <code class="literal">-d</code> option is 
 identical to <code class="literal">-w</code> and <code class="literal">-s</code> together.
-</p><p>The <code class="literal">-p</code> option means that you want to convert
+</p><p>The <code class="literal">-C</code> option allows to specify a Windows codepage
+to print DOS and Windows paths created with one of the <code class="literal">-d</code>,
+<code class="literal">-m</code>, or <code class="literal">-w</code> options.  The default is to
+use the character set of the current locale defined by one of the
+internationalization environment variables <code class="envar">LC_ALL</code>,
+<code class="envar">LC_CTYPE</code>, or <code class="envar">LANG</code>, see
+<a class="xref" href="#setup-locale" title="Internationalization">the section called &#8220;Internationalization&#8221;</a>.  This is sometimes not sufficent for
+interaction with native Windows tools, which might expect native, non-ASCII
+characters in a specific Windows codepage.  Console tools, for instance, might
+expect pathnames in the current OEM codepage, while graphical tools like
+Windows Explorer might expect pathnames in the current ANSI codepage.</p><p>The <code class="literal">-C</code> option takes a single parameter:</p><div class="itemizedlist"><ul type="disc" compact><li><p><code class="literal">ANSI</code>, to specify the current ANSI codepage</p></li><li><p><code class="literal">OEM</code>, to specify the current OEM (console) codepage</p></li><li><p><code class="literal">UTF8</code>, to specify UTF-8.</p></li><li><p>A numerical, decimal codepage number, for instance 936 for GBK,
+28593 for ISO-8859-3, etc.  A full list of supported codepages is listed on the
+Microsoft MSDN page
+<a class="ulink" href="http://msdn.microsoft.com/en-us/library/dd317756(VS.85).aspx" target="_top">Code Page Identifiers</a>.  A codepage of 0 is the same as if the
+<code class="literal">-C</code> hasn't been specified at all.</p></li></ul></div><p>The <code class="literal">-p</code> option means that you want to convert
 a path-style string rather than a single filename.  For example, the
 PATH environment variable is semicolon-delimited in Windows, but
 colon-delimited in UNIX.  By giving <code class="literal">-p</code> you are
@@ -2886,7 +2910,7 @@ if [ "${1}" = "" ];
 	then
 		XPATH=".";
 	else
-		XPATH="$(cygpath -w "${1}")";
+		XPATH="$(cygpath -C ANSI -w "${1}")";
 fi
 explorer $XPATH &amp;
 
