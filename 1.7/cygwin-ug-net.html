@@ -629,6 +629,8 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
 </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-misc"></a>Miscellaneous</h3></div></div></div><pre class="screen">
 - New ldd utility, similar to Linux.
 
+- New link libraries libdl.a, libresolve.a, librt.a.
+
 - Fallout from the long path names: If the current working directory is
   longer than 260 bytes, or if the current working directory is a virtual
   path (like /proc, /cygdrive, //server), don't call native Win32 programs
@@ -989,10 +991,23 @@ which basically only supports plain ASCII code.  If the aforementioned
 environment variables are not set, or set to "C" or "POSIX", you get the
 default ASCII-only behaviour.
 </p><p>
-Right now the language and territory content is not evaluated by Cygwin any
-further.  The only important part so far is the character set.  How does that
-work?
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-how"></a>How to set the locale</h3></div></div></div><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p>
+Right now the language and territory, as well as the modifier, are not
+important to Cygwin, except to fix a single problem.  There's a class of
+characters in the Unicode character set, called the "CJK Ambiguous Width
+Character set".  For these characters the width returned by the
+wcwidth/wcswidth function is usually 1.  This is often a problem in
+East-Asian languages, which historically use character sets in which
+these characters have a width of 2.  Kind of explains why they are
+called "ambiguous"...</p><p>
+The problem has been fixed for now like this.  wcwidth/wcswidth usually
+return 1 as the width of these characters.  However, if the language is
+specifed as "ja" (Japanese), "ko" (Korean), or "zh" (Chinese), wcwidth
+returns 2 for these characters.  Unfortunately this isn't correct in
+all circumstances, so the user can specify the modifier "@cjknarrow",
+which modifies the behaviour of wcwidth/wcswidth to return 1 for the
+ambiguous width characters to return 1 even in those languages.</p><p>
+Other than that, the only important part so far is the character set.
+How does that work?</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-how"></a>How to set the locale</h3></div></div></div><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p>
 The default locale is the "C" or "POSIX" locale.  In this locale, basically
 only ASCII characters are supported.  Even if one of the aforementioned
 environment variables are set to something else, it's the application's
