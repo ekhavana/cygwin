@@ -257,7 +257,6 @@ category: "ASCII Games"
 </pre>
       <p>The above would place a package in a single category called "ASCII Games" rather than two categories "ASCII" and "Games".</p>
       <p>The <tt>requires</tt> line indicates the packages that this package relies on. If your package is dependent on a file provided by another package that other package should be included here. The requires field may be missing or empty if your package truly does not require any other package.</p>
-      <p>A package will probably require the <tt>Cygwin</tt> package if it contain any DLLs or executable files since the <tt>Cygwin</tt> package contains <tt>cygwin1.dll</tt>, which is required for most programs. However, the <tt>Cygwin</tt> package would not be a required dependency for a package which contained only text files, as is the case with, for example, packages that consist entirely of man pages.</p>
       <p>A package can rely on multiple other packages. Hierarchical dependencies should work correctly, however, it is best to always include specific dependencies, i.e. don't drop '<tt>bar</tt>' from your dependency list if your package requires it, even if you are including '<tt>foo</tt>' which relies on '<tt>bar</tt>'.</p>
       <p>Conversely, do not include package dependencies of <em>dependent</em> packages in your dependency list. If you think that another package has an incorrect dependency list, send email to cygwin-apps noting that fact.</p>
       <p>Multiple packages are separated by spaces. Do not enclose multiple package names within quotation marks.</p>
@@ -355,7 +354,7 @@ etc...
 	<li>All executables in your binary package are stripped (run 'strip' on them). Some makefiles have a install-strip command you can use to do this automatically when you setup your 'installed' tree. </li>
 	<li>Source packages are extracted in /usr/src. See the <a href="#srcpackage_contents">Package Source</a> section for more information. </li>
 	<li>In your binary package, include a file /usr/share/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc. </li>
-	<li>In your binary package include a directory /usr/share/doc/foo-vendor/ that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc. </li>
+	<li>In your binary package include a directory /usr/share/doc/foo/ that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc. </li>
 	<li>If you are not creating your package from an installed virtual root, be sure to check that the file permissions are appropriate. </li>
 	<li>If the package has any global settings (ie in files in /etc) that are not overrideable on a per user basis (sshd, as a daemon, is an example of this) do not include the relevant config files in your package. Instead include in your post-install script to install the settings files. Be sure that if you would overwrite an already present file that the user is offered the choice of keeping their own or overwriting with your defaults. </li>
 	<li>Ensure that your package handles binary only systems, textmode only systems, and hybrid systems correctly. </li>
