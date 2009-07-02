@@ -101,7 +101,7 @@ padding-bottom: 10px;
       <h1 align="center">Cygwin Package Contributor's Guide</h1>
       <p>This document is intended for people who post packages to sourceware.org, and thus need to make them available through the standard Cygwin setup program. This documents the syntax of the setup.hint file, the program that automatically generates it on a regular basis, the layout required for packages, and the related policies to ensure good behaviour from the setup.exe program.</p>
       <p><a href="http://sourceware.org/cygwin-apps/setup.html">Setup.exe</a> depends on certain conventions being followed. If they are not followed, bad things may happen to the users of setup.exe. Where a convention can be ignored, should circumstances warrent, this document will specify that. Setup.exe has it's own homepage <a href="http://sourceware.org/cygwin-apps/setup.html">http://sourceware.org/cygwin-apps/setup.html</a>. If you are interested in adding features to setup.exe, or in manually creating a setup.ini file, you should consult the setup.exe homepage.</p>
-      <p>The mailing list <tt>cygwin-apps&#64;cygwin&#46;com</tt> is the correct place to discuss any package creation or maintenance issues. It is not a place for end user bug reports - direct those to cygwin at cygwin dot com instead.</p>
+      <p>The <tt>cygwin-apps</t> mailing list is the correct place to discuss any package creation or maintenance issues. It is not a place for end user bug reports - direct those to cygwin at cygwin dot com instead.</p>
       <h2>Contents</h2>
       <ul class="spaced">
 	<li><a href="#naming">Package naming</a></li>
@@ -475,12 +475,12 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
       <p>After the script has been run it is renamed by appending the suffix ".done" to its previous name, to prevent it from being run again the next time the user runs the setup program.</p>
       <p>Note that the setup program runs all the postinstall scripts after all desired packages have been installed, that is, it does not run each package's postinstall script immediately after installing that package. Note, furthermore, that the order in which the scripts are run is not guaranteed. Therefore, if your package depends on others which have their own postinstall scripts, you cannot assume in your script that the other packages' scripts have already been run.</p>
       <h2><a id="submitting" name="submitting">Submitting a new package</a></h2>
-      <p>So you've got a package you want to submit. Follow the following checklist before emailing <tt>cygwin-apps&#64;cygwin&#46;com</tt> and you'll almost certainly save time.</p>
+      <p>So you've got a package you want to submit. Follow the following checklist before emailing the <tt>cygwin-apps</tt> mailing list and you'll almost certainly save time.</p>
       <ol>
 	<li><i>Do you have the time to maintain the package?</i><br />
-	 Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to <tt>cygwin&#64;cygwin&#46;com</tt>. We'd prefer if you read the non-digest mode since prompt response to packaging issues is a plus. When a <i>bug</i> in your package is reported in the cygwin mailing list, address the bug (if it's a Cygwin-only bug) or pass back to the vendor. When a solution exists, create an updated package with the fix in it, and send a notification that you need the package uploaded to cygwin-apps. Note that you are not expected to be a helpdesk for the package - the users should be pointed to the vendors lists if you've determined that the bug is not a Cygwin-related bug.</li>
+	 Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to the <tt>cygwin</tt> mailing list. We'd prefer if you read the non-digest mode since prompt response to packaging issues is a plus. When a <i>bug</i> in your package is reported in the cygwin mailing list, address the bug (if it's a Cygwin-only bug) or pass back to the vendor. When a solution exists, create an updated package with the fix in it, and send a notification that you need the package uploaded to cygwin-apps. Note that you are not expected to be a helpdesk for the package - the users should be pointed to the vendors lists if you've determined that the bug is not a Cygwin-related bug.</li>
 	<li>
-	  Propose on <tt>cygwin-apps&#64;cygwin&#46;com</tt> that you are interested in becoming a package maintainer for package "foo" using a subject like "[<a href="http://cygwin.com/acronyms/#ITP">ITP</a>] foo 0.10". Some packages cannot be distributed via Cygwin's setup due to vendor licence limitations. Other packages may not be appropriate for Cygwin. This step will save time if, for some reason, we cannot accept the package.<br />
+	  Propose on the <tt>cygwin-apps</tt> mailing list that you are interested in becoming a package maintainer for package "foo" using a subject like "[<a href="http://cygwin.com/acronyms/#ITP">ITP</a>] foo 0.10". Some packages cannot be distributed via Cygwin's setup due to vendor licence limitations. Other packages may not be appropriate for Cygwin. This step will save time if, for some reason, we cannot accept the package.<br />
 	   Submission rules:
 	  <ul>
 	    <li><b>Include a complete <tt>setup.hint</tt> file as part of your proposal</b>. Include this file in the text of your message so that it can be commented on. Do not submit it as an attachment.</li>
@@ -508,10 +508,10 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
 	    <li><tt>myserver.com/whatever/foo/libfoo/setup.hint</tt></li>
 	  </ul>
 	</li>
-	<li>Announce on <tt>cygwin-apps&#64;cygwin&#46;com</tt> that you have the package ready for uploading. Provide the URLs of all package files to your mail.</li>
+	<li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Provide the URLs of all package files to your mail.</li>
 	<li>Each new package must in any case receive one <a href="http://cygwin.com/acronyms/#GTG">GTG</a> vote from a package mantainer, meaning that an existing mantainer has downloaded the package, inspected the tarball contents, tested the applications, and rebuilt the package from the source tarball without incident. Once a successful package is produced, you become a mantainer yourself and can provide GTG reviews for others as well.</li>
 	<li>Feel free to delete your temporary copy once the files have been uploaded to sourceware.org.</li>
-	<li>Announce via <tt>cygwin-announce&#64;cygwin&#46;com</tt> that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement.<br />
+	<li>Announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement.<br />
 	 Be sure the unsubscribe instructions are included at the end of the email, since cygwin-announce does not add any.<br />
 	 Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
       </ol>
@@ -520,11 +520,11 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
         <li>Build the package and make sure that you have time to maintain it.</li>
 	<li>Send an ITP to the cygwin mailing list.  If the package is part of a distribution, include the URL which demonstrates this.  Include a <tt>setup.hint</tt>.</li>
 	<li>If you have received the correct number of votes or if the package is part of a distribution, include URL(s) for the package binary and source so that someone can download them to check the package for any obvious problems.</li>
-	<li>Once you get a GTG from a package maintainer, send a "Please upload" to the cygwin-apps mailing list.</li>
-	<li>When you get the "uploaded" confirmation, send an immediate note to <tt>cygwin-announce&#64;cygwin&#46;com</tt>.</li>
+	<li>Once you get a GTG from a package maintainer, send a "Please upload" to the <tt>cygwin-apps</tt> mailing list.</li>
+	<li>When you get the "uploaded" confirmation, send an immediate note to the <tt>cygwin-announce</tt> mailing list.</li>
       </ol>
       <h2><a id="updating" name="updating">Updating a package</a></h2>
-      <p>So you've got an updated package you want to submit. Follow the following checklist before emailing <tt>cygwin-apps&#64;cygwin&#46;com</tt> and you'll almost certainly save time.</p>
+      <p>So you've got an updated package you want to submit. Follow the following checklist before emailing the <tt>cygwin-apps</tt> mailing list and you'll almost certainly save time.</p>
       <ol>
 	<li>
 	  Place the package files in a web accessible http/ftp site somewhere. If at all possible the files should have a directory structure in order to get them all with a single command. For example, if I am updating "foo" and "libfoo", an upload site should look like:
@@ -535,21 +535,17 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
 	  </ul>
 	</li>
 	<li>Do increase the version number no matter what (if upstream version didn't change, bump the Cygwin release number): even if the package was bad, even if it was removed from the server for a security issue, even if has only been discussed in mailing list and never uploaded: it costs nothing and avoids confusion in both <tt>setup.exe</tt> and people mind.</li>
-	<li>Announce on <tt>cygwin-apps&#64;cygwin&#46;com</tt> that you have the package ready for uploading. Include in the mail the URLs of all the new package files.<br />
+	<li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Include in the mail the URLs of all the new package files.<br />
 	 Be concise in your message: as package mantainer you're trusted to know when and how your packages should be updated, no reason to explain it.<br />
 	 Just provide URLs for files that have actually changed, i.e. it is not necessary to provide a new link to a <tt>setup.hint</tt> file every time you update your packages unless the actual content changed (e.g. because version numbers are not parsable or ordered and have to be specified manually).<br />
 	 Please do specify which version must be kept as "old", all the others will be deleted from the server.</li>
 	<li>Feel free to delete your temporary copy once the files have been uploaded to sourceware.org. This fact will be made clear by an "Uploaded." reply to your announcement by someone with upload privileges.</li>
-	<li>Announce via <tt>cygwin-announce&#64;cygwin&#46;com</tt> that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement..<br />
+	<li>Announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement..<br />
 	 Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
       </ol>
       <p>NOTE: On any major version upgrade, you may want to mark the release as <tt>Test</tt>.</p>
       <h2><a id="announcement" name="announcement">Example announcement</a></h2>
       <table border="1">
-	<tr>
-	  <td width="20%"><i>To:</i></td>
-	  <td><tt><b>cygwin-announce&#64;cygwin&#46;com</b></tt></td>
-	</tr>
 	<tr>
 	  <td width="20%"><i>Subject:</i></td>
 	  <td><tt><b>New package: foo-0.30.2-1</b></tt><br />
@@ -561,8 +557,6 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
 	  <br />
 	   (a couple of lines about what "foo" is)<br />
 	   (short changelog of important features or fixes; big emphasis for security fixes)<br />
-	  <br />
-	   If you have questions or comments, please send them to the cygwin mailing list at: cygwin&#64;cygwin&#46;com .<br />
 	  <br />
 	   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** CYGWIN-ANNOUNCE UNSUBSCRIBE INFO ***<br />
 	  <br />
