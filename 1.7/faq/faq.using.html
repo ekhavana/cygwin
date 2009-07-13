@@ -31,15 +31,6 @@ access a network share.  You may have the obsolete <code class="literal">//c</co
 notation in your PATH or startup files.  Using <code class="literal">//c</code> means
 to contact the <span class="emphasis"><em>network server</em></span> <code class="literal">c</code>, which
 will slow things down tremendously if it does not exist.  
-</p><p>Using //c (for C:) doesn't work.  (Similarly for any drive
-letter, e.g. <code class="literal">//z</code> for <code class="literal">Z:</code>) This
-``feature'' has long been deprecated.
-For a detailed discussion of why this change was made, and how deal
-with it, refer to
-<a class="ulink" href="http://sources.redhat.com/ml/cygwin/2001-09/msg00014.html" target="_top">http://sources.redhat.com/ml/cygwin/2001-09/msg00014.html</a>.
-Just note that, in contrast to what that posting claims, using
-<code class="literal">/</code> as the cygdrive prefix is not supported anymore for a
-long time (though it still might work).
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.using.shares"></a><p><b>3.</b></p></td><td align="left" valign="top"><p>Why can't my services access network shares?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>If your service is one of those which switch the user context
 (sshd, inetd, etc), then it depends on the method used to switch to
 another user.  This problem as well as its solution is described in
