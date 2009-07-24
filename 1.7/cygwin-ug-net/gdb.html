@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Debugging Cygwin Programs</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="programming.html" title="Chapter&#160;4.&#160;Programming with Cygwin"><link rel="prev" href="programming.html" title="Chapter&#160;4.&#160;Programming with Cygwin"><link rel="next" href="dll.html" title="Building and Using DLLs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Debugging Cygwin Programs</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="programming.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;4.&#160;Programming with Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="dll.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gdb"></a>Debugging Cygwin Programs</h2></div></div></div><p>When your program doesn't work right, it usually has a "bug" in
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Debugging Cygwin Programs</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="programming.html" title="Chapter 4. Programming with Cygwin"><link rel="prev" href="programming.html" title="Chapter 4. Programming with Cygwin"><link rel="next" href="dll.html" title="Building and Using DLLs"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Debugging Cygwin Programs</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="programming.html">Prev</a> </td><th width="60%" align="center">Chapter 4. Programming with Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="dll.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="gdb"></a>Debugging Cygwin Programs</h2></div></div></div><p>When your program doesn't work right, it usually has a "bug" in
 it, meaning there's something wrong with the program itself that is
 causing unexpected results or crashes.  Diagnosing these bugs and
 fixing them is made easy by special tools called
@@ -12,7 +12,7 @@ regular text files that cannot be used directly by GDB.
 </p><p>Before you can debug your program, you need to prepare your
 program for debugging.  What you need to do is add
 <code class="literal">-g</code> to all the other flags you use when compiling
-your sources to objects.</p><div class="example"><a name="gdb-g"></a><p class="title"><b>Example&#160;4.2.&#160;Compiling with -g</b></p><div class="example-contents"><pre class="screen">
+your sources to objects.</p><div class="example"><a name="gdb-g"></a><p class="title"><b>Example 4.2. Compiling with -g</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">bash$</code> gcc -g -O2 -c myapp.c
 <code class="prompt">bash$</code> gcc -g myapp.c -o myapp
 </pre></div></div><br class="example-break"><p>What this does is add extra information to the objects (they get
@@ -36,7 +36,7 @@ your program run.  After it crashes, you can type
 variables.  There's also a <span class="command"><strong>print</strong></span> that lets you look
 at individual variables or what pointers point to.</p><p>If your program is doing something unexpected, you can use the
 <span class="command"><strong>break</strong></span> command to tell gdb to stop your program when it
-gets to a specific function or line number:</p><div class="example"><a name="gdb-break"></a><p class="title"><b>Example&#160;4.3.&#160;"break" in gdb</b></p><div class="example-contents"><pre class="screen">
+gets to a specific function or line number:</p><div class="example"><a name="gdb-break"></a><p class="title"><b>Example 4.3. "break" in gdb</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">(gdb)</code> break my_function
 <code class="prompt">(gdb)</code> break 47
 </pre></div></div><br class="example-break"><p>Now, when you type <span class="command"><strong>run</strong></span> your program will stop
@@ -46,9 +46,9 @@ the state of your program at that point, modify variables, and
 time.</p><p>Note that you may specify additional arguments to the
 <span class="command"><strong>run</strong></span> command to provide command-line arguments to
 your program.  These two cases are the same as far as your program is
-concerned:</p><div class="example"><a name="gdb-cliargs"></a><p class="title"><b>Example&#160;4.4.&#160;Debugging with command line arguments</b></p><div class="example-contents"><pre class="screen">
+concerned:</p><div class="example"><a name="gdb-cliargs"></a><p class="title"><b>Example 4.4. Debugging with command line arguments</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">bash$</code> myprog -t foo --queue 47
 
 <code class="prompt">bash$</code> gdb myprog
 <code class="prompt">(gdb)</code> run -t foo --queue 47
-</pre></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="programming.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="programming.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="dll.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&#160;4.&#160;Programming with Cygwin&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Building and Using DLLs</td></tr></table></div></body></html>
+</pre></div></div><br class="example-break"></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="programming.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="programming.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="dll.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 4. Programming with Cygwin </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> Building and Using DLLs</td></tr></table></div></body></html>

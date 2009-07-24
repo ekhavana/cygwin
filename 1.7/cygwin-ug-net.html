@@ -530,8 +530,8 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
   this *is* the former libminires.a.
 
 - rcmd is now implemented inside of Cygwin, instead of calling the
-  WinSock function.  This allows rsh(1) usage on Vista/2008, which
-  dropped this function from WinSock.
+  WinSock function.  This allows rsh(1) usage on Vista/2008 and later,
+  which dropped this function from WinSock.
 
 - Define multicast structures in netinet/in.h.  Note that fully
   conformant multicast support is only available beginning with Vista/2008.
@@ -597,6 +597,8 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
 
 - Only declare expected functions in &lt;strings.h&gt;, don't include
   &lt;string.h&gt; from here.
+
+- Support for WCONTINUED, WIFCONTINUED() added to waitpid and wait4.
 
 - New APIs: _Exit, confstr, insque, remque, sys_sigabbrev,
   posix_madvise, posix_memalign, reallocf,
@@ -668,6 +670,10 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
 
 - Remove backwards compatibility with old signal masks.  (Some *very* old
   programs which use signal masks may no longer work correctly).
+
+- Cygwin now exports wrapper functions for libstdc++ operators new and
+  delete, to support the toolchain in implementing full C++ standards
+  conformance when working with shared libraries.
 
 </pre></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="setup-net"></a>Chapter 2. Setting Up Cygwin</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#setup-locale">Internationalization</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-locale-ov">Overview</a></span></dt><dt><span class="sect2"><a href="#setup-locale-how">How to set the locale</a></span></dt><dt><span class="sect2"><a href="#setup-locale-problems">Potential Problems when using Locales</a></span></dt><dt><span class="sect2"><a href="#setup-locale-missing">What does not work?</a></span></dt><dt><span class="sect2"><a href="#setup-locale-charsetlist">List of supported character sets</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does it all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="internet-setup"></a>Internet Setup</h2></div></div></div><p>To install the Cygwin net release, go to <a class="ulink" href="http://cygwin.com/" target="_top">http://cygwin.com/</a> and click on <a class="ulink" href="http://cygwin.com/setup.exe" target="_top">"Install Cygwin Now!"</a>.  This will
 download a GUI installer called <span class="command"><strong>setup.exe</strong></span> which can
@@ -1148,9 +1154,9 @@ oif the "CPxxx" style charsets, always use them with the trailing "CP".</p><p>Th
     ISO-8859-9            28599 (ISO-8859-9)
     ISO-8859-10             -   (not available)
     ISO-8859-11             -   (not available)
-    ISO-8859-13           28563 (ISO-8859-13)
+    ISO-8859-13           28603 (ISO-8859-13)
     ISO-8859-14             -   (not available)
-    ISO-8859-15           28565 (ISO-8859-15)
+    ISO-8859-15           28605 (ISO-8859-15)
     ISO-8859-16             -   (not available)
 
     SJIS                    932 (ANSI/OEM Japanese)
@@ -3265,8 +3271,11 @@ The normal UNIX users are usually not enumerated, but they can show
 up as file owners in <span class="command"><strong>ls -l</strong></span> output.
 </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="mount"></a>mount</h3></div></div></div><pre class="screen">
 Usage: mount [OPTION] [&lt;win32path&gt; &lt;posixpath&gt;]
+       mount -a
+       mount &lt;posixpath&gt;
 Display information about mounted filesystems, or mount a filesystem
 
+  -a, --all                     mount all filesystems mentioned in fstab
   -c, --change-cygdrive-prefix  change the cygdrive path prefix to &lt;posixpath&gt;
   -f, --force                   force mount, don't warn about missing mount
                                 point directories
@@ -3340,7 +3349,23 @@ most of the options are duplicates of other mount flags):</p><pre class="screen"
 <code class="filename">/etc/fstab</code> file, see
 <a class="xref" href="#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p><p>Note that all mount points added with <span class="command"><strong>mount</strong></span> are
 user mount points.  System mount points can only be specified in
-the <code class="filename">/etc/fstab</code> file.</p><p>
+the <code class="filename">/etc/fstab</code> file.</p><p>If you added mount points to <code class="filename">/etc/fstab</code> or your
+<code class="filename">/etc/fstab.d/&lt;username&gt;</code> file, you can add these
+mount points to your current user session using the <code class="literal">-a/--all</code>
+option, or by specifing the posix path alone on the command line.  As an
+example, consider you added a mount point with the POSIX path
+<code class="filename">/my/mount</code>.  You can add this mount point with either
+one of the following two commands to your current user session.</p><pre class="screen">
+<code class="prompt">$</code> <strong class="userinput"><code>mount /my/mount</code></strong>
+<code class="prompt">$</code> <strong class="userinput"><code>mount -a</code></strong>
+</pre><p>The first command just adds the <code class="filename">/my/mount</code> mount
+point to your current session, the <span class="command"><strong>mount -a</strong></span> adds all
+new mount points to your user session.</p><p>If you change a mount point to point to another native path, or
+if you changed the flags of a mount point, you have to <span class="command"><strong>umount</strong></span>
+the mount point first, before you can add it again.  Please note that
+all such added mount points are added as user mount points, and that the
+rule that system mount points can't be removed or replaced in a running
+session still applies.</p><p>
 The <code class="literal">-m</code> option causes the <span class="command"><strong>mount</strong></span> utility
 to output the current mount table in a series of fstab entries.
 You can save this output as a backup when experimenting with the mount table.
