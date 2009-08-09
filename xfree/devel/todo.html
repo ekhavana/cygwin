@@ -24,7 +24,7 @@
 
     <p>Following is a list of open tasks on the Cygwin/X
     project:<p>
-    <i>Please note that presence on this list doesn't guarantee that a task
+    <i>Please note that this list is in no particular order, and presence on this list doesn't guarantee that a task
     desirable, practical or even possible.</i>
     <p>
 
@@ -55,19 +55,23 @@
             <tr valign="top">
               <td>Stability Testing</td>
               
-              <td>2008-11-26</td>
+              <td>2008-08-09</td>
               
-              <td>Upgrade to modular X11R7.4 has inevitably
-                  introduced some bugs. We need to find them
-                  and fix them.</td>
+              <td>Upgrade to modular X11R7.4 has inevitably introduced some bugs. 
+		  Cygwin 1.7 seems to have brought a few new issues as well.
+	          We need to find them and fix them.</td>
             </tr>
 
             <tr valign="top">
               <td>-mwextwm mode and xwinwm</td>
               
-              <td>2008-11-26</td>
+              <td>2008-08-09</td>
               
-              <td>Needs fixing to build, and work again</td>
+              <td><strike>Needs fixing to build, and work again</strike>.
+	      Should build and work now, but needs looking at to see what it lacks compared to the internal WM.
+	      An external WM is desirable for a couple of reasons, not least of which is that it can be updated without updating the server,
+	      so it would be nice to move to this as a replacement for internal WM in the long-term, if possible.
+              </td>
             </tr>
 
             <tr valign="top">
@@ -97,6 +101,7 @@ skeleton code in the server, but it doesn't do anything yet.
 
                 <td>Find and fix Composite bugs in rooted mode.
                   Cunning plans for compositing in multiwindow mode (using Win2K+ window transparency)?
+                  (Integrated WM has to become composite-aware for this)
                 </td>
             </tr>
 
@@ -164,19 +169,13 @@ skeleton code in the server, but it doesn't do anything yet.
             </tr>
 
             <tr valign="top">
-                <td>Indirect OpenGL acceleration</td>
+                <td>Indirect OpenGL acceleration (AIGLX)</td>
 
-                <td>2004-03-25</td>
+                <td>2008-08-09</td>
 
-                <td>Finish implementing the indirect OpenGL
-                acceleration that Alexander Gottwald has nearly
-                completed; there are mostly some rough edges
-                remaining. The
-                <a href="http://msu.edu/~huntharo/xwin/devel/server/CygwinX-Accelerated-OpenGL-Support-20040229.pdf">
-                notes posted by Harold on 2004-02-29</a> will be
-                useful. Additional information is in the
-                <a href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00001.html">
-                email that accompanied the above notes</a>.</td>
+                <td>Testing of the implementation of indirect OpenGL acceleration using native WGL.
+		Additional information is in the
+		<a href="http://cygwin.com/ml/cygwin-xfree/2009-06/msg00088.html">email asking for testing</a>.</td>
             </tr>
 
             <tr valign="top">
@@ -236,16 +235,18 @@ skeleton code in the server, but it doesn't do anything yet.
             </tr>
 
             <tr valign="top">
-                <td>Timestamp on log file entries</td>
+                <td><strike>Timestamp on log file entries</strike></td>
 
-                <td>2004-03-04</td>
+                <td><strike>2009-08-09</td>
 
-                <td>Add a timestamp to each line of /tmp/XWin.log,
+                <td><strike>Add a timestamp to each line of /tmp/XWin.log,
                 as suggested by Ehud Karni on 2004-03-03. Ehud also
                 <a href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00082.html">
                 provided source code useful for performing such
                 timestamping</a> in his email. Should be written using
-                strftime(), though.</td>
+                strftime(), though.</strike>
+		Added in 1.6.2-2</td>
+	    </strike>
             </tr>
 
             <tr valign="top">
