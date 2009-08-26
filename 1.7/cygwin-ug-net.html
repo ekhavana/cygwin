@@ -580,10 +580,10 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
   The full list of supported character sets: "ASCII", "ISO-8859-x" with x
   in 1-16, except 12, "UTF-8", Windows codepages "CPxxx", with xxx in
   (437, 720, 737, 775, 850, 852, 855, 857, 858, 862, 866, 874, 1125,
-  1250, 1251, 1252, 1253, 1254, 1255, 1256, 1257, 1258), "SJIS",
-  "GBK", "eucJP", "eucKR", and "Big5".  The leading language and territory
-  part (en_US, for instance) is not used by Cygwin yet, but is required
-  for POSIX compatibility.
+  1250, 1251, 1252, 1253, 1254, 1255, 1256, 1257, 1258), "KOI8-R", "KOI8-U",
+  "SJIS", "GBK", "eucJP", "eucKR", and "Big5".  The leading language and
+  territory part (en_US, for instance) is not used by Cygwin yet, but is
+  required for POSIX compatibility.
 
 - Allow multiple concurrent read locks per thread for pthread_rwlock_t.
 
@@ -1107,12 +1107,16 @@ formats, and no support for native language sorting orders.
 be glad for coding help in this area.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-charsetlist"></a>List of supported character sets</h3></div></div></div><p>Last but not least, here's the list of currently supported character
 sets.  The left-hand expression is the name of the charset, as you would use
 it in the internationalization environment variables as outlined above.
+Note that charset specifiers are case-insensitive.  <code class="literal">EUCJP</code>
+is equivalent to <code class="literal">eucJP</code> or <code class="literal">eUcJp</code>.
+Writing the charset in the exact case as given in the list below is a
+good convention, though.
 </p><p>The right-hand side is the number of the equivalent Windows
 codepage as well as the Windows name of the codepage.  They are only
 noted here for reference.  Don't try to use the bare codepage number or
 the Windows name of the codepage as charset in locale specifiers, unless
 they happen to be identical with the left-hand side.  Especially in case
-oif the "CPxxx" style charsets, always use them with the trailing "CP".</p><p>This works:</p><pre class="screen">
+of the "CPxxx" style charsets, always use them with the trailing "CP".</p><p>This works:</p><pre class="screen">
   set LC_ALL=en_US.CP437
 </pre><p>This does <span class="emphasis"><em>not</em></span> work:</p><pre class="screen">
   set LC_ALL=en_US.437
@@ -1159,13 +1163,15 @@ oif the "CPxxx" style charsets, always use them with the trailing "CP".</p><p>Th
     ISO-8859-15           28605 (ISO-8859-15)
     ISO-8859-16             -   (not available)
 
+    KOI8-R                20866 (KOI8-R Russian Cyrillic)
+    KOI8-U                21866 (KOI8-U Ukrainian Cyrillic)
     SJIS                    932 (ANSI/OEM Japanese)
     GBK                     936 (ANSI/OEM Simplified Chinese)
     Big5                    950 (ANSI/OEM Traditional Chinese)
     eucJP                 20932 (EUC Japanese)
     eucKR                   949 (EUC Korean)
 
-    UTF-8                 65001 (UTF-8)
+    UTF-8 or UTF8         65001 (UTF-8)
 </pre></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ntsec"></a>Using Windows security in Cygwin</h2></div></div></div><p>This section discusses how the Windows security model is
 utilized in Cygwin to implement POSIX-like permissions, as well as how
 the Windows authentication model is used to allow cygwin applications
