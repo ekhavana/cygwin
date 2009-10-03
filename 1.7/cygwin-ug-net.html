@@ -1,4 +1,4 @@
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Cygwin User's Guide</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="cygwin-ug-net"></a>Cygwin User's Guide</h1></div><div><div class="legalnotice"><a name="legal"></a><p>Copyright © 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Red Hat, Inc.</p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#overview">1. Cygwin Overview</a></span></dt><dd><dl><dt><span class="sect1"><a href="#what-is-it">What is it?</a></span></dt><dt><span class="sect1"><a href="#ov-ex-win">Quick Start Guide for those more experienced with Windows</a></span></dt><dt><span class="sect1"><a href="#ov-ex-unix">Quick Start Guide for those more experienced with UNIX</a></span></dt><dt><span class="sect1"><a href="#are-free">Are the Cygwin tools free software?</a></span></dt><dt><span class="sect1"><a href="#brief-history">A brief history of the Cygwin project</a></span></dt><dt><span class="sect1"><a href="#highlights">Highlights of Cygwin Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-hi-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#ov-hi-perm">Permissions and Security</a></span></dt><dt><span class="sect2"><a href="#ov-hi-files">File Access</a></span></dt><dt><span class="sect2"><a href="#ov-hi-textvsbinary">Text Mode vs. Binary Mode</a></span></dt><dt><span class="sect2"><a href="#ov-hi-ansiclib">ANSI C Library</a></span></dt><dt><span class="sect2"><a href="#ov-hi-process">Process Creation</a></span></dt><dt><span class="sect2"><a href="#ov-hi-signals">Signals</a></span></dt><dt><span class="sect2"><a href="#ov-hi-sockets">Sockets</a></span></dt><dt><span class="sect2"><a href="#ov-hi-select">Select</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ov-new1.7">What's new and what changed in Cygwin 1.7</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-new1.7-os">OS related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-file">File Access related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-net">Network related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-device">Device related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-posix">Other POSIX related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-sec">Security related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-misc">Miscellaneous</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#setup-net">2. Setting Up Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#setup-locale">Internationalization</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-locale-ov">Overview</a></span></dt><dt><span class="sect2"><a href="#setup-locale-how">How to set the locale</a></span></dt><dt><span class="sect2"><a href="#setup-locale-problems">Potential Problems when using Locales</a></span></dt><dt><span class="sect2"><a href="#setup-locale-missing">What does not work?</a></span></dt><dt><span class="sect2"><a href="#setup-locale-charsetlist">List of supported character sets</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does it all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></dd><dt><span class="chapter"><a href="#using">3. Using Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#using-pathnames">Mapping path names</a></span></dt><dd><dl><dt><span class="sect2"><a href="#pathnames-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#mount-table">The Cygwin Mount Table</a></span></dt><dt><span class="sect2"><a href="#cygdrive">The cygdrive path prefix</a></span></dt><dt><span class="sect2"><a href="#pathnames-additional">Additional Path-related Information</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-textbinary">Text and Binary modes</a></span></dt><dd><dl><dt><span class="sect2"><a href="#textbin-issue">The Issue</a></span></dt><dt><span class="sect2"><a href="#textbin-default">The default Cygwin behavior</a></span></dt><dt><span class="sect2"><a href="#textbin-example">Example</a></span></dt><dt><span class="sect2"><a href="#textbin-question">Binary or text?</a></span></dt><dt><span class="sect2"><a href="#textbin-devel">Programming</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-filemodes">File permissions</a></span></dt><dt><span class="sect1"><a href="#using-specialnames">Special filenames</a></span></dt><dd><dl><dt><span class="sect2"><a href="#pathnames-etc">Special files in /etc</a></span></dt><dt><span class="sect2"><a href="#pathnames-dosdevices">Invalid filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-specialchars">Forbidden characters in filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-unusual">Filenames with unusual (foreign) characters</a></span></dt><dt><span class="sect2"><a href="#pathnames-casesensitive">Case sensitive filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-posixdevices">POSIX devices</a></span></dt><dt><span class="sect2"><a href="#pathnames-exe">The .exe extension</a></span></dt><dt><span class="sect2"><a href="#pathnames-proc">The /proc filesystem</a></span></dt><dt><span class="sect2"><a href="#pathnames-proc-registry">The /proc/registry filesystem</a></span></dt><dt><span class="sect2"><a href="#pathnames-at">The @pathnames</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-cygwinenv">The CYGWIN environment
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>Cygwin User's Guide</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="cygwin-ug-net"></a>Cygwin User's Guide</h1></div><div><div class="legalnotice"><a name="legal"></a><p>Copyright © 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009 Red Hat, Inc.</p></div></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#overview">1. Cygwin Overview</a></span></dt><dd><dl><dt><span class="sect1"><a href="#what-is-it">What is it?</a></span></dt><dt><span class="sect1"><a href="#ov-ex-win">Quick Start Guide for those more experienced with Windows</a></span></dt><dt><span class="sect1"><a href="#ov-ex-unix">Quick Start Guide for those more experienced with UNIX</a></span></dt><dt><span class="sect1"><a href="#are-free">Are the Cygwin tools free software?</a></span></dt><dt><span class="sect1"><a href="#brief-history">A brief history of the Cygwin project</a></span></dt><dt><span class="sect1"><a href="#highlights">Highlights of Cygwin Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-hi-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#ov-hi-perm">Permissions and Security</a></span></dt><dt><span class="sect2"><a href="#ov-hi-files">File Access</a></span></dt><dt><span class="sect2"><a href="#ov-hi-textvsbinary">Text Mode vs. Binary Mode</a></span></dt><dt><span class="sect2"><a href="#ov-hi-ansiclib">ANSI C Library</a></span></dt><dt><span class="sect2"><a href="#ov-hi-process">Process Creation</a></span></dt><dt><span class="sect2"><a href="#ov-hi-signals">Signals</a></span></dt><dt><span class="sect2"><a href="#ov-hi-sockets">Sockets</a></span></dt><dt><span class="sect2"><a href="#ov-hi-select">Select</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ov-new1.7">What's new and what changed in Cygwin 1.7</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-new1.7-os">OS related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-file">File Access related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-net">Network related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-device">Device related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-posix">Other POSIX related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-sec">Security related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-misc">Miscellaneous</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#setup-net">2. Setting Up Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#setup-locale">Internationalization</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-locale-ov">Overview</a></span></dt><dt><span class="sect2"><a href="#setup-locale-how">How to set the locale</a></span></dt><dt><span class="sect2"><a href="#setup-locale-console">The Windows Console character set</a></span></dt><dt><span class="sect2"><a href="#setup-locale-problems">Potential Problems when using Locales</a></span></dt><dt><span class="sect2"><a href="#setup-locale-missing">What does not work?</a></span></dt><dt><span class="sect2"><a href="#setup-locale-charsetlist">List of supported character sets</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does it all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></dd><dt><span class="chapter"><a href="#using">3. Using Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#using-pathnames">Mapping path names</a></span></dt><dd><dl><dt><span class="sect2"><a href="#pathnames-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#mount-table">The Cygwin Mount Table</a></span></dt><dt><span class="sect2"><a href="#cygdrive">The cygdrive path prefix</a></span></dt><dt><span class="sect2"><a href="#pathnames-additional">Additional Path-related Information</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-textbinary">Text and Binary modes</a></span></dt><dd><dl><dt><span class="sect2"><a href="#textbin-issue">The Issue</a></span></dt><dt><span class="sect2"><a href="#textbin-default">The default Cygwin behavior</a></span></dt><dt><span class="sect2"><a href="#textbin-example">Example</a></span></dt><dt><span class="sect2"><a href="#textbin-question">Binary or text?</a></span></dt><dt><span class="sect2"><a href="#textbin-devel">Programming</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-filemodes">File permissions</a></span></dt><dt><span class="sect1"><a href="#using-specialnames">Special filenames</a></span></dt><dd><dl><dt><span class="sect2"><a href="#pathnames-etc">Special files in /etc</a></span></dt><dt><span class="sect2"><a href="#pathnames-dosdevices">Invalid filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-specialchars">Forbidden characters in filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-unusual">Filenames with unusual (foreign) characters</a></span></dt><dt><span class="sect2"><a href="#pathnames-casesensitive">Case sensitive filenames</a></span></dt><dt><span class="sect2"><a href="#pathnames-posixdevices">POSIX devices</a></span></dt><dt><span class="sect2"><a href="#pathnames-exe">The .exe extension</a></span></dt><dt><span class="sect2"><a href="#pathnames-proc">The /proc filesystem</a></span></dt><dt><span class="sect2"><a href="#pathnames-proc-registry">The /proc/registry filesystem</a></span></dt><dt><span class="sect2"><a href="#pathnames-at">The @pathnames</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-cygwinenv">The CYGWIN environment
 variable</a></span></dt><dd><dl><dt><span class="sect2"><a href="#cygwinenv-implemented-options">Implemented options</a></span></dt><dt><span class="sect2"><a href="#cygwinenv-removed-options">Obsolete options</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-cygserver">Cygserver</a></span></dt><dd><dl><dt><span class="sect2"><a href="#what-is-cygserver">What is Cygserver?</a></span></dt><dt><span class="sect2"><a href="#cygserver-command-line">Cygserver command line options</a></span></dt><dt><span class="sect2"><a href="#start-cygserver">How to start Cygserver</a></span></dt><dt><span class="sect2"><a href="#cygserver-config">The Cygserver configuration file</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-utils">Cygwin Utilities</a></span></dt><dd><dl><dt><span class="sect2"><a href="#cygcheck">cygcheck</a></span></dt><dt><span class="sect2"><a href="#cygpath">cygpath</a></span></dt><dt><span class="sect2"><a href="#dumper">dumper</a></span></dt><dt><span class="sect2"><a href="#getfacl">getfacl</a></span></dt><dt><span class="sect2"><a href="#kill">kill</a></span></dt><dt><span class="sect2"><a href="#mkgroup">mkgroup</a></span></dt><dt><span class="sect2"><a href="#mkpasswd">mkpasswd</a></span></dt><dt><span class="sect2"><a href="#mount">mount</a></span></dt><dt><span class="sect2"><a href="#passwd">passwd</a></span></dt><dt><span class="sect2"><a href="#ps">ps</a></span></dt><dt><span class="sect2"><a href="#regtool">regtool</a></span></dt><dt><span class="sect2"><a href="#setfacl">setfacl</a></span></dt><dt><span class="sect2"><a href="#ssp">ssp</a></span></dt><dt><span class="sect2"><a href="#strace">strace</a></span></dt><dt><span class="sect2"><a href="#umount">umount</a></span></dt></dl></dd><dt><span class="sect1"><a href="#using-effectively">Using Cygwin effectively with Windows</a></span></dt><dd><dl><dt><span class="sect2"><a href="#using-pathnames-effectively">Pathnames</a></span></dt><dt><span class="sect2"><a href="#using-console">Console Programs</a></span></dt><dt><span class="sect2"><a href="#using-net">Cygwin and Windows Networking</a></span></dt><dt><span class="sect2"><a href="#using-cygutils">The cygutils package</a></span></dt><dt><span class="sect2"><a href="#using-shortcuts">Creating shortcuts with cygutils</a></span></dt><dt><span class="sect2"><a href="#using-printing">Printing with cygutils</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#programming">4. Programming with Cygwin</a></span></dt><dd><dl><dt><span class="sect1"><a href="#gcc">Using GCC with Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#gcc-cons">Console Mode Applications</a></span></dt><dt><span class="sect2"><a href="#gcc-gui">GUI Mode Applications</a></span></dt></dl></dd><dt><span class="sect1"><a href="#gdb">Debugging Cygwin Programs</a></span></dt><dt><span class="sect1"><a href="#dll">Building and Using DLLs</a></span></dt><dd><dl><dt><span class="sect2"><a href="#dll-build">Building DLLs</a></span></dt><dt><span class="sect2"><a href="#dll-link">Linking Against DLLs</a></span></dt></dl></dd><dt><span class="sect1"><a href="#windres">Defining Windows Resources</a></span></dt></dl></dd></dl></div><div class="list-of-examples"><p><b>List of Examples</b></p><dl><dt>2.1. <a href="#ntsec-passwd">/etc/passwd:</a></dt><dt>2.2. <a href="#ntsec-passwd-tweaked">/etc/passwd, tweaked:</a></dt><dt>2.3. <a href="#ntsec-group-tweaked">/etc/group, tweaked:</a></dt><dt>3.1. <a href="#pathnames-mount-ex">Displaying the current set of mount points</a></dt><dt>3.2. <a href="#pathnames-at-ex"> Using @pathname</a></dt><dt>3.3. <a href="#utils-cygcheck-ex">Example cygcheck usage</a></dt><dt>3.4. <a href="#utils-search-ex">Searching all packages for a file</a></dt><dt>3.5. <a href="#utils-cygpath-ex">Example cygpath usage</a></dt><dt>3.6. <a href="#utils-kill-ex">Using the kill command</a></dt><dt>3.7. <a href="#utils-mkgroup-ex">Setting up group entry for current user with different domain/group separator</a></dt><dt>3.8. <a href="#utils-althome-ex">Using an alternate home root</a></dt><dt>3.9. <a href="#utils-mount-ex">Displaying the current set of mount points</a></dt><dt>3.10. <a href="#utils-mount-add-ex">Adding mount points</a></dt><dt>3.11. <a href="#utils-cygdrive-ex">Changing the default prefix</a></dt><dt>3.12. <a href="#utils-cygdrive-ex2">Changing the default prefix with specific mount options</a></dt><dt>4.1. <a href="#gcc-hello-world">Building Hello World with GCC</a></dt><dt>4.2. <a href="#gdb-g">Compiling with -g</a></dt><dt>4.3. <a href="#gdb-break">"break" in gdb</a></dt><dt>4.4. <a href="#gdb-cliargs">Debugging with command line arguments</a></dt></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="overview"></a>Chapter 1. Cygwin Overview</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#what-is-it">What is it?</a></span></dt><dt><span class="sect1"><a href="#ov-ex-win">Quick Start Guide for those more experienced with Windows</a></span></dt><dt><span class="sect1"><a href="#ov-ex-unix">Quick Start Guide for those more experienced with UNIX</a></span></dt><dt><span class="sect1"><a href="#are-free">Are the Cygwin tools free software?</a></span></dt><dt><span class="sect1"><a href="#brief-history">A brief history of the Cygwin project</a></span></dt><dt><span class="sect1"><a href="#highlights">Highlights of Cygwin Functionality</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-hi-intro">Introduction</a></span></dt><dt><span class="sect2"><a href="#ov-hi-perm">Permissions and Security</a></span></dt><dt><span class="sect2"><a href="#ov-hi-files">File Access</a></span></dt><dt><span class="sect2"><a href="#ov-hi-textvsbinary">Text Mode vs. Binary Mode</a></span></dt><dt><span class="sect2"><a href="#ov-hi-ansiclib">ANSI C Library</a></span></dt><dt><span class="sect2"><a href="#ov-hi-process">Process Creation</a></span></dt><dt><span class="sect2"><a href="#ov-hi-signals">Signals</a></span></dt><dt><span class="sect2"><a href="#ov-hi-sockets">Sockets</a></span></dt><dt><span class="sect2"><a href="#ov-hi-select">Select</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ov-new1.7">What's new and what changed in Cygwin 1.7</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ov-new1.7-os">OS related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-file">File Access related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-net">Network related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-device">Device related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-posix">Other POSIX related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-sec">Security related changes</a></span></dt><dt><span class="sect2"><a href="#ov-new1.7-misc">Miscellaneous</a></span></dt></dl></dd></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="what-is-it"></a>What is it?</h2></div></div></div><p>
 Cygwin is a Linux-like environment for Windows. It consists of a DLL
 (<code class="filename">cygwin1.dll</code>), which acts as an emulation layer
@@ -252,8 +252,8 @@ set than the one you used when creating these symlinks
 (see <a class="xref" href="#setup-locale-problems" title="Potential Problems when using Locales">the section called &#8220;Potential Problems when using Locales&#8221;</a>.  Please note that this
 new UTF-16 style of symlinks is not compatible with older Cygwin release,
 which can't read the target filename correctly.</p><p>Hard links are fully supported on NTFS and NFS file systems.  On FAT
-and some other file systems, the call falls back to simply copying the file,
-a strategy that works in many cases.</p><p>On file systems which don't support unique persistent file IDs (FAT,
+and other file systems which don't support hardlinks, the call returns with
+an error, just like on other POSIX systems.</p><p>On file systems which don't support unique persistent file IDs (FAT,
 older Samba shares) the inode number for a file is calculated by hashing its
 full Win32 path.  The inode number generated by the stat call always matches
 the one returned in <code class="literal">d_ino</code> of the <code class="literal">dirent</code>
@@ -410,10 +410,10 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
 
 - Cygwin creates the mount points for /, /usr/bin, and /usr/lib automatically
   from it's own position on the disk.  They don't have to be specified in
-  /etc/fstab. 
+  /etc/fstab.
 
 - If a filename cannot be represented in the current character set,
-  the character will be converted to a sequence Ctrl-N + UTF-8 representation
+  the character will be converted to a sequence Ctrl-X + UTF-8 representation
   of the character.  This allows to access all files, even those not
   having a valid representation of their filename in the current character
   set (codepage).  To always have a valid string, use the UTF-8 charset
@@ -448,7 +448,7 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
   shares.  Requires to change a registry key (see the user's guide).
   Can be switched off on a per-mount base.
 
-- Due to the above changes, managed mounts have been removed. 
+- Due to the above changes, managed mounts have been removed.
 
 - Incoming DOS paths are always handled case-insensitive and get no POSIX
   permission, as if they are mounted with noacl,posix=0 mount flags.
@@ -458,6 +458,10 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
   the hidden recycle bin directories and marking the files for deletion.
 
 - rename(2) rewritten to be more POSIX conformant.
+
+- access(2) now performs checks using the real user ID, as required by
+  POSIX; the old behavior of querying based on effective user ID is
+  available through the new faccessat(2) and euidaccess(2) APIs.
 
 - Add st_birthtim member to struct stat.
 
@@ -491,6 +495,10 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
 - Recognize Samba version beginning with Samba 3.0.28a using the new
   extended version information negotiated with the Samba developers.
 
+- Stop faking hardlinks by copying the file on filesystems which don't
+  support hardlinks natively (FAT, FAT32, etc.).  Just return an error
+  instead, just like Linux.
+
 - List servers of all accessible domains and workgroups in // instead of
   just the servers in the own domain/workgroup.
 
@@ -505,7 +513,8 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
   symlinkat, unlinkat.
 
 - Other new APIs: posix_fadvise, posix_fallocate, funopen, fopencookie,
-  open_memstream, open_wmemstream, fmemopen, fdopendir, fpurge, mkstemps.
+  open_memstream, open_wmemstream, fmemopen, fdopendir, fpurge,
+  mkstemps, eaccess, euidaccess, canonicalize_file_name, fexecve, execvpe.
 </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-net"></a>Network related changes</h3></div></div></div><pre class="screen">
 - New implementation for blocking sockets and select on sockets which
   is supposed to allow POSIX-compatible sharing of sockets between
@@ -675,7 +684,7 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
   delete, to support the toolchain in implementing full C++ standards
   conformance when working with shared libraries.
 
-</pre></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="setup-net"></a>Chapter 2. Setting Up Cygwin</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#setup-locale">Internationalization</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-locale-ov">Overview</a></span></dt><dt><span class="sect2"><a href="#setup-locale-how">How to set the locale</a></span></dt><dt><span class="sect2"><a href="#setup-locale-problems">Potential Problems when using Locales</a></span></dt><dt><span class="sect2"><a href="#setup-locale-missing">What does not work?</a></span></dt><dt><span class="sect2"><a href="#setup-locale-charsetlist">List of supported character sets</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does it all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="internet-setup"></a>Internet Setup</h2></div></div></div><p>To install the Cygwin net release, go to <a class="ulink" href="http://cygwin.com/" target="_top">http://cygwin.com/</a> and click on <a class="ulink" href="http://cygwin.com/setup.exe" target="_top">"Install Cygwin Now!"</a>.  This will
+</pre></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="setup-net"></a>Chapter 2. Setting Up Cygwin</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#setup-locale">Internationalization</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-locale-ov">Overview</a></span></dt><dt><span class="sect2"><a href="#setup-locale-how">How to set the locale</a></span></dt><dt><span class="sect2"><a href="#setup-locale-console">The Windows Console character set</a></span></dt><dt><span class="sect2"><a href="#setup-locale-problems">Potential Problems when using Locales</a></span></dt><dt><span class="sect2"><a href="#setup-locale-missing">What does not work?</a></span></dt><dt><span class="sect2"><a href="#setup-locale-charsetlist">List of supported character sets</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does it all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="internet-setup"></a>Internet Setup</h2></div></div></div><p>To install the Cygwin net release, go to <a class="ulink" href="http://cygwin.com/" target="_top">http://cygwin.com/</a> and click on <a class="ulink" href="http://cygwin.com/setup.exe" target="_top">"Install Cygwin Now!"</a>.  This will
 download a GUI installer called <span class="command"><strong>setup.exe</strong></span> which can
 be run to download a complete cygwin installation via the internet.
 Follow the instructions on each screen to install Cygwin.
@@ -992,11 +1001,31 @@ manual pages on the homepage of the
   "fr_FR.UTF-8"    language = french, territory = France, charset = UTF-8
   "ko_KR.eucKR"    language = korean, territory = South Korea, charset = eucKR
 </pre><p>
-And let's not forget the default locale called "C" or "POSIX"
-which basically only supports plain ASCII code.  If the aforementioned
-environment variables are not set, or set to "C" or "POSIX", you get the
-default ASCII-only behaviour.
-</p><p>
+At application startup, the application's locale is set to the default
+"C" or "POSIX" locale.  Under Cygwin, this locale defaults to the UTF-8
+character set.  If you want to stick to the "C" locale and only change to
+another charset, you can define this by setting one of the locale environment
+variables to "C.charset".  For instance</p><pre class="screen">
+  "C.ISO-8859-1"
+</pre><p>Windows uses the UTF-16 charset exclusively to store the names
+of any object used by the Operating System.  This is especially important
+with filenames.  Cygwin uses the setting of the locale environment variables
+<code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>, and <code class="envar">LANG</code>, to
+determine how to convert Windows filenames from their UTF-16 representation
+to the singlebyte or multibyte character set used by Cygwin.</p><p>
+The setting of the locale environment variables at process startup
+is effective for Cygwin's internal conversions to and from the Windows UTF-16
+object names for the entire lifetime of the current process.  Changing
+the environment variables to another value changes the way filenames are
+converted in subsequently started child processes, but not within the same
+process.</p><p>
+However, even if one of the locale environment variables is set to
+some other value than "C", this does <span class="emphasis"><em>only</em></span> affect
+how Cygwin itself converts filenames.  As the POSIX standard requires,
+it's the applications responsibility to activate that locale for its
+own purpose, typically by using the call</p><pre class="screen">
+  setlocale (LC_ALL, "");
+</pre><p>early in the application code.</p><p>
 Right now the language and territory, as well as the modifier, are not
 important to Cygwin, except to fix a single problem.  There's a class of
 characters in the Unicode character set, called the "CJK Ambiguous Width
@@ -1005,7 +1034,7 @@ wcwidth/wcswidth function is usually 1.  This is often a problem in
 East-Asian languages, which historically use character sets in which
 these characters have a width of 2.  Kind of explains why they are
 called "ambiguous"...</p><p>
-The problem has been fixed for now like this.  wcwidth/wcswidth usually
+The problem has been fixed like this.  wcwidth/wcswidth usually
 return 1 as the width of these characters.  However, if the language is
 specifed as "ja" (Japanese), "ko" (Korean), or "zh" (Chinese), wcwidth
 returns 2 for these characters.  Unfortunately this isn't correct in
@@ -1013,32 +1042,25 @@ all circumstances, so the user can specify the modifier "@cjknarrow",
 which modifies the behaviour of wcwidth/wcswidth to return 1 for the
 ambiguous width characters to return 1 even in those languages.</p><p>
 Other than that, the only important part so far is the character set.
+
 How does that work?</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-how"></a>How to set the locale</h3></div></div></div><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p>
-The default locale is the "C" or "POSIX" locale.  In this locale, basically
-only ASCII characters are supported.  Even if one of the aforementioned
-environment variables are set to something else, it's the application's
-responsibility to call the function <code class="function">setlocale</code>,
-typically like this</p><pre class="screen">
-  setlocale (LC_ALL, "");
-</pre><p>to switch to another locale according to the settings of the
-internationalization environment variables.
-</p></li><li style="list-style-type: disc"><p>
+The default locale is the "C" or "POSIX" locale.  Under Cygwin this locale
+defaults to the UTF-8 character set.</p></li><li style="list-style-type: disc"><p>
 Assume that you've set one of the aforementioned environment variables to some
-valid POSIX locale value, other than "C" and "POSIX", and assume that you
-call an application which calls <code class="function">setlocale</code> as above.</p><p>Assume further that you're living in Japan.  You might want to use
-the language code "ja" and the territory "JP", thus setting, say,
-<code class="envar">LANG</code> to "ja_JP".  You didn't set a character set, so
-what will Cygwin use now?  Easy!  It will use the default Windows ANSI
-codepage of your system, if it's supported by Cygwin.  Hopefully Cygwin
-supports all relevant default ANSI codepages...</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>For a list of supported character sets, see
+valid POSIX locale value, other than "C" and "POSIX".  Assume further that
+you're living in Japan.  You might want to use the language code "ja" and the
+territory "JP", thus setting, say, <code class="envar">LANG</code> to "ja_JP".  You didn't
+set a character set, so what will Cygwin use now?  Easy!  It will use the
+default Windows ANSI codepage of your system, if it's supported by Cygwin.
+Hopefully Cygwin supports all relevant default ANSI codepages...</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>For a list of supported character sets, see
 <a class="xref" href="#setup-locale-charsetlist" title="List of supported character sets">the section called &#8220;List of supported character sets&#8221;</a>
 </p></div></li><li style="list-style-type: disc"><p>
 You don't want to use the default Windows codepage as character set?
 In that case you have to specify the charset explicitly.  For instance,
-assume you're from Italy and don't want to use the default Windows codepage
-1252, but the more portable ISO-8859-15 character set.  What you can do is
-to set the <code class="envar">LANG</code> variable in the
-<code class="filename">C:\cygwin\Cygwin.bat</code> file which is the batch file
+assume you're from Italy and don't want to use the Italian default Windows
+ANSI codepage 1252, but the more portable ISO-8859-15 character set.
+What you can do, for instance, is to set the <code class="envar">LANG</code> variable
+in the <code class="filename">C:\cygwin\Cygwin.bat</code> file which is the batch file
 to start a Cygwin session from the "Cygwin" desktop shortcut.</p><pre class="screen">
   @echo off
 
@@ -1047,38 +1069,52 @@ to start a Cygwin session from the "Cygwin" desktop shortcut.</p><pre class="scr
   set LANG=it_IT.ISO-8859-15
   bash --login -i
 </pre></li><li style="list-style-type: disc"><p>
-Most singlebyte or doublebyte charsets have a disadvantage.  Windows
-filesystems use the Unicode character set in the UTF-16 encoding to store filename information.  Not all characters
+Last, but not least, most singlebyte or doublebyte charsets have a big
+disadvantage.  Windows filesystems use the Unicode character set in the
+UTF-16 encoding to store filename information.  Not all characters
 from the Unicode character set are available in a singlebyte or doublebyte
 charset.  While Cygwin has a workaround to access files with unusual
 characters (see <a class="xref" href="#pathnames-unusual" title="Filenames with unusual (foreign) characters">the section called &#8220;Filenames with unusual (foreign) characters&#8221;</a>), a better
-workaround is to use always the UTF-8 character set.  UTF-8 is the only
-multibyte character set which can represent <span class="emphasis"><em>every</em></span>
-Unicode character.</p><pre class="screen">
+workaround is to use always the UTF-8 character set.i</p><p><span class="emphasis"><em>UTF-8 is the only multibyte character set which can represent
+every Unicode character.</em></span></p><pre class="screen">
   set LANG=es_MX.UTF-8
 </pre><p>For a description of the Unicode standard, see the homepage of the
 <a class="ulink" href="http://www.unicode.org/" target="_top">Unicode Consortium</a>.
-</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems when using Locales</h3></div></div></div><p>
+</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-console"></a>The Windows Console character set</h3></div></div></div><p>Most of the time the Windows console is used to run Cygwin applications.
+While terminal emulations like <span class="command"><strong>xterm</strong></span> or
+<span class="command"><strong>mintty</strong></span> have a distinct way to set the character set
+used for in- and output, the Windows console hasn't such a way, since it's
+not an application in its own right.</p><p>This problem is solved in Cygwin as follows.  When a Cygwin
+process is started in a Windows console (either explicitly from cmd.exe,
+or implicitly by, for instance, clicking on the Cygwin desktop icon, or
+running the Cygwin.bat file), the Console character set is determined by the
+setting of the aforementioned internationalization environment variables,
+the same way as described in <a class="xref" href="#setup-locale-how" title="How to set the locale">the section called &#8220;How to set the locale&#8221;</a>.
+</p><p>What is that good for?  Why not switch the console character set with
+the applications requirements?  After all, the application knows if it uses
+localization or not.  However, what if a non-localized application calls
+a remote application which itself is localized?  This can happen with
+<span class="command"><strong>ssh</strong></span> or <span class="command"><strong>rlogin</strong></span>.  Both commands don't
+have and don't need localization and they never call
+<code class="function">setlocale</code>.  Setting one of the internationalization
+environment variable to the same charset as the remote machine before
+starting <span class="command"><strong>ssh</strong></span> or <span class="command"><strong>rlogin</strong></span> fixes that
+problem.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems when using Locales</h3></div></div></div><p>
 You can set the above internationalization variables not only in
 <code class="filename">Cygwin.bat</code> or in the Windows environment, but also
 in your Cygwin shell on the fly, even switch to yet another character
 set, and yet another.  In bash for instance:</p><pre class="screen">
   <code class="prompt">bash$</code> export LC_CTYPE="nl_BE.UTF-8"
 </pre><p>However, here's a problem.  At the start of the first Cygwin process
-in a session, the Windows environment has to be converted from UTF-16 to
-some singlebyte or multibyte charset.  If the internationalization environment
-variable hasn't been set <span class="emphasis"><em>before</em></span> starting this process,
-Cygwin has to make an educated guess which charset to use to convert
-the environment itself.  The only reproducible way to do that in the absence
-of <code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>, or <code class="envar">LANG</code>,
-is to use the "C" locale.  The default conversion in the "C" locale
-used by Cygwin internally is UTF-8.  So, in the absence of any
-internationalization environment variable, the environment will be converted
-to UTF-8.</p><p>As long as the environment only contains ASCII characters, this is
+in a session, the Windows environment is converted from UTF-16 to UTF-8.
+The environment is another of the system objects stored in UTF-16 in
+Windows.</p><p>As long as the environment only contains ASCII characters, this is
 no problem at all.  But if it contains native characters, and you're planning
 to use, say, GBK, the environment will result in invalid characters in
 the GBK charset.  This would be especially a problem in variables like
-<code class="envar">PATH</code>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Per POSIX, the name of an environment variable should only
+<code class="envar">PATH</code>.  To circumvent the worst problems, Cygwin converts
+the <code class="envar">PATH</code> environment variable to the charset set in the
+environment, if it's different from the UTF-8 charset.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Per POSIX, the name of an environment variable should only
 consist of valid ASCII characters, and only of uppercase letters, digits, and
 the underscore for maximum portablilty.</p></div><p>Symbolic links, too, may pose a problem when switching charsets on
 the fly.  A symbolic link contains the filename of the target file the
@@ -1093,7 +1129,13 @@ This behaviour is not different from the behaviour in other Operating
 Systems.  So, if you suddenly can't access a symlink anymore which
 worked all these years before, maybe it's because you switched to
 another character set.  This doesn't occur with symlinks created with
-Cygwin 1.7 or later.  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-missing"></a>What does not work?</h3></div></div></div><p>
+Cygwin 1.7 or later.  </p><p>Another problem you might encounter is that older versions of
+Windows did not install all charsets by default.  If you are running
+Windows XP or older, you can open the "Regional and Language Options"
+portion of the Control Panel, select the "Advanced" tab, and select
+entries from the "Code page conversion tables" list.  The following
+entries are useful to cygwin: 932/SJIS, 936/GBK, 949/EUC-KR, 950/Big5,
+20932/EUC-JP.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-missing"></a>What does not work?</h3></div></div></div><p>
 Except for <code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>,
 and <code class="envar">LANG</code>, all other LC_xxx environment variables,
 <code class="envar">LC_COLLATE</code>, <code class="envar">LC_MESSAGES</code>,
@@ -2170,14 +2212,14 @@ reason, you will nevertheless be able to access the file.  How does that
 work?  When Cygwin converts the filename from UTF-16 to your character
 set, it recognizes characters which can't be converted.  If that occurs,
 Cygwin replaces the non-convertible character with a special character
-sequence.  The sequence starts with an ASCII SO character (hex code
-0x0e, equivalent Control-N), followed by the UTF-8 representation of the
+sequence.  The sequence starts with an ASCII CAN character (hex code
+0x18, equivalent Control-X), followed by the UTF-8 representation of the
 character.  The result is a filename containing some ugly looking
 characters.  While it doesn't <span class="emphasis"><em>look</em></span> nice, it
 <span class="emphasis"><em>is</em></span> nice, because Cygwin knows how to convert this
 filename back to UTF-16.  The filename will be converted using your
-usual character set.  However, when Cygwin recognizes an ASCII SO
-character, it skips over the ASCII SO and handles the following bytes as
+usual character set.  However, when Cygwin recognizes an ASCII CAN
+character, it skips over the ASCII CAN and handles the following bytes as
 a UTF-8 character.  Thus, the filename is symmetrically converted back to
 UTF-16 and you can access the file.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Please be aware that this method is not entirely foolproof.
 In some character set combinations it might not work for certain native

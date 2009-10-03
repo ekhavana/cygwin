@@ -19,11 +19,31 @@ manual pages on the homepage of the
   "fr_FR.UTF-8"    language = french, territory = France, charset = UTF-8
   "ko_KR.eucKR"    language = korean, territory = South Korea, charset = eucKR
 </pre><p>
-And let's not forget the default locale called "C" or "POSIX"
-which basically only supports plain ASCII code.  If the aforementioned
-environment variables are not set, or set to "C" or "POSIX", you get the
-default ASCII-only behaviour.
-</p><p>
+At application startup, the application's locale is set to the default
+"C" or "POSIX" locale.  Under Cygwin, this locale defaults to the UTF-8
+character set.  If you want to stick to the "C" locale and only change to
+another charset, you can define this by setting one of the locale environment
+variables to "C.charset".  For instance</p><pre class="screen">
+  "C.ISO-8859-1"
+</pre><p>Windows uses the UTF-16 charset exclusively to store the names
+of any object used by the Operating System.  This is especially important
+with filenames.  Cygwin uses the setting of the locale environment variables
+<code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>, and <code class="envar">LANG</code>, to
+determine how to convert Windows filenames from their UTF-16 representation
+to the singlebyte or multibyte character set used by Cygwin.</p><p>
+The setting of the locale environment variables at process startup
+is effective for Cygwin's internal conversions to and from the Windows UTF-16
+object names for the entire lifetime of the current process.  Changing
+the environment variables to another value changes the way filenames are
+converted in subsequently started child processes, but not within the same
+process.</p><p>
+However, even if one of the locale environment variables is set to
+some other value than "C", this does <span class="emphasis"><em>only</em></span> affect
+how Cygwin itself converts filenames.  As the POSIX standard requires,
+it's the applications responsibility to activate that locale for its
+own purpose, typically by using the call</p><pre class="screen">
+  setlocale (LC_ALL, "");
+</pre><p>early in the application code.</p><p>
 Right now the language and territory, as well as the modifier, are not
 important to Cygwin, except to fix a single problem.  There's a class of
 characters in the Unicode character set, called the "CJK Ambiguous Width
@@ -32,7 +52,7 @@ wcwidth/wcswidth function is usually 1.  This is often a problem in
 East-Asian languages, which historically use character sets in which
 these characters have a width of 2.  Kind of explains why they are
 called "ambiguous"...</p><p>
-The problem has been fixed for now like this.  wcwidth/wcswidth usually
+The problem has been fixed like this.  wcwidth/wcswidth usually
 return 1 as the width of these characters.  However, if the language is
 specifed as "ja" (Japanese), "ko" (Korean), or "zh" (Chinese), wcwidth
 returns 2 for these characters.  Unfortunately this isn't correct in
@@ -40,32 +60,25 @@ all circumstances, so the user can specify the modifier "@cjknarrow",
 which modifies the behaviour of wcwidth/wcswidth to return 1 for the
 ambiguous width characters to return 1 even in those languages.</p><p>
 Other than that, the only important part so far is the character set.
+
 How does that work?</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-how"></a>How to set the locale</h3></div></div></div><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><p>
-The default locale is the "C" or "POSIX" locale.  In this locale, basically
-only ASCII characters are supported.  Even if one of the aforementioned
-environment variables are set to something else, it's the application's
-responsibility to call the function <code class="function">setlocale</code>,
-typically like this</p><pre class="screen">
-  setlocale (LC_ALL, "");
-</pre><p>to switch to another locale according to the settings of the
-internationalization environment variables.
-</p></li><li style="list-style-type: disc"><p>
+The default locale is the "C" or "POSIX" locale.  Under Cygwin this locale
+defaults to the UTF-8 character set.</p></li><li style="list-style-type: disc"><p>
 Assume that you've set one of the aforementioned environment variables to some
-valid POSIX locale value, other than "C" and "POSIX", and assume that you
-call an application which calls <code class="function">setlocale</code> as above.</p><p>Assume further that you're living in Japan.  You might want to use
-the language code "ja" and the territory "JP", thus setting, say,
-<code class="envar">LANG</code> to "ja_JP".  You didn't set a character set, so
-what will Cygwin use now?  Easy!  It will use the default Windows ANSI
-codepage of your system, if it's supported by Cygwin.  Hopefully Cygwin
-supports all relevant default ANSI codepages...</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>For a list of supported character sets, see
+valid POSIX locale value, other than "C" and "POSIX".  Assume further that
+you're living in Japan.  You might want to use the language code "ja" and the
+territory "JP", thus setting, say, <code class="envar">LANG</code> to "ja_JP".  You didn't
+set a character set, so what will Cygwin use now?  Easy!  It will use the
+default Windows ANSI codepage of your system, if it's supported by Cygwin.
+Hopefully Cygwin supports all relevant default ANSI codepages...</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>For a list of supported character sets, see
 <a class="xref" href="setup-locale.html#setup-locale-charsetlist" title="List of supported character sets">the section called &#8220;List of supported character sets&#8221;</a>
 </p></div></li><li style="list-style-type: disc"><p>
 You don't want to use the default Windows codepage as character set?
 In that case you have to specify the charset explicitly.  For instance,
-assume you're from Italy and don't want to use the default Windows codepage
-1252, but the more portable ISO-8859-15 character set.  What you can do is
-to set the <code class="envar">LANG</code> variable in the
-<code class="filename">C:\cygwin\Cygwin.bat</code> file which is the batch file
+assume you're from Italy and don't want to use the Italian default Windows
+ANSI codepage 1252, but the more portable ISO-8859-15 character set.
+What you can do, for instance, is to set the <code class="envar">LANG</code> variable
+in the <code class="filename">C:\cygwin\Cygwin.bat</code> file which is the batch file
 to start a Cygwin session from the "Cygwin" desktop shortcut.</p><pre class="screen">
   @echo off
 
@@ -74,38 +87,52 @@ to start a Cygwin session from the "Cygwin" desktop shortcut.</p><pre class="scr
   set LANG=it_IT.ISO-8859-15
   bash --login -i
 </pre></li><li style="list-style-type: disc"><p>
-Most singlebyte or doublebyte charsets have a disadvantage.  Windows
-filesystems use the Unicode character set in the UTF-16 encoding to store filename information.  Not all characters
+Last, but not least, most singlebyte or doublebyte charsets have a big
+disadvantage.  Windows filesystems use the Unicode character set in the
+UTF-16 encoding to store filename information.  Not all characters
 from the Unicode character set are available in a singlebyte or doublebyte
 charset.  While Cygwin has a workaround to access files with unusual
 characters (see <a class="xref" href="using-specialnames.html#pathnames-unusual" title="Filenames with unusual (foreign) characters">the section called &#8220;Filenames with unusual (foreign) characters&#8221;</a>), a better
-workaround is to use always the UTF-8 character set.  UTF-8 is the only
-multibyte character set which can represent <span class="emphasis"><em>every</em></span>
-Unicode character.</p><pre class="screen">
+workaround is to use always the UTF-8 character set.i</p><p><span class="emphasis"><em>UTF-8 is the only multibyte character set which can represent
+every Unicode character.</em></span></p><pre class="screen">
   set LANG=es_MX.UTF-8
 </pre><p>For a description of the Unicode standard, see the homepage of the
 <a class="ulink" href="http://www.unicode.org/" target="_top">Unicode Consortium</a>.
-</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems when using Locales</h3></div></div></div><p>
+</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-console"></a>The Windows Console character set</h3></div></div></div><p>Most of the time the Windows console is used to run Cygwin applications.
+While terminal emulations like <span class="command"><strong>xterm</strong></span> or
+<span class="command"><strong>mintty</strong></span> have a distinct way to set the character set
+used for in- and output, the Windows console hasn't such a way, since it's
+not an application in its own right.</p><p>This problem is solved in Cygwin as follows.  When a Cygwin
+process is started in a Windows console (either explicitly from cmd.exe,
+or implicitly by, for instance, clicking on the Cygwin desktop icon, or
+running the Cygwin.bat file), the Console character set is determined by the
+setting of the aforementioned internationalization environment variables,
+the same way as described in <a class="xref" href="setup-locale.html#setup-locale-how" title="How to set the locale">the section called &#8220;How to set the locale&#8221;</a>.
+</p><p>What is that good for?  Why not switch the console character set with
+the applications requirements?  After all, the application knows if it uses
+localization or not.  However, what if a non-localized application calls
+a remote application which itself is localized?  This can happen with
+<span class="command"><strong>ssh</strong></span> or <span class="command"><strong>rlogin</strong></span>.  Both commands don't
+have and don't need localization and they never call
+<code class="function">setlocale</code>.  Setting one of the internationalization
+environment variable to the same charset as the remote machine before
+starting <span class="command"><strong>ssh</strong></span> or <span class="command"><strong>rlogin</strong></span> fixes that
+problem.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems when using Locales</h3></div></div></div><p>
 You can set the above internationalization variables not only in
 <code class="filename">Cygwin.bat</code> or in the Windows environment, but also
 in your Cygwin shell on the fly, even switch to yet another character
 set, and yet another.  In bash for instance:</p><pre class="screen">
   <code class="prompt">bash$</code> export LC_CTYPE="nl_BE.UTF-8"
 </pre><p>However, here's a problem.  At the start of the first Cygwin process
-in a session, the Windows environment has to be converted from UTF-16 to
-some singlebyte or multibyte charset.  If the internationalization environment
-variable hasn't been set <span class="emphasis"><em>before</em></span> starting this process,
-Cygwin has to make an educated guess which charset to use to convert
-the environment itself.  The only reproducible way to do that in the absence
-of <code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>, or <code class="envar">LANG</code>,
-is to use the "C" locale.  The default conversion in the "C" locale
-used by Cygwin internally is UTF-8.  So, in the absence of any
-internationalization environment variable, the environment will be converted
-to UTF-8.</p><p>As long as the environment only contains ASCII characters, this is
+in a session, the Windows environment is converted from UTF-16 to UTF-8.
+The environment is another of the system objects stored in UTF-16 in
+Windows.</p><p>As long as the environment only contains ASCII characters, this is
 no problem at all.  But if it contains native characters, and you're planning
 to use, say, GBK, the environment will result in invalid characters in
 the GBK charset.  This would be especially a problem in variables like
-<code class="envar">PATH</code>.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Per POSIX, the name of an environment variable should only
+<code class="envar">PATH</code>.  To circumvent the worst problems, Cygwin converts
+the <code class="envar">PATH</code> environment variable to the charset set in the
+environment, if it's different from the UTF-8 charset.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Per POSIX, the name of an environment variable should only
 consist of valid ASCII characters, and only of uppercase letters, digits, and
 the underscore for maximum portablilty.</p></div><p>Symbolic links, too, may pose a problem when switching charsets on
 the fly.  A symbolic link contains the filename of the target file the
@@ -120,7 +147,13 @@ This behaviour is not different from the behaviour in other Operating
 Systems.  So, if you suddenly can't access a symlink anymore which
 worked all these years before, maybe it's because you switched to
 another character set.  This doesn't occur with symlinks created with
-Cygwin 1.7 or later.  </p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-missing"></a>What does not work?</h3></div></div></div><p>
+Cygwin 1.7 or later.  </p><p>Another problem you might encounter is that older versions of
+Windows did not install all charsets by default.  If you are running
+Windows XP or older, you can open the "Regional and Language Options"
+portion of the Control Panel, select the "Advanced" tab, and select
+entries from the "Code page conversion tables" list.  The following
+entries are useful to cygwin: 932/SJIS, 936/GBK, 949/EUC-KR, 950/Big5,
+20932/EUC-JP.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-missing"></a>What does not work?</h3></div></div></div><p>
 Except for <code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>,
 and <code class="envar">LANG</code>, all other LC_xxx environment variables,
 <code class="envar">LC_COLLATE</code>, <code class="envar">LC_MESSAGES</code>,
