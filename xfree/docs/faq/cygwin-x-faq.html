@@ -386,11 +386,25 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN535"
+HREF="cygwin-x-faq.html#AEN531"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
 >?
+Why do remote programs exit when you try to copy and paste?
+</A
+></DT
+><DT
+>6.3. <A
+HREF="cygwin-x-faq.html#AEN553"
+>I'm confused about the difference between trusted and untrested X11 forwarding.
+What does "Warning: untrusted X11 forwarding setup failed: xauth key data not generated" mean?
+</A
+></DT
+><DT
+>6.4. <A
+HREF="cygwin-x-faq.html#AEN564"
+>&#13;What does "Warning: no xauth data; using fake authentication data for X11 forwarding" mean?
 </A
 ></DT
 ></DL
@@ -1701,7 +1715,7 @@ CLASS="answer"
 >See <A
 HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 >Q: 6.1.</A
->.  See <A
+> and following.  See <A
 HREF="http://cygwin.com/ml/cygwin-xfree/2008-11/msg00154.html"
 TARGET="_top"
 >point 3 in this mail</A
@@ -2746,45 +2760,26 @@ CLASS="answer"
 > </B
 >A1:</P
 ><P
->OpenSSH 3.8 enables untrusted X11 forwarding by default when
-connecting to an ssh server that supports untrusted <A
-HREF="glossary.html#gloss-x11forwarding"
-><I
-CLASS="glossterm"
->X11Forwarding</I
-></A
->.
-Most ssh servers for GNU/Linux are versions of OpenSSH that do support
-untrusted X11Forwarding, so using OpenSSH 3.8 from Cygwin will result
-in a connection that uses untrusted X11Forwarding by default.  You will
-quickly notice that this is the case if most of your X applications
-are now killed when you try to copy and paste or if
-<B
-CLASS="command"
->xdpyinfo</B
-> returns only a fraction of the supported
-extensions that it does if run locally.</P
-><P
->It is easiest to just override untrusted X11Forwarding by passing
-<CODE
+>&#13;Try adding the <CODE
 CLASS="parameter"
->-Y</CODE
-> to <B
+>-v</CODE
+> argument to ssh, which often pinpoints the reason for a connection problem.
+</P
+><P
+>&#13;From the <B
 CLASS="command"
 >ssh</B
-> in place of
-<CODE
-CLASS="parameter"
->-X</CODE
->.  The <CODE
-CLASS="parameter"
->-Y</CODE
-> does the
-same thing as <CODE
-CLASS="parameter"
->-X</CODE
->, but it enables trusted X11Forwarding 
-for the current connection.</P
+> man-page :
+<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>-v Verbose mode.  Causes ssh to print debugging messages about its progress.
+This is helpful in debugging connection, authentication, and configuration problems.
+Multiple -v options increase the verbosity.  The maximum is 3.</I
+></SPAN
+>
+</P
 ></DIV
 ><DIV
 CLASS="answer"
@@ -3046,7 +3041,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN535"
+NAME="AEN531"
 ></A
 ><B
 >6.2. </B
@@ -3054,6 +3049,7 @@ NAME="AEN535"
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
 >?
+Why do remote programs exit when you try to copy and paste?
 </P
 ></DIV
 ><DIV
@@ -3061,6 +3057,51 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>This question should be obsolete since the security extension
+is now disabled</P
+><P
+>OpenSSH 3.8 enables untrusted X11 forwarding by default when
+connecting to an ssh server that supports untrusted <A
+HREF="glossary.html#gloss-x11forwarding"
+><I
+CLASS="glossterm"
+>X11Forwarding</I
+></A
+>.
+Most ssh servers for GNU/Linux are versions of OpenSSH that do support
+untrusted X11Forwarding, so using OpenSSH from Cygwin will result
+in a connection that uses untrusted X11Forwarding by default.</P
+><P
+> You will
+quickly notice that this is the case if most of your X applications
+are now killed when you try to copy and paste or if
+<B
+CLASS="command"
+>xdpyinfo</B
+> returns only a fraction of the supported
+extensions that it does if run locally.</P
+><P
+>It is easiest to just override untrusted X11Forwarding by passing
+<CODE
+CLASS="parameter"
+>-Y</CODE
+> to <B
+CLASS="command"
+>ssh</B
+> in place of
+<CODE
+CLASS="parameter"
+>-X</CODE
+>.  The <CODE
+CLASS="parameter"
+>-Y</CODE
+> does the
+same thing as <CODE
+CLASS="parameter"
+>-X</CODE
+>, but it enables trusted X11Forwarding
+for the current connection.</P
+><P
 >Starting with OpenSSH 3.8 you will need to set
 <SPAN
 CLASS="QUOTE"
@@ -3093,7 +3134,104 @@ CLASS="parameter"
 See also <A
 HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 >Q: 6.1.</A
-> 
+>
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="AEN553"
+></A
+><B
+>6.3. </B
+>I'm confused about the difference between trusted and untrested X11 forwarding.
+What does "Warning: untrusted X11 forwarding setup failed: xauth key data not generated" mean?
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+The warning means that ssh is going to use <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>trusted</I
+></SPAN
+> X11 forwarding
+because <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>untrusted</I
+></SPAN
+> X11 forwarding depends on the security extension,
+which isn't built into the Xserver and has been disabled by default upstream.
+</P
+><P
+>&#13;Trusted X11 forwarding means that you trust the server that you wish to
+ssh into is not using any keyloggers, screenshot utilities, packet
+sniffers, or anything else to hijack your connection.
+Such programs could be run by a malicious or compromised root user on
+the ssh server, or under your account if it was compromised on the ssh server.
+The X server will allow remote clients to do whatever a local client would
+be able to do to your X session.
+</P
+><P
+>&#13;So why is this disabled?
+Untrusted X11 forwarding was meant to be a way to allow logins to
+unknown or insecure systems.  It generates a cookie with xauth and uses
+the security extension to limit what the remote client is allowed to do.
+But this is widely considered to be not useful, because the security
+extension uses an arbitrary and limited access control policy, which
+results in a lot of applications not working correctly and what is
+really a false sense of security.
+See this mail <A
+HREF="http://cygwin.com/ml/cygwin-xfree/2008-11/msg00154.html"
+TARGET="_top"
+>for more on the subject</A
+>.
+</P
+><P
+>&#13;(Words adapted from an email by Yaakov Selkowitz)
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="AEN564"
+></A
+><B
+>6.4. </B
+>
+What does "Warning: no xauth data; using fake authentication data for X11 forwarding" mean?
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Unless you started the server with the <CODE
+CLASS="parameter"
+>-auth</CODE
+> argument
+(typically by using <B
+CLASS="command"
+>startx</B
+>) this warning is expected and
+can safely be ignored.
 </P
 ></DIV
 ></DIV
@@ -5114,7 +5252,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN1014"
+NAME="AEN1039"
 ></A
 ><P
 ><B
