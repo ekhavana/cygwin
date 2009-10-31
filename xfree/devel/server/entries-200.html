@@ -1,0 +1,257 @@
+<h4>Release 1.6.2-1</h4>
+<table>
+<tbody>
+<tr><td>Released: 08 Jul 2009 18:10:20 -0500</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Always use an authorization cookie for internal clients (fixes clipboard integration in XDMCP sessions)</li>
+<li>Ensure WM_STATE atom exists in multiwindow mode (fixes BadAtom errors with Solaris X clients)</li>
+<li>Fix issue with X window menus sometimes appearing beneath the window which activated it</li>
+<li>The -logverbose option now affects the verbosity of both the logfile and the console output
+<a href="http://sourceware.org/bugzilla/show_bug.cgi?id=10431">[bug 10431]</a></li>
+<li>Add timestamps to logfile messages
+<a href="http://sourceware.org/bugzilla/show_bug.cgi?id=10431">[bug 10431]</a></li>
+</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.6.2-1</h4>
+<table>
+<tbody>
+<tr><td>Released: 08 Jul 2009 18:10:20 -0500</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Update to upstream version 1.6.2</li>
+<li>Use bash login shell to execute commands started via the Xwin tray icon menu
+<a href="http://sourceware.org/bugzilla/show_bug.cgi?id=10351">[bug 10351]</a></li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.6.1.902-1</h4>
+<table>
+<tbody>
+<tr><td>Released: 29 Jun 2009 20:36:52 -0500</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Update to upstream version 1.6.1.902
+<ul>
+<li>This version includes an upstream change which may fix the previously reported problems with X clients on Solaris terminating on the first keypress
+<a href="http://sourceware.org/bugzilla/show_bug.cgi?id=9780">[bug 9780]</a>.
+We would appreciate if anyone previously having such issues would report if this is fixed or not.
+</li>
+</ul>
+</li>
+<li>Clipboard integration is now enabled by default, with a '-noclipboard' option for disabling it.  The '-clipboard' option, although no longer necessary, is still accepted<li>
+<li>Fixed the 20-second startup delay caused by inet6 listener failure
+<a href="http://cygwin.com/ml/cygwin-xfree/2009-06/msg00075.html">(bug report)</a>
+</li>
+<li>Fixed a crash caused by network interfaces with no broadcast address
+<a href="http://cygwin.com/ml/cygwin-xfree/2009-06/msg00071.html">(bug report)</a>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.6.0-1</h4>
+<table>
+<tbody>
+<tr><td>Released: 05 Feb 2009 13:54:11 -0600</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Update to upstream version 1.6.0.  Please note some major upstream changes in this version:
+<ul>
+<li>XEvIE extension support has been removed.  Therefore, libXevie and libxcb-xevie are deprecated and will soon be removed</li>
+<li>In windowed (desktop) mode, -br (black background with mouse cursor hidden until XDefineCursor() is first called) is now the default.  The old behaviour can be obtained with the -retro flag</li>
+</ul>
+<li>Added Hebrew keyboard layout detection</li>
+<li>Added more clipboard debugging messages</li>
+<li>Fixed numeric keypad input</li>
+<li>Reverted an upstream clipboard change that wreaked havoc with other applications monitoring the clipboard (e.g. MS Office Clipboard, VNC)
+[<a href="http://bugs.freedesktop.org/show_bug.cgi?id=5735">bug 5735</a>]</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.5.3-7</h4>
+<table>
+<tbody>
+<tr><td>Released:  22 Feb 2009 12:32:45 -0600</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>
+<li>Added Xinerama support in some modes
+(<a href="http://cygwin.com/ml/cygwin-xfree-announce/2009-02/msg00007.html">more details here</a>)</li>
+<li>Fixed Latin American keyboard layout detection</li>
+<li>Remainder of Xming clipboard patches</li>
+<li>Additional clipboard debugging messages</li>
+<li>Fix for flickering when resizing in multiwindow mode
+<a href="http://sourceware.org/bugzilla/show_bug.cgi?id=9840">[bug 9840]</a>
+</li>
+<li>Removed references to obsolete -co flag from Xserver manpage</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.5.3-6</h4>
+<table>
+<tbody>
+<tr><td>Released: 05 Feb 2009 13:54:11 -0600</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>This release was rebuilt with libXfont-1.3.4 to fix the reported
+problems with the builtin fonts</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.5.3-5</h4>
+<table>
+<tbody>
+<tr><td>Released: 21 Jan 2009 22:39:00 -0600</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Restored Windows-WM ("-mwextwm") support for use with xwinwm</li>
+<li>Allow pointer warping to work in multiwindow and rootless modes</li>
+<li>Fixed keyboard layouts for nation-specific locales</li>
+<li>Fixed -silent-dup-error option</li>
+<li>Force keyboard state onto Virtual Core Keyboard on server startup</li>
+<li>Generate scan codes for fake keypresses from speech recognizers (Paul Loewenstein)</li>
+<li>Improve mouse tracking for moving/resizing undecorated windows</li>
+<li>Reduce mouse polling interval to 50m</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.5.3-4</h4>
+<table>
+<tbody>
+<tr><td>Released: 24 Nov 2008 16:21:31 -0600</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Potential fix for crashing of remote GLX clients which were built for earlier versions of GLX</li>
+<li>Fixed and restored the NumLock/CapsLock synchronization</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.5.3-3</h4>
+<table>
+<tbody>
+<tr><td>Released: 20 Nov 2008 20:56:53 -0600</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Log changes:
+<ul>
+<li>In addition to the XWin logs now being found in /var/log (as of the
+last release), now a separate log is created for each display.  The
+default log location is now /var/log/XWin.0.log, when run as "X :1" the
+log will be /var/log/XWin.1.log, etc.</li>
+<li>The -logfile flag argument may contain "%s" (w/o quotations) to have
+the display number automatically substituted; e.g. "XWin :2 -logfile
+~/tmp/XWin.%s.log" will create ~/tmp/XWin.2.log</li>
+<li>The verbosity of the logfile and the console output should now match</li>
+</li>
+</ul>
+<li>The messages about /tmp/.X11-unix creation and ownership are silenced</li>
+<li>Multiwindow mode fix: Windows which remember their placement don't drift with each instance</li>
+<li>Multihead fixes:
+<ul>
+<li>Windows don't appear offscreen when the primary monitor is not upper-left</li>
+<li>XWin dialogs are placed near the tray icon so that they don't end up
+in the middle of the virtual desktop, possibly split between two monitors</li>
+</li>
+</ul>
+<li>Numerous clipboard fixes, including a fix for clipboard startup with XDMCP</li>
+<li>Built-in fonts are used in addition to server-side fonts.  The default
+font has changed as a result, but the full selection of fonts is still
+available if installed</li>
+<li>Temporary disabled the NumLock/CapsLock synchronization due to several
+bug reports.</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.5.3-2</h4>
+<table>
+<tbody>
+<tr><td>Released: 14 Nov 2008 02:48:29 -0600</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Additional fixes to multiwindow mode: Qt4 program icons display
+correctly; window geometry take window decorations into account; window
+decorations do not appear and immediately disappear when they shouldn't
+be shown at all</li>
+<li>Moved system.XWinrc to /etc/X11.  This file is meant only as a sane
+default; personal customizations should be made in ~/.XWinrc</li>
+<li>Moved XWin.log to /var/log</li>
+<li>Fixed up XWin and XWinrc man pages</li>
+<li>Added patch to fix build when Xv is disabled and videoproto not installed</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+
+
+<h4>Release 1.5.3-1</h4>
+<table>
+<tbody>
+<tr><td>Released: 11 Nov 2008 10:42:45 -0600</td></tr>
+<tr><td>Changes:</td></tr>
+<tr>
+<td>
+<ul>
+<li>Update to X.Org R7.4</li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
