@@ -40,12 +40,17 @@ to use these files with native Win32 applications.</p></div><div class="sect2" l
 compatibility.  When trying to create files with trailing dots or spaces,
 all of them are removed before the file is created.  This restriction only
 affects native Win32 applications.  Cygwin applications can create and
-access files with trailing dots and spaces without problems.</p><p>Some characters are disallowed in filenames on Windows filesystems:</p><pre class="screen">
+access files with trailing dots and spaces without problems.</p><p>Additionally, some characters are disallowed in filenames on Windows
+filesystems.  These forbidden characters are the ASCII control characters
+from ASCII value 1 to 31, plus the following charcters which have a special
+menaing in the Win32 API:</p><pre class="screen">
   "   *   :   &lt;   &gt;   ?   |   \
 </pre><p>Cygwin can't fix this, but it has a method to workaround this
 restriction.  All of the above characters, except for the backslash,
 are converted to special UNICODE characters in the range 0xf000 to 0xf0ff
-(the "Private use area") when creating or accessing files.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-unusual"></a>Filenames with unusual (foreign) characters</h3></div></div></div><p> Windows filesystems use the Unicode character set in the UTF-16
+(the "Private use area") when creating or accessing files.</p><p>The backslash has to be exempt from this conversion, because Cygwin
+accepts Win32 filenames including backslashes as path separators on input. 
+Converting backslashes using the above method would make this impossible.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-unusual"></a>Filenames with unusual (foreign) characters</h3></div></div></div><p> Windows filesystems use the Unicode character set in the UTF-16
 encoding to store filename information.  If you don't use the UTF-8
 character set (see <a class="xref" href="setup-locale.html" title="Internationalization">the section called &#8220;Internationalization&#8221;</a>) then there's a
 chance that a filename is using one or more characters which have no
@@ -101,10 +106,14 @@ the installer will change the aforementioned registry value to 0, too.  So, if
 you have SFU installed, there's some chance that the registry value is already
 set to case sensitivity.
 </p></div><p>After you set this registry value to 0, Cygwin will be case-sensitive
-by default on NTFS and NFS filesystems.  Be aware that using two filenames
-which only differ by case might result in some weird interoperability
-issues with native Win32 applications.  You're using case-sensitivity 
-at your own risk.  You have been warned!</p><p>Even if you use case-sensitivity, it might be feasible to switch to
+by default on NTFS and NFS filesystems.  However, there are limitations: 
+while two <span class="bold"><strong>programs</strong></span> <code class="filename">Abc.exe</code>
+and <code class="filename">aBc.exe</code> can be created and accessed like other files,
+starting applications is still case-insensitive due to Windows limitations
+and so the program you try to launch may not be the one actually started.  Also,
+be aware that using two filenames which only differ by case might
+result in some weird interoperability issues with native Win32 applications.  
+You're using case-sensitivity at your own risk.  You have been warned! </p><p>Even if you use case-sensitivity, it might be feasible to switch to
 case-insensitivity for certain paths for better interoperability with
 native Win32 applications (even if it's just Windows Explorer).  You can do
 this on a per-mount point base, by using the "posix=0" mount option in

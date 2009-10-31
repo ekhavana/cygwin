@@ -184,7 +184,9 @@
   The setting of the environment variables $LANG, $LC_ALL or $LC_CTYPE will
   be used.  For instance, setting $LANG to "de_DE.ISO-8859-15" before
   starting a Cygwin session will use the ISO-8859-15 character set in
-  the entire session.  UTF-8 is supported as well, as in "en_US.UTF-8".
+  the entire session.  The default charset is "UTF-8", even in the
+  default locale "C".  The default locale in the absence of one of the
+  aforementioned environment variables is "C.UTF-8".
 
   The full list of supported character sets: "ASCII", "ISO-8859-x" with x
   in 1-16, except 12, "UTF-8", Windows codepages "CPxxx", with xxx in
@@ -284,4 +286,12 @@
   delete, to support the toolchain in implementing full C++ standards
   conformance when working with shared libraries.
 
+- Different Cygwin installations in different paths can be run in parallel
+  without knowing of each other.  The path of the Cygwin DLL used in a
+  process is a key used when creating IPC objects.  So different Cygwin
+  DLLs are running in different namespaces.
+
+- Each Cygwin DLL stores its path and installation key in the registry.
+  This allows troubleshooting of problems which could be a result of having
+  multiple concurrent Cygwin installations.
 </pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="highlights.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="overview.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="setup-net.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Highlights of Cygwin Functionality&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Chapter&#160;2.&#160;Setting Up Cygwin</td></tr></table></div></body></html>

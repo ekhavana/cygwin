@@ -25,7 +25,8 @@ character set.  If you want to stick to the "C" locale and only change to
 another charset, you can define this by setting one of the locale environment
 variables to "C.charset".  For instance</p><pre class="screen">
   "C.ISO-8859-1"
-</pre><p>Windows uses the UTF-16 charset exclusively to store the names
+</pre><p>The default locale in the absence of the aforementioned locale
+environment variables is "C.UTF-8".</p><p>Windows uses the UTF-16 charset exclusively to store the names
 of any object used by the Operating System.  This is especially important
 with filenames.  Cygwin uses the setting of the locale environment variables
 <code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>, and <code class="envar">LANG</code>, to
@@ -43,7 +44,10 @@ how Cygwin itself converts filenames.  As the POSIX standard requires,
 it's the applications responsibility to activate that locale for its
 own purpose, typically by using the call</p><pre class="screen">
   setlocale (LC_ALL, "");
-</pre><p>early in the application code.</p><p>
+</pre><p>early in the application code.  Again, so that this doesn't get
+lost:  If the application calls setlocale as above, and there is none
+of the important locale variables set in the environment, the locale
+is set to the default locale, which is "C.UTF-8".</p><p>
 Right now the language and territory, as well as the modifier, are not
 important to Cygwin, except to fix a single problem.  There's a class of
 characters in the Unicode character set, called the "CJK Ambiguous Width

@@ -584,7 +584,9 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
   The setting of the environment variables $LANG, $LC_ALL or $LC_CTYPE will
   be used.  For instance, setting $LANG to "de_DE.ISO-8859-15" before
   starting a Cygwin session will use the ISO-8859-15 character set in
-  the entire session.  UTF-8 is supported as well, as in "en_US.UTF-8".
+  the entire session.  The default charset is "UTF-8", even in the
+  default locale "C".  The default locale in the absence of one of the
+  aforementioned environment variables is "C.UTF-8".
 
   The full list of supported character sets: "ASCII", "ISO-8859-x" with x
   in 1-16, except 12, "UTF-8", Windows codepages "CPxxx", with xxx in
@@ -684,6 +686,14 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
   delete, to support the toolchain in implementing full C++ standards
   conformance when working with shared libraries.
 
+- Different Cygwin installations in different paths can be run in parallel
+  without knowing of each other.  The path of the Cygwin DLL used in a
+  process is a key used when creating IPC objects.  So different Cygwin
+  DLLs are running in different namespaces.
+
+- Each Cygwin DLL stores its path and installation key in the registry.
+  This allows troubleshooting of problems which could be a result of having
+  multiple concurrent Cygwin installations.
 </pre></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="setup-net"></a>Chapter 2. Setting Up Cygwin</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="#internet-setup">Internet Setup</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-download">Download Source</a></span></dt><dt><span class="sect2"><a href="#setup-dir">Selecting an Install Directory</a></span></dt><dt><span class="sect2"><a href="#setup-localdir">Local Package Directory</a></span></dt><dt><span class="sect2"><a href="#setup-connection">Connection Method</a></span></dt><dt><span class="sect2"><a href="#setup-mirror">Choosing Mirrors</a></span></dt><dt><span class="sect2"><a href="#setup-packages">Choosing Packages</a></span></dt><dt><span class="sect2"><a href="#setup-progress">Download and Installation Progress</a></span></dt><dt><span class="sect2"><a href="#setup-icons">Icons</a></span></dt><dt><span class="sect2"><a href="#setup-postinstall">Post-Install Scripts</a></span></dt><dt><span class="sect2"><a href="#setup-troubleshooting">Troubleshooting</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-env">Environment Variables</a></span></dt><dt><span class="sect1"><a href="#setup-maxmem">Changing Cygwin's Maximum Memory</a></span></dt><dt><span class="sect1"><a href="#setup-locale">Internationalization</a></span></dt><dd><dl><dt><span class="sect2"><a href="#setup-locale-ov">Overview</a></span></dt><dt><span class="sect2"><a href="#setup-locale-how">How to set the locale</a></span></dt><dt><span class="sect2"><a href="#setup-locale-console">The Windows Console character set</a></span></dt><dt><span class="sect2"><a href="#setup-locale-problems">Potential Problems when using Locales</a></span></dt><dt><span class="sect2"><a href="#setup-locale-missing">What does not work?</a></span></dt><dt><span class="sect2"><a href="#setup-locale-charsetlist">List of supported character sets</a></span></dt></dl></dd><dt><span class="sect1"><a href="#ntsec">Using Windows security in Cygwin</a></span></dt><dd><dl><dt><span class="sect2"><a href="#ntsec-common">Overview</a></span></dt><dt><span class="sect2"><a href="#ntsec-files">File permissions</a></span></dt><dt><span class="sect2"><a href="#ntsec-ids">Special values of user and group ids</a></span></dt><dt><span class="sect2"><a href="#ntsec-mapping">The POSIX permission mapping leak</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-overview">Switching the user context</a></span></dt><dt><span class="sect2"><a href="#ntsec-logonuser">Switching the user context with password authentication</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd1">Switching the user context without password, Method 1: Create a token from scratch</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd2">Switching the user context without password, Method 2: LSA authentication package</a></span></dt><dt><span class="sect2"><a href="#ntsec-nopasswd3">Switching the user context without password, Method 3: With password</a></span></dt><dt><span class="sect2"><a href="#ntsec-setuid-impl">Switching the user context, how does it all fit together?</a></span></dt></dl></dd><dt><span class="sect1"><a href="#setup-files">Customizing bash</a></span></dt></dl></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="internet-setup"></a>Internet Setup</h2></div></div></div><p>To install the Cygwin net release, go to <a class="ulink" href="http://cygwin.com/" target="_top">http://cygwin.com/</a> and click on <a class="ulink" href="http://cygwin.com/setup.exe" target="_top">"Install Cygwin Now!"</a>.  This will
 download a GUI installer called <span class="command"><strong>setup.exe</strong></span> which can
 be run to download a complete cygwin installation via the internet.
@@ -1007,7 +1017,8 @@ character set.  If you want to stick to the "C" locale and only change to
 another charset, you can define this by setting one of the locale environment
 variables to "C.charset".  For instance</p><pre class="screen">
   "C.ISO-8859-1"
-</pre><p>Windows uses the UTF-16 charset exclusively to store the names
+</pre><p>The default locale in the absence of the aforementioned locale
+environment variables is "C.UTF-8".</p><p>Windows uses the UTF-16 charset exclusively to store the names
 of any object used by the Operating System.  This is especially important
 with filenames.  Cygwin uses the setting of the locale environment variables
 <code class="envar">LC_ALL</code>, <code class="envar">LC_CTYPE</code>, and <code class="envar">LANG</code>, to
@@ -1025,7 +1036,10 @@ how Cygwin itself converts filenames.  As the POSIX standard requires,
 it's the applications responsibility to activate that locale for its
 own purpose, typically by using the call</p><pre class="screen">
   setlocale (LC_ALL, "");
-</pre><p>early in the application code.</p><p>
+</pre><p>early in the application code.  Again, so that this doesn't get
+lost:  If the application calls setlocale as above, and there is none
+of the important locale variables set in the environment, the locale
+is set to the default locale, which is "C.UTF-8".</p><p>
 Right now the language and territory, as well as the modifier, are not
 important to Cygwin, except to fix a single problem.  There's a class of
 characters in the Unicode character set, called the "CJK Ambiguous Width
@@ -2186,12 +2200,17 @@ to use these files with native Win32 applications.</p></div><div class="sect2" l
 compatibility.  When trying to create files with trailing dots or spaces,
 all of them are removed before the file is created.  This restriction only
 affects native Win32 applications.  Cygwin applications can create and
-access files with trailing dots and spaces without problems.</p><p>Some characters are disallowed in filenames on Windows filesystems:</p><pre class="screen">
+access files with trailing dots and spaces without problems.</p><p>Additionally, some characters are disallowed in filenames on Windows
+filesystems.  These forbidden characters are the ASCII control characters
+from ASCII value 1 to 31, plus the following charcters which have a special
+menaing in the Win32 API:</p><pre class="screen">
   "   *   :   &lt;   &gt;   ?   |   \
 </pre><p>Cygwin can't fix this, but it has a method to workaround this
 restriction.  All of the above characters, except for the backslash,
 are converted to special UNICODE characters in the range 0xf000 to 0xf0ff
-(the "Private use area") when creating or accessing files.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-unusual"></a>Filenames with unusual (foreign) characters</h3></div></div></div><p> Windows filesystems use the Unicode character set in the UTF-16
+(the "Private use area") when creating or accessing files.</p><p>The backslash has to be exempt from this conversion, because Cygwin
+accepts Win32 filenames including backslashes as path separators on input. 
+Converting backslashes using the above method would make this impossible.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-unusual"></a>Filenames with unusual (foreign) characters</h3></div></div></div><p> Windows filesystems use the Unicode character set in the UTF-16
 encoding to store filename information.  If you don't use the UTF-8
 character set (see <a class="xref" href="#setup-locale" title="Internationalization">the section called &#8220;Internationalization&#8221;</a>) then there's a
 chance that a filename is using one or more characters which have no
@@ -2247,10 +2266,14 @@ the installer will change the aforementioned registry value to 0, too.  So, if
 you have SFU installed, there's some chance that the registry value is already
 set to case sensitivity.
 </p></div><p>After you set this registry value to 0, Cygwin will be case-sensitive
-by default on NTFS and NFS filesystems.  Be aware that using two filenames
-which only differ by case might result in some weird interoperability
-issues with native Win32 applications.  You're using case-sensitivity 
-at your own risk.  You have been warned!</p><p>Even if you use case-sensitivity, it might be feasible to switch to
+by default on NTFS and NFS filesystems.  However, there are limitations: 
+while two <span class="bold"><strong>programs</strong></span> <code class="filename">Abc.exe</code>
+and <code class="filename">aBc.exe</code> can be created and accessed like other files,
+starting applications is still case-insensitive due to Windows limitations
+and so the program you try to launch may not be the one actually started.  Also,
+be aware that using two filenames which only differ by case might
+result in some weird interoperability issues with native Win32 applications.  
+You're using case-sensitivity at your own risk.  You have been warned! </p><p>Even if you use case-sensitivity, it might be feasible to switch to
 case-insensitivity for certain paths for better interoperability with
 native Win32 applications (even if it's just Windows Explorer).  You can do
 this on a per-mount point base, by using the "posix=0" mount option in
@@ -2750,13 +2773,18 @@ interchangeably; for example, <code class="literal">--help</code> and
 command-line utilities support the <code class="literal">--help</code> and
 <code class="literal">--version</code> options. 
 </p><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygcheck"></a>cygcheck</h3></div></div></div><pre class="screen">
-Usage: cygcheck PROGRAM [ -v ] [ -h ]
-       cygcheck -c [ PACKAGE ... ] [ -d ]
-       cygcheck -s [ -r ] [ -v ] [ -h ]
+Usage: cygcheck [-v] [-h] PROGRAM
+       cygcheck -c [-d] [PACKAGE]
+       cygcheck -s [-r] [-v] [-h]
        cygcheck -k
-       cygcheck -f FILE [ FILE ... ]
-       cygcheck -l [ PACKAGE ... ]
+       cygcheck -f FILE [FILE]...
+       cygcheck -l [PACKAGE]...
        cygcheck -p REGEXP
+       cygcheck --delete-orphaned-installation-keys
+       cygcheck --enable-unique-object-names Cygwin-DLL
+       cygcheck --disable-unique-object-names Cygwin-DLL
+       cygcheck --show-unique-object-names Cygwin-DLL
+       cygcheck -h
 List system information, check installed packages, or query package database.
 
 At least one command option or a PROGRAM is required, as shown above.
@@ -2773,6 +2801,19 @@ At least one command option or a PROGRAM is required, as shown above.
   -l, --list-package   list contents of PACKAGE (or all packages if none given)
   -p, --package-query  search for REGEXP in the entire cygwin.com package
                        repository (requires internet connectivity)
+  --delete-orphaned-installation-keys
+                       Delete installation keys of old, now unused
+                       installations from the registry.  Requires the right
+                       to change the registry.
+  --enable-unique-object-names Cygwin-DLL
+  --disable-unique-object-names Cygwin-DLL
+  --show-unique-object-names Cygwin-DLL
+                       Enable, disable, or show the setting of the
+                       \"unique object names\" setting in the Cygwin DLL
+                       given as argument to this option.  The DLL path must
+                       be given as valid Windows(!) path.
+                       See the users guide for more information.
+                       If you don't know what this means, don't change it.
   -v, --verbose        produce more verbose output
   -h, --help           annotate output with explanatory comments when given
                        with another command, otherwise print this help
@@ -2890,7 +2931,52 @@ information about your system for troubleshooting when requested.
 When asked to run this command save the output so that you can email it,
 for example:</p><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>cygcheck -s -v -r -h &gt; cygcheck_output.txt</code></strong>
-</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygpath"></a>cygpath</h3></div></div></div><pre class="screen">
+</pre><p>
+Each Cygwin DLL stores its path and installation key in the registry.
+This allows troubleshooting of problems which could be a result of having
+multiple concurrent Cygwin installations.  However, if you're experimenting
+a lot with different Cygwin installation paths, your registry could 
+accumulate a lot of old Cygwin installation entries for which the
+installation doesn't exist anymore.  To get rid of these orphaned registry
+entries, use the <span class="command"><strong>cygcheck --delete-orphaned-installation-keys</strong></span>
+command.</p><p>
+Each Cygwin DLL generates a key value from its installation path.  This
+value is not only stored in the registry, it's also used to generate
+global object names used for interprocess communication.   This keeps
+different Cygwin installations separate.  Processes running under a
+Cygwin DLL installed in C:\cygwin don't see processes running under a
+Cygwin DLL installed in C:\Program Files\cygwin.  This allows
+running multiple versions of Cygwin DLLs without these versions to
+interfere with each other, or to run small third-party installations
+for a specific purpose independently from a Cygwin net distribution.
+</p><p>
+For debugging purposes it could be desired that the various Cygwin DLLs
+use the same key, independently from their installation paths.  If the
+DLLs have different versions, trying to run processes under these DLLs
+concurrently will result in error messages like this one:</p><pre class="screen">
+*** shared version mismatch detected - 0x8A88009C/0x75BE0074.
+This problem is probably due to using incompatible versions of the cygwin DLL.
+Search for cygwin1.dll using the Windows Start-&gt;Find/Search facility
+and delete all but the most recent version.  The most recent version *should*
+reside in x:\\cygwin\\bin, where 'x' is the drive on which you have
+installed the cygwin distribution.  Rebooting is also suggested if you
+are unable to find another cygwin DLL.
+</pre><p>
+To disable the usage of a unique key value of a certain Cygwin DLL, use
+the <span class="command"><strong>cygcheck --disable-unique-object-names Cygwin-DLL</strong></span>
+command.  <code class="literal">Cygwin-DLL</code> is the Windows path (*not* a 
+Cygwin POSIX path) to the DLL for which you want to disable this feature.
+Note that you have to stop all Cygwin processes running under this DLL,
+before you're allowed to change this setting.  For instance, run
+<span class="command"><strong>cygcheck</strong></span> from a DOS command line for this purpose.</p><p>To re-enable the usage of a unique key, use the
+<span class="command"><strong>cygcheck --enable-unique-object-names Cygwin-DLL</strong></span> command.
+This option has the same characteristics as the
+<code class="literal">--disable-unique-object-names</code> option</p><p>Finally, you can use
+<span class="command"><strong>cygcheck --show-unique-object-names Cygwin-DLL</strong></span> to find out
+if the given Cygwin DLL use unique object names or not.  In contrast to the
+<code class="literal">--disable-...</code> and <code class="literal">--enable-...</code> options,
+the <code class="literal">--show-unique-object-names</code> option also works for
+Cygwin DLLs which are currently in use.</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="cygpath"></a>cygpath</h3></div></div></div><pre class="screen">
 Usage: cygpath (-d|-m|-u|-w|-t TYPE) [-f FILE] [OPTION]... NAME...
        cygpath [-c HANDLE] 
        cygpath [-ADHOPSW] 
