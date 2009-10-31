@@ -102,7 +102,7 @@ HREF="using-clipboard-integration.html"
 ><DT
 ><A
 HREF="using-shared-memory.html"
->Shared Memory Support (MIT-SHM Extension)</A
+>Shared Memory Support</A
 ></DT
 ><DT
 ><A
@@ -126,9 +126,9 @@ NAME="using-starting"
 ></H1
 ><P
 >There are several methods of starting the Cygwin/X X Server
-with a startup script that optionally starts initial clients and loads
-keyboard modifier maps.  Several startup methods are described
-below.</P
+with a startup script that optionally starts initial clients and performs
+X server configuration (for example, loading a keyboard modifier map).
+Several startup methods are described below.</P
 ><DIV
 CLASS="sect2"
 ><H2
@@ -138,27 +138,30 @@ NAME="using-starting-bat"
 >startxwin.bat</A
 ></H2
 ><P
->Use a MS-DOS batch file as
-the startup script.  An example <TT
+>Use a MS-DOS batch file as the startup script.</P
+><P
+>&#13;An example <TT
 CLASS="filename"
 >startxwin.bat</TT
 > is
-included in <TT
+included in the <TT
 CLASS="filename"
->xorg-xinit</TT
->, which is
-installed by following the instructions in <A
+>xinit</TT
+> package
+(installed by following the instructions in <A
 HREF="setup-cygwin-x-installing.html"
 >the Section called <I
 >Installing Cygwin/X</I
 > in Chapter 2</A
->.  Run
+>),
+which starts the X server in multiwindow mode along with a single X terminal.
+Run
 <TT
 CLASS="filename"
 >/usr/bin/startxwin.bat</TT
-> by 
+> by
 using the "XWin Server" shortcut under "Cygwin-X" on the Start Menu,
-or starting it from a MS-DOS shell, 
+or starting it from a MS-DOS shell,
 or double-clicking it in Windows Explorer.</P
 ></DIV
 ><DIV
@@ -174,21 +177,18 @@ NAME="using-starting-sh"
 CLASS="command"
 >sh</B
 >
-shell script as the startup script.  An example
+shell script as the startup script.</P
+><P
+>An example
 <TT
 CLASS="filename"
 >startxwin.sh</TT
-> is included in
+> is included in the
 <TT
 CLASS="filename"
->xorg-xinit</TT
->, which is installed
-by following the instructions in <A
-HREF="setup-cygwin-x-installing.html"
->the Section called <I
->Installing Cygwin/X</I
-> in Chapter 2</A
->. 
+>xinit</TT
+> package, which
+starts the X server in multiwindow mode along with a single X terminal.
 Run
 <TT
 CLASS="filename"
@@ -253,7 +253,7 @@ CLASS="filename"
 >~/.xinitrc</TT
 > from the template in <TT
 CLASS="filename"
->/etc/X11/xinit/</TT
+>/etc/X11/xinit/xinitrc</TT
 > and then customize
 <TT
 CLASS="filename"
@@ -269,6 +269,7 @@ WIDTH="100%"
 CLASS="screen"
 >&#13;Username@CygwinHost ~
 $ cp /etc/X11/xinit/xinitrc ~/.xinitrc
+[edit ~/.xinitrc as desired]
 </PRE
 ></TD
 ></TR

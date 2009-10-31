@@ -70,7 +70,7 @@ NAME="website"
 >Chapter 4. Web Site Maintenance</H1
 ><P
 >&#13;The Cygwin/X web site is stored in sourceware.org CVS.
-The CVS root is ext:sourceware.org:/cvs/cygwin/htdocs/xfree.
+The CVSROOT is :ext:sourceware.org:/cvs/cygwin/, and the path is htdocs/xfree/
 </P
 ><DIV
 CLASS="sect1"
@@ -92,9 +92,10 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;$ cvs co ext:user@sourceware.org:/cvs/cygwin/htdocs/xfree 
+>&#13;$ export CVS_RSH=ssh
+$ cvs -z9 -d :ext:user@sourceware.org:/cvs/cygwin/ co htdocs/xfree
 [...]
-$ cd xfree/docs
+$ cd htdocs/xfree/docs
 $ path-to-cygwin-x-doc/configure --enable-hardcopy
 $ make
 $ cvs up

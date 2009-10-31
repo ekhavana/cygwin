@@ -54,9 +54,9 @@ Jon Turney
         [27]Packaging a Cygwin/X Distribution
         [28]Reference Documentation
 
-              [29]Online documents not available in print
-              [30]Online versions of documents that are in-print
-              [31]Print versions of X Window System manuals
+              [29]X.Org documents
+              [30]Further reading
+              [31]X server porting documents
 
    3. [32]Documentation
 
@@ -540,19 +540,19 @@ Required Packages for Building
    installation; do not unselect any of these automatically selected
    packages.
      * Required tools:
-       autoconf, automake, binutils, bison, bzip2, diffutils, fileutils,
-       findutils, flex, gawk, gcc, git, libtool, make, patch, pkg-config,
-       sed, subversion, tar
+       autoconf, automake, binutils, bison, bzip2, cygport, diffutils,
+       fileutils, findutils, flex, gawk, gcc, git, libtool, make, patch,
+       pkg-config, sed, subversion, tar
      * Required protocol headers:
-       bigreqsproto, damageproto, evieext, fixesproto, fontsproto,
-       glproto, inputproto, kbproto, randrproto, recordproto, renderproto,
-       resourceproto, scrnsaverproto, xcmiscproto, xextproto,
+       bigreqsproto, compositeproto, damageproto, evieext, fixesproto,
+       fontsproto, glproto, inputproto, kbproto, randrproto, recordproto,
+       renderproto, resourceproto, scrnsaverproto, xcmiscproto, xextproto,
        xineramaproto, xproto
      * Required development libraries:
        libfontenc-devel, libfreetype2-devel, libGL-devel,
        libpixman1-devel, libX11-devel, libXau-devel, libXdmcp-devel,
-       libXext-devel, libXfont-devel, libxkbfile-devel, minires-devel,
-       openssl-devel, zlib
+       libXext-devel, libXfont-devel, libXinerama-devel, libxkbfile-devel,
+       minires-devel, openssl-devel, zlib
      * Other miscellaneous required pacakges :
        xorg-util-macros, xtrans
 
@@ -705,7 +705,7 @@ $ make
 
        Standard build is now complete.
 
-     Note: You wish to consult the .cygport file for the current
+     Note: You may wish to consult the .cygport file for the current
      ./configure flags used in distributed packages
 
      Note: The unpacked source occupies approximately 80MB of disk space.
@@ -1122,109 +1122,63 @@ $ cygport xorg-server-x.x.x-x.cygport all
 
 Reference Documentation
 
-   X developer reference documentation. See also the xorg-docs package.
+   X developer reference documentation.
      __________________________________________________________________
 
-Online documents not available in print
+X.Org documents
 
-   The following documents are not generally available in print. All of
-   these documents print out fine. Be aware that there are several
-   versions of these documents, located on different servers, that do not
-   print out correctly. For example, the first 20 or so pages will print
-   fine, but the last 500 pages will be gibberish.
+   Offical X.Org documentation.
+
+   Print versions of various X Window System Manuals also exist.
      * [100]Definition of the Porting Layer for the X V11 Sample Server
-       (179 KiB, 69 pages)
-       1994 - Covers up to X11R6; essential
-     * [101]Design of eXcursion Version 2 for Windows, Windows NT, and
+       Essential reading.
+       The current version of this document is available in the xorg-docs
+       package.
+     * [101]Xlib - C Language X Interface
+       The current version of this document is available in the libX11
+       runtime package.
+     * [102]X Protocol
+     * [103]X Inter-Client Communication Conventions
+     * [104]X Logical Font Description Conventions
+     __________________________________________________________________
+
+Further reading
+
+   Other documents of interest.
+     * [105]The X Selection Mechanism or, How to Cut and Paste in 1000
+       lines or more (40 KiB, 13 pages)
+       1990 - Good information/tutorial about the X selection mechanism.
+       From [106]Papers and Talks by Keith Packard converted to PDF
+     __________________________________________________________________
+
+X server porting documents
+
+   Other documents about X server porting.
+     * [107]Strategies for Porting the X V11 Sample Server (77 KiB, 22
+       pages)
+       1998 - Mainly of historical interest now, but might give you some
+       insight
+     * [108]Godzilla's Guide to Porting the X V11 Sample Server (38 KiB,
+       11 pages)
+       1990 - Old and thin, but relevant
+     * [109]Design of eXcursion Version 2 for Windows, Windows NT, and
        Windows 95 (301 KiB, 14 pages)
        1996 - Discusses some of the difficulties in creating an X Server
        for Microsoft Windows. More geared towards implementing a server
        that translates X raster ops into Windows GDI raster ops. Cygwin/X
-       does not currently, as of 2001-06-06, translate raster ops, though
-       the framework to do so is in place, and development on raster op
-       translation will be resumed in the not so distant future.
-     * [102]Strategies for Porting the X V11 Sample Server (77 KiB, 22
-       pages)
-       1988 - Might give you some insight
-     * [103]Godzilla's Guide to Porting the X V11 Sample Server (38 KiB,
-       11 pages)
-       1990 - Old and thin, but relevant
-     * [104]Writing a Graphics Device Driver and DDX for the Digital UNIX
+       does not currently translate raster ops, though the framework to do
+       so is in place, and development on raster op translation could be
+       resumed in the future.
+     * [110]Writing a Graphics Device Driver and DDX for the Digital UNIX
        X Server (602 KiB, 272 pages)
        1997 - Contains some good hints in the DDX section
-     * [105]The X Selection Mechanism or, How to Cut and Paste in 1000
-       lines or more (40 KiB, 13 pages)
-       1990 - Good information/tutorial about the X selection mechanism
-     __________________________________________________________________
-
-Online versions of documents that are in-print
-
-   Online versions contain roughly the same information as the books, but
-   the online versions are free. :) Some of these documents have graphics
-   that appear out of place or grainy when viewing them on a computer
-   display; most of these graphics are fine when printed.
-     * [106]X Window System - The Complete Reference to Xlib, X Protocol,
-       ICCCM, and XFLD for X11R4 (1.5 MiB PDF, 711 pages)
-       1992 - The original X Window System book.
-     * [107]Xlib - C Language X Interface - X11R6.4 (1.1 MiB PDF, 466
-       pages)
-       1996 - Updated version of the Xlib section in the original X Window
-       System book.
-     * [108]X Protocol - X11R6 (327 KiB PDF, 176 pages)
-       1994 - Updated version of the X Protocol section in the original X
-       Window System book.
-     * [109]X Inter-Client Communication Conventions - X11R6 (166 KiB PDF,
-       70 pages)
-       1994 - Updated version of the X Inter-Client Communication
-       Conventions section in the original X Window System book.
-     * [110]X Logical Font Description Conventions - X11R6 (67 KiB PDF, 37
-       pages)
-       1994 - Updated version of the X Logical Font Description
-       Conventions section in the original X Window System book.
-     __________________________________________________________________
-
-Print versions of X Window System manuals
-
-   All books listed below are in-print and available at [111]amazon.com
-   through the provided links.
-     * [112]X Window System - The Complete Reference to Xlib, X Protocol,
-       ICCCM, and XFLD for X11R5 (Paperback, 1000 pages)
-       1992 - $59.95 - Original X Window System book. This book has been
-       updated, its scope has been broadened, and it has been split into
-       three parts, which are listed below. For your information, I own
-       this book, as I cannot afford the three books listed below; I find
-       that I rarely need to reference this book, but when I do reference
-       this book the information that I need is recent enough to answer my
-       question.
-     * [113]X Window System - Core Libraries and Standards - X11R6.1
-       (Paperback, 700 pages)
-       1996 - $59.95 - Part 1 of 3 replacing original X Window System
-       book. Covers Xlib - C Language Interface, Inter-Client
-       Communication Conventions Manual, X Logical Font Description, Xlib
-       Functions and Protocol Requests, X Font Cursors, Extensions,
-       Compatibility Functions, Bitmap Distribution Format, Compound Text
-       Encoding, and X Consortium Character Set Names
-     * [114]X Window System - Core and Extension Protocols - X11R6.1
-       (Paperback, 700 pages)
-       1997 - $69.95 - Part 2 of 3 replacing original X Window System
-       book. Covers X Window System Protocol, X Display Manager Control
-       Protocol, X11 Input Extension Protocol, X Font Service Protocol,
-       Inter-Client Exchange Protocol, Input Method Protocol, X Image
-       Extension Protocol, KEYSYM Encoding, and Protocol Enoding
-     * [115]X Window System - Extension Libraries - X11R6.1 (Paperback,
-       400 pages)
-       1997 - $59.95 - Part 3 of 3 replacing original X Window System
-       book. Covers X11 Nonrectangular Window Shape Extension Library, X11
-       Input Extension Library, Inter-Client Exchange Library, X Session
-       Management Library, X Image Extension Library, XTEST Extension
-       Library, and XC-MISC Extension Library
      __________________________________________________________________
 
 Chapter 3. Documentation
 
 Overview
 
-   Cygwin/X documentation is written in XML according to the [116]DocBook
+   Cygwin/X documentation is written in XML according to the [111]DocBook
    document type definition (DTD). These XML input files are then compiled
    using an autoconf and automake build system. We currently build the
    following output formats: HTML, PDF, PS, RTF, and TXT.
@@ -1248,11 +1202,14 @@ Source from CVS
 $ cvs -d :pserver:anoncvs@sourceware.org:/cvs/cygwin-xfree login
 CVS password: <hit return>
 $ cvs -d :pserver:anoncvs@sourceware.org:/cvs/cygwin-xfree co doc
+[output as files are checked out]
+$ (cd doc && autoreconf)
+[output as autoconfiguration scripts are regenerated]
 
    You should now have the sources in an directory called doc.
 
    If you just want to look at the Cygwin/X documentation source, use the
-   [117]CVSweb interface to the Cygwin/X documentation tree.
+   [112]CVSweb interface to the Cygwin/X documentation tree.
      __________________________________________________________________
 
 Setting Up a DocBook Build Environment
@@ -1269,7 +1226,7 @@ Required Packages for building documentation
 
      Note: A useful, if slightly dated, introduction to setting up a
      docbook build environment and editing tools can be found in the
-     [118]SGML for Windows NT: Setting up a free SGML editing and
+     [113]SGML for Windows NT: Setting up a free SGML editing and
      publishing system on Windows NT/Cygwin document.
      __________________________________________________________________
 
@@ -1326,11 +1283,11 @@ Packaging a Documentation Distribution
 
    Follow these instructions to build a Cygwin/X documentation source code
    distribution:
-    1. Edit the version tag in the third line of the file configure.in to
+    1. Edit the version tag in the third line of the file configure.ac to
        indicated a new version, or to add a branch name to the
        distribution. The line containing the version tag should look like:
 
-AM_INIT_AUTOMAKE(cygwin-x-doc, 1.0.0)
+AC_INIT(cygwin-x-doc, 1.0.0)
 
     2. Open a shell on your documentation build host; you should see a
        window like the following:
@@ -1360,8 +1317,8 @@ $ make distcheck
 
 Chapter 4. Web Site Maintenance
 
-   The Cygwin/X web site is stored in sourceware.org CVS. The CVS root is
-   ext:sourceware.org:/cvs/cygwin/htdocs/xfree.
+   The Cygwin/X web site is stored in sourceware.org CVS. The CVSROOT is
+   :ext:sourceware.org:/cvs/cygwin/, and the path is htdocs/xfree/
      __________________________________________________________________
 
 Updating the documentation on the web site
@@ -1369,9 +1326,10 @@ Updating the documentation on the web site
    A simple way of updating the documentation from the cywin-x-doc package
    shown on the web site is to build the documentation directly into a CVS
    checkout of web-site and then check it in.
-$ cvs co ext:user@sourceware.org:/cvs/cygwin/htdocs/xfree
+$ export CVS_RSH=ssh
+$ cvs -z9 -d :ext:user@sourceware.org:/cvs/cygwin/ co htdocs/xfree
 [...]
-$ cd xfree/docs
+$ cd htdocs/xfree/docs
 $ path-to-cygwin-x-doc/configure --enable-hardcopy
 $ make
 $ cvs up
@@ -1438,7 +1396,7 @@ B
 
    Bitmap (X)
           X pixel map with bit depth equal to one. X pixel maps of bit
-          depth not equal to one are called [119]pixmaps.
+          depth not equal to one are called [114]pixmaps.
 
 C
 
@@ -1486,7 +1444,7 @@ G
 
    git (git)
           git is an open source distributed version control system. More
-          information can be found at the [120]git project homepage.
+          information can be found at the [115]git project homepage.
 
 M
 
@@ -1499,10 +1457,10 @@ M
 O
 
    Offscreen Framebuffer
-          Essentially a [121]bitmap, in the Windows sense, of size and
+          Essentially a [116]bitmap, in the Windows sense, of size and
           color format that can be displayed on the screen. An offscreen
           framebuffer may be identical in size and color format to the
-          [122]primary framebuffer, but this is not always required.
+          [117]primary framebuffer, but this is not always required.
 
    OS Layer (OS)
           X Server layer that depends on the operating system; but not the
@@ -1512,18 +1470,18 @@ P
 
    Pixmap
           X pixel map with bit depth not equal to one. X pixel maps of bit
-          depth one are called [123]bitmaps.
+          depth one are called [118]bitmaps.
 
    Primary Framebuffer
-          The block of memory, essentially a [124]bitmap, that describes
+          The block of memory, essentially a [119]bitmap, that describes
           what is currently being displayed on the screen. Any updates to
           the primary framebuffer will be displayed on the screen after
           the next screen refresh.
 
    Privates
           Additional information associated with internal X Server
-          structures, such as [125]colormaps, [126]GCs, [127]pixmaps, or
-          [128]screens.
+          structures, such as [120]colormaps, [121]GCs, [122]pixmaps, or
+          [123]screens.
 
 S
 
@@ -1534,8 +1492,8 @@ S
           may have several screens.
 
    Shadow
-          X Server shadow layer that allows [129]FB to draw to an
-          offscreen framebuffer and occasionally call a [130]DDX function
+          X Server shadow layer that allows [124]FB to draw to an
+          offscreen framebuffer and occasionally call a [125]DDX function
           that transfers the updated regions to the screen.
 
 X
@@ -1554,7 +1512,7 @@ X
           use XDMCP to login to an X session running on an engineering
           department computer from your dorm room.
 
-          See Also: [131]X Display Manager.
+          See Also: [126]X Display Manager.
      __________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -1879,7 +1837,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [132]http://www.gnu.org/copyleft/.
+   [127]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -1946,9 +1904,9 @@ References
   26. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-cross-build
   27. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-distribution
   28. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-reference
-  29. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#online-docs
-  30. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#online-docs-inprint
-  31. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#inprint-manuals
+  29. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#xorg-docs
+  30. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#unoffical-docs
+  31. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#x-server-porting-docs
   32. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#documentation
   33. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-overview
   34. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#docs-obtaining-source
@@ -2017,36 +1975,31 @@ References
   97. http://cygwin.com/mirrors.html
   98. http://cygwin.com/mirrors.html
   99. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#prog-build-native
- 100. http://www.msu.edu/~huntharo/xwin/docs/xwindows/ddx.pdf
- 101. http://www.msu.edu/~huntharo/xwin/docs/xwindows/eXcursion2.pdf
- 102. http://www.msu.edu/~huntharo/xwin/docs/xwindows/strat.pdf
- 103. http://www.msu.edu/~huntharo/xwin/docs/xwindows/gdz.pdf
- 104. http://www.msu.edu/~huntharo/xwin/docs/xwindows/xikdoc.pdf
+ 100. http://www.x.org/releases/X11R7.5/doc/core/Xserver-spec.pdf
+ 101. http://www.x.org/docs/X11/xlib.pdf
+ 102. http://www.x.org/docs/XProtocol/proto.pdf
+ 103. http://www.x.org/docs/ICCCM/icccm.pdf
+ 104. http://www.x.org/docs/XLFD/xlfd.pdf
  105. http://www.msu.edu/~huntharo/xwin/docs/xwindows/selection.pdf
- 106. http://www.msu.edu/~huntharo/xwin/docs/xwindows/XWINSYS.pdf
- 107. http://www.msu.edu/~huntharo/xwin/docs/xwindows/XLIB.pdf
- 108. http://www.msu.edu/~huntharo/xwin/docs/xwindows/PROTO.pdf
- 109. http://www.msu.edu/~huntharo/xwin/docs/xwindows/ICCCM.pdf
- 110. http://www.msu.edu/~huntharo/xwin/docs/xwindows/XLFD.pdf
- 111. http://amazon.com/
- 112. http://www.amazon.com/exec/obidos/ASIN/1555580882/
- 113. http://www.amazon.com/exec/obidos/ASIN/1555581544/
- 114. http://www.amazon.com/exec/obidos/ASIN/155558148X/
- 115. http://www.amazon.com/exec/obidos/ASIN/1555581463/
- 116. http://docbook.org/
- 117. http://sourceware.org/cgi-bin/cvsweb.cgi/doc/?cvsroot=cygwin-xfree
- 118. http://web.archive.org/web/20050320030737/http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
- 119. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-pixmap
- 120. http://git.or.cz/
- 121. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-win32
- 122. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-primary-framebuffer
- 123. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-x
- 124. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-win32
- 125. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-colormap
- 126. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-gc
- 127. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-pixmap
- 128. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-screen
- 129. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-fb-layer
- 130. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-ddx-layer
- 131. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-xdm
- 132. http://www.gnu.org/copyleft/
+ 106. http://keithp.com/~keithp/talks/
+ 107. http://www.msu.edu/~huntharo/xwin/docs/xwindows/strat.pdf
+ 108. http://www.msu.edu/~huntharo/xwin/docs/xwindows/gdz.pdf
+ 109. http://www.msu.edu/~huntharo/xwin/docs/xwindows/eXcursion2.pdf
+ 110. http://www.msu.edu/~huntharo/xwin/docs/xwindows/xikdoc.pdf
+ 111. http://docbook.org/
+ 112. http://sourceware.org/cgi-bin/cvsweb.cgi/doc/?cvsroot=cygwin-xfree
+ 113. http://web.archive.org/web/20050320030737/http://ourworld.compuserve.com/homepages/hoenicka_markus/cygbook1.html
+ 114. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-pixmap
+ 115. http://git.or.cz/
+ 116. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-win32
+ 117. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-primary-framebuffer
+ 118. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-x
+ 119. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-bitmap-win32
+ 120. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-colormap
+ 121. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-gc
+ 122. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-pixmap
+ 123. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-screen
+ 124. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-fb-layer
+ 125. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-ddx-layer
+ 126. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/cg/dump.html#gloss-xdm
+ 127. http://www.gnu.org/copyleft/
