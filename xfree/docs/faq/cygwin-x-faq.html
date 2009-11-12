@@ -386,7 +386,7 @@ HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 ></DT
 ><DT
 >6.2. <A
-HREF="cygwin-x-faq.html#AEN531"
+HREF="cygwin-x-faq.html#AEN547"
 >Why do remote programs crash with <SPAN
 CLASS="errorname"
 >X Error of failed request: BadAtom</SPAN
@@ -396,14 +396,14 @@ Why do remote programs exit when you try to copy and paste?
 ></DT
 ><DT
 >6.3. <A
-HREF="cygwin-x-faq.html#AEN553"
+HREF="cygwin-x-faq.html#AEN569"
 >I'm confused about the difference between trusted and untrusted X11 forwarding.
 What does "Warning: untrusted X11 forwarding setup failed: xauth key data not generated" mean?
 </A
 ></DT
 ><DT
 >6.4. <A
-HREF="cygwin-x-faq.html#AEN564"
+HREF="cygwin-x-faq.html#AEN580"
 >&#13;What does "Warning: no xauth data; using fake authentication data for X11 forwarding" mean?
 </A
 ></DT
@@ -1456,17 +1456,72 @@ CLASS="answer"
 ><P
 ><B
 > </B
->The cause of this problem is not well understood at present.  Possible causes:</P
+>
+A1:
+</P
+><P
+>&#13;<TT
+CLASS="filename"
+>/tmp</TT
+> resides on a FAT filesystem
+</P
+><P
+>Start the server with <CODE
+CLASS="parameter"
+>-nolock</CODE
+> (e.g. if you use <TT
+CLASS="filename"
+>startxwin.bat</TT
+> or <TT
+CLASS="filename"
+>startxwin.sh</TT
+> to start the server, add <CODE
+CLASS="parameter"
+>-nolock</CODE
+> to the <B
+CLASS="command"
+>XWin</B
+> line in that script; if you use <B
+CLASS="command"
+>xinit</B
+> or <B
+CLASS="command"
+>startx</B
+>, run it as <B
+CLASS="command"
+>xinit -- -nolock</B
+> or  <B
+CLASS="command"
+>startx -- -nolock</B
+>)</P
+><P
+>&#13;You should really consider updating the filesystem to NTFS using Microsoft's <B
+CLASS="command"
+>convert.exe</B
+> tool.
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+A2:
+</P
+><P
+>&#13;For reasons which are not well understood at present, this error has also been seen where
+<TT
+CLASS="filename"
+>/tmp</TT
+> resides on a NTFS filesystem.
+</P
+><P
+>&#13;Possible causes:
+</P
 ><OL
 COMPACT="COMPACT"
 TYPE="1"
-><LI
-><P
-> <TT
-CLASS="filename"
->/tmp</TT
-> resides on a FAT filesystem</P
-></LI
 ><LI
 ><P
 >Bad permissions on <TT
@@ -1534,7 +1589,9 @@ then renaming it to the proper name (by hard linking it under the correct name, 
 it from the temporary name). If this rename fails it attempts to read the existing
 lock file to determine the pid of an already running server.
 
-The failure
+The FAT filesystem does not support hardlinks so this operation cannot succeed.
+
+On NFTS filesystems, the failure
 case appears to be that lock file was created successfully, but the rename
 failed, despite the fact that no old lock file exists, which we then fail
 to read (hence the error message).
@@ -3041,7 +3098,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN531"
+NAME="AEN547"
 ></A
 ><B
 >6.2. </B
@@ -3144,7 +3201,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN553"
+NAME="AEN569"
 ></A
 ><B
 >6.3. </B
@@ -3209,7 +3266,7 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="AEN564"
+NAME="AEN580"
 ></A
 ><B
 >6.4. </B
@@ -5252,7 +5309,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN1039"
+NAME="AEN1055"
 ></A
 ><P
 ><B

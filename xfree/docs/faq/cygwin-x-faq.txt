@@ -392,11 +392,26 @@ Questions and Answers
 
    3.4. Fatal server error: Can't read lock file /tmp/.X0-lock
 
-   The cause of this problem is not well understood at present. Possible
-   causes:
-    1. /tmp resides on a FAT filesystem
-    2. Bad permissions on /tmp
-    3. Not having administrator rights
+   A1:
+
+   /tmp resides on a FAT filesystem
+
+   Start the server with -nolock (e.g. if you use startxwin.bat or
+   startxwin.sh to start the server, add -nolock to the XWin line in that
+   script; if you use xinit or startx, run it as xinit -- -nolock or
+   startx -- -nolock)
+
+   You should really consider updating the filesystem to NTFS using
+   Microsoft's convert.exe tool.
+
+   A2:
+
+   For reasons which are not well understood at present, this error has
+   also been seen where /tmp resides on a NTFS filesystem.
+
+   Possible causes:
+    1. Bad permissions on /tmp
+    2. Not having administrator rights
 
    Possible workarounds:
     1. Try starting the server with -nolock (e.g. if you use startxwin.bat
@@ -410,9 +425,11 @@ Questions and Answers
    proper name (by hard linking it under the correct name, then unlinking
    it from the temporary name). If this rename fails it attempts to read
    the existing lock file to determine the pid of an already running
-   server. The failure case appears to be that lock file was created
-   successfully, but the rename failed, despite the fact that no old lock
-   file exists, which we then fail to read (hence the error message).
+   server. The FAT filesystem does not support hardlinks so this operation
+   cannot succeed. On NFTS filesystems, the failure case appears to be
+   that lock file was created successfully, but the rename failed, despite
+   the fact that no old lock file exists, which we then fail to read
+   (hence the error message).
 
    3.5. My favourite font has gone! The font Emacs uses is just boxes
 
@@ -2003,9 +2020,9 @@ References
   50. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-bash-8bit
   51. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#remote
   52. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-ssh-no-x11forwarding
-  53. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN531
-  54. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN553
-  55. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN564
+  53. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN547
+  54. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN569
+  55. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#AEN580
   56. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#xdmcp
   57. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-xdmcp-no-valid-address
   58. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/faq/dump.html#q-audit-client-rejected
