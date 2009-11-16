@@ -402,6 +402,8 @@ we know at least one descriptor is ready.  So select returns, after
 polling all of the file descriptors one last time.</p></div></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin 1.7</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-os"></a>OS related changes</h3></div></div></div><pre class="screen">
 - Windows 95, 98 and Me are not supported anymore.  The new Cygwin 1.7 DLL
   will not run on any of these systems.
+
+- Add support for Windows 7 and Windows Server 2008 R2.
 </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-file"></a>File Access related changes</h3></div></div></div><pre class="screen">
 - Mount points are no longer stored in the registry.  Use /etc/fstab
   and /etc/fstab.d/$USER instead.  Mount points created with mount(1)
@@ -578,7 +580,8 @@ polling all of the file descriptors one last time.</p></div></div><div class="se
 
 - Support up to 128 raw disk drives /dev/sda - /dev/sddx.
 
-- New API: cfmakeraw, posix_openpt.
+- New API: cfmakeraw, get_avphys_pages, get_nprocs, get_nprocs_conf,
+  get_phys_pages, posix_openpt.
 </pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-posix"></a>Other POSIX related changes</h3></div></div></div><pre class="screen">
 - A lot of character sets are supported now via a call to setlocale().
   The setting of the environment variables $LANG, $LC_ALL or $LC_CTYPE will
@@ -2202,8 +2205,8 @@ all of them are removed before the file is created.  This restriction only
 affects native Win32 applications.  Cygwin applications can create and
 access files with trailing dots and spaces without problems.</p><p>Additionally, some characters are disallowed in filenames on Windows
 filesystems.  These forbidden characters are the ASCII control characters
-from ASCII value 1 to 31, plus the following charcters which have a special
-menaing in the Win32 API:</p><pre class="screen">
+from ASCII value 1 to 31, plus the following characters which have a special
+meaning in the Win32 API:</p><pre class="screen">
   "   *   :   &lt;   &gt;   ?   |   \
 </pre><p>Cygwin can't fix this, but it has a method to workaround this
 restriction.  All of the above characters, except for the backslash,
