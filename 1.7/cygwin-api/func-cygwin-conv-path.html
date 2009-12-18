@@ -5,8 +5,7 @@
 or, vice versa, Win32 paths in <em class="parameter"><code>from</code></em> to POSIX paths
 in <em class="parameter"><code>to</code></em>.  <em class="parameter"><code>what</code></em>
 defines the direction of this conversion and can be any of the below
-values.  <em class="parameter"><code>size</code></em> is the size of the buffer pointed
-to by <em class="parameter"><code>to</code></em> in bytes.</p><pre class="programlisting">
+values.</p><pre class="programlisting">
   CCP_POSIX_TO_WIN_A      /* from is char *posix, to is char *win32       */
   CCP_POSIX_TO_WIN_W,     /* from is char *posix, to is wchar_t *win32    */
   CCP_WIN_A_TO_POSIX,     /* from is char *win32, to is char *posix       */
@@ -18,16 +17,17 @@ relative paths in relative notation.  Creating absolute paths is the
 default.</p><pre class="programlisting">
   CCP_ABSOLUTE = 0,       /* Request absolute path (default).             */
   CCP_RELATIVE = 0x100    /* Request to keep path relative.               */
-</pre><p>If <em class="parameter"><code>size</code></em> is 0,
-<code class="function">cygwin_conv_path</code> just returns the required buffer
-size in bytes.  Otherwise, it returns 0 on success, or -1 on error and
-errno is set to one of the below values.</p><pre class="programlisting">
+</pre><p><em class="parameter"><code>size</code></em> is the size of the buffer pointed to
+by <em class="parameter"><code>to</code></em> in bytes.  If <em class="parameter"><code>size</code></em>
+is 0, <code class="function">cygwin_conv_path</code> just returns the required
+buffer size in bytes.  Otherwise, it returns 0 on success, or -1 on
+error and errno is set to one of the below values.</p><pre class="programlisting">
     EINVAL        what has an invalid value.
     EFAULT        from or to point into nirvana.
     ENAMETOOLONG  the resulting path is longer than 32K, or, in case
                   of what == CCP_POSIX_TO_WIN_A, longer than MAX_PATH.
     ENOSPC        size is less than required for the conversion.
-</pre><div class="example"><a name="id316087"></a><p class="title"><b>Example&#160;2.1.&#160;Example use of cygwin_conv_path</b></p><div class="example-contents"><pre class="programlisting">
+</pre><div class="example"><a name="id316084"></a><p class="title"><b>Example&#160;2.1.&#160;Example use of cygwin_conv_path</b></p><div class="example-contents"><pre class="programlisting">
 
 #include &lt;sys/cygwin.h&gt;
 
