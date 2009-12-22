@@ -15,25 +15,32 @@
 <table width="85%">
 <tr>
 <td align="left">
-<h3><center>What Is Cygwin?</center></h1>
-Cygwin is a Linux-like environment for Windows.
+<h3><center>NEW Cygwin 1.7.1 just released!</center></h3>
+<p>Please note that the <b>update</b> from Cygwin 1.5.x to Cygwin 1.7.x might
+require some <b>manual changes</b> afterwards.  Most notably the mount point
+storage has been moved out of the registry into files.  User mount points
+are <b>NOT</b> copied into the new user-specific /etc/fstab.d/$USER file.
+Rather, every user has to call the <b>/bin/copy-user-registry-fstab</b>
+shell script once after the update.  <b>PLEASE</b> read the new
+<a href="cygwin-ug-net/index.html">User's Guide</a> before upgrading your
+Cygwin installation to 1.7.  You're avoiding trouble.</p>
+
+<h3><center>What Is Cygwin?</center></h3>
+<p>Cygwin is a Linux-like environment for Windows.
 It consists of two parts:
 <li>A DLL (cygwin1.dll) which acts as a Linux API emulation layer providing
 substantial Linux API functionality.
-<li>A collection of tools which provide Linux look and feel.
+<li>A collection of tools which provide Linux look and feel.</p>
 
 <p>The Cygwin DLL currently works with all recent, commercially released
 x86 32 bit and 64 bit versions of Windows, with the exception of Windows
 CE.</p>
 
 <p>Note that the official support for Windows 95, Windows 98, and Windows Me
-will be discontinued with the
-<a href="#beta-test"><b>next major version (1.7)</b></a> of Cygwin, which is
-in <a href="#beta-test"><b>beta testing</b></a> right now.  Note that
-Windows 7 and later will only be supported starting with the
-<a href="#beta-test">1.7</a> version of Cygwin.</p>
+has been discontinued with the latest Cygwin major release 1.7.  For users
+who are still running one of these legacy versions of Windows, see <a href="#win-9x">below</a>.</p>
 
-<h3><center>What Isn't Cygwin?</center></h1>
+<h3><center>What Isn't Cygwin?</center></h3>
 <li>Cygwin is <b>not</b> a way to run native linux apps on Windows.  You have
 to rebuild your application <em>from source</em> if you want it to run on Windows.
 <li>Cygwin is <b>not</b> a way to magically make native Windows apps aware of UNIX &reg;
@@ -52,7 +59,7 @@ if you want to take advantage of Cygwin functionality.
 <td width="8%" align="left">or</td>
 <td width="30%"><font size=-1><a href="packages/">find</a> where a package or file lives in the Cygwin release.</font></td></tr>
 <tr><td height=4 colspan=5></td></tr>
-<tr align=center><td colspan=5><p>Latest Cygwin DLL release version is <a href="http://cygwin.com/ml/cygwin-announce/2008-06/msg00014.html">1.5.25-15</a></td></tr>
+<tr align=center><td colspan=5><p>Latest Cygwin DLL release version is <a href="http://cygwin.com/ml/cygwin-announce/2009-12/msg000XX.html">1.7.1-1</a></td></tr>
 </table>
 <hr noshade size=1>
 
@@ -102,62 +109,13 @@ program will update your system with any new package releases.</p>
 
 <tr>
 <td align=left>
-<center><a name="beta-test"><h3>Cygwin release 1.7 in BETA testing</h3></a></center>
-<p>
-<b>NOTE:</b> We're in <b>beta-testing</b> for the new Cygwin
-<b>release 1.7</b>.  This new release will come with <a href="http://cygwin.com/1.7/cygwin-ug-net/ov-new1.7.html"><b>many changes</b></a>
-and a whole bunch of <a href="http://cygwin.com/1.7/cygwin-ug-net/ov-new1.7.html"><b>new features</b></a>.</p>
-
-<p>If you would like to participate in the testing, just download
-the <a href="http://cygwin.com/setup-1.7.exe"><b>new setup-1.7.exe</b></a>
-and use that setup tool to install Cygwin 1.7.  Please note that Cygwin
-1.7 will <b>NOT</b> run anymore on Windows 95, 98 or Me.</p>
-
-<p>We also have a new User's Guide for 1.7, which is currently located at
-<a href="http://cygwin.com/1.7/cygwin-ug-net/cygwin-ug-net.html">http://cygwin.com/1.7/cygwin-ug-net/cygwin-ug-net.html</a>.</p>
-
-<p>We also have new matching API documentation located at
-<a href="http://cygwin.com/1.7/cygwin-api/cygwin-api.html">http://cygwin.com/1.7/cygwin-api/cygwin-api.html</a>.</p>
-
-<p>And, last but not least, we have a new FAQ, though very likely not quite
-complete since we still don't know what exactly <b>is</b> a FAQ related to
-Cygwin 1.7: <a href="http://cygwin.com/1.7/faq/faq.html">http://cygwin.com/1.7/faq/faq.html</a>.</p>
-
-<p>Every couple of days the Beta release 1.7.0 is updated with a version
-including the latest bugfixes and changes.  Announcements for these updates
-are sent to the 
-<a href="http://cygwin.com/lists.html#cygwin">Cygwin mailing list</a> and the
-<a href="http://cygwin.com/lists.html#cygwin">Cygwin-Announce mailing list</a>.</p>
-
-<p>The official 1.7.1 release should go public in late November or early December 2009.</p>
-
-<p>Please keep in mind that this is a <b>TEST</b> release.  Don't use in
-critical production environments.  Nevertheless I'd like to encourage
-everyone to give 1.7 a try.  Due to internal changes it is possible to
-install a 1.7 release in parallel to a 1.5 release and even run 1.7
-processes in parallel to 1.5 processes.  The processes will not know
-about each other!  Any try to interact between 1.7-based and 1.5-based
-processes will lead to, at least, funny results.</p>
-
-<p>To install a 1.7 release in parallel to a 1.5 release, all you have
-to do is to choose another root directory (for instance: C:\cygwin-1.7)
-in setup-1.7's "Choose Installation Directory" dialog.</p>
-
-<p><b>NOTE</b>: Due to the way setup-1.7 works, you have to change the directory
-right the first time you visit this dialog!  If you pressed the "Next"
-button and then "Back" again, it's already too late and setup-1.7 will
-create a broken 1.7 install.  If you pressed "Next" by mistake, exit
-setup-1.7 and start it again.</p>
-
-<p>Please report bugs and problems to
-<a href="http://cygwin.com/lists.html#cygwin">the Cygwin mailing list</a> and,
-<b>thanks for your participation</b>.
-</p>
-
+<a name="win-9x"></a>
+<p>Users of Windows 95, Windows 98, or Windows Me can obtain a legacy
+version of Cygwin which still runs on these systems <a href=win-9x.html>here</a>.</p>
 </td>
-
 </tr>
 </table>
+
 </center>
 <hr noshade size=1>
 
