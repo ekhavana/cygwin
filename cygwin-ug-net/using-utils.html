@@ -976,12 +976,17 @@ Options for 'list' Action:
 
 Options for 'get' Action:
  -b, --binary         print REG_BINARY data as hex bytes
+ -n, --none           print data as stream of bytes as stored in registry
+ -x, --hex            print numerical data as hex numbers
 
 Options for 'set' Action:
  -b, --binary         set type to REG_BINARY (hex args or '-')
+ -D, --dword-be       set type to REG_DWORD_BIG_ENDIAN
  -e, --expand-string  set type to REG_EXPAND_SZ
  -i, --integer        set type to REG_DWORD
  -m, --multi-string   set type to REG_MULTI_SZ
+ -n, --none           set type to REG_NONE
+ -Q, --qword          set type to REG_QWORD
  -s, --string         set type to REG_SZ
 
 Options for 'set' and 'unset' Actions:
@@ -1046,23 +1051,31 @@ postfix.  The <code class="literal">remove</code> action
 removes a key.  Note that you may need to remove everything in the key 
 before you may remove it, but don't rely on this stopping you from 
 accidentally removing too much.  
-</p><p>The <code class="literal">set</code> action sets a value within a key.
+</p><p>The <code class="literal">get</code> action prints a value within a key.
+With the <code class="literal">-b</code> option, data is printed as hex bytes.
+<code class="literal">-n</code> allows to print the data as a typeless stream of
+bytes.  Integer values (REG_DWORD, REG_QWORD) are usually printed
+as decimal values.  The <code class="literal">-x</code> option allows to print
+the numbers as hexadecimal values.</p><p>The <code class="literal">set</code> action sets a value within a key.
 <code class="literal">-b</code> means it's binary data (REG_BINARY).
 The binary values are specified as hex bytes in the argument list.
 If the argument is <code class="literal">'-'</code>, binary data is read
 from stdin instead.
+<code class="literal">-d</code> or <code class="literal">-i</code> means the value is a 32 bit
+integer value (REG_DWORD).
+<code class="literal">-D</code> means the value is a 32 bit integer value in
+Big Endian representation (REG_DWORD_BIG_ENDIAN).
+<code class="literal">-Q</code> means the value is a 64 bit integer value (REG_QWORD).
+<code class="literal">-s</code> means the value is a string (REG_SZ).
 <code class="literal">-e</code> means it's an expanding string (REG_EXPAND_SZ)
 that contains embedded environment variables.  
-<code class="literal">-i</code> means the value is an integer (REG_DWORD).
 <code class="literal">-m</code> means it's a multi-string (REG_MULTI_SZ).  
-<code class="literal">-s</code> means the value is a string (REG_SZ).
 If you don't specify one of these, <span class="command"><strong>regtool</strong></span> tries to
 guess the type based on the value you give.  If it looks like a
-number, it's a DWORD.  If it starts with a percent, it's an expanding
+number, it's a DWORD, unless it's value doesn't fit into 32 bit, in which
+case it's a QWORD.  If it starts with a percent, it's an expanding
 string.  If you give multiple values, it's a multi-string.  Else, it's
-a regular string.
-The <code class="literal">unset</code> action removes a value from a key.
-</p><p>The <code class="literal">load</code> action adds a new subkey and loads
+a regular string.</p><p>The <code class="literal">unset</code> action removes a value from a key.</p><p>The <code class="literal">load</code> action adds a new subkey and loads
 the contents of a registry hive into it.
 The parent key must be HKEY_LOCAL_MACHINE or HKEY_USERS.
 The <code class="literal">unload</code> action unloads the file and removes
