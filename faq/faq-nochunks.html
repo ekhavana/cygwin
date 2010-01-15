@@ -147,22 +147,30 @@ For other options, search the mailing lists with terms such as
 when you run <code class="literal">setup.exe --help</code>. The current options are:
 </p><pre class="screen">
 Command Line Options:
- -D --download                          Download from internet
- -L --local-install                     Install from local directory
- -s --site                              Download site
- -R --root                              Root installation directory
- -q --quiet-mode                        Unattended setup mode
- -h --help                              print help
- -l --local-package-dir                 Local package directory
- -r --no-replaceonreboot                Disable replacing in-use files on next
-                                        reboot.
- -n --no-shortcuts                      Disable creation of desktop and start
-                                        menu shortcuts
- -N --no-startmenu                      Disable creation of start menu shortcut
- -d --no-desktop                        Disable creation of desktop shortcut
  -A --disable-buggy-antivirus           Disable known or suspected buggy anti
-                                        virus software packages during
-                                        execution.
+ 					virus software packages during execution.
+ -C --categories                        Specify entire categories to install
+ -D --download                          Download from internet
+ -d --no-desktop                        Disable creation of desktop shortcut
+ -h --help                              print help
+ -K --pubkey                            Path to extra public key file (gpg format)
+ -L --local-install                     Install from local directory
+ -l --local-package-dir                 Local package directory
+ -n --no-shortcuts                      Disable creation of desktop and start menu
+ 					shortcuts
+ -N --no-startmenu                      Disable creation of start menu shortcut
+ -O --only-site                         Ignore all sites except for -s
+ -P --packages                          Specify packages to install
+ -p --proxy                             HTTP/FTP proxy (host:port)
+ -q --quiet-mode                        Unattended setup mode
+ -r --no-replaceonreboot                Disable replacing in-use files on next
+ 					reboot.
+ -R --root                              Root installation directory
+ -S --sexpr-pubkey                      Extra public key in s-expr format
+ -s --site                              Download site
+ -U --keep-untrusted-keys               Use untrusted keys and retain all
+ -u --untrusted-keys                    Use untrusted keys from last-extrakeys
+ -X --no-verify                         Don't verify setup.ini signatures
 </pre><p>
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.setup.c"></a><p><b>2.4.</b></p></td><td align="left" valign="top"><p>Why not install in C:\?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>The Cygwin Setup program will prompt you for a "root" directory.
 The default is <code class="literal">C:\cygwin</code>, but you can change it.  You are urged not to
@@ -1158,7 +1166,7 @@ often implements its functions by installing hooks into various parts of the sys
 including both the Explorer shell and the underlying kernel.  Sometimes these hooks
 are not implemented in an entirely transparent fashion, and cause changes in the
 behaviour which affect the operation of other programs, such as Cygwin.
-</p><p>Among the software that has been found to cause difficulties are:</p><div class="itemizedlist"><ul type="disc"><li><p>Sonic Solutions burning software containing DLA component (when DLA disabled)</p></li><li><p>Norton/McAfee/Symantec antivirus or antispyware</p></li><li><p>Logitech webcam software with "Logitech process monitor" service</p></li><li><p>Kerio, Agnitum or ZoneAlarm Personal Firewall</p></li><li><p>Iolo System Mechanic/AntiVirus/Firewall</p></li><li><p>LanDesk</p></li><li><p>Windows Defender </p></li><li><p>Embassy Trust Suite fingerprint reader software wxvault.dll</p></li><li><p>NOD32 Antivirus</p></li><li><p>ByteMobile laptop optimization client</p></li><li><p>Earthlink Total-Access</p></li><li><p>Spybot S&amp;D TeaTimer</p></li><li><p>AR Soft RAM Disk</p></li><li><p>ATI Catalyst drivers</p></li><li><p>Windows LiveOneCare</p></li><li><p>Webroot Spy Sweeper with Antivirus</p></li><li><p>COMODO Firewall Pro</p></li><li><p>PC Tools Spyware Doctor</p></li><li><p>Avira AntiVir</p></li><li><p>Panda Internet Security</p></li><li><p>BitDefender</p></li><li><p>Google Desktop</p></li><li><p>Sophos Anti-Virus 7</p></li><li><p>Bufferzone from Trustware</p></li><li><p>Lenovo IPS Core Service (ipssvc)</p></li></ul></div><p>Sometimes these problems can be worked around, by temporarily or partially
+</p><p>Among the software that has been found to cause difficulties are:</p><div class="itemizedlist"><ul type="disc"><li><p>Sonic Solutions burning software containing DLA component (when DLA disabled)</p></li><li><p>Norton/McAfee/Symantec antivirus or antispyware</p></li><li><p>Logitech webcam software with "Logitech process monitor" service</p></li><li><p>Kerio, Agnitum or ZoneAlarm Personal Firewall</p></li><li><p>Iolo System Mechanic/AntiVirus/Firewall</p></li><li><p>LanDesk</p></li><li><p>Windows Defender </p></li><li><p>Various programs by Wave Systems Corp using wxvault.dll, including Embassy Trust Suite and Embassy Security Center</p></li><li><p>NOD32 Antivirus</p></li><li><p>ByteMobile laptop optimization client</p></li><li><p>Earthlink Total-Access</p></li><li><p>Spybot S&amp;D TeaTimer</p></li><li><p>AR Soft RAM Disk</p></li><li><p>ATI Catalyst drivers</p></li><li><p>Windows LiveOneCare</p></li><li><p>Webroot Spy Sweeper with Antivirus</p></li><li><p>COMODO Firewall Pro</p></li><li><p>PC Tools Spyware Doctor</p></li><li><p>Avira AntiVir</p></li><li><p>Panda Internet Security</p></li><li><p>BitDefender</p></li><li><p>Google Desktop</p></li><li><p>Sophos Anti-Virus 7</p></li><li><p>Bufferzone from Trustware</p></li><li><p>Lenovo IPS Core Service (ipssvc)</p></li></ul></div><p>Sometimes these problems can be worked around, by temporarily or partially
 disabling the offending software.  For instance, it may be possible to disable
 on-access scanning in your antivirus, or configure it to ignore files under the
 Cygwin installation root.  Often, unfortunately, this is not possible; even disabling
