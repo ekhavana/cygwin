@@ -1,10 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>What's new and what changed in Cygwin 1.7</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter&#160;1.&#160;Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin 1.7</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;1.&#160;Cygwin Overview</th><td width="20%" align="right">&#160;<a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin 1.7</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-os"></a>OS related changes</h3></div></div></div><pre class="screen">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>What's new and what changed in Cygwin 1.7</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter&#160;1.&#160;Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin 1.7</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;1.&#160;Cygwin Overview</th><td width="20%" align="right">&#160;<a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1" title="What's new and what changed in Cygwin 1.7"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin 1.7</h2></div></div></div><div class="sect2" title="OS related changes"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-os"></a>OS related changes</h3></div></div></div><pre class="screen">
 - Windows 95, 98 and Me are not supported anymore.  The new Cygwin 1.7 DLL
   will not run on any of these systems.
 
 - Add support for Windows 7 and Windows Server 2008 R2.
-</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-file"></a>File Access related changes</h3></div></div></div><pre class="screen">
+</pre></div><div class="sect2" title="File Access related changes"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-file"></a>File Access related changes</h3></div></div></div><pre class="screen">
 - Mount points are no longer stored in the registry.  Use /etc/fstab
   and /etc/fstab.d/$USER instead.  Mount points created with mount(1)
   are only local to the current session and disappear when the last
@@ -117,7 +117,7 @@
 - Other new APIs: posix_fadvise, posix_fallocate, funopen, fopencookie,
   open_memstream, open_wmemstream, fmemopen, fdopendir, fpurge,
   mkstemps, eaccess, euidaccess, canonicalize_file_name, fexecve, execvpe.
-</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-net"></a>Network related changes</h3></div></div></div><pre class="screen">
+</pre></div><div class="sect2" title="Network related changes"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-net"></a>Network related changes</h3></div></div></div><pre class="screen">
 - New implementation for blocking sockets and select on sockets which
   is supposed to allow POSIX-compatible sharing of sockets between
   threads and processes.
@@ -157,7 +157,7 @@
   if_indextoname, if_nameindex, if_freenameindex.
 
 - Add /proc/net/if_inet6.
-</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-device"></a>Device related changes</h3></div></div></div><pre class="screen">
+</pre></div><div class="sect2" title="Device related changes"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-device"></a>Device related changes</h3></div></div></div><pre class="screen">
 - Reworked pipe implementation which uses overlapped IO to create
   more reliable interruptible pipes and fifos.
 
@@ -182,7 +182,7 @@
 
 - New API: cfmakeraw, get_avphys_pages, get_nprocs, get_nprocs_conf,
   get_phys_pages, posix_openpt.
-</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-posix"></a>Other POSIX related changes</h3></div></div></div><pre class="screen">
+</pre></div><div class="sect2" title="Other POSIX related changes"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-posix"></a>Other POSIX related changes</h3></div></div></div><pre class="screen">
 - A lot of character sets are supported now via a call to setlocale().
   The setting of the environment variables $LANG, $LC_ALL or $LC_CTYPE will
   be used.  For instance, setting $LANG to "de_DE.ISO-8859-15" before
@@ -225,7 +225,7 @@
   ungetwc, asnprintf, dprintf, vasnprintf, vdprintf,
   wprintf, fwprintf, swprintf, vwprintf, vfwprintf, vswprintf,
   wscanf, fwscanf, swscanf, vwscanf, vfwscanf, vswscanf.
-</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-sec"></a>Security related changes</h3></div></div></div><pre class="screen">
+</pre></div><div class="sect2" title="Security related changes"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-sec"></a>Security related changes</h3></div></div></div><pre class="screen">
 - Getting a domain user's groups is hopefully more bulletproof now.
 
 - Cygwin now comes with a real LSA authentication package.  This must
@@ -242,7 +242,7 @@
 - New options have been added to the mkpasswd and mkgroup tools to
   ease use in multi-machine and multi-domain environments.  The existing
   options have a slightly changed behaviour.
-</pre></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-misc"></a>Miscellaneous</h3></div></div></div><pre class="screen">
+</pre></div><div class="sect2" title="Miscellaneous"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-misc"></a>Miscellaneous</h3></div></div></div><pre class="screen">
 - New ldd utility, similar to Linux.
 
 - New link libraries libdl.a, libresolve.a, librt.a.
