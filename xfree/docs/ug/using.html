@@ -1,4 +1,4 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
 <HTML
 ><HEAD
 ><TITLE
@@ -14,7 +14,9 @@ TITLE="Command Line Parameters"
 HREF="configure-cygwin-x-options.html"/><LINK
 REL="NEXT"
 TITLE="Switching Out of Cygwin/X"
-HREF="using-switching.html"/></HEAD
+HREF="using-switching.html"/><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html;charset=utf-8"/></HEAD
 ><BODY
 CLASS="chapter"
 ><DIV
@@ -125,26 +127,28 @@ NAME="using-starting"
 >Starting Cygwin/X</A
 ></H1
 ><P
->There are several methods of starting the Cygwin/X X Server
-with a startup script that optionally starts initial clients and performs
+>Described below are several methods of starting up the Cygwin/X X Server
+with a startup utility that optionally starts initial clients and performs
 X server configuration (for example, loading a keyboard modifier map).
-Several startup methods are described below.</P
+</P
 ><DIV
 CLASS="sect2"
 ><H2
 CLASS="sect2"
 ><A
-NAME="using-starting-bat"
->startxwin.bat</A
+NAME="using-starting-exe"
+>startxwin</A
 ></H2
 ><P
->Use a MS-DOS batch file as the startup script.</P
+>Use the custom XWin startup utility <B
+CLASS="command"
+>startxwin</B
+></P
 ><P
->&#13;An example <TT
-CLASS="filename"
->startxwin.bat</TT
-> is
-included in the <TT
+>&#13;<B
+CLASS="command"
+>startxwin</B
+> is included in the <TT
 CLASS="filename"
 >xinit</TT
 > package
@@ -155,46 +159,30 @@ HREF="setup-cygwin-x-installing.html"
 > in Chapter 2</A
 >),
 which starts the X server in multiwindow mode along with a single X terminal.
-Run
-<TT
-CLASS="filename"
->/usr/bin/startxwin.bat</TT
-> by
-using the "XWin Server" shortcut under "Cygwin-X" on the Start Menu,
-or starting it from a MS-DOS shell,
-or double-clicking it in Windows Explorer.</P
-></DIV
-><DIV
-CLASS="sect2"
-><H2
-CLASS="sect2"
-><A
-NAME="using-starting-sh"
->startxwin.sh</A
-></H2
-><P
->Use a <B
+
+Run <B
 CLASS="command"
->sh</B
->
-shell script as the startup script.</P
+>startxwin</B
+> by:
+</P
+><UL
+><LI
 ><P
->An example
-<TT
+>&#13;using the "XWin Server" shortcut under "Cygwin-X" on the Start Menu
+</P
+></LI
+><LI
+><P
+>&#13;starting it from a MS-DOS shell
+</P
+></LI
+><LI
+><P
+>&#13;Starting <TT
 CLASS="filename"
->startxwin.sh</TT
-> is included in the
-<TT
-CLASS="filename"
->xinit</TT
-> package, which
-starts the X server in multiwindow mode along with a single X terminal.
-Run
-<TT
-CLASS="filename"
->/usr/bin/startxwin.sh</TT
-> in a Cygwin
-shell:</P
+>/usr/bin/startxwin</TT
+> in a Cygwin shell:
+</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -203,12 +191,89 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;Username@CygwinHost ~
-$ sh /usr/bin/startxwin.sh
+>&#13;$ startxwin
 </PRE
 ></TD
 ></TR
 ></TABLE
+></LI
+><LI
+><P
+>&#13;double-clicking it in Windows Explorer
+</P
+></LI
+></UL
+><P
+>&#13;Full documentation for <B
+CLASS="command"
+>startxwin</B
+> can be read with
+<A
+HREF="http://x.cygwin.com/docs/man1/startxwin.1.html"
+TARGET="_top"
+>&#13;<B
+CLASS="command"
+>man startxwin</B
+>
+</A
+>.
+Note that the special argument <B
+CLASS="command"
+>--</B
+> is used to mark the end of
+client arguments and the beginning of server options, so, for example, if you
+wish to start the X server with the -noclipboard option, as described in
+<A
+HREF="configure-cygwin-x-options.html"
+>the Section called <I
+>Command Line Parameters</I
+> in Chapter 3</A
+>, use the following command:
+</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ startxwin -- -noclipboard
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;You may create a <TT
+CLASS="filename"
+>~/.startxwinrc</TT
+> script to customize
+the client programs started, rather than a single xterm.
+</P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+The MS-DOS batch file <TT
+CLASS="filename"
+>startxwin.bat</TT
+> and bash shell script <TT
+CLASS="filename"
+>startxwin.sh</TT
+>
+previously used to start the X server are no longer provided.  Implemented as a script made it difficult
+to reliably wait until the the X server had started before starting any clients.
+Use <TT
+CLASS="filename"
+>startxwin</TT
+> instead.
+</P
+></BLOCKQUOTE
+></DIV
 ></DIV
 ><DIV
 CLASS="sect2"
@@ -220,17 +285,19 @@ NAME="using-starting-startx"
 ></H2
 ><P
 >Use the standard X Window System
-<TT
-CLASS="filename"
->startx</TT
-> script with its attendant
+<B
+CLASS="command"
+>startx</B
+> command with its attendant
 <TT
 CLASS="filename"
 >~/.xinitrc</TT
-> configuration file. 
-Run <TT
-CLASS="filename"
->startx</TT
+> configuration file.
+</P
+><P
+>&#13;Run <B
+CLASS="command"
+>startx</B
 > in a Cygwin shell:</P
 ><TABLE
 BORDER="0"
@@ -240,8 +307,47 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;Username@CygwinHost ~
-$ startx
+>&#13;$ startx
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;Full documentation for <B
+CLASS="command"
+>startx</B
+> can be read with
+<A
+HREF="http://www.x.org/releases/X11R7.5/doc/man/man1/startx.1.html"
+TARGET="_top"
+>&#13;<B
+CLASS="command"
+>man startx</B
+>
+</A
+>.
+Note that the special argument <B
+CLASS="command"
+>--</B
+> is used to mark the end of
+client arguments and the beginning of server options, so, for example, if you
+wish to start the X server with the -emulate3buttons option, as described in
+<A
+HREF="configure-cygwin-x-options.html"
+>the Section called <I
+>Command Line Parameters</I
+> in Chapter 3</A
+>, use the following command:
+</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ startx -- -emulate3buttons
 </PRE
 ></TD
 ></TR
@@ -267,13 +373,27 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;Username@CygwinHost ~
-$ cp /etc/X11/xinit/xinitrc ~/.xinitrc
+>&#13;$ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 [edit ~/.xinitrc as desired]
 </PRE
 ></TD
 ></TR
 ></TABLE
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="using-starting-advanced"
+>Other startup methods</A
+></H2
+><P
+>&#13;Advanced users may wish to start the X server by invoking <B
+CLASS="command"
+>X</B
+> directly
+</P
 ></DIV
 ></DIV
 ></DIV

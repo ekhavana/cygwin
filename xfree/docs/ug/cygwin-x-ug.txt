@@ -1,3 +1,4 @@
+
 Cygwin/X User's Guide
 
 Harold L Hunt, II
@@ -11,7 +12,7 @@ Jon Turney
      Foundation; with no Invariant Sections, with no Front-Cover Texts,
      and with no Back-Cover Texts. A copy of the license is included in
      the section entitled "GNU Free Documentation License".
-     __________________________________________________________________
+     _________________________________________________________________
 
    Table of Contents
    1. [1]Cygwin/X Overview
@@ -29,9 +30,9 @@ Jon Turney
 
         [9]Starting Cygwin/X
 
-              [10]startxwin.bat
-              [11]startxwin.sh
-              [12]startx
+              [10]startxwin
+              [11]startx
+              [12]Other startup methods
 
         [13]Switching Out of Cygwin/X
         [14]Stopping Cygwin/X
@@ -58,46 +59,43 @@ Jon Turney
         9. [32]TERMINATION
         10. [33]FUTURE REVISIONS OF THIS LICENSE
         [34]How to use this License for your documents
-
-   List of Tables
-   3-1. [35]Parameter Descriptions
-     __________________________________________________________________
+     _________________________________________________________________
 
 Chapter 1. Cygwin/X Overview
 
    Cygwin/X is a port of the X Window System to Cygwin; Cygwin provides a
    UNIX-like API on the Win32 platform.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Chapter 2. Setting Up Cygwin/X
 
 Cygwin/X Contents
 
    Cygwin/X consists of two parts: Cygwin, a port of the GNU tools to
-   Win32, and Cygwin/X, a port of the X Window System to Win32. Both parts
-   of Cygwin/X are needed to successfully run an X Server on a Win32
-   platform.
-     __________________________________________________________________
+   Win32, and Cygwin/X, a port of the X Window System to Win32. Both
+   parts of Cygwin/X are needed to successfully run an X Server on a
+   Win32 platform.
+     _________________________________________________________________
 
 Installing Cygwin/X
 
    Cygwin tools are, in the words of the Cygwin development homepage,
-   [36]http://cygwin.com/, "ports of the popular GNU development tools and
-   utilities for Windows 95, 98, and NT. They function by using the Cygwin
-   library which provides a UNIX-like API on top of the Win32 API." Cygwin
-   allows the compilation of the X Window System source on Win32; several
-   patches were made to the X Window System source to make it actually
-   compile and run under Cygwin.
+   [35]http://cygwin.com/, "ports of the popular GNU development tools
+   and utilities for Windows 95, 98, and NT. They function by using the
+   Cygwin library which provides a UNIX-like API on top of the Win32
+   API." Cygwin allows the compilation of the X Window System source on
+   Win32; several patches were made to the X Window System source to make
+   it actually compile and run under Cygwin.
 
    Cygwin has a nice setup program that downloads and installs the
    necessary Cygwin packages for you.
-    1. Open the Cygwin, [37]http://cygwin.com/ page in your web browser
-    2. Click the [38]"Install Cygwin Now" link in the upper-right hand
+    1. Open the Cygwin, [36]http://cygwin.com/ page in your web browser
+    2. Click the [37]"Install Cygwin Now" link in the upper-right hand
        corner of the page. This link downloads setup.exe from the primary
        Cygwin server; save setup.exe to the directory that you would like
-       to store the downloaded packages in (e.g. c:\download); do not save
-       setup.exe to c:\cygwin, as that is the default directory for the
-       extraction and installation of the downloaded packages.
+       to store the downloaded packages in (e.g. c:\download); do not
+       save setup.exe to c:\cygwin, as that is the default directory for
+       the extraction and installation of the downloaded packages.
     3. Run setup.exe, you will see the welcome screen:
        [cyi01welcome.png]
     4. Click Next to proceed to the next screen.
@@ -106,9 +104,10 @@ Installing Cygwin/X
        any number of machines:
        [cyi02installoption.png]
     6. Click Next to proceed to the next screen.
-    7. The default Install Root is c:\cygwin which should be fine for most
-       installations. Leave Default Text File Type as UNIX. Leave Install
-       For set to All unless you lack local administrative privileges.
+    7. The default Install Root is c:\cygwin which should be fine for
+       most installations. Leave Default Text File Type as UNIX. Leave
+       Install For set to All unless you lack local administrative
+       privileges.
        [cyi03installto.png]
     8. Click Next to proceed to the next screen.
     9. Local Package Directory should default to the directory that you
@@ -135,15 +134,15 @@ Installing Cygwin/X
           + xorg-docs (optional, man pages)
           + X-start-menu-icons (optional, adds icons for X Clients to the
             Start menu)
-          + You may also select any X client programs you want to use, and
-            any fonts you would like to have available.
+          + You may also select any X client programs you want to use,
+            and any fonts you would like to have available.
           + You may also want to ensure that the inetutils or openssh
             packages are selected if you wish to use telnet or ssh
             connections to run remote X clients.
        [cyi07packages.png]
    16. Click Next to begin the download process, you may want to try
-       another mirror if you see a "Connecting" message on this screen for
-       a long period of time:
+       another mirror if you see a "Connecting" message on this screen
+       for a long period of time:
        [cyi08downloading.png]
    17. After the packages are downloaded, setup will automatically begin
        to install them:
@@ -153,9 +152,9 @@ Installing Cygwin/X
        [cyi10createicons.png]
    19. Click Finish to close the setup program.
 
-   You have now successfully installed Cygwin/X. Proceed to [39]Chapter 4
+   You have now successfully installed Cygwin/X. Proceed to [38]Chapter 4
    for instructions on how to use Cygwin/X.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Chapter 3. Configuring Cygwin/X
 
@@ -165,288 +164,111 @@ Configuration Overview
    parameters passed to XWin.exe. Cygwin/X comes with a file called
    startxwin.bat that launches an X Server, a terminal, and a window
    manager.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Command Line Parameters
 
    Cygwin/X, by default, runs in windowed mode with the largest window
-   that will fit on your Windows desktop, using the best performing engine
-   that is installed on your system; you do not need to pass any
-   parameters to XWin.exe to use the default behavior. Below is the syntax
-   for XWin.exe parameters.
+   that will fit on your Windows desktop, using the best performing
+   engine that is installed on your system; you do not need to pass any
+   parameters to XWin.exe to use the default behavior.
 
-   XWin.exe
-   [-help]
-   [-clipboard [-nounicodeclipboard] ]
-   [-clipupdates clip_updates_above_n ]
-   [-emulate3buttons timeout_in_milliseconds ]
-   [-engine engine_number ]
-   [-fullscreen [-depth depth_in_bits_per_pixel ] [-refresh
-   refresh_rate_in_herz ] ]
-   [-ignoreinput]
-   [-lesspointer]
-   [-multiwindow]
-   [-multimonitors]
-   [-nodecoration]
-   [-rootless]
-   [-screen screen_number width height ...]
-   [-scrollbars]
-   [-[no]trayicon]
-   [-[no]unixkill]
-   [-[no]winkill]
-   [-[no]keyhook]
-   [-swcursor]
-   [-xkbrules XKBRules ]
-   [-xkbmodel XKBModel ]
-   [-xkblayout XKBLayout ]
-   [-xkbvariant XKBVariant ]
-   [-xkboptions XKBOptions ]
-   [-logfile path_to_logfile ]
-   [-logverbose verbosity_level ]
+   Up to date documentation of XWin.exe options can be read with [39]man
+   XWin .
 
    Below is an example command line for XWin.exe.
 
    XWin.exe -screen 0 800 600 -fullscreen -depth 32 -refresh 85
-   -emulate3buttons 100 -nowinkill -unixkill
-
-   Table 3-1. Parameter Descriptions
-   Parameter Description
-
-   [-help]
-
-   Print a list of supported commandline options and their description
-   similar to this list.
-
-   [-clipboard [-nounicodeclipboard] ]
-
-   Enables the integrated version of xwinclip, which provides integration
-   between the Cygwin/X clipboard and Windows clipboard. Do not use in
-   conjunction with the xwinclip program.
-
-   -nounicodeclipboard disables Unicode clipboard even if Cygwin/X is
-   running on a NT-based platform
-
-   [-clipupdates clip_updates_above_n ]
-
-   Groups together the regions in each update to the screen when there are
-   more than the specified number of regions in an update. This works by
-   fitting a clipping region around the updated regions, then transferring
-   that entire region of the shadow frame buffer to the screen, rather
-   than making many individual calls to transfer small portions of the
-   shadow frame buffer to the screen. This has a diminished effect on
-   NT-based platforms because they already group GDI operations together
-   in a batch, which has a similar effect.
-
-   [-emulate3buttons timeout_in_milliseconds ]
-
-   Note: scroll wheel mice often allow you to click the scroll wheel for
-   middle mouse button functionality. Thus, most users with a scroll wheel
-   mouse will not need to use this parameter.
-
-   This option allows users with a two-button mouse to emulate a third
-   mouse button by pressing both mouse buttons within the optional timeout
-   specified in milliseconds. The default timeout is 50 milliseconds.
-
-   [-engine engine_number ]
-
-   Do not use this parameter unless you are a Cygwin/X developer or are
-   instructed by a Cygwin/X developer to do so.
-
-   Cygwin/X's default behavior is to determine if DirectDraw or
-   DirectDraw4 are present, then to examine the -depth and -fullscreen
-   parameters to determine the engine with optimum performance that
-   supports the specified depth and window configuration.
-
-   [-fullscreen [-depth depth_in_bits_per_pixel ] [-refresh
-   refresh_rate_in_herz ] ]
-
-   The -fullscreen parameter tells Cygwin/X to open a given screen in
-   fullscreen mode.
-
-   The -depth parameter can only be used with -fullscreen and a DirectDraw
-   based engine to specify the display depth that should be used for the
-   fullscreen Cygwin/X screen.
-
-   The -refresh parameter can only be used with -fullscreen and a
-   DirectDraw based engine to specify the refresh rate that should be used
-   for the fullscreen Cygwin/X screen.
-
-   [-ignoreinput]
-
-   Ignore keyboard and mouse input. This is usually only use for testing
-   and debugging purposes.
-
-   [-lesspointer]
-
-   Hide the Windows mouse cursor when the mouse is over any Cygwin/X
-   window (regardless of whether that window is active or inactive). This
-   prevents the Windows mouse cursor from being placed overtop of the X
-   cursor.
-
-   [-multimonitors]
-
-   Create a root window that covers all monitors on a system with multiple
-   monitors.
-
-   [-multiwindow]
-
-   Start the integrated Windows-based window manager, which launches each
-   top-level X window in its own Windows window. Not to be used together
-   with -rootless nor -fullscreen.
-
-   [-nodecoration]
-
-   Do not give the Cygwin/X window a Windows window border, title bar,
-   etc. This parameter only applies to windowed mode screens, i.e., this
-   parameter is ignored when the -fullscreen parameter is specified.
-
-   [-rootless]
-
-   Use a transparent root window with an external window manager (such as
-   twm). Not to be used with -multiwindow nor with -fullscreen.
-
-   [-screen screen_number width height ...]
-
-   This parameter does not have to be specified. Cygwin/X's default
-   behavior is to create a single screen that is roughly the size of the
-   current Windows display area.
-
-   This parameter may be used to specify the screen number, height, and
-   width of one or several Cygwin/X screens; each Cygwin/X screen will be
-   opened in its own window. When using multiple screens, be sure not to
-   duplicate any screen numbers. Do note that, as of 2002-01-08, using
-   multiple screens is not fully implemented; there are several bugs that
-   must be fixed by someone that uses the multiple screens feature.
-
-   Screen specific parameters, such as -fullscreen, can be applied as a
-   default to all screens by placing those screen specific parameters
-   before any -screen parameter. Screen specific parameters placed after
-   the first -screen parameter will apply only to the immediately
-   preceeding -screen parameter.
-
-   [-scrollbars]
-
-   Enable resizing of the server display window. Do not use in conjunction
-   with -multiwindow nor with -rootless.
-
-   [-[no]trayicon]
-
-   Enable or disable the tray icon; the default is to enable the tray
-   icon.
-
-   [-[no]unixkill]
-
-   Enable or disable the Ctrl-Alt-Backspace key combo as a signal to exit
-   Cygwin/X. The Ctrl-Alt-Backspace key combo is disabled by default.
-
-   [-[no]winkill]
-
-   Enable or disable the Alt-F4 key combo as a signal to exit Cygwin/X.
-   The Alt-F4 key combo is enabled by default.
-
-   [-[no]keyhook]
-
-   Enable or disable grabbing of special windows keys like the Menu key or
-   Alt-Tab. This is disabled by default.
-
-   [-swcursor]
-
-   Disable the use of the windows cursor and use the X11 software cursor
-   instead.
-
-   [-xkbrules XKBRules ]
-
-   Set the rules to use for XKB. This defaults to xorg.
-
-   [-xkbmodel XKBModel ]
-
-   Set the model to use for XKB. This defaults to pc105.
-
-   [-xkblayout XKBLayout ]
-
-   Set the layout to use for XKB. This defaults to a layout matching your
-   current layout from windows or us if no matching layout was found.
-
-   [-xkbvariant XKBVariant ]
-
-   Set the variant to use for XKB. This defaults to not set.
-
-   [-xkboptions XKBOptions ]
-
-   Set the options to use for XKB. This defaults to not set.
-
-   [-logfile path_to_logfile ]
-
-   Set the location of the logfile. This defaults to /var/log/XWin.0.log.
-
-   [-logverbose verbosity_level ]
-
-   Set the level of logging verbosity. Currently only a few log messages
-   respect this setting.
-     __________________________________________________________________
+   -emulate3buttons 100 -nowinkill -unixkill 
+     _________________________________________________________________
 
 Chapter 4. Using Cygwin/X
 
 Starting Cygwin/X
 
-   There are several methods of starting the Cygwin/X X Server with a
-   startup script that optionally starts initial clients and performs X
-   server configuration (for example, loading a keyboard modifier map).
-   Several startup methods are described below.
-     __________________________________________________________________
+   Described below are several methods of starting up the Cygwin/X X
+   Server with a startup utility that optionally starts initial clients
+   and performs X server configuration (for example, loading a keyboard
+   modifier map).
+     _________________________________________________________________
 
-startxwin.bat
+startxwin
 
-   Use a MS-DOS batch file as the startup script.
+   Use the custom XWin startup utility startxwin
 
-   An example startxwin.bat is included in the xinit package (installed by
-   following the instructions in [40]the Section called Installing
-   Cygwin/X in Chapter 2), which starts the X server in multiwindow mode
-   along with a single X terminal. Run /usr/bin/startxwin.bat by using the
-   "XWin Server" shortcut under "Cygwin-X" on the Start Menu, or starting
-   it from a MS-DOS shell, or double-clicking it in Windows Explorer.
-     __________________________________________________________________
+   startxwin is included in the xinit package (installed by following the
+   instructions in [40]the Section called Installing Cygwin/X in Chapter
+   2), which starts the X server in multiwindow mode along with a single
+   X terminal. Run startxwin by:
+     * using the "XWin Server" shortcut under "Cygwin-X" on the Start
+       Menu
+     * starting it from a MS-DOS shell
+     * Starting /usr/bin/startxwin in a Cygwin shell:
 
-startxwin.sh
+$ startxwin
 
-   Use a sh shell script as the startup script.
+     * double-clicking it in Windows Explorer
 
-   An example startxwin.sh is included in the xinit package, which starts
-   the X server in multiwindow mode along with a single X terminal. Run
-   /usr/bin/startxwin.sh in a Cygwin shell:
-Username@CygwinHost ~
-$ sh /usr/bin/startxwin.sh
-     __________________________________________________________________
+   Full documentation for startxwin can be read with [41]man startxwin .
+   Note that the special argument -- is used to mark the end of client
+   arguments and the beginning of server options, so, for example, if you
+   wish to start the X server with the -noclipboard option, as described
+   in [42]the Section called Command Line Parameters in Chapter 3, use
+   the following command:
+   $ startxwin -- -noclipboard
+
+   You may create a ~/.startxwinrc script to customize the client
+   programs started, rather than a single xterm.
+
+     Note: The MS-DOS batch file startxwin.bat and bash shell script
+     startxwin.sh previously used to start the X server are no longer
+     provided. Implemented as a script made it difficult to reliably
+     wait until the the X server had started before starting any
+     clients. Use startxwin instead.
+     _________________________________________________________________
 
 startx
 
-   Use the standard X Window System startx script with its attendant
-   ~/.xinitrc configuration file. Run startx in a Cygwin shell:
-Username@CygwinHost ~
-$ startx
+   Use the standard X Window System startx command with its attendant
+   ~/.xinitrc configuration file.
 
-   You may create a ~/.xinitrc from the template in /etc/X11/xinit/xinitrc
-   and then customize ~/.xinitrc as required
-Username@CygwinHost ~
+   Run startx in a Cygwin shell:
+   $ startx
+
+   Full documentation for startx can be read with [43]man startx . Note
+   that the special argument -- is used to mark the end of client
+   arguments and the beginning of server options, so, for example, if you
+   wish to start the X server with the -emulate3buttons option, as
+   described in [44]the Section called Command Line Parameters in Chapter
+   3, use the following command:
+   $ startx -- -emulate3buttons
+
+   You may create a ~/.xinitrc from the template in
+   /etc/X11/xinit/xinitrc and then customize ~/.xinitrc as required
 $ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 [edit ~/.xinitrc as desired]
-     __________________________________________________________________
+     _________________________________________________________________
+
+Other startup methods
+
+   Advanced users may wish to start the X server by invoking X directly
+     _________________________________________________________________
 
 Switching Out of Cygwin/X
 
    Press Alt-Tab to switch from Cygwin/X to your Windows desktop or other
    running Windows applications.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Stopping Cygwin/X
 
    When you are done using Cygwin/X, press Alt-F4 to shutdown the X
    Server; this is the default key combination to shutdown the X Server.
-   The -[no]winkill and -[no]unixkill parameters can change the set of key
-   combinations that will shutdown the X Server. Using the -unixkill
-   allows the Ctrl-Alt-Backspace key combination to shutdown the X Server,
-   in addition to the default Alt-F4 key combination.
-     __________________________________________________________________
+   The -[no]winkill and -[no]unixkill parameters can change the set of
+   key combinations that will shutdown the X Server. Using the -unixkill
+   allows the Ctrl-Alt-Backspace key combination to shutdown the X
+   Server, in addition to the default Alt-F4 key combination.
+     _________________________________________________________________
 
 Window Managers
 
@@ -454,34 +276,35 @@ Window Managers
      * Internal window manager (a.k.a. MultiWindow Mode) that creates a
        Windows window for each top-level X window. The internal window
        manager is launched using the -multiwindow command-line parameter
-       to XWin.exe. See [41]the Section called Command Line Parameters in
+       to XWin.exe. See [45]the Section called Command Line Parameters in
        Chapter 3 for more information on the -multiwindow command-line
        parameter.
      * External local window managers (e.g. twm, mwm (part of the lesstif
-       package)). These local window managers must be installed on Cygwin;
-       they are run locally and cannot be used together with the internal
-       window manager.
+       package)). These local window managers must be installed on
+       Cygwin; they are run locally and cannot be used together with the
+       internal window manager.
      * Remote window managers via an XDMCP session, which you can read
-       more about in [42]the Section called Remote Sessions via XDMCP.
+       more about in [46]the Section called Remote Sessions via XDMCP.
      * Remote window manager launched through an ssh tunnel. This is not
        Cygwin/X-specific, so you should be able to find information about
-       launching remote window managers from other sources. See [43]the
+       launching remote window managers from other sources. See [47]the
        Section called Secure ssh for more information on using ssh.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Windows Clipboard Integration
 
-   The X Window System, and thus Cygwin/X, uses its own internal clipboard
-   system that is distinct from the clipboard system used by Windows.
-   Copying and pasting text between these two clipboard systems requires a
-   clipboard integration program that watches for updates to either
-   clipboard and copies data between them when either one is updated.
+   The X Window System, and thus Cygwin/X, uses its own internal
+   clipboard system that is distinct from the clipboard system used by
+   Windows. Copying and pasting text between these two clipboard systems
+   requires a clipboard integration program that watches for updates to
+   either clipboard and copies data between them when either one is
+   updated.
 
    Cygwin/X has an internal clipboard integration system that is invoked
-   via the -clipboard command-line parameter. See [44]the Section called
+   via the -clipboard command-line parameter. See [48]the Section called
    Command Line Parameters in Chapter 3 for more information on the
    -clipboard command-line parameter.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Shared Memory Support
 
@@ -497,10 +320,10 @@ Shared Memory Support
 
    XWin.exe will not use Shared Memory if the CYGWIN does not contain the
    server keyword. Starting XWin.exe with
-CYGWIN=server XWin.exe
+   CYGWIN=server XWin.exe
 
    will enable Shared Memory support if the cygserver service is running.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Remote Sessions via XDMCP
 
@@ -515,11 +338,11 @@ Remote Sessions via XDMCP
    You may login to several remote sesstions with a single or multiple
    hosts using XDMCP. Each session will need a seperate display number,
    specified by the :display_number parameter, such as :0. A display
-   number is not the same as a screen number, as a single display can have
-   multiple screens associated with it. Each display listens on a
+   number is not the same as a screen number, as a single display can
+   have multiple screens associated with it. Each display listens on a
    different network port number, so each display can connect to multiple
-   machines. Start Cygwin/X with command lines similar to the following to
-   login to several remote sessions using XDMCP:
+   machines. Start Cygwin/X with command lines similar to the following
+   to login to several remote sessions using XDMCP:
 
    XWin.exe :0 -query remote_hostname_or_ip_address_0
 
@@ -527,19 +350,19 @@ Remote Sessions via XDMCP
 
    Note that the :display_number parameter is a general X Server
    parameter, not specific to Cygwin/X. Further documentation of the
-   :display_number parameter can be found in the [45]X Server manual page.
-   XDMCP is a complex system that is not specific to Cygwin/X; further
-   discussion of XDMCP is beyond the scope of this document. You may wish
-   to read the [46]Linux XDMCP HOWTO or the [47]X Server XDMCP Options for
-   more information.
-     __________________________________________________________________
+   :display_number parameter can be found in the [49]X Server manual
+   page. XDMCP is a complex system that is not specific to Cygwin/X;
+   further discussion of XDMCP is beyond the scope of this document. You
+   may wish to read the [50]Linux XDMCP HOWTO or the [51]X Server XDMCP
+   Options for more information.
+     _________________________________________________________________
 
 Displaying Remote Clients
 
    Displaying remote X clients with Cygwin/X is nearly identical to
    displaying remote X clients with any other X Server. You may use the
    secure ssh method, or the unsecure telnet method (not recommended).
-     __________________________________________________________________
+     _________________________________________________________________
 
 Secure ssh
 
@@ -548,12 +371,11 @@ Secure ssh
     2. Launch Cygwin/X
     3. Run the following in an X terminal:
 
-Username@CygwinHost ~
 $ ssh -Y username@remote_hostname_or_ip_address
 
     4. Enter your password when prompted by ssh.
-    5. Your ssh session should now show you a shell prompt for your remote
-       machine.
+    5. Your ssh session should now show you a shell prompt for your
+       remote machine.
     6. You can now launch remote X clients in your ssh session, for
        example, xterm& will launch an xterm running on your remote host
        that will display on your Cygwin/X screen.
@@ -561,7 +383,7 @@ $ ssh -Y username@remote_hostname_or_ip_address
        starting the remote clients in the background, by appending & to
        the command name, so that you don't have to open several ssh
        sessions.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Unsecure Telnet
 
@@ -570,9 +392,9 @@ Unsecure Telnet
     2. Launch Cygwin/X
     3. In an X terminal type /usr/bin/xhost remote_hostname_or_ip_address
     4. In an X terminal type /usr/bin/telnet
-       remote_hostname_or_ip_address. Use the explicit path to ensure that
-       Cygwin's telnet is run instead of Microsoft's telnet; Microsoft's
-       telnet will crash on startup when run from Cygwin/X.
+       remote_hostname_or_ip_address. Use the explicit path to ensure
+       that Cygwin's telnet is run instead of Microsoft's telnet;
+       Microsoft's telnet will crash on startup when run from Cygwin/X.
     5. Login to your remote machine via your telnet session
     6. In your telnet session type,
        DISPLAY=windows_hostname_or_ip_address:0.0
@@ -584,7 +406,7 @@ Unsecure Telnet
        starting the remote clients in the background, by appending & to
        the command name, so that you don't have to open several telnet
        sessions.
-     __________________________________________________________________
+     _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
 
@@ -594,22 +416,22 @@ Appendix A. GNU Free Documentation License
      Suite 330, Boston, MA 02111-1307 USA Everyone is permitted to copy
      and distribute verbatim copies of this license document, but
      changing it is not allowed.
-     __________________________________________________________________
+     _________________________________________________________________
 
 0. PREAMBLE
 
    The purpose of this License is to make a manual, textbook, or other
-   written document "free" in the sense of freedom: to assure everyone the
-   effective freedom to copy and redistribute it, with or without
-   modifying it, either commercially or noncommercially. Secondarily, this
-   License preserves for the author and publisher a way to get credit for
-   their work, while not being considered responsible for modifications
-   made by others.
+   written document "free" in the sense of freedom: to assure everyone
+   the effective freedom to copy and redistribute it, with or without
+   modifying it, either commercially or noncommercially. Secondarily,
+   this License preserves for the author and publisher a way to get
+   credit for their work, while not being considered responsible for
+   modifications made by others.
 
-   This License is a kind of "copyleft", which means that derivative works
-   of the document must themselves be free in the same sense. It
-   complements the GNU General Public License, which is a copyleft license
-   designed for free software.
+   This License is a kind of "copyleft", which means that derivative
+   works of the document must themselves be free in the same sense. It
+   complements the GNU General Public License, which is a copyleft
+   license designed for free software.
 
    We have designed this License in order to use it for manuals for free
    software, because free software needs free documentation: a free
@@ -618,15 +440,15 @@ Appendix A. GNU Free Documentation License
    can be used for any textual work, regardless of subject matter or
    whether it is published as a printed book. We recommend this License
    principally for works whose purpose is instruction or reference.
-     __________________________________________________________________
+     _________________________________________________________________
 
 1. APPLICABILITY AND DEFINITIONS
 
-   This License applies to any manual or other work that contains a notice
-   placed by the copyright holder saying it can be distributed under the
-   terms of this License. The "Document", below, refers to any such manual
-   or work. Any member of the public is a licensee, and is addressed as
-   "you".
+   This License applies to any manual or other work that contains a
+   notice placed by the copyright holder saying it can be distributed
+   under the terms of this License. The "Document", below, refers to any
+   such manual or work. Any member of the public is a licensee, and is
+   addressed as "you".
 
    A "Modified Version" of the Document means any work containing the
    Document or a portion of it, either copied verbatim, or with
@@ -634,11 +456,11 @@ Appendix A. GNU Free Documentation License
 
    A "Secondary Section" is a named appendix or a front-matter section of
    the Document that deals exclusively with the relationship of the
-   publishers or authors of the Document to the Document's overall subject
-   (or to related matters) and contains nothing that could fall directly
-   within that overall subject. (For example, if the Document is in part a
-   textbook of mathematics, a Secondary Section may not explain any
-   mathematics.) The relationship could be a matter of historical
+   publishers or authors of the Document to the Document's overall
+   subject (or to related matters) and contains nothing that could fall
+   directly within that overall subject. (For example, if the Document is
+   in part a textbook of mathematics, a Secondary Section may not explain
+   any mathematics.) The relationship could be a matter of historical
    connection with the subject or with related matters, or of legal,
    commercial, philosophical, ethical or political position regarding
    them.
@@ -652,41 +474,42 @@ Appendix A. GNU Free Documentation License
    the Document is released under this License.
 
    A "Transparent" copy of the Document means a machine-readable copy,
-   represented in a format whose specification is available to the general
-   public, whose contents can be viewed and edited directly and
+   represented in a format whose specification is available to the
+   general public, whose contents can be viewed and edited directly and
    straightforwardly with generic text editors or (for images composed of
    pixels) generic paint programs or (for drawings) some widely available
    drawing editor, and that is suitable for input to text formatters or
-   for automatic translation to a variety of formats suitable for input to
-   text formatters. A copy made in an otherwise Transparent file format
-   whose markup has been designed to thwart or discourage subsequent
-   modification by readers is not Transparent. A copy that is not
-   "Transparent" is called "Opaque".
+   for automatic translation to a variety of formats suitable for input
+   to text formatters. A copy made in an otherwise Transparent file
+   format whose markup has been designed to thwart or discourage
+   subsequent modification by readers is not Transparent. A copy that is
+   not "Transparent" is called "Opaque".
 
-   Examples of suitable formats for Transparent copies include plain ASCII
-   without markup, Texinfo input format, LaTeX input format, SGML or XML
-   using a publicly available DTD, and standard-conforming simple HTML
-   designed for human modification. Opaque formats include PostScript,
-   PDF, proprietary formats that can be read and edited only by
-   proprietary word processors, SGML or XML for which the DTD and/or
-   processing tools are not generally available, and the machine-generated
-   HTML produced by some word processors for output purposes only.
+   Examples of suitable formats for Transparent copies include plain
+   ASCII without markup, Texinfo input format, LaTeX input format, SGML
+   or XML using a publicly available DTD, and standard-conforming simple
+   HTML designed for human modification. Opaque formats include
+   PostScript, PDF, proprietary formats that can be read and edited only
+   by proprietary word processors, SGML or XML for which the DTD and/or
+   processing tools are not generally available, and the
+   machine-generated HTML produced by some word processors for output
+   purposes only.
 
-   The "Title Page" means, for a printed book, the title page itself, plus
-   such following pages as are needed to hold, legibly, the material this
-   License requires to appear in the title page. For works in formats
-   which do not have any title page as such, "Title Page" means the text
-   near the most prominent appearance of the work's title, preceding the
-   beginning of the body of the text.
-     __________________________________________________________________
+   The "Title Page" means, for a printed book, the title page itself,
+   plus such following pages as are needed to hold, legibly, the material
+   this License requires to appear in the title page. For works in
+   formats which do not have any title page as such, "Title Page" means
+   the text near the most prominent appearance of the work's title,
+   preceding the beginning of the body of the text.
+     _________________________________________________________________
 
 2. VERBATIM COPYING
 
    You may copy and distribute the Document in any medium, either
    commercially or noncommercially, provided that this License, the
    copyright notices, and the license notice saying this License applies
-   to the Document are reproduced in all copies, and that you add no other
-   conditions whatsoever to those of this License. You may not use
+   to the Document are reproduced in all copies, and that you add no
+   other conditions whatsoever to those of this License. You may not use
    technical measures to obstruct or control the reading or further
    copying of the copies you make or distribute. However, you may accept
    compensation in exchange for copies. If you distribute a large enough
@@ -694,21 +517,21 @@ Appendix A. GNU Free Documentation License
 
    You may also lend copies, under the same conditions stated above, and
    you may publicly display copies.
-     __________________________________________________________________
+     _________________________________________________________________
 
 3. COPYING IN QUANTITY
 
    If you publish printed copies of the Document numbering more than 100,
    and the Document's license notice requires Cover Texts, you must
-   enclose the copies in covers that carry, clearly and legibly, all these
-   Cover Texts: Front-Cover Texts on the front cover, and Back-Cover Texts
-   on the back cover. Both covers must also clearly and legibly identify
-   you as the publisher of these copies. The front cover must present the
-   full title with all words of the title equally prominent and visible.
-   You may add other material on the covers in addition. Copying with
-   changes limited to the covers, as long as they preserve the title of
-   the Document and satisfy these conditions, can be treated as verbatim
-   copying in other respects.
+   enclose the copies in covers that carry, clearly and legibly, all
+   these Cover Texts: Front-Cover Texts on the front cover, and
+   Back-Cover Texts on the back cover. Both covers must also clearly and
+   legibly identify you as the publisher of these copies. The front cover
+   must present the full title with all words of the title equally
+   prominent and visible. You may add other material on the covers in
+   addition. Copying with changes limited to the covers, as long as they
+   preserve the title of the Document and satisfy these conditions, can
+   be treated as verbatim copying in other respects.
 
    If the required texts for either cover are too voluminous to fit
    legibly, you should put the first ones listed (as many as fit
@@ -730,33 +553,34 @@ Appendix A. GNU Free Documentation License
    the public.
 
    It is requested, but not required, that you contact the authors of the
-   Document well before redistributing any large number of copies, to give
-   them a chance to provide you with an updated version of the Document.
-     __________________________________________________________________
+   Document well before redistributing any large number of copies, to
+   give them a chance to provide you with an updated version of the
+   Document.
+     _________________________________________________________________
 
 4. MODIFICATIONS
 
    You may copy and distribute a Modified Version of the Document under
-   the conditions of sections 2 and 3 above, provided that you release the
-   Modified Version under precisely this License, with the Modified
+   the conditions of sections 2 and 3 above, provided that you release
+   the Modified Version under precisely this License, with the Modified
    Version filling the role of the Document, thus licensing distribution
-   and modification of the Modified Version to whoever possesses a copy of
-   it. In addition, you must do these things in the Modified Version:
+   and modification of the Modified Version to whoever possesses a copy
+   of it. In addition, you must do these things in the Modified Version:
     A. Use in the Title Page (and on the covers, if any) a title distinct
        from that of the Document, and from those of previous versions
        (which should, if there were any, be listed in the History section
        of the Document). You may use the same title as a previous version
        if the original publisher of that version gives permission.
-    B. List on the Title Page, as authors, one or more persons or entities
-       responsible for authorship of the modifications in the Modified
-       Version, together with at least five of the principal authors of
-       the Document (all of its principal authors, if it has less than
-       five).
+    B. List on the Title Page, as authors, one or more persons or
+       entities responsible for authorship of the modifications in the
+       Modified Version, together with at least five of the principal
+       authors of the Document (all of its principal authors, if it has
+       less than five).
     C. State on the Title page the name of the publisher of the Modified
        Version, as the publisher.
     D. Preserve all the copyright notices of the Document.
-    E. Add an appropriate copyright notice for your modifications adjacent
-       to the other copyright notices.
+    E. Add an appropriate copyright notice for your modifications
+       adjacent to the other copyright notices.
     F. Include, immediately after the copyright notices, a license notice
        giving the public permission to use the Modified Version under the
        terms of this License, in the form shown in the Addendum below.
@@ -776,8 +600,8 @@ Appendix A. GNU Free Documentation License
        the network locations given in the Document for previous versions
        it was based on. These may be placed in the "History" section. You
        may omit a network location for a work that was published at least
-       four years before the Document itself, or if the original publisher
-       of the version it refers to gives permission.
+       four years before the Document itself, or if the original
+       publisher of the version it refers to gives permission.
     K. In any section entitled "Acknowledgements" or "Dedications",
        preserve the section's title, and preserve in the section all the
        substance and tone of each of the contributor acknowledgements
@@ -805,18 +629,18 @@ Appendix A. GNU Free Documentation License
 
    You may add a passage of up to five words as a Front-Cover Text, and a
    passage of up to 25 words as a Back-Cover Text, to the end of the list
-   of Cover Texts in the Modified Version. Only one passage of Front-Cover
-   Text and one of Back-Cover Text may be added by (or through
-   arrangements made by) any one entity. If the Document already includes
-   a cover text for the same cover, previously added by you or by
-   arrangement made by the same entity you are acting on behalf of, you
-   may not add another; but you may replace the old one, on explicit
+   of Cover Texts in the Modified Version. Only one passage of
+   Front-Cover Text and one of Back-Cover Text may be added by (or
+   through arrangements made by) any one entity. If the Document already
+   includes a cover text for the same cover, previously added by you or
+   by arrangement made by the same entity you are acting on behalf of,
+   you may not add another; but you may replace the old one, on explicit
    permission from the previous publisher that added the old one.
 
    The author(s) and publisher(s) of the Document do not by this License
    give permission to use their names for publicity for or to assert or
    imply endorsement of any Modified Version.
-     __________________________________________________________________
+     _________________________________________________________________
 
 5. COMBINING DOCUMENTS
 
@@ -833,74 +657,74 @@ Appendix A. GNU Free Documentation License
    different contents, make the title of each such section unique by
    adding at the end of it, in parentheses, the name of the original
    author or publisher of that section if known, or else a unique number.
-   Make the same adjustment to the section titles in the list of Invariant
-   Sections in the license notice of the combined work.
+   Make the same adjustment to the section titles in the list of
+   Invariant Sections in the license notice of the combined work.
 
-   In the combination, you must combine any sections entitled "History" in
-   the various original documents, forming one section entitled "History";
-   likewise combine any sections entitled "Acknowledgements", and any
-   sections entitled "Dedications". You must delete all sections entitled
-   "Endorsements."
-     __________________________________________________________________
+   In the combination, you must combine any sections entitled "History"
+   in the various original documents, forming one section entitled
+   "History"; likewise combine any sections entitled "Acknowledgements",
+   and any sections entitled "Dedications". You must delete all sections
+   entitled "Endorsements."
+     _________________________________________________________________
 
 6. COLLECTIONS OF DOCUMENTS
 
    You may make a collection consisting of the Document and other
    documents released under this License, and replace the individual
-   copies of this License in the various documents with a single copy that
-   is included in the collection, provided that you follow the rules of
-   this License for verbatim copying of each of the documents in all other
-   respects.
+   copies of this License in the various documents with a single copy
+   that is included in the collection, provided that you follow the rules
+   of this License for verbatim copying of each of the documents in all
+   other respects.
 
    You may extract a single document from such a collection, and
    distribute it individually under this License, provided you insert a
    copy of this License into the extracted document, and follow this
    License in all other respects regarding verbatim copying of that
    document.
-     __________________________________________________________________
+     _________________________________________________________________
 
 7. AGGREGATION WITH INDEPENDENT WORKS
 
    A compilation of the Document or its derivatives with other separate
    and independent documents or works, in or on a volume of a storage or
-   distribution medium, does not as a whole count as a Modified Version of
-   the Document, provided no compilation copyright is claimed for the
+   distribution medium, does not as a whole count as a Modified Version
+   of the Document, provided no compilation copyright is claimed for the
    compilation. Such a compilation is called an "aggregate", and this
    License does not apply to the other self-contained works thus compiled
-   with the Document, on account of their being thus compiled, if they are
-   not themselves derivative works of the Document.
+   with the Document, on account of their being thus compiled, if they
+   are not themselves derivative works of the Document.
 
    If the Cover Text requirement of section 3 is applicable to these
    copies of the Document, then if the Document is less than one quarter
    of the entire aggregate, the Document's Cover Texts may be placed on
    covers that surround only the Document within the aggregate. Otherwise
    they must appear on covers around the whole aggregate.
-     __________________________________________________________________
+     _________________________________________________________________
 
 8. TRANSLATION
 
-   Translation is considered a kind of modification, so you may distribute
-   translations of the Document under the terms of section 4. Replacing
-   Invariant Sections with translations requires special permission from
-   their copyright holders, but you may include translations of some or
-   all Invariant Sections in addition to the original versions of these
-   Invariant Sections. You may include a translation of this License
-   provided that you also include the original English version of this
-   License. In case of a disagreement between the translation and the
-   original English version of this License, the original English version
-   will prevail.
-     __________________________________________________________________
+   Translation is considered a kind of modification, so you may
+   distribute translations of the Document under the terms of section 4.
+   Replacing Invariant Sections with translations requires special
+   permission from their copyright holders, but you may include
+   translations of some or all Invariant Sections in addition to the
+   original versions of these Invariant Sections. You may include a
+   translation of this License provided that you also include the
+   original English version of this License. In case of a disagreement
+   between the translation and the original English version of this
+   License, the original English version will prevail.
+     _________________________________________________________________
 
 9. TERMINATION
 
-   You may not copy, modify, sublicense, or distribute the Document except
-   as expressly provided for under this License. Any other attempt to
-   copy, modify, sublicense or distribute the Document is void, and will
-   automatically terminate your rights under this License. However,
+   You may not copy, modify, sublicense, or distribute the Document
+   except as expressly provided for under this License. Any other attempt
+   to copy, modify, sublicense or distribute the Document is void, and
+   will automatically terminate your rights under this License. However,
    parties who have received copies, or rights, from you under this
-   License will not have their licenses terminated so long as such parties
-   remain in full compliance.
-     __________________________________________________________________
+   License will not have their licenses terminated so long as such
+   parties remain in full compliance.
+     _________________________________________________________________
 
 10. FUTURE REVISIONS OF THIS LICENSE
 
@@ -908,7 +732,7 @@ Appendix A. GNU Free Documentation License
    GNU Free Documentation License from time to time. Such new versions
    will be similar in spirit to the present version, but may differ in
    detail to address new problems or concerns. See
-   [48]http://www.gnu.org/copyleft/.
+   [52]http://www.gnu.org/copyleft/.
 
    Each version of the License is given a distinguishing version number.
    If the Document specifies that a particular numbered version of this
@@ -918,13 +742,13 @@ Appendix A. GNU Free Documentation License
    Free Software Foundation. If the Document does not specify a version
    number of this License, you may choose any version ever published (not
    as a draft) by the Free Software Foundation.
-     __________________________________________________________________
+     _________________________________________________________________
 
 How to use this License for your documents
 
    To use this License in a document you have written, include a copy of
-   the License in the document and put the following copyright and license
-   notices just after the title page:
+   the License in the document and put the following copyright and
+   license notices just after the title page:
 
      Copyright (c) YEAR YOUR NAME. Permission is granted to copy,
      distribute and/or modify this document under the terms of the GNU
@@ -937,8 +761,8 @@ How to use this License for your documents
 
    If you have no Invariant Sections, write "with no Invariant Sections"
    instead of saying which ones are invariant. If you have no Front-Cover
-   Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts being
-   LIST"; likewise for Back-Cover Texts.
+   Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts
+   being LIST"; likewise for Back-Cover Texts.
 
    If your document contains nontrivial examples of program code, we
    recommend releasing these examples in parallel under your choice of
@@ -947,51 +771,55 @@ How to use this License for your documents
 
 References
 
-   1. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#overview
-   2. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#setup
-   3. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#setup-project-contents
-   4. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#setup-cygwin-x-installing
-   5. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure
-   6. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-overview
-   7. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
-   8. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using
-   9. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-starting
-  10. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-starting-bat
-  11. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-starting-sh
-  12. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-starting-startx
-  13. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-switching
-  14. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-stopping
-  15. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-window-managers
-  16. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-clipboard-integration
-  17. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-shared-memory
-  18. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-session
-  19. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps
-  20. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps-ssh
-  21. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps-telnet
-  22. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl
-  23. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-preamble
-  24. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-applicability-and-definitions
-  25. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-verbation-copying
-  26. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-copying-in-quantity
-  27. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-modifications
-  28. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-combining-documents
-  29. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-collections-of-documents
-  30. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-aggregation-with-independent-works
-  31. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-translation
-  32. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-termination
-  33. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-future-revisions-of-this-license
-  34. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-using-for-your-documents
-  35. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#AEN293
+   1. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#overview
+   2. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#setup
+   3. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#setup-project-contents
+   4. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#setup-cygwin-x-installing
+   5. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#configure
+   6. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-overview
+   7. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
+   8. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using
+   9. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-starting
+  10. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-starting-exe
+  11. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-starting-startx
+  12. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-starting-advanced
+  13. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-switching
+  14. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-stopping
+  15. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-window-managers
+  16. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-clipboard-integration
+  17. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-shared-memory
+  18. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-session
+  19. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps
+  20. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps-ssh
+  21. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps-telnet
+  22. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl
+  23. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-preamble
+  24. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-applicability-and-definitions
+  25. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-verbation-copying
+  26. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-copying-in-quantity
+  27. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-modifications
+  28. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-combining-documents
+  29. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-collections-of-documents
+  30. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-aggregation-with-independent-works
+  31. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-translation
+  32. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-termination
+  33. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-future-revisions-of-this-license
+  34. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#gfdl-using-for-your-documents
+  35. http://cygwin.com/
   36. http://cygwin.com/
-  37. http://cygwin.com/
-  38. http://cygwin.com/setup.exe
-  39. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using
-  40. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#setup-cygwin-x-installing
-  41. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
-  42. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-session
-  43. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps-ssh
-  44. file://localhost/home/jon/sourceware-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
-  45. http://www.x.org/archive/X11R6.8.1/doc/Xserver.1.html
-  46. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
-  47. http://www.x.org/archive/X11R6.8.1/doc/Xserver.1.html#toc6
-  48. http://www.gnu.org/copyleft/
+  37. http://cygwin.com/setup.exe
+  38. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using
+  39. http://x.cygwin.com/docs/man1/XWin.1.html
+  40. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#setup-cygwin-x-installing
+  41. http://x.cygwin.com/docs/man1/startxwin.1.html
+  42. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
+  43. http://www.x.org/releases/X11R7.5/doc/man/man1/startx.1.html
+  44. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
+  45. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
+  46. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-session
+  47. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#using-remote-apps-ssh
+  48. file://localhost/opt/wip/cygwin-x-doc-cvs/htdocs/xfree/docs/ug/dump.html#configure-cygwin-x-options
+  49. http://www.x.org/archive/X11R6.8.1/doc/Xserver.1.html
+  50. http://en.tldp.org/HOWTO/XDMCP-HOWTO/
+  51. http://www.x.org/archive/X11R6.8.1/doc/Xserver.1.html#toc6
+  52. http://www.gnu.org/copyleft/
