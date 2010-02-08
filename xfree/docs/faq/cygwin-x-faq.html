@@ -1299,7 +1299,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->The upgrade from X.Org R6.8 to modular X.Org R7.4 makes a lot of changes.
+>The upgrade from X.Org R6.8 to modular X.Org R7.4 made a lot of changes.
 Please
 <A
 HREF="http://cygwin.com/ml/cygwin-xfree-announce/2008-11/msg00000.html"
@@ -1367,7 +1367,7 @@ CLASS="parameter"
 > from it, or (preferrably)
 use the updated <B
 CLASS="command"
->startxwin.bat</B
+>startxwin</B
 >.
 </P
 ><P
@@ -1409,7 +1409,19 @@ CLASS="answer"
 ><B
 > </B
 >
-X.Org now uses the prefix <TT
+The MS-DOS batch file <B
+CLASS="command"
+>startxwin.bat</B
+> previously used to start the X server
+has been retired and replaced with <B
+CLASS="command"
+>startxwin.exe</B
+>, as implementing this as a script
+made it difficult to reliably wait until the the X server had started before
+starting any clients.
+</P
+><P
+>&#13;X.Org now uses the prefix <TT
 CLASS="filename"
 >/usr</TT
 > not <TT
@@ -1419,7 +1431,7 @@ CLASS="filename"
 CLASS="command"
 >startxwin.bat</B
 >
-has moved from <TT
+was moved from <TT
 CLASS="filename"
 >/usr/X11R6/bin/startxwin.bat</TT
 > to
@@ -1429,12 +1441,15 @@ CLASS="filename"
 >.
 </P
 ><P
->&#13;A "XWin Server" shortcut to this batch file is created on the Start menu, under "Cygwin-X" 
+>&#13;A "XWin Server" shortcut to <B
+CLASS="command"
+>startxwin</B
+> is created on the Start menu, under "Cygwin-X"
 </P
 ><P
 >&#13;<B
 CLASS="command"
->startxwin.bat</B
+>startxwin</B
 > and the Start menu link to it are now installed by the <TT
 CLASS="filename"
 >xinit</TT
@@ -1486,11 +1501,17 @@ CLASS="command"
 >XWin</B
 > line in that script; if you use <B
 CLASS="command"
+>startxwin</B
+>, <B
+CLASS="command"
 >xinit</B
 > or <B
 CLASS="command"
 >startx</B
 >, run it as <B
+CLASS="command"
+>startxwin -- -nolock</B
+>,  <B
 CLASS="command"
 >xinit -- -nolock</B
 > or  <B
@@ -1896,22 +1917,18 @@ COMPACT="COMPACT"
 TYPE="1"
 ><LI
 ><P
->&#13;Start the X server using the "XWin Server" shortcut under "Cygwin-X" on the Start menu, or using the <B
+>&#13;Start the X server using the "XWin Server" shortcut under "Cygwin-X" on the Start menu, or using <B
 CLASS="command"
->startxwin.bat</B
-> or <B
-CLASS="command"
->startxwin.sh scripts</B
+>startxwin</B
 >.
 </P
 ><P
->&#13;Note: If you wish to customize the X clients started when the X server starts, please make a copy of the script (in <TT
+>&#13;Note: If you wish to customize the X clients started when the X server starts, 
+you can do so using a <TT
 CLASS="filename"
->/usr/local/bin/</TT
-> or <TT
-CLASS="filename"
->~/bin/</TT
->) to avoid losing your customizations when the xinit package is upgraded.  You should also read the instructions in the script regarding setting CYGWIN_ROOT.</P
+>~/.startxwinrc</TT
+> script.
+</P
 ></LI
 ><LI
 ><P
@@ -4483,6 +4500,8 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>This question should be obsolete</P
+><P
 >To workaround this add the command <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -4626,21 +4645,14 @@ CLASS="answer"
 >Most likely you have started <TT
 CLASS="filename"
 >XWin.exe</TT
-> twice with <TT
-CLASS="filename"
->startxwin.bat
-</TT
-> or <TT
-CLASS="filename"
->startx</TT
-> 
-or a similar script.</P
+> twice.</P
 ><P
 >if you start multiple instances of <TT
 CLASS="filename"
 >XWin.exe</TT
-> you have to start to number 
-them </P
+> you have to
+give then unique display numbers
+</P
 ><P
 ><TABLE
 BORDER="0"
@@ -4658,18 +4670,18 @@ XWin.exe :2 -query blubb
 ></TR
 ></TABLE
 >
-Specifying no number is the same as using <CODE
+Specifying no display number is the same as using <CODE
 CLASS="parameter"
 >:0</CODE
 ></P
 ><P
 >If you want another terminal window (which in fact is just a convenient side effect of running <TT
 CLASS="filename"
->startxwin.bat</TT
+>startxwin</TT
 >) you should do this by starting <TT
 CLASS="filename"
 >xterm</TT
-> from the cygwin shell or from the startmenu entries.</P
+> from an existing terminal window, from the cygwin shell or from the startmenu entries.</P
 ></DIV
 ></DIV
 ><DIV
@@ -5313,7 +5325,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN1055"
+NAME="AEN1058"
 ></A
 ><P
 ><B
