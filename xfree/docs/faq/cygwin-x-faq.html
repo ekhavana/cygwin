@@ -218,6 +218,12 @@ CLASS="command"
 > and now all my X windows are contained within one large root Windows window?  How do I get it back to each X window in it's own Windows window?
 </A
 ></DT
+><DT
+>3.11. <A
+HREF="cygwin-x-faq.html#q-startxwin-no-windows"
+>&#13;Nothing appears to happen when I try to start the X server using the "XWin Server" start menu shortcut.
+</A
+></DT
 ></DL
 ></DD
 ><DT
@@ -1965,6 +1971,64 @@ CLASS="filename"
 ></OL
 >
 
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-startxwin-no-windows"
+></A
+><B
+>3.11. </B
+>
+Nothing appears to happen when I try to start the X server using the "XWin Server" start menu shortcut.
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Task manager shows the <B
+CLASS="command"
+>startxwin.exe</B
+> process starting, spawning <B
+CLASS="command"
+>XWin.exe</B
+>
+and <B
+CLASS="command"
+>xterm.exe</B
+>, but no windows are shown.
+This is caused by having <CODE
+CLASS="parameter"
+>tty</CODE
+> in the <CODE
+CLASS="parameter"
+>CYGWIN</CODE
+> environment variable
+set through the Windows control panel.  Removing <CODE
+CLASS="parameter"
+>tty</CODE
+> resolves this issue.
+</P
+><P
+>&#13;If you really need <CODE
+CLASS="parameter"
+>CYGWIN=tty</CODE
+> for working with <B
+CLASS="command"
+>cmd.exe</B
+> windows,
+you'll have to arrange to set that by some other means before invoking <B
+CLASS="command"
+>cygwin.bat</B
+>.
 </P
 ></DIV
 ></DIV
@@ -5325,7 +5389,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN1058"
+NAME="AEN1073"
 ></A
 ><P
 ><B
