@@ -263,8 +263,8 @@ $ startxwin
      * double-clicking it in Windows Explorer
 
    Full documentation for startxwin can be read with [45]man startxwin .
-   Note that the special argument -- is used to mark the end of client
-   arguments and the beginning of server options, so, for example, if you
+   Note that the special option -- is used to mark the end of client
+   options and the beginning of server options, so, for example, if you
    wish to start the X server with the -noclipboard option, as described
    in [46]the Section called Command line parameters in Chapter 3, use
    the following command:
@@ -278,6 +278,25 @@ $ startxwin
      provided. Implemented as a script made it difficult to reliably
      wait until the the X server had started before starting any
      clients. Use startxwin instead.
+
+     Note: If you want to have a Start Menu shortcut which runs
+     startxwin with custom options, you should use a copy of the Start
+     Menu shortcut installed by xinit, so that your changes are not
+     overwritten when the xinit package is updated.
+
+     Note: startxwin is a specialized version of startx with a few
+     differences appropriate to running in multiwindow mode, rather than
+     windowed mode.
+     * startxwin supplies the -multiwindow option to XWin.exe
+     * It uses a different script to start clients (~/.startxwinrc rather
+       than ~/.xinitrc), because ~/.xinitrc will normally end by starting
+       a window manager, which would be incorrect for ~/.startxwinrc (as
+       it would discover the internal window manager is already running
+       and exit immediately).
+     * startxwin exits after ~/.startxwinrc has completed and leaves
+       XWin.exe running, whereas startx waits until ~/.xinitrc exits
+       (which is usually waiting for the window manager started by it to
+       exit) and then kills XWin.exe.
      _________________________________________________________________
 
 Starting Cygwin/X in windowed mode (startx)
@@ -289,17 +308,25 @@ Starting Cygwin/X in windowed mode (startx)
    $ startx
 
    Full documentation for startx can be read with [47]man startx . Note
-   that the special argument -- is used to mark the end of client
-   arguments and the beginning of server options, so, for example, if you
-   wish to start the X server with the -emulate3buttons option, as
-   described in [48]the Section called Command line parameters in Chapter
-   3, use the following command:
+   that the special option -- is used to mark the end of client options
+   and the beginning of server options, so, for example, if you wish to
+   start the X server with the -emulate3buttons option, as described in
+   [48]the Section called Command line parameters in Chapter 3, use the
+   following command:
    $ startx -- -emulate3buttons
 
    You may create a ~/.xinitrc from the template in
    /etc/X11/xinit/xinitrc and then customize ~/.xinitrc as required
 $ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 [edit ~/.xinitrc as desired]
+
+   Alternatively, if you just want to start a single client program
+   (perhaps a window manager), you don't need to use a ~/.xinitrc, and
+   can start the client directly from startx, e.g.
+   $ startx /usr/bin/fvwm2
+
+     Note: The client name supplied to startx must begin with / or .,
+     otherwise it is treated as options to the default xterm client.
      _________________________________________________________________
 
 Other startup methods

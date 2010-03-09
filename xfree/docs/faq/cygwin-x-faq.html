@@ -376,6 +376,15 @@ CLASS="QUOTE"
 >
 mode?</A
 ></DT
+><DT
+>5.2.3. <A
+HREF="cygwin-x-faq.html#q-xterm-utf8"
+>How do I display unicode characters in an <B
+CLASS="command"
+>xterm</B
+>?
+</A
+></DT
 ></DL
 ></DD
 ></DL
@@ -2575,24 +2584,24 @@ CLASS="answer"
 ><P
 ><B
 > </B
->[Pavel Rybnicek] The X Keyboard Extension doesn't work with AIX.
-The X Keyboard Extension is enabled by default, so you must disable it
-with the <CODE
+>
+[paraphrased from the <A
+HREF="http://www.straightrunning.com/XmingNotes/trouble.php"
+TARGET="_top"
+>Xming FAQ</A
+>]
+AIX login scripts contain a call to xmodmap (for IBM keyboards) which causes
+the keyboard to be incorrectly configured for XWin.
+Commenting out those calls should allow you to use XWin with AIX.
+</P
+><P
+>&#13;The XKB extension is now always enabled in the X.Org xserver, so the previous
+answer to this question of disabling the XKB extension with the <CODE
 CLASS="parameter"
 >-kb</CODE
-> parameter.  An example command
-line follows.</P
-><P
-><KBD
-CLASS="userinput"
->XWin.exe -kb -query
-<TT
-CLASS="replaceable"
-><I
->aix_hostname_or_ip_address</I
-></TT
-></KBD
-></P
+>
+parameter is no longer applicable.
+</P
 ></DIV
 ></DIV
 ><DIV
@@ -2813,7 +2822,7 @@ CLASS="filename"
 > in your Cygwin home directory
 (e.g. <TT
 CLASS="filename"
->/home/harold/</TT
+>~/.inputrc</TT
 >):
 </P
 ><TABLE
@@ -2824,19 +2833,9 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;set meta-flag on
-set output-meta on # to show 8-bit characters
+>&#13;set input-meta on    # to accept 8-bit characters
+set output-meta on   # to show 8-bit characters
 set convert-meta off # to show it as character, not the octal representation
-
-# Mapping for German umlauts
-"\M-a": "ä"
-"\M-A": "Ä"
-"\M-o": "ö"
-"\M-O": "Ö"
-"\M-u": "ü"
-"\M-U": "Ü"
-"\M-s": "ß"
-# (TODO: Mapping for accents?)
 </PRE
 ></TD
 ></TR
@@ -2871,6 +2870,176 @@ CLASS="answer"
 HREF="cygwin-x-faq.html#q-bash-extended-chars"
 >Q: 5.2.1.</A
 ></P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-xterm-utf8"
+></A
+><B
+>5.2.3. </B
+>How do I display unicode characters in an <B
+CLASS="command"
+>xterm</B
+>?
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+A1: For Cygwin 1.7: If you have a UTF-8 locale configured, this should all just work :-).
+</P
+><P
+>&#13;To confirm this is working properly, you may try the following:
+</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ wget http://www.cl.cam.ac.uk/~mgk25/ucs/examples/quickbrown.txt
+[...]
+$ cat quickbrown.txt
+</PRE
+></TD
+></TR
+></TABLE
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ wget http://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt
+[...]
+$ cat UTF-8-demo.txt
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;If you want to be able type into this <B
+CLASS="command"
+>xterm</B
+>, you'll need to configure
+your <B
+CLASS="command"
+>bash</B
+> shell not to escape 8-bit characters, see <A
+HREF="cygwin-x-faq.html#q-bash-extended-chars"
+>Q: 5.2.1.</A
+>
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+A2: For Cygwin 1.5: Start your <B
+CLASS="command"
+>xterm</B
+> in UTF-8 mode as <B
+CLASS="command"
+>xterm +lc -u8</B
+>.
+</P
+><P
+>&#13;To confirm this is working properly, you may try the following
+</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ wget http://www.cl.cam.ac.uk/~mgk25/ucs/examples/quickbrown.txt
+[...]
+$ cat quickbrown.txt
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;For reasons I don't currently understand, the default fixed font is only capable
+of supplying accented roman, hiragana and katakana characters, so if you
+wish to work with e.g. greek, cyrillic, hebrew, thai, etc. you'll need to
+start your xterm specifying a suitable font e.g.
+<B
+CLASS="command"
+>xterm +lc -u8 -fn -misc-fixed-medium-r-semicondensed--13-120-75-75-c-60-iso10646-1</B
+>
+</P
+><P
+>&#13;To confirm this is working properly, you may try the following
+</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ wget http://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt
+[...]
+$ cat UTF-8-demo.txt
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;For other programs run from your xterm to output properly (e.g. <B
+CLASS="command"
+>less</B
+>, which is why <B
+CLASS="command"
+>cat
+</B
+> is used in the examples above), you may also need to set the LANG environment variable to
+<TT
+CLASS="replaceable"
+><I
+>LL_CC</I
+></TT
+>.UTF-8, where LL_CC is your language and country code.
+</P
+><P
+>&#13;If you want to be able type into this <B
+CLASS="command"
+>xterm</B
+>, you'll need to configure
+your <B
+CLASS="command"
+>bash</B
+> shell not to escape 8-bit characters, see <A
+HREF="cygwin-x-faq.html#q-bash-extended-chars"
+>Q: 5.2.1.</A
+>
+</P
+><P
+>&#13;See also <A
+HREF="http://cygwin.com/faq/faq-nochunks.html#faq.using.unicode"
+TARGET="_top"
+>the main Cygwin FAQ question on unicode
+support in Cygwin</A
+>
+</P
 ></DIV
 ></DIV
 ></DIV
@@ -5389,7 +5558,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN1073"
+NAME="AEN1105"
 ></A
 ><P
 ><B
