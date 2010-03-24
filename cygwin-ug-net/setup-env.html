@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Environment Variables</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="prev" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="next" href="setup-maxmem.html" title="Changing Cygwin's Maximum Memory"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Environment Variables</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-net.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;2.&#160;Setting Up Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="setup-maxmem.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Environment Variables"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-env"></a>Environment Variables</h2></div></div></div><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Environment Variables</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="prev" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="next" href="setup-maxmem.html" title="Changing Cygwin's Maximum Memory"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Environment Variables</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-net.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;2.&#160;Setting Up Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="setup-maxmem.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-env"></a>Environment Variables</h2></div></div></div><p>
 You may wish to specify settings of several important environment
 variables that affect Cygwin's operation.  Some of these settings need
 to be in effect prior to launching the initial Cygwin session (before
@@ -18,12 +18,14 @@ to support job control with ^Z etc...) using a syntax like this in the
 DOS shell, before launching bash.</p><pre class="screen">
 <code class="prompt">C:\&gt;</code> <strong class="userinput"><code>set CYGWIN=tty notitle glob</code></strong>
 </pre><p>
+For all possible settings of the <code class="envar">CYGWIN</code> environment variable,
+see <a class="xref" href="using-cygwinenv.html" title="The CYGWIN environment variable">the section called &#8220;The CYGWIN environment
+variable&#8221;</a>.
+</p><p>
 Locale support is controlled by the <code class="envar">LANG</code> and
-<code class="envar">LC_xxx</code> environment variables.  You can set all of them
-but Cygwin itself only honors the variables <code class="envar">LC_ALL</code>,
-<code class="envar">LC_CTYPE</code>, and <code class="envar">LANG</code>, in this order, according
-to the POSIX standard.  The first one found rules.  For a more detailed
-description see <a class="xref" href="setup-locale.html" title="Internationalization">the section called &#8220;Internationalization&#8221;</a>.
+<code class="envar">LC_xxx</code> environment variables.  Since Cygwin 1.7.2, all of
+them are honored and have a meaning.  For a more detailed description see
+<a class="xref" href="setup-locale.html" title="Internationalization">the section called &#8220;Internationalization&#8221;</a>.
 </p><p>
 The <code class="envar">PATH</code> environment variable is used by Cygwin
 applications as a list of directories to search for executable files
