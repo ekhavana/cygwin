@@ -34,32 +34,11 @@ mode just like in calls to fopen().</p></li><li><p>Sockets and other non-file de
 Non-Cygwin shells always pipe and redirect with binary mode. With
 non-Cygwin shells the commands <span class="command"><strong> cat filename | program </strong></span>
 and <span class="command"><strong> program &lt; filename </strong></span> are not equivalent when
-<code class="filename">filename</code> is on a text-mounted partition. </p></li></ol></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="textbin-example"></a>Example</h3></div></div></div><p>To illustrate the various rules, we provide scripts to delete CRs
-from files by using the <span class="command"><strong>tr</strong></span> program, which can only write
-to standard output. 
-The script</p><pre class="screen">
-
-#!/bin/sh
-# Remove \r from the file given as argument
-tr -d '\r' &lt; "$1" &gt; "$1".nocr
-
-</pre><p> will not work on a text mounted systems because the \r will be 
-reintroduced on writing. However scripts such as </p><pre class="screen">
-
-#!/bin/sh
-# Remove \r from the file given as argument
-tr -d '\r' | gzip | gunzip &gt; "$1".nocr
-
-</pre><p>and the .bat file</p><pre class="screen">
-
-REM Remove \r from the file given as argument
-@echo off
-tr -d \r &lt; %1 &gt; %1.nocr
-
-</pre><p> work fine. In the first case we rely on <span class="command"><strong>gunzip</strong></span> to
-set its output to binary mode, possibly overriding the mode used by the shell.
-In the second case we rely on the DOS shell to redirect in binary mode.
-</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="textbin-question"></a>Binary or text?</h3></div></div></div><p>UNIX programs that have been written for maximum portability
+<code class="filename">filename</code> is on a text-mounted partition. </p><p>The programs <span class="command"><strong>u2d</strong></span> and <span class="command"><strong>d2u</strong></span> can
+be used to add or remove CR's from a file.  <span class="command"><strong>u2d</strong></span> add's CR's before a NL.
+<span class="command"><strong>d2u</strong></span> removes CR's.  Use the --help option to these commands
+for more information.
+</p></li></ol></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="textbin-question"></a>Binary or text?</h3></div></div></div><p>UNIX programs that have been written for maximum portability
 will know the difference between text and binary files and act
 appropriately under Cygwin.  Most programs included in the official
 Cygwin distributions should work well in the default mode. </p><p>Binmode is the best choice usually since it's faster and
