@@ -16,8 +16,9 @@ shaing the same file descriptor.</p><p><code class="function">fpclassify</code>,
 only support float and double arguments, not long double arguments.</p><p><code class="function">getitimer</code> and <code class="function">setitimer</code>
 only support ITIMER_REAL for now.</p><p><code class="function">link</code> will copy the file if it can't implement
 a true hardlink.  This is true at least for FAT and FAT32 filesystems.
-NTFS supports hardlinks.  </p><p><code class="function">lseek</code> only works properly on binary
-files.</p><p><code class="function">setuid</code> is only safe against reverting the user
+NTFS supports hardlinks.  </p><p><code class="function">lseek</code> only works properly on files opened in
+binary mode.  On files opened in textmode (via mount mode or explicit
+open flag) its positioning is potentially unreliable.</p><p><code class="function">setuid</code> is only safe against reverting the user
 switch after a call to one of the exec(2) functions took place.  Windows
 doesn't support a non-revertable user switch within the context of Win32
 processes.</p><p><code class="function">vfork</code> just calls <code class="function">fork</code>.</p><p><code class="function">vhangup</code> always returns -1 and sets errno to
