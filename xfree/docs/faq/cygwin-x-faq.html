@@ -1549,35 +1549,45 @@ CLASS="answer"
 A2:
 </P
 ><P
->&#13;For reasons which are not well understood at present, this error has also been seen where
-<TT
+>&#13;<TT
 CLASS="filename"
 >/tmp</TT
 > resides on a NTFS filesystem.
 </P
 ><P
->&#13;Possible causes:
+>&#13;This can be caused by a stale lock file being left behind after the X server is run by a user with 
+Adminstrator rights, which cannot be overwritten when the X server is next run by a user without
+Adminstrator rights.
+</P
+><P
+>&#13;Failure to clean up the lock file properly is a bug in the X server, but until that is fixed the
+following workarounds may be neccessary.
 </P
 ><OL
 COMPACT="COMPACT"
 TYPE="1"
 ><LI
 ><P
->Bad permissions on <TT
-CLASS="filename"
->/tmp</TT
-></P
+>Try removing the stale lock file using 
+<B
+CLASS="command"
+>rm -f /tmp/.X<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-lock</B
+>
+where <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> is the display number.
+If this fails due to insufficent permissions, you must either get the owner or a user with Adminstrator rights to 
+remove the stale lock file. 
+</P
 ></LI
-><LI
-><P
->Not having administrator rights</P
-></LI
-></OL
-><P
->Possible workarounds:</P
-><OL
-COMPACT="COMPACT"
-TYPE="1"
 ><LI
 ><P
 >Try starting the server with <CODE
@@ -1609,13 +1619,6 @@ CLASS="command"
 >startx -- -nolock</B
 >)</P
 ></LI
-><LI
-><P
->Try <B
-CLASS="command"
->rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp</B
-></P
-></LI
 ></OL
 ><P
 >Technical details:
@@ -1630,10 +1633,8 @@ lock file to determine the pid of an already running server.
 
 The FAT filesystem does not support hardlinks so this operation cannot succeed.
 
-On NFTS filesystems, the failure
-case appears to be that lock file was created successfully, but the rename
-failed, despite the fact that no old lock file exists, which we then fail
-to read (hence the error message).
+On NFTS filesystems, the failure case appears to be that lock file was created successfully, but
+the rename failed due to a stale lock file created by a user with Adminstrator rights.
 </P
 ></DIV
 ></DIV
@@ -2240,9 +2241,12 @@ CLASS="answer"
 ><P
 ><B
 > </B
->There is a keybinding to Ctrl-Alt-BackSpace which is named 
-TerminateServer. Remove this binding and Ctrl-Alt-BackSpace will have no 
-effect.
+>
+This question should be obsolete as the TerminateServer keybinding is
+no longer present by default.
+</P
+><P
+>&#13;The TerminateServer keybinding can be enabled with
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2251,12 +2255,11 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->xmodmap -e "keycode 22 = BackSpace"
-</PRE
+>setxkbmap -option terminate:ctrl_alt_bksp</PRE
 ></TD
 ></TR
 ></TABLE
->
+> 
 </P
 ></DIV
 ></DIV
@@ -5558,7 +5561,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN1105"
+NAME="AEN1102"
 ></A
 ><P
 ><B

@@ -420,19 +420,23 @@ Questions and Answers
 
    A2:
 
-   For reasons which are not well understood at present, this error has
-   also been seen where /tmp resides on a NTFS filesystem.
+   /tmp resides on a NTFS filesystem.
 
-   Possible causes:
-    1. Bad permissions on /tmp
-    2. Not having administrator rights
+   This can be caused by a stale lock file being left behind after the X
+   server is run by a user with Adminstrator rights, which cannot be
+   overwritten when the X server is next run by a user without
+   Adminstrator rights.
 
-   Possible workarounds:
-    1. Try starting the server with -nolock (e.g. if you use
+   Failure to clean up the lock file properly is a bug in the X server,
+   but until that is fixed the following workarounds may be neccessary.
+    1. Try removing the stale lock file using rm -f /tmp/.Xn-lock where n
+       is the display number. If this fails due to insufficent
+       permissions, you must either get the owner or a user with
+       Adminstrator rights to remove the stale lock file.
+    2. Try starting the server with -nolock (e.g. if you use
        startxwin.bat or startxwin.sh to start the server, add -nolock to
        the XWin line in that script; if you use xinit or startx, run it
        as xinit -- -nolock or startx -- -nolock)
-    2. Try rm -rf /tmp; mkdir /tmp ; chmod 1777 /tmp
 
    Technical details: The X server attempts to create a lock file in /tmp
    by creating the file under a temporary name, then renaming it to the
@@ -442,8 +446,8 @@ Questions and Answers
    server. The FAT filesystem does not support hardlinks so this
    operation cannot succeed. On NFTS filesystems, the failure case
    appears to be that lock file was created successfully, but the rename
-   failed, despite the fact that no old lock file exists, which we then
-   fail to read (hence the error message).
+   failed due to a stale lock file created by a user with Adminstrator
+   rights.
 
    3.5. My favourite font has gone! The font Emacs uses is just boxes
 
@@ -578,10 +582,11 @@ $ nedit
    4.6. The option -nounixkill has no effect. How can i prevent the
    server shutdown an Ctrl-Alt-BackSpace?
 
-   There is a keybinding to Ctrl-Alt-BackSpace which is named
-   TerminateServer. Remove this binding and Ctrl-Alt-BackSpace will have
-   no effect.
-   xmodmap -e "keycode 22 = BackSpace"
+   This question should be obsolete as the TerminateServer keybinding is
+   no longer present by default.
+
+   The TerminateServer keybinding can be enabled with
+   setxkbmap -option terminate:ctrl_alt_bksp
 
    4.7. I have a multihead system. Do I need special options to make it
    work? I have a multihead system. Why are my X-application windows
