@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Environment Variables</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="prev" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="next" href="setup-maxmem.html" title="Changing Cygwin's Maximum Memory"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Environment Variables</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-net.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;2.&#160;Setting Up Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="setup-maxmem.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-env"></a>Environment Variables</h2></div></div></div><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Environment Variables</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"><link rel="prev" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"><link rel="next" href="setup-maxmem.html" title="Changing Cygwin's Maximum Memory"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Environment Variables</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-net.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Setting Up Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="setup-maxmem.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-env"></a>Environment Variables</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-env-ov"></a>Overview</h3></div></div></div><p>
 You may wish to specify settings of several important environment
 variables that affect Cygwin's operation.  Some of these settings need
 to be in effect prior to launching the initial Cygwin session (before
@@ -19,13 +19,13 @@ DOS shell, before launching bash.</p><pre class="screen">
 <code class="prompt">C:\&gt;</code> <strong class="userinput"><code>set CYGWIN=tty notitle glob</code></strong>
 </pre><p>
 For all possible settings of the <code class="envar">CYGWIN</code> environment variable,
-see <a class="xref" href="using-cygwinenv.html" title="The CYGWIN environment variable">the section called &#8220;The CYGWIN environment
-variable&#8221;</a>.
+see <a class="xref" href="using-cygwinenv.html" title="The CYGWIN environment variable">the section called “The CYGWIN environment
+variable”</a>.
 </p><p>
 Locale support is controlled by the <code class="envar">LANG</code> and
 <code class="envar">LC_xxx</code> environment variables.  Since Cygwin 1.7.2, all of
 them are honored and have a meaning.  For a more detailed description see
-<a class="xref" href="setup-locale.html" title="Internationalization">the section called &#8220;Internationalization&#8221;</a>.
+<a class="xref" href="setup-locale.html" title="Internationalization">the section called “Internationalization”</a>.
 </p><p>
 The <code class="envar">PATH</code> environment variable is used by Cygwin
 applications as a list of directories to search for executable files
@@ -79,4 +79,18 @@ any other temporary directory of your choice.  For example:
 export TMP=/tmp
 export TEMP=/tmp
 </pre><p>
-</p></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup-net.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="setup-net.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="setup-maxmem.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter&#160;2.&#160;Setting Up Cygwin&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Changing Cygwin's Maximum Memory</td></tr></table></div></body></html>
+</p></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-env-win32"></a>Restricted Win32 environment</h3></div></div></div><p>There is a restriction when calling Win32 API functions which
+require a fully set up application environment.  Cygwin maintains its own
+environment in POSIX style.  The Win32 environment is usually stripped
+to a bare minimum and not at all kept in sync with the Cygwin POSIX
+environment.</p><p>If you need the full Win32 environment set up in a Cygwin process,
+you have to call</p><pre class="screen">
+#include &lt;sys/cygwin.h&gt;
+
+cygwin_internal (CW_SYNC_WINENV);
+</pre><p>to synchronize the Win32 environment with the Cygwin environment.
+Note that this only synchronizes the Win32 environment once with the
+Cygwin environment.  Later changes using the <code class="function">setenv</code>
+or <code class="function">putenv</code> calls are not reflected in the Win32
+environment.  In these cases, you have to call the aforementioned
+<code class="function">cygwin_internal</code> call again.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup-net.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="setup-net.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="setup-maxmem.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 2. Setting Up Cygwin </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> Changing Cygwin's Maximum Memory</td></tr></table></div></body></html>

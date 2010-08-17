@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Highlights of Cygwin Functionality</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter&#160;1.&#160;Cygwin Overview"><link rel="prev" href="brief-history.html" title="A brief history of the Cygwin project"><link rel="next" href="ov-new1.7.html" title="What's new and what changed in Cygwin 1.7"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Highlights of Cygwin Functionality</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="brief-history.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;1.&#160;Cygwin Overview</th><td width="20%" align="right">&#160;<a accesskey="n" href="ov-new1.7.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="highlights"></a>Highlights of Cygwin Functionality</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-intro"></a>Introduction</h3></div></div></div><p>When a binary linked
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Highlights of Cygwin Functionality</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="brief-history.html" title="A brief history of the Cygwin project"><link rel="next" href="ov-new1.7.html" title="What's new and what changed in Cygwin 1.7"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Highlights of Cygwin Functionality</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="brief-history.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="ov-new1.7.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="highlights"></a>Highlights of Cygwin Functionality</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-intro"></a>Introduction</h3></div></div></div><p>When a binary linked
 against the library is executed, the Cygwin DLL is loaded into the
 application's text segment.  Because we are trying to emulate a UNIX kernel
 which needs access to all processes running under it, the first Cygwin DLL to
@@ -11,10 +11,12 @@ process-specific information.</p><p>The DLL is implemented as a standard DLL in 
 the hood it's using the Win32 API, as well as the native NT API, where
 appropriate.</p><p>Because processes run under the standard Win32 subsystem, they
 can access both the UNIX compatibility calls provided by Cygwin as well as
-any of the Win32 API calls.  This gives the programmer complete flexibility in
+any of the Win32 API calls.  This gives the programmer some flexibility in
 designing the structure of their program in terms of the APIs used.  For
 example, they could write a Win32-specific GUI using Win32 API calls on top of
-a UNIX back-end that uses Cygwin.</p><p>The native NT API is used mainly for speed, as well as to access
+a UNIX back-end that uses Cygwin.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Some restrictions apply for calls to the Win32 API.
+For details, see <a class="xref" href="setup-env.html#setup-env-win32" title="Restricted Win32 environment">the section called “Restricted Win32 environment”</a>,
+as well as <a class="xref" href="using.html#pathnames-win32-api" title="Using the Win32 file API in Cygwin applications">the section called “Using the Win32 file API in Cygwin applications”</a>.</p></div><p>The native NT API is used mainly for speed, as well as to access
 NT capabilities which are useful to implement certain POSIX features, but
 are hidden to the Win32 API.
 </p><p>Due to some restrictions in Windows, it's not always possible
@@ -30,7 +32,7 @@ Because many programs expect to be able to find the
 that can be used to construct them from the user and group information
 provided by the operating system.</p><p>Users with Administrator rights are permitted to chown files.
 With version 1.1.3 Cygwin introduced a mechanism for setting real and
-effective UIDs. This is described in <a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called &#8220;Using Windows security in Cygwin&#8221;</a>.  As
+effective UIDs. This is described in <a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called “Using Windows security in Cygwin”</a>.  As
 of version 1.5.13, the Cygwin developers are not aware of any feature in
 the Cygwin DLL that would allow users to gain privileges or to access
 objects to which they have no rights under Windows.  However there is no
@@ -89,7 +91,7 @@ the filename of the target file, to better support internationalization.
 Symlinks created by older Cygwin releases can be read just fine.  However,
 you could run into problems with them if you're now using another character
 set than the one you used when creating these symlinks
-(see <a class="xref" href="setup-locale.html#setup-locale-problems" title="Potential Problems when using Locales">the section called &#8220;Potential Problems when using Locales&#8221;</a>.  Please note that this
+(see <a class="xref" href="setup-locale.html#setup-locale-problems" title="Potential Problems when using Locales">the section called “Potential Problems when using Locales”</a>.  Please note that this
 new UTF-16 style of symlinks is not compatible with older Cygwin release,
 which can't read the target filename correctly.</p><p>Hard links are fully supported on NTFS and NFS file systems.  On FAT
 and other file systems which don't support hardlinks, the call returns with
@@ -242,4 +244,4 @@ respective type with the appropriate Win32 API call.  As soon as a
 thread identifies a ready descriptor, that thread signals the main
 thread to wake up.  This case is now the same as the first one since
 we know at least one descriptor is ready.  So select returns, after
-polling all of the file descriptors one last time.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="brief-history.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="overview.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="ov-new1.7.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">A brief history of the Cygwin project&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;What's new and what changed in Cygwin 1.7</td></tr></table></div></body></html>
+polling all of the file descriptors one last time.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="brief-history.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="overview.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ov-new1.7.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">A brief history of the Cygwin project </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> What's new and what changed in Cygwin 1.7</td></tr></table></div></body></html>

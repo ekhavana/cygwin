@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Internationalization</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter&#160;2.&#160;Setting Up Cygwin"><link rel="prev" href="setup-maxmem.html" title="Changing Cygwin's Maximum Memory"><link rel="next" href="ntsec.html" title="Using Windows security in Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Internationalization</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-maxmem.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;2.&#160;Setting Up Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-locale"></a>Internationalization</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-ov"></a>Overview</h3></div></div></div><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Internationalization</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.74.0"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"><link rel="prev" href="setup-maxmem.html" title="Changing Cygwin's Maximum Memory"><link rel="next" href="ntsec.html" title="Using Windows security in Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Internationalization</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setup-maxmem.html">Prev</a> </td><th width="60%" align="center">Chapter 2. Setting Up Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="ntsec.html">Next</a></td></tr></table><hr></div><div class="sect1" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="setup-locale"></a>Internationalization</h2></div></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-ov"></a>Overview</h3></div></div></div><p>
 Internationalization support is controlled by the <code class="envar">LANG</code> and
 <code class="envar">LC_xxx</code> environment variables.  You can set all of them
 but Cygwin itself only honors the variables <code class="envar">LC_ALL</code>,
@@ -138,15 +138,15 @@ desktop shortcut.</p><pre class="screen">
   bash --login -i
 </pre><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>For a list of locales supported by your Windows machine, use the new
 &gt;<span class="command"><strong>locale -a</strong></span> command, which is part of the Cygwin package.
-For a description see <a class="xref" href="using-utils.html#locale" title="locale">the section called &#8220;locale&#8221;</a></p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>For a list of supported character sets, see
-<a class="xref" href="setup-locale.html#setup-locale-charsetlist" title="List of supported character sets">the section called &#8220;List of supported character sets&#8221;</a>
+For a description see <a class="xref" href="using-utils.html#locale" title="locale">the section called “locale”</a></p></div><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>For a list of supported character sets, see
+<a class="xref" href="setup-locale.html#setup-locale-charsetlist" title="List of supported character sets">the section called “List of supported character sets”</a>
 </p></div></li><li style="list-style-type: disc"><p>
 Last, but not least, most singlebyte or doublebyte charsets have a big
 disadvantage.  Windows filesystems use the Unicode character set in the
 UTF-16 encoding to store filename information.  Not all characters
 from the Unicode character set are available in a singlebyte or doublebyte
 charset.  While Cygwin has a workaround to access files with unusual
-characters (see <a class="xref" href="using-specialnames.html#pathnames-unusual" title="Filenames with unusual (foreign) characters">the section called &#8220;Filenames with unusual (foreign) characters&#8221;</a>), a better
+characters (see <a class="xref" href="using-specialnames.html#pathnames-unusual" title="Filenames with unusual (foreign) characters">the section called “Filenames with unusual (foreign) characters”</a>), a better
 workaround is to use always the UTF-8 character set.i</p><p><span class="emphasis"><em>UTF-8 is the only multibyte character set which can represent
 every Unicode character.</em></span></p><pre class="screen">
   set LANG=es_MX.UTF-8
@@ -161,7 +161,7 @@ process is started in a Windows console (either explicitly from cmd.exe,
 or implicitly by, for instance, clicking on the Cygwin desktop icon, or
 running the Cygwin.bat file), the Console character set is determined by the
 setting of the aforementioned internationalization environment variables,
-the same way as described in <a class="xref" href="setup-locale.html#setup-locale-how" title="How to set the locale">the section called &#8220;How to set the locale&#8221;</a>.
+the same way as described in <a class="xref" href="setup-locale.html#setup-locale-how" title="How to set the locale">the section called “How to set the locale”</a>.
 </p><p>What is that good for?  Why not switch the console character set with
 the applications requirements?  After all, the application knows if it uses
 localization or not.  However, what if a non-localized application calls
@@ -193,7 +193,7 @@ the fly.  A symbolic link contains the filename of the target file the
 symlink points to.  When a symlink had been created with older versions
 of Cygwin, the current ANSI or OEM character set had been used to store
 the target filename, dependent on the old <code class="envar">CYGWIN</code>
-environment variable setting <code class="envar">codepage</code> (see <a class="xref" href="using-cygwinenv.html#cygwinenv-removed-options" title="Obsolete options">the section called &#8220;Obsolete options&#8221;</a>.  If the target filename
+environment variable setting <code class="envar">codepage</code> (see <a class="xref" href="using-cygwinenv.html#cygwinenv-removed-options" title="Obsolete options">the section called “Obsolete options”</a>.  If the target filename
 contains non-ASCII characters and you use another character set than
 your default ANSI/OEM charset, the target filename of the symlink is now
 potentially an invalid character sequence in the new character set.
@@ -283,4 +283,4 @@ of the "CPxxx" style charsets, always use them with the trailing "CP".</p><p>Thi
     TIS620 or TIS-620       874 (ANSI/OEM Thai)
 
     UTF-8 or utf8         65001 (UTF-8)
-</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup-maxmem.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="setup-net.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Changing Cygwin's Maximum Memory&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Using Windows security in Cygwin</td></tr></table></div></body></html>
+</pre></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="setup-maxmem.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="setup-net.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ntsec.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Changing Cygwin's Maximum Memory </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> Using Windows security in Cygwin</td></tr></table></div></body></html>
