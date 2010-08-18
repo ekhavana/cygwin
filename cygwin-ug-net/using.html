@@ -228,14 +228,16 @@ functions like <code class="function">CreateFile</code> to access files using re
 pathnames.</p><p>When a Cygwin application is started, the Win32 idea of the current
 working directory (CWD) is set to an invalid directory.  This works around
 the problem that the Win32 CWD is locked in a way which restricts POSIX
-functionality.  However, the side effect is that a call to, say,
+functionality.  However, the side effect is that a call to, for instance,
 <code class="function">CreateFile ("foo", ...);</code> will fail, since the Win32
 notion of the CWD is <span class="emphasis"><em>not</em></span> the same as the Cygwin notion
 of the CWD.</p><p>So, in general, don't use the Win32 file API in Cygwin applications.
 If you <span class="emphasis"><em>really</em></span> need to access files using the Win32 API,
 and if you <span class="emphasis"><em>really</em></span> have to use relative pathnames,
 you have two choices.</p><div class="itemizedlist"><ul type="disc" compact><li><p>Either you call <code class="function">SetCurrentDirectory</code> before
-    calling <code class="function">CreateFile</code>.</p></li><li><p>Or you compile your application as native Win32 (mingw) executable,
+    calling the Win32 function which requires a valid Win32 CWD
+    (<code class="function">CreateFile</code>, <code class="function">CreateProcess</code>,
+    etc).</p></li><li><p>Or you compile your application as native Win32 (mingw) executable,
     rather than as Cygwin executable.</p></li></ul></div></div><div class="sect2" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="pathnames-additional"></a>Additional Path-related Information</h3></div></div></div><p>The <span class="command"><strong>cygpath</strong></span> program provides the ability to
 translate between Win32 and POSIX pathnames in shell scripts. See
 <a class="xref" href="using-utils.html#cygpath" title="cygpath">the section called “cygpath”</a> for the details.</p><p>The <code class="envar">HOME</code>, <code class="envar">PATH</code>, and
