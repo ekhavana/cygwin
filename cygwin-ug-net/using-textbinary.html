@@ -77,17 +77,21 @@ of the underlying mount point, just add the file
 <code class="filename">/lib/binmode.o</code> to the link stage of the application
 in your project, like this:</p><pre class="screen">
   $ gcc my_tiny_app.c /lib/binmode.o -o my_tiny_app
+</pre><p>Starting with Cygwin 1.7.7, you can use the even simpler:</p><pre class="screen">
+  $ gcc my_tiny_app.c -lbinmode -o my_tiny_app
 </pre><p>This adds code which sets the default open mode for all files
 opened by <span class="command"><strong>my_tiny_app</strong></span> to binary for reading and
-writing.</p><p>Cygwin provides the following object files to set the default open mode
-just by linking an application against them:</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><pre class="screen">
-/lib/automode.o      -  Open files for reading in textmode
-                        Open files for writing in binary mode
+writing.</p><p>Cygwin provides the following libraries and object files to set the
+default open mode just by linking an application against them:</p><div class="itemizedlist"><ul type="bullet"><li style="list-style-type: disc"><pre class="screen">
+/lib/libautomode.a      -  Open files for reading in textmode,
+/lib/automode.o            open files for writing in binary mode
 </pre></li><li style="list-style-type: disc"><pre class="screen">
-/lib/binmode.o       -  Open files for reading and writing in binary mode
+/lib/libbinmode.a       -  Open files for reading and writing in binary mode
+/lib/binmode.o
 </pre></li><li style="list-style-type: disc"><pre class="screen">
-/lib/textmode.o      -  Open files for reading and writing in textmode
+/lib/libtextmode.a      -  Open files for reading and writing in textmode
+/lib/textmode.o
 </pre></li><li style="list-style-type: disc"><pre class="screen">
-/lib/textreadmode.o  -  Open files for reading in textmode
-                        Keep default behaviour for writing.
+/lib/libtextreadmode.a  -  Open files for reading in textmode,
+/lib/textreadmode.o        keep default behaviour for writing.
 </pre></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="using-filemodes.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Chapter 3. Using Cygwin </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> File permissions</td></tr></table></div></body></html>

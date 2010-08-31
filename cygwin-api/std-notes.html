@@ -3,26 +3,26 @@
 by keeping track of the current root and accomodating this in the file
 related function calls.  A real chroot functionality is not supported by
 Windows however.</p><p><code class="function">clock_getres</code>, <code class="function">clock_gettime</code>
-and <code class="function">clock_setres</code> only support CLOCK_REALTIME for
-now.</p><p>BSD file locks created via <code class="function">flock</code> are not
+and <code class="function">clock_setres</code> only support CLOCK_REALTIME and
+CLOCK_MONOTONIC for now.</p><p>BSD file locks created via <code class="function">flock</code> are not
 propagated to the parent process and sibling processes.  The locks are
 only valid in the creating process and subsequently started child processes
-shaing the same file descriptor.</p><p><code class="function">fpclassify</code>, <code class="function">isfinite</code>,
+sharing the same file descriptor.</p><p><code class="function">fpclassify</code>, <code class="function">isfinite</code>,
 <code class="function">isgreater</code>, <code class="function">isgreaterequal</code>,
 <code class="function">isinf</code>, <code class="function">isless</code>,
 <code class="function">islessequal</code>, <code class="function">islessgreater</code>,
 <code class="function">isnan</code>, <code class="function">isnormal</code>,
 <code class="function">isunordered</code>, and <code class="function">signbit</code>
 only support float and double arguments, not long double arguments.</p><p><code class="function">getitimer</code> and <code class="function">setitimer</code>
-only support ITIMER_REAL for now.</p><p><code class="function">link</code> will copy the file if it can't implement
-a true hardlink.  This is true at least for FAT and FAT32 filesystems.
-NTFS supports hardlinks.  </p><p><code class="function">lseek</code> only works properly on files opened in
+only support ITIMER_REAL for now.</p><p><code class="function">link</code> will fail on FAT, FAT32, and other filesystems
+not supporting hardlinks, just as on Linux.</p><p><code class="function">lseek</code> only works properly on files opened in
 binary mode.  On files opened in textmode (via mount mode or explicit
 open flag) its positioning is potentially unreliable.</p><p><code class="function">setuid</code> is only safe against reverting the user
 switch after a call to one of the exec(2) functions took place.  Windows
 doesn't support a non-revertable user switch within the context of Win32
-processes.</p><p><code class="function">vfork</code> just calls <code class="function">fork</code>.</p><p><code class="function">vhangup</code> always returns -1 and sets errno to
-ENOSYS.</p><p>The XSI IPC functions <code class="function">semctl</code>,
+processes.</p><p><code class="function">vfork</code> just calls <code class="function">fork</code>.</p><p><code class="function">vhangup</code> and <code class="function">revoke</code> always
+return -1 and set errno to ENOSYS.  <code class="function">grantpt</code> and
+<code class="function">unlockpt</code> always just return 0.</p><p>The XSI IPC functions <code class="function">semctl</code>,
 <code class="function">semget</code>, <code class="function">semop</code>,
 <code class="function">shmat</code>, <code class="function">shmctl</code>,
 <code class="function">shmdt</code>, <code class="function">shmget</code>,
