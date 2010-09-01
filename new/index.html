@@ -12,39 +12,47 @@
 <h1>This is the home of the Cygwin project</h1>
 <div id="background">
 <b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
-<h2>What is it?</h2>
+<h2>What...</h2>
 <b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
 </div>
-<br><p>Cygwin is a Linux-like environment for Windows.
-It consists of two parts:</p><ul>
-<li>A DLL (cygwin1.dll) which acts as a Linux API emulation layer providing
-substantial Linux API functionality.
-<li>A collection of tools which provide Linux look and feel.</p>
-</ul>
-
-<p>The Cygwin DLL currently works with all recent, commercially released
-x86 32 bit and 64 bit versions of Windows, with the exception of Windows
-CE.</p>
-<div id="background">
-<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
-<h2>What isn't it?</h2>
-<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
-</div>
-<br>
+<div id="wrap">
+<div id="leftwhat">
+<br><h2>...is it?</h3>
+<h4></h4>
+<p>Cygwin is:
 <ul>
-<li>Cygwin is <strong>not</strong> a way to run native linux apps on Windows.  You have
-to rebuild your application <em>from source</em> if you want it to run on Windows.
-<li>Cygwin is <strong>not</strong> a way to magically make native Windows apps aware of UNIX&reg;
+<li>a collection of tools which provide a Linux look and feel environment for Windows.</p>
+<li>a DLL (cygwin1.dll) which acts as a Linux API emulation layer providing
+substantial Linux API functionality.
+</ul>
+</div>
+<div id="rightwhat">
+<br><h2>...isn't it?</h3>
+<h4></h4>
+<p>Cygwin is not:
+<ul>
+<li>a way to run native Linux apps on Windows.  You must
+rebuild your application <em>from source</em> if you want it to run on Windows.
+<li>a way to magically make native Windows apps aware of UNIX&reg;
 functionality like signals, ptys, etc.  Again, you need to build your apps <em>from source</em>
 if you want to take advantage of Cygwin functionality.
 </ul>
+</div>
+</div>
+<div style="clear:both; border-top: 2px solid #e8e8e8;"></div>
+<p>
+<p>The Cygwin DLL currently works with all recent, commercially released
+x86 32 bit and 64 bit versions of Windows, with the exception of Windows
+CE.
 <p>For more information see the <a href="http://cygwin.com/faq/faq-nochunks.html#faq.what">FAQ</a>.
 <div id="background">
 <b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
 <h2>Current Cygwin DLL version</h2>
 <b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
 </div>
-<br><p>The most recent version of the Cygwin DLL is <a href="http://cygwin.com/ml/cygwin-announce/2010-04/msg00021.html">1.7.5</a>.  You can install it by running <a href="http://cygwin.com/setup.exe">setup.exe</a>.  Use <a href="http://cygwin.com/setup.exe">setup.exe</a> for either a fresh install or for an update to an existing installation.  Note that individual packages in the distribution are updated separately from the DLL so the Cygwin DLL version is not useful as a Cygwin release indicator.
+<br><p>The most recent version of the Cygwin DLL is <a href="http://cygwin.com/ml/cygwin-announce/2010-08/msg00035.html">1.7.7-1</a>.  Install it by running <a href="http://cygwin.com/setup.exe">setup.exe</a>.</p>
+<p>Use <a href="http://cygwin.com/setup.exe">setup.exe</a> to perform a <a href="install.html">fresh install</a> or to <a href="install.html">update</a> an existing installation.</p>
+<p>Note that individual packages in the distribution are updated separately from the DLL so the Cygwin DLL version is not useful as a general Cygwin release number.</p>
 <div id="background">
 <b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
 <h2>Updating from Cygwin 1.5.x</h2>
@@ -53,9 +61,10 @@ if you want to take advantage of Cygwin functionality.
 <br><p>Updating from Cygwin 1.5.x to Cygwin 1.7.x may
 require additional <b>manual changes</b>.  Most notably the mount point
 storage has been moved out of the registry into files.  During installation, standard system mount points are automatically copied from the registry but user mount points
-are <b>NOT</b> copied into the new user-specific /etc/fstab.d/$USER file.
-If you use user mount points then every  user will have to run the <b>/bin/copy-user-registry-fstab</b>
-shell script once after the update.  <b>PLEASE</b> read the new
+<em>are not copied into the user-specific</em> <tt>/etc/fstab.d/$USER</tt> file.
+If you use user mount points then every  user will have to run the <nobr><tt>/bin/copy-user-registry-fstab</tt></nobr>
+shell script once after the update.
+<p><b>PLEASE</b> read the
 <a href="http://cygwin.com/cygwin-ug-net/ov-new1.7.html">User's Guide</a> before upgrading your
 Cygwin installation to 1.7.  You'll be avoiding future trouble if you do this.</p>
 <div id="background">
