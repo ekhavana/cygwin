@@ -37,8 +37,6 @@
             <tr>
                 <td><b>Summary</b></td>
 
-                <td><b>Updated</b></td>
-
                 <td><b>Description</b></td>
             </tr>
         </thead>
@@ -50,15 +48,30 @@
                         <td></td>
 
                         <td></td>
-
-                        <td></td>
                         </tr>
                         -->
 
             <tr valign="top">
-              <td>Regression and stability Testing</td>
+              <td>native IME - XIM bridge</td>
+                            
+              <td>Kensuke Matsuzaki wrote some 
+                  <a href="http://www.cygwin.com/ml/cygwin-xfree/2005-01/msg00066.html">clever code</a>
+                  which provides a bridge between Windows native IME and XIM.
+                  This should be brought up to date and integrated.
+              </td>
+            </tr>
+
+            <tr valign="top">
+              <td>Animated cursors</td>
               
-              <td>2008-08-09</td>
+              <td>Are we converting every frame of an animated cursor every time it appears?
+	          Build on the work in <a href="http://cgit.freedesktop.org/~ajax/xserver/commit/?h=dmx-2&id=1d401db26613ccd24d6f218f459bf824710e7b44">this commit</a> 
+	          to allow the XWin DDX visibility of the animated cursor, so it can do something cleverer.
+              </td>
+            </tr>
+
+            <tr valign="top">
+              <td>Regression and stability Testing</td>
               
               <td>Upgrade to modular X11R7.4 has inevitably introduced some bugs. 
 		  Cygwin 1.7 seems to have brought a few new issues as well.
@@ -67,9 +80,7 @@
 
             <tr valign="top">
               <td>-mwextwm mode and xwinwm</td>
-              
-              <td>2008-08-09</td>
-              
+                            
               <td><strike>Needs fixing to build, and work again</strike>.
 	      Should build and work now, but needs looking at to see what it lacks compared to the internal WM.
 	      An external WM is desirable for a couple of reasons, not least of which is that it can be updated without updating the server,
@@ -80,16 +91,12 @@
             <tr valign="top">
               <td><strike>Command line parameters</strike></td>
               
-              <td><strike>2008-11-26</strike></td>
-              
               <td><strike>-help, the man page, and the user guide all
               need updating and synchronizing with what the source actually does</strike></td>
             </tr>
 
             <tr valign="top">
               <td>XVideo?</td>
-              
-              <td>2008-11-26</td>
               
               <td>The XVideo extension is currently disabled.  There is some
 skeleton code in the server, but it doesn't do anything yet.
@@ -99,8 +106,6 @@ skeleton code in the server, but it doesn't do anything yet.
 
             <tr valign="top">
                 <td>Composite</td>
-
-                <td>2008-11-26</td>
 
                 <td>Find and fix Composite bugs in rooted mode.
                   Cunning plans for compositing in multiwindow mode (using Win2K+ window transparency)?
@@ -112,8 +117,6 @@ skeleton code in the server, but it doesn't do anything yet.
             <tr valign="top">
                 <td>Windows display size changes while running.
                     Monitor count/position changes while running.</td>
-
-                <td>2008-11-26</td>
 
                 <td>Use RandR (resize and rotate) to pass changes
                 to the display size (e.g. from 1024 x 768 to 1280 x
@@ -132,8 +135,6 @@ skeleton code in the server, but it doesn't do anything yet.
             <tr valign="top">
                 <td>Improve Windows clipboard integration</td>
 
-                <td>2008-11-26</td>
-
                 <td>Stamp out remaining clipboard bugs.
 
                   Extend the
@@ -143,9 +144,7 @@ skeleton code in the server, but it doesn't do anything yet.
             </tr>
 
             <tr valign="top">
-                <td><<strike>>User's Guide - Document .XWinrc</strike></td>
-
-                <td><strike>2008-11-26</strike></td>
+                <td><strike>User's Guide - Document .XWinrc</strike></td>
 
                 <td><strike>Documentation needs to be added to the User's
                 Guide for Earle F Philhower III's .XWinrc
@@ -160,17 +159,17 @@ skeleton code in the server, but it doesn't do anything yet.
             <tr valign="top">
                 <td>GUI mechanism for opening the log file</td>
 
-                <td>2008-11-26</td>
-
                 <td>Add an item to the tray-icon right-click menu
-                to open the log file (in Notepad)
-                (probably by using ShellExecute()?)</td>
+                to open the log file<p>
+		Adding a line like <code>"View logfile" EXEC "xterm -e less +F /var/log/XWin.0.log"</code>
+		to the default XWinrc is almost enough.
+		We need to get the correct logfile name for non-default display or -logfile options, though.
+		</td>
+
             </tr>
 
             <tr valign="top">
                 <td>FatalError Dialog Box</td>
-
-                <td>2008-11-26</td>
 
                 <td>Change the FatalError message box to a dialog
                 box with helpful links?</td>
@@ -178,8 +177,6 @@ skeleton code in the server, but it doesn't do anything yet.
 
             <tr valign="top">
                 <td>Indirect OpenGL acceleration (AIGLX)</td>
-
-                <td>2008-08-09</td>
 
                 <td>Testing of the implementation of indirect OpenGL acceleration using native WGL.
 		Additional information is in the
@@ -189,9 +186,27 @@ skeleton code in the server, but it doesn't do anything yet.
             </tr>
 
             <tr valign="top">
-                <td>Automatically assign display number</td>
+                <td>Detect in-use display number ports</td>
 
-                <td>2004-03-04</td>
+                <td>Display number <i>n</i> in X11 listens on TCP
+                port 6000 + <i>n</i>. As of our X Server release
+                4.3.0-49 we check for other instances of XWin.exe
+                running on a given display number, but we perform
+                no checks for other applications listening on port
+                6000 + <i>n</i>. We may not be able to atomically
+                check port 6000 + <i>n</i> and start listening on
+                it if it is not in use, but we can at least perform
+                a sanity check with only a small window where
+                another application could start listening on that
+                port before we started listening on it; this would
+                be a sufficient fix for our purposes. Other
+                developers can help with adding command-line
+                parameters to control this feature once the above
+                code is finished.</td>
+            </tr>
+
+            <tr valign="top">
+                <td>Automatically assign display number</td>
 
                 <td>Coupled with the detection of in-use display
                 numbers, it would be advantageous if we could
@@ -219,35 +234,13 @@ skeleton code in the server, but it doesn't do anything yet.
                 applications attaching to the wrong display.<p>
 	        Perhaps simply place a correctly set DISPLAY into the
                 environment of processes started via the taskbar icon.
-		tbh, I'm not sure what problem we are trying to solve here. </td>
-            </tr>
-
-            <tr valign="top">
-                <td>Detect in-use display number ports</td>
-
-                <td>2004-03-04</td>
-
-                <td>Display number <i>n</i> in X11 listens on TCP
-                port 6000 + <i>n</i>. As of our X Server release
-                4.3.0-49 we check for other instances of XWin.exe
-                running on a given display number, but we perform
-                no checks for other applications listening on port
-                6000 + <i>n</i>. We may not be able to atomically
-                check port 6000 + <i>n</i> and start listening on
-                it if it is not in use, but we can at least perform
-                a sanity check with only a small window where
-                another application could start listening on that
-                port before we started listening on it; this would
-                be a sufficient fix for our purposes. Other
-                developers can help with adding command-line
-                parameters to control this feature once the above
-                code is finished.</td>
+		tbh, I'm not sure what problem we are trying to solve here.<p>
+		-displayfd patch used in fedora could address both
+		these issues </td>
             </tr>
 
             <tr valign="top">
                 <td><strike>Timestamp on log file entries</strike></td>
-
-                <td><strike>2009-08-09</td>
 
                 <td><strike>Add a timestamp to each line of /tmp/XWin.log,
                 as suggested by Ehud Karni on 2004-03-03. Ehud also
@@ -261,8 +254,6 @@ skeleton code in the server, but it doesn't do anything yet.
 
             <tr valign="top">
                 <td>MultiWindow DirectDraw and DirectDraw NL</td>
-
-                <td>2004-03-04</td>
 
                 <td>Blit updates from a DirectDraw shadow
                 framebuffer to the updated Win32 window instead of
@@ -279,8 +270,6 @@ skeleton code in the server, but it doesn't do anything yet.
             <tr valign="top">
                 <td>Emulate PseudoColor on TrueColor</td>
 
-                <td>2003-09-23</td>
-
                 <td>Provide emulation of PseudoColor visuals
                 (typically 8-bit palette-based visuals) on top of
                 the default TrueColor visual (when running in 15,
@@ -292,13 +281,14 @@ skeleton code in the server, but it doesn't do anything yet.
                 between offscreen and onscreen, as well as between
                 areas on the screen; these checks test for
                 differing visual types and convert the pixels and
-                colors accordingly.</td>
+                colors accordingly.</p>
+
+                See also upstream bug <a href="http://bugs.freedesktop.org/show_bug.cgi?id=4770">#4770</a>.
+                </td>
             </tr>
 
             <tr valign="top">
                 <td>DirectDraw windowed PseudoColor</td>
-
-                <td>2003-08-27</td>
 
                 <td>Figure out a satisfactory solution for enabling
                 DirectDraw engines to support PseudoColor visuals
