@@ -34,7 +34,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Cygwin/X User's Guide: Generated 2010-08-26 17:23&#13;</TH
+>Cygwin/X User's Guide: Generated 2010-10-23 12:22&#13;</TH
 ></TR
 ><TR
 ><TD
@@ -110,7 +110,7 @@ installed.</P
 ></LI
 ><LI
 ><P
->Run the following in an X terminal:</P
+>Run the following in a terminal:</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -119,7 +119,13 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;$ ssh -Y <TT
+>&#13;$ export DISPLAY=<TT
+CLASS="replaceable"
+><I
+>:0.0</I
+></TT
+>
+$ ssh -Y <TT
 CLASS="replaceable"
 ><I
 >username</I
@@ -258,23 +264,12 @@ CLASS="command"
 > session type,
 <KBD
 CLASS="userinput"
->DISPLAY=<TT
+>export DISPLAY=<TT
 CLASS="replaceable"
 ><I
 >windows_hostname_or_ip_address</I
 ></TT
 >:0.0</KBD
-></P
-></LI
-><LI
-><P
->In your <B
-CLASS="command"
->telnet</B
-> session type,
-<KBD
-CLASS="userinput"
->export DISPLAY</KBD
 ></P
 ></LI
 ><LI
@@ -304,6 +299,27 @@ CLASS="command"
 > sessions.</P
 ></LI
 ></OL
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+This is <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>insecure</I
+></SPAN
+> because the X protocol is transmitted in clear
+across the network between you and the remote host, and you have allowed any user
+on the remote host to connect to your X server and monitor your X session.  For this
+reason, use ssh forwarding rather than telnet, if at all possible.
+</P
+></BLOCKQUOTE
+></DIV
 ></DIV
 ></DIV
 ><DIV

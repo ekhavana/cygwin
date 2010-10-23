@@ -1,7 +1,7 @@
 
 Cygwin/X Frequently Asked Questions
 
-Generated 2010-08-26 17:23
+Generated 2010-10-23 12:22
      _________________________________________________________________
 
    Table of Contents
@@ -397,21 +397,28 @@ Questions and Answers
 
    3.4. Fatal server error: Can't read lock file /tmp/.X0-lock
 
-   A1:
+   A1: /tmp resides on a FAT filesystem
 
-   /tmp resides on a FAT filesystem
+   Start the server with -nolock
+     * If you use the start menu shortcut to start the X server, you will
+       need to amend it to add the -nolock option, e.g.
+       C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin
+       -- -nolock"
 
-   Start the server with -nolock (e.g. if you use startxwin.bat or
-   startxwin.sh to start the server, add -nolock to the XWin line in that
-   script; if you use startxwin, xinit or startx, run it as startxwin --
-   -nolock, xinit -- -nolock or startx -- -nolock)
+     Note: Note well that the entire command after -c is quoted
+
+     Note: Note that this start menu shortcut is created by the xinit
+     package, and your changes will be overwritten when the xinit
+     package is updated.
+     * If you use startxwin, xinit or startx to start the server, run it
+       as startxwin -- -nolock, xinit -- -nolock or startx -- -nolock
+     * If you use startxwin.bat or startxwin.sh to start the server, add
+       -nolock to the XWin line in that script.
 
    You should really consider updating the filesystem to NTFS using
    Microsoft's convert.exe tool.
 
-   A2:
-
-   /tmp resides on a NTFS filesystem.
+   A2: /tmp resides on a NTFS filesystem.
 
    This can be caused by a stale lock file being left behind after the X
    server is run by a user with Adminstrator rights, which cannot be
@@ -635,7 +642,8 @@ $ nedit
    cygwin-xfree@cygwin.com. Please include the following information in
    your mail:
      * The windows keyboard layout code and the layout name
-       You will find it in /var/log/XWin.0.log in lines similar to these:
+       You will find it in /var/log/xwin/XWin.0.log in lines similar to
+       these:
 
 (--) winConfigKeyboard - Layout: "00001809" (00001809)
 (EE) Keyboardlayout "Irish" (00001809) is unknown
@@ -1069,16 +1077,16 @@ KillInitClients=false
    8.1. Cygwin/X failed with "Fatal Error". What does this mean?
 
    The Fatal Error is a general error message. More specific information
-   what caused this is available in /var/log/XWin.0.log. Please check the
-   common error messages in the Section called Error and Warning
-   Messages. If your error is not mentioned proceed with Q: 8.4.
+   what caused this is available in /var/log/xwin/XWin.0.log. Please
+   check the common error messages in the Section called Error and
+   Warning Messages. If your error is not mentioned proceed with Q: 8.4.
 
    8.2. Is there a log file that I can look at for diagnostic information
    and error messages?
 
-   Yes. The Cygwin/X log file is located at /var/log/XWin.0.log. You will
-   find solutions to the most common error messages in the Section called
-   Error and Warning Messages.
+   Yes. The Cygwin/X log file is located at /var/log/xwin/XWin.0.log. You
+   will find solutions to the most common error messages in the Section
+   called Error and Warning Messages.
 
    8.3. I have a specific error message, what does it mean?
 
@@ -1097,8 +1105,8 @@ KillInitClients=false
    if the circumstances that produced the error message are significantly
    different from other reports, or if you have additional information
    regarding the error message to contribute. Please include
-   /var/log/XWin.0.log in your mail. This may help us identify the cause
-   of your problem quicker.
+   /var/log/xwin/XWin.0.log in your mail. This may help us identify the
+   cause of your problem quicker.
 
    8.5. My bug report the Cygwin/X mailing list was ignored. What do I do
    now?
@@ -1116,7 +1124,7 @@ KillInitClients=false
    8.6. Why does Cygwin/X freeze right after startup?
 
    Zone Alarm 5 is known to break Cygwin/X. As a result you'll see this
-   line (or a similar) as last output in /var/log/XWin.0.log
+   line (or a similar) as last output in /var/log/xwin/XWin.0.log
 Rules = "xorg" Model = "pc101" Layout = "us" Variant = "(null)" Options = "(nul
 l)"
 

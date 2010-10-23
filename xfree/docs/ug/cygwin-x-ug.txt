@@ -1,7 +1,7 @@
 
 Cygwin/X User's Guide
 
-Generated 2010-08-26 17:23
+Generated 2010-10-23 12:22
 
 Harold L Hunt, II
 
@@ -458,8 +458,9 @@ Secure ssh
    On your Windows machine:
     1. Make sure you have the openssh package installed.
     2. Launch Cygwin/X
-    3. Run the following in an X terminal:
+    3. Run the following in a terminal:
 
+$ export DISPLAY=:0.0
 $ ssh -Y username@remote_hostname_or_ip_address
 
     4. Enter your password when prompted by ssh.
@@ -485,16 +486,21 @@ Insecure telnet
        that Cygwin's telnet is run instead of Microsoft's telnet;
        Microsoft's telnet will crash on startup when run from Cygwin/X.
     5. Login to your remote machine via your telnet session
-    6. In your telnet session type,
+    6. In your telnet session type, export
        DISPLAY=windows_hostname_or_ip_address:0.0
-    7. In your telnet session type, export DISPLAY
-    8. You can now launch remote X clients in your telnet session, for
+    7. You can now launch remote X clients in your telnet session, for
        example, xterm& will launch an xterm running on your remote host
        that will display on your Cygwin/X screen.
-    9. Launch other remote clients in the same manner; I recommend
+    8. Launch other remote clients in the same manner; I recommend
        starting the remote clients in the background, by appending & to
        the command name, so that you don't have to open several telnet
        sessions.
+
+     Note: This is insecure because the X protocol is transmitted in
+     clear across the network between you and the remote host, and you
+     have allowed any user on the remote host to connect to your X
+     server and monitor your X session. For this reason, use ssh
+     forwarding rather than telnet, if at all possible.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License

@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->Generated 2010-08-26 17:23</H2
+>Generated 2010-10-23 12:22</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -1493,19 +1493,75 @@ CLASS="answer"
 ><B
 > </B
 >
-A1:
-</P
-><P
->&#13;<TT
-CLASS="filename"
->/tmp</TT
-> resides on a FAT filesystem
+A1: /tmp resides on a FAT filesystem
 </P
 ><P
 >Start the server with <CODE
 CLASS="parameter"
 >-nolock</CODE
-> (e.g. if you use <TT
+></P
+><UL
+COMPACT="COMPACT"
+><LI
+><P
+>&#13;If you use the start menu shortcut to start the X server, you will need to amend it to add the -nolock option, e.g. <B
+CLASS="command"
+>C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin -- -nolock"</B
+>
+</P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>Note well that the entire command after -c is quoted</P
+></BLOCKQUOTE
+></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>Note that this start menu shortcut is created by the  <TT
+CLASS="filename"
+>xinit</TT
+> package, and your changes will be overwritten when the <TT
+CLASS="filename"
+>xinit</TT
+> package is updated.</P
+></BLOCKQUOTE
+></DIV
+></LI
+><LI
+><P
+>&#13;If you use <B
+CLASS="command"
+>startxwin</B
+>, <B
+CLASS="command"
+>xinit</B
+> or <B
+CLASS="command"
+>startx</B
+> to start the server, run it as <B
+CLASS="command"
+>startxwin -- -nolock</B
+>,  <B
+CLASS="command"
+>xinit -- -nolock</B
+> or  <B
+CLASS="command"
+>startx -- -nolock</B
+>
+</P
+></LI
+><LI
+><P
+>&#13;If you use <TT
 CLASS="filename"
 >startxwin.bat</TT
 > or <TT
@@ -1517,25 +1573,10 @@ CLASS="parameter"
 > to the <B
 CLASS="command"
 >XWin</B
-> line in that script; if you use <B
-CLASS="command"
->startxwin</B
->, <B
-CLASS="command"
->xinit</B
-> or <B
-CLASS="command"
->startx</B
->, run it as <B
-CLASS="command"
->startxwin -- -nolock</B
->,  <B
-CLASS="command"
->xinit -- -nolock</B
-> or  <B
-CLASS="command"
->startx -- -nolock</B
->)</P
+> line in that script.
+</P
+></LI
+></UL
 ><P
 >&#13;You should really consider updating the filesystem to NTFS using Microsoft's <B
 CLASS="command"
@@ -1549,13 +1590,7 @@ CLASS="answer"
 ><B
 > </B
 >
-A2:
-</P
-><P
->&#13;<TT
-CLASS="filename"
->/tmp</TT
-> resides on a NTFS filesystem.
+A2: /tmp resides on a NTFS filesystem.
 </P
 ><P
 >&#13;This can be caused by a stale lock file being left behind after the X server is run by a user with 
@@ -2469,7 +2504,7 @@ Please include the following information in your mail:</P
 ><P
 >You will find it in <TT
 CLASS="filename"
->/var/log/XWin.0.log</TT
+>/var/log/xwin/XWin.0.log</TT
 > in lines similar
 to these:
 <TABLE
@@ -4266,7 +4301,7 @@ CLASS="answer"
 >The Fatal Error is a general error message. More specific information
 what caused this is available in <TT
 CLASS="filename"
->/var/log/XWin.0.log</TT
+>/var/log/xwin/XWin.0.log</TT
 >. Please
 check the common error messages in <A
 HREF="cygwin-x-faq.html#errors"
@@ -4306,7 +4341,7 @@ CLASS="answer"
 >Yes.  The Cygwin/X log file is located at
 <TT
 CLASS="filename"
->/var/log/XWin.0.log</TT
+>/var/log/xwin/XWin.0.log</TT
 >.  You will find solutions to the most
 common error messages in <A
 HREF="cygwin-x-faq.html#errors"
@@ -4380,7 +4415,7 @@ error message are significantly different from other reports, or if
 you have additional information regarding the error message to
 contribute. Please include <TT
 CLASS="filename"
->/var/log/XWin.0.log</TT
+>/var/log/xwin/XWin.0.log</TT
 > in your mail.
 This may help us identify the cause of your problem quicker.</P
 ></DIV
@@ -4438,7 +4473,7 @@ CLASS="answer"
 >Zone Alarm 5 is known to break Cygwin/X. As a result you'll see
 this line (or a similar) as last output in <TT
 CLASS="filename"
->/var/log/XWin.0.log</TT
+>/var/log/xwin/XWin.0.log</TT
 >
 <TABLE
 BORDER="0"
@@ -5587,7 +5622,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN1108"
+NAME="AEN1118"
 ></A
 ><P
 ><B
