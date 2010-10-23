@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XSERVER</TITLE>
 </HEAD><BODY>
 <H1>XSERVER</H1>
-Section: User Commands  (1)<BR>Updated: xorg-server 1.7.1<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.9.0<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -98,15 +98,15 @@ Audit lines are sent as standard error output.
 specifies a file which contains a collection of authorization records used
 to authenticate access.  See also the <I>xdm</I>(1) and 
 <I>Xsecurity</I>(7) manual pages.
-<DT><B>-bs</B>
-
-<DD>
-disables backing store support on all screens.
 <DT><B>-br</B>
 
 <DD>
 sets the default root window to solid black instead of the standard root weave
-pattern.
+pattern.   This is the default unless -retro or -wr is specified.
+<DT><B>-bs</B>
+
+<DD>
+disables backing store support on all screens.
 <DT><B>-c</B>
 
 <DD>
@@ -121,11 +121,18 @@ sets key-click volume (allowable range: 0-100).
 sets the visual class for the root window of color screens.
 The class numbers are as specified in the X protocol.
 Not obeyed by all servers.
-
 <DT><B>-core</B>
 
 <DD>
 causes the server to generate a core dump on fatal errors.
+<DT><B>-displayfd </B><I>fd</I>
+
+<DD>
+specifies a file descriptor in the launching process.  Rather than specify
+a display number, the X server will attempt to listen on successively higher
+display numbers, and upon finding a free one, will write the display number back
+on this file descriptor as a newline-terminated string.  The -pn option is
+ignored when using -displayfd.
 <DT><B>-deferglyphs </B><I>whichfonts</I>
 
 <DD>
@@ -192,6 +199,10 @@ sets the maximum big request to
 <I>size</I>
 
 MB.
+<DT><B>-nocursor</B>
+
+<DD>
+disable the display of the pointer cursor.
 <DT><B>-nolisten </B><I>trans-type</I>
 
 <DD>
@@ -663,11 +674,11 @@ the following font path:
 
 <DD>
 Initial access control list for display number <B>n</B>
-<DT><I>/usr/lib/X11/fonts/misc</I>,<I>/usr/lib/X11/fonts/75dpi</I>,<I>/usr/lib/X11/fonts/100dpi</I>
+<DT><I>/usr/share/fonts/X11/misc</I>,<I>/usr/share/fonts/X11/75dpi</I>,<I>/usr/share/fonts/X11/100dpi</I>
 
 <DD>
 Bitmap font directories
-<DT><I>/usr/lib/X11/fonts/TTF</I>,<I>/usr/lib/X11/fonts/Type1</I>
+<DT><I>/usr/share/fonts/X11/TTF</I>,<I>/usr/share/fonts/X11/Type1</I>
 
 <DD>
 Outline font directories
@@ -715,12 +726,12 @@ Starting the server: <I>startx</I>(1), <I>xdm</I>(1), <I>xinit</I>(1)
 <P>
 
 Controlling the server once started: <I>xset</I>(1), <I>xsetroot</I>(1),
-<I>xhost</I>(1)
+<I>xhost</I>(1), <I>xinput</I>(1), <I>xrandr</I>(1)
 <P>
 
 Server-specific man pages:
 <I>Xorg</I>(1), <I>Xdmx</I>(1), <I>Xephyr</I>(1), <I>Xnest</I>(1),
-<I>Xvfb</I>(1), <I>XDarwin</I>(1), <I><A HREF="../man1/XWin.1.html">XWin</A></I>(1).
+<I>Xvfb</I>(1), <I>Xquartz</I>(1), <I><A HREF="../man1/XWin.1.html">XWin</A></I>(1).
 <P>
 
 Server internal documentation:
@@ -760,5 +771,6 @@ Dave Wiggins took over post-R5 and made substantial improvements.
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
+Time: 13:28:20 GMT, October 23, 2010
 </BODY>
 </HTML>

@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XWIN</TITLE>
 </HEAD><BODY>
 <H1>XWIN</H1>
-Section: User Commands  (1)<BR>Updated: xorg-server 1.7.1<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.9.0<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -50,7 +50,7 @@ pattern) is hidden from view, so only top-level X windows are seen.
 <A NAME="lbAF">&nbsp;</A>
 <H2>OPTIONS</H2>
 
-In addition to the normal server options described in the <I><A HREF="../man1/Xserver.1.html">Xserver</A></B>(1)</I>
+In addition to the normal server options described in the <I><A HREF="../man1/Xserver.1.html">Xserver</A>(1)</I>
 manual page, <I>XWin</I> accepts the following command line switches,
 <I>all</I> of which are optional:
 <P>
@@ -146,7 +146,7 @@ Examples:
 <H2>OPTIONS CONTROLLING THE APPEARANCE OF THE X SCREEN WINDOWS</H2>
 
 These parameters only apply to windowed mode screens i.e. not
-in <B>-multwindow</B> or <B>-rootless</B> mode
+in <B>-multiwindow</B> or <B>-rootless</B> mode.
 <DL COMPACT>
 <DT><B>-fullscreen</B>
 
@@ -162,20 +162,65 @@ This parameter is ignored when the <B>-fullscreen</B> parameter is specified.
 <DT><B>-scrollbars</B>
 
 <DD>
-In windowed mode, allow screens bigger than the <I>Windows</I> desktop.
-Moreover, if the window has decorations, one can now resize it.
-This parameter is ignored when the <B>-fullscreen</B> parameter is specified.
-<P>
+Alternative name for <B>-resize=scrollbars</B>.
 <P>
 </DL>
 <A NAME="lbAJ">&nbsp;</A>
+<H2>OPTIONS CONTROLLING RESIZE BEHAVIOUR</H2>
+
+<B>-resize</B>
+
+Select the resize mode of an X screen.
+<P>
+<B>-resize=none</B>
+
+<P>
+(default). The screen is not resizable.
+<P>
+In windowed mode, if the window has decorations, a fixed frame is used.
+<P>
+<B>-resize=scrollbars</B>
+
+<P>
+The screen window is resizeable, but the screen is not resizable.
+<P>
+In windowed mode, if the window has decorations, a resizing frame is used.
+<P>
+Scrollbars are drawn when needed to allow the entire X screen
+to viewed by adjusting them.
+<P>
+This also permits screens bigger than the <I>Windows</I> virtual desktop to be used.
+<P>
+This parameter is ignored in <B>-multiwindow</B> or <B>-rootless</B> mode.
+<P>
+<B>-resize=randr</B>
+
+<P>
+In windowed mode, if the window has decorations, a resizing frame is used.
+<P>
+Resizing the window will use the RANDR extension to change
+the size of the X screen.  Likewise, changing the size of
+the X screen using the RANDR extension will cause the size
+of the <I>Windows</I> window containing the X screen to be changed.
+<P>
+In <B>-multiwindow</B> or <B>-rootless</B> mode, if the X screen is
+of the same dimensions as a Windows monitor or the virtual desktop,
+the X server will respond to the WM_DISPLAYCHANGED sent when those
+dimensions change by resizing the X screen.  Changing the size
+of the X screen using the RANDR extension is not permitted.
+<P>
+The maximum dimensions of the screen are the dimensions of the <I>Windows</I> virtual desktop.
+<P>
+<B>--resize</B> on its own is equivalent to <B>--resize=randr</B>
+<P>
+<A NAME="lbAK">&nbsp;</A>
 <H2>OPTIONS CONTROLLING WINDOWS INTEGRATION</H2>
 
 <DL COMPACT>
 <DT><B>-[no]clipboard</B>
 
 <DD>
-Enables [disables] the integration between the Cygwin/X clipboard and 
+Enables [disables] the integration between the Cygwin/X clipboard and
 <I>Windows</I> clipboard.  The default is enabled.
 <DT><B>-emulate3buttons [</B><I>timeout</I>]
 
@@ -233,7 +278,7 @@ X Server.
 The <I>Alt-F4</I> key combination is enabled by default.
 <P>
 </DL>
-<A NAME="lbAK">&nbsp;</A>
+<A NAME="lbAL">&nbsp;</A>
 <H2>DRAWING ENGINE OPTIONS</H2>
 
 <DL COMPACT>
@@ -268,7 +313,7 @@ Default behavior is to determine the engine with optimum performance that
 supports the specified depth and window configuration.
 <P>
 </DL>
-<A NAME="lbAL">&nbsp;</A>
+<A NAME="lbAM">&nbsp;</A>
 <H2>FULLSCREEN OPTIONS</H2>
 
 <DL COMPACT>
@@ -286,10 +331,10 @@ fullscreen with a DirectDraw engine.  This parameter is ignored if
 <B>-fullscreen</B> is not specified.
 <P>
 </DL>
-<A NAME="lbAM">&nbsp;</A>
+<A NAME="lbAN">&nbsp;</A>
 <H2>MISCELLANEOUS OPTIONS</H2>
 
-See also the normal server options described in the <I><A HREF="../man1/Xserver.1.html">Xserver</A></B>(1)</I>
+See also the normal server options described in the <I><A HREF="../man1/Xserver.1.html">Xserver</A>(1)</I>
 manual page
 <P>
 <DL COMPACT>
@@ -302,11 +347,12 @@ Write a help text listing supported command line options and their description t
 <DD>
 Ignore keyboard and mouse input.  This is usually only used for testing
 and debugging purposes.
-<DT><B>-logfile </B><I>File_Name</I>
+<DT><B>-logfile </B><I>filename</I>
 
 <DD>
-Change the log file from the default located at <I>
-/var/log/XWin.0.log</I> to the one indicated by <I>File_Name</I>.
+Change the server log file from the default of <I>
+/var/log/xwin/XWin.n.log</I>,
+where <I>n</I> is the display number of the XWin server, to <I>filename</I>.
 <DT><B>-logverbose </B><I>level</I>
 
 <DD>
@@ -358,7 +404,7 @@ reported by <I>Windows</I> if known, or the default X server layout
 if no matching keyboard layout was found.
 <P>
 </DL>
-<A NAME="lbAN">&nbsp;</A>
+<A NAME="lbAO">&nbsp;</A>
 <H2>UNDOCUMENTED OPTIONS</H2>
 
 These options are undocumented.  Do not use them.
@@ -379,7 +425,7 @@ visual to operate in TrueColor modes.
 Run the internal window manager.
 <P>
 </DL>
-<A NAME="lbAO">&nbsp;</A>
+<A NAME="lbAP">&nbsp;</A>
 <H2>LOG FILE</H2>
 
 As it runs <I>XWin</I> writes messages indicating the most relevant events
@@ -388,7 +434,7 @@ from which it was called and to a log file that by default is located at <I>
 /var/log/XWin.0.log</I>.  This file is mainly for debugging purposes.
 <P>
 <P>
-<A NAME="lbAP">&nbsp;</A>
+<A NAME="lbAQ">&nbsp;</A>
 <H2>PREFERENCES FILE</H2>
 
 On startup <I>XWin</I> looks for the file <I>$HOME/.XWinrc</I> or, if
@@ -417,37 +463,32 @@ Win I-multiwindow produces for each top-level X window.
 
 The format of the <I>.XWinrc</I> file is given in the man page <A HREF="../man5/XWinrc.5.html">XWinrc</A>(5).
 <P>
-<A NAME="lbAQ">&nbsp;</A>
+<A NAME="lbAR">&nbsp;</A>
 <H2>EXAMPLES</H2>
 
 Need some examples
 <P>
 <P>
-<A NAME="lbAR">&nbsp;</A>
+<A NAME="lbAS">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-X(7), <A HREF="../man1/Xserver.1.html">Xserver</A></B>(1), xdm(1), xinit(1), <A HREF="../man5/XWinrc.5.html">XWinrc</A>(5), setxkbmap(1)
+X(7), <A HREF="../man1/Xserver.1.html">Xserver</A>(1), xdm(1), xinit(1), <A HREF="../man5/XWinrc.5.html">XWinrc</A>(5), setxkbmap(1)
 <P>
 <P>
-<A NAME="lbAS">&nbsp;</A>
+<A NAME="lbAT">&nbsp;</A>
 <H2>BUGS</H2>
 
 <I>XWin</I>
 
-and this man page still have many limitations.  Some of the more obvious
-ones are:
-<BR>
-
-- The display mode can not be changed once the X server has started.
-<BR>
-
-- The <I>XWin</I> software is continuously developing; it is therefore possible that
+and this man page still have many limitations.
+<P>
+The <I>XWin</I> software is continuously developing; it is therefore possible that
 this man page is not up to date.  It is always prudent to
 look also at the output of <I>XWin -help</I> in order to
 check the options that are operative.
 <P>
 <P>
-<A NAME="lbAT">&nbsp;</A>
+<A NAME="lbAU">&nbsp;</A>
 <H2>AUTHORS</H2>
 
 This list is by no means complete, but direct contributors to the
@@ -473,21 +514,23 @@ Suhaib Siddiqi, Jack Tanner, Jon Turney and Nicholas Wourms.
 <DT><A HREF="#lbAG">OPTIONS CONTROLLING WINDOWING MODE</A><DD>
 <DT><A HREF="#lbAH">OPTIONS FOR SPECIFYING X SCREENS</A><DD>
 <DT><A HREF="#lbAI">OPTIONS CONTROLLING THE APPEARANCE OF THE X SCREEN WINDOWS</A><DD>
-<DT><A HREF="#lbAJ">OPTIONS CONTROLLING WINDOWS INTEGRATION</A><DD>
-<DT><A HREF="#lbAK">DRAWING ENGINE OPTIONS</A><DD>
-<DT><A HREF="#lbAL">FULLSCREEN OPTIONS</A><DD>
-<DT><A HREF="#lbAM">MISCELLANEOUS OPTIONS</A><DD>
-<DT><A HREF="#lbAN">UNDOCUMENTED OPTIONS</A><DD>
-<DT><A HREF="#lbAO">LOG FILE</A><DD>
-<DT><A HREF="#lbAP">PREFERENCES FILE</A><DD>
-<DT><A HREF="#lbAQ">EXAMPLES</A><DD>
-<DT><A HREF="#lbAR">SEE ALSO</A><DD>
-<DT><A HREF="#lbAS">BUGS</A><DD>
-<DT><A HREF="#lbAT">AUTHORS</A><DD>
+<DT><A HREF="#lbAJ">OPTIONS CONTROLLING RESIZE BEHAVIOUR</A><DD>
+<DT><A HREF="#lbAK">OPTIONS CONTROLLING WINDOWS INTEGRATION</A><DD>
+<DT><A HREF="#lbAL">DRAWING ENGINE OPTIONS</A><DD>
+<DT><A HREF="#lbAM">FULLSCREEN OPTIONS</A><DD>
+<DT><A HREF="#lbAN">MISCELLANEOUS OPTIONS</A><DD>
+<DT><A HREF="#lbAO">UNDOCUMENTED OPTIONS</A><DD>
+<DT><A HREF="#lbAP">LOG FILE</A><DD>
+<DT><A HREF="#lbAQ">PREFERENCES FILE</A><DD>
+<DT><A HREF="#lbAR">EXAMPLES</A><DD>
+<DT><A HREF="#lbAS">SEE ALSO</A><DD>
+<DT><A HREF="#lbAT">BUGS</A><DD>
+<DT><A HREF="#lbAU">AUTHORS</A><DD>
 </DL>
 <HR>
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
+Time: 13:44:37 GMT, October 23, 2010
 </BODY>
 </HTML>
