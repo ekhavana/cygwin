@@ -71,9 +71,10 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 	close INDEX;
     }
 
-    save @toprint, " Found <b>$::count</b> matches for <b>$html_esc_grep</b>";
+    my $sp = $text ? ' ' : '&nbsp;';
+    save @toprint, "${sp}Found <b>$::count</b> matches for <b>$html_esc_grep</b>";
     if ($truncated_search) {
-	save @toprint, "&nbsp;&nbsp;&nbsp;&nbsp;(search truncated due to too many matches)<br><br>\n";
+	save @toprint, "${sp}${sp}${sp}${sp}(search truncated due to too many matches)<br><br>\n";
     } else {
 	save @toprint, "<br><br>\n";
     }
