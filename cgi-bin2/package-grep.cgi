@@ -16,7 +16,8 @@ my $html = new CGI;
 # Get our data
 my $grep = $html->param('grep');
 my $text = $html->param('text');
-my $esc_grep = uri_escape $grep;
+my $uri_esc_grep = uri_escape $grep;
+my $html_esc_grep = escapeHTML $grep;
 
 $::packages = ();
 $::count = 0;
@@ -35,7 +36,7 @@ if ($text) {
 
 eval '"foo" =~ /$grep/o';
 if ($@ || $grep =~ m!\\.\\.!o) {
-    save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $esc_grep);
+    save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $html_esc_grep);
     save @toprint, $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>') unless $text;
 } else {
     $SIG{ALRM} = \&wakey;
@@ -61,13 +62,13 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 	close INDEX;
     }
 
-    save @toprint, "Found <b>$::count</b> matches for <b>$grep</b>.<br><br>\n";
+    save @toprint, "Found <b>$::count</b> matches for <b>$html_esc_grep</b>.<br><br>\n";
     if (%::packages) {
 	for my $p (sort keys %::packages) {
 	    for my $f (@{$::packages{$p}}) {
 		save @toprint, '<tr><td><img src="http://sourceware.org/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
 		       '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		       $esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</td></tr>\n";
+		       $uri_esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</td></tr>\n";
 	    }
 	}
     }
