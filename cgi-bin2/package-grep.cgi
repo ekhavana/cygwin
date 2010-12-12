@@ -7,6 +7,7 @@ use URI::Escape;
 use HTML::TreeBuilder;
 
 sub addfn($);
+sub myprint(@);
 sub wakey($);
 sub save(\@@);
 
@@ -27,11 +28,13 @@ $::count = 0;
 use FindBin qw($Bin);
 my @toprint;
 
+$::DUPOUT = 1;
+
 $| = 1;
 if ($text) {
-    print $html->header(-type=>'text/plain');
+    myprint $html->header(-type=>'text/plain');
 } else {
-    print $html->header, "\n<html>\n<head>\n",
+    myprint $html->header, "\n<html>\n<head>\n",
 	  "<title>Package List Search Results</title>\n</head>\n",
 	  LWP::Simple::get('http://cygwin.com/cygwin-header.html'),
 	  "</td></table>\n", "<table>\n",
@@ -47,10 +50,12 @@ if ($@ || $grep =~ m!\\.\\.!o) {
     alarm 45;
     save @toprint, $html->h2({-align=>'center'}, 'Search Results'), "\n" unless $text;
     chdir "$Bin/../packages";
-    for my $f (<*/*>) {
+    my $truncated_search = 0;
+    outer: for my $f (<*/*>) {
 	open F, '<', $f or next;
 	while (<F>) {
 	    if (/$grep/o) {
+		last outer if $truncated_search = $::count >= 30;
 		addfn $f;
 		last;
 	    }
@@ -66,7 +71,12 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 	close INDEX;
     }
 
-    save @toprint, "Found <b>$::count</b> matches for <b>$html_esc_grep</b>.<br><br>\n";
+    save @toprint, "Found <b>$::count</b> matches for <b>$html_esc_grep</b>.<br>\n";
+    if ($truncated_search) {
+	save @toprint, "&nbsp;&nbsp;&nbsp;(search truncated due to too many matches)<br><br>\n";
+    } else {
+	save @toprint, "<br>\n";
+    }
     if (%::packages) {
 	for my $p (sort keys %::packages) {
 	    for my $f (@{$::packages{$p}}) {
@@ -90,7 +100,7 @@ if (!$text) {
     print @toprint;
 } else {
     my $tree = HTML::TreeBuilder->new_from_content(join('', @toprint));
-    print $tree->as_text;
+    myprint $tree->as_text;
 }
 exit 0;
 
@@ -105,6 +115,15 @@ sub findheader {
     my $p = shift;
     my $header = ($text && "\t") . (($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '');
     return $header;
+}
+
+sub myprint(@) {
+    print @_;
+    if ($::DUPOUT) {
+	open my $log, '>>', "/tmp/package-grep.$$";
+	print $log @_;
+	close $log;
+    }
 }
 
 sub save(\@@) {
