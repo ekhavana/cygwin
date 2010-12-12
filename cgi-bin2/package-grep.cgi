@@ -38,7 +38,7 @@ if ($@ || $grep =~ m!\\.\\.!o) {
     save @toprint, $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>') unless $text;
 } else {
     $SIG{ALRM} = \&wakey;
-    alarm 1;
+    alarm 45;
     save @toprint, $html->h2({-align=>'center'}, 'Search Results'), "\n" unless $text;
     chdir "$Bin/../packages";
     for my $f (<*/*>) {
@@ -113,5 +113,5 @@ sub save(\@@) {
 sub wakey($) {
     print "<!-- ...working... -->\n";
     $SIG{ALRM} = \&wakey;
-    alarm 1;
+    alarm 45;
 }
