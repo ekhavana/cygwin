@@ -71,11 +71,11 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 	close INDEX;
     }
 
-    save @toprint, "Found <b>$::count</b> matches for <b>$html_esc_grep</b>.<br>\n";
+    save @toprint, "Found <b>$::count</b> matches for <b>$html_esc_grep";
     if ($truncated_search) {
-	save @toprint, "&nbsp;&nbsp;&nbsp;(search truncated due to too many matches)<br><br>\n";
+	save @toprint, " (search truncated due to too many matches)<br><br>\n";
     } else {
-	save @toprint, "<br>\n";
+	save @toprint, "<br><br>\n";
     }
     if (%::packages) {
 	for my $p (sort keys %::packages) {
@@ -97,7 +97,7 @@ if (!$text) {
 alarm 0;
 $SIG{ALRM} = 'DEFAULT';
 if (!$text) {
-    print @toprint;
+    myprint @toprint;
 } else {
     my $tree = HTML::TreeBuilder->new_from_content(join('', @toprint));
     myprint $tree->as_text;
