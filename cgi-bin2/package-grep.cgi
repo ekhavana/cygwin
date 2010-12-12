@@ -43,7 +43,7 @@ if ($text) {
 
 eval '"foo" =~ /$grep/o';
 if ($@ || $grep =~ m!\\.\\.!o) {
-    save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $html_esc_grep . "<br>\n");
+    save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $html_esc_grep . "<br><br>\n");
     save @toprint, $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>') unless $text;
 } else {
     $SIG{ALRM} = \&wakey;
