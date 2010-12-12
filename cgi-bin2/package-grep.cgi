@@ -7,6 +7,7 @@ use URI::Escape;
 use HTML::TreeBuilder;
 
 sub addfn($);
+sub wakey($);
 sub save(\@@);
 
 # Create one of our Objects
@@ -36,13 +37,15 @@ if ($@ || $grep =~ m!\\.\\.!o) {
     save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $grep);
     save @toprint, $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>') unless $text;
 } else {
+    $SIG{ALRM} = \&wakey;
+    alarm 45;
     save @toprint, $html->h2({-align=>'center'}, 'Search Results'), "\n" unless $text;
-    chdir("$Bin/../packages");
+    chdir "$Bin/../packages";
     for my $f (<*/*>) {
-	open(F, '<', $f) or next;
+	open F, '<', $f or next;
 	while (<F>) {
 	    if (/$grep/o) {
-		addfn($f);
+		addfn $f;
 		last;
 	    }
 	}
@@ -75,6 +78,8 @@ if (!$text) {
     close FOOTER;
 }
 
+alarm 0;
+$SIG{ALRM} = 'DEFAULT';
 if (!$text) {
     print @toprint;
 } else {
@@ -103,4 +108,10 @@ sub save(\@@) {
     } else {
         push(@$arr, @_);
     }
+}
+
+sub wakey($) {
+    print "<!-- working... -->\n";
+    $SIG{ALRM} = \&wakey;
+    alarm 45;
 }
