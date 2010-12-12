@@ -18,8 +18,8 @@ my $grep = $html->param('grep');
 my $text = $html->param('text');
 my $esc_grep = uri_escape $grep;
 
-$main::packages = ();
-$main::count = 0;
+$::packages = ();
+$::count = 0;
 use FindBin qw($Bin);
 my @toprint;
 
@@ -55,16 +55,16 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 
     my $index;
     if (!open(INDEX, '<', 'index.html')) {
-	%main::packages = ();
+	%::packages = ();
     } else {
 	$index = join('', <INDEX>);
 	close INDEX;
     }
 
-    save @toprint, "Found <b>$main::count</b> matches for <b>$esc_grep</b>.<br><br>\n";
-    if (%main::packages) {
-	for my $p (sort keys %main::packages) {
-	    for my $f (@{$main::packages{$p}}) {
+    save @toprint, "Found <b>$::count</b> matches for <b>$esc_grep</b>.<br><br>\n";
+    if (%::packages) {
+	for my $p (sort keys %::packages) {
+	    for my $f (@{$::packages{$p}}) {
 		save @toprint, '<tr><td><img src="http://sourceware.org/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
 		       '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
 		       $esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</td></tr>\n";
@@ -90,9 +90,9 @@ if (!$text) {
 exit 0;
 
 sub addfn($) {
-    $main::count++;
+    $::count++;
     $_[0] =~ m!^([^/]+)/! or return;
-    push(@{$main::packages{$1}}, $_[0]);
+    push(@{$::packages{$1}}, $_[0]);
 }
 
 sub findheader {
