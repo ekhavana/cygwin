@@ -13,6 +13,9 @@ sub save(\@@);
 # Create one of our Objects
 my $html = new CGI;
 
+$CGI::POST_MAX = 64;
+$CGI::DISABLE_UPLOADS = 1;
+
 # Get our data
 my $grep = $html->param('grep');
 my $text = $html->param('text');
@@ -24,6 +27,7 @@ $::count = 0;
 use FindBin qw($Bin);
 my @toprint;
 
+$| = 1;
 if ($text) {
     print $html->header(-type=>'text/plain');
 } else {
