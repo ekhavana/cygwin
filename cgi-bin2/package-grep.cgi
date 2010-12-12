@@ -6,6 +6,8 @@ use CGI;
 use URI::Escape;
 use HTML::TreeBuilder;
 
+use constant {MAXMATCHES => 30};
+
 sub addfn($);
 sub myprint(@);
 sub wakey($);
@@ -55,7 +57,7 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 	open F, '<', $f or next;
 	while (<F>) {
 	    if (/$grep/o) {
-		last outer if $truncated_search = $::count >= 30;
+		last outer if $truncated_search = $::count >= MAXMATCHES;
 		addfn $f;
 		last;
 	    }
