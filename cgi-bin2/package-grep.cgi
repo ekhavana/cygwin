@@ -73,7 +73,7 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 
     save @toprint, "Found <b>$::count</b> matches for <b>$html_esc_grep</b>";
     if ($truncated_search) {
-	save @toprint, " (search truncated due to too many matches)<br><br>\n";
+	save @toprint, "&nbsp;&nbsp;(search truncated due to too many matches)<br><br>\n";
     } else {
 	save @toprint, "<br><br>\n";
     }
