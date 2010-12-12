@@ -17,7 +17,7 @@ my $html = new CGI;
 my $grep = $html->param('grep');
 my $text = $html->param('text');
 my $uri_esc_grep = uri_escape $grep;
-my $html_esc_grep = CGI::escapeHTML $grep;
+my $html_esc_grep = $html->escapeHTML $grep;
 
 $::packages = ();
 $::count = 0;
