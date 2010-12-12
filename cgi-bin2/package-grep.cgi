@@ -111,7 +111,7 @@ sub save(\@@) {
 }
 
 sub wakey($) {
-    print "<!-- working... -->\n";
+    print "<!-- ...working... -->\n";
     $SIG{ALRM} = \&wakey;
-    alarm 45;
+    alarm 5;
 }
