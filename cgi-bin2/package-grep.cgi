@@ -61,7 +61,7 @@ if ($@ || $grep =~ m!\\.\\.!o) {
 	close INDEX;
     }
 
-    save @toprint, "Found <b>$::count</b> matches for <b>$esc_grep</b>.<br><br>\n";
+    save @toprint, "Found <b>$::count</b> matches for <b>$grep</b>.<br><br>\n";
     if (%::packages) {
 	for my $p (sort keys %::packages) {
 	    for my $f (@{$::packages{$p}}) {
