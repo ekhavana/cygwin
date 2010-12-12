@@ -28,7 +28,7 @@ $::count = 0;
 use FindBin qw($Bin);
 my @toprint;
 
-$::DUPOUT = 1;
+$::DUPOUT = 0;
 
 $| = 1;
 if ($text) {
@@ -78,13 +78,11 @@ if ($@ || $grep =~ m!\\.\\.!o) {
     } else {
 	save @toprint, "<br><br>\n";
     }
-    if (%::packages) {
-	for my $p (sort keys %::packages) {
-	    for my $f (@{$::packages{$p}}) {
-		save @toprint, '<tr><td><img src="http://sourceware.org/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
-		       '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		       $uri_esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</td></tr>\n";
-	    }
+    for my $p (sort keys %::packages) {
+	for my $f (@{$::packages{$p}}) {
+	    save @toprint, '<tr><td><img src="http://sourceware.org/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
+		   '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
+		   $uri_esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</td></tr>\n";
 	}
     }
 }
@@ -106,9 +104,10 @@ if (!$text) {
 exit 0;
 
 sub addfn($) {
-    $::count++;
-    $_[0] =~ m!^([^/]+)/! or return;
-    push(@{$::packages{$1}}, $_[0]);
+    if ($_[0] =~ m!^([^/]+)/!o) {
+	push @{$::packages{$1}}, $_[0];
+	$::count++;
+    }
 }
 
 sub findheader {
