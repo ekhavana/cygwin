@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US">
+<head>
+    <title>Cygwin/X - Get a crash backtrace</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+    <link rel="stylesheet" type="text/css" href="../cygx.css" />
+    <link rel="icon" type="image/ico" href="../favicon.ico" />
+</head>
+
+<!-- BODY MODIFIED: $Date$ $Author$ -->
+
+<body>
+    <!--#include virtual="../cygx-header.html" -->
+
+    <h2>Cygwin/X - Get a crash backtrace</h2>
+
+    <p>If the X server has crashed, before you report a problem, you should get a backtrace.  Useful backtraces will
+    help identify where and why the crash is occuring, which will help us fix the bug.</p>
+
+    <p>To generate a useful backtrace, you will need an X server built with debugging symbols.  X server snapshots are
+    built with debugging symbols for this reason.  Download the latest X Server snapshot from
+    <a href="ftp://cygwin.com/pub/cygwinx/">ftp://cygwin.com/pub/cygwinx</a>, uncompress it using <tt>bunzip2</tt>, and move it
+    to <tt>/usr/bin/XWin.exe</tt></p>
+
+    <ul>
+     <li>Install the <b>gdb</b> and <b>sysvinit</b> packages (for <tt>gdb</tt> and <tt>pidof</tt>, respectively)</li>
+     <li>Start XWin using your normal method</li>
+     <li>In a non-X terminal window, run <tt>gdb --pid=`pidof /usr/bin/XWin`</tt>, to attach gdb to the running X server</li>
+     <li>Type <tt>c</tt> at the <tt>(gdb)</tt> prompt, to resume running the X server</li>
+     <li>Reproduce your crash</li>
+     <li>Type <tt>bt full</tt> at the <tt>(gdb)</tt> prompt, to produce a backtrace</li>
+    </ul>
+
+    <p>Please attach the output from gdb, in addition to your <tt>/var/log/xwin/XWin.0.log</tt>, to your problem report.</p>
+
+    <p>Last updated: $Date$ ($Author$)</p>
+    <!--#include virtual="../cygx-footer.html" -->
+</body>
+</html>
