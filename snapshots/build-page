@@ -13,8 +13,8 @@ use vars '$DB::inhibit_exit';
 $DB::inhibit_exit = 0;
 
 my $TMP = "/sourceware/snapshot-tmp/cygwin/$$";
-my $http = "http://cygwin.com/snapshots";
-my $wwwdir = '/www/sourceware/htdocs/cygwin/snapshots';
+my $http = "http://cygwin.org/snapshots";
+my $wwwdir = getcwd;
 
 open(TEMPLATE, "master.template") || die("master.template: $!");
 my $template = join('', <TEMPLATE>);
