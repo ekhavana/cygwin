@@ -99,6 +99,7 @@ $var{'perday'} = $perdays;
 
 open INDEX, '>', 'index.html';
 print INDEX $template;
+chmod 0775 \*INDEX;
 close INDEX;
 
 my @tounlink = reverse sort keys %bydate;
