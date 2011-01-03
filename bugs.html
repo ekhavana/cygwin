@@ -1,15 +1,26 @@
-<html>
-<heaD>
-<title>Where should I send problem reports or observations?</title>
-<!--#include virtual="cygwin-header.html"-->
-</heaD>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+    <link rel="stylesheet" type="text/css" href="http://cygwin.org/style.css" />
+    <title>Reporting Cygwin Problems</title>
+  </head>
 
-<h1 align=center>Where should I send problem reports?</h1>
-First, you need to verify that your potential problem hasn't already been
+<body>
+<!--#include virtual="navbar.html" -->
+<!--#include virtual="top.html" -->
+
+<h1>Reporting Problems</h1>
+<p>Problems?  Problems?  Impossible!
+
+<p>Well, maybe not...  We'd like to hear what you've uncovered but it's
+in your best interests to do some initial research.
+
+<p>First, you need to verify that your potential problem hasn't already been
 reported by reading the <a href="faq/">Cygwin FAQ</a> and the <a
 href="http://cygwin.com/ml/cygwin/">mailing list archives</a>.  If your
 issue is still unresolved, feel free to write to the cygwin list with
-your problem.<P>
+your problem.
 
 <p>Before you start asking questions please take a moment to read and
 understand some very good general advice on how to ask <a
@@ -45,6 +56,7 @@ Shouldn't I just send email to straight to a Cygwin developer or package maintai
 	I don't want to bother the list with my problem.&nbsp;&nbsp;<em>or</em><br>
 	I'm not really sure if this is a real problem and want to find out before I bother the list.
 </blockquote></li></font></h3>
+<br>
 
 <p>Using the correct Cygwin mailing list is absolutely the proper way
 to report problems or make observations.  The mailing lists were created for this express
@@ -66,8 +78,12 @@ Cygwin-related email should go to the mailing list.</p>
 <p>Nevertheless, some people still seem to insist on either Cc'ing
 Cygwin contributors or sending private email.  This is inconsiderate.
 Please <b>do not do this</b> unless specifically requested.</p>
-
-<H2>Reporting guidelines</H2>
+<div id="background">
+<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+<h2>Reporting guidelines</h2>
+<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+</div>
+<br>
 
 <ul indent="0">
 <li>Use a subject line that describes the issue well: <P>
@@ -101,7 +117,7 @@ the list when most of the subject lines look very similar.
 <br>
 <li>When reporting problems, <em>describe the problem</em> rather than
 just including your interpretation of the problem.
-<ul>Bad example:<br>
+<br><br><ul>Bad example:<br>
 <blockquote>
 	"Cygwin's setup.exe fails to operate when the humidity is high.
 	How can I solve Cygwin's problem with high humidity?"
@@ -116,7 +132,7 @@ Good example:<br>
 </ul>
 
 <a name="cygcheck">
-<b><li>Run <tt>cygcheck -s -v -r &gt; cygcheck.out</tt> and include cygcheck.out as
+<b><li>Run <tt>cygcheck -s -v -r &gt; cygcheck.out</tt> and include that file as
 <em>an attachment</em> in your report.  Please do <em>not</em> compress or
 otherwise encode the output.  Just attach it as a straight text file so
 that it can be easily viewed.</li></b><br>
@@ -134,13 +150,13 @@ you.  Many (most?) people who report problems fall into the trap of
 assuming that people are "clued into" their mental state when, in most
 cases, this is not the case.
 
-<p>As a rule of thumb, if you find yourself referring to your problem as
+<br><br>As a rule of thumb, if you find yourself referring to your problem as
 <em>the</em> problem with <tt>XYZ</tt> rather than <em>a</em> problem
 with <tt>XYZ</tt> then your message is suspect.  Using <em>the</em> in
 this context means that you are assuming that your problem is well known.
 Unless you can point to an email message thread or FAQ entry (either of which
 is a good idea, btw) please do not assume that the readers of your message will
-be familiar with your problem.</p></li>
+be familiar with your problem.</li><br>
 
 <li>If you are experiencing problems with a package which is not part of
 the <a href="packages/">Cygwin distribution</a> first see if there is a
@@ -175,35 +191,36 @@ excited to think calmly about the problem.</li><br>
 
 <li>Avoid personal details about why you need the problem rectified,
 how important it is for you to have it fixed, or how long you've worked
-on the problem.  People will be more likely to look at your email if it
+on it.  People will be more likely to look at your email if it
 is cut and dry, to the point, and uses a minimum of extra
 words.</li><br>
 
-<li>Avoid expressions of incredulity "I can't believe that this is so broken!"
-or other editorializing.</li></br>
+<li>Avoid expressions of incredulity like "I can't believe that this is so broken!"
+or other editorializing.</li><br>
 
 <li>Minimize reporting that your problem "works fine" on some "other" UNIX platform or
 used to work ok in a previous Cygwin release.  This is marginally useful data but
 it does not <em>guarantee</em> that you've uncovered a Cygwin problem.
 Cygwin can change its behavior between releases; sometimes to fix an
 operational problem and sometimes, well... because we've introduced a bug.</p>
-<p>With regard to differing behavior from some flavor of UNIX:
+
+<br><br>With regard to differing behavior from some flavor of UNIX:
 UNIXes vary in their behavior and Cygwin is basically a different flavor of UNIX.
 One common source of differing behavior is with programs which rely on specific
 malloc behavior, like being able to free a pointer twice or being able to
 access memory after freeing.  Cygwin is unforgiving about this kind of practice
 while some older linux versions of malloc are not.</p>
 
-<p>Note that, "It worked in a previous version of Cygwin" observations are only
+<br><br>Note that, "It worked in a previous version of Cygwin" observations are only
 relevant for modern versions of Cygwin.  The "B series" versions of Cygwin
 (B17, B18, B19, B20) are not modern versions.  Save your fingers and don't
 even bother with comments about your experiences with these versions.</p>
 
-<p>Many people seem to latch onto the fact that their issues do not seem to
+<br><br>Many people seem to latch onto the fact that their issues do not seem to
 occur in other versions of UNIX or Cygwin and mention this in
 all followup email when people attempt to help them with the problem.
 However, this information is usually only useful in the first message
-and does not usually bear repeating.</p></li>
+and does not usually bear repeating.</li><br>
 
 <li>Keep in mind that there are over 1500 people on the mailing list.  Try
 to avoid "me too" responses or reporting problems that have already been
@@ -212,43 +229,9 @@ reported.  It's hard enough keeping up with the volume as it is...</li>
 <ul>
 <li><a href="contrib.html">Send a patch</a> to fix the problem if you can.</li>
 </ul>
-<br><br><br><p><small>UNIX &reg; is a registered trademark of the Open Group in the United
-States and other countries.</small></p>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<!--#include virtual="cygwin-footer.html"-->
+</div>
+<div id="footer">
+<p>UNIX&reg; is a registered trademark of the Open Group in the United States and other countries.
+</div>
 </body>
 </html>

@@ -1,10 +1,15 @@
-<HTML>
-<HEAD>
-<title>Cygwin in CVS</title>
-</HEAD>
-<!--#include virtual="cygwin-header.html"-->
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+    <link rel="stylesheet" type="text/css" href="http://cygwin.org/style.css" />
+    <title>Cygwin in CVS</title>
+  </head>
 
-<h1 align=center>Cygwin in CVS</h1>
+<body>
+<!--#include virtual="navbar.html" -->
+<!--#include virtual="top.html" -->
+<h1>Cygwin in CVS</h1>
 
 <p>The sources to the core Cygwin libraries and utilities (winsup and
 newlib) files are available via anonymous CVS access.  If you don't know
@@ -19,23 +24,26 @@ on the Web</a>.</p>
 
 <p>To access the repository from your system, you'll need to set the
 <tt>CVSROOT</tt> environment variable as in these examples (if you are
-using a different shell, you'll have to figure it out yourself):</p>
-
+using a different shell, you'll have to figure it out yourself):
+<tt>
 <pre>
-95/NT	set    CVSROOT=:pserver:anoncvs@cygwin.com:/cvs/src
-bash	export CVSROOT=:pserver:anoncvs@cygwin.com:/cvs/src
-csh	setenv CVSROOT :pserver:anoncvs@cygwin.com:/cvs/src
+CMD prompt	set    CVSROOT=:pserver:anoncvs@cygwin.com:/cvs/src
+bash		export CVSROOT=:pserver:anoncvs@cygwin.com:/cvs/src
+csh		setenv CVSROOT :pserver:anoncvs@cygwin.com:/cvs/src
 </pre>
+</tt>
+</p>
 
 <p>Once you've done that, you need to tell your local cvs software
 what password to use.  The password is the word
-<tt>anoncvs </tt>:</p>
-
+<tt>anoncvs</tt>:
+<tt>
 <pre>
 bash$ cvs login
 (Logging in to anoncvs@cygwin.com)
 CVS password: <i>anoncvs</i>
 </pre>
+</tt>
 
 <p><em>Note:</em> Windows users may need to make sure the
 <tt>HOME</tt> environment variable is set to something meaningful.</p>
@@ -47,9 +55,11 @@ again.</p>
 
 <p>To get the Cygwin sources, do this:
 
+<tt>
 <pre>
 bash$ cvs checkout winsup
 </pre>
+</tt>
 
 <p>This will create a subdirectory called <tt>src</tt> and fill it
 with the core sources.  Once you have the latest sources, "<tt>cvs
@@ -57,21 +67,14 @@ update</tt>" will get any changes since your last update.</p>
 
 <p>Please refer to the <A href="http://cygwin.com/faq/faq.programming.html#faq.programming.building-cygwin">
 FAQ</a>
-for information on building Cygwin.  Hint: You need to configure and
+for information on building Cygwin.<br>Hint: You need to configure and
 build in a separate directory from the source.</p>
-<pre>
 
-
-
-
-
-
-
-
-</pre>
-<hr>
-
+<div id="background">
+<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
 <h2>For developers with write access</h2>
+<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+</div><br>
 
 <p>If you are a Cygwin developer with a sourceware account, and
 someone has told you that you have permission to write to
@@ -83,9 +86,9 @@ to you with two exceptions:
 <li>Set <tt>CVS_RSH</tt> to the path to your <tt>ssh</tt> program
 </ol>
 
-If you don't know if you have write access or not, you don't have it.
+<p>If you don't know if you have write access or not, you don't have it.
 
 
-<!--#include virtual="cygwin-footer.html"-->
+</div>
 </body>
 </html>

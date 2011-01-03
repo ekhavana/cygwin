@@ -1,11 +1,14 @@
-<HTML>
-<HEAD>
-<title>How can I help out?</title>
-</HEAD>
-<!--#include virtual="cygwin-header.html"-->
-
-<h1 align=center>How can I help out?</h1>
-
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+    <link rel="stylesheet" type="text/css" href="http://cygwin.org/style.css" />
+    <title>Cygwin Contribution</title>
+  </head>
+<body>
+<!--#include virtual="navbar.html" -->
+<!--#include virtual="top.html" -->
+<h1>How can I help out?</h1>
 <p>This document deals with contributions to the Cygwin DLL and
 Cygwin-specific utilities<a href="#cygwin-utilities">*</a>.
 Although the space and internet connection for this site have been
@@ -15,17 +18,17 @@ employees.  Volunteer time is always in short supply, so if you are
 thinking about contributing, rest assured that your efforts will be
 welcome.</p>
 
-Contributions to other packages in the Cygwin distribution are also
+<p>Contributions to other packages in the Cygwin distribution are also
 welcome and some of the principles involved are the same.  However, most
 of the specific instructions here will not be applicable to utilities
 like apache, bash, gawk, etc., which are generally found in linux
 releases.  If you have a patch for any of those, send it along to the
 cygwin mailing list and the appropriate package maintainer will respond.
 If you want to contribute a package that is not currently part of the
-Cygwin distribution, look <a
-href="http://cygwin.com/setup.html">here</a>.</p>
+Cygwin distribution, look <a href="http://cygwin.com/setup.html">here</a>.
+</p>
 
-If you are looking to donate money to cygwin developers then check out
+<p>If you are looking to donate money to cygwin developers then check out
 the <a href="donations.html">donations page</a>.
 
 <p>Two other important cygwin components are also not covered by the
@@ -35,7 +38,11 @@ the <a href="http://sourceware.org/newlib/">newlib library</a> (used by
 cygwin for some common "libc"-like functions) also have different
 contribution rules.  See their project pages for more information.</p>
 
-<H2>Building the development version of Cygwin</H2>
+<div id="background">
+<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+<h2>Building the development version of Cygwin</h2>
+<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+</div><br>
 
 <P>The code corresponding to cygwin1.dll is mostly in the winsup
 directory with additional code coming from newlib/libc and newlib/libm.
@@ -60,9 +67,13 @@ configure.in, include, install-sh, ltconfig, ltmain.sh, missing, move-if-change,
 newlib, symlink-tree, winsup, ylwrap.
 </blockquote>
 
-but you really should just check out the winsup module as mentioned on the Cygwin <a href="http://cygwin.com/cvs.html">CVS page</a>.
+<p>but you really should just check out the winsup module as mentioned on the Cygwin <a href="http://cygwin.com/cvs.html">CVS page</a>.
 
-<H2>Before you get started</H2>
+<div id="background">
+<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+<h2>Before you get started</h2>
+<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+</div><br>
 
 <p>Once you've checked out the sources, you will be able to avail
 yourself of the "how*" files in the <tt>winsup/cygwin</tt> directory.
@@ -93,13 +104,16 @@ subscribe to the cygwin-cvs and newlib-cvs mailing lists using the standard
 subscription techniques employed for the <a href="lists.html">other
 non-cvs mailing lists</a>.</p>
 
-<H2>When you have finalized your changes</H2>
+<div id="background">
+<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+<h2>When you have finalized your changes</h2>
+<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+</div><br>
 <P>Once you've finished making and testing your changes, you should send
 a unified diff to the <a href="mailto:cygwin-patches@cygwin.com">cygwin-patches list</a>.
 As an example, if you have modified several files in /c/src/winsup, then do the following
 in bash:</p>
 
-<p>
 <pre>
       cd /c/src/winsup
       cvs diff -up &gt; /tmp/mypatch
@@ -119,12 +133,11 @@ winsup/ChangeLog.</p>
 <p>Ideally, diffs should be sent as plain text with no encoding or other
 special formatting.  ChangeLogs should <b>not</b> be sent as "diffs".
 Just send the complete ChangeLog entry.</p>
-
 <p>Common patch submission problems include:
 <ul>
 <li>Missing ChangeLog.
 <p><li>ChangeLog sent as part of "diff" rather than as a separate "non-diffed" entry.</p>
-<p><li>Improper ChangeLog formatting:</p>
+<li>Improper ChangeLog formatting:</p>
 <ul>
 <li>Missing function names (e.g. <tt>"* foo.cc: Don't increment x if y is negative"</tt>).
 <li>Multiple functions or filenames on a ChangeLog line (e.g. <tt>"* foo.cc, bar.cc: Add argument to baf call."</tt>)
@@ -137,7 +150,7 @@ is indented by two spaces.</li>
 <li>No capitalization, or not terminated with a period (e.g. <tt>"* foo.c (bar): fixed off by one error"</tt>).
 </ul>
 <p><li>Diffs sent in uuencoded or otherwise encrypted fashion.</p>
-<p><li>Diffs sent in improper form:</p>
+<li>Diffs sent in improper form:</p>
 <ul>
 <li>Not "unidiff" format (i.e. no -u).
 <li>Patch is uuencoded.
@@ -154,9 +167,13 @@ would love it if more people made useful contributions -- this can be
 one of the big advantages of free software; we all benefit from
 everyone else's work as well as our own.</p>
 
-<H2>What needs doing:</H2>
+<div id="background">
+<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
+<h2>What needs doing</h2>
+<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
+</div><br>
 
-<P>You can also get a good idea of the current bugs and problem areas by
+<P>You can get a good idea of the current bugs and problem areas by
 browsing the cygwin mailing list archives.  In addition, check out the
 API calls portion of the FAQ and look for references to unimplemented
 functions.</p>
@@ -179,6 +196,6 @@ this.)</p>
 <p><a name="cygwin-utilities"><font size=-1>* Cygwin-specific utilities are any executable or
 shared libraries distributed in the cygwin distribution tar file, i.e., those
 files that are generated from the winsup/{cygwin,cygserver,utils} source directories.</font></p>
-<!--#include virtual="cygwin-footer.html"-->
+</div>
 </body>
 </html>
