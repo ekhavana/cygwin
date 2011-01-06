@@ -1,0 +1,188 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Hardware Accelerated OpenGL (AIGLX)</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
+REL="HOME"
+TITLE="Cygwin/X User's Guide"
+HREF="cygwin-x-ug.html"/><LINK
+REL="UP"
+TITLE="Using Cygwin/X"
+HREF="using.html"/><LINK
+REL="PREVIOUS"
+TITLE="Displaying remote clients"
+HREF="using-remote-apps.html"/><LINK
+REL="NEXT"
+TITLE="GNU Free Documentation License"
+HREF="gfdl.html"/><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html;charset=utf-8"/></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin/X User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="using-remote-apps.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 4. Using Cygwin/X</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="gfdl.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="using-aiglx"
+>Hardware Accelerated OpenGL (AIGLX)</A
+></H1
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+This is feature is still under active development and should be considered beta quality,
+but should be working well enough to be useful.
+Please report success or failure with specific OpenGL applications to the cygwin-xfree mailing list.
+</P
+></BLOCKQUOTE
+></DIV
+><P
+>&#13;Cygwin/X supports hardware accelerated OpenGL rendering in the X server using the native Windows OpenGL (WGL) interface.
+Use the command line option <CODE
+CLASS="parameter"
+>-wgl</CODE
+> to the X server to turn on the use of the native Windows OpenGL implementation.
+This option is only supported by multiwindow mode currently.
+If you don't use this option, the X server will use software rendering.
+</P
+><P
+>&#13;For remote clients, Mesa's libGL prefers to use client-side rendering and transfer the image to the server using xlib.
+To force indirect rendering (which takes place on the server), you must do <B
+CLASS="command"
+>export LIBGL_ALWAYS_INDIRECT=1</B
+> before starting the client application.
+There's a performance trade-off between rendering performance
+and network latency, so you should try both direct and indirect rendering and see which
+performs best in your specific circumstances.  Generally, accelerated indirect rendering
+should be more performant for clients which render complex scenes.
+</P
+><P
+>&#13;For local clients, indirect rendering is the default, so no special steps are needed.
+</P
+><P
+>&#13;If you have set things up successfully, <B
+CLASS="command"
+>glxinfo | grep OpenGL</B
+> should output something mentioning your graphics card vendor.  If it mentions Mesa, you still have software rendering
+</P
+><P
+>&#13;Please ensure you are using the latest display drivers for your graphics
+hardware before reporting any visual issues with WGL.
+</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="using-remote-apps.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-x-ug.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="gfdl.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Displaying remote clients</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="using.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>GNU Free Documentation License</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
