@@ -31,7 +31,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Cygwin/X User's Guide: Generated 2010-10-23 12:22&#13;</TH
+>Cygwin/X User's Guide</TH
 ></TR
 ><TR
 ><TD
@@ -116,6 +116,11 @@ HREF="using-remote-session.html"
 HREF="using-remote-apps.html"
 >Displaying remote clients</A
 ></DT
+><DT
+><A
+HREF="using-aiglx.html"
+>Hardware Accelerated OpenGL (AIGLX)</A
+></DT
 ></DL
 ></DIV
 ><DIV
@@ -154,7 +159,7 @@ CLASS="filename"
 >xinit</TT
 > package
 (installed by following the instructions in <A
-HREF="setup-cygwin-x-installing.html"
+HREF="setup.html#setup-cygwin-x-installing"
 >the Section called <I
 >Installing Cygwin/X</I
 > in Chapter 2</A
@@ -170,11 +175,6 @@ CLASS="command"
 ><LI
 ><P
 >&#13;using the "XWin Server" shortcut under "Cygwin-X" on the Start Menu
-</P
-></LI
-><LI
-><P
->&#13;starting it from a MS-DOS shell
 </P
 ></LI
 ><LI
@@ -197,11 +197,6 @@ CLASS="screen"
 ></TD
 ></TR
 ></TABLE
-></LI
-><LI
-><P
->&#13;double-clicking it in Windows Explorer
-</P
 ></LI
 ></UL
 ><P
@@ -272,6 +267,24 @@ Use <TT
 CLASS="filename"
 >startxwin</TT
 > instead.
+</P
+></BLOCKQUOTE
+></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+It's not recommended to start <TT
+CLASS="filename"
+>startxwin</TT
+> from a MS-DOS shell or by double-clicking it in
+Windows Explorer.  To do so means that XWin is not started from a login shell, and programs started from
+the notification area icon menu will not inherit the environment of a login shell.  This may lead to unexpected
+behaviour, for example, if you have customizations to your login shell start-up scripts which set environment variables.
 </P
 ></BLOCKQUOTE
 ></DIV
@@ -532,7 +545,7 @@ NAME="using-starting-advanced"
 ><P
 >&#13;Advanced users may wish to start the X server by invoking <B
 CLASS="command"
->X</B
+>XWin</B
 > directly,
 for example, to start XDMCP sessions.
 </P

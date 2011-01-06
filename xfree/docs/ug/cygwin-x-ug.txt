@@ -1,26 +1,24 @@
 
 Cygwin/X User's Guide
 
-Generated 2010-10-23 12:22
-
 Harold L Hunt, II
 
 Jon Turney
 
-     Copyright (c) 2000 Harold L Hunt II. Copyright (C) 2009 Jon Turney.
-     Permission is granted to copy, distribute and/or modify this
-     document under the terms of the GNU Free Documentation License,
-     Version 1.1 or any later version published by the Free Software
-     Foundation; with no Invariant Sections, with no Front-Cover Texts,
-     and with no Back-Cover Texts. A copy of the license is included in
-     the section entitled "GNU Free Documentation License".
+     Copyright (c) 2000 Harold L Hunt II. Copyright (C) 2009,2010 Jon
+     Turney. Permission is granted to copy, distribute and/or modify
+     this document under the terms of the GNU Free Documentation
+     License, Version 1.1 or any later version published by the Free
+     Software Foundation; with no Invariant Sections, with no
+     Front-Cover Texts, and with no Back-Cover Texts. A copy of the
+     license is included in the section entitled "GNU Free Documentation
+     License".
      _________________________________________________________________
 
    Table of Contents
    1. Cygwin/X Overview
    2. Setting Up Cygwin/X
 
-        Cygwin/X Contents
         Installing Cygwin/X
 
    3. Configuring Cygwin/X
@@ -51,6 +49,8 @@ Jon Turney
               Secure ssh
               Insecure telnet
 
+        Hardware Accelerated OpenGL (AIGLX)
+
    A. GNU Free Documentation License
 
         0. PREAMBLE
@@ -69,39 +69,23 @@ Jon Turney
 
 Chapter 1. Cygwin/X Overview
 
-   Cygwin/X is a port of the X Window System to Cygwin; Cygwin provides a
-   UNIX-like API on the Win32 platform.
+   Cygwin/X is a port of the X Window System to Cygwin. The Cygwin
+   library provides a UNIX-like API on the Win32 platform.
      _________________________________________________________________
 
 Chapter 2. Setting Up Cygwin/X
 
-Cygwin/X Contents
-
-   Cygwin/X consists of two parts: Cygwin, a port of the GNU tools to
-   Win32, and Cygwin/X, a port of the X Window System to Win32. Both
-   parts of Cygwin/X are needed to successfully run an X Server on a
-   Win32 platform.
-     _________________________________________________________________
-
 Installing Cygwin/X
-
-   Cygwin tools are, in the words of the Cygwin development homepage,
-   http://cygwin.com/, "ports of the popular GNU development tools and
-   utilities for Windows 95, 98, and NT. They function by using the
-   Cygwin library which provides a UNIX-like API on top of the Win32
-   API." Cygwin allows the compilation of the X Window System source on
-   Win32; several patches were made to the X Window System source to make
-   it actually compile and run under Cygwin.
 
    Cygwin has a nice setup program that downloads and installs the
    necessary Cygwin packages for you.
     1. Open the Cygwin, http://cygwin.com/ page in your web browser
-    2. Click the "Install Cygwin Now" link in the upper-right hand corner
-       of the page. This link downloads setup.exe from the primary Cygwin
-       server; save setup.exe to the directory that you would like to
-       store the downloaded packages in (e.g. c:\download); do not save
-       setup.exe to c:\cygwin, as that is the default directory for the
-       extraction and installation of the downloaded packages.
+    2. Click on the "setup.exe" link. This link downloads setup.exe from
+       the primary Cygwin server; save setup.exe to the directory that
+       you would like to store the downloaded packages in (e.g.
+       c:\download); do not save setup.exe to c:\cygwin, as that is the
+       default directory for the extraction and installation of the
+       downloaded packages.
     3. Run setup.exe, you will see the welcome screen:
        [cyi01welcome.png]
     4. Click Next to proceed to the next screen.
@@ -215,8 +199,9 @@ Command line parameters
 
    Cygwin/X, by default, runs in windowed mode with the largest window
    that will fit on your Windows desktop, using the best performing
-   engine that is installed on your system; you do not need to pass any
-   parameters to XWin.exe to use the default behavior.
+   engine that is installed on your system, with clipboard integration
+   enabled. You do not need to pass any parameters to XWin.exe to use the
+   default behavior.
 
    Up to date documentation of XWin.exe options can be read with man XWin
    .
@@ -257,12 +242,9 @@ Starting Cygwin/X in multiwindow mode (startxwin)
    terminal. Run startxwin by:
      * using the "XWin Server" shortcut under "Cygwin-X" on the Start
        Menu
-     * starting it from a MS-DOS shell
      * Starting /usr/bin/startxwin in a Cygwin shell:
 
 $ startxwin
-
-     * double-clicking it in Windows Explorer
 
    Full documentation for startxwin can be read with man startxwin . Note
    that the special option -- is used to mark the end of client options
@@ -280,6 +262,14 @@ $ startxwin
      provided. Implemented as a script made it difficult to reliably
      wait until the the X server had started before starting any
      clients. Use startxwin instead.
+
+     Note: It's not recommended to start startxwin from a MS-DOS shell
+     or by double-clicking it in Windows Explorer. To do so means that
+     XWin is not started from a login shell, and programs started from
+     the notification area icon menu will not inherit the environment of
+     a login shell. This may lead to unexpected behaviour, for example,
+     if you have customizations to your login shell start-up scripts
+     which set environment variables.
 
      Note: If you want to have a Start Menu shortcut which runs
      startxwin with custom options, you should use a copy of the Start
@@ -333,24 +323,28 @@ $ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 
 Other startup methods
 
-   Advanced users may wish to start the X server by invoking X directly,
-   for example, to start XDMCP sessions.
+   Advanced users may wish to start the X server by invoking XWin
+   directly, for example, to start XDMCP sessions.
      _________________________________________________________________
 
 Switching out of Cygwin/X
 
-   Press Alt-Tab to switch from Cygwin/X to your Windows desktop or other
-   running Windows applications.
+   When running in windowed mode, press Alt-Tab to switch from Cygwin/X
+   to your Windows desktop or other running Windows applications.
      _________________________________________________________________
 
 Stopping Cygwin/X
 
-   When you are done using Cygwin/X, press Alt-F4 to shutdown the X
-   Server; this is the default key combination to shutdown the X Server.
-   The -[no]winkill and -[no]unixkill parameters can change the set of
-   key combinations that will shutdown the X Server. Using the -unixkill
-   allows the Ctrl-Alt-Backspace key combination to shutdown the X
-   Server, in addition to the default Alt-F4 key combination.
+   When you are done using Cygwin/X, you can shutdown the X server by:
+     * Selecting the "Exit..." option from the notification area icon
+       menu
+     * In Windowed mode: Press Alt-F4 to shutdown the X Server. This can
+       be disabled using the -nowinkill option.
+     * Using the -unixkill option allows the Ctrl-Alt-Backspace key
+       combination to shutdown the X Server.
+
+   If clients are still connected to the X server, you will be prompted
+   to confirm you wish to shutdown the X server.
      _________________________________________________________________
 
 Window managers
@@ -358,7 +352,7 @@ Window managers
    A window manager is required in order to decorate, move, resize, and
    perform other operations on individual X windows.
 
-   Cygwin/X works with window managers in a couple of different ways:
+   Cygwin/X can work with window managers in a couple of different ways:
      * Internal window manager for multiwindow mode. The internal window
        manager that creates a Windows window for each top-level X window
        is automatically started when using the -multiwindow command-line
@@ -366,9 +360,8 @@ Window managers
        parameters in Chapter 3 for more information on the -multiwindow
        command-line parameter.
      * External local window managers (e.g. twm, mwm (part of the lesstif
-       package)). These local window managers must be installed on
-       Cygwin; they are run locally and cannot be used together with the
-       internal window manager.
+       package)). These local window managers must be installed on Cygwin
+       and run locally.
      * Remote window managers via an XDMCP session, which you can read
        more about in the Section called Remote sessions via XDMCP.
      * Remote window manager launched through an ssh tunnel. This is not
@@ -386,21 +379,21 @@ Windows Clipboard integration
    either clipboard and copies data between them when either one is
    updated.
 
-   Cygwin/X has an internal clipboard integration system that is invoked
-   via the -clipboard command-line parameter. See the Section called
-   Command line parameters in Chapter 3 for more information on the
-   -clipboard command-line parameter.
+   Cygwin/X has an internal clipboard integration system that is enabled
+   by default. See the Section called Command line parameters in Chapter
+   3 for more information on the -[no]clipboard command-line parameters.
      _________________________________________________________________
 
 Shared memory support
 
    Shared memory support is needed by the MIT-SHM and XFree86-BigFont
-   extensions.
+   extensions, which may provide better performance for local
+   applications which use large images or fonts and are written to use
+   those extensions.
 
-   Shared memory is provided by the cygserver Windows service.
-
-   To install cygserver run the cygserver-config script. It will install
-   the service.
+   Shared memory is provided by the cygserver Windows service. To install
+   cygserver, install it using setup.exe and then run the
+   cygserver-config script to install the service.
 
      Note: for Cygwin 1.5 only 
 
@@ -444,6 +437,12 @@ Remote sessions via XDMCP
    discussion of XDMCP is beyond the scope of this document. You may wish
    to read the Linux XDMCP HOWTO or the X Server XDMCP Options for more
    information.
+
+     Note: For security reasons, XDMCP is not enabled by default on most
+     modern UNIX distributions. You will have to enable remote logins to
+     your X Display Manager (xdm, kdm, gdm, etc.). See the configuration
+     documentation for your X Display Manager and/or UNIX distribution.
+     The Cygwin/X FAQ section on XDMCP may also be helpful.
      _________________________________________________________________
 
 Displaying remote clients
@@ -501,6 +500,41 @@ Insecure telnet
      have allowed any user on the remote host to connect to your X
      server and monitor your X session. For this reason, use ssh
      forwarding rather than telnet, if at all possible.
+     _________________________________________________________________
+
+Hardware Accelerated OpenGL (AIGLX)
+
+     Note: This is feature is still under active development and should
+     be considered beta quality, but should be working well enough to be
+     useful. Please report success or failure with specific OpenGL
+     applications to the cygwin-xfree mailing list.
+
+   Cygwin/X supports hardware accelerated OpenGL rendering in the X
+   server using the native Windows OpenGL (WGL) interface. Use the
+   command line option -wgl to the X server to turn on the use of the
+   native Windows OpenGL implementation. This option is only supported by
+   multiwindow mode currently. If you don't use this option, the X server
+   will use software rendering.
+
+   For remote clients, Mesa's libGL prefers to use client-side rendering
+   and transfer the image to the server using xlib. To force indirect
+   rendering (which takes place on the server), you must do export
+   LIBGL_ALWAYS_INDIRECT=1 before starting the client application.
+   There's a performance trade-off between rendering performance and
+   network latency, so you should try both direct and indirect rendering
+   and see which performs best in your specific circumstances. Generally,
+   accelerated indirect rendering should be more performant for clients
+   which render complex scenes.
+
+   For local clients, indirect rendering is the default, so no special
+   steps are needed.
+
+   If you have set things up successfully, glxinfo | grep OpenGL should
+   output something mentioning your graphics card vendor. If it mentions
+   Mesa, you still have software rendering
+
+   Please ensure you are using the latest display drivers for your
+   graphics hardware before reporting any visual issues with WGL.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
