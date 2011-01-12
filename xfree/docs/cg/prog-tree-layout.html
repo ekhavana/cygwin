@@ -35,7 +35,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Cygwin/X Contributor's Guide: Generated 2010-10-23 12:22&#13;</TH
+>Cygwin/X Contributor's Guide</TH
 ></TR
 ><TR
 ><TD
@@ -75,36 +75,13 @@ NAME="prog-tree-layout"
 >Source Code Tree Layout</A
 ></H1
 ><P
-><B
->Descriptions of Important <TT
+>&#13;A brief overview of the <TT
 CLASS="filename"
 >xserver</TT
-> Directories and Subdirectories</B
-></P
+> source
+tree layout, highlighting the parts of important and interest for Cygwin/X development:
+</P
 ><UL
-><LI
-><P
-><TT
-CLASS="filename"
->cfb*</TT
-> contains deprecated
-<A
-HREF="glossary.html#gloss-cfb-layer"
-><I
-CLASS="glossterm"
->color framebuffer</I
-></A
->
-drawing procedures that are not compatible with the <A
-HREF="glossary.html#gloss-shadow-layer"
-><I
-CLASS="glossterm"
->Shadow</I
-></A
-> drawing system that
-Cygwin/X depends upon.  This directory is of no interest to Cygwin/X
-programmers.</P
-></LI
 ><LI
 ><P
 ><TT
@@ -138,9 +115,7 @@ CLASS="function"
 CLASS="filename"
 >fb</TT
 > contains the modern
-framebuffer drawing procedures used by Cygwin/X.  This directory is
-maintained by Keith Packard and is only of interest to Cygwin/X
-programmers when it fails to build.</P
+framebuffer drawing procedures used by Cygwin/X.</P
 ></LI
 ><LI
 ><P
@@ -154,11 +129,51 @@ hardware dependent functions.</P
 ><P
 ><TT
 CLASS="filename"
+>dmx</TT
+> contains the Distributed
+Multihead X X Server.  The DMX X server acts as a proxy for multiple back-end
+X servers.</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>kdrive</TT
+>
+<UL
+><LI
+><P
+><TT
+CLASS="filename"
+>ephyr</TT
+> contains the Xephyr X Server
+Xephyr X Server which uses a window on a host X Server as its framebuffer.
+Unlike Xnest it supports modern X extensions such as Composite, Damage, randr, etc.
+</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>fake</TT
+> contains the Xfake X Server.
+xfake is similar to xvfb, but discards all data written to the framebuffer.
+</P
+></LI
+></UL
+>
+</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
 >vfb</TT
 > contains the Virtual
 Framebuffer X Server.  The vfb server draws to a system memory
-framebuffer with the primary purpose of allowing X clients to run on a
-machine that does not have display hardware.</P
+framebuffer. Xvfb is primarly used for testing, or for running X clients
+which require an X server but there is no interest in seeing the content
+of it's windows.</P
 ></LI
 ><LI
 ><P
@@ -177,8 +192,15 @@ thus Cygwin/X is not able to utilize the X Window System server.</P
 CLASS="filename"
 >xnest</TT
 > contains source
-code for the Nested X Server which runs inside of another X Server.
-xnest is not generally of interest to Cygwin/X programmers.</P
+code for the Nested X Server which runs inside of another X Server.</P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>xquartz</TT
+> contains the source
+code for the XQuartz X Server, which runs on Mac OS X.</P
 ></LI
 ><LI
 ><P
@@ -187,7 +209,7 @@ CLASS="filename"
 >xwin</TT
 > contains the source
 code for the Cygwin/X X Server.  This is the primary directory that
-Cygwin/X programmers are interested in.</P
+Cygwin/X programmers will be interested in.</P
 ></LI
 ></UL
 ></LI
@@ -241,22 +263,19 @@ machine independent X extensions.</P
 ><P
 ><TT
 CLASS="filename"
->layer</TT
-> contains source
-code for the layer extension.  This extension is supported by
-Cygwin/X, however, this directory will be of interest only when layer
-fails to build.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
 >shadow</TT
 > contains source
-code for the shadow extension that the Cygwin/X X Server depends
+code for the <A
+HREF="glossary.html#gloss-shadow-layer"
+><I
+CLASS="glossterm"
+>shadow</I
+></A
+>
+framebuffer layer that the Cygwin/X X Server depends
 upon.  This directory is of primary importance to Cygwin/X, but it is
 maintained by other programmers and is only of direct interest to
-Cygwin/X programmers when it fails to build.  The shadow extension
+Cygwin/X programmers when it fails to build.  The shadow layer
 does three things:</P
 ><OL
 TYPE="1"
@@ -307,92 +326,51 @@ include Cygwin.</P
 ></LI
 ></UL
 ><P
-><B
->Other components of interest</B
-></P
+>Other packages of interest in the X.Org Release</P
 ><UL
 ><LI
 ><P
 ><TT
 CLASS="filename"
->doc</TT
-></P
-><UL
-><LI
-><P
-><TT
-CLASS="filename"
->hardcopy</TT
-> contains
-precompiled PostScript documentation for various components of the X
-Window System.  Cygwin/X-specific documentation is not contained in
-this directory.  This directory is of little interest to Cygwin/X
-programmers.</P
+>xorg-docs</TT
+>
+contains documentation for various components of the X Window System.
+Cygwin/X-specific documentation is not contained in this directory.
+</P
 ></LI
 ><LI
 ><P
-><TT
-CLASS="filename"
->specs</TT
-> contains the
-sources to build the documents in <TT
-CLASS="filename"
->hardcopy</TT
->.  This directory is of little
-interest to Cygwin/X programmers.</P
-></LI
-></UL
+>The various X Window System protocol headers.</P
 ></LI
 ><LI
 ><P
-><TT
-CLASS="filename"
->fonts</TT
-> contains font
-definition files used to compile fonts.  This directory is of little
-interest to Cygwin/X programmers.</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->include</TT
-> contains various
-X Window System headers that are not generally specific to any one
-client or library (i.e. <TT
-CLASS="filename"
->X.h</TT
->,
-<TT
-CLASS="filename"
->Xproto.h</TT
->, and
-<TT
-CLASS="filename"
->keysymdef.h</TT
->).</P
-></LI
-><LI
-><P
-><TT
-CLASS="filename"
->lib</TT
-> contains both X
-client and X Server libraries.  Cygwin/X does not generally call any
-functions in these libraries directly; however, we do have to link to
-several of these libraries to get our X Server to build.  These
-libraries are maintained by various developers from the X Window System
-project and there are occasional synchronizations with <A
-HREF="http://www.opengroup.org/"
-TARGET="_top"
->The Open Group</A
->'s <A
-HREF="http://www.x.org/"
-TARGET="_top"
->X.org</A
->.  Cygwin/X programmers
-occasionally need to fix Cygwin-related build errors that occur in
+>The various X client and X Server libraries.
+Cygwin/X programmers occasionally need to fix Cygwin-related build errors that occur in
 these libraries.</P
+></LI
+><LI
+><P
+>The various standard X utility and test applications (e.g. <B
+CLASS="command"
+>xeyes</B
+>,
+<B
+CLASS="command"
+>xhost</B
+>, <B
+CLASS="command"
+>xinit</B
+>, <B
+CLASS="command"
+>xlogo</B
+>, etc.).
+Cygwin/X programmers occasionally need to fix Cygwin-related build errors that occur in
+these applications.
+</P
+></LI
+><LI
+><P
+>The various font packages that contain font definition files used to compile fonts.</P
 ></LI
 ></UL
 ></DIV

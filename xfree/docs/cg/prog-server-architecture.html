@@ -35,7 +35,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Cygwin/X Contributor's Guide: Generated 2010-10-23 12:22&#13;</TH
+>Cygwin/X Contributor's Guide</TH
 ></TR
 ><TR
 ><TD
@@ -232,7 +232,7 @@ privates are examined as an example.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN163"
+NAME="AEN161"
 ></A
 ><P
 ><CODE
@@ -269,7 +269,7 @@ cause an access violation, crashing the Cygwin/X X Server.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN174"
+NAME="AEN172"
 ></A
 ><P
 ><CODE
@@ -313,7 +313,7 @@ crashing the Cygwin/X X Server.</P
 ><DIV
 CLASS="funcsynopsis"
 ><A
-NAME="AEN188"
+NAME="AEN186"
 ></A
 ><P
 ><CODE
@@ -538,23 +538,28 @@ NAME="prog-server-architecture-input"
 >User Input</A
 ></H2
 ><P
->User input is processed using the <A
-HREF="glossary.html#gloss-mi-layer"
-><I
-CLASS="glossterm"
->MI</I
-></A
-> layer's user input system.
-Any queued Win32 user input messages, as well as other Win32
-messages, are handled when <TT
+>&#13;At the end of <CODE
+CLASS="function"
+>InitInput</CODE
+> in <TT
 CLASS="filename"
->hw/xwin/winwakeup.c</TT
->'s
+>hw/xwin/InitInput.c</TT
+>
+we open <TT
+CLASS="filename"
+>/dev/windows</TT
+>, a special device which becomes ready when there
+is anything to read on the windows message queue, and add that to the select mask for
 <CODE
 CLASS="function"
->winWakeupHandler</CODE
-> function is called by the
-<A
+>WaitForSomething</CODE
+> using <CODE
+CLASS="function"
+>AddEnabledDevice</CODE
+>.
+</P
+><P
+>&#13;The X server's main loop calls the <A
 HREF="glossary.html#gloss-os-layer"
 ><I
 CLASS="glossterm"
@@ -564,11 +569,46 @@ CLASS="glossterm"
 <TT
 CLASS="filename"
 >os/WaitFor.c</TT
+>'s <CODE
+CLASS="function"
+>WaitForSomething</CODE
+> function, which
+waits for something to happen using <CODE
+CLASS="function"
+>select</CODE
+>.
+When <CODE
+CLASS="function"
+>select</CODE
+> returns, all the wakeup handlers are run.
+Any queued Win32 user input messages (as well as other Win32
+messages) are handled when <TT
+CLASS="filename"
+>hw/xwin/winwakeup.c</TT
 >'s
 <CODE
 CLASS="function"
->WaitForSomething</CODE
-> function and when the <A
+>winWakeupHandler</CODE
+> function is called.
+Each Win32 user input message typically queues an input event, or several input
+events, using the <A
+HREF="glossary.html#gloss-mi-layer"
+><I
+CLASS="glossterm"
+>MI</I
+></A
+>
+layer's <TT
+CLASS="filename"
+>mi/mieq.c</TT
+>'s <CODE
+CLASS="function"
+>mieqEnqueue</CODE
+> function.
+</P
+><P
+>&#13;Enqueued MI input events are processed
+when the <A
 HREF="glossary.html#gloss-dix-layer"
 ><I
 CLASS="glossterm"
@@ -589,36 +629,15 @@ CLASS="filename"
 <CODE
 CLASS="function"
 >ProcessInputEvents</CODE
-> function.  Each Win32 user
-input message typically queues an input event, or several input
-events, using the MI layer's <TT
-CLASS="filename"
->mi/mieq.c</TT
->'s
-<CODE
-CLASS="function"
->mieqEnqueue</CODE
-> function.  Enqueued MI input events
-are processed in <CODE
-CLASS="function"
->ProcessInputEvents</CODE
-> by calling
+> function, which calls
 <TT
 CLASS="filename"
 >mi/mieq.c</TT
->'s
-<CODE
+>'s <CODE
 CLASS="function"
 >mieqProcessInputEvents</CODE
->; the cursor position is
-updated on the screen by calling <TT
-CLASS="filename"
->mipointer.c</TT
->'s
-<CODE
-CLASS="function"
->miPointerUpdate</CODE
->.</P
+>.
+</P
 ><DIV
 CLASS="sect3"
 ><H3
@@ -728,7 +747,7 @@ further concerns for non-U.S. keyboard layouts.</P
 <B
 CLASS="keycap"
 >Alt</B
-> key as a sort of shift key to access an
+> key as an alternate shift key to access an
 additional row of symbols from the <B
 CLASS="keycap"
 >`</B
@@ -744,7 +763,7 @@ CLASS="keycap"
 >0</B
 > keys,
 as well as accented forms of standard alphabetic characters, such as
-á, ä, å, ú and additional alphabetic characters, such as ß.
+Ã¡, Ã¤, Ã¥, Ãº and additional alphabetic characters, such as ÃŸ.
 Non-U.S. keyboards typically label the right <B
 CLASS="keycap"
 >Alt</B
@@ -824,8 +843,8 @@ CLASS="keycap"
 > messages, so the fake messages can be easily
 identified.</P
 ><P
->Special keyboard considerations must be handled the Cygwin/X X
-Server losses or gains the keyboard focus.  For example, the user can
+>Special keyboard considerations must be handled when the Cygwin/X X
+Server loses or gains the keyboard focus.  For example, the user can
 switch out of Cygwin/X, toggle the <B
 CLASS="keycap"
 >Num Lock</B
@@ -854,7 +873,7 @@ Lock</B
 CLASS="keycap"
 >Kana Lock</B
 > must be stored upon loss
-of keyboard focus; the stored state of each mode key must then be
+of keyboard focus; on regaining focus, the stored state of each mode key must then be
 compared to that key's current state, toggling the key if its state
 has changed.</P
 ></DIV
@@ -956,6 +975,18 @@ dividing the wheel delta by the distance that is considered by Win32
 to be one unit of motion for the mouse wheel; any remainder of the
 wheel delta must be preserved and added to the next mouse wheel
 message.</P
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="prog-server-architecture-other-windows-messages"
+>Other Windows messages</A
+></H3
+><P
+>&#13;Certain other WM_ messages are also processed. TBD.
+</P
 ></DIV
 ></DIV
 ></DIV

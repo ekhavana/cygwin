@@ -1,19 +1,18 @@
 
 Cygwin/X Contributor's Guide
 
-Generated 2010-10-23 12:22
-
 Harold L Hunt, II
 
 Jon Turney
 
-     Copyright (C) 2004 Harold L Hunt II. Copyright (C) 2009 Jon Turney.
-     Permission is granted to copy, distribute and/or modify this
-     document under the terms of the GNU Free Documentation License,
-     Version 1.1 or any later version published by the Free Software
-     Foundation; with no Invariant Sections, with no Front-Cover Texts,
-     and with no Back-Cover Texts. A copy of the license is included in
-     the section entitled "GNU Free Documentation License".
+     Copyright (C) 2004 Harold L Hunt II. Copyright (C) 2009,2010 Jon
+     Turney. Permission is granted to copy, distribute and/or modify
+     this document under the terms of the GNU Free Documentation
+     License, Version 1.1 or any later version published by the Free
+     Software Foundation; with no Invariant Sections, with no
+     Front-Cover Texts, and with no Back-Cover Texts. A copy of the
+     license is included in the section entitled "GNU Free Documentation
+     License".
      _________________________________________________________________
 
    Table of Contents
@@ -36,7 +35,7 @@ Jon Turney
         Obtaining the Source Code
 
               Obtaining via Cygwin setup
-              Obtaining from subversion
+              Obtaining from version control
               Obtaining from X.Org
 
         Native Compiling
@@ -48,10 +47,6 @@ Jon Turney
 
         Cross Compiling
 
-              Obtaining binutils and gcc Source
-              Obtaining Cygwin Headers and Libs
-              Building binutils and gcc
-              Creating Links for binutils and gcc
               Building Cygwin/X
 
         Contributing Patches
@@ -83,7 +78,14 @@ Jon Turney
 
    Bibliography
    Glossary
-   A. GNU Free Documentation License
+   A. Building a cross-compiler
+
+        Obtaining binutils and GCC source
+        Obtaining Cygwin headers and libraries
+        Building binutils
+        Building GCC
+
+   B. GNU Free Documentation License
 
         0. PREAMBLE
         1. APPLICABILITY AND DEFINITIONS
@@ -97,6 +99,8 @@ Jon Turney
         9. TERMINATION
         10. FUTURE REVISIONS OF THIS LICENSE
         How to use this License for your documents
+
+   Colophon
      _________________________________________________________________
 
 Chapter 1. Overview
@@ -128,10 +132,11 @@ Overview
    Cygwin/X after reading this chapter. Programming gurus are great; our
    intention is to create more of them.
 
-   This document is primarily focused on the Cygwin/X server; most other
-   components are extremely stable and work out-of-the-box on Cygwin
+   This document is primarily focused on the Cygwin/X X server; most
+   other X.Org components are extremely stable and work out-of-the-box on
+   Cygwin
 
-   The primary source of information on developing for X is the X.Org
+   The primary source of information on developing X is the X.Org
    developer startpage 
 
    Downloading the X Window System source code tree can take anywhere
@@ -145,32 +150,39 @@ Overview
 
 Source Code Tree Layout
 
-   Descriptions of Important xserver Directories and Subdirectories
-     * cfb* contains deprecated color framebuffer drawing procedures that
-       are not compatible with the Shadow drawing system that Cygwin/X
-       depends upon. This directory is of no interest to Cygwin/X
-       programmers.
+   A brief overview of the xserver source tree layout, highlighting the
+   parts of important and interest for Cygwin/X development:
      * dix contains [drawing] device independent X routines. main.c
        contains the main entry-point function for the Cygwin/X X Server.
        The X Server startup procedure can be followed by examining main.
      * fb contains the modern framebuffer drawing procedures used by
-       Cygwin/X. This directory is maintained by Keith Packard and is
-       only of interest to Cygwin/X programmers when it fails to build.
+       Cygwin/X.
      * hw contains [drawing] hardware dependent functions.
+          + dmx contains the Distributed Multihead X X Server. The DMX X
+            server acts as a proxy for multiple back-end X servers.
+          + kdrive
+               o ephyr contains the Xephyr X Server Xephyr X Server which
+                 uses a window on a host X Server as its framebuffer.
+                 Unlike Xnest it supports modern X extensions such as
+                 Composite, Damage, randr, etc.
+               o fake contains the Xfake X Server. xfake is similar to
+                 xvfb, but discards all data written to the framebuffer.
           + vfb contains the Virtual Framebuffer X Server. The vfb server
-            draws to a system memory framebuffer with the primary purpose
-            of allowing X clients to run on a machine that does not have
-            display hardware.
+            draws to a system memory framebuffer. Xvfb is primarly used
+            for testing, or for running X clients which require an X
+            server but there is no interest in seeing the content of it's
+            windows.
           + xfree86 contains source code for the X Window System servers
             that run on various operating systems that generally have
             low-level access to the graphics hardware. Cygwin/X does not
             have low-level access to the graphics hardware, thus Cygwin/X
             is not able to utilize the X Window System server.
           + xnest contains source code for the Nested X Server which runs
-            inside of another X Server. xnest is not generally of
-            interest to Cygwin/X programmers.
+            inside of another X Server.
+          + xquartz contains the source code for the XQuartz X Server,
+            which runs on Mac OS X.
           + xwin contains the source code for the Cygwin/X X Server. This
-            is the primary directory that Cygwin/X programmers are
+            is the primary directory that Cygwin/X programmers will be
             interested in.
      * include contains header files specific to the X Server program,
        such as graphics context structures. This directory is useful to
@@ -182,14 +194,11 @@ Source Code Tree Layout
        winFillSpans, and winSetSpans, which are implemented in the Native
        GDI engine.
      * miext contains various machine independent X extensions.
-          + layer contains source code for the layer extension. This
-            extension is supported by Cygwin/X, however, this directory
-            will be of interest only when layer fails to build.
-          + shadow contains source code for the shadow extension that the
-            Cygwin/X X Server depends upon. This directory is of primary
-            importance to Cygwin/X, but it is maintained by other
+          + shadow contains source code for the shadow framebuffer layer
+            that the Cygwin/X X Server depends upon. This directory is of
+            primary importance to Cygwin/X, but it is maintained by other
             programmers and is only of direct interest to Cygwin/X
-            programmers when it fails to build. The shadow extension does
+            programmers when it fails to build. The shadow layer does
             three things:
               1. Allows the fb graphics routines to draw to an offscreen
                  framebuffer.
@@ -203,28 +212,20 @@ Source Code Tree Layout
        that they are actually compatible with most UNIX-style operating
        systems, include Cygwin.
 
-   Other components of interest
-     * doc
-          + hardcopy contains precompiled PostScript documentation for
-            various components of the X Window System. Cygwin/X-specific
-            documentation is not contained in this directory. This
-            directory is of little interest to Cygwin/X programmers.
-          + specs contains the sources to build the documents in
-            hardcopy. This directory is of little interest to Cygwin/X
-            programmers.
-     * fonts contains font definition files used to compile fonts. This
-       directory is of little interest to Cygwin/X programmers.
-     * include contains various X Window System headers that are not
-       generally specific to any one client or library (i.e. X.h,
-       Xproto.h, and keysymdef.h).
-     * lib contains both X client and X Server libraries. Cygwin/X does
-       not generally call any functions in these libraries directly;
-       however, we do have to link to several of these libraries to get
-       our X Server to build. These libraries are maintained by various
-       developers from the X Window System project and there are
-       occasional synchronizations with The Open Group's X.org. Cygwin/X
-       programmers occasionally need to fix Cygwin-related build errors
-       that occur in these libraries.
+   Other packages of interest in the X.Org Release
+     * xorg-docs contains documentation for various components of the X
+       Window System. Cygwin/X-specific documentation is not contained in
+       this directory.
+     * The various X Window System protocol headers.
+     * The various X client and X Server libraries. Cygwin/X programmers
+       occasionally need to fix Cygwin-related build errors that occur in
+       these libraries.
+     * The various standard X utility and test applications (e.g. xeyes,
+       xhost, xinit, xlogo, etc.). Cygwin/X programmers occasionally need
+       to fix Cygwin-related build errors that occur in these
+       applications.
+     * The various font packages that contain font definition files used
+       to compile fonts.
      _________________________________________________________________
 
 Cygwin/X X Server Architecture
@@ -393,17 +394,24 @@ Primary FB Engine
 
 User Input
 
-   User input is processed using the MI layer's user input system. Any
-   queued Win32 user input messages, as well as other Win32 messages, are
-   handled when hw/xwin/winwakeup.c's winWakeupHandler function is called
-   by the OS layer os/WaitFor.c's WaitForSomething function and when the
-   DIX layer dix/dispatch.c's Dispatch function calls
-   hw/xwin/InitInput.c's ProcessInputEvents function. Each Win32 user
-   input message typically queues an input event, or several input
-   events, using the MI layer's mi/mieq.c's mieqEnqueue function.
-   Enqueued MI input events are processed in ProcessInputEvents by
-   calling mi/mieq.c's mieqProcessInputEvents; the cursor position is
-   updated on the screen by calling mipointer.c's miPointerUpdate.
+   At the end of InitInput in hw/xwin/InitInput.c we open /dev/windows, a
+   special device which becomes ready when there is anything to read on
+   the windows message queue, and add that to the select mask for
+   WaitForSomething using AddEnabledDevice.
+
+   The X server's main loop calls the OS layer os/WaitFor.c's
+   WaitForSomething function, which waits for something to happen using
+   select. When select returns, all the wakeup handlers are run. Any
+   queued Win32 user input messages (as well as other Win32 messages) are
+   handled when hw/xwin/winwakeup.c's winWakeupHandler function is
+   called. Each Win32 user input message typically queues an input event,
+   or several input events, using the MI layer's mi/mieq.c's mieqEnqueue
+   function.
+
+   Enqueued MI input events are processed when the DIX layer
+   dix/dispatch.c's Dispatch function calls hw/xwin/InitInput.c's
+   ProcessInputEvents function, which calls mi/mieq.c's
+   mieqProcessInputEvents.
      _________________________________________________________________
 
 Keyboard
@@ -454,14 +462,14 @@ Keyboard
    this method works reliably for non-U.S. keyboard layouts. However,
    there are further concerns for non-U.S. keyboard layouts.
 
-   Non-U.S. keyboard layouts typically use the right Alt key as a sort of
-   shift key to access an additional row of symbols from the `, 1, 2,
-   ..., 0 keys, as well as accented forms of standard alphabetic
-   characters, such as , , , and additional alphabetic characters, such
-   as . Non-U.S. keyboards typically label the right Alt key as AltGr or
-   AltLang; the Gr is short for "grave", which is the name of one of the
-   accent symbols. The X Protocol and Win32 methods of handling the AltGr
-   key are not directly compatible with one another.
+   Non-U.S. keyboard layouts typically use the right Alt key as an
+   alternate shift key to access an additional row of symbols from the `,
+   1, 2, ..., 0 keys, as well as accented forms of standard alphabetic
+   characters, such as á, ä, å, ú and additional alphabetic characters,
+   such as ß. Non-U.S. keyboards typically label the right Alt key as
+   AltGr or AltLang; the Gr is short for "grave", which is the name of
+   one of the accent symbols. The X Protocol and Win32 methods of
+   handling the AltGr key are not directly compatible with one another.
 
    The X Protocol handles AltGr presses and releases in much the same way
    as any other key press and release. Win32, however, generates a fake
@@ -477,16 +485,16 @@ Keyboard
    timestamp as the AltGr messages, so the fake messages can be easily
    identified.
 
-   Special keyboard considerations must be handled the Cygwin/X X Server
-   losses or gains the keyboard focus. For example, the user can switch
-   out of Cygwin/X, toggle the Num Lock key, then switch back into
+   Special keyboard considerations must be handled when the Cygwin/X X
+   Server loses or gains the keyboard focus. For example, the user can
+   switch out of Cygwin/X, toggle the Num Lock key, then switch back into
    Cygwin/X; in this case Cygwin/X would not have received the Num Lock
    toggle message, so it will continue to function as if Num Lock was in
    its previous state. Thus, the state of any mode keys such as Num Lock,
    Caps Lock, Scroll Lock, and Kana Lock must be stored upon loss of
-   keyboard focus; the stored state of each mode key must then be
-   compared to that key's current state, toggling the key if its state
-   has changed.
+   keyboard focus; on regaining focus, the stored state of each mode key
+   must then be compared to that key's current state, toggling the key if
+   its state has changed.
      _________________________________________________________________
 
 Mouse
@@ -532,6 +540,11 @@ Mouse
    mouse wheel message.
      _________________________________________________________________
 
+Other Windows messages
+
+   Certain other WM_ messages are also processed. TBD.
+     _________________________________________________________________
+
 Prerequisites for Building the Source Code
 
 Required Packages for Building
@@ -547,7 +560,7 @@ Required Packages for Building
      * Required tools:
        autoconf, automake, binutils, bison, bzip2, cygport, diffutils,
        fileutils, findutils, flex, gawk, gcc, git, libtool, make, patch,
-       pkg-config, sed, subversion, tar
+       pkg-config, sed, tar
      * Required protocol headers:
        bigreqsproto, compositeproto, damageproto, dmxproto, evieext,
        fixesproto, fontsproto, glproto, inputproto, kbproto, randrproto,
@@ -558,8 +571,8 @@ Required Packages for Building
        libpixman1-devel, libX11-devel, libXau-devel, libXaw-devel,
        libXdmcp-devel, libXext-devel, libXfont-devel, libXinerama-devel,
        libXmu-devel, libXpm-devel, libXRes-devel, libxkbfile-devel,
-       minires-devel, openssl-devel, zlib
-     * Other miscellaneous required pacakges :
+       openssl-devel, zlib
+     * Other miscellaneous required packages :
        font-utils, xorg-util-macros, xtrans
 
      Note: The /usr/share/doc/Cygwin/xorg-server-n.n.n.README file
@@ -586,11 +599,10 @@ libXfont linkage issue
    Cygwin when libXfont is statically linked with the X server, and not
    as a shared libary.
 
-   We can't ship a static-only libXfont in Cygwin because xfs requires it
-   shared, otherwise you get multiple definitions during linking, thanks
-   to the xtrans code. So when building the X server, you must prepare
-   your compilation environment so that the libXfont shared libary is not
-   linked with.
+   If Cygwin's libXfont-devel package contains a shared library stub,
+   /usr/lib/libXFont.dll.a, when building the X server, you must prepare
+   your compilation environment so that the libXfont shared libary stub
+   is not linked with.
 
    A quick and dirty way of achieving this is to move libXFont.la and
    libXfont.dll.a aside whilst building the X server.
@@ -616,9 +628,9 @@ Obtaining via Cygwin setup
    source code, and should be the starting point for new developers.
 
    On installing the source code package, setup will unpack it under
-   /usr/src. You should find the stock X.Org xorg-server-n.n.n.tar.bz2
-   archive, plus a number of .patch files, and a .cygport file which
-   automates the distribution build and packaging tasks.
+   /usr/src. You should find the source archive, any needed .patch files,
+   and a .cygport file which automates the distribution build and
+   packaging tasks.
 
    The sources can unpacked and prepared using cygport as follows:
 Username@CygwinHost ~
@@ -647,24 +659,22 @@ $ ./autogen.sh -V
      Distribution
      _________________________________________________________________
 
-Obtaining from subversion
+Obtaining from version control
 
-   The patches applied to the stock X.Org archive and the packaging
-   script for the packages distributed via Cygwin setup are held in a
-   subversion repository. Intermediate versions between released packages
-   can be obtained from there.
+   The packaging script and patches for the packages distributed via
+   Cygwin setup are held in a git repository. Intermediate versions
+   between released packages can be obtained from there.
 Username@CygwinHost ~
-$ svn checkout https://cygwin-ports.svn.sourceforge.net/svnroot/cygwin-ports/po
-rts/trunk/xorg/xorg-server
+$ git clone git://cygwin-ports.git.sourceforge.net/gitroot/cygwin-ports/xorg-se
+rver
 
 Username@CygwinHost ~
 $ cd xorg-server
 
-   This will obtain the .patch files, and a .cygport file. You can then
-   add the stock X.Org xorg-server-n.n.n.tar.bz2 archive, either by
-   downloading it with 'cygport xorg-server-n.n.n-n.cygport download' or
-   by copying it into that directory if you have already downloaded it,
-   and proceed as in the Section called Obtaining via Cygwin setup
+   This will obtain a .cygport file. and any .patch files. You can then
+   add the source archive by downloading it with 'cygport
+   xorg-server-n.n.n-n.cygport download', and proceed as in the Section
+   called Obtaining via Cygwin setup
      _________________________________________________________________
 
 Obtaining from X.Org
@@ -706,7 +716,7 @@ Username@CygwinHost ~
 $ cd ~/xserver
 
 Username@CygwinHost ~/xserver
-$ ./configure --prefix=/usr --with-log-dir=/var/log --disable-xv
+$ ./configure --prefix=/usr --with-log-dir=/var/log
 [lots of output]
 $ make
 [lots more output]
@@ -721,7 +731,8 @@ $ make
      160MB. On my ageing 2.2MHz Athlon64 3500+, a full build takes about
      20 minutes.
 
-     Note: XXX: Describe how to configure using a builddir
+     Note: If you wish to keep build products separate from the source,
+     you may run configure from a separate build directory.
      _________________________________________________________________
 
 Debug Build
@@ -734,8 +745,8 @@ Username@CygwinHost ~
 $ cd ~/xserver
 
 Username@CygwinHost ~/xserver
-$ ./configure --prefix=/usr --with-log-dir=/var/log --disable-xv --enable-debug
- CFLAGS="-g -O0"
+$ ./configure --prefix=/usr --with-log-dir=/var/log --enable-debug CFLAGS="-g -
+O0"
 [lots of output]
 $ make
 [lots more output]
@@ -792,19 +803,10 @@ Keeping your source code tree updated
 
 Cross Compiling
 
-     Note: XXX: THIS SECTION NEEDS UPDATING
-
    Cross compiling is the act of the building source code on one system,
    the build host, into executables or libraries to be run on a different
-   host, the native host. The build host and the native host may differ
-   in operating system and/or processor type. Cross compiling is done for
-   several reasons:
-     * The native host is grossly under powered, such as a handheld
-       computer.
-     * The user happens to have greatly more compiling power available on
-       a platform other than the native host. For example, the user may
-       have access to a 32 processor machine while their desktop machine
-       may only be a uni-processor machine.
+   host, the target host. The build host and the target host may differ
+   in operating system and/or processor type.
 
    Cross compiling is much trickier than building on the native host.
    There are a whole new class of problems that can happen when cross
@@ -812,270 +814,8 @@ Cross Compiling
    should be familiar with building Cygwin/X on Cygwin, as described in
    the Section called Native Compiling, before attempting to cross
    compile Cygwin/X.
-     _________________________________________________________________
 
-Obtaining binutils and gcc Source
-
-   binutils and gcc source code releases that are known to compile on
-   Cygwin are distributed by the Cygwin project. Therefore, it is highly
-   recommended that you obtain the binutils and gcc sources from the
-   Cygwin mirror network.
-
-   Follow these steps to download Cygwin/X binaries:
-    1. Create a directory to store the binutils and gcc sources in, such
-       as /home/my_login/cygwin/src/
-    2. Visit the Cygwin mirrors page to find your closest mirror
-    3. The ftp url for your mirror site should take you to the cygwin/
-       directory on the mirror
-    4. Change current ftp directory to cygwin/release/.
-    5. Download the following files from cygwin/release/, saving them to
-       /home/my_login/cygwin/src/ The compressed file size appears after
-       each file in the list below.
-
-     Downloading with a Web Browser: Some web browsers automatically
-     decompress saved files when you use the left mouse button to follow
-     the link to a file; bunzip2 will report, "Data integrity error when
-     decompressing.", when attempting to decompress a file that has been
-     decompressed by your web browser. Prevent your files from being
-     automatically decompressed by clicking the right mouse button on a
-     file link and choosing a command such as Save Target As... or Save
-     Link As... from the context sensitive menu. Better yet, download
-     your files with a stand alone ftp client.
-          + binutils/binutils-20030901-1-src.tar.bz2 (10.5 MiB; required,
-            necessary to build gcc and Cygwin/X)
-          + gcc/gcc-3.3.1-1-src.tar.bz2 (21.9 MiB; required, necessary to
-            build Cygwin/X)
-     _________________________________________________________________
-
-Obtaining Cygwin Headers and Libs
-
-   The simplest method of building a cross compiler for Cygwin requires
-   that you have the Cygwin headers and libraries available at the time
-   of building the cross compiler. Cygwin headers and libraries are
-   installed when Cygwin is installed, so the headers and libraries can
-   be obtained from an existing Cygwin installation.
-
-     Don't simply copy the headers and libraries: Some of the headers
-     and libraries are symbolic links to other headers or libraries.
-     Copying these files using a program that is not aware of Cygwin's
-     symlink emulation will result in some of the header and library
-     files being broken. The method described below will preserve the
-     symbolic links used by the header and library files.
-
-    1. Launch your Cygwin environment, using either the icon on your
-       Desktop, the icon in your Start Menu, or by running cygwin.bat
-       from your Cygwin directory (e.g. c:\cygwin); you should see a
-       window like the following:
-
-Username@CygwinHost ~
-$
-
-    2. Change the current directory to Cygwin root directory:
-
-Username@CygwinHost ~
-$ cd /
-
-Username@CygwinHost /
-$
-
-    3. Create an archive of the contents of the /lib directory:
-
-Username@CygwinHost /
-$ tar czf cygwin-lib.tgz lib/
-
-Username@CygwinHost /
-$
-
-    4. Change the current directory to the usr directory in your Cygwin
-       root directory:
-
-Username@CygwinHost /
-$ cd /usr
-
-Username@CygwinHost /usr
-$
-
-    5. Create an archive of the contents of the /usr/include directory:
-
-Username@CygwinHost /usr
-$ tar czf cygwin-include.tgz include/
-
-Username@CygwinHost /usr
-$
-
-    6. Transfer cygwin-lib.tgz and cygwin-include.tgz to your build host
-       using any method that you have available (e.g. ftp, samba,
-       diskette, etc.). Save the files in the
-       /home/my_login/cygwin/i686-pc-cygwin/ directory.
-    7. Open a shell on your cross compiling build host; you should see a
-       window like the following:
-
-[harold@CrossHost harold]$
-
-    8. Change the current directory to the
-       /home/my_login/cygwin/i686-pc-cygwin/ directory in your build host
-       root directory:
-
-[harold@CrossHost harold]$ cd /home/my_login/cygwin/i686-pc-cygwin/
-
-[harold@CrossHost /home/my_login/cygwin/i686-pc-cygwin/]$
-
-    9. Extract the cygwin-lib.tgz and cygwin-include.tgz archives:
-
-[harold@CrossHost /home/my_login/cygwin/i686-pc-cygwin/]$ tar xzf cygwin-lib.tg
-z
-
-[harold@CrossHost /home/my_login/cygwin/i686-pc-cygwin/]$ tar xzf cygwin-includ
-e.tgz
-
-   10. Obtaining Cygwin headers and libs is now complete.
-     _________________________________________________________________
-
-Building binutils and gcc
-
-    1. Open a shell on your cross compiling build host; you should see a
-       window like the following:
-
-[harold@CrossHost harold]$
-
-    2. Change the current directory to the /home/my_login/cygwin/src/
-       directory in your build host root directory:
-
-[harold@CrossHost harold]$ cd /home/my_login/cygwin/src/
-
-[harold@CrossHost src]$
-
-    3. Extract the binutils-20030901-1-src.tar.bz2 and
-       gcc-3.3.1-1-src.tar.bz2 archives:
-
-[harold@CrossHost src]$ bunzip2 binutils-20030901-1-src.tar.bz2
-
-[harold@CrossHost src]$ tar xf binutils-20030901-1-src.tar
-
-[harold@CrossHost src]$ bunzip2 gcc-3.3.1-1-src.tar.bz2
-
-[harold@CrossHost src]$ tar xf gcc-3.3.1-1-src.tar
-
-    4. Change the current directory to the
-       /home/my_login/cygwin/src/binutils-20030901-1 directory:
-
-[harold@CrossHost src]$ cd binutils-20030901-1
-
-[harold@CrossHost binutils-20030901-1]$
-
-    5. Create a build directory and change the current directory to that
-       directory:
-
-[harold@CrossHost binutils-20030901-1]$ mkdir build
-
-[harold@CrossHost binutils-20030901-1]$ cd build
-
-[harold@CrossHost build]$
-
-    6. Configure binutils:
-
-[harold@CrossHost build]$ ../configure
---prefix=/home/my_login/cygwin --exec-prefix=/home/my_login/cygwin
---target=i686-pc-cygwin --host=i686-pc-linux > configure.log 2>&1
-
-[harold@CrossHost build]$
-
-    7. Build binutils:
-
-[harold@CrossHost build]$ make all > all.log 2>&1
-
-[harold@CrossHost build]$
-
-    8. Install binutils:
-
-[harold@CrossHost build]$ make install > install.log 2>&1
-
-[harold@CrossHost build]$
-
-    9. Modify the PATH environment variable to include the directories
-       that the binutils executables were installed in:
-
-[harold@CrossHost build]$
-PATH=$PATH:/home/my_login/cygwin/bin:/home/my_login/cygwin/i686-pc-cygwin/bin
-
-[harold@CrossHost build]$
-
-   10. Change the current directory to the
-       /home/my_login/cygwin/src/gcc-3.3.1-1 directory:
-
-[harold@CrossHost build]$ cd ../../gcc-3.3.1-1
-
-[harold@CrossHost gcc-3.3.1-1]$
-
-   11. Create a build directory and change the current directory to that
-       directory:
-
-[harold@CrossHost gcc-3.3.1-1]$ mkdir build
-
-[harold@CrossHost gcc-3.3.1-1]$ cd build
-
-[harold@CrossHost build]$
-
-   12. Configure gcc:
-
-[harold@CrossHost build]$ ../configure
---prefix=/home/my_login/cygwin --exec-prefix=/home/my_login/cygwin
---target=i686-pc-cygwin --host=i686-pc-linux
---enable-haifa > configure.log 2>&1
-
-[harold@CrossHost build]$
-
-   13. Build gcc:
-
-[harold@CrossHost build]$ make all > all.log 2>&1
-
-[harold@CrossHost build]$
-
-   14. Install gcc:
-
-[harold@CrossHost build]$ make install > install.log 2>&1
-
-[harold@CrossHost build]$
-
-   15. Building binutils and gcc is now complete.
-     _________________________________________________________________
-
-Creating Links for binutils and gcc
-
-   Links to the executables in /home/my_login/cygwin/bin must be created
-   in the /home/my_login/cygwin/i686-pc-cygwin/bin directory; these are
-   required for the build system to find the build executables (e.g. gcc,
-   cpp, etc.). Each of the build executables in /home/my_login/cygwin/bin
-   is prefixed with i686-pc-cygwin (e.g. i686-pc-cygwin-cpp) whereas the
-   build system expects the executables to have no prefix (e.g. cpp).
-
-   Creating links to the build executables and dropping the prefix from
-   the name of each build executables link is done by a script that was
-   provided by the XFree86 cross-compiling community and slightly
-   modified by Alexander Gottwald. The text of this script is below, save
-   it in a file on your cross compiling host called cross-links.sh. Note
-   that the location of the script does not matter, since it contains a
-   reference to the location of the build tools in the CYGROOT variable.
-#!/bin/bash
-
-#
-# This stuff is required for the Cross Compile Environment.
-#
-CYGROOT=/home/my_login/cygwin
-TARGET=i686-pc-cygwin
-mkdir -p $CYGROOT/$TARGET/bin
-cd $CYGROOT/$TARGET/bin
-
-for i in ../../bin/*; do
-    if [ $i !=  ${i/$TARGET-/} ]; then
-         ln -s $i ${i/.*$TARGET-/}
-    fi
-done
-
-ln -s gcc cc
-
-   Finally, run the cross-links.sh script. There should now be several
-   links in the /home/my_login/cygwin/i686-pc-cygwin/bin directory.
+   See Appendix A for notes on building a cross compiler.
      _________________________________________________________________
 
 Building Cygwin/X
@@ -1084,11 +824,7 @@ Building Cygwin/X
    nearly identical to the process described below in the Section called
    Native Compiling of the Native Compiling section. One divergence from
    the aforementioned instructions is that you will be using a bash shell
-   on your cross compiling host, rather than on your native Cygwin host;
-   other divergences follow.
-
-     Note: XXX: THIS IS UNTESTED
-
+   on your cross compiling host, rather than on your native Cygwin host.
     1. When configuring, you must pass --target=i686-pc-cygwin to
        ./configure to cause the build system to build for the target,
        Cygwin, platform:
@@ -1128,7 +864,8 @@ Packaging a Cygwin/X Distribution
      setup.exe.
 
      You can a similar technique to build a distribution from locally
-     modified sources, cygports svn or a X.Org release tarball instead.
+     modified sources, cygwin-ports git or an X.Org release tarball
+     instead.
 
     1. Use Cygwin setup to install the xorg-server source package, it
        will be automatically unpacked under /usr/src
@@ -1531,7 +1268,221 @@ X
           See Also: X Display Manager.
      _________________________________________________________________
 
-Appendix A. GNU Free Documentation License
+Appendix A. Building a cross-compiler
+
+     Here be dragons: Building a cross-compiler is not often tested. You
+     will likely encounter problems following these instructions, and
+     require an in-depth understanding of what you are doing in order to
+     fix those problems. These instructions are meant to be a template
+     to be completed with your own understanding, rather than a recipe
+     to be followed blindly. Reports to the mailing list that you
+     followed these instructions, got an error message and are now
+     stuck, will be ignored with harsh, uncaring indifference.
+
+     Note: Even once you have built your cross-compiler, there are a
+     whole new class of problems that can happen when cross-compiling
+     that are simply not an issue when building on the target. For
+     example: you will need to somehow make the dependencies of your
+     program available to the cross-compiler, hardly anything uses
+     HOST_EXEEXT correctly, etc.
+
+   This mailing list thread discusses some of the issues with building a
+   cross-compiler, and provides an example script. It also discusses
+   cross-compiling the Cygwin DLL itself.
+
+   You will want to read carefully the GCC installation guide.
+
+   These instructions will assume you have chosen a suitable working
+   directory, e.g. ~/cygwin/
+
+   To build a minimal cross-toolchain, we need to build binutils (for the
+   cross-assembler and cross-linker) and GCC (for the cross-compiler).
+     _________________________________________________________________
+
+Obtaining binutils and GCC source
+
+   binutils and GCC releases that are known to work for Cygwin are
+   distributed with source code by the Cygwin project. These may contain
+   patches against the stock upstream release required to build or
+   function correctly on Cygwin, therefore, it is highly recommended that
+   you obtain the binutils and GCC sources from the Cygwin mirror
+   network.
+
+   Follow these steps to download Cygwin sources:
+    1. Create a directory to store the binutils and GCC sources in, such
+       as ~/cygwin/src/
+    2. The URL listed for your nearest mirror site should take you to the
+       cygwin/ directory on the mirror
+    3. Download the following files from cygwin/release/, saving them to
+       ~/cygwin/src/.
+          + binutils/binutils-2.20.51-2-src.tar.bz2
+          + gcc4/gcc4-4.5.0-1-src.tar.bz2
+
+user@crosshost ~ $ mkdir -p ~/cygwin/src
+user@crosshost ~ $ cd ~/cygwin/src
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/binutils/binutils-2.20.
+51-2-src.tar.bz2
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/gcc4/gcc4-4.5.0-1-src.t
+ar.bz2
+
+   Currently GCC is provided as cygport package. You will want to examine
+   closely the .cygport file contained in the source package which shows
+   how GCC is configured and built natively.
+
+   You will want to read carefully the cygwin-specific READMEs installed
+   by the corresponding binary packages into /usr/share/doc/Cygwin/,
+   which contain important information and build instructions
+     _________________________________________________________________
+
+Obtaining Cygwin headers and libraries
+
+   The usual technique for building GCC cross-compilers is to:
+    1. build binutils
+    2. build a bootstrap compiler (--without-headers
+       --enable-languages=c) that will only be used to build the C
+       runtime library.
+    3. use the bootstrap compiler to build the C runtime library.
+    4. rebuild the final compiler, including internal libraries that need
+       the target-specific C runtime library in order to be compiled
+       properly.
+
+   Unfortunately, this technique cannot be applied building a
+   cross-compiler for Cygwin, not least due to the use of C++ code in
+   winsup/.
+
+   The simplest method of escaping from this chicken-and-egg situation is
+   to make the Cygwin headers and libraries available at the time of
+   building the cross-compiler, by installing them from the Cygwin binary
+   packages containing those headers and libraries.
+
+   Headers and libraries from the following packages are required:
+     * cygwin (needed for building libgcc)
+     * win32api (needed for building libgcc)
+     * iconv (needed for building libstdc++)
+
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/cygwin/cygwin-1.7.7-1.t
+ar.bz2
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/w32api/w32api-3.15-1.ta
+r.bz2
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/libiconv/libiconv-1.13-
+10.tar.bz2
+user@crosshost ~/cygwin/src $ cd ~/cygwin
+user@crosshost ~/cygwin $ tar xjf src/cygwin-1.7.7-1.tar.bz2 usr/include usr/li
+b
+user@crosshost ~/cygwin $ tar xjf src/w32api-3.15-1.tar.bz2 usr/include usr/lib
+user@crosshost ~/cygwin $ tar xjf src/libiconv-1.13-10.tar.bz2 usr/include usr/
+lib
+user@crosshost ~/cygwin $ ln -s ../usr/include/ i686-pc-cygwin/include
+user@crosshost ~/cygwin $ ln -s ../usr/lib/ i686-pc-cygwin/lib
+
+   Alternatively, these headers and libraries can be obtained by copying
+   the contents of the /usr/lib directory and /usr/include directory of a
+   Cygwin host, to the ~/cygwin/i686-pc-cygwin directory on your build
+   host. Ensure the method you use to copy these files preserves
+   symlinks. 
+     _________________________________________________________________
+
+Building binutils
+
+    1. Change the current directory to the ~/cygwin/src directory:
+
+user@crosshost ~/cygwin $ cd ~/cygwin/src/
+
+    2. Extract the binutils archive:
+
+user@crosshost ~/cygwin/src $ tar jxf binutils-2.20.51-2-src.tar.bz2
+
+    3. Create a ~/cygwin/build/binutils-2.20.51-2/ directory and change
+       the current directory to that directory:
+
+user@crosshost ~/cygwin/src $ mkdir -p ~/cygwin/build/binutils-2.20.51-2
+user@crosshost ~/cygwin/src $ cd -p ~/cygwin/build/binutils-2.20.51-2
+
+    4. Configure binutils:
+
+user@crosshost ~/cygwin/build/binutils-2.20.51-2/build $ ../../src/binutils-2.2
+0.51-2/configure --prefix=/home/user/cygwin --target=i686-pc-cygwin 2>&1 | tee
+configure.log
+
+          + The Cygwin binutils source tarball doesn't seem to record the
+            configuration used to build the Cygwin binary package.
+    5. Build binutils:
+
+user@crosshost ~/cygwin/build/binutils-2.20.51-2/build $ make all 2>&1 | tee al
+l.log
+
+    6. Install binutils:
+
+user@crosshost ~/cygwin/build/binutils-2.20.51-2/build $ make install 2>&1 | te
+e install.log
+
+    7. Modify the PATH environment variable to include the directories
+       that the binutils executables were installed in, so they are
+       available when we build GCC:
+
+user@crosshost ~/cygwin/build/binutils-2.20.51-2/build $ export PATH=~/cygwin/b
+in:$PATH
+     _________________________________________________________________
+
+Building GCC
+
+    1. Change the current directory to the ~/cygwin/src/ directory:
+
+user@crosshost ~ $ cd ~/cygwin/src
+
+    2. Extract the GCC archive, then extract the upstream GCC source
+       archive and apply the patches it contains :
+
+user@crosshost ~/cygwin/src $ tar jxf gcc4-4.5.0-1-src.tar.bz2
+user@crosshost ~/cygwin/src $ tar jxf gcc-4.5.0.tar.bz2
+user@crosshost ~/cygwin/src $ (patching and autoreconf commands omitted)
+
+          + Where the patches touch the configuration mechanism, you need
+            to regenerate the files generated by autotools. autoreconf
+            doesn't work, I don't know why, so you need to invoke the
+            correct autotools in the correct directories. The cygport
+            file provides an example of how to do this.
+          + GCC is picky about the exact versions of the autotools in
+            use, so you need to make the versions it requires available.
+          + For bonus points, use cygport prep to extract the source and
+            apply the patches.
+    3. Create a ~/cygwin/build/gcc-4.5.0-1/ directory and change the
+       current directory to that directory:
+
+user@crosshost ~/cygwin/src $ mkdir ~/cygwin/build/gcc-4.5.0
+user@crosshost ~/cygwin/src $ cd ~/cygwin/build/gcc-4.5.0
+
+          + It's highly recommended that GCC be built into a separate
+            directory from the sources which does not reside within the
+            source tree. Building GCC in the source directory is
+            generally untested, and building into a subdirectory of the
+            source directory is unsupported.
+    4. Configure GCC:
+
+user@crosshost ~/cygwin/build/gcc-4.5.0 $ ../../src/gcc-4.5.0/configure --prefi
+x=/home/user/cygwin --target=i686-pc-cygwin \
+--disable-bootstrap --enable-version-specific-runtime-libs --enable-static --en
+able-shared --enable-shared-libgcc \
+--disable-__cxa_atexit --disable-sjlj-exceptions --enable-languages=c,c++ --dis
+able-symvers --enable-threads=posix \
+2>&1 | tee configure.log
+
+          + Use the same configure options as used in the cygport file or
+            reported by gcc -v
+    5. Build GCC:
+
+user@crosshost ~/cygwin/build/gcc-4.5.0-1 $ make all 2>&1 | tee all.log
+
+    6. Install GCC:
+
+user@crosshost ~/cygwin/build/gcc-4.5.0-1 $ make install 2>&1 | install.log
+
+   Building binutils and GCC is now complete. Test your cross-compiler by
+   checking that a 'hello world' program can be successfully compiled on
+   your build host and run on your Cygwin target host.
+     _________________________________________________________________
+
+Appendix B. GNU Free Documentation License
 
    Version 1.1, March 2000
 
@@ -1891,3 +1842,9 @@ How to use this License for your documents
    recommend releasing these examples in parallel under your choice of
    free software license, such as the GNU General Public License, to
    permit their use in free software.
+     _________________________________________________________________
+
+Colophon
+
+   This document was produced from DocBook source XML using OpenJade and
+   the DocBook DSSSL Stylesheets at 2011-01-12 22:20 .

@@ -35,7 +35,7 @@ CELLSPACING="0"
 ><TH
 COLSPAN="3"
 ALIGN="center"
->Cygwin/X Contributor's Guide: Generated 2010-10-23 12:22&#13;</TH
+>Cygwin/X Contributor's Guide</TH
 ></TR
 ><TR
 ><TD
@@ -114,7 +114,6 @@ make,
 patch,
 pkg-config,
 sed,
-subversion,
 tar
 </P
 ></LI
@@ -164,14 +163,13 @@ libXmu-devel,
 libXpm-devel,
 libXRes-devel,
 libxkbfile-devel,
-minires-devel,
 openssl-devel,
 zlib
 </P
 ></LI
 ><LI
 ><P
->Other miscellaneous required pacakges :</P
+>Other miscellaneous required packages :</P
 ><P
 >&#13;font-utils,
 xorg-util-macros,
@@ -251,10 +249,9 @@ However, such overloading will only currently work for Cygwin when libXfont is s
 linked with the X server, and not as a shared libary.
 </P
 ><P
->&#13;We can't ship a static-only libXfont in Cygwin because xfs requires it shared,
-otherwise you get multiple definitions during linking, thanks to the xtrans code.
-So when building the X server, you must prepare your compilation environment so
-that the libXfont shared libary is not linked with.
+>&#13;If Cygwin's libXfont-devel package contains a shared library stub, /usr/lib/libXFont.dll.a,
+when building the X server, you must prepare your compilation environment so that the libXfont
+shared libary stub is not linked with.
 </P
 ><P
 >&#13;A quick and dirty way of achieving this is to move libXFont.la and libXfont.dll.a
