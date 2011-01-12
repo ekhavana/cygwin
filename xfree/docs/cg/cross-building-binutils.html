@@ -1,0 +1,287 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Building binutils</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
+REL="HOME"
+TITLE="Cygwin/X Contributor's Guide"
+HREF="cygwin-x-cg.html"/><LINK
+REL="UP"
+TITLE="Building a cross-compiler"
+HREF="cross.html"/><LINK
+REL="PREVIOUS"
+TITLE="Obtaining Cygwin headers and libraries"
+HREF="cross-obtaining-cygwin-headers-and-libs.html"/><LINK
+REL="NEXT"
+TITLE="Building GCC"
+HREF="cross-building-gcc.html"/><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html;charset=utf-8"/></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin/X Contributor's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="cross-obtaining-cygwin-headers-and-libs.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Appendix A. Building a cross-compiler</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="cross-building-gcc.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="cross-building-binutils"
+>Building binutils</A
+></H1
+><OL
+TYPE="1"
+><LI
+><P
+>Change the current directory to the
+<TT
+CLASS="filename"
+>~/cygwin/src</TT
+>
+directory:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~/cygwin $ cd ~/cygwin/src/
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Extract the binutils archive:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~/cygwin/src $ tar jxf binutils-2.20.51-2-src.tar.bz2
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Create a
+<TT
+CLASS="filename"
+>~/cygwin/build/binutils-2.20.51-2/</TT
+> directory
+and change the current directory to that directory:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~/cygwin/src $ mkdir -p ~/cygwin/build/binutils-2.20.51-2
+user@crosshost ~/cygwin/src $ cd -p ~/cygwin/build/binutils-2.20.51-2
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Configure binutils:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~/cygwin/build/binutils-2.20.51-2/build $ ../../src/binutils-2.20.51-2/configure --prefix=/home/user/cygwin --target=i686-pc-cygwin 2&gt;&amp;1 | tee configure.log
+</PRE
+></TD
+></TR
+></TABLE
+><UL
+><LI
+><P
+>&#13;The Cygwin binutils source tarball doesn't seem to record the configuration used to build
+the Cygwin binary package.
+</P
+></LI
+></UL
+></LI
+><LI
+><P
+>Build binutils:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~/cygwin/build/binutils-2.20.51-2/build $ make all 2&gt;&amp;1 | tee all.log
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Install binutils:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~/cygwin/build/binutils-2.20.51-2/build $ make install 2&gt;&amp;1 | tee install.log
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Modify the <CODE
+CLASS="envar"
+>PATH</CODE
+> environment variable to include
+the directories that the binutils executables were installed in, so
+they are available when we build GCC:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~/cygwin/build/binutils-2.20.51-2/build $ export PATH=~/cygwin/bin:$PATH
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+></OL
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="cross-obtaining-cygwin-headers-and-libs.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-x-cg.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="cross-building-gcc.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Obtaining Cygwin headers and libraries</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cross.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Building GCC</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

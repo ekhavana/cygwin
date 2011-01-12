@@ -1,0 +1,326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Building a cross-compiler</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
+REL="HOME"
+TITLE="Cygwin/X Contributor's Guide"
+HREF="cygwin-x-cg.html"/><LINK
+REL="PREVIOUS"
+TITLE="Glossary"
+HREF="glossary.html"/><LINK
+REL="NEXT"
+TITLE="Obtaining Cygwin headers and libraries"
+HREF="cross-obtaining-cygwin-headers-and-libs.html"/><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html;charset=utf-8"/></HEAD
+><BODY
+CLASS="appendix"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin/X Contributor's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="glossary.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+></TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="cross-obtaining-cygwin-headers-and-libs.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/></DIV
+><DIV
+CLASS="appendix"
+><H1
+><A
+NAME="cross"
+></A
+>Appendix A. Building a cross-compiler</H1
+><DIV
+CLASS="TOC"
+><DL
+><DT
+><B
+>Table of Contents</B
+></DT
+><DT
+><A
+HREF="cross.html#cross-obtaining-compiler-source"
+>Obtaining binutils and GCC source</A
+></DT
+><DT
+><A
+HREF="cross-obtaining-cygwin-headers-and-libs.html"
+>Obtaining Cygwin headers and libraries</A
+></DT
+><DT
+><A
+HREF="cross-building-binutils.html"
+>Building binutils</A
+></DT
+><DT
+><A
+HREF="cross-building-gcc.html"
+>Building GCC</A
+></DT
+></DL
+></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Here be dragons: </B
+>
+Building a cross-compiler is not often tested.
+You will likely encounter problems following these instructions, and
+require an in-depth understanding of what you are doing in order to
+fix those problems.  These instructions are meant to be a template
+to be completed with your own understanding, rather than a recipe
+to be followed blindly.  Reports to the mailing list that you followed
+these instructions, got an error message and are now stuck, will
+be ignored with harsh, uncaring indifference.
+</P
+></BLOCKQUOTE
+></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+Even once you have built your cross-compiler, there are a whole new
+class of problems that can happen when cross-compiling that are simply
+not an issue when building on the target. For example: you will need
+to somehow make the dependencies of your program available to the cross-compiler,
+hardly anything uses HOST_EXEEXT correctly, etc.
+</P
+></BLOCKQUOTE
+></DIV
+><P
+>&#13;This <A
+HREF="http://cygwin.com/ml/cygwin/2010-09/msg00194.html"
+TARGET="_top"
+>mailing list thread</A
+>
+discusses some of the issues with building a cross-compiler, and provides an example script.
+It also discusses cross-compiling the Cygwin DLL itself.
+</P
+><P
+>&#13;You will want to read carefully
+<A
+HREF="http://gcc.gnu.org/install/"
+TARGET="_top"
+>the GCC installation guide</A
+>.
+</P
+><P
+>&#13;These instructions will assume you have chosen a suitable working
+directory, e.g.
+<TT
+CLASS="filename"
+>~/cygwin/</TT
+>
+</P
+><P
+>&#13;To build a minimal cross-toolchain, we need to build binutils (for the cross-assembler and
+cross-linker) and GCC (for the cross-compiler).
+</P
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="cross-obtaining-compiler-source"
+>Obtaining binutils and GCC source</A
+></H1
+><P
+>binutils and GCC releases that are known to
+work for Cygwin are distributed with source code by the Cygwin project.
+These may contain patches against the stock upstream release required to
+build or function correctly on Cygwin,
+therefore, it is highly recommended that you obtain the binutils and
+GCC sources from the <A
+HREF="http://cygwin.com/mirrors.html"
+TARGET="_top"
+>Cygwin
+mirror network</A
+>.</P
+><P
+>Follow these steps to download Cygwin sources:</P
+><OL
+TYPE="1"
+><LI
+><P
+>Create a directory to store the binutils and GCC sources in,
+such as <TT
+CLASS="filename"
+>~/cygwin/src/</TT
+></P
+></LI
+><LI
+><P
+>The URL listed for your nearest mirror site should take you to the
+<TT
+CLASS="filename"
+>cygwin/</TT
+>
+directory on the mirror</P
+></LI
+><LI
+><P
+>Download the following files from <TT
+CLASS="filename"
+>cygwin/release/</TT
+>, saving them to
+<TT
+CLASS="filename"
+>~/cygwin/src/</TT
+>.</P
+><UL
+><LI
+><P
+><TT
+CLASS="filename"
+>binutils/binutils-2.20.51-2-src.tar.bz2</TT
+></P
+></LI
+><LI
+><P
+><TT
+CLASS="filename"
+>gcc4/gcc4-4.5.0-1-src.tar.bz2</TT
+></P
+></LI
+></UL
+></LI
+></OL
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~ $ mkdir -p ~/cygwin/src
+user@crosshost ~ $ cd ~/cygwin/src
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/binutils/binutils-2.20.51-2-src.tar.bz2
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/gcc4/gcc4-4.5.0-1-src.tar.bz2
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;Currently GCC is provided as cygport package.  You will want to examine closely
+the .cygport file contained in the source package which shows how GCC is
+configured and built natively.
+</P
+><P
+>&#13;You will want to read carefully the cygwin-specific READMEs installed by the corresponding
+binary packages into
+<TT
+CLASS="filename"
+>/usr/share/doc/Cygwin/</TT
+>, which contain important information
+and build instructions
+</P
+></DIV
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="glossary.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-x-cg.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="cross-obtaining-cygwin-headers-and-libs.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Glossary</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+>&nbsp;</TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Obtaining Cygwin headers and libraries</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>

@@ -1,0 +1,243 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Obtaining Cygwin headers and libraries</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
+REL="HOME"
+TITLE="Cygwin/X Contributor's Guide"
+HREF="cygwin-x-cg.html"/><LINK
+REL="UP"
+TITLE="Building a cross-compiler"
+HREF="cross.html"/><LINK
+REL="PREVIOUS"
+TITLE="Building a cross-compiler"
+HREF="cross.html"/><LINK
+REL="NEXT"
+TITLE="Building binutils"
+HREF="cross-building-binutils.html"/><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html;charset=utf-8"/></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin/X Contributor's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="cross.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Appendix A. Building a cross-compiler</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="cross-building-binutils.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="cross-obtaining-cygwin-headers-and-libs"
+>Obtaining Cygwin headers and libraries</A
+></H1
+><P
+>The usual technique for building GCC cross-compilers is to:</P
+><OL
+TYPE="1"
+><LI
+><P
+>build binutils</P
+></LI
+><LI
+><P
+>build a bootstrap compiler (--without-headers --enable-languages=c)
+that will only be used to build the C runtime library.
+</P
+></LI
+><LI
+><P
+>&#13;use the bootstrap compiler to build the C runtime library.
+</P
+></LI
+><LI
+><P
+>&#13;rebuild the final compiler, including internal libraries that need the
+target-specific C runtime library in order to be compiled properly.
+</P
+></LI
+></OL
+><P
+>Unfortunately, this technique cannot be applied building a cross-compiler
+for Cygwin, not least due to the use of C++ code in
+<TT
+CLASS="filename"
+>winsup/</TT
+>.
+</P
+><P
+>The simplest method of escaping from this chicken-and-egg situation
+is to make the Cygwin headers and libraries available at the time of
+building the cross-compiler, by installing them from the Cygwin binary packages
+containing those headers and libraries.
+</P
+><P
+>&#13;Headers and libraries from the following packages are required:
+</P
+><UL
+><LI
+><P
+>cygwin (needed for building libgcc)</P
+></LI
+><LI
+><P
+>win32api (needed for building libgcc)</P
+></LI
+><LI
+><P
+>iconv (needed for building libstdc++)</P
+></LI
+></UL
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/cygwin/cygwin-1.7.7-1.tar.bz2
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/w32api/w32api-3.15-1.tar.bz2
+user@crosshost ~/cygwin/src $ wget $YOUR_MIRROR/release/libiconv/libiconv-1.13-10.tar.bz2
+user@crosshost ~/cygwin/src $ cd ~/cygwin
+user@crosshost ~/cygwin $ tar xjf src/cygwin-1.7.7-1.tar.bz2 usr/include usr/lib
+user@crosshost ~/cygwin $ tar xjf src/w32api-3.15-1.tar.bz2 usr/include usr/lib
+user@crosshost ~/cygwin $ tar xjf src/libiconv-1.13-10.tar.bz2 usr/include usr/lib
+user@crosshost ~/cygwin $ ln -s ../usr/include/ i686-pc-cygwin/include
+user@crosshost ~/cygwin $ ln -s ../usr/lib/ i686-pc-cygwin/lib
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;Alternatively, these headers and libraries can be obtained by copying the
+contents of the <TT
+CLASS="filename"
+>/usr/lib</TT
+> directory and
+<TT
+CLASS="filename"
+>/usr/include</TT
+> directory of a Cygwin host,
+to the <TT
+CLASS="filename"
+>~/cygwin/i686-pc-cygwin</TT
+> directory
+on your build host.
+<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>&#13;Ensure the method you use to copy these files preserves symlinks.
+</I
+></SPAN
+>
+</P
+></DIV
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="cross.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-x-cg.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="cross-building-binutils.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Building a cross-compiler</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cross.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Building binutils</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
