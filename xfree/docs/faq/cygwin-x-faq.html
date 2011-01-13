@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2011-01-12 22:20</H2
+>2011-01-13 22:53</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -601,8 +601,7 @@ HREF="cygwin-x-faq.html#errors"
 HREF="cygwin-x-faq.html#q-owner-tmp-.X11-unix"
 ><SPAN
 CLASS="errorname"
->_XSERVTransmkdir: Owner of /tmp/.X11-unix should be
-set to root</SPAN
+>_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root</SPAN
 ></A
 ></DT
 ><DT
@@ -712,6 +711,21 @@ HREF="cygwin-x-faq.html#q-too-many-parameters"
 HREF="cygwin-x-faq.html#q-xcb-lock-assertion"
 >&#13;"xcb_xlib_lock: Assertion '!c-&gt;xlib.lock' failed." or "xcb_xlib_unlock: Assertion 'c-&gt;xlib.lock' failed."
 </A
+></DT
+><DT
+>9.15. <A
+HREF="cygwin-x-faq.html#q-failed-to-compile-keymap"
+>Fatal server error: Failed to activate core devices.</A
+></DT
+><DT
+>9.16. <A
+HREF="cygwin-x-faq.html#q-fork-failures"
+>fatal error - unable to remap (some dll) to same address as parent: (some hex number) != (some other hex number)</A
+></DT
+><DT
+>9.17. <A
+HREF="cygwin-x-faq.html#q-died-waiting-for-longjmp"
+>fork: child -1 - died waiting for longjmp before initialization, retry (some number), exit code (some hex number), errno (some other number)</A
 ></DT
 ></DL
 ></DD
@@ -2957,8 +2971,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-A1: For Cygwin 1.7: If you have a UTF-8 locale configured, this should all just work :-).
+>A1: for Cygwin 1.7</P
+><P
+>&#13;If you have a UTF-8 locale configured, this should all just work :-).
 </P
 ><P
 >&#13;To confirm this is working properly, you may try the following:
@@ -3012,8 +3027,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-A2: For Cygwin 1.5: Start your <B
+>A2: for Cygwin 1.5</P
+><P
+>&#13;Start your <B
 CLASS="command"
 >xterm</B
 > in UTF-8 mode as <B
@@ -4880,13 +4896,7 @@ NAME="q-owner-tmp-.X11-unix"
 >9.1. </B
 ><SPAN
 CLASS="errorname"
->_XSERVTransmkdir: Owner of /tmp/.X11-unix should be
-set to root</SPAN
-></P
-><P
-><SPAN
-CLASS="errorname"
->_XSERVTransmkdir: ERROR: euid != 0,directory /tmp/.X11-unix will not be created</SPAN
+>_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root</SPAN
 ></P
 ></DIV
 ><DIV
@@ -4894,6 +4904,26 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root
+_XSERVTransmkdir: ERROR: euid != 0,directory /tmp/.X11-unix will not be created
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+><P
+>This question should be obsolete as this error is no longer generated.</P
+><P
 >This warning message can be ignored; it does not cause any known
 problems.</P
 ></DIV
@@ -4919,6 +4949,8 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>This question should be obsolete as this error is no longer generated.</P
+><P
 >This error is harmless.</P
 ></DIV
 ></DIV
@@ -5002,6 +5034,8 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>This question should be obsolete as the default font is now built into the server.</P
+><P
 >This error occurs for one of three reasons:</P
 ><OL
 COMPACT="COMPACT"
@@ -5207,9 +5241,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-Obsolete question
-</P
+>This question should be obsolete.</P
 ></DIV
 ></DIV
 ><DIV
@@ -5308,9 +5340,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Cygwin/X queries getdtablesize () for the maximum number of
+>Cygwin/X queries getdtablesize() for the maximum number of
 client connections allowed; by default Cygwin returns 32 from
-getdtablesize ().  Cygwin/X <A
+getdtablesize().  Cygwin/X <A
 HREF="http://x.cygwin.com/devel/server/"
 TARGET="_top"
 >Server Test Series</A
@@ -5320,9 +5352,9 @@ HREF="http://x.cygwin.com/devel/server/changelog.html"
 TARGET="_top"
 >Test44</A
 >,
-released on 2001-08-15, changes the maximum number of clients from 32
-to 1024 by passing the square of getdtablesize () to setdtablesize
-().</P
+released on 2001-08-15, changed the maximum number of clients from 32
+to 1024 by passing the square of getdtablesize() to setdtablesize().
+</P
 ></DIV
 ></DIV
 ><DIV
@@ -5400,21 +5432,6 @@ time until Cygwin/X stops working.</P
 ><P
 >Some products that have been reported to cause problems:
 
-<DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
-><P
-><B
->Note: </B
->These products may not cause problems in all configurations.
-However, the Cygwin/X project has neither the time, ability, nor
-resources to help you correctly configure your third-party
-software.</P
-></BLOCKQUOTE
-></DIV
->
-
 <UL
 COMPACT="COMPACT"
 ><LI
@@ -5433,6 +5450,28 @@ CLASS="application"
 ></LI
 ></UL
 >
+
+<DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>These products may not cause problems in all configurations.
+However, the Cygwin/X project has neither the time, ability, nor
+resources to help you correctly configure your third-party
+software.</P
+></BLOCKQUOTE
+></DIV
+>
+
+See <A
+HREF="http://cygwin.com/faq-nochunks.html#faq.using.bloda"
+TARGET="_top"
+>&#13;the main Cygwin FAQ question</A
+> for an up-to-date list of software
+which has been known to interfere with the correct operation of Cygwin.
 </P
 ></DIV
 ></DIV
@@ -5533,6 +5572,185 @@ CLASS="command"
 </P
 ></DIV
 ></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-failed-to-compile-keymap"
+></A
+><B
+>9.15. </B
+>Fatal server error: Failed to activate core devices.</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;(EE) XKB: Could not invoke xkbcomp
+(EE) XKB: Couldn't compile keymap
+XKB: Failed to compile keymap
+Keyboard initialization failed. This could be a missing or incorrect setup of xkeyboard-config.
+Fatal server error: Failed to activate core devices.
+</PRE
+></TD
+></TR
+></TABLE
+>
+
+<UL
+COMPACT="COMPACT"
+><LI
+><P
+>&#13;Verify that xkeyboard-config is correctly installed using <B
+CLASS="command"
+>cygcheck -c xkeyboard-config</B
+>,
+</P
+></LI
+><LI
+><P
+>&#13;Check that <B
+CLASS="command"
+>/usr/bin/xkbcomp</B
+> can be run from a bash shell.  If that fails, see if
+<B
+CLASS="command"
+>cygcheck /usr/bin/xkbcomp</B
+> reports any missing DLLs.
+</P
+></LI
+><LI
+><P
+>&#13;Something is interferring with the ability of the X server to invoke xkbcomp
+to compile the keymap.
+</P
+><P
+>&#13;See <A
+HREF="cygwin-x-faq.html#q-fork-failures"
+>Q: 9.16.</A
+> for possible causes.
+</P
+></LI
+></UL
+>
+
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-fork-failures"
+></A
+><B
+>9.16. </B
+>fatal error - unable to remap (some dll) to same address as parent: (some hex number) != (some other hex number)</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+This is commonly caused by one of three things:
+<UL
+><LI
+><P
+>&#13;You have run Cygwin's <B
+CLASS="command"
+>setup.exe</B
+> to do an update while some
+cygwin processes were running, and then clicked on the continue option in the
+"In-use files detected" dialog, and then tried to carry on using Cygwin without
+rebooting as advised by setup.  Reboot.
+</P
+></LI
+><LI
+><P
+>&#13;This is one of the symptoms of an application interfering with Cygwin's fork() emulation.
+See <A
+HREF="http://cygwin.com/faq-nochunks.html#faq.using.bloda"
+TARGET="_top"
+>&#13;the main Cygwin FAQ question</A
+> for a list of software
+which has been known to interfere with the correct operation of Cygwin.
+</P
+></LI
+><LI
+><P
+>&#13;This also caused by DLLs with conflicting base addresses preventing Cygwin's fork() emulation
+from functioning correctly.
+Install the rebase package, read the README file <TT
+CLASS="filename"
+>/usr/share/doc/Cygwin/rebase-n.n.n.README</TT
+>,
+and follow the instructions there to run <B
+CLASS="command"
+>rebaseall</B
+>.
+In short: stop all Cygwin processes (including services) and run
+<B
+CLASS="command"
+>rebaseall</B
+> from an <B
+CLASS="command"
+>ash</B
+> shell
+(not <B
+CLASS="command"
+>bash</B
+>, which would open some DLLs, making them unwriteable) in
+a <B
+CLASS="command"
+>cmd.exe</B
+> window.
+</P
+></LI
+></UL
+>
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-died-waiting-for-longjmp"
+></A
+><B
+>9.17. </B
+>fork: child -1 - died waiting for longjmp before initialization, retry (some number), exit code (some hex number), errno (some other number)</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+This is believed to have the same underlying causes as <A
+HREF="cygwin-x-faq.html#q-fork-failures"
+>Q: 9.16.</A
+>
+</P
+></DIV
+></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -5622,7 +5840,7 @@ xvmc.h), which is due to a Windows' limitation.</P
 ><DIV
 CLASS="example"
 ><A
-NAME="AEN1118"
+NAME="example-include-problems"
 ></A
 ><P
 ><B

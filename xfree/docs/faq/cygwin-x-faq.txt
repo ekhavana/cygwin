@@ -1,7 +1,7 @@
 
 Cygwin/X Frequently Asked Questions
 
-2011-01-12 22:20
+2011-01-13 22:53
      _________________________________________________________________
 
    Table of Contents
@@ -193,6 +193,14 @@ Questions and Answers
         9.13. Too many parameters
         9.14. "xcb_xlib_lock: Assertion '!c->xlib.lock' failed." or
                 "xcb_xlib_unlock: Assertion 'c->xlib.lock' failed." 
+
+        9.15. Fatal server error: Failed to activate core devices.
+        9.16. fatal error - unable to remap (some dll) to same address as
+                parent: (some hex number) != (some other hex number)
+
+        9.17. fork: child -1 - died waiting for longjmp before
+                initialization, retry (some number), exit code (some hex
+                number), errno (some other number)
 
    10. Porting Software
 
@@ -747,8 +755,9 @@ set convert-meta off # to show it as character, not the octal representation
 
    5.2.3. How do I display unicode characters in an xterm?
 
-   A1: For Cygwin 1.7: If you have a UTF-8 locale configured, this should
-   all just work :-).
+   A1: for Cygwin 1.7
+
+   If you have a UTF-8 locale configured, this should all just work :-).
 
    To confirm this is working properly, you may try the following:
 $ wget http://www.cl.cam.ac.uk/~mgk25/ucs/examples/quickbrown.txt
@@ -762,7 +771,9 @@ $ cat UTF-8-demo.txt
    If you want to be able type into this xterm, you'll need to configure
    your bash shell not to escape 8-bit characters, see Q: 5.2.1.
 
-   A2: For Cygwin 1.5: Start your xterm in UTF-8 mode as xterm +lc -u8.
+   A2: for Cygwin 1.5
+
+   Start your xterm in UTF-8 mode as xterm +lc -u8.
 
    To confirm this is working properly, you may try the following
 $ wget http://www.cl.cam.ac.uk/~mgk25/ucs/examples/quickbrown.txt
@@ -1230,14 +1241,18 @@ XNLSPATH
 
    9.1. _XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root
 
-   _XSERVTransmkdir: ERROR: euid != 0,directory /tmp/.X11-unix will not
-   be created
+_XSERVTransmkdir: Owner of /tmp/.X11-unix should be set to root
+_XSERVTransmkdir: ERROR: euid != 0,directory /tmp/.X11-unix will not be created
+
+   This question should be obsolete as this error is no longer generated.
 
    This warning message can be ignored; it does not cause any known
    problems.
 
    9.2. error opening security policy file
    /usr/X11R6/lib/X11/xserver/SecurityPolicy
+
+   This question should be obsolete as this error is no longer generated.
 
    This error is harmless.
 
@@ -1260,6 +1275,9 @@ XWin.exe :2 -query blubb
    or from the startmenu entries.
 
    9.4. Fatal server error: could not open default font 'fixed'
+
+   This question should be obsolete as the default font is now built into
+   the server.
 
    This error occurs for one of three reasons:
     1. You do not have a font package which provides the default font
@@ -1320,7 +1338,7 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    9.7. cygX11-6.dll not found after installation or upgrade
 
-   Obsolete question
+   This question should be obsolete.
 
    9.8. Exception: STATUS_ACCESS_VIOLATION
 
@@ -1340,11 +1358,11 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
    9.9. Xlib: connection to "local_host_name_or_ip_address:0.0" refused
    by server Xlib: Maximum number of clients reached
 
-   Cygwin/X queries getdtablesize () for the maximum number of client
-   connections allowed; by default Cygwin returns 32 from getdtablesize
-   (). Cygwin/X Server Test Series release Test44, released on
-   2001-08-15, changes the maximum number of clients from 32 to 1024 by
-   passing the square of getdtablesize () to setdtablesize ().
+   Cygwin/X queries getdtablesize() for the maximum number of client
+   connections allowed; by default Cygwin returns 32 from
+   getdtablesize(). Cygwin/X Server Test Series release Test44, released
+   on 2001-08-15, changed the maximum number of clients from 32 to 1024
+   by passing the square of getdtablesize() to setdtablesize().
 
    9.10. XIO: fatal IO error 104 (Connection reset by peer) on X server
    "127.0.0.1:0.0"
@@ -1368,14 +1386,17 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
    Cygwin/X stops working.
 
    Some products that have been reported to cause problems:
+     * Aventail Connect
+     * Zonealarm PC Firewall from Zonelab
 
      Note: These products may not cause problems in all configurations.
      However, the Cygwin/X project has neither the time, ability, nor
      resources to help you correctly configure your third-party
      software.
 
-     * Aventail Connect
-     * Zonealarm PC Firewall from Zonelab
+   See the main Cygwin FAQ question for an up-to-date list of software
+   which has been known to interfere with the correct operation of
+   Cygwin.
 
    9.12. Out of environment space
 
@@ -1399,6 +1420,50 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    This error can be worked around by using export
    LIBXCB_ALLOW_SLOPPY_LOCK=1
+
+   9.15. Fatal server error: Failed to activate core devices.
+
+(EE) XKB: Could not invoke xkbcomp
+(EE) XKB: Couldn't compile keymap
+XKB: Failed to compile keymap
+Keyboard initialization failed. This could be a missing or incorrect setup of x
+keyboard-config.
+Fatal server error: Failed to activate core devices.
+
+     * Verify that xkeyboard-config is correctly installed using cygcheck
+       -c xkeyboard-config,
+     * Check that /usr/bin/xkbcomp can be run from a bash shell. If that
+       fails, see if cygcheck /usr/bin/xkbcomp reports any missing DLLs.
+     * Something is interferring with the ability of the X server to
+       invoke xkbcomp to compile the keymap.
+       See Q: 9.16. for possible causes.
+
+   9.16. fatal error - unable to remap (some dll) to same address as
+   parent: (some hex number) != (some other hex number)
+
+   This is commonly caused by one of three things:
+     * You have run Cygwin's setup.exe to do an update while some cygwin
+       processes were running, and then clicked on the continue option in
+       the "In-use files detected" dialog, and then tried to carry on
+       using Cygwin without rebooting as advised by setup. Reboot.
+     * This is one of the symptoms of an application interfering with
+       Cygwin's fork() emulation. See the main Cygwin FAQ question for a
+       list of software which has been known to interfere with the
+       correct operation of Cygwin.
+     * This also caused by DLLs with conflicting base addresses
+       preventing Cygwin's fork() emulation from functioning correctly.
+       Install the rebase package, read the README file
+       /usr/share/doc/Cygwin/rebase-n.n.n.README, and follow the
+       instructions there to run rebaseall. In short: stop all Cygwin
+       processes (including services) and run rebaseall from an ash shell
+       (not bash, which would open some DLLs, making them unwriteable) in
+       a cmd.exe window.
+
+   9.17. fork: child -1 - died waiting for longjmp before initialization,
+   retry (some number), exit code (some hex number), errno (some other
+   number)
+
+   This is believed to have the same underlying causes as Q: 9.16.
 
 10. Porting Software
 
