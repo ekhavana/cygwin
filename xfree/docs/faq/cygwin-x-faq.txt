@@ -1342,18 +1342,23 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    9.8. Exception: STATUS_ACCESS_VIOLATION
 
-   cygwin1.dll uses a shared memory section amongst all loaded copies of
-   cygwin1.dll; unfortunately, the layout and usage of the shared memory
-   section changes between versions of cygwin1.dll. Loading two different
-   versions of cygwin1.dll will cause the shared memory section to become
-   corrupted, which almost always results in an Exception:
-   STATUS_ACCESS_VIOLATION. You must search your filesystem(s) and remove
-   all copies of cygwin1.dll except the copy in /bin. You must remove the
-   different versions of cygwin1.dll even if they are not in your path,
-   as programs that depend on cygwin1.dll attempt to load the file from
-   the local directory before searching other paths; thus, it is rather
-   easy, and common, for multiple versions of cygwin1.dll to become
-   loaded at the same time if they exist on a particular system.
+     * It is believed that this may have the same underlying causes as Q:
+       9.16.
+     * cygwin1.dll uses a shared memory section amongst all loaded copies
+       of cygwin1.dll; unfortunately, the layout and usage of the shared
+       memory section changes between versions of cygwin1.dll. Loading
+       two different versions of cygwin1.dll will cause the shared memory
+       section to become corrupted, which almost always results in an
+       Exception: STATUS_ACCESS_VIOLATION. You must search your
+       filesystem(s) and remove all copies of cygwin1.dll except the copy
+       in /bin. You must remove the different versions of cygwin1.dll
+       even if they are not in your path, as programs that depend on
+       cygwin1.dll attempt to load the file from the local directory
+       before searching other paths; thus, it is rather easy, and common,
+       for multiple versions of cygwin1.dll to become loaded at the same
+       time if they exist on a particular system.
+     * See also this main Cygwin FAQ question for an issue which may
+       cause this issue with older binaries on Terminal Server.
 
    9.9. Xlib: connection to "local_host_name_or_ip_address:0.0" refused
    by server Xlib: Maximum number of clients reached
