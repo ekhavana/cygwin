@@ -1,7 +1,7 @@
 
 Cygwin/X Frequently Asked Questions
 
-2011-01-13 22:53
+2011-01-26 14:41
      _________________________________________________________________
 
    Table of Contents
@@ -19,7 +19,7 @@ Questions and Answers
         1.3. What is the X Window System?
         1.4. What is an X Server?
         1.5. What is an X client?
-        1.6. What does :0.0 mean?
+        1.6. What does DISPLAY=:0.0 mean?
         1.7. Why port the X Window System to Microsoft Windows?
         1.8. Is there a Cygwin/X newsgroup?
         1.9. Is there a Cygwin/X mailing list?
@@ -28,6 +28,9 @@ Questions and Answers
 
         2.1. What versions of Windows does Cygwin/X run on?
         2.2. How is Cygwin/X installed?
+        2.3. Fatal server error: Can't read lock file /tmp/.X0-lock
+        2.4. Nothing appears to happen when I try to start the X server
+                using the "XWin Server" start menu shortcut. 
 
    3. Upgrade
 
@@ -36,7 +39,7 @@ Questions and Answers
                 any X application
 
         3.3. I can't find startxwin.bat to start the X server
-        3.4. Fatal server error: Can't read lock file /tmp/.X0-lock
+        3.4. Moved question
         3.5. My favourite font has gone! The font Emacs uses is just
                 boxes
 
@@ -51,8 +54,7 @@ Questions and Answers
                 window? How do I get it back to each X window in it's own
                 Windows window? 
 
-        3.11. Nothing appears to happen when I try to start the X server
-                using the "XWin Server" start menu shortcut. 
+        3.11. Moved question
 
    4. Configuration
 
@@ -251,12 +253,12 @@ Questions and Answers
 
    1.2. What is Cygwin?
 
-   Cygwin tools are, in the words of the Cygwin homepage, "ports of the
-   popular GNU development tools and utilities for Windows 95, 98, and
-   NT. They function by using the Cygwin library which provides a
-   UNIX-like API on top of the Win32 API." Cygwin provides the compiler
-   (gcc), libraries, headers, and other utilities which build and support
-   the operation of Cygwin/X.
+   Cygwin tools are, in the words of the Cygwin FAQ, " ports of the
+   popular GNU development tools and utilities for Microsoft Windows.
+   They run thanks to the Cygwin library which provides the POSIX system
+   calls and environment these programs expect. " Cygwin provides the
+   compiler (gcc), libraries, headers, and other utilities which build
+   and support the operation of Cygwin/X.
 
    1.3. What is the X Window System?
 
@@ -286,15 +288,21 @@ Questions and Answers
    disparate machine as the X Server that is providing display and user
    input services.
 
-   1.6. What does :0.0 mean?
+   1.6. What does DISPLAY=:0.0 mean?
+
+   The DISPLAY environment variable instructs an X client which X server
+   it is to connect to by default. Typically this can be overriden by
+   running the client with a -display or -d command line option.
 
    The :0.0 part of the DISPLAY variable denote the display and the
    screen of an X server.
 
-   The display is the first number and equals to a running instance of an
-   X server. If it is using TCP/IP for communication it listens on port
-   6000 + display-number for connections. With local (UNIX domain
-   sockets) it uses the socket /tmp/.X11-unix/Xdisplay-number
+   The display is the first number and should equal the display number
+   given to a running instance of an X server. By default the X server
+   uses display number 0. If the X server is using TCP/IP for
+   communication it listens on port 6000 + display-number for X client
+   connections. For local (UNIX domain sockets) it uses the socket
+   /tmp/.X11-unix/Xdisplay-number
 
    The screen denotes different output devices of the X server. You could
    start XWin.exe with two -screen options and would end up with two X11
@@ -308,6 +316,8 @@ Questions and Answers
      * hostname:0.0
        This names a remote X server and the communication uses the TCP/IP
        network.
+
+   See the DISPLAY NAMES section of man X for more information.
 
    1.7. Why port the X Window System to Microsoft Windows?
 
@@ -326,12 +336,15 @@ Questions and Answers
    No, Cygwin/X does not have a newsgroup; however, we do have a mailing
    list. See Q: 1.9.
 
+   You can read and post to the mailing list using your newsreader using
+   the GMANE mail-to-news gateway.
+
    1.9. Is there a Cygwin/X mailing list?
 
    Yes, Cygwin/X has a mailing list, namely, cygwin-xfree@cygwin.com.
-   Visit the Cygwin Mailing Lists page to subscribe to
-   cygwin-xfree@cygwin.com as well as to read and search an online
-   archive of the mailing list traffic.
+   Non-subscribers may post to this list. Visit the Cygwin Mailing Lists
+   page to subscribe to cygwin-xfree@cygwin.com as well as to read and
+   search an online archive of the mailing list traffic.
 
      Tip: Post your X-related inquires to cygwin-xfree@cygwin.com only;
      do not post nor cross post your inquires to the cygwin@cygwin.com
@@ -343,67 +356,21 @@ Questions and Answers
    2.1. What versions of Windows does Cygwin/X run on?
 
    Cygwin/X aims to support all versions of Windows supported by Cygwin.
-   However, Cygwin/X has not been tested on older versions of Windows and
-   is believed to be broken. Problem reports are welcomed.
+
+   However, Cygwin/X is not tested on older versions of Windows (i.e.
+   Windows NT4, Windows 2000) and may be broken. Problem reports are
+   welcomed.
 
    Cygwin/X requires Cygwin to compile and run. Cygwin is not, as of
-   2003-12-29, available on Microsoft Windows CE, therefore Cygwin/X is
-   not currently available on Microsoft Windows CE.
+   writing, available on Microsoft Windows CE, therefore Cygwin/X is not
+   currently available on Microsoft Windows CE.
 
    2.2. How is Cygwin/X installed?
 
    The Cygwin/X User's Guide thoroughly documents the installation
    process. Installation is performed through Cygwin's setup.exe program.
 
-3. Upgrade
-
-   3.1. What happened to my X server? Where did /usr/X11R6/ go?
-
-   The upgrade from X.Org R6.8 to modular X.Org R7.4 made a lot of
-   changes. Please read the announce email and pay attention to the
-   upgrade instructions
-
-   3.2. I upgraded my X server and now I can't type anything into any X
-   application
-
-   Launch the X server via the shortcut under "Cygwin-X" on the start
-   menu.
-
-   Technical details: The startxwin.bat script used to set several
-   enviroment variables used by the X server to specify the location of
-   files it needs to access. Specifically this batch file would set
-   XKEYSYMDB to /usr/X11R6/lib/X11/XKeysymDB. This file is now at
-   /usr/share/X11/XKeysymDB, and without it the keyboard won't work.
-
-   If you are (perhaps unintentionally) using a copy of the old
-   startxwin.bat (perhaps under another name) to start the X server,
-   remove the environment variables XAPPLRESDIR, XCMSDB, XNLSPATH and
-   XKEYSYMDB from it, or (preferrably) use the updated startxwin.
-
-   If echo $XKEYSYMDB outputs something, you have something else setting
-   XKEYSYMDB in your environment. Find it and remove it.
-
-   These variables were always being set to the defaults, so they can
-   simply be removed. See Q: 8.8. for the reason why you might need to
-   set them.
-
-   3.3. I can't find startxwin.bat to start the X server
-
-   The MS-DOS batch file startxwin.bat previously used to start the X
-   server has been retired and replaced with startxwin.exe, as
-   implementing this as a script made it difficult to reliably wait until
-   the the X server had started before starting any clients.
-
-   X.Org now uses the prefix /usr not /usr/X11R6. So startxwin.bat was
-   moved from /usr/X11R6/bin/startxwin.bat to /usr/bin/startxwin.bat.
-
-   A "XWin Server" shortcut to startxwin is created on the Start menu,
-   under "Cygwin-X"
-
-   startxwin and the Start menu link to it are now installed by the xinit
-   package.
-
-   3.4. Fatal server error: Can't read lock file /tmp/.X0-lock
+   2.3. Fatal server error: Can't read lock file /tmp/.X0-lock
 
    A1: /tmp resides on a FAT filesystem
 
@@ -455,6 +422,76 @@ Questions and Answers
    failed due to a stale lock file created by a user with Adminstrator
    rights.
 
+   2.4. Nothing appears to happen when I try to start the X server using
+   the "XWin Server" start menu shortcut.
+
+   A1:
+
+   Task manager shows the startxwin.exe process starting, spawning
+   XWin.exe and xterm.exe, but no windows are shown. Running
+   startxwin.exe from a bash shell works correctly. This is caused by
+   having tty in the CYGWIN environment variable set through the Windows
+   control panel. Removing tty resolves this issue.
+
+   If you really need CYGWIN=tty for working with cmd.exe windows, you'll
+   have to arrange to set that by some other means before invoking
+   cygwin.bat.
+
+   A2:
+
+   Try running startxwin.exe from a bash shell, it should output some
+   error message which should indicate why it's not able to start.
+
+3. Upgrade
+
+   3.1. What happened to my X server? Where did /usr/X11R6/ go?
+
+   The upgrade from X.Org R6.8 to modular X.Org R7.4 made a lot of
+   changes. Please read the announce email and pay attention to the
+   upgrade instructions
+
+   3.2. I upgraded my X server and now I can't type anything into any X
+   application
+
+   Launch the X server via the shortcut under "Cygwin-X" on the start
+   menu.
+
+   Technical details: The startxwin.bat script used to set several
+   enviroment variables used by the X server to specify the location of
+   files it needs to access. Specifically this batch file would set
+   XKEYSYMDB to /usr/X11R6/lib/X11/XKeysymDB. This file is now at
+   /usr/share/X11/XKeysymDB, and without it the keyboard won't work.
+
+   If you are (perhaps unintentionally) using a copy of the old
+   startxwin.bat (perhaps under another name) to start the X server,
+   remove the environment variables XAPPLRESDIR, XCMSDB, XNLSPATH and
+   XKEYSYMDB from it, or (preferrably) use the updated startxwin.
+
+   If echo $XKEYSYMDB outputs something, you have something else setting
+   XKEYSYMDB in your environment. Find it and remove it.
+
+   These variables were always being set to the defaults, so they can
+   simply be removed. See Q: 8.8. for the reason why you might need to
+   set them.
+
+   3.3. I can't find startxwin.bat to start the X server
+
+   The MS-DOS batch file startxwin.bat previously used to start the X
+   server has been retired and replaced with startxwin.exe, as
+   implementing this as a script made it difficult to reliably wait until
+   the the X server had started before starting any clients.
+
+   X.Org now uses the prefix /usr not /usr/X11R6. So startxwin.bat was
+   moved from /usr/X11R6/bin/startxwin.bat to /usr/bin/startxwin.bat.
+
+   A "XWin Server" shortcut to startxwin is created on the Start menu,
+   under "Cygwin-X"
+
+   startxwin and the Start menu link to it are now installed by the xinit
+   package.
+
+   3.4. Moved question
+
    3.5. My favourite font has gone! The font Emacs uses is just boxes
 
    Only minimal fonts will be installed after the upgrade.
@@ -498,6 +535,8 @@ Questions and Answers
 
    3.9. nedit fails to start with an error message
 
+   This question should be obsolete.
+
 $ nedit
 X Error of failed request:  BadMatch (invalid parameter attributes)
   Major opcode of failed request:  70 (X_PolyFillRectangle)
@@ -528,38 +567,20 @@ $ nedit
     3. Alternatively, put XWin -multiwindow -clipboard into ~/.xserverrc
        or /etc/X11/xinit/xserverrc
 
-   3.11. Nothing appears to happen when I try to start the X server using
-   the "XWin Server" start menu shortcut.
-
-   A1:
-
-   Task manager shows the startxwin.exe process starting, spawning
-   XWin.exe and xterm.exe, but no windows are shown. Running
-   startxwin.exe from a bash shell works correctly. This is caused by
-   having tty in the CYGWIN environment variable set through the Windows
-   control panel. Removing tty resolves this issue.
-
-   If you really need CYGWIN=tty for working with cmd.exe windows, you'll
-   have to arrange to set that by some other means before invoking
-   cygwin.bat.
-
-   A2:
-
-   Try running startxwin.exe from a bash shell, it should output some
-   error message which should indicate why it's not able to start.
+   3.11. Moved question
 
 4. Configuration
 
    4.1. Is there an xorg.conf or XF86Config file?
 
-   No. But most of the options which were configurable in the configfile
-   are now available as command line options. For more information on
-   configuring other keyboard layouts see Q: 5.1.1.
+   No. Options which are configurable are available as command line
+   options. For example, for more information on configuring other
+   keyboard layouts see Q: 5.1.1.
 
    4.2. What are the command line arguments for XWin.exe?
 
-   The Cygwin/X User's Guide documents the command line arguments for
-   XWin.exe.
+   The Cygwin/X User's Guide and man XWin document the command line
+   arguments for XWin.exe.
 
    4.3. Why does XWin.exe ignore the display depth that I pass on the
    command line?
@@ -581,15 +602,15 @@ $ nedit
 
    4.5. Is there a Focus-Follows-Mouse feature (Auto-Focus)?
 
-   This is a setting of the windowmanager used. The default windowmanager
-   twm has no such feature. But with fvwm2 this can be achieved with the
-   this configuration entry:
+   This is a setting of the window manager used. The default window
+   manager twm has no such feature. But with fvwm2 this can be achieved
+   with the this configuration entry:
    Focus FocusFollowsMouse
 
-   Other windowmanagers (eg. windowmaker) have similar features too.
+   Other window managers (eg. windowmaker) have similar features too.
 
    If you are using the -multiwindow mode you can not set this behaviour
-   in the windowmanager but you can use the TweakUI tool to enable this
+   in the window manager but you can use the TweakUI tool to enable this
    feature for all windows, not limited to Cygwin/X windows.
 
    4.6. The option -nounixkill has no effect. How can i prevent the
@@ -722,8 +743,7 @@ $ nedit
    5.1.7. I have Windows XP with Powertoys installed and AltGr does not
    work. What can I do?
 
-   This problem is solved in recent Cygwin/X releases. Use cygwin setup
-   to upgrade the xorg-server package.
+   This question should be obsolete.
 
    5.1.8. AltGr does not work properly when connecting to other unices or
    to old XFree86.
@@ -768,8 +788,9 @@ $ wget http://www.cl.cam.ac.uk/~mgk25/ucs/examples/UTF-8-demo.txt
 [...]
 $ cat UTF-8-demo.txt
 
-   If you want to be able type into this xterm, you'll need to configure
-   your bash shell not to escape 8-bit characters, see Q: 5.2.1.
+   If you want to be able type unicode characters into this xterm, you'll
+   need to configure your bash shell not to escape 8-bit characters, see
+   Q: 5.2.1.
 
    A2: for Cygwin 1.5
 
@@ -797,8 +818,9 @@ $ cat UTF-8-demo.txt
    set the LANG environment variable to LL_CC.UTF-8, where LL_CC is your
    language and country code.
 
-   If you want to be able type into this xterm, you'll need to configure
-   your bash shell not to escape 8-bit characters, see Q: 5.2.1.
+   If you want to be able type unicode characters into this xterm, you'll
+   need to configure your bash shell not to escape 8-bit characters, see
+   Q: 5.2.1.
 
    See also the main Cygwin FAQ question on unicode support in Cygwin
 
@@ -975,7 +997,7 @@ $ ssh -Y remotehost
 
    7.3. I get no login screen when using -query
 
-   Disabled XDMCP on servers
+   A1: Disabled XDMCP on servers
 
    [Mika Laitio] For security reasons, XDMCP is not enabled by default on
    most Linux/UNIX/*NIX/*BSD distributions (RedHat, Mandrake, SuSE,
@@ -1005,7 +1027,7 @@ Enable=true
    Debian GNU/Linux Unstable xdm             /etc/X11/xdm/xdm-config
    Debian GNU/Linux Unstable wdm             /etc/X11/wdm/wdm-config
 
-   XDMCP and firewalls
+   A2: XDMCP and firewalls
 
    XDMCP will not work correctly if you have a personal firewall
    installed or the built-in firewall of Windows is activated.
@@ -1213,9 +1235,7 @@ XNLSPATH
 
    8.11. Why is the root window not shown in normal mode?
 
-   This is a small problem with run.exe. If you start XWin.exe with
-   -nodecoration, -multiwindow or -fullscreen the window will come up
-   normally.
+   This question should be obsolete.
 
    8.12. Why is the cross the default cursor in multiwindow mode?
 
@@ -1332,6 +1352,8 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
    9.6. The procedure entry point _check_for_executable could not be
    located
 
+   This question should be obsolete.
+
    Programs that you are attempting to use were compiled against a newer
    version of Cygwin than is currently on your system. Run Cygwin's setup
    program to update your installation to the latest version.
@@ -1358,7 +1380,7 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
        for multiple versions of cygwin1.dll to become loaded at the same
        time if they exist on a particular system.
      * See also this main Cygwin FAQ question for an issue which may
-       cause this issue with older binaries on Terminal Server.
+       cause this problem with older binaries on Terminal Server.
 
    9.9. Xlib: connection to "local_host_name_or_ip_address:0.0" refused
    by server Xlib: Maximum number of clients reached
@@ -1414,6 +1436,8 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    9.14. "xcb_xlib_lock: Assertion '!c->xlib.lock' failed." or
    "xcb_xlib_unlock: Assertion 'c->xlib.lock' failed."
+
+   This question should be obsolete.
 
    Both of these represent bugs in a caller of libX11, and not in libX11
    or libxcb. The first assertion means that a caller attempted to lock

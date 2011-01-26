@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2011-01-13 22:53</H2
+>2011-01-26 14:41</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -102,7 +102,7 @@ HREF="cygwin-x-faq.html#q-what-is-x-client"
 ><DT
 >1.6. <A
 HREF="cygwin-x-faq.html#display-and-screen"
->What does :0.0 mean?</A
+>What does DISPLAY=:0.0 mean?</A
 ></DT
 ><DT
 >1.7. <A
@@ -138,6 +138,17 @@ HREF="cygwin-x-faq.html#q-windows-versions-supported"
 HREF="cygwin-x-faq.html#q-how-to-install"
 >How is Cygwin/X installed?</A
 ></DT
+><DT
+>2.3. <A
+HREF="cygwin-x-faq.html#q-cant-read-lock-file"
+>Fatal server error: Can't read lock file /tmp/.X0-lock</A
+></DT
+><DT
+>2.4. <A
+HREF="cygwin-x-faq.html#q-startxwin-no-windows"
+>&#13;Nothing appears to happen when I try to start the X server using the "XWin Server" start menu shortcut.
+</A
+></DT
 ></DL
 ></DD
 ><DT
@@ -171,8 +182,8 @@ CLASS="command"
 ></DT
 ><DT
 >3.4. <A
-HREF="cygwin-x-faq.html#q-cant-read-lock-file"
->Fatal server error: Can't read lock file /tmp/.X0-lock</A
+HREF="cygwin-x-faq.html#q-moved-1"
+>Moved question</A
 ></DT
 ><DT
 >3.5. <A
@@ -223,9 +234,8 @@ CLASS="command"
 ></DT
 ><DT
 >3.11. <A
-HREF="cygwin-x-faq.html#q-startxwin-no-windows"
->&#13;Nothing appears to happen when I try to start the X server using the "XWin Server" start menu shortcut.
-</A
+HREF="cygwin-x-faq.html#q-moved-2"
+>Moved question</A
 ></DT
 ></DL
 ></DD
@@ -239,7 +249,7 @@ HREF="cygwin-x-faq.html#configuration"
 ><DT
 >4.1. <A
 HREF="cygwin-x-faq.html#q-why-no-xf86config"
->Is there an xorg.conf or  XF86Config file?</A
+>Is there an xorg.conf or XF86Config file?</A
 ></DT
 ><DT
 >4.2. <A
@@ -927,19 +937,19 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Cygwin tools are, in the words of the <A
-HREF="http://cygwin.com/"
+>Cygwin tools are, in the words of the
+<A
+HREF="http://cygwin.com/faq-nochunks.html#faq.what"
 TARGET="_top"
->Cygwin homepage</A
->, <SPAN
+>Cygwin FAQ</A
+>,
+<SPAN
 CLASS="QUOTE"
->"ports of the
-popular GNU development tools and utilities for Windows 95, 98, and
-NT.  They function by using the Cygwin library which provides a
-<ACRONYM
-CLASS="acronym"
->UNIX</ACRONYM
->-like API on top of the Win32 API."</SPAN
+>"
+ports of the popular GNU development tools and utilities for Microsoft Windows.
+They run thanks to the Cygwin library which provides the POSIX system calls
+and environment these programs expect. 
+"</SPAN
 >
 Cygwin provides the compiler (gcc), libraries, headers, and other
 utilities which build and support the operation of Cygwin/X.</P
@@ -1038,13 +1048,29 @@ NAME="display-and-screen"
 ></A
 ><B
 >1.6. </B
->What does :0.0 mean?</P
+>What does DISPLAY=:0.0 mean?</P
 ></DIV
 ><DIV
 CLASS="answer"
 ><P
 ><B
 > </B
+>
+The <CODE
+CLASS="parameter"
+>DISPLAY</CODE
+> environment variable instructs an X client which X server it
+is to connect to by default.  Typically this can be overriden by running
+the client with a <CODE
+CLASS="parameter"
+>-display</CODE
+> or <CODE
+CLASS="parameter"
+>-d</CODE
+>
+command line option.
+</P
+><P
 >The <TT
 CLASS="replaceable"
 ><I
@@ -1056,15 +1082,17 @@ CLASS="parameter"
 > variable denote
 the display and the screen of an X server.</P
 ><P
->The display is the first number and equals to a running instance of an 
-X server. If it is using TCP/IP for communication it listens on port 6000 + 
+>The display is the first number and should equal the display number
+given to a running instance of an X server.  By default the X server uses
+display number 0.
+If the X server is using TCP/IP for communication it listens on port 6000 + 
 <TT
 CLASS="replaceable"
 ><I
 >display-number</I
 ></TT
-> for connections.
-With local (UNIX domain sockets) it uses the socket 
+> for X client connections.
+For local (UNIX domain sockets) it uses the socket 
 <TT
 CLASS="filename"
 >/tmp/.X11-unix/X<TT
@@ -1125,6 +1153,12 @@ CLASS="replaceable"
 ></LI
 ></UL
 >
+</P
+><P
+>&#13;See the DISPLAY NAMES section of <B
+CLASS="command"
+>man X</B
+> for more information.
 </P
 ></DIV
 ></DIV
@@ -1195,6 +1229,15 @@ mailing list.  See <A
 HREF="cygwin-x-faq.html#q-mailing-list"
 >Q: 1.9.</A
 ></P
+><P
+>You can read and post to the mailing list using your newsreader
+using the <A
+HREF="http://gmane.org/find.php?list=cygwin.xfree"
+TARGET="_top"
+>GMANE</A
+>
+mail-to-news gateway.
+</P
 ></DIV
 ></DIV
 ><DIV
@@ -1214,8 +1257,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Yes, Cygwin/X has a mailing list, namely, cygwin-xfree@cygwin.com.  Visit
-the <A
+>Yes, Cygwin/X has a mailing list, namely, cygwin-xfree@cygwin.com. 
+Non-subscribers may post to this list.
+Visit the <A
 HREF="http://cygwin.com/lists.html"
 TARGET="_top"
 >Cygwin Mailing Lists</A
@@ -1236,6 +1280,8 @@ mailing list is only for Cygwin related inquires that are not
 handled by another more-specific list.</P
 ></BLOCKQUOTE
 ></DIV
+><P
+></P
 ></DIV
 ></DIV
 ></DIV
@@ -1264,11 +1310,14 @@ CLASS="answer"
 ><B
 > </B
 >Cygwin/X aims to support all versions of Windows supported by
-Cygwin.  However, Cygwin/X has not been tested on older versions of
-Windows and is believed to be broken. Problem reports are welcomed.</P
+Cygwin.</P
+><P
+>However, Cygwin/X is not tested on older versions of Windows
+(i.e. Windows NT4, Windows 2000) and may be broken. Problem reports are welcomed.
+</P
 ><P
 >Cygwin/X requires Cygwin to compile and run.  Cygwin is
-not, as of 2003-12-29, available on Microsoft Windows CE, therefore
+not, as of writing, available on Microsoft Windows CE, therefore
 Cygwin/X is not currently available on Microsoft Windows CE.</P
 ></DIV
 ></DIV
@@ -1300,6 +1349,288 @@ CLASS="command"
 >setup.exe</B
 >
 program.</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-cant-read-lock-file"
+></A
+><B
+>2.3. </B
+>Fatal server error: Can't read lock file /tmp/.X0-lock</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+A1: /tmp resides on a FAT filesystem
+</P
+><P
+>Start the server with <CODE
+CLASS="parameter"
+>-nolock</CODE
+></P
+><UL
+COMPACT="COMPACT"
+><LI
+><P
+>&#13;If you use the start menu shortcut to start the X server, you will need to amend it to add the -nolock option, e.g. <B
+CLASS="command"
+>C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin -- -nolock"</B
+>
+</P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>Note well that the entire command after -c is quoted</P
+></BLOCKQUOTE
+></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>Note that this start menu shortcut is created by the  <TT
+CLASS="filename"
+>xinit</TT
+> package, and your changes will be overwritten when the <TT
+CLASS="filename"
+>xinit</TT
+> package is updated.</P
+></BLOCKQUOTE
+></DIV
+></LI
+><LI
+><P
+>&#13;If you use <B
+CLASS="command"
+>startxwin</B
+>, <B
+CLASS="command"
+>xinit</B
+> or <B
+CLASS="command"
+>startx</B
+> to start the server, run it as <B
+CLASS="command"
+>startxwin -- -nolock</B
+>,  <B
+CLASS="command"
+>xinit -- -nolock</B
+> or  <B
+CLASS="command"
+>startx -- -nolock</B
+>
+</P
+></LI
+><LI
+><P
+>&#13;If you use <TT
+CLASS="filename"
+>startxwin.bat</TT
+> or <TT
+CLASS="filename"
+>startxwin.sh</TT
+> to start the server, add <CODE
+CLASS="parameter"
+>-nolock</CODE
+> to the <B
+CLASS="command"
+>XWin</B
+> line in that script.
+</P
+></LI
+></UL
+><P
+>&#13;You should really consider updating the filesystem to NTFS using Microsoft's <B
+CLASS="command"
+>convert.exe</B
+> tool.
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+A2: /tmp resides on a NTFS filesystem.
+</P
+><P
+>&#13;This can be caused by a stale lock file being left behind after the X server is run by a user with
+Adminstrator rights, which cannot be overwritten when the X server is next run by a user without
+Adminstrator rights.
+</P
+><P
+>&#13;Failure to clean up the lock file properly is a bug in the X server, but until that is fixed the
+following workarounds may be neccessary.
+</P
+><OL
+COMPACT="COMPACT"
+TYPE="1"
+><LI
+><P
+>Try removing the stale lock file using
+<B
+CLASS="command"
+>rm -f /tmp/.X<TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+>-lock</B
+>
+where <TT
+CLASS="replaceable"
+><I
+>n</I
+></TT
+> is the display number.
+If this fails due to insufficent permissions, you must either get the owner or a user with Adminstrator rights to
+remove the stale lock file.
+</P
+></LI
+><LI
+><P
+>Try starting the server with <CODE
+CLASS="parameter"
+>-nolock</CODE
+> (e.g. if you use <TT
+CLASS="filename"
+>startxwin.bat</TT
+> or <TT
+CLASS="filename"
+>startxwin.sh</TT
+> to start the server, add <CODE
+CLASS="parameter"
+>-nolock</CODE
+> to the <B
+CLASS="command"
+>XWin</B
+> line in that script; if you use <B
+CLASS="command"
+>xinit</B
+> or <B
+CLASS="command"
+>startx</B
+>, run it as <B
+CLASS="command"
+>xinit -- -nolock</B
+> or  <B
+CLASS="command"
+>startx -- -nolock</B
+>)</P
+></LI
+></OL
+><P
+>Technical details:
+The X server attempts to create a lock file in
+<TT
+CLASS="filename"
+>/tmp</TT
+> by creating the file under a temporary name,
+then renaming it to the proper name (by hard linking it under the correct name, then unlinking
+it from the temporary name). If this rename fails it attempts to read the existing
+lock file to determine the pid of an already running server.
+
+The FAT filesystem does not support hardlinks so this operation cannot succeed.
+
+On NFTS filesystems, the failure case appears to be that lock file was created successfully, but
+the rename failed due to a stale lock file created by a user with Adminstrator rights.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-startxwin-no-windows"
+></A
+><B
+>2.4. </B
+>
+Nothing appears to happen when I try to start the X server using the "XWin Server" start menu shortcut.
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+A1:
+</P
+><P
+>&#13;Task manager shows the <B
+CLASS="command"
+>startxwin.exe</B
+> process starting, spawning <B
+CLASS="command"
+>XWin.exe</B
+>
+and <B
+CLASS="command"
+>xterm.exe</B
+>, but no windows are shown.  Running <B
+CLASS="command"
+>startxwin.exe</B
+> from
+a bash shell works correctly.
+This is caused by having <CODE
+CLASS="parameter"
+>tty</CODE
+> in the <CODE
+CLASS="parameter"
+>CYGWIN</CODE
+> environment variable
+set through the Windows control panel.  Removing <CODE
+CLASS="parameter"
+>tty</CODE
+> resolves this issue.
+</P
+><P
+>&#13;If you really need <CODE
+CLASS="parameter"
+>CYGWIN=tty</CODE
+> for working with <B
+CLASS="command"
+>cmd.exe</B
+> windows,
+you'll have to arrange to set that by some other means before invoking <B
+CLASS="command"
+>cygwin.bat</B
+>.
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+A2:
+</P
+><P
+>&#13;Try running <B
+CLASS="command"
+>startxwin.exe</B
+> from a bash shell, it should output some error message which
+should indicate why it's not able to start.
+</P
 ></DIV
 ></DIV
 ></DIV
@@ -1495,199 +1826,11 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-cant-read-lock-file"
+NAME="q-moved-1"
 ></A
 ><B
 >3.4. </B
->Fatal server error: Can't read lock file /tmp/.X0-lock</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-A1: /tmp resides on a FAT filesystem
-</P
-><P
->Start the server with <CODE
-CLASS="parameter"
->-nolock</CODE
-></P
-><UL
-COMPACT="COMPACT"
-><LI
-><P
->&#13;If you use the start menu shortcut to start the X server, you will need to amend it to add the -nolock option, e.g. <B
-CLASS="command"
->C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin -- -nolock"</B
->
-</P
-><DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
-><P
-><B
->Note: </B
->Note well that the entire command after -c is quoted</P
-></BLOCKQUOTE
-></DIV
-><DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
-><P
-><B
->Note: </B
->Note that this start menu shortcut is created by the  <TT
-CLASS="filename"
->xinit</TT
-> package, and your changes will be overwritten when the <TT
-CLASS="filename"
->xinit</TT
-> package is updated.</P
-></BLOCKQUOTE
-></DIV
-></LI
-><LI
-><P
->&#13;If you use <B
-CLASS="command"
->startxwin</B
->, <B
-CLASS="command"
->xinit</B
-> or <B
-CLASS="command"
->startx</B
-> to start the server, run it as <B
-CLASS="command"
->startxwin -- -nolock</B
->,  <B
-CLASS="command"
->xinit -- -nolock</B
-> or  <B
-CLASS="command"
->startx -- -nolock</B
->
-</P
-></LI
-><LI
-><P
->&#13;If you use <TT
-CLASS="filename"
->startxwin.bat</TT
-> or <TT
-CLASS="filename"
->startxwin.sh</TT
-> to start the server, add <CODE
-CLASS="parameter"
->-nolock</CODE
-> to the <B
-CLASS="command"
->XWin</B
-> line in that script.
-</P
-></LI
-></UL
-><P
->&#13;You should really consider updating the filesystem to NTFS using Microsoft's <B
-CLASS="command"
->convert.exe</B
-> tool.
-</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-A2: /tmp resides on a NTFS filesystem.
-</P
-><P
->&#13;This can be caused by a stale lock file being left behind after the X server is run by a user with 
-Adminstrator rights, which cannot be overwritten when the X server is next run by a user without
-Adminstrator rights.
-</P
-><P
->&#13;Failure to clean up the lock file properly is a bug in the X server, but until that is fixed the
-following workarounds may be neccessary.
-</P
-><OL
-COMPACT="COMPACT"
-TYPE="1"
-><LI
-><P
->Try removing the stale lock file using 
-<B
-CLASS="command"
->rm -f /tmp/.X<TT
-CLASS="replaceable"
-><I
->n</I
-></TT
->-lock</B
->
-where <TT
-CLASS="replaceable"
-><I
->n</I
-></TT
-> is the display number.
-If this fails due to insufficent permissions, you must either get the owner or a user with Adminstrator rights to 
-remove the stale lock file. 
-</P
-></LI
-><LI
-><P
->Try starting the server with <CODE
-CLASS="parameter"
->-nolock</CODE
-> (e.g. if you use <TT
-CLASS="filename"
->startxwin.bat</TT
-> or <TT
-CLASS="filename"
->startxwin.sh</TT
-> to start the server, add <CODE
-CLASS="parameter"
->-nolock</CODE
-> to the <B
-CLASS="command"
->XWin</B
-> line in that script; if you use <B
-CLASS="command"
->xinit</B
-> or <B
-CLASS="command"
->startx</B
->, run it as <B
-CLASS="command"
->xinit -- -nolock</B
-> or  <B
-CLASS="command"
->startx -- -nolock</B
->)</P
-></LI
-></OL
-><P
->Technical details:
-The X server attempts to create a lock file in
-<TT
-CLASS="filename"
->/tmp</TT
-> by creating the file under a temporary name,
-then renaming it to the proper name (by hard linking it under the correct name, then unlinking
-it from the temporary name). If this rename fails it attempts to read the existing
-lock file to determine the pid of an already running server.
-
-The FAT filesystem does not support hardlinks so this operation cannot succeed.
-
-On NFTS filesystems, the failure case appears to be that lock file was created successfully, but
-the rename failed due to a stale lock file created by a user with Adminstrator rights.
-</P
+>Moved question</P
 ></DIV
 ></DIV
 ><DIV
@@ -1898,8 +2041,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-<TABLE
+>This question should be obsolete.</P
+><P
+>&#13;<TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
 WIDTH="100%"
@@ -2042,79 +2186,11 @@ CLASS="qandaentry"
 CLASS="question"
 ><P
 ><A
-NAME="q-startxwin-no-windows"
+NAME="q-moved-2"
 ></A
 ><B
 >3.11. </B
->
-Nothing appears to happen when I try to start the X server using the "XWin Server" start menu shortcut.
-</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-A1:
-</P
-><P
->&#13;Task manager shows the <B
-CLASS="command"
->startxwin.exe</B
-> process starting, spawning <B
-CLASS="command"
->XWin.exe</B
->
-and <B
-CLASS="command"
->xterm.exe</B
->, but no windows are shown.  Running <B
-CLASS="command"
->startxwin.exe</B
-> from
-a bash shell works correctly.
-This is caused by having <CODE
-CLASS="parameter"
->tty</CODE
-> in the <CODE
-CLASS="parameter"
->CYGWIN</CODE
-> environment variable
-set through the Windows control panel.  Removing <CODE
-CLASS="parameter"
->tty</CODE
-> resolves this issue.
-</P
-><P
->&#13;If you really need <CODE
-CLASS="parameter"
->CYGWIN=tty</CODE
-> for working with <B
-CLASS="command"
->cmd.exe</B
-> windows,
-you'll have to arrange to set that by some other means before invoking <B
-CLASS="command"
->cygwin.bat</B
->.
-</P
-></DIV
-><DIV
-CLASS="answer"
-><P
-><B
-> </B
->
-A2:
-</P
-><P
->&#13;Try running <B
-CLASS="command"
->startxwin.exe</B
-> from a bash shell, it should output some error message which
-should indicate why it's not able to start.
-</P
+>Moved question</P
 ></DIV
 ></DIV
 ></DIV
@@ -2135,16 +2211,15 @@ NAME="q-why-no-xf86config"
 ></A
 ><B
 >4.1. </B
->Is there an xorg.conf or  XF86Config file?</P
+>Is there an xorg.conf or XF86Config file?</P
 ></DIV
 ><DIV
 CLASS="answer"
 ><P
 ><B
 > </B
->No.  But most of the options which were configurable in the
-configfile are now available as
-command line options.  For more information on configuring other
+>No.  Options which are configurable are available as command line options.
+For example, for more information on configuring other
 keyboard layouts see <A
 HREF="cygwin-x-faq.html#q-non-U.S.-keyboard-layout"
 >Q: 5.1.1.</A
@@ -2176,7 +2251,15 @@ HREF="http://x.cygwin.com/docs/ug/cygwin-x-ug.html"
 TARGET="_top"
 >Cygwin/X User's Guide</A
 >
-documents the command line arguments for XWin.exe.</P
+and <A
+HREF="http://x.cygwin.com/docs/man1/XWin.1.html"
+TARGET="_top"
+><B
+CLASS="command"
+>man XWin</B
+></A
+>
+document the command line arguments for XWin.exe.</P
 ></DIV
 ></DIV
 ><DIV
@@ -2271,9 +2354,15 @@ CLASS="answer"
 ><P
 ><B
 > </B
->This is a setting of the windowmanager used. The default windowmanager
-twm has no such feature. But with fvwm2 this can be achieved with the this 
-configuration entry: 
+>This is a setting of the window manager used. The default window manager
+<B
+CLASS="command"
+>twm</B
+> has no such feature. But with <B
+CLASS="command"
+>fvwm2</B
+>
+this can be achieved with the this configuration entry:
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -2288,13 +2377,16 @@ CLASS="screen"
 ></TR
 ></TABLE
 >
-Other windowmanagers (eg. windowmaker) have similar features too.</P
+Other window managers (eg. <B
+CLASS="command"
+>windowmaker</B
+>) have similar features too.</P
 ><P
 >If you are using the <CODE
 CLASS="parameter"
 >-multiwindow</CODE
 > mode you can not set this behaviour
-in the windowmanager but you can use the TweakUI tool to enable this feature
+in the window manager but you can use the TweakUI tool to enable this feature
 for all windows, not limited to Cygwin/X windows.</P
 ></DIV
 ></DIV
@@ -2806,9 +2898,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->This problem is solved in recent Cygwin/X releases. Use cygwin setup to
-upgrade the xorg-server package.
-</P
+>This question should be obsolete.</P
 ></DIV
 ></DIV
 ><DIV
@@ -3009,7 +3099,7 @@ $ cat UTF-8-demo.txt
 ></TR
 ></TABLE
 ><P
->&#13;If you want to be able type into this <B
+>&#13;If you want to be able type unicode characters into this <B
 CLASS="command"
 >xterm</B
 >, you'll need to configure
@@ -3100,7 +3190,7 @@ CLASS="replaceable"
 >.UTF-8, where LL_CC is your language and country code.
 </P
 ><P
->&#13;If you want to be able type into this <B
+>&#13;If you want to be able type unicode characters into this <B
 CLASS="command"
 >xterm</B
 >, you'll need to configure
@@ -3751,7 +3841,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->Disabled XDMCP on servers</P
+>A1: Disabled XDMCP on servers</P
 ><P
 >[Mika Laitio] For security reasons, <A
 HREF="glossary.html#gloss-xdmcp"
@@ -3926,7 +4016,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->XDMCP and firewalls</P
+>A2: XDMCP and firewalls</P
 ><P
 ><A
 HREF="glossary.html#gloss-xdmcp"
@@ -4776,24 +4866,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->This is a small problem with <TT
-CLASS="filename"
->run.exe</TT
->. If you start 
-<TT
-CLASS="filename"
->XWin.exe</TT
-> with <CODE
-CLASS="parameter"
->-nodecoration</CODE
->, <CODE
-CLASS="parameter"
->-multiwindow</CODE
-> or <CODE
-CLASS="parameter"
->-fullscreen</CODE
-> the window will come 
-up normally.</P
+>This question should be obsolete.</P
 ></DIV
 ></DIV
 ><DIV
@@ -5218,6 +5291,8 @@ CLASS="answer"
 ><P
 ><B
 > </B
+>This question should be obsolete.</P
+><P
 >Programs that you are attempting to use were compiled against a
 newer version of Cygwin than is currently on your system.  Run
 Cygwin's setup program to update your installation to the latest
@@ -5332,7 +5407,7 @@ HREF="http://cygwin.com/faq-nochunks.html#faq.setup.setup-fails-on-ts"
 TARGET="_top"
 >&#13;this main Cygwin FAQ question</A
 > for an issue which may cause this
-issue with older binaries on Terminal Server.
+problem with older binaries on Terminal Server.
 </P
 ></LI
 ></UL
@@ -5569,8 +5644,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-Both of these represent bugs in a caller of libX11, and <SPAN
+>This question should be obsolete.</P
+><P
+>&#13;Both of these represent bugs in a caller of libX11, and <SPAN
 CLASS="emphasis"
 ><I
 CLASS="emphasis"
@@ -5660,7 +5736,10 @@ CLASS="command"
 ></LI
 ><LI
 ><P
->&#13;Something is interferring with the ability of the X server to invoke xkbcomp
+>&#13;Something is interferring with the ability of the X server to invoke <B
+CLASS="command"
+>xkbcomp</B
+>
 to compile the keymap.
 </P
 ><P
