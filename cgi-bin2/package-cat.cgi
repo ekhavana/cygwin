@@ -6,15 +6,18 @@ use CGI;
 use Cwd;
 use File::Basename;
 
+sub include_virtual(@);
+
 my $html = new CGI;
 
 my $grep = $html->param('grep');
 my $file = $html->param('file');
 
 use FindBin qw($Bin);
-
-print $html->header, "\n<html>\n<head>\n<title>Package List Search Results</title>\n</head>\n",
-      LWP::Simple::get('http://cygwin.com/cygwin-header.html'), "\n";
+print $html->header, $html->start_html(-title=>'Cygwin Package List Search Result',
+				       -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
+				       -style=>'http://cygwin.com/style.css');
+include_virtual "../navbar.html", "../top.html";
 
 chdir("$Bin/../packages");
 my $here = getcwd;
@@ -29,7 +32,16 @@ if (substr($there, 0, length($here) + 1) ne "$here/" || !open(F, '<', $file)) {
     print $_;
 }
 
-print "</table>";
-open(FOOTER, '../cygwin-footer.html');
-print <FOOTER>, $html->end_html;
-close FOOTER;
+print <<'EOF';
+</div>
+</body>
+</html>
+EOF
+
+sub include_virtual(@) {
+    for my $f (@_) {
+	open my $fd, '<', $f;
+	print <$fd>;
+	close $fd;
+    }
+}
