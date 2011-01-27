@@ -8,7 +8,7 @@ use constant {
     MAXKEEP => 60
 };
 
-umask 0113;
+umask 0002;
 $| = 1;
 use vars '$DB::inhibit_exit';
 $DB::inhibit_exit = 0;
@@ -123,6 +123,7 @@ sub file_row {
 	$rv .= "<td align=center><a href=\"$1\">list</a></td>";
 	if (!-e $1) {
 	    open my $fd, '>', $1;
+	    chmod 0664, $fd;
 	    close $fd;
 	}
     }
@@ -176,6 +177,7 @@ sub update_diffs($$) {
 	    $sawstuff ||= $keeper;
 	}
 	close DIFF;
+	chmod 0664, \*OUT;
 	close OUT;
 	unlink "$base-diffs-$basesnap-$nextsnap" unless $sawstuff;
     }
@@ -207,6 +209,7 @@ sub update_diffs($$) {
 	    close DIFF;
 	}
 	close FIND;
+	chmod 0664, \*OUT;
 	close OUT;
     }
 }
