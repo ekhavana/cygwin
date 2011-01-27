@@ -30,26 +30,17 @@ $::count = 0;
 use FindBin qw($Bin);
 my @toprint;
 
-$::DUPOUT = 1;
+$::DUPOUT = 0;
 
 $| = 1;
 if ($text) {
     myprint $html->header(-type=>'text/plain');
 } else {
-    myprint <<'EOF';
-<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
-    <link rel="stylesheet" type="text/css" href="http://cygwin.com/style.css" />
-    <title>Cygwin Package List Search Results</title>
-  </head>
-
-<body>
-<!--#include virtual="../navbar.html" -->
-<!--#include virtual="../top.html" -->
-<table>
-EOF
+    myprint $html->header, "\n<html>\n<head>\n",
+	  "<title>Package List Search Results</title>\n</head>\n",
+	  LWP::Simple::get('http://cygwin.com/cygwin-header.html'),
+	  "</td></table>\n", "<table>\n",
+	  $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n";
 }
 
 eval '"foo" =~ /$grep/o';
@@ -59,7 +50,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 } else {
     $SIG{ALRM} = \&wakey;
     alarm 45;
-    save @toprint, $html->h1('Search Results'), "\n" unless $text;
+    save @toprint, $html->h2({-align=>'center'}, 'Search Results'), "\n" unless $text;
     chdir "$Bin/../packages";
     my $truncated_search = 0;
     outer: for my $f (<*/*>) {
@@ -97,13 +88,11 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 	}
     }
 }
+push @toprint, "</table>";
 if (!$text) {
-    push @toprint, <<'EOF';
-</table>
-</div>
-</body>
-</html>
-EOF
+    open FOOTER, '../cygwin-footer.html';
+    push @toprint, <FOOTER>, $html->end_html;
+    close FOOTER;
 }
 
 alarm 0;
