@@ -9,6 +9,7 @@ use HTML::TreeBuilder;
 use constant {MAXMATCHES => 30};
 
 sub addfn($);
+sub include_virtual(@);
 sub myprint(@);
 sub wakey($);
 sub save(\@@);
@@ -46,10 +47,9 @@ if ($text) {
   </head>
 
 <body>
-<!--#include virtual="../navbar.html" -->
-<!--#include virtual="../top.html" -->
-<table>
 EOF
+    include_virtual "../navbar.html", "../top.html";
+    print "<table>\n"
 }
 
 eval '"foo" =~ /$grep/o';
@@ -130,6 +130,14 @@ sub findheader {
     return $header;
 }
 
+sub include_virtual(@) {
+    for my $f (@_) {
+	open my $fd, '<', $f;
+	myprint <$fd>;
+	close $fd;
+    }
+}
+
 sub myprint(@) {
     print @_;
     if ($::DUPOUT) {
@@ -153,3 +161,4 @@ sub wakey($) {
     $SIG{ALRM} = \&wakey;
     alarm 45;
 }
+
