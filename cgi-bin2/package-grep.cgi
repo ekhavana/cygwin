@@ -30,7 +30,7 @@ $::count = 0;
 use FindBin qw($Bin);
 my @toprint;
 
-$::DUPOUT = 0;
+$::DUPOUT = 1;
 
 $| = 1;
 if ($text) {
