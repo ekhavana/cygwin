@@ -9,6 +9,7 @@ use HTML::TreeBuilder;
 use constant {MAXMATCHES => 30};
 
 sub addfn($);
+sub include_virtual(@);
 sub myprint(@);
 sub wakey($);
 sub save(\@@);
@@ -30,17 +31,17 @@ $::count = 0;
 use FindBin qw($Bin);
 my @toprint;
 
-$::DUPOUT = 0;
+$::DUPOUT = 1;
 
 $| = 1;
 if ($text) {
     myprint $html->header(-type=>'text/plain');
 } else {
-    myprint $html->header, "\n<html>\n<head>\n",
-	  "<title>Package List Search Results</title>\n</head>\n",
-	  LWP::Simple::get('http://cygwin.com/cygwin-header.html'),
-	  "</td></table>\n", "<table>\n",
-	  $html->h1({-align=>'center'}, 'Cygwin Package List'), "\n";
+    myprint $html->header, $html->start_html(-title=>'Cygwin Package List Search Result',
+					     -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
+					     -style=>'http://cygwin.com/style.css');
+    include_virtual "../navbar.html", "../top.html";
+    print "<table>\n"
 }
 
 eval '"foo" =~ /$grep/o';
@@ -50,7 +51,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 } else {
     $SIG{ALRM} = \&wakey;
     alarm 45;
-    save @toprint, $html->h2({-align=>'center'}, 'Search Results'), "\n" unless $text;
+    save @toprint, $html->h1('Search Results'), "\n" unless $text;
     chdir "$Bin/../packages";
     my $truncated_search = 0;
     outer: for my $f (<*/*>) {
@@ -88,11 +89,13 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 	}
     }
 }
-push @toprint, "</table>";
 if (!$text) {
-    open FOOTER, '../cygwin-footer.html';
-    push @toprint, <FOOTER>, $html->end_html;
-    close FOOTER;
+    push @toprint, <<'EOF';
+</table>
+</div>
+</body>
+</html>
+EOF
 }
 
 alarm 0;
@@ -119,6 +122,14 @@ sub findheader {
     return $header;
 }
 
+sub include_virtual(@) {
+    for my $f (@_) {
+	open my $fd, '<', $f;
+	myprint <$fd>;
+	close $fd;
+    }
+}
+
 sub myprint(@) {
     print @_;
     if ($::DUPOUT) {
@@ -142,3 +153,4 @@ sub wakey($) {
     $SIG{ALRM} = \&wakey;
     alarm 45;
 }
+
