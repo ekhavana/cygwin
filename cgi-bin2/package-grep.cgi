@@ -30,7 +30,7 @@ $::count = 0;
 use FindBin qw($Bin);
 my @toprint;
 
-$::DUPOUT = 1;
+$::DUPOUT = 0;
 
 $| = 1;
 if ($text) {
@@ -48,6 +48,7 @@ if ($text) {
 <body>
 <!--#include virtual="navbar.html" -->
 <!--#include virtual="top.html" -->
+<table>
 EOF
 }
 
@@ -96,9 +97,9 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 	}
     }
 }
-push @toprint, "</table>";
 if (!$text) {
     push @toprint, <<'EOF';
+</table>
 </div>
 </body>
 </html>
