@@ -111,10 +111,10 @@ for (my $i = MAXKEEP; $i < @tounlink; $i++) {
 exit(0);
 
 sub file_row {
-    local($f) = @_;
+    my $f = shift;
     return "" unless -f $f;
     local($sz) = &size($f);
-    $rv = "<tr>";
+    my $rv = "<tr>";
     $rv .= "<td><tt>&nbsp; $f</tt></td>";
     $rv .= "<td align=right colspan=3>$sz Kb</td>";
     if ($f !~ /^(.*\.tar)\.bz2$/o) {
@@ -155,28 +155,28 @@ sub update_diffs($$) {
     my $basesrc = "$base-src-$basesnap";
     my $nextsrc = "$base-src-$nextsnap";
 
-    $sf = &mtime("$basesrc.tar.bz2");
-    $osf = &mtime("$nextsrc.tar.bz2");
-    $df = &mtime("$base-diffs-$basesnap-$nextsnap");
-    $cl = &mtime("$base-changelog-$basesnap-$nextsnap");
+    my $sf = &mtime("$basesrc.tar.bz2");
+    my $osf = &mtime("$nextsrc.tar.bz2");
+    my $df = &mtime("$base-diffs-$basesnap-$nextsnap");
+    my $cl = &mtime("$base-changelog-$basesnap-$nextsnap");
 
     if (!$df || $df < $sf || $df < $osf) {
 	print "build $base-diffs-$basesnap-$nextsnap\n";
 	my $basedir = need($basesnap, $basesrc);
 	my $nextdir = need($nextsnap, $nextsrc);
 	
-	open(OUT, "> $base-diffs-$basesnap-$nextsnap");
-	open(DIFF, "cd $TMP; exec diff -p -N -d -r -U2 $basedir $nextdir |");
+	open OUT, '>', "$base-diffs-$basesnap-$nextsnap" or die "$0: couldn't open $base-diffs-$basesnap-$nextsnap for output - $!\n";
+	open DIFF, '-|', "cd $TMP; exec diff -p -N -d -r -U2 $basedir $nextdir" or die "$0: diff $basedir $nextdir failed - $!\n";
 	print OUT "Differences between $basesnap and $nextsnap\n\n";
-	$keeper = 0;
-	$sawstuff = 0;
+	my $keeper = 0;
+	my $sawstuff = 0;
 	while (<DIFF>) {
 	    $keeper = !/\.snapshot-date|ChangeLog/o if /^diff /o;
 	    print OUT if $keeper;
 	    $sawstuff ||= $keeper;
 	}
-	close(DIFF);
-	close(OUT);
+	close DIFF;
+	close OUT;
 	unlink "$base-diffs-$basesnap-$nextsnap" unless $sawstuff;
     }
 
@@ -184,9 +184,9 @@ sub update_diffs($$) {
 	print "build $base-changelog-$basesnap-$nextsnap\n";
 	my $basedir = need($basesnap, $basesrc);
 	my $nextdir = need($nextsnap, $nextsrc);
-	open(OUT, "> $base-changelog-$basesnap-$nextsnap");
+	open OUT, '>', "$base-changelog-$basesnap-$nextsnap" or die "$0: couldn't open $base-changelog-$basesnap-$nextsnap for writing - $!\n";
 	print OUT "ChangeLog for $basesnap to $nextsnap\n\n";
-	open(FIND, "cd $TMP/$basedir; find . -name ChangeLog -print |");
+	open FIND, '-|', "cd $TMP/$basedir; exec find . -name ChangeLog -print" or die "$0: 'find -name Changelog -print' failed - $!\n";
 	while ($f = <FIND>) {
 	    $f =~ s/[\r\n]+$//o;
 #	    $f =~ s!cygwin-snapshot-\d+-1/!!o;
@@ -204,10 +204,10 @@ sub update_diffs($$) {
 		    print OUT;
 		}
 	    }
-	    close(DIFF);
+	    close DIFF;
 	}
-	close(FIND);
-	close(OUT);
+	close FIND;
+	close OUT;
     }
 }
 
