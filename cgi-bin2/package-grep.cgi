@@ -39,11 +39,9 @@ if ($text) {
     myprint <<'EOF';
 !DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head "a">
     <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
     <link rel="stylesheet" type="text/css" href="http://cygwin.com/style.css" />
     <title>Cygwin Package List Search Results</title>
-</head>
 
 <body>
 <!--#include virtual="../navbar.html" -->
