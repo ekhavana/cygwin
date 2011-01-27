@@ -48,7 +48,7 @@ if ($text) {
 <body>
 <!--#include virtual="navbar.html" -->
 <!--#include virtual="top.html" -->
-'EOF'
+EOF
 }
 
 eval '"foo" =~ /$grep/o';
