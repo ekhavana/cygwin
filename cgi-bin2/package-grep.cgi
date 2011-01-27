@@ -46,8 +46,8 @@ if ($text) {
   </head>
 
 <body>
-<!--#include virtual="navbar.html" -->
-<!--#include virtual="top.html" -->
+<!--#include virtual="../navbar.html" -->
+<!--#include virtual="../top.html" -->
 <table>
 EOF
 }
