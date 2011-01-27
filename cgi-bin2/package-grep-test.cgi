@@ -37,16 +37,9 @@ $| = 1;
 if ($text) {
     myprint $html->header(-type=>'text/plain');
 } else {
-    myprint <<'EOF';
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-  <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
-    <link rel="stylesheet" type="text/css" href="http://cygwin.com/style.css" />
-    <title>Cygwin Package List Search Results</title>
-  </head>
-
-<body>
-EOF
+    myprint $html->header, $html->start_html(-title=>'Cygwin Package List Search Result',
+					     -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
+					     -style=>'http://cygwin.com/style.css');
     include_virtual "../navbar.html", "../top.html";
     print "<table>\n"
 }
