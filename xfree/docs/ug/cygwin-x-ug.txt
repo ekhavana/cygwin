@@ -5,8 +5,8 @@ Harold L Hunt, II
 
 Jon Turney
 
-     Copyright (c) 2000 Harold L Hunt II. Copyright (C) 2009,2010 Jon
-     Turney. Permission is granted to copy, distribute and/or modify
+     Copyright (c) 2000 Harold L Hunt II. Copyright (C) 2009, 2010, 2011
+     Jon Turney. Permission is granted to copy, distribute and/or modify
      this document under the terms of the GNU Free Documentation
      License, Version 1.1 or any later version published by the Free
      Software Foundation; with no Invariant Sections, with no
@@ -65,6 +65,8 @@ Jon Turney
         9. TERMINATION
         10. FUTURE REVISIONS OF THIS LICENSE
         How to use this License for your documents
+
+   Colophon
      _________________________________________________________________
 
 Chapter 1. Cygwin/X Overview
@@ -142,8 +144,7 @@ Installing Cygwin/X
        [cyi10createicons.png]
    19. Click Finish to close the setup program.
 
-   You have now successfully installed Cygwin/X. Proceed to Chapter 4 for
-   instructions on how to use Cygwin/X.
+   You have now successfully installed Cygwin/X.
      _________________________________________________________________
 
 Chapter 3. Configuring Cygwin/X
@@ -169,12 +170,16 @@ Windowing mode
      Note: This is typically used to present a virtual full-screen X
      session using the X window manager of your choice, or for remote
      XDMCP sessions.
-     * Multiwindow mode. -multiwindow
+       The -nodecoration option can be used to remove the Windows window
+       decorations from the X screen window. Alternatively, the
+       -fullscreen option can be used to show the X screen in exclusive
+       fullscreen mode.
+     * Multiwindow mode. (-multiwindow)
        Each top-level X window appears in its own Windows window.
 
      Note: This is typically used to work with local or remote X
      applications, integrated into your native Windows desktop.
-     * Rootless mode. -rootless
+     * Rootless mode. (-rootless)
        The X root window is hidden from view, but top-level X windows are
        drawn.
 
@@ -185,7 +190,7 @@ Windowing mode
      particulaly useful with X window managers with which you need to
      interact with the root window (for example, clicking on the root
      window to get a menu listing programs you can launch) [1] , but is
-     more useful with X window managers which show a dock or panel
+     more useful with X window managers which work with a dock or panel
      window for selecting applications from.
      Also note that the X window manager has no knowledge of the
      stacking of Windows windows, and vice versa, so raising one X
@@ -340,6 +345,11 @@ Stopping Cygwin/X
        menu
      * In Windowed mode: Press Alt-F4 to shutdown the X Server. This can
        be disabled using the -nowinkill option.
+     * In Windowed mode: Close the X server window in the conventional
+       ways, e.g. by clicking on the "X" button at the upper-right corner
+       of the X screen window frame, or choosing "Close" from the control
+       menu opened by left-clicking on the X logo icon at the upper-left
+       corner of the X screen window frame.
      * Using the -unixkill option allows the Ctrl-Alt-Backspace key
        combination to shutdown the X Server.
 
@@ -352,7 +362,7 @@ Window managers
    A window manager is required in order to decorate, move, resize, and
    perform other operations on individual X windows.
 
-   Cygwin/X can work with window managers in a couple of different ways:
+   Cygwin/X can work with window managers in several different ways:
      * Internal window manager for multiwindow mode. The internal window
        manager that creates a Windows window for each top-level X window
        is automatically started when using the -multiwindow command-line
@@ -360,10 +370,11 @@ Window managers
        parameters in Chapter 3 for more information on the -multiwindow
        command-line parameter.
      * External local window managers (e.g. twm, mwm (part of the lesstif
-       package)). These local window managers must be installed on Cygwin
-       and run locally.
-     * Remote window managers via an XDMCP session, which you can read
-       more about in the Section called Remote sessions via XDMCP.
+       package), fvwm2, openbox, aewm++). These local window managers
+       must be installed on Cygwin and run locally.
+     * Remote window managers started by logging into an XDMCP session.
+       You can read more about XDMCP in the Section called Remote
+       sessions via XDMCP.
      * Remote window manager launched through an ssh tunnel. This is not
        Cygwin/X-specific, so you should be able to find information about
        launching remote window managers from other sources. See the
@@ -479,11 +490,13 @@ Insecure telnet
    On your Windows machine:
     1. Make sure you have the inetutils package installed.
     2. Launch Cygwin/X
-    3. In an X terminal type /usr/bin/xhost remote_hostname_or_ip_address
+    3. In an X terminal type xhost remote_hostname_or_ip_address
     4. In an X terminal type /usr/bin/telnet
-       remote_hostname_or_ip_address. Use the explicit path to ensure
-       that Cygwin's telnet is run instead of Microsoft's telnet;
-       Microsoft's telnet will crash on startup when run from Cygwin/X.
+       remote_hostname_or_ip_address.
+
+     Note: Use the explicit path to ensure that Cygwin's telnet is run
+     instead of Microsoft's telnet. Microsoft's telnet cannot read input
+     or display output correctly when run from a Cygwin shell.
     5. Login to your remote machine via your telnet session
     6. In your telnet session type, export
        DISPLAY=windows_hostname_or_ip_address:0.0
@@ -535,6 +548,14 @@ Hardware Accelerated OpenGL (AIGLX)
 
    Please ensure you are using the latest display drivers for your
    graphics hardware before reporting any visual issues with WGL.
+
+   Known issues:
+     * OpenGL windows with static contents aren't re-drawn when occluded
+       by a native Window and then exposed. Workaround: force the window
+       to redraw, e.g. by resizing it.
+     * When an OpenGL window is behind a native application window which
+       uses layered windows for translucency, the OpenGL rendering is
+       drawn over the top, flickering.
      _________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -897,6 +918,15 @@ How to use this License for your documents
    recommend releasing these examples in parallel under your choice of
    free software license, such as the GNU General Public License, to
    permit their use in free software.
+     _________________________________________________________________
+
+Colophon
+
+   This document was produced from DocBook source XML using OpenJade and
+   the DocBook DSSSL Stylesheets.
+
+   The production process for this instance of this document was started
+   at 2011-02-10 14:48 .
 
   Notes
 

@@ -241,7 +241,7 @@ NAME="prog-compiling-libXfont-linkage-issue"
 it fails with errors loading all fonts, including the mandatory fixed font.
 </P
 ><P
->&#13;This is due to limitations of Cygwin's current weak symbol handling which requires
+>&#13;This is due to limitations of Cygwin's current weak symbol handling, which requires
 static linking to work correctly.  For example, in libXfont the RegisterFPEFunctions
 function is defined weak and should be overloaded with RegisterFPEFunctions defined
 in dix/dixfont.c in the xserver.
@@ -275,9 +275,25 @@ mv /usr/lib/libXFont.dll.a /usr/lib/libXFont.dll.a.old
 >
 </P
 ><P
->&#13;A cleaner way is to generate customized .pc file for libXfont and arrange for that
-to be in your PKG_CONFIG_PATH when ./configuring the X server.  See the .cygport file
-for an example of how to achieve that.
+>&#13;A cleaner way is to generate a customized .pc file for libXfont and arrange for that
+to be in your PKG_CONFIG_PATH when ./configuring the X server. For example:
+</P
+><P
+>&#13;<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;sed -e 's| -lXfont| /usr/lib/libXfont.a|' /usr/lib/pkgconfig/xfont.pc &gt; ~/xfont.pc
+export PKG_CONFIG_PATH=~:$PKG_CONFIG_PATH
+</PRE
+></TD
+></TR
+></TABLE
+>
 </P
 ></DIV
 ></DIV

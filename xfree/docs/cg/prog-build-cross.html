@@ -136,24 +136,10 @@ platform:</P
 ></LI
 ><LI
 ><P
->When configuring, you must pass
-<CODE
-CLASS="parameter"
->--prefix=/stagingdir</CODE
-> to <B
-CLASS="command"
->./configure</B
-> to
-cause the build system to be configured to install the target platform build into
-<TT
-CLASS="filename"
->/stagingdir</TT
->.</P
-><P
->OR, when installing a build, you must
+>When installing a build, you must
 pass <CODE
 CLASS="parameter"
->DESTDIR</CODE
+>DESTDIR=/stagingdir</CODE
 > to <B
 CLASS="command"
 >make install</B
@@ -161,7 +147,8 @@ CLASS="command"
 install the target platform build into <TT
 CLASS="filename"
 >/stagingdir</TT
->.</P
+>.
+</P
 ><DIV
 CLASS="tip"
 ><BLOCKQUOTE
@@ -182,6 +169,27 @@ of your local X Window System installation, which would completely
 destroy your host system's X Window System installation.</P
 ></BLOCKQUOTE
 ></DIV
+><P
+>OR, when configuring, you can pass
+<CODE
+CLASS="parameter"
+>--prefix=/stagingdir</CODE
+> to <B
+CLASS="command"
+>./configure</B
+> to
+cause the build system to be configured to install the target platform build into
+<TT
+CLASS="filename"
+>/stagingdir</TT
+>.
+This avoids the possibilty of installing over the native installation, at the
+cost of baking the prefix <TT
+CLASS="filename"
+>/stagingdir</TT
+>
+into the target binaries.
+</P
 ></LI
 ></OL
 ></DIV

@@ -5,8 +5,8 @@ Harold L Hunt, II
 
 Jon Turney
 
-     Copyright (C) 2004 Harold L Hunt II. Copyright (C) 2009,2010 Jon
-     Turney. Permission is granted to copy, distribute and/or modify
+     Copyright (C) 2004 Harold L Hunt II. Copyright (C) 2009, 2010, 2011
+     Jon Turney. Permission is granted to copy, distribute and/or modify
      this document under the terms of the GNU Free Documentation
      License, Version 1.1 or any later version published by the Free
      Software Foundation; with no Invariant Sections, with no
@@ -161,10 +161,10 @@ Source Code Tree Layout
           + dmx contains the Distributed Multihead X X Server. The DMX X
             server acts as a proxy for multiple back-end X servers.
           + kdrive
-               o ephyr contains the Xephyr X Server Xephyr X Server which
-                 uses a window on a host X Server as its framebuffer.
-                 Unlike Xnest it supports modern X extensions such as
-                 Composite, Damage, randr, etc.
+               o ephyr contains the Xephyr X Server which uses a window
+                 on a host X Server as its framebuffer. Unlike Xnest it
+                 supports modern X extensions such as Composite, Damage,
+                 randr, etc.
                o fake contains the Xfake X Server. xfake is similar to
                  xvfb, but discards all data written to the framebuffer.
           + vfb contains the Virtual Framebuffer X Server. The vfb server
@@ -190,7 +190,7 @@ Source Code Tree Layout
        type of members of various X Server structures.
      * mi contains machine independent drawing routines. These drawing
        routines are used by the Cygwin/X Native GDI X Server engine. In
-       turn, the machine independent routines depend in winGetSpans,
+       turn, the machine independent routines depend on winGetSpans,
        winFillSpans, and winSetSpans, which are implemented in the Native
        GDI engine.
      * miext contains various machine independent X extensions.
@@ -426,9 +426,9 @@ Keyboard
    The WM_SYSKEY* messages are generated when the user presses a key
    while holding down the Alt key or when the user presses a key after
    pressing and releasing the F10 key. Processing for WM_SYSKEYDOWN and
-   WM_KEYDOWN (respectively WM_SYSKEYUP, WM_KEYUP) messages are identical
-   because the X Server does not distinguish between a normal key press
-   and a key press when the Alt key is down.
+   WM_KEYDOWN (and respectively WM_SYSKEYUP and WM_KEYUP) messages are
+   identical because the X Server does not distinguish between a normal
+   key press and a key press when the Alt key is down.
 
    Win32 uses virtual key codes to identify which key is being pressed or
    released. Virtual key codes follow the idea that the same virtual key
@@ -591,7 +591,7 @@ libXfont linkage issue
    otherwise it fails with errors loading all fonts, including the
    mandatory fixed font.
 
-   This is due to limitations of Cygwin's current weak symbol handling
+   This is due to limitations of Cygwin's current weak symbol handling,
    which requires static linking to work correctly. For example, in
    libXfont the RegisterFPEFunctions function is defined weak and should
    be overloaded with RegisterFPEFunctions defined in dix/dixfont.c in
@@ -610,9 +610,13 @@ libXfont linkage issue
 mv /usr/lib/libXFont.la    /usr/lib/libXFont.la.old
 mv /usr/lib/libXFont.dll.a /usr/lib/libXFont.dll.a.old
 
-   A cleaner way is to generate customized .pc file for libXfont and
+   A cleaner way is to generate a customized .pc file for libXfont and
    arrange for that to be in your PKG_CONFIG_PATH when ./configuring the
-   X server. See the .cygport file for an example of how to achieve that.
+   X server. For example:
+
+sed -e 's| -lXfont| /usr/lib/libXfont.a|' /usr/lib/pkgconfig/xfont.pc > ~/xfont
+.pc
+export PKG_CONFIG_PATH=~:$PKG_CONFIG_PATH
      _________________________________________________________________
 
 Obtaining the Source Code
@@ -624,8 +628,9 @@ Obtaining via Cygwin setup
    run Cygwin setup and tick the 'Src?' check-box for the 'xorg-server'
    package.
 
-   This may have multiple patches applied on top of the X Window System
-   source code, and should be the starting point for new developers.
+   This may have multiple patches applied on top of the upstream X.Org X
+   Window System source code, and is known to build and function on
+   Cygwin, so this should be the starting point for new developers.
 
    On installing the source code package, setup will unpack it under
    /usr/src. You should find the source archive, any needed .patch files,
@@ -661,9 +666,9 @@ $ ./autogen.sh -V
 
 Obtaining from version control
 
-   The packaging script and patches for the packages distributed via
-   Cygwin setup are held in a git repository. Intermediate versions
-   between released packages can be obtained from there.
+   The packaging script for the packages distributed via Cygwin setup are
+   currently held in a git repository. Intermediate versions between
+   released packages can be obtained from there.
 Username@CygwinHost ~
 $ git clone git://cygwin-ports.git.sourceforge.net/gitroot/cygwin-ports/xorg-se
 rver
@@ -828,17 +833,19 @@ Building Cygwin/X
     1. When configuring, you must pass --target=i686-pc-cygwin to
        ./configure to cause the build system to build for the target,
        Cygwin, platform:
-    2. When configuring, you must pass --prefix=/stagingdir to
-       ./configure to cause the build system to be configured to install
-       the target platform build into /stagingdir.
-       OR, when installing a build, you must pass DESTDIR to make install
-       to install the target platform build into /stagingdir.
+    2. When installing a build, you must pass DESTDIR=/stagingdir to make
+       install to install the target platform build into /stagingdir.
 
      Tip: Never run make install on your host platform without the
      DESTDIR parameter, as that will cause the Cygwin build of X Window
      System to be installed over top of your local X Window System
      installation, which would completely destroy your host system's X
      Window System installation.
+       OR, when configuring, you can pass --prefix=/stagingdir to
+       ./configure to cause the build system to be configured to install
+       the target platform build into /stagingdir. This avoids the
+       possibilty of installing over the native installation, at the cost
+       of baking the prefix /stagingdir into the target binaries.
      _________________________________________________________________
 
 Contributing Patches
@@ -1847,4 +1854,7 @@ How to use this License for your documents
 Colophon
 
    This document was produced from DocBook source XML using OpenJade and
-   the DocBook DSSSL Stylesheets at 2011-01-12 22:20 .
+   the DocBook DSSSL Stylesheets.
+
+   The production process for this instance of this document was started
+   at 2011-02-10 14:39 .

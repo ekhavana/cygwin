@@ -1,7 +1,7 @@
 
 Cygwin/X Frequently Asked Questions
 
-2011-01-26 14:41
+2011-02-10 14:39
      _________________________________________________________________
 
    Table of Contents
@@ -109,9 +109,9 @@ Questions and Answers
    6. Remote connections
 
         6.1. X11Forwarding does not work with OpenSSH under Cygwin
-        6.2. Why do remote programs crash with X Error of failed request:
-                BadAtom? Why do remote programs exit when you try to copy
-                and paste? 
+        6.2. Why do remote programs crash with an X Error of failed
+                request: BadAtom? Why do remote programs exit when you
+                try to copy and paste? 
 
         6.3. I'm confused about the difference between trusted and
                 untrusted X11 forwarding. What does "Warning: untrusted
@@ -555,7 +555,7 @@ $ nedit
    windows are contained within one large root Windows window? How do I
    get it back to each X window in it's own Windows window?
 
-   This is a deliberate change from X R6.9 behaviour.
+   This is a deliberate change from Cygwin/X X11 R6.9 behaviour.
 
     1. Start the X server using the "XWin Server" shortcut under
        "Cygwin-X" on the Start menu, or using startxwin.
@@ -575,7 +575,7 @@ $ nedit
 
    No. Options which are configurable are available as command line
    options. For example, for more information on configuring other
-   keyboard layouts see Q: 5.1.1.
+   keyboard layouts using command line options, see Q: 5.1.1.
 
    4.2. What are the command line arguments for XWin.exe?
 
@@ -626,7 +626,9 @@ $ nedit
    work? I have a multihead system. Why are my X-application windows
    white?
 
-   You should start XWin.exe with the -multiplemonitors options
+   You should start XWin.exe with the -multiplemonitors option.
+
+   Note that this option is enabled by default in -multiwindow mode.
 
    4.8. I have a firewall. Is there anything I have to take care of?
 
@@ -639,7 +641,7 @@ $ nedit
 
    If you use a different DISPLAY variable check section Q: 1.6. for
    details about which ports are used. For additional information about
-   firewalls and XDMCP connections check Q: 7.4..
+   firewalls and XDMCP connections check Q: 7.3..
 
 5. Internationalization
 
@@ -684,8 +686,7 @@ $ nedit
      * A description how the layout looks like. This makes it easy to
        identify the matching XKB layout code. Many layouts are available
        from the Microsoft Global Dev website (It seems that website only
-       works with some browsers. Fail harder, Microsoft!). Just add a
-       link to your layout.
+       works with some browsers). Just add a link to your layout.
 
    5.1.3. Where can I find an xmodmap for my non-U.S. keyboard layout?
 
@@ -906,7 +907,7 @@ $ ssh -Y remotehost
    installed on the remote machine. The OpenSSH server needs to be able
    to run xauth to do X11 Forwarding.
 
-   6.2. Why do remote programs crash with X Error of failed request:
+   6.2. Why do remote programs crash with an X Error of failed request:
    BadAtom? Why do remote programs exit when you try to copy and paste?
 
    This question should be obsolete since the security extension is now
@@ -1002,10 +1003,10 @@ $ ssh -Y remotehost
    [Mika Laitio] For security reasons, XDMCP is not enabled by default on
    most Linux/UNIX/*NIX/*BSD distributions (RedHat, Mandrake, SuSE,
    FreeBSD, NetBSD, etc.) by default. You have to manually enable remote
-   logins to your X Display Manager (xdm, kdm, or gdm). The location of
-   the proper config file is distribution/OS dependent, but a short list
-   of known config file locations is given in Table 1. You must change
-   the line:
+   logins to your X Display Manager (e.g. xdm, kdm, or gdm). The location
+   of the proper config file is distribution/OS dependent, but a short
+   list of known config file locations is given in Table 1. You must
+   change the line:
 [Xdmcp]
 Enable=false
 
@@ -1041,7 +1042,7 @@ Enable=true
    Port Protocol Direction Comment
    177 UDP Incoming/Outgoing Actual XDMCP connection
    6000+display TCP Incoming Connection for X11 clients. display is
-   usally 0 except you specify it on the commandline.
+   usually 0 except if you specify it on the commandline.
 
    7.4. XDMCP does not work with Mandrake 8.1
 
@@ -1187,7 +1188,7 @@ l)"
    causes serious processing overhead beyond that from the X11 protocol
    and the unix emulation layer.
 
-   So far there is no know solution but to disable the virus scanner
+   So far there is no known solution but to disable the virus scanner
    completely.
 
    [Dr. Edward Wornar] Certain programs that are installed by various
@@ -1248,6 +1249,8 @@ XNLSPATH
 
    8.13. How can I adjust the linewidth in bash after resizing XTerm?
 
+   We think this question is probably obsolete
+
    Try starting resize.
 
    8.14. Why do some menus not work if Num-Lock is on?
@@ -1291,8 +1294,9 @@ XWin.exe :2 -query blubb
 
    If you want another terminal window (which in fact is just a
    convenient side effect of running startxwin) you should do this by
-   starting xterm from an existing terminal window, from the cygwin shell
-   or from the startmenu entries.
+   starting xterm & from an existing terminal window, from the
+   notification area icon menu, from a cygwin shell or from the start
+   menu.
 
    9.4. Fatal server error: could not open default font 'fixed'
 
