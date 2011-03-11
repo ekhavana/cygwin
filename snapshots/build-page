@@ -59,9 +59,6 @@ for $i (0..$#snaps) {
     $var{'date'} = $date;
     ($var{'longdate'} = $date) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
     my ($mm, $hh, $mday, $m, $yr) = (gmtime(time))[1..5];
-    $var{'longdate'} .= sprintf ' <font size="-1">(last update %d-%02d-%02d %02d:%02d GMT)</font>',
-				$yr + 1900, $m + 1, $mday, $hh, $mm
-        if $i == 0;
     ($var{'longprev'} = $snaps[$i+1]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
     if ($i < $#snaps) {
 	$var{'prev'} = $snaps[$i+1];
