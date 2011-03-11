@@ -58,13 +58,15 @@ for $i (0..$#snaps) {
     my $date = $snaps[$i];
     $var{'date'} = $date;
     ($var{'longdate'} = $date) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
-    my ($ss, $mm, $hh, $mday, $m, $yr) = (gmtime(time))[0..5];
-    $var{'longdate'} .= sprintf ' %02d:%02d:%02d UTC', $hh, $mm, $ss;
+
+    my $time = mtime("cygwin1-$snaps[$i]-$date.dll.bz2");
+    my ($ss, $mm, $hh, $mday, $m, $yr) = (gmtime($time))[0..5];
+    $var{'longdate'} .= sprintf ' <font size=-1>%02d:%02d:%02d UTC</font>', $hh, $mm, $ss;
     ($var{'longprev'} = $snaps[$i+1]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
     if ($i < $#snaps) {
 	$var{'prev'} = $snaps[$i+1];
-	$var{'wsdfsz'} = &size("winsup-diffs-$snaps[$i+1]-$date");
-	$var{'wsclsz'} = &size("winsup-changelog-$snaps[$i+1]-$date");
+	$var{'wsdfsz'} = size("winsup-diffs-$snaps[$i+1]-$date");
+	$var{'wsclsz'} = size("winsup-changelog-$snaps[$i+1]-$date");
 	$var{'changelog'} = $changelogt;
 	0 while $var{'changelog'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
 	$var{'diffs'} = $difft;
@@ -111,7 +113,7 @@ exit(0);
 sub file_row {
     my $f = shift;
     return "" unless -f $f;
-    local($sz) = &size($f);
+    local($sz) = size($f);
     my $rv = "<tr>";
     $rv .= "<td><tt>&nbsp; $f</tt></td>";
     $rv .= "<td align=right colspan=3>$sz Kb</td>";
@@ -154,10 +156,10 @@ sub update_diffs($$) {
     my $basesrc = "$base-src-$basesnap";
     my $nextsrc = "$base-src-$nextsnap";
 
-    my $sf = &mtime("$basesrc.tar.bz2");
-    my $osf = &mtime("$nextsrc.tar.bz2");
-    my $df = &mtime("$base-diffs-$basesnap-$nextsnap");
-    my $cl = &mtime("$base-changelog-$basesnap-$nextsnap");
+    my $sf = mtime("$basesrc.tar.bz2");
+    my $osf = mtime("$nextsrc.tar.bz2");
+    my $df = mtime("$base-diffs-$basesnap-$nextsnap");
+    my $cl = mtime("$base-changelog-$basesnap-$nextsnap");
 
     if (!$df || $df < $sf || $df < $osf) {
 	print "build $base-diffs-$basesnap-$nextsnap\n";
