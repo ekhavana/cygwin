@@ -47,7 +47,7 @@ Jon Turney
         Displaying remote clients
 
               Secure ssh
-              Insecure telnet
+              Insecure telnet or rsh (Not recommended)
 
         Hardware Accelerated OpenGL (AIGLX)
 
@@ -128,9 +128,12 @@ Installing Cygwin/X
             Start menu)
           + You may also select any X client programs you want to use,
             and any fonts you would like to have available.
-          + You may also want to ensure that the inetutils or openssh
-            packages are selected if you wish to use telnet or ssh
-            connections to run remote X clients.
+          + You may also want to ensure that the openssh package is
+            selected if you wish to use ssh connections to run remote X
+            clients.
+          + You may also want to ensure that the inetutils or rsh
+            packages are selected if you wish to use telnet or rsh
+            connections to run remote X clients. (not recommended)
        [cyi07packages.png]
    16. Click Next to begin the download process, you may want to try
        another mirror if you see a "Connecting" message on this screen
@@ -370,8 +373,8 @@ Window managers
        parameters in Chapter 3 for more information on the -multiwindow
        command-line parameter.
      * External local window managers (e.g. twm, mwm (part of the lesstif
-       package), fvwm2, openbox, aewm++). These local window managers
-       must be installed on Cygwin and run locally.
+       package), fvwm2, openbox, aewm++, WindowMaker). These local window
+       managers must be installed on Cygwin and run locally.
      * Remote window managers started by logging into an XDMCP session.
        You can read more about XDMCP in the Section called Remote
        sessions via XDMCP.
@@ -460,7 +463,8 @@ Displaying remote clients
 
    Displaying remote X clients with Cygwin/X is nearly identical to
    displaying remote X clients with any other X Server. You may use the
-   secure ssh method, or the insecure telnet method (not recommended).
+   secure ssh method, or the insecure telnet or rsh method (not
+   recommended).
      _________________________________________________________________
 
 Secure ssh
@@ -468,50 +472,80 @@ Secure ssh
    On your Windows machine:
     1. Make sure you have the openssh package installed.
     2. Launch Cygwin/X
-    3. Run the following in a terminal:
+    3. Ensure the DISPLAY environment variable is set correctly. (This
+       step is not neccessary if you are entering your commands into an X
+       terminal, as DISPLAY must already be set in that case)
 
 $ export DISPLAY=:0.0
+
+    4. Run the ssh command to connect to the remote host:
+
 $ ssh -Y username@remote_hostname_or_ip_address
 
-    4. Enter your password when prompted by ssh.
-    5. Your ssh session should now show you a shell prompt for your
+    5. Enter your password when prompted by ssh.
+    6. Your ssh session should now show you a shell prompt for your
        remote machine.
-    6. You can now launch remote X clients in your ssh session, for
+    7. You can now launch remote X clients in your ssh session, for
        example, xterm& will launch an xterm running on your remote host
        that will display on your Cygwin/X screen.
-    7. Launch other remote clients in the same manner. I recommend
+    8. Launch other remote clients in the same manner. I recommend
        starting the remote clients in the background, by appending & to
        the command name, so that you don't have to open several ssh
        sessions.
+
+     Note: By default, the OpenSSH server does not allow forwarded X
+     connections. This must be configured on the remote host by adding
+     X11Forwarding yes to the sshd_config configuration file. The
+     OpenSSH server must be restarted or SIGHUP'ed to re-read the
+     configuration file after it is changed.
+
+     Note: The OpenSSH server requires the xauth command to be available
+     to forward X connections. Consequently, it must be installed on the
+     remote host.
      _________________________________________________________________
 
-Insecure telnet
+Insecure telnet or rsh (Not recommended)
 
    On your Windows machine:
-    1. Make sure you have the inetutils package installed.
+    1. Make sure you have the inetutils package installed (for telnet) or
+       rsh package (for rsh).
     2. Launch Cygwin/X
-    3. In an X terminal type xhost remote_hostname_or_ip_address
-    4. In an X terminal type /usr/bin/telnet
-       remote_hostname_or_ip_address.
+    3. In an X terminal, use the xhost command to allow the remote host
+       access to make connections to your X server:
+
+$ xhost remote_hostname_or_ip_address
+
+    4. Run the telnet or rsh command to connect to the remote host:
+
+$ /usr/bin/telnet remote_hostname_or_ip_address
+
+       or
+
+$ rsh remote_hostname_or_ip_address
 
      Note: Use the explicit path to ensure that Cygwin's telnet is run
      instead of Microsoft's telnet. Microsoft's telnet cannot read input
      or display output correctly when run from a Cygwin shell.
-    5. Login to your remote machine via your telnet session
-    6. In your telnet session type, export
-       DISPLAY=windows_hostname_or_ip_address:0.0
-    7. You can now launch remote X clients in your telnet session, for
-       example, xterm& will launch an xterm running on your remote host
-       that will display on your Cygwin/X screen.
+    5. Login to your remote machine
+    6. Ensure the DISPLAY environment variable is set correctly in your
+       remote session.
+
+$ export DISPLAY=windows_hostname_or_ip_address:0.0
+
+    7. You can now launch remote X clients, for example, xterm& will
+       launch an xterm running on your remote host that will display on
+       your Cygwin/X screen.
     8. Launch other remote clients in the same manner; I recommend
        starting the remote clients in the background, by appending & to
        the command name, so that you don't have to open several telnet
        sessions.
 
-     Note: This is insecure because the X protocol is transmitted in
-     clear across the network between you and the remote host, and you
+     Note: This is insecure because (1) when you log in, your username
+     and password may be transmitted in clear across the network between
+     you and the remote host (2) the X protocol is transmitted in clear
+     across the network between you and the remote host, and (3) you
      have allowed any user on the remote host to connect to your X
-     server and monitor your X session. For this reason, use ssh
+     server and monitor your X session. For these reasons, use ssh
      forwarding rather than telnet, if at all possible.
      _________________________________________________________________
 
@@ -926,7 +960,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2011-02-10 14:48 .
+   at 2011-03-29 21:17 .
 
   Notes
 

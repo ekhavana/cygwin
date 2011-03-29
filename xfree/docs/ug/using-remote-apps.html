@@ -83,6 +83,9 @@ CLASS="command"
 <B
 CLASS="command"
 >telnet</B
+> or <B
+CLASS="command"
+>rsh</B
 > method (not recommended).</P
 ><DIV
 CLASS="sect2"
@@ -110,7 +113,7 @@ installed.</P
 ></LI
 ><LI
 ><P
->Run the following in a terminal:</P
+>Ensure the DISPLAY environment variable is set correctly. (This step is not neccessary if you are entering your commands into an X terminal, as DISPLAY must already be set in that case)</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -125,7 +128,26 @@ CLASS="replaceable"
 >:0.0</I
 ></TT
 >
-$ ssh -Y <TT
+</PRE
+></TD
+></TR
+></TABLE
+></LI
+><LI
+><P
+>Run the <B
+CLASS="command"
+>ssh</B
+> command to connect to the remote host:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ ssh -Y <TT
 CLASS="replaceable"
 ><I
 >username</I
@@ -184,6 +206,43 @@ CLASS="command"
 > sessions.</P
 ></LI
 ></OL
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>By default, the OpenSSH server does not allow forwarded X connections.
+This must be configured on the remote host by adding <TT
+CLASS="literal"
+>X11Forwarding yes</TT
+>
+to the <TT
+CLASS="filename"
+>sshd_config</TT
+> configuration file.
+The OpenSSH server must be restarted or SIGHUP'ed to re-read the configuration
+file after it is changed.
+</P
+></BLOCKQUOTE
+></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+The OpenSSH server requires the <B
+CLASS="command"
+>xauth</B
+> command to be available
+to forward X connections. Consequently, it must be installed on the remote host.
+</P
+></BLOCKQUOTE
+></DIV
 ></DIV
 ><DIV
 CLASS="sect2"
@@ -191,7 +250,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="using-remote-apps-telnet"
->Insecure telnet</A
+>Insecure telnet or rsh (Not recommended)</A
 ></H2
 ><P
 >On your Windows machine:</P
@@ -203,7 +262,17 @@ TYPE="1"
 CLASS="literal"
 >inetutils</TT
 > package
-installed.</P
+installed (for <B
+CLASS="command"
+>telnet</B
+>) or <TT
+CLASS="literal"
+>rsh</TT
+> package
+(for <B
+CLASS="command"
+>rsh</B
+>).</P
 ></LI
 ><LI
 ><P
@@ -211,29 +280,79 @@ installed.</P
 ></LI
 ><LI
 ><P
->In an X terminal type <KBD
-CLASS="userinput"
->xhost
-<TT
+>In an X terminal, use the <B
+CLASS="command"
+>xhost</B
+> command to allow the
+remote host access to make connections to your X server:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ xhost <TT
 CLASS="replaceable"
 ><I
 >remote_hostname_or_ip_address</I
 ></TT
-></KBD
-></P
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
 ></LI
 ><LI
 ><P
->In an X terminal type <KBD
-CLASS="userinput"
->/usr/bin/telnet
-<TT
+>Run the <B
+CLASS="command"
+>telnet</B
+> or <B
+CLASS="command"
+>rsh</B
+> command to connect to the remote host:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ /usr/bin/telnet <TT
 CLASS="replaceable"
 ><I
 >remote_hostname_or_ip_address</I
 ></TT
-></KBD
->.
+>
+</PRE
+></TD
+></TR
+></TABLE
+> or
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ rsh <TT
+CLASS="replaceable"
+><I
+>remote_hostname_or_ip_address</I
+></TT
+>
+</PRE
+></TD
+></TR
+></TABLE
+>
 </P
 ><DIV
 CLASS="note"
@@ -260,35 +379,35 @@ when run from a Cygwin shell.</P
 ></LI
 ><LI
 ><P
->Login to your remote machine via your <B
-CLASS="command"
->telnet</B
->
-session</P
+>Login to your remote machine</P
 ></LI
 ><LI
 ><P
->In your <B
-CLASS="command"
->telnet</B
-> session type,
-<KBD
-CLASS="userinput"
->export DISPLAY=<TT
+>Ensure the DISPLAY environment variable is set correctly in your remote session.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ export DISPLAY=<TT
 CLASS="replaceable"
 ><I
 >windows_hostname_or_ip_address</I
 ></TT
->:0.0</KBD
-></P
+>:0.0
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
 ></LI
 ><LI
 ><P
->You can now launch remote X clients in your
-<B
-CLASS="command"
->telnet</B
-> session, for example,
+>You can now launch remote X clients, for example,
 <KBD
 CLASS="userinput"
 >xterm&amp;</KBD
@@ -323,10 +442,12 @@ CLASS="emphasis"
 CLASS="emphasis"
 >insecure</I
 ></SPAN
-> because the X protocol is transmitted in clear
-across the network between you and the remote host, and you have allowed any user
-on the remote host to connect to your X server and monitor your X session.  For this
-reason, use ssh forwarding rather than telnet, if at all possible.
+> because (1) when you log in, your username
+and password may be transmitted in clear across the network between you and the remote host
+(2) the X protocol is transmitted in clear across the network between you and the
+remote host, and (3) you have allowed any user on the remote host to connect to your
+X server and monitor your X session.
+For these reasons, use ssh forwarding rather than telnet, if at all possible.
 </P
 ></BLOCKQUOTE
 ></DIV
