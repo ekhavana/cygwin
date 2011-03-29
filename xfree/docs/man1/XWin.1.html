@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XWIN</TITLE>
 </HEAD><BODY>
 <H1>XWIN</H1>
-Section: User Commands  (1)<BR>Updated: xorg-server 1.9.4<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.10.0<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -97,7 +97,7 @@ The default behaviour is to create a single screen 0 that is roughly the
 size of useful area of the primary monitor (allowing for any window
 decorations and the task-bar).
 <P>
-Screen specific parameters, such as <B>-fullscreen</B>, can be applied as a
+Screen specific parameters can be applied as a
 default to all screens by placing those screen specific parameters
 before any <B>-screen</B> parameter.  Screen specific parameters placed after
 the first <B>-screen</B> parameter will apply only to the immediately
@@ -153,6 +153,7 @@ in <B>-multiwindow</B> or <B>-rootless</B> mode.
 <DD>
 The X server window takes the full screen, covering completely the
 <I>Windows</I> desktop.
+Currently <B>-fullscreen</B> may only be applied to one X screen.
 <DT><B>-nodecoration</B>
 
 <DD>
@@ -168,37 +169,37 @@ Alternative name for <B>-resize=scrollbars</B>.
 <A NAME="lbAJ">&nbsp;</A>
 <H2>OPTIONS CONTROLLING RESIZE BEHAVIOUR</H2>
 
-<B>-resize</B>
+<DL COMPACT>
+<DT><B>-resize[=none|scrollbars|randr]</B>
 
+<DD>
 Select the resize mode of an X screen.
 <P>
-<B>-resize=none</B>
-
-<P>
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<DT><B>-resize=none</B><DD>
 (default). The screen is not resizable.
 <P>
 In windowed mode, if the window has decorations, a fixed frame is used.
 <P>
-<B>-resize=scrollbars</B>
-
-<P>
+<DT><B>-resize=scrollbars</B><DD>
 The screen window is resizeable, but the screen is not resizable.
 <P>
 In windowed mode, if the window has decorations, a resizing frame is used.
-<P>
 Scrollbars are drawn when needed to allow the entire X screen
 to viewed by adjusting them.
 <P>
 This also permits screens bigger than the <I>Windows</I> virtual desktop to be used.
 <P>
 This parameter is ignored in <B>-multiwindow</B> or <B>-rootless</B> mode.
+Alternative name is <B>-scrollbars</B>.
 <P>
-<B>-resize=randr</B>
-
+<DT><B>-resize=randr</B><DD>
+The screen is resizable and the screen window is resizeable.
 <P>
 In windowed mode, if the window has decorations, a resizing frame is used.
 <P>
-Resizing the window will use the RANDR extension to change
+Resizing the  <I>Windows</I> window will use the RANDR extension to change
 the size of the X screen.  Likewise, changing the size of
 the X screen using the RANDR extension will cause the size
 of the <I>Windows</I> window containing the X screen to be changed.
@@ -211,8 +212,13 @@ of the X screen using the RANDR extension is not permitted.
 <P>
 The maximum dimensions of the screen are the dimensions of the <I>Windows</I> virtual desktop.
 <P>
-<B>--resize</B> on its own is equivalent to <B>--resize=randr</B>
+<DT><B>--resize</B><DD>
+on its own is equivalent to <B>--resize=randr</B>
+</DL>
+</DL>
+
 <P>
+</DL>
 <A NAME="lbAK">&nbsp;</A>
 <H2>OPTIONS CONTROLLING WINDOWS INTEGRATION</H2>
 
@@ -308,14 +314,29 @@ respectively).
 
 <DD>
 This option, which is intended for Cygwin/X developers,
-overrides the server's automatically selected engine type.  This
-parameter will be ignored if the specified engine type is not
-supported on the current system.  The supported engine type ids are 1
-- Shadow GDI, 2 - Shadow DirectDraw, and 4 - Shadow DirectDraw Non-Locking.
-Additionally, there are engines with type ids
-8 - Primary DirectDraw (obsolete) and 16 - Native GDI (experimental and barely functional).
-Default behavior is to determine the engine with optimum performance that
+overrides the server's automatically selected drawing engine type.  This
+parameter will be ignored if the specified drawing engine type is not
+supported on the current system.
+<P>
+Default behavior is to select the drawing engine with optimum performance that
 supports the specified depth and window configuration.
+<P>
+The engine type ids are:
+<DL COMPACT><DT><DD>
+<DL COMPACT>
+<DT>1<DD>
+Shadow GDI
+<DT>2<DD>
+Shadow DirectDraw
+<DT>4<DD>
+Shadow DirectDraw Non-Locking
+<DT>8<DD>
+Primary DirectDraw (unsupported, obsolete)
+<DT>16<DD>
+Native GDI (unsupported, experimental and barely functional)
+</DL>
+</DL>
+
 <P>
 </DL>
 <A NAME="lbAM">&nbsp;</A>
@@ -389,7 +410,7 @@ exit silently and don't display any error message.
 <DT><B>-xkbvariant </B><I>variant</I>
 
 <DD>
-These options implement the xkeyboard extension for loading
+These options configure the xkeyboard extension to load
 a particular keyboard map as the X server starts.  The behavior is similar
 to the <I>setxkbmap</I> program.  The layout data is located at <I>
 /usr/share/X11/xkb/</I>.  Additional information is found in the
@@ -404,9 +425,9 @@ the options:
 Alternatively one may use the <I>setxkbmap</I> program after <I>XWin</I> is
 running.
 <P>
-The default is to select a layout matching your current layout as
-reported by <I>Windows</I> if known, or the default X server layout
-if no matching keyboard layout was found.
+The default is to select a configuration matching your current layout as
+reported by <I>Windows</I>, if known, or the default X server configuration
+if no matching keyboard configuration was found.
 <P>
 </DL>
 <A NAME="lbAO">&nbsp;</A>
@@ -536,6 +557,6 @@ Suhaib Siddiqi, Jack Tanner, Jon Turney and Nicholas Wourms.
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
-Time: 22:51:51 GMT, February 08, 2011
+Time: 11:56:00 GMT, March 29, 2011
 </BODY>
 </HTML>
