@@ -485,6 +485,14 @@ $ ssh -Y username@remote_hostname_or_ip_address
     5. Enter your password when prompted by ssh.
     6. Your ssh session should now show you a shell prompt for your
        remote machine.
+
+     Note: The ssh server will automatically set the DISPLAY environment
+     variable appropriately, typically to something like localhost:10.0,
+     so clients will connect to a proxy X11 display on the remote host
+     from which the X11 protocol will be forwarded over ssh to your X
+     server.
+     If your login scripts unconditionally set DISPLAY to something
+     else, this will break X11 forwarding.
     7. You can now launch remote X clients in your ssh session, for
        example, xterm& will launch an xterm running on your remote host
        that will display on your Cygwin/X screen.
@@ -960,7 +968,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2011-03-29 21:17 .
+   at 2011-07-19 14:40 .
 
   Notes
 

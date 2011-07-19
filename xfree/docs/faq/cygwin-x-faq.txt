@@ -1,7 +1,7 @@
 
 Cygwin/X Frequently Asked Questions
 
-2011-03-29 21:17
+2011-07-19 16:24
      _________________________________________________________________
 
    Table of Contents
@@ -98,7 +98,8 @@ Questions and Answers
                       does not work. What can I do?
 
               5.1.8. AltGr does not work properly when connecting to
-                      other unices or to old XFree86.
+                      various older commercial unices (e.g. HP-UX, AIX)
+                      or to old XFree86.
 
         5.2. Display problems
 
@@ -439,8 +440,14 @@ Questions and Answers
 
    A2:
 
-   Try running startxwin.exe from a bash shell, it should output some
-   error message which should indicate why it's not able to start.
+   Try running startxwin.exe from a bash shell in the mintty terminal
+   emulator, it should output some error message which should indicate
+   why it's not able to start.
+
+     Note: For technical reasons, the output of XWin doesn't appear in
+     cmd.exe windows unless the CYGWIN environment variable set through
+     the Windows control panel contains tty, so to ensure the output can
+     be seen, use mintty.
 
 3. Upgrade
 
@@ -746,19 +753,22 @@ $ nedit
 
    This question should be obsolete.
 
-   5.1.8. AltGr does not work properly when connecting to other unices or
-   to old XFree86.
+   5.1.8. AltGr does not work properly when connecting to various older
+   commercial unices (e.g. HP-UX, AIX) or to old XFree86.
 
-   The older X11 releases on the various commercial unices define the
-   AltGr key as ModeSwitch, MetaR, AltR or similar. Cygwin/X expects it
-   to be ISO_Level3_Switch. For reasons unknown to us this is reset when
-   logging into the remote host. As far as we don't have access to such a
-   machine we are unable to track this down and find a reason.
+   xkeyboard-config XKB keyboard layouts generally have AltGr mapped as
+   ISO_Level3_Shift to access additional characters on non-english
+   keyboards. For reasons unknown to us, this is incompatible with some
+   older X11 releases. We don't have access to such a machine, so we are
+   unable to track this down and find a reason.
 
-   Sometimes it does help to run
+   It has been reported that sometimes it helps to run
    DISPLAY=:0.0 setxkbmap languagecode
 
-   from a cygwin shell. For more information see Q: 5.1.1..
+   from a cygwin shell after connecting.
+
+   See this mailing list thread for more discussion and a possible
+   workaround.
 
 5.2. Display problems
 

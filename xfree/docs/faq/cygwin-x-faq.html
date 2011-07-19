@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2011-03-29 21:17</H2
+>2011-07-19 16:24</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -356,8 +356,8 @@ What can I do?</A
 ><DT
 >5.1.8. <A
 HREF="cygwin-x-faq.html#alt-gr-with-old-x"
->AltGr does not work properly when connecting to other unices or to old
-XFree86.</A
+>AltGr does not work properly when connecting to various older commercial unices
+(e.g. HP-UX, AIX) or to old XFree86.</A
 ></DT
 ></DL
 ></DD
@@ -1628,9 +1628,41 @@ A2:
 >&#13;Try running <B
 CLASS="command"
 >startxwin.exe</B
-> from a bash shell, it should output some error message which
-should indicate why it's not able to start.
+> from a <B
+CLASS="command"
+>bash</B
+> shell in the <B
+CLASS="command"
+>mintty</B
+> terminal emulator,
+it should output some error message which should indicate why it's not able to start.
 </P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+For technical reasons, the output of XWin doesn't appear in <B
+CLASS="command"
+>cmd.exe</B
+> windows unless
+the <CODE
+CLASS="parameter"
+>CYGWIN</CODE
+> environment variable set through the Windows control panel contains
+<CODE
+CLASS="parameter"
+>tty</CODE
+>, so to ensure the output can be seen, use <B
+CLASS="command"
+>mintty</B
+>.
+</P
+></BLOCKQUOTE
+></DIV
 ></DIV
 ></DIV
 ></DIV
@@ -2916,22 +2948,27 @@ NAME="alt-gr-with-old-x"
 ></A
 ><B
 >5.1.8. </B
->AltGr does not work properly when connecting to other unices or to old
-XFree86.</P
+>AltGr does not work properly when connecting to various older commercial unices
+(e.g. HP-UX, AIX) or to old XFree86.</P
 ></DIV
 ><DIV
 CLASS="answer"
 ><P
 ><B
 > </B
->The older X11 releases on the various commercial unices define
-the AltGr key as ModeSwitch, MetaR, AltR or similar.  Cygwin/X expects
-it to be ISO_Level3_Switch.  For reasons unknown to us this is reset
-when logging into the remote host.  As far as we don't have access to
-such a machine we are unable to track this down and find a
-reason.</P
+>
+<TT
+CLASS="filename"
+>xkeyboard-config</TT
+> XKB keyboard layouts generally have AltGr
+mapped as ISO_Level3_Shift to access additional characters on non-english keyboards.
+
+For reasons unknown to us, this is incompatible with some older X11 releases.
+We don't have access to such a machine, so we are unable to track this down and
+find a reason.
+</P
 ><P
->Sometimes it does help to run
+>&#13;It has been reported that sometimes it helps to run
 
 <TABLE
 BORDER="0"
@@ -2953,10 +2990,14 @@ CLASS="replaceable"
 ></TABLE
 >
 
-from a cygwin shell. For more information see <A
-HREF="cygwin-x-faq.html#q-non-U.S.-keyboard-layout"
->Q: 5.1.1.</A
->.</P
+from a cygwin shell after connecting.</P
+><P
+>&#13;See this <A
+HREF="http://cygwin.com/ml/cygwin-xfree/2011-07/msg00011.html"
+TARGET="_top"
+>&#13;mailing list thread</A
+> for more discussion and a possible workaround.
+</P
 ></DIV
 ></DIV
 ></DIV
