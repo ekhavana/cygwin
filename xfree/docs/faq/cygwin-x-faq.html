@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2011-07-19 16:24</H2
+>2011-08-10 13:21</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -436,6 +436,12 @@ Why is the SECURITY extension disabled?
 >6.4. <A
 HREF="cygwin-x-faq.html#q-warning-no-xauth-data"
 >&#13;What does "Warning: no xauth data; using fake authentication data for X11 forwarding" mean?
+</A
+></DT
+><DT
+>6.5. <A
+HREF="cygwin-x-faq.html#q-twenty-minute-timeout"
+>&#13;Why can't new remote X clients connect to the X server after 20 minutes?
 </A
 ></DT
 ></DL
@@ -3589,26 +3595,41 @@ CLASS="answer"
 >This question should be obsolete since the security extension
 is now disabled</P
 ><P
->OpenSSH 3.8 enables untrusted X11 forwarding by default when
-connecting to an ssh server that supports untrusted <A
+>OpenSSH 3.8 enables untrusted <A
 HREF="glossary.html#gloss-x11forwarding"
 ><I
 CLASS="glossterm"
 >X11Forwarding</I
 ></A
->.
-Most ssh servers for GNU/Linux are versions of OpenSSH that do support
-untrusted X11Forwarding, so using OpenSSH from Cygwin will result
-in a connection that uses untrusted X11Forwarding by default.</P
+> by default when
+connecting to an ssh server that supports it.</P
 ><P
 > You will
 quickly notice that this is the case if most of your X applications
-are now killed when you try to copy and paste or if
+are now killed when you try to copy and paste, X applications fail
+with an error similar to that below,  or if
 <B
 CLASS="command"
 >xdpyinfo</B
 > returns only a fraction of the supported
 extensions that it does if run locally.</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+> X Error of failed request: BadAtom (invalid Atom parameter)
+  Major opcode of failed request: 18 (X_ChangeProperty)
+  Atom id in failed request: 0x114
+  Serial number of failed request: 370
+  Current serial number in output stream: 372
+</PRE
+></TD
+></TR
+></TABLE
 ><P
 >It is easiest to just override untrusted X11Forwarding by passing
 <CODE
@@ -3628,39 +3649,21 @@ CLASS="parameter"
 same thing as <CODE
 CLASS="parameter"
 >-X</CODE
->, but it enables trusted X11Forwarding
+>, but it enables trusted X11 forwarding
 for the current connection.</P
 ><P
->Starting with OpenSSH 3.8 you will need to set
+>Setting
 <SPAN
 CLASS="QUOTE"
 >"ForwardX11Trusted yes"</SPAN
-> in the client configuration to
-allow remote clients full access to the xserver. Without it some
-clients will fail with a similar error:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
-> X Error of failed request: BadAtom (invalid Atom parameter)
-  Major opcode of failed request: 18 (X_ChangeProperty)
-  Atom id in failed request: 0x114
-  Serial number of failed request: 370
-  Current serial number in output stream: 372
-</PRE
-></TD
-></TR
-></TABLE
+> in the ssh client configuration file
+does the same thing. See <B
+CLASS="command"
+>man ssh_config</B
+> for more information.
+</P
 ><P
->&#13;The commandline switch <CODE
-CLASS="parameter"
->-Y</CODE
-> does the same.
-See also <A
+>&#13;See also <A
 HREF="cygwin-x-faq.html#q-ssh-no-x11forwarding"
 >Q: 6.1.</A
 >
@@ -3706,12 +3709,12 @@ which isn't built into the Xserver and has been disabled by default upstream.
 </P
 ><P
 >&#13;Trusted X11 forwarding means that you trust the server that you wish to
-ssh into is not using any keyloggers, screenshot utilities, packet
-sniffers, or anything else to hijack your connection.
+ssh into.
+The X server will allow remote clients to do whatever a local client would
+be able to do to your X session, for example, monitor your keypresses and
+take a screenshot.
 Such programs could be run by a malicious or compromised root user on
 the ssh server, or under your account if it was compromised on the ssh server.
-The X server will allow remote clients to do whatever a local client would
-be able to do to your X session.
 </P
 ><P
 >&#13;So why is this disabled?
@@ -3762,6 +3765,42 @@ CLASS="command"
 >startx</B
 >) this warning is expected and
 can safely be ignored.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-twenty-minute-timeout"
+></A
+><B
+>6.5. </B
+>
+Why can't new remote X clients connect to the X server after 20 minutes?
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Starting with OpenSSH 5.6, ssh enforces the ForwardX11Timeout (which defaults
+to 1200 seconds) when an untrusted connections is requested, even if an untrusted
+connection could not be made.  This means that no new connections to the X server
+can be made 20 minutes after the ssh connection is established.
+</P
+><P
+>&#13;Use <B
+CLASS="command"
+>ssh -Y</B
+>.  See also <A
+HREF="cygwin-x-faq.html#q-bad-atom"
+>Q: 6.2.</A
+>.
 </P
 ></DIV
 ></DIV

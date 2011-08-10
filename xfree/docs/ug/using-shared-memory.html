@@ -74,12 +74,12 @@ NAME="using-shared-memory"
 >Shared memory support</A
 ></H1
 ><P
->&#13;Shared memory support is needed by the MIT-SHM and XFree86-BigFont extensions,
+>&#13;Shared memory is needed by the MIT-SHM and XFree86-BigFont extensions,
 which may provide better performance for local applications which use large images or fonts
 and are written to use those extensions.
 </P
 ><P
->Shared memory is provided by the <B
+>&#13;In Cygwin, XSI shared memory is provided by the <B
 CLASS="command"
 >cygserver</B
 > Windows service.
@@ -106,24 +106,28 @@ CLASS="note"
 CLASS="emphasis"
 ><I
 CLASS="emphasis"
->&#13;for Cygwin 1.5 only
+>&#13;This note is applicable to Cygwin 1.5 only.  Cygwin 1.7 automatically enables shared
+memory if the <B
+CLASS="command"
+>cygserver</B
+> Windows service is running.
 </I
 ></SPAN
 >
 </P
 ><P
->&#13;<TT
-CLASS="filename"
->XWin.exe</TT
-> will not use shared memory if the
+>&#13;Shared memory will only be used if the
 <CODE
 CLASS="parameter"
 >CYGWIN</CODE
->  environment variable does not contain the <CODE
+> environment variable contains the <CODE
 CLASS="parameter"
 >server</CODE
 >
-keyword. Starting <B
+keyword.
+</P
+><P
+>For example, starting <B
 CLASS="command"
 >XWin.exe</B
 > with
@@ -140,8 +144,20 @@ CLASS="screen"
 ></TD
 ></TR
 ></TABLE
-> will enable shared memory support if the cygserver service is
-running.
+>
+or setting the <CODE
+CLASS="parameter"
+>CYGWIN</CODE
+> environment variable
+in the Windows control panel to contain <CODE
+CLASS="parameter"
+>server</CODE
+>
+will enable shared memory support if the <B
+CLASS="command"
+>cygserver</B
+>
+service is running.
 </P
 ></BLOCKQUOTE
 ></DIV

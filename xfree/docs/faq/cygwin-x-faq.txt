@@ -1,7 +1,7 @@
 
 Cygwin/X Frequently Asked Questions
 
-2011-07-19 16:24
+2011-08-10 13:21
      _________________________________________________________________
 
    Table of Contents
@@ -121,6 +121,9 @@ Questions and Answers
 
         6.4. What does "Warning: no xauth data; using fake authentication
                 data for X11 forwarding" mean? 
+
+        6.5. Why can't new remote X clients connect to the X server after
+                20 minutes? 
 
    7. XDMCP connections
 
@@ -925,31 +928,28 @@ $ ssh -Y remotehost
    This question should be obsolete since the security extension is now
    disabled
 
-   OpenSSH 3.8 enables untrusted X11 forwarding by default when
-   connecting to an ssh server that supports untrusted X11Forwarding.
-   Most ssh servers for GNU/Linux are versions of OpenSSH that do support
-   untrusted X11Forwarding, so using OpenSSH from Cygwin will result in a
-   connection that uses untrusted X11Forwarding by default.
+   OpenSSH 3.8 enables untrusted X11Forwarding by default when connecting
+   to an ssh server that supports it.
 
    You will quickly notice that this is the case if most of your X
-   applications are now killed when you try to copy and paste or if
-   xdpyinfo returns only a fraction of the supported extensions that it
-   does if run locally.
-
-   It is easiest to just override untrusted X11Forwarding by passing -Y
-   to ssh in place of -X. The -Y does the same thing as -X, but it
-   enables trusted X11Forwarding for the current connection.
-
-   Starting with OpenSSH 3.8 you will need to set "ForwardX11Trusted yes"
-   in the client configuration to allow remote clients full access to the
-   xserver. Without it some clients will fail with a similar error:
+   applications are now killed when you try to copy and paste, X
+   applications fail with an error similar to that below, or if xdpyinfo
+   returns only a fraction of the supported extensions that it does if
+   run locally.
  X Error of failed request: BadAtom (invalid Atom parameter)
   Major opcode of failed request: 18 (X_ChangeProperty)
   Atom id in failed request: 0x114
   Serial number of failed request: 370
   Current serial number in output stream: 372
 
-   The commandline switch -Y does the same. See also Q: 6.1.
+   It is easiest to just override untrusted X11Forwarding by passing -Y
+   to ssh in place of -X. The -Y does the same thing as -X, but it
+   enables trusted X11 forwarding for the current connection.
+
+   Setting "ForwardX11Trusted yes" in the ssh client configuration file
+   does the same thing. See man ssh_config for more information.
+
+   See also Q: 6.1.
 
    6.3. I'm confused about the difference between trusted and untrusted
    X11 forwarding. What does "Warning: untrusted X11 forwarding setup
@@ -962,12 +962,11 @@ $ ssh -Y remotehost
    upstream.
 
    Trusted X11 forwarding means that you trust the server that you wish
-   to ssh into is not using any keyloggers, screenshot utilities, packet
-   sniffers, or anything else to hijack your connection. Such programs
-   could be run by a malicious or compromised root user on the ssh
-   server, or under your account if it was compromised on the ssh server.
-   The X server will allow remote clients to do whatever a local client
-   would be able to do to your X session.
+   to ssh into. The X server will allow remote clients to do whatever a
+   local client would be able to do to your X session, for example,
+   monitor your keypresses and take a screenshot. Such programs could be
+   run by a malicious or compromised root user on the ssh server, or
+   under your account if it was compromised on the ssh server.
 
    So why is this disabled? Untrusted X11 forwarding was meant to be a
    way to allow logins to unknown or insecure systems. It generates a
@@ -985,6 +984,17 @@ $ ssh -Y remotehost
 
    Unless you started the server with the -auth argument (typically by
    using startx) this warning is expected and can safely be ignored.
+
+   6.5. Why can't new remote X clients connect to the X server after 20
+   minutes?
+
+   Starting with OpenSSH 5.6, ssh enforces the ForwardX11Timeout (which
+   defaults to 1200 seconds) when an untrusted connections is requested,
+   even if an untrusted connection could not be made. This means that no
+   new connections to the X server can be made 20 minutes after the ssh
+   connection is established.
+
+   Use ssh -Y. See also Q: 6.2..
 
 7. XDMCP connections
 

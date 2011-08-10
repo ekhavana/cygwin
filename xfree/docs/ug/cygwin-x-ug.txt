@@ -400,25 +400,28 @@ Windows Clipboard integration
 
 Shared memory support
 
-   Shared memory support is needed by the MIT-SHM and XFree86-BigFont
-   extensions, which may provide better performance for local
-   applications which use large images or fonts and are written to use
-   those extensions.
+   Shared memory is needed by the MIT-SHM and XFree86-BigFont extensions,
+   which may provide better performance for local applications which use
+   large images or fonts and are written to use those extensions.
 
-   Shared memory is provided by the cygserver Windows service. To install
-   cygserver, install it using setup.exe and then run the
-   cygserver-config script to install the service.
+   In Cygwin, XSI shared memory is provided by the cygserver Windows
+   service. To install cygserver, install it using setup.exe and then run
+   the cygserver-config script to install the service.
 
-     Note: for Cygwin 1.5 only 
+     Note: This note is applicable to Cygwin 1.5 only. Cygwin 1.7
+     automatically enables shared memory if the cygserver Windows
+     service is running. 
 
-     XWin.exe will not use shared memory if the CYGWIN environment
-     variable does not contain the server keyword. Starting XWin.exe
-     with
+     Shared memory will only be used if the CYGWIN environment variable
+     contains the server keyword.
+
+     For example, starting XWin.exe with
 
      CYGWIN=server XWin.exe
 
-     will enable shared memory support if the cygserver service is
-     running.
+     or setting the CYGWIN environment variable in the Windows control
+     panel to contain server will enable shared memory support if the
+     cygserver service is running.
      _________________________________________________________________
 
 Remote sessions via XDMCP
@@ -968,7 +971,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2011-07-19 14:40 .
+   at 2011-07-23 13:20 .
 
   Notes
 
