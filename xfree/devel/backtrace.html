@@ -20,12 +20,20 @@
     help identify where and why the crash is occuring, which will help us fix the bug.</p>
 
     <p>To generate a useful backtrace, you will need an X server built with debugging symbols.  X server snapshots are
-    built with debugging symbols for this reason.  Download the latest X Server snapshot from
-    <a href="ftp://cygwin.com/pub/cygwinx/">ftp://cygwin.com/pub/cygwinx</a>, uncompress it using <tt>bunzip2</tt>, and move it
-    to <tt>/usr/bin/XWin.exe</tt></p>
+    built with debugging symbols for this reason.</p>
 
+    <p>To prepare:</p>
     <ul>
-     <li>Install the <b>gdb</b> and <b>sysvinit</b> packages (for <tt>gdb</tt> and <tt>pidof</tt>, respectively)</li>
+      <li>Download the latest X Server snapshot from <a href="ftp://cygwin.com/pub/cygwinx/">ftp://cygwin.com/pub/cygwinx</a>
+        <tt>wget ftp://cygwin.com/pub/cygwinx/XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe.bz2</tt></li>
+      <li>uncompress it <tt>bunzip2 XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe.bz2</tt></li>
+      <li>ensure it is executable <tt>chmod +x XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe</tt></li>
+      <li>move it to /usr/bin <tt>mv XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe /usr/bin/XWin.exe</tt></li>
+      <li>Install the <b>gdb</b> and <b>sysvinit</b> packages (for <tt>gdb</tt> and <tt>pidof</tt>, respectively)</li>
+    </ul>
+
+    <p>To generate the backtrace:</p>
+    <ul>
      <li>Start XWin using your normal method</li>
      <li>In a non-X terminal window, run <tt>gdb --pid=`pidof /usr/bin/XWin`</tt>, to attach gdb to the running X server</li>
      <li>Type <tt>c</tt> at the <tt>(gdb)</tt> prompt, to resume running the X server</li>
@@ -34,6 +42,11 @@
     </ul>
 
     <p>Please attach the output from gdb, in addition to your <tt>/var/log/xwin/XWin.0.log</tt>, to your problem report.</p>
+
+    <p>To clean up:</p>
+    <ul>
+      <li>Use setup.exe to reinstall the <b>xorg-server</b> package and uninstall the <b>gdb</b> and <b>sysvinit</b> packages if you no longer need them.</li>
+    </ul>
 
     <p>Last updated: $Date$ ($Author$)</p>
     <!--#include virtual="../cygx-footer.html" -->
