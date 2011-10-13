@@ -475,7 +475,8 @@ CLASS="filename"
 <TT
 CLASS="filename"
 >~/.xinitrc</TT
-> as required</P
+> to start client programs and configure
+your X server.</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -490,6 +491,33 @@ CLASS="screen"
 ></TD
 ></TR
 ></TABLE
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+<B
+CLASS="command"
+>startx</B
+> waits until <TT
+CLASS="filename"
+>~/.xinitrc</TT
+> exits
+(which is often waiting for a window manager started by it to exit) and
+then kills XWin.exe, so the last client started by should be started
+with <B
+CLASS="command"
+>exec</B
+> and without <B
+CLASS="command"
+>&amp;</B
+>.
+</P
+></BLOCKQUOTE
+></DIV
 ><P
 >&#13;Alternatively, if you just want to start a single client program (perhaps a window
 manager), you don't need to use a <TT
