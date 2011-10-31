@@ -19,16 +19,21 @@
     <p>If the X server has crashed, before you report a problem, you should get a backtrace.  Useful backtraces will
     help identify where and why the crash is occuring, which will help us fix the bug.</p>
 
-    <p>To generate a useful backtrace, you will need an X server built with debugging symbols.  X server snapshots are
-    built with debugging symbols for this reason.</p>
+    <p>To generate a useful backtrace, you will need debugging symbols for the X server.</p>
 
     <p>To prepare:</p>
+
     <ul>
-      <li>Download the latest X Server snapshot from <a href="ftp://cygwin.com/pub/cygwinx/">ftp://cygwin.com/pub/cygwinx</a>
-        <tt>wget ftp://cygwin.com/pub/cygwinx/XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe.bz2</tt></li>
-      <li>uncompress it <tt>bunzip2 XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe.bz2</tt></li>
-      <li>ensure it is executable <tt>chmod +x XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe</tt></li>
-      <li>move it to /usr/bin <tt>mv XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe /usr/bin/XWin.exe</tt></li>
+      <li>
+        Download the debugging symbols archive corresponding to your installed X server from <a href="ftp://cygwin.com/pub/cygwinx/">ftp://cygwin.com/pub/cygwinx</a>
+        <br>
+        <tt>wget ftp://cygwin.com/pub/cygwinx/xorg-server-debuginfo-N.NN.N-N.tar.bz2</tt>
+      </li>
+      <li>
+        Unpack the archive
+        <br>
+        <tt>tar -C / -jxvf xorg-server-debuginfo-N.NN.N-N.tar.bz2</tt>
+      </li>
       <li>Install the <b>gdb</b> and <b>sysvinit</b> packages (for <tt>gdb</tt> and <tt>pidof</tt>, respectively)</li>
     </ul>
 
@@ -45,8 +50,40 @@
 
     <p>To clean up:</p>
     <ul>
-      <li>Use setup.exe to reinstall the <b>xorg-server</b> package and uninstall the <b>gdb</b> and <b>sysvinit</b> packages if you no longer need them.</li>
+      <li>
+        Remove the debug symbol files
+        <br>
+        <tt>rm -r /usr/lib/debug</tt>
+      </li>
+      <li>Uninstall the <b>gdb</b> and <b>sysvinit</b> packages if you no longer need them.</li>
     </ul>
+
+    <p>Alternatively, X server snapshots are built with debugging symbols included. You can install an X server snapshot with the following steps:</p>
+
+    <ul>
+      <li>
+        Download the latest X Server snapshot from <a href="ftp://cygwin.com/pub/cygwinx/">ftp://cygwin.com/pub/cygwinx</a>
+        <br>
+        <tt>wget ftp://cygwin.com/pub/cygwinx/XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe.bz2</tt>
+      </li>
+      <li>
+        Uncompress it
+        <br>
+        <tt>bunzip2 XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe.bz2</tt>
+      </li>
+      <li>
+        Ensure it is executable
+        <br>
+        <tt>chmod +x XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe</tt>
+      </li>
+      <li>
+        Move it to /usr/bin
+        <br>
+        <tt>mv XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe /usr/bin/XWin.exe</tt>
+      </li>
+    </ul>
+
+    <p>To remove the X server snapshot, use setup.exe to reinstall the <b>xorg-server</b> package</p>
 
     <p>Last updated: $Date$ ($Author$)</p>
     <!--#include virtual="../cygx-footer.html" -->
