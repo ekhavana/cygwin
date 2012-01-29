@@ -1,7 +1,7 @@
 
 Cygwin/X Frequently Asked Questions
 
-2011-08-10 13:21
+2012-01-29 13:40
      _________________________________________________________________
 
    Table of Contents
@@ -49,7 +49,7 @@ Questions and Answers
                 failed: xauth key data not generated"
 
         3.9. nedit fails to start with an error message 
-        3.10. I start my X server with startx or xinint and now all my X
+        3.10. I start my X server with startx or xinit and now all my X
                 windows are contained within one large root Windows
                 window? How do I get it back to each X window in it's own
                 Windows window? 
@@ -59,7 +59,9 @@ Questions and Answers
    4. Configuration
 
         4.1. Is there an xorg.conf or XF86Config file?
-        4.2. What are the command line arguments for XWin.exe?
+        4.2. What are the command line options for XWin.exe? How do I add
+                command line options for XWin.exe?
+
         4.3. Why does XWin.exe ignore the display depth that I pass on
                 the command line?
 
@@ -160,8 +162,9 @@ Questions and Answers
         8.9. Cygwin/X is extremely slow, especially when using XDMCP to
                 connect to remote machines.
 
-        8.10. IBM ThinkPad's with a TrackPoint mouse doesn't allow
-                simulated mouse wheel scrolling.
+        8.10. Simulated mouse wheel scrolling doesn't work with a
+                TrackPoint mouse (found on IBM laptops) or Synaptics
+                Touchpads
 
         8.11. Why is the root window not shown in normal mode?
         8.12. Why is the cross the default cursor in multiwindow mode?
@@ -376,23 +379,11 @@ Questions and Answers
 
    2.3. Fatal server error: Can't read lock file /tmp/.X0-lock
 
+   This question should be obsolete.
+
    A1: /tmp resides on a FAT filesystem
 
-   Start the server with -nolock
-     * If you use the start menu shortcut to start the X server, you will
-       need to amend it to add the -nolock option, e.g.
-       C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin
-       -- -nolock"
-
-     Note: Note well that the entire command after -c is quoted
-
-     Note: Note that this start menu shortcut is created by the xinit
-     package, and your changes will be overwritten when the xinit
-     package is updated.
-     * If you use startxwin, xinit or startx to start the server, run it
-       as startxwin -- -nolock, xinit -- -nolock or startx -- -nolock
-     * If you use startxwin.bat or startxwin.sh to start the server, add
-       -nolock to the XWin line in that script.
+   Start the server with the -nolock option. See Q: 4.2.
 
    You should really consider updating the filesystem to NTFS using
    Microsoft's convert.exe tool.
@@ -410,10 +401,7 @@ Questions and Answers
        is the display number. If this fails due to insufficent
        permissions, you must either get the owner or a user with
        Adminstrator rights to remove the stale lock file.
-    2. Try starting the server with -nolock (e.g. if you use
-       startxwin.bat or startxwin.sh to start the server, add -nolock to
-       the XWin line in that script; if you use xinit or startx, run it
-       as xinit -- -nolock or startx -- -nolock)
+    2. Try starting the server with the -nolock option. (See Q: 4.2.)
 
    Technical details: The X server attempts to create a lock file in /tmp
    by creating the file under a temporary name, then renaming it to the
@@ -561,7 +549,7 @@ X Error of failed request:  BadMatch (invalid parameter attributes)
 $ export XLIB_SKIP_ARGB_VISUALS=1
 $ nedit
 
-   3.10. I start my X server with startx or xinint and now all my X
+   3.10. I start my X server with startx or xinit and now all my X
    windows are contained within one large root Windows window? How do I
    get it back to each X window in it's own Windows window?
 
@@ -571,7 +559,7 @@ $ nedit
        "Cygwin-X" on the Start menu, or using startxwin.
        Note: If you wish to customize the X clients started when the X
        server starts, you can do so using a ~/.startxwinrc script.
-    2. Alternatively, add the server arguments -multiwindow -clipboard to
+    2. Alternatively, add the server options -multiwindow -clipboard to
        your xinit or startx invocation, i.e. xinit -- -multiwindow
        -clipboard or startx -- -multiwindow -clipboard
     3. Alternatively, put XWin -multiwindow -clipboard into ~/.xserverrc
@@ -587,10 +575,28 @@ $ nedit
    options. For example, for more information on configuring other
    keyboard layouts using command line options, see Q: 5.1.1.
 
-   4.2. What are the command line arguments for XWin.exe?
+   4.2. What are the command line options for XWin.exe? How do I add
+   command line options for XWin.exe?
 
    The Cygwin/X User's Guide and man XWin document the command line
-   arguments for XWin.exe.
+   options for XWin.exe.
+
+   To supply a command line option to XWin.exe:
+     * If you use the start menu shortcut to start the X server, you will
+       need to amend it's target to add an option, e.g.
+       C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin
+       -- -nolock"
+
+     Note: Note well that the entire command after -c is quoted
+
+     Note: Note that this start menu shortcut is created by the xinit
+     package, and your changes will be overwritten when the xinit
+     package is updated.
+     * If you use startxwin, xinit or startx to start the server, run it
+       as e.g. startxwin -- -nolock, xinit -- -nolock or startx --
+       -nolock
+     * If you use startxwin.bat or startxwin.sh to start the server, add
+       e.g. -nolock to the XWin line in that script.
 
    4.3. Why does XWin.exe ignore the display depth that I pass on the
    command line?
@@ -1241,20 +1247,23 @@ XNLSPATH
 
    see Q: 8.7..
 
-   8.10. IBM ThinkPad's with a TrackPoint mouse doesn't allow simulated
-   mouse wheel scrolling.
+   8.10. Simulated mouse wheel scrolling doesn't work with a TrackPoint
+   mouse (found on IBM laptops) or Synaptics Touchpads
 
    [Gerald S. Williams] The TrackPoint driver tries to send scroll
    up/down messages to the default scrollbar in a window. Cygwin/X does
    not use Windows scrollbars for X Client windows, so we must configure
    the TrackPoint driver to send standard WM_MOUSEWHEEL messages to the
    Cygwin/X window. This can be done by editing the TrackPoint
-   configuration file that can be found either in
-   %SYSTEM_ROOT%\System32\tp4table.dat or
-   %SYSTEM_ROOT%\System32\tp4scrol.dat. Add the following to the "Pass 0
-   rules"section:
+   configuration that can be found in the tp4table.dat and/or
+   tp4scrol.dat files, which are usually located in
+   %SYSTEM_ROOT%\System32\, %PROGRAMFILES%\Synaptics\SynTP\ or
+   %PROGRAMFILES%\Lenovo\Trackpoint\.
+
+   Add the following to the "Pass 0 rules"section and then restart your
+   computer to ensure the driver reloads it's settings.
 ; X Windows
-*,*,XWin.exe,*,*,Cygwin/X,WheelStd,0,9
+*,*,XWin.exe,*,*,*,WheelStd,0,9
 
    8.11. Why is the root window not shown in normal mode?
 
