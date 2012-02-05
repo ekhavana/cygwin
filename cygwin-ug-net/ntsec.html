@@ -7,7 +7,7 @@ controlled by the <a class="link" href="using.html#mount-table" title="The Cygwi
 <code class="literal">(no)acl</code> which is set to <code class="literal">acl</code> by
 default.</p><p>We start with a short overview.  Note that this overview must
 be necessarily short.  If you want to learn more about the Windows security
-model, see the <a class="ulink" href="http://msdn.microsoft.com/en-us/library/aa374860(VS.85).aspx" target="_top">Access Control</a> article in MSDN documentation.</p><p>POSIX concepts and specificially the POSIX security model are not
+model, see the <a class="ulink" href="http://msdn.microsoft.com/en-us/library/aa374860(VS.85).aspx" target="_top">Access Control</a> article in MSDN documentation.</p><p>POSIX concepts and in particular the POSIX security model are not
 discussed here, but assumed to be understood by the reader.  If you
 don't know the POSIX security model, search the web for beginner
 documentation.</p><div class="sect2" title="Overview"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-common"></a>Overview</h3></div></div></div><p>In the Windows security model, almost any "object" is securable.
@@ -261,11 +261,10 @@ correctness.  It's not an absolute requirement.  All Windows kernels
 will correctly deal with the ACL regardless of the order of allow and
 deny ACEs.  The second rule is not modified to get the ACEs in the
 preferred order.</p><p>Unfortunately the security tab in the file properties dialog of
-the Windows NT4 explorer is completely unable to deal with access denied ACEs
-while the Windows 2000 and later properties dialog rearranges the order of the
-ACEs to canonical order before you can read them. Thank God, the sort
-order remains unchanged if one presses the Cancel button.  But don't
-even <span class="bold"><strong>think</strong></span> of pressing OK...</p><p>Canonical ACLs are unable to reflect each possible combination
+the Windows Explorer insists to rearrange the order of the ACEs to
+canonical order before you can read them. Thank God, the sort order
+remains unchanged if one presses the Cancel button.  But don't even
+<span class="bold"><strong>think</strong></span> of pressing OK...</p><p>Canonical ACLs are unable to reflect each possible combination
 of POSIX permissions. Example:</p><pre class="screen">
 rw-r-xrw-
 </pre><p>Ok, so here's the first try to create a matching ACL, assuming
@@ -295,8 +294,8 @@ GroupDeny:   010
 GroupAllow:  001
 OthersAllow: 110
 </pre><p>Again: This works on all existing versions of Windows NT, at the
-time of writing from at least NT4 up to Server 2008 R2.  Only the GUIs
-aren't able (or willing) to deal with that order.</p></div><div class="sect2" title="Switching the user context"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-setuid-overview"></a>Switching the user context</h3></div></div></div><p>Since Windows XP, Windows users have been accustomed to the
+time of writing from at least Windows 2000 up to Server 2008 R2.  Only
+the GUIs aren't able (or willing) to deal with that order.</p></div><div class="sect2" title="Switching the user context"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-setuid-overview"></a>Switching the user context</h3></div></div></div><p>Since Windows XP, Windows users have been accustomed to the
 "Switch User" feature, which switches the entire desktop to another user
 while leaving the original user's desktop "suspended".  Another Windows
 feature (since Windows 2000) is the "Run as..." context menu entry,
@@ -443,9 +442,7 @@ choose collides with a drive letter already used in another session.
 Therefore it's better to get used to accessing these shares using the UNC
 path as in</p><pre class="screen">
 bash$ grep foo //server/share/foofile
-</pre></div><div class="sect2" title="Switching the user context without password, Method 2: LSA authentication package"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-nopasswd2"></a>Switching the user context without password, Method 2: LSA authentication package</h3></div></div></div><p>Caveat: The method described in this chapter only works starting
-with Windows 2000.  Windows NT4 users have to use one of the other
-methods described in this document.</p><p>We're looking for another way to switch the user context without
+</pre></div><div class="sect2" title="Switching the user context without password, Method 2: LSA authentication package"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-nopasswd2"></a>Switching the user context without password, Method 2: LSA authentication package</h3></div></div></div><p>We're looking for another way to switch the user context without
 having to provide the password.  Another technique is to create an
 LSA authentication package.  LSA is an acronym for "Local Security Authority"
 which is a protected part of the operating system which only allows changes

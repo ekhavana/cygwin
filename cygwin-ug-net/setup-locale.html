@@ -126,9 +126,10 @@ You don't want to use the default character set?  In that case you have to
 specify the charset explicitly.  For instance, assume you're from Japan and
 don't want to use the japanese default charset EUC-JP, but the Windows
 default charset SJIS.  What you can do, for instance, is to set the
-<code class="envar">LANG</code> variable in the <code class="filename">C:\cygwin\Cygwin.bat</code>
-file which is the batch file to start a Cygwin session from the "Cygwin"
-desktop shortcut.</p><pre class="screen">
+<code class="envar">LANG</code> variable in the <span class="command"><strong>mintty</strong></span> Cygwin Terminal
+in the "Text" section of its "Options" dialog.  If you're starting your
+Cygwin session via a batch file or a shortcut to a batch file, you can also
+just set LANG there:</p><pre class="screen">
   @echo off
 
   C:
@@ -146,22 +147,22 @@ UTF-16 encoding to store filename information.  Not all characters
 from the Unicode character set are available in a singlebyte or doublebyte
 charset.  While Cygwin has a workaround to access files with unusual
 characters (see <a class="xref" href="using-specialnames.html#pathnames-unusual" title="Filenames with unusual (foreign) characters">the section called “Filenames with unusual (foreign) characters”</a>), a better
-workaround is to use always the UTF-8 character set.i</p><p><span class="emphasis"><em>UTF-8 is the only multibyte character set which can represent
+workaround is to use always the UTF-8 character set.</p><p><span class="emphasis"><em>UTF-8 is the only multibyte character set which can represent
 every Unicode character.</em></span></p><pre class="screen">
   set LANG=es_MX.UTF-8
 </pre><p>For a description of the Unicode standard, see the homepage of the
 <a class="ulink" href="http://www.unicode.org/" target="_top">Unicode Consortium</a>.
-</p></li></ul></div></div><div class="sect2" title="The Windows Console character set"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-console"></a>The Windows Console character set</h3></div></div></div><p>Most of the time the Windows console is used to run Cygwin applications.
-While terminal emulations like <span class="command"><strong>xterm</strong></span> or
-<span class="command"><strong>mintty</strong></span> have a distinct way to set the character set
+</p></li></ul></div></div><div class="sect2" title="The Windows Console character set"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-console"></a>The Windows Console character set</h3></div></div></div><p>Sometimes the Windows console is used to run Cygwin applications.
+While terminal emulations like the Cygwin Terminal <span class="command"><strong>mintty</strong></span>
+or <span class="command"><strong>xterm</strong></span> have a distinct way to set the character set
 used for in- and output, the Windows console hasn't such a way, since it's
 not an application in its own right.</p><p>This problem is solved in Cygwin as follows.  When a Cygwin
 process is started in a Windows console (either explicitly from cmd.exe,
-or implicitly by, for instance, clicking on the Cygwin desktop icon, or
-running the Cygwin.bat file), the Console character set is determined by the
-setting of the aforementioned internationalization environment variables,
-the same way as described in <a class="xref" href="setup-locale.html#setup-locale-how" title="How to set the locale">the section called “How to set the locale”</a>.
-</p><p>What is that good for?  Why not switch the console character set with
+or implicitly by, for instance, running the
+<code class="filename">C:\cygwin\Cygwin.bat</code> batch file), the Console character
+set is determined by the setting of the aforementioned
+internationalization environment variables, the same way as described in
+<a class="xref" href="setup-locale.html#setup-locale-how" title="How to set the locale">the section called “How to set the locale”</a>.  </p><p>What is that good for?  Why not switch the console character set with
 the applications requirements?  After all, the application knows if it uses
 localization or not.  However, what if a non-localized application calls
 a remote application which itself is localized?  This can happen with
@@ -171,10 +172,10 @@ have and don't need localization and they never call
 environment variable to the same charset as the remote machine before
 starting <span class="command"><strong>ssh</strong></span> or <span class="command"><strong>rlogin</strong></span> fixes that
 problem.</p></div><div class="sect2" title="Potential Problems when using Locales"><div class="titlepage"><div><div><h3 class="title"><a name="setup-locale-problems"></a>Potential Problems when using Locales</h3></div></div></div><p>
-You can set the above internationalization variables not only in
-<code class="filename">Cygwin.bat</code> or in the Windows environment, but also
-in your Cygwin shell on the fly, even switch to yet another character
-set, and yet another.  In bash for instance:</p><pre class="screen">
+You can set the above internationalization variables not only when
+starting the first Cygwin process, but also in your Cygwin shell on the
+fly, even switch to yet another character set, and yet another.  In bash
+for instance:</p><pre class="screen">
   <code class="prompt">bash$</code> export LC_CTYPE="nl_BE.UTF-8"
 </pre><p>However, here's a problem.  At the start of the first Cygwin process
 in a session, the Windows environment is converted from UTF-16 to UTF-8.
@@ -187,7 +188,7 @@ the GBK charset.  This would be especially a problem in variables like
 the <code class="envar">PATH</code> environment variable to the charset set in the
 environment, if it's different from the UTF-8 charset.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Per POSIX, the name of an environment variable should only
 consist of valid ASCII characters, and only of uppercase letters, digits, and
-the underscore for maximum portablilty.</p></div><p>Symbolic links, too, may pose a problem when switching charsets on
+the underscore for maximum portability.</p></div><p>Symbolic links, too, may pose a problem when switching charsets on
 the fly.  A symbolic link contains the filename of the target file the
 symlink points to.  When a symlink had been created with older versions
 of Cygwin, the current ANSI or OEM character set had been used to store

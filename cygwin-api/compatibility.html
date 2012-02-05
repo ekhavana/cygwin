@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 1. Compatibility</title><link rel="stylesheet" href="docbook.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.75.2"><link rel="home" href="cygwin-api.html" title="Cygwin API Reference"><link rel="up" href="cygwin-api.html" title="Cygwin API Reference"><link rel="prev" href="cygwin-api.html" title="Cygwin API Reference"><link rel="next" href="std-bsd.html" title="System interfaces compatible with BSD functions:"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 1. Compatibility</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="cygwin-api.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="std-bsd.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter 1. Compatibility"><div class="titlepage"><div><div><h2 class="title"><a name="compatibility"></a>Chapter 1. Compatibility</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="compatibility.html#std-susv4">System interfaces compatible with the Single Unix Specification, Version 4:</a></span></dt><dt><span class="sect1"><a href="std-bsd.html">System interfaces compatible with BSD functions:</a></span></dt><dt><span class="sect1"><a href="std-gnu.html">System interfaces compatible with GNU or Linux extensions:</a></span></dt><dt><span class="sect1"><a href="std-solaris.html">System interfaces compatible with Solaris or SunOS functions:</a></span></dt><dt><span class="sect1"><a href="std-deprec.html">Other UNIX system interfaces, deprecated or not in POSIX.1-2008:</a></span></dt><dt><span class="sect1"><a href="std-notimpl.html">NOT implemented system interfaces from the Single Unix Specification, Volume 4:</a></span></dt><dt><span class="sect1"><a href="std-notes.html">Implementation Notes</a></span></dt></dl></div><div class="sect1" title="System interfaces compatible with the Single Unix Specification, Version 4:"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="std-susv4"></a>System interfaces compatible with the Single Unix Specification, Version 4:</h2></div></div></div><p>Note that the core of the Single Unix Specification, Version 4 is
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Chapter 1. Compatibility</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="cygwin-api.html" title="Cygwin API Reference"><link rel="up" href="cygwin-api.html" title="Cygwin API Reference"><link rel="prev" href="cygwin-api.html" title="Cygwin API Reference"><link rel="next" href="std-bsd.html" title="System interfaces compatible with BSD functions:"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Chapter 1. Compatibility</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="cygwin-api.html">Prev</a> </td><th width="60%" align="center"> </th><td width="20%" align="right"> <a accesskey="n" href="std-bsd.html">Next</a></td></tr></table><hr></div><div class="chapter" title="Chapter 1. Compatibility"><div class="titlepage"><div><div><h2 class="title"><a name="compatibility"></a>Chapter 1. Compatibility</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="sect1"><a href="compatibility.html#std-susv4">System interfaces compatible with the Single Unix Specification, Version 4:</a></span></dt><dt><span class="sect1"><a href="std-bsd.html">System interfaces compatible with BSD functions:</a></span></dt><dt><span class="sect1"><a href="std-gnu.html">System interfaces compatible with GNU or Linux extensions:</a></span></dt><dt><span class="sect1"><a href="std-solaris.html">System interfaces compatible with Solaris or SunOS functions:</a></span></dt><dt><span class="sect1"><a href="std-deprec.html">Other UNIX system interfaces, deprecated or not in POSIX.1-2008:</a></span></dt><dt><span class="sect1"><a href="std-notimpl.html">NOT implemented system interfaces from the Single Unix Specification, Volume 4:</a></span></dt><dt><span class="sect1"><a href="std-notes.html">Implementation Notes</a></span></dt></dl></div><div class="sect1" title="System interfaces compatible with the Single Unix Specification, Version 4:"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="std-susv4"></a>System interfaces compatible with the Single Unix Specification, Version 4:</h2></div></div></div><p>Note that the core of the Single Unix Specification, Version 4 is
 also IEEE Std 1003.1-2008 (POSIX.1-2008).</p><pre class="screen">
     FD_CLR
     FD_ISSET
@@ -82,14 +82,15 @@ also IEEE Std 1003.1-2008 (POSIX.1-2008).</p><pre class="screen">
     chdir
     chmod
     chown
-    chroot			(see chapter "Implementation Notes")
     cimag
     cimagf
     clearerr
     clock
-    clock_getres		(see chapter "Implementation Notes")
-    clock_gettime		(see chapter "Implementation Notes")
-    clock_setres		(see chapter "Implementation Notes")
+    clock_getcpuclockid
+    clock_getres
+    clock_gettime
+    clock_nanosleep		(see chapter "Implementation Notes")
+    clock_settime		(see chapter "Implementation Notes")
     clog
     clogf
     close
@@ -256,7 +257,6 @@ also IEEE Std 1003.1-2008 (POSIX.1-2008).</p><pre class="screen">
     ftw
     funlockfile
     futimens
-    futimes
     fwide
     fwprintf
     fwrite
@@ -327,7 +327,6 @@ also IEEE Std 1003.1-2008 (POSIX.1-2008).</p><pre class="screen">
     hcreate
     hdestroy
     hsearch
-    hstrerror
     htonl
     htons
     hypot
@@ -524,20 +523,26 @@ also IEEE Std 1003.1-2008 (POSIX.1-2008).</p><pre class="screen">
     pread
     printf
     pselect
+    psiginfo
+    psignal
     pthread_atfork
     pthread_attr_destroy
     pthread_attr_getdetachstate
+    pthread_attr_getguardsize
     pthread_attr_getinheritsched
     pthread_attr_getschedparam
     pthread_attr_getschedpolicy
     pthread_attr_getscope
+    pthread_attr_getstack
     pthread_attr_getstacksize
     pthread_attr_init
     pthread_attr_setdetachstate
+    pthread_attr_setguardsize
     pthread_attr_setinheritsched
     pthread_attr_setschedparam
     pthread_attr_setschedpolicy
     pthread_attr_setscope
+    pthread_attr_setstack
     pthread_attr_setstacksize
     pthread_cancel
     pthread_cond_broadcast
@@ -547,14 +552,17 @@ also IEEE Std 1003.1-2008 (POSIX.1-2008).</p><pre class="screen">
     pthread_cond_timedwait
     pthread_cond_wait
     pthread_condattr_destroy
+    pthread_condattr_getclock
     pthread_condattr_getpshared
     pthread_condattr_init
+    pthread_condattr_setclock
     pthread_condattr_setpshared
     pthread_create
     pthread_detach
     pthread_equal
     pthread_exit
     pthread_getconcurrency
+    pthread_getcpuclockid
     pthread_getschedparam
     pthread_getspecific
     pthread_join
@@ -595,8 +603,14 @@ also IEEE Std 1003.1-2008 (POSIX.1-2008).</p><pre class="screen">
     pthread_setcanceltype
     pthread_setconcurrency
     pthread_setschedparam
+    pthread_setschedprio
     pthread_setspecific
     pthread_sigmask
+    pthread_spin_destroy
+    pthread_spin_init
+    pthread_spin_lock
+    pthread_spin_trylock
+    pthread_spin_unlock
     pthread_testcancel
     ptsname
     putc
@@ -821,7 +835,7 @@ also IEEE Std 1003.1-2008 (POSIX.1-2008).</p><pre class="screen">
     tgamma
     tgammaf
     time
-    timer_create
+    timer_create		(see chapter "Implementation Notes")
     timer_delete
     timer_gettime
     timer_settime
