@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2012-01-29 13:40</H2
+>2012-02-28 19:40</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -739,7 +739,8 @@ HREF="cygwin-x-faq.html#q-failed-to-compile-keymap"
 ><DT
 >9.16. <A
 HREF="cygwin-x-faq.html#q-fork-failures"
->fatal error - unable to remap (some dll) to same address as parent: (some hex number) != (some other hex number)</A
+>"fatal error - unable to remap (some dll) to same address as parent: (some hex number) != (some other hex number)" or
+"(some dll): Loaded to different address: parent(some hex number) != child(some other hex number)"</A
 ></DT
 ><DT
 >9.17. <A
@@ -3298,7 +3299,10 @@ CLASS="answer"
 >&#13;Try adding the <CODE
 CLASS="parameter"
 >-v</CODE
-> argument to ssh, which often pinpoints the reason for a connection problem.
+> option to <B
+CLASS="command"
+>ssh</B
+>, which often pinpoints the reason for a connection problem.
 </P
 ><P
 >&#13;From the <B
@@ -3328,7 +3332,7 @@ started and the environment variable <CODE
 CLASS="parameter"
 >DISPLAY</CODE
 >
-must be set for ssh.
+must be set.
 
 <TABLE
 BORDER="0"
@@ -3383,15 +3387,6 @@ CLASS="replaceable"
 ></TR
 ></TABLE
 >
-The parameter <CODE
-CLASS="parameter"
->-Y</CODE
-> enables trusted X11Forwarding. 
-This is available since OpenSSH 3.8. If you have an older version of ssh
-you will have to use <CODE
-CLASS="parameter"
->-X</CODE
->.
 </P
 ></DIV
 ><DIV
@@ -3401,11 +3396,14 @@ CLASS="answer"
 > </B
 >A3:</P
 ><P
->&#13;Make sure you're not starting ssh with the parameter <CODE
+>&#13;Make sure you're not starting <B
+CLASS="command"
+>ssh</B
+> with the option <CODE
 CLASS="parameter"
 >-x</CODE
-> 
-(lowercase). This disables X11Forwarding. 
+>
+(lowercase). This disables X11Forwarding.
 </P
 ></DIV
 ><DIV
@@ -3415,7 +3413,7 @@ CLASS="answer"
 > </B
 >A4:</P
 ><P
->Check that X11Forwarding is not disabled in the openssh client
+>Check that X11Forwarding is not disabled in the ssh client
 configuration.</P
 ><P
 >The configfiles are by default
@@ -3466,37 +3464,6 @@ CLASS="screen"
 ></TD
 ></TR
 ></TABLE
-><P
->Starting with OpenSSH 3.8 you will need the switch
-<SPAN
-CLASS="QUOTE"
->"ForwardX11Trusted yes"</SPAN
-> in the client configuration to
-allow remote clients full access to the xserver. Without it some
-clients will fail with a similar error:</P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
-> X Error of failed request: BadAtom (invalid Atom parameter)
-  Major opcode of failed request: 18 (X_ChangeProperty)
-  Atom id in failed request: 0x114
-  Serial number of failed request: 370
-  Current serial number in output stream: 372
-</PRE
-></TD
-></TR
-></TABLE
-><P
->&#13;The commandline switch <CODE
-CLASS="parameter"
->-Y</CODE
-> does the same.
-</P
 ></DIV
 ><DIV
 CLASS="answer"
@@ -3595,7 +3562,7 @@ CLASS="answer"
 ><P
 ><B
 > </B
->This question should be obsolete since the security extension
+>This question should be obsolete since the SECURITY extension
 is now disabled</P
 ><P
 >OpenSSH 3.8 enables untrusted <A
@@ -3707,7 +3674,7 @@ CLASS="emphasis"
 CLASS="emphasis"
 >untrusted</I
 ></SPAN
-> X11 forwarding depends on the security extension,
+> X11 forwarding depends on the SECURITY extension,
 which isn't built into the Xserver and has been disabled by default upstream.
 </P
 ><P
@@ -3720,14 +3687,30 @@ Such programs could be run by a malicious or compromised root user on
 the ssh server, or under your account if it was compromised on the ssh server.
 </P
 ><P
+>&#13;Starting with OpenSSH 3.8, untrusted forwarding is the default when X forwarding
+is requested using the <CODE
+CLASS="parameter"
+>-X</CODE
+> command line option and you need
+to use the option <CODE
+CLASS="parameter"
+>-Y</CODE
+> or specify
+<SPAN
+CLASS="QUOTE"
+>"ForwardX11Trusted yes"</SPAN
+> in the client configuration for trusted forwarding
+by default.
+</P
+><P
 >&#13;So why is this disabled?
 Untrusted X11 forwarding was meant to be a way to allow logins to
 unknown or insecure systems.  It generates a cookie with xauth and uses
 the security extension to limit what the remote client is allowed to do.
 But this is widely considered to be not useful, because the security
 extension uses an arbitrary and limited access control policy, which
-results in a lot of applications not working correctly and what is
-really a false sense of security.
+results in a lot of applications not working correctly (e.g. not being
+able to cut and paste) and what is really a false sense of security.
 See this mail <A
 HREF="http://cygwin.com/ml/cygwin-xfree/2008-11/msg00154.html"
 TARGET="_top"
@@ -3762,7 +3745,7 @@ CLASS="answer"
 Unless you started the server with the <CODE
 CLASS="parameter"
 >-auth</CODE
-> argument
+> option
 (typically by using <B
 CLASS="command"
 >startx</B
@@ -3793,7 +3776,12 @@ CLASS="answer"
 >
 Starting with OpenSSH 5.6, ssh enforces the ForwardX11Timeout (which defaults
 to 1200 seconds) when an untrusted connections is requested, even if an untrusted
-connection could not be made.  This means that no new connections to the X server
+connection could not be made (e.g. you used <B
+CLASS="command"
+>ssh -X</B
+> which asks for
+an untrusted connection, and got the "untrusted X11 forwarding setup failed" warning).
+This means that no new connections to the X server
 can be made 20 minutes after the ssh connection is established.
 </P
 ><P
@@ -5873,7 +5861,8 @@ NAME="q-fork-failures"
 ></A
 ><B
 >9.16. </B
->fatal error - unable to remap (some dll) to same address as parent: (some hex number) != (some other hex number)</P
+>"fatal error - unable to remap (some dll) to same address as parent: (some hex number) != (some other hex number)" or
+"(some dll): Loaded to different address: parent(some hex number) != child(some other hex number)"</P
 ></DIV
 ><DIV
 CLASS="answer"

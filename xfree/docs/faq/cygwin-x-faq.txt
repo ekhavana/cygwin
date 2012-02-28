@@ -1,7 +1,7 @@
 
 Cygwin/X Frequently Asked Questions
 
-2012-01-29 13:40
+2012-02-28 19:40
      _________________________________________________________________
 
    Table of Contents
@@ -204,8 +204,10 @@ Questions and Answers
                 "xcb_xlib_unlock: Assertion 'c->xlib.lock' failed." 
 
         9.15. Fatal server error: Failed to activate core devices.
-        9.16. fatal error - unable to remap (some dll) to same address as
-                parent: (some hex number) != (some other hex number)
+        9.16. "fatal error - unable to remap (some dll) to same address
+                as parent: (some hex number) != (some other hex number)"
+                or "(some dll): Loaded to different address: parent(some
+                hex number) != child(some other hex number)"
 
         9.17. fork: child -1 - died waiting for longjmp before
                 initialization, retry (some number), exit code (some hex
@@ -850,8 +852,8 @@ $ cat UTF-8-demo.txt
 
    A1:
 
-   Try adding the -v argument to ssh, which often pinpoints the reason
-   for a connection problem.
+   Try adding the -v option to ssh, which often pinpoints the reason for
+   a connection problem.
 
    From the ssh man-page : -v Verbose mode. Causes ssh to print debugging
    messages about its progress. This is helpful in debugging connection,
@@ -861,7 +863,7 @@ $ cat UTF-8-demo.txt
    A2:
 
    Before establishing the ssh connection the xserver must be started and
-   the environment variable DISPLAY must be set for ssh.
+   the environment variable DISPLAY must be set.
 $ DISPLAY=localhost:0.0
 $ export DISPLAY
 $ ssh -Y remotehost
@@ -869,18 +871,14 @@ $ ssh -Y remotehost
    or
    $ DISPLAY=localhost:0.0 ssh -Y remotehost
 
-   The parameter -Y enables trusted X11Forwarding. This is available
-   since OpenSSH 3.8. If you have an older version of ssh you will have
-   to use -X.
-
    A3:
 
-   Make sure you're not starting ssh with the parameter -x (lowercase).
-   This disables X11Forwarding.
+   Make sure you're not starting ssh with the option -x (lowercase). This
+   disables X11Forwarding.
 
    A4:
 
-   Check that X11Forwarding is not disabled in the openssh client
+   Check that X11Forwarding is not disabled in the ssh client
    configuration.
 
    The configfiles are by default ~/.ssh/config and /etc/ssh_config. The
@@ -893,18 +891,6 @@ $ ssh -Y remotehost
    If this section contains an entry "ForwardX11 no" then X11Forwarding
    is disabled. To enable it change the entry to:
    ForwardX11 yes
-
-   Starting with OpenSSH 3.8 you will need the switch "ForwardX11Trusted
-   yes" in the client configuration to allow remote clients full access
-   to the xserver. Without it some clients will fail with a similar
-   error:
- X Error of failed request: BadAtom (invalid Atom parameter)
-  Major opcode of failed request: 18 (X_ChangeProperty)
-  Atom id in failed request: 0x114
-  Serial number of failed request: 370
-  Current serial number in output stream: 372
-
-   The commandline switch -Y does the same.
 
    A5:
 
@@ -931,7 +917,7 @@ $ ssh -Y remotehost
    6.2. Why do remote programs crash with an X Error of failed request:
    BadAtom? Why do remote programs exit when you try to copy and paste?
 
-   This question should be obsolete since the security extension is now
+   This question should be obsolete since the SECURITY extension is now
    disabled
 
    OpenSSH 3.8 enables untrusted X11Forwarding by default when connecting
@@ -963,7 +949,7 @@ $ ssh -Y remotehost
    extension disabled?
 
    The warning means that ssh is going to use trusted X11 forwarding
-   because untrusted X11 forwarding depends on the security extension,
+   because untrusted X11 forwarding depends on the SECURITY extension,
    which isn't built into the Xserver and has been disabled by default
    upstream.
 
@@ -974,21 +960,27 @@ $ ssh -Y remotehost
    run by a malicious or compromised root user on the ssh server, or
    under your account if it was compromised on the ssh server.
 
+   Starting with OpenSSH 3.8, untrusted forwarding is the default when X
+   forwarding is requested using the -X command line option and you need
+   to use the option -Y or specify "ForwardX11Trusted yes" in the client
+   configuration for trusted forwarding by default.
+
    So why is this disabled? Untrusted X11 forwarding was meant to be a
    way to allow logins to unknown or insecure systems. It generates a
    cookie with xauth and uses the security extension to limit what the
    remote client is allowed to do. But this is widely considered to be
    not useful, because the security extension uses an arbitrary and
    limited access control policy, which results in a lot of applications
-   not working correctly and what is really a false sense of security.
-   See this mail for more on the subject.
+   not working correctly (e.g. not being able to cut and paste) and what
+   is really a false sense of security. See this mail for more on the
+   subject.
 
    (Words adapted from an email by Yaakov Selkowitz)
 
    6.4. What does "Warning: no xauth data; using fake authentication data
    for X11 forwarding" mean?
 
-   Unless you started the server with the -auth argument (typically by
+   Unless you started the server with the -auth option (typically by
    using startx) this warning is expected and can safely be ignored.
 
    6.5. Why can't new remote X clients connect to the X server after 20
@@ -996,9 +988,11 @@ $ ssh -Y remotehost
 
    Starting with OpenSSH 5.6, ssh enforces the ForwardX11Timeout (which
    defaults to 1200 seconds) when an untrusted connections is requested,
-   even if an untrusted connection could not be made. This means that no
-   new connections to the X server can be made 20 minutes after the ssh
-   connection is established.
+   even if an untrusted connection could not be made (e.g. you used ssh
+   -X which asks for an untrusted connection, and got the "untrusted X11
+   forwarding setup failed" warning). This means that no new connections
+   to the X server can be made 20 minutes after the ssh connection is
+   established.
 
    Use ssh -Y. See also Q: 6.2..
 
@@ -1502,8 +1496,10 @@ Fatal server error: Failed to activate core devices.
        invoke xkbcomp to compile the keymap.
        See Q: 9.16. for possible causes.
 
-   9.16. fatal error - unable to remap (some dll) to same address as
-   parent: (some hex number) != (some other hex number)
+   9.16. "fatal error - unable to remap (some dll) to same address as
+   parent: (some hex number) != (some other hex number)" or "(some dll):
+   Loaded to different address: parent(some hex number) != child(some
+   other hex number)"
 
    This is commonly caused by one of three things:
      * You have run Cygwin's setup.exe to do an update while some cygwin
