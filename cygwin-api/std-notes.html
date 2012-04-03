@@ -5,10 +5,11 @@ related function calls.  A real chroot functionality is not supported by
 Windows however.</p><p><code class="function">clock_nanosleep</code> currently supports only
 CLOCK_REALTIME and CLOCK_MONOTONIC.  <code class="function">clock_setres</code>,
 <code class="function">clock_settime</code>, and <code class="function">timer_create</code>
-currently support only CLOCK_REALTIME.</p><p>BSD file locks created via <code class="function">flock</code> are not
-propagated to the parent process and sibling processes.  The locks are
-only valid in the creating process and subsequently started child processes
-sharing the same file descriptor.</p><p><code class="function">fpclassify</code>, <code class="function">isfinite</code>,
+currently support only CLOCK_REALTIME.</p><p>BSD file locks created via <code class="function">flock</code> are only
+propagated to the direct parent process, not to grand parents or sibling
+processes.  The locks are only valid in the creating process, its parent,
+and subsequently started child processes sharing the same file descriptor.
+</p><p><code class="function">fpclassify</code>, <code class="function">isfinite</code>,
 <code class="function">isgreater</code>, <code class="function">isgreaterequal</code>,
 <code class="function">isinf</code>, <code class="function">isless</code>,
 <code class="function">islessequal</code>, <code class="function">islessgreater</code>,

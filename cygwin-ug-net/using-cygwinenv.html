@@ -4,7 +4,13 @@ variable</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-
 variable</h2></div></div></div><div class="sect2" title="Implemented options"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-implemented-options"></a>Implemented options</h3></div></div></div><p>The <code class="envar">CYGWIN</code> environment variable is used to configure
 many global settings for the Cygwin runtime system. It contains the options
 listed below, separated by blank characters. Many options can be turned off
-by prefixing with <code class="literal">no</code>.</p><div class="itemizedlist"><ul class="itemizedlist" type="bullet"><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
+by prefixing with <code class="literal">no</code>.</p><div class="itemizedlist"><ul class="itemizedlist" type="bullet"><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)detect_bloda</code> - If set, Cygwin will try to detect
+foreign applications which try to inject threads into a Cygwin process,
+or which redirect system sockets by providing an enforced so-called
+<code class="literal">Layered Service Provider</code>.  This may or may not help to
+detect <a class="ulink" href="http://cygwin.com/faq/faq.using.html#faq.using.bloda" target="_top">
+BLODAs</a>.  Don't use this option for day-to-day usage, it will slow
+down every thread and socket creation!</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)dosfilewarning</code> - If set, Cygwin will warn the
 first time a user uses an "MS-DOS" style path name rather than a POSIX-style
 path name.  Defaults to set.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)export</code> - If set, the final values of these
 settings are re-exported to the environment as <code class="envar">CYGWIN</code> again.
