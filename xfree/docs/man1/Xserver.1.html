@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XSERVER</TITLE>
 </HEAD><BODY>
 <H1>XSERVER</H1>
-Section: User Commands  (1)<BR>Updated: xorg-server 1.11.4<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.12.1<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -98,6 +98,13 @@ Audit lines are sent as standard error output.
 specifies a file which contains a collection of authorization records used
 to authenticate access.  See also the <I>xdm</I>(1) and
 <I>Xsecurity</I>(7) manual pages.
+<DT><B>-background&nbsp;none</B>
+
+<DD>
+Asks the driver not to clear the background on startup, if the driver supports that.
+May be useful for smooth transition with eg. fbdev driver.
+For security reasons this is not the default as the screen contents might
+show a previous user session.
 <DT><B>-br</B>
 
 <DD>
@@ -168,7 +175,7 @@ a list of accepted extension names is printed.
 <DT><B>-f </B><I>volume</I>
 
 <DD>
-sets feep (bell) volume (allowable range: 0-100).
+sets beep (bell) volume (allowable range: 0-100).
 <DT><B>-fc </B><I>cursorFont</I>
 
 <DD>
@@ -259,6 +266,13 @@ sets screen-saver timeout time in minutes.
 
 <DD>
 disables save under support on all screens.
+<DT><B>-seat </B><I>seat</I>
+
+<DD>
+seat to run on. Takes a string identifying a seat in a platform
+specific syntax. On platforms which support this feature this may be
+used to limit the server to expose only a specific subset of devices
+connected to the system.
 <DT><B>-t </B><I>number</I>
 
 <DD>
@@ -643,8 +657,8 @@ An example configuration:
 
 <P>
 This will add /usr/share/X11/fonts/misc as the first FPE with the attribute
-
-the attribute unscaled etc. This is functionally equivalent to setting
+'unscaled', second FPE will be /usr/share/X11/fonts/75dpi, also with
+the attribute 'unscaled' etc. This is functionally equivalent to setting
 the following font path:
 <P>
 <PRE>
@@ -676,10 +690,6 @@ Outline font directories
 
 <DD>
 Unix domain socket for display number <B>n</B>
-<DT><I>/usr/adm/X</I><B>n</B>msgs
-
-<DD>
-Error log file for display number <B>n</B> if run from <I>init</I>(8)
 <DT><I>/usr/lib/X11/xdm/xdm-errors</I>
 
 <DD>
@@ -764,6 +774,6 @@ Dave Wiggins took over post-R5 and made substantial improvements.
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
-Time: 22:40:38 GMT, January 30, 2012
+Time: 20:42:57 GMT, June 15, 2012
 </BODY>
 </HTML>

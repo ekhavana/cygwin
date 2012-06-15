@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XWIN</TITLE>
 </HEAD><BODY>
 <H1>XWIN</H1>
-Section: User Commands  (1)<BR>Updated: xorg-server 1.11.4<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.12.1<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -108,6 +108,9 @@ preceeding <B>-screen</B> parameter.
 <DD>
 Create a screen 0 that covers all monitors [the primary monitor] on a system with
 multiple monitors.
+Fake XINERAMA data is created describing the individual monitors,
+(This is similar to the 'merged framebuffer' or 'pseudo-xinerama' mode provided by
+some drivers for the xorg X server).
 This option is currently enabled by default in <B>-multiwindow</B> mode.
 <DT><B>-screen </B><I>screen_number</I> [<I>W</I> <I>H</I> [<I>X</I> <I>Y</I>] | [[<I>W</I>x<I>H</I>[+<I>X</I>+<I>Y</I>]][@<I>M</I>]] ] 
 
@@ -426,20 +429,24 @@ exit silently and don't display any error message.
 <DD>
 These options configure the xkeyboard extension to load
 a particular keyboard map as the X server starts.  The behavior is similar
-to the <I>setxkbmap</I> program.  The layout data is located at <I>
-/usr/share/X11/xkb/</I>.  Additional information is found in the
-README files therein and in the man page of <I>setxkbmap</I>.  For example
-in order to load a German layout for a pc105 keyboard one uses
-the options:
+to the <I>setxkbmap</I>(1) program.
+<P>
+See the <I>xkeyboard-config</I>(7) manual page for a list of
+keyboard configurations.
+<P>
+The keyboard layout data is located at <I>/usr/share/X11/xkb/</I>.  Additional information
+can be found in the README files there and in the <I>setxkbmap</I>(1) manual page.
+<P>
+For example, in order to load a German layout for a pc105 keyboard, use the options:
 <BR>
 
 <I> -xkblayout de -xkbmodel pc105</I>
 
 <P>
-Alternatively one may use the <I>setxkbmap</I> program after <I>XWin</I> is
+Alternatively, you can use the <I>setxkbmap</I>(1) program after <I>XWin</I> is
 running.
 <P>
-The default is to select a configuration matching your current layout as
+The default is to select a keyboard configuration matching your current layout as
 reported by <I>Windows</I>, if known, or the default X server configuration
 if no matching keyboard configuration was found.
 <P>
@@ -501,7 +508,7 @@ window, in both the generic case and for particular programs.
 Win I-multiwindow produces for each top-level X window.
 <P>
 
-The format of the <I>.XWinrc</I> file is given in the man page <A HREF="../man5/XWinrc.5.html">XWinrc</A>(5).
+The format of the <I>.XWinrc</I> file is given in the <A HREF="../man5/XWinrc.5.html">XWinrc</A>(5) manual page.
 <P>
 <A NAME="lbAS">&nbsp;</A>
 <H2>EXAMPLES</H2>
@@ -513,7 +520,7 @@ Need some examples
 <H2>SEE ALSO</H2>
 
 X(7), <A HREF="../man1/Xserver.1.html">Xserver</A>(1), xdm(1), xinit(1), <A HREF="../man5/XWinrc.5.html">XWinrc</A>(5),
-setxkbmap(1), xkeyboard-config (7).
+setxkbmap(1), xkeyboard-config(7).
 <P>
 <P>
 <A NAME="lbAU">&nbsp;</A>
@@ -521,10 +528,10 @@ setxkbmap(1), xkeyboard-config (7).
 
 <I>XWin</I>
 
-and this man page still have many limitations.
+and this manual page still have many limitations.
 <P>
 The <I>XWin</I> software is continuously developing; it is therefore possible that
-this man page is not up to date.  It is always prudent to
+this manual page is not up to date.  It is always prudent to
 look also at the output of <I>XWin -help</I> in order to
 check the options that are operative.
 <P>
@@ -573,6 +580,6 @@ Suhaib Siddiqi, Jack Tanner, Jon Turney and Nicholas Wourms.
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
-Time: 22:40:39 GMT, January 30, 2012
+Time: 20:42:59 GMT, June 15, 2012
 </BODY>
 </HTML>
