@@ -21,7 +21,7 @@
 
     <p>To generate a useful backtrace, you will need debugging symbols for the X server.</p>
 
-    <p>To prepare:</p>
+    <h3>Preparation</h3>
 
     <ul>
       <li>
@@ -37,7 +37,7 @@
       <li>Install the <b>gdb</b> and <b>sysvinit</b> packages (for <tt>gdb</tt> and <tt>pidof</tt>, respectively)</li>
     </ul>
 
-    <p>To generate the backtrace:</p>
+    <h3>Generating a backtrace when some specific action is making the X server crash</h3>
     <ul>
      <li>Start XWin using your normal method</li>
      <li>In a non-X terminal window, run <tt>gdb --pid=`pidof /usr/bin/XWin`</tt>, to attach gdb to the running X server</li>
@@ -46,18 +46,38 @@
      <li>Type <tt>bt full</tt> at the <tt>(gdb)</tt> prompt, to produce a backtrace</li>
     </ul>
 
+    <h3>Generating a backtrace when the X server is crashing at startup</h3>
+    <ul>
+     <li>In a non-X terminal window, run <tt>gdb --args /usr/bin/XWin -multiwindow`</tt>, to start the X server under gdb
+     (If you have customized how you start XWin to add additional options, you should also add them here)</li>
+     <li>Type <tt>r</tt> at the <tt>(gdb)</tt> prompt, to start running the X server</li>
+     <li>Your crash should occur</li>
+     <li>Type <tt>bt full</tt> at the <tt>(gdb)</tt> prompt, to produce a backtrace</li>
+    </ul>
+
+    <h3>Generating a backtrace when the X server is crashing at startup (alternative approach using JIT debugging)</h3>
+    <ul>
+     <li>Set the error_start token in the CYGWIN environment variable to run gdb, e.g. <tt>CYGWIN="error_start=C:\cygwin\bin\gdb"</tt>
+       <(If you are going to start the X server using a Windows shortcut, you will have to set this in the System applet of the Windows control panel)</li>
+     <li>Start XWin using your normal method</li>
+     <li>Your crash should occur</li>
+     <li>Type <tt>bt full</tt> at the <tt>(gdb)</tt> prompt, to produce a backtrace</li>
+    </ul>
+
     <p>Please attach the output from gdb, in addition to your <tt>/var/log/xwin/XWin.0.log</tt>, to your problem report.</p>
 
-    <p>To clean up:</p>
+    <h3>Cleaning up</h3>
     <ul>
       <li>
         Remove the debug symbol files
         <br>
         <tt>rm -r /usr/lib/debug</tt>
       </li>
-      <li>Uninstall the <b>gdb</b> and <b>sysvinit</b> packages if you no longer need them.</li>
+      <li>Uninstall the <b>gdb</b> and <b>sysvinit</b> packages if you no longer need them</li>
+      <li>Restore the previous value of the CYGWIN environment variable, if you changed it</li>
     </ul>
 
+    <h3>Preparation (alternative approach)</h3>
     <p>Alternatively, X server snapshots are built with debugging symbols included. You can install an X server snapshot with the following steps:</p>
 
     <ul>
