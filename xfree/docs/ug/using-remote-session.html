@@ -13,11 +13,11 @@ REL="UP"
 TITLE="Using Cygwin/X"
 HREF="using.html"/><LINK
 REL="PREVIOUS"
-TITLE="Shared memory support"
-HREF="using-shared-memory.html"/><LINK
-REL="NEXT"
 TITLE="Displaying remote clients"
-HREF="using-remote-apps.html"/><META
+HREF="using-remote-apps.html"/><LINK
+REL="NEXT"
+TITLE="Hardware Accelerated OpenGL (AIGLX)"
+HREF="using-aiglx.html"/><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html;charset=utf-8"/></HEAD
 ><BODY
@@ -42,7 +42,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="using-shared-memory.html"
+HREF="using-remote-apps.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -56,7 +56,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="using-remote-apps.html"
+HREF="using-aiglx.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -82,7 +82,7 @@ to a single remote session using XDMCP:</P
 ><P
 >&#13;<KBD
 CLASS="userinput"
->XWin.exe -query
+>X -query
 <TT
 CLASS="replaceable"
 ><I
@@ -93,7 +93,7 @@ CLASS="replaceable"
 </P
 ><P
 >You may login to several remote sesstions with a single or
-multiple hosts using XDMCP.  Each session will need a seperate display
+multiple hosts using XDMCP.  Each session will need a separate display
 number, specified by the <CODE
 CLASS="parameter"
 >:display_number</CODE
@@ -110,7 +110,7 @@ to several remote sessions using XDMCP:</P
 ><P
 >&#13;<KBD
 CLASS="userinput"
->XWin.exe :0 -query
+>X :0 -query
 <TT
 CLASS="replaceable"
 ><I
@@ -122,7 +122,7 @@ CLASS="replaceable"
 ><P
 >&#13;<KBD
 CLASS="userinput"
->XWin.exe :1 -query
+>X :1 -query
 <TT
 CLASS="replaceable"
 ><I
@@ -188,6 +188,33 @@ TARGET="_top"
 </P
 ></BLOCKQUOTE
 ></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+XDMCP suffers from some of the same security problems noted in the previous section, but
+unfortunately cannot be tunnelled over <B
+CLASS="command"
+>ssh</B
+> due to it's use of UDP.  A
+similar effect can be achieved with a command like
+<KBD
+CLASS="userinput"
+>&#13;ssh -Y <TT
+CLASS="replaceable"
+><I
+>remote_hostname_or_ip_address_1</I
+></TT
+> Xnest :1 -query localhost
+</KBD
+>
+</P
+></BLOCKQUOTE
+></DIV
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -205,7 +232,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="using-shared-memory.html"
+HREF="using-remote-apps.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -223,7 +250,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="using-remote-apps.html"
+HREF="using-aiglx.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -233,7 +260,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Shared memory support</TD
+>Displaying remote clients</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -247,7 +274,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Displaying remote clients</TD
+>Hardware Accelerated OpenGL (AIGLX)</TD
 ></TR
 ></TABLE
 ></DIV

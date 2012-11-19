@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2012-02-28 19:40</H2
+>2012-11-19 15:28</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -256,10 +256,10 @@ HREF="cygwin-x-faq.html#q-why-no-xf86config"
 HREF="cygwin-x-faq.html#q-command-line-args"
 >What are the command line options for <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 >? How do I add command line options for <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 >?</A
 ></DT
 ><DT
@@ -267,7 +267,7 @@ CLASS="filename"
 HREF="cygwin-x-faq.html#q-display-depth-ignored"
 >Why does <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > ignore the display depth that I pass
 on the command line?</A
 ></DT
@@ -1117,7 +1117,7 @@ CLASS="replaceable"
 > The screen denotes different output devices of the X server. You could 
 start <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > with two <CODE
 CLASS="parameter"
 >-screen</CODE
@@ -1644,8 +1644,9 @@ CLASS="answer"
 ><P
 ><B
 > </B
->
-Launch the X server via the shortcut under "Cygwin-X" on the start menu. 
+>This question should be obsolete.</P
+><P
+>&#13;Launch the X server via the shortcut under "Cygwin-X" on the start menu. 
 </P
 ><P
 >&#13;Technical details: The <B
@@ -1660,10 +1661,14 @@ CLASS="parameter"
 CLASS="filename"
 >/usr/X11R6/lib/X11/XKeysymDB</TT
 >.
-This file is now at <TT
+This file was moved to <TT
 CLASS="filename"
 >/usr/share/X11/XKeysymDB</TT
->, and without it the keyboard won't work.
+>.
+The keyboard won't work if <CODE
+CLASS="parameter"
+>XKEYSYMDB</CODE
+> points to a non-existent file.
 </P
 ><P
 >&#13;If you are (perhaps unintentionally) using a copy of the old <B
@@ -2192,10 +2197,10 @@ NAME="q-command-line-args"
 >4.2. </B
 >What are the command line options for <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 >? How do I add command line options for <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 >?</P
 ></DIV
 ><DIV
@@ -2216,11 +2221,11 @@ CLASS="command"
 >man XWin</B
 ></A
 >
-document the command line options for XWin.exe.</P
+document the command line options for X.</P
 ><P
 >&#13;To supply a command line option to <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 >:
 
 <UL
@@ -2316,7 +2321,7 @@ NAME="q-display-depth-ignored"
 >4.3. </B
 >Why does <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > ignore the display depth that I pass
 on the command line?</P
 ></DIV
@@ -2328,12 +2333,12 @@ CLASS="answer"
 >When running in windowed mode or GDI-based fullscreen mode,
 <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > must run the X Server at whatever display depth
 Windows is currently using; in these cases the display depth passed on
 the command line is ignored.  <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > only uses the display
 depth parameter when running in a DirectDraw-based fullscreen mode, as
 DirectDraw allows applications to change the display resolution and
@@ -2368,7 +2373,7 @@ CLASS="replaceable"
 >
 parameter to <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 >, where <TT
 CLASS="replaceable"
 ><I
@@ -2492,7 +2497,7 @@ CLASS="answer"
 > </B
 >You should start <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > with the <CODE
 CLASS="parameter"
 >-multiplemonitors</CODE
@@ -2524,11 +2529,11 @@ CLASS="answer"
 > </B
 ><TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > uses port 6000/TCP by default. You will have to allow incoming and
 outgoing traffic on this port even if you are only using local clients. <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > 
 has a builtin access control so you won't have to worry about opening the
 port. If you are still concerned about security, you may limit the allowed 
@@ -3843,7 +3848,7 @@ CLASS="replaceable"
 > to
 <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > to specify which interface address to report.</P
 ></DIV
 ></DIV
@@ -4295,7 +4300,7 @@ CLASS="glossterm"
 ><P
 >&#13;<KBD
 CLASS="userinput"
->XWin.exe -query
+>X -query
 <TT
 CLASS="replaceable"
 ><I
@@ -5142,12 +5147,12 @@ CLASS="answer"
 > </B
 >Most likely you have started <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > twice.</P
 ><P
 >if you start multiple instances of <TT
 CLASS="filename"
->XWin.exe</TT
+>X</TT
 > you have to
 give then unique display numbers
 </P
@@ -5160,9 +5165,9 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->XWin.exe -query foo
-XWin.exe :1 -query bar
-XWin.exe :2 -query blubb
+>X -query foo
+X :1 -query bar
+X :2 -query blubb
 </PRE
 ></TD
 ></TR

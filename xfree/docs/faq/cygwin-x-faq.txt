@@ -1,8 +1,7 @@
-
 Cygwin/X Frequently Asked Questions
 
-2012-02-28 19:40
-     _________________________________________________________________
+2012-11-19 15:28
+     __________________________________________________________________
 
    Table of Contents
    Questions and Answers
@@ -30,40 +29,38 @@ Questions and Answers
         2.2. How is Cygwin/X installed?
         2.3. Fatal server error: Can't read lock file /tmp/.X0-lock
         2.4. Nothing appears to happen when I try to start the X server
-                using the "XWin Server" start menu shortcut. 
+                using the "XWin Server" start menu shortcut.
 
    3. Upgrade
 
-        3.1. What happened to my X server? Where did /usr/X11R6/ go? 
-        3.2. I upgraded my X server and now I can't type anything into
-                any X application
+        3.1. What happened to my X server? Where did /usr/X11R6/ go?
+        3.2. I upgraded my X server and now I can't type anything into any
+                X application
 
         3.3. I can't find startxwin.bat to start the X server
         3.4. Moved question
-        3.5. My favourite font has gone! The font Emacs uses is just
-                boxes
-
+        3.5. My favourite font has gone! The font Emacs uses is just boxes
         3.6. Where has xhost/xlsfonts/etc. gone?
         3.7. How do I get rid of that menu at the top of my xterm?
         3.8. ssh -X now says "Warning: untrusted X11 forwarding setup
                 failed: xauth key data not generated"
 
-        3.9. nedit fails to start with an error message 
+        3.9. nedit fails to start with an error message
         3.10. I start my X server with startx or xinit and now all my X
                 windows are contained within one large root Windows
                 window? How do I get it back to each X window in it's own
-                Windows window? 
+                Windows window?
 
         3.11. Moved question
 
    4. Configuration
 
         4.1. Is there an xorg.conf or XF86Config file?
-        4.2. What are the command line options for XWin.exe? How do I add
-                command line options for XWin.exe?
+        4.2. What are the command line options for X? How do I add command
+                line options for X?
 
-        4.3. Why does XWin.exe ignore the display depth that I pass on
-                the command line?
+        4.3. Why does X ignore the display depth that I pass on the
+                command line?
 
         4.4. I have a two button mouse, can I emulate a three button
                 mouse?
@@ -77,7 +74,7 @@ Questions and Answers
                 X-application windows white?
 
         4.8. I have a firewall. Is there anything I have to take care of?
-                
+
    5. Internationalization
 
         5.1. Keyboard support
@@ -100,32 +97,32 @@ Questions and Answers
                       does not work. What can I do?
 
               5.1.8. AltGr does not work properly when connecting to
-                      various older commercial unices (e.g. HP-UX, AIX)
-                      or to old XFree86.
+                      various older commercial unices (e.g. HP-UX, AIX) or
+                      to old XFree86.
 
         5.2. Display problems
 
               5.2.1. How do I get bash to display accents and/or umlauts?
               5.2.2. How do I put bash into "8 bit" mode?
-              5.2.3. How do I display unicode characters in an xterm? 
+              5.2.3. How do I display unicode characters in an xterm?
 
    6. Remote connections
 
         6.1. X11Forwarding does not work with OpenSSH under Cygwin
         6.2. Why do remote programs crash with an X Error of failed
-                request: BadAtom? Why do remote programs exit when you
-                try to copy and paste? 
+                request: BadAtom? Why do remote programs exit when you try
+                to copy and paste?
 
         6.3. I'm confused about the difference between trusted and
                 untrusted X11 forwarding. What does "Warning: untrusted
-                X11 forwarding setup failed: xauth key data not
-                generated" mean? Why is the SECURITY extension disabled? 
+                X11 forwarding setup failed: xauth key data not generated"
+                mean? Why is the SECURITY extension disabled?
 
         6.4. What does "Warning: no xauth data; using fake authentication
-                data for X11 forwarding" mean? 
+                data for X11 forwarding" mean?
 
         6.5. Why can't new remote X clients connect to the X server after
-                20 minutes? 
+                20 minutes?
 
    7. XDMCP connections
 
@@ -168,9 +165,7 @@ Questions and Answers
 
         8.11. Why is the root window not shown in normal mode?
         8.12. Why is the cross the default cursor in multiwindow mode?
-        8.13. How can I adjust the linewidth in bash after resizing
-                XTerm?
-
+        8.13. How can I adjust the linewidth in bash after resizing XTerm?
         8.14. Why do some menus not work if Num-Lock is on?
 
    9. Error and Warning Messages
@@ -201,13 +196,13 @@ Questions and Answers
         9.12. Out of environment space
         9.13. Too many parameters
         9.14. "xcb_xlib_lock: Assertion '!c->xlib.lock' failed." or
-                "xcb_xlib_unlock: Assertion 'c->xlib.lock' failed." 
+                "xcb_xlib_unlock: Assertion 'c->xlib.lock' failed."
 
         9.15. Fatal server error: Failed to activate core devices.
-        9.16. "fatal error - unable to remap (some dll) to same address
-                as parent: (some hex number) != (some other hex number)"
-                or "(some dll): Loaded to different address: parent(some
-                hex number) != child(some other hex number)"
+        9.16. "fatal error - unable to remap (some dll) to same address as
+                parent: (some hex number) != (some other hex number)" or
+                "(some dll): Loaded to different address: parent(some hex
+                number) != child(some other hex number)"
 
         9.17. fork: child -1 - died waiting for longjmp before
                 initialization, retry (some number), exit code (some hex
@@ -222,8 +217,8 @@ Questions and Answers
         10.3. Are there common problems encountered when porting software
                 to Cygwin/X?
 
-        10.4. Problems linking OpenGL applications? Undefined reference
-                to _glsomething?
+        10.4. Problems linking OpenGL applications? Undefined reference to
+                _glsomething?
 
    11. Contributing
 
@@ -263,32 +258,32 @@ Questions and Answers
    1.2. What is Cygwin?
 
    Cygwin tools are, in the words of the Cygwin FAQ, " ports of the
-   popular GNU development tools and utilities for Microsoft Windows.
-   They run thanks to the Cygwin library which provides the POSIX system
-   calls and environment these programs expect. " Cygwin provides the
-   compiler (gcc), libraries, headers, and other utilities which build
-   and support the operation of Cygwin/X.
+   popular GNU development tools and utilities for Microsoft Windows. They
+   run thanks to the Cygwin library which provides the POSIX system calls
+   and environment these programs expect. " Cygwin provides the compiler
+   (gcc), libraries, headers, and other utilities which build and support
+   the operation of Cygwin/X.
 
    1.3. What is the X Window System?
 
    [ScheiflerGettys92]
 
-   The X Window System, or X, is a network-transparent window system.
-   With X, multiple applications can run simultaneously in windows,
-   generating text and graphics in monochrome or color on a bitmap
-   display. Network transparency means that application programs can run
-   on machines scattered through the network.
+   The X Window System, or X, is a network-transparent window system. With
+   X, multiple applications can run simultaneously in windows, generating
+   text and graphics in monochrome or color on a bitmap display. Network
+   transparency means that application programs can run on machines
+   scattered through the network.
 
    1.4. What is an X Server?
 
    An X Server is a program that provides display and user input services
-   to other programs. In comparison, a file server provides other
-   programs with access to file storage devices. File servers are
-   typically located in a remote location and you use the services of a
-   file server from the machine that you are located at. In contrast, an
-   X Server is typically running on the machine that you are located at;
-   display and user input services may be requested by programs running
-   on your machine, as well as by programs running on remote machines.
+   to other programs. In comparison, a file server provides other programs
+   with access to file storage devices. File servers are typically located
+   in a remote location and you use the services of a file server from the
+   machine that you are located at. In contrast, an X Server is typically
+   running on the machine that you are located at; display and user input
+   services may be requested by programs running on your machine, as well
+   as by programs running on remote machines.
 
    1.5. What is an X client?
 
@@ -303,8 +298,8 @@ Questions and Answers
    it is to connect to by default. Typically this can be overriden by
    running the client with a -display or -d command line option.
 
-   The :0.0 part of the DISPLAY variable denote the display and the
-   screen of an X server.
+   The :0.0 part of the DISPLAY variable denote the display and the screen
+   of an X server.
 
    The display is the first number and should equal the display number
    given to a running instance of an X server. By default the X server
@@ -314,9 +309,9 @@ Questions and Answers
    /tmp/.X11-unix/Xdisplay-number
 
    The screen denotes different output devices of the X server. You could
-   start XWin.exe with two -screen options and would end up with two X11
-   windows. Each of them is a different screen. Other X servers open
-   different screens for different monitors connected to the computer.
+   start X with two -screen options and would end up with two X11 windows.
+   Each of them is a different screen. Other X servers open different
+   screens for different monitors connected to the computer.
 
    Cygwin/X supports different formats of the DISPLAY variable
      * :0.0 or unix:0.0
@@ -410,11 +405,10 @@ Questions and Answers
    proper name (by hard linking it under the correct name, then unlinking
    it from the temporary name). If this rename fails it attempts to read
    the existing lock file to determine the pid of an already running
-   server. The FAT filesystem does not support hardlinks so this
-   operation cannot succeed. On NFTS filesystems, the failure case
-   appears to be that lock file was created successfully, but the rename
-   failed due to a stale lock file created by a user with Adminstrator
-   rights.
+   server. The FAT filesystem does not support hardlinks so this operation
+   cannot succeed. On NFTS filesystems, the failure case appears to be
+   that lock file was created successfully, but the rename failed due to a
+   stale lock file created by a user with Adminstrator rights.
 
    2.4. Nothing appears to happen when I try to start the X server using
    the "XWin Server" start menu shortcut.
@@ -422,10 +416,10 @@ Questions and Answers
    A1:
 
    Task manager shows the startxwin.exe process starting, spawning
-   XWin.exe and xterm.exe, but no windows are shown. Running
-   startxwin.exe from a bash shell works correctly. This is caused by
-   having tty in the CYGWIN environment variable set through the Windows
-   control panel. Removing tty resolves this issue.
+   XWin.exe and xterm.exe, but no windows are shown. Running startxwin.exe
+   from a bash shell works correctly. This is caused by having tty in the
+   CYGWIN environment variable set through the Windows control panel.
+   Removing tty resolves this issue.
 
    If you really need CYGWIN=tty for working with cmd.exe windows, you'll
    have to arrange to set that by some other means before invoking
@@ -434,8 +428,8 @@ Questions and Answers
    A2:
 
    Try running startxwin.exe from a bash shell in the mintty terminal
-   emulator, it should output some error message which should indicate
-   why it's not able to start.
+   emulator, it should output some error message which should indicate why
+   it's not able to start.
 
      Note: For technical reasons, the output of XWin doesn't appear in
      cmd.exe windows unless the CYGWIN environment variable set through
@@ -453,14 +447,17 @@ Questions and Answers
    3.2. I upgraded my X server and now I can't type anything into any X
    application
 
+   This question should be obsolete.
+
    Launch the X server via the shortcut under "Cygwin-X" on the start
    menu.
 
    Technical details: The startxwin.bat script used to set several
    enviroment variables used by the X server to specify the location of
    files it needs to access. Specifically this batch file would set
-   XKEYSYMDB to /usr/X11R6/lib/X11/XKeysymDB. This file is now at
-   /usr/share/X11/XKeysymDB, and without it the keyboard won't work.
+   XKEYSYMDB to /usr/X11R6/lib/X11/XKeysymDB. This file was moved to
+   /usr/share/X11/XKeysymDB. The keyboard won't work if XKEYSYMDB points
+   to a non-existent file.
 
    If you are (perhaps unintentionally) using a copy of the old
    startxwin.bat (perhaps under another name) to start the X server,
@@ -471,8 +468,8 @@ Questions and Answers
    XKEYSYMDB in your environment. Find it and remove it.
 
    These variables were always being set to the defaults, so they can
-   simply be removed. See Q: 8.8. for the reason why you might need to
-   set them.
+   simply be removed. See Q: 8.8. for the reason why you might need to set
+   them.
 
    3.3. I can't find startxwin.bat to start the X server
 
@@ -498,12 +495,12 @@ Questions and Answers
 
    Font packages are now named font-<author/class>-<fonttype>
 
-   Some packages dependencies have not yet been updated for the fonts
-   they require, so you may need to manually install the needed fonts.
-   For example, to provide the font emacs wants to use by default you
-   will probably want to install font-adobe-dpi75 (or font-adobe-dpi100
-   if you like large fonts). This package provides the courier,
-   helvetica, new century schoolbook and times font families.
+   Some packages dependencies have not yet been updated for the fonts they
+   require, so you may need to manually install the needed fonts. For
+   example, to provide the font emacs wants to use by default you will
+   probably want to install font-adobe-dpi75 (or font-adobe-dpi100 if you
+   like large fonts). This package provides the courier, helvetica, new
+   century schoolbook and times font families.
 
    The lucida font family is provided by the package font-bh-dpi75 (or
    font-bh-dpi100). The monospaced version, lucida typewriter is provided
@@ -530,8 +527,8 @@ Questions and Answers
    See Q: 6.1. and following. See point 3 in this mail. Use ssh -Y.
 
    Technical details: ssh tried to run xauth generate to create a
-   untrusted cookie for the session, which failed because the server
-   isn't compiled with the XCSECURITY extension built-in.
+   untrusted cookie for the session, which failed because the server isn't
+   compiled with the XCSECURITY extension built-in.
 
    3.9. nedit fails to start with an error message
 
@@ -543,17 +540,17 @@ X Error of failed request:  BadMatch (invalid parameter attributes)
   Serial number of failed request:  some number
   Current serial number in output stream:  some other number
 
-   nedit needs rebuilding with a patch to work around an issue lesstif
-   has with current X servers.
+   nedit needs rebuilding with a patch to work around an issue lesstif has
+   with current X servers.
 
    Until this happemns, you can work around the issue by adding
    XLIB_SKIP_ARGB_VISUALS to your enviroment, e.g.
 $ export XLIB_SKIP_ARGB_VISUALS=1
 $ nedit
 
-   3.10. I start my X server with startx or xinit and now all my X
-   windows are contained within one large root Windows window? How do I
-   get it back to each X window in it's own Windows window?
+   3.10. I start my X server with startx or xinit and now all my X windows
+   are contained within one large root Windows window? How do I get it
+   back to each X window in it's own Windows window?
 
    This is a deliberate change from Cygwin/X X11 R6.9 behaviour.
 
@@ -577,13 +574,13 @@ $ nedit
    options. For example, for more information on configuring other
    keyboard layouts using command line options, see Q: 5.1.1.
 
-   4.2. What are the command line options for XWin.exe? How do I add
-   command line options for XWin.exe?
+   4.2. What are the command line options for X? How do I add command line
+   options for X?
 
    The Cygwin/X User's Guide and man XWin document the command line
-   options for XWin.exe.
+   options for X.
 
-   To supply a command line option to XWin.exe:
+   To supply a command line option to X:
      * If you use the start menu shortcut to start the X server, you will
        need to amend it's target to add an option, e.g.
        C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin
@@ -592,38 +589,37 @@ $ nedit
      Note: Note well that the entire command after -c is quoted
 
      Note: Note that this start menu shortcut is created by the xinit
-     package, and your changes will be overwritten when the xinit
-     package is updated.
+     package, and your changes will be overwritten when the xinit package
+     is updated.
      * If you use startxwin, xinit or startx to start the server, run it
-       as e.g. startxwin -- -nolock, xinit -- -nolock or startx --
-       -nolock
+       as e.g. startxwin -- -nolock, xinit -- -nolock or startx -- -nolock
      * If you use startxwin.bat or startxwin.sh to start the server, add
        e.g. -nolock to the XWin line in that script.
 
-   4.3. Why does XWin.exe ignore the display depth that I pass on the
-   command line?
+   4.3. Why does X ignore the display depth that I pass on the command
+   line?
 
-   When running in windowed mode or GDI-based fullscreen mode, XWin.exe
-   must run the X Server at whatever display depth Windows is currently
-   using; in these cases the display depth passed on the command line is
-   ignored. XWin.exe only uses the display depth parameter when running
-   in a DirectDraw-based fullscreen mode, as DirectDraw allows
-   applications to change the display resolution and depth when running
-   in fullscreen mode.
+   When running in windowed mode or GDI-based fullscreen mode, X must run
+   the X Server at whatever display depth Windows is currently using; in
+   these cases the display depth passed on the command line is ignored. X
+   only uses the display depth parameter when running in a
+   DirectDraw-based fullscreen mode, as DirectDraw allows applications to
+   change the display resolution and depth when running in fullscreen
+   mode.
 
    4.4. I have a two button mouse, can I emulate a three button mouse?
 
-   Yes. Pass the -emulate3buttons timeout_in_milliseconds parameter to
-   XWin.exe, where timeout_in_milliseconds is the, optional, maximum
-   number of milliseconds between a button release and opposite button
-   press that will trigger an emulated third button press.
+   Yes. Pass the -emulate3buttons timeout_in_milliseconds parameter to X,
+   where timeout_in_milliseconds is the, optional, maximum number of
+   milliseconds between a button release and opposite button press that
+   will trigger an emulated third button press.
 
    4.5. Is there a Focus-Follows-Mouse feature (Auto-Focus)?
 
    This is a setting of the window manager used. The default window
    manager twm has no such feature. But with fvwm2 this can be achieved
    with the this configuration entry:
-   Focus FocusFollowsMouse
+Focus FocusFollowsMouse
 
    Other window managers (eg. windowmaker) have similar features too.
 
@@ -631,8 +627,8 @@ $ nedit
    in the window manager but you can use the TweakUI tool to enable this
    feature for all windows, not limited to Cygwin/X windows.
 
-   4.6. The option -nounixkill has no effect. How can i prevent the
-   server shutdown an Ctrl-Alt-BackSpace?
+   4.6. The option -nounixkill has no effect. How can i prevent the server
+   shutdown an Ctrl-Alt-BackSpace?
 
    This question should be obsolete as the TerminateServer keybinding is
    no longer present by default.
@@ -644,18 +640,17 @@ $ nedit
    work? I have a multihead system. Why are my X-application windows
    white?
 
-   You should start XWin.exe with the -multiplemonitors option.
+   You should start X with the -multiplemonitors option.
 
    Note that this option is enabled by default in -multiwindow mode.
 
    4.8. I have a firewall. Is there anything I have to take care of?
 
-   XWin.exe uses port 6000/TCP by default. You will have to allow
-   incoming and outgoing traffic on this port even if you are only using
-   local clients. XWin.exe has a builtin access control so you won't have
-   to worry about opening the port. If you are still concerned about
-   security, you may limit the allowed hosts to 127.0.0.1 (localhost) and
-   the local IP addresses.
+   X uses port 6000/TCP by default. You will have to allow incoming and
+   outgoing traffic on this port even if you are only using local clients.
+   X has a builtin access control so you won't have to worry about opening
+   the port. If you are still concerned about security, you may limit the
+   allowed hosts to 127.0.0.1 (localhost) and the local IP addresses.
 
    If you use a different DISPLAY variable check section Q: 1.6. for
    details about which ports are used. For additional information about
@@ -673,9 +668,9 @@ $ nedit
    commandline options.
 
    The mainoption for changing the layout is -xkblayout countrycode where
-   countrycode is in most cases the 2 character code which also
-   represents the country in internet adresses (e.g. Australia = au,
-   Deutschland = de, France = fr, Japan = jp)
+   countrycode is in most cases the 2 character code which also represents
+   the country in internet adresses (e.g. Australia = au, Deutschland =
+   de, France = fr, Japan = jp)
 
    Other options for tweaking the XKB layout are -xkbmodel,-xkbvariant,
    -xkboptions and -xkbrules. These are the counterparts for the similar
@@ -698,9 +693,9 @@ $ nedit
 (EE) Keyboardlayout "Irish" (00001809) is unknown
 
      * The XKB layout code for this layout if you know it. Please
-       experiment with setxkbmap or -xkblayout (as described in Q:
-       5.1.1.) to find an XKB layout code which works for you, otherwise
-       the maintainers will have to guess it.
+       experiment with setxkbmap or -xkblayout (as described in Q: 5.1.1.)
+       to find an XKB layout code which works for you, otherwise the
+       maintainers will have to guess it.
      * A description how the layout looks like. This makes it easy to
        identify the matching XKB layout code. Many layouts are available
        from the Microsoft Global Dev website (It seems that website only
@@ -720,13 +715,13 @@ $ nedit
 
    See Q: 5.1.1.
 
-   5.1.5. Logging into AIX via XDMCP causes the keyboard to function as
-   if AltGr is permanently pressed.
+   5.1.5. Logging into AIX via XDMCP causes the keyboard to function as if
+   AltGr is permanently pressed.
 
    [paraphrased from the Xming FAQ] AIX login scripts contain a call to
-   xmodmap (for IBM keyboards) which causes the keyboard to be
-   incorrectly configured for XWin. Commenting out those calls should
-   allow you to use XWin with AIX.
+   xmodmap (for IBM keyboards) which causes the keyboard to be incorrectly
+   configured for XWin. Commenting out those calls should allow you to use
+   XWin with AIX.
 
    The XKB extension is now always enabled in the X.Org xserver, so the
    previous answer to this question of disabling the XKB extension with
@@ -736,22 +731,22 @@ $ nedit
 
    First check if you are able to change the server to another layout via
    XKB. The german layout will be good for testing:
-   setxkbmap de -model pc105
+setxkbmap de -model pc105
 
-   This worked if pressing "Shift" and "8" produces "(" instead of "*".
-   If it worked then you can skip the next paragraph.
+   This worked if pressing "Shift" and "8" produces "(" instead of "*". If
+   it worked then you can skip the next paragraph.
 
    There is currently a problem with the /tmp directory mounted in
    textmode. You can change the setting to binmode with:
-   mount -b "$(cygpath -m /tmp)" /tmp
+mount -b "$(cygpath -m /tmp)" /tmp
 
    If this fails with an error message stating insufficient rights, try
-   mount -b -u "$(cygpath -m /tmp)" /tmp
+mount -b -u "$(cygpath -m /tmp)" /tmp
 
    Not all keyboard layouts are tested very well and some contain errors
    or do not work at all. To test if the compiling of your layout works
    start
-   setxkbmap de -print | xkbcomp -w3 -xkm - localhost:0.0
+setxkbmap de -print | xkbcomp -w3 -xkm - localhost:0.0
 
    (replace the "de" with your layout code). This may produce warnings,
    but must not produce errors. If there are errors then please report
@@ -774,7 +769,7 @@ $ nedit
    unable to track this down and find a reason.
 
    It has been reported that sometimes it helps to run
-   DISPLAY=:0.0 setxkbmap languagecode
+DISPLAY=:0.0 setxkbmap languagecode
 
    from a cygwin shell after connecting.
 
@@ -852,8 +847,8 @@ $ cat UTF-8-demo.txt
 
    A1:
 
-   Try adding the -v option to ssh, which often pinpoints the reason for
-   a connection problem.
+   Try adding the -v option to ssh, which often pinpoints the reason for a
+   connection problem.
 
    From the ssh man-page : -v Verbose mode. Causes ssh to print debugging
    messages about its progress. This is helpful in debugging connection,
@@ -869,7 +864,7 @@ $ export DISPLAY
 $ ssh -Y remotehost
 
    or
-   $ DISPLAY=localhost:0.0 ssh -Y remotehost
+$ DISPLAY=localhost:0.0 ssh -Y remotehost
 
    A3:
 
@@ -888,20 +883,20 @@ $ ssh -Y remotehost
    wildcard". The section applies to all hosts where wildcard matches the
    hostname.
 
-   If this section contains an entry "ForwardX11 no" then X11Forwarding
-   is disabled. To enable it change the entry to:
-   ForwardX11 yes
+   If this section contains an entry "ForwardX11 no" then X11Forwarding is
+   disabled. To enable it change the entry to:
+ForwardX11 yes
 
    A5:
 
    Check that X11Forwarding is not disabled in the ssh server
    configuration.
 
-   The configfile is by default /etc/ssh/sshd_config. If there is an
-   entry "X11Forwarding no" then X11Forwarding is disabled.
+   The configfile is by default /etc/ssh/sshd_config. If there is an entry
+   "X11Forwarding no" then X11Forwarding is disabled.
 
    If you have write access to the config file then change it to
-   X11Forwarding yes
+X11Forwarding yes
 
    The OpenSSH server must be restarted or SIGHUP'ed to re-read the
    configuration file after it is changed. Otherwise, ask your
@@ -909,10 +904,10 @@ $ ssh -Y remotehost
 
    A6:
 
-   [Frederick W. Wheeler] If the remote machine is a Windows machine
-   using Cygwin OpenSSH server, make sure the Cygwin xauth package is
-   installed on the remote machine. The OpenSSH server needs to be able
-   to run xauth to do X11 Forwarding.
+   [Frederick W. Wheeler] If the remote machine is a Windows machine using
+   Cygwin OpenSSH server, make sure the Cygwin xauth package is installed
+   on the remote machine. The OpenSSH server needs to be able to run xauth
+   to do X11 Forwarding.
 
    6.2. Why do remote programs crash with an X Error of failed request:
    BadAtom? Why do remote programs exit when you try to copy and paste?
@@ -926,17 +921,17 @@ $ ssh -Y remotehost
    You will quickly notice that this is the case if most of your X
    applications are now killed when you try to copy and paste, X
    applications fail with an error similar to that below, or if xdpyinfo
-   returns only a fraction of the supported extensions that it does if
-   run locally.
+   returns only a fraction of the supported extensions that it does if run
+   locally.
  X Error of failed request: BadAtom (invalid Atom parameter)
   Major opcode of failed request: 18 (X_ChangeProperty)
   Atom id in failed request: 0x114
   Serial number of failed request: 370
   Current serial number in output stream: 372
 
-   It is easiest to just override untrusted X11Forwarding by passing -Y
-   to ssh in place of -X. The -Y does the same thing as -X, but it
-   enables trusted X11 forwarding for the current connection.
+   It is easiest to just override untrusted X11Forwarding by passing -Y to
+   ssh in place of -X. The -Y does the same thing as -X, but it enables
+   trusted X11 forwarding for the current connection.
 
    Setting "ForwardX11Trusted yes" in the ssh client configuration file
    does the same thing. See man ssh_config for more information.
@@ -953,26 +948,26 @@ $ ssh -Y remotehost
    which isn't built into the Xserver and has been disabled by default
    upstream.
 
-   Trusted X11 forwarding means that you trust the server that you wish
-   to ssh into. The X server will allow remote clients to do whatever a
-   local client would be able to do to your X session, for example,
-   monitor your keypresses and take a screenshot. Such programs could be
-   run by a malicious or compromised root user on the ssh server, or
-   under your account if it was compromised on the ssh server.
+   Trusted X11 forwarding means that you trust the server that you wish to
+   ssh into. The X server will allow remote clients to do whatever a local
+   client would be able to do to your X session, for example, monitor your
+   keypresses and take a screenshot. Such programs could be run by a
+   malicious or compromised root user on the ssh server, or under your
+   account if it was compromised on the ssh server.
 
    Starting with OpenSSH 3.8, untrusted forwarding is the default when X
    forwarding is requested using the -X command line option and you need
    to use the option -Y or specify "ForwardX11Trusted yes" in the client
    configuration for trusted forwarding by default.
 
-   So why is this disabled? Untrusted X11 forwarding was meant to be a
-   way to allow logins to unknown or insecure systems. It generates a
-   cookie with xauth and uses the security extension to limit what the
-   remote client is allowed to do. But this is widely considered to be
-   not useful, because the security extension uses an arbitrary and
-   limited access control policy, which results in a lot of applications
-   not working correctly (e.g. not being able to cut and paste) and what
-   is really a false sense of security. See this mail for more on the
+   So why is this disabled? Untrusted X11 forwarding was meant to be a way
+   to allow logins to unknown or insecure systems. It generates a cookie
+   with xauth and uses the security extension to limit what the remote
+   client is allowed to do. But this is widely considered to be not
+   useful, because the security extension uses an arbitrary and limited
+   access control policy, which results in a lot of applications not
+   working correctly (e.g. not being able to cut and paste) and what is
+   really a false sense of security. See this mail for more on the
    subject.
 
    (Words adapted from an email by Yaakov Selkowitz)
@@ -980,16 +975,16 @@ $ ssh -Y remotehost
    6.4. What does "Warning: no xauth data; using fake authentication data
    for X11 forwarding" mean?
 
-   Unless you started the server with the -auth option (typically by
-   using startx) this warning is expected and can safely be ignored.
+   Unless you started the server with the -auth option (typically by using
+   startx) this warning is expected and can safely be ignored.
 
    6.5. Why can't new remote X clients connect to the X server after 20
    minutes?
 
    Starting with OpenSSH 5.6, ssh enforces the ForwardX11Timeout (which
    defaults to 1200 seconds) when an untrusted connections is requested,
-   even if an untrusted connection could not be made (e.g. you used ssh
-   -X which asks for an untrusted connection, and got the "untrusted X11
+   even if an untrusted connection could not be made (e.g. you used ssh -X
+   which asks for an untrusted connection, and got the "untrusted X11
    forwarding setup failed" warning). This means that no new connections
    to the X server can be made 20 minutes after the ssh connection is
    established.
@@ -1002,18 +997,18 @@ $ ssh -Y remotehost
 
    Cygwin/X is sometimes unable to determine which local network
    interface's address should be reported to the XDMCP server; in these
-   cases you need to pass -from local_host_name_or_ip_address to XWin.exe
-   to specify which interface address to report.
+   cases you need to pass -from local_host_name_or_ip_address to X to
+   specify which interface address to report.
 
    7.2. Why does Cygwin/X report AUDIT: client 1 rejected from IP
    remotehost?
 
    The problem is most likely a wrong DNS (Network name resolution). Make
-   sure your windows host has a hostname which is valid from linux too
-   and an IP address which linux can resolve to that hostname.
+   sure your windows host has a hostname which is valid from linux too and
+   an IP address which linux can resolve to that hostname.
 
    If you add a line
-   192.168.26.1 myhost
+192.168.26.1 myhost
 
    to /etc/hosts on the XDMCP server with the IP address and the hostname
    of your windows host the name resolution should work.
@@ -1037,10 +1032,10 @@ Enable=false
 Enable=true
 
    or for xdm style configuration:
-   DisplayManager.requestPort:     0
+DisplayManager.requestPort:     0
 
    to:
-   !DisplayManager.requestPort:     0
+!DisplayManager.requestPort:     0
 
    Table 1. Known XDM Configuration File Locations
    Distribution/OS  Version  Display Manager          Location
@@ -1052,8 +1047,8 @@ Enable=true
 
    A2: XDMCP and firewalls
 
-   XDMCP will not work correctly if you have a personal firewall
-   installed or the built-in firewall of Windows is activated.
+   XDMCP will not work correctly if you have a personal firewall installed
+   or the built-in firewall of Windows is activated.
 
    The XDMCP protocol will send and receive data on port 177/UDP. But the
    actual connections will be made to the local port 6000/TCP. It is safe
@@ -1086,14 +1081,14 @@ KillInitClients=false
    See also Q: 7.7. and Q: 7.8.
 
    [David Dawson] For whatever reason, certain versions of Solaris need
-   fonts that are not provided by Cygwin/X; the result is that you may
-   see the Solaris background tile and the hourglass cursor, but the XDM
-   login prompt will never appear. The simplest solution is to point
-   Cygwin/X at the font server that is usually running on the Solaris
-   machine. You'll need a command line similar to the following to start
-   your XDMCP session and to connect to the Solaris font server:
+   fonts that are not provided by Cygwin/X; the result is that you may see
+   the Solaris background tile and the hourglass cursor, but the XDM login
+   prompt will never appear. The simplest solution is to point Cygwin/X at
+   the font server that is usually running on the Solaris machine. You'll
+   need a command line similar to the following to start your XDMCP
+   session and to connect to the Solaris font server:
 
-   XWin.exe -query solaris_hostname_or_ip_address -fp
+   X -query solaris_hostname_or_ip_address -fp
    tcp/solaris_hostname_or_ip_address:7100
 
      Note: The -fp parameter is a general X Server parameter, it is not
@@ -1133,9 +1128,9 @@ KillInitClients=false
    8.1. Cygwin/X failed with "Fatal Error". What does this mean?
 
    The Fatal Error is a general error message. More specific information
-   what caused this is available in /var/log/xwin/XWin.0.log. Please
-   check the common error messages in the Section called Error and
-   Warning Messages. If your error is not mentioned proceed with Q: 8.4.
+   what caused this is available in /var/log/xwin/XWin.0.log. Please check
+   the common error messages in the Section called Error and Warning
+   Messages. If your error is not mentioned proceed with Q: 8.4.
 
    8.2. Is there a log file that I can look at for diagnostic information
    and error messages?
@@ -1146,19 +1141,19 @@ KillInitClients=false
 
    8.3. I have a specific error message, what does it mean?
 
-   See the Error and Warning Messages section for help with specific
-   error messages. Return to this section if you do not find a specific
-   answer for the error message that you have.
+   See the Error and Warning Messages section for help with specific error
+   messages. Return to this section if you do not find a specific answer
+   for the error message that you have.
 
-   8.4. I have a specific error message that is not addressed in the
-   Error and Warning Messages section.
+   8.4. I have a specific error message that is not addressed in the Error
+   and Warning Messages section.
 
    Search the Cygwin/X mailing list archives to see if the error message
-   has already been reported and/or addressed. Report the error message
-   to the Cygwin/X mailing list, how the error message was caused, and
-   the behavior of the X Server after the error message was generated
-   (exit, freeze, etc.), only if the error message has not been reported,
-   if the circumstances that produced the error message are significantly
+   has already been reported and/or addressed. Report the error message to
+   the Cygwin/X mailing list, how the error message was caused, and the
+   behavior of the X Server after the error message was generated (exit,
+   freeze, etc.), only if the error message has not been reported, if the
+   circumstances that produced the error message are significantly
    different from other reports, or if you have additional information
    regarding the error message to contribute. Please include
    /var/log/xwin/XWin.0.log in your mail. This may help us identify the
@@ -1167,22 +1162,22 @@ KillInitClients=false
    8.5. My bug report the Cygwin/X mailing list was ignored. What do I do
    now?
 
-   Some bug reports are deliberately ignored by project members if the
-   bug in question was recently dealt with; did you search the mailing
-   list archives for a solution to your problem before submitting your
-   bug report? Some bug reports are ignored if they do not contain
-   sufficient information to understand the situation that produces the
-   bug; did your bug report have enough information? Some bug reports are
-   missed or forgotten, thus some valid bug reports do not receive a
-   reply; simply resubmit such bug reports that have not received a
-   response within 7 days of submission.
+   Some bug reports are deliberately ignored by project members if the bug
+   in question was recently dealt with; did you search the mailing list
+   archives for a solution to your problem before submitting your bug
+   report? Some bug reports are ignored if they do not contain sufficient
+   information to understand the situation that produces the bug; did your
+   bug report have enough information? Some bug reports are missed or
+   forgotten, thus some valid bug reports do not receive a reply; simply
+   resubmit such bug reports that have not received a response within 7
+   days of submission.
 
    8.6. Why does Cygwin/X freeze right after startup?
 
    Zone Alarm 5 is known to break Cygwin/X. As a result you'll see this
    line (or a similar) as last output in /var/log/xwin/XWin.0.log
-Rules = "xorg" Model = "pc101" Layout = "us" Variant = "(null)" Options = "(nul
-l)"
+Rules = "xorg" Model = "pc101" Layout = "us" Variant = "(null)" Options = "(null
+)"
 
    Disabling Zone Alarm will not solve this problem. You can only
    uninstall Zone Alarm 5 and switch to an earlier version (4.5 is known
@@ -1193,10 +1188,10 @@ l)"
    within Cygwin/X.
 
    You can remount /tmp to binmode with these commands:
-   mount -b "$(cygpath -m /tmp)" /tmp
+mount -b "$(cygpath -m /tmp)" /tmp
 
    If this fails with an errormessage stating unsufficient rights, try
-   mount -b -u "$(cygpath -m /tmp)" /tmp
+mount -b -u "$(cygpath -m /tmp)" /tmp
 
    8.7. Cygwin/X has very poor performance. What's the reason?
 
@@ -1205,10 +1200,10 @@ l)"
    Windows. Especially Webwasher and some other filtering software are
    known to slow down the network traffic.
 
-   Some online virus scanners like Symantec Antivirus do slowdown
-   Cygwin/X a lot. They scan every file access and network traffic which
-   causes serious processing overhead beyond that from the X11 protocol
-   and the unix emulation layer.
+   Some online virus scanners like Symantec Antivirus do slowdown Cygwin/X
+   a lot. They scan every file access and network traffic which causes
+   serious processing overhead beyond that from the X11 protocol and the
+   unix emulation layer.
 
    So far there is no known solution but to disable the virus scanner
    completely.
@@ -1216,17 +1211,17 @@ l)"
    [Dr. Edward Wornar] Certain programs that are installed by various
    drivers and software packages can consume an incredible amount of
    system resources and processing time. One known example of such a
-   program is ATI2evxx.exe, a utility installed with some ATI
-   Technologies graphics card drivers. Answers That Work has information
-   on ATI2evxx.exe on their Task List Programs - A page. You may want to
-   try disabling, one-by-one, ATI2evxx.exe and other such programs until
-   you find the program that is causing the slowdown.
+   program is ATI2evxx.exe, a utility installed with some ATI Technologies
+   graphics card drivers. Answers That Work has information on
+   ATI2evxx.exe on their Task List Programs - A page. You may want to try
+   disabling, one-by-one, ATI2evxx.exe and other such programs until you
+   find the program that is causing the slowdown.
 
    8.8. I have Microsoft Services for Unix installed and can't type
    anything. Help me!!!
 
-   Microsoft Services for Unix set some environment variables which
-   points Cygwin/X to outdated or not existing files. These variables are
+   Microsoft Services for Unix set some environment variables which points
+   Cygwin/X to outdated or not existing files. These variables are
 XAPPLRESDIR
 XCMSDB
 XKEYSYMDB
@@ -1236,23 +1231,22 @@ XNLSPATH
 
    Reported by Juan Medina, Pavel Rozenboim
 
-   8.9. Cygwin/X is extremely slow, especially when using XDMCP to
-   connect to remote machines.
+   8.9. Cygwin/X is extremely slow, especially when using XDMCP to connect
+   to remote machines.
 
    see Q: 8.7..
 
    8.10. Simulated mouse wheel scrolling doesn't work with a TrackPoint
    mouse (found on IBM laptops) or Synaptics Touchpads
 
-   [Gerald S. Williams] The TrackPoint driver tries to send scroll
-   up/down messages to the default scrollbar in a window. Cygwin/X does
-   not use Windows scrollbars for X Client windows, so we must configure
-   the TrackPoint driver to send standard WM_MOUSEWHEEL messages to the
+   [Gerald S. Williams] The TrackPoint driver tries to send scroll up/down
+   messages to the default scrollbar in a window. Cygwin/X does not use
+   Windows scrollbars for X Client windows, so we must configure the
+   TrackPoint driver to send standard WM_MOUSEWHEEL messages to the
    Cygwin/X window. This can be done by editing the TrackPoint
-   configuration that can be found in the tp4table.dat and/or
-   tp4scrol.dat files, which are usually located in
-   %SYSTEM_ROOT%\System32\, %PROGRAMFILES%\Synaptics\SynTP\ or
-   %PROGRAMFILES%\Lenovo\Trackpoint\.
+   configuration that can be found in the tp4table.dat and/or tp4scrol.dat
+   files, which are usually located in %SYSTEM_ROOT%\System32\,
+   %PROGRAMFILES%\Synaptics\SynTP\ or %PROGRAMFILES%\Lenovo\Trackpoint\.
 
    Add the following to the "Pass 0 rules"section and then restart your
    computer to ensure the driver reloads it's settings.
@@ -1306,22 +1300,21 @@ _XSERVTransmkdir: ERROR: euid != 0,directory /tmp/.X11-unix will not be created
 
    9.3. Duplicate invocation on display number: 0. Exiting.
 
-   Most likely you have started XWin.exe twice.
+   Most likely you have started X twice.
 
-   if you start multiple instances of XWin.exe you have to give then
-   unique display numbers
+   if you start multiple instances of X you have to give then unique
+   display numbers
 
-XWin.exe -query foo
-XWin.exe :1 -query bar
-XWin.exe :2 -query blubb
+X -query foo
+X :1 -query bar
+X :2 -query blubb
 
    Specifying no display number is the same as using :0
 
-   If you want another terminal window (which in fact is just a
-   convenient side effect of running startxwin) you should do this by
-   starting xterm & from an existing terminal window, from the
-   notification area icon menu, from a cygwin shell or from the start
-   menu.
+   If you want another terminal window (which in fact is just a convenient
+   side effect of running startxwin) you should do this by starting xterm
+   & from an existing terminal window, from the notification area icon
+   menu, from a cygwin shell or from the start menu.
 
    9.4. Fatal server error: could not open default font 'fixed'
 
@@ -1358,8 +1351,8 @@ XWin.exe :2 -query blubb
             files being untarred to a valid location.
     3. You chose "DOS/text" as the "Default Text File type" during Cygwin
        setup, ignoring the advice that the Default Text File Type should
-       be left on Unix/binary unless you have a very good reason to
-       switch it to DOS/text.
+       be left on Unix/binary unless you have a very good reason to switch
+       it to DOS/text.
        Open a Cygwin shell and run.
 
 umount /usr/share/fonts/
@@ -1372,8 +1365,8 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
    These warnings are generally harmless since they indicate that default
    search paths for fonts do not actually contain fonts; this is only a
-   problem if the misc path does not contain fonts and/or all of the
-   paths do not contain fonts.
+   problem if the misc path does not contain fonts and/or all of the paths
+   do not contain fonts.
 
    If you are getting these message and the X Server is also failing to
    start, then see Q: 9.4. for information on how to fix your fonts.
@@ -1397,28 +1390,28 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
        9.16.
      * cygwin1.dll uses a shared memory section amongst all loaded copies
        of cygwin1.dll; unfortunately, the layout and usage of the shared
-       memory section changes between versions of cygwin1.dll. Loading
-       two different versions of cygwin1.dll will cause the shared memory
+       memory section changes between versions of cygwin1.dll. Loading two
+       different versions of cygwin1.dll will cause the shared memory
        section to become corrupted, which almost always results in an
        Exception: STATUS_ACCESS_VIOLATION. You must search your
        filesystem(s) and remove all copies of cygwin1.dll except the copy
-       in /bin. You must remove the different versions of cygwin1.dll
-       even if they are not in your path, as programs that depend on
+       in /bin. You must remove the different versions of cygwin1.dll even
+       if they are not in your path, as programs that depend on
        cygwin1.dll attempt to load the file from the local directory
        before searching other paths; thus, it is rather easy, and common,
        for multiple versions of cygwin1.dll to become loaded at the same
        time if they exist on a particular system.
-     * See also this main Cygwin FAQ question for an issue which may
-       cause this problem with older binaries on Terminal Server.
+     * See also this main Cygwin FAQ question for an issue which may cause
+       this problem with older binaries on Terminal Server.
 
-   9.9. Xlib: connection to "local_host_name_or_ip_address:0.0" refused
-   by server Xlib: Maximum number of clients reached
+   9.9. Xlib: connection to "local_host_name_or_ip_address:0.0" refused by
+   server Xlib: Maximum number of clients reached
 
    Cygwin/X queries getdtablesize() for the maximum number of client
-   connections allowed; by default Cygwin returns 32 from
-   getdtablesize(). Cygwin/X Server Test Series release Test44, released
-   on 2001-08-15, changed the maximum number of clients from 32 to 1024
-   by passing the square of getdtablesize() to setdtablesize().
+   connections allowed; by default Cygwin returns 32 from getdtablesize().
+   Cygwin/X Server Test Series release Test44, released on 2001-08-15,
+   changed the maximum number of clients from 32 to 1024 by passing the
+   square of getdtablesize() to setdtablesize().
 
    9.10. XIO: fatal IO error 104 (Connection reset by peer) on X server
    "127.0.0.1:0.0"
@@ -1447,12 +1440,10 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 
      Note: These products may not cause problems in all configurations.
      However, the Cygwin/X project has neither the time, ability, nor
-     resources to help you correctly configure your third-party
-     software.
+     resources to help you correctly configure your third-party software.
 
    See the main Cygwin FAQ question for an up-to-date list of software
-   which has been known to interfere with the correct operation of
-   Cygwin.
+   which has been known to interfere with the correct operation of Cygwin.
 
    9.12. Out of environment space
 
@@ -1484,8 +1475,8 @@ mount -f -s -b "C:/cygwin/usr/share/fonts" "/usr/share/fonts"
 (EE) XKB: Could not invoke xkbcomp
 (EE) XKB: Couldn't compile keymap
 XKB: Failed to compile keymap
-Keyboard initialization failed. This could be a missing or incorrect setup of x
-keyboard-config.
+Keyboard initialization failed. This could be a missing or incorrect setup of xk
+eyboard-config.
 Fatal server error: Failed to activate core devices.
 
      * Verify that xkeyboard-config is correctly installed using cygcheck
@@ -1508,11 +1499,11 @@ Fatal server error: Failed to activate core devices.
        using Cygwin without rebooting as advised by setup. Reboot.
      * This is one of the symptoms of an application interfering with
        Cygwin's fork() emulation. See the main Cygwin FAQ question for a
-       list of software which has been known to interfere with the
-       correct operation of Cygwin.
-     * This also caused by DLLs with conflicting base addresses
-       preventing Cygwin's fork() emulation from functioning correctly.
-       Install the rebase package, read the README file
+       list of software which has been known to interfere with the correct
+       operation of Cygwin.
+     * This also caused by DLLs with conflicting base addresses preventing
+       Cygwin's fork() emulation from functioning correctly. Install the
+       rebase package, read the README file
        /usr/share/doc/Cygwin/rebase-n.n.n.README, and follow the
        instructions there to run rebaseall. In short: stop all Cygwin
        processes (including services) and run rebaseall from an ash shell
@@ -1544,31 +1535,30 @@ Fatal server error: Failed to activate core devices.
    10.3. Are there common problems encountered when porting software to
    Cygwin/X?
 
-   One common problem encountered when porting software to Cygwin/X is
-   due to Cygwin's inability to distinguish between files with the same
-   name but different capitalization (e.g. XvMC.h and xvmc.h), which is
-   due to a Windows' limitation.
+   One common problem encountered when porting software to Cygwin/X is due
+   to Cygwin's inability to distinguish between files with the same name
+   but different capitalization (e.g. XvMC.h and xvmc.h), which is due to
+   a Windows' limitation.
 
    Example 1. Include Problems
 
-   This example is based off an error that actually occurred in the
-   source code tree in xc/programs/Xserver/Xext/xvmc.c. xvmc.c included
-   XvMC.h, as shown below:
-   #include "XvMC.h"
+   This example is based off an error that actually occurred in the source
+   code tree in xc/programs/Xserver/Xext/xvmc.c. xvmc.c included XvMC.h,
+   as shown below:
+#include "XvMC.h"
 
    The intention was to include the file xc/include/extensions/XvMC.h.
    Unfortunately, there was a file named xc/programs/Xserver/Xext/xvmc.h
-   that ended up getting included instead of the desired file, because
-   the precompiler searched the local directory,
-   xc/programs/Xserver/Xext/, before searching the rest of the include
-   path. Cygwin can't distinguish between XvMC.h and xvmc.h, so xvmc.h
-   ended up being included in xvmc.c. The build process on Cygwin broke
-   because the contents of XvMC.h were entirely different than the
-   contents of xvmc.h.
+   that ended up getting included instead of the desired file, because the
+   precompiler searched the local directory, xc/programs/Xserver/Xext/,
+   before searching the rest of the include path. Cygwin can't distinguish
+   between XvMC.h and xvmc.h, so xvmc.h ended up being included in xvmc.c.
+   The build process on Cygwin broke because the contents of XvMC.h were
+   entirely different than the contents of xvmc.h.
 
    The solution was to change the include to specifically reference the
    desired header:
-   #include "../../../include/extensions/XvMC.h"
+#include "../../../include/extensions/XvMC.h"
 
    10.4. Problems linking OpenGL applications? Undefined reference to
    _glsomething?
@@ -1591,16 +1581,15 @@ Fatal server error: Failed to activate core devices.
      * Applications using GLUT have a choice.
      * Applications using the WGL API must be built using option 1.
 
-   (Words adapted from an email by André Bleau)
+   (Words adapted from an email by AndrÃ© Bleau)
 
 11. Contributing
 
-   11.1. Are there step-by-step instructions for contributing to
-   Cygwin/X?
+   11.1. Are there step-by-step instructions for contributing to Cygwin/X?
 
-   Yes. The Cygwin/X Contributor's Guide has step-by-step instructions
-   for obtaining the source, building the source, building debug versions
-   of the source, and even cross-compiling under Linux.
+   Yes. The Cygwin/X Contributor's Guide has step-by-step instructions for
+   obtaining the source, building the source, building debug versions of
+   the source, and even cross-compiling under Linux.
 
    11.2. Are there editors for Windows that understand and preserve UNIX
    end of line characters?
@@ -1610,9 +1599,9 @@ Fatal server error: Failed to activate core devices.
 
    11.3. How should I generate patches for Cygwin/X?
 
-   Only submit patches that have UNIX end of line characters. See Q:
-   11.2. for information on editors for Windows that are aware of UNIX
-   end of line characters.
+   Only submit patches that have UNIX end of line characters. See Q: 11.2.
+   for information on editors for Windows that are aware of UNIX end of
+   line characters.
 
    11.4. Where do I submit patches for Cygwin/X?
 
@@ -1641,8 +1630,8 @@ Fatal server error: Failed to activate core devices.
 
    11.7. Is cross-compiling from a non-Cygwin platform supported?
 
-   Cross-compiling from a non-Cygwin platform is described in the
-   Cygwin/X Contributor's Guide
+   Cross-compiling from a non-Cygwin platform is described in the Cygwin/X
+   Contributor's Guide
 
    11.8. Where can I get help for installing DocBook on Cygwin?
 
@@ -1653,8 +1642,8 @@ Fatal server error: Failed to activate core devices.
    12.1. What licenses apply to Cygwin/X source code?
 
    Cygwin/X proper isn't covered by a single license, as Cygwin/X is made
-   up of two parts that are covered by distinct licenses: Cygwin and the
-   X Window System.
+   up of two parts that are covered by distinct licenses: Cygwin and the X
+   Window System.
 
    See Q: 12.2. and Q: 12.3. for more information regarding the licenses
    that apply to Cygwin/X.
@@ -1667,21 +1656,21 @@ Fatal server error: Failed to activate core devices.
 
    12.3. What license applies to Cygwin source code?
 
-   Cygwin source code is licensed under a modified version of the GNU
-   GPL. Cygwin's license modification specifically allows third-party
-   software under an open source license to be linked with Cygwin without
-   requiring that the source code for the third-party software be
-   distributed under the terms of the GNU GPL. Cygwin's developers went
-   to great trouble to obtain this modification and should be thanked for
-   doing so, as without it the modification, Cygwin/X linking to Cygwin
-   would be the subject of endless discussion.
+   Cygwin source code is licensed under a modified version of the GNU GPL.
+   Cygwin's license modification specifically allows third-party software
+   under an open source license to be linked with Cygwin without requiring
+   that the source code for the third-party software be distributed under
+   the terms of the GNU GPL. Cygwin's developers went to great trouble to
+   obtain this modification and should be thanked for doing so, as without
+   it the modification, Cygwin/X linking to Cygwin would be the subject of
+   endless discussion.
 
    12.4. Who holds the copyright on the Cygwin/X source code?
 
    Cygwin/X proper doesn't have a single copyright holder, as Cygwin/X is
    made up of two parts, namely Cygwin and the X Window System; each part
-   follows a different scheme in regards to who will hold the copyright
-   on source code.
+   follows a different scheme in regards to who will hold the copyright on
+   source code.
 
    See Q: 12.5. and Q: 12.6. for more information regarding who holds the
    copyright on Cygwin/X source code.
@@ -1689,19 +1678,19 @@ Fatal server error: Failed to activate core devices.
    12.5. Who holds the copyright on the X Window System source code?
 
    Each source code file in the X Window System typically has its own
-   license and copyright statement. Therefore, there is not a general
-   rule for determining who holds the copyright on a particular X Window
-   System source file, as each author is free to assign the copyright to
-   someone else, to some group, or to keep the copyright themselves. You
-   must inspect the source code file in question to determine who holds
-   the copyright for that file.
+   license and copyright statement. Therefore, there is not a general rule
+   for determining who holds the copyright on a particular X Window System
+   source file, as each author is free to assign the copyright to someone
+   else, to some group, or to keep the copyright themselves. You must
+   inspect the source code file in question to determine who holds the
+   copyright for that file.
 
    12.6. Who holds the copyright on the Cygwin source code?
 
    RedHat owns the copyright on the Cygwin source code. RedHat requires
-   that copyright be assigned to RedHat for non-trivial changes to
-   Cygwin. You must fill out a copyright transfer form if you are going
-   to contribute substantial changes to Cygwin.
+   that copyright be assigned to RedHat for non-trivial changes to Cygwin.
+   You must fill out a copyright transfer form if you are going to
+   contribute substantial changes to Cygwin.
 
    12.7. What license applies to Motif?
 
@@ -1717,23 +1706,22 @@ Fatal server error: Failed to activate core devices.
 
    12.8. Isn't "XWin" trademarked by StarNet Communications?
 
-   No. A quick search at the United States Patent and Trademark Office
-   for "XWin" turns up one dead record and one live record. The live
-   record is for a logo belonging to a rock crusher manufacturer based
-   out of Belgium. Neither trademark affects Cygwin/X, as the dead record
-   is no longer enforceable, while the live record is in an unrelated and
+   No. A quick search at the United States Patent and Trademark Office for
+   "XWin" turns up one dead record and one live record. The live record is
+   for a logo belonging to a rock crusher manufacturer based out of
+   Belgium. Neither trademark affects Cygwin/X, as the dead record is no
+   longer enforceable, while the live record is in an unrelated and
    distinct industry; there cannot be confusion between rock crushers and
    computer programs.
-     _________________________________________________________________
+     __________________________________________________________________
 
 Bibliography
 
 Books
 
-   [ScheiflerGettys92] Robert W. Scheifler, James Gettys, Jim Flowers,
-   and David Rosenthal, 1992, 1-55558-088-2, Butterworth-Heinemann, X
-   Window System: The Complete Reference to Xlib, X Protocol, ICCCM, and
-   XLFD.
+   [ScheiflerGettys92] Robert W. Scheifler, James Gettys, Jim Flowers, and
+   David Rosenthal, 1992, 1-55558-088-2, Butterworth-Heinemann, X Window
+   System: The Complete Reference to Xlib, X Protocol, ICCCM, and XLFD.
 
    [Richter99] Jeffrey Richter, 1999, 1-57231-996-8, Microsoft Press,
    Programming Applications for Microsoft Windows: Mastering the critical
@@ -1804,12 +1792,12 @@ X
 
    X11 Forwarding
           Some SSH programs like OpenSSH provide a feature where in
-          addition to the normal text channel opened between the local
-          and the remote host another encrypted channel is opened for the
-          communication between the X11 client and the X11 server. The
-          SSH server will act as proxy-server for the X11 clients and
-          will forward all communication to the X11 server.
-     _________________________________________________________________
+          addition to the normal text channel opened between the local and
+          the remote host another encrypted channel is opened for the
+          communication between the X11 client and the X11 server. The SSH
+          server will act as proxy-server for the X11 clients and will
+          forward all communication to the X11 server.
+     __________________________________________________________________
 
 A. GNU Free Documentation License
 
@@ -1819,22 +1807,22 @@ A. GNU Free Documentation License
      Suite 330, Boston, MA 02111-1307 USA Everyone is permitted to copy
      and distribute verbatim copies of this license document, but
      changing it is not allowed.
-     _________________________________________________________________
+     __________________________________________________________________
 
 0. PREAMBLE
 
    The purpose of this License is to make a manual, textbook, or other
-   written document "free" in the sense of freedom: to assure everyone
-   the effective freedom to copy and redistribute it, with or without
-   modifying it, either commercially or noncommercially. Secondarily,
-   this License preserves for the author and publisher a way to get
-   credit for their work, while not being considered responsible for
-   modifications made by others.
+   written document "free" in the sense of freedom: to assure everyone the
+   effective freedom to copy and redistribute it, with or without
+   modifying it, either commercially or noncommercially. Secondarily, this
+   License preserves for the author and publisher a way to get credit for
+   their work, while not being considered responsible for modifications
+   made by others.
 
-   This License is a kind of "copyleft", which means that derivative
-   works of the document must themselves be free in the same sense. It
-   complements the GNU General Public License, which is a copyleft
-   license designed for free software.
+   This License is a kind of "copyleft", which means that derivative works
+   of the document must themselves be free in the same sense. It
+   complements the GNU General Public License, which is a copyleft license
+   designed for free software.
 
    We have designed this License in order to use it for manuals for free
    software, because free software needs free documentation: a free
@@ -1843,15 +1831,15 @@ A. GNU Free Documentation License
    can be used for any textual work, regardless of subject matter or
    whether it is published as a printed book. We recommend this License
    principally for works whose purpose is instruction or reference.
-     _________________________________________________________________
+     __________________________________________________________________
 
 1. APPLICABILITY AND DEFINITIONS
 
-   This License applies to any manual or other work that contains a
-   notice placed by the copyright holder saying it can be distributed
-   under the terms of this License. The "Document", below, refers to any
-   such manual or work. Any member of the public is a licensee, and is
-   addressed as "you".
+   This License applies to any manual or other work that contains a notice
+   placed by the copyright holder saying it can be distributed under the
+   terms of this License. The "Document", below, refers to any such manual
+   or work. Any member of the public is a licensee, and is addressed as
+   "you".
 
    A "Modified Version" of the Document means any work containing the
    Document or a portion of it, either copied verbatim, or with
@@ -1859,11 +1847,11 @@ A. GNU Free Documentation License
 
    A "Secondary Section" is a named appendix or a front-matter section of
    the Document that deals exclusively with the relationship of the
-   publishers or authors of the Document to the Document's overall
-   subject (or to related matters) and contains nothing that could fall
-   directly within that overall subject. (For example, if the Document is
-   in part a textbook of mathematics, a Secondary Section may not explain
-   any mathematics.) The relationship could be a matter of historical
+   publishers or authors of the Document to the Document's overall subject
+   (or to related matters) and contains nothing that could fall directly
+   within that overall subject. (For example, if the Document is in part a
+   textbook of mathematics, a Secondary Section may not explain any
+   mathematics.) The relationship could be a matter of historical
    connection with the subject or with related matters, or of legal,
    commercial, philosophical, ethical or political position regarding
    them.
@@ -1877,42 +1865,41 @@ A. GNU Free Documentation License
    the Document is released under this License.
 
    A "Transparent" copy of the Document means a machine-readable copy,
-   represented in a format whose specification is available to the
-   general public, whose contents can be viewed and edited directly and
+   represented in a format whose specification is available to the general
+   public, whose contents can be viewed and edited directly and
    straightforwardly with generic text editors or (for images composed of
    pixels) generic paint programs or (for drawings) some widely available
    drawing editor, and that is suitable for input to text formatters or
-   for automatic translation to a variety of formats suitable for input
-   to text formatters. A copy made in an otherwise Transparent file
-   format whose markup has been designed to thwart or discourage
-   subsequent modification by readers is not Transparent. A copy that is
-   not "Transparent" is called "Opaque".
+   for automatic translation to a variety of formats suitable for input to
+   text formatters. A copy made in an otherwise Transparent file format
+   whose markup has been designed to thwart or discourage subsequent
+   modification by readers is not Transparent. A copy that is not
+   "Transparent" is called "Opaque".
 
-   Examples of suitable formats for Transparent copies include plain
-   ASCII without markup, Texinfo input format, LaTeX input format, SGML
-   or XML using a publicly available DTD, and standard-conforming simple
-   HTML designed for human modification. Opaque formats include
-   PostScript, PDF, proprietary formats that can be read and edited only
-   by proprietary word processors, SGML or XML for which the DTD and/or
-   processing tools are not generally available, and the
-   machine-generated HTML produced by some word processors for output
-   purposes only.
+   Examples of suitable formats for Transparent copies include plain ASCII
+   without markup, Texinfo input format, LaTeX input format, SGML or XML
+   using a publicly available DTD, and standard-conforming simple HTML
+   designed for human modification. Opaque formats include PostScript,
+   PDF, proprietary formats that can be read and edited only by
+   proprietary word processors, SGML or XML for which the DTD and/or
+   processing tools are not generally available, and the machine-generated
+   HTML produced by some word processors for output purposes only.
 
-   The "Title Page" means, for a printed book, the title page itself,
-   plus such following pages as are needed to hold, legibly, the material
-   this License requires to appear in the title page. For works in
-   formats which do not have any title page as such, "Title Page" means
-   the text near the most prominent appearance of the work's title,
-   preceding the beginning of the body of the text.
-     _________________________________________________________________
+   The "Title Page" means, for a printed book, the title page itself, plus
+   such following pages as are needed to hold, legibly, the material this
+   License requires to appear in the title page. For works in formats
+   which do not have any title page as such, "Title Page" means the text
+   near the most prominent appearance of the work's title, preceding the
+   beginning of the body of the text.
+     __________________________________________________________________
 
 2. VERBATIM COPYING
 
    You may copy and distribute the Document in any medium, either
    commercially or noncommercially, provided that this License, the
    copyright notices, and the license notice saying this License applies
-   to the Document are reproduced in all copies, and that you add no
-   other conditions whatsoever to those of this License. You may not use
+   to the Document are reproduced in all copies, and that you add no other
+   conditions whatsoever to those of this License. You may not use
    technical measures to obstruct or control the reading or further
    copying of the copies you make or distribute. However, you may accept
    compensation in exchange for copies. If you distribute a large enough
@@ -1920,21 +1907,21 @@ A. GNU Free Documentation License
 
    You may also lend copies, under the same conditions stated above, and
    you may publicly display copies.
-     _________________________________________________________________
+     __________________________________________________________________
 
 3. COPYING IN QUANTITY
 
    If you publish printed copies of the Document numbering more than 100,
    and the Document's license notice requires Cover Texts, you must
-   enclose the copies in covers that carry, clearly and legibly, all
-   these Cover Texts: Front-Cover Texts on the front cover, and
-   Back-Cover Texts on the back cover. Both covers must also clearly and
-   legibly identify you as the publisher of these copies. The front cover
-   must present the full title with all words of the title equally
-   prominent and visible. You may add other material on the covers in
-   addition. Copying with changes limited to the covers, as long as they
-   preserve the title of the Document and satisfy these conditions, can
-   be treated as verbatim copying in other respects.
+   enclose the copies in covers that carry, clearly and legibly, all these
+   Cover Texts: Front-Cover Texts on the front cover, and Back-Cover Texts
+   on the back cover. Both covers must also clearly and legibly identify
+   you as the publisher of these copies. The front cover must present the
+   full title with all words of the title equally prominent and visible.
+   You may add other material on the covers in addition. Copying with
+   changes limited to the covers, as long as they preserve the title of
+   the Document and satisfy these conditions, can be treated as verbatim
+   copying in other respects.
 
    If the required texts for either cover are too voluminous to fit
    legibly, you should put the first ones listed (as many as fit
@@ -1956,34 +1943,33 @@ A. GNU Free Documentation License
    the public.
 
    It is requested, but not required, that you contact the authors of the
-   Document well before redistributing any large number of copies, to
-   give them a chance to provide you with an updated version of the
-   Document.
-     _________________________________________________________________
+   Document well before redistributing any large number of copies, to give
+   them a chance to provide you with an updated version of the Document.
+     __________________________________________________________________
 
 4. MODIFICATIONS
 
    You may copy and distribute a Modified Version of the Document under
-   the conditions of sections 2 and 3 above, provided that you release
-   the Modified Version under precisely this License, with the Modified
+   the conditions of sections 2 and 3 above, provided that you release the
+   Modified Version under precisely this License, with the Modified
    Version filling the role of the Document, thus licensing distribution
-   and modification of the Modified Version to whoever possesses a copy
-   of it. In addition, you must do these things in the Modified Version:
+   and modification of the Modified Version to whoever possesses a copy of
+   it. In addition, you must do these things in the Modified Version:
     A. Use in the Title Page (and on the covers, if any) a title distinct
        from that of the Document, and from those of previous versions
        (which should, if there were any, be listed in the History section
        of the Document). You may use the same title as a previous version
        if the original publisher of that version gives permission.
-    B. List on the Title Page, as authors, one or more persons or
-       entities responsible for authorship of the modifications in the
-       Modified Version, together with at least five of the principal
-       authors of the Document (all of its principal authors, if it has
-       less than five).
+    B. List on the Title Page, as authors, one or more persons or entities
+       responsible for authorship of the modifications in the Modified
+       Version, together with at least five of the principal authors of
+       the Document (all of its principal authors, if it has less than
+       five).
     C. State on the Title page the name of the publisher of the Modified
        Version, as the publisher.
     D. Preserve all the copyright notices of the Document.
-    E. Add an appropriate copyright notice for your modifications
-       adjacent to the other copyright notices.
+    E. Add an appropriate copyright notice for your modifications adjacent
+       to the other copyright notices.
     F. Include, immediately after the copyright notices, a license notice
        giving the public permission to use the Modified Version under the
        terms of this License, in the form shown in the Addendum below.
@@ -2003,8 +1989,8 @@ A. GNU Free Documentation License
        the network locations given in the Document for previous versions
        it was based on. These may be placed in the "History" section. You
        may omit a network location for a work that was published at least
-       four years before the Document itself, or if the original
-       publisher of the version it refers to gives permission.
+       four years before the Document itself, or if the original publisher
+       of the version it refers to gives permission.
     K. In any section entitled "Acknowledgements" or "Dedications",
        preserve the section's title, and preserve in the section all the
        substance and tone of each of the contributor acknowledgements
@@ -2032,18 +2018,18 @@ A. GNU Free Documentation License
 
    You may add a passage of up to five words as a Front-Cover Text, and a
    passage of up to 25 words as a Back-Cover Text, to the end of the list
-   of Cover Texts in the Modified Version. Only one passage of
-   Front-Cover Text and one of Back-Cover Text may be added by (or
-   through arrangements made by) any one entity. If the Document already
-   includes a cover text for the same cover, previously added by you or
-   by arrangement made by the same entity you are acting on behalf of,
-   you may not add another; but you may replace the old one, on explicit
+   of Cover Texts in the Modified Version. Only one passage of Front-Cover
+   Text and one of Back-Cover Text may be added by (or through
+   arrangements made by) any one entity. If the Document already includes
+   a cover text for the same cover, previously added by you or by
+   arrangement made by the same entity you are acting on behalf of, you
+   may not add another; but you may replace the old one, on explicit
    permission from the previous publisher that added the old one.
 
    The author(s) and publisher(s) of the Document do not by this License
    give permission to use their names for publicity for or to assert or
    imply endorsement of any Modified Version.
-     _________________________________________________________________
+     __________________________________________________________________
 
 5. COMBINING DOCUMENTS
 
@@ -2060,74 +2046,74 @@ A. GNU Free Documentation License
    different contents, make the title of each such section unique by
    adding at the end of it, in parentheses, the name of the original
    author or publisher of that section if known, or else a unique number.
-   Make the same adjustment to the section titles in the list of
-   Invariant Sections in the license notice of the combined work.
+   Make the same adjustment to the section titles in the list of Invariant
+   Sections in the license notice of the combined work.
 
-   In the combination, you must combine any sections entitled "History"
-   in the various original documents, forming one section entitled
-   "History"; likewise combine any sections entitled "Acknowledgements",
-   and any sections entitled "Dedications". You must delete all sections
-   entitled "Endorsements."
-     _________________________________________________________________
+   In the combination, you must combine any sections entitled "History" in
+   the various original documents, forming one section entitled "History";
+   likewise combine any sections entitled "Acknowledgements", and any
+   sections entitled "Dedications". You must delete all sections entitled
+   "Endorsements."
+     __________________________________________________________________
 
 6. COLLECTIONS OF DOCUMENTS
 
    You may make a collection consisting of the Document and other
    documents released under this License, and replace the individual
-   copies of this License in the various documents with a single copy
-   that is included in the collection, provided that you follow the rules
-   of this License for verbatim copying of each of the documents in all
-   other respects.
+   copies of this License in the various documents with a single copy that
+   is included in the collection, provided that you follow the rules of
+   this License for verbatim copying of each of the documents in all other
+   respects.
 
    You may extract a single document from such a collection, and
    distribute it individually under this License, provided you insert a
    copy of this License into the extracted document, and follow this
    License in all other respects regarding verbatim copying of that
    document.
-     _________________________________________________________________
+     __________________________________________________________________
 
 7. AGGREGATION WITH INDEPENDENT WORKS
 
    A compilation of the Document or its derivatives with other separate
    and independent documents or works, in or on a volume of a storage or
-   distribution medium, does not as a whole count as a Modified Version
-   of the Document, provided no compilation copyright is claimed for the
+   distribution medium, does not as a whole count as a Modified Version of
+   the Document, provided no compilation copyright is claimed for the
    compilation. Such a compilation is called an "aggregate", and this
    License does not apply to the other self-contained works thus compiled
-   with the Document, on account of their being thus compiled, if they
-   are not themselves derivative works of the Document.
+   with the Document, on account of their being thus compiled, if they are
+   not themselves derivative works of the Document.
 
    If the Cover Text requirement of section 3 is applicable to these
    copies of the Document, then if the Document is less than one quarter
    of the entire aggregate, the Document's Cover Texts may be placed on
    covers that surround only the Document within the aggregate. Otherwise
    they must appear on covers around the whole aggregate.
-     _________________________________________________________________
+     __________________________________________________________________
 
 8. TRANSLATION
 
-   Translation is considered a kind of modification, so you may
-   distribute translations of the Document under the terms of section 4.
-   Replacing Invariant Sections with translations requires special
-   permission from their copyright holders, but you may include
-   translations of some or all Invariant Sections in addition to the
-   original versions of these Invariant Sections. You may include a
-   translation of this License provided that you also include the
-   original English version of this License. In case of a disagreement
-   between the translation and the original English version of this
-   License, the original English version will prevail.
-     _________________________________________________________________
+   Translation is considered a kind of modification, so you may distribute
+   translations of the Document under the terms of section 4. Replacing
+   Invariant Sections with translations requires special permission from
+   their copyright holders, but you may include translations of some or
+   all Invariant Sections in addition to the original versions of these
+   Invariant Sections. You may include a translation of this License
+   provided that you also include the original English version of this
+   License. In case of a disagreement between the translation and the
+   original English version of this License, the original English version
+   will prevail.
+     __________________________________________________________________
 
 9. TERMINATION
 
-   You may not copy, modify, sublicense, or distribute the Document
-   except as expressly provided for under this License. Any other attempt
-   to copy, modify, sublicense or distribute the Document is void, and
-   will automatically terminate your rights under this License. However,
+   You may not copy, modify, sublicense, or distribute the Document except
+   as expressly provided for under this License. Any other attempt to
+   copy, modify, sublicense or distribute the Document is void, and will
+   automatically terminate your rights under this License. However,
    parties who have received copies, or rights, from you under this
-   License will not have their licenses terminated so long as such
-   parties remain in full compliance.
-     _________________________________________________________________
+   License will not have their licenses terminated so long as such parties
+   remain in full compliance.
+     __________________________________________________________________
 
 10. FUTURE REVISIONS OF THIS LICENSE
 
@@ -2145,13 +2131,13 @@ A. GNU Free Documentation License
    Free Software Foundation. If the Document does not specify a version
    number of this License, you may choose any version ever published (not
    as a draft) by the Free Software Foundation.
-     _________________________________________________________________
+     __________________________________________________________________
 
 How to use this License for your documents
 
    To use this License in a document you have written, include a copy of
-   the License in the document and put the following copyright and
-   license notices just after the title page:
+   the License in the document and put the following copyright and license
+   notices just after the title page:
 
      Copyright (c) YEAR YOUR NAME. Permission is granted to copy,
      distribute and/or modify this document under the terms of the GNU
@@ -2164,8 +2150,8 @@ How to use this License for your documents
 
    If you have no Invariant Sections, write "with no Invariant Sections"
    instead of saying which ones are invariant. If you have no Front-Cover
-   Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts
-   being LIST"; likewise for Back-Cover Texts.
+   Texts, write "no Front-Cover Texts" instead of "Front-Cover Texts being
+   LIST"; likewise for Back-Cover Texts.
 
    If your document contains nontrivial examples of program code, we
    recommend releasing these examples in parallel under your choice of

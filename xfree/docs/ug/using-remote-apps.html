@@ -13,11 +13,11 @@ REL="UP"
 TITLE="Using Cygwin/X"
 HREF="using.html"/><LINK
 REL="PREVIOUS"
-TITLE="Remote sessions via XDMCP"
-HREF="using-remote-session.html"/><LINK
+TITLE="Shared memory support"
+HREF="using-shared-memory.html"/><LINK
 REL="NEXT"
-TITLE="Hardware Accelerated OpenGL (AIGLX)"
-HREF="using-aiglx.html"/><META
+TITLE="Remote sessions via XDMCP"
+HREF="using-remote-session.html"/><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html;charset=utf-8"/></HEAD
 ><BODY
@@ -42,7 +42,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="using-remote-session.html"
+HREF="using-shared-memory.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -56,7 +56,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="using-aiglx.html"
+HREF="using-remote-session.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -74,19 +74,26 @@ NAME="using-remote-apps"
 >Displaying remote clients</A
 ></H1
 ><P
->Displaying remote X clients with Cygwin/X is nearly identical
-to displaying remote X clients with any other X Server.  You may use
-the secure <B
+>Displaying remote X clients with Cygwin/X is identical
+to displaying remote X clients with any other X Server.</P
+><P
+>It is recommended that you use the secure method of tunnelling
+the X connection over <B
 CLASS="command"
 >ssh</B
-> method, or the insecure
-<B
+>.
+</P
+><P
+>&#13;Alternatively, you can use the host-based access control provided by the
+X server, connecting to the remote machine using <B
 CLASS="command"
 >telnet</B
-> or <B
+> or
+<B
 CLASS="command"
 >rsh</B
-> method (not recommended).</P
+> and directing clients to connect to the server by setting
+the DISPLAY environment variable.  This method is insecure and not recommended.</P
 ><DIV
 CLASS="sect2"
 ><H2
@@ -207,11 +214,22 @@ this will break X11 forwarding.
 <B
 CLASS="command"
 >ssh</B
-> session, for example,
-<KBD
-CLASS="userinput"
->xterm&amp;</KBD
-> will launch an xterm running on your
+> session, for example:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ xterm &amp;
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;will launch an xterm running on your
 remote host that will display on your Cygwin/X screen.</P
 ></LI
 ><LI
@@ -274,6 +292,8 @@ CLASS="sect2"
 NAME="using-remote-apps-telnet"
 >Insecure telnet or rsh (Not recommended)</A
 ></H2
+><P
+>An example of connecting remote clients using host-based authorization.</P
 ><P
 >On your Windows machine:</P
 ><OL
@@ -429,16 +449,31 @@ CLASS="replaceable"
 ></LI
 ><LI
 ><P
->You can now launch remote X clients, for example,
-<KBD
-CLASS="userinput"
->xterm&amp;</KBD
-> will launch an xterm running on your
+>You can now launch remote X clients in your
+<B
+CLASS="command"
+>ssh</B
+> session, for example:</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ xterm &amp;
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;will launch an xterm running on your
 remote host that will display on your Cygwin/X screen.</P
 ></LI
 ><LI
 ><P
->Launch other remote clients in the same manner; I recommend
+>Launch other remote clients in the same manner. I recommend
 starting the remote clients in the background, by appending
 <TT
 CLASS="literal"
@@ -447,6 +482,9 @@ CLASS="literal"
 open several <B
 CLASS="command"
 >telnet</B
+> or <B
+CLASS="command"
+>rsh</B
 > sessions.</P
 ></LI
 ></OL
@@ -469,7 +507,7 @@ and password may be transmitted in clear across the network between you and the 
 (2) the X protocol is transmitted in clear across the network between you and the
 remote host, and (3) you have allowed any user on the remote host to connect to your
 X server and monitor your X session.
-For these reasons, use ssh forwarding rather than telnet, if at all possible.
+For these reasons, use ssh forwarding, if at all possible.
 </P
 ></BLOCKQUOTE
 ></DIV
@@ -491,7 +529,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="using-remote-session.html"
+HREF="using-shared-memory.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -509,7 +547,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="using-aiglx.html"
+HREF="using-remote-session.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -519,7 +557,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Remote sessions via XDMCP</TD
+>Shared memory support</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -533,7 +571,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Hardware Accelerated OpenGL (AIGLX)</TD
+>Remote sessions via XDMCP</TD
 ></TR
 ></TABLE
 ></DIV
