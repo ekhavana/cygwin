@@ -555,17 +555,15 @@ Required Packages for Building
        fileutils, findutils, flex, gawk, gcc, git, libtool, make, patch,
        pkg-config, sed, tar
      * Required protocol headers:
-       bigreqsproto, compositeproto, damageproto, dmxproto, evieext,
-       fixesproto, fontsproto, glproto, inputproto, kbproto, randrproto,
-       recordproto, renderproto, resourceproto, scrnsaverproto,
-       windowswmproto, xcmiscproto, xextproto, xineramaproto, xproto,
-       x86bigfontproto
+       bigreqsproto, compositeproto, damageproto, dmxproto, fixesproto,
+       fontsproto, glproto, inputproto, kbproto, randrproto, recordproto,
+       renderproto, resourceproto, scrnsaverproto, windowswmproto,
+       xcmiscproto, xextproto, xineramaproto, xproto, xf86bigfontproto
      * Required development libraries:
-       libdmx-devel, libfontenc-devel, libfreetype2-devel,
-       libgcrypt-devel, libGL-devel, libpixman1-devel, libX11-devel,
-       libXau-devel, libXaw-devel, libXdmcp-devel, libXext-devel,
-       libXfont-devel, libXinerama-devel, libXmu-devel, libXpm-devel,
-       libXRes-devel, libxkbfile-devel, zlib
+       libdmx-devel, libfontenc-devel, libfreetype-devel, libGL-devel,
+       libpixman1-devel, libX11-devel, libXau-devel, libXaw-devel,
+       libXdmcp-devel, libXext-devel, libXfont-devel, libXinerama-devel,
+       libXmu-devel, libXpm-devel, libXRes-devel, libxkbfile-devel, zlib
      * Other miscellaneous required packages :
        font-util, khronos-opengl-registry, xorg-util-macros, xtrans
 
@@ -1039,16 +1037,19 @@ Packaging a Documentation Distribution
 
 AC_INIT(cygwin-x-doc, 1.0.0)
 
-    2. Open a shell on your documentation build host; you should see a
-       window like the following:
+    2. Commit this change to CVS and apply an appropriate tag:
 
-Username@CygwinHost ~
-$
+Username@CygwinHost ~/cygwin-x-doc-1.0.0
+$ cvs ci configure.ac
+[...]
+Username@CygwinHost ~/cygwin-x-doc-1.0.0
+$ cvs tag -c VERSION_1_0_0
+[...]
 
     3. Change the current directory to the documentation source code build
        directory:
 
-Username@CygwinHost ~
+Username@CygwinHost ~/cygwin-x-doc-1.0.0
 $ cd cygwin-x-doc-1.0.0/build
 
 Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
@@ -1063,13 +1064,6 @@ $ make distcheck
        in the current directory in a file called
        cygwin-x-doc-1.0.0.tar.bz2.
     6. Building the documentation is now complete.
-
-   Don't forget to commit this change to CVS and apply an appropriate tag.
-   e.g:
-Username@CygwinHost cygwin-x-doc-1.0.0
-$ cvs ci
-Username@CygwinHost cygwin-x-doc-1.0.0
-$ cvs tag VERSION_1_0_0
      __________________________________________________________________
 
 Chapter 4. Web Site Maintenance
@@ -1080,17 +1074,19 @@ Chapter 4. Web Site Maintenance
 
 Updating the documentation on the web site
 
-   A simple way of updating the documentation from the cywin-x-doc package
-   shown on the web site is to build the documentation directly into a CVS
-   checkout of web-site and then check it in.
+   A simple way of updating the documentation shown on the web site from
+   the cywin-x-doc package is to build the documentation, then install it
+   into a CVS checkout of web-site and then check it in.
+$ cd path-to-website-checkout
 $ export CVS_RSH=ssh
 $ cvs -z9 -d :ext:user@sourceware.org:/cvs/cygwin/ co htdocs/xfree
 [...]
-$ cd htdocs/xfree/docs
-$ path-to-cygwin-x-doc/configure --enable-hardcopy
+$ cd path-to-cygwin-x-doc-checkout
+$ ./configure --enable-hardcopy --with-docdir=path-to-website-checkout/htdocs/xf
+ree/docs
 $ make
-$ cvs up
-[...]
+$ make install
+$ cd path-to-website-checkout/htdocs/xfree/docs
 $ cvs ci
      __________________________________________________________________
 
@@ -1847,4 +1843,4 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2012-11-18 00:29 .
+   at 2013-04-03 19:03 .

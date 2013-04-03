@@ -83,8 +83,8 @@ NAME="updating-documentation-on-website"
 >Updating the documentation on the web site</A
 ></H1
 ><P
->&#13;A simple way of updating the documentation from the cywin-x-doc package shown on the web site
-is to build the documentation directly into a CVS checkout of web-site and then check it in.
+>&#13;A simple way of updating the documentation shown on the web site from the cywin-x-doc package
+is to build the documentation, then install it into a CVS checkout of web-site and then check it in.
 </P
 ><TABLE
 BORDER="0"
@@ -94,14 +94,15 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;$ export CVS_RSH=ssh
+>&#13;$ cd path-to-website-checkout
+$ export CVS_RSH=ssh
 $ cvs -z9 -d :ext:user@sourceware.org:/cvs/cygwin/ co htdocs/xfree
 [...]
-$ cd htdocs/xfree/docs
-$ path-to-cygwin-x-doc/configure --enable-hardcopy
+$ cd path-to-cygwin-x-doc-checkout
+$ ./configure --enable-hardcopy --with-docdir=path-to-website-checkout/htdocs/xfree/docs
 $ make
-$ cvs up
-[...]
+$ make install
+$ cd path-to-website-checkout/htdocs/xfree/docs
 $ cvs ci
 </PRE
 ></TD
