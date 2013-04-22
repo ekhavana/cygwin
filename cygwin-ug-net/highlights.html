@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Highlights of Cygwin Functionality</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.76.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="brief-history.html" title="A brief history of the Cygwin project"><link rel="next" href="ov-new1.7.html" title="What's new and what changed in Cygwin 1.7"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Highlights of Cygwin Functionality</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="brief-history.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="ov-new1.7.html">Next</a></td></tr></table><hr></div><div class="sect1" title="Highlights of Cygwin Functionality"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="highlights"></a>Highlights of Cygwin Functionality</h2></div></div></div><div class="sect2" title="Introduction"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-intro"></a>Introduction</h3></div></div></div><p>When a binary linked
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Highlights of Cygwin Functionality</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="brief-history.html" title="A brief history of the Cygwin project"><link rel="next" href="ov-new1.7.html" title="What's new and what changed in Cygwin 1.7"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Highlights of Cygwin Functionality</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="brief-history.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="ov-new1.7.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="highlights"></a>Highlights of Cygwin Functionality</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-intro"></a>Introduction</h3></div></div></div><p>When a binary linked
 against the library is executed, the Cygwin DLL is loaded into the
 application's text segment.  Because we are trying to emulate a UNIX kernel
 which needs access to all processes running under it, the first Cygwin DLL to
@@ -9,7 +9,7 @@ purposes.  Every process also has a per_process structure that contains
 information such as process id, user id, signal masks, and other similar
 process-specific information.</p><p>The DLL is implemented as a standard DLL in the Win32 subsystem.  Under
 the hood it's using the Win32 API, as well as the native NT API, where
-appropriate.</p><div class="note" title="Note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Some restrictions apply for calls to the Win32 API.
+appropriate.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Some restrictions apply for calls to the Win32 API.
 For details, see <a class="xref" href="setup-env.html#setup-env-win32" title="Restricted Win32 environment">the section called “Restricted Win32 environment”</a>,
 as well as <a class="xref" href="using.html#pathnames-win32-api" title="Using the Win32 file API in Cygwin applications">the section called “Using the Win32 file API in Cygwin applications”</a>.</p></div><p>The native NT API is used mainly for speed, as well as to access
 NT capabilities which are useful to implement certain POSIX features, but
@@ -21,7 +21,7 @@ compatibility do not mesh well with the native Windows API.  If you mix
 POSIX calls with Windows calls in your program it is possible that you
 will see uneven results.  In particular, Cygwin signals will not work
 with Windows functions which block and Windows functions which accept
-filenames may be confused by Cygwin's support for long filenames.</p></div><div class="sect2" title="Permissions and Security"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-perm"></a>Permissions and Security</h3></div></div></div><p>Windows NT includes a sophisticated security model based on Access
+filenames may be confused by Cygwin's support for long filenames.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-perm"></a>Permissions and Security</h3></div></div></div><p>Windows NT includes a sophisticated security model based on Access
 Control Lists (ACLs).  Cygwin maps Win32 file ownership and permissions to
 ACLs by default, on file systems supporting them (usually NTFS).  Solaris
 style ACLs and accompanying function calls are also supported.
@@ -39,7 +39,7 @@ objects to which they have no rights under Windows.  However there is no
 guarantee that Cygwin is as secure as the Windows it runs on. Cygwin
 processes share some variables and are thus easier targets of denial of
 service type of attacks.
-</p></div><div class="sect2" title="File Access"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-files"></a>File Access</h3></div></div></div><p>Cygwin supports
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-files"></a>File Access</h3></div></div></div><p>Cygwin supports
 both POSIX- and Win32-style paths, using either forward or back slashes as the
 directory delimiter.  Paths coming into the DLL are translated from POSIX to
 native NT as needed.  From the application perspective, the file system is
@@ -117,7 +117,7 @@ privileged call.  Any user may call it.  Second, the chroot environment
 isn't safe against native windows processes.  Given that, chroot in Cygwin
 is only a hack which pretends security where there is none.  For that reason
 the usage of chroot is discouraged.
-</p></div><div class="sect2" title="Text Mode vs. Binary Mode"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-textvsbinary"></a>Text Mode vs. Binary Mode</h3></div></div></div><p>It is often important that files created by native Windows
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-textvsbinary"></a>Text Mode vs. Binary Mode</h3></div></div></div><p>It is often important that files created by native Windows
 applications be interoperable with Cygwin applications.  For example, a
 file created by a native Windows text editor should be readable by a
 Cygwin application, and vice versa.</p><p>Unfortunately, UNIX and Win32 have different end-of-line
@@ -130,7 +130,7 @@ the expense of violating the POSIX requirement that text and binary mode
 be identical.  Consequently, processes that attempt to lseek through
 text files can no longer rely on the number of bytes read to be an
 accurate indicator of position within the file.  For this reason, Cygwin
-allows you to choose the mode in which a file is read in several ways.</p></div><div class="sect2" title="ANSI C Library"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-ansiclib"></a>ANSI C Library</h3></div></div></div><p>We chose to include Red Hat's own existing ANSI C library
+allows you to choose the mode in which a file is read in several ways.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-ansiclib"></a>ANSI C Library</h3></div></div></div><p>We chose to include Red Hat's own existing ANSI C library
 "newlib" as part of the library, rather than write all of the lib C
 and math calls from scratch.  Newlib is a BSD-derived ANSI C library,
 previously only used by cross-compilers for embedded systems
@@ -142,7 +142,7 @@ effort.  In addition, Cygwin uses Doug Lea's free malloc
 implementation that successfully balances speed and compactness.  The
 library accesses the malloc calls via an exported function pointer.
 This makes it possible for a Cygwin process to provide its own
-malloc if it so desires.</p></div><div class="sect2" title="Process Creation"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-process"></a>Process Creation</h3></div></div></div><p>The <code class="function">fork</code> call in Cygwin is particularly interesting
+malloc if it so desires.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-process"></a>Process Creation</h3></div></div></div><p>The <code class="function">fork</code> call in Cygwin is particularly interesting
 because it does not map well on top of the Win32 API.  This makes it very
 difficult to implement correctly.  Currently, the Cygwin fork is a
 non-copy-on-write implementation similar to what was present in early
@@ -178,12 +178,12 @@ Win32, Cygwin has to invent its own Process IDs (PIDs).  As a
 result, when a process performs multiple exec calls, there will be
 multiple Windows PIDs associated with a single Cygwin PID.  In some
 cases, stubs of each of these Win32 processes may linger, waiting for
-their exec'd Cygwin process to exit.</p></div><div class="sect3" title="Problems with process creation"><div class="titlepage"><div><div><h4 class="title"><a name="ov-hi-process-problems"></a>Problems with process creation</h4></div></div></div><p>The semantics of <code class="literal">fork</code> require that a forked
+their exec'd Cygwin process to exit.</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ov-hi-process-problems"></a>Problems with process creation</h4></div></div></div><p>The semantics of <code class="literal">fork</code> require that a forked
 child process have <span class="emphasis"><em>exactly</em></span> the same address
 space layout as its parent. However, Windows provides no native
 support for cloning address space between processes and several
 features actively undermine a reliable <code class="literal">fork</code>
-implementation. Three issues are especially prevalent:</p><div class="itemizedlist"><ul class="itemizedlist" type="disc"><li class="listitem">DLL base address collisions. Unlike *nix shared
+implementation. Three issues are especially prevalent:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">DLL base address collisions. Unlike *nix shared
 libraries, which use "position-independent code", Windows shared
 libraries assume a fixed base address. Whenever the hard-wired
 address ranges of two DLLs collide (which occurs quite often), the
@@ -215,7 +215,7 @@ problem is to remove (usually uninstall) the offending app.  See
 BLODA.</li></ul></div><p>In summary, current Windows implementations make it
 impossible to implement a perfectly reliable fork, and occasional
 fork failures are inevitable.
-</p></div><div class="sect2" title="Signals"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-signals"></a>Signals</h3></div></div></div><p>When
+</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-signals"></a>Signals</h3></div></div></div><p>When
 a Cygwin process starts, the library starts a secondary thread for
 use in signal handling.  This thread waits for Windows events used to
 pass signals to the process.  When a process notices it has a signal,
@@ -236,7 +236,7 @@ the signal is processed, the signal handler signals the event that it
 is done.  This process keeps intraprocess signals synchronous, as
 required by POSIX.</p><p>Most standard UNIX signals are provided.  Job
 control works as expected in shells that support
-it.</p></div><div class="sect2" title="Sockets"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-sockets"></a>Sockets</h3></div></div></div><p>Socket-related calls in Cygwin basically call the functions by the
+it.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-sockets"></a>Sockets</h3></div></div></div><p>Socket-related calls in Cygwin basically call the functions by the
 same name in Winsock, Microsoft's implementation of Berkeley sockets, but
 with lots of tweaks.  All sockets are non-blocking under the hood to allow
 to interrupt blocking calls by POSIX signals.  Additional bookkeeping is
@@ -261,7 +261,7 @@ Windows 2003 and earlier.  Full IPv6 support became available starting
 with Windows Vista and Windows Server 2008.  Cygwin does not depend on
 the underlying OS for the (newly implemented) <code class="function">getaddrinfo</code>
 and <code class="function">getnameinfo</code> functions.  Cygwin 1.7.0 adds
-replacement functions which implement the full functionality for IPv4.</p></div><div class="sect2" title="Select"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-select"></a>Select</h3></div></div></div><p>The UNIX <code class="function">select</code> function is another
+replacement functions which implement the full functionality for IPv4.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-select"></a>Select</h3></div></div></div><p>The UNIX <code class="function">select</code> function is another
 call that does not map cleanly on top of the Win32 API.  Much to our
 dismay, we discovered that the Win32 select in Winsock only worked on
 socket handles.  Our implementation allows select to function normally
