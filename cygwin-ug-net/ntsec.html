@@ -62,7 +62,7 @@ treat these SIDs as identifying two separate accounts.  One is
 Different SID, different account.  Full stop.  </p><p>The last part of the SID, the so called "Relative IDentifier" (RID),
 is by default used as UID and/or GID under Cygwin when you create the
 <code class="filename">/etc/passwd</code> and <code class="filename">/etc/group</code>
-files using the <span class="command"><strong><a class="link" href="">mkpasswd</a></strong></span> and <span class="command"><strong><a class="link" href="">mkgroup</a></strong></span>
+files using the <span class="command"><strong><a class="link" href="using-utils.html#mkpasswd" title="mkpasswd">mkpasswd</a></strong></span> and <span class="command"><strong><a class="link" href="using-utils.html#mkgroup" title="mkgroup">mkgroup</a></strong></span>
 tools.  Domain account UIDs and GIDs are offset by 10000 by default
 which might be a bit low for very big organizations.  Fortunately there's
 an option in both tools to change the offset...</p><p>Do you still remember the SIDs with special meaning?  In offical
@@ -480,7 +480,7 @@ with password.  The password gets stored two-way encrypted in a hidden,
 obfuscated area of the registry, the LSA private registry area.  This
 part of the registry contains, for instance, the passwords of the Windows
 services which run under some non-default user account.</p><p>So what we do is to utilize this registry area for the purpose of
-<span class="command"><strong>set(e)uid</strong></span>.  The Cygwin command <span class="command"><strong><a class="link" href="">passwd</a> -R</strong></span> allows a user to specify
+<span class="command"><strong>set(e)uid</strong></span>.  The Cygwin command <span class="command"><strong><a class="link" href="using-utils.html#passwd" title="passwd">passwd</a> -R</strong></span> allows a user to specify
 his/her password for storage in this registry area.  When this user
 tries to login using ssh with public key authentication, Cygwin's
 <span class="command"><strong>set(e)uid</strong></span> examines the LSA private registry area and
