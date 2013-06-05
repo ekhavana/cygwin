@@ -37,14 +37,21 @@ due to certain windows-specific errors.  These errors usually occur when
 processes are being started while a user is logging off.
 </p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)reset_com</code> - if set, serial ports are reset
 to 9600-8-N-1 with no flow control when used. This is done at open
-time and when handles are inherited.  Defaults to set.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)winsymlinks</code> - if set, Cygwin creates
-symlinks as Windows shortcuts with a special header and the R/O attribute
-set. If not set, Cygwin creates symlinks as plain files with a magic number,
-a path and the system attribute set. Defaults to not set since plain
-file symlinks are faster to write and faster to read.</p><p>Please note that symlinks created under Cygwin 1.7 or later are
-not readable by older Cygwin releases because the new symlinks use UTF-16
-to encode the target filename, while the old symlinks used the current
-ANSI or OEM charset.</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Obsolete options</h3></div></div></div><p>
+time and when handles are inherited.  Defaults to set.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">winsymlinks:{lnk,native,nativestrict}</code> - if set to just
+<code class="literal">winsymlinks</code> or <code class="literal">winsymlinks:lnk</code>,
+Cygwin creates symlinks as Windows shortcuts with a special header and
+the R/O attribute set.</p><p>If set to <code class="literal">winsymlinks:native</code> or
+<code class="literal">winsymlinks:nativestrict</code>, Cygwin creates symlinks as
+native Windows symlinks on filesystems and OS versions supporting them.
+If the OS is known not to support native symlinks (Windows XP, Windows
+Server 2003), a warning message is produced once per session.</p><p>The difference between <code class="literal">winsymlinks:native</code> and
+<code class="literal">winsymlinks:nativestrict</code> is this:  If the filesystem
+supports native symlinks and Cygwin fails to create a native symlink for
+some reason, it will fall back to creating Cygwin default symlinks
+with <code class="literal">winsymlinks:native</code>, while with
+<code class="literal">winsymlinks:nativestrict</code> the <code class="literal">symlink(2)</code>
+system call will immediately fail.</p><p>For more information on symbolic links, see
+<a class="xref" href="using.html#pathnames-symlinks" title="Symbolic links">the section called “Symbolic links”</a>.</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Obsolete options</h3></div></div></div><p>
 Certain CYGWIN options available in past releases have been removed in
 Cygwin 1.7 for one reason or another.  These obsolete options are listed
 below.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)binmode</code> - This option has been removed because
