@@ -5,10 +5,28 @@ related function calls.  A real chroot functionality is not supported by
 Windows however.</p><p><code class="function">clock_nanosleep</code> currently supports only
 CLOCK_REALTIME and CLOCK_MONOTONIC.  <code class="function">clock_setres</code>,
 <code class="function">clock_settime</code>, and <code class="function">timer_create</code>
-currently support only CLOCK_REALTIME.</p><p>BSD file locks created via <code class="function">flock</code> are only
+currently support only CLOCK_REALTIME.</p><p>POSIX file locks via <code class="function">fcntl</code> or
+<code class="function">lockf</code>, as well as BSD <code class="function">flock</code> locks
+are advisory locks.  They don't interact with Windows mandatory locks, nor
+do POSIX fcntl locks interfere with BSD flock locks or vice versa.</p><p>BSD file locks created via <code class="function">flock</code> are only
 propagated to the direct parent process, not to grand parents or sibling
-processes.  The locks are only valid in the creating process, its parent,
-and subsequently started child processes sharing the same file descriptor.
+processes.  The locks are only valid in the creating process, its parent
+process, and subsequently started child processes sharing the same file
+descriptor.</p><p>In very rare circumstances an application would want to use Windows
+mandatory locks to interact with non-Cygwin Windows processes accessing the
+same file (databases, etc).  For these purposes, the entire locking mechanism
+(fcntl/flock/lockf) can be switched to Windows mandatory locks on a
+per-descriptor/per-process basis.  For this purpose, use the call
+
+</p><pre class="screen">
+  fcntl (fd, F_LCK_MANDATORY, 1);
+</pre><p>
+
+After that, all file locks on this descriptor will follow Windows mandatory
+record locking semantics: Locks are per-descriptor/per-process; locks are not
+propagated to child processes, not even via <code class="function">execve</code>;
+no atmoic replacement of read locks with write locks and vice versa on the
+same descriptor; locks have to be unlocked exactly as they have been locked.
 </p><p><code class="function">fpclassify</code>, <code class="function">isfinite</code>,
 <code class="function">isgreater</code>, <code class="function">isgreaterequal</code>,
 <code class="function">isinf</code>, <code class="function">isless</code>,
