@@ -96,7 +96,7 @@ point for new developers.
 >&#13;On installing the source code package, setup will unpack it under
 /usr/src.  You should find the source archive,
 any needed .patch files, and a .cygport file which automates the distribution
-build and packaging tasks.
+configuration, build and packaging tasks.
 </P
 ><P
 >&#13;The sources can unpacked and prepared using cygport as follows:
@@ -116,12 +116,15 @@ Username@CygwinHost /usr/src
 $ cygport xorg-server-n.n.n-n.cygport prep
 [lots of output as archive is unpacked and patches applied]
 
+$ cygport xorg-server-n.n.n-n.cygport compile
+[lots of output as source is configured and built]
+
 Username@CygwinHost /usr/src
 $ cd xorg-server-n.n.n-n/src/xorg-server-n.n.n/
+[navigate to the source directory]
 
 Username@CygwinHost /usr/src/xorg-server-n.n.n-n/src/xorg-server-n.n.n/
-$ ./autogen.sh -V
-[more output as autoconfiguration scripts are regenerated]
+$
 </PRE
 ></TD
 ></TR
@@ -134,7 +137,7 @@ CLASS="note"
 ><B
 >Note: </B
 >
-Alternatively you may manually untar the archive and apply the patches
+Alternatively you may manually untar the archive and apply any patches
 (in the correct order).
 </P
 ></BLOCKQUOTE
@@ -195,17 +198,29 @@ WIDTH="100%"
 CLASS="screen"
 >&#13;Username@CygwinHost ~
 $ git clone git://cygwin-ports.git.sourceforge.net/gitroot/cygwin-ports/xorg-server
-
-Username@CygwinHost ~
-$ cd xorg-server
 </PRE
 ></TD
 ></TR
 ></TABLE
 ><P
->&#13;This will obtain a .cygport file. and any .patch files.
-You can then add the source archive by downloading it with 'cygport xorg-server-n.n.n-n.cygport download',
-and proceed as in <A
+>&#13;This will obtain a .cygport file. and any .patch files.  You can then add the source archive by downloading it with cygport.
+</P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;Username@CygwinHost ~
+$ cygport xorg-server-n.n.n-n.cygport download
+</PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;Then proceed as in <A
 HREF="prog-obtaining-source.html#prog-source-cygwin-setup"
 >the Section called <I
 >Obtaining via Cygwin setup</I
@@ -230,20 +245,20 @@ TARGET="_top"
 >.
 </P
 ><P
->Read-only access to the
+>Anonymous read-only access to the
 <A
 HREF="http://cgit.freedesktop.org/xorg/xserver/"
 TARGET="_top"
 >&#13;X Window System git source
 </A
->.
+>
 tree hosted on
 <A
 HREF="http://freedesktop.org/Software/xorg"
 TARGET="_top"
 >freedesktop.org</A
 >
-is also available.</P
+is available.</P
 ><P
 >&#13;<TABLE
 BORDER="0"
@@ -253,12 +268,49 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;$ git clone git://git.freedesktop.org/git/xorg/xserver
+>&#13;$ git clone git://anongit.freedesktop.org/git/xorg/xserver
 </PRE
 ></TD
 ></TR
 ></TABLE
 >
+</P
+><P
+>&#13;You will probably want to look at the .cygport file in the source
+package obtained in <A
+HREF="prog-obtaining-source.html#prog-source-cygwin-setup"
+>the Section called <I
+>Obtaining via Cygwin setup</I
+></A
+> and
+check you understand if you need to use the configuration options
+used there. For example:
+</P
+><P
+>&#13;<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ ./configure --prefix=/usr --with-log-dir=/var/log
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+><P
+>&#13;Consult the <A
+HREF="glossary.html#gloss-git"
+><I
+CLASS="glossterm"
+>git</I
+></A
+> documentation
+for details on using git.
 </P
 ><P
 >The CYGWIN branch exists in git for historical reasons.

@@ -41,7 +41,6 @@ Jon Turney
               Compiling the Source Code
               Running a local build
               Installing a local build
-              Keeping your source code tree updated
 
         Cross Compiling
 
@@ -552,7 +551,7 @@ Required Packages for Building
    packages.
      * Required tools:
        autoconf, automake, binutils, bison, bzip2, cygport, diffutils,
-       fileutils, findutils, flex, gawk, gcc, git, libtool, make, patch,
+       fileutils, findutils, flex, gawk, gcc4, git, libtool, make, patch,
        pkg-config, sed, tar
      * Required protocol headers:
        bigreqsproto, compositeproto, damageproto, dmxproto, fixesproto,
@@ -560,12 +559,14 @@ Required Packages for Building
        renderproto, resourceproto, scrnsaverproto, windowswmproto,
        xcmiscproto, xextproto, xineramaproto, xproto, xf86bigfontproto
      * Required development libraries:
-       libdmx-devel, libfontenc-devel, libfreetype-devel, libGL-devel,
-       libpixman1-devel, libX11-devel, libXau-devel, libXaw-devel,
+       libdmx-devel, libfontenc-devel, libglapi-devel, libfreetype-devel,
+       libGL-devel, libpixman1-devel, libX11-devel, libXau-devel,
+       libXaw-devel, libxcb-icccm-devel libxcb-image-devel,
        libXdmcp-devel, libXext-devel, libXfont-devel, libXinerama-devel,
        libXmu-devel, libXpm-devel, libXRes-devel, libxkbfile-devel, zlib
      * Other miscellaneous required packages :
-       font-util, khronos-opengl-registry, xorg-util-macros, xtrans
+       dri-drivers, font-util, khronos-opengl-registry, xorg-util-macros,
+       xtrans
 
      Note: The /usr/share/doc/Cygwin/xorg-server-n.n.n.README file
      installed with the X server binary package lists up-to-date runtime
@@ -626,8 +627,8 @@ Obtaining via Cygwin setup
 
    On installing the source code package, setup will unpack it under
    /usr/src. You should find the source archive, any needed .patch files,
-   and a .cygport file which automates the distribution build and
-   packaging tasks.
+   and a .cygport file which automates the distribution configuration,
+   build and packaging tasks.
 
    The sources can unpacked and prepared using cygport as follows:
 Username@CygwinHost ~
@@ -637,14 +638,17 @@ Username@CygwinHost /usr/src
 $ cygport xorg-server-n.n.n-n.cygport prep
 [lots of output as archive is unpacked and patches applied]
 
+$ cygport xorg-server-n.n.n-n.cygport compile
+[lots of output as source is configured and built]
+
 Username@CygwinHost /usr/src
 $ cd xorg-server-n.n.n-n/src/xorg-server-n.n.n/
+[navigate to the source directory]
 
 Username@CygwinHost /usr/src/xorg-server-n.n.n-n/src/xorg-server-n.n.n/
-$ ./autogen.sh -V
-[more output as autoconfiguration scripts are regenerated]
+$
 
-     Note: Alternatively you may manually untar the archive and apply the
+     Note: Alternatively you may manually untar the archive and apply any
      patches (in the correct order).
 
      Note: It is necessary to run the package's autogen.sh script to
@@ -665,13 +669,12 @@ Username@CygwinHost ~
 $ git clone git://cygwin-ports.git.sourceforge.net/gitroot/cygwin-ports/xorg-ser
 ver
 
-Username@CygwinHost ~
-$ cd xorg-server
-
    This will obtain a .cygport file. and any .patch files. You can then
-   add the source archive by downloading it with 'cygport
-   xorg-server-n.n.n-n.cygport download', and proceed as in the Section
-   called Obtaining via Cygwin setup
+   add the source archive by downloading it with cygport.
+Username@CygwinHost ~
+$ cygport xorg-server-n.n.n-n.cygport download
+
+   Then proceed as in the Section called Obtaining via Cygwin setup
      __________________________________________________________________
 
 Obtaining from X.Org
@@ -679,10 +682,19 @@ Obtaining from X.Org
    Cygwin/X source code is contained in, and distributed with, the X
    Window System source code releases.
 
-   Read-only access to the X Window System git source . tree hosted on
-   freedesktop.org is also available.
+   Anonymous read-only access to the X Window System git source tree
+   hosted on freedesktop.org is available.
 
-$ git clone git://git.freedesktop.org/git/xorg/xserver
+$ git clone git://anongit.freedesktop.org/git/xorg/xserver
+
+   You will probably want to look at the .cygport file in the source
+   package obtained in the Section called Obtaining via Cygwin setup and
+   check you understand if you need to use the configuration options used
+   there. For example:
+
+$ ./configure --prefix=/usr --with-log-dir=/var/log
+
+   Consult the git documentation for details on using git.
 
    The CYGWIN branch exists in git for historical reasons. Current
    development follows the mainline (called the master branch in git
@@ -697,29 +709,24 @@ Native Compiling
 
 Compiling the Source Code
 
-   Compiling Cygwin/X doesn't have to be hard, although the X Window
-   System source code tree is reasonably large. There are a few simple
-   techniques that make building the source code, keeping the source code
-   up to date, and keeping the source code organized much easier.
-     __________________________________________________________________
-
 Standard Build
 
    Follow these steps to create a standard, non-debug, build:
-    1. Change the current directory to your X Window System development
-       directory:
 
+   Change the current directory to your X Window System development
+   directory:
 Username@CygwinHost ~
 $ cd ~/xserver
 
 Username@CygwinHost ~/xserver
 $ ./configure --prefix=/usr --with-log-dir=/var/log
 [lots of output]
+
+Username@CygwinHost ~/xserver
 $ make
 [lots more output]
 
-
-       Standard build is now complete.
+   Standard build is now complete.
 
      Note: You may wish to consult the .cygport file for the current
      ./configure flags used in distributed packages
@@ -736,9 +743,9 @@ $ make
 Debug Build
 
    Follow these steps to create a build with debugging information:
-    1. Change the current directory to your X Window System development
-       directory:
 
+   Change the current directory to your X Window System development
+   directory:
 Username@CygwinHost ~
 $ cd ~/xserver
 
@@ -746,16 +753,18 @@ Username@CygwinHost ~/xserver
 $ ./configure --prefix=/usr --with-log-dir=/var/log --enable-debug CFLAGS="-g -O
 0"
 [lots of output]
+
+Username@CygwinHost ~/xserver
 $ make
 [lots more output]
 
-       Debug build is now complete.
+   Debug build is now complete.
      __________________________________________________________________
 
 Running a local build
 
    Follow these steps to run the built X server:
-    1. Change the current directory to your X Window System development
+    1. Change the current directory to your X Window System build
        directory:
 
 Username@CygwinHost ~
@@ -788,15 +797,6 @@ $
 
 Username@CygwinHost ~/xserver/build/build-prefix
 $ make install
-
-Username@CygwinHost ~/xserver/build/build-prefix
-$
-     __________________________________________________________________
-
-Keeping your source code tree updated
-
-   git makes keeping your source code tree up to date easy. Consult the
-   git documentation for details.
      __________________________________________________________________
 
 Cross Compiling
@@ -1843,4 +1843,4 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2013-04-03 19:03 .
+   at 2013-06-16 15:36 .
