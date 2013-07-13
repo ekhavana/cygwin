@@ -56,8 +56,8 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     my $truncated_search = 0;
     outer: for my $f (<*/*>) {
 	open my $fd, '<', $f or next;
-	close $fd;
 	addfn $f if join('', <$fd>) =~ /$grep/om;
+	close $fd;
     }
 
     my $index;
