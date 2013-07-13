@@ -55,15 +55,9 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     chdir "$Bin/../packages";
     my $truncated_search = 0;
     outer: for my $f (<*/*>) {
-	open F, '<', $f or next;
-	while (<F>) {
-	    if (/$grep/o) {
-		last outer if $truncated_search = $::count >= MAXMATCHES;
-		addfn $f;
-		last;
-	    }
-	}
-	close F;
+	open my $fd, '<', $f or next;
+	close $fd;
+	addfn $f if join('', <$fd>) =~ /$grep/om;
     }
 
     my $index;
