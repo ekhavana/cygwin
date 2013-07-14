@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 use Cwd;
-use File::Path;
+use File::Path qw(make_path remove_tree);
 
 sub file_row($);
 sub mtime($);
@@ -13,9 +13,6 @@ use constant {
 };
 
 my %var;
-our $arch = shift;
-$arch = x86 unless defined $arch;
-$var{arch} = $arch;
 
 umask 0002;
 $| = 1;
@@ -23,8 +20,8 @@ use vars '$DB::inhibit_exit';
 $DB::inhibit_exit = 0;
 
 my $TMP = "/sourceware/snapshot-tmp/cygwin/$$";
-my $http = "http://cygwin.com/snapshots";
 my $wwwdir = getcwd . '/' . $arch;
+my $http = "http://cygwin.com/snapshots";
 
 our ($changelog,  $diff, $master, $perday, $perdaync);
 for my $t (qw'changelog diff master perday perdaync') {
@@ -34,78 +31,82 @@ for my $t (qw'changelog diff master perday perdaync') {
 }
 
 chdir $wwwdir or die "couldn't cd to $wwwdir - $!\n";
-opendir D, '.';
-my %bydate = ();
-my @snaps = ();
-for (reverse sort readdir D) {
-    next unless /^(.*?)-(\d\d\d\d\d\d\d\d)\.(.*)$/o;
-    push @{$bydate{$2}}, $_;
-    push(@snaps, $2) if @snaps < MAXKEEP && $1 eq 'winsup-src' && $3 eq 'tar.bz2';
-}
-closedir D;
 
 my @month = ('', '01', '02', '03', '04', '05', '06', '07', '08',
 	     '09', '10', '11', '12');
+my @perdays = ();
+for our $arch ('x86', 'x86_64') {
+    $var{'arch'} = $arch;
+    my $dfd;
+    opendir $dfd, $arch;
+    my %bydate = ();
+    my @snaps = ();
+    for (reverse sort readdir $dfd) {
+	next unless /^(.*?)-(\d\d\d\d\d\d\d\d)\.(.*)$/o;
+	push @{$bydate{$2}}, 'arch/' . $_;
+	push(@snaps, $2) if @snaps < MAXKEEP && $1 eq 'winsup-src' && $3 eq 'tar.bz2';
+    }
+    closedir $dfd;
 
-for $i (0..$#snaps) {
-    update_diffs('winsup', $i);
-    my $date = $snaps[$i];
-    $var{'date'} = $date;
-    ($var{'longdate'} = $date) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
+    for $i (0..$#snaps) {
+	update_diffs('winsup', $i);
+	my $date = $snaps[$i];
+	$var{'date'} = $date;
+	($var{'longdate'} = $date) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
 
-    my $time = mtime("cygwin1-$snaps[$i].dll.bz2") || time;
-    my ($ss, $mm, $hh, $mday, $m, $yr) = (gmtime($time))[0..5];
-    $var{'longdate'} .= sprintf ' <font size=-1>%02d:%02d:%02d UTC</font>', $hh, $mm, $ss;
-    ($var{'longprev'} = $snaps[$i+1]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
-    if ($i < $#snaps) {
-	$var{'prev'} = $snaps[$i+1];
-	$var{'wsdfsz'} = size("winsup-diffs-$snaps[$i+1]-$date");
-	$var{'wsclsz'} = size("winsup-changelog-$snaps[$i+1]-$date");
-	$var{'changelog'} = $changelog;
-	0 while $var{'changelog'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
-	$var{'diffs'} = $diff;
-	0 while $var{'diffs'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
-    } else {
-	$var{'changelog'} = '';
-	$var{'diffs'} = '';
+	my $time = mtime("cygwin1-$snaps[$i].dll.bz2") || time;
+	my ($ss, $mm, $hh, $mday, $m, $yr) = (gmtime($time))[0..5];
+	$var{'longdate'} .= sprintf ' <font size=-1>%02d:%02d:%02d UTC</font>', $hh, $mm, $ss;
+	($var{'longprev'} = $snaps[$i+1]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
+	if ($i < $#snaps) {
+	    $var{'prev'} = $snaps[$i+1];
+	    $var{'wsdfsz'} = size("winsup-diffs-$snaps[$i+1]-$date");
+	    $var{'wsclsz'} = size("winsup-changelog-$snaps[$i+1]-$date");
+	    $var{'changelog'} = $changelog;
+	    0 while $var{'changelog'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
+	    $var{'diffs'} = $diff;
+	    0 while $var{'diffs'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
+	} else {
+	    $var{'changelog'} = '';
+	    $var{'diffs'} = '';
+	}
+
+	$var{'xfiles'} = file_row("winsup-src-$snaps[$i].tar.bz2");
+	$var{'xfiles'} .= file_row("cygwin1-$snaps[$i].dll.bz2");
+	$var{'xfiles'} .= file_row("cygwin1-$snaps[$i].dbg.bz2");
+	$var{'xfiles'} .= file_row("cygwin-inst-$snaps[$i].tar.bz2");
+	$var{'xfiles'} .= file_row("cygwin-src-$snaps[$i].tar.bz2");
+
+	if ($i == $#snaps || (stat("winsup-diffs-$snaps[$i+1]-$date"))[7] > 0) {
+	    $t = $perday;
+	} else {
+	    $t = $perdaync;
+	}
+	0 while $t =~ s/<var ([a-z]+)>/$var{$1}/ge;
+	push @perdays, $t;
     }
 
-    $var{'xfiles'} = file_row("winsup-src-$snaps[$i].tar.bz2");
-    $var{'xfiles'} .= file_row("cygwin1-$snaps[$i].dll.bz2");
-    $var{'xfiles'} .= file_row("cygwin1-$snaps[$i].dbg.bz2");
-    $var{'xfiles'} .= file_row("cygwin-inst-$snaps[$i].tar.bz2");
-    $var{'xfiles'} .= file_row("cygwin-src-$snaps[$i].tar.bz2");
-
-    if ($i == $#snaps || (stat("winsup-diffs-$snaps[$i+1]-$date"))[7] > 0) {
-	$t = $perday;
-    } else {
-	$t = $perdaync;
+    my @tounlink = reverse sort keys %bydate;
+    for (my $i = MAXKEEP; $i < @tounlink; $i++) {
+	unlink @{$bydate{$tounlink[$i]}};
     }
-    0 while $t =~ s/<var ([a-z]+)>/$var{$1}/ge;
-    $perdays .= $t;
 }
 
-rmtree $TMP, 0, 0;
-
-$var{'date'} = $snaps[0];
+$var{'perday'} = join '', reverse sort @perdays;
 ($var{'longdate'} = $snaps[0]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
-$var{'perday'} = $perdays;
 0 while $master =~ s/<var ([a-z]+)>/$var{$1}/ge;
 
-open my $fd, '>', '../index.html';
+open my $fd, '>', 'index.html';
 print $fd $master;
 chmod 0775, $fd;
 close $fd;
 
-my @tounlink = reverse sort keys %bydate;
-for (my $i = MAXKEEP; $i < @tounlink; $i++) {
-    unlink @{$bydate{$tounlink[$i]}};
-}
+remove_tree $TMP;
 
-exit(0);
+exit 0;
 
 sub file_row($) {
-    my $f = shift;
+    my $f = $arch . '/' . shift;
     return "" unless -f $f;
     local($sz) = size($f);
     my $rv = "<tr>";
@@ -121,7 +122,7 @@ sub file_row($) {
 	    close $fd;
 	}
     }
-    $rv .= "<td align=center><a href=\"$http/$f\">download</a></td>\n";
+    $rv .= "<td align=center><a href=\"$http/$arch/$f\">download</a></td>\n";
     $rv .= "</tr>\n";
     return $rv;
 }
@@ -160,19 +161,19 @@ sub update_diffs($$) {
 	my $basedir = need($basesnap, $basesrc);
 	my $nextdir = need($nextsnap, $nextsrc);
 	
-	open OUT, '>', "$base-diffs-$basesnap-$nextsnap" or die "$0: couldn't open $base-diffs-$basesnap-$nextsnap for output - $!\n";
-	open DIFF, '-|', "cd $TMP; exec diff -p -N -d -r -U2 $basedir $nextdir" or die "$0: diff $basedir $nextdir failed - $!\n";
-	print OUT "Differences between $basesnap and $nextsnap\n\n";
+	open $outfd, '>', "$base-diffs-$basesnap-$nextsnap" or die "$0: couldn't open $base-diffs-$basesnap-$nextsnap for output - $!\n";
+	open $difffd, '-|', "cd $TMP; exec diff -p -N -d -r -U2 $basedir $nextdir" or die "$0: diff $basedir $nextdir failed - $!\n";
+	print $outfd "Differences between $basesnap and $nextsnap\n\n";
 	my $keeper = 0;
 	my $sawstuff = 0;
-	while (<DIFF>) {
+	while (<$difffd>) {
 	    $keeper = !/\.snapshot-date|ChangeLog/o if /^diff /o;
-	    print OUT if $keeper;
+	    print $outfd if $keeper;
 	    $sawstuff ||= $keeper;
 	}
-	close DIFF;
-	chmod 0664, \*OUT;
-	close OUT;
+	close $difffd;
+	chmod 0664, $outfd;
+	close $outfd;
 	unlink "$base-diffs-$basesnap-$nextsnap" unless $sawstuff;
     }
 
@@ -185,8 +186,7 @@ sub update_diffs($$) {
 	open FIND, '-|', "cd $TMP/$basedir; exec find . -name ChangeLog -print" or die "$0: 'find -name Changelog -print' failed - $!\n";
 	while ($f = <FIND>) {
 	    $f =~ s/[\r\n]+$//o;
-#	    $f =~ s!cygwin-snapshot-\d+-1/!!o;
-	    open(DIFF, "diff $TMP/$basedir/$f $TMP/$nextdir/$f |");
+	    open DIFF, '-|', 'diff', "$TMP/$basedir/$f", "$TMP/$nextdir/$f";
 	    while (<DIFF>) {
 		last if /^> /;
 	    }
@@ -209,14 +209,13 @@ sub update_diffs($$) {
 }
 
 sub need($$) {
-    my($snap, $tbz) = @_;
+    my ($snap, $tbz) = @_;
     if (!$::unpacked{$tbz}) {
 	print "unpacking $tbz\n";
 	$::unpacked{$tbz} = 1;
-	mkdir($TMP, 0755) unless -d $TMP;
-	mkdir("$TMP/$tbz", 0755);
+	make_path("$TMP/$tbz");
 	system '/bin/tar', 'xjf', "$tbz.tar.bz2", '-C', "$TMP/$tbz";
     }
     return -d "$TMP/$tbz/cygwin-snapshot-$snap-1" ?
-	      "$tbz/cygwin-snapshot-$snap-1" : $tbz;
+	   "$tbz/$arch/cygwin-snapshot-$snap-1" : $tbz;
 }
