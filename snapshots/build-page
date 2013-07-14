@@ -40,7 +40,7 @@ for our $arch ('x86', 'x86_64') {
     my $dfd;
     opendir $dfd, $arch;
     my %bydate = ();
-    my @snaps = ();
+    local @snaps = ();
     for (reverse sort readdir $dfd) {
 	next unless /^(.*?)-(\d\d\d\d\d\d\d\d)\.(.*)$/o;
 	push @{$bydate{$2}}, "$arch/" . $_;
