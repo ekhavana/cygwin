@@ -135,7 +135,8 @@ sub size($) {
 }
 
 sub mtime($) {
-    if ( -f $_[0]) {
+    my $f = "$arch/" . shift;
+    if ( -f $f) {
 	return (stat(_))[9];
     } else {
 	return 0;
@@ -181,7 +182,7 @@ sub update_diffs($$) {
 	print "build $base-changelog-$basesnap-$nextsnap\n";
 	my $basedir = need($basesnap, $basesrc);
 	my $nextdir = need($nextsnap, $nextsrc);
-	open OUT, '>', "$base-changelog-$basesnap-$nextsnap" or die "$0: couldn't open $base-changelog-$basesnap-$nextsnap for writing - $!\n";
+	open OUT, '>', "$arch/$base-changelog-$basesnap-$nextsnap" or die "$0: couldn't open $arch/$base-changelog-$basesnap-$nextsnap for writing - $!\n";
 	print OUT "ChangeLog for $basesnap to $nextsnap\n\n";
 	open FIND, '-|', "cd $TMP/$basedir; exec find . -name ChangeLog -print" or die "$0: 'find -name Changelog -print' failed - $!\n";
 	while ($f = <FIND>) {
