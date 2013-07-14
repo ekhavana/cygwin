@@ -2,6 +2,8 @@
 use Cwd;
 use File::Path qw(make_path remove_tree);
 
+use integer;
+
 sub file_row($);
 sub mtime($);
 sub need($$);
@@ -128,8 +130,9 @@ sub file_row($) {
 }
 
 sub size($) {
-    print "No file $_[0]\n" unless -f $_[0];
-    $sz = int(((stat($_[0]))[7]+1023) / 1024);
+    my $f = "$arch/" . shift;
+    print "No file $_[0]\n" unless -f $f;
+    $sz = int(((stat _)[7]+1023) / 1024);
     0 while $sz =~ s/(.*\d)(\d\d\d)/$1,$2/;
     return $sz;
 }
