@@ -165,7 +165,7 @@ sub update_diffs($$) {
 	my $basedir = need($basesnap, $basesrc);
 	my $nextdir = need($nextsnap, $nextsrc);
 	
-	open $outfd, '>', "$base-diffs-$basesnap-$nextsnap" or die "$0: couldn't open $base-diffs-$basesnap-$nextsnap for output - $!\n";
+	open $outfd, '>', "$arch/$base-diffs-$basesnap-$nextsnap" or die "$0: couldn't open $base-diffs-$basesnap-$nextsnap for output - $!\n";
 	open $difffd, '-|', "cd $TMP; exec diff -p -N -d -r -U2 $basedir $nextdir" or die "$0: diff $basedir $nextdir failed - $!\n";
 	print $outfd "Differences between $basesnap and $nextsnap\n\n";
 	my $keeper = 0;
