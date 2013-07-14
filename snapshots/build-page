@@ -2,11 +2,20 @@
 use Cwd;
 use File::Path;
 
+sub file_row($);
+sub mtime($);
+sub need($$);
+sub size($);
 sub update_diffs($$);
 
 use constant {
     MAXKEEP => 60
 };
+
+my %var;
+our $arch = shift;
+$arch = x86 unless defined $arch;
+$var{arch} = $arch;
 
 umask 0002;
 $| = 1;
@@ -14,30 +23,16 @@ use vars '$DB::inhibit_exit';
 $DB::inhibit_exit = 0;
 
 my $TMP = "/sourceware/snapshot-tmp/cygwin/$$";
-my $http = "http://cygwin.org/snapshots";
-my $wwwdir = getcwd;
+my $http = "http://cygwin.com/snapshots";
+my $wwwdir = getcwd . '/' . $arch;
 
-open(TEMPLATE, "master.template") || die("master.template: $!");
-my $template = join('', <TEMPLATE>);
-close(TEMPLATE);
+our ($changelog,  $diff, $master, $perday, $perdaync);
+for my $t (qw'changelog diff master perday perdaync') {
+    open my $fd, '<', "$t.template" or die "$t.template: $!\n";
+    ${$t} = join '', <$fd>;
+    close $fd;
+}
 
-open(PERDAY, "perday.template") || die("perday.template: $!");
-my $perday = join('', <PERDAY>);
-close(PERDAY);
-
-open(PERDAYNC, "perdaync.template") || die("perdaync.template: $!");
-my $perdaync = join('', <PERDAYNC>);
-close(PERDAYNC);
-
-open(DIFFT, "diff.template") || die("diff.template: $!");
-my $difft = join('', <DIFFT>);
-close(DIFFT);
-
-open(CLT, "changelog.template") || die("changelog.template: $!");
-my $changelogt = join('', <CLT>);
-close(CLT);
-
-my $cwd = getcwd;
 chdir $wwwdir or die "couldn't cd to $wwwdir - $!\n";
 opendir D, '.';
 my %bydate = ();
@@ -52,7 +47,6 @@ closedir D;
 my @month = ('', '01', '02', '03', '04', '05', '06', '07', '08',
 	     '09', '10', '11', '12');
 
-my %var;
 for $i (0..$#snaps) {
     update_diffs('winsup', $i);
     my $date = $snaps[$i];
@@ -67,9 +61,9 @@ for $i (0..$#snaps) {
 	$var{'prev'} = $snaps[$i+1];
 	$var{'wsdfsz'} = size("winsup-diffs-$snaps[$i+1]-$date");
 	$var{'wsclsz'} = size("winsup-changelog-$snaps[$i+1]-$date");
-	$var{'changelog'} = $changelogt;
+	$var{'changelog'} = $changelog;
 	0 while $var{'changelog'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
-	$var{'diffs'} = $difft;
+	$var{'diffs'} = $diff;
 	0 while $var{'diffs'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
     } else {
 	$var{'changelog'} = '';
@@ -96,12 +90,12 @@ rmtree $TMP, 0, 0;
 $var{'date'} = $snaps[0];
 ($var{'longdate'} = $snaps[0]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
 $var{'perday'} = $perdays;
-0 while $template =~ s/<var ([a-z]+)>/$var{$1}/ge;
+0 while $master =~ s/<var ([a-z]+)>/$var{$1}/ge;
 
-open INDEX, '>', 'index.html';
-print INDEX $template;
-chmod 0775, \*INDEX;
-close INDEX;
+open my $fd, '>', '../index.html';
+print $fd $master;
+chmod 0775, $fd;
+close $fd;
 
 my @tounlink = reverse sort keys %bydate;
 for (my $i = MAXKEEP; $i < @tounlink; $i++) {
@@ -110,7 +104,7 @@ for (my $i = MAXKEEP; $i < @tounlink; $i++) {
 
 exit(0);
 
-sub file_row {
+sub file_row($) {
     my $f = shift;
     return "" unless -f $f;
     local($sz) = size($f);
@@ -132,14 +126,14 @@ sub file_row {
     return $rv;
 }
 
-sub size {
+sub size($) {
     print "No file $_[0]\n" unless -f $_[0];
     $sz = int(((stat($_[0]))[7]+1023) / 1024);
     0 while $sz =~ s/(.*\d)(\d\d\d)/$1,$2/;
     return $sz;
 }
 
-sub mtime {
+sub mtime($) {
     if ( -f $_[0]) {
 	return (stat(_))[9];
     } else {
@@ -214,7 +208,7 @@ sub update_diffs($$) {
     }
 }
 
-sub need {
+sub need($$) {
     my($snap, $tbz) = @_;
     if (!$::unpacked{$tbz}) {
 	print "unpacking $tbz\n";
