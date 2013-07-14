@@ -214,6 +214,7 @@ sub update_diffs($$) {
 
 sub need($$) {
     my ($snap, $tbz) = @_;
+    $tbz = "$arch/$tbz";
     if (!$::unpacked{$tbz}) {
 	print "unpacking $tbz\n";
 	$::unpacked{$tbz} = 1;
