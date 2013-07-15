@@ -79,7 +79,7 @@ for our $arch ('x86', 'x86_64') {
 	$var{'xfiles'} .= file_row("$arch/cygwin-inst-$snaps[$i].tar.bz2");
 	$var{'xfiles'} .= file_row("$arch/cygwin-src-$snaps[$i].tar.bz2");
 
-	if ($i == $#snaps || (stat("winsup-diffs-$snaps[$i+1]-$date"))[7] > 0) {
+	if ($i == $#snaps || (stat("$arch/winsup-diffs-$snaps[$i+1]-$date"))[7] > 0) {
 	    $t = $perday;
 	} else {
 	    $t = $perdaync;
