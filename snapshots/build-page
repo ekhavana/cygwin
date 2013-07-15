@@ -160,7 +160,7 @@ sub update_diffs($$) {
     my $cl = mtime("$arch/$base-changelog-$basesnap-$nextsnap");
 
     if (!$df || $df < $sf || $df < $osf) {
-	print "build $base-diffs-$basesnap-$nextsnap\n";
+	print "build $arch/$base-diffs-$basesnap-$nextsnap\n";
 	my $basedir = need($basesnap, $basesrc);
 	my $nextdir = need($nextsnap, $nextsrc);
 	
@@ -182,7 +182,7 @@ sub update_diffs($$) {
     }
 
     if (!$cl || $cl < $sf || $cl < $osf) {
-	print "build $base-changelog-$basesnap-$nextsnap\n";
+	print "build $arch/$base-changelog-$basesnap-$nextsnap\n";
 	my $basedir = need($basesnap, $basesrc);
 	my $nextdir = need($nextsnap, $nextsrc);
 	open OUT, '>', "$arch/$base-changelog-$basesnap-$nextsnap" or die "$0: couldn't open $arch/$base-changelog-$basesnap-$nextsnap for writing - $!\n";
