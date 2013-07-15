@@ -62,8 +62,8 @@ for our $arch ('x86', 'x86_64') {
 	($var{'longprev'} = $snaps[$i+1]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
 	if ($i < $#snaps) {
 	    $var{'prev'} = $snaps[$i+1];
-	    $var{'wsdfsz'} = size("winsup-diffs-$snaps[$i+1]-$date");
-	    $var{'wsclsz'} = size("winsup-changelog-$snaps[$i+1]-$date");
+	    $var{'wsdfsz'} = size("$arch/winsup-diffs-$snaps[$i+1]-$date");
+	    $var{'wsclsz'} = size("$arch/winsup-changelog-$snaps[$i+1]-$date");
 	    $var{'changelog'} = $changelog;
 	    0 while $var{'changelog'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
 	    $var{'diffs'} = $diff;
@@ -73,11 +73,11 @@ for our $arch ('x86', 'x86_64') {
 	    $var{'diffs'} = '';
 	}
 
-	$var{'xfiles'} = file_row("winsup-src-$snaps[$i].tar.bz2");
-	$var{'xfiles'} .= file_row("cygwin1-$snaps[$i].dll.bz2");
-	$var{'xfiles'} .= file_row("cygwin1-$snaps[$i].dbg.bz2");
-	$var{'xfiles'} .= file_row("cygwin-inst-$snaps[$i].tar.bz2");
-	$var{'xfiles'} .= file_row("cygwin-src-$snaps[$i].tar.bz2");
+	$var{'xfiles'} = file_row("$arch/winsup-src-$snaps[$i].tar.bz2");
+	$var{'xfiles'} .= file_row("$arch/cygwin1-$snaps[$i].dll.bz2");
+	$var{'xfiles'} .= file_row("$arch/cygwin1-$snaps[$i].dbg.bz2");
+	$var{'xfiles'} .= file_row("$arch/cygwin-inst-$snaps[$i].tar.bz2");
+	$var{'xfiles'} .= file_row("$arch/cygwin-src-$snaps[$i].tar.bz2");
 
 	if ($i == $#snaps || (stat("winsup-diffs-$snaps[$i+1]-$date"))[7] > 0) {
 	    $t = $perday;
@@ -108,7 +108,7 @@ remove_tree $TMP;
 exit 0;
 
 sub file_row($) {
-    my $f = $arch . '/' . shift;
+    my $f = shift;
     return "" unless -f $f;
     local($sz) = size($f);
     my $rv = "<tr>";
@@ -124,13 +124,13 @@ sub file_row($) {
 	    close $fd;
 	}
     }
-    $rv .= "<td align=center><a href=\"$http/$arch/$f\">download</a></td>\n";
+    $rv .= "<td align=center><a href=\"$http/$f\">download</a></td>\n";
     $rv .= "</tr>\n";
     return $rv;
 }
 
 sub size($) {
-    my $f = "$arch/" . shift;
+    my $f = shift;
     print "No file $_[0]\n" unless -f $f;
     $sz = int(((stat _)[7]+1023) / 1024);
     0 while $sz =~ s/(.*\d)(\d\d\d)/$1,$2/;
