@@ -95,7 +95,6 @@ for our $arch ('x86', 'x86_64') {
 }
 
 $var{'perday'} = join '', reverse sort @perdays;
-($var{'longdate'} = $snaps[0]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
 0 while $master =~ s/<var ([a-z]+)>/$var{$1}/ge;
 
 open my $fd, '>', 'index.html';
