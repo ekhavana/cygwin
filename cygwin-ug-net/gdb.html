@@ -12,7 +12,7 @@ regular text files that cannot be used directly by GDB.
 </p><p>Before you can debug your program, you need to prepare your
 program for debugging.  What you need to do is add
 <code class="literal">-g</code> to all the other flags you use when compiling
-your sources to objects.</p><div class="example"><a name="gdb-g"></a><p class="title"><b>Example 4.2. Compiling with -g</b></p><div class="example-contents"><pre class="screen">
+your sources to objects.</p><div class="example"><a name="gdb-g"></a><p class="title"><b>Example 4.4. Compiling with -g</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">bash$</code> gcc -g -O2 -c myapp.c
 <code class="prompt">bash$</code> gcc -g myapp.c -o myapp
 </pre></div></div><br class="example-break"><p>What this does is add extra information to the objects (they get
@@ -36,7 +36,7 @@ your program run.  After it crashes, you can type
 variables.  There's also a <span class="command"><strong>print</strong></span> that lets you look
 at individual variables or what pointers point to.</p><p>If your program is doing something unexpected, you can use the
 <span class="command"><strong>break</strong></span> command to tell gdb to stop your program when it
-gets to a specific function or line number:</p><div class="example"><a name="gdb-break"></a><p class="title"><b>Example 4.3. "break" in gdb</b></p><div class="example-contents"><pre class="screen">
+gets to a specific function or line number:</p><div class="example"><a name="gdb-break"></a><p class="title"><b>Example 4.5. "break" in gdb</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">(gdb)</code> break my_function
 <code class="prompt">(gdb)</code> break 47
 </pre></div></div><br class="example-break"><p>Now, when you type <span class="command"><strong>run</strong></span> your program will stop
@@ -46,7 +46,7 @@ the state of your program at that point, modify variables, and
 time.</p><p>Note that you may specify additional arguments to the
 <span class="command"><strong>run</strong></span> command to provide command-line arguments to
 your program.  These two cases are the same as far as your program is
-concerned:</p><div class="example"><a name="gdb-cliargs"></a><p class="title"><b>Example 4.4. Debugging with command line arguments</b></p><div class="example-contents"><pre class="screen">
+concerned:</p><div class="example"><a name="gdb-cliargs"></a><p class="title"><b>Example 4.6. Debugging with command line arguments</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">bash$</code> myprog -t foo --queue 47
 
 <code class="prompt">bash$</code> gdb myprog
