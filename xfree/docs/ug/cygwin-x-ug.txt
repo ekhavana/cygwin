@@ -86,13 +86,14 @@ Installing Cygwin/X
    Cygwin has a nice setup program that downloads and installs the
    necessary Cygwin packages for you.
     1. Open the Cygwin, http://cygwin.com/ page in your web browser
-    2. Click on the "setup.exe" link. This link downloads setup.exe from
-       the primary Cygwin server; save setup.exe to the directory that you
-       would like to store the downloaded packages in (e.g. c:\download);
-       do not save setup.exe to c:\cygwin, as that is the default
-       directory for the extraction and installation of the downloaded
-       packages.
-    3. Run setup.exe, you will see the welcome screen:
+    2. Click on the "setup-x86.exe" (32-bit installation) or
+       "setup-x86_64.exe" (64-bit installation) link to download the
+       appropriate setup program from the primary Cygwin server. Save it
+       to the directory that you would like to store the downloaded
+       packages in (e.g. c:\download). Do not save to c:\cygwin, as that
+       is the default directory for the extraction and installation of the
+       downloaded packages.
+    3. Run the Cygwin setup program and you will see the welcome screen:
        [cyi01welcome.png]
     4. Click Next to proceed to the next screen.
     5. Choose, Install from Internet, this will still save the package
@@ -127,8 +128,6 @@ Installing Cygwin/X
             startx, startwin (and a shortcut on the Start Menu to run it),
             startxdmcp.bat )
           + xorg-docs (optional, man pages)
-          + X-start-menu-icons (optional, adds icons for X Clients to the
-            Start menu)
           + You may also select any X client programs you want to use, and
             any fonts you would like to have available.
           + You may also want to ensure that the openssh package is
@@ -632,6 +631,10 @@ Hardware Accelerated OpenGL (AIGLX)
    graphics hardware before reporting any visual issues with WGL.
 
    Known issues:
+     * OpenGL drawing is just drawn on top of the X window. This works
+       well enough when the OpenGL window is a top-level window, or is
+       non-top-level and has no occluding relatives and is drawn after
+       anything it occludes, but can mis-render in more complex scenarios.
      * OpenGL windows with static contents aren't re-drawn when occluded
        by a native Window and then exposed. Workaround: force the window
        to redraw, e.g. by resizing it.
@@ -1063,7 +1066,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2013-06-20 19:30 .
+   at 2013-07-29 13:40 .
 
   Notes
 

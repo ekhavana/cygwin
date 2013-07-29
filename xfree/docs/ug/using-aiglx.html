@@ -125,6 +125,14 @@ hardware before reporting any visual issues with WGL.
 <UL
 ><LI
 ><P
+>&#13;OpenGL drawing is just drawn on top of the X window. This works well enough
+when the OpenGL window is a top-level window, or is non-top-level and has no
+occluding relatives and is drawn after anything it occludes, but can mis-render
+in more complex scenarios.
+</P
+></LI
+><LI
+><P
 >&#13;OpenGL windows with static contents aren't re-drawn when occluded by a
 native Window and then exposed.  Workaround: force the window to redraw, e.g.
 by resizing it.
