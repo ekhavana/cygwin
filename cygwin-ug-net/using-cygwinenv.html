@@ -37,7 +37,9 @@ due to certain windows-specific errors.  These errors usually occur when
 processes are being started while a user is logging off.
 </p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)reset_com</code> - if set, serial ports are reset
 to 9600-8-N-1 with no flow control when used. This is done at open
-time and when handles are inherited.  Defaults to set.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">winsymlinks:{lnk,native,nativestrict}</code> - if set to just
+time and when handles are inherited.  Defaults to set.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)wincmdln</code> - if set, the windows complete command
+line (truncated to ~32K) will be passed on any processes that it creates
+in addition to the normal UNIX argv list.  Defaults to not set.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">winsymlinks:{lnk,native,nativestrict}</code> - if set to just
 <code class="literal">winsymlinks</code> or <code class="literal">winsymlinks:lnk</code>,
 Cygwin creates symlinks as Windows shortcuts with a special header and
 the R/O attribute set.</p><p>If set to <code class="literal">winsymlinks:native</code> or
