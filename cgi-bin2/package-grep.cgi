@@ -53,13 +53,20 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     $SIG{ALRM} = \&wakey;
     alarm 45;
     save @toprint, $html->h1('Search Results'), "\n" unless $text;
-    chdir "$Bin/../packages/$arch";
+    chdir "$Bin/../packages";
     my $truncated_search = 0;
-    outer: for my $f (<*/*>) {
-	open my $fd, '<', $f or next;
-	addfn $f if join('', <$fd>) =~ /$grep/om;
-	close $fd;
+    opendir my ($archdir), $arch;
+    for my $dir (sort readdir $archdir) {
+	next -f ! -d $dir || substr($dir, 0, 1) eq '.';
+	opendir my $reldir, "$arch/$dir";
+	for my $f (sort readdir $reldir) {
+	    open my $fd, '<', $f or next;
+	    addfn "$arch/$dir/$f" if join('', <$fd>) =~ /$grep/om;
+	    close $fd;
+	}
+	closedir $reldir;
     }
+    closedir $archdir;
 
     my $index;
     if (!open(INDEX, '<', 'index.html')) {
