@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+    <link rel="stylesheet" type="text/css" href="http://cygwin.com/style.css" />
+    <title>Cygwin Package List</title>
+    <script type="text/javascript">
+    var arch_divs;
+    function arch_init () {
+	var names = ['x86', 'x86_64'];
+	arch_divs = {};
+	for (var i = 0; i < names.length; i++) {
+	    var name = names[i];
+	    arch_divs[name] = document.getElementById(name);
+	}
+    }
+    function arch_sel (radio) {
+	var arch = radio.value;
+	for (var name in arch_divs) {
+	    var dsp = name == arch ? 'block' : 'none';
+	    arch_divs[name].style.display = dsp;
+	}
+    }
+    </script>
+  </head>
+
+<body onload="arch_init()">
+<!--#include virtual="../navbar.html" -->
+<!--#include virtual="../top.html" -->
+<h1>Cygwin Package List</h1>
+<form method="GET" action="http://cygwin.com/cgi-bin2/package-grep.cgi">
+&nbsp;Search package contents for a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern:
+<br>
+&nbsp;<INPUT type="text" size=40 name="grep"> <INPUT type=submit value="Go"><br>
+<input type="radio" name="arch" value="x86" checked="checked" onchange="arch_sel(this)">x86
+<input type="radio" name="arch" value="x86_64" onchange="arch_sel(this)">x86_64
+</form>
+<!--#include virtual="x86/packages.inc" -->
+<!--#include virtual="x86_64/packages.inc" -->
