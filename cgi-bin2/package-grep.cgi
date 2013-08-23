@@ -23,6 +23,7 @@ $CGI::DISABLE_UPLOADS = 1;
 # Get our data
 my $grep = $html->param('grep');
 my $text = $html->param('text');
+my $arch = $html->param('x86');
 my $uri_esc_grep = uri_escape $grep;
 my $html_esc_grep = $html->escapeHTML($grep);
 
@@ -52,7 +53,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     $SIG{ALRM} = \&wakey;
     alarm 45;
     save @toprint, $html->h1('Search Results'), "\n" unless $text;
-    chdir "$Bin/../packages";
+    chdir "$Bin/../packages/$arch";
     my $truncated_search = 0;
     outer: for my $f (<*/*>) {
 	open my $fd, '<', $f or next;
