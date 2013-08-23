@@ -57,11 +57,13 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     my $truncated_search = 0;
     opendir my ($archdir), $arch;
     for my $dir (sort readdir $archdir) {
-	next if -f ! -d $dir || substr($dir, 0, 1) eq '.';
-	opendir my $reldir, "$arch/$dir";
+	next if substr($dir, 0, 1) eq '.';
+	$dir = "$archdir/$dir";
+	opendir my $reldir, "$dir" or next;	# presumably not a directory
 	for my $f (sort readdir $reldir) {
+	    $f = "$dir/$f";
 	    open my $fd, '<', $f or next;
-	    addfn "$arch/$dir/$f" if join('', <$fd>) =~ /$grep/om;
+	    addfn $f if join('', <$fd>) =~ /$grep/om;
 	    close $fd;
 	}
 	closedir $reldir;
