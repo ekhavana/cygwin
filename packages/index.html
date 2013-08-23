@@ -14,8 +14,7 @@
 	    arch_divs[name] = document.getElementById(name);
 	}
     }
-    function arch_sel (radio) {
-	var arch = radio.value;
+    function arch_sel (arch) {
 	for (var name in arch_divs) {
 	    var dsp = name == arch ? 'block' : 'none';
 	    arch_divs[name].style.display = dsp;
@@ -32,8 +31,8 @@
 &nbsp;Search package contents for a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern:
 <br>
 &nbsp;<INPUT type="text" size=40 name="grep"> <INPUT type=submit value="Go"><br>
-<input type="radio" name="arch" value="x86" checked="checked" onchange="arch_sel(this)">x86
-<input type="radio" name="arch" value="x86_64" onchange="arch_sel(this)">x86_64
+<input type="radio" name="arch" value="x86" checked="checked" onchange="arch_sel(this.value)">x86
+<input type="radio" name="arch" value="x86_64" onchange="arch_sel(this.value)">x86_64
 </form>
 <!--#include virtual="x86/packages.inc" -->
 <!--#include virtual="x86_64/packages.inc" -->
