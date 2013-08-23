@@ -55,20 +55,20 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     save @toprint, $html->h1('Search Results'), "\n" unless $text;
     chdir "$Bin/../packages";
     my $truncated_search = 0;
-    opendir my ($archdir), $arch;
-    for my $dir (sort readdir $archdir) {
+    opendir my ($archdfd), $arch;
+    for my $dir (sort readdir $archdfd) {
 	next if substr($dir, 0, 1) eq '.';
-	$dir = "$archdir/$dir";
-	opendir my $reldir, "$dir" or next;	# presumably not a directory
-	for my $f (sort readdir $reldir) {
+	$dir = "$arch/$dir";
+	opendir my $reldfd, "$dir" or next;	# presumably not a directory
+	for my $f (sort readdir $reldfd) {
 	    $f = "$dir/$f";
 	    open my $fd, '<', $f or next;
 	    addfn $f if join('', <$fd>) =~ /$grep/om;
 	    close $fd;
 	}
-	closedir $reldir;
+	closedir $reldfd;
     }
-    closedir $archdir;
+    closedir $archdfd;
 
     my $index;
     if (!open(INDEX, '<', 'index.html')) {
