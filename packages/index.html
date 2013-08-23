@@ -13,6 +13,12 @@
 	    var name = names[i];
 	    arch_divs[name] = document.getElementById(name);
 	}
+	var radios = document.getElementsByName('arch');
+	for (var i = 0; i < radios.length; i++) {
+	    var radio = radios[i];
+	    if (radio.checked)
+		arch_sel(radio.value);
+	}
     }
     function arch_sel (arch) {
 	for (var name in arch_divs) {
