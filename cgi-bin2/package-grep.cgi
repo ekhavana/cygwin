@@ -57,7 +57,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     my $truncated_search = 0;
     opendir my ($archdir), $arch;
     for my $dir (sort readdir $archdir) {
-	next -f ! -d $dir || substr($dir, 0, 1) eq '.';
+	next if -f ! -d $dir || substr($dir, 0, 1) eq '.';
 	opendir my $reldir, "$arch/$dir";
 	for my $f (sort readdir $reldir) {
 	    open my $fd, '<', $f or next;
