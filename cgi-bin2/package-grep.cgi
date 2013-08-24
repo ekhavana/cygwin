@@ -23,7 +23,7 @@ $CGI::DISABLE_UPLOADS = 1;
 # Get our data
 my $grep = $html->param('grep');
 my $text = $html->param('text');
-my $arch = $html->param('arch');
+my $arch = $html->param('arch') || 'x86';
 my $uri_esc_grep = uri_escape $grep;
 my $html_esc_grep = $html->escapeHTML($grep);
 
