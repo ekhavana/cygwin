@@ -27,7 +27,8 @@ chdir $here;
 if (substr($there, 0, length($here) + 1) ne "$here/" || !open(F, '<', $file)) {
     print "<br><br>\n", $html->h2("Error: couldn't open file: $file");
 } else {
-    $_ = join('', <F>);
+    local $/;
+    $_ = <F>;
     s!($grep)!\<b\>$1\</b\>!mog if length($grep);
     print $_;
 }

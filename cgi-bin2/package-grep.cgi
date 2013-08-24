@@ -62,8 +62,9 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 	opendir my $reldfd, "$dir" or next;	# presumably not a directory
 	for my $f (sort readdir $reldfd) {
 	    $f = "$dir/$f";
+	    local $/;
 	    open my $fd, '<', $f or next;
-	    addfn $f if join('', <$fd>) =~ /$grep/om;
+	    addfn $f if <$fd> =~ /$grep/om;
 	    close $fd;
 	}
 	closedir $reldfd;
