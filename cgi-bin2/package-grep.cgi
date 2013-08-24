@@ -75,7 +75,8 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     if (!open(INDEX, '<', 'index.html')) {
 	%::packages = ();
     } else {
-	$index = join('', <INDEX>);
+	local $/;
+	$index = <INDEX>;
 	close INDEX;
     }
 
