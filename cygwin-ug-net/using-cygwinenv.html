@@ -1,6 +1,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>The CYGWIN environment variable</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter 3. Using Cygwin"><link rel="prev" href="using-specialnames.html" title="Special filenames"><link rel="next" href="ntsec.html" title="Using Windows security in Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The <code class="envar">CYGWIN</code> environment
-variable</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Using Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="ntsec.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-cygwinenv"></a>The <code class="envar">CYGWIN</code> environment
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>The CYGWIN environment variable</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter&#160;3.&#160;Using Cygwin"><link rel="prev" href="using-specialnames.html" title="Special filenames"><link rel="next" href="ntsec.html" title="Using Windows security in Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">The <code class="envar">CYGWIN</code> environment
+variable</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;3.&#160;Using Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="using-cygwinenv"></a>The <code class="envar">CYGWIN</code> environment
 variable</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-implemented-options"></a>Implemented options</h3></div></div></div><p>The <code class="envar">CYGWIN</code> environment variable is used to configure
 many global settings for the Cygwin runtime system. It contains the options
 listed below, separated by blank characters. Many options can be turned off
@@ -53,7 +53,7 @@ some reason, it will fall back to creating Cygwin default symlinks
 with <code class="literal">winsymlinks:native</code>, while with
 <code class="literal">winsymlinks:nativestrict</code> the <code class="literal">symlink(2)</code>
 system call will immediately fail.</p><p>For more information on symbolic links, see
-<a class="xref" href="using.html#pathnames-symlinks" title="Symbolic links">the section called “Symbolic links”</a>.</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Obsolete options</h3></div></div></div><p>
+<a class="xref" href="using.html#pathnames-symlinks" title="Symbolic links">the section called &#8220;Symbolic links&#8221;</a>.</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="cygwinenv-removed-options"></a>Obsolete options</h3></div></div></div><p>
 Certain CYGWIN options available in past releases have been removed in
 Cygwin 1.7 for one reason or another.  These obsolete options are listed
 below.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)binmode</code> - This option has been removed because
@@ -61,8 +61,8 @@ all file opens default to binary mode, unless the open mode has been specified
 explicitly in the open(2) call.
 </p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">check_case</code> - This option has been removed in favor of
 real case sensitivity and the per-mount option "posix=[0|1]".  For more
-information, read the documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called “The Cygwin Mount Table”</a> and
-<a class="xref" href="using-specialnames.html#pathnames-casesensitive" title="Case sensitive filenames">the section called “Case sensitive filenames”</a>.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">codepage:[ansi|oem]</code> - This option controlled
+information, read the documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a> and
+<a class="xref" href="using-specialnames.html#pathnames-casesensitive" title="Case sensitive filenames">the section called &#8220;Case sensitive filenames&#8221;</a>.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">codepage:[ansi|oem]</code> - This option controlled
 which character set is used for file and console operations.  Since Cygwin
 is now doing all character conversion by itself, depending on the
 application call to the <code class="function">setlocale()</code> function, and in
@@ -79,14 +79,14 @@ only fakes security which is considered dangerous and useless.  It also
 created an uncontrollably large file on FAT and was entirely useless
 on FAT32.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)ntsec</code> - This option has been removed in favor of
 the per-mount option "acl"/"noacl".  For more information, read the
-documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called “The Cygwin Mount Table”</a>.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)server</code> - Originally this option had to be
+documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)server</code> - Originally this option had to be
 enabled on the client side to use features only available when running
 <span class="command"><strong>cygserver</strong></span>.  This option has been removed because Cygwin now
 always tries to contact cygserver if a function is called which requires
 cygserver being available.  For more information, read the documentation
-in <a class="xref" href="using-cygserver.html" title="Cygserver">the section called “Cygserver”</a>.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)smbntsec</code> - This option has been removed in favor of
+in <a class="xref" href="using-cygserver.html" title="Cygserver">the section called &#8220;Cygserver&#8221;</a>.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)smbntsec</code> - This option has been removed in favor of
 the per-mount option "acl"/"noacl".  For more information, read the
-documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called “The Cygwin Mount Table”</a>.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)strip_title</code> - Removed because setting the Window title
+documentation in <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called &#8220;The Cygwin Mount Table&#8221;</a>.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)strip_title</code> - Removed because setting the Window title
 can be controlled by the application via Escape sequences.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)title</code> - Removed because setting the Window title
 can be controlled by the application via Escape sequences.</p></li><li class="listitem" style="list-style-type: disc"><p><code class="envar">(no)transparent_exe</code> - This option has been removed
 because the behaviour it switched on is now the standard behaviour in
@@ -127,4 +127,4 @@ backward compatibility.  The current list of always uppercased variables is:
   TMP
   TMPDIR
   WINDIR
-</pre></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="ntsec.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Special filenames </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> Using Windows security in Cygwin</td></tr></table></div></body></html>
+</pre></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-specialnames.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="ntsec.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Special filenames&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Using Windows security in Cygwin</td></tr></table></div></body></html>
