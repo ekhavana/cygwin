@@ -1,6 +1,6 @@
 Cygwin/X Frequently Asked Questions
 
-2013-07-29 13:40
+2013-09-16 17:08
      __________________________________________________________________
 
    Table of Contents
@@ -372,7 +372,7 @@ Questions and Answers
    2.2. How is Cygwin/X installed?
 
    The Cygwin/X User's Guide thoroughly documents the installation
-   process. Installation is performed through Cygwin's setup.exe program.
+   process. Installation is performed through Cygwin's setup program.
 
    2.3. Fatal server error: Can't read lock file /tmp/.X0-lock
 
@@ -1324,8 +1324,8 @@ X :2 -query blubb
    This error occurs for one of three reasons:
     1. You do not have a font package which provides the default font
        ('fixed') installed. This is rarely the problem; but in the event
-       that it is the problem, just rerun Cygwin's setup.exe, select the
-       font-misc-misc package and install it.
+       that it is the problem, just rerun Cygwin' setup program, select
+       the font-misc-misc package and install it.
     2. The mount point for /usr/share/fonts/ was either invalid (does not
        point to a valid folder on your system) or is a text-mode mount.
        You can confirm that this is the problem by running mount from a
@@ -1341,14 +1341,14 @@ X :2 -query blubb
        To fix the problem, perform the following steps:
          a. Open a Cygwin shell and run umount /usr/share/fonts/.
          b. Close the Cygwin shell.
-         c. Run Cygwin's setup.exe.
+         c. Run Cygwin's setup program.
          d. For each of the font packages, if they are marked Keep, then
             select Reinstall, otherwise leave them as they are:
-         e. Allow Cygwin's setup.exe to download and reinstall the fonts
-            packages. The key to fixing this problem is that the files
-            were previously untarred into an invalid location; removing
-            the mount point for the fonts directory should result in the
-            files being untarred to a valid location.
+         e. Allow Cygwin's setup program to download and reinstall the
+            fonts packages. The key to fixing this problem is that the
+            files were previously untarred into an invalid location;
+            removing the mount point for the fonts directory should result
+            in the files being untarred to a valid location.
     3. You chose "DOS/text" as the "Default Text File type" during Cygwin
        setup, ignoring the advice that the Default Text File Type should
        be left on Unix/binary unless you have a very good reason to switch
@@ -1493,10 +1493,11 @@ Fatal server error: Failed to activate core devices.
    other hex number)"
 
    This is commonly caused by one of three things:
-     * You have run Cygwin's setup.exe to do an update while some cygwin
-       processes were running, and then clicked on the continue option in
-       the "In-use files detected" dialog, and then tried to carry on
-       using Cygwin without rebooting as advised by setup. Reboot.
+     * You have run Cygwin's setup program to do an update while some
+       cygwin processes were running, and then clicked on the continue
+       option in the "In-use files detected" dialog, and then tried to
+       carry on using Cygwin without rebooting as advised by setup.
+       Reboot.
      * This is one of the symptoms of an application interfering with
        Cygwin's fork() emulation. See the main Cygwin FAQ question for a
        list of software which has been known to interfere with the correct
@@ -1520,7 +1521,7 @@ Fatal server error: Failed to activate core devices.
 
    10.1. Is there a list of software that has been ported to Cygwin/X?
 
-   Check for packages using Cygwin/X in setup.exe in the X11 category.
+   Look in Cygwin's setup program for packages in the X11 category.
 
    Also, see this Cygwin/X - Ported Software old list.
 
