@@ -44,7 +44,7 @@ for our $arch ('x86', 'x86_64') {
     my %bydate = ();
     local @snaps = ();
     for (reverse sort readdir $dfd) {
-	next unless /^(.*?)-(\d\d\d\d\d\d\d\d)\.(.*)$/o;
+	next unless /^(.*?)-(\d\d\d\d\d\d\d\d)\.(.*?)$/o;
 	push @{$bydate{$2}}, "$arch/" . $_;
 	push(@snaps, $2) if @snaps < MAXKEEP && $1 eq 'winsup-src' && $3 eq 'tar.bz2';
     }
