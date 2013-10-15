@@ -46,7 +46,7 @@ for our $arch ('x86', 'x86_64') {
     for (reverse sort readdir $dfd) {
 	next unless /^(.*?)-(\d\d\d\d\d\d\d\d)\.(.*?)$/o;
 	push @{$bydate{$2}}, "$arch/" . $_;
-	push(@snaps, $2) if @snaps < MAXKEEP && $1 eq 'winsup-src' && $3 eq 'tar.bz2';
+	push(@snaps, $2) if @snaps < MAXKEEP && $1 eq 'winsup-src' && $3 eq 'tar.xz';
     }
     closedir $dfd;
 
@@ -56,7 +56,7 @@ for our $arch ('x86', 'x86_64') {
 	$var{'date'} = $date;
 	($var{'longdate'} = $date) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
 
-	my $time = mtime("$arch/cygwin1-$snaps[$i].dll.bz2") || time;
+	my $time = mtime("$arch/cygwin1-$snaps[$i].dll.xz") || time;
 	my ($ss, $mm, $hh, $mday, $m, $yr) = (gmtime($time))[0..5];
 	$var{'longdate'} .= sprintf ' <font size=-1>%02d:%02d:%02d UTC</font>', $hh, $mm, $ss;
 	($var{'longprev'} = $snaps[$i+1]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
@@ -73,11 +73,11 @@ for our $arch ('x86', 'x86_64') {
 	    $var{'diffs'} = '';
 	}
 
-	$var{'xfiles'} = file_row("$arch/winsup-src-$snaps[$i].tar.bz2");
-	$var{'xfiles'} .= file_row("$arch/cygwin1-$snaps[$i].dll.bz2");
-	$var{'xfiles'} .= file_row("$arch/cygwin1-$snaps[$i].dbg.bz2");
-	$var{'xfiles'} .= file_row("$arch/cygwin-inst-$snaps[$i].tar.bz2");
-	$var{'xfiles'} .= file_row("$arch/cygwin-src-$snaps[$i].tar.bz2");
+	$var{'xfiles'} = file_row("$arch/winsup-src-$snaps[$i].tar.xz");
+	$var{'xfiles'} .= file_row("$arch/cygwin1-$snaps[$i].dll.xz");
+	$var{'xfiles'} .= file_row("$arch/cygwin1-$snaps[$i].dbg.xz");
+	$var{'xfiles'} .= file_row("$arch/cygwin-inst-$snaps[$i].tar.xz");
+	$var{'xfiles'} .= file_row("$arch/cygwin-src-$snaps[$i].tar.xz");
 
 	if ($i == $#snaps || (stat("$arch/winsup-diffs-$snaps[$i+1]-$date"))[7] > 0) {
 	    $t = $perday;
@@ -113,7 +113,7 @@ sub file_row($) {
     my $rv = "<tr>";
     $rv .= "<td><tt>&nbsp; $f</tt></td>";
     $rv .= "<td align=right colspan=3>$sz Kb</td>";
-    if ($f !~ /^(.*\.tar)\.bz2$/o) {
+    if ($f !~ /^(.*\.tar)\.xz$/o) {
 	$rv .= "<td align=center><br></td>";
     } else {
 	$rv .= "<td align=center><a href=\"$1\">list</a></td>";
@@ -154,8 +154,8 @@ sub update_diffs($$) {
     my $basesrc = "$base-src-$basesnap";
     my $nextsrc = "$base-src-$nextsnap";
 
-    my $sf = mtime("$arch/$basesrc.tar.bz2");
-    my $osf = mtime("$arch/$nextsrc.tar.bz2");
+    my $sf = mtime("$arch/$basesrc.tar.xz");
+    my $osf = mtime("$arch/$nextsrc.tar.xz");
     my $df = mtime("$arch/$base-diffs-$basesnap-$nextsnap");
     my $cl = mtime("$arch/$base-changelog-$basesnap-$nextsnap");
 
@@ -213,14 +213,14 @@ sub update_diffs($$) {
 }
 
 sub need($$) {
-    my ($snap, $tbz) = @_;
-    $tbz = "$arch/$tbz";
-    if (!$::unpacked{$tbz}) {
-	print "unpacking $tbz\n";
-	$::unpacked{$tbz} = 1;
-	make_path("$TMP/$tbz");
-	system '/bin/tar', 'xjf', "$tbz.tar.bz2", '-C', "$TMP/$tbz";
+    my ($snap, $txz) = @_;
+    $txz = "$arch/$txz";
+    if (!$::unpacked{$txz}) {
+	print "unpacking $txz\n";
+	$::unpacked{$txz} = 1;
+	make_path("$TMP/$txz");
+	system '/bin/tar', 'xf', "$txz.tar.xz", '-C', "$TMP/$txz";
     }
-    return -d "$TMP/$tbz/cygwin-snapshot-$snap-1" ?
-	   "$tbz/cygwin-snapshot-$snap-1" : $tbz;
+    return -d "$TMP/$txz/cygwin-snapshot-$snap-1" ?
+	   "$txz/cygwin-snapshot-$snap-1" : $txz;
 }
