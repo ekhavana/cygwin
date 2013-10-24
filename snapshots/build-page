@@ -1,6 +1,7 @@
 #!/usr/bin/perl
 use Cwd;
-use File::Path qw(make_path remove_tree);
+use File::Path qw(make_path);
+use File::Temp;
 
 use integer;
 
@@ -21,7 +22,7 @@ $| = 1;
 use vars '$DB::inhibit_exit';
 $DB::inhibit_exit = 0;
 
-my $TMP = "/sourceware/snapshot-tmp/cygwin/$$";
+my $TMP = File::Temp->newdir();
 my $wwwdir = getcwd . '/' . $arch;
 my $http = "http://cygwin.com/snapshots";
 
@@ -101,8 +102,6 @@ open my $fd, '>', 'index.html';
 print $fd $master;
 chmod 0775, $fd;
 close $fd;
-
-remove_tree $TMP;
 
 exit 0;
 
