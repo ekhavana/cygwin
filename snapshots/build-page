@@ -3,6 +3,10 @@ use Cwd;
 use File::Path qw(make_path);
 use File::Temp;
 
+use vars '$DB::inhibit_exit';
+$DB::inhibit_exit = 0;
+
+use strict;
 use integer;
 
 sub file_row($);
@@ -19,11 +23,9 @@ my %var;
 
 umask 0002;
 $| = 1;
-use vars '$DB::inhibit_exit';
-$DB::inhibit_exit = 0;
 
 my $TMP = File::Temp->newdir();
-my $wwwdir = getcwd . '/' . $arch;
+my $wwwdir = getcwd;
 my $http = "http://cygwin.com/snapshots";
 
 our ($changelog,  $diff, $master, $perday, $perdaync);
@@ -38,12 +40,14 @@ chdir $wwwdir or die "couldn't cd to $wwwdir - $!\n";
 my @month = ('', '01', '02', '03', '04', '05', '06', '07', '08',
 	     '09', '10', '11', '12');
 my @perdays = ();
-for our $arch ('x86', 'x86_64') {
+our $arch;
+our @snaps;
+for $arch ('x86', 'x86_64') {
     $var{'arch'} = $arch;
     my $dfd;
     opendir $dfd, $arch;
     my %bydate = ();
-    local @snaps = ();
+    @snaps = ();
     for (reverse sort readdir $dfd) {
 	next unless /^(.*?)-(\d\d\d\d\d\d\d\d)\.(.*?)$/o;
 	push @{$bydate{$2}}, "$arch/" . $_;
@@ -51,7 +55,7 @@ for our $arch ('x86', 'x86_64') {
     }
     closedir $dfd;
 
-    for $i (0..$#snaps) {
+    for my $i (0..$#snaps) {
 	update_diffs('winsup', $i);
 	my $date = $snaps[$i];
 	$var{'date'} = $date;
@@ -80,6 +84,7 @@ for our $arch ('x86', 'x86_64') {
 	$var{'xfiles'} .= file_row("$arch/cygwin-inst-$snaps[$i].tar.xz");
 	$var{'xfiles'} .= file_row("$arch/cygwin-src-$snaps[$i].tar.xz");
 
+	my $t;
 	if ($i == $#snaps || (stat("$arch/winsup-diffs-$snaps[$i+1]-$date"))[7] > 0) {
 	    $t = $perday;
 	} else {
@@ -108,7 +113,7 @@ exit 0;
 sub file_row($) {
     my $f = shift;
     return "" unless -f $f;
-    local($sz) = size($f);
+    my $sz = size($f);
     my $rv = "<tr>";
     $rv .= "<td><tt>&nbsp; $f</tt></td>";
     $rv .= "<td align=right colspan=3>$sz Kb</td>";
@@ -130,7 +135,7 @@ sub file_row($) {
 sub size($) {
     my $f = shift;
     print "No file $_[0]\n" unless -f $f;
-    $sz = int(((stat _)[7]+1023) / 1024);
+    my $sz = int(((stat _)[7]+1023) / 1024);
     0 while $sz =~ s/(.*\d)(\d\d\d)/$1,$2/;
     return $sz;
 }
@@ -164,8 +169,8 @@ sub update_diffs($$) {
 	my $nextdir = need($nextsnap, $nextsrc);
 	
 	my $fnsnap = "$arch/$base-diffs-$basesnap-$nextsnap";
-	open $outfd, '>', $fnsnap or die "$0: couldn't open $fnsnap for output - $!\n";
-	open $difffd, '-|', "cd $TMP; exec diff -p -N -d -r -U2 $basedir $nextdir" or die "$0: diff $basedir $nextdir failed - $!\n";
+	open my $outfd, '>', $fnsnap or die "$0: couldn't open $fnsnap for output - $!\n";
+	open my $difffd, '-|', "cd $TMP; exec diff -p -N -d -r -U2 $basedir $nextdir" or die "$0: diff $basedir $nextdir failed - $!\n";
 	print $outfd "Differences between $basesnap and $nextsnap\n\n";
 	my $keeper = 0;
 	my $sawstuff = 0;
@@ -187,7 +192,7 @@ sub update_diffs($$) {
 	open OUT, '>', "$arch/$base-changelog-$basesnap-$nextsnap" or die "$0: couldn't open $arch/$base-changelog-$basesnap-$nextsnap for writing - $!\n";
 	print OUT "ChangeLog for $basesnap to $nextsnap\n\n";
 	open FIND, '-|', "cd $TMP/$basedir; exec find . -name ChangeLog -print" or die "$0: 'find -name Changelog -print' failed - $!\n";
-	while ($f = <FIND>) {
+	while (my $f = <FIND>) {
 	    $f =~ s/[\r\n]+$//o;
 	    open DIFF, '-|', 'diff', "$TMP/$basedir/$f", "$TMP/$nextdir/$f";
 	    while (<DIFF>) {
