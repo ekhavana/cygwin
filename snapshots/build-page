@@ -30,6 +30,7 @@ my $http = "http://cygwin.com/snapshots";
 
 our ($changelog,  $diff, $master, $perday, $perdaync);
 for my $t (qw'changelog diff master perday perdaync') {
+    no strict refs;
     open my $fd, '<', "$t.template" or die "$t.template: $!\n";
     ${$t} = join '', <$fd>;
     close $fd;
