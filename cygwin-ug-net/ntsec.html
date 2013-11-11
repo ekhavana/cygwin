@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=ANSI_X3.4-1968"><title>Using Windows security in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter&#160;3.&#160;Using Cygwin"><link rel="prev" href="using-cygwinenv.html" title="The CYGWIN environment variable"><link rel="next" href="using-cygserver.html" title="Cygserver"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Using Windows security in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-cygwinenv.html">Prev</a>&#160;</td><th width="60%" align="center">Chapter&#160;3.&#160;Using Cygwin</th><td width="20%" align="right">&#160;<a accesskey="n" href="using-cygserver.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ntsec"></a>Using Windows security in Cygwin</h2></div></div></div><p>This section discusses how the Windows security model is
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Using Windows security in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using.html" title="Chapter 3. Using Cygwin"><link rel="prev" href="using-cygwinenv.html" title="The CYGWIN environment variable"><link rel="next" href="using-cygserver.html" title="Cygserver"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">Using Windows security in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="using-cygwinenv.html">Prev</a> </td><th width="60%" align="center">Chapter 3. Using Cygwin</th><td width="20%" align="right"> <a accesskey="n" href="using-cygserver.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ntsec"></a>Using Windows security in Cygwin</h2></div></div></div><p>This section discusses how the Windows security model is
 utilized in Cygwin to implement POSIX-like permissions, as well as how
 the Windows authentication model is used to allow cygwin applications
 to switch users in a POSIX-like fashion.</p><p>The setting of POSIX-like file and directory permissions is
@@ -122,7 +122,7 @@ from the permission to change object data, and even changing object data
 can be separated into different permission bits for different kind of
 data.  But there's a problem with the definition of a "correct" ACL
 which disallows mapping of certain POSIX permissions cleanly.  See
-<a class="xref" href="ntsec.html#ntsec-mapping" title="The POSIX permission mapping leak">the section called &#8220;The POSIX permission mapping leak&#8221;</a>.</p><p>POSIX is able to create only three different permissions?  Not quite.
+<a class="xref" href="ntsec.html#ntsec-mapping" title="The POSIX permission mapping leak">the section called “The POSIX permission mapping leak”</a>.</p><p>POSIX is able to create only three different permissions?  Not quite.
 Newer operating systems and file systems on POSIX systems also provide
 access control lists.  Two different APIs exist for accessing these
 ACLs, the Solaris API and the POSIX API.  Cygwin implements the Solaris
@@ -148,7 +148,7 @@ usually do this for you.</p><p>Another interesting entry in the pw_gecos field (
 usually created by running <span class="command"><strong>mkpasswd</strong></span>) is the Windows user
 name entry.  It takes the form "U-domain\username" and is sometimes used
 by services to authenticate a user.  Logging in through
-<span class="command"><strong>telnet</strong></span> is a common scenario.</p><p>A typical snippet from <code class="filename">/etc/passwd</code>:</p><div class="example"><a name="ntsec-passwd"></a><p class="title"><b>Example&#160;3.3.&#160;/etc/passwd:</b></p><div class="example-contents"><pre class="screen">
+<span class="command"><strong>telnet</strong></span> is a common scenario.</p><p>A typical snippet from <code class="filename">/etc/passwd</code>:</p><div class="example"><a name="ntsec-passwd"></a><p class="title"><b>Example 3.3. /etc/passwd:</b></p><div class="example-contents"><pre class="screen">
 SYSTEM:*:18:544:,S-1-5-18::
 Administrators:*:544:544:,S-1-5-32-544::
 Administrator:unused:500:513:U-FOO\Administrator,S-1-5-21-790525478-115176313-839522115-500:/home/Administrator:/bin/bash
@@ -169,7 +169,7 @@ are all we need to exactly identify an account, and to have a two way
 translation, from Windows account name/SID to Cygwin account name uid and
 vice versa.  Having this complete information allows us to choose a Cygwin
 user name and uid which doesn't have to match the Windows account at all.  As
-long as the pw_gecos information is available, we're on the safe side:</p><div class="example"><a name="ntsec-passwd-tweaked"></a><p class="title"><b>Example&#160;3.4.&#160;/etc/passwd, tweaked:</b></p><div class="example-contents"><pre class="screen">
+long as the pw_gecos information is available, we're on the safe side:</p><div class="example"><a name="ntsec-passwd-tweaked"></a><p class="title"><b>Example 3.4. /etc/passwd, tweaked:</b></p><div class="example-contents"><pre class="screen">
 root:unused:0:513:U-FOO\Administrator,S-1-5-21-790525478-115176313-839522115-500:/home/Administrator:/bin/bash
 thursday_next:unused:11001:11125:U-BAR\corinna,S-1-5-21-2913048732-1697188782-3448811101-1001:/home/corinna:/bin/tcsh
 </pre></div></div><br class="example-break"><p>  The above <code class="filename">/etc/passwd</code> will still work fine.
@@ -183,7 +183,7 @@ pretend to be Thursday Next, but will wake up sooner or later finding
 out she's still actually the domain user BAR\corinna...</p><p>Do I have to mention that you can also rename groups in
 <code class="filename">/etc/group</code>?  As long as the SID is present and correct,
 all is well.  This allows you to, for instance, rename the "Administrators"
-group to "root" as well:</p><div class="example"><a name="ntsec-group-tweaked"></a><p class="title"><b>Example&#160;3.5.&#160;/etc/group, tweaked:</b></p><div class="example-contents"><pre class="screen">
+group to "root" as well:</p><div class="example"><a name="ntsec-group-tweaked"></a><p class="title"><b>Example 3.5. /etc/group, tweaked:</b></p><div class="example-contents"><pre class="screen">
 root:S-1-5-32-544:544:
 </pre></div></div><br class="example-break"><p>Last but not least, you can also change the primary group of a user
 in <code class="filename">/etc/passwd</code>.  The only requirement is that the user
@@ -539,5 +539,5 @@ calls to communicate with the Cygwin LSA authentication package and
 use the returned token.</p></li><li class="listitem"><p>Last chance, try to use the <span class="command"><strong>NtCreateToken</strong></span> call
 to create a token.  If that works, use this token.</p></li><li class="listitem"><p>If all of the above fails, our process has insufficient privileges
 to switch the user context at all, so <span class="command"><strong>set(e)uid</strong></span>
-fails and returns -1, setting errno to EPERM.</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-cygwinenv.html">Prev</a>&#160;</td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right">&#160;<a accesskey="n" href="using-cygserver.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The <code class="envar">CYGWIN</code> environment
-variable&#160;</td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top">&#160;Cygserver</td></tr></table></div></body></html>
+fails and returns -1, setting errno to EPERM.</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-cygwinenv.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="using-cygserver.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">The <code class="envar">CYGWIN</code> environment
+variable </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> Cygserver</td></tr></table></div></body></html>
