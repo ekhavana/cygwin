@@ -1,5 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin 1.7</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin 1.7</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin 1.7</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.25"></a>What's new and what changed from 1.7.24 to 1.7.25</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin 1.7</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin 1.7</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin 1.7</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.26"></a>What's new and what changed from 1.7.25 to 1.7.26</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+getaddrinfo now supports glibc-specific International Domain Name (IDN)
+extension flags: AI_IDN, AI_CANONIDN, AI_IDN_ALLOW_UNASSIGNED,
+AI_IDN_USE_STD3_ASCII_RULES.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+getnameinfo now supports glibc-specific International Domain Name (IDN)
+extension flags: NI_IDN, NI_IDN_ALLOW_UNASSIGNED, NI_IDN_USE_STD3_ASCII_RULES.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Slightly improve randomness of /dev/random emulation.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Allow to use advisory locking on any device.  POSIX fcntl and lockf locking
+works with any device, BSD flock locking only with devices backed by an OS
+handle.  Right now this excludes console windows on pre Windows 8, as well as
+almost all virtual files under /proc from BSD flock locking.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+The header /usr/include/exceptions.h, containing implementation details for
+32 bit Windows' exception handling only, has been removed.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Preliminary, experimental support of the posix_spawn family of functions.
+New associated header /usr/include/spawn.h.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.25"></a>What's new and what changed from 1.7.24 to 1.7.25</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Change magic number associated with process information block so that 32-bit
 Cygwin processes don't try to interpret 64-bit information and vice-versa.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
