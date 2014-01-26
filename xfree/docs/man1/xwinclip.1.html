@@ -1,0 +1,113 @@
+<HTML><HEAD><TITLE>Manpage of xwinclip</TITLE>
+</HEAD><BODY>
+<H1>xwinclip</H1>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.15.0<BR><A HREF="#index">Index</A>
+<A HREF="../index.html">Return to Main Contents</A><HR>
+
+<A NAME="lbAB">&nbsp;</A>
+<H2>NAME</H2>
+
+xwinclip - An X11 and Windows clipboard integration tool
+<P>
+<A NAME="lbAC">&nbsp;</A>
+<H2>SYNOPSIS</H2>
+
+<B>xwinclip [OPTION]...</B>
+
+<P>
+<A NAME="lbAD">&nbsp;</A>
+<H2>DESCRIPTION</H2>
+
+<I>xwinclip</I> is a tool for copying and pasting text between the Windows and X11 clipboard systems.
+<P>
+<I>xwinclip</I> watches for updates to either clipboard and copies data between them when either one is updated.
+<P>
+<I>xwinclip</I> monitors the X PRIMARY and CLIBPOARD selections for changes in ownership, and makes
+the contents of the most recent one to change available to paste from the Windows clipboard.
+<P>
+It also monitors the contents of the Windows clipboard for changes, taking ownership of the PRIMARY and
+CLIPBOARD selections, and making the contents of the Windows clipboard available in them.
+<P>
+<B>Note well:</B>
+
+The <I><A HREF="../man1/XWin.1.html">XWin</A>(1)</I> X server has internal clipboard integration that is enabled by default.
+Do <I>NOT</I> run <I>xwinclip</I> unless <I><A HREF="../man1/XWin.1.html">XWin</A>(1)</I> has been started with the -noclipboard option.
+<P>
+<A NAME="lbAE">&nbsp;</A>
+<H2>OPTIONS</H2>
+
+<I>xwinclip</I> accepts the following optional command line switches:
+<P>
+<DL COMPACT>
+<DT><B>-display [display]</B>
+
+<DD>
+Specifies the X server display to connect to.
+<DT><B>-nounicodeclipboard</B>
+
+<DD>
+Do not use unicode text on the clipboard.
+<DT><B>-noprimary</B>
+
+<DD>
+Do not monitor the PRIMARY selection.
+<P>
+</DL>
+<A NAME="lbAF">&nbsp;</A>
+<H2>SEE ALSO</H2>
+
+<A HREF="../man1/XWin.1.html">XWin</A>(1)
+<P>
+<A NAME="lbAG">&nbsp;</A>
+<H2>BUGS</H2>
+
+Only text clipboard contents are supported.
+<P>
+The INCR (Incrememntal transfer) clipboard protocol for clipboard contents larger than the maximum size of an
+X request is not supported.
+<P>
+Some X clients, notably ones written in Tcl/Tk, do not re-assert ownership of the PRIMARY selection or update
+it's timestamp when it's contents change, which currently prevents <I>xwinclip</I> from correctly noticing that
+the PRIMARY selection's contents have changed.
+<P>
+Windows clipboard rendering is synchronous in the WM_RENDER*FORMAT message (that is, we must have placed the
+contents onto the clipboard by the time we return from processing this message), but we must wait for the X
+client which owns the selection to convert the selection to our requested format.  This is currently achieved
+using a fixed timeout of one second.
+<P>
+The <A HREF="../man1/XWin.1.html">XWin</A>(1) server should indicate somehow (by placing an atom on the root window?) that it is running with it's
+internal clipboard integration enabled, and xwinclip should notice this and exit with an appropriate error.
+<P>
+Probably many other bugs.
+<P>
+<A NAME="lbAH">&nbsp;</A>
+<H2>CONFORMING TO</H2>
+
+ICCCM (Inter-Client Communication Conventions Manual) 2.0
+<P>
+<A NAME="lbAI">&nbsp;</A>
+<H2>AUTHORS</H2>
+
+Contributors to xwinclip include Benjamin Riefenstahl, Roland Cassard, Brian Genisio, Colin Harrison,
+Harold L Hunt II, Matsuzaki Kensuke, Jon Turney, Chris Twiner and Jeremy Wilkins.
+<P>
+
+<HR>
+<A NAME="index">&nbsp;</A><H2>Index</H2>
+<DL>
+<DT><A HREF="#lbAB">NAME</A><DD>
+<DT><A HREF="#lbAC">SYNOPSIS</A><DD>
+<DT><A HREF="#lbAD">DESCRIPTION</A><DD>
+<DT><A HREF="#lbAE">OPTIONS</A><DD>
+<DT><A HREF="#lbAF">SEE ALSO</A><DD>
+<DT><A HREF="#lbAG">BUGS</A><DD>
+<DT><A HREF="#lbAH">CONFORMING TO</A><DD>
+<DT><A HREF="#lbAI">AUTHORS</A><DD>
+</DL>
+<HR>
+This document was created by
+<A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
+using the manual pages.<BR>
+Time: 18:12:12 GMT, January 26, 2014
+</BODY>
+</HTML>

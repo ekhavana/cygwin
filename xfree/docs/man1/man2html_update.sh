@@ -20,6 +20,8 @@ function convert_to_html_and_fixup
 convert_to_html_and_fixup "startxwin"
 convert_to_html_and_fixup "Xserver"
 convert_to_html_and_fixup "XWin"
+convert_to_html_and_fixup "xwinclip"
+convert_to_html_and_fixup "xtow"
 
 convert_to_html_and_fixup "XWinrc"
 mv XWinrc.1.html ../man5/XWinrc.5.html
