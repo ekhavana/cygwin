@@ -84,7 +84,7 @@ curr: 0.9-1
 </pre>
 This usage should be rare, however.
 <p>In general, you should trust the automatic setup.ini generator to "do the right thing" -- with one exception. If you decide that you need to release a <i>test</i> version of your package, there is no way for the setup.ini generator to know that.</p>
-<p>So, you will have to put something like "<tt>test: 1.9-1</tt>" in your setup.hint file. This will cause setup.exe to characterize the 1.9-1 version as a "test" package. With the current setup implementation, it will also mean that it will be overlooked by most people during installation. So, unless you have made arrangements to advertise your test release, this option should be used sparingly.</p>
+<p>So, you will have to put something like "<tt>test: 1.9-1</tt>" in your setup.hint file. This will cause setup characterize the 1.9-1 version as a "test" package. With the current setup implementation, it will also mean that it will be overlooked by most people during installation. So, unless you have made arrangements to advertise your test release, this option should be used sparingly.</p>
 <p>Note that if any of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt> options are used, they will short circuit <em>all</em> of the automatic version detection used for generating setup.ini. So, if you include a <tt>test</tt> option, and you have valid current and/or previous tar files, you <em>must</em> specify <tt>curr</tt> and/or <tt>prev</tt>. Otherwise, the <b>only</b> version that setup will display will be the <tt>test</tt> version.</p>
 <p>For example, if your setup.hint looks like this:</p>
 <pre>
