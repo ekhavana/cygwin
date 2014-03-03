@@ -10,8 +10,8 @@
 <!--#include virtual="navbar.html" -->
 <!--#include virtual="top.html" -->
 <h1>Cygwin Package Contributor's Guide</h1>
-<p>This document is intended for people who post packages to sourceware.org, and thus need to make them available through the standard Cygwin setup program. This documents the syntax of the setup.hint file, the program that automatically generates it on a regular basis, the layout required for packages, and the related policies to ensure good behaviour from the setup.exe program.</p>
-<p><a href="http://sourceware.org/cygwin-apps/setup.html">Setup.exe</a> depends on certain conventions being followed. If they are not followed, bad things may happen to the users of setup.exe. Where a convention can be ignored, should circumstances warrent, this document will specify that. Setup.exe has it's own homepage <a href="http://sourceware.org/cygwin-apps/setup.html">http://sourceware.org/cygwin-apps/setup.html</a>. If you are interested in adding features to setup.exe, or in manually creating a setup.ini file, you should consult the setup.exe homepage.</p>
+<p>This document is intended for people who post packages to sourceware.org, and thus need to make them available through the standard Cygwin setup program. This documents the syntax of the setup.hint file, the program that automatically generates it on a regular basis, the layout required for packages, and the related policies to ensure good behaviour from the setup program.</p>
+<p><a href="http://sourceware.org/cygwin-apps/setup.html">Setup</a> depends on certain conventions being followed. If they are not followed, bad things may happen to the users of the setup program. Where a convention can be ignored, should circumstances warrent, this document will specify that. Setup has it's own homepage <a href="http://sourceware.org/cygwin-apps/setup.html">http://sourceware.org/cygwin-apps/setup.html</a>. If you are interested in adding features to setup, or in manually creating a setup.ini file, you should consult the setup homepage.</p>
 <p>The <tt>cygwin-apps</tt> mailing list is the correct place to discuss any package creation or maintenance issues. It is not a place for end user bug reports - direct those to the <tt>cygwin</tt> mailing list instead.</p>
 <h2>Contents</h2>
 <ul class="spaced">
@@ -32,10 +32,10 @@
   <li>a setup.hint file</li>
 </ul>
 <p>Binary tar files are named "package-version-release.tar.bz2". They generally contain the executable files that will be installed on a user's system plus any auxilliary files needed by the package. See the <a href="#package_contents">making packages</a> section below for more details on how to generate a binary tar file.</p>
-<p>Source tar files are named "package-version-release-src.tar.bz2". Source tar files should contain the source files needed to rebuild the package. While installing these files is optional under setup.exe, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associate shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#srcpackage_contents">making packages</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
+<p>Source tar files are named "package-version-release-src.tar.bz2". Source tar files should contain the source files, patches and scripts needed to rebuild the package. While installing these files is optional, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associate shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#srcpackage_contents">making packages</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
 <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.</p>
 <h2><a id="sourceware.org" name="sourceware.org">Automatic setup.ini generation on sourceware.org</a></h2>
-<p>A script runs on sourceware.org which collects information from (currently) the <tt>release</tt> directory in the ftp download area. Information from subdirectories of these directories is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a> file which is used by the Cygwin setup.exe program for installation control. If you are responsible for maintaining a Cygwin package, it is important that you understand how this process works.</p>
+<p>A script runs on sourceware.org which collects information from (currently) the <tt>release</tt> directory in the ftp download area. Information from subdirectories of these directories is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a> file which is used by the Cygwin setup program for installation control. If you are responsible for maintaining a Cygwin package, it is important that you understand how this process works.</p>
 <p>Packages are grouped by directory under <tt>release</tt>. The directory name is the same as the package name. For example, the <tt>boffo</tt> package will live in the <tt>boffo</tt> subdirectory. Exceptions to this rule are historical. All new packages will follow the rule of package name == directory name. However, for closely related groups of packages, it is acceptable to use a heirarchical tree under <tt>release/</tt>:</p>
 <pre>
 release/
@@ -55,7 +55,7 @@ boffo-1.0-1.tar.bz2  boffo-1.0-1-src.tar.bz2  setup.hint
 </pre>
 <p>Setup is currently unable to list more than three versions of each package. Therefore you should not keep more than three versions of each package around: The current version, the previous stable version, and, optionally, one test version. By keeping a previous stable version around, you isolate yourself (somewhat) from problems with partial mirrors. When you add a new "current" version, you can either keep the old "previous" version, or make the old current version the new previous version, depending on how stable they each were.</p>
 <p>Test versions are specified via the setup.hint file as described <a href="#setup.hint">below</a>. It is not required that your package have a <tt>test</tt> version. Use of a <tt>test</tt> version of a package is at the discretion of the package maintainer.</p>
-<p>Note that currently some files in the distribution are gzipped. Use of gzip for file compression is deprecated, however. New package submissions must be bzip2'ed.</p>
+<p>Note that package files may be .bz2, .gzip or .xz compressed.  Use of gzip for file compression is deprecated, and should not be used for new package submissions.</p>
 <h2><a id="setup.hint" name="setup.hint"><tt>setup.hint</tt></a></h2>
 <p>Each package must be submitted with a file called <tt>setup.hint</tt>. This file is used for information that cannot be inferred just from the context of the file name or package name. Lines in <tt>setup.hint</tt> will consist of one of the following:</p>
 <pre>
@@ -84,8 +84,8 @@ curr: 0.9-1
 </pre>
 This usage should be rare, however.
 <p>In general, you should trust the automatic setup.ini generator to "do the right thing" -- with one exception. If you decide that you need to release a <i>test</i> version of your package, there is no way for the setup.ini generator to know that.</p>
-<p>So, you will have to put something like "<tt>test: 1.9-1</tt>" in your setup.hint file. This will cause setup.exe to characterize the 1.9-1 version as a "test" package. With the current setup.exe implementation, it will also mean that it will be overlooked by most people during installation. So, unless you have made arrangements to advertise your test release, this option should be used sparingly.</p>
-<p>Note that if any of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt> options are used, they will short circuit <em>all</em> of the automatic version detection used for generating setup.ini. So, if you include a <tt>test</tt> option, and you have valid current and/or previous tar files, you <em>must</em> specify <tt>curr</tt> and/or <tt>prev</tt>. Otherwise, the <b>only</b> version that setup.exe will display will be the <tt>test</tt> version.</p>
+<p>So, you will have to put something like "<tt>test: 1.9-1</tt>" in your setup.hint file. This will cause setup.exe to characterize the 1.9-1 version as a "test" package. With the current setup implementation, it will also mean that it will be overlooked by most people during installation. So, unless you have made arrangements to advertise your test release, this option should be used sparingly.</p>
+<p>Note that if any of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt> options are used, they will short circuit <em>all</em> of the automatic version detection used for generating setup.ini. So, if you include a <tt>test</tt> option, and you have valid current and/or previous tar files, you <em>must</em> specify <tt>curr</tt> and/or <tt>prev</tt>. Otherwise, the <b>only</b> version that setup will display will be the <tt>test</tt> version.</p>
 <p>For example, if your setup.hint looks like this:</p>
 <pre>
 test: 1.9-1
@@ -98,9 +98,9 @@ curr: 1.0-1
 test: 1.9-1
 </pre>
 <p>The <tt>skip</tt> line indicates that that package should not appear in setup.ini. It is intended for directories that exist in the hierarchy that should not be considered for inclusion in setup.ini.</p>
-<p><tt>sdesc</tt> is a mandatory field for setup.hint. Your package <em>must</em> contain this field. The <tt>sdesc</tt> field is required for correct operation of setup.exe.</p>
-<p><tt>sdesc</tt> is a one line description of the package. This is the information that will be displayed when installing packages via setup.exe.</p>
-<p><tt>ldesc</tt> is a more descriptive, multi-line description of the package, intended for future use in setup.exe.</p>
+<p><tt>sdesc</tt> is a mandatory field for setup.hint. Your package <em>must</em> contain this field. The <tt>sdesc</tt> field is required for correct operation of the setup program.</p>
+<p><tt>sdesc</tt> is a one line description of the package. This is the information that will be displayed when installing packages via setup.</p>
+<p><tt>ldesc</tt> is a more descriptive, multi-line description of the package, intended for future use.</p>
 <p>Please note that the package name should <em>not</em> be part of the description, e.g. this is incorrect:
 <pre>
 sdesc:      "boffo: A whackamole simulation in ASCII art"
@@ -162,7 +162,7 @@ No actual moles will be harmed during execution of this game."
     <td>X11</td>
   </tr>
 </table>
-<p>As you can see, currently, all categories consist of only a single word. We don't anticipate that this will change anytime soon. However, with the use of quotes, setup.exe will understand category names which contain spaces, for example:</p>
+<p>As you can see, currently, all categories consist of only a single word. We don't anticipate that this will change anytime soon. However, with the use of quotes, setup will understand category names which contain spaces, for example:</p>
 <pre>
 category: "ASCII Games"
 </pre>
@@ -239,7 +239,7 @@ source: release/boffo/boffo-2.4.1-2-src.tar.bz2
 </pre>
 <p>Note that both packages point to the same -src tarball. Also, it is required that the version strings match (libboffo7-5.2 won't point to boffo-1.4-src). The same logic is used to "match up" prev: and test: versions.</p>
 <h2><a id="package_contents" name="package_contents">Making Packages</a></h2>
-<p>The files paths within both the -src and the binary package files are quite important. Since setup.exe extracts into a predetermined directory, you must structure your package contents accordingly.</p>
+<p>The files paths within both the -src and the binary package files are quite important. Since setup extracts into a predetermined directory, you must structure your package contents accordingly.</p>
 <p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
 <ul class="spaced">
   <li>
@@ -286,7 +286,7 @@ etc...
   </li>
   <li>In your source package include the same foo-vendor-suffix.README as used in the binary package.</li>
   <li>Your source package already be patched with any necessary Cygwin specific changes. The user should be able to just ./configure; make; and go.</li>
-  <li>Include a single file foo-vendor-release.patch in your source package, that when applied (in reverse: 'patch -R') will remove all the patches you've applied to the package, leaving it as the vendor distributes it. This file should extract as : <tt>/usr/src/foo-vendor-release.patch</tt> (that is, since setup.exe extracts everything into <tt>/usr/src</tt>, the patch should be a "top level" member of the -src tarball.)<br />
+  <li>Include a single file foo-vendor-release.patch in your source package, that when applied (in reverse: 'patch -R') will remove all the patches you've applied to the package, leaving it as the vendor distributes it. This file should extract as : <tt>/usr/src/foo-vendor-release.patch</tt> (that is, since setup extracts everything into <tt>/usr/src</tt>, the patch should be a "top level" member of the -src tarball.)<br />
     <br />
     Optionally, this patch could also unpack inside the source tree:
 <pre>
@@ -383,7 +383,7 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
 <h2><a id="postinstall" name="postinstall">Creating a package postinstall script</a></h2>
 <p>If your package requires certain commands to be executed after the files in the package are installed, include them in a file in the package called /etc/postinstall/<var>package</var>.sh or /etc/postinstall/<var>package</var>.bat.</p>
 <p>If the file's name ends in ".sh", it is executed with the Cygwin shell; if it ends in ".bat", it is executed with the DOS command interpreter. If it doesn't end with either of these suffixes, it is ignored.</p>
-<p>After the script has been run it is renamed by appending the suffix ".done" to its previous name, to prevent it from being run again the next time the user runs the setup program.</p>
+<p>After the script has been successfully run it is renamed by appending the suffix ".done" to its previous name, to prevent it from being run again the next time the user runs the setup program.</p>
 <p>Note that the setup program runs all the postinstall scripts after all desired packages have been installed, that is, it does not run each package's postinstall script immediately after installing that package. Note, furthermore, that the order in which the scripts are run is not guaranteed. Therefore, if your package depends on others which have their own postinstall scripts, you cannot assume in your script that the other packages' scripts have already been run.</p>
 <h2><a id="submitting" name="submitting">Submitting a new package</a></h2>
 <p>So you've got a package you want to submit. Follow the following checklist before emailing the <tt>cygwin-apps</tt> mailing list and you'll almost certainly save time.</p>
@@ -405,7 +405,7 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
     <ul>
       <li>Avoid the "@ foo" line at the beginning of the file: it is added automatically.</li>
       <li>In order to select an appropriate a correct <tt>Category</tt> you can look in the Debian package list and identify the section that your package is present in there - if it's available via Debian. If it's not, have a look and take a sensible guess. Use <a href="#categories">existing categories</a> if at all possible.</li>
-      <li>Do not use the package name in <tt>sdesc</tt>, as it is added automatically by <tt>setup.exe</tt>.</li>
+      <li>Do not use the package name in <tt>sdesc</tt>, as it is added automatically by the setup program.</li>
       <li>Opinion on whether to mark your initial version as a <tt>Test</tt> version is currently mixed. If you have doubts about the stability of your initial offering you may decide to mark it as <tt>Test</tt>. Then, once the package has no major bug reports from users, a current package may be introduced. Otherwise, it is perfectly acceptable to forgo the <tt>Test</tt> designation in your first release.</li>
     </ul>
   </li>
