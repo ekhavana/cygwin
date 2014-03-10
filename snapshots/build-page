@@ -19,7 +19,9 @@ use constant {
     MAXKEEP => 60
 };
 
-my %var;
+my $tag = $ARGV[0];
+
+my %var = ();
 
 umask 0002;
 $| = 1;
@@ -44,7 +46,9 @@ my @perdays = ();
 our $arch;
 our @snaps;
 for $arch ('x86', 'x86_64') {
+    my %var = ();
     $var{'arch'} = $arch;
+    $var{'tag'} = defined($tag) ? " ($tag)" : '';
     my $dfd;
     opendir $dfd, $arch;
     my %bydate = ();
