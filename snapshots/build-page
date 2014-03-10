@@ -46,7 +46,6 @@ my @perdays = ();
 our $arch;
 our @snaps;
 for $arch ('x86', 'x86_64') {
-    my %var = ();
     $var{'arch'} = $arch;
     $var{'tag'} = defined($tag) ? " ($tag)" : '';
     my $dfd;
@@ -62,6 +61,7 @@ for $arch ('x86', 'x86_64') {
 
     for my $i (0..$#snaps) {
 	update_diffs('winsup', $i);
+	$var{'tag'} = '';
 	my $date = $snaps[$i];
 	$var{'date'} = $date;
 	($var{'longdate'} = $date) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
