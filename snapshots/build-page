@@ -61,7 +61,6 @@ for $arch ('x86', 'x86_64') {
 
     for my $i (0..$#snaps) {
 	update_diffs('winsup', $i);
-	$var{'tag'} = '';
 	my $date = $snaps[$i];
 	$var{'date'} = $date;
 	($var{'longdate'} = $date) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
@@ -96,6 +95,7 @@ for $arch ('x86', 'x86_64') {
 	    $t = $perdaync;
 	}
 	0 while $t =~ s/<var ([a-z]+)>/$var{$1}/ge;
+	$var{'tag'} = '';
 	push @perdays, $t;
     }
 
