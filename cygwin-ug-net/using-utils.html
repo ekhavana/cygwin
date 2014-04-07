@@ -626,7 +626,31 @@ nostr="no"
 messages-codeset="UTF-8"
 bash$ locale noexpr
 ^[nN]
-</pre></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mkgroup"></a>mkgroup</h3></div></div></div><pre class="screen">
+</pre></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="minidumper"></a>minidumper</h3></div></div></div><pre class="screen">
+Usage: minidumper [OPTION] FILENAME WIN32PID
+
+Write minidump from WIN32PID to FILENAME.dmp
+
+-t, --type     minidump type flags
+-n, --nokill   don't terminate the dumped process
+-d, --verbose  be verbose while dumping
+-h, --help     output help information and exit
+-q, --quiet    be quiet while dumping (default)
+-V, --version  output version information and exit
+  </pre><p>
+    The <span class="command"><strong>minidumper</strong></span> utility can be used to create a
+    minidump of a running Windows process.  This minidump can be later
+    analysed using breakpad or Windows debugging tools.
+  </p><p>
+    <span class="command"><strong>minidumper</strong></span> can be used with cygwin's Just-In-Time
+    debugging facility in exactly the same way as <span class="command"><strong>dumper</strong></span>
+    (See <a class="xref" href="using-utils.html#dumper" title="dumper">the section called “dumper”</a>).
+  </p><p>
+    <span class="command"><strong>minidumper</strong></span> can also be started from the command line to
+    create a minidump of any running process.  For compatibility with
+    <span class="command"><strong>dumper</strong></span> the target process is terminated after dumping
+    unless the <code class="literal">-n</code> option is given.
+  </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mkgroup"></a>mkgroup</h3></div></div></div><pre class="screen">
 Usage: mkgroup [OPTION]...
 
 Print /etc/group file to stdout
