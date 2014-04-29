@@ -107,7 +107,7 @@ fileutils,
 findutils,
 flex,
 gawk,
-gcc4,
+gcc,
 git,
 libtool,
 make,
@@ -131,6 +131,7 @@ fontsproto,
 glproto,
 inputproto,
 kbproto,
+presentproto,
 randrproto,
 recordproto,
 renderproto,
@@ -139,9 +140,9 @@ scrnsaverproto,
 windowswmproto,
 xcmiscproto,
 xextproto,
+xf86bigfontproto
 xineramaproto,
 xproto,
-xf86bigfontproto
 </P
 ></LI
 ><LI
@@ -150,22 +151,27 @@ xf86bigfontproto
 ><P
 >&#13;libdmx-devel,
 libfontenc-devel,
-libglapi-devel,
 libfreetype-devel,
 libGL-devel,
 libpixman1-devel,
 libX11-devel,
+libXRes-devel,
 libXau-devel,
 libXaw-devel,
-libxcb-icccm-devel,
-libxcb-image-devel,
 libXdmcp-devel,
 libXext-devel,
 libXfont-devel,
+libXi-devel,
 libXinerama-devel,
 libXmu-devel,
 libXpm-devel,
-libXRes-devel,
+libXrender-devel,
+libXtst-devel,
+libxcb-icccm-devel,
+libxcb-image-devel,
+libxcb-keysyms-devel,
+libxcb-shape-devel,
+libxcb-util-devel,
 libxkbfile-devel,
 zlib
 </P
@@ -242,6 +248,19 @@ CLASS="sect3"
 NAME="prog-compiling-libXfont-linkage-issue"
 >libXfont linkage issue</A
 ></H3
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+As of libXfont 1.5 and X server 1.16, the linkage issue discussed here should be
+resolved.  This section is retained for information only.
+</P
+></BLOCKQUOTE
+></DIV
 ><P
 >&#13;libXfont must be statically linked for the server to start correctly, otherwise
 it fails with errors loading all fonts, including the mandatory fixed font.
