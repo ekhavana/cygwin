@@ -11,7 +11,7 @@
 <!--#include virtual="top.html" -->
 <h1>Cygwin Package Contributor's Guide</h1>
 <p>This document is intended for people who post packages to sourceware.org, and thus need to make them available through the standard Cygwin setup program. This documents the syntax of the setup.hint file, the program that automatically generates it on a regular basis, the layout required for packages, and the related policies to ensure good behaviour from the setup program.</p>
-<p><a href="http://sourceware.org/cygwin-apps/setup.html">Setup</a> depends on certain conventions being followed. If they are not followed, bad things may happen to the users of the setup program. Where a convention can be ignored, should circumstances warrent, this document will specify that. Setup has it's own homepage <a href="http://sourceware.org/cygwin-apps/setup.html">http://sourceware.org/cygwin-apps/setup.html</a>. If you are interested in adding features to setup, or in manually creating a setup.ini file, you should consult the setup homepage.</p>
+<p><a href="http://sourceware.org/cygwin-apps/setup.html">Setup</a> depends on certain conventions being followed. If they are not followed, bad things may happen to the users of the setup program. Where a convention can be ignored, should circumstances warrant, this document will specify that. Setup has it's own homepage <a href="http://sourceware.org/cygwin-apps/setup.html">http://sourceware.org/cygwin-apps/setup.html</a>. If you are interested in adding features to setup, or in manually creating a setup.ini file, you should consult the setup homepage.</p>
 <p>The <tt>cygwin-apps</tt> mailing list is the correct place to discuss any package creation or maintenance issues. It is not a place for end user bug reports - direct those to the <tt>cygwin</tt> mailing list instead.</p>
 <h2>Contents</h2>
 <ul class="spaced">
@@ -24,19 +24,19 @@
   <li><a href="#submitting">Submitting a package</a></li>
 </ul>
 <h2><a id="naming" name="naming">Package file naming</a></h2>
-<p>Package naming scheme: use the vendor's version plus a release suffix for ports of existing packages (i.e. bash 2.04 becomes 2.04-1, 2.04-2, etc, until bash 2.05 is ported, which would be 2.05-1, etc). Some packages also use a YYMMDD format for their versions, e.g. binutils-20010901-1.tar.bz2. The first release of a package should have a -1 release suffix.</p>
+<p>Package naming scheme: use the vendor's version plus a release suffix for ports of existing packages (i.e. bash 2.04 becomes 2.04-1, 2.04-2, etc., until bash 2.05 is ported, which would be 2.05-1, etc). Some packages also use a YYMMDD format for their versions, e.g. binutils-20010901-1.tar.bz2. The first release of a package should have a -1 release suffix.</p>
 <p>A complete package currently consists of three files:</p>
 <ul>
   <li>a binary tar file</li>
   <li>a source tar file</li>
   <li>a setup.hint file</li>
 </ul>
-<p>Binary tar files are named "package-version-release.tar.bz2". They generally contain the executable files that will be installed on a user's system plus any auxilliary files needed by the package. See the <a href="#package_contents">making packages</a> section below for more details on how to generate a binary tar file.</p>
-<p>Source tar files are named "package-version-release-src.tar.bz2". Source tar files should contain the source files, patches and scripts needed to rebuild the package. While installing these files is optional, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associate shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#srcpackage_contents">making packages</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
+<p>Binary tar files are named "package-version-release.tar.bz2". They generally contain the executable files that will be installed on a user's system plus any auxiliary files needed by the package. See the <a href="#package_contents">making packages</a> section below for more details on how to generate a binary tar file.</p>
+<p>Source tar files are named "package-version-release-src.tar.bz2". Source tar files should contain the source files, patches and scripts needed to rebuild the package. While installing these files is optional, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associated shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#srcpackage_contents">making packages</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
 <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.</p>
 <h2><a id="sourceware.org" name="sourceware.org">Automatic setup.ini generation on sourceware.org</a></h2>
 <p>A script runs on sourceware.org which collects information from (currently) the <tt>release</tt> directory in the ftp download area. Information from subdirectories of these directories is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a> file which is used by the Cygwin setup program for installation control. If you are responsible for maintaining a Cygwin package, it is important that you understand how this process works.</p>
-<p>Packages are grouped by directory under <tt>release</tt>. The directory name is the same as the package name. For example, the <tt>boffo</tt> package will live in the <tt>boffo</tt> subdirectory. Exceptions to this rule are historical. All new packages will follow the rule of package name == directory name. However, for closely related groups of packages, it is acceptable to use a heirarchical tree under <tt>release/</tt>:</p>
+<p>Packages are grouped by directory under <tt>release</tt>. The directory name is the same as the package name. For example, the <tt>boffo</tt> package will live in the <tt>boffo</tt> subdirectory. Exceptions to this rule are historical. All new packages will follow the rule of package name == directory name. However, for closely related groups of packages, it is acceptable to use a hierarchical tree under <tt>release/</tt>:</p>
 <pre>
 release/
 release/boffo/
@@ -265,9 +265,9 @@ etc...
   <li>All executables in your binary package are stripped (run 'strip' on them). Some makefiles have a install-strip command you can use to do this automatically when you setup your 'installed' tree. </li>
   <li>Source packages are extracted in /usr/src. See the <a href="#srcpackage_contents">Package Source</a> section for more information. </li>
   <li>In your binary package, you may choose to include a file /usr/share/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc. </li>
-  <li>In your binary package include a directory /usr/share/doc/foo/ that includes any binary-relevant vendor documentation, such as ChangeLog's, copyright licence's, README's etc. </li>
+  <li>In your binary package include a directory /usr/share/doc/foo/ that includes any binary-relevant vendor documentation, such as ChangeLogs, copyright licences, READMEs etc. </li>
   <li>If you are not creating your package from an installed virtual root, be sure to check that the file permissions are appropriate. </li>
-  <li>If the package has any global settings (ie in files in /etc) that are not overrideable on a per user basis (sshd, as a daemon, is an example of this) do not include the relevant config files in your package. Instead include in your post-install script to install the settings files. Be sure that if you would overwrite an already present file that the user is offered the choice of keeping their own or overwriting with your defaults. </li>
+  <li>If the package has any global settings (i.e. in files in /etc) that are not overrideable on a per user basis (sshd, as a daemon, is an example of this) do not include the relevant config files in your package. Instead include in your post-install script to install the settings files. Be sure that if you would overwrite an already present file that the user is offered the choice of keeping their own or overwriting with your defaults. </li>
   <li>Ensure that your package handles binary only systems, textmode only systems, and hybrid systems correctly. </li>
 </ul>
 <h2><a id="srcpackage_contents" name="srcpackage_contents">Package Source</a></h2>
@@ -396,7 +396,7 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
     <ul>
       <li><b>Include a complete <tt>setup.hint</tt> file as part of your proposal</b>. Include this file in the text of your message so that it can be commented on. Do not submit it as an attachment.</li>
       <li>If the new package is a well-known program already included in a major Linux distribution (e.g. Debian, Fedora, SuSE) please <b>include the URL</b> of the package page.  Note that "development", "test", and "unstable" packages are <b>not eligible</b> for this rule.</li>
-      <li>If the package is not included in any major Linux distro it must receive <b>five positive votes</b> from other package mantainers in order to be accepted.</li>
+      <li>If the package is not included in any major Linux distro it must receive <b>five positive votes</b> from other package maintainers in order to be accepted.</li>
     </ul>
   </li>
   <li>
@@ -420,7 +420,7 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
     </ul>
   </li>
   <li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Provide the URLs of all package files to your mail.</li>
-  <li>Each new package must in any case receive one <a href="acronyms/#GTG">GTG</a> vote from a package mantainer, meaning that an existing mantainer has downloaded the package, inspected the tarball contents, tested the applications, and rebuilt the package from the source tarball without incident. Once a successful package is produced, you become a mantainer yourself and can provide GTG reviews for others as well.</li>
+  <li>Each new package must in any case receive one <a href="acronyms/#GTG">GTG</a> vote from a package maintainer, meaning that an existing maintainer has downloaded the package, inspected the tarball contents, tested the applications, and rebuilt the package from the source tarball without incident. Once a successful package is produced, you become a maintainer yourself and can provide GTG reviews for others as well.</li>
   <li>Feel free to delete your temporary copy once the files have been uploaded to sourceware.org.</li>
   <li>Announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement.<br />
    Be sure the unsubscribe instructions are included at the end of the email, since cygwin-announce does not add any.<br />
@@ -447,7 +447,7 @@ tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
   </li>
   <li>There is no need to increase the version number if the package has not been officially released.  So, if you are releasing a -1 version of a package keep using -1 for any refinements <em>until</em> the package has been uploaded.</li>
   <li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Include in the mail the URLs of all the new package files.<br />
-   Be concise in your message: as package mantainer you're trusted to know when and how your packages should be updated, no reason to explain it.<br />
+   Be concise in your message: as package maintainer you're trusted to know when and how your packages should be updated, no reason to explain it.<br />
    Just provide URLs for files that have actually changed, i.e. it is not necessary to provide a new link to a <tt>setup.hint</tt> file every time you update your packages unless the actual content changed (e.g. because version numbers are not parsable or ordered and have to be specified manually).<br />
    Please do specify which version must be kept as "old", all the others will be deleted from the server.</li>
   <li>Feel free to delete your temporary copy once the files have been uploaded to sourceware.org. This fact will be made clear by an "Uploaded." reply to your announcement by someone with upload privileges.</li>
