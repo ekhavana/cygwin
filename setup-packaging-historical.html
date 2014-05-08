@@ -1,0 +1,120 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Historical Cygwin Packaging</title>
+  </head>
+
+<body>
+<!--#include virtual="navbar.html" -->
+<!--#include virtual="top.html" -->
+<h1>Historical Cygwin Packaging</h1>
+<h2><a id="srcpackage_contents" name="srcpackage_contents">Package Source</a></h2>
+<p>There are two previous ways of packaging source code for Cygwin packages.</p>
+<h3>Method One</h3>
+<ul class="spaced">
+  <li>
+    Source packages are extracted underneath /usr/src (so your -src tarball should not include /usr/src). On extraction, the tar file should put the sources in a directory with the same name as the package tar ball minus the -src.tar.bz2 part:
+<pre>
+boffo-1.0-1/Makefile.in
+boffo-1.0-1/README
+boffo-1.0-1/configure
+boffo-1.0-1/configure.in
+etc...
+</pre>
+  </li>
+  <li>In your source package include the same foo-vendor-suffix.README as used in the binary package.</li>
+  <li>Your source package already be patched with any necessary Cygwin specific changes. The user should be able to just ./configure; make; and go.</li>
+  <li>Include a single file foo-vendor-release.patch in your source package, that when applied (in reverse: 'patch -R') will remove all the patches you've applied to the package, leaving it as the vendor distributes it. This file should extract as : <tt>/usr/src/foo-vendor-release.patch</tt> (that is, since setup extracts everything into <tt>/usr/src</tt>, the patch should be a "top level" member of the -src tarball.)<br />
+    <br />
+    Optionally, this patch could also unpack inside the source tree:
+<pre>
+boffo-1.0-1/README
+boffo-1.0-1/configure
+boffo-1.0-1/CYGWIN-PATCHES/boffo-1.0-1.patch
+etc...
+</pre>
+    However, that tends to complicate actually <b>creating</b> the patch itself. Unless one enjoys recursion, one must move the .patch file OUT of the source tree, regenerate the patch to incorporate any new changes, and then copy the new patch back into .../CYGWIN-PATCHES/. This option is documented because some existing packages do it this way, but it is not recommended for new packages. Make boffo-1.0-1.patch a top-level member of the -src tarball instead:
+<pre>
+boffo-1.0-1.patch
+boffo-1.0-1/README
+boffo-1.0-1/configure
+etc...
+</pre>
+    To create the patch file described above, you might run
+<pre>
+diff -Nrup vendor-src-dir patched-src-dir &gt; foo-vendor-release.patch
+</pre>
+    To apply the generated patch (in reverse; that is, to remove the Cygwin specific changes from the unpacked -src tarball) the user would run (from within the source tree)
+<pre>
+patch -R -p1 &lt; ../foo-vendor-release.patch
+</pre>
+  </li>
+  <li>In general, any Cygwin-specific "packaging" files -- such as cygwin-specific READMEs, a copy of the setup.hint file for your package, etc. -- should unpack within a /CYGWIN-PATCHES/ subdirectory in your sources. Naturally, applying the patch (in reverse, as described above) would remove these files from the source tree.</li>
+  <li>So, returning to the boffo example, boffo-1.0-1-src.tar.bz2 would contain:
+<pre>
+boffo-1.0-1.patch
+boffo-1.0-1/README
+boffo-1.0-1/configure
+boffo-1.0-1/configure.in
+boffo-1.0-1/Makefile.am
+boffo-1.0-1/Makefile.in
+boffo-1.0-1/boffo.c
+...
+boffo-1.0-1/CYGWIN-PATCHES/boffo.README (Cygwin-specific)
+boffo-1.0-1/CYGWIN-PATCHES/setup.hint
+...
+</pre>
+  </li>
+</ul>
+<h3>Method Two</h3>
+<p>This method is sometimes referred to as the "g-b-s" method, after the filename of the <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>generic-build-script</tt></a> template.</p>
+<ul class="spaced">
+  <li>In a packaging technique inspired by rpms and debs, you may create a -src tarball which simply contains:
+    <ol>
+      <li><tt>foo-vendor.tar.[gz|bz2]</tt>: The original source tarball, exactly as downloaded from the original vendor.</li>
+      <li><tt>foo-vendor-release.patch</tt>: the patch file as described in Method One, above.</li>
+      <li><tt>foo-vendor-release.sh</tt>: A build script that drives the entire unpacking, configuration, build, and packaging (binary and -src) process.</li>
+    </ol>
+  </li>
+  <li>You can adapt <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&amp;cvsroot=cygwin-apps">this</a> generic readme file for script-driven -src packages.</li>
+  <li><a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&amp;cvsroot=cygwin-apps">Here</a> is an example build script which can be adapted for your package. By carefully modifying the details of this script, it can create the binary and -src packages for you, once you've finished porting your package. How? See the <b><i>Initial packaging procedure</i></b> below. But first, a few facts:
+    <ul>
+      <li>The buildscript will autodetect the package name, vendor version, and release number from its own filename.</li>
+      <li>When the buildscript is used to compile the package, all building occurs within a hidden subdirectory inside the source tree: <tt>boffo-1.0/.build/</tt></li>
+      <li>To create the binary package, the script redirects 'make install' into a hidden subdirectory <tt>boffo-1.0/.inst/</tt>, creating a faux tree <tt>boffo-1.0/.inst/usr/bin</tt>, etc. This faux tree is tar'ed up into the new binary package.</li>
+      <li>To create the -src package, the script generates a patch file, and copies the original tarball, the patch, and the script into yet another hidden subdirectory <tt>boffo-1.0/.sinst/</tt>. The contents of this subdirectory are tar'ed up into the new -src package.</li>
+      <li>Sometimes, you will find that a package cannot build outside of its source directory. In this case, the script must recreate the source tree within the <tt>.build</tt> subdirectory. The jbigkit -src package uses GNU shtool's mkshadow to do this.</li>
+      <li><tt>generic-build-script</tt> is <b>not</b> a one-size-fits-all solution. It <b>must</b> be customized for your package.</li>
+    </ul>
+  </li>
+  <li>
+    <b><i>Initial packaging procedure, script-based</i></b>
+    <ul>
+      <li>Suppose you've got your boffo package ported to Cygwin. It took some work, but it now builds and runs. Further, suppose that the <tt>boffo-1.0.tar.bz2</tt> file that you downloaded from the boffo homepage unpacks into <tt>boffo-1.0/</tt>, so you've been doing all of your work in <tt>~/sources/boffo-1.0/</tt>. That's good.</li>
+      <li>Place a copy of <tt>boffo-1.0.tar.bz2</tt> in <tt>~/sources</tt></li>
+      <li>copy <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>generic-build-script</tt></a> into <tt>~/sources/</tt> and rename it <tt>boffo-1.0-1.sh</tt>. Carefully adapt this script for your purposes. However, it should auto detect most of what it needs to know: the package name, vendor version, release number, etc.<br />
+      <br />
+      </li>
+      <li>Clean up inside your <tt>~/sources/boffo-1.0/</tt> directory -- make sure that no files which are generated during the build process are lying around. Usually, a '<tt>make distclean</tt>' will do the trick, but not always.</li>
+      <li>Ensure that you've put any Cygwin-specific readme files, setup.hint files, etc, into <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/</tt>. You can adapt <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>this generic readme file</tt></a> for this purpose. The build script expects that the Cygwin-specific README file will be named <tt>.../CYGWIN-PATCHES/&lt;package&gt;.README</tt>. In this example, it would be stored as <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/boffo.README</tt>. The build script will ensure that it gets installed as <tt>/usr/share/doc/Cygwin/boffo-1.0.README</tt></li>
+      <li>Prepare the staging location for the -src package (yes, do the -src package first): From the directory above your boffo-1.0 tree (e.g. <tt>~/sources/</tt> in our example) execute '<tt>./boffo-1.0-1.sh mkdirs</tt>'</li>
+      <li>Create the -src package: '<tt>./boffo-1.0-1.sh spkg</tt>'</li>
+      <li>Now, let's go somewhere else and unpack this new -src package:
+<pre>
+cd /tmp
+tar xvjf ~/sources/boffo-1.0-1-src.tar.bz2
+</pre>
+      </li>
+      <li>Finally, rebuild the whole thing (you're still in /tmp):
+<pre>
+./boffo-1.0-1.sh all
+</pre>
+	(Or, you may want to do each step in 'all' manually: prep, conf, build, (check), install, strip, pkg, spkg, finish.
+      </li>
+    </ul>
+  </li>
+</ul>
+</body>
+</html>
