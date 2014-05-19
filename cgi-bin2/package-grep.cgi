@@ -40,7 +40,7 @@ if ($text) {
 } else {
     myprint $html->header, $html->start_html(-title=>'Cygwin Package List Search Result',
 					     -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
-					     -style=>'http://cygwin.com/style.css');
+					     -style=>'../style.css');
     include_virtual "../navbar.html", "../top.html";
     print "<table>\n"
 }
@@ -48,7 +48,7 @@ if ($text) {
 eval '"foo" =~ /$grep/o';
 if ($@ || $grep =~ m!\\\.\\\.!o) {
     save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $html_esc_grep . "<br><br>\n");
-    save @toprint, $html->h3({-align=>'center'}, '<a href="http://cygwin.com/packages/" align="center">Back</a>') unless $text;
+    save @toprint, $html->h3({-align=>'center'}, '<a href="packages/" align="center">Back</a>') unless $text;
 } else {
     $SIG{ALRM} = \&wakey;
     alarm 45;
@@ -89,7 +89,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     }
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
-	    save @toprint, '<tr><td><img src="http://sourceware.org/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
+	    save @toprint, '<tr><td><img src="//sourceware.org/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
 		   '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
 		   $uri_esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</td></tr>\n";
 	}
