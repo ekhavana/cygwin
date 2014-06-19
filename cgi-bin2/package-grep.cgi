@@ -86,17 +86,18 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     } else {
 	save @toprint, "<br><br>\n";
     }
-    print "<ul>\n" if !$text;
+    push @toprint, "<ul>\n" if !$text;
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
-		   '<li><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		   $uri_esc_grep . '">' . $f . '</a>' . findheader($text, $p, $index) . "</li>\n";
+	    push @toprint,
+		 '<li><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
+		 $uri_esc_grep . '">' . $f . '</a>' . findheader($text, $p, $index) . "</li>\n";
 	}
     }
+    push @toprint, "</ul>\n" if !$text;
 }
 if (!$text) {
     push @toprint, <<'EOF';
-</ul>
 </div>
 </body>
 </html>
