@@ -42,7 +42,6 @@ if ($text) {
 					     -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
 					     -style=>'../style.css');
     include_virtual "../navbar.html", "../top.html";
-    print "<ul>\n"
 }
 
 eval '"foo" =~ /$grep/o';
@@ -87,6 +86,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     } else {
 	save @toprint, "<br><br>\n";
     }
+    print "<ul>\n" if !$text;
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
 		   '<li><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
