@@ -86,7 +86,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     } else {
 	save @toprint, "<br><br>\n";
     }
-    push @toprint, "<ul>FOO\n" if !$text;
+    push @toprint, "<ul>\n" if !$text;
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
 	    push @toprint, '<li><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
