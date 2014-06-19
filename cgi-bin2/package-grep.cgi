@@ -89,8 +89,8 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     }
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
-		   '<ul><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		   $uri_esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</ul>\n";
+		   '<li><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
+		   $uri_esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</li>\n";
 	}
     }
 }
