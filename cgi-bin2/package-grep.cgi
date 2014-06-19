@@ -42,7 +42,7 @@ if ($text) {
 					     -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
 					     -style=>'../style.css');
     include_virtual "../navbar.html", "../top.html";
-    print "<table>\n"
+    print "<ul>\n"
 }
 
 eval '"foo" =~ /$grep/o';
@@ -89,15 +89,14 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     }
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
-	    save @toprint, '<tr><td><img src="//sourceware.org/icons/ball.gray.gif" height=10 width=10 alt=""></td>',
-		   '<td cellspacing=10><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		   $uri_esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</td></tr>\n";
+		   '<ul><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
+		   $uri_esc_grep . '">' . $f . '</a></td><td align="left">' . findheader($text, $p, $index) . "</ul>\n";
 	}
     }
 }
 if (!$text) {
     push @toprint, <<'EOF';
-</table>
+</ul>
 </div>
 </body>
 </html>
