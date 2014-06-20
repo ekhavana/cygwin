@@ -139,6 +139,7 @@ sub findheader($$$) {
     my $p = shift;
     my $debuginfo = $p =~ s/-debuginfo$//;
     my $header = ($text && "\t") . (($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '');
+    $header =~ s/^\s+//;
     $header = "Debug information for $header" if $debuginfo;
     return $header;
 }
