@@ -52,7 +52,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     $SIG{ALRM} = \&wakey;
     alarm 45;
     save @toprint, $html->h1('Search Results'), "\n" unless $text;
-    chdir "$Bin/../packages/$arch";
+    chdir "$Bin/../packages";
     my $truncated_search = 0;
     opendir my ($archdfd), $arch;
     for my $dir (sort readdir $archdfd) {
@@ -71,7 +71,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     closedir $archdfd;
 
     my $index;
-    if (!open(INDEX, '<', 'packages.inc')) {
+    if (!open(INDEX, '<', "$arch/packages.inc")) {
 	%::packages = ();
     } else {
 	local $/;
