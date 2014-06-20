@@ -128,7 +128,7 @@ sub findheader($$$) {
     my $text = shift;
     my $p = shift;
     my $header = ($text && "\t") . (($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '');
-print "<h3>HEADER $header</h3>" if $debug;
+print "<h3>HEADER $text $p $header</h3>" if $debug;
     return $header;
 }
 
