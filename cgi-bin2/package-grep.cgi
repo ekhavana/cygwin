@@ -141,6 +141,7 @@ sub findheader($$$) {
     my $header = ($text && "\t") . (($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '');
     $header = "Debug information for $header" if $debuginfo;
 
+    return '';
     return $header;
 }
 
