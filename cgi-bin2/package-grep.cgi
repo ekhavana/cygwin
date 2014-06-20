@@ -47,6 +47,7 @@ if ($text) {
     include_virtual "../navbar.html", "../top.html";
 }
 
+my $index;
 eval '"foo" =~ /$grep/o';
 if ($@ || $grep =~ m!\\\.\\\.!o) {
     save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $html_esc_grep . "<br><br>\n");
@@ -73,7 +74,6 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     }
     closedir $archdfd;
 
-    my $index;
     if (!open(INDEX, '<', "$arch/packages.inc")) {
 	%::packages = ();
 	print "<h3>empty packages?</h3>" if $debug;
@@ -104,7 +104,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
 	    save @toprint, $start . '<a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		 $uri_esc_grep . '">' . basename($f) . '</a> - ' . findheader($text, $p, $index) . $end;
+		 $uri_esc_grep . '">' . basename($f) . '</a> - ' . findheader($text, $p, $f) . $end;
 	}
     }
     push @toprint, "</ul>\n" if !$text;
@@ -138,9 +138,11 @@ print "<h3>HUH $1</h3>" if $debug;
 sub findheader($$$) {
     my $text = shift;
     my $p = shift;
+    my $f = shift;
     my $debuginfo = $p =~ s/-debuginfo$//;
-    my $header = ($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '';
+    my $header = ($index =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '';
     $header = "Debug information for $header" if $debuginfo;
+    $header = "Source code for $header" if $f =~ /-src$/o;
     return $header;
 }
 
