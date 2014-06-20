@@ -79,6 +79,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 	local $/;
 	$index = <INDEX>;
 	close INDEX;
+	print "<h3>full packages?</h3>" if $debug;
     }
 
     my $sp = $text ? ' ' : '&nbsp;';
