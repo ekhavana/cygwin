@@ -119,6 +119,7 @@ exit 0;
 
 sub addfn($) {
     if ($_[0] =~ m!^.*?/([^/]+)/!o) {
+print "<h3>HUH $1</h3>" if $debug;
 	push @{$::packages{$1}}, $_[0];
 	$::count++;
     }
