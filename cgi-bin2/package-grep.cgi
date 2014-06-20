@@ -119,7 +119,7 @@ if (!$text) {
 exit 0;
 
 sub addfn($) {
-    if ($_[0] =~ m!^([^/]+)/!o) {
+    if ($_[0] =~ m!^.*?/([^/]+)/!o) {
 	push @{$::packages{$1}}, $_[0];
 	$::count++;
     }
