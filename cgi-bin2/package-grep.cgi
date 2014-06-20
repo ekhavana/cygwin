@@ -24,6 +24,7 @@ $CGI::DISABLE_UPLOADS = 1;
 my $grep = $html->param('grep');
 my $text = $html->param('text');
 my $arch = $html->param('arch') || 'x86';
+my $debug = $html->param('debug');
 my $uri_esc_grep = uri_escape $grep;
 my $html_esc_grep = $html->escapeHTML($grep);
 
@@ -73,6 +74,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     my $index;
     if (!open(INDEX, '<', "$arch/packages.inc")) {
 	%::packages = ();
+	print "<h3>empty packages?</h3>" if $debug;
     } else {
 	local $/;
 	$index = <INDEX>;
