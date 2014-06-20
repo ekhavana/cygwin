@@ -103,7 +103,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
 	    save @toprint, $start . '<a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		 $uri_esc_grep . '">' . $f . '</a>&nbsp;&nbsp;- ' . findheader($text, $p, $index) . $end;
+		 $uri_esc_grep . '">' . $f . '</a> - ' . findheader($text, $p, $index) . $end;
 	}
     }
     push @toprint, "</ul>\n" if !$text;
