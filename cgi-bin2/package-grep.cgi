@@ -94,15 +94,15 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     my $start;
     my $end;
     if ($text) {
-	$start = '<pre>';
-	$end = "</pre>\n";
+	$start = '';
+	$end = "\n";
     } else {
 	$start = '<li>';
 	$end = "</li>\n";
     }
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
-	    push @toprint, $start . '<a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
+	    save @toprint, $start . '<a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
 		 $uri_esc_grep . '">' . $f . '</a>' . findheader($text, $p, $index) . $end;
 	}
     }
