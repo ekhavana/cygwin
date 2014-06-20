@@ -94,7 +94,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     my $start;
     my $end;
     if ($text) {
-	$start = '';
+	$start = '<br>';
 	$end = "<br>\n";
     } else {
 	$start = '<li>';
