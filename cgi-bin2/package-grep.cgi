@@ -9,6 +9,7 @@ use HTML::TreeBuilder;
 use constant {MAXMATCHES => 30};
 
 sub addfn($);
+sub findheader($$$);
 sub include_virtual(@);
 sub myprint(@);
 sub wakey($);
@@ -79,7 +80,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 	local $/;
 	$index = <INDEX>;
 	close INDEX;
-	print "<h3>full packages?</h3>" if $debug;
+	print "<h3>full packages</h3>" if $debug;
     }
 
     my $sp = $text ? ' ' : '&nbsp;';
@@ -91,6 +92,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     }
     push @toprint, "<ul>\n" if !$text;
     for my $p (sort keys %::packages) {
+print "<h3>$p</h3>" if $debug;
 	for my $f (@{$::packages{$p}}) {
 	    push @toprint, '<li><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
 		 $uri_esc_grep . '">' . $f . '</a>' . findheader($text, $p, $index) . "</li>\n";
@@ -123,7 +125,7 @@ sub addfn($) {
     }
 }
 
-sub findheader {
+sub findheader($$$) {
     my $text = shift;
     my $p = shift;
     my $header = ($text && "\t") . (($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '');
