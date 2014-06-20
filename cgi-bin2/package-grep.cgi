@@ -1,10 +1,11 @@
 #!/usr/bin/perl
 
 use strict;
-use LWP::Simple;
 use CGI;
-use URI::Escape;
+use File::Basename;
 use HTML::TreeBuilder;
+use LWP::Simple;
+use URI::Escape;
 
 use constant {MAXMATCHES => 30};
 
@@ -102,6 +103,7 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     }
     for my $p (sort keys %::packages) {
 	for my $f (@{$::packages{$p}}) {
+	    my $fdisp = basename $f;
 	    save @toprint, $start . '<a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
 		 $uri_esc_grep . '">' . $f . '</a> - ' . findheader($text, $p, $index) . $end;
 	}
