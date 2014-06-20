@@ -92,7 +92,6 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     }
     push @toprint, "<ul>\n" if !$text;
     for my $p (sort keys %::packages) {
-print "<h3>$p</h3>" if $debug;
 	for my $f (@{$::packages{$p}}) {
 	    push @toprint, '<li><a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
 		 $uri_esc_grep . '">' . $f . '</a>' . findheader($text, $f, $index) . "</li>\n";
@@ -129,6 +128,7 @@ sub findheader($$$) {
     my $text = shift;
     my $p = shift;
     my $header = ($text && "\t") . (($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '');
+print "<h3>HEADER $header</h3>" if $debug;
     return $header;
 }
 
