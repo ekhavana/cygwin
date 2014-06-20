@@ -128,8 +128,10 @@ print "<h3>HUH $1</h3>" if $debug;
 sub findheader($$$) {
     my $text = shift;
     my $p = shift;
+    my $debuginfo = $p =~ s/-debuginfo$//;
     my $header = ($text && "\t") . (($_[0] =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '');
-print "<h3>HEADER $text $p $header</h3>" if $debug;
+    $header = "Debug information for $header" if $debuginfo;
+
     return $header;
 }
 
