@@ -48,8 +48,9 @@ if ($text) {
 }
 
 my $index;
+$grep =~ s/^\s+|\s+$//g;
 eval '"foo" =~ /$grep/o';
-if ($@ || $grep =~ m!\\\.\\\.!o) {
+if ($@ || !length($grep) || $grep =~ m!\\\.\\\.!o) {
     save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $html_esc_grep . "<br><br>\n");
     save @toprint, $html->h3({-align=>'center'}, '<a href="packages/" align="center">Back</a>') unless $text;
 } else {
