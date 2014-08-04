@@ -25,15 +25,20 @@
   <li><a href="#submitting">Submitting a package</a></li>
 </ul>
 <h2><a id="naming" name="naming">Package file naming</a></h2>
-<p>Package naming scheme: use the vendor's version plus a release suffix for ports of existing packages (i.e. bash 2.04 becomes 2.04-1, 2.04-2, etc., until bash 2.05 is ported, which would be 2.05-1, etc). Some packages also use a YYMMDD format for their versions, e.g. binutils-20010901-1.tar.bz2. The first release of a package should have a -1 release suffix.</p>
+<p>Package naming scheme: use the vendor's version plus a release
+  suffix for ports of existing packages (i.e. findutils 4.5.12 becomes
+  4.5.12-1, 4.5.12-2, etc., until findutils 4.5.13 is ported, which
+  would be 4.5.13-1, etc). Some packages also use a YYYYMMDD format for
+  their versions, e.g. terminfo-5.9-20140524-1.tar.xz. The first release
+  of a package should have a -1 release suffix.</p>
 <p>A complete package currently consists of three files:</p>
 <ul>
   <li>a binary tar file</li>
   <li>a source tar file</li>
   <li>a setup.hint file</li>
 </ul>
-<p>Binary tar files are named "package-version-release.tar.bz2". They generally contain the executable files that will be installed on a user's system plus any auxiliary files needed by the package. See the <a href="#package_contents">package contents</a> section below for more details on the contents of a binary tar file.</p>
-<p>Source tar files are named "package-version-release-src.tar.bz2". Source tar files should contain the source files, patches and scripts needed to rebuild the package. While installing these files is optional, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associated shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#package_contents">package contents</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
+<p>Binary tar files are named "package-version-release.tar.xz". They generally contain the executable files that will be installed on a user's system plus any auxiliary files needed by the package. See the <a href="#package_contents">package contents</a> section below for more details on the contents of a binary tar file.</p>
+<p>Source tar files are named "package-version-release-src.tar.xz". Source tar files should contain the source files, patches and scripts needed to rebuild the package. While installing these files is optional, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associated shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#package_contents">package contents</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
 <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.</p>
 <h2><a id="sourceware.org" name="sourceware.org">Automatic setup.ini generation on sourceware.org</a></h2>
 <p>A script runs on sourceware.org which collects information from (currently) the <tt>release</tt> directory in the ftp download area. Information from subdirectories of these directories is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a> file which is used by the Cygwin setup program for installation control. If you are responsible for maintaining a Cygwin package, it is important that you understand how this process works.</p>
@@ -45,14 +50,14 @@ release/boffo/&lt;boffo files&gt;
 release/boffo/boffo-devel/
 release/boffo/boffo-devel/&lt;boffo-devel file&gt;
 </pre>
-<p>Each directory contains <a href="#naming">source and binary tar files</a> which have been been compressed using bzip2. The required <a href="#naming">format of these filenames</a> is: <tt>package-version-release[<i>-src</i>].tar.bz2</tt> . The contents of these files is discussed <a href="#package_contents">below</a>.</p>
+<p>Each directory contains <a href="#naming">source and binary tar files</a> which have been been compressed using xz. The required <a href="#naming">format of these filenames</a> is: <tt>package-version-release[<i>-src</i>].tar.xz</tt> . The contents of these files is discussed <a href="#package_contents">below</a>.</p>
 <p>The "package" part of the filename is the name mentioned above.</p>
 <p>The version number <b>must</b> start with a digit and must adhere to the rules in <a href="#naming">package file naming</a> above. Higher version (and release) numbers are used for the current version of a package; the previous stable version (if any) is used for the previous version (however see <a href="#setup.hint">setup.hint</a> for exceptions to this rule). Lexically, when two packages have identical vendor version numbers, the one with the higher release number is considered newer. Also, given two packages, the one with the higher vendor version number is always considered newer, regardless of the release number.</p>
 <p>The <i>-src</i> component of the filename is added to files which contain source code.</p>
 <p>A complete "package" is made up of three files: the "binary" package tar file, the "source" tar file, and the "setup.hint" file, e.g.:</p>
 <pre>
 bash$ ls release/boffo
-boffo-1.0-1.tar.bz2  boffo-1.0-1-src.tar.bz2  setup.hint
+boffo-1.0-1.tar.xz  boffo-1.0-1-src.tar.xz  setup.hint
 </pre>
 <p>Setup is currently unable to list more than three versions of each package. Therefore you should not keep more than three versions of each package around: The current version, the previous stable version, and, optionally, one test version. By keeping a previous stable version around, you isolate yourself (somewhat) from problems with partial mirrors. When you add a new "current" version, you can either keep the old "previous" version, or make the old current version the new previous version, depending on how stable they each were.</p>
 <p>Test versions are specified via the setup.hint file as described <a href="#setup.hint">below</a>. It is not required that your package have a <tt>test</tt> version. Use of a <tt>test</tt> version of a package is at the discretion of the package maintainer.</p>
@@ -187,11 +192,11 @@ No actual moles will be harmed during execution of this game."
 <h3><a id="advanced_setup.hint" name="advanced_setup.hint"><tt>setup.hint (Advanced Options)</tt></a></h3>
 <p>The <tt>external-source</tt> line is used when multiple installation packages are generated from a single -src package. For example, suppose the <tt>boffo</tt> package contains the executables and documentation for boffo, but there is also a shared library <tt>cygboffo-7.dll</tt> that might be used by other packages; say, the <tt>fobbo</tt> program. It would be nice to separate that <tt>cygboffo-7.dll</tt> shared library into a second installation package, so that users of the <tt>fobbo</tt> program can install <em>just</em> the library, and not the entire <tt>boffo</tt> package. However, all of the <tt>boffo</tt> executables and the DLL are generated from the same source. To support this usage, the <tt>boffo</tt> maintainer would create three packages:</p>
 <ul>
-  <li><tt>boffo-2.4.1-2.tar.bz2</tt>: an installable package that contains all of the normal contents of <tt>boffo</tt> -- except for the shared library.</li>
-  <li><tt>libboffo7-2.4.1-2.tar.bz2</tt>: an installable package that contains only the shared library from <tt>boffo</tt></li>
-  <li><tt>boffo-2.4.1-2-src.tar.bz2</tt>: the -src tarball for boffo.</li>
+  <li><tt>boffo-2.4.1-2.tar.xz</tt>: an installable package that contains all of the normal contents of <tt>boffo</tt> -- except for the shared library.</li>
+  <li><tt>libboffo7-2.4.1-2.tar.xz</tt>: an installable package that contains only the shared library from <tt>boffo</tt></li>
+  <li><tt>boffo-2.4.1-2-src.tar.xz</tt>: the -src tarball for boffo.</li>
 </ul>
-<p><tt>boffo-2.4.1-2.tar.bz2</tt>, <tt>boffo-2.4.1-2-src.tar.bz2</tt>, and the boffo <tt>setup.hint</tt> would go into the <tt>release/boffo/</tt> subdirectory on the Cygwin server. <tt>libboffo7-2.4.1-2.tar.bz2</tt> would go into a separate subdirectory, such as <tt>release/boffo/libboffo7/</tt>, along with a separate libboffo7 <tt>setup.hint</tt>. The two <tt>setup.hint</tt> files would look something like this:</p>
+<p><tt>boffo-2.4.1-2.tar.xz</tt>, <tt>boffo-2.4.1-2-src.tar.xz</tt>, and the boffo <tt>setup.hint</tt> would go into the <tt>release/boffo/</tt> subdirectory on the Cygwin server. <tt>libboffo7-2.4.1-2.tar.xz</tt> would go into a separate subdirectory, such as <tt>release/boffo/libboffo7/</tt>, along with a separate libboffo7 <tt>setup.hint</tt>. The two <tt>setup.hint</tt> files would look something like this:</p>
 <center>
   <table border="2">
     <tr>
@@ -230,13 +235,13 @@ No actual moles will be harmed during execution of this game."
 @ boffo
 requires: libboffo7 libncurses6 cygwin
 version: 2.4.1-2
-install: release/boffo/boffo-2.4.1-2.tar.bz2
-source: release/boffo/boffo-2.4.1-2-src.tar.bz2
+install: release/boffo/boffo-2.4.1-2.tar.xz
+source: release/boffo/boffo-2.4.1-2-src.tar.xz
 @ libboffo7
 requires: cygwin
 version: 2.4.1-2
-install: release/boffo/libboffo7/libboffo7-2.4.1-2.tar.bz2
-source: release/boffo/boffo-2.4.1-2-src.tar.bz2
+install: release/boffo/libboffo7/libboffo7-2.4.1-2.tar.xz
+source: release/boffo/boffo-2.4.1-2-src.tar.xz
 </pre>
 <p>Note that both packages point to the same -src tarball. Also, it is required that the version strings match (libboffo7-5.2 won't point to boffo-1.4-src). The same logic is used to "match up" prev: and test: versions.</p>
 <h2><a id="package_contents" name="package_contents">Package contents</a></h2>
@@ -264,10 +269,10 @@ etc...
 </pre>
   </li>
   <li>All executables in your binary package are stripped.  </li>
-  <li>Source packages are extracted in /usr/src (so the paths in your -src tarball should not include /usr/src). On extraction, the tar file should put the sources in a directory with the same name as the package tarball minus the -src.tar.bz2 part:
+  <li>Source packages are extracted in /usr/src (so the paths in your -src tarball should not include /usr/src). On extraction, the tar file should put the sources in a directory with the same name as the package tarball minus the -src.tar.xz part:
 <pre>
 boffo-1.0-1/boffo.cygport
-boffo-1.0-1/boffo-1.0.tar.bz2
+boffo-1.0-1/boffo-1.0.tar.xz
 boffo-1.0-1/boffo-1.0-1.src.patch
 etc...
 </pre>
@@ -283,9 +288,12 @@ etc...
   <li>Ensure that your package handles being installed on binary and text mounts correctly. </li>
 </ul>
 
-<p>While you could make a package satisfying these requirements by hand, the
-accepted way to make Cygwin packages is using the cygport tool, which
-automatically handles most of the above issues for you.</p>
+<p>While older packages exist which satisfy these requirements by hand, the
+only accepted way to make a new Cygwin package is using the cygport tool, which
+automatically handles most of the above issues for you.  It is also
+strongly recommended to convert existing packages to cygport when
+updating them; ask on the <tt>cygwin-apps</tt> list if you need help
+converting an existing package to use cygport.</p>
 
 <h2><a id="making_srcpackage" name="making_srcpackage">Making a package with cygport</a></h2>
 
@@ -293,7 +301,7 @@ automatically handles most of the above issues for you.</p>
 on <a href="setup-packaging-historical.html">previous Cygwin build scripts</a>, and
 borrows concepts from the Gentoo portage system.</p>
 
-<p>Suppose that the vendor's <tt>boffo-1.0.tar.bz2</tt> source tarball, that you
+<p>Suppose that the vendor's <tt>boffo-1.0.tar.xz</tt> source tarball, that you
 downloaded from the boffo homepage, unpacks into <tt>boffo-1.0/</tt>.</p>
 
 <p>Further, suppose you've got "boffo" ported to Cygwin. It took some work, but
@@ -365,15 +373,19 @@ and sample .cygport files.</p>
   <li>
     Place the package files in a web accessible http/ftp site somewhere. If at all possible the files should have a directory structure in order to get them all with a single command. For example, if I am proposing "foo" and "libfoo", an upload site should look like:
     <ul>
-      <li><tt>myserver.com/whatever/foo/foo-0.20.3-1.tar.bz2</tt></li>
-      <li><tt>myserver.com/whatever/foo/foo-0.20.3-1-src.tar.bz2</tt></li>
+      <li><tt>myserver.com/whatever/foo/foo-0.20.3-1.tar.xz</tt></li>
+      <li><tt>myserver.com/whatever/foo/foo-0.20.3-1-src.tar.xz</tt></li>
       <li><tt>myserver.com/whatever/foo/setup.hint</tt></li>
-      <li><tt>myserver.com/whatever/foo/libfoo/libfoo-0.20.3-1.tar.bz2</tt></li>
+      <li><tt>myserver.com/whatever/foo/libfoo/libfoo-0.20.3-1.tar.xz</tt></li>
       <li><tt>myserver.com/whatever/foo/libfoo/setup.hint</tt></li>
     </ul>
   </li>
   <li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Provide the URLs of all package files to your mail.</li>
   <li>Each new package must in any case receive one <a href="acronyms/#GTG">GTG</a> vote from a package maintainer, meaning that an existing maintainer has downloaded the package, inspected the tarball contents, tested the applications, and rebuilt the package from the source tarball without incident. Once a successful package is produced, you become a maintainer yourself and can provide GTG reviews for others as well.</li>
+  <li>Once you have your first GTG,
+  follow <a href="http://sourceware.org/cygwin-apps/package-upload.html">these
+  instructions</a> for setting up your upload ssh key, and uploading
+  your files.</li>
   <li>Feel free to delete your temporary copy once the files have been uploaded to sourceware.org.</li>
   <li>Announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement.<br />
    Be sure the unsubscribe instructions are included at the end of the email, since cygwin-announce does not add any.<br />
@@ -384,27 +396,21 @@ and sample .cygport files.</p>
   <li>Build the package and make sure that you have time to maintain it.</li>
   <li>Send an ITP to the cygwin mailing list.  If the package is part of a distribution, include the URL which demonstrates this.  Include a <tt>setup.hint</tt>.</li>
   <li>If you have received the correct number of votes or if the package is part of a distribution, include URL(s) for the package binary and source so that someone can download them to check the package for any obvious problems.</li>
-  <li>Once you get a GTG from a package maintainer, send a "Please upload" to the <tt>cygwin-apps</tt> mailing list.</li>
+  <li>Once you get a GTG from a package maintainer,
+  follow <a href="http://sourceware.org/cygwin-apps/package-upload.html">these
+  instructions</a> for uploading your package.</li>
   <li>When you get the "uploaded" confirmation, send an immediate note to the <tt>cygwin-announce</tt> mailing list.</li>
 </ol>
 <h2><a id="updating" name="updating">Updating a package</a></h2>
-<p>So you've got an updated package you want to submit. Follow the following checklist before emailing the <tt>cygwin-apps</tt> mailing list and you'll almost certainly save time.</p>
+<p>So you've got an updated package you want to submit. You should
+  already have upload privileges, and should be able to do the entire
+  process yourself, by
+  following <a href="http://sourceware.org/cygwin-apps/package-upload.html">these
+  instructions</a>.  If you encounter any problems, email
+  the <tt>cygwin-apps</tt> mailing list.
 <ol>
-  <li>
-    Place the package files in a web accessible http/ftp site somewhere. If at all possible the files should have a directory structure in order to get them all with a single command. For example, if I am updating "foo" and "libfoo", an upload site should look like:
-    <ul>
-      <li><tt>myserver.com/whatever/foo/foo-0.21.1-1.tar.bz2</tt></li>
-      <li><tt>myserver.com/whatever/foo/foo-0.21.1-1-src.tar.bz2</tt></li>
-      <li><tt>myserver.com/whatever/foo/libfoo/libfoo-0.21.1-1.tar.bz2</tt></li>
-    </ul>
-  </li>
   <li>There is no need to increase the version number if the package has not been officially released.  So, if you are releasing a -1 version of a package keep using -1 for any refinements <em>until</em> the package has been uploaded.</li>
-  <li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Include in the mail the URLs of all the new package files.<br />
-   Be concise in your message: as package maintainer you're trusted to know when and how your packages should be updated, no reason to explain it.<br />
-   Just provide URLs for files that have actually changed, i.e. it is not necessary to provide a new link to a <tt>setup.hint</tt> file every time you update your packages unless the actual content changed (e.g. because version numbers are not parsable or ordered and have to be specified manually).<br />
-   Please do specify which version must be kept as "old", all the others will be deleted from the server.</li>
-  <li>Feel free to delete your temporary copy once the files have been uploaded to sourceware.org. This fact will be made clear by an "Uploaded." reply to your announcement by someone with upload privileges.</li>
-  <li>Announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement..<br />
+  <li>After doing a self-upload, announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement..<br />
    Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
 </ol>
 <p>NOTE: On any major version upgrade, you may want to mark the release as <tt>Test</tt>.</p>
