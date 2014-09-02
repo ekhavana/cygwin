@@ -18,7 +18,7 @@
   <li><a href="#naming">Package naming</a></li>
   <li><a href="#sourceware.org">Sourceware.org</a></li>
   <li><a href="#setup.hint">setup.hint</a></li>
-  <li><a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a></li>
+  <li><a href="http://sourceware.org/cygwin-apps/setup-head.ini.html">setup.ini</a></li>
   <li><a href="#package_contents">Package contents</a></li>
   <li><a href="#making_srcpackage">Making a package with cygport</a></li>
   <li><a href="#postinstall">Creating a package postinstall script</a></li>
@@ -39,6 +39,7 @@
 </ul>
 <p>Binary tar files are named "package-version-release.tar.xz". They generally contain the executable files that will be installed on a user's system plus any auxiliary files needed by the package. See the <a href="#package_contents">package contents</a> section below for more details on the contents of a binary tar file.</p>
 <p>Source tar files are named "package-version-release-src.tar.xz". Source tar files should contain the source files, patches and scripts needed to rebuild the package. While installing these files is optional, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associated shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#package_contents">package contents</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
+<p>Note that package files may be .bz2, .gzip or .xz compressed.  .gzip is deprecated and .xz is preferred for new package submissions.</p>
 <p>The setup.hint file is discussed <a href="#setup.hint">below</a>.</p>
 <h2><a id="sourceware.org" name="sourceware.org">Automatic setup.ini generation on sourceware.org</a></h2>
 <p>A script runs on sourceware.org which collects information from (currently) the <tt>release</tt> directory in the ftp download area. Information from subdirectories of these directories is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a> file which is used by the Cygwin setup program for installation control. If you are responsible for maintaining a Cygwin package, it is important that you understand how this process works.</p>
@@ -50,7 +51,7 @@ release/boffo/&lt;boffo files&gt;
 release/boffo/boffo-devel/
 release/boffo/boffo-devel/&lt;boffo-devel file&gt;
 </pre>
-<p>Each directory contains <a href="#naming">source and binary tar files</a> which have been been compressed using xz. The required <a href="#naming">format of these filenames</a> is: <tt>package-version-release[<i>-src</i>].tar.xz</tt> . The contents of these files is discussed <a href="#package_contents">below</a>.</p>
+<p>Each directory contains <a href="#naming">source and binary tar files</a> which have been been compressed. The required <a href="#naming">format of these filenames</a> is: <tt>package-version-release[<i>-src</i>].tar.xz</tt> . The contents of these files is discussed <a href="#package_contents">below</a>.</p>
 <p>The "package" part of the filename is the name mentioned above.</p>
 <p>The version number <b>must</b> start with a digit and must adhere to the rules in <a href="#naming">package file naming</a> above. Higher version (and release) numbers are used for the current version of a package; the previous stable version (if any) is used for the previous version (however see <a href="#setup.hint">setup.hint</a> for exceptions to this rule). Lexically, when two packages have identical vendor version numbers, the one with the higher release number is considered newer. Also, given two packages, the one with the higher vendor version number is always considered newer, regardless of the release number.</p>
 <p>The <i>-src</i> component of the filename is added to files which contain source code.</p>
@@ -61,7 +62,6 @@ boffo-1.0-1.tar.xz  boffo-1.0-1-src.tar.xz  setup.hint
 </pre>
 <p>Setup is currently unable to list more than three versions of each package. Therefore you should not keep more than three versions of each package around: The current version, the previous stable version, and, optionally, one test version. By keeping a previous stable version around, you isolate yourself (somewhat) from problems with partial mirrors. When you add a new "current" version, you can either keep the old "previous" version, or make the old current version the new previous version, depending on how stable they each were.</p>
 <p>Test versions are specified via the setup.hint file as described <a href="#setup.hint">below</a>. It is not required that your package have a <tt>test</tt> version. Use of a <tt>test</tt> version of a package is at the discretion of the package maintainer.</p>
-<p>Note that package files may be .bz2, .gzip or .xz compressed.  Use of gzip for file compression is deprecated, and should not be used for new package submissions.</p>
 <h2><a id="setup.hint" name="setup.hint"><tt>setup.hint</tt></a></h2>
 <p>Each package must be submitted with a file called <tt>setup.hint</tt>. This file is used for information that cannot be inferred just from the context of the file name or package name. Lines in <tt>setup.hint</tt> will consist of one of the following:</p>
 <pre>
