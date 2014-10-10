@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Hardware Accelerated OpenGL (AIGLX)</TITLE
+>OpenGL (GLX)</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
@@ -71,7 +71,7 @@ CLASS="sect1"
 CLASS="sect1"
 ><A
 NAME="using-aiglx"
->Hardware Accelerated OpenGL (AIGLX)</A
+>OpenGL (GLX)</A
 ></H1
 ><DIV
 CLASS="note"
@@ -81,45 +81,250 @@ CLASS="note"
 ><B
 >Note: </B
 >
-This is feature is still under active development and should be considered beta quality,
-but should be working well enough to be useful.
-Please report success or failure with specific OpenGL applications to the cygwin-xfree mailing list.
+Accelerated OpenGL is still under active development and should be considered
+beta quality, but should be working well enough to be useful.  Please report
+problems with specific OpenGL applications to the cygwin-xfree mailing list.
 </P
 ></BLOCKQUOTE
 ></DIV
 ><P
->&#13;Cygwin/X supports hardware accelerated OpenGL rendering in the X server using the native Windows OpenGL (WGL) interface.
-Use the command line option <CODE
+>&#13;The Cygwin/X X Server supports both software OpenGL rendering (using the mesa
+software renderer), and hardware accelerated OpenGL rendering (using the native
+Windows OpenGL (WGL) interface).
+</P
+><P
+>&#13;The X server command line options <CODE
 CLASS="parameter"
 >-wgl</CODE
-> to the X server to turn on the use of the native Windows OpenGL implementation.
-This option is only supported by multiwindow mode currently.
-If you don't use this option, the X server will use software rendering.
+> and
+<CODE
+CLASS="parameter"
+>-nowgl</CODE
+> turn on and off the use of the native Windows
+OpenGL implementation.
+
+Currently <CODE
+CLASS="parameter"
+>-wgl</CODE
+> is only supported in multiwindow mode, and
+is on by default in that mode.
 </P
+><DIV
+CLASS="table"
+><A
+NAME="AEN620"
+></A
 ><P
->&#13;For remote clients, Mesa's libGL prefers to use client-side rendering and transfer the image to the server using xlib.
-To force indirect rendering (which takes place on the server), you must do <B
+><B
+>Table 4-1. Summary of OpenGL rendering options</B
+></P
+><TABLE
+BORDER="1"
+WIDTH="100%"
+CLASS="CALSTABLE"
+><COL
+WIDTH="33%"/><COL
+WIDTH="33%"/><COL
+WIDTH="33%"/><THEAD
+><TR
+><TH
+>&#13;          <P
+>&#13;          </P
+>
+        </TH
+><TH
+>&#13;          <P
+>&#13;            software rendering
+            <SUP
+>a</SUP
+>
+          </P
+>
+        </TH
+><TH
+>&#13;          <P
+>&#13;            hardware-accelerated rendering
+          </P
+>
+        </TH
+></TR
+></THEAD
+><TBODY
+><TR
+><TD
+>&#13;          <P
+>&#13;            indirect
+          </P
+>
+          <P
+>&#13;            (Uses GLX protocol, limited to OpenGL 1.4)
+          </P
+>
+        </TD
+><TD
+>&#13;          <P
+>&#13;            start server with <CODE
+CLASS="parameter"
+>-nowgl</CODE
+> option
+          </P
+>
+          <P
+>&#13;            <B
 CLASS="command"
 >export LIBGL_ALWAYS_INDIRECT=1</B
+>
+          </P
+>
+        </TD
+><TD
+>&#13;          <P
+>&#13;            start server with <CODE
+CLASS="parameter"
+>-wgl</CODE
+> option
+          </P
+>
+          <P
+>&#13;            <B
+CLASS="command"
+>export LIBGL_ALWAYS_INDIRECT=1</B
+>
+          </P
+>
+        </TD
+></TR
+><TR
+><TD
+>&#13;          <P
+>&#13;            direct
+          </P
+>
+        </TD
+><TD
+>&#13;          <B
+CLASS="command"
+>unset LIBGL_ALWAYS_INDIRECT</B
+>
+        </TD
+><TD
+>&#13;          <P
+>&#13;            start server with <CODE
+CLASS="parameter"
+>-wgl</CODE
+> option
+          </P
+>
+          <P
+>&#13;            <B
+CLASS="command"
+>export LIBGL_USE_WGL=1</B
+>
+            <SUP
+>b</SUP
+>
+          </P
+>
+          <P
+>&#13;            <B
+CLASS="command"
+>unset LIBGL_ALWAYS_INDIRECT</B
+>
+          </P
+>
+        </TD
+></TR
+></TBODY
+><TR
+><TD
+COLSPAN="3"
+>Notes:<BR/><A
+NAME="FTN.AEN632"
+>a. </A
+>
+                The software renderer used (e.g. llvmpipe, softpipe) can be
+                selected using the GALLIUM_DRIVER environment variable.
+              <BR/><A
+NAME="FTN.AEN661"
+>b. </A
+>
+                Since direct accelerated rendering is currently experimental,
+                the LIBGL_USE_WGL environment variable is required to enable it,
+                but that will be removed when the feature is mature, at which
+                point it will be the default and <B
+CLASS="command"
+>export
+                LIBGL_ALWAYS_SOFTWARE=1</B
+> will be required to force
+                software rendering.
+              <BR/></TD
+></TR
+></TABLE
+></DIV
+><P
+>&#13;  Currently, in multiwindow mode, the default configurations are:
+<UL
+><LI
+><P
+>&#13;For local clients the default is indirect, hardware-accelerated rendering, as
+<CODE
+CLASS="parameter"
+>-wgl</CODE
+> is on by default, and LIBGL_ALWAYS_INDIRECT is set
+by a <TT
+CLASS="filename"
+>profile.d</TT
+> file installed by mesa.
+</P
+></LI
+><LI
+><P
+>&#13;For remote clients, Mesa's libGL prefers to use client-side software rendering
+and then transfer the rendered image to the server.  To force indirect rendering
+(which takes place on the server), you must do <B
+CLASS="command"
+>export
+LIBGL_ALWAYS_INDIRECT=1</B
 > before starting the client application.
-There's a performance trade-off between rendering performance
-and network latency, so you should try both direct and indirect rendering and see which
-performs best in your specific circumstances.  Generally, accelerated indirect rendering
-should be more performant for clients which render complex scenes.
+
+There is a performance trade-off between rendering performance and network
+latency, so you should try both direct and indirect rendering and see which
+performs best in your specific circumstances.
+</P
+></LI
+></UL
+>
 </P
 ><P
->&#13;For local clients, indirect rendering is the default, so no special steps are needed.
-</P
-><P
->&#13;If you have set things up successfully, <B
+>&#13;If <B
 CLASS="command"
 >glxinfo | grep OpenGL</B
-> should output something mentioning your graphics card vendor.  If it mentions Mesa, you still have software rendering
+> outputs something mentioning your
+graphics card vendor, you have hardware-accelerated rendering. If it mentions
+Mesa, you have software rendering.
 </P
 ><P
 >&#13;Please ensure you are using the latest display drivers for your graphics
 hardware before reporting any visual issues with WGL.
 </P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+    Because of it's lack of support for modern OpenGL versions (&gt;1.4), indirect
+    rendering is considered of limited use.  An <CODE
+CLASS="parameter"
+>-iglx</CODE
+>
+    option was added in X server 1.16 which allows it's use to be prohibited,
+    which will probably be the default in X server 1.17.
+  </P
+></BLOCKQUOTE
+></DIV
 ><P
 >&#13;Known issues:
 <UL
@@ -143,6 +348,11 @@ by resizing it.
 >&#13;When an OpenGL window is behind a native application window which uses
 layered windows for translucency, the OpenGL rendering is drawn over the top,
 flickering.
+</P
+></LI
+><LI
+><P
+>&#13;Rendering to GLX pixmaps is only partially implemented due to WGL limitations.
 </P
 ></LI
 ></UL

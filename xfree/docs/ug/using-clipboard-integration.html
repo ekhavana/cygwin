@@ -82,7 +82,8 @@ updates to either clipboard and copies data between them when either
 one is updated. Cygwin/X has an internal clipboard integration program
 that is enabled by default.</P
 ><P
->&#13;The clipboard integration monitors the X PRIMARY and CLIBPOARD selections
+>&#13;The clipboard integration monitors the X PRIMARY (selected/highlighted text)
+and CLIBPOARD (cut/copied text) selections
 for changes in ownership, and makes the contents of the most recent one
 to change available to paste from the Windows clipboard.  It also monitors
 the contents of the Windows clipboard for changes, taking ownership of the
@@ -104,6 +105,26 @@ noticing that the PRIMARY selection's contents have changed.
 </P
 ></BLOCKQUOTE
 ></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+    With some X clients, it may be inconvenient that updating the PRIMARY
+    selection causes that to overwrite the Windows clipboard contents you were
+    just about to paste, so monitoring of the X PRIMARY selection can be
+    disabled using the <CODE
+CLASS="parameter"
+>-noprimary</CODE
+> option, or temporarily
+    using the "Clipboard may use PRIMARY selection" toggle on the notification
+    area icon menu.
+  </P
+></BLOCKQUOTE
+></DIV
 ><P
 >&#13;See <A
 HREF="configure-cygwin-x-options.html"
@@ -114,8 +135,12 @@ HREF="configure-cygwin-x-options.html"
 for more information on the <CODE
 CLASS="parameter"
 >-[no]clipboard</CODE
->
-command-line parameter.</P
+> and
+<CODE
+CLASS="parameter"
+>-[no]primary</CODE
+> command-line options.
+</P
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"

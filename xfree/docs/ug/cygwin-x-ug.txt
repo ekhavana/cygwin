@@ -32,9 +32,12 @@ Jon Turney
 
         Starting Cygwin/X
 
-              Starting Cygwin/X in multiwindow mode (startxwin)
-              Starting Cygwin/X in windowed mode (startx)
-              Other startup methods
+              Starting in multiwindow mode (startxwin)
+              Starting an X desktop environment session in windowed mode
+              Starting an X session with XLaunch
+              Starting in windowed mode (startx)
+              Notes for advanced users
+              Obsolete startup methods
 
         Switching out of Cygwin/X
         Stopping Cygwin/X
@@ -47,16 +50,20 @@ Jon Turney
               Insecure telnet or rsh (Not recommended)
 
         Remote sessions via XDMCP
-        Hardware Accelerated OpenGL (AIGLX)
+        OpenGL (GLX)
         Input internationalization
 
               Compose key ('Multi_key')
               Input Method Editors (IMEs)
 
         Terminal Server or Fast User Switching
+        Customizing the notification area icon menu
 
    A. GNU Free Documentation License
    Colophon
+
+   List of Tables
+   4-1. Summary of OpenGL rendering options
      __________________________________________________________________
 
 Chapter 1. Cygwin/X Overview
@@ -114,6 +121,7 @@ Installing Cygwin/X
             startx, startwin (and a shortcut on the Start Menu to run it),
             startxdmcp.bat )
           + xorg-docs (optional, man pages)
+          + xlaunch (optional, a wizard for starting X sessions)
           + You may also select any X client programs you want to use, and
             any fonts you would like to have available.
           + You may also want to ensure that the openssh package is
@@ -122,6 +130,7 @@ Installing Cygwin/X
           + You may also want to ensure that the inetutils or rsh packages
             are selected if you wish to use telnet or rsh connections to
             run remote X clients. (not recommended)
+       You can run setup again in the future to add more packages.
        [cyi07packages.png]
    16. Click Next to begin the download process, you may want to try
        another mirror if you see a "Connecting" message on this screen for
@@ -159,8 +168,8 @@ Windowing mode
        the X root window for the screen)
 
      Note: This is typically used to present a virtual full-screen X
-     session using the X window manager of your choice, or for remote
-     XDMCP sessions.
+     session using the X desktop environment or window manager of your
+     choice, or for remote XDMCP sessions.
        The -nodecoration option can be used to remove the Windows window
        decorations from the X screen window. Alternatively, the
        -fullscreen option can be used to show the X screen in exclusive
@@ -222,82 +231,65 @@ Starting Cygwin/X
 
    Described below are several methods of starting up the Cygwin/X X
    Server with a startup utility that optionally starts initial clients
-   (for example, a terminal or a window manager) and performs X server
-   configuration (for example, loading a keyboard modifier map).
+   (for example, a terminal, a window manager, or a desktop environment)
+   and performs X server configuration (for example, loading a keyboard
+   map).
      __________________________________________________________________
 
-Starting Cygwin/X in multiwindow mode (startxwin)
+Starting in multiwindow mode (startxwin)
 
-   Use the custom XWin startup utility startxwin
+   The custom XWin startup utility startxwin [2] starts the X server in
+   multiwindow mode along with a single X terminal.
 
    startxwin is included in the xinit package (installed by following the
-   instructions in the Section called Installing Cygwin/X in Chapter 2),
-   which starts the X server in multiwindow mode along with a single X
-   terminal. Run startxwin by:
+   instructions in the Section called Installing Cygwin/X in Chapter 2).
+
+   Run startxwin by: [3]
      * using the "XWin Server" shortcut under "Cygwin-X" on the Start Menu
      * Starting /usr/bin/startxwin in a Cygwin shell:
 
 $ startxwin
 
-   Full documentation for startxwin can be read with man startxwin . Note
-   that the special option -- is used to mark the end of client options
-   and the beginning of server options, so, for example, if you wish to
-   start the X server with the -noclipboard option, as described in the
-   Section called Command line parameters in Chapter 3, use the following
-   command:
-$ startxwin -- -noclipboard
-
    You may create a ~/.startxwinrc script to customize the client programs
    started, rather than a single xterm.
 
-     Note: The MS-DOS batch file startxwin.bat and bash shell script
-     startxwin.sh previously used to start the X server are no longer
-     provided. Implemented as a script made it difficult to reliably wait
-     until the the X server had started before starting any clients. Use
-     startxwin instead.
-
-     Note: It's not recommended to start startxwin from a MS-DOS shell or
-     by double-clicking it in Windows Explorer. To do so means that XWin
-     is not started from a login shell, and programs started from the
-     notification area icon menu will not inherit the environment of a
-     login shell. This may lead to unexpected behaviour, for example, if
-     you have customizations to your login shell start-up scripts which
-     set environment variables.
-
-     Note: If you want to have a Start Menu shortcut which runs startxwin
-     with custom options, you should use a copy of the Start Menu
-     shortcut installed by xinit, so that your changes are not
-     overwritten when the xinit package is updated.
-
-     Note: startxwin is a specialized version of startx with a few
-     differences appropriate to running in multiwindow mode, rather than
-     windowed mode.
-     * startxwin supplies the -multiwindow option to X
-     * It uses a different script to start clients (~/.startxwinrc rather
-       than ~/.xinitrc), because ~/.xinitrc will normally end by starting
-       a window manager, which would be incorrect for ~/.startxwinrc (as
-       it would discover the internal window manager is already running
-       and exit immediately).
-     * startxwin exits after ~/.startxwinrc has completed and leaves X
-       running, whereas startx waits until ~/.xinitrc exits (which is
-       usually waiting for the window manager started by it to exit) and
-       then kills X.
+   Full documentation for startxwin can be read with man startxwin .
      __________________________________________________________________
 
-Starting Cygwin/X in windowed mode (startx)
+Starting an X desktop environment session in windowed mode
 
-   Use the standard X Window System startx command with its attendant
+   Several X desktop environments are packaged for Cygwin.
+     * MATE Desktop Environment: install the mate-session-manager package
+     * Xfce Desktop Environment: install the xfce4-session package
+
+   and use the provided Start Menu shortcut. [4]
+     __________________________________________________________________
+
+Starting an X session with XLaunch
+
+   XLaunch is a GUI wizard for starting the Cygwin/X X server and a local
+   or remote X client. These sessions can be saved and shared as .xlaunch
+   files.
+
+   XLaunch is included in the xlaunch package (installed by following the
+   instructions in the Section called Installing Cygwin/X in Chapter 2).
+
+   Run xlaunch using the "XLaunch" shortcut under "Cygwin-X" on the Start
+   Menu.
+
+   Full documentation for xlaunch is available as online help within the
+   program.
+     __________________________________________________________________
+
+Starting in windowed mode (startx)
+
+   Use the standard X Window System startx command and its associated
    ~/.xinitrc configuration file.
 
    Run startx in a Cygwin shell:
 $ startx
 
-   Full documentation for startx can be read with man startx . Note that
-   the special option -- is used to mark the end of client options and the
-   beginning of server options, so, for example, if you wish to start the
-   X server with the -emulate3buttons option, as described in the Section
-   called Command line parameters in Chapter 3, use the following command:
-$ startx -- -emulate3buttons
+   Full documentation for startx can be read with man startx .
 
    You may create a ~/.xinitrc from the template in /etc/X11/xinit/xinitrc
    and then customize ~/.xinitrc to start client programs and configure
@@ -311,17 +303,31 @@ $ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 
    Alternatively, if you just want to start a single client program
    (perhaps a window manager), you don't need to use a ~/.xinitrc, and can
-   start the client directly from startx, e.g.
+   start the client directly from startx, e.g. [5]
 $ startx /usr/bin/fvwm2
 
      Note: The client name supplied to startx must begin with / or .,
      otherwise it is treated as options to the default xterm client.
      __________________________________________________________________
 
-Other startup methods
+Notes for advanced users
 
    Advanced users may wish to start the X server by invoking XWin
    directly, for example, to start XDMCP sessions.
+
+   If you want to have a Start Menu shortcut which runs startxwin with
+   custom options, you should use a copy of the Start Menu shortcut
+   installed by xinit, so that your changes are not overwritten when the
+   xinit package is updated.
+     __________________________________________________________________
+
+Obsolete startup methods
+
+   The MS-DOS batch file startxwin.bat and bash shell script startxwin.sh
+   previously used to start the X server are no longer provided.
+   Implementing this as a script made it difficult to reliably wait until
+   the the X server had started before starting any clients. Use startxwin
+   instead.
      __________________________________________________________________
 
 Switching out of Cygwin/X
@@ -360,7 +366,7 @@ Window managers
        parameter to X. See the Section called Command line parameters in
        Chapter 3 for more information on the -multiwindow command-line
        parameter.
-     * External local window managers (e.g. twm, mwm (part of the lesstif
+     * External local window managers (e.g. twm, mwm (part of the motif
        package), fvwm2, openbox, aewm++, WindowMaker). These local window
        managers must be installed on Cygwin and run locally.
      * Remote window managers started by logging into an XDMCP session.
@@ -381,12 +387,13 @@ Windows Clipboard integration
    them when either one is updated. Cygwin/X has an internal clipboard
    integration program that is enabled by default.
 
-   The clipboard integration monitors the X PRIMARY and CLIBPOARD
-   selections for changes in ownership, and makes the contents of the most
-   recent one to change available to paste from the Windows clipboard. It
-   also monitors the contents of the Windows clipboard for changes, taking
-   ownership of the PRIMARY and CLIPBOARD selections, and making the
-   contents of the Windows clipboard available in them.
+   The clipboard integration monitors the X PRIMARY (selected/highlighted
+   text) and CLIBPOARD (cut/copied text) selections for changes in
+   ownership, and makes the contents of the most recent one to change
+   available to paste from the Windows clipboard. It also monitors the
+   contents of the Windows clipboard for changes, taking ownership of the
+   PRIMARY and CLIPBOARD selections, and making the contents of the
+   Windows clipboard available in them.
 
      Note: Some X clients, notably ones written in Tcl/Tk, do not
      re-assert ownership of the PRIMARY selection or update it's
@@ -394,8 +401,16 @@ Windows Clipboard integration
      clipboard integration program from correctly noticing that the
      PRIMARY selection's contents have changed.
 
+     Note: With some X clients, it may be inconvenient that updating the
+     PRIMARY selection causes that to overwrite the Windows clipboard
+     contents you were just about to paste, so monitoring of the X
+     PRIMARY selection can be disabled using the -noprimary option, or
+     temporarily using the "Clipboard may use PRIMARY selection" toggle
+     on the notification area icon menu.
+
    See the Section called Command line parameters in Chapter 3 for more
-   information on the -[no]clipboard command-line parameter.
+   information on the -[no]clipboard and -[no]primary command-line
+   options.
      __________________________________________________________________
 
 Shared memory support
@@ -582,39 +597,80 @@ Remote sessions via XDMCP
      localhost
      __________________________________________________________________
 
-Hardware Accelerated OpenGL (AIGLX)
+OpenGL (GLX)
 
-     Note: This is feature is still under active development and should
-     be considered beta quality, but should be working well enough to be
-     useful. Please report success or failure with specific OpenGL
+     Note: Accelerated OpenGL is still under active development and
+     should be considered beta quality, but should be working well enough
+     to be useful. Please report problems with specific OpenGL
      applications to the cygwin-xfree mailing list.
 
-   Cygwin/X supports hardware accelerated OpenGL rendering in the X server
-   using the native Windows OpenGL (WGL) interface. Use the command line
-   option -wgl to the X server to turn on the use of the native Windows
-   OpenGL implementation. This option is only supported by multiwindow
-   mode currently. If you don't use this option, the X server will use
-   software rendering.
+   The Cygwin/X X Server supports both software OpenGL rendering (using
+   the mesa software renderer), and hardware accelerated OpenGL rendering
+   (using the native Windows OpenGL (WGL) interface).
 
-   For remote clients, Mesa's libGL prefers to use client-side rendering
-   and transfer the image to the server using xlib. To force indirect
-   rendering (which takes place on the server), you must do export
-   LIBGL_ALWAYS_INDIRECT=1 before starting the client application. There's
-   a performance trade-off between rendering performance and network
-   latency, so you should try both direct and indirect rendering and see
-   which performs best in your specific circumstances. Generally,
-   accelerated indirect rendering should be more performant for clients
-   which render complex scenes.
+   The X server command line options -wgl and -nowgl turn on and off the
+   use of the native Windows OpenGL implementation. Currently -wgl is only
+   supported in multiwindow mode, and is on by default in that mode.
 
-   For local clients, indirect rendering is the default, so no special
-   steps are needed.
+   Table 4-1. Summary of OpenGL rendering options
 
-   If you have set things up successfully, glxinfo | grep OpenGL should
-   output something mentioning your graphics card vendor. If it mentions
-   Mesa, you still have software rendering
+      software rendering ^a
+
+   hardware-accelerated rendering
+
+   indirect
+
+   (Uses GLX protocol, limited to OpenGL 1.4)
+
+   start server with -nowgl option
+
+   export LIBGL_ALWAYS_INDIRECT=1
+
+   start server with -wgl option
+
+   export LIBGL_ALWAYS_INDIRECT=1
+
+   direct
+   unset LIBGL_ALWAYS_INDIRECT
+
+   start server with -wgl option
+
+   export LIBGL_USE_WGL=1 ^b
+
+   unset LIBGL_ALWAYS_INDIRECT
+   Notes:
+   a. The software renderer used (e.g. llvmpipe, softpipe) can be selected
+   using the GALLIUM_DRIVER environment variable.
+   b. Since direct accelerated rendering is currently experimental, the
+   LIBGL_USE_WGL environment variable is required to enable it, but that
+   will be removed when the feature is mature, at which point it will be
+   the default and export LIBGL_ALWAYS_SOFTWARE=1 will be required to
+   force software rendering.
+
+   Currently, in multiwindow mode, the default configurations are:
+     * For local clients the default is indirect, hardware-accelerated
+       rendering, as -wgl is on by default, and LIBGL_ALWAYS_INDIRECT is
+       set by a profile.d file installed by mesa.
+     * For remote clients, Mesa's libGL prefers to use client-side
+       software rendering and then transfer the rendered image to the
+       server. To force indirect rendering (which takes place on the
+       server), you must do export LIBGL_ALWAYS_INDIRECT=1 before starting
+       the client application. There is a performance trade-off between
+       rendering performance and network latency, so you should try both
+       direct and indirect rendering and see which performs best in your
+       specific circumstances.
+
+   If glxinfo | grep OpenGL outputs something mentioning your graphics
+   card vendor, you have hardware-accelerated rendering. If it mentions
+   Mesa, you have software rendering.
 
    Please ensure you are using the latest display drivers for your
    graphics hardware before reporting any visual issues with WGL.
+
+     Note: Because of it's lack of support for modern OpenGL versions
+     (>1.4), indirect rendering is considered of limited use. An -iglx
+     option was added in X server 1.16 which allows it's use to be
+     prohibited, which will probably be the default in X server 1.17.
 
    Known issues:
      * OpenGL drawing is just drawn on top of the X window. This works
@@ -627,6 +683,8 @@ Hardware Accelerated OpenGL (AIGLX)
      * When an OpenGL window is behind a native application window which
        uses layered windows for translucency, the OpenGL rendering is
        drawn over the top, flickering.
+     * Rendering to GLX pixmaps is only partially implemented due to WGL
+       limitations.
      __________________________________________________________________
 
 Input internationalization
@@ -643,7 +701,7 @@ Compose key ('Multi_key')
    listed in the xkeyboard-config(7) man page.
 
    Alternatively, the option lv3:ralt_switch_multikey configures Right Alt
-   as 3rd-level shift, Shift + Right Alt [2] as Compose. Note that this
+   as 3rd-level shift, Shift + Right Alt [6] as Compose. Note that this
    option is on by default in the gb layout.
 
    The standard compose key sequences available are determined by the
@@ -684,6 +742,17 @@ Terminal Server or Fast User Switching
      Note: Automatically communicating the allocated display number to
      all future X clients started by the user who started the X server is
      left as an exercise for the reader.
+     __________________________________________________________________
+
+Customizing the notification area icon menu
+
+   You can customize the right-click menu for the XWin icon in the Windows
+   notification area (system tray) using the XWinrc file. e.g.
+$ cp /etc/X11/system.XWinrc./etc/X11/xinit/xinitrc ~/.XWinrc
+[edit ~/.Xwinrc as desired]
+
+   See the Section called XWinrc configuration file in Chapter 3 for more
+   details.
      __________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -1127,7 +1196,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2014-04-29 10:18 .
+   at 2014-10-10 19:45 .
 
   Notes
 
@@ -1136,5 +1205,48 @@ Colophon
    Although this can be worked around, to some extent, by using a utility
    like xroot , which provides a clickable area of root window.
    [2]
+
+   startxwin is a specialized version of startx with a few differences
+   appropriate to running in multiwindow mode, rather than windowed mode.
+     * startxwin supplies the -multiwindow option to X
+     * It uses a different script to start clients (~/.startxwinrc rather
+       than ~/.xinitrc), because ~/.xinitrc will normally end by starting
+       a window manager, which would be incorrect for ~/.startxwinrc (as
+       it would discover the internal window manager is already running
+       and exit immediately).
+     * startxwin exits after ~/.startxwinrc has completed and leaves X
+       running, whereas startx waits until ~/.xinitrc exits (which is
+       usually waiting for the window manager started by it to exit) and
+       then kills X.
+
+   [3]
+
+   It's not recommended to start startxwin from a MS-DOS shell or by
+   double-clicking it in Windows Explorer. To do so means that the X
+   server is not started from a login shell, and programs started from the
+   notification area icon menu will not inherit the environment of a login
+   shell. This may lead to unexpected behaviour, for example, if you have
+   customizations to your login shell start-up scripts which set
+   environment variables.
+   [4]
+
+   Alternatively, these sessions can be started from the command line,
+   e.g.
+startx /usr/bin/dbus-launch mate-session
+
+   or
+echo "/usr/bin/dbus-launch startxfce4" > ~/.xinitrc
+
+   and then run startx.
+   [5]
+
+   Note that startxwin and startx use the special option -- to mark the
+   end of client options and the beginning of server options, So, for
+   example, if you wish to also start the X server with the options
+   -emulate3buttons and -noclipboard, as described in the Section called
+   Command line parameters in Chapter 3, use the following command:
+$ startx /usr/bin/fvwm2 -- -emulate3buttons -noclipboard
+
+   [6]
 
    pressing the keys in that order. Right Alt + Shift is 4th-level shift.

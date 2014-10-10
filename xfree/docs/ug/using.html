@@ -119,7 +119,7 @@ HREF="using-remote-session.html"
 ><DT
 ><A
 HREF="using-aiglx.html"
->Hardware Accelerated OpenGL (AIGLX)</A
+>OpenGL (GLX)</A
 ></DT
 ><DT
 ><A
@@ -130,6 +130,11 @@ HREF="using-i18n.html"
 ><A
 HREF="using-terminal-server.html"
 >Terminal Server or Fast User Switching</A
+></DT
+><DT
+><A
+HREF="using-customizing-traymenu.html"
+>Customizing the notification area icon menu</A
 ></DT
 ></DL
 ></DIV
@@ -144,8 +149,8 @@ NAME="using-starting"
 ><P
 >Described below are several methods of starting up the Cygwin/X X Server
 with a startup utility that optionally starts initial clients (for example,
-a terminal or a window manager) and performs
-X server configuration (for example, loading a keyboard modifier map).
+a terminal, a window manager, or a desktop environment) and performs
+X server configuration (for example, loading a keyboard map).
 </P
 ><DIV
 CLASS="sect2"
@@ -153,13 +158,23 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="using-starting-exe"
->Starting Cygwin/X in multiwindow mode (startxwin)</A
+>Starting in multiwindow mode (startxwin)</A
 ></H2
 ><P
->Use the custom XWin startup utility <B
+>&#13;  The custom XWin startup utility <B
 CLASS="command"
 >startxwin</B
-></P
+>
+  <A
+NAME="AEN263"
+HREF="#FTN.AEN263"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+  starts the X server in multiwindow mode along with a single X terminal.
+</P
 ><P
 >&#13;<B
 CLASS="command"
@@ -173,13 +188,21 @@ HREF="setup.html#setup-cygwin-x-installing"
 >the Section called <I
 >Installing Cygwin/X</I
 > in Chapter 2</A
->),
-which starts the X server in multiwindow mode along with a single X terminal.
-
-Run <B
+>).
+</P
+><P
+>&#13;Run <B
 CLASS="command"
 >startxwin</B
 > by:
+<A
+NAME="AEN290"
+HREF="#FTN.AEN290"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+>
 </P
 ><UL
 ><LI
@@ -210,6 +233,13 @@ CLASS="screen"
 ></LI
 ></UL
 ><P
+>&#13;You may create a <TT
+CLASS="filename"
+>~/.startxwinrc</TT
+> script to customize
+the client programs started, rather than a single xterm.
+</P
+><P
 >&#13;Full documentation for <B
 CLASS="command"
 >startxwin</B
@@ -223,178 +253,89 @@ CLASS="command"
 >
 </A
 >.
-Note that the special option <B
-CLASS="command"
->--</B
-> is used to mark the end of
-client options and the beginning of server options, so, for example, if you
-wish to start the X server with the -noclipboard option, as described in
-<A
-HREF="configure-cygwin-x-options.html"
->the Section called <I
->Command line parameters</I
-> in Chapter 3</A
->, use the following command:
 </P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;$ startxwin -- -noclipboard
-</PRE
-></TD
-></TR
-></TABLE
-><P
->&#13;You may create a <TT
-CLASS="filename"
->~/.startxwinrc</TT
-> script to customize
-the client programs started, rather than a single xterm.
-</P
-><DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
-><P
-><B
->Note: </B
->
-The MS-DOS batch file <TT
-CLASS="filename"
->startxwin.bat</TT
-> and bash shell script <TT
-CLASS="filename"
->startxwin.sh</TT
->
-previously used to start the X server are no longer provided.  Implemented as a script made it difficult
-to reliably wait until the the X server had started before starting any clients.
-Use <TT
-CLASS="filename"
->startxwin</TT
-> instead.
-</P
-></BLOCKQUOTE
 ></DIV
 ><DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN306"
+>Starting an X desktop environment session in windowed mode</A
+></H2
 ><P
-><B
->Note: </B
->
-It's not recommended to start <TT
-CLASS="filename"
->startxwin</TT
-> from a MS-DOS shell or by double-clicking it in
-Windows Explorer.  To do so means that XWin is not started from a login shell, and programs started from
-the notification area icon menu will not inherit the environment of a login shell.  This may lead to unexpected
-behaviour, for example, if you have customizations to your login shell start-up scripts which set environment variables.
-</P
-></BLOCKQUOTE
-></DIV
-><DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
-><P
-><B
->Note: </B
->
-If you want to have a Start Menu shortcut which runs <B
-CLASS="command"
->startxwin</B
-> with custom options, you should
-use a copy of the Start Menu shortcut installed by <TT
-CLASS="filename"
->xinit</TT
->, so that your
-changes are not overwritten when the <TT
-CLASS="filename"
->xinit</TT
-> package is updated.
-</P
-></BLOCKQUOTE
-></DIV
-><DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
-><P
-><B
->Note: </B
->
-<B
-CLASS="command"
->startxwin</B
-> is a specialized version of <B
-CLASS="command"
->startx</B
->
-with a few differences appropriate to running in multiwindow mode, rather than windowed mode.
-</P
+>&#13;    Several X desktop environments are packaged for Cygwin.
+  </P
 ><UL
 ><LI
 ><P
->&#13;<B
-CLASS="command"
->startxwin</B
-> supplies the <B
-CLASS="command"
->-multiwindow</B
-> option to 
-X
-</P
+>MATE Desktop Environment: install the <TT
+CLASS="filename"
+>mate-session-manager</TT
+> package</P
 ></LI
 ><LI
 ><P
->&#13;It uses a different script to start clients (<TT
+>Xfce Desktop Environment: install the <TT
 CLASS="filename"
->~/.startxwinrc</TT
->
-rather than <TT
-CLASS="filename"
->~/.xinitrc</TT
->), because <TT
-CLASS="filename"
->~/.xinitrc</TT
->
-will normally end by starting a window manager, which would be incorrect for
-<TT
-CLASS="filename"
-> ~/.startxwinrc</TT
-> (as it would discover the internal window manager
-is already running and exit immediately).
-</P
-></LI
-><LI
-><P
->&#13;<B
-CLASS="command"
->startxwin</B
-> exits after <TT
-CLASS="filename"
->~/.startxwinrc</TT
-> has completed
-and leaves X running, whereas <B
-CLASS="command"
->startx</B
-> waits until
-<TT
-CLASS="filename"
->~/.xinitrc</TT
-> exits (which is usually waiting for the window manager started
-by it to exit) and then kills X.
-</P
+>xfce4-session</TT
+> package</P
 ></LI
 ></UL
-></BLOCKQUOTE
+><P
+>&#13;    and use the provided Start Menu shortcut.
+    <A
+NAME="AEN317"
+HREF="#FTN.AEN317"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+>
+  </P
 ></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="AEN322"
+>Starting an X session with XLaunch</A
+></H2
+><P
+>&#13;    XLaunch is a GUI wizard for starting the Cygwin/X X server and a local or
+    remote X client.  These sessions can be saved and shared as
+    <TT
+CLASS="filename"
+>.xlaunch</TT
+> files.
+  </P
+><P
+>&#13;    XLaunch is included in the <TT
+CLASS="filename"
+>xlaunch</TT
+> package (installed by
+    following the instructions in <A
+HREF="setup.html#setup-cygwin-x-installing"
+>the Section called <I
+>Installing Cygwin/X</I
+> in Chapter 2</A
+>).
+  </P
+><P
+>&#13;    Run <B
+CLASS="command"
+>xlaunch</B
+> using the "XLaunch" shortcut under
+    "Cygwin-X" on the Start Menu.
+  </P
+><P
+>&#13;    Full documentation for <B
+CLASS="command"
+>xlaunch</B
+> is available as online
+    help within the program.
+</P
 ></DIV
 ><DIV
 CLASS="sect2"
@@ -402,14 +343,14 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="using-starting-startx"
->Starting Cygwin/X in windowed mode (startx)</A
+>Starting in windowed mode (startx)</A
 ></H2
 ><P
 >Use the standard X Window System
 <B
 CLASS="command"
 >startx</B
-> command with its attendant
+> command and its associated
 <TT
 CLASS="filename"
 >~/.xinitrc</TT
@@ -447,32 +388,7 @@ CLASS="command"
 >
 </A
 >.
-Note that the special option <B
-CLASS="command"
->--</B
-> is used to mark the end of
-client options and the beginning of server options, so, for example, if you
-wish to start the X server with the -emulate3buttons option, as described in
-<A
-HREF="configure-cygwin-x-options.html"
->the Section called <I
->Command line parameters</I
-> in Chapter 3</A
->, use the following command:
 </P
-><TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->&#13;$ startx -- -emulate3buttons
-</PRE
-></TD
-></TR
-></TABLE
 ><P
 >&#13;You may
 create a <TT
@@ -538,6 +454,14 @@ can start the client directly from <B
 CLASS="command"
 >startx</B
 >, e.g.
+<A
+NAME="AEN359"
+HREF="#FTN.AEN359"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+>
 </P
 ><TABLE
 BORDER="0"
@@ -578,7 +502,7 @@ CLASS="sect2"
 CLASS="sect2"
 ><A
 NAME="using-starting-advanced"
->Other startup methods</A
+>Notes for advanced users</A
 ></H2
 ><P
 >&#13;Advanced users may wish to start the X server by invoking <B
@@ -587,9 +511,282 @@ CLASS="command"
 > directly,
 for example, to start XDMCP sessions.
 </P
+><P
+>&#13;If you want to have a Start Menu shortcut which runs <B
+CLASS="command"
+>startxwin</B
+> with custom options, you should
+use a copy of the Start Menu shortcut installed by <TT
+CLASS="filename"
+>xinit</TT
+>, so that your
+changes are not overwritten when the <TT
+CLASS="filename"
+>xinit</TT
+> package is updated.
+</P
+></DIV
+><DIV
+CLASS="sect2"
+><H2
+CLASS="sect2"
+><A
+NAME="using-starting-obsolete"
+>Obsolete startup methods</A
+></H2
+><P
+>&#13;The MS-DOS batch file <TT
+CLASS="filename"
+>startxwin.bat</TT
+> and bash shell script <TT
+CLASS="filename"
+>startxwin.sh</TT
+>
+previously used to start the X server are no longer provided.  Implementing this as a script made it difficult
+to reliably wait until the the X server had started before starting any clients.
+Use <TT
+CLASS="filename"
+>startxwin</TT
+> instead.
+</P
 ></DIV
 ></DIV
 ></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN263"
+HREF="using.html#AEN263"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>&#13;<B
+CLASS="command"
+>startxwin</B
+> is a specialized version of <B
+CLASS="command"
+>startx</B
+>
+with a few differences appropriate to running in multiwindow mode, rather than windowed mode.
+</P
+><UL
+><LI
+><P
+>&#13;<B
+CLASS="command"
+>startxwin</B
+> supplies the <B
+CLASS="command"
+>-multiwindow</B
+> option to
+X
+</P
+></LI
+><LI
+><P
+>&#13;It uses a different script to start clients (<TT
+CLASS="filename"
+>~/.startxwinrc</TT
+>
+rather than <TT
+CLASS="filename"
+>~/.xinitrc</TT
+>), because <TT
+CLASS="filename"
+>~/.xinitrc</TT
+>
+will normally end by starting a window manager, which would be incorrect for
+<TT
+CLASS="filename"
+> ~/.startxwinrc</TT
+> (as it would discover the internal window manager
+is already running and exit immediately).
+</P
+></LI
+><LI
+><P
+>&#13;<B
+CLASS="command"
+>startxwin</B
+> exits after <TT
+CLASS="filename"
+>~/.startxwinrc</TT
+> has completed
+and leaves X running, whereas <B
+CLASS="command"
+>startx</B
+> waits until
+<TT
+CLASS="filename"
+>~/.xinitrc</TT
+> exits (which is usually waiting for the window manager started
+by it to exit) and then kills X.
+</P
+></LI
+></UL
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN290"
+HREF="using.html#AEN290"
+><SPAN
+CLASS="footnote"
+>[2]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>&#13;It's not recommended to start <TT
+CLASS="filename"
+>startxwin</TT
+> from a MS-DOS shell or by double-clicking it in
+Windows Explorer.  To do so means that the X server is not started from a login shell, and programs started from
+the notification area icon menu will not inherit the environment of a login shell.  This may lead to unexpected
+behaviour, for example, if you have customizations to your login shell start-up scripts which set environment variables.
+</P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN317"
+HREF="using.html#AEN317"
+><SPAN
+CLASS="footnote"
+>[3]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>&#13;        Alternatively, these sessions can be started from the command line, e.g.
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;startx /usr/bin/dbus-launch mate-session
+</PRE
+></TD
+></TR
+></TABLE
+>
+        or
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;echo "/usr/bin/dbus-launch startxfce4" &gt; ~/.xinitrc
+</PRE
+></TD
+></TR
+></TABLE
+>
+        and then run <B
+CLASS="command"
+>startx</B
+>.
+      </P
+></TD
+></TR
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN359"
+HREF="using.html#AEN359"
+><SPAN
+CLASS="footnote"
+>[4]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>&#13;Note that <B
+CLASS="command"
+>startxwin</B
+> and <B
+CLASS="command"
+>startx</B
+> use the
+special option <TT
+CLASS="filename"
+>--</TT
+> to mark the end of client options and the
+beginning of server options, So, for example, if you wish to also start the X
+server with the options <TT
+CLASS="filename"
+>-emulate3buttons</TT
+> and
+<TT
+CLASS="filename"
+>-noclipboard</TT
+>, as described in <A
+HREF="configure-cygwin-x-options.html"
+>the Section called <I
+>Command line parameters</I
+> in Chapter 3</A
+>, use the following command:
+<TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;$ startx /usr/bin/fvwm2 -- -emulate3buttons -noclipboard
+</PRE
+></TD
+></TR
+></TABLE
+>
+</P
+></TD
+></TR
+></TABLE
 ><DIV
 CLASS="NAVFOOTER"
 ><HR
