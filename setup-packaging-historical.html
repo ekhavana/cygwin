@@ -69,7 +69,7 @@ boffo-1.0-1/CYGWIN-PATCHES/setup.hint
   </li>
 </ul>
 <h3>Method Two</h3>
-<p>This method is sometimes referred to as the "g-b-s" method, after the filename of the <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>generic-build-script</tt></a> template.</p>
+<p>This method is sometimes referred to as the "g-b-s" method, after the filename of the <a href="http://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-build-script?view=co"><tt>generic-build-script</tt></a> template.</p>
 <ul class="spaced">
   <li>In a packaging technique inspired by rpms and debs, you may create a -src tarball which simply contains:
     <ol>
@@ -78,8 +78,8 @@ boffo-1.0-1/CYGWIN-PATCHES/setup.hint
       <li><tt>foo-vendor-release.sh</tt>: A build script that drives the entire unpacking, configuration, build, and packaging (binary and -src) process.</li>
     </ol>
   </li>
-  <li>You can adapt <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&amp;cvsroot=cygwin-apps">this</a> generic readme file for script-driven -src packages.</li>
-  <li><a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&amp;cvsroot=cygwin-apps">Here</a> is an example build script which can be adapted for your package. By carefully modifying the details of this script, it can create the binary and -src packages for you, once you've finished porting your package. How? See the <b><i>Initial packaging procedure</i></b> below. But first, a few facts:
+  <li>You can adapt <a href="http://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-readme?view=co">this</a> generic readme file for script-driven -src packages.</li>
+  <li><a href="http://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-build-script?view=co">Here</a> is an example build script which can be adapted for your package. By carefully modifying the details of this script, it can create the binary and -src packages for you, once you've finished porting your package. How? See the <b><i>Initial packaging procedure</i></b> below. But first, a few facts:
     <ul>
       <li>The buildscript will autodetect the package name, vendor version, and release number from its own filename.</li>
       <li>When the buildscript is used to compile the package, all building occurs within a hidden subdirectory inside the source tree: <tt>boffo-1.0/.build/</tt></li>
@@ -94,11 +94,11 @@ boffo-1.0-1/CYGWIN-PATCHES/setup.hint
     <ul>
       <li>Suppose you've got your boffo package ported to Cygwin. It took some work, but it now builds and runs. Further, suppose that the <tt>boffo-1.0.tar.bz2</tt> file that you downloaded from the boffo homepage unpacks into <tt>boffo-1.0/</tt>, so you've been doing all of your work in <tt>~/sources/boffo-1.0/</tt>. That's good.</li>
       <li>Place a copy of <tt>boffo-1.0.tar.bz2</tt> in <tt>~/sources</tt></li>
-      <li>copy <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-build-script?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>generic-build-script</tt></a> into <tt>~/sources/</tt> and rename it <tt>boffo-1.0-1.sh</tt>. Carefully adapt this script for your purposes. However, it should auto detect most of what it needs to know: the package name, vendor version, release number, etc.<br />
+      <li>Copy <a href="http://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-build-script?view=co"><tt>generic-build-script</tt></a> into <tt>~/sources/</tt> and rename it <tt>boffo-1.0-1.sh</tt>. Carefully adapt this script for your purposes. However, it should auto detect most of what it needs to know: the package name, vendor version, release number, etc.<br />
       <br />
       </li>
       <li>Clean up inside your <tt>~/sources/boffo-1.0/</tt> directory -- make sure that no files which are generated during the build process are lying around. Usually, a '<tt>make distclean</tt>' will do the trick, but not always.</li>
-      <li>Ensure that you've put any Cygwin-specific readme files, setup.hint files, etc, into <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/</tt>. You can adapt <a href="http://sourceware.org/cgi-bin/cvsweb.cgi/~checkout~/packaging/templates/generic-readme?content-type=text/plain&amp;cvsroot=cygwin-apps"><tt>this generic readme file</tt></a> for this purpose. The build script expects that the Cygwin-specific README file will be named <tt>.../CYGWIN-PATCHES/&lt;package&gt;.README</tt>. In this example, it would be stored as <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/boffo.README</tt>. The build script will ensure that it gets installed as <tt>/usr/share/doc/Cygwin/boffo-1.0.README</tt></li>
+      <li>Ensure that you've put any Cygwin-specific readme files, setup.hint files, etc, into <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/</tt>. You can adapt <a href="http://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-readme?view=co"><tt>this generic readme file</tt></a> for this purpose. The build script expects that the Cygwin-specific README file will be named <tt>.../CYGWIN-PATCHES/&lt;package&gt;.README</tt>. In this example, it would be stored as <tt>~/sources/boffo-1.0/CYGWIN-PATCHES/boffo.README</tt>. The build script will ensure that it gets installed as <tt>/usr/share/doc/Cygwin/boffo-1.0.README</tt></li>
       <li>Prepare the staging location for the -src package (yes, do the -src package first): From the directory above your boffo-1.0 tree (e.g. <tt>~/sources/</tt> in our example) execute '<tt>./boffo-1.0-1.sh mkdirs</tt>'</li>
       <li>Create the -src package: '<tt>./boffo-1.0-1.sh spkg</tt>'</li>
       <li>Now, let's go somewhere else and unpack this new -src package:
