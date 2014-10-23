@@ -41,19 +41,28 @@ $| = 1;
 if ($text) {
     myprint $html->header(-type=>'text/plain');
 } else {
-    myprint $html->header, $html->start_html(-title=>'Cygwin Package List Search Result',
+    myprint $html->header, $html->start_html(-title=>'Cygwin Package Search',
 					     -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
 					     -style=>'../style.css');
     include_virtual "../navbar.html", "../top.html";
+
+    print '<h1>Cygwin Package Search</h1>';
+    print '<form method="GET" action="//cygwin.com/cgi-bin2/package-grep-test.cgi">';
+    print 'Search package contents for a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern, ';
+    print 'or view the <a href="https://cygwin.com/packages/package_list.html">full list</a> of packages<br>';
+    print '<input type="text" size=40 name="grep" value="' . $html_esc_grep . '">';
+    print '<input type=submit value="Go"><br>';
+    print '<input type="radio" name="arch" value="x86"'    . (($arch eq 'x86') ? 'checked="checked"' : '') . '>x86';
+    print '<input type="radio" name="arch" value="x86_64"' . (($arch ne 'x86') ? 'checked="checked"' : '') . '>x86_64';
+    print '</form>';
 }
 
 my $index;
 $grep =~ s/^\s+|\s+$//g;
 eval '"foo" =~ /$grep/o';
-if ($@ || !length($grep) || $grep =~ m!\\\.\\\.!o) {
+if ($@ || $grep =~ m!\\\.\\\.!o) {
     save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $html_esc_grep . "<br><br>\n");
-    save @toprint, $html->h3({-align=>'center'}, '<a href="packages/" align="center">Back</a>') unless $text;
-} else {
+} elsif (length($grep)) {
     $SIG{ALRM} = \&wakey;
     alarm 45;
     save @toprint, $html->h1('Search Results'), "\n" unless $text;
