@@ -47,7 +47,7 @@ if ($text) {
     include_virtual "../navbar.html", "../top.html";
 
     print '<h1>Cygwin Package Search</h1>';
-    print '<form method="GET" action="//cygwin.com/cgi-bin2/package-grep-test.cgi">';
+    print '<form method="GET" action="//cygwin.com/cgi-bin2/package-grep.cgi">';
     print 'Search package contents for a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern, ';
     print 'or view the <a href="https://cygwin.com/packages/package_list.html">full list</a> of packages<br>';
     print '<input type="text" size=40 name="grep" value="' . $html_esc_grep . '">';
