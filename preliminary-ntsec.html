@@ -312,8 +312,8 @@ Local accounts from another machine in the network:
 </p><p>
 There's no SID&lt;=&gt;uid/gid mapping implemented for this case.  The problem
 is, there's no way to generate a bijective mapping.  There's no central place
-which keeps an analogue value of the <code class="literal">trustPosixOffset</code>, and
-there's the additional problem that the
+which keeps an analogue of the <code class="literal">trustPosixOffset</code>, and there's
+the additional problem that the
 <a class="ulink" href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa379166%28v=vs.85%29.aspx" target="_top">LookupAccountSid</a>
 and
 <a class="ulink" href="http://msdn.microsoft.com/en-us/library/windows/desktop/aa379159%28v=vs.85%29.aspx" target="_top">LookupAccountName</a>
@@ -471,8 +471,13 @@ For changing group comments, use the `net localgroup' command.  The supported
 key/value pair for groups are:
 </p><div class="segmentedlist"><table border="0"><thead><tr class="segtitle"></tr></thead><tbody><tr class="seglistitem"><td class="seg"><code class="literal">unix="value"</code></td><td class="seg">Sets the NFS/Samba gid of the group to the decimal value.
          See <a class="xref" href="ntsec.html#ntsec-mapping-nfs" title="NFS account mapping">the section called “NFS account mapping”</a>.</td></tr></tbody></table></div></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ntsec-mapping-caching"></a>Caching account information</h4></div></div></div><p>
-The information fetched from file or the Windows account database is cached
-by the process.  The cached information is inherited by child processes.
+The information fetched from the Windows account database or the
+<code class="filename">/etc/passwd</code> and <code class="filename">/etc/group</code> files is
+cached by the process.  The cached information is inherited by Cygwin child
+processes.  A Cygwin process invoked from a Windows command, such as CMD.exe,
+will start a new Cygwin process tree and the caching starts from scratch
+(unless <span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">cygserver</a></strong></span> is
+running, but read on).
 </p><p>
 While usually working fine, this has some drawbacks.  Consider a shell calling
 <span class="command"><strong>id</strong></span>.  <span class="command"><strong>id</strong></span> fetches all group information
@@ -482,8 +487,8 @@ doesn't start any child processes, so the information is lost as soon as
 </p><p>
 But there's another caching mechanism available.  If
 <span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">cygserver</a></strong></span> is running
-it will provide passwd and group entry caching for all processes in a Cygwin
-process tree, which first process has been started after
+it will provide passwd and group entry caching for all processes in every Cygwin
+process tree started after
 <span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">cygserver</a></strong></span>.  So, if
 you start a Cygwin Terminal and
 <span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">cygserver</a></strong></span> is running
