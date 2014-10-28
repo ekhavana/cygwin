@@ -132,10 +132,11 @@ which disallows mapping of certain POSIX permissions cleanly.  See
 <a class="xref" href="ntsec.html#ntsec-files" title="File permissions">the section called “File permissions”</a>.</p><p>POSIX is able to create only three different permissions?  Not quite.
 Newer operating systems and file systems on POSIX systems also provide
 access control lists.  Two different APIs exist for accessing these
-ACLs, the Solaris API and the POSIX API.  Cygwin implements the Solaris
-API to access Windows ACLs in a Unixy way.  Online man pages for the
+ACLs, the Solaris API and the POSIX API.  Cygwin implements the original
+Solaris API to access Windows ACLs in a Unixy way.  Online man pages for the
 Solaris ACL API can be found on
-<a class="ulink" href="http://docs.sun.com" target="_top">http://docs.sun.com</a>.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-mapping"></a>Mapping Windows accounts to POSIX accounts</h3></div></div></div><p>
+<a class="ulink" href="http://docs.oracle.com" target="_top">http://docs.oracle.com</a>.
+For an overview see <a class="ulink" href="http://docs.oracle.com/cd/E23824_01/html/821-1474/acl-5.html#scrolltoc" target="_top">acl(5)</a>.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-mapping"></a>Mapping Windows accounts to POSIX accounts</h3></div></div></div><p>
 For as long as Cygwin has existed, it has stored user and group information in
 <code class="filename">/etc/passwd</code> and <code class="filename">/etc/group</code> files. 
 Under the assumption that these files would never be too large, the first
@@ -710,9 +711,9 @@ passwd and group information.
 </p><pre class="screen">
   group: db files
 </pre><p>
-This is a valid entry, but the order will be ignored by Cygwin.  If both,
-<code class="literal">files</code> and <code class="literal">db</code> are specified, Cygwin will
-always try the files first, then the db.
+This is a valid entry, but the order will be ignored by Cygwin.  If both
+settings, <code class="literal">files</code> and <code class="literal">db</code> are specified,
+Cygwin will always try the files first, then the db.
 </p><p>
 The remaining entries define certain aspects of the Windows account
 database search.  Right now, only one entry is valid:
