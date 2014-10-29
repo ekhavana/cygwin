@@ -510,7 +510,44 @@ unforgetful.  Every Cygwin process on the system will have the
 its service.  Additionally, all information requested from
 <span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">cygserver</a></strong></span> once, will
 be cached inside the process itself and, again, propagated to child processes.
-</p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ntsec-mapping-nfs"></a>NFS account mapping</h4></div></div></div><p>
+</p><p>
+If you automatically start Cygwin processes as Windows services at system
+startup, you may wish to consider starting
+<span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">cygserver</a></strong></span> first in
+order to take advantage of this system-wide caching.  To assure that
+<span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">cygserver</a></strong></span> has started
+prior to starting <span class="command"><strong>sshd</strong></span> or other Cygwin processes, you may
+wish to create service startup dependencies.
+<span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">Cygserver</a></strong></span> should
+probably wait for Windows TCPIP and AFD services before it starts, and then
+other Cygwin process should start after
+<span class="command"><strong><a class="link" href="using-cygserver.html" title="Cygserver">cygserver</a></strong></span>.  Example
+Windows commands to accomplish this (after the services already exist) are
+shown below.  You will need an administrative prompt to run the
+<span class="command"><strong>sc config</strong></span> commands.
+</p><pre class="screen">
+  # Delay Cygserver until TCPIP and AFD have started
+  # Note the (odd) required space character after "depend="
+
+  sc config cygserver depend= tcp/afd
+
+  # Delay sshd until after Cygserver has started
+  # Again note the (odd) required space character after "depend="
+
+  sc config sshd depend= cygserver
+
+  # View the Cygserver service details
+
+  sc qc cygserver
+</pre><p>
+Note that this <span class="command"><strong>sc config</strong></span> command
+<span class="emphasis"><em>replaces</em></span> any existing dependencies.  The above changes
+will not impact the running instance, only future instances.
+</p><pre class="screen">
+  # To remove all dependencies from the cygserver service
+
+  sc config cygserver depend= /
+</pre></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ntsec-mapping-nfs"></a>NFS account mapping</h4></div></div></div><p>
 Microsoft's NFS client does not map the uid/gid values on the NFS shares
 to SIDs.  There's no such thing as a (fake) security descriptor returned
 to the application.  Rather, via an undocumented API an application can
