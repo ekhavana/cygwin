@@ -48,6 +48,14 @@ Disable CYGWIN "dosfilewarning" option by default.
 Improve various header files for C++- and standards-compliance.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Doug Lea malloc implementation update from 2.8.3 to the latest 2.8.6.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+The xdr functions are no longer exported for newly built executables.
+Use libtirpc-devel instead.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+atexit(3) is now exported as statically linked function from libcygwin.a.
+This allows reliable access to the DSO handle of the caller for newly
+built executables.  The former atexit entry point into the DLL remains
+for backward compatibility only.
 </p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.32"></a>What's new and what changed in 1.7.32</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Export __cxa_atexit and __cxa_finalize to allow C++ standards-compliant
 destructor handling in libstdc++ and g++ compiled code.
