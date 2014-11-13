@@ -1,5 +1,41 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin 1.7</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin 1.7</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin 1.7</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.32"></a>What's new and what changed in 1.7.32</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.33"></a>What's new and what changed in 1.7.33</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+/proc/cygdrive is a new symlink pointing to the current cygdrive prefix.
+This can be utilized in scripts to access paths via cygdrive prefix,
+even if the cygdrive prefix has been changed by the user.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+/proc/partitions now prints the windows mount points the device is
+mounted on.  This allows to recognize the underlying Windows devices of
+the Cygwin raw device names.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New API: quotactl, designed after the Linux/BSD function, but severely
+restricted:  Windows only supports user block quotas on NTFS, no group
+quotas, no inode quotas, no time constraints.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New APIs: ffsl, ffsll (glibc extensions).
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New API: stime (SVr4).
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Provide Cygwin documentation (PDFs and HTML) for offline usage in
+<code class="filename">/usr/share/doc/cygwin-${version}</code>.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New internal exception handling based on SEH on 64 bit Cygwin.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+When exec'ing applications, check if $PATH exists and is non-empty.  If
+not, add PATH variable with Cygwin installation directory as content to
+Windows environment to allow loading of Cygwin system DLLs.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Disable CYGWIN "dosfilewarning" option by default.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Improve various header files for C++- and standards-compliance.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Doug Lea malloc implementation update from 2.8.3 to the latest 2.8.6.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+atexit(3) is now exported as statically linked function from libcygwin.a.
+This allows reliable access to the DSO handle of the caller for newly
+built executables.  The former atexit entry point into the DLL remains
+for backward compatibility only.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.32"></a>What's new and what changed in 1.7.32</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Export __cxa_atexit and __cxa_finalize to allow C++ standards-compliant
 destructor handling in libstdc++ and g++ compiled code.
 
@@ -9,7 +45,7 @@ enable the -fuse-cxa-atexit flag by default, and that C++ applications
 using this feature will not run on older Cygwin releases.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Support more recent CPU flags in /proc/cpuinfo.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.31"></a>What's new and what changed from 1.7.30 to 1.7.31</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.31"></a>What's new and what changed in 1.7.31</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Improve performance of send(2), sendto(2), sendmsg(2) when using small
 input buffers.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
@@ -20,12 +56,12 @@ Align pthread_attr stack functions more closely to Linux.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Mark pthread_attr_getstackaddr and pthread_attr_setstackaddr as deprecated,
 as on Linux.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.29"></a>What's new and what changed from 1.7.28 to 1.7.29</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.29"></a>What's new and what changed in 1.7.29</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Allow quoting of arguments to the CYGWIN environment variable, i.e.,
 set CYGWIN=error_start="c:\bin\someprogram -T"
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Console screen clearing works more like xterm or mintty.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.28"></a>What's new and what changed from 1.7.27 to 1.7.28</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.28"></a>What's new and what changed in 1.7.28</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 popen now supports the Glibc 'e' flag to set the FD_CLOEXEC flag on the pipe
 in a thread-safe way.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
@@ -34,12 +70,12 @@ New netinet/ip6.h header.
 Switch to BSD FILE stream fopen/exit semantics, as in all BSD variants
 and Linux/GLibc:  Don't fflush/lseek a FILE stream on fclose and exit,
 if it only has been read from.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.27"></a>What's new and what changed from 1.7.26 to 1.7.27</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.27"></a>What's new and what changed in 1.7.27</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Don't create native symlinks with target paths having long path prefixes
 "\\?\" if the target path is shorter than MAX_PATH characters.  This works
 around a Windows 8.1 bug:  The ShellExecuteW fails if the lpFile parameter
 points to a native NTFS symlink with a target path prefixed with "\\?\".
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.26"></a>What's new and what changed from 1.7.25 to 1.7.26</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.26"></a>What's new and what changed in 1.7.26</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 getaddrinfo now supports glibc-specific International Domain Name (IDN)
 extension flags: AI_IDN, AI_CANONIDN, AI_IDN_ALLOW_UNASSIGNED,
 AI_IDN_USE_STD3_ASCII_RULES.
@@ -59,18 +95,18 @@ The header /usr/include/exceptions.h, containing implementation details for
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Preliminary, experimental support of the posix_spawn family of functions.
 New associated header /usr/include/spawn.h.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.25"></a>What's new and what changed from 1.7.24 to 1.7.25</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.25"></a>What's new and what changed in 1.7.25</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Change magic number associated with process information block so that 32-bit
 Cygwin processes don't try to interpret 64-bit information and vice-versa.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Redefine content of mtget tape info struct to allow fetching the number of
 partitions on a tape.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.24"></a>What's new and what changed from 1.7.23 to 1.7.24</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.24"></a>What's new and what changed in 1.7.24</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Allow application override of posix_memalign.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.23"></a>What's new and what changed from 1.7.22 to 1.7.23</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.23"></a>What's new and what changed in 1.7.23</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Added CYGWIN environment variable keyword "wincmdln" which causes Cygwin to
 send the full windows command line to any subprocesses.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.22"></a>What's new and what changed from 1.7.21 to 1.7.22</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.22"></a>What's new and what changed in 1.7.22</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Support for /dev/mem, /dev/kmem and /dev/port removed, since OS support
 was limited to 32 bit Windows XP only.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
@@ -80,9 +116,9 @@ Added cygwin GetCommandLine wrappers which will allow Cygwin programs to
 regcomp(3) now allows character values &gt;= 0x80 if the current codeset is
 ASCII (default codeset in the "C"/"POSIX" locale).  This allows patterns
 containing arbitrary byte values as GLibc's regcomp.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.21"></a>What's new and what changed from 1.7.20 to 1.7.21</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.21"></a>What's new and what changed in 1.7.21</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 New API: rawmemchr.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.19"></a>What's new and what changed from 1.7.18 to 1.7.19</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.19"></a>What's new and what changed in 1.7.19</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Drop support for Windows 2000 and Windows XP pre-SP3.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Add support for building a 64 bit version of Cygwin on x86_64 natively.
@@ -98,7 +134,7 @@ locking semantics.  New F_LCK_MANDATORY fcntl command.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 New APIs: __b64_ntop, __b64_pton, arc4random, arc4random_addrandom,
 arc4random_buf, arc4random_stir, arc4random_uniform.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.18"></a>What's new and what changed from 1.7.17 to 1.7.18</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>Added Windows console cursor appearance support.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.18"></a>What's new and what changed in 1.7.18</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>Added Windows console cursor appearance support.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
   Show/Hide Cursor mode (DECTCEM): "ESC[?25h" / "ESC[?25l"
   </p></li><li class="listitem" style="list-style-type: disc"><p>
   Set cursor style (DECSCUSR): "ESC[n q" (note the space before the q);
@@ -110,27 +146,27 @@ For performance reasons, Cygwin does not try to create sparse files
 automatically anymore, unless you use the new "sparse" mount option.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 New API: cfsetspeed.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.17"></a>What's new and what changed from 1.7.16 to 1.7.17</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.17"></a>What's new and what changed in 1.7.17</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Support the "e" flag to fopen(3).  This is a Glibc extension which
 allows to fopen the file with the O_CLOEXEC flag set.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Support the "x" flag to fopen(3).  This is a Glibc/C11 extension which
 allows to open the file with the O_EXCL flag set.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.16"></a>What's new and what changed from 1.7.15 to 1.7.16</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.16"></a>What's new and what changed in 1.7.16</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 New API: getmntent_r, memrchr.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Recognize ReFS filesystem.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.15"></a>What's new and what changed from 1.7.14 to 1.7.15</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.15"></a>What's new and what changed in 1.7.15</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 CYGWIN=pipe_byte option now forces the opening of pipes in byte mode rather than message mode.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.14"></a>What's new and what changed from 1.7.13 to 1.7.14</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.14"></a>What's new and what changed in 1.7.14</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Add mouse reporting modes 1005, 1006 and 1015 to console window.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.13"></a>What's new and what changed from 1.7.12 to 1.7.13</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.13"></a>What's new and what changed in 1.7.13</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 mkpasswd and mkgroup now try to print an entry for the TrustedInstaller
 account existing since Windows Vista/Server 2008.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Terminal typeahead when switching from canonical to non-canonical mode
 is now properly flushed.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.12"></a>What's new and what changed from 1.7.11 to 1.7.12</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.12"></a>What's new and what changed in 1.7.12</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Cygwin now automatically populates the /dev directory with all existing
 POSIX devices.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
@@ -149,7 +185,7 @@ flock now additionally supports the following scenario, which requires
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Add a "detect_bloda" setting for the CYGWIN environment variable to help
 finding potential BLODAs.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.11"></a>What's new and what changed from 1.7.10 to 1.7.11</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.11"></a>What's new and what changed in 1.7.11</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 New <span class="command"><strong>pldd</strong></span> command for listing DLLs loaded by a process.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 New API: scandirat.
@@ -160,7 +196,7 @@ unavailable, don't show it in the cygdrive directory listing.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Raise default stacksize of pthreads from 512K to 1 Meg.  It can still be
 changed using the pthread_attr_setstacksize call.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.10"></a>What's new and what changed from 1.7.9 to 1.7.10</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.10"></a>What's new and what changed in 1.7.10</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Drop support for Windows NT4.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 The CYGWIN environment variable options "envcache", "strip_title", "title",
@@ -232,9 +268,9 @@ conversion flag.
 Other new API: clock_settime, __fpurge, getgrouplist, get_current_dir_name,
 getpt, ppoll, psiginfo, psignal, ptsname_r, sys_siglist, pthread_setschedprio,
 pthread_sigqueue, sysinfo.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.9"></a>What's new and what changed from 1.7.8 to 1.7.9</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.9"></a>What's new and what changed in 1.7.9</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 New API: strchrnul.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.8"></a>What's new and what changed from 1.7.7 to 1.7.8</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.8"></a>What's new and what changed in 1.7.8</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Drop support for Windows NT4 prior to Service Pack 4.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Reinstantiate Cygwin's ability to delete an empty directory which is the
@@ -278,7 +314,7 @@ bash$ cd /proc/sys/Device/HarddiskVolumeShadowCopy1/
 Other new APIs: llround, llroundf, madvise, pthread_yield.
 Export program_invocation_name, program_invocation_short_name.
 Support TIOCGPGRP, TIOCSPGRP ioctls.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.7"></a>What's new and what changed from 1.7.6 to 1.7.7</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.7"></a>What's new and what changed in 1.7.7</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Partially revert the 1.7.6 change to set the Win32 current working directory
 (CWD) always to an invalid directory, since it breaks backward compatibility
 too much.  The Cygwin CWD and the Win32 CWD are now kept in sync again, unless
@@ -291,7 +327,7 @@ See the <a class="ulink" href="http://www.microsoft.com/technet/security/advisor
 Allow to link against -lbinmode instead of /lib/binmode.o.  Same for
 -ltextmode, -ltextreadmode and -lautomode. 
 See <a class="xref" href="using-textbinary.html#textbin-devel" title="Programming">the section called “Programming”</a> for details.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.6"></a>What's new and what changed from 1.7.5 to 1.7.6</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.6"></a>What's new and what changed in 1.7.6</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Add new mount options "dos" and "ihash" to allow overriding Cygwin default
 behaviour on broken filesystems not recognized by Cygwin.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
@@ -322,16 +358,16 @@ clock_gettime(3) and clock_getres(3) accept CLOCK_MONOTONIC.
 DEPRECATED with 1.7.7: Cygwin handles the current working directory entirely
 on its own.  The Win32 current working directory is set to an invalid path to
 be out of the way.  [...]
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.5"></a>What's new and what changed from 1.7.3 to 1.7.5</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.5"></a>What's new and what changed in 1.7.5</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Support for DEC Backarrow Key Mode escape sequences (ESC [ ? 67 h, ESC [ ? 67 l)
 in Windows console.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.3"></a>What's new and what changed from 1.7.2 to 1.7.3</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.3"></a>What's new and what changed in 1.7.3</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Support for GB2312/EUC-CN.  These charsets are implemented as aliases to GBK.
 GB2312 is now the default charset name for the locales zh_CN and zh_SG, just
 as on Linux.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Modification and access timestamps of devices reflect the current time.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.2"></a>What's new and what changed from 1.7.1 to 1.7.2</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>Localization support has been much improved.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.2"></a>What's new and what changed in 1.7.2</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>Localization support has been much improved.</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
   Cygwin now handles locales using the underlying Windows locale
   support.  The locale must exist in Windows to be recognized.
   Locale aliases from the file /usr/share/locale/locale.alias are also
@@ -413,12 +449,12 @@ as defined by RFCs 1014, 1832, and 4506.  The XDR protocol and
 functions are useful for cross-platfrom data exchange, and are
 commonly used as the core data interchange format for Remote
 Procedure Call (RPC) and NFS.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-os"></a>OS related changes</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.1"></a>What's new and what changed from 1.5 to 1.7</h3></div></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ov-new1.7-os"></a>OS related changes</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Windows 95, 98 and Me are not supported anymore.  The new Cygwin 1.7 DLL
 will not run on any of these systems.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Add support for Windows 7 and Windows Server 2008 R2.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-file"></a>File Access related changes</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ov-new1.7-file"></a>File Access related changes</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Mount points are no longer stored in the registry.  Use /etc/fstab and
 /etc/fstab.d/$USER instead.  Mount points created with mount(1) are only
 local to the current session and disappear when the last Cygwin process
@@ -532,7 +568,7 @@ renameat, symlinkat, unlinkat.
 Other new APIs: posix_fadvise, posix_fallocate, funopen, fopencookie,
 open_memstream, open_wmemstream, fmemopen, fdopendir, fpurge, mkstemps,
 eaccess, euidaccess, canonicalize_file_name, fexecve, execvpe.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-net"></a>Network related changes</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ov-new1.7-net"></a>Network related changes</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 New implementation for blocking sockets and select on sockets which is
 supposed to allow POSIX-compatible sharing of sockets between threads
 and processes.
@@ -572,7 +608,7 @@ iruserok_sa, rcmd_af, rresvport_af.  getifaddrs, freeifaddrs,
 if_nametoindex, if_indextoname, if_nameindex, if_freenameindex.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Add /proc/net/if_inet6.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-device"></a>Device related changes</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ov-new1.7-device"></a>Device related changes</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Reworked pipe implementation which uses overlapped IO to create more
 reliable interruptible pipes and fifos.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
@@ -597,7 +633,7 @@ Support up to 128 raw disk drives /dev/sda - /dev/sddx.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 New API: cfmakeraw, get_avphys_pages, get_nprocs, get_nprocs_conf,
 get_phys_pages, posix_openpt.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-posix"></a>Other POSIX related changes</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ov-new1.7-posix"></a>Other POSIX related changes</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 A lot of character sets are supported now via a call to setlocale().
 The setting of the environment variables $LANG, $LC_ALL or $LC_CTYPE
 will be used.  For instance, setting $LANG to "de_DE.ISO-8859-15" before
@@ -635,7 +671,7 @@ fputwc, fputws, fwide, getwc, getwchar, putwc, putwchar, ungetwc,
 asnprintf, dprintf, vasnprintf, vdprintf, wprintf, fwprintf, swprintf,
 vwprintf, vfwprintf, vswprintf, wscanf, fwscanf, swscanf, vwscanf,
 vfwscanf, vswscanf.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-sec"></a>Security related changes</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ov-new1.7-sec"></a>Security related changes</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Getting a domain user's groups is hopefully more bulletproof now.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Cygwin now comes with a real LSA authentication package.  This must be
@@ -652,7 +688,7 @@ other machines.
 New options have been added to the mkpasswd and mkgroup tools to ease
 use in multi-machine and multi-domain environments.  The existing
 options have a slightly changed behaviour.
-</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7-misc"></a>Miscellaneous</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+</p></li></ul></div></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ov-new1.7-misc"></a>Miscellaneous</h4></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 New ldd utility, similar to Linux.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 New link libraries libdl.a, libresolv.a, librt.a.
@@ -707,4 +743,4 @@ DLLs are running in different namespaces.
 Each Cygwin DLL stores its path and installation key in the registry.
 This allows troubleshooting of problems which could be a result of
 having multiple concurrent Cygwin installations.
-</p></li></ul></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="overview.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Highlights of Cygwin Functionality </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 2. Setting Up Cygwin</td></tr></table></div></body></html>
+</p></li></ul></div></div></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="overview.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Highlights of Cygwin Functionality </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> Chapter 2. Setting Up Cygwin</td></tr></table></div></body></html>
