@@ -313,7 +313,8 @@ $ startx /usr/bin/fvwm2
 Notes for advanced users
 
    Advanced users may wish to start the X server by invoking XWin
-   directly, for example, to start XDMCP sessions.
+   directly, for example, to start XDMCP sessions (See the Section called
+   Remote sessions via XDMCP).
 
    If you want to have a Start Menu shortcut which runs startxwin with
    custom options, you should use a copy of the Start Menu shortcut
@@ -593,15 +594,15 @@ Remote sessions via XDMCP
      Note: XDMCP suffers from some of the same security problems noted in
      the previous section, but unfortunately cannot be tunnelled over ssh
      due to it's use of UDP. A similar effect can be achieved with a
-     command like ssh -Y remote_hostname_or_ip_address_1 Xnest :1 -query
+     command like ssh -Y remote_hostname_or_ip_address Xnest :1 -query
      localhost
      __________________________________________________________________
 
 OpenGL (GLX)
 
-     Note: Accelerated OpenGL is still under active development and
-     should be considered beta quality, but should be working well enough
-     to be useful. Please report problems with specific OpenGL
+     Note: Hardware-accelerated OpenGL is still under active development
+     and should be considered beta quality, but should be working well
+     enough to be useful. Please report problems with specific OpenGL
      applications to the cygwin-xfree mailing list.
 
    The Cygwin/X X Server supports both software OpenGL rendering (using
@@ -610,11 +611,13 @@ OpenGL (GLX)
 
    The X server command line options -wgl and -nowgl turn on and off the
    use of the native Windows OpenGL implementation. Currently -wgl is only
-   supported in multiwindow mode, and is on by default in that mode.
+   supported in multiwindow mode, and is on by default in that mode. -wgl
+   has no effect if your display driver does not support
+   hardware-accelerated OpenGL.
 
    Table 4-1. Summary of OpenGL rendering options
 
-      software rendering ^a
+   software rendering ^a
 
    hardware-accelerated rendering
 
@@ -631,13 +634,13 @@ OpenGL (GLX)
    export LIBGL_ALWAYS_INDIRECT=1
 
    direct
-   unset LIBGL_ALWAYS_INDIRECT
+
 
    start server with -wgl option
 
    export LIBGL_USE_WGL=1 ^b
 
-   unset LIBGL_ALWAYS_INDIRECT
+   (local clients only)
    Notes:
    a. The software renderer used (e.g. llvmpipe, softpipe) can be selected
    using the GALLIUM_DRIVER environment variable.
@@ -647,18 +650,21 @@ OpenGL (GLX)
    the default and export LIBGL_ALWAYS_SOFTWARE=1 will be required to
    force software rendering.
 
-   Currently, in multiwindow mode, the default configurations are:
-     * For local clients the default is indirect, hardware-accelerated
-       rendering, as -wgl is on by default, and LIBGL_ALWAYS_INDIRECT is
-       set by a profile.d file installed by mesa.
+   Currently the default configurations are:
+     * For local clients the default is direct, software rendering.
+       To use the experimental direct, hardware-accelerated rendering, you
+       must do export LIBGL_USE_WGL=1 before starting the client
+       application.
      * For remote clients, Mesa's libGL prefers to use client-side
        software rendering and then transfer the rendered image to the
-       server. To force indirect rendering (which takes place on the
-       server), you must do export LIBGL_ALWAYS_INDIRECT=1 before starting
-       the client application. There is a performance trade-off between
-       rendering performance and network latency, so you should try both
-       direct and indirect rendering and see which performs best in your
-       specific circumstances.
+       server.
+       To force indirect rendering (which takes place on the server), you
+       must do export LIBGL_ALWAYS_INDIRECT=1 before starting the client
+       application.
+       There is a performance trade-off between rendering performance and
+       network latency, so you might wish to try both direct and indirect
+       rendering and see which performs best in your specific
+       circumstances.
 
    If glxinfo | grep OpenGL outputs something mentioning your graphics
    card vendor, you have hardware-accelerated rendering. If it mentions
@@ -1196,7 +1202,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2014-10-10 19:45 .
+   at 2014-11-17 11:10 .
 
   Notes
 

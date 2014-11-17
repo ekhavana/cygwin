@@ -81,7 +81,7 @@ CLASS="note"
 ><B
 >Note: </B
 >
-Accelerated OpenGL is still under active development and should be considered
+Hardware-accelerated OpenGL is still under active development and should be considered
 beta quality, but should be working well enough to be useful.  Please report
 problems with specific OpenGL applications to the cygwin-xfree mailing list.
 </P
@@ -108,11 +108,17 @@ CLASS="parameter"
 >-wgl</CODE
 > is only supported in multiwindow mode, and
 is on by default in that mode.
+
+<CODE
+CLASS="parameter"
+>-wgl</CODE
+> has no effect if your display driver does not
+support hardware-accelerated OpenGL.
 </P
 ><DIV
 CLASS="table"
 ><A
-NAME="AEN620"
+NAME="table-opengl-rendering-options"
 ></A
 ><P
 ><B
@@ -202,11 +208,7 @@ CLASS="command"
 >
         </TD
 ><TD
->&#13;          <B
-CLASS="command"
->unset LIBGL_ALWAYS_INDIRECT</B
->
-        </TD
+>&nbsp;</TD
 ><TD
 >&#13;          <P
 >&#13;            start server with <CODE
@@ -226,10 +228,7 @@ CLASS="command"
           </P
 >
           <P
->&#13;            <B
-CLASS="command"
->unset LIBGL_ALWAYS_INDIRECT</B
->
+>&#13;            (local clients only)
           </P
 >
         </TD
@@ -239,13 +238,13 @@ CLASS="command"
 ><TD
 COLSPAN="3"
 >Notes:<BR/><A
-NAME="FTN.AEN632"
+NAME="FTN.AEN634"
 >a. </A
 >
                 The software renderer used (e.g. llvmpipe, softpipe) can be
                 selected using the GALLIUM_DRIVER environment variable.
               <BR/><A
-NAME="FTN.AEN661"
+NAME="FTN.AEN662"
 >b. </A
 >
                 Since direct accelerated rendering is currently experimental,
@@ -262,33 +261,37 @@ CLASS="command"
 ></TABLE
 ></DIV
 ><P
->&#13;  Currently, in multiwindow mode, the default configurations are:
+>&#13;Currently the default configurations are:
 <UL
 ><LI
 ><P
->&#13;For local clients the default is indirect, hardware-accelerated rendering, as
-<CODE
-CLASS="parameter"
->-wgl</CODE
-> is on by default, and LIBGL_ALWAYS_INDIRECT is set
-by a <TT
-CLASS="filename"
->profile.d</TT
-> file installed by mesa.
+>&#13;For local clients the default is direct, software rendering.
+</P
+><P
+>&#13;To use the experimental direct, hardware-accelerated rendering, you must do
+<B
+CLASS="command"
+>export LIBGL_USE_WGL=1</B
+> before starting the client
+application.
 </P
 ></LI
 ><LI
 ><P
 >&#13;For remote clients, Mesa's libGL prefers to use client-side software rendering
-and then transfer the rendered image to the server.  To force indirect rendering
+and then transfer the rendered image to the server.
+</P
+><P
+>&#13;To force indirect rendering
 (which takes place on the server), you must do <B
 CLASS="command"
 >export
 LIBGL_ALWAYS_INDIRECT=1</B
 > before starting the client application.
-
-There is a performance trade-off between rendering performance and network
-latency, so you should try both direct and indirect rendering and see which
+</P
+><P
+>&#13;There is a performance trade-off between rendering performance and network
+latency, so you might wish to try both direct and indirect rendering and see which
 performs best in your specific circumstances.
 </P
 ></LI
