@@ -1,5 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.33"></a>What's new and what changed in 1.7.33</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.34"></a>What's new and what changed in 1.7.34</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Cygwin can now generate passwd/group entries directly from Windows user
 databases (local SAM or Active Directory), thus allowing to run Cygwin
 without having to create /etc/passwd and /etc/group files.  Introduce
@@ -14,6 +14,21 @@ the entries read from SAM/AD.
 Add -b/--remove-all option to setfacl to reduce the ACL to only the entries
 representing POSIX permission bits.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
+Revamp Solaris ACL implementation to more closely work like POSIX ACLs
+are supposed to work.  Finally implement a CLASS_OBJ emulation.  Update
+getfacl(1)/setfacl(1) accordingly.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+The xdr functions are no longer exported for newly built executables.
+Use libtirpc-devel instead.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+32 bit only: Change default values for socket buffer size to raise
+performance on 10Gb networks.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+When spawning a process under another user account, merge the user's
+default Windows environment into the new process' environment.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New APIs: qsort_r, __bsd_qsort_r.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.33"></a>What's new and what changed in 1.7.33</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 /proc/cygdrive is a new symlink pointing to the current cygdrive prefix.
 This can be utilized in scripts to access paths via cygdrive prefix,
 even if the cygdrive prefix has been changed by the user.
@@ -35,10 +50,6 @@ Provide Cygwin documentation (PDFs and HTML) for offline usage in
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 New internal exception handling based on SEH on 64 bit Cygwin.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
-Revamp Solaris ACL implementation to more closely work like POSIX ACLs
-are supposed to work.  Finally implement a CLASS_OBJ emulation.  Update
-getfacl(1)/setfacl(1) accordingly.
-</p></li><li class="listitem" style="list-style-type: disc"><p>
 When exec'ing applications, check if $PATH exists and is non-empty.  If
 not, add PATH variable with Cygwin installation directory as content to
 Windows environment to allow loading of Cygwin system DLLs.
@@ -48,9 +59,6 @@ Disable CYGWIN "dosfilewarning" option by default.
 Improve various header files for C++- and standards-compliance.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Doug Lea malloc implementation update from 2.8.3 to the latest 2.8.6.
-</p></li><li class="listitem" style="list-style-type: disc"><p>
-The xdr functions are no longer exported for newly built executables.
-Use libtirpc-devel instead.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 atexit(3) is now exported as statically linked function from libcygwin.a.
 This allows reliable access to the DSO handle of the caller for newly
