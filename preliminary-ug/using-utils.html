@@ -1260,6 +1260,8 @@ Modify file and directory access control lists (ACLs)
   -d, --delete     delete one or more specified ACL entries
   -f, --file       set ACL entries for FILE to ACL entries read
                    from a ACL_FILE
+  -k, --remove-default
+		   remove all default ACL entries
   -m, --modify     modify one or more specified ACL entries
   -r, --replace    replace mask entry with maximum permissions
                    needed for the file group class
@@ -1268,7 +1270,7 @@ Modify file and directory access control lists (ACLs)
   -h, --help       output usage information and exit
   -V, --version    output version information and exit
 
-At least one of (-b, -d, -f, -m, -s) must be specified
+At least one of (-b, -d, -f, -k, -m, -s) must be specified
 </pre><p> For each file given as parameter, <span class="command"><strong>setfacl</strong></span> will
       either replace its complete ACL (<code class="literal">-s</code>,
       <code class="literal">-f</code>), or it will add, modify, or delete ACL entries.
@@ -1316,7 +1318,8 @@ $ getfacl source_file | setfacl -f - target_file
       file group class of the file, and no duplicate user or group entries with
       the same uid/gid. </p><p> If it is a directory: one default user entry for the owner of the
       file, one default group entry for the group of the file, one default mask
-      entry for the file group class, and one default other entry. </p><p> <code class="literal">-m</code> Add or modify one or more specified ACL
+      entry for the file group class, and one default other entry. </p><p> <code class="literal">-k</code> Remove all default ACL entries. If no default
+      ACL entries exist, no warnings are issued. </p><p> <code class="literal">-m</code> Add or modify one or more specified ACL
       entries. Acl_entries is a comma-separated list of entries from the same
       list as above. </p><p> <code class="literal">-r</code> Causes the permissions specified in the mask
       entry to be ignored and replaced by the maximum permissions needed for

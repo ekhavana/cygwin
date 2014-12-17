@@ -168,24 +168,7 @@ new mount points, and the <span class="command"><strong>umount</strong></span> t
 them.  However, since they are only stored in memory, these mount
 points will disappear as soon as your last Cygwin process ends.
 See <a class="xref" href="using-utils.html#mount" title="mount">the section called “mount”</a> and <a class="xref" href="using-utils.html#umount" title="umount">the section called “umount”</a> for more
-information.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
-When you upgrade an existing older Cygwin installation to Cygwin 1.7,
-your old system mount points (stored in the HKEY_LOCAL_MACHINE branch
-of your registry) are read by a script and the <code class="filename">/etc/fstab</code>
-file is generated from these entries.  Note that entries for
-<code class="filename">/</code>, <code class="filename">/usr/bin</code>, and
-<code class="filename">/usr/lib</code> are <span class="bold"><strong>never</strong></span>
-generated.
-</p><p>
-The old user mount points in your HKEY_CURRENT_USER branch of the registry
-are not used to generate <code class="filename">/etc/fstab</code>.  If you want
-to create a user specific <code class="filename">/etc/fstab.d/${USER}</code> file
-from your old entries, there's a script available which does exactly
-that for you, <code class="filename">/bin/copy-user-registry-fstab</code>.  Just
-start the script and it will create your user specific fstab file.  Stop
-all your Cygwin processes and restart them, and you can simply use your
-old user mount points as before.
-</p></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="unc-paths"></a>UNC paths</h3></div></div></div><p>Apart from the unified POSIX tree starting at the <code class="filename">/</code>
+information.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="unc-paths"></a>UNC paths</h3></div></div></div><p>Apart from the unified POSIX tree starting at the <code class="filename">/</code>
 directory, UNC pathnames starting with two slashes and a server name
 (<code class="filename">//machine/share/...</code>) are supported as well.
 They are handled as POSIX paths if only containing forward slashes.  There's
