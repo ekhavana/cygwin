@@ -10,7 +10,6 @@ use URI::Escape;
 use constant {MAXMATCHES => 30};
 
 sub addfn($);
-sub findheader($$$);
 sub include_virtual(@);
 sub myprint(@);
 sub wakey($);
@@ -69,15 +68,16 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
     chdir "$Bin/../packages";
     my $truncated_search = 0;
     opendir my ($archdfd), $arch;
-    for my $dir (sort readdir $archdfd) {
+    my $regexp = qr/$grep/om;
+    for my $dir (readdir $archdfd) {
 	next if substr($dir, 0, 1) eq '.';
 	$dir = "$arch/$dir";
 	opendir my $reldfd, "$dir" or next;	# presumably not a directory
-	for my $f (sort readdir $reldfd) {
+	for my $f (readdir $reldfd) {
 	    $f = "$dir/$f";
 	    local $/;
 	    open my $fd, '<', $f or next;
-	    addfn $f if <$fd> =~ /$grep/om;
+	    addfn $f if <$fd> =~ $regexp;
 	    close $fd;
 	}
 	closedir $reldfd;
@@ -112,9 +112,12 @@ if ($@ || $grep =~ m!\\\.\\\.!o) {
 	$end = "</li>\n";
     }
     for my $p (sort keys %::packages) {
+        my $header = ($index =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '';
+        $header = "Debug information for $header" if $p =~ s/-debuginfo$//;
 	for my $f (@{$::packages{$p}}) {
+            $header = "Source code for $header" if $f =~ /-src$/o;
 	    save @toprint, $start . '<a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		 $uri_esc_grep . '">' . basename($f) . '</a> - ' . findheader($text, $p, $f) . $end;
+		 $uri_esc_grep . '">' . basename($f) . '</a> - ' . $header . $end;
 	}
     }
     push @toprint, "</ul>\n" if !$text;
@@ -143,17 +146,6 @@ print "<h3>HUH $1</h3>" if $debug;
 	push @{$::packages{$1}}, $_[0];
 	$::count++;
     }
-}
-
-sub findheader($$$) {
-    my $text = shift;
-    my $p = shift;
-    my $f = shift;
-    my $debuginfo = $p =~ s/-debuginfo$//;
-    my $header = ($index =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '';
-    $header = "Debug information for $header" if $debuginfo;
-    $header = "Source code for $header" if $f =~ /-src$/o;
-    return $header;
 }
 
 sub include_virtual(@) {
