@@ -718,7 +718,13 @@ definition.
 	      
 	      <div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">%u</code></span></dt><dd>The Cygwin username (that's lowercase
 			    <code class="literal">u</code>).</dd><dt><span class="term"><code class="literal">%U</code></span></dt><dd>The Windows username (that's uppercase
-			    <code class="literal">U</code>).</dd><dt><span class="term"><code class="literal">%D</code></span></dt><dd>Windows domain in NetBIOS style.</dd><dt><span class="term"><code class="literal">%_</code></span></dt><dd>Since space and TAB characters are used to separate
+			    <code class="literal">U</code>).</dd><dt><span class="term"><code class="literal">%D</code></span></dt><dd>Windows domain in NetBIOS style.</dd><dt><span class="term"><code class="literal">%H</code></span></dt><dd>Windows home directory in POSIX style.  Note that,
+			    for the <code class="literal">db_home:</code> setting, this
+			    only makes sense right after the preceeding slash,
+			    as in
+<pre class="screen">
+db_home:  /%H/cygwin
+</pre></dd><dt><span class="term"><code class="literal">%_</code></span></dt><dd>Since space and TAB characters are used to separate
 			    the schemata, a space in the filename has to be
 			    given as <code class="literal">%_</code> (that's an
 			    underscore).</dd><dt><span class="term"><code class="literal">%%</code></span></dt><dd>A per-cent character.</dd></dl></div><p>Any other <code class="literal">%X</code> expression is treated as if
@@ -732,13 +738,11 @@ member of the user's passwd entry.  The following list describes the meaning
 of each schema when used with <code class="literal">db_home:</code>
 </p><div class="variablelist"><dl class="variablelist"><dt><span class="term"><code class="literal">windows</code></span></dt><dd>The user's home directory is set to the same directory which is
 	      used as Windows home directory.  This is the
-	      <code class="literal">homeDrive</code> AD attribute if set, or the
-	      <code class="literal">homeDirectory</code> AD attribute if
-	      <code class="literal">homeDrive</code> is not set.  For SAM accounts,
-	      this is equivalent to the "Home folder" setting in SAM.
-	      If both attributes are unset, Cygwin falls back to the user's
-	      local profile directory, typically something along the lines
-	      of <code class="filename">C:\Users\$USERNAME</code>.  Of course, the
+<code class="literal">homeDirectory</code> AD attribute.
+	      For SAM accounts, this is equivalent to the "Home folder" setting
+	      in SAM.  If both attributes are unset, Cygwin falls back to the
+	      user's local profile directory, typically something along the
+	      lines of <code class="filename">C:\Users\$USERNAME</code>.  Of course, the
 	      Windows directory is converted to POSIX-style by Cygwin.
 	      </dd><dt><span class="term"><code class="literal">cygwin</code></span></dt><dd>AD only: The user's home directory is set to the POSIX path given
 	      in the <code class="literal">cygwinHome</code> attribute from the
@@ -1194,7 +1198,7 @@ example:</p><pre class="screen">
     /* Use standard method on non-Cygwin systems. */
     hashed_password = crypt (cleartext_password, salt);
     if (!user_pwd_entry ||
-        strcmp (hashed_password, user_pwd_entry-&gt;pw_password))
+        strcmp (hashed_password, user_pwd_entry-&gt;pw_passwd))
       error_exit;
 #endif /* CYGWIN */
 
