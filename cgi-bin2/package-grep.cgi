@@ -21,6 +21,11 @@ my $html = new CGI;
 $CGI::POST_MAX = 64;
 $CGI::DISABLE_UPLOADS = 1;
 
+# renice/iostat ourselves down to oblivion
+system("ionice -c 3 -n 7 -p $$ >/dev/null 2>&1");
+system("renice -n 19 -p $$ >/dev/null 2>&1");
+
+
 # Get our data
 my $grep = $html->param('grep');
 my $text = $html->param('text');
