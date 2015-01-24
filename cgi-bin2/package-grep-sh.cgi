@@ -32,7 +32,7 @@ urlencode() {
 
 
 # defaults
-param_grep=.
+param_grep=
 param_text=
 param_arch=x86
 
@@ -78,7 +78,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     cat ../navbar.html
     cat ../top.html # opens <div>
     echo '<h1>Cygwin Package Search</h1>
-<form method="GET" action="//cygwin.com/cgi-bin2/package-grep.cgi">
+<form method="GET" action="//cygwin.com/cgi-bin2/package-grep-sh.cgi">
 Search package contents for a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern,
 or view the <a href="https://cygwin.com/packages/package_list.html">full list</a> of packages<br>
 <input type="text" size=40 name="grep" value="'$param_grep_htmlencode'">
@@ -109,7 +109,11 @@ fi
 
 tmpfile=`mktemp`
 trap 'rm -f $tmpfile' 0 1 2 3 4 5 9 15
-egrep -l "$param_grep" $dir/*/* > "$tmpfile"
+if [ -n "$param_grep" ]; then
+    egrep -l "$param_grep" $dir/*/* > "$tmpfile"
+else
+    touch "$tmpfile"
+fi
 
 
 ############################## report
