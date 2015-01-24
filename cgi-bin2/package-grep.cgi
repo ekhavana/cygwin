@@ -1,187 +1,169 @@
-#!/usr/bin/perl
+#! /bin/bash
 
-use strict;
-use CGI;
-use File::Basename;
-use HTML::TreeBuilder;
-use LWP::Simple;
-use URI::Escape;
+############################## reduce self priority
 
-use constant {MAXMATCHES => 30};
+ionice -c 3 -p $$ >/dev/null 2>&1
+renice -n 19 -p $$ >/dev/null 2>&1
 
-sub addfn($);
-sub include_virtual(@);
-sub myprint(@);
-sub wakey($);
-sub save(\@@);
+############################## decode parameters
 
-# Create one of our Objects
-my $html = new CGI;
+urldecode() {
+# urldecode <string>
+    local url_encoded="${1//+/ }"
+    printf '%b' "${url_encoded//%/\x}"
+} 
 
-$CGI::POST_MAX = 64;
-$CGI::DISABLE_UPLOADS = 1;
-
-# renice/iostat ourselves down to oblivion
-system("ionice -c 3 -n 7 -p $$ >/dev/null 2>&1");
-system("renice -n 19 -p $$ >/dev/null 2>&1");
-
-
-# Get our data
-my $grep = $html->param('grep');
-my $text = $html->param('text');
-my $arch = $html->param('arch') || 'x86';
-my $debug = $html->param('debug');
-my $uri_esc_grep = uri_escape $grep;
-my $html_esc_grep = $html->escapeHTML($grep);
-
-$::packages = ();
-$::count = 0;
-use FindBin qw($Bin);
-my @toprint;
-
-$::DUPOUT = 0;
-
-$| = 1;
-if ($text) {
-    myprint $html->header(-type=>'text/plain');
-} else {
-    myprint $html->header, $html->start_html(-title=>'Cygwin Package Search',
-					     -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
-					     -style=>'../style.css');
-    include_virtual "../navbar.html", "../top.html";
-
-    print '<h1>Cygwin Package Search</h1>';
-    print '<form method="GET" action="//cygwin.com/cgi-bin2/package-grep.cgi">';
-    print 'Search package contents for a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern, ';
-    print 'or view the <a href="https://cygwin.com/packages/package_list.html">full list</a> of packages<br>';
-    print '<input type="text" size=40 name="grep" value="' . $html_esc_grep . '">';
-    print '<input type=submit value="Go"><br>';
-    print '<input type="radio" name="arch" value="x86"'    . (($arch eq 'x86') ? 'checked="checked"' : '') . '>x86';
-    print '<input type="radio" name="arch" value="x86_64"' . (($arch ne 'x86') ? 'checked="checked"' : '') . '>x86_64';
-    print '</form>';
+htmlencode() {
+    echo "$1" | sed 's/&/\&amp;/g; s/</\&lt;/g; s/>/\&gt;/g; s/"/\&quot;/g; s/'"'"'/\&#39;/g'
 }
 
-my $index;
-$grep =~ s/^\s+|\s+$//g;
-eval '"foo" =~ /$grep/o';
-if ($@ || $grep =~ m!\\\.\\\.!o) {
-    save @toprint, $html->h3({-align=>'center'}, '*** Invalid regular expression search string: ', $html_esc_grep . "<br><br>\n");
-} elsif (length($grep)) {
-    $SIG{ALRM} = \&wakey;
-    alarm 45;
-    save @toprint, $html->h1('Search Results'), "\n" unless $text;
-    chdir "$Bin/../packages";
-    my $truncated_search = 0;
-    opendir my ($archdfd), $arch;
-    my $regexp = qr/$grep/om;
-    for my $dir (readdir $archdfd) {
-	next if substr($dir, 0, 1) eq '.';
-	$dir = "$arch/$dir";
-	opendir my $reldfd, "$dir" or next;	# presumably not a directory
-	for my $f (readdir $reldfd) {
-	    $f = "$dir/$f";
-	    local $/;
-	    open my $fd, '<', $f or next;
-	    addfn $f if <$fd> =~ $regexp;
-	    close $fd;
-	}
-	closedir $reldfd;
-    }
-    closedir $archdfd;
-
-    if (!open(INDEX, '<', "$arch/packages.inc")) {
-	%::packages = ();
-	print "<h3>empty packages?</h3>" if $debug;
-    } else {
-	local $/;
-	$index = <INDEX>;
-	close INDEX;
-	print "<h3>full packages</h3>" if $debug;
-    }
-
-    my $sp = $text ? ' ' : '&nbsp;';
-    save @toprint, ($text ? '' : $sp) . "Found <b>$::count</b> matches for <b>$html_esc_grep</b>";
-    if ($truncated_search) {
-	save @toprint, "${sp}${sp}${sp}${sp}(search truncated due to too many matches)<br><br>\n";
-    } else {
-	save @toprint, "<br><br>\n";
-    }
-    push @toprint, "<ul>\n" if !$text;
-    my $start;
-    my $end;
-    if ($text) {
-	$start = '';
-	$end = "\n";
-    } else {
-	$start = '<li>';
-	$end = "</li>\n";
-    }
-    for my $p (sort keys %::packages) {
-        my $header = ($index =~ m!^.*<a href=.*?>\Q$p\E</a>.*?<td.*?>([^><]+)<!m)[0] || '';
-        $header = "Debug information for $header" if $p =~ s/-debuginfo$//;
-	for my $f (@{$::packages{$p}}) {
-            $header = "Source code for $header" if $f =~ /-src$/o;
-	    save @toprint, $start . '<a href="package-cat.cgi?file=' . uri_escape($f) . '&grep=' .
-		 $uri_esc_grep . '">' . basename($f) . '</a> - ' . $header . $end;
-	}
-    }
-    push @toprint, "</ul>\n" if !$text;
+urlencode() {
+# urlencode <string>
+    local length="${#1}"
+    for (( i = 0; i < length; i++ )); do
+	local c="${1:i:1}"
+	case $c in
+	    [a-zA-Z0-9.~_-]) printf "$c" ;;
+	    *) printf '%%%02X' "'$c"
+	esac
+    done
 }
-if (!$text) {
-    push @toprint, <<'EOF';
-</div>
-</body>
-</html>
-EOF
-}
+  
 
-alarm 0;
-$SIG{ALRM} = 'DEFAULT';
-if (!$text) {
-    myprint @toprint;
-} else {
-    my $tree = HTML::TreeBuilder->new_from_content(join('', @toprint));
-    myprint $tree->as_text;
-}
-exit 0;
 
-sub addfn($) {
-    if ($_[0] =~ m!^.*?/([^/]+)/!o) {
-print "<h3>HUH $1</h3>" if $debug;
-	push @{$::packages{$1}}, $_[0];
-	$::count++;
-    }
-}
+# defaults
+param_grep=
+param_text=
+param_arch=x86
 
-sub include_virtual(@) {
-    for my $f (@_) {
-	open my $fd, '<', $f;
-	myprint <$fd>;
-	close $fd;
-    }
-}
+if [ "$QUERY_STRING" = "" ]; then
+    QUERY_STRING="&grep="
+fi
 
-sub myprint(@) {
-    print @_;
-    if ($::DUPOUT) {
-	open my $log, '>>', "/tmp/package-grep.$$";
-	print $log @_;
-	close $log;
-    }
-}
+if [ "$REQUEST_METHOD" = "GET" ]; then
+    OIFS="$IFS"
+    IFS="&"
+    set $QUERY_STRING
+    IFS="$OIFS"
 
-sub save(\@@) {
-    my $arr = shift;
-    if ($text) {
-        push(@$arr, "<pre>", @_, "</pre>");
-    } else {
-        push(@$arr, @_);
-    }
-}
+    for i in $*; do
+	key=`echo "$i" | cut -f1 -d=`
+	value=`echo "$i" | cut -f2- -d=`
+	case "$key" in
+	    grep)  param_grep=`urldecode "$value"` ;;
+	    text)  param_text=`urldecode "$value"` ;;
+	    arch)  param_arch=`urldecode "$value"` ;;
+	    *)     param_ignored=`urldecode "$value"` ;;
+	esac
+    done
+fi
 
-sub wakey($) {
-    print "<!-- ...working... -->\n";
-    $SIG{ALRM} = \&wakey;
-    alarm 45;
-}
+param_grep_htmlencode=`htmlencode "$param_grep"`
 
+
+############################## print headerstuff 
+
+if [ -n "$param_text" ]; then
+    echo "Content-Type: text/plain; charset=ISO-8859-1"
+    echo
+else
+    echo "Content-Type: text/html"
+    echo
+    echo '
+<!DOCTYPE html
+PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+ "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+<title>Cygwin Package Search</title>
+<link rel="stylesheet" type="text/css" href="../style.css" />
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+</head><body>'
+    cat ../navbar.html
+    cat ../top.html # opens <div>
+    echo '<h1>Cygwin Package Search</h1>
+<form method="GET" action="//cygwin.com/cgi-bin2/package-grep.cgi">
+Search package contents for a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern,
+or view the <a href="https://cygwin.com/packages/package_list.html">full list</a> of packages<br>
+<input type="text" size=40 name="grep" value="'$param_grep_htmlencode'">
+<input type=submit value="Go"><br>'
+    echo '<input type="radio" name="arch" value="x86" '
+    if [ "$param_arch" = "x86" ]; then echo 'checked="checked"'; fi
+    echo '>x86'
+
+    echo '<input type="radio" name="arch" value="x86_64" '
+    if [ "$param_arch" != "x86" ]; then echo 'checked="checked"'; fi
+    echo '>x86_64'
+
+    echo '</form>'
+fi
+
+
+
+############################## do the search
+
+if [ "$param_arch" = "x86" ]; then
+    dir=../packages/x86
+else
+    param_arch=x86_64
+    dir=../packages/x86_64
+fi
+
+# We don't emulate the perlre /m modifier.
+
+tmpfile=`mktemp`
+trap 'rm -f $tmpfile' 0 1 2 3 4 5 9 15
+if [ -n "$param_grep" ]; then
+    egrep -l "$param_grep" $dir/*/* > "$tmpfile"
+else
+    touch "$tmpfile"
+fi
+
+
+############################## report
+
+
+if [ -z "$param_text" ]; then
+    echo '<h1>Search Results</h1>&nbsp;Found <b>'`wc -l < "$tmpfile"`'</b>'
+    echo ' matches for <b>'$param_grep_htmlencode'</b><br><br>'
+    echo '<ul>'
+else
+    echo 'Found '`wc -l < "$tmpfile"`' matches for '$param_grep
+fi
+
+cat "$tmpfile" | while read fullfile; do
+    file=`echo $fullfile | cut -f5 -d/` # subtract ../packages/$ARCH/DIR/
+    partfile=`echo $fullfile | cut -f3- -d/` # subtract only ../packages/
+
+    basedesc=`fgrep '<h1>' "$fullfile" | cut -f2 -d'>' | cut -f1 -d'<' `
+
+#    basefile=`echo $file | rev | cut -f3- -d- | rev` # subtract -V-R, rpm-style
+#    # subtract "$file: "
+#    filechars=`echo -n $basefile | wc -c`
+#    basedesc=`echo $basedesc | cut -c${filechars}- | cut -c4-`
+#
+#    if expr "$file" : '.*-src$' >/dev/null; then
+#	desc="Source code for $basedesc"
+#    elif expr "$file" : '.*-debuginfo$' >/dev/null; then
+#	desc="Debug information for $basedesc"
+#    else
+#	desc="$basedesc"
+#    fi
+
+    desc="$basedesc"
+    
+    if [ -z "$param_text" ]; then
+	echo '<li><a href="package-cat.cgi?file='`urlencode $partfile`'&grep='`urlencode $param_grep`'">'$file'</a> - '$desc'</li>'
+    else
+	echo "$file - $desc"
+    fi
+done
+
+
+############################## footer
+
+if [ -z "$param_text" ]; then
+    echo '</ul></div></body></html>'
+else
+    true
+fi
