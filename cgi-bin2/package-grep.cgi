@@ -2,7 +2,8 @@
 
 ############################## reduce self priority
 
-ionice -c 3 -p $$ >/dev/null 2>&1
+# ionice -c 3 -p $$ >/dev/null 2>&1     # IDLE
+ionice -c 2 -n 7 -p $$ >/dev/null 2>&1  # lowest priority best-effort
 renice -n 19 -p $$ >/dev/null 2>&1
 
 ############################## decode parameters
