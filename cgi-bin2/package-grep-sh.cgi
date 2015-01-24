@@ -36,6 +36,10 @@ param_grep=
 param_text=
 param_arch=x86
 
+if [ "$QUERY_STRING" = "" ]; then
+    QUERY_STRING="&grep="
+fi
+
 if [ "$REQUEST_METHOD" = "GET" ]; then
     OIFS="$IFS"
     IFS="&"
