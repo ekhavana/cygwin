@@ -293,6 +293,14 @@ CLASS="footnote"
 ></A
 >
   </P
+><P
+>&#13;    Packages for several other desktop environments (e.g. GNOME, KDE, LXDE, ROX,
+    Sugar) are available in <A
+HREF="http://cygwinports.org/"
+TARGET="_top"
+>cygwinports.</A
+>
+  </P
 ></DIV
 ><DIV
 CLASS="sect2"
@@ -547,12 +555,22 @@ CLASS="filename"
 CLASS="filename"
 >startxwin.sh</TT
 >
-previously used to start the X server are no longer provided.  Implementing this as a script made it difficult
+previously used to start the X server are no longer provided.  This implementation made it difficult
 to reliably wait until the the X server had started before starting any clients.
 Use <TT
 CLASS="filename"
 >startxwin</TT
 > instead.
+</P
+><P
+>&#13;The executable <TT
+CLASS="filename"
+>startxwin.exe</TT
+> previously used to start the X
+server has been retired and replaced with a shell script <B
+CLASS="command"
+>startxwin</B
+>.
 </P
 ></DIV
 ></DIV
@@ -627,22 +645,39 @@ is already running and exit immediately).
 ></LI
 ><LI
 ><P
->&#13;<B
+>&#13;Note that <B
 CLASS="command"
 >startxwin</B
-> exits after <TT
-CLASS="filename"
->~/.startxwinrc</TT
-> has completed
-and leaves X running, whereas <B
-CLASS="command"
->startx</B
-> waits until
+> <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>no longer</I
+></SPAN
+> exits after
 <TT
 CLASS="filename"
->~/.xinitrc</TT
-> exits (which is usually waiting for the window manager started
-by it to exit) and then kills X.
+>~/.startxwinrc</TT
+> has completed, leaving X
+running, but, similar to <B
+CLASS="command"
+>startx</B
+>, waits until
+<TT
+CLASS="filename"
+>~/.startxwinrc</TT
+> exits and then kills X.
+</P
+><P
+>&#13;If you don't want the X server to exit until explicitly told to do so, end your
+<TT
+CLASS="filename"
+>~/.startxwinrc</TT
+> with something like <B
+CLASS="command"
+>exec sleep
+infinity</B
+>.
 </P
 ></LI
 ></UL
@@ -724,7 +759,7 @@ CLASS="screen"
 ></TR
 ></TABLE
 >
-        and then run <B
+        and then running <B
 CLASS="command"
 >startx</B
 >.

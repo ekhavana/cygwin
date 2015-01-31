@@ -1,6 +1,6 @@
 Cygwin/X Frequently Asked Questions
 
-2014-11-17 11:10
+2015-01-31 18:13
      __________________________________________________________________
 
    Table of Contents
@@ -37,7 +37,9 @@ Questions and Answers
         3.2. I upgraded my X server and now I can't type anything into any
                 X application
 
-        3.3. I can't find startxwin.bat to start the X server
+        3.3. I can't find startxwin.bat or startxwin.exe to start the X
+                server
+
         3.4. Moved question
         3.5. My favourite font has gone! The font Emacs uses is just boxes
         3.6. Where has xhost/xlsfonts/etc. gone?
@@ -52,6 +54,7 @@ Questions and Answers
                 Windows window?
 
         3.11. Moved question
+        3.12. I upgraded and now X exits immediately after starting
 
    4. Configuration
 
@@ -123,6 +126,10 @@ Questions and Answers
 
         6.5. Why can't new remote X clients connect to the X server after
                 20 minutes?
+
+        6.6. Remote clients can't connect
+        6.7. X sessions forwarded by PuTTY can't connect. Non-cygwin local
+                X clients can't connect.
 
    7. XDMCP connections
 
@@ -415,6 +422,8 @@ Questions and Answers
 
    A1:
 
+   This answer should be obsolete.
+
    Task manager shows the startxwin.exe process starting, spawning
    XWin.exe and xterm.exe, but no windows are shown. Running startxwin.exe
    from a bash shell works correctly. This is caused by having tty in the
@@ -427,7 +436,7 @@ Questions and Answers
 
    A2:
 
-   Try running startxwin.exe from a bash shell in the mintty terminal
+   Try running startxwin from a bash shell in the mintty terminal
    emulator, it should output some error message which should indicate why
    it's not able to start.
 
@@ -471,12 +480,15 @@ Questions and Answers
    simply be removed. See Q: 8.8. for the reason why you might need to set
    them.
 
-   3.3. I can't find startxwin.bat to start the X server
+   3.3. I can't find startxwin.bat or startxwin.exe to start the X server
+
+   The executable startxwin.exe previously used to start the X server has
+   been retired and replaced with a shell script startxwin.
 
    The MS-DOS batch file startxwin.bat previously used to start the X
-   server has been retired and replaced with startxwin.exe, as
-   implementing this as a script made it difficult to reliably wait until
-   the the X server had started before starting any clients.
+   server has been retired, as implementing this as a batch file made it
+   difficult to reliably wait until the the X server had started before
+   starting any clients.
 
    X.Org now uses the prefix /usr not /usr/X11R6. So startxwin.bat was
    moved from /usr/X11R6/bin/startxwin.bat to /usr/bin/startxwin.bat.
@@ -566,6 +578,26 @@ $ nedit
 
    3.11. Moved question
 
+   3.12. I upgraded and now X exits immediately after starting
+
+   Since xinit-1.3.4-1, startxwin is now implemented by a script based on
+   startx. Unfortunately, this has changed the behaviour in a
+   backwards-incompatible way, as the X server is now killed when
+   ~/.startxwinrc exits.
+
+   If you have an empty ~/.startxwinrc, you should change it to contain
+   exec sleep infinity so the X server will not exit until explicitly told
+   to do so.
+
+   If you are using a custom ~/.startxwinrc, either run the last client in
+   the foreground (i.e. without &), so the X server exits when that client
+   exits, or use exec sleep infinity as described above.
+
+   You should also make sure that ~/.startxwinrc is executable (e.g. chmod
+   +x ~/.startxwinrc).
+
+   See the announce mail for more details.
+
 4. Configuration
 
    4.1. Is there an xorg.conf or XF86Config file?
@@ -583,8 +615,8 @@ $ nedit
    To supply a command line option to X:
      * If you use the start menu shortcut to start the X server, you will
        need to amend it's target to add an option, e.g.
-       C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin
-       -- -nolock"
+       C:\cygwin\bin\run.exe --quote /usr/bin/bash.exe -l -c
+       "/usr/bin/startxwin -- -nolock"
 
      Note: Note well that the entire command after -c is quoted
 
@@ -945,7 +977,7 @@ X11Forwarding yes
 
    The warning means that ssh is going to use trusted X11 forwarding
    because untrusted X11 forwarding depends on the SECURITY extension,
-   which isn't built into the Xserver and has been disabled by default
+   which isn't built into the X server and has been disabled by default
    upstream.
 
    Trusted X11 forwarding means that you trust the server that you wish to
@@ -975,8 +1007,8 @@ X11Forwarding yes
    6.4. What does "Warning: no xauth data; using fake authentication data
    for X11 forwarding" mean?
 
-   Unless you started the server with the -auth option (typically by using
-   startx) this warning is expected and can safely be ignored.
+   Unless you started the X server with the -auth option (typically by
+   using startx) this warning is expected and can safely be ignored.
 
    6.5. Why can't new remote X clients connect to the X server after 20
    minutes?
@@ -990,6 +1022,30 @@ X11Forwarding yes
    established.
 
    Use ssh -Y. See also Q: 6.2..
+
+   6.6. Remote clients can't connect
+
+   startx and startxwin now pass -nolisten tcp to the X server by default,
+   which increases security in the X server by not opening a TCP/IP
+   socket.
+
+   Use the -listen option to the startxwin to allow the X server to open a
+   TCP/IP socket as well. See Q: 4.2..
+
+   (better) Stop explicitly allowing access using xhost or by disabling
+   access control, and stop setting DISPLAY. use ssh -Y instead. (See the
+   User's Guide section on X forwarding using ssh for more details).
+
+   6.7. X sessions forwarded by PuTTY can't connect. Non-cygwin local X
+   clients can't connect.
+
+   startx and startxwin now pass -nolisten tcp to the X server by default,
+   which increases security in the X server by not opening a TCP/IP
+   socket, only a local (UNIX domain) socket. Non-cygwin applications
+   cannot connect to that socket.
+
+   Use the -listen option to the startxwin to allow the X server to open a
+   TCP/IP socket as well. See Q: 4.2..
 
 7. XDMCP connections
 

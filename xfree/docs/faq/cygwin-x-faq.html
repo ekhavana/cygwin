@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2014-11-17 11:10</H2
+>2015-01-31 18:13</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -178,6 +178,9 @@ HREF="cygwin-x-faq.html#q-whereis-startxwin-bat"
 >I can't find <B
 CLASS="command"
 >startxwin.bat</B
+> or <B
+CLASS="command"
+>startxwin.exe</B
 > to start the X server</A
 ></DT
 ><DT
@@ -236,6 +239,11 @@ CLASS="command"
 >3.11. <A
 HREF="cygwin-x-faq.html#q-moved-2"
 >Moved question</A
+></DT
+><DT
+>3.12. <A
+HREF="cygwin-x-faq.html#q-startxwinrc-exit"
+>I upgraded and now X exits immediately after starting</A
 ></DT
 ></DL
 ></DD
@@ -445,6 +453,22 @@ HREF="cygwin-x-faq.html#q-warning-no-xauth-data"
 >6.5. <A
 HREF="cygwin-x-faq.html#q-twenty-minute-timeout"
 >&#13;Why can't new remote X clients connect to the X server after 20 minutes?
+</A
+></DT
+><DT
+>6.6. <A
+HREF="cygwin-x-faq.html#q-remote-clients-cant-connect"
+>&#13;Remote clients can't connect
+</A
+></DT
+><DT
+>6.7. <A
+HREF="cygwin-x-faq.html#q-local-noncygwin-clients-cant-connect"
+>&#13;X sessions forwarded by <B
+CLASS="command"
+>PuTTY</B
+> can't connect.
+Non-cygwin local X clients can't connect.
 </A
 ></DT
 ></DL
@@ -1494,6 +1518,8 @@ CLASS="answer"
 A1:
 </P
 ><P
+>This answer should be obsolete.</P
+><P
 >&#13;Task manager shows the <B
 CLASS="command"
 >startxwin.exe</B
@@ -1546,11 +1572,12 @@ A2:
 ><P
 >&#13;Try running <B
 CLASS="command"
->startxwin.exe</B
+>startxwin</B
 > from a <B
 CLASS="command"
 >bash</B
-> shell in the <B
+> shell
+in the <B
 CLASS="command"
 >mintty</B
 > terminal emulator,
@@ -1720,6 +1747,9 @@ NAME="q-whereis-startxwin-bat"
 >I can't find <B
 CLASS="command"
 >startxwin.bat</B
+> or <B
+CLASS="command"
+>startxwin.exe</B
 > to start the X server</P
 ></DIV
 ><DIV
@@ -1728,14 +1758,21 @@ CLASS="answer"
 ><B
 > </B
 >
-The MS-DOS batch file <B
+The executable <B
+CLASS="command"
+>startxwin.exe</B
+> previously used to start the X server
+has been retired and replaced with a shell script <B
+CLASS="command"
+>startxwin</B
+>.
+</P
+><P
+>&#13;The MS-DOS batch file <B
 CLASS="command"
 >startxwin.bat</B
 > previously used to start the X server
-has been retired and replaced with <B
-CLASS="command"
->startxwin.exe</B
->, as implementing this as a script
+has been retired, as implementing this as a batch file
 made it difficult to reliably wait until the the X server had started before
 starting any clients.
 </P
@@ -2149,6 +2186,86 @@ NAME="q-moved-2"
 >Moved question</P
 ></DIV
 ></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-startxwinrc-exit"
+></A
+><B
+>3.12. </B
+>I upgraded and now X exits immediately after starting</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+Since <TT
+CLASS="filename"
+>xinit-1.3.4-1</TT
+>, <B
+CLASS="command"
+>startxwin</B
+> is now
+implemented by a script based on <B
+CLASS="command"
+>startx</B
+>.  Unfortunately, this
+has changed the behaviour in a backwards-incompatible way, as the X server is
+now killed when <TT
+CLASS="filename"
+>~/.startxwinrc</TT
+> exits.
+</P
+><P
+>&#13;If you have an empty <TT
+CLASS="filename"
+>~/.startxwinrc</TT
+>, you should change it
+to contain <B
+CLASS="command"
+>exec sleep infinity</B
+> so the X server will not exit
+until explicitly told to do so.
+</P
+><P
+>&#13;If you are using a custom <TT
+CLASS="filename"
+>~/.startxwinrc</TT
+>, either run the
+last client in the foreground (i.e. without <B
+CLASS="command"
+>&amp;</B
+>), so the X
+server exits when that client exits, or use <B
+CLASS="command"
+>exec sleep
+infinity</B
+> as described above.
+</P
+><P
+>&#13;You should also make sure that <TT
+CLASS="filename"
+>~/.startxwinrc</TT
+> is executable
+(e.g. <B
+CLASS="command"
+>chmod +x ~/.startxwinrc</B
+>).
+</P
+><P
+>&#13;See <A
+HREF="https://cygwin.com/ml/cygwin-xfree-announce/2014-11/msg00004.html"
+TARGET="_top"
+>&#13;the announce mail</A
+> for more details.
+</P
+></DIV
+></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -2231,7 +2348,7 @@ COMPACT="COMPACT"
 ><P
 >&#13;If you use the start menu shortcut to start the X server, you will need to amend it's target to add an option, e.g. <B
 CLASS="command"
->C:\cygwin\bin\run.exe /usr/bin/bash.exe -l -c "/usr/bin/startxwin -- -nolock"</B
+>C:\cygwin\bin\run.exe --quote /usr/bin/bash.exe -l -c "/usr/bin/startxwin -- -nolock"</B
 >
 </P
 ><DIV
@@ -3677,7 +3794,7 @@ CLASS="emphasis"
 >untrusted</I
 ></SPAN
 > X11 forwarding depends on the SECURITY extension,
-which isn't built into the Xserver and has been disabled by default upstream.
+which isn't built into the X server and has been disabled by default upstream.
 </P
 ><P
 >&#13;Trusted X11 forwarding means that you trust the server that you wish to
@@ -3744,7 +3861,7 @@ CLASS="answer"
 ><B
 > </B
 >
-Unless you started the server with the <CODE
+Unless you started the X server with the <CODE
 CLASS="parameter"
 >-auth</CODE
 > option
@@ -3793,6 +3910,125 @@ CLASS="command"
 >.  See also <A
 HREF="cygwin-x-faq.html#q-bad-atom"
 >Q: 6.2.</A
+>.
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-remote-clients-cant-connect"
+></A
+><B
+>6.6. </B
+>
+Remote clients can't connect
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+<B
+CLASS="command"
+>startx</B
+> and <B
+CLASS="command"
+>startxwin</B
+> now pass
+<CODE
+CLASS="parameter"
+>-nolisten tcp</CODE
+> to the X server by default, which increases
+security in the X server by not opening a TCP/IP socket.
+</P
+><P
+>&#13;Use the <CODE
+CLASS="parameter"
+>-listen</CODE
+> option to the
+<B
+CLASS="command"
+>startxwin</B
+> to allow the X server to open a TCP/IP socket as
+well. See <A
+HREF="cygwin-x-faq.html#q-command-line-args"
+>Q: 4.2.</A
+>.
+</P
+><P
+>&#13;(better) Stop explicitly allowing access using <B
+CLASS="command"
+>xhost</B
+> or by
+disabling access control, and stop setting DISPLAY.  use <B
+CLASS="command"
+>ssh
+-Y</B
+> instead.  (See the User's Guide section <A
+HREF="http://x.cygwin.com/docs/ug/using-remote-apps.html#using-remote-apps-ssh"
+TARGET="_top"
+>on
+X forwarding using ssh</A
+> for more details).
+</P
+></DIV
+></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-local-noncygwin-clients-cant-connect"
+></A
+><B
+>6.7. </B
+>
+X sessions forwarded by <B
+CLASS="command"
+>PuTTY</B
+> can't connect.
+Non-cygwin local X clients can't connect.
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>
+<B
+CLASS="command"
+>startx</B
+> and <B
+CLASS="command"
+>startxwin</B
+> now pass
+<CODE
+CLASS="parameter"
+>-nolisten tcp</CODE
+> to the X server by default, which increases
+security in the X server by not opening a TCP/IP socket, only a local (UNIX
+domain) socket.  Non-cygwin applications cannot connect to that socket.
+</P
+><P
+>&#13;Use the <CODE
+CLASS="parameter"
+>-listen</CODE
+> option to the
+<B
+CLASS="command"
+>startxwin</B
+> to allow the X server to open a TCP/IP socket as
+well. See <A
+HREF="cygwin-x-faq.html#q-command-line-args"
+>Q: 4.2.</A
 >.
 </P
 ></DIV

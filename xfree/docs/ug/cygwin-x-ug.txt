@@ -169,7 +169,12 @@ Windowing mode
 
      Note: This is typically used to present a virtual full-screen X
      session using the X desktop environment or window manager of your
-     choice, or for remote XDMCP sessions.
+     choice, or for remote XDMCP sessions, e.g.:
+     [cyw01xdmcp.png]
+     An XDMCP session to a Fedora host
+     [cyw02wm.png]
+     xfce4-terminal and emacs under the Openbox Window Manager in
+     windowed mode
        The -nodecoration option can be used to remove the Windows window
        decorations from the X screen window. Alternatively, the
        -fullscreen option can be used to show the X screen in exclusive
@@ -178,7 +183,9 @@ Windowing mode
        Each top-level X window appears in its own Windows window.
 
      Note: This is typically used to work with local or remote X
-     applications, integrated into your native Windows desktop.
+     applications, integrated into your native Windows desktop, e.g.:
+     [cyw03multiwindow.png]
+     Various X and Windows applications in multiwindow mode
      * Rootless mode. (-rootless)
        The X root window is hidden from view, but top-level X windows are
        drawn.
@@ -263,6 +270,9 @@ Starting an X desktop environment session in windowed mode
      * Xfce Desktop Environment: install the xfce4-session package
 
    and use the provided Start Menu shortcut. [4]
+
+   Packages for several other desktop environments (e.g. GNOME, KDE, LXDE,
+   ROX, Sugar) are available in cygwinports.
      __________________________________________________________________
 
 Starting an X session with XLaunch
@@ -325,10 +335,12 @@ Notes for advanced users
 Obsolete startup methods
 
    The MS-DOS batch file startxwin.bat and bash shell script startxwin.sh
-   previously used to start the X server are no longer provided.
-   Implementing this as a script made it difficult to reliably wait until
-   the the X server had started before starting any clients. Use startxwin
-   instead.
+   previously used to start the X server are no longer provided. This
+   implementation made it difficult to reliably wait until the the X
+   server had started before starting any clients. Use startxwin instead.
+
+   The executable startxwin.exe previously used to start the X server has
+   been retired and replaced with a shell script startxwin.
      __________________________________________________________________
 
 Switching out of Cygwin/X
@@ -511,6 +523,10 @@ Insecure telnet or rsh (Not recommended)
     1. Make sure you have the inetutils package installed (for telnet) or
        rsh package (for rsh).
     2. Launch Cygwin/X
+
+     Note: You must provide the -listen option to startx or startxwin so
+     that the X server will listen for TCP/IP connections. (See this FAQ
+     for more details).
     3. In an X terminal, use the xhost command to allow the remote host
        access to make connections to your X server:
 
@@ -1202,7 +1218,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2014-11-17 11:10 .
+   at 2015-01-31 18:29 .
 
   Notes
 
@@ -1220,10 +1236,12 @@ Colophon
        a window manager, which would be incorrect for ~/.startxwinrc (as
        it would discover the internal window manager is already running
        and exit immediately).
-     * startxwin exits after ~/.startxwinrc has completed and leaves X
-       running, whereas startx waits until ~/.xinitrc exits (which is
-       usually waiting for the window manager started by it to exit) and
-       then kills X.
+     * Note that startxwin no longer exits after ~/.startxwinrc has
+       completed, leaving X running, but, similar to startx, waits until
+       ~/.startxwinrc exits and then kills X.
+       If you don't want the X server to exit until explicitly told to do
+       so, end your ~/.startxwinrc with something like exec sleep
+       infinity.
 
    [3]
 
@@ -1243,7 +1261,7 @@ startx /usr/bin/dbus-launch mate-session
    or
 echo "/usr/bin/dbus-launch startxfce4" > ~/.xinitrc
 
-   and then run startx.
+   and then running startx.
    [5]
 
    Note that startxwin and startx use the special option -- to mark the
