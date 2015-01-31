@@ -1,13 +1,13 @@
 <HTML><HEAD><TITLE>Manpage of STARTXWIN</TITLE>
 </HEAD><BODY>
 <H1>STARTXWIN</H1>
-Section: User Commands  (1)<BR>Updated: xinit 1.3.2<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xinit 1.3.4<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
 <H2>NAME</H2>
 
-startxwin - Cygwin XWin server initializer
+startxwin - initialize an X multiwindow session
 <A NAME="lbAC">&nbsp;</A>
 <H2>SYNOPSIS</H2>
 
@@ -17,162 +17,235 @@ startxwin - Cygwin XWin server initializer
 <I>client</I>
 
 ]
-<I>client_options</I>
+<I>options</I>
 
 ... ] [
 <B>--</B>
 
 [
+<I>server</I>
+
+] [
 <I>display</I>
 
+] [
+<I>-listen</I>
+
 ]
-<I>server_options</I>
+<I>options</I>
 
 ... ]
 <A NAME="lbAD">&nbsp;</A>
 <H2>DESCRIPTION</H2>
 
-The <B>startxwin</B> program is used to start the Cygwin XWin server in
-multi-window mode and a first client program.
+The <B>startxwin</B> script is a front end to
+<B>xinit</B>(1)
+
+that provides a
+somewhat nicer user interface for running a single session of the X
+Window System in multiwindow mode.  It is often run with no arguments.
 <P>
 
-If no specific client program is given on the command line,
-<B>startxwin</B> will look for a file in the user's home directory
-called <I>.startxwinrc</I> to run as a shell script to start up client programs.
-If no such file exists, <B>startxwin</B> will use the following as a default:
-<P>
-<TT>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TT>xterm  -geometry  +1+1  -n  login  -display  :0<BR>
-<P>
-<P>
+Arguments immediately following the
+<I>startxwin</I>
 
-An important point is that programs which are run by <I>.startxwinrc</I>
-should be run in the background if they do
-not exit right away, so that they don't prevent other programs from
-starting up.
-<P>
+command are used to start a client in the same manner as
+<B>xinit</B>(1).
 
-An alternate client and/or server command may be specified on the
-command line.  The desired client program and its arguments should be given
-as the first command line arguments to <B>startxwin</B>.  To specify particular
-server options, append a double dash (--) to the <B>startxwin</B> command
-line (after any client and arguments) followed by the desired server options.
-<B>startxwin</B> always supplies the -multiwindow option to the X server.
-<P>
+The special argument
+'--'
 
-The client program name name must begin with a
-slash (/) or a period (.).  Otherwise, it is treated as an argument to be
-appended to the client startup command.  This makes it possible to
-add arguments (for example, foreground and background colors) without
-having to retype the whole command line.
-<P>
+marks the end of client arguments and the beginning of server options.
+By default startxwin passes
+'-nolisten&nbsp;tcp'
 
-If the first argument following the
-double dash (--) is a colon followed by a digit, <B>startxwin</B> will use that
-number as the display
-number instead of zero.  All remaining arguments are appended to the server
-command line.
+to the server, the special server option
+'-listen'
+
+can be used to stop startxwin from doing this.
+It may be convenient to specify server options with startxwin to change on a
+per-session basis the
+default color depth, the server's notion of the number of dots-per-inch the
+display device presents, or take advantage of a different server layout, as
+permitted by the
+<B><A HREF="../man1/XWin.1.html">XWin</A></B>(1)
+
+server and specified in the
+<B><A HREF="../man5/XWinrc.5.html">XWinrc</A></B>(5)
+
+configuration.  Some examples of specifying server arguments follow; consult
+the manual page for your X server to determine which arguments are legal.
+<DL COMPACT><DT><DD>
 <P>
 
-<A NAME="lbAE">&nbsp;</A>
-<H2>EXAMPLES</H2>
+startxwin -- -depth 16
+<P>
 
-Below are several examples of how command line arguments in <B>startxwin</B> are
-used.
-<DL COMPACT>
-<DT><B>startxwin</B>
-
-<DD>
-This will start up an XWin server and run the user's <I>.startxwinrc</I>,
-if it exists, or else start an <I>xterm</I>.
-<DT><B>startxwin -- :1</B>
-
-<DD>
-This is how one could start the server on an alternate display.
-<DT><B>startxwin -geometry =80x65+10+10 -fn 8x13 -j -fg white -bg navy</B>
-
-<DD>
-This will start up the server, and will append the given
-arguments to the default <I>xterm</I> command.  It will ignore <I>.startxwinrc</I>.
-<DT><B>startxwin /usr/bin/ssh -Y username@fasthost cpupig -display ws:1 -- :1 -a 2 -t 5</B>
-
-<DD>
-This will start a server on display 1 with the arguments
-<I>-a 2 -t 5</I>.  It will then start a remote shell on the machine
-<B>fasthost</B> in which it will run the command <I>cpupig</I>, telling it
-to display back on the local workstation.
+startxwin -- -dpi 100
 </DL>
+
+
+
+
 <P>
 
-Below is a sample <I>.startxwinrc</I> that starts a clock and several terminals.
+To determine the client to run,
+<B>startxwin</B>
+
+first looks for a file called
+<I>.startxwinrc</I>
+
+in the user's home directory.  If that is not found, it uses
+the file
+<I>startxwinrc</I>
+
+in the
+<I>xinit</I>
+
+library directory.
+
+If command line client options are given, they override this
+behavior and revert to the
+<B>xinit</B>(1)
+
+behavior.
+To determine the server to run,
+<B>startxwin</B>
+
+first looks for a file called
+<I>.xserverrc</I>
+
+in the user's home directory.  If that is not found, it uses
+the file
+<I>xserverrc</I>
+
+in the
+<I>xinit</I>
+
+library directory.
+If command line server options are given, they override this
+behavior and revert to the
+<B>xinit</B>(1)
+
+behavior.  Users rarely need to provide a
+<I>.xserverrc</I>
+
+file.
+See the
+<B>xinit</B>(1)
+
+manual page for more details on the arguments.
+<P>
+
+The system-wide
+<I>startxwinrc</I>
+
+and
+<I>xserverrc</I>
+
+files are found in the
+<I>/etc/X11/xinit</I>
+
+directory.
+<P>
+
+The
+<I>.startxwinrc</I>
+
+is typically a shell script which starts many clients according to the
+user's preference.  When this shell script exits,
+<B>startxwin</B>
+
+kills the server and performs any other session shutdown needed.
+Most of the clients started by
+<I>.startxwinrc</I>
+
+should be run in the background.  The last client should run in the
+foreground; when it exits, the session will exit.  People often choose
+a session manager, window manager, or <I>xterm</I> as the ''magic'' client.
+<A NAME="lbAE">&nbsp;</A>
+<H2>EXAMPLE</H2>
+
+<P>
+
+Below is a sample <I>.startxwinrc</I> that starts several applications and
+leaves the panel running as the ''last'' application.  Assuming that
+the window manager has been configured properly, the user
+then chooses the ''Exit'' menu item to shut down X.
 <P>
 
 <PRE>
 xrdb -load $HOME/.Xresources
-xclock -g 50x50-0+0 -bw 0 &amp;
-xload -g 50x50-50+0 -bw 0 &amp;
-xterm -g 80x24+0+0 &amp;
-xterm -g 80x24+0-0 &amp;
+xbiff -geometry -430+5 &amp;
+oclock -geometry 75x75-0-0 &amp;
+xload -geometry -80-0 &amp;
+xterm -geometry +0+60 -ls &amp;
+xterm -geometry +0-100 &amp;
+xconsole -geometry -0+0 -fn 5x7 &amp;
+exec fbpanel -profile multiwindow
 </PRE>
 
 
-<P>
-Sites that want to create a common startup environment could simply create
-a default <I>.startxwinrc</I> that references a site-wide startup file:
-<P>
-
-<PRE>
-#!/bin/sh
-. /usr/local/lib/site.startxwinrc
-</PRE>
-
-
-<P>
-Another approach is to write a script that starts <B>startxwin</B> with a specific
-shell script.  Such scripts are usually named <I>x11</I>, <I>xstart</I>, or
-<I>startx</I> and are a convenient way to provide a simple interface for
-novice users:
-<P>
-
-<PRE>
-#!/bin/sh
-startxwin /usr/local/lib/site.startxwinrc -- -br
-</PRE>
-
-
-<P>
 <A NAME="lbAF">&nbsp;</A>
 <H2>ENVIRONMENT VARIABLES</H2>
 
 <DL COMPACT>
-<DT><B>DISPLAY</B>
-
-<DD>
+<DT>DISPLAY<DD>
 This variable gets set to the name of the display to which clients should
-connect.
-<DT><B>STARTXWINRC</B>
+connect.  Note that this gets
+<I>set</I>,
 
-<DD>
-This variable specifies an init file containing shell commands to start up the
-initial windows.  By default, <I>.startxwinrc</I> in the home directory will be
-used.
+not read.
+<DT>XAUTHORITY<DD>
+This variable, if not already defined, gets set to
+<I>$(HOME)/.Xauthority</I>.
+
+This is to prevent the X server, if not given the
+<I>-auth</I>
+
+argument, from automatically setting up insecure host-based authentication
+for the local host.  See the
+<B><A HREF="../man1/Xserver.1.html">Xserver</A></B>(1)
+
+and
+<I>Xsecurity</I>(7)
+
+manual pages for more information on X client/server authentication.
 </DL>
 <A NAME="lbAG">&nbsp;</A>
 <H2>FILES</H2>
 
 <DL COMPACT>
-<DT><I>.startxwinrc</I>
+<DT><I>$(HOME)/.startxwinrc</I>
 
 <DD>
-default client script
-<DT><I>xterm</I>
+Client to run.  Typically a shell script which runs many programs in
+the background.
+<DT><I>$(HOME)/.xserverrc</I>
 
 <DD>
-client to run if <I>.startxwinrc</I> does not exist
+Server to run.  The default is
+<I>X</I>.
+
+<DT><I>/etc/X11/xinit/startxwinrc</I>
+
+<DD>
+Client to run if the user has no
+<I>.startxwinrc</I>
+
+file.
+<DT><I>/etc/X11/xinit/xserverrc</I>
+
+<DD>
+Server to run if the user has no
+<I>.xserverrc</I>
+
+file.
 </DL>
 <A NAME="lbAH">&nbsp;</A>
 <H2>SEE ALSO</H2>
 
-<B>xinit(1)</B>
+<B>xinit</B>(1),
 
 <B>X</B>(7),
 
@@ -180,9 +253,7 @@ client to run if <I>.startxwinrc</I> does not exist
 
 <B><A HREF="../man1/XWin.1.html">XWin</A></B>(1),
 
-<B><A HREF="../man5/XWinrc.5.html">XWinrc</A></B>(5),
-
-<B>xterm</B>(1)
+<B><A HREF="../man5/XWinrc.5.html">XWinrc</A></B>(5)
 
 <P>
 
@@ -192,7 +263,7 @@ client to run if <I>.startxwinrc</I> does not exist
 <DT><A HREF="#lbAB">NAME</A><DD>
 <DT><A HREF="#lbAC">SYNOPSIS</A><DD>
 <DT><A HREF="#lbAD">DESCRIPTION</A><DD>
-<DT><A HREF="#lbAE">EXAMPLES</A><DD>
+<DT><A HREF="#lbAE">EXAMPLE</A><DD>
 <DT><A HREF="#lbAF">ENVIRONMENT VARIABLES</A><DD>
 <DT><A HREF="#lbAG">FILES</A><DD>
 <DT><A HREF="#lbAH">SEE ALSO</A><DD>
@@ -201,6 +272,6 @@ client to run if <I>.startxwinrc</I> does not exist
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
-Time: 12:14:21 GMT, October 11, 2014
+Time: 13:23:25 GMT, January 31, 2015
 </BODY>
 </HTML>
