@@ -46,6 +46,16 @@
                         </tr>
                         -->
 
+
+            <tr valign="top">
+              <td>Testing</td>
+
+              <td><p>
+                  There are always bugs.
+                  We need to find them and fix them.
+              </p></td>
+            </tr>
+
             <tr valign="top">
               <td>native IME - XIM bridge</td>
 
@@ -66,27 +76,12 @@
             </tr>
 
             <tr valign="top">
-              <td>Regression and stability Testing</td>
-
-              <td><p>Upgrade to modular X11R7.4 has inevitably introduced some bugs.
-		  Cygwin 1.7 seems to have brought a few new issues as well.
-	          We need to find them and fix them.</p></td>
-            </tr>
-
-            <tr valign="top">
               <td>-mwextwm mode and xwinwm</td>
 
               <td><p><strike>Needs fixing to build, and work again</strike>.
 	      Should build and work now, but needs looking at to see what it lacks compared to the internal WM.
               Is it possible to replace the internal WM with this, in the long term?
               </p></td>
-            </tr>
-
-            <tr valign="top">
-              <td><strike>Command line parameters</strike></td>
-
-              <td><p><strike>-help, the man page, and the user guide all
-              need updating and synchronizing with what the source actually does</strike></p></td>
             </tr>
 
             <tr valign="top">
@@ -109,25 +104,6 @@
             </tr>
 
             <tr valign="top">
-                <td><strike>Windows display size changes while running.
-                    Monitor count/position changes while running.</strike></td>
-
-                <td><p><strike>Use RandR (resize and rotate) to pass changes
-                to the display size (e.g. from 1024 x 768 to 1280 x
-                1024) to the X Server and all running applications.
-                This should be straightforward to do; you can use the
-                WM_DISPLAYCHANGE handling code that is in place for
-                detecting display changes
-                and just pass these values to RandR to let it do
-                its thing.
-                Partially done at <a href="http://cgit.freedesktop.org/~jturney/xserver/log/?h=jturney-framebuffer-resize">
-                http://cgit.freedesktop.org/~jturney/xserver/log/?h=jturney-framebuffer-resize</a>.</strike>
-		Done in 1.8.2-1. Possibly xinerama scenarios need looking at.
-                </p></td>
-
-            </tr>
-
-            <tr valign="top">
                 <td>Improve Windows clipboard integration</td>
 
                 <td><p>Stamp out remaining clipboard bugs.</p>
@@ -139,121 +115,24 @@
             </tr>
 
             <tr valign="top">
-                <td><strike>User's Guide - Document .XWinrc</strike></td>
+                <td>Crash reporting</td>
 
-                <td><p><strike>Documentation needs to be added to the User's
-                Guide for Earle F Philhower III's .XWinrc
-                mechanism.
-                This task is greatly simplied by the fact that
-                Earle provided comments in the
-                example /etc/X11/system.Xwinrc file.
-                Perhaps a pointer to 'man XWinrc' and some examples.</strike>
+                <td><p>
+                    Automated upload of crash reports.
                 </p></td>
             </tr>
 
             <tr valign="top">
-                <td>GUI mechanism for opening the log file</td>
-
-                <td>
-                <p>Add an item to the tray-icon right-click menu
-                to open the log file</p>
-                <p>
-		Adding a line like <code>"View logfile" EXEC "xterm -e less +F /var/log/XWin.0.log"</code>
-		to the default XWinrc is almost enough.
-		We need to get the correct logfile name for non-default display or -logfile options, though.
-                </p>
-		</td>
-
-            </tr>
-
-            <tr valign="top">
-                <td>FatalError Dialog Box</td>
-
-                <td><p>Change the FatalError message box to a dialog
-                box with helpful links?</p></td>
-            </tr>
-
-            <tr valign="top">
-                <td>Indirect OpenGL acceleration (AIGLX)</td>
+                <td>OpenGL acceleration</td>
 
                 <td><p>Testing of the implementation of indirect OpenGL acceleration using native WGL.
 		Additional information is in the
 		<a href="http://cygwin.com/ml/cygwin-xfree/2009-06/msg00088.html">email asking for testing</a>.
                 <a href="http://sourceware.org/bugzilla/show_bug.cgi?id=10472">Bug #10472</a>
+                </p>
+                <p>
+                Testing of the implementation of direct OpenGL acceleration using native WGL.
                 </p></td>
-            </tr>
-
-            <tr valign="top">
-                <td>Detect in-use display number ports</td>
-
-                <td><p>Display number <i>n</i> in X11 listens on TCP
-                port 6000 + <i>n</i>. As of our X Server release
-                4.3.0-49 we check for other instances of XWin.exe
-                running on a given display number, but we perform
-                no checks for other applications listening on port
-                6000 + <i>n</i>. We may not be able to atomically
-                check port 6000 + <i>n</i> and start listening on
-                it if it is not in use, but we can at least perform
-                a sanity check with only a small window where
-                another application could start listening on that
-                port before we started listening on it; this would
-                be a sufficient fix for our purposes. Other
-                developers can help with adding command-line
-                parameters to control this feature once the above
-                code is finished.</p></td>
-            </tr>
-
-            <tr valign="top">
-                <td>Automatically assign display number</td>
-
-                <td><p>
-                Coupled with the detection of in-use display
-                numbers, it would be advantageous if we could
-                optionally automatically assign an unused display
-                number to a new instance of XWin.exe. We would need
-                an IPC mechanism used for all instances of XWin.exe
-                to share information about in-use display numbers,
-                as well as a check of potentially available ports
-                for use by other applications. Finally, this whole
-                thing is useless if we do not have a way to query
-                the started instance of XWin.exe for the display
-                number that it assigned to itself; the ideal
-                solution to this problem will likely require an
-                external executable that has an IPC mechanism to
-                retrieve the desired display number from all
-                running instances of XWin.exe. We may be able to
-                adapt the run.exe utility to query the XWin.exe
-                instance with the same parent process id (should be
-                the command shell that both were started from, I
-                hope) and to then modify the environment being
-                passed to a child process. There may be other ways
-                to solve this problem, but anything that allows for
-                a race between started instances of XWin.exe will
-                be unacceptable, since an error would result in
-                applications attaching to the wrong display.
-                </p>
-                <p>
-	        Perhaps simply place a correctly set DISPLAY into the
-                environment of processes started via the taskbar icon.
-		tbh, I'm not sure what problem we are trying to solve here.
-                </p>
-                <p>
-                The -displayfd patch from fedora, added in 1.9.0-1 could address
-                this issue. See <a href="http://cygwin.com/ml/cygwin-xfree/2010-09/msg00040.html">this email</a>.
-                </p>
-                </td>
-            </tr>
-
-            <tr valign="top">
-                <td><strike>Timestamp on log file entries</strike></td>
-
-                <td><p><strike>Add a timestamp to each line of /tmp/XWin.log,
-                as suggested by Ehud Karni on 2004-03-03. Ehud also
-                <a href="http://cygwin.com/ml/cygwin-xfree/2004-03/msg00082.html">
-                provided source code useful for performing such
-                timestamping</a> in his email. Should be written using
-                strftime(), though.</strike>
-		Added in 1.6.2-2</p></td>
             </tr>
 
             <tr valign="top">
@@ -262,13 +141,12 @@
                 <td><p>Blit updates from a DirectDraw shadow
                 framebuffer to the updated Win32 window instead of
                 blitting from a GDI shadow framebuffer. This should
-                be trivially easy to start and should require only
-                a single DirectDraw surface for the whole screen (I
-                had previously said it would require one surface
-                per Win32 window). It would be very important to
+                be easy to start and should require only
+                a single DirectDraw surface for the whole screen.
+                It would be very important to
                 just demonstrate that this can be done; clipping
                 the blits to properly handle window z-order and
-                such can be finished by other developers.</p></td>
+                such can be finished.</p></td>
             </tr>
 
             <tr valign="top">
