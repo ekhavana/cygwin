@@ -1,6 +1,6 @@
 Cygwin/X Frequently Asked Questions
 
-2015-01-31 18:13
+2015-02-01 15:12
      __________________________________________________________________
 
    Table of Contents
@@ -503,7 +503,8 @@ Questions and Answers
 
    3.5. My favourite font has gone! The font Emacs uses is just boxes
 
-   Only minimal fonts will be installed after the upgrade.
+   Only minimal fonts will be installed after the upgrade from X.Org R6.8
+   to modular X.Org.
 
    Font packages are now named font-<author/class>-<fonttype>
 
@@ -1026,25 +1027,26 @@ X11Forwarding yes
    6.6. Remote clients can't connect
 
    startx and startxwin now pass -nolisten tcp to the X server by default,
-   which increases security in the X server by not opening a TCP/IP
+   which increases the security of the X server by not opening a TCP/IP
    socket.
 
-   Use the -listen option to the startxwin to allow the X server to open a
+   Use the -listen option to startxwin to allow the X server to open a
    TCP/IP socket as well. See Q: 4.2..
 
-   (better) Stop explicitly allowing access using xhost or by disabling
-   access control, and stop setting DISPLAY. use ssh -Y instead. (See the
-   User's Guide section on X forwarding using ssh for more details).
+   A better solution is to stop explicitly allowing access using xhost or
+   by disabling access control, and stop setting DISPLAY. Use ssh -Y
+   instead. (See the User's Guide section on X forwarding using ssh for
+   more details).
 
    6.7. X sessions forwarded by PuTTY can't connect. Non-cygwin local X
    clients can't connect.
 
    startx and startxwin now pass -nolisten tcp to the X server by default,
-   which increases security in the X server by not opening a TCP/IP
+   which increases the security of the X server by not opening a TCP/IP
    socket, only a local (UNIX domain) socket. Non-cygwin applications
    cannot connect to that socket.
 
-   Use the -listen option to the startxwin to allow the X server to open a
+   Use the -listen option to startxwin to allow the X server to open a
    TCP/IP socket as well. See Q: 4.2..
 
 7. XDMCP connections

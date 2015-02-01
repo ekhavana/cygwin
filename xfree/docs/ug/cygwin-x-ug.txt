@@ -4,7 +4,7 @@ Harold L Hunt, II
 
 Jon Turney
 
-     Copyright (c) 2000 Harold L Hunt II. Copyright © 2009-2014 Jon
+     Copyright (c) 2000 Harold L Hunt II. Copyright © 2009-2015 Jon
      Turney. Permission is granted to copy, distribute and/or modify this
      document under the terms of the GNU Free Documentation License,
      Version 1.3 or any later version published by the Free Software
@@ -33,7 +33,9 @@ Jon Turney
         Starting Cygwin/X
 
               Starting in multiwindow mode (startxwin)
-              Starting an X desktop environment session in windowed mode
+              Starting an X desktop environment session or X window
+                      manager in windowed mode
+
               Starting an X session with XLaunch
               Starting in windowed mode (startx)
               Notes for advanced users
@@ -171,9 +173,9 @@ Windowing mode
      session using the X desktop environment or window manager of your
      choice, or for remote XDMCP sessions, e.g.:
      [cyw01xdmcp.png]
-     An XDMCP session to a Fedora host
+     An XDMCP session to a remote Fedora host
      [cyw02wm.png]
-     xfce4-terminal and emacs under the Openbox Window Manager in
+     xfce4-terminal and emacs under the Openbox window manager in
      windowed mode
        The -nodecoration option can be used to remove the Windows window
        decorations from the X screen window. Alternatively, the
@@ -185,7 +187,8 @@ Windowing mode
      Note: This is typically used to work with local or remote X
      applications, integrated into your native Windows desktop, e.g.:
      [cyw03multiwindow.png]
-     Various X and Windows applications in multiwindow mode
+     X applications (emacs, gitk and xterm) and Windows applications
+     (explorer and firefox) in multiwindow mode
      * Rootless mode. (-rootless)
        The X root window is hidden from view, but top-level X windows are
        drawn.
@@ -263,16 +266,20 @@ $ startxwin
    Full documentation for startxwin can be read with man startxwin .
      __________________________________________________________________
 
-Starting an X desktop environment session in windowed mode
+Starting an X desktop environment session or X window manager in windowed
+mode
 
-   Several X desktop environments are packaged for Cygwin.
+   Several of these are packaged for Cygwin.
      * MATE Desktop Environment: install the mate-session-manager package
+     * Openbox window manager: install the openbox package
+     * WindowMaker window manager: install the WindowMaker package
      * Xfce Desktop Environment: install the xfce4-session package
 
    and use the provided Start Menu shortcut. [4]
 
    Packages for several other desktop environments (e.g. GNOME, KDE, LXDE,
-   ROX, Sugar) are available in cygwinports.
+   ROX, Sugar) and window managers (e.g. Blackbox, dwm, Enlightenment,
+   Fluxbox) are available in cygwinports.
      __________________________________________________________________
 
 Starting an X session with XLaunch
@@ -317,7 +324,7 @@ $ cp /etc/X11/xinit/xinitrc ~/.xinitrc
 $ startx /usr/bin/fvwm2
 
      Note: The client name supplied to startx must begin with / or .,
-     otherwise it is treated as options to the default xterm client.
+     otherwise it is treated as an option to the default xterm client.
      __________________________________________________________________
 
 Notes for advanced users
@@ -1218,7 +1225,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2015-01-31 18:29 .
+   at 2015-02-01 15:12 .
 
   Notes
 
