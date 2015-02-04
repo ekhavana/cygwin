@@ -28,11 +28,11 @@ style ACLs and accompanying function calls are also supported.
 The chmod call maps UNIX-style permissions back to the Win32 equivalents. 
 Because many programs expect to be able to find the
 <code class="filename">/etc/passwd</code> and
-<code class="filename">/etc/group</code> files, we provide <a class="ulink" href="http://cygwin.com/cygwin-ug-net/using-utils.html" target="_top">utilities</a>
+<code class="filename">/etc/group</code> files, we provide <a class="ulink" href="https://cygwin.com/cygwin-ug-net/using-utils.html" target="_top">utilities</a>
 that can be used to construct them from the user and group information
 provided by the operating system.</p><p>Users with Administrator rights are permitted to chown files.
 With version 1.1.3 Cygwin introduced a mechanism for setting real and
-effective UIDs. This is described in <a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called “Using Windows security in Cygwin”</a>.  As
+effective UIDs. This is described in <a class="xref" href="ntsec.html" title="POSIX accounts, permission, and security">the section called “POSIX accounts, permission, and security”</a>.  As
 of version 1.5.13, the Cygwin developers are not aware of any feature in
 the Cygwin DLL that would allow users to gain privileges or to access
 objects to which they have no rights under Windows.  However there is no
@@ -166,7 +166,7 @@ child process have <span class="emphasis"><em>exactly</em></span> the same addre
 space layout as its parent. However, Windows provides no native
 support for cloning address space between processes and several
 features actively undermine a reliable <code class="literal">fork</code>
-implementation. Three issues are especially prevalent:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem">DLL base address collisions. Unlike *nix shared
+implementation. Three issues are especially prevalent:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>DLL base address collisions. Unlike *nix shared
 libraries, which use "position-independent code", Windows shared
 libraries assume a fixed base address. Whenever the hard-wired
 address ranges of two DLLs collide (which occurs quite often), the
@@ -179,15 +179,15 @@ statically-linked dlls (dependencies known at compile time) are
 resolved before <code class="literal">cygwin1.dll</code> initializes and
 cannot be fixed afterward. This problem can only be solved by
 removing the base address conflicts which cause the problem,
-usually using the <code class="literal">rebaseall</code> tool.</li><li class="listitem">Address space layout randomization (ASLR). Starting with
+usually using the <code class="literal">rebaseall</code> tool.</p></li><li class="listitem" style="list-style-type: disc"><p>Address space layout randomization (ASLR). Starting with
 Vista, Windows implements ASLR, which means that thread stacks,
 heap, memory-mapped files, and statically-linked dlls are placed
 at different (random) locations in each process. This behaviour
 interferes with a proper <code class="literal">fork</code>, and if an
 unmovable object (process heap or system dll) ends up at the wrong
 location, Cygwin can do nothing to compensate (though it will
-retry a few times automatically).</li><li class="listitem">DLL injection by
-<a class="ulink" href="http://cygwin.com/faq/faq.html#faq.using.bloda" target="_top">
+retry a few times automatically).</p></li><li class="listitem" style="list-style-type: disc"><p>DLL injection by
+<a class="ulink" href="https://cygwin.com/faq/faq.html#faq.using.bloda" target="_top">
 BLODA</a>. Badly-behaved applications which
 inject dlls into other processes often manage to clobber important
 sections of the child's address space, leading to base address
@@ -195,7 +195,7 @@ collisions which rebasing cannot fix. The only way to resolve this
 problem is to remove (usually uninstall) the offending app.  See
 <a class="xref" href="using-cygwinenv.html#cygwinenv-implemented-options" title="Implemented options">the section called “Implemented options”</a> for the
 <code class="literal">detect_bloda</code> option, which may be able to identify the
-BLODA.</li></ul></div><p>In summary, current Windows implementations make it
+BLODA.</p></li></ul></div><p>In summary, current Windows implementations make it
 impossible to implement a perfectly reliable fork, and occasional
 fork failures are inevitable.
 </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-signals"></a>Signals</h3></div></div></div><p>When

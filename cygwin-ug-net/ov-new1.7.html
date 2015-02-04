@@ -1,5 +1,55 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.33"></a>What's new and what changed in 1.7.33</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.34"></a>What's new and what changed in 1.7.34</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+Cygwin can now generate passwd/group entries directly from Windows user
+databases (local SAM or Active Directory), thus allowing to run Cygwin
+without having to create /etc/passwd and /etc/group files.  Introduce
+/etc/nsswitch.conf file to configure passwd/group handling.
+</p><p>
+For bordercase which require to use /etc/passwd and /etc/group files,
+change mkpasswd/mkgroup to generate passwd/group entries compatible with
+the entries read from SAM/AD.
+</p><p>For a description of this exciting new feature see
+<a class="xref" href="ntsec.html" title="POSIX accounts, permission, and security">the section called “POSIX accounts, permission, and security”</a>.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Add -b/--remove-all option to setfacl to reduce the ACL to only the entries
+representing POSIX permission bits.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Add -k/--remove-default option to setfacl to remove all default ACL entries
+from an ACL.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Add restore action to regtool.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Make gethostbyname2 handle numeric host addresses as well as the
+reserved domain names "localhost" and "invalid" per RFC 6761.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Revamp Solaris ACL implementation to more closely work like POSIX ACLs
+are supposed to work.  Finally implement a CLASS_OBJ emulation.  Update
+getfacl(1)/setfacl(1) accordingly.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+The xdr functions are no longer exported for newly built executables.
+Use libtirpc-devel instead.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+32 bit only: Change default values for socket buffer size to raise
+performance on 10Gb networks.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+When spawning a process under another user account, merge the user's
+default Windows environment into the new process' environment.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New APIs: qsort_r, __bsd_qsort_r.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New API: wcstold.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New APIs: __fbufsize, __flbf, __fpending, __freadable, __freading,
+__fsetlocking, __fwritable, __fwriting.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New APIs: clearerr_unlocked, feof_unlocked, ferror_unlocked, fflush_unlocked,
+fgetc_unlocked, fgets_unlocked, fgetwc_unlocked, fgetws_unlocked,
+fileno_unlocked, fputc_unlocked, fputs_unlocked, fputwc_unlocked,
+fputws_unlocked, fread_unlocked, fwrite_unlocked, getwc_unlocked,
+getwchar_unlocked, putwc_unlocked, putwchar_unlocked.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New API: sockatmark.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.33"></a>What's new and what changed in 1.7.33</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 /proc/cygdrive is a new symlink pointing to the current cygdrive prefix.
 This can be utilized in scripts to access paths via cygdrive prefix,
 even if the cygdrive prefix has been changed by the user.
@@ -677,7 +727,7 @@ Getting a domain user's groups is hopefully more bulletproof now.
 Cygwin now comes with a real LSA authentication package.  This must be
 manually installed by a privileged user using the /bin/cyglsa-config
 script.  The advantages and disadvantages are noted in
-http://cygwin.com/ml/cygwin-developers/2006-11/msg00000.html
+https://cygwin.com/ml/cygwin-developers/2006-11/msg00000.html
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 Cygwin now allows storage and use of user passwords in a hidden area of
 the registry.  This is tried first when Cygwin is called by privileged

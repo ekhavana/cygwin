@@ -82,7 +82,7 @@ Note: -c, -f, and -l only report on packages that are currently installed. To
       both.</p><p> The <code class="literal">-f</code> option helps you to track down which
       package a file came from, and <code class="literal">-l</code> lists all files in a
       package. For example, to find out about
-      <code class="filename">/usr/bin/less</code> and its package: </p><div class="example"><a name="utils-cygcheck-ex"></a><p class="title"><b>Example 3.6. Example <span class="command">cygcheck</span>
+      <code class="filename">/usr/bin/less</code> and its package: </p><div class="example"><a name="utils-cygcheck-ex"></a><p class="title"><b>Example 3.3. Example <span class="command">cygcheck</span>
       usage</b></p><div class="example-contents"><pre class="screen">
 $ cygcheck -f /usr/bin/less
 less-381-1
@@ -113,10 +113,10 @@ $ cygcheck -l less
       package names, package descriptions, and path/filenames of the contents
       of packages. This feature requires an active internet connection, since
       it must query the <code class="literal">cygwin.com</code> web site. In fact, it is
-      equivalent to the search that is available on the <a class="ulink" href="http://cygwin.com/packages/" target="_top">Cygwin package listing</a>
+      equivalent to the search that is available on the <a class="ulink" href="https://cygwin.com/packages/" target="_top">Cygwin package listing</a>
       page.</p><p>For example, perhaps you are getting an error because you are missing
       a certain DLL and you want to know which package includes that file:
-      </p><div class="example"><a name="utils-search-ex"></a><p class="title"><b>Example 3.7. Searching all packages for a
+      </p><div class="example"><a name="utils-search-ex"></a><p class="title"><b>Example 3.4. Searching all packages for a
       file</b></p><div class="example-contents"><pre class="screen">
 $ cygcheck -p 'cygintl-2\.dll'
 Found 1 matches for 'cygintl-2\.dll'.
@@ -288,7 +288,7 @@ Other options:
       message if no filename argument was given. It can be used in make file
       rules converting variables that may be omitted to a proper format. Note
       that <span class="command"><strong>cygpath</strong></span> output may contain spaces (C:\Program
-      Files) so should be enclosed in quotes. </p><div class="example"><a name="utils-cygpath-ex"></a><p class="title"><b>Example 3.8. Example <span class="command">cygpath</span> usage</b></p><div class="example-contents"><pre class="screen">
+      Files) so should be enclosed in quotes. </p><div class="example"><a name="utils-cygpath-ex"></a><p class="title"><b>Example 3.5. Example <span class="command">cygpath</span> usage</b></p><div class="example-contents"><pre class="screen">
 
 #!/bin/sh
 if [ "${1}" = "" ];
@@ -397,14 +397,16 @@ line separates the ACLs for each file.
       <span class="command"><strong>getfacl</strong></span> displays the owner, the group, and the ACL.
       For directories <span class="command"><strong>getfacl</strong></span> displays additionally the
       default ACL. With no options specified, <span class="command"><strong>getfacl</strong></span>
-      displays the filename, the owner, the group, and both the ACL and the
-      default ACL, if it exists. For more information on Cygwin and Windows
-      ACLs, see <a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called “Using Windows security in Cygwin”</a> in the Cygwin User's Guide. The format
+      displays the filename, the owner, the group, the setuid (s), setgid (s),
+      and sticky (t) bits if available, and both the ACL and the default ACL,
+      if it exists. For more information on Cygwin and Windows ACLs, see
+      <a class="xref" href="ntsec.html" title="POSIX accounts, permission, and security">the section called “POSIX accounts, permission, and security”</a> in the Cygwin User's Guide. The format
       for ACL output is as follows:
       </p><pre class="screen">
      # file: filename
      # owner: name or uid
      # group: name or uid
+     # flags: sst
      user::perm
      user:name or uid:perm
      group::perm
@@ -450,7 +452,7 @@ $ /bin/kill --version
       will display <span class="emphasis"><em>all</em></span> windows pids.</p><p>The <span class="command"><strong>kill -l</strong></span> option prints the name of the given
       signal, or a list of all signal names if no signal is given.</p><p>To send a specific signal, use the <code class="literal">-signN</code> option,
       either with a signal number or a signal name (minus the "SIG" part), as
-      shown in these examples:</p><div class="example"><a name="utils-kill-ex"></a><p class="title"><b>Example 3.9. Using the kill command</b></p><div class="example-contents"><pre class="screen">
+      shown in these examples:</p><div class="example"><a name="utils-kill-ex"></a><p class="title"><b>Example 3.6. Using the kill command</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>kill 123</code></strong>
 <code class="prompt">$</code> <strong class="userinput"><code>kill -1 123</code></strong>
 <code class="prompt">$</code> <strong class="userinput"><code>kill -HUP 123</code></strong>
@@ -653,74 +655,63 @@ Write minidump from WIN32PID to FILENAME.dmp
   </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mkgroup"></a>mkgroup</h3></div></div></div><pre class="screen">
 Usage: mkgroup [OPTION]...
 
-Print /etc/group file to stdout
+Write /etc/group-like output to stdout
+
+Don't use this command to generate a local /etc/group file, unless you
+really need one.  See the Cygwin User's Guide for more information.
 
 Options:
 
-   -l,--local [machine[,offset]]
-                           print local groups with gid offset offset
-                           (from local machine if no machine specified)
-   -L,--Local [machine[,offset]]
-                           ditto, but generate groupname with machine prefix
-   -d,--domain [domain[,offset]]
-                           print domain groups with gid offset offset
-                           (from current domain if no domain specified)
-   -D,--Domain [domain[,offset]]
-                           ditto, but generate groupname with machine prefix
-   -c,--current            print current group
-   -C,--Current            ditto, but generate groupname with machine or
-                           domain prefix
-   -S,--separator char     for -L, -D, -C use character char as domain\group
-                           separator in groupname instead of the default '\'
-   -o,--id-offset offset   change the default offset (10000) added to gids
-                           in domain or foreign server accounts.
-   -g,--group groupname    only return information for the specified group
-                           one of -l, -L, -d, -D must be specified, too
-   -b,--no-builtin         don't print BUILTIN groups
-   -U,--unix grouplist     additionally print UNIX groups when using -l or -L
-                           on a UNIX Samba server
-                           grouplist is a comma-separated list of groupnames
-                           or gid ranges (root,-25,50-100).
-			   (enumerating large ranges can take a long time!)
-   -s,--no-sids            (ignored)
-   -u,--users              (ignored)
-   -h,--help               print this message
-   -V,--version            print version information and exit
+   -l,--local [machine]    Print local group accounts of \"machine\",
+                           from local machine if no machine specified.
+                           Automatically adding machine prefix for local
+                           machine depends on settings in /etc/nsswitch.conf.
+   -L,--Local machine      Ditto, but generate groupname with machine prefix.
+   -d,--domain [domain]    Print domain groups,
+                           from current domain if no domain specified.
+   -c,--current            Print current group.
+   -S,--separator char     For -L use character char as domain\\group
+                           separator in groupname instead of default '+'.
+   -o,--id-offset offset   Change the default offset (0x10000) added to gids
+   -g,--group groupname    Only return information for the specified group.
+                           One of -l, -d must be specified, too.
+   -b,--no-builtin         Don't print BUILTIN groups.
+   -U,--unix grouplist     Print UNIX groups when using -l on a UNIX Samba
+                           server.  Grouplist is a comma-separated list of
+                           groupnames or gid ranges (root,-25,50-100).
+                           Enumerating large ranges can take a long time!
+   -h,--help               Print this message.
+   -v,--version            Print version information and exit.
 
 Default is to print local groups on stand-alone machines, plus domain
 groups on domain controllers and domain member machines.
-</pre><p>The <span class="command"><strong>mkgroup</strong></span> program can be used to help configure
-      Cygwin by creating a <code class="filename">/etc/group</code> file. Its use is
-      essential to include Windows security information.</p><p>The command is initially called by <span class="command"><strong>setup.exe</strong></span> to
-      create a default <code class="filename">/etc/group</code>. This should be
-      sufficient in most circumstances. However, especially when working in a
-      multi-domain environment, you can use <span class="command"><strong>mkgroup</strong></span> manually
-      to create a more complete <code class="filename">/etc/group</code> file for all
-      domains. Especially when you have the same group name used on multiple
-      machines or in multiple domains, you can use the <code class="literal">-D</code>,
-      <code class="literal">-L</code> and <code class="literal">-C</code> options to create unique
-      domain\group style groupnames.</p><p>Note that this information is static. If you change the group
-      information in your system, you'll need to regenerate the group file for
-      it to have the new information.</p><p>The <code class="literal">-d/-D</code> and <code class="literal">-l/-L</code> options
-      allow you to specify where the information comes from, the local SAM of a
-      machine or from the domain, or both. With the <code class="literal">-d/-D</code>
-      options the program contacts a Domain Controller, which my be unreachable
-      or have restricted access. Comma-separated from the machine or domain,
-      you can specify an offset which is used as base added to the group's RID
-      to compute the gid (offset + RID = gid). This allows you to create the
-      same gids every time you re-run <span class="command"><strong>mkgroup</strong></span>. For very
-      simple needs, an entry for the current user's group can be created by
-      using the option <code class="literal">-c</code> or <code class="literal">-C</code>. If you
-      want to use one of the <code class="literal">-D</code>, <code class="literal">-L</code> or
-      <code class="literal">-C</code> options, but you don't like the backslash as
-      domain/group separator, you can specify another separator using the
-      <code class="literal">-S</code> option, for instance:</p><div class="example"><a name="utils-mkgroup-ex"></a><p class="title"><b>Example 3.10. Setting up group entry for current user with different
+</pre><p>The <span class="command"><strong>mkgroup</strong></span> program can be used to create a local
+      <code class="filename">/etc/group</code> file.  Cygwin doesn't need this file,
+      because it reads group information from the Windows account databases,
+      but you can add an <code class="filename">/etc/group</code> file for instance, if
+      your machine is often disconnected from its domain controller.
+      </p><p>Note that this information is static, in contrast to the information
+      automatically gathered by Cygwin from the Windows account databases. If
+      you change the group information on your system, you'll need to regenerate
+      the group file for it to have the new information.</p><p>By default, the information generated by <span class="command"><strong>mkgroup</strong></span>
+      is equivalent to the information generated by Cygwin itself.  The
+      <code class="literal">-d</code> and <code class="literal">-l/-L</code> options allow you to
+      specify where the information comes from, some domain, or the local SAM
+      of a machine. Note that you can only enumerate accounts from trusted
+      domains.  Any non-trusted domain will be ignored.  Access-restrictions
+      of your current account apply.  The <code class="literal">-l/-L</code> when used
+      with a machine name, tries to contact that machine to enumerate local
+      groups of other machines, typically outside of domains.  This scenario
+      cannot be covered by Cygwin's account automatism.  If you want to use 
+      the <code class="literal">-L</code> option, but you don't like the default
+      domain/group separator from <code class="filename">/etc/nsswitch.conf</code>,
+      you can specify another separator using the <code class="literal">-S</code> option,
+      for instance:</p><div class="example"><a name="utils-mkgroup-ex"></a><p class="title"><b>Example 3.7. Setting up group entry for current user with different
         domain/group separator</b></p><div class="example-contents"><pre class="screen">
-<code class="prompt">$</code> <strong class="userinput"><code>mkgroup -C -S+ &gt; /etc/group</code></strong>
-<code class="prompt">$</code> <strong class="userinput"><code>cat /etc/group</code></strong>
-DOMAIN+my_group:S-1-5-21-2913048732-1697188782-3448811101-1144:11144:
-</pre></div></div><br class="example-break"><p>The <code class="literal">-o</code> option allows for special cases (such as
-      multiple domains) where the GIDs might match otherwise. The
+<code class="prompt">$</code> <strong class="userinput"><code>mkgroup -L server1 -S= &gt; /etc/group</code></strong>
+</pre></div></div><br class="example-break"><p>For very simple needs, an entry for the current user's group can be
+      created by using the option <code class="literal">-c</code>.</p><p>The <code class="literal">-o</code> option allows for (unlikely) special cases
+      with multiple machines where the GIDs might match otherwise. The
       <code class="literal">-g</code> option only prints the information for one group.
       The <code class="literal">-U</code> option allows you to enumerate the standard
       UNIX groups on a Samba machine. It's used together with <code class="literal">-l
@@ -729,77 +720,65 @@ DOMAIN+my_group:S-1-5-21-2913048732-1697188782-3448811101-1144:11144:
       in <span class="command"><strong>ls -l</strong></span> output. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mkpasswd"></a>mkpasswd</h3></div></div></div><pre class="screen">
 Usage: mkpasswd [OPTIONS]...
 
-Print /etc/passwd file to stdout
+Write /etc/passwd-like output to stdout
+
+Don't use this command to generate a local /etc/passwd file, unless you
+really need one.  See the Cygwin User's Guide for more information.
 
 Options:
 
-   -l,--local [machine[,offset]]
-                           print local user accounts with uid offset offset
-                           (from local machine if no machine specified)
-   -L,--Local [machine[,offset]]
-                           ditto, but generate username with machine prefix
-   -d,--domain [domain[,offset]]
-                           print domain accounts with uid offset offset
-                           (from current domain if no domain specified)
-   -D,--Domain [domain[,offset]]
-                           ditto, but generate username with domain prefix
-   -c,--current            print current user
-   -C,--Current            ditto, but generate username with machine or
-                           domain prefix
-   -S,--separator char     for -L, -D, -C use character char as domain\user
-                           separator in username instead of the default '\'
-   -o,--id-offset offset   change the default offset (10000) added to uids
-                           in domain or foreign server accounts.
-   -u,--username username  only return information for the specified user
-                           one of -l, -L, -d, -D must be specified, too
-   -p,--path-to-home path  use specified path instead of user account home dir
-                           or /home prefix
-   -U,--unix userlist      additionally print UNIX users when using -l or -L\
-                           on a UNIX Samba server
-                           userlist is a comma-separated list of usernames
-                           or uid ranges (root,-25,50-100).
-                           (enumerating large ranges can take a long time!)
-   -s,--no-sids            (ignored)
-   -m,--no-mount           (ignored)
-   -g,--local-groups       (ignored)
-   -h,--help               displays this message
-   -V,--version            version information and exit
+   -l,--local [machine]    Print local user accounts of \"machine\",
+                           from local machine if no machine specified.
+                           Automatically adding machine prefix for local
+                           machine depends on settings in /etc/nsswitch.conf.
+   -L,--Local machine      Ditto, but generate username with machine prefix.
+   -d,--domain [domain]    Print domain accounts,
+                           from current domain if no domain specified.
+   -c,--current            Print current user.
+   -S,--separator char     For -L use character char as domain\\user
+                           separator in username instead of the default '+'.
+   -o,--id-offset offset   Change the default offset (0x10000) added to uids
+                           of foreign local machine accounts.  Use with -l/-L.
+   -u,--username username  Only return information for the specified user.
+                           One of -l, -d must be specified, too
+   -b,--no-builtin         Don't print BUILTIN users.
+   -p,--path-to-home path  Use specified path instead of user account home dir
+                           or /home prefix.
+   -U,--unix userlist      Print UNIX users when using -l on a UNIX Samba
+                           server.  Userlist is a comma-separated list of
+                           usernames or uid ranges (root,-25,50-100).
+                           Enumerating large ranges can take a long time!
+   -h,--help               Displays this message.
+   -V,--version            Version information and exit.
 
 Default is to print local accounts on stand-alone machines, domain accounts
 on domain controllers and domain member machines.
-</pre><p>The <span class="command"><strong>mkpasswd</strong></span> program can be used to help configure
-      Cygwin by creating a <code class="filename">/etc/passwd</code> from your system
-      information. Its use is essential to include Windows security
-      information. However, the actual passwords are determined by Windows, not
-      by the content of <code class="filename">/etc/passwd</code>.</p><p>The command is initially called by <span class="command"><strong>setup.exe</strong></span> to
-      create a default <code class="filename">/etc/passwd</code>. This should be
-      sufficient in most circumstances. However, especially when working in a
-      multi-domain environment, you can use <span class="command"><strong>mkpasswd</strong></span>
-      manually to create a more complete <code class="filename">/etc/passwd</code> file
-      for all domains. Especially when you have the same user name used on
-      multiple machines or in multiple domains, you can use the
-      <code class="literal">-D</code>, <code class="literal">-L</code> and <code class="literal">-C</code>
-      options to create unique domain\user style usernames.</p><p>Note that this information is static. If you change the user
-      information in your system, you'll need to regenerate the passwd file for
-      it to have the new information.</p><p>The <code class="literal">-d/-D</code> and <code class="literal">-l/-L</code> options
-      allow you to specify where the information comes from, the local machine
-      or the domain (default or given), or both. With the
-      <code class="literal">-d/-D</code> options the program contacts the Domain
-      Controller, which may be unreachable or have restricted access.
-      Comma-separated from the machine or domain, you can specify an offset
-      which is used as base added to the user's RID to compute the uid (offset
-      + RID = uid). This allows to create the same uids every time you re-run
-      <span class="command"><strong>mkpasswd</strong></span>. An entry for the current user can be created
-      by using the option <code class="literal">-c</code> or <code class="literal">-C</code>. If
-      you want to use one of the <code class="literal">-D</code>, <code class="literal">-L</code>
-      or <code class="literal">-C</code> options, but you don't like the backslash as
-      domain/group separator, you can specify another separator using the
-      <code class="literal">-S</code> option, similar to the <span class="command"><strong>mkgroup</strong></span>.
-      The <code class="literal">-o</code> option allows for special cases (such as
+</pre><p>The <span class="command"><strong>mkpasswd</strong></span> program can be used to create a
+      <code class="filename">/etc/passwd</code> file.  Cygwin doesn't need this file,
+      because it reads user information from the Windows account databases,
+      but you can add an <code class="filename">/etc/passwd</code> file, for instance
+      if your machine is often disconnected from its domain controller.</p><p>Note that this information is static, in contrast to the information
+      automatically gathered by Cygwin from the Windows account databases. If
+      you change the user information on your system, you'll need to regenerate
+      the passwd file for it to have the new information.</p><p>By default, the information generated by <span class="command"><strong>mkpasswd</strong></span>
+      is equivalent to the information generated by Cygwin itself.  The
+      <code class="literal">-d</code> and <code class="literal">-l/-L</code> options allow you to
+      specify where the information comes from, some domain, or the local SAM
+      of a machine.  Note that you can only enumerate accounts from trusted
+      domains.  Any non-trusted domain will be ignored.  Access-restrictions
+      of your current account apply.  The <code class="literal">-l/-L</code> when used
+      with a machine name, tries to contact that machine to enumerate local
+      groups of other machines, typically outside of domains.  This scenario
+      cannot be covered by Cygwin's account automatism.  If you want to use
+      the <code class="literal">-L</code> option, but you don't like the default
+      domain/group separator from <code class="filename">/etc/nsswitch.conf</code>,
+      you can specify another separator using the <code class="literal">-S</code> option,
+      analog to <span class="command"><strong>mkgroup</strong></span>.</p><p>For very simple needs, an entry for the current user can be created
+      by using the option <code class="literal">-c</code>.</p><p>The <code class="literal">-o</code> option allows for special cases (such as
       multiple domains) where the UIDs might match otherwise. The
       <code class="literal">-p</code> option causes <span class="command"><strong>mkpasswd</strong></span> to use
       the specified prefix instead of the account home dir or <code class="literal">/home/
-      </code>. For example, this command: </p><div class="example"><a name="utils-althome-ex"></a><p class="title"><b>Example 3.11. Using an alternate home root</b></p><div class="example-contents"><pre class="screen">
+      </code>. For example, this command: </p><div class="example"><a name="utils-althome-ex"></a><p class="title"><b>Example 3.8. Using an alternate home root</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>mkpasswd -l -p "$(cygpath -H)" &gt; /etc/passwd</code></strong>
 </pre></div></div><p><br class="example-break"> would put local users' home directories in the Windows
       'Profiles' directory. The <code class="literal">-u</code> option creates just an
@@ -807,7 +786,8 @@ on domain controllers and domain member machines.
       to enumerate the standard UNIX users on a Samba machine. It's used
       together with <code class="literal">-l samba-server</code> or <code class="literal">-L
       samba-server</code>. The normal UNIX users are usually not enumerated,
-      but they can show up as file owners in <span class="command"><strong>ls -l</strong></span> output. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mount"></a>mount</h3></div></div></div><pre class="screen">
+      but they can show up as file owners in <span class="command"><strong>ls -l</strong></span> output.
+      </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="mount"></a>mount</h3></div></div></div><pre class="screen">
 Usage: mount [OPTION] [&lt;win32path&gt; &lt;posixpath&gt;]
        mount -a
        mount &lt;posixpath&gt;
@@ -833,7 +813,7 @@ Display information about mounted filesystems, or mount a filesystem
       <a class="xref" href="using.html#mount-table" title="The Cygwin Mount Table">the section called “The Cygwin Mount Table”</a> for more information on the concepts behind
       the Cygwin POSIX file system and strategies for using mounts. To remove
       mounts temporarily, use <span class="command"><strong>umount</strong></span></p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="utils-mount"></a>Using mount</h4></div></div></div><p>If you just type <span class="command"><strong>mount</strong></span> with no parameters, it
-        will display the current mount table for you.</p><div class="example"><a name="utils-mount-ex"></a><p class="title"><b>Example 3.12. Displaying the current set of mount points</b></p><div class="example-contents"><pre class="screen">
+        will display the current mount table for you.</p><div class="example"><a name="utils-mount-ex"></a><p class="title"><b>Example 3.9. Displaying the current set of mount points</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>mount</code></strong>
 C:/cygwin/bin on /usr/bin type ntfs (binary)
 C:/cygwin/lib on /usr/lib type ntfs (binary)
@@ -848,7 +828,7 @@ D: on /mnt/d type fat (binary,user,noumount)
         adding new mounts to the mount table in memory. The following example
         demonstrates how to mount the directory
         <code class="filename">//pollux/home/joe/data</code> to
-        <code class="filename">/data</code> for the duration of the current session. </p><div class="example"><a name="utils-mount-add-ex"></a><p class="title"><b>Example 3.13. Adding mount points</b></p><div class="example-contents"><pre class="screen">
+        <code class="filename">/data</code> for the duration of the current session. </p><div class="example"><a name="utils-mount-add-ex"></a><p class="title"><b>Example 3.10. Adding mount points</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>ls /data</code></strong>
 ls: /data: No such file or directory
 <code class="prompt">$</code> <strong class="userinput"><code>mount //pollux/home/joe/data /data</code></strong>
@@ -940,7 +920,7 @@ D: on /d type fat (binary,user,noumount)
         <code class="filename">/cygdrive/z</code>. The <span class="command"><strong>mount</strong></span> utility
         can be used to change this default automount prefix through the use of
         the "--change-cygdrive-prefix" option. In the following example, we
-        will set the automount prefix to <code class="filename">/mnt</code>:</p><div class="example"><a name="utils-cygdrive-ex"></a><p class="title"><b>Example 3.14. Changing the default prefix</b></p><div class="example-contents"><pre class="screen">
+        will set the automount prefix to <code class="filename">/mnt</code>:</p><div class="example"><a name="utils-cygdrive-ex"></a><p class="title"><b>Example 3.11. Changing the default prefix</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>mount --change-cygdrive-prefix /mnt</code></strong>
 </pre></div></div><br class="example-break"><p>Note that the cygdrive prefix can be set both per-user and
         system-wide, and that as with all mounts, a user-specific mount takes
@@ -950,7 +930,7 @@ D: on /d type fat (binary,user,noumount)
         <code class="literal">-p</code> option. Using the <code class="literal">--options</code>
         flag with <code class="literal">--change-cygdrive-prefix</code> makes all new
         automounted filesystems default to this set of options. For instance
-        (using the short form of the command line flags)</p><div class="example"><a name="utils-cygdrive-ex2"></a><p class="title"><b>Example 3.15. Changing the default prefix with specific mount options</b></p><div class="example-contents"><pre class="screen">
+        (using the short form of the command line flags)</p><div class="example"><a name="utils-cygdrive-ex2"></a><p class="title"><b>Example 3.12. Changing the default prefix with specific mount options</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>mount -c /mnt -o binary,noacl</code></strong>
 </pre></div></div><br class="example-break"></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="utils-limitations"></a>Limitations</h4></div></div></div><p>Limitations: there is a hard-coded limit of 64 mount points (up to
         Cygwin 1.7.9: 30 mount points). Also, although you can mount to
@@ -992,15 +972,13 @@ User operations:
 System operations:
   -i, --inactive NUM       set NUM of days before inactive accounts are disabled
                            (inactive accounts are those with expired passwords).
-  -n, --minage DAYS        set system minimum password age to DAYS days.
-  -x, --maxage DAYS        set system maximum password age to DAYS days.
+  -n, --minage MINDAYS     set system minimum password age to MINDAYS days.
+  -x, --maxage MAXDAYS     set system maximum password age to MAXDAYS days.
   -L, --length LEN         set system minimum password length to LEN.
 
 Other options:
   -d, --logonserver SERVER connect to SERVER (e.g. domain controller).
-                           Default server is the local system, unless
-                           changing the current user, in which case the
-                           default is the content of $LOGONSERVER.
+                           Usually not required.
   -S, --status             display password status for USER (locked, expired,
                            etc.) plus global system password settings.
   -h, --help               output usage information and exit.
@@ -1064,11 +1042,12 @@ specifying an empty password.
       means `no restrictions'.</p><p> All operations affecting the current user are by default run against
       the logon server of the current user (taken from the environment variable
       <code class="envar">LOGONSERVER</code>. When password or account information of other
-      users should be changed, the default server is the local system. To
-      change a user account on a remote machine, use the <code class="literal">-d</code>
-      option to specify the machine to run the command against. Note that the
-      current user must be a valid member of the administrators group on the
-      remote machine to perform such actions. </p><p>Users can use the <span class="command"><strong>passwd -R</strong></span> to enter a password
+      users should be changed, the logon server is evaluated automatically.
+      In rare cases, it might be necessary to switch to another domain
+      controller to perform the action.  In this case, use the
+      <code class="literal">-d</code> option to specify the machine to run the command
+      against. Note that the current user must have account operator permissions
+      to perform user account changes in a domain. </p><p>Users can use the <span class="command"><strong>passwd -R</strong></span> to enter a password
       which then gets stored in a special area of the registry on the local
       system, which is also used by Windows to store passwords of accounts
       running Windows services. When a privileged Cygwin application calls the
@@ -1078,7 +1057,7 @@ specifying an empty password.
       This allows you to logon through, for instance, <span class="command"><strong>ssh</strong></span>
       with public key authentication and get a full qualified user token with
       all credentials for network access. However, the method has some
-      drawbacks security-wise. This is explained in more detail in <a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called “Using Windows security in Cygwin”</a>.</p><p>Please note that storing passwords in that registry area is a
+      drawbacks security-wise. This is explained in more detail in <a class="xref" href="ntsec.html" title="POSIX accounts, permission, and security">the section called “POSIX accounts, permission, and security”</a>.</p><p>Please note that storing passwords in that registry area is a
       privileged operation which only administrative accounts are allowed to
       do. Administrators can enter the password for other user accounts into
       the registry by specifying the username on the commandline. If normal,
@@ -1157,7 +1136,8 @@ Actions:
  unset KEY\VALUE            removes VALUE from KEY
  load KEY\SUBKEY PATH       load hive from PATH into new SUBKEY
  unload KEY\SUBKEY          unload hive and remove SUBKEY
- save KEY\SUBKEY PATH       save SUBKEY into new hive PATH
+ save KEY\SUBKEY PATH       save SUBKEY into new file PATH
+ restore KEY\SUBKEY PATH    restore SUBKEY from file PATH
 
 Options for 'list' Action:
 
@@ -1185,6 +1165,11 @@ Options for 'set' Action:
 Options for 'set' and 'unset' Actions:
 
  -K&lt;c&gt;, --key-separator[=]&lt;c&gt;  set key separator to &lt;c&gt; instead of '\'
+
+Options for 'restore' action:
+
+ -f, --force    restore even if open handles exist at or beneath the location
+                in the registry hierarchy to which KEY\SUBKEY points
 
 Other Options:
 
@@ -1268,17 +1253,25 @@ Example: regtool.exe get '\user\software\Microsoft\Clock\iFormat'
       contents of a registry hive into it. The parent key must be
       HKEY_LOCAL_MACHINE or HKEY_USERS. The <code class="literal">unload</code> action
       unloads the file and removes the subkey. </p><p>The <code class="literal">save</code> action saves a subkey into a registry
-      hive. </p><p> By default, the last "\" or "/" is assumed to be the separator
+      file.  Ideally you append the suffix <code class="filename">.reg</code> to the file
+      so it gets automatically recognized as registry file by
+      <span class="command"><strong>Windows Explorer</strong></span>.</p><p>The <code class="literal">restore</code> action restores a registry subkey
+      from a file saved via the aforementioned <code class="literal">save</code> action.
+      </p><p> By default, the last "\" or "/" is assumed to be the separator
       between the key and the value. You can use the <code class="literal">-K</code>
       option to provide an alternate key/value separator character. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="setfacl"></a>setfacl</h3></div></div></div><pre class="screen">
-Usage: setfacl [-r] (-f ACL_FILE | -s acl_entries) FILE...
-       setfacl [-r] ([-d acl_entries] [-m acl_entries]) FILE...
+Usage: setfacl [-r] {-f ACL_FILE | -s acl_entries} FILE...
+       setfacl [-r] {-b|[-d acl_entries] [-m acl_entries]} FILE...
+
 
 Modify file and directory access control lists (ACLs)
 
+  -b, --remove-all remove all extended ACL entries
   -d, --delete     delete one or more specified ACL entries
   -f, --file       set ACL entries for FILE to ACL entries read
                    from a ACL_FILE
+  -k, --remove-default
+		   remove all default ACL entries
   -m, --modify     modify one or more specified ACL entries
   -r, --replace    replace mask entry with maximum permissions
                    needed for the file group class
@@ -1287,11 +1280,11 @@ Modify file and directory access control lists (ACLs)
   -h, --help       output usage information and exit
   -V, --version    output version information and exit
 
-At least one of (-d, -f, -m, -s) must be specified
+At least one of (-b, -d, -f, -k, -m, -s) must be specified
 </pre><p> For each file given as parameter, <span class="command"><strong>setfacl</strong></span> will
       either replace its complete ACL (<code class="literal">-s</code>,
       <code class="literal">-f</code>), or it will add, modify, or delete ACL entries.
-      For more information on Cygwin and Windows ACLs, see see <a class="xref" href="ntsec.html" title="Using Windows security in Cygwin">the section called “Using Windows security in Cygwin”</a> in the Cygwin User's Guide. </p><p> Acl_entries are one or more comma-separated ACL entries from the
+      For more information on Cygwin and Windows ACLs, see see <a class="xref" href="ntsec.html" title="POSIX accounts, permission, and security">the section called “POSIX accounts, permission, and security”</a> in the Cygwin User's Guide. </p><p> Acl_entries are one or more comma-separated ACL entries from the
       following list:
       </p><pre class="screen">
          u[ser]::perm
@@ -1310,17 +1303,19 @@ At least one of (-d, -f, -m, -s) must be specified
       permission or it is the octal representation of the permissions, a value
       from 0 (equivalent to "---") to 7 ("rwx"). <span class="emphasis"><em>uid</em></span> is a
       user name or a numerical uid. <span class="emphasis"><em>gid</em></span> is a group name or
-      a numerical gid. </p><p> The following options are supported: </p><p> <code class="literal">-d</code> Delete one or more specified entries from the
+      a numerical gid. </p><p> The following options are supported: </p><p> <code class="literal">-b</code> Remove all extended ACL entries.  The base
+      ACL entries of the owner, group and others are retained.</p><p> <code class="literal">-d</code> Delete one or more specified entries from the
       file's ACL. The owner, group and others entries must not be deleted.
       Acl_entries to be deleted should be specified without permissions, as in
       the following list:
       </p><pre class="screen">
-         u[ser]:uid
-         g[roup]:gid
-         d[efault]:u[ser]:uid
-         d[efault]:g[roup]:gid
-         d[efault]:m[ask]:
-         d[efault]:o[ther]:
+         u[ser]:uid[:]
+         g[roup]:gid[:]
+	 m[ask][:]
+         d[efault]:u[ser][:uid]
+         d[efault]:g[roup][:gid]
+         d[efault]:m[ask][:]
+         d[efault]:o[ther][:]
 </pre><p> </p><p> <code class="literal">-f</code> Take the Acl_entries from ACL_FILE one per
       line. Whitespace characters are ignored, and the character "#" may be
       used to start a comment. The special filename "-" indicates reading from
@@ -1333,7 +1328,8 @@ $ getfacl source_file | setfacl -f - target_file
       file group class of the file, and no duplicate user or group entries with
       the same uid/gid. </p><p> If it is a directory: one default user entry for the owner of the
       file, one default group entry for the group of the file, one default mask
-      entry for the file group class, and one default other entry. </p><p> <code class="literal">-m</code> Add or modify one or more specified ACL
+      entry for the file group class, and one default other entry. </p><p> <code class="literal">-k</code> Remove all default ACL entries. If no default
+      ACL entries exist, no warnings are issued. </p><p> <code class="literal">-m</code> Add or modify one or more specified ACL
       entries. Acl_entries is a comma-separated list of entries from the same
       list as above. </p><p> <code class="literal">-r</code> Causes the permissions specified in the mask
       entry to be ignored and replaced by the maximum permissions needed for
@@ -1344,8 +1340,7 @@ $ getfacl source_file | setfacl -f - target_file
       <code class="literal">-s</code> options may be used only exclusively. </p><p> Directories may contain default ACL entries. Files created in a
       directory that contains default ACL entries will have permissions
       according to the combination of the current umask, the explicit
-      permissions requested and the default ACL entries </p><p> Limitations: Under Cygwin, the default ACL entries are not taken
-      into account currently. </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="setmetamode"></a>setmetamode</h3></div></div></div><pre class="screen">
+      permissions requested and the default ACL entries </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="setmetamode"></a>setmetamode</h3></div></div></div><pre class="screen">
 Usage: setmetamode [metabit|escprefix]
 
 Get or set keyboard meta mode
