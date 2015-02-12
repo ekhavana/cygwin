@@ -59,10 +59,10 @@ the systems know it's the same account?  After all, the name is
 the same, right?  The answer is, these accounts are <span class="bold"><strong>not</strong></span> identical.  All machines on the network will
 treat these SIDs as identifying two separate accounts.  One is
 "FOO\johndoe", the other one is "BAR\johndoe" or "johndoe@bar.local".
-Different SID, different account.  Full stop.  </p><p>Starting with Cygwin 1.7.33, Cygwin uses an automatic, internal
+Different SID, different account.  Full stop.  </p><p>Starting with Cygwin 1.7.34, Cygwin uses an automatic, internal
 translation from Windows SID to POSIX UID/GID.  This mechanism, which is
 the preferred method for the SID&lt;=&gt;UID/GID mapping, is described in
-detail in <a class="xref" href="ntsec.html#ntsec-mapping" title="Mapping Windows accounts to POSIX accounts">the section called “Mapping Windows accounts to POSIX accounts”</a>.</p><p>Prior to Cygwin 1.7.33, the last part of the SID, the so called
+detail in <a class="xref" href="ntsec.html#ntsec-mapping" title="Mapping Windows accounts to POSIX accounts">the section called “Mapping Windows accounts to POSIX accounts”</a>.</p><p>Prior to Cygwin 1.7.34, the last part of the SID, the so called
 "Relative IDentifier" (RID), was by default used as UID and/or GID
 when you created the <code class="filename">/etc/passwd</code> and
 <code class="filename">/etc/group</code> files using the
@@ -163,7 +163,7 @@ between SIDs and POSIX uid/gid which even has Active Directory support.  It
 allows us to generate uid/gid values from SIDs and vice versa.  The mechanism is
 documented, albeit in a confusing way and spread over multiple MSDN articles.
 </p><p>
-Starting with Cygwin 1.7.33, Cygwin utilizes an approach inspired by the
+Starting with Cygwin 1.7.34, Cygwin utilizes an approach inspired by the
 mapping method as implemented by SFU, with a few differences for backward
 compatibility and to handle some border cases differently.
 </p><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ntsec-mapping-how"></a>Mapping Windows SIDs to POSIX uid/gid values</h4></div></div></div><p>
