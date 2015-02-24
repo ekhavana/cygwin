@@ -1,6 +1,6 @@
 Cygwin/X Frequently Asked Questions
 
-2015-02-23 16:05
+2015-02-24 22:45
      __________________________________________________________________
 
    Table of Contents
@@ -624,6 +624,8 @@ $ nedit
      Note: Note that this start menu shortcut is created by the xinit
      package, and your changes will be overwritten when the xinit package
      is updated.
+
+     Note: Note that X server options to startxwin are preceded by --.
      * If you use startxwin, xinit or startx to start the server, run it
        as e.g. startxwin -- -nolock, xinit -- -nolock or startx -- -nolock
      * If you use startxwin.bat or startxwin.sh to start the server, add
@@ -1026,28 +1028,27 @@ X11Forwarding yes
 
    6.6. Remote clients can't connect
 
-   startx and startxwin now pass -nolisten tcp to the X server by default,
-   which increases the security of the X server by not opening a TCP/IP
-   socket.
+   The X server now uses -nolisten tcp by default, which increases the
+   security of the X server by not opening a TCP/IP socket.
 
-   Use the -listen option to startxwin to allow the X server to open a
-   TCP/IP socket as well, e.g. startxwin -- -listen. See Q: 4.2..
+   Use the -listen tcp option to allow the X server to open a TCP/IP
+   socket as well, e.g. startxwin -- -listen tcp. See Q: 4.2..
 
-   A better solution is to stop explicitly allowing access using xhost or
-   by disabling access control, and stop setting DISPLAY. Use ssh -Y
-   instead. (See the User's Guide section on X forwarding using ssh for
-   more details).
+   A better solution is to stop explicitly setting DISPLAY and allowing
+   access using xhost or by disabling access control. Use ssh -Y instead.
+   (See the User's Guide section on X forwarding using ssh for more
+   details).
 
    6.7. X sessions forwarded by PuTTY can't connect. Non-cygwin local X
    clients can't connect.
 
-   startx and startxwin now pass -nolisten tcp to the X server by default,
-   which increases the security of the X server by not opening a TCP/IP
-   socket, only a local (UNIX domain) socket. Non-cygwin applications
-   cannot connect to that socket.
+   The X server now uses -nolisten tcp by default, which increases the
+   security of the X server by not opening a TCP/IP socket, only a local
+   (UNIX domain) socket. Non-cygwin applications cannot connect to that
+   socket.
 
-   Use the -listen option to startxwin to allow the X server to open a
-   TCP/IP socket as well, e.g. startxwin -- -listen. See Q: 4.2..
+   Use the -listen tcp option to allow the X server to open a TCP/IP
+   socket as well, e.g. startxwin -- -listen tcp. See Q: 4.2..
 
 7. XDMCP connections
 

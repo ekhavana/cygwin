@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2015-02-23 16:05</H2
+>2015-02-24 22:45</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -2358,7 +2358,10 @@ CLASS="note"
 ><P
 ><B
 >Note: </B
->Note well that the entire command after -c is quoted</P
+>Note well that the entire command after <CODE
+CLASS="parameter"
+>-c</CODE
+> is quoted</P
 ></BLOCKQUOTE
 ></DIV
 ><DIV
@@ -2368,13 +2371,29 @@ CLASS="note"
 ><P
 ><B
 >Note: </B
->Note that this start menu shortcut is created by the  <TT
+>Note that this start menu shortcut is created by the <TT
 CLASS="filename"
 >xinit</TT
 > package, and your changes will be overwritten when the <TT
 CLASS="filename"
 >xinit</TT
 > package is updated.</P
+></BLOCKQUOTE
+></DIV
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>Note that X server options to <B
+CLASS="command"
+>startxwin</B
+> are preceded by <CODE
+CLASS="parameter"
+>--</CODE
+>.</P
 ></BLOCKQUOTE
 ></DIV
 ></LI
@@ -3934,31 +3953,20 @@ CLASS="answer"
 ><B
 > </B
 >
-<B
-CLASS="command"
->startx</B
-> and <B
-CLASS="command"
->startxwin</B
-> now pass
-<CODE
+The X server now uses <CODE
 CLASS="parameter"
 >-nolisten tcp</CODE
-> to the X server by default, which increases
+> by default, which increases
 the security of the X server by not opening a TCP/IP socket.
 </P
 ><P
 >&#13;Use the <CODE
 CLASS="parameter"
->-listen</CODE
-> option to
-<B
+>-listen tcp</CODE
+> option to allow the X server to open
+a TCP/IP socket as well, e.g. <B
 CLASS="command"
->startxwin</B
-> to allow the X server to open a TCP/IP socket as
-well, e.g. <B
-CLASS="command"
->startxwin -- -listen</B
+>startxwin -- -listen tcp</B
 >.
 See <A
 HREF="cygwin-x-faq.html#q-command-line-args"
@@ -3966,12 +3974,11 @@ HREF="cygwin-x-faq.html#q-command-line-args"
 >.
 </P
 ><P
->&#13;A better solution is to stop explicitly allowing access using
+>&#13;A better solution is to stop explicitly setting DISPLAY and allowing access using
 <B
 CLASS="command"
 >xhost</B
-> or by disabling access control, and stop setting
-DISPLAY.
+> or by disabling access control.
 Use <B
 CLASS="command"
 >ssh -Y</B
@@ -4008,32 +4015,21 @@ CLASS="answer"
 ><B
 > </B
 >
-<B
-CLASS="command"
->startx</B
-> and <B
-CLASS="command"
->startxwin</B
-> now pass
-<CODE
+The X server now uses <CODE
 CLASS="parameter"
 >-nolisten tcp</CODE
-> to the X server by default, which increases
+> by default, which increases
 the security of the X server by not opening a TCP/IP socket, only a local (UNIX
 domain) socket.  Non-cygwin applications cannot connect to that socket.
 </P
 ><P
 >&#13;Use the <CODE
 CLASS="parameter"
->-listen</CODE
-> option to
-<B
+>-listen tcp</CODE
+> option to allow the X server to open
+a TCP/IP socket as well, e.g. <B
 CLASS="command"
->startxwin</B
-> to allow the X server to open a TCP/IP socket as
-well, e.g. <B
-CLASS="command"
->startxwin -- -listen</B
+>startxwin -- -listen tcp</B
 >.
 See <A
 HREF="cygwin-x-faq.html#q-command-line-args"
