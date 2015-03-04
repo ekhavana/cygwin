@@ -530,9 +530,9 @@ file set up to all default values:
   group:  files db
 
   db_enum:  cache builtin
-  db_home:  cygwin desc
-  db_shell: cygwin desc
-  db_gecos: cygwin desc
+  db_home:  /home/%U
+  db_shell: /bin/bash
+  db_gecos: &lt;empty$gt;
 </pre><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-syntax"></a>The <code class="filename">/etc/nsswitch.conf</code> syntax</h5></div></div></div><p>
 The first line, starting with a hash <code class="literal">#</code> is a comment.
 The hash character starts a comment, just as in shell scripts.  Everything
@@ -766,14 +766,10 @@ of each schema when used with <code class="literal">db_home:</code>
 As has been briefly mentioned before, the default setting for
 <code class="literal">db_home:</code> is
 </p><pre class="screen">
-  db_home: cygwin desc
+  db_home: /home/%U
 </pre><p>
-So, for AD accounts Cygwin tries to fetch the path from the user's
-<code class="literal">cygwinHome</code> attribute first.  If that's not available,
-or if the account is a local SAM account, Cygwin tries to get the home
-directory from the <code class="literal">home=</code> attribute of the user's
-<code class="literal">description</code> field.  If that's not available, Cygwin
-falls back to the path <code class="filename">/home/$USERNAME</code>.
+So by default, Cygwin just sets the home dir to
+<code class="filename">/home/$USERNAME</code>.
 </p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-shell"></a>The <code class="literal">db_shell:</code> setting</h5></div></div></div><p>
 The <code class="literal">db_shell:</code> setting defines how Cygwin fetches the user's
 login shell, the content of the <code class="literal">pw_shell</code> member of the
@@ -804,17 +800,10 @@ when used with <code class="literal">db_shell:</code>
 	      define a non-empty pathname, the user's login shell is set to
 	      <code class="filename">/bin/bash</code>.</dd></dl></div><p>
 As for <code class="literal">db_home:</code>, the default setting for
-<code class="literal">db_shell:</code> is
+<code class="literal">db_shell:</code> is pretty much a constant
 </p><pre class="screen">
-  db_shell: cygwin desc
-</pre><p>
-So, for AD accounts Cygwin tries to fetch the path from the user's
-<code class="literal">cygwinShell</code> attribute first.  If that's not available,
-or if the account is a local SAM account, Cygwin tries to get the home
-directory from the <code class="literal">shell=</code> attribute of the user's
-<code class="literal">description</code> field.  If that's not available, Cygwin
-falls back to <code class="filename">/bin/bash</code>.
-</p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-gecos"></a>The <code class="literal">db_gecos:</code> setting</h5></div></div></div><p>
+  db_shell: /bin/bash
+</pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-gecos"></a>The <code class="literal">db_gecos:</code> setting</h5></div></div></div><p>
 The <code class="literal">db_gecos:</code> setting defines how to fetch additional
 content for the <code class="literal">pw_gecos</code> member of the user's passwd entry.
 There's always a fixed, Cygwin-specific part in the <code class="literal">pw_gecos</code>
@@ -844,17 +833,7 @@ The following list describes the meaning of each schema when used with
 	      may come in handy.</dd><dt><span class="term">Fallback</span></dt><dd>If none of the schemes given for <code class="literal">db_gecos:</code>
 	      define a non-empty pathname, nothing is added to
 	      <code class="literal">pw_gecos</code>.</dd></dl></div><p>
-As for <code class="literal">db_home:</code> and <code class="literal">db_shell:</code>, the
-default setting for <code class="literal">db_gecos:</code> is
-</p><pre class="screen">
-  db_gecos: cygwin desc
-</pre><p>
-So, for AD accounts Cygwin tries to fetch the string from the user's
-<code class="literal">cygwinGecos</code> attribute first.  If that's not available,
-or if the account is a local SAM account, Cygwin tries to get the home
-directory from the <code class="literal">gecos=</code> attribute of the user's
-<code class="literal">description</code> field.  If that's not available, Cygwin
-just doesn't add anything to <code class="literal">pw_gecos</code>.
+The default setting for <code class="literal">db_gecos:</code> is the empty string.
 </p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-cygwin"></a>The <code class="literal">cygwin</code> schema</h5></div></div></div><p>
 The <code class="literal">cygwin</code> schema is based on a Cygwin-specific Active
 Directory schema extension.  Using this schema extension allows to maintain

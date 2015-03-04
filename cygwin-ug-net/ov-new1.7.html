@@ -1,5 +1,36 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.34"></a>What's new and what changed in 1.7.34</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new1.7"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.35"></a>What's new and what changed in 1.7.35</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+Performance improvements of the new account DB handling.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Since 1.7.34, chmod does not always affect the POSIX permission mask as
+returned by stat(2) or printed by ls(1), due to the improved POSIX ACL
+handling.  However, that's still far from perfect, so, as a temporary
+workaround, chmod now checks if secondary groups and users in the ACL
+have more permissions than the primary group.  If so, the permissions of
+the secondary users and groups will be reduced according to the mask
+given by the new primary group permissions.  I.e, chmod 600 will remove
+all permissions from the primary group as well as all secondary user and
+group entries in the ACL.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Change handling of group permissions if owner SID == group SID.  Now the
+group permissions don't mirror the user permissions anymore, thus
+leading to less hassle with security-conscious applications.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Allow group SID to be the same as owner SID for "Microsoft Accounts".
+Those have the group in their user token set to the owner SID by
+default.  Drop the workaround to change their primary group to "Users".
+It's not required anymore due to the aforementioned changes.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Change getfacl long options from --all to --access and from --dir to
+--default, along the lines of the Linux getfacl tool.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Don't raise a SIGSYS signal in the XSI IPC functions if cygserver is not
+running.  Just return -1 with errno set to ENOSYS.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New APIs: cabsl, cimagl, creall, finitel, hypotl, sqrtl.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New API: issetugid.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new1.7.34"></a>What's new and what changed in 1.7.34</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 Cygwin can now generate passwd/group entries directly from Windows user
 databases (local SAM or Active Directory), thus allowing to run Cygwin
 without having to create /etc/passwd and /etc/group files.  Introduce
