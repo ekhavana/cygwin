@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XSERVER</TITLE>
 </HEAD><BODY>
 <H1>XSERVER</H1>
-Section: User Commands  (1)<BR>Updated: xorg-server 1.16.3<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.17.1<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -206,11 +206,11 @@ Prohibit creating indirect GLX contexts.  Indirect GLX is of limited use,
 since it lacks support for many modern OpenGL features and extensions;
 it's slower than direct contexts; and it opens a large attack surface for
 protocol parsing errors.
+This is the default unless +iglx is specified.
 <DT><B>+iglx</B>
 
 <DD>
 Allow creating indirect GLX contexts.
-This is the default unless -iglx is specified.
 <DT><B>-maxbigreqsize </B><I>size</I>
 
 <DD>
@@ -230,6 +230,15 @@ with
 <B>-nolisten tcp</B>.
 
 This option may be issued multiple times to disable listening to different
+transport types.
+<DT><B>-listen </B><I>trans-type</I>
+
+<DD>
+enables a transport type.  For example, TCP/IP connections can be enabled
+with
+<B>-listen tcp</B>.
+
+This option may be issued multiple times to enable listening to different
 transport types.
 <DT><B>-noreset</B>
 
@@ -785,6 +794,6 @@ Dave Wiggins took over post-R5 and made substantial improvements.
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
-Time: 13:23:26 GMT, January 31, 2015
+Time: 23:55:47 GMT, March 04, 2015
 </BODY>
 </HTML>
