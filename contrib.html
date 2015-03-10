@@ -46,28 +46,18 @@ contribution rules.  See their project pages for more information.</p>
 
 <P>The code corresponding to cygwin1.dll is mostly in the winsup
 directory with additional code coming from newlib/libc and newlib/libm.
-Any changes you make should be to the <a href="cvs.html">current
+Any changes you make should be to the <a href="git.html">current
 development sources</a>.  This makes it much easier to integrate your
-changes once they're completed and tested.  Note that the current CVS
+changes once they're completed and tested.  Note that the current GIT
 tree (and the development snapshots) should compile, but they should
 always be assumed to be unstable since they contain untested,
 experimental code.
 
 <P>Build instructions are included in the <a href="faq.html">FAQ</a> under
-"How do I build Cygwin on my own?".  If your object directory is
-/c/obj, the Cygwin dll you will build should be
-/c/obj/i686-pc-cygwin/winsup/cygwin/new-cygwinxx.dll where xx represents
-the current API_MAJOR version number (currently it is 1).
+"How do I build Cygwin on my own?".
 
-<P>Note that minimally, the top-level source tree needs to contain:
-
-<blockquote>
-Makefile.in, config, config-ml.in, config.guess, config.sub, configure,
-configure.in, include, install-sh, ltconfig, ltmain.sh, missing, move-if-change,
-newlib, symlink-tree, winsup, ylwrap.
-</blockquote>
-
-<p>but you really should just check out the winsup module as mentioned on the Cygwin <a href="cvs.html">CVS page</a>.
+<p>Basically, just clone the newlib-cygwin GIT repository as mentioned on the
+Cygwin <a href="git.html">GIT page</a>.
 
 <div id="background">
 <b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
@@ -105,13 +95,13 @@ style of the surrounding code.  For the most part, that means following
 the <a href="http://www.gnu.org/prep/standards/html_node/Writing-C.html#Writing-C">
 GNU coding standards</a> but some parts of the code which have been imported
 from other sources use other styles.  Just pay close attention to the formatting
-of the surrounding code and don't, e.g., add K&R style coding to a file which
+of the surrounding code and don't, e.g., add K&amp;R style coding to a file which
 uses GNU formatting.</p>
 
 <p>If you want to keep track of who's doing what to the sources, you can
 subscribe to the cygwin-cvs and newlib-cvs mailing lists using the standard
 subscription techniques employed for the <a href="lists.html">other
-non-cvs mailing lists</a>.</p>
+mailing lists</a>.</p>
 
 <div id="background">
 <b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
@@ -120,28 +110,30 @@ non-cvs mailing lists</a>.</p>
 </div><br>
 <P>Once you've finished making and testing your changes, you should send
 a unified diff to the <a href="mailto:cygwin-patches@cygwin.com">cygwin-patches list</a>.
-As an example, if you have modified several files in /c/src/winsup, then do the following
-in bash:</p>
+As an example, if you have modified several files in /oss/newlib-cygwin/winsup,
+then do the following in bash:</p>
 
 <pre>
-      cd /c/src/winsup
-      cvs diff -up &gt; /tmp/mypatch
+      cd /oss/newlib-cygwin
+      git commit -a
+      git format-patch
 </pre>
 
-<p>This will produce one file with all of your changes, making it easy for someone
-to review and apply.  Send the contents of this file <em>as plain text</em>.  Do not
-uuencode or otherwise encrypt it.</p>
+<p>This will produce files with all of your changes newer that origin, making
+it easy for someone to review and, if you don't have write access, push.  Send
+the contents of this file <em>as plain text</em>.  Do not uuencode or otherwise
+encrypt it.</p>
 
 <P>Then send it to the cygwin-patches list in an email along with an
-explanation of what the change does.  <em>Make sure that you include a ChangeLog
-entry</em>.  If you have never used a ChangeLog before 1) refer to the <a
-href="http://www.gnu.org/prep/standards/html_node/Change-Logs.html">GNU ChangeLog
-Standards</a> and 2) model your entry after other entries in the file
-winsup/ChangeLog.</p>
+explanation of what the change does.  <em>Make sure that you include a
+ChangeLog entry</em>.  If you have never used a ChangeLog before, refer to the
+<a href="http://www.gnu.org/prep/standards/html_node/Change-Logs.html">GNU ChangeLog Standards</a>
+and model your entry after other entries in the ChangeLog file next to your
+changes.</p>
 
-<p>Ideally, diffs should be sent as plain text with no encoding or other
-special formatting.  ChangeLogs should <b>not</b> be sent as "diffs".
-Just send the complete ChangeLog entry.</p>
+<p>ChangeLogs should <b>not</b> be sent as "diffs".  Just send the complete
+ChangeLog entry, which is ideally part of the output of `git format-patch'
+anyway.</p>
 <p>Common patch submission problems include:
 <ul>
 <li>Missing ChangeLog.
