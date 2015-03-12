@@ -450,9 +450,9 @@ fields of a passwd entry as well.  A couple of things come to mind:
 </p><div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p>
 You want to use a Cygwin username different from your Windows username.
 </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>
-Note: This is only supported via <code class="filename">/etc/passwd</code>.  A
-Cygwin username maintained in the Windows user databases would require
-very costly (read: slow) search operations.
+This is only supported via <code class="filename">/etc/passwd</code>.  A Cygwin
+username maintained in the Windows user databases would require very costly
+(read: slow) search operations.
 </p></div></li><li class="listitem"><p>
 You want to change the primary group of a user.  For AD accounts this is
 not supported.  The primary group of a user is always the Windows
@@ -532,7 +532,7 @@ file set up to all default values:
   db_enum:  cache builtin
   db_home:  /home/%U
   db_shell: /bin/bash
-  db_gecos: &lt;empty$gt;
+  db_gecos: &lt;empty&gt;
 </pre><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-syntax"></a>The <code class="filename">/etc/nsswitch.conf</code> syntax</h5></div></div></div><p>
 The first line, starting with a hash <code class="literal">#</code> is a comment.
 The hash character starts a comment, just as in shell scripts.  Everything
