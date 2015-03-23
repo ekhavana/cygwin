@@ -3,91 +3,60 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Cygwin in CVS</title>
+    <title>Cygwin in GIT</title>
   </head>
 
 <body>
 <!--#include virtual="navbar.html" -->
 <!--#include virtual="top.html" -->
-<h1>Cygwin in CVS</h1>
+<h1>Cygwin in GIT</h1>
 
-<p>The sources to the core Cygwin libraries and utilities (cygwin and
-newlib) files are available via anonymous CVS access.  If you don't know
-what CVS is, visit the <a href="http://cvshome.org/">CVS home page</a>.
-You'll need to install a version of CVS with networking capabilities to
-access this server -- such a version, coincidentally enough, comes with
-the Cygwin net release.</p>
+<p>The sources to the core Cygwin libraries and utilities (Cygwin and
+Newlib) are available via anonymous GIT access.  If you don't know
+what GIT is, visit the <a href="http://git-scm.com/">GIT home page</a>.
+Coincidentally enough, GIT comes with the Cygwin net release.</p>
 
-<p>You can also browse the winsup (aka cygwin) CVS repository
-<a href="https://cygwin.com/viewvc/src/winsup/">
-on the Web</a>.</p>
+<p>To access the repository from your system, use one of the following
+commands:</p>
 
-<p>To access the repository from your system, you'll need to set the
-<tt>CVSROOT</tt> environment variable as in these examples (if you are
-using a different shell, you'll have to figure it out yourself):
-<tt>
+<dl>
+
+<dt><b>Read-only web-based GIT access</b></dt>
+<dd>
+  <p>You can use <a href="/git/gitweb.cgi?p=newlib-cygwin.git" target=_top>the gitweb interface</a>.
+</dd>
+
+<dt><b>Anonymous GIT read-only access</b></dt>
+<dd>
 <pre>
-CMD prompt	set    CVSROOT=:pserver:anoncvs@cygwin.com:/cvs/src
-bash		export CVSROOT=:pserver:anoncvs@cygwin.com:/cvs/src
-csh		setenv CVSROOT :pserver:anoncvs@cygwin.com:/cvs/src
+git clone git://sourceware.org/git/newlib-cygwin.git
 </pre>
-</tt>
-</p>
+</dd>
 
-<p>Once you've done that, you need to tell your local cvs software
-what password to use.  The password is the word
-<tt>anoncvs</tt>:
-<tt>
+<dt><b>GIT for developers with read/write access</b></dt>
+<dd>
 <pre>
-bash$ cvs login
-(Logging in to anoncvs@cygwin.com)
-CVS password: <i>anoncvs</i>
+git clone sourceware.org:/git/newlib-cygwin.git
 </pre>
-</tt>
+</dd>
 
-<p><em>Note:</em> Windows users may need to make sure the
-<tt>HOME</tt> environment variable is set to something meaningful.</p>
+<dt><b>GIT-less Developer snapshots</b></dt>
+<dd>
+  <p>Developer snapshots are available via
+  <a href="snapshots.html" target=_top>the Cygwin developer snapshot page</a>.
+  New snapshots are packaged and released from time to time as required for
+  testing of new features.  The matching sources are provided alongside the
+  binary tar archives.  This allows following development even if you're not
+  comfortable with GIT.
+  </p>
+</dd>
 
-<p>After this, you shouldn't have to worry about passwords any more,
-as it will store your password in <tt>$HOME/.cvspass</tt>
-(semi-encoded).  In other words, don't type "<tt>cvs login</tt>"
-again.</p>
-
-<p>To get the Cygwin sources, do this:
-
-<tt>
-<pre>
-bash$ cvs checkout cygwin
-</pre>
-</tt>
-
-<p>This will create a subdirectory called <tt>src</tt> and fill it
-with the core sources.  Once you have the latest sources, "<tt>cvs
-update</tt>" will get any changes since your last update.</p>
+</dl>
 
 <p>Please refer to the <A href="faq/faq.html#faq.programming.building-cygwin">
 FAQ</a>
 for information on building Cygwin.<br>Hint: You need to configure and
 build in a separate directory from the source.</p>
-
-<div id="background">
-<b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
-<h2>For developers with write access</h2>
-<b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
-</div><br>
-
-<p>If you are a Cygwin developer with a sourceware account, and
-someone has told you that you have permission to write to
-the sourceware cvs repository, the above information still applies
-to you with two exceptions:
-
-<ol>
-<li>Replace <tt>:pserver:</tt> with <tt>:ext:</tt>
-<li>Set <tt>CVS_RSH</tt> to the path to your <tt>ssh</tt> program
-</ol>
-
-<p>If you don't know if you have write access or not, you don't have it.
-
 
 </div>
 </body>
