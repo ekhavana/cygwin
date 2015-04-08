@@ -747,7 +747,26 @@ Compose key ('Multi_key')
 
 Input Method Editors (IMEs)
 
-   This section TBD.
+   If an IME is configured, it should be started as part of a remote
+   session (See the Section called Remote sessions via XDMCP).
+
+   To use an IME with remote clients started from a command line (See the
+   Section called Displaying remote clients), the IME must be started
+   explicitly, e.g.
+     __________________________________________________________________
+
+Starting the ibus IME
+
+   After configuring ibus with ibus-setup, start the ibus daemon
+    $ ibus-daemon -drx
+
+   and set XMODIFIERS so XIM clients will use ibus
+    $ export XMODIFIERS="@im=ibus"
+     __________________________________________________________________
+
+Starting other IMEs
+
+   Similarly for fcitx, gcim, iiimf, scim, uim, etc.
      __________________________________________________________________
 
 Terminal Server or Fast User Switching
@@ -1226,7 +1245,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2015-03-03 20:55 .
+   at 2015-04-08 16:52 .
 
   Notes
 

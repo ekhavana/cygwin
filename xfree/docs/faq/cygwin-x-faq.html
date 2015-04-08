@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2015-03-03 20:55</H2
+>2015-04-08 17:02</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -244,6 +244,11 @@ HREF="cygwin-x-faq.html#q-moved-2"
 >3.12. <A
 HREF="cygwin-x-faq.html#q-startxwinrc-exit"
 >I upgraded and now X exits immediately after starting</A
+></DT
+><DT
+>3.13. <A
+HREF="cygwin-x-faq.html#q-xserver-nolisten-tcp-default"
+>I upgraded and now X clients can't connect</A
 ></DT
 ></DL
 ></DD
@@ -1266,7 +1271,7 @@ HREF="cygwin-x-faq.html#q-mailing-list"
 ><P
 >You can read and post to the mailing list using your newsreader
 using the <A
-HREF="http://gmane.org/find.php?list=cygwin.xfree"
+HREF="http://gmane.org/find.php?list=os.cygwin"
 TARGET="_top"
 >GMANE</A
 >
@@ -2266,6 +2271,100 @@ TARGET="_top"
 </P
 ></DIV
 ></DIV
+><DIV
+CLASS="qandaentry"
+><DIV
+CLASS="question"
+><P
+><A
+NAME="q-xserver-nolisten-tcp-default"
+></A
+><B
+>3.13. </B
+>I upgraded and now X clients can't connect</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>A1:</P
+><P
+>&#13;Since X server 1.17, by default the server does not listen for TCP/IP
+connections, only accepting local connections on a unix domain socket.
+</P
+><P
+>&#13;For local clients, use <B
+CLASS="command"
+>DISPLAY=:0.0</B
+>, rather than
+<B
+CLASS="command"
+>DISPLAY=localhost:0.0</B
+>,
+<B
+CLASS="command"
+>DISPLAY=127.0.0.1:0.0</B
+> or <B
+CLASS="command"
+>DISPLAY=::1:0.0</B
+>.
+See <A
+HREF="cygwin-x-faq.html#display-and-screen"
+>Q: 1.6.</A
+>.
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>A2:</P
+><P
+>&#13;For remote clients, rather than connecting over TCP/IP by explicitly setting
+<CODE
+CLASS="parameter"
+>DISPLAY</CODE
+> and allowing access using
+<B
+CLASS="command"
+>xhost</B
+> or by disabling access control, use ssh tunnelling with
+<B
+CLASS="command"
+>ssh -Y</B
+> instead.  (See the User's Guide section <A
+HREF="http://x.cygwin.com/docs/ug/using-remote-apps.html#using-remote-apps-ssh"
+TARGET="_top"
+>on
+X forwarding using ssh</A
+> for more details).
+</P
+></DIV
+><DIV
+CLASS="answer"
+><P
+><B
+> </B
+>A3:</P
+><P
+>&#13;Use the <CODE
+CLASS="parameter"
+>-listen tcp</CODE
+> option to restore the previous
+behaviour, allowing the X server to open a TCP/IP socket as well
+e.g. <B
+CLASS="command"
+>startxwin -- -listen tcp</B
+>.
+See <A
+HREF="cygwin-x-faq.html#q-command-line-args"
+>Q: 4.2.</A
+>.
+</P
+></DIV
+></DIV
 ></DIV
 ><DIV
 CLASS="qandadiv"
@@ -2663,24 +2762,25 @@ CLASS="answer"
 ><TT
 CLASS="filename"
 >X</TT
-> uses port 6000/TCP by default. You will have to allow incoming and
-outgoing traffic on this port even if you are only using local clients. <TT
+> uses port 6000/TCP when the option <CODE
+CLASS="parameter"
+>-listen
+tcp</CODE
+> is used. You will have to allow incoming and outgoing traffic on
+this port even if you are only using local clients. <TT
 CLASS="filename"
 >X</TT
-> 
-has a builtin access control so you won't have to worry about opening the
-port. If you are still concerned about security, you may limit the allowed 
-hosts to 127.0.0.1 (localhost) and the local IP addresses.</P
+> has a builtin access
+control so you won't have to worry about opening the port. If you are still
+concerned about security, you may limit the allowed hosts to the local IP
+addresses.</P
 ><P
->&#13;If you use a different <CODE
-CLASS="parameter"
->DISPLAY</CODE
-> variable check section 
+>&#13;If you use a different display number check section
 <A
 HREF="cygwin-x-faq.html#display-and-screen"
 >Q: 1.6.</A
-> for details about which ports are 
-used. For additional information about firewalls and XDMCP connections check 
+> for details about which ports are
+used. For additional information about firewalls and XDMCP connections check
 <A
 HREF="cygwin-x-faq.html#q-xdmcp-query"
 >Q: 7.3.</A
@@ -3051,7 +3151,7 @@ CLASS="replaceable"
 ><I
 >de</I
 ></TT
-> -print | xkbcomp -w3 -xkm - localhost:0.0
+> -print | xkbcomp -w3 -xkm - :0.0
 </PRE
 ></TD
 ></TR
@@ -3483,7 +3583,7 @@ CLASS="screen"
 >&#13;$ DISPLAY=<TT
 CLASS="replaceable"
 ><I
->localhost:0.0</I
+>:0.0</I
 ></TT
 >
 $ export DISPLAY
@@ -3512,7 +3612,7 @@ CLASS="screen"
 >&#13;$ DISPLAY=<TT
 CLASS="replaceable"
 ><I
->localhost:0.0</I
+>:0.0</I
 ></TT
 > ssh -Y <TT
 CLASS="replaceable"

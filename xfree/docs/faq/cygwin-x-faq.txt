@@ -1,6 +1,6 @@
 Cygwin/X Frequently Asked Questions
 
-2015-03-03 20:55
+2015-04-08 17:02
      __________________________________________________________________
 
    Table of Contents
@@ -55,6 +55,7 @@ Questions and Answers
 
         3.11. Moved question
         3.12. I upgraded and now X exits immediately after starting
+        3.13. I upgraded and now X clients can't connect
 
    4. Configuration
 
@@ -599,6 +600,29 @@ $ nedit
 
    See the announce mail for more details.
 
+   3.13. I upgraded and now X clients can't connect
+
+   A1:
+
+   Since X server 1.17, by default the server does not listen for TCP/IP
+   connections, only accepting local connections on a unix domain socket.
+
+   For local clients, use DISPLAY=:0.0, rather than DISPLAY=localhost:0.0,
+   DISPLAY=127.0.0.1:0.0 or DISPLAY=::1:0.0. See Q: 1.6..
+
+   A2:
+
+   For remote clients, rather than connecting over TCP/IP by explicitly
+   setting DISPLAY and allowing access using xhost or by disabling access
+   control, use ssh tunnelling with ssh -Y instead. (See the User's Guide
+   section on X forwarding using ssh for more details).
+
+   A3:
+
+   Use the -listen tcp option to restore the previous behaviour, allowing
+   the X server to open a TCP/IP socket as well e.g. startxwin -- -listen
+   tcp. See Q: 4.2..
+
 4. Configuration
 
    4.1. Is there an xorg.conf or XF86Config file?
@@ -681,15 +705,15 @@ Focus FocusFollowsMouse
 
    4.8. I have a firewall. Is there anything I have to take care of?
 
-   X uses port 6000/TCP by default. You will have to allow incoming and
-   outgoing traffic on this port even if you are only using local clients.
-   X has a builtin access control so you won't have to worry about opening
-   the port. If you are still concerned about security, you may limit the
-   allowed hosts to 127.0.0.1 (localhost) and the local IP addresses.
+   X uses port 6000/TCP when the option -listen tcp is used. You will have
+   to allow incoming and outgoing traffic on this port even if you are
+   only using local clients. X has a builtin access control so you won't
+   have to worry about opening the port. If you are still concerned about
+   security, you may limit the allowed hosts to the local IP addresses.
 
-   If you use a different DISPLAY variable check section Q: 1.6. for
-   details about which ports are used. For additional information about
-   firewalls and XDMCP connections check Q: 7.3..
+   If you use a different display number check section Q: 1.6. for details
+   about which ports are used. For additional information about firewalls
+   and XDMCP connections check Q: 7.3..
 
 5. Internationalization
 
@@ -781,7 +805,7 @@ mount -b -u "$(cygpath -m /tmp)" /tmp
    Not all keyboard layouts are tested very well and some contain errors
    or do not work at all. To test if the compiling of your layout works
    start
-setxkbmap de -print | xkbcomp -w3 -xkm - localhost:0.0
+setxkbmap de -print | xkbcomp -w3 -xkm - :0.0
 
    (replace the "de" with your layout code). This may produce warnings,
    but must not produce errors. If there are errors then please report
@@ -894,12 +918,12 @@ $ cat UTF-8-demo.txt
 
    Before establishing the ssh connection the xserver must be started and
    the environment variable DISPLAY must be set.
-$ DISPLAY=localhost:0.0
+$ DISPLAY=:0.0
 $ export DISPLAY
 $ ssh -Y remotehost
 
    or
-$ DISPLAY=localhost:0.0 ssh -Y remotehost
+$ DISPLAY=:0.0 ssh -Y remotehost
 
    A3:
 

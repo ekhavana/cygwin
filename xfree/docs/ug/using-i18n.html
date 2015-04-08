@@ -162,8 +162,79 @@ NAME="using-i18n-ime"
 >Input Method Editors (IMEs)</A
 ></H2
 ><P
->&#13;This section TBD.
+>&#13;If an IME is configured, it should be started as part of a remote session (See
+<A
+HREF="using-remote-session.html"
+>the Section called <I
+>Remote sessions via XDMCP</I
+></A
+>).
 </P
+><P
+>&#13;To use an IME with remote clients started from a command line (See <A
+HREF="using-remote-apps.html"
+>the Section called <I
+>Displaying remote clients</I
+></A
+>), the IME must be started explicitly, e.g.
+</P
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="using-i18n-ime-ibus"
+>Starting the ibus IME</A
+></H3
+><P
+>&#13;    After configuring ibus with <B
+CLASS="command"
+>ibus-setup</B
+>, start the ibus
+    daemon
+  </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;    $ ibus-daemon -drx
+  </PRE
+></TD
+></TR
+></TABLE
+><P
+>&#13;    and set XMODIFIERS so XIM clients will use ibus
+  </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;    $ export XMODIFIERS="@im=ibus"
+  </PRE
+></TD
+></TR
+></TABLE
+></DIV
+><DIV
+CLASS="sect3"
+><H3
+CLASS="sect3"
+><A
+NAME="using-i18n-ime-other"
+>Starting other IMEs</A
+></H3
+><P
+>&#13;Similarly for fcitx, gcim, iiimf, scim, uim, etc.
+</P
+></DIV
 ></DIV
 ></DIV
 ><H3
