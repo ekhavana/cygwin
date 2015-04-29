@@ -523,7 +523,7 @@ the old information.
 </p></div><p>
 So, what settings can we perform with <code class="filename">/etc/nsswitch.conf</code>?
 Let's start with an example <code class="filename">/etc/nsswitch.conf</code> file
-file set up to all default values:
+set up to all default values:
 </p><pre class="screen">
   # /etc/nsswitch.conf
   passwd: files db
@@ -866,7 +866,7 @@ The <code class="literal">unix</code> schema utilizes the
 <code class="literal">posixAccount</code> attribute extension.  This is one of two
 schema extensions which are connected to AD accounts, available by default
 starting with Windows Server 2003 R2.  They are usually
-<code class="literal">not set</code>, unless used by the Active Directory
+<span class="bold"><strong>not set</strong></span>, unless used by the Active Directory
 <code class="literal">Server for NIS</code> feature (deprecated since Server 2012 R2).
 
 Two schemata are interesting for Cygwin, <code class="literal">posixAccount</code>,
@@ -1010,7 +1010,7 @@ The mapping will be cached for the lifetime of the process, and inherited
 by child processes.
 </p></div><div class="sect3"><div class="titlepage"><div><div><h4 class="title"><a name="ntsec-mapping-samba"></a>Samba account mapping</h4></div></div></div><p>
 A fully set up Samba file server with domain integration is running winbindd to
-map Window SIDs to artificially created UNIX uids and gids, and this mapping is
+map Windows SIDs to artificially created UNIX uids and gids, and this mapping is
 transparent within the domain, so Cygwin doesn't have to do anything special.
 </p><p>
 However, setting up winbindd isn't for everybody, and it fails to map
@@ -1067,7 +1067,7 @@ user given for that object.</p></li><li class="listitem"><p>The order of ACEs is
 sequence until either any single requested permission is denied or all
 requested permissions are granted.  Reading stops when this condition is
 met.  Later ACEs are not taken into account.</p></li><li class="listitem"><p>All access denied ACEs <span class="bold"><strong>should</strong></span> precede any access allowed ACE.  ACLs
-following this rule are called "canonical"</p></li></ul></div><p>Note that the last rule is a preference or a definition of
+following this rule are called "canonical".</p></li></ul></div><p>Note that the last rule is a preference or a definition of
 correctness.  It's not an absolute requirement.  All Windows kernels
 will correctly deal with the ACL regardless of the order of allow and
 deny ACEs.  The second rule is not modified to get the ACEs in the
