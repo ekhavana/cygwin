@@ -83,7 +83,7 @@ CLASS="note"
 >
 Hardware-accelerated OpenGL is still under active development and should be considered
 beta quality, but should be working well enough to be useful.  Please report
-problems with specific OpenGL applications to the cygwin-xfree mailing list.
+problems with specific OpenGL applications to the cygwin mailing list.
 </P
 ></BLOCKQUOTE
 ></DIV
@@ -171,8 +171,8 @@ WIDTH="33%"/><THEAD
 >&#13;          <P
 >&#13;            start server with <CODE
 CLASS="parameter"
->-nowgl</CODE
-> option
+>+iglx -nowgl</CODE
+> options
           </P
 >
           <P
@@ -187,8 +187,8 @@ CLASS="command"
 >&#13;          <P
 >&#13;            start server with <CODE
 CLASS="parameter"
->-wgl</CODE
-> option
+>+iglx -wgl</CODE
+> options
           </P
 >
           <P
@@ -283,7 +283,11 @@ and then transfer the rendered image to the server.
 </P
 ><P
 >&#13;To force indirect rendering
-(which takes place on the server), you must do <B
+(which takes place on the server), you must start the server with the
+<CODE
+CLASS="parameter"
+>+iglx</CODE
+> option and do <B
 CLASS="command"
 >export
 LIBGL_ALWAYS_INDIRECT=1</B
@@ -310,24 +314,6 @@ Mesa, you have software rendering.
 >&#13;Please ensure you are using the latest display drivers for your graphics
 hardware before reporting any visual issues with WGL.
 </P
-><DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
-><P
-><B
->Note: </B
->
-    Because of it's lack of support for modern OpenGL versions (&gt;1.4), indirect
-    rendering is considered of limited use.  An <CODE
-CLASS="parameter"
->-iglx</CODE
->
-    option was added in X server 1.16 which allows it's use to be prohibited,
-    which will probably be the default in X server 1.17.
-  </P
-></BLOCKQUOTE
-></DIV
 ><P
 >&#13;Known issues:
 <UL

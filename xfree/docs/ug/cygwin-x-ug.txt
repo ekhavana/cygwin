@@ -627,7 +627,7 @@ OpenGL (GLX)
      Note: Hardware-accelerated OpenGL is still under active development
      and should be considered beta quality, but should be working well
      enough to be useful. Please report problems with specific OpenGL
-     applications to the cygwin-xfree mailing list.
+     applications to the cygwin mailing list.
 
    The Cygwin/X X Server supports both software OpenGL rendering (using
    the mesa software renderer), and hardware accelerated OpenGL rendering
@@ -649,11 +649,11 @@ OpenGL (GLX)
 
    (Uses GLX protocol, limited to OpenGL 1.4)
 
-   start server with -nowgl option
+   start server with +iglx -nowgl options
 
    export LIBGL_ALWAYS_INDIRECT=1
 
-   start server with -wgl option
+   start server with +iglx -wgl options
 
    export LIBGL_ALWAYS_INDIRECT=1
 
@@ -683,8 +683,8 @@ OpenGL (GLX)
        software rendering and then transfer the rendered image to the
        server.
        To force indirect rendering (which takes place on the server), you
-       must do export LIBGL_ALWAYS_INDIRECT=1 before starting the client
-       application.
+       must start the server with the +iglx option and do export
+       LIBGL_ALWAYS_INDIRECT=1 before starting the client application.
        There is a performance trade-off between rendering performance and
        network latency, so you might wish to try both direct and indirect
        rendering and see which performs best in your specific
@@ -696,11 +696,6 @@ OpenGL (GLX)
 
    Please ensure you are using the latest display drivers for your
    graphics hardware before reporting any visual issues with WGL.
-
-     Note: Because of it's lack of support for modern OpenGL versions
-     (>1.4), indirect rendering is considered of limited use. An -iglx
-     option was added in X server 1.16 which allows it's use to be
-     prohibited, which will probably be the default in X server 1.17.
 
    Known issues:
      * OpenGL drawing is just drawn on top of the X window. This works
@@ -1245,7 +1240,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2015-04-08 16:52 .
+   at 2015-05-03 11:16 .
 
   Notes
 
