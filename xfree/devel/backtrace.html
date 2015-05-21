@@ -13,11 +13,25 @@
 
 <body>
     <!--#include virtual="../cygx-header.html" -->
+    <h1>Reporting crashes</h1>
 
-    <h2>Cygwin/X - Get a crash backtrace</h2>
+    <h2>Automatically reporting crashes</h2>
 
-    <p>If the X server has crashed, before you report a problem, you should get a backtrace.  Useful backtraces will
-    help identify where and why the crash is occuring, which will help us fix the bug.</p>
+    <ul>
+      <li>Install the <b>xorg-server-cygwin-crashreporter</b> package</l>
+      <li>Reproduce your crash</li>
+    </ul>
+
+    <p>This should automatically start a crash reporter, which will generate and
+    upload a minidump file containing information about the crash.</p>
+
+    <p>In some cases, this doesn't work (for reasons still under investigation),
+    in which case see the following section.</p>
+
+    <h2>Get a crash backtrace</h2>
+
+    <p>Useful backtraces will help identify where and why the crash is occurring,
+    which will help us fix the bug.</p>
 
     <p>To generate a useful backtrace, you will need debugging symbols for the X server.</p>
 
