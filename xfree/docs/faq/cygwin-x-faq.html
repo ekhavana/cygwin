@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2015-05-03 11:16</H2
+>2015-06-05 13:24</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -361,7 +361,7 @@ CLASS="keycap"
 ><DT
 >5.1.6. <A
 HREF="cygwin-x-faq.html#q-xkb-not-working"
->Loading XKB keymaps fails</A
+>Loading an XKB keyboard layout selected with -xkblayout fails</A
 ></DT
 ><DT
 >5.1.7. <A
@@ -2142,9 +2142,9 @@ CLASS="filename"
 ></LI
 ><LI
 ><P
->Alternatively, add the server options <CODE
+>Alternatively, add the server option <CODE
 CLASS="parameter"
->-multiwindow -clipboard</CODE
+>-multiwindow</CODE
 > to your <B
 CLASS="command"
 >xinit</B
@@ -2153,17 +2153,17 @@ CLASS="command"
 >startx</B
 > invocation, i.e. <B
 CLASS="command"
->xinit -- -multiwindow -clipboard</B
+>xinit -- -multiwindow</B
 > or <B
 CLASS="command"
->startx -- -multiwindow -clipboard</B
+>startx -- -multiwindow</B
 ></P
 ></LI
 ><LI
 ><P
 >Alternatively, put <B
 CLASS="command"
->XWin -multiwindow -clipboard</B
+>XWin -multiwindow</B
 > into <TT
 CLASS="filename"
 >~/.xserverrc</TT
@@ -2825,7 +2825,7 @@ keyboard settings.  For these layouts no special change is needed.
 For all other layouts there is the possibility to configure the layout
 via commandline options.</P
 ><P
->The mainoption for changing the layout is <CODE
+>The main option for changing the layout is <CODE
 CLASS="parameter"
 >-xkblayout
 <TT
@@ -3069,71 +3069,13 @@ NAME="q-xkb-not-working"
 ></A
 ><B
 >5.1.6. </B
->Loading XKB keymaps fails</P
+>Loading an XKB keyboard layout selected with -xkblayout fails</P
 ></DIV
 ><DIV
 CLASS="answer"
 ><P
 ><B
 > </B
->First check if you are able to change the server to another
-layout via XKB.  The german layout will be good for testing:
-
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->setxkbmap de -model pc105
-</PRE
-></TD
-></TR
-></TABLE
->
-
-This worked if pressing "Shift" and "8" produces "(" instead of "*".
-If it worked then you can skip the next paragraph.</P
-><P
->There is currently a problem with the /tmp directory mounted in
-textmode.  You can change the setting to binmode with:
-
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->mount -b "$(cygpath -m /tmp)" /tmp
-</PRE
-></TD
-></TR
-></TABLE
->
-
-If this fails with an error message stating insufficient rights, try
-
-<TABLE
-BORDER="0"
-BGCOLOR="#E0E0E0"
-WIDTH="100%"
-><TR
-><TD
-><PRE
-CLASS="screen"
->mount -b -u "$(cygpath -m /tmp)" /tmp
-</PRE
-></TD
-></TR
-></TABLE
->
-
-</P
-><P
 >Not all keyboard layouts are tested very well and some contain
 errors or do not work at all. To test if the compiling of your layout
 works start
@@ -3160,9 +3102,7 @@ CLASS="replaceable"
 
 (replace the "de" with your layout code).  This may produce warnings,
 but must not produce errors. If there are errors then please report
-them to the mailinglist.</P
-><P
->XXX: This answer needs updating</P
+them to the mailing list.</P
 ></DIV
 ></DIV
 ><DIV
@@ -5055,7 +4995,7 @@ CLASS="screen"
 ></TABLE
 >
 
-If this fails with an errormessage stating unsufficient rights, try
+If this fails with an error message stating insufficient rights, try
 
 <TABLE
 BORDER="0"

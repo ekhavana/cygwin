@@ -1,6 +1,6 @@
 Cygwin/X Frequently Asked Questions
 
-2015-05-03 11:16
+2015-06-05 13:24
      __________________________________________________________________
 
    Table of Contents
@@ -96,7 +96,9 @@ Questions and Answers
               5.1.5. Logging into AIX via XDMCP causes the keyboard to
                       function as if AltGr is permanently pressed.
 
-              5.1.6. Loading XKB keymaps fails
+              5.1.6. Loading an XKB keyboard layout selected with
+                      -xkblayout fails
+
               5.1.7. I have Windows XP with Powertoys installed and AltGr
                       does not work. What can I do?
 
@@ -572,11 +574,11 @@ $ nedit
        "Cygwin-X" on the Start menu, or using startxwin.
        Note: If you wish to customize the X clients started when the X
        server starts, you can do so using a ~/.startxwinrc script.
-    2. Alternatively, add the server options -multiwindow -clipboard to
-       your xinit or startx invocation, i.e. xinit -- -multiwindow
-       -clipboard or startx -- -multiwindow -clipboard
-    3. Alternatively, put XWin -multiwindow -clipboard into ~/.xserverrc
-       or /etc/X11/xinit/xserverrc
+    2. Alternatively, add the server option -multiwindow to your xinit or
+       startx invocation, i.e. xinit -- -multiwindow or startx --
+       -multiwindow
+    3. Alternatively, put XWin -multiwindow into ~/.xserverrc or
+       /etc/X11/xinit/xserverrc
 
    3.11. Moved question
 
@@ -726,7 +728,7 @@ Focus FocusFollowsMouse
    layouts there is the possibility to configure the layout via
    commandline options.
 
-   The mainoption for changing the layout is -xkblayout countrycode where
+   The main option for changing the layout is -xkblayout countrycode where
    countrycode is in most cases the 2 character code which also represents
    the country in internet adresses (e.g. Australia = au, Deutschland =
    de, France = fr, Japan = jp)
@@ -786,21 +788,7 @@ Focus FocusFollowsMouse
    previous answer to this question of disabling the XKB extension with
    the -kb parameter is no longer applicable.
 
-   5.1.6. Loading XKB keymaps fails
-
-   First check if you are able to change the server to another layout via
-   XKB. The german layout will be good for testing:
-setxkbmap de -model pc105
-
-   This worked if pressing "Shift" and "8" produces "(" instead of "*". If
-   it worked then you can skip the next paragraph.
-
-   There is currently a problem with the /tmp directory mounted in
-   textmode. You can change the setting to binmode with:
-mount -b "$(cygpath -m /tmp)" /tmp
-
-   If this fails with an error message stating insufficient rights, try
-mount -b -u "$(cygpath -m /tmp)" /tmp
+   5.1.6. Loading an XKB keyboard layout selected with -xkblayout fails
 
    Not all keyboard layouts are tested very well and some contain errors
    or do not work at all. To test if the compiling of your layout works
@@ -809,9 +797,7 @@ setxkbmap de -print | xkbcomp -w3 -xkm - :0.0
 
    (replace the "de" with your layout code). This may produce warnings,
    but must not produce errors. If there are errors then please report
-   them to the mailinglist.
-
-   XXX: This answer needs updating
+   them to the mailing list.
 
    5.1.7. I have Windows XP with Powertoys installed and AltGr does not
    work. What can I do?
@@ -1273,7 +1259,7 @@ Rules = "xorg" Model = "pc101" Layout = "us" Variant = "(null)" Options = "(null
    You can remount /tmp to binmode with these commands:
 mount -b "$(cygpath -m /tmp)" /tmp
 
-   If this fails with an errormessage stating unsufficient rights, try
+   If this fails with an error message stating insufficient rights, try
 mount -b -u "$(cygpath -m /tmp)" /tmp
 
    8.7. Cygwin/X has very poor performance. What's the reason?
