@@ -1,0 +1,110 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html;charset=utf-8">
+<title>XLaunch Start program</title>
+<link rel="stylesheet" type="text/css" charset="utf-8" media="all" href="common.css">
+<link rel="stylesheet" type="text/css" charset="utf-8" media="screen" href="screen.css">
+</head>
+<body lang="en" dir="ltr">
+<div id="logo"><a href="xdmcp.html"><img src="X2.bmp" title="XLaunch XDMCP settings" alt="XLaunch XDMCP settings"></a><span style="color:#2b5e82;vertical-align:super;font-family:Bitstream Vera Sans,sans-serif;font-weight:bold;font-size:30pt;">Launch</span></div>
+<p style="clear: both;">
+<div id="content" lang="en" dir="ltr">
+<h2><a name="1"></a>Start program</h2>
+Enter the name and parameters of an X client you want to start and display on the X server.
+For example, to run <b>xeyes</b>
+<pre>xeyes -fg red
+</pre>
+<h3><a name="3"></a>Start program on this computer</h3>
+Start the chosen or entered program (with parameters as required) on the local machine.
+<h3><a name="4"></a>Start program on remote computer</h3>
+As above but the program will be run on a remote machine.
+<h4><a name="6"></a>Using SSH</h4>
+
+An X client program can be started remotely via SSH.<p>
+There is no mechanism to save a ssh password for security reasons.<p>
+SSH X11 forwarding must be enabled in the <b>sshd</b> daemon's sshd_config file on the remote machine, e.g.
+
+<pre>
+X11Forwarding yes
+</pre>
+
+<h5><a name="7"></a>Prompt for ssh password/passphrase</h5>
+
+<b>ssh</b> is run within a terminal, allowing the password or passphrase to be entered interactively.<p>
+
+<h5><a name="8"></a>Use keychain to contact ssh-agent</h5>
+
+From <b>bash</b> you can start a <b>ssh-agent</b> daemon using <b>keychain</b>
+(which saves the <b>ssh-agent</b> environment variables to ~/.keychain/${HOSTNAME}-sh,
+so that subsequent non-interactive shells, such as used by xlaunch can source
+the file and make passwordless ssh connections).<p>
+
+e.g. to start <b>ssh-agent</b> and load the key ~/.ssh/ida_rsa into it:
+<pre>
+$ keychain id_rsa
+</pre>
+You will be prompted for the key's passphrase.
+<p>
+
+Subsequently, xlaunch can run <b>ssh</b> using this key to authenticate without
+prompting for the passphrase.<p>
+
+When finished, use <b>keychain</b> to stop <b>ssh-agent</b>
+<pre>
+$ keychain -k all
+</pre>
+<p>
+
+See <b>man keychain</b> for more details.
+
+<h5><a name="9"></a>Additional parameters for ssh</h5>
+
+Enter any other command line parameters needed by you for the ssh, for example
+-C to enable compression.  ssh compression may improve performance on a slow, low-bandwidth
+connection, but will slow things down on fast, high-bandwidth networks.<p>
+If unsure enter nothing.<p>
+
+<h5><a name="10"></a>Password-less public key authentication</h5>
+
+If neither of the options above are selected, you must arrange for
+<b>ssh</b> to be able to non-interactively authenticate with the remote
+<b>sshd</b> i.e. install on the remote machine a public key corresponding
+to a local private key which has no passphrase.
+<p>
+
+e.g.
+Create a passphrase-less key-pair, using
+<pre>
+ssh-keygen -f ~/.ssh/example-key -N ''
+</pre>
+append the public key to your ~/.ssh/authorized_keys file on the remote machine,
+<pre>
+ssh-copy-id -i ~/.ssh/example-key.pub <i>user@server</i>
+</pre>
+and instruct the local ssh to use the corresponding private key, by adding to ~/.ssh/config
+(possibly under an appropriate Host section)
+<pre>
+IdentityFile ~/.ssh/example-key
+</pre>
+<p>
+
+See the "AUTHORIZED KEYS FILE FORMAT" section of <b>man sshd</b> and
+the "IdentityFile" section of <b>man ssh_config</b> for more details.
+<p>
+
+<h5><a name="11"></a>Troubleshooting SSH</h5>
+
+The command run automatically after the X server has started is
+<pre>ssh -Y &lt;user@computer&gt; &lt;program&gt;
+</pre>
+Try this by hand, from a shell, if you have problems.<p>
+
+<h4><a name="12"></a>Using rsh</h4>
+
+An X client program can be started remotely via rsh.<p>
+You must configure rsh for password-less authentication.<p>
+
+</div>
+</body>
+</html>
