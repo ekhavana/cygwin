@@ -137,14 +137,8 @@ foreach my $initials (sort { $awardees{$b}{latest_date} cmp $awardees{$a}{latest
 	next unless defined $awardee{awards};
 
 	# Print awardee header
-	my $head = "<li name=\"$initials\">";
-	if (defined $awardee{Email}) {
-		$head .= "<a href=\"mailto:$awardee{Email}\">$awardee{Name}</a>";
-	}
-	else {
-		$head .= $awardee{Name};
-	}
-	push @list, $head;
+	push @list, "<li><a name=\"$initials\"" . (defined($awardee{Email}) ? " href=\"mailto:$awardee{Email}\"" : '') 
+		. ">$awardee{Name}</a>";
 
 	# Print list of awards
 	my $last_award;
