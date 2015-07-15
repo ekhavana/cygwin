@@ -66,8 +66,8 @@ detail in <a class="xref" href="ntsec.html#ntsec-mapping" title="Mapping Windows
 "Relative IDentifier" (RID), was by default used as UID and/or GID
 when you created the <code class="filename">/etc/passwd</code> and
 <code class="filename">/etc/group</code> files using the
-<span class="command"><strong><a class="link" href="using-utils.html#mkpasswd" title="mkpasswd">mkpasswd</a></strong></span> and
-<span class="command"><strong><a class="link" href="using-utils.html#mkgroup" title="mkgroup">mkgroup</a></strong></span> tools.
+<span class="command"><strong><a class="link" href="mkpasswd.html" title="mkpasswd">mkpasswd</a></strong></span> and
+<span class="command"><strong><a class="link" href="mkgroup.html" title="mkgroup">mkgroup</a></strong></span> tools.
 These tools as well as reading accounts from <code class="filename">/etc/passwd</code>
 and <code class="filename">/etc/group</code> files is still present in recent
 versions of Cygwin, but you should switch to the aforementioned
@@ -731,7 +731,7 @@ db_home:  /%H/cygwin
 	      the character <code class="literal">X</code> has been given alone.</p></dd></dl></div><p>
 The exact meaning of a schema depends on the setting it's used for.  The
 following sections explain the settings in detail.
-</p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-home"></a>The <code class="literal">db_home:</code> setting</h5></div></div></div><p>
+</p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-home"></a>The <code class="literal">db_home</code> setting</h5></div></div></div><p>
 The <code class="literal">db_home:</code> setting defines how Cygwin fetches the user's
 home directory, or, more precise, the content of the <code class="literal">pw_dir</code>
 member of the user's passwd entry.  The following list describes the meaning
@@ -770,7 +770,7 @@ As has been briefly mentioned before, the default setting for
 </pre><p>
 So by default, Cygwin just sets the home dir to
 <code class="filename">/home/$USERNAME</code>.
-</p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-shell"></a>The <code class="literal">db_shell:</code> setting</h5></div></div></div><p>
+</p></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-shell"></a>The <code class="literal">db_shell</code> setting</h5></div></div></div><p>
 The <code class="literal">db_shell:</code> setting defines how Cygwin fetches the user's
 login shell, the content of the <code class="literal">pw_shell</code> member of the
 user's passwd entry.  The following list describes the meaning of each schema
@@ -803,7 +803,7 @@ As for <code class="literal">db_home:</code>, the default setting for
 <code class="literal">db_shell:</code> is pretty much a constant
 </p><pre class="screen">
   db_shell: /bin/bash
-</pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-gecos"></a>The <code class="literal">db_gecos:</code> setting</h5></div></div></div><p>
+</pre></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-gecos"></a>The <code class="literal">db_gecos</code> setting</h5></div></div></div><p>
 The <code class="literal">db_gecos:</code> setting defines how to fetch additional
 content for the <code class="literal">pw_gecos</code> member of the user's passwd entry.
 There's always a fixed, Cygwin-specific part in the <code class="literal">pw_gecos</code>
@@ -858,10 +858,10 @@ using <span class="command"><strong>ADSI Edit</strong></span>.
 </p><p>
 At the time of writing the following attributes are utilized by Cygwin:
 </p><div class="segmentedlist"><table border="0"><thead><tr class="segtitle"></tr></thead><tbody><tr class="seglistitem"><td class="seg"><code class="literal">cygwinHome</code></td><td class="seg">Used as Cygwin home directory with <code class="literal">db_home: cygwin</code>.
-	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-home" title="The db_home: setting">the section called “The <code class="literal">db_home:</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">cygwinShell</code></td><td class="seg">Used as Cygwin login shell with <code class="literal">db_shell: cygwin</code>.
-	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-shell" title="The db_shell: setting">the section called “The <code class="literal">db_shell:</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">cygwinGecos</code></td><td class="seg">Content will be added to the pw_gecos field with
+	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-home" title="The db_home setting">the section called “The <code class="literal">db_home</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">cygwinShell</code></td><td class="seg">Used as Cygwin login shell with <code class="literal">db_shell: cygwin</code>.
+	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-shell" title="The db_shell setting">the section called “The <code class="literal">db_shell</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">cygwinGecos</code></td><td class="seg">Content will be added to the pw_gecos field with
 	 <code class="literal">db_gecos: cygwin</code>.
-	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-gecos" title="The db_gecos: setting">the section called “The <code class="literal">db_gecos:</code> setting”</a>.</td></tr></tbody></table></div></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-posix"></a>The <code class="literal">unix</code> schema</h5></div></div></div><p>
+	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-gecos" title="The db_gecos setting">the section called “The <code class="literal">db_gecos</code> setting”</a>.</td></tr></tbody></table></div></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-posix"></a>The <code class="literal">unix</code> schema</h5></div></div></div><p>
 The <code class="literal">unix</code> schema utilizes the 
 <code class="literal">posixAccount</code> attribute extension.  This is one of two
 schema extensions which are connected to AD accounts, available by default
@@ -876,10 +876,10 @@ to group accounts.  Both follow the description of RFC 2307,
 a Network Information Service</a>.
 The user attributes utilized by Cygwin are:
 </p><div class="segmentedlist"><table border="0"><thead><tr class="segtitle"></tr></thead><tbody><tr class="seglistitem"><td class="seg"><code class="literal">unixHomeDirectory</code></td><td class="seg">Used as Cygwin home directory with <code class="literal">db_home: unix</code>.
-	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-home" title="The db_home: setting">the section called “The <code class="literal">db_home:</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">loginShell</code></td><td class="seg">Used as Cygwin login shell with <code class="literal">db_shell: unix</code>.
-	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-shell" title="The db_shell: setting">the section called “The <code class="literal">db_shell:</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">gecos</code></td><td class="seg">Content will be added to the pw_gecos field with
+	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-home" title="The db_home setting">the section called “The <code class="literal">db_home</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">loginShell</code></td><td class="seg">Used as Cygwin login shell with <code class="literal">db_shell: unix</code>.
+	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-shell" title="The db_shell setting">the section called “The <code class="literal">db_shell</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">gecos</code></td><td class="seg">Content will be added to the pw_gecos field with
 	 <code class="literal">db_gecos: unix</code>.
-	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-gecos" title="The db_gecos: setting">the section called “The <code class="literal">db_gecos:</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">uidNumber</code></td><td class="seg">See <a class="xref" href="ntsec.html#ntsec-mapping-nfs" title="NFS account mapping">the section called “NFS account mapping”</a> and
+	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-gecos" title="The db_gecos setting">the section called “The <code class="literal">db_gecos</code> setting”</a>.</td></tr><tr class="seglistitem"><td class="seg"><code class="literal">uidNumber</code></td><td class="seg">See <a class="xref" href="ntsec.html#ntsec-mapping-nfs" title="NFS account mapping">the section called “NFS account mapping”</a> and
 	 <a class="xref" href="ntsec.html#ntsec-mapping-samba" title="Samba account mapping">the section called “Samba account mapping”</a>.</td></tr></tbody></table></div><p>
 The group attributes utilized by Cygwin are:
 </p><div class="segmentedlist"><table border="0"><thead><tr class="segtitle"></tr></thead><tbody><tr class="seglistitem"><td class="seg"><code class="literal">gidNumber</code></td><td class="seg">See <a class="xref" href="ntsec.html#ntsec-mapping-nfs" title="NFS account mapping">the section called “NFS account mapping”</a> and
@@ -1291,7 +1291,7 @@ with password.  The password gets stored two-way encrypted in a hidden,
 obfuscated area of the registry, the LSA private registry area.  This
 part of the registry contains, for instance, the passwords of the Windows
 services which run under some non-default user account.</p><p>So what we do is to utilize this registry area for the purpose of
-<span class="command"><strong>set(e)uid</strong></span>.  The Cygwin command <span class="command"><strong><a class="link" href="using-utils.html#passwd" title="passwd">passwd</a> -R</strong></span> allows a user to specify
+<span class="command"><strong>set(e)uid</strong></span>.  The Cygwin command <span class="command"><strong><a class="link" href="passwd.html" title="passwd">passwd</a> -R</strong></span> allows a user to specify
 his/her password for storage in this registry area.  When this user
 tries to login using ssh with public key authentication, Cygwin's
 <span class="command"><strong>set(e)uid</strong></span> examines the LSA private registry area and
