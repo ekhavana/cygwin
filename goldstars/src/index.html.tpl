@@ -6,7 +6,7 @@
     <title>Cygwin Gold Stars</title>
     <style type="text/css">
       img { border: 0; vertical-align: top; }
-      a.award { text-decoration: none; color: black; }
+      a.award { text-decoration: none; }
       span.date { font-style: italic; font-size: smaller; }
       span.times { font-size: smaller; }
     </style>
