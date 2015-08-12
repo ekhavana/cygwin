@@ -144,18 +144,22 @@ foreach my $initials (sort { $awardees{$b}{latest_date} cmp $awardees{$a}{latest
 	my $last_award;
 	foreach my $award (sort { $a->{date} cmp $b->{date} } @{$awardee{awards}}) {
 		$last_award = $award;
-		my $text = "<a href=\"$award->{URL}\">";
+		# Show the award description if any, with HTML tags stripped out, as the anchor title:
+		(my $title = $award->{Description} || '') =~ s/<[^>]*>//g;
+		my $text = "<a href=\"$award->{URL}\" class=\"award\"" 
+			. ($title ? " title=\"${title}\"" : "" ) 
+			. ">";
 		foreach my $type (@award_type_names) {
 			my $nawards = $award->{$type};
 			if ($nawards > MAX_STARS) {
-				$text .= "$award_types{$type}{img_html}<span class=\"times\">&times;&nbsp;$nawards</span>";
+				$text .= "$award_types{$type}{img_html}<span class=\"times\">&times;${nawards}&nbsp;</span>";
 			}
 			else {
 				$text .= $award_types{$type}{img_html} x $award->{$type};
 			}
 		}
 		my ($y, $m) = $award->{date} =~ /^(\d+)-(\d+)/;
-		$text .= '</a> <span class="date">(' . strftime('%b %Y', 0, 0, 0, 1, $m-1, $y-1900) . ')</span>';
+		$text .= '<span class="date">(' . strftime('%b %Y', 0, 0, 0, 1, $m-1, $y-1900) . ')</span></a>';
 		push @list, $text;
 	}
 	# Append description of the last award only, for now
