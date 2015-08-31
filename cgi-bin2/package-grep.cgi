@@ -87,7 +87,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 Search package contents for a
 <a href="http://www.gnu.org/software/grep/manual/grep.html">grep</a>
 <a href="http://www.gnu.org/software/grep/manual/grep.html#Basic-vs-Extended">basic</a>
-<a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern:
+<a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a>
 pattern, or view the <a href="https://cygwin.com/packages/package_list.html">full list</a>
 of packages<br>
 <input type="text" size=40 name="grep" value="'$param_grep_htmlencode'">
