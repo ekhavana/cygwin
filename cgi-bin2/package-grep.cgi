@@ -35,7 +35,7 @@ urlencode() {
 # defaults
 param_grep=
 param_text=
-param_arch=x86
+param_arch=x86_64
 
 if [ "$QUERY_STRING" = "" ]; then
     QUERY_STRING="&grep="
