@@ -791,8 +791,8 @@ related messages.
 or <code class="literal">whatis</code>, you
 must create the whatis database.  Just run the command
 </p><pre class="screen">
-	/usr/sbin/makewhatis
-</pre><p>(it may take a minute to complete).
+	mandb
+</pre><p>(it may take a few minutes to complete).
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.using.chmod"></a><p><b>4.15.</b></p></td><td align="left" valign="top"><p>Why doesn't <code class="literal">chmod</code> work?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>If you're using FAT32 instead of NTFS, <code class="literal">chmod</code> 
 will fail since FAT32 does not provide any permission information.
 You should really consider converting the drive to NTFS with
@@ -1298,7 +1298,7 @@ often implements its functions by installing hooks into various parts of the sys
 including both the Explorer shell and the underlying kernel.  Sometimes these hooks
 are not implemented in an entirely transparent fashion, and cause changes in the
 behaviour which affect the operation of other programs, such as Cygwin.
-</p><p>Among the software that has been found to cause difficulties are:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Sonic Solutions burning software containing DLA component (when DLA disabled)</p></li><li class="listitem"><p>Norton/McAfee/Symantec antivirus or antispyware</p></li><li class="listitem"><p>Logitech webcam software with "Logitech process monitor" service</p></li><li class="listitem"><p>Kerio, Agnitum or ZoneAlarm Personal Firewall</p></li><li class="listitem"><p>Iolo System Mechanic/AntiVirus/Firewall</p></li><li class="listitem"><p>LanDesk</p></li><li class="listitem"><p>Windows Defender </p></li><li class="listitem"><p>Various programs by Wave Systems Corp using wxvault.dll, including Embassy Trust Suite and Embassy Security Center</p></li><li class="listitem"><p>NOD32 Antivirus</p></li><li class="listitem"><p>ByteMobile laptop optimization client</p></li><li class="listitem"><p>Earthlink Total-Access</p></li><li class="listitem"><p>Spybot S&amp;D TeaTimer</p></li><li class="listitem"><p>AR Soft RAM Disk</p></li><li class="listitem"><p>ATI Catalyst (some versions)</p></li><li class="listitem"><p>NVIDIA GeForce (some versions)</p></li><li class="listitem"><p>Windows LiveOneCare</p></li><li class="listitem"><p>Webroot Spy Sweeper with Antivirus</p></li><li class="listitem"><p>COMODO Firewall Pro</p></li><li class="listitem"><p>PC Tools Spyware Doctor</p></li><li class="listitem"><p>Avira AntiVir</p></li><li class="listitem"><p>Panda Internet Security</p></li><li class="listitem"><p>BitDefender</p></li><li class="listitem"><p>Google Desktop</p></li><li class="listitem"><p>Sophos Anti-Virus 7</p></li><li class="listitem"><p>Bufferzone from Trustware</p></li><li class="listitem"><p>Lenovo IPS Core Service (ipssvc)</p></li><li class="listitem"><p>Lenovo RapidBoot Shield</p></li><li class="listitem"><p>Credant Guardian Shield</p></li><li class="listitem"><p>AVAST (disable FILESYSTEM and BEHAVIOR realtime shields)</p></li><li class="listitem"><p>Citrix Metaframe Presentation Server/XenApp (see <a class="ulink" href="http://support.citrix.com/article/CTX107825" target="_top">Citrix Support page</a>)</p></li></ul></div><p>Sometimes these problems can be worked around, by temporarily or partially
+</p><p>Among the software that has been found to cause difficulties are:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: disc; "><li class="listitem"><p>Sonic Solutions burning software containing DLA component (when DLA disabled)</p></li><li class="listitem"><p>Norton/McAfee/Symantec antivirus or antispyware</p></li><li class="listitem"><p>Logitech webcam software with "Logitech process monitor" service</p></li><li class="listitem"><p>Kerio, Agnitum or ZoneAlarm Personal Firewall</p></li><li class="listitem"><p>Iolo System Mechanic/AntiVirus/Firewall</p></li><li class="listitem"><p>LanDesk</p></li><li class="listitem"><p>Windows Defender </p></li><li class="listitem"><p>Various programs by Wave Systems Corp using wxvault.dll, including Embassy Trust Suite and Embassy Security Center</p></li><li class="listitem"><p>NOD32 Antivirus</p></li><li class="listitem"><p>ByteMobile laptop optimization client</p></li><li class="listitem"><p>Earthlink Total-Access</p></li><li class="listitem"><p>Spybot S&amp;D TeaTimer</p></li><li class="listitem"><p>AR Soft RAM Disk</p></li><li class="listitem"><p>ATI Catalyst (some versions)</p></li><li class="listitem"><p>NVIDIA GeForce (some versions)</p></li><li class="listitem"><p>Windows LiveOneCare</p></li><li class="listitem"><p>Webroot Spy Sweeper with Antivirus</p></li><li class="listitem"><p>COMODO Firewall Pro</p></li><li class="listitem"><p>PC Tools Spyware Doctor</p></li><li class="listitem"><p>Avira AntiVir</p></li><li class="listitem"><p>Panda Internet Security</p></li><li class="listitem"><p>BitDefender</p></li><li class="listitem"><p>Google Desktop</p></li><li class="listitem"><p>Sophos Anti-Virus 7</p></li><li class="listitem"><p>Bufferzone from Trustware</p></li><li class="listitem"><p>Lenovo IPS Core Service (ipssvc)</p></li><li class="listitem"><p>Lenovo RapidBoot Shield</p></li><li class="listitem"><p>Credant Guardian Shield</p></li><li class="listitem"><p>AVAST (disable FILESYSTEM and BEHAVIOR realtime shields)</p></li><li class="listitem"><p>Citrix Metaframe Presentation Server/XenApp (see <a class="ulink" href="http://support.citrix.com/article/CTX107825" target="_top">Citrix Support page</a>)</p></li><li class="listitem"><p>Lavasoft Web Companion</p></li></ul></div><p>Sometimes these problems can be worked around, by temporarily or partially
 disabling the offending software.  For instance, it may be possible to disable
 on-access scanning in your antivirus, or configure it to ignore files under the
 Cygwin installation root.  Often, unfortunately, this is not possible; even disabling
@@ -1972,13 +1972,24 @@ Windows command prompt, and see what happens.
 </p><p>If you get the error "shared region is corrupted" it means that two
 different versions of cygwin1.dll are running on your machine at the
 same time. Remove all but one. 
-</p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.debugging-cygwin"></a><p><b>6.22.</b></p></td><td align="left" valign="top"><p>I may have found a bug in Cygwin, how can I debug it (the symbols in gdb look funny)?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>Debugging symbols are stripped from distibuted Cygwin binaries, so any
-symbols that you see in gdb are basically meaningless. It is also a good
+</p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.debugging-cygwin"></a><p><b>6.22.</b></p></td><td align="left" valign="top"><p>I may have found a bug in Cygwin, how can I debug it (the symbols in gdb look funny)?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>Debugging symbols are stripped from distibuted Cygwin binaries, so to
+debug with <span class="command"><strong>gdb</strong></span> you will need to install the
+<span class="package">cygwin-debuginfo</span> package to obtain the debug symbols for
+<code class="filename">cygwin1.dll</code>
+</p><p>
+If your bug causes an exception inside <code class="filename">cygwin1.dll</code> you will
+need to use the <span class="command"><strong>gdb</strong></span> command <strong class="userinput"><code>set cygwin-exceptions
+on</code></strong> to tell <span class="command"><strong>gdb</strong></span> to stop on exceptions inside the
+Cygwin DLL (by default they are ignored, as they may be generated during normal
+operation e.g. when checking a pointer is valid)
+</p><p>
+It is also a good
 idea to use the latest code in case the bug has been fixed, so we
 recommend trying the latest snapshot from
-<a class="ulink" href="https://cygwin.com/snapshots/" target="_top">https://cygwin.com/snapshots/</a> or building the DLL from GIT.
+<a class="ulink" href="https://cygwin.com/snapshots/" target="_top">https://cygwin.com/snapshots/</a> or building the DLL from git.
 </p><p>To build a debugging version of the Cygwin DLL, you will need to follow
-the instructions at <a class="ulink" href="https://cygwin.com/faq/faq.html#faq.programming.building-cygwin" target="_top">https://cygwin.com/faq/faq.html#faq.programming.building-cygwin</a>. 
+the instructions at <a class="ulink" href="https://cygwin.com/faq/faq.html#faq.programming.building-cygwin" target="_top">https://cygwin.com/faq/faq.html#faq.programming.building-cygwin</a>.
+</p><p>
 You can also contact the mailing list for pointers (a simple test case that 
 demonstrates the bug is always welcome).  
 </p></td></tr><tr class="question"><td align="left" valign="top"><a name="faq.programming.compiling-unsupported"></a><p><b>6.23.</b></p></td><td align="left" valign="top"><p>How can I compile Cygwin for an unsupported platform (PowerPC, Alpha, ARM, Itanium)?</p></td></tr><tr class="answer"><td align="left" valign="top"></td><td align="left" valign="top"><p>Unfortunately, this will be difficult.  Exception handling and signals
