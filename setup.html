@@ -10,58 +10,92 @@
 <!--#include virtual="navbar.html" -->
 <!--#include virtual="top.html" -->
 <h1>Cygwin Package Contributor's Guide</h1>
-<p>This document is intended for people who post packages to sourceware.org, and thus need to make them available through the standard Cygwin setup program. This documents the syntax of the setup.hint file, the program that automatically generates it on a regular basis, the layout required for packages, and the related policies to ensure good behaviour from the setup program.</p>
-<p><a href="http://sourceware.org/cygwin-apps/setup.html">Setup</a> depends on certain conventions being followed. If they are not followed, bad things may happen to the users of the setup program. Where a convention can be ignored, should circumstances warrant, this document will specify that. Setup has it's own homepage <a href="http://sourceware.org/cygwin-apps/setup.html">http://sourceware.org/cygwin-apps/setup.html</a>. If you are interested in adding features to setup, or in manually creating a setup.ini file, you should consult the setup homepage.</p>
+
+<p>This document is intended for people who upload packages to sourceware.org,
+  to be made available through the standard Cygwin setup program. This documents
+  the syntax of the setup.hint file, the layout required for packages, and the
+  related policies to ensure good behaviour from the setup program.
+</p>
+
+<p><a href="http://sourceware.org/cygwin-apps/setup.html">Setup</a> depends on
+  certain conventions being followed. If they are not followed, bad things may
+  happen to the users of the setup program. Where a convention can be ignored,
+  should circumstances warrant, this document will specify that. Setup has it's
+  own <a href="http://sourceware.org/cygwin-apps/setup.html">homepage</a>. If you
+  are interested in adding features to setup, you should consult the setup
+  homepage.
+
+  If you are interested in creating a local mirror with or without custom Cygwin
+  packages, see
+  the <a href="https://sourceware.org/cygwin-apps/package-server.html">package
+  server</a> page.
+</p>
+
 <p>The <tt>cygwin-apps</tt> mailing list is the correct place to discuss any package creation or maintenance issues. It is not a place for end user bug reports - direct those to the <tt>cygwin</tt> mailing list instead.</p>
 <h2>Contents</h2>
 <ul class="spaced">
-  <li><a href="#naming">Package naming</a></li>
-  <li><a href="#sourceware.org">Sourceware.org</a></li>
+  <li><a href="#naming">Package file naming scheme</a></li>
   <li><a href="#setup.hint">setup.hint</a></li>
-  <li><a href="http://sourceware.org/cygwin-apps/setup-head.ini.html">setup.ini</a></li>
   <li><a href="#package_contents">Package contents</a></li>
   <li><a href="#making_srcpackage">Making a package with cygport</a></li>
   <li><a href="#postinstall">Creating a package postinstall script</a></li>
   <li><a href="#submitting">Submitting a package</a></li>
 </ul>
-<h2><a id="naming" name="naming">Package file naming</a></h2>
-<p>Package naming scheme: use the vendor's version plus a release
-  suffix for ports of existing packages (i.e. findutils 4.5.12 becomes
-  4.5.12-1, 4.5.12-2, etc., until findutils 4.5.13 is ported, which
-  would be 4.5.13-1, etc). Some packages also use a YYYYMMDD format for
-  their versions, e.g. terminfo-5.9-20140524-1.tar.xz. The first release
-  of a package should have a -1 release suffix.</p>
+<h2><a id="naming" name="naming">Package file naming scheme</a></h2>
+<p>
+  Use the upstream's version plus a release suffix (i.e. findutils 4.5.12
+  becomes 4.5.12-1, 4.5.12-2, etc., until findutils 4.5.13 is packaged, which
+  would be 4.5.13-1, etc). Some packages also use a YYYYMMDD format for their
+  versions, e.g. terminfo-5.9-20140524-1.tar.xz. The first release of a package
+  should have a -1 release suffix.
+</p>
+
 <p>A complete package currently consists of three files:</p>
 <ul>
-  <li>a binary tar file</li>
-  <li>a source tar file</li>
+  <li>a binary tar file, named <tt>package-version-release.tar.xz</tt></li>
+  <li>a source tar file, named <tt>package-version-release-src.tar.xz</tt></li>
   <li>a setup.hint file</li>
 </ul>
-<p>Binary tar files are named "package-version-release.tar.xz". They generally contain the executable files that will be installed on a user's system plus any auxiliary files needed by the package. See the <a href="#package_contents">package contents</a> section below for more details on the contents of a binary tar file.</p>
-<p>Source tar files are named "package-version-release-src.tar.xz". Source tar files should contain the source files, patches and scripts needed to rebuild the package. While installing these files is optional, the inclusion of a source tar file is part of the totality that makes up a Cygwin package and so, these files are <em>not</em> optional. In some cases, there may be multiple packages generated from the same source; for instance, one might have a "boffo" package and its associated shared library in "libboffo7", where both are generated from the same -src tarball. See the <a href="#package_contents">package contents</a> section below for more details on the contents of a -src tar file, and the <a href="#setup.hint">setup.hint</a> section for information on the "external-source:" option.</p>
-<p>Note that package files may be .bz2, .gzip or .xz compressed.  .gzip is deprecated and .xz is preferred for new package submissions.</p>
-<p>The setup.hint file is discussed <a href="#setup.hint">below</a>.</p>
-<h2><a id="sourceware.org" name="sourceware.org">Automatic setup.ini generation on sourceware.org</a></h2>
-<p>A script runs on sourceware.org which collects information from (currently) the <tt>release</tt> directory in the ftp download area. Information from subdirectories of these directories is parsed to automatically generate the default <a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">setup.ini</a> file which is used by the Cygwin setup program for installation control. If you are responsible for maintaining a Cygwin package, it is important that you understand how this process works.</p>
-<p>Packages are grouped by directory under <tt>release</tt>. The directory name is the same as the package name. For example, the <tt>boffo</tt> package will live in the <tt>boffo</tt> subdirectory. Exceptions to this rule are historical. All new packages will follow the rule of package name == directory name. However, for closely related groups of packages, it is acceptable to use a hierarchical tree under <tt>release/</tt>:</p>
+
+<p>
+e.g.:
+</p>
+
 <pre>
-release/
-release/boffo/
-release/boffo/&lt;boffo files&gt;
-release/boffo/boffo-devel/
-release/boffo/boffo-devel/&lt;boffo-devel file&gt;
+bash$ ls -1 release/boffo
+boffo-1.0-1.tar.xz
+boffo-1.0-1-src.tar.xz
+setup.hint
 </pre>
-<p>Each directory contains <a href="#naming">source and binary tar files</a> which have been been compressed. The required <a href="#naming">format of these filenames</a> is: <tt>package-version-release[<i>-src</i>].tar.xz</tt> . The contents of these files is discussed <a href="#package_contents">below</a>.</p>
-<p>The "package" part of the filename is the name mentioned above.</p>
-<p>The version number <b>must</b> start with a digit and must adhere to the rules in <a href="#naming">package file naming</a> above. Higher version (and release) numbers are used for the current version of a package; the previous stable version (if any) is used for the previous version (however see <a href="#setup.hint">setup.hint</a> for exceptions to this rule). Lexically, when two packages have identical vendor version numbers, the one with the higher release number is considered newer. Also, given two packages, the one with the higher vendor version number is always considered newer, regardless of the release number.</p>
-<p>The <i>-src</i> component of the filename is added to files which contain source code.</p>
-<p>A complete "package" is made up of three files: the "binary" package tar file, the "source" tar file, and the "setup.hint" file, e.g.:</p>
-<pre>
-bash$ ls release/boffo
-boffo-1.0-1.tar.xz  boffo-1.0-1-src.tar.xz  setup.hint
-</pre>
-<p>Setup is currently unable to list more than three versions of each package. Therefore you should not keep more than three versions of each package around: The current version, the previous stable version, and, optionally, one test version. By keeping a previous stable version around, you isolate yourself (somewhat) from problems with partial mirrors. When you add a new "current" version, you can either keep the old "previous" version, or make the old current version the new previous version, depending on how stable they each were.</p>
-<p>Test versions are specified via the setup.hint file as described <a href="#setup.hint">below</a>. It is not required that your package have a <tt>test</tt> version. Use of a <tt>test</tt> version of a package is at the discretion of the package maintainer.</p>
+
+<p>Binary tar files generally contain the executable files that will be
+  installed on a user's system plus any auxiliary files needed by the
+  package. See the <a href="#package_contents">package contents</a> section
+  below for more details on the contents of a binary tar file.
+</p>
+
+<p>Source tar files should contain the source files, patches and scripts needed
+  to rebuild the package. While installing these files is optional, the
+  inclusion of a source tar file is part of the totality that makes up a Cygwin
+  package and so, these files are <em>not</em> optional. In some cases, there
+  may be multiple packages generated from the same source; for instance, one
+  might have a "boffo" package and its associated shared library in "libboffo7",
+  where both are generated from the same -src tarball. See
+  the <a href="#package_contents">package contents</a> section below for more
+  details on the contents of a -src tar file, and
+  the <a href="#advanced_setup.hint">setup.hint</a> section for information on
+  the "external-source:" option.
+</p>
+
+<p>
+  Note that package files may be .bz2, .gzip or .xz compressed.  .gzip is
+  deprecated and .xz is preferred for new package submissions.
+</p>
+
+<p>
+  The version and release number <b>must</b> start with a digit.
+</p>
+
 <h2><a id="setup.hint" name="setup.hint"><tt>setup.hint</tt></a></h2>
 <p>Each package must be submitted with a file called <tt>setup.hint</tt>. This file is used for information that cannot be inferred just from the context of the file name or package name. Lines in <tt>setup.hint</tt> will consist of one of the following:</p>
 <pre>
@@ -77,56 +111,205 @@ category: <i>name1[ name2...]</i>
 requires: <i>package[ package...]</i>
 external-source: <i>package</i>
 </pre>
-<h4 align="center">Note: Not all of the above setup.hint lines are required. Please read the description below for further details on how to construct a setup.hint file.</h4>
-<p>(You may see some older setup.hint files which lack the colons after the introducing field. This usage is allowed but deprecated. Please use colons in your setup.hint for everything but '#' and '@'.)</p>
-<p>Lines that begin with '#' are considered to be comments and are ignored by the setup.ini generator.</p>
-<p>A line that begins with a "<tt>@</tt>" behaves similarly to the setup.ini field (<a href="http://sourceware.org/cygwin-apps/setup.html#setup.ini">see below</a>). It overrides the package name for the enclosing directory. This is an optional entry. It is intended only for historical packages where the package name is different from the name of the directory in which the package resides. This should not be necessary for "modern" setup.hint files. <em>Do not use this unless you've been instructed to do so.</em></p>
-<p>The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate which versions should be used for which sections of that package. Use these settings <em>only</em> if you need to circumvent the normal intuitive version numbering scheme.</p>
-<p>Use of <tt>curr</tt> and <tt>prev</tt> is usually not required since the setup.ini generator does a good job of figuring out version number ordering. So, e.g. if you had previously released <tt>boffo-0.9-1</tt> and now have a new <tt>boffo-1.0-1</tt>, the version numbering is obvious and there is no need to use <tt>curr</tt> or <tt>prev</tt>. It is obvious that <tt>boffo-1.0-1</tt> is newer than <tt>boffo-0.9-1</tt> and the setup.ini generator will do the right thing in this case.</p>
-<p>However, if you had discovered a serious error in the <tt>boffo-1.0</tt> release, and then decided that you want to drop back to <tt>boffo-0.9-1</tt>, you could include entries like this:</p>
+<p align="center">
+  <b>Note: Not all of the above setup.hint lines are required. Please read the
+  description below for further details on how to construct a setup.hint
+  file.</b>
+</p>
+
+<ul>
+  <li>
+    <p>Lines that begin with '#' are comments and are ignored.</p>
+  </li>
+
+  <li>
+    <p>
+      A line that begins with a "<tt>@</tt>" overrides the package name for the
+      enclosing directory. This is intended only for historical packages where
+      the package name is different from the name of the directory in which the
+      package resides. This should not be necessary for "modern" setup.hint
+      files. <em>Do not use this unless you've been instructed to do so.</em>
+    </p>
+  </li>
+
+  <li>
+    <p>
+      The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate which
+      versions of that package should be used. Use these settings <em>only</em>
+      if you need to circumvent the normal version number ordering.
+    </p>
+
+    <p>
+      By default, the highest version (and release) numbers are used for the
+      current version of a package; the next highest (if any) is used for the
+      previous version.  When two packages have lexically identical version
+      numbers, the one with the higher release number is considered newer. Also,
+      given two packages, the one with the higher version number is always
+      considered newer, regardless of the release number.
+    </p>
+
+    <p>
+      Use of <tt>curr</tt> and <tt>prev</tt> is usually not required, given this
+      version number ordering. So, e.g. if you had previously
+      released <tt>boffo-0.9-1</tt> and now have a new <tt>boffo-1.0-1</tt>, the
+      version number ordering is obvious and there is no need to
+      use <tt>curr</tt> or <tt>prev</tt>. It is obvious
+      that <tt>boffo-1.0-1</tt> is newer than <tt>boffo-0.9-1</tt>.
+    </p>
+
+    <p>
+      However, if you had discovered a serious error in the <tt>boffo-1.0</tt>
+      release, and then decided that you want to drop back
+      to <tt>boffo-0.9-1</tt>, you could include entries like this:
+    </p>
+
 <pre>
 prev: 1.0-1
 curr: 0.9-1
 </pre>
-This usage should be rare, however.
-<p>In general, you should trust the automatic setup.ini generator to "do the right thing" -- with one exception. If you decide that you need to release a <i>test</i> version of your package, there is no way for the setup.ini generator to know that.</p>
-<p>So, you will have to put something like "<tt>test: 1.9-1</tt>" in your setup.hint file. This will cause setup to characterize the 1.9-1 version as a "test" package. With the current setup implementation, it will also mean that it will be overlooked by most people during installation. So, unless you have made arrangements to advertise your test release, this option should be used sparingly.</p>
-<p>Note that if any of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt> options are used, they will short circuit <em>all</em> of the automatic version detection used for generating setup.ini. So, if you include a <tt>test</tt> option, and you have valid current and/or previous tar files, you <em>must</em> specify <tt>curr</tt> and/or <tt>prev</tt>. Otherwise, the <b>only</b> version that setup will display will be the <tt>test</tt> version.</p>
-<p>For example, if your setup.hint looks like this:</p>
+
+    <p>
+      This usage should be rare, however.
+    </p>
+
+    <p>
+      In general, you should trust setup to "do the right thing" -- with one
+      exception. If you decide that you need to release a <i>test</i> version of
+      your package, there is no way for setup to know that.
+    </p>
+
+    <p>
+      So, you will have to put something like "<tt>test: 1.9-1</tt>" in your
+      setup.hint file. This will cause setup to characterize the 1.9-1 version
+      as a "test" package. With the current setup implementation, it will also
+      mean that it will be overlooked by most people during installation. So,
+      unless you have made arrangements to advertise your test release, this
+      option should be used sparingly.
+    </p>
+
+    <p>
+      Note that if any of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt>
+      options are used, they will short circuit <em>all</em> of the automatic
+      version ordering. So, if you include a <tt>test</tt> option, and you have
+      valid current and/or previous tar files, you <em>must</em>
+      specify <tt>curr</tt> and/or <tt>prev</tt>. Otherwise, the <b>only</b>
+      version that setup will display will be the <tt>test</tt> version.
+    </p>
+
+    <p>
+      For example, if your setup.hint looks like this:
+    </p>
+
 <pre>
 test: 1.9-1
 </pre>
-<p>then setup.ini will not contain the 0.9-1 or 1.0-1 versions.
-<p>If you want all of the versions included, you must do this:</p>
+
+    <p>
+      then setup will not offer the 0.9-1 or 1.0-1 versions.
+    </p>
+    <p>
+      If you want all of the versions included, you must do this:
+    </p>
+
 <pre>
 prev: 0.9-1
 curr: 1.0-1
 test: 1.9-1
 </pre>
-<p>The <tt>skip</tt> line indicates that that package should not appear in setup.ini. It is intended for directories that exist in the hierarchy that should not be considered for inclusion in setup.ini.</p>
-<p><tt>sdesc</tt> is a mandatory field for setup.hint. Your package <em>must</em> contain this field. The <tt>sdesc</tt> field is required for correct operation of the setup program.</p>
-<p><tt>sdesc</tt> is a one line description of the package. This is the information that will be displayed when installing packages via setup.</p>
-<p><tt>ldesc</tt> is a more descriptive, multi-line description of the package, intended for future use.</p>
-<p>Please note that the package name should <em>not</em> be part of the description, e.g. this is incorrect:
+
+    <p>
+      Setup is currently unable to list more than three versions of each
+      package. Therefore you should not keep more than three versions of each
+      package around: The current version, the previous stable version, and,
+      optionally, one test version. By keeping a previous stable version around,
+      you isolate yourself (somewhat) from problems with partial mirrors. When
+      you add a new "current" version, you can either keep the old "previous"
+      version, or make the old current version the new previous version,
+      depending on how stable they each were.
+    </p>
+
+    <p>
+      It is not required that your package have a <tt>test</tt> version. Use of
+      a <tt>test</tt> version of a package is at the discretion of the package
+      maintainer.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      The <tt>skip</tt> line indicates that that package should not appear in
+      setup. It is intended for directories that exist in the hierarchy that
+      should not be considered.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      <tt>sdesc</tt> is a mandatory field for setup.hint. Your
+      package <em>must</em> contain this field. The <tt>sdesc</tt> field is
+      required for correct operation of the setup program.
+    </p>
+
+    <p>
+      <tt>sdesc</tt> is a one line description of the package. This is the
+      information that will be displayed when installing packages via setup.
+    </p>
+
+    <p>
+      Please note that the package name should <em>not</em> be part of the
+      description, e.g. this is incorrect:
+    </p>
+
 <pre>
 sdesc:      "boffo: A whackamole simulation in ASCII art"
 </pre>
-<p>This is correct:
+
+    <p>
+      This is correct:
+    </p>
+
 <pre>
 sdesc:      "A whackamole simulation in ASCII art"
 </pre>
-<p>Quote text that takes up several lines e.g.:</p>
+
+  </li>
+
+  <li>
+    <p>
+      <tt>ldesc</tt> is a more descriptive, multi-line description of the
+      package, intended for future use.
+    </p>
+
+    <p>
+      Quote text that takes up several lines e.g.:
+    </p>
+
 <pre>
-ldesc: "A whackamole simulation in ASCII art.
+ldesc:    "A whackamole simulation in ASCII art.
 Intended for use on VT100 terminals at BAUD rates 1200 and
 above.  Uses arrow keys for positioning over moles.  Space
 bar whacks the mole.
 No actual moles will be harmed during execution of this game."
 </pre>
-<p>The <tt>category</tt> line indicates the categories that this package belongs to. One package can belong to multiple categories. Multiple categories are separated by spaces.</p>
-<p>Do not enclose multiple category names within quotation marks.</p>
-<a name="categories" />
-<p>Please do not invent a new category without checking with the cygwin-apps mailing list first. As of this writing, the current categories are:</p>
+  </li>
+
+  <li>
+    <p>
+      The <tt>category</tt> line indicates the categories that this package
+      belongs to. One package can belong to multiple categories. Multiple
+      categories are separated by spaces.
+    </p>
+
+    <p>
+      Do not enclose multiple category names within quotation marks.
+    </p>
+
+    <a name="categories" />
+    <p>
+      Please do not invent a new category without checking with the cygwin-apps
+      mailing list first. As of this writing, the current categories are:
+    </p>
+
 <table width="50%" align="center">
   <tr>
     <td>Accessibility</td>
@@ -176,15 +359,51 @@ No actual moles will be harmed during execution of this game."
     <td>Xfce</td>
   </tr>
 </table>
-<p>As you can see, currently, all categories consist of only a single word. We don't anticipate that this will change anytime soon. However, with the use of quotes, setup will understand category names which contain spaces, for example:</p>
+
+    <p>
+      As you can see, currently, all categories consist of only a single
+      word. We don't anticipate that this will change anytime soon. However,
+      with the use of quotes, setup will understand category names which contain
+      spaces, for example:
+    </p>
+
 <pre>
 category: "ASCII Games"
 </pre>
-<p>The above would place a package in a single category called "ASCII Games" rather than two categories "ASCII" and "Games".</p>
-<p>The <tt>requires</tt> line indicates the packages that this package relies on. If your package is dependent on a file provided by another package that other package should be included here. The requires field may be missing or empty if your package truly does not require any other package.</p>
-<p>A package can rely on multiple other packages. Hierarchical dependencies should work correctly, however, it is best to always include specific dependencies, i.e. don't drop '<tt>bar</tt>' from your dependency list if your package requires it, even if you are including '<tt>foo</tt>' which relies on '<tt>bar</tt>'.</p>
-<p>Conversely, do not include package dependencies of <em>dependent</em> packages in your dependency list. If you think that another package has an incorrect dependency list, send email to cygwin-apps noting that fact.</p>
-<p>Multiple packages are separated by spaces. Do not enclose multiple package names within quotation marks.</p>
+
+    <p>
+      The above would place a package in a single category called "ASCII Games" rather than two categories "ASCII" and "Games".
+    </p>
+  </li>
+
+  <li>
+    <p>
+      The <tt>requires</tt> line indicates the packages that this package relies
+      on. If your package is dependent on a file provided by another package
+      that other package should be included here. The requires field may be
+      missing or empty if your package truly does not require any other package.
+    </p>
+
+    <p>
+      A package can rely on multiple other packages. Hierarchical dependencies
+      should work correctly, however, it is best to always include specific
+      dependencies, i.e. don't drop '<tt>bar</tt>' from your dependency list if
+      your package requires it, even if you are including '<tt>foo</tt>' which
+      relies on '<tt>bar</tt>'.
+    </p>
+
+    <p>
+      Conversely, do not include package dependencies of <em>dependent</em>
+      packages in your dependency list. If you think that another package has an
+      incorrect dependency list, send email to cygwin-apps noting that fact.
+    </p>
+
+    <p>
+      Multiple packages are separated by spaces. Do not enclose multiple package
+      names within quotation marks.
+    </p>
+  </li>
+</ul>
 <p>Here's an example of a complete <i>release/boffo/setup.hint</i>:</p>
 <pre>
 category: Games Text
@@ -196,15 +415,15 @@ above.  Uses arrow keys for positioning over moles.  Space
 bar whacks the mole.
 No actual moles will be harmed during execution of this game."
 </pre>
-<p>Notice that we didn't use the <tt>prev</tt>, <tt>curr</tt>, <tt>test</tt>, or <tt>@</tt> options. Instead, we relied on the automatic setup.ini generator to do as much as possible for us.</p>
-<h3><a id="advanced_setup.hint" name="advanced_setup.hint"><tt>setup.hint (Advanced Options)</tt></a></h3>
-<p>The <tt>external-source</tt> line is used when multiple installation packages are generated from a single -src package. For example, suppose the <tt>boffo</tt> package contains the executables and documentation for boffo, but there is also a shared library <tt>cygboffo-7.dll</tt> that might be used by other packages; say, the <tt>fobbo</tt> program. It would be nice to separate that <tt>cygboffo-7.dll</tt> shared library into a second installation package, so that users of the <tt>fobbo</tt> program can install <em>just</em> the library, and not the entire <tt>boffo</tt> package. However, all of the <tt>boffo</tt> executables and the DLL are generated from the same source. To support this usage, the <tt>boffo</tt> maintainer would create three packages:</p>
+<p>Notice that we didn't use the <tt>prev</tt>, <tt>curr</tt>, <tt>test</tt>, or <tt>@</tt> options. Instead, we relied on setup to do as much as possible for us.</p>
+<h2><a id="advanced_setup.hint" name="advanced_setup.hint"><tt>setup.hint (Advanced Options)</tt></a></h2>
+<p>The <tt>external-source</tt> line is used when multiple installation packages are generated from a single source package. For example, suppose the <tt>boffo</tt> package contains the executables and documentation for boffo, but there is also a shared library <tt>cygboffo-7.dll</tt> that might be used by other packages; say, the <tt>fobbo</tt> program. It would be nice to separate that <tt>cygboffo-7.dll</tt> shared library into a second installation package, so that users of the <tt>fobbo</tt> program can install <em>just</em> the library, and not the entire <tt>boffo</tt> package. However, all of the <tt>boffo</tt> executables and the DLL are generated from the same source. To support this usage, the <tt>boffo</tt> maintainer would create three package files:</p>
 <ul>
   <li><tt>boffo-2.4.1-2.tar.xz</tt>: an installable package that contains all of the normal contents of <tt>boffo</tt> -- except for the shared library.</li>
   <li><tt>libboffo7-2.4.1-2.tar.xz</tt>: an installable package that contains only the shared library from <tt>boffo</tt></li>
   <li><tt>boffo-2.4.1-2-src.tar.xz</tt>: the -src tarball for boffo.</li>
 </ul>
-<p><tt>boffo-2.4.1-2.tar.xz</tt>, <tt>boffo-2.4.1-2-src.tar.xz</tt>, and the boffo <tt>setup.hint</tt> would go into the <tt>release/boffo/</tt> subdirectory on the Cygwin server. <tt>libboffo7-2.4.1-2.tar.xz</tt> would go into a separate subdirectory, such as <tt>release/boffo/libboffo7/</tt>, along with a separate libboffo7 <tt>setup.hint</tt>. The two <tt>setup.hint</tt> files would look something like this:</p>
+<p><tt>boffo-2.4.1-2.tar.xz</tt>, <tt>boffo-2.4.1-2-src.tar.xz</tt>, and the boffo <tt>setup.hint</tt> would go into the <tt>release/boffo/</tt> subdirectory. <tt>libboffo7-2.4.1-2.tar.xz</tt> would go into a separate subdirectory, such as <tt>release/boffo/libboffo7/</tt>, along with a separate libboffo7 <tt>setup.hint</tt>. The two <tt>setup.hint</tt> files would look something like this:</p>
 <center>
   <table border="2">
     <tr>
@@ -251,7 +470,14 @@ version: 2.4.1-2
 install: release/boffo/libboffo7/libboffo7-2.4.1-2.tar.xz
 source: release/boffo/boffo-2.4.1-2-src.tar.xz
 </pre>
-<p>Note that both packages point to the same -src tarball. Also, it is required that the version strings match (libboffo7-5.2 won't point to boffo-1.4-src). The same logic is used to "match up" prev: and test: versions.</p>
+
+<p>
+  Note that both packages point to the same -src tarball. Also, it is required
+  that the versions match (libboffo7-5.2 can't point to boffo-1.4-src). The same
+  logic is used to "match up" prev: and test: versions with their external
+  sources.
+</p>
+
 <h2><a id="package_contents" name="package_contents">Package contents</a></h2>
 <p>The files paths within both the -src and the binary package files are quite important. Since setup extracts into a predetermined directory, you must structure your package contents accordingly.</p>
 <p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
@@ -284,13 +510,13 @@ boffo-1.0-1/boffo-1.0.tar.xz
 boffo-1.0-1/boffo-1.0-1.src.patch
 etc...
 </pre>
-  <p>Generally, this will contain the original source tarball, exactly as downloaded from the original vendor, any needed patch files, and a
+  <p>Generally, this will contain the original source tarball, exactly as downloaded from the original upstream, any needed patch files, and a
      cygport script that drives the packaging process.</p>
   </li>
   <li>In your binary package, you may choose to include a file /usr/share/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.
     (You can adapt <a href="http://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-readme?view=co">this generic README</a>.)
   </li>
-  <li>In your binary package include a directory /usr/share/doc/foo/ that includes any binary-relevant vendor documentation, such as ChangeLogs, copyright licences, READMEs etc. </li>
+  <li>In your binary package include a directory /usr/share/doc/foo/ that includes any binary-relevant upstream documentation, such as ChangeLogs, copyright licences, READMEs etc. </li>
   <li>If you are not creating your package from an installed virtual root, be sure to check that the file permissions are appropriate. </li>
   <li>If the package has any global settings (i.e. in files in /etc) that are not overrideable on a per user basis (sshd, as a daemon, is an example of this) do not include the relevant config files in your package. Instead install the files into /etc/defaults and include in your post-install script to install the settings files. Be sure that if you would overwrite an already present file that the user is offered the choice of keeping their own or overwriting with your defaults. </li>
   <li>Ensure that your package handles being installed on binary and text mounts correctly. </li>
@@ -309,7 +535,7 @@ converting an existing package to use cygport.</p>
 on <a href="setup-packaging-historical.html">previous Cygwin build scripts</a>, and
 borrows concepts from the Gentoo portage system.</p>
 
-<p>Suppose that the vendor's <tt>boffo-1.0.tar.xz</tt> source tarball, that you
+<p>Suppose that the upstream's <tt>boffo-1.0.tar.xz</tt> source tarball, that you
 downloaded from the boffo homepage, unpacks into <tt>boffo-1.0/</tt>.</p>
 
 <p>Further, suppose you've got "boffo" ported to Cygwin. It took some work, but
@@ -358,56 +584,49 @@ and sample .cygport files.</p>
 <p>So you've got a package you want to submit. Follow the following checklist before emailing the <tt>cygwin-apps</tt> mailing list and you'll almost certainly save time.</p>
 <ol>
   <li><i>Do you have the time to maintain the package?</i><br />
-   Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to the <tt>cygwin</tt> mailing list. We'd prefer if you read the non-digest mode since prompt response to packaging issues is a plus. When a <i>bug</i> in your package is reported in the cygwin mailing list, address the bug (if it's a Cygwin-only bug) or pass back to the vendor. When a solution exists, create an updated package with the fix in it, and send a notification that you need the package uploaded to cygwin-apps. Note that you are not expected to be a helpdesk for the package - the users should be pointed to the vendor's lists if you've determined that the bug is not a Cygwin-related bug.</li>
+   Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to the <tt>cygwin</tt> mailing list. We'd prefer if you read the non-digest mode since prompt response to packaging issues is a plus. When a <i>bug</i> in your package is reported in the cygwin mailing list, address the bug (if it's a Cygwin-only bug) or pass back to the upstream. When a solution exists, create and upload an updated package with the fix in it. Note that you are not expected to be a helpdesk for the package - the users should be pointed to the upstream's lists if you've determined that the bug is not a Cygwin-related bug.</li>
   <li>
-    Propose on the <tt>cygwin-apps</tt> mailing list that you are interested in becoming a package maintainer for package "foo" using a subject like "[<a href="acronyms/#ITP">ITP</a>] foo 0.10". Some packages cannot be distributed via Cygwin's setup due to vendor licence limitations. Other packages may not be appropriate for Cygwin. This step will save time if, for some reason, we cannot accept the package.<br />
-     Submission rules:
+    Propose on the <tt>cygwin-apps</tt> mailing list that you are interested in becoming a package maintainer for package "foo" using a subject like "[<a href="acronyms/#ITP">ITP</a>] foo 0.10". Some packages cannot be distributed via Cygwin's setup due to upstream licence limitations. Other packages may not be appropriate for Cygwin. This step will save time if, for some reason, we cannot accept the package.<br />
+    Submission rules:<br />
     <ul>
       <li><b>Include a complete <tt>setup.hint</tt> file as part of your proposal</b>. Include this file in the text of your message so that it can be commented on. Do not submit it as an attachment.</li>
       <li>If the new package is a well-known program already included in a major Linux distribution (e.g. Debian, Fedora, SuSE) please <b>include the URL</b> of the package page.  Note that "development", "test", and "unstable" packages are <b>not eligible</b> for this rule.</li>
       <li>If the package is not included in any major Linux distro it must receive <b>five positive votes</b> from other package maintainers in order to be accepted.</li>
+      <li>It's helpful to mention which <a href="http://opensource.org/licenses">open source license</a> applies to the source.</li>
     </ul>
   </li>
   <li>
     In order to create a good <tt>setup.hint</tt> file do read and follow the documentation in the <a href="#setup.hint">specific section</a> of this very web page.<br />
-     A few things to take extra care to:
+    A few things to take extra care to:<br />
     <ul>
-      <li>Avoid the "@ foo" line at the beginning of the file: it is added automatically.</li>
       <li>In order to select an appropriate a correct <tt>Category</tt> you can look in the Debian package list and identify the section that your package is present in there - if it's available via Debian. If it's not, have a look and take a sensible guess. Use <a href="#categories">existing categories</a> if at all possible.</li>
       <li>Do not use the package name in <tt>sdesc</tt>, as it is added automatically by the setup program.</li>
       <li>Opinion on whether to mark your initial version as a <tt>Test</tt> version is currently mixed. If you have doubts about the stability of your initial offering you may decide to mark it as <tt>Test</tt>. Then, once the package has no major bug reports from users, a current package may be introduced. Otherwise, it is perfectly acceptable to forgo the <tt>Test</tt> designation in your first release.</li>
     </ul>
   </li>
   <li>
-    Place the package files in a web accessible http/ftp site somewhere. If at all possible the files should have a directory structure in order to get them all with a single command. For example, if I am proposing "foo" and "libfoo", an upload site should look like:
+    Place the package files in a web accessible http/ftp site somewhere. If at all possible the files should have a directory structure in order to get them all with a single command. For example, if I am proposing "foo" and "libfoo", an upload site should look like:<br />
     <ul>
-      <li><tt>myserver.com/whatever/foo/foo-0.20.3-1.tar.xz</tt></li>
-      <li><tt>myserver.com/whatever/foo/foo-0.20.3-1-src.tar.xz</tt></li>
-      <li><tt>myserver.com/whatever/foo/setup.hint</tt></li>
-      <li><tt>myserver.com/whatever/foo/libfoo/libfoo-0.20.3-1.tar.xz</tt></li>
-      <li><tt>myserver.com/whatever/foo/libfoo/setup.hint</tt></li>
+      <li><tt>myserver.com/whatever/x86/foo/foo-0.20.3-1.tar.xz</tt></li>
+      <li><tt>myserver.com/whatever/x86/foo/foo-0.20.3-1-src.tar.xz</tt></li>
+      <li><tt>myserver.com/whatever/x86/foo/setup.hint</tt></li>
+      <li><tt>myserver.com/whatever/x86/foo/libfoo/libfoo-0.20.3-1.tar.xz</tt></li>
+      <li><tt>myserver.com/whatever/x86/foo/libfoo/setup.hint</tt></li>
     </ul>
   </li>
   <li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Provide the URLs of all package files to your mail.</li>
   <li>Each new package must in any case receive one <a href="acronyms/#GTG">GTG</a> vote from a package maintainer, meaning that an existing maintainer has downloaded the package, inspected the tarball contents, tested the applications, and rebuilt the package from the source tarball without incident. Once a successful package is produced, you become a maintainer yourself and can provide GTG reviews for others as well.</li>
-  <li>Once you have your first GTG,
-  follow <a href="http://sourceware.org/cygwin-apps/package-upload.html">these
-  instructions</a> for setting up your upload ssh key, and uploading
-  your files.</li>
-  <li>Feel free to delete your temporary copy once the files have been uploaded to sourceware.org.</li>
-  <li>Announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement.<br />
-   Be sure the unsubscribe instructions are included at the end of the email, since cygwin-announce does not add any.<br />
-   Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
+
 </ol>
-<h2><a id="acceptance" name="acceptance">Package acceptance</a></h2>
+<h2><a id="acceptance" name="acceptance">Uploading an accepted package</a></h2>
 <ol>
-  <li>Build the package and make sure that you have time to maintain it.</li>
-  <li>Send an ITP to the cygwin mailing list.  If the package is part of a distribution, include the URL which demonstrates this.  Include a <tt>setup.hint</tt>.</li>
-  <li>If you have received the correct number of votes or if the package is part of a distribution, include URL(s) for the package binary and source so that someone can download them to check the package for any obvious problems.</li>
-  <li>Once you get a GTG from a package maintainer,
-  follow <a href="http://sourceware.org/cygwin-apps/package-upload.html">these
-  instructions</a> for uploading your package.</li>
-  <li>When you get the "uploaded" confirmation, send an immediate note to the <tt>cygwin-announce</tt> mailing list.</li>
+  <li>Once you have your GTG,
+      follow <a href="http://sourceware.org/cygwin-apps/package-upload.html">these
+      instructions</a> for submitting a ssh key and uploading your package files.</li>
+  <li>Announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement.<br />
+    Be sure the unsubscribe instructions are included at the end of the email, since cygwin-announce does not add any.<br />
+    Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
+  <li>Feel free to delete your local copy once the files have been uploaded to sourceware.org.</li>
 </ol>
 <h2><a id="updating" name="updating">Updating a package</a></h2>
 <p>So you've got an updated package you want to submit. You should
@@ -418,7 +637,9 @@ and sample .cygport files.</p>
   the <tt>cygwin-apps</tt> mailing list.
 <ol>
   <li>There is no need to increase the version number if the package has not been officially released.  So, if you are releasing a -1 version of a package keep using -1 for any refinements <em>until</em> the package has been uploaded.</li>
-  <li>After doing a self-upload, announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement..<br />
+  <li>Thereafter, you <em>must</em> increase the version or release number when
+    uploading an updated version of the package.</li>
+  <li>After doing a upload, announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement..<br />
    Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
 </ol>
 <p>NOTE: On any major version upgrade, you may want to mark the release as <tt>Test</tt>.</p>
@@ -454,4 +675,3 @@ and sample .cygport files.</p>
 </div>
 </body>
 </html>
-
