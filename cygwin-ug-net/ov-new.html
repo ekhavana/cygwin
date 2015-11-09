@@ -1,5 +1,26 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new2.2"></a>What's new and what changed in 2.2</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new2.3"></a>What's new and what changed in 2.3</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+strftime(3) supports %s (seconds since Epoch) now.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+posix_madvise(POSIX_MADV_WILLNEED) now utilizes OS functionality available
+starting with Windows 8/Server 2012.
+</p><p>
+posix_madvise(POSIX_MADV_DONTNEED) now utilizes OS functionality available
+starting with Windows 8.1/Server 2012R2.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+sysconf() now supports returning CPU cache information:
+  </p><pre class="screen">
+  _SC_LEVEL1_ICACHE_SIZE, _SC_LEVEL1_ICACHE_ASSOC, _SC_LEVEL1_ICACHE_LINESIZE,
+  _SC_LEVEL1_DCACHE_SIZE, _SC_LEVEL1_DCACHE_ASSOC, _SC_LEVEL1_DCACHE_LINESIZE,
+  _SC_LEVEL2_CACHE_SIZE, _SC_LEVEL2_CACHE_ASSOC, _SC_LEVEL2_CACHE_LINESIZE,
+  _SC_LEVEL3_CACHE_SIZE, _SC_LEVEL3_CACHE_ASSOC, _SC_LEVEL3_CACHE_LINESIZE,
+  _SC_LEVEL4_CACHE_SIZE, _SC_LEVEL4_CACHE_ASSOC, _SC_LEVEL4_CACHE_LINESIZE
+  </pre><p>
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New API: aligned_alloc, at_quick_exit, quick_exit.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Add support for Parallels Desktop FS (prlfs).
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new2.2"></a>What's new and what changed in 2.2</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 New APIs: getcontext, setcontext, makecontext, swapcontext.
 </p></li><li class="listitem" style="list-style-type: disc"><p>
 New functions: sigsetjmp, siglongjmp.
