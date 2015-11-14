@@ -15,20 +15,15 @@ Jon Turney
 
    Table of Contents
    1. Cygwin/X Overview
+
+        Summary
+        Windowing mode
+
    2. Setting Up Cygwin/X
 
         Installing Cygwin/X
 
-   3. Configuring Cygwin/X
-
-        Configuration overview
-
-              Windowing mode
-
-        Command line parameters
-        XWinrc configuration file
-
-   4. Using Cygwin/X
+   3. Using Cygwin/X
 
         Starting Cygwin/X
 
@@ -41,6 +36,7 @@ Jon Turney
               Notes for advanced users
               Obsolete startup methods
 
+        Displaying local clients
         Switching out of Cygwin/X
         Stopping Cygwin/X
         Window managers
@@ -61,17 +57,89 @@ Jon Turney
         Terminal Server or Fast User Switching
         Customizing the notification area icon menu
 
+   4. Configuring Cygwin/X
+
+        Configuration overview
+        Command line parameters
+        XWinrc configuration file
+
    A. GNU Free Documentation License
    Colophon
 
    List of Tables
-   4-1. Summary of OpenGL rendering options
+   3-1. Summary of OpenGL rendering options
      __________________________________________________________________
 
 Chapter 1. Cygwin/X Overview
 
    Cygwin/X is a port of the X Window System to Cygwin. The Cygwin library
    provides a UNIX-like API on the Win32 platform.
+     __________________________________________________________________
+
+Summary
+
+    1. Use Cygwin's setup program to install the xinit package. (See the
+       instructions in the Section called Installing Cygwin/X in Chapter 2
+       for more details).
+    2. Start the X server using the "XWin Server" shortcut under
+       "Cygwin-X" on the Start Menu. (See the Section called Starting in
+       multiwindow mode (startxwin) in Chapter 3 for more details).
+    3. Start X clients using the "X applications menu" icon in the
+       notification area, or from the command line. (See the Section
+       called Displaying local clients in Chapter 3 for more details).
+
+   See the rest of this User's Guide for other topics such as desktop
+   environments, remote clients, XDMCP, etc.
+     __________________________________________________________________
+
+Windowing mode
+
+   Cygwin/X can be configured to present X windows for an X screen in
+   three different ways:
+     * Multiwindow mode. (-multiwindow option)
+       Each top-level X window appears in its own Windows window.
+
+     Note: This is typically used to work with local or remote X
+     applications, integrated into your native Windows desktop, e.g.:
+     [cyw03multiwindow.png]
+     X applications (emacs, gitk and xterm) and Windows applications
+     (explorer and firefox) in multiwindow mode
+     * Windowed or rooted mode. (default)
+       Each X screen appears as a single Windows window and all X windows
+       are contained within those windows. (the Windows window contains
+       the X root window for the screen)
+
+     Note: This is typically used to present a virtual full-screen X
+     session using the X desktop environment or window manager of your
+     choice, or for remote XDMCP sessions, e.g.:
+     [cyw01xdmcp.png]
+     An XDMCP session to a remote Fedora host
+     [cyw02wm.png]
+     xfce4-terminal and emacs under the Openbox window manager in
+     windowed mode
+       The -nodecoration option can be used to remove the Windows window
+       decorations from the X screen window. Alternatively, the
+       -fullscreen option can be used to show the X screen in exclusive
+       fullscreen mode.
+     * Rootless mode. (-rootless option)
+       The X root window is hidden from view, but top-level X windows are
+       drawn.
+
+     Note: This is typically used to work with local or remote X
+     applications, integrated into your native Windows desktop, but
+     controlled using the X window manager of your choice.
+     Because the X root window is hidden in this mode, this is not
+     particulaly useful with X window managers with which you need to
+     interact with the root window (for example, clicking on the root
+     window to get a menu listing programs you can launch) [1] , but is
+     more useful with X window managers which work with a dock or panel
+     window for selecting applications from.
+     Also note that the X window manager has no knowledge of the stacking
+     of Windows windows, and vice versa, so raising one X window above a
+     Windows window raises all of the X windows, and raising one Windows
+     window above an X window raises it above all of the X windows.
+     Exactly as if all X windows were being drawn into a hidden Windows
+     window :-)
      __________________________________________________________________
 
 Chapter 2. Setting Up Cygwin/X
@@ -149,93 +217,7 @@ Installing Cygwin/X
    You have now successfully installed Cygwin/X.
      __________________________________________________________________
 
-Chapter 3. Configuring Cygwin/X
-
-Configuration overview
-
-   Cygwin/X settings are configured primarily through command-line
-   parameters passed to X.
-
-   A XWinrc file is used to configure the notification area icon menu, and
-   customize window appearance in multiwindow mode.
-     __________________________________________________________________
-
-Windowing mode
-
-   Cygwin/X can be configured to present X windows for an X screen in
-   three different ways:
-     * Windowed or rooted mode. (default)
-       Each X screen appears as a single Windows window and all X windows
-       are contained within those windows. (the Windows window contains
-       the X root window for the screen)
-
-     Note: This is typically used to present a virtual full-screen X
-     session using the X desktop environment or window manager of your
-     choice, or for remote XDMCP sessions, e.g.:
-     [cyw01xdmcp.png]
-     An XDMCP session to a remote Fedora host
-     [cyw02wm.png]
-     xfce4-terminal and emacs under the Openbox window manager in
-     windowed mode
-       The -nodecoration option can be used to remove the Windows window
-       decorations from the X screen window. Alternatively, the
-       -fullscreen option can be used to show the X screen in exclusive
-       fullscreen mode.
-     * Multiwindow mode. (-multiwindow)
-       Each top-level X window appears in its own Windows window.
-
-     Note: This is typically used to work with local or remote X
-     applications, integrated into your native Windows desktop, e.g.:
-     [cyw03multiwindow.png]
-     X applications (emacs, gitk and xterm) and Windows applications
-     (explorer and firefox) in multiwindow mode
-     * Rootless mode. (-rootless)
-       The X root window is hidden from view, but top-level X windows are
-       drawn.
-
-     Note: This is typically used to work with local or remote X
-     applications, integrated into your native Windows desktop, but
-     controlled using the X window manager of your choice.
-     Because the X root window is hidden in this mode, this is not
-     particulaly useful with X window managers with which you need to
-     interact with the root window (for example, clicking on the root
-     window to get a menu listing programs you can launch) [1] , but is
-     more useful with X window managers which work with a dock or panel
-     window for selecting applications from.
-     Also note that the X window manager has no knowledge of the stacking
-     of Windows windows, and vice versa, so raising one X window above a
-     Windows window raises all of the X windows, and raising one Windows
-     window above an X window raises it above all of the X windows.
-     Exactly as if all X windows were being drawn into a hidden Windows
-     window :-)
-     __________________________________________________________________
-
-Command line parameters
-
-   Cygwin/X, by default, runs in windowed mode with the largest window
-   that will fit on your Windows desktop, using the best performing engine
-   that is installed on your system, with clipboard integration enabled.
-   You do not need to pass any parameters to X to use the default
-   behavior.
-
-   Up to date documentation of X options can be read with man XWin .
-     __________________________________________________________________
-
-XWinrc configuration file
-
-   With the .XWinrc configuration file it is possible to:
-     * Add items and submenus into the menu opened by right-clicking on
-       the notification area icon.
-     * In multiwindow mode: add items and submenus into the Windows window
-       system menu (opened by clicking on the icon in the top-left of the
-       Windows window frame) and override the window icon and window
-       styles for Windows windows, by window name or window class name.
-
-   Full documentation of the XWinrc file format and command can be read
-   with man XWinrc .
-     __________________________________________________________________
-
-Chapter 4. Using Cygwin/X
+Chapter 3. Using Cygwin/X
 
 Starting Cygwin/X
 
@@ -259,10 +241,6 @@ Starting in multiwindow mode (startxwin)
      * Starting /usr/bin/startxwin in a Cygwin shell:
 
 $ startxwin
-
-   You can then start X clients from the right-click menu of the
-   notification area icon, or (after setting DISPLAY appropriately) from
-   the Cygwin terminal.
 
    You may create a ~/.startxwinrc script to customize the client programs
    started, rather than using the default /etc/X11/xinit/startxwinrc
@@ -357,6 +335,28 @@ Obsolete startup methods
    been retired and replaced with a shell script startxwin.
      __________________________________________________________________
 
+Displaying local clients
+
+   You can start X clients for display on your X server by:
+     * Right-clicking on the "X applications menu" icon in the
+       notification area, and choosing from the menu.
+       [cyu01appsmenu.png]
+
+     Note: The alacarte package may be installed to edit the menu via
+     Preferences->Main Menu.
+     * Running the client from a Cygwin shell, e.g.
+
+$ xterm &
+
+     Note: When starting from X clients from a shell, it may be necessary
+     to ensure the DISPLAY environment variable is set correctly. This
+     step is not necessary if you are entering your commands into an X
+     terminal, as DISPLAY must already be set in that case. e.g. in a
+     bash shell:
+
+          $ export DISPLAY=:0.0
+     __________________________________________________________________
+
 Switching out of Cygwin/X
 
    When running in windowed mode, press Alt-Tab to switch from Cygwin/X to
@@ -391,7 +391,7 @@ Window managers
        manager that creates a Windows window for each top-level X window
        is automatically started when using the -multiwindow command-line
        parameter to X. See the Section called Command line parameters in
-       Chapter 3 for more information on the -multiwindow command-line
+       Chapter 4 for more information on the -multiwindow command-line
        parameter.
      * External local window managers (e.g. twm, mwm (part of the motif
        package), fvwm2, openbox, aewm++, WindowMaker). These local window
@@ -435,7 +435,7 @@ Windows Clipboard integration
      temporarily using the "Clipboard may use PRIMARY selection" toggle
      on the notification area icon menu.
 
-   See the Section called Command line parameters in Chapter 3 for more
+   See the Section called Command line parameters in Chapter 4 for more
    information on the -[no]clipboard and -[no]primary command-line
    options.
      __________________________________________________________________
@@ -653,7 +653,7 @@ OpenGL (GLX)
    The creation of indirect GLX contexts is disabled by default. The +iglx
    option is required to allow them.
 
-   Table 4-1. Summary of OpenGL rendering options
+   Table 3-1. Summary of OpenGL rendering options
 
    software rendering ^a
 
@@ -809,8 +809,44 @@ Customizing the notification area icon menu
 $ cp /etc/X11/system.XWinrc./etc/X11/xinit/xinitrc ~/.XWinrc
 [edit ~/.Xwinrc as desired]
 
-   See the Section called XWinrc configuration file in Chapter 3 for more
+   See the Section called XWinrc configuration file in Chapter 4 for more
    details.
+     __________________________________________________________________
+
+Chapter 4. Configuring Cygwin/X
+
+Configuration overview
+
+   Cygwin/X settings are configured primarily through command-line
+   parameters passed to X.
+
+   A XWinrc file is used to configure the notification area icon menu, and
+   customize window appearance in multiwindow mode.
+     __________________________________________________________________
+
+Command line parameters
+
+   Cygwin/X, by default, runs in windowed mode with the largest window
+   that will fit on your Windows desktop, using the best performing engine
+   that is installed on your system, with clipboard integration enabled.
+   You do not need to pass any parameters to X to use the default
+   behavior.
+
+   Up to date documentation of X options can be read with man XWin .
+     __________________________________________________________________
+
+XWinrc configuration file
+
+   With the .XWinrc configuration file it is possible to:
+     * Add items and submenus into the menu opened by right-clicking on
+       the notification area icon.
+     * In multiwindow mode: add items and submenus into the Windows window
+       system menu (opened by clicking on the icon in the top-left of the
+       Windows window frame) and override the window icon and window
+       styles for Windows windows, by window name or window class name.
+
+   Full documentation of the XWinrc file format and command can be read
+   with man XWinrc .
      __________________________________________________________________
 
 Appendix A. GNU Free Documentation License
@@ -1254,7 +1290,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2015-09-22 11:26 .
+   at 2015-11-14 17:09 .
 
   Notes
 
@@ -1304,7 +1340,7 @@ echo "/usr/bin/dbus-launch startxfce4" > ~/.xinitrc
    end of client options and the beginning of server options, So, for
    example, if you wish to also start the X server with the options
    -emulate3buttons and -noclipboard, as described in the Section called
-   Command line parameters in Chapter 3, use the following command:
+   Command line parameters in Chapter 4, use the following command:
 $ startx /usr/bin/fvwm2 -- -emulate3buttons -noclipboard
 
    [6]

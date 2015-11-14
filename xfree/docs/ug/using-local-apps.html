@@ -2,7 +2,7 @@
 <HTML
 ><HEAD
 ><TITLE
->Shared memory support</TITLE
+>Displaying local clients</TITLE
 ><META
 NAME="GENERATOR"
 CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
@@ -13,11 +13,11 @@ REL="UP"
 TITLE="Using Cygwin/X"
 HREF="using.html"/><LINK
 REL="PREVIOUS"
-TITLE="Windows Clipboard integration"
-HREF="using-clipboard-integration.html"/><LINK
+TITLE="Using Cygwin/X"
+HREF="using.html"/><LINK
 REL="NEXT"
-TITLE="Displaying remote clients"
-HREF="using-remote-apps.html"/><META
+TITLE="Switching out of Cygwin/X"
+HREF="using-switching.html"/><META
 HTTP-EQUIV="Content-Type"
 CONTENT="text/html;charset=utf-8"/></HEAD
 ><BODY
@@ -42,7 +42,7 @@ WIDTH="10%"
 ALIGN="left"
 VALIGN="bottom"
 ><A
-HREF="using-clipboard-integration.html"
+HREF="using.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -56,7 +56,7 @@ WIDTH="10%"
 ALIGN="right"
 VALIGN="bottom"
 ><A
-HREF="using-remote-apps.html"
+HREF="using-switching.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -70,31 +70,24 @@ CLASS="sect1"
 ><H1
 CLASS="sect1"
 ><A
-NAME="using-shared-memory"
->Shared memory support</A
+NAME="using-local-apps"
+>Displaying local clients</A
 ></H1
 ><P
->&#13;Shared memory is needed by the MIT-SHM and XFree86-BigFont extensions,
-which may provide better performance for local applications which use large images or fonts
-and are written to use those extensions.
-</P
+>&#13;     You can start X clients for display on your X server by:
+  </P
+><UL
+><LI
 ><P
->&#13;In Cygwin, XSI shared memory is provided by the <B
-CLASS="command"
->cygserver</B
-> Windows service.
-To install <B
-CLASS="command"
->cygserver</B
->, install it using the setup program,
-run the <B
-CLASS="command"
->cygserver-config</B
-> script to install the service,
-and then reboot or use <B
-CLASS="command"
->cygrunsrv -S cygserver</B
-> to start the service.</P
+>&#13;        Right-clicking on the "X applications menu" icon in the notification
+        area, and choosing from the menu.
+      </P
+><DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="figures/cyu01appsmenu.png"/></P
+></DIV
 ><DIV
 CLASS="note"
 ><BLOCKQUOTE
@@ -103,35 +96,18 @@ CLASS="note"
 ><B
 >Note: </B
 >
-<SPAN
-CLASS="emphasis"
-><I
-CLASS="emphasis"
->&#13;This note is applicable to Cygwin 1.5 only.  Cygwin 1.7 automatically enables shared
-memory if the <B
-CLASS="command"
->cygserver</B
-> Windows service is running.
-</I
-></SPAN
->
-</P
+          The <TT
+CLASS="filename"
+>alacarte</TT
+> package may be installed to edit the
+          menu via Preferences-&gt;Main Menu.
+        </P
+></BLOCKQUOTE
+></DIV
+></LI
+><LI
 ><P
->&#13;Shared memory will only be used if the
-<CODE
-CLASS="parameter"
->CYGWIN</CODE
-> environment variable contains the <CODE
-CLASS="parameter"
->server</CODE
->
-keyword.
-</P
-><P
->For example, starting <B
-CLASS="command"
->X</B
-> with
+>&#13;        Running the client from a Cygwin shell, e.g.
 <TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -140,28 +116,54 @@ WIDTH="100%"
 ><TD
 ><PRE
 CLASS="screen"
->&#13;CYGWIN=server X
+>&#13;$ xterm &amp;
 </PRE
 ></TD
 ></TR
 ></TABLE
 >
-or setting the <CODE
-CLASS="parameter"
->CYGWIN</CODE
-> environment variable
-in the Windows control panel to contain <CODE
-CLASS="parameter"
->server</CODE
+      </P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
 >
-will enable shared memory support if the <B
-CLASS="command"
->cygserver</B
+          When starting from X clients from a shell, it may be necessary to
+          ensure the <CODE
+CLASS="envar"
+>DISPLAY</CODE
+> environment variable is set correctly.
+
+          This step is not necessary if you are entering your commands into an X
+          terminal, as DISPLAY must already be set in that case.
+
+          e.g. in a bash shell:
+        </P
+><TABLE
+BORDER="0"
+BGCOLOR="#E0E0E0"
+WIDTH="100%"
+><TR
+><TD
+><PRE
+CLASS="screen"
+>&#13;          $ export DISPLAY=<TT
+CLASS="replaceable"
+><I
+>:0.0</I
+></TT
 >
-service is running.
-</P
+        </PRE
+></TD
+></TR
+></TABLE
 ></BLOCKQUOTE
 ></DIV
+></LI
+></UL
 ></DIV
 ><DIV
 CLASS="NAVFOOTER"
@@ -179,7 +181,7 @@ WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
 ><A
-HREF="using-clipboard-integration.html"
+HREF="using.html"
 ACCESSKEY="P"
 >Prev</A
 ></TD
@@ -197,7 +199,7 @@ WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
 ><A
-HREF="using-remote-apps.html"
+HREF="using-switching.html"
 ACCESSKEY="N"
 >Next</A
 ></TD
@@ -207,7 +209,7 @@ ACCESSKEY="N"
 WIDTH="33%"
 ALIGN="left"
 VALIGN="top"
->Windows Clipboard integration</TD
+>Using Cygwin/X</TD
 ><TD
 WIDTH="34%"
 ALIGN="center"
@@ -221,7 +223,7 @@ ACCESSKEY="U"
 WIDTH="33%"
 ALIGN="right"
 VALIGN="top"
->Displaying remote clients</TD
+>Switching out of Cygwin/X</TD
 ></TR
 ></TABLE
 ></DIV

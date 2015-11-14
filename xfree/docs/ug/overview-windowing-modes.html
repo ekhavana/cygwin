@@ -1,0 +1,341 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN""http://www.w3.org/TR/html4/loose.dtd">
+<HTML
+><HEAD
+><TITLE
+>Windowing mode</TITLE
+><META
+NAME="GENERATOR"
+CONTENT="Modular DocBook HTML Stylesheet Version 1.79"/><LINK
+REL="HOME"
+TITLE="Cygwin/X User's Guide"
+HREF="cygwin-x-ug.html"/><LINK
+REL="UP"
+TITLE="Cygwin/X Overview"
+HREF="overview.html"/><LINK
+REL="PREVIOUS"
+TITLE="Cygwin/X Overview"
+HREF="overview.html"/><LINK
+REL="NEXT"
+TITLE="Setting Up Cygwin/X"
+HREF="setup.html"/><META
+HTTP-EQUIV="Content-Type"
+CONTENT="text/html;charset=utf-8"/></HEAD
+><BODY
+CLASS="sect1"
+><DIV
+CLASS="NAVHEADER"
+><TABLE
+SUMMARY="Header navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TH
+COLSPAN="3"
+ALIGN="center"
+>Cygwin/X User's Guide</TH
+></TR
+><TR
+><TD
+WIDTH="10%"
+ALIGN="left"
+VALIGN="bottom"
+><A
+HREF="overview.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="80%"
+ALIGN="center"
+VALIGN="bottom"
+>Chapter 1. Cygwin/X Overview</TD
+><TD
+WIDTH="10%"
+ALIGN="right"
+VALIGN="bottom"
+><A
+HREF="setup.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+></TABLE
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/></DIV
+><DIV
+CLASS="sect1"
+><H1
+CLASS="sect1"
+><A
+NAME="overview-windowing-modes"
+>Windowing mode</A
+></H1
+><P
+>&#13;    Cygwin/X can be configured to present X windows for an X screen in three different ways:
+  </P
+><UL
+><LI
+><P
+>&#13;        Multiwindow mode.
+        (<CODE
+CLASS="parameter"
+>-multiwindow</CODE
+> option)
+      </P
+><P
+>&#13;        Each top-level X window appears in its own Windows window.
+      </P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+          This is typically used to work with local or remote X applications,
+          integrated into your native Windows desktop, e.g.:
+
+          <DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="figures/cyw03multiwindow.png"/><DIV
+CLASS="caption"
+><P
+>X applications (emacs, gitk and xterm) and Windows
+              applications (explorer and firefox) in multiwindow mode</P
+></DIV
+></P
+></DIV
+>
+        </P
+></BLOCKQUOTE
+></DIV
+></LI
+><LI
+><P
+>&#13;        Windowed or rooted mode.
+        (default)
+      </P
+><P
+>&#13;        Each X screen appears as a single Windows window and all X windows are
+        contained within those windows.  (the Windows window contains the X root
+        window for the screen)
+      </P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+          This is typically used to present a virtual full-screen X session
+          using the X desktop environment or window manager of your choice, or
+          for remote XDMCP sessions, e.g.:
+
+          <DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="figures/cyw01xdmcp.png"/><DIV
+CLASS="caption"
+><P
+>An XDMCP session to a remote Fedora host</P
+></DIV
+></P
+></DIV
+>
+
+          <DIV
+CLASS="mediaobject"
+><P
+><IMG
+SRC="figures/cyw02wm.png"/><DIV
+CLASS="caption"
+><P
+>xfce4-terminal and emacs under the Openbox window manager in
+              windowed mode</P
+></DIV
+></P
+></DIV
+>
+        </P
+></BLOCKQUOTE
+></DIV
+><P
+>&#13;        The <CODE
+CLASS="parameter"
+>-nodecoration</CODE
+> option can be used to remove
+        the Windows window decorations from the X screen window.  Alternatively,
+        the <CODE
+CLASS="parameter"
+>-fullscreen</CODE
+> option can be used to show the X
+        screen in exclusive fullscreen mode.
+      </P
+></LI
+><LI
+><P
+>&#13;        Rootless mode.
+        (<CODE
+CLASS="parameter"
+>-rootless</CODE
+> option)
+      </P
+><P
+>&#13;        The X root window is hidden from view, but top-level X windows are
+        drawn.
+      </P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+          This is typically used to work with local or remote X applications,
+          integrated into your native Windows desktop, but controlled using the
+          X window manager of your choice.
+        </P
+><P
+>&#13;          Because the X root window is hidden in this mode, this is not
+          particulaly useful with X window managers with which you need to
+          interact with the root window (for example, clicking on the root
+          window to get a menu listing programs you can launch)
+          <A
+NAME="AEN80"
+HREF="#FTN.AEN80"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+>
+          , but is more useful with X window managers which work with a dock or
+          panel window for selecting applications from.
+        </P
+><P
+>&#13;          Also note that the X window manager has no knowledge of the stacking
+          of Windows windows, and vice versa, so raising one X window above a
+          Windows window raises all of the X windows, and raising one Windows
+          window above an X window raises it above all of the X windows.
+          Exactly as if all X windows were being drawn into a hidden Windows
+          window :-)
+        </P
+></BLOCKQUOTE
+></DIV
+></LI
+></UL
+></DIV
+><H3
+CLASS="FOOTNOTES"
+>Notes</H3
+><TABLE
+BORDER="0"
+CLASS="FOOTNOTES"
+WIDTH="100%"
+><TR
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="5%"
+><A
+NAME="FTN.AEN80"
+HREF="overview-windowing-modes.html#AEN80"
+><SPAN
+CLASS="footnote"
+>[1]</SPAN
+></A
+></TD
+><TD
+ALIGN="LEFT"
+VALIGN="TOP"
+WIDTH="95%"
+><P
+>&#13;              Although this can be worked around, to some extent, by using a
+              utility like
+              <A
+HREF="http://www.sealiesoftware.com/xroot.c"
+TARGET="_top"
+>&#13;                <B
+CLASS="command"
+>xroot</B
+>
+              </A
+>
+              , which provides a clickable area of root window.
+            </P
+></TD
+></TR
+></TABLE
+><DIV
+CLASS="NAVFOOTER"
+><HR
+ALIGN="LEFT"
+WIDTH="100%"/><TABLE
+SUMMARY="Footer navigation table"
+WIDTH="100%"
+BORDER="0"
+CELLPADDING="0"
+CELLSPACING="0"
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+><A
+HREF="overview.html"
+ACCESSKEY="P"
+>Prev</A
+></TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="cygwin-x-ug.html"
+ACCESSKEY="H"
+>Home</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+><A
+HREF="setup.html"
+ACCESSKEY="N"
+>Next</A
+></TD
+></TR
+><TR
+><TD
+WIDTH="33%"
+ALIGN="left"
+VALIGN="top"
+>Cygwin/X Overview</TD
+><TD
+WIDTH="34%"
+ALIGN="center"
+VALIGN="top"
+><A
+HREF="overview.html"
+ACCESSKEY="U"
+>Up</A
+></TD
+><TD
+WIDTH="33%"
+ALIGN="right"
+VALIGN="top"
+>Setting Up Cygwin/X</TD
+></TR
+></TABLE
+></DIV
+></BODY
+></HTML
+>
