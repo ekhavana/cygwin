@@ -93,7 +93,18 @@ setup.hint
 </p>
 
 <p>
-  The version and release number <b>must</b> start with a digit.
+  The version and release <b>must</b> start with a digit.
+  The release <b>must not</b> contain a hyphen.
+</p>
+
+<p>
+  Version and release sort according to the following rules:
+  <ul>
+    <li>Contiguous chunks of digits or non-digits are compared</li>
+    <li>Non-digit chunks sort before digit chunks</li>
+    <li>Digit chunks sort numerically and non-digit chunks sort lexicographically</li>
+    <li>If all chunks are equal, the string with any suffix remaining is the greater</li>
+  </ul>
 </p>
 
 <h2><a id="setup.hint" name="setup.hint"><tt>setup.hint</tt></a></h2>
