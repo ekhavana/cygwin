@@ -4,7 +4,7 @@ cygpath (-d|-m|-u|-w|-t TYPE) [-f FILE] [OPTION]... NAME...
 cygpath [-c HANDLE]
 cygpath [-ADHOPSW]
 cygpath [-F ID]
-    </pre></div><div class="refsect1"><a name="idm235673249776"></a><h2>Options</h2><pre class="screen">
+    </pre></div><div class="refsect1"><a name="idm140292562993808"></a><h2>Options</h2><pre class="screen">
 Output type options:
 
   -d, --dos             print DOS (short) form of NAMEs (C:\PROGRA~1\)
@@ -19,6 +19,8 @@ Path conversion options:
   -a, --absolute        output absolute path
   -l, --long-name       print Windows long form of NAMEs (with -w, -m only)
   -p, --path            NAME is a PATH list (i.e., '/bin:/usr/bin')
+  -U, --proc-cygdrive   Emit /proc/cygdrive path instead of cygdrive prefix
+                        when converting Windows path to UNIX path.
   -s, --short-name      print DOS (short) form of NAMEs (with -w, -m only)
   -C, --codepage CP     print DOS, Windows, or mixed pathname in Windows
                         codepage CP.  CP can be a numeric codepage identifier,
@@ -45,7 +47,7 @@ Other options:
   -i, --ignore          ignore missing argument
   -h, --help            output usage information and exit
   -V, --version         output version information and exit
-</pre></div><div class="refsect1"><a name="idm235677363216"></a><h2>Description</h2><p>The <span class="command"><strong>cygpath</strong></span> program is a utility that converts
+</pre></div><div class="refsect1"><a name="idm140292566627680"></a><h2>Description</h2><p>The <span class="command"><strong>cygpath</strong></span> program is a utility that converts
       Windows native filenames to Cygwin POSIX-style pathnames and vice versa.
       It can be used when a Cygwin program needs to pass a file name to a
       native Windows program, or expects to get a file name from a native
@@ -71,7 +73,15 @@ Other options:
       non-ASCII characters in a specific Windows codepage. Console tools, for
       instance, might expect pathnames in the current OEM codepage, while
       graphical tools like Windows Explorer might expect pathnames in the
-      current ANSI codepage.</p><p>The <code class="literal">-C</code> option takes a single parameter:</p><div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p><code class="literal">ANSI</code>, to specify the current ANSI
+      current ANSI codepage.</p><p>The <code class="literal">-U</code> option allows to use cygpath to create
+    unambiguous Unix paths pointing outside the Cygwin tree andf thus having
+    no explicit POSIX path.  Those paths usually use the cygdrive prefix.
+    However, the cygdrive prefix can be changed by the user, so symbolic links
+    created using the cygdrive prefix are not foolproof.  With
+    <code class="literal">-U</code> cygpath will generate such paths prepended by the
+    virtual <span style="color: red">&lt;pathname&gt;/proc/cygdrive&lt;/pathname&gt;</span> symbolic link, which will
+    never change, so the created path is safe against changing the cygdrive
+    prefix.</p><p>The <code class="literal">-C</code> option takes a single parameter:</p><div class="itemizedlist"><ul class="itemizedlist compact" style="list-style-type: disc; "><li class="listitem"><p><code class="literal">ANSI</code>, to specify the current ANSI
           codepage</p></li><li class="listitem"><p><code class="literal">OEM</code>, to specify the current OEM (console)
           codepage</p></li><li class="listitem"><p><code class="literal">UTF8</code>, to specify UTF-8.</p></li><li class="listitem"><p>A numerical, decimal codepage number, for instance 936 for GBK,
           28593 for ISO-8859-3, etc. A full list of supported codepages is

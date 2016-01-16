@@ -1,7 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ssp</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using-utils.html" title="Cygwin Utilities"><link rel="prev" href="setmetamode.html" title="setmetamode"><link rel="next" href="strace.html" title="strace"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">ssp</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="setmetamode.html">Prev</a> </td><th width="60%" align="center">Cygwin Utilities</th><td width="20%" align="right"> <a accesskey="n" href="strace.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="ssp"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>ssp — Single-step profile COMMAND</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="screen">
 ssp [options] low_pc high_pc command...
-      </pre></div><div class="refsect1"><a name="idm235670817216"></a><h2>Options</h2><pre class="screen">
+      </pre></div><div class="refsect1"><a name="idm140292572787296"></a><h2>Options</h2><pre class="screen">
  -c, --console-trace  trace every EIP value to the console. *Lots* slower.
  -d, --disable        disable single-stepping by default; use
                       OutputDebugString ("ssp on") to enable stepping
@@ -18,7 +18,7 @@ ssp [options] low_pc high_pc command...
  -V, --version        output version information and exit
 
 Example: ssp 0x401000 0x403000 hello.exe
-</pre></div><div class="refsect1"><a name="idm235672291808"></a><h2>Description</h2><p> SSP - The Single Step Profiler </p><p> Original Author: DJ Delorie </p><p> The SSP is a program that uses the Win32 debug API to run a program
+</pre></div><div class="refsect1"><a name="idm140292573390032"></a><h2>Description</h2><p> SSP - The Single Step Profiler </p><p> Original Author: DJ Delorie </p><p> The SSP is a program that uses the Win32 debug API to run a program
       one ASM instruction at a time. It records the location of each
       instruction used, how many times that instruction is used, and all
       function calls. The results are saved in a format that is usable by the
