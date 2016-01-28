@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XSERVER</TITLE>
 </HEAD><BODY>
 <H1>XSERVER</H1>
-Section: User Commands  (1)<BR>Updated: xorg-server 1.17.1<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.18.0<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -231,6 +231,15 @@ with
 
 This option may be issued multiple times to disable listening to different
 transport types.
+Supported transport types are platform dependent, but commonly include:
+<TABLE>
+<TR VALIGN=top><TD>tcp     TCP over IPv4 or IPv6</TD><TD><BR></TD></TR>
+<TR VALIGN=top><TD>inet    TCP over IPv4 only</TD><TD><BR></TD></TR>
+<TR VALIGN=top><TD>inet6   TCP over IPv6 only</TD><TD><BR></TD></TR>
+<TR VALIGN=top><TD>unix    UNIX Domain Sockets</TD><TD><BR></TD></TR>
+<TR VALIGN=top><TD>local   Platform preferred local connection method</TD><TD><BR></TD></TR>
+</TABLE>
+
 <DT><B>-listen </B><I>trans-type</I>
 
 <DD>
@@ -274,7 +283,7 @@ turns on auto-repeat.
 <DT><B>-retro</B>
 
 <DD>
-starts the stipple with the classic stipple and cursor visible.  The default
+starts the server with the classic stipple and cursor visible.  The default
 is to start with a black root window, and to suppress display of the cursor
 until the first time an application calls XDefineCursor(). For kdrive
 servers, this implies -zap.
@@ -377,6 +386,13 @@ of -1 leaves the limit unchanged.
 sets the stack space limit of the server to the specified number of kilobytes.
 A value of zero makes the stack size as large as possible.  The default value
 of -1 leaves the stack space limit unchanged.
+<DT><B>-maxclients</B>
+
+<DD>
+<B>64</B>|<B>128</B>|<B>256</B>|<B>512</B>
+
+Set the maximum number of clients allowed to connect to the X server.
+Acceptable values are 64, 128, 256 or 512.
 <DT><B>-render</B>
 
 <DD>
@@ -475,7 +491,7 @@ ends.
 <DD>
 XDMCP has an additional display qualifier used in resource lookup for
 display-specific options.  This option sets that value, by default it
-is &quot;MIT-Unspecified&quot; (not a very useful value).
+is &quot;MIT-unspecified&quot; (not a very useful value).
 <DT><B>-cookie </B><I>xdm-auth-bits</I>
 
 <DD>
@@ -527,7 +543,7 @@ loads keyboard description in <I>filename</I> on server startup.
 <H2>NETWORK CONNECTIONS</H2>
 
 The X server supports client connections via a platform-dependent subset of
-the following transport types: TCP/IP, Unix Domain sockets, DECnet,
+the following transport types: TCP/IP, Unix Domain sockets,
 and several varieties of SVR4 local connections.  See the DISPLAY
 NAMES section of the <I>X</I>(7) manual page to learn how to
 specify which transport type clients should try to use.
@@ -560,8 +576,8 @@ If no other authorization mechanism is being used,
 this list initially consists of the host on which the server is running as
 well as any machines listed in the file <I>/etc/X</I><B>n</B><I>.hosts</I>, where
 <B>n</B> is the display number of the server.  Each line of the file should
-contain either an Internet hostname (e.g. expo.lcs.mit.edu) or a DECnet
-hostname in double colon format (e.g. hydra::) or a complete name in the format
+contain either an Internet hostname (e.g. expo.lcs.mit.edu)
+or a complete name in the format
 <I>family</I>:<I>name</I> as described in the <I>xhost</I>(1) manual page.
 There should be no leading or trailing spaces on any lines.  For example:
 <P>
@@ -569,7 +585,6 @@ There should be no leading or trailing spaces on any lines.  For example:
 <PRE>
 joesworkstation
 corporate.company.com
-star::
 inet:bigcpu
 local:
 </PRE>
@@ -642,7 +657,7 @@ by the <I>font path</I>.
 <P>
 
 The default font path is
-/usr/share/fonts/misc/, /usr/share/fonts/TTF/, /usr/share/fonts/OTF/, /usr/share/fonts/Type1/, /usr/share/fonts/100dpi/, /usr/share/fonts/75dpi/ .
+catalogue:/etc/X11/fontpath.d,built-ins .
 <P>
 
 A special kind of directory can be specified using the <B>catalogue</B>:
@@ -794,6 +809,6 @@ Dave Wiggins took over post-R5 and made substantial improvements.
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
-Time: 23:55:47 GMT, March 04, 2015
+Time: 15:05:17 GMT, January 28, 2016
 </BODY>
 </HTML>

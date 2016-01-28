@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XWIN</TITLE>
 </HEAD><BODY>
 <H1>XWIN</H1>
-Section: User Commands  (1)<BR>Updated: xorg-server 1.17.1<BR><A HREF="#index">Index</A>
+Section: User Commands  (1)<BR>Updated: xorg-server 1.18.0<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <A NAME="lbAB">&nbsp;</A>
@@ -235,6 +235,13 @@ on its own is equivalent to <B>-resize=randr</B>
 Add the host name to the window title for X applications which are running
 on remote hosts, when that information is available and it's useful to do so.
 The default is enabled.
+<DT><B>-compositewm</B>
+
+<DD>
+Experimental.
+Use Composite extension redirection to maintain a bitmap image of each top-level
+X window, so window contents which are occluded show correctly in task bar and
+task switcher previews.
 <P>
 </DL>
 <A NAME="lbAL">&nbsp;</A>
@@ -326,12 +333,11 @@ clipping region is then used to do a single bit block transfer that is
 constrained to the updated area by the clipping region.  There is some
 overhead involved in creating, installing, destroying, and removing
 the clipping region, thus there may not be much benefit for a small
-number of boxes.  It is even possible that this
+number of boxes (less than 10).  It is even possible that this
 functionality does not provide a benefit at any number of boxes; we
 can only determine the usefulness of this feature through testing.
 This option probably has limited effect on current <I>Windows</I> versions
 as they already perform GDI batching.
-This parameter only has any effect when a Shadow drawing engine is selected.
 <DT><B>-engine </B><I>engine_type_id</I>
 
 <DD>
@@ -348,8 +354,6 @@ The engine type ids are:
 <DL COMPACT>
 <DT>1<DD>
 Shadow GDI
-<DT>2<DD>
-Shadow DirectDraw (obsolete, disabled)
 <DT>4<DD>
 Shadow DirectDraw Non-Locking
 </DL>
@@ -467,10 +471,6 @@ Color map manipulation is not supported, so the PseudoColor visual will
 not have the correct colors.
 This option is intended to allow applications which only work with a depth 8
 visual to operate in TrueColor modes.
-<DT><B>-internalwm</B>
-
-<DD>
-Run the internal window manager.
 <P>
 </DL>
 <A NAME="lbAQ">&nbsp;</A>
@@ -581,6 +581,6 @@ Suhaib Siddiqi, Jack Tanner, Jon Turney and Nicholas Wourms.
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
-Time: 23:55:48 GMT, March 04, 2015
+Time: 15:05:18 GMT, January 28, 2016
 </BODY>
 </HTML>
