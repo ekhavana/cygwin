@@ -4,37 +4,15 @@
     <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
     <link rel="stylesheet" type="text/css" href="../style.css" />
     <title>Cygwin Package List</title>
-    <script type="text/javascript">
-    var arch_divs;
-    function arch_init () {
-	var names = ['x86', 'x86_64'];
-	arch_divs = {};
-	for (var i = 0; i < names.length; i++) {
-	    var name = names[i];
-	    arch_divs[name] = document.getElementById(name);
-	}
-	var radios = document.getElementsByName('arch');
-	for (var i = 0; i < radios.length; i++) {
-	    var radio = radios[i];
-	    if (radio.checked)
-		arch_sel(radio.value);
-	}
-    }
-    function arch_sel (arch) {
-	for (var name in arch_divs) {
-	    var dsp = name == arch ? 'block' : 'none';
-	    arch_divs[name].style.display = dsp;
-	}
-    }
-    </script>
+    <script src="archselector.js"></script>
   </head>
 
-<body onload="arch_init()">
+<body>
 <!--#include virtual="../navbar.html" -->
 <!--#include virtual="../top.html" -->
 <h1>Cygwin Package List</h1>
-<input type="radio" name="arch" value="x86" onchange="arch_sel(this.value)">x86
-<input type="radio" name="arch" value="x86_64" checked="checked" onchange="arch_sel(this.value)">x86_64
-<!--#include virtual="x86/packages.inc" -->
+<input type="radio" name="arch" value="x86">x86
+<input type="radio" name="arch" value="x86_64" checked="checked">x86_64
 <!--#include virtual="x86_64/packages.inc" -->
+<!--#include virtual="x86/packages.inc" -->
 </html>
