@@ -28,8 +28,8 @@ my $TMP = File::Temp->newdir();
 my $wwwdir = getcwd;
 my $http = "https://cygwin.com/snapshots";
 
-our ($diff, $master, $perday);
-for my $t (qw'diff master perday') {
+our ($master, $perday);
+for my $t (qw'master perday') {
     no strict qw{refs};
     open my $fd, '<', "$t.template" or die "$t.template: $!\n";
     ${$t} = join '', <$fd>;
@@ -51,17 +51,17 @@ opendir $dfd, $arch;
 my %bydate = ();
 @snaps = ();
 for (reverse sort readdir $dfd) {
-    next unless /^(.*?)-(\d\d\d\d\d\d\d\d)\.(.*?)$/o;
+    next unless /^(.*?)-(\d{8})((-src)?\.(.*?))$/o;
     push @{$bydate{$2}}, $_;
     push @{$bydate{$2}}, "x86_64/" . $_ if -f "x86_64/" . $_;
     push(@snaps, $2) if @snaps < MAXKEEP
-	&& $1 eq 'winsup-src' && $3 eq 'tar.xz'
+	&& $1 eq 'cygwin' && $3 eq '-src.tar.xz'
 	&& -s "x86_64/$_";
 }
 closedir $dfd;
 
 for my $i (0..$#snaps) {
-    update_diffs('winsup', $i);
+    update_diffs('cygwin', $i);
     my $date = $snaps[$i];
     $var{'date'} = $date;
     ($var{'longdate'} = $date) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
@@ -72,21 +72,18 @@ for my $i (0..$#snaps) {
     ($var{'longprev'} = $snaps[$i+1]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
     if ($i < $#snaps) {
 	$var{'prev'} = $snaps[$i+1];
-	$var{'wsdfsz'} = size("$arch/winsup-diffs-$snaps[$i+1]-$date");
-	$var{'diffs'} = $diff;
-	0 while $var{'diffs'} =~ s/<var ([a-z]+)>/$var{$1}/ge;
+	$var{'wsdfsz'} = size("$arch/cygwin-diffs-$snaps[$i+1]-$date");
     } else {
 	$var{'diffs'} = '';
     }
 
-    $var{'xfiles'}  = file_row("winsup-src-$snaps[$i].tar.xz");
-    $var{'xfiles'} .= file_row("cygwin1-$snaps[$i].dll.xz");
+    $var{'xfiles'}  = file_row("cygwin1-$snaps[$i].dll.xz");
     $var{'xfiles'} .= file_row("cygwin1-$snaps[$i].dbg.xz");
-    $var{'xfiles'} .= file_row("cygwin-inst-$snaps[$i].tar.xz");
-    $var{'xfiles'} .= file_row("cygwin-src-$snaps[$i].tar.xz");
+    $var{'xfiles'} .= file_row("cygwin-$snaps[$i].tar.xz");
+    $var{'xfiles'} .= file_row("cygwin-$snaps[$i]-src.tar.xz");
 
     my $t;
-    if ($i == $#snaps || (stat("$arch/winsup-diffs-$snaps[$i+1]-$date"))[7] > 0) {
+    if ($i == $#snaps || (stat("$arch/cygwin-diffs-$snaps[$i+1]-$date"))[7] > 0) {
 	$t = $perday;
     }
     0 while $t =~ s/<var ([a-z]+)>/$var{$1}/ge;
@@ -155,13 +152,12 @@ sub update_diffs($$) {
 
     my $basesnap = $snaps[$i + 1] or return;
     my $nextsnap = $snaps[$i];
-    my $basesrc = "$base-src-$basesnap";
-    my $nextsrc = "$base-src-$nextsnap";
+    my $basesrc = "$base-$basesnap-src";
+    my $nextsrc = "$base-$nextsnap-src";
 
     my $sf = mtime("$arch/$basesrc.tar.xz");
     my $osf = mtime("$arch/$nextsrc.tar.xz");
     my $df = mtime("$arch/$base-diffs-$basesnap-$nextsnap");
-    my $cl = mtime("$arch/$base-changelog-$basesnap-$nextsnap");
 
     if (!$df || $df < $sf || $df < $osf) {
 	print "build $arch/$base-diffs-$basesnap-$nextsnap\n";
