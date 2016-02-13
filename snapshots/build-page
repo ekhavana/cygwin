@@ -68,7 +68,7 @@ for my $i (0..$#snaps) {
 
     my $time = mtime("$arch/cygwin1-$snaps[$i].dll.xz") || time;
     my ($ss, $mm, $hh, $mday, $m, $yr) = (gmtime($time))[0..5];
-    $var{'longdate'} .= sprintf '&nbsp;&nbsp;%02d:%02d:%02d&nbsp;&nbsp;UTC', $hh, $mm, $ss;
+    $var{'longdate'} .= sprintf '&emsp;%02d:%02d:%02d&emsp;UTC', $hh, $mm, $ss;
     ($var{'longprev'} = $snaps[$i+1]) =~ s/(....)(..)(..)/$1-$month[$2]-$3/;
     if ($i < $#snaps) {
 	$var{'prev'} = $snaps[$i+1];
@@ -109,21 +109,10 @@ sub file_row($) {
     my $f = shift;
     return "" unless -f "x86/$f" &&  -f "x86_64/$f";
     my $rv = "<tr>\n";
-    $rv   .= "  <td><tt>&nbsp;&nbsp;$f</tt></td>\n";
+    $rv   .= "  <td>&emsp;&emsp;<tt>$f</tt></td>\n";
     foreach my $arch ( qw( x86 x86_64 ) ) {
 	my $sz = size("$arch/$f");
-	$rv .= "  <td align=right>$sz&nbsp;kiB</td>\n";
-	if ($f !~ /^(.*\.tar)\.xz$/o) {
-	    $rv .= "  <td align=center>&nbsp;</td>\n";
-	} else {
-	    $rv .= "  <td align=center><a href=\"$arch/$1\">list</a></td>";
-	    if (!-e $1) {
-		open my $fd, '>', "$arch/$1";
-		chmod 0664, $fd;
-		close $fd;
-	    }
-	}
-	$rv .= "  <td align=center><a href=\"$http/$arch/$f\">download</a></td>\n";
+	$rv .= "  <td align=left>&emsp;&emsp;<a href=\"$http/$arch/$f\">download</a>&emsp;($sz&nbsp;kiB)</td>\n";
     }
     $rv .= "</tr>\n";
     return $rv;
