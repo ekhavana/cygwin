@@ -112,7 +112,8 @@ sub file_row($) {
     $rv   .= "  <td>&emsp;&emsp;<tt>$f</tt></td>\n";
     foreach my $arch ( qw( x86 x86_64 ) ) {
 	my $sz = size("$arch/$f");
-	$rv .= "  <td align=left>&emsp;&emsp;<a href=\"$http/$arch/$f\">download</a>&emsp;($sz&nbsp;kiB)</td>\n";
+	$rv .= "  <td align=right>$sz&nbsp;kiB&emsp;</td>";
+	$rv .= "  <td align=left>&emsp;<a href=\"$http/$arch/$f\">download</a></td>\n";
     }
     $rv .= "</tr>\n";
     return $rv;
