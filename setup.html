@@ -40,6 +40,8 @@
   <li><a href="#making_srcpackage">Making a package with cygport</a></li>
   <li><a href="#postinstall">Creating a package postinstall script</a></li>
   <li><a href="#submitting">Submitting a package</a></li>
+  <li><a href="#acceptance">Uploading an accepted package</a></li>
+  <li><a href="#updating">Updating a package</a></li>
 </ul>
 <h2><a id="naming" name="naming">Package file naming scheme</a></h2>
 <p>
@@ -80,9 +82,9 @@ setup.hint
   package and so, these files are <em>not</em> optional. In some cases, there
   may be multiple packages generated from the same source; for instance, one
   might have a "boffo" package and its associated shared library in "libboffo7",
-  where both are generated from the same -src tarball. See
+  where both are generated from the same source tar file. See
   the <a href="#package_contents">package contents</a> section below for more
-  details on the contents of a -src tar file, and
+  details on the contents of a source tar file, and
   the <a href="#advanced_setup.hint">setup.hint</a> section for information on
   the "external-source:" option.
 </p>
@@ -107,11 +109,16 @@ setup.hint
   </ul>
 </p>
 
+<p>
+  A package with a higher version is greater, regardless of the release.  When
+  two packages have an identical version, the one with the higher release is
+  greater.
+</p>
+
 <h2><a id="setup.hint" name="setup.hint"><tt>setup.hint</tt></a></h2>
 <p>Each package must be submitted with a file called <tt>setup.hint</tt>. This file is used for information that cannot be inferred just from the context of the file name or package name. Lines in <tt>setup.hint</tt> will consist of one of the following:</p>
 <pre>
 # <i>comment</i>
-@ <i>package</i>
 sdesc: <i>"some text"</i>
 ldesc: <i>"some text"</i>
 skip:
@@ -130,42 +137,32 @@ external-source: <i>package</i>
 
 <ul>
   <li>
-    <p>Lines that begin with '#' are comments and are ignored.</p>
+    <p>Use UTF-8 character encoding.</p>
   </li>
-
   <li>
-    <p>
-      A line that begins with a "<tt>@</tt>" overrides the package name for the
-      enclosing directory. This is intended only for historical packages where
-      the package name is different from the name of the directory in which the
-      package resides. This should not be necessary for "modern" setup.hint
-      files. <em>Do not use this unless you've been instructed to do so.</em>
-    </p>
+    <p>Lines that begin with '#' are comments and are ignored.</p>
   </li>
 
   <li>
     <p>
       The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate which
       versions of that package should be used. Use these settings <em>only</em>
-      if you need to circumvent the normal version number ordering.
+      if you need to circumvent the normal version ordering.
     </p>
 
     <p>
       By default, the highest version (and release) numbers are used for the
       current version of a package; the next highest (if any) is used for the
-      previous version.  When two packages have lexically identical version
-      numbers, the one with the higher release number is considered newer. Also,
-      given two packages, the one with the higher version number is always
-      considered newer, regardless of the release number.
+      previous version.
     </p>
 
     <p>
       Use of <tt>curr</tt> and <tt>prev</tt> is usually not required, given this
-      version number ordering. So, e.g. if you had previously
+      version ordering. So, e.g. if you had previously
       released <tt>boffo-0.9-1</tt> and now have a new <tt>boffo-1.0-1</tt>, the
-      version number ordering is obvious and there is no need to
-      use <tt>curr</tt> or <tt>prev</tt>. It is obvious
-      that <tt>boffo-1.0-1</tt> is newer than <tt>boffo-0.9-1</tt>.
+      version ordering matches the default and there is no need to
+      use <tt>curr</tt> or <tt>prev</tt>, as <tt>1.0-1</tt> is greater
+      than <tt>0.9-1</tt>.
     </p>
 
     <p>
@@ -199,7 +196,7 @@ curr: 0.9-1
     </p>
 
     <p>
-      Note that if any of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt>
+      Note that if <em>any</em> of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt>
       options are used, they will short circuit <em>all</em> of the automatic
       version ordering. So, if you include a <tt>test</tt> option, and you have
       valid current and/or previous tar files, you <em>must</em>
@@ -262,8 +259,9 @@ test: 1.9-1
     </p>
 
     <p>
-      <tt>sdesc</tt> is a one line description of the package. This is the
-      information that will be displayed when installing packages via setup.
+      <tt>sdesc</tt> is a one line description of the package, enclosed in
+      double-quotes.  This is the information that will be displayed when
+      installing packages via setup.
     </p>
 
     <p>
@@ -288,11 +286,7 @@ sdesc:      "A whackamole simulation in ASCII art"
   <li>
     <p>
       <tt>ldesc</tt> is a more descriptive, multi-line description of the
-      package, intended for future use.
-    </p>
-
-    <p>
-      Quote text that takes up several lines e.g.:
+      package, enclosed in double-quotes.  It is intended for future use. e.g.:
     </p>
 
 <pre>
@@ -302,6 +296,13 @@ above.  Uses arrow keys for positioning over moles.  Space
 bar whacks the mole.
 No actual moles will be harmed during execution of this game."
 </pre>
+
+    <p>
+      Note that there is currently no method for escaping double-quotes, so
+       there is no way to represent a double-quote embedded in
+       the <tt>ldesc</tt>.
+    </p>
+
   </li>
 
   <li>
@@ -318,72 +319,57 @@ No actual moles will be harmed during execution of this game."
     <a name="categories" />
     <p>
       Please do not invent a new category without checking with the cygwin-apps
-      mailing list first. As of this writing, the current categories are:
+      mailing list first. At the time of writing, the current categories are:
     </p>
 
-<table width="50%" align="center">
-  <tr>
-    <td>Accessibility</td>
-    <td>Admin</td>
-    <td>Archive</td>
-    <td>Audio</td>
-    <td>Base</td>
-    <td>Comm</td>
-  </tr>
-  <tr>
-    <td>Database</td>
-    <td>Devel</td>
-    <td>Doc</td>
-    <td>Editors</td>
-    <td>Games</td>
-    <td>GNOME</td>
-  </tr>
-  <tr>
-    <td>Graphics</td>
-    <td>Interpreters</td>
-    <td>KDE</td>
-    <td>Libs</td>
-    <td>LXDE</td>
-    <td>Mail</td>
-  </tr>
-  <tr>
-    <td>MATE</td>
-    <td>Math</td>
-    <td>Mingw</td>
-    <td>Net</td>
-    <td>Perl</td>
-    <td>PHP</td>
-  </tr>
-  <tr>
-    <td>Publishing</td>
-    <td>Python</td>
-    <td>Ruby</td>
-    <td>Science</td>
-    <td>Shells</td>
-    <td>System</td>
-  </tr>
-  <tr>
-    <td>Text</td>
-    <td>Utils</td>
-    <td>Web</td>
-    <td>X11</td>
-    <td>Xfce</td>
-  </tr>
-</table>
+    <div style="-moz-column-width: 5em; -webkit-column-width: 5em; column-width: 5em; width: 50%; margin: auto;">
+      <p>Accessibility</p>
+      <p>Admin</p>
+      <p>Archive</p>
+      <p>Audio</p>
+      <p>Base</p>
+      <p>Comm</p>
+      <p>Database</p>
+      <p>Devel</p>
+      <p>Doc</p>
+      <p>Editors</p>
+      <p>Games</p>
+      <p>GNOME</p>
+      <p>Graphics</p>
+      <p>Interpreters</p>
+      <p>KDE</p>
+      <p>Libs</p>
+      <p>Lua</p>
+      <p>LXDE</p>
+      <p>Mail</p>
+      <p>MATE</p>
+      <p>Math</p>
+      <p>Mingw</p>
+      <p>Net</p>
+      <p>Ocaml</p>
+      <p>Office</p>
+      <p>Perl</p>
+      <p>PHP</p>
+      <p>Publishing</p>
+      <p>Python</p>
+      <p>Ruby</p>
+      <p>Scheme</p>
+      <p>Science</p>
+      <p>Shells</p>
+      <p>Sugar</p>
+      <p>System</p>
+      <p>Tcl</p>
+      <p>Text</p>
+      <p>Utils</p>
+      <p>video</p>
+      <p>Web</p>
+      <p>X11</p>
+      <p>Xfce</p>
+    </div>
 
     <p>
       As you can see, currently, all categories consist of only a single
-      word. We don't anticipate that this will change anytime soon. However,
-      with the use of quotes, setup will understand category names which contain
-      spaces, for example:
-    </p>
-
-<pre>
-category: "ASCII Games"
-</pre>
-
-    <p>
-      The above would place a package in a single category called "ASCII Games" rather than two categories "ASCII" and "Games".
+      word. We don't anticipate that this will change anytime soon.
     </p>
   </li>
 
@@ -426,13 +412,13 @@ above.  Uses arrow keys for positioning over moles.  Space
 bar whacks the mole.
 No actual moles will be harmed during execution of this game."
 </pre>
-<p>Notice that we didn't use the <tt>prev</tt>, <tt>curr</tt>, <tt>test</tt>, or <tt>@</tt> options. Instead, we relied on setup to do as much as possible for us.</p>
+<p>Notice that we didn't use the <tt>prev</tt>, <tt>curr</tt> or <tt>test</tt> options. Instead, we relied on setup to do as much as possible for us.</p>
 <h2><a id="advanced_setup.hint" name="advanced_setup.hint"><tt>setup.hint (Advanced Options)</tt></a></h2>
 <p>The <tt>external-source</tt> line is used when multiple installation packages are generated from a single source package. For example, suppose the <tt>boffo</tt> package contains the executables and documentation for boffo, but there is also a shared library <tt>cygboffo-7.dll</tt> that might be used by other packages; say, the <tt>fobbo</tt> program. It would be nice to separate that <tt>cygboffo-7.dll</tt> shared library into a second installation package, so that users of the <tt>fobbo</tt> program can install <em>just</em> the library, and not the entire <tt>boffo</tt> package. However, all of the <tt>boffo</tt> executables and the DLL are generated from the same source. To support this usage, the <tt>boffo</tt> maintainer would create three package files:</p>
 <ul>
   <li><tt>boffo-2.4.1-2.tar.xz</tt>: an installable package that contains all of the normal contents of <tt>boffo</tt> -- except for the shared library.</li>
   <li><tt>libboffo7-2.4.1-2.tar.xz</tt>: an installable package that contains only the shared library from <tt>boffo</tt></li>
-  <li><tt>boffo-2.4.1-2-src.tar.xz</tt>: the -src tarball for boffo.</li>
+  <li><tt>boffo-2.4.1-2-src.tar.xz</tt>: the source package for boffo.</li>
 </ul>
 <p><tt>boffo-2.4.1-2.tar.xz</tt>, <tt>boffo-2.4.1-2-src.tar.xz</tt>, and the boffo <tt>setup.hint</tt> would go into the <tt>release/boffo/</tt> subdirectory. <tt>libboffo7-2.4.1-2.tar.xz</tt> would go into a separate subdirectory, such as <tt>release/boffo/libboffo7/</tt>, along with a separate libboffo7 <tt>setup.hint</tt>. The two <tt>setup.hint</tt> files would look something like this:</p>
 <center>
@@ -483,14 +469,14 @@ source: release/boffo/boffo-2.4.1-2-src.tar.xz
 </pre>
 
 <p>
-  Note that both packages point to the same -src tarball. Also, it is required
+  Note that both packages point to the same source tar file. Also, it is required
   that the versions match (libboffo7-5.2 can't point to boffo-1.4-src). The same
   logic is used to "match up" prev: and test: versions with their external
   sources.
 </p>
 
 <h2><a id="package_contents" name="package_contents">Package contents</a></h2>
-<p>The files paths within both the -src and the binary package files are quite important. Since setup extracts into a predetermined directory, you must structure your package contents accordingly.</p>
+<p>The files paths within both the source and the binary package files are quite important. Since setup extracts into a predetermined directory, you must structure your package contents accordingly.</p>
 <p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
 <ul class="spaced">
   <li>
@@ -514,14 +500,14 @@ etc...
 </pre>
   </li>
   <li>All executables in your binary package are stripped.  </li>
-  <li>Source packages are extracted in /usr/src (so the paths in your -src tarball should not include /usr/src). On extraction, the tar file should put the sources in a directory with the same name as the package tarball minus the -src.tar.xz part:
+  <li>Source packages are extracted in /usr/src (so the paths in your source tar file should not include /usr/src). On extraction, the tar file should put the sources in a directory with the same name as the package tar file minus the -src.tar.xz part:
 <pre>
 boffo-1.0-1/boffo.cygport
 boffo-1.0-1/boffo-1.0.tar.xz
 boffo-1.0-1/boffo-1.0-1.src.patch
 etc...
 </pre>
-  <p>Generally, this will contain the original source tarball, exactly as downloaded from the original upstream, any needed patch files, and a
+  <p>Generally, this will contain the original source tar file, exactly as downloaded from the original upstream, any needed patch files, and a
      cygport script that drives the packaging process.</p>
   </li>
   <li>In your binary package, you may choose to include a file /usr/share/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.
@@ -546,7 +532,7 @@ converting an existing package to use cygport.</p>
 on <a href="setup-packaging-historical.html">previous Cygwin build scripts</a>, and
 borrows concepts from the Gentoo portage system.</p>
 
-<p>Suppose that the upstream's <tt>boffo-1.0.tar.xz</tt> source tarball, that you
+<p>Suppose that the upstream's <tt>boffo-1.0.tar.xz</tt> source tar file, that you
 downloaded from the boffo homepage, unpacks into <tt>boffo-1.0/</tt>.</p>
 
 <p>Further, suppose you've got "boffo" ported to Cygwin. It took some work, but
@@ -626,7 +612,7 @@ and sample .cygport files.</p>
     </ul>
   </li>
   <li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Provide the URLs of all package files to your mail.</li>
-  <li>Each new package must in any case receive one <a href="acronyms/#GTG">GTG</a> vote from a package maintainer, meaning that an existing maintainer has downloaded the package, inspected the tarball contents, tested the applications, and rebuilt the package from the source tarball without incident. Once a successful package is produced, you become a maintainer yourself and can provide GTG reviews for others as well.</li>
+  <li>Each new package must in any case receive one <a href="acronyms/#GTG">GTG</a> vote from a package maintainer, meaning that an existing maintainer has downloaded the package, inspected the tar file contents, tested the applications, and rebuilt the package from the source tar file without incident. Once a successful package is produced, you become a maintainer yourself and can provide GTG reviews for others as well.</li>
 
 </ol>
 <h2><a id="acceptance" name="acceptance">Uploading an accepted package</a></h2>
@@ -647,7 +633,7 @@ and sample .cygport files.</p>
   instructions</a>.  If you encounter any problems, email
   the <tt>cygwin-apps</tt> mailing list.
 <ol>
-  <li>There is no need to increase the version number if the package has not been officially released.  So, if you are releasing a -1 version of a package keep using -1 for any refinements <em>until</em> the package has been uploaded.</li>
+  <li>There is no need to increase the release number if the package has not been officially released.  So, if you are releasing a -1 release of a package keep using -1 for any refinements <em>until</em> the package has been uploaded.</li>
   <li>Thereafter, you <em>must</em> increase the version or release number when
     uploading an updated version of the package.</li>
   <li>After doing a upload, announce via the <tt>cygwin-announce</tt> mailing list that the new package is available. Use the <a href="#announcement">announce message example</a> listed later in this page as a template for your announcement..<br />
