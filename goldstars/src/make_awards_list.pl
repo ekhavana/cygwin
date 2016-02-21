@@ -13,7 +13,7 @@ use constant LIST_TOKEN => '__LIST_OF_AWARDS__';
 # More than this many stars are printed as "x N": 
 use constant MAX_STARS => 5;
 
-use Data::Dumper;
+#use Data::Dumper;
 use POSIX qw(strftime);
 use Text::CSV;
 
@@ -96,7 +96,7 @@ foreach my $award (@awards) {
 	# and for sorting awards within each awardee. 
 	# The "date" is actually just a part of the award URL (yyyy-mm-nnnnn, where
 	# nnnnn is the sequence number within each month on one of the cygwin mailing lists).
-	# This is close enough for sorting, except that sequence #s from the two lists
+	# This is close enough for sorting, except that sequence #s from different lists
 	# generally won't sort correctly together within each month.  Oh well.
 	if ($award->{URL} =~ m{/ml/cygwin(?:|-\w+)/(\d+)-(\d+)/msg(\d+)}) {
 		$award->{date} = "$1-$2-$3";
