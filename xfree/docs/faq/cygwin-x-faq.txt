@@ -1,6 +1,6 @@
 Cygwin/X Frequently Asked Questions
 
-2015-11-14 17:09
+2016-03-03 12:18
      __________________________________________________________________
 
    Table of Contents
@@ -539,7 +539,9 @@ Questions and Answers
 
    Technical details: ssh tried to run xauth generate to create a
    untrusted cookie for the session, which failed because the server isn't
-   compiled with the XCSECURITY extension built-in.
+   compiled with the XCSECURITY extension built-in. Since OpenSSH 7.2p1,
+   ssh does not fallback to trusted forwarding, so no X11 forwarding is
+   setup.
 
    3.9. nedit fails to start with an error message
 
@@ -908,8 +910,12 @@ $ DISPLAY=:0.0 ssh -Y remotehost
 
    A3:
 
+   Make sure you're not starting ssh with the option -X. Since OpenSSH
+   7.2p1, ssh does not fallback to trusted forwarding, option -Y , so no
+   X11 forwarding is setup. Use ssh -Y.
+
    Make sure you're not starting ssh with the option -x (lowercase). This
-   disables X11Forwarding.
+   disables X11 forwarding.
 
    A4:
 

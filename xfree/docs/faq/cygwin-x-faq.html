@@ -25,7 +25,7 @@ NAME="article-info"
 ></H1
 ><H2
 CLASS="subtitle"
->2015-11-14 17:09</H2
+>2016-03-03 12:18</H2
 ><HR/></DIV
 ><DIV
 CLASS="TOC"
@@ -1995,10 +1995,26 @@ TARGET="_top"
 >point 3 in this mail</A
 >.  Use ssh -Y.</P
 ><P
->Technical details: ssh tried to run <B
+>Technical details: <B
 CLASS="command"
->xauth generate</B
-> to create a untrusted cookie for the session, which failed because the server isn't compiled with the XCSECURITY extension built-in.</P
+>ssh</B
+> tried to run <B
+CLASS="command"
+>xauth
+generate</B
+> to create a untrusted cookie for the session, which failed
+because the server isn't compiled with the XCSECURITY extension built-in.  Since
+OpenSSH 7.2p1, <B
+CLASS="command"
+>ssh</B
+> does <SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>not</I
+></SPAN
+> fallback to
+trusted forwarding, so no X11 forwarding is setup.</P
 ></DIV
 ></DIV
 ><DIV
@@ -3558,15 +3574,41 @@ CLASS="answer"
 > </B
 >A3:</P
 ><P
->&#13;Make sure you're not starting <B
+>Make sure you're not starting <B
 CLASS="command"
 >ssh</B
-> with the option <CODE
+> with the option
+<CODE
+CLASS="parameter"
+>-X</CODE
+>.  Since OpenSSH 7.2p1, <B
+CLASS="command"
+>ssh</B
+> does
+<SPAN
+CLASS="emphasis"
+><I
+CLASS="emphasis"
+>not</I
+></SPAN
+> fallback to trusted forwarding, option <CODE
+CLASS="parameter"
+>-Y
+</CODE
+>, so no X11 forwarding is setup.  Use <B
+CLASS="command"
+>ssh -Y</B
+>.
+</P
+><P
+>Make sure you're not starting <B
+CLASS="command"
+>ssh</B
+> with the option
+<CODE
 CLASS="parameter"
 >-x</CODE
->
-(lowercase). This disables X11Forwarding.
-</P
+> (lowercase). This disables X11 forwarding.</P
 ></DIV
 ><DIV
 CLASS="answer"
