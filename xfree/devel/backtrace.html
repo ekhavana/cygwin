@@ -21,7 +21,7 @@
     <h2>Automatically reporting crashes</h2>
 
     <ul>
-      <li>Install the <b>xorg-server-cygwin-crashreporter</b> package</l>
+      <li>Install the <b>xorg-server-cygwin-crashreporter</b> package</li>
       <li>Reproduce your crash</li>
     </ul>
 
@@ -36,15 +36,15 @@
     <p>To generate a useful backtrace, you will need debugging symbols for the X server.</p>
 
     <h3>Preparation</h3>
-    <br>
+    <br/>
     <ul>
-      <li>Install the <b>xorg-server-debuginfo</b> package (for debugging symbols)</l>
+      <li>Install the <b>xorg-server-debuginfo</b> package (for debugging symbols)</li>
       <li>Install the <b>gdb</b> package (for <tt>gdb</tt>)</li>
       <li>Install the <b>sysvinit</b> package (for <tt>pidof</tt>)</li>
     </ul>
 
     <h3>Generating a backtrace when some specific action is making the X server crash (automatically)</h3>
-    <br>
+    <br/>
     <ul>
      <li>Start XWin using your normal method</li>
      <li>Reproduce your crash</li>
@@ -52,7 +52,7 @@
     </ul>
 
     <h3>Generating a backtrace when some specific action is making the X server crash (manually)</h3>
-    <br>
+    <br/>
     <ul>
      <li>Start XWin using your normal method</li>
      <li>In a non-X terminal window, run <tt>gdb --pid=`pidof /usr/bin/XWin`</tt>, to attach gdb to the running X server</li>
@@ -62,7 +62,7 @@
     </ul>
 
     <h3>Generating a backtrace when the X server is crashing at startup</h3>
-    <br>
+    <br/>
     <ul>
      <li>In a non-X terminal window, run <tt>gdb --args /usr/bin/XWin -multiwindow</tt>, to start the X server under gdb
      (If you have customized how you start XWin to add additional options, you should also add them here)</li>
@@ -73,7 +73,7 @@
     </ul>
 
     <h3>Generating a backtrace when the X server is crashing at startup (alternative approach using JIT debugging)</h3>
-    <br>
+    <br/>
     <ul>
      <li>Set the error_start token in the CYGWIN environment variable to run gdb, e.g. <tt>CYGWIN="error_start=C:\cygwin\bin\gdb"</tt>
          (If you are going to start the X server using a Windows shortcut, you will have to set this in the System applet of the Windows control panel)</li>
@@ -85,7 +85,7 @@
     <p>Please attach the output from gdb, in addition to your <tt>/var/log/xwin/XWin.0.log</tt>, to your problem report.</p>
 
     <h3>Cleaning up</h3>
-    <br>
+    <br/>
     <ul>
       <li>Uninstall the <b>xorg-server-debuginfo</b> package</li>
       <li>Uninstall the <b>gdb</b> and <b>sysvinit</b> packages if you no longer need them</li>
@@ -93,27 +93,27 @@
     </ul>
 
     <h3>Preparation (alternative approach)</h3>
-    <br>
+    <br/>
     <p>Alternatively, X server snapshots are built with debugging symbols included. You can install an X server snapshot with the following steps:</p>
     <ul>
       <li>
         Download the latest X Server snapshot from <a href="ftp://cygwin.com/pub/cygwinx/">ftp://cygwin.com/pub/cygwinx</a>
-        <br>
+        <br/>
         <tt>wget ftp://cygwin.com/pub/cygwinx/XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe.bz2</tt>
       </li>
       <li>
         Uncompress it
-        <br>
+        <br/>
         <tt>bunzip2 XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe.bz2</tt>
       </li>
       <li>
         Ensure it is executable
-        <br>
+        <br/>
         <tt>chmod +x XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe</tt>
       </li>
       <li>
         Move it to /usr/bin
-        <br>
+        <br/>
         <tt>mv XWin.YYYMMDD-git-XXXXXXXXXXXXXXXX.exe /usr/bin/XWin.exe</tt>
       </li>
     </ul>
