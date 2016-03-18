@@ -149,7 +149,7 @@ foreach my $initials (sort { $awardees{$b}{latest_date} cmp $awardees{$a}{latest
 		my $text = "<a href=\"$award->{URL}\" class=\"award\"" 
 			. ($title ? " title=\"${title}\"" : "" ) 
 			. ">";
-		foreach my $type (@award_type_names) {
+		foreach my $type (reverse @award_type_names) {
 			my $nawards = $award->{$type};
 			if ($nawards > MAX_STARS) {
 				$text .= "$award_types{$type}{img_html}<span class=\"times\">&times;${nawards}&nbsp;</span>";
