@@ -71,8 +71,18 @@ NAME="website"
 ></A
 >Chapter 4. Web Site Maintenance</H1
 ><P
->&#13;The Cygwin/X web site is stored in sourceware.org CVS.
-The CVSROOT is :ext:sourceware.org:/cvs/cygwin/, and the path is htdocs/xfree/
+>&#13;The Cygwin/X web site is stored in sourceware.org <B
+CLASS="command"
+>git</B
+>.
+The repository is <TT
+CLASS="literal"
+>git://sourceware.org/git/cygwin-htdocs.git</TT
+>
+and the path is <TT
+CLASS="filename"
+>htdocs/xfree/</TT
+>
 </P
 ><DIV
 CLASS="sect1"
@@ -83,8 +93,12 @@ NAME="updating-documentation-on-website"
 >Updating the documentation on the web site</A
 ></H1
 ><P
->&#13;A simple way of updating the documentation shown on the web site from the cywin-x-doc package
-is to build the documentation, then install it into a CVS checkout of web-site and then check it in.
+>&#13;A relatively simple way of updating the documentation shown on the web site from
+the cygwin-x-doc sources is to build the documentation, then install it into a
+<B
+CLASS="command"
+>git</B
+> checkout of the web site, and then check that in, e.g.:
 </P
 ><TABLE
 BORDER="0"
@@ -95,15 +109,16 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;$ cd path-to-website-checkout
-$ export CVS_RSH=ssh
-$ cvs -z9 -d :ext:user@sourceware.org:/cvs/cygwin/ co htdocs/xfree
-[...]
+$ git clone ssh://user@sourceware.org/git/cygwin-htdocs.git
 $ cd path-to-cygwin-x-doc-checkout
 $ ./configure --enable-hardcopy --with-docdir=path-to-website-checkout/htdocs/xfree/docs
 $ make
+[...]
 $ make install
+[...]
 $ cd path-to-website-checkout/htdocs/xfree/docs
-$ cvs ci
+$ git add --all
+$ git commit -m "Rebuild X documentation"
 </PRE
 ></TD
 ></TR

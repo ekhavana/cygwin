@@ -60,7 +60,7 @@ Jon Turney
         Obtaining the Source Code
 
               Source of latest cygwin-x-doc release
-              Source from CVS
+              Source from git
 
         Setting Up a DocBook Build Environment
 
@@ -946,24 +946,21 @@ Obtaining the Source Code
 Source of latest cygwin-x-doc release
 
    To obtain the source of the latest release of the cygwin-x-doc package
-   start the cygwin setup, select directories and mirror and select the
-   package cygwin-x-doc from the category X11. Mark the checkbox labelled
-   src and install. This will install the documentation source in
-   /usr/src/cygwin-x-doc.
+   start the cygwin setup program, and select the package cygwin-x-doc
+   from the category X11. Mark the checkbox labelled src and install. This
+   will install the documentation source in /usr/src/cygwin-x-doc.
      __________________________________________________________________
 
-Source from CVS
+Source from git
 
-   The documentation source code is available from sourceware.org CVS. To
-   obtain them please use the follow commands:
-$ cvs -d :pserver:anoncvs@sourceware.org:/cvs/cygwin-xfree login
-CVS password: <hit return>
-$ cvs -d :pserver:anoncvs@sourceware.org:/cvs/cygwin-xfree co doc
+   The documentation source code is available from sourceware.org git. To
+   obtain it, please use the following commands:
+$ git clone git://sourceware.org/git/cygwin-apps/xorg-doc.git
 [output as files are checked out]
-$ (cd doc && autoreconf)
+$ (cd xorg-doc && autoreconf)
 [output as autoconfiguration scripts are regenerated]
 
-   You should now have the sources in an directory called doc.
+   You should now have the sources in a directory called xorg-doc.
 
    If you just want to look at the Cygwin/X documentation source, use the
    web interface to the Cygwin/X documentation tree.
@@ -1035,20 +1032,20 @@ Packaging a Documentation Distribution
 
    Follow these instructions to build a Cygwin/X documentation source code
    distribution:
-    1. Edit the version tag in the third line of the file configure.ac to
-       indicated a new version, or to add a branch name to the
-       distribution. The line containing the version tag should look like:
+    1. Edit the version tag in the file configure.ac to indicate a new
+       version. The line containing the version tag should look like:
 
 AC_INIT(cygwin-x-doc, 1.0.0)
 
-    2. Commit this change to CVS and apply an appropriate tag:
+    2. Commit this change to git and apply an appropriate tag:
 
 Username@CygwinHost ~/cygwin-x-doc-1.0.0
-$ cvs ci configure.ac
+$ git add configure.ac
+Username@CygwinHost ~/cygwin-x-doc-1.0.0
+$ git commit -m "Bump version to 1.0.0"
 [...]
 Username@CygwinHost ~/cygwin-x-doc-1.0.0
-$ cvs tag -c VERSION_1_0_0
-[...]
+$ git tag VERSION_1_0_0
 
     3. Change the current directory to the documentation source code build
        directory:
@@ -1067,31 +1064,34 @@ $ make distcheck
     5. The documentation source code distribution should now be contained
        in the current directory in a file called
        cygwin-x-doc-1.0.0.tar.bz2.
-    6. Building the documentation is now complete.
+    6. Packaging the documentation is now complete.
      __________________________________________________________________
 
 Chapter 4. Web Site Maintenance
 
-   The Cygwin/X web site is stored in sourceware.org CVS. The CVSROOT is
-   :ext:sourceware.org:/cvs/cygwin/, and the path is htdocs/xfree/
+   The Cygwin/X web site is stored in sourceware.org git. The repository
+   is git://sourceware.org/git/cygwin-htdocs.git and the path is
+   htdocs/xfree/
      __________________________________________________________________
 
 Updating the documentation on the web site
 
-   A simple way of updating the documentation shown on the web site from
-   the cywin-x-doc package is to build the documentation, then install it
-   into a CVS checkout of web-site and then check it in.
+   A relatively simple way of updating the documentation shown on the web
+   site from the cygwin-x-doc sources is to build the documentation, then
+   install it into a git checkout of the web site, and then check that in,
+   e.g.:
 $ cd path-to-website-checkout
-$ export CVS_RSH=ssh
-$ cvs -z9 -d :ext:user@sourceware.org:/cvs/cygwin/ co htdocs/xfree
-[...]
+$ git clone ssh://user@sourceware.org/git/cygwin-htdocs.git
 $ cd path-to-cygwin-x-doc-checkout
 $ ./configure --enable-hardcopy --with-docdir=path-to-website-checkout/htdocs/xf
 ree/docs
 $ make
+[...]
 $ make install
+[...]
 $ cd path-to-website-checkout/htdocs/xfree/docs
-$ cvs ci
+$ git add --all
+$ git commit -m "Rebuild X documentation"
      __________________________________________________________________
 
 Bibliography
@@ -1922,4 +1922,4 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2016-03-03 12:18 .
+   at 2016-03-20 21:14 .

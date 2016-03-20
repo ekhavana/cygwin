@@ -82,13 +82,12 @@ source code distribution:</P
 TYPE="1"
 ><LI
 ><P
->Edit the version tag in the third line of the file
-<TT
+>Edit the version tag in the file <TT
 CLASS="filename"
 >configure.ac</TT
-> to indicated a new version, or to
-add a branch name to the distribution.  The line containing the
-version tag should look like:</P
+> to
+indicate a new version.  The line containing the version tag should look
+like:</P
 ><TABLE
 BORDER="0"
 BGCOLOR="#E0E0E0"
@@ -105,7 +104,10 @@ CLASS="programlisting"
 ></LI
 ><LI
 ><P
->&#13;Commit this change to CVS and apply an appropriate tag:
+>&#13;Commit this change to <B
+CLASS="command"
+>git</B
+> and apply an appropriate tag:
 
 <TABLE
 BORDER="0"
@@ -116,11 +118,12 @@ WIDTH="100%"
 ><PRE
 CLASS="screen"
 >&#13;Username@CygwinHost ~/cygwin-x-doc-1.0.0
-$ cvs ci configure.ac
+$ git add configure.ac
+Username@CygwinHost ~/cygwin-x-doc-1.0.0
+$ git commit -m "Bump version to 1.0.0"
 [...]
 Username@CygwinHost ~/cygwin-x-doc-1.0.0
-$ cvs tag -c VERSION_1_0_0
-[...]
+$ git tag VERSION_1_0_0
 </PRE
 ></TD
 ></TR
@@ -145,7 +148,7 @@ CLASS="screen"
 $ cd cygwin-x-doc-1.0.0/build
 
 Username@CygwinHost ~/cygwin-x-doc-1.0.0/build
-$ 
+$
 </PRE
 ></TD
 ></TR
@@ -180,7 +183,7 @@ CLASS="filename"
 ></LI
 ><LI
 ><P
->Building the documentation is now complete.</P
+>Packaging the documentation is now complete.</P
 ></LI
 ></OL
 ></DIV
