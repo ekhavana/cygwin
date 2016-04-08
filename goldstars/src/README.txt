@@ -9,7 +9,7 @@ To update the gold star page:
 (2) Add the new award entry(ies) to awards.csv.
 (3) Add corresponding new entries to awardees.csv and award_types.csv, if needed.
 (4) Run make. This will regenerate ../index.html.
-(5) cd .. and commit the changes to CVS.
+(5) cd .. and commit the changes in git.
 
 make runs make_awards_list.pl, which rebuilds index.html based on the contents of the following files:
 
