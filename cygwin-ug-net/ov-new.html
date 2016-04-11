@@ -1,5 +1,59 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new2.4"></a>What's new and what changed in 2.4</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>What's new and what changed in Cygwin</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="overview.html" title="Chapter 1. Cygwin Overview"><link rel="prev" href="highlights.html" title="Highlights of Cygwin Functionality"><link rel="next" href="setup-net.html" title="Chapter 2. Setting Up Cygwin"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">What's new and what changed in Cygwin</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="highlights.html">Prev</a> </td><th width="60%" align="center">Chapter 1. Cygwin Overview</th><td width="20%" align="right"> <a accesskey="n" href="setup-net.html">Next</a></td></tr></table><hr></div><div class="sect1"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="ov-new"></a>What's new and what changed in Cygwin</h2></div></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new2.5"></a>What's new and what changed in 2.5</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
+Full set of POSIX.1e ACL API functions now implemented.
+New APIs: acl_add_perm, acl_calc_mask, acl_clear_perms, acl_copy_entry,
+acl_copy_ext, acl_copy_int, acl_create_entry, acl_delete_def_file,
+acl_delete_entry, acl_delete_perm, acl_dup, acl_free, acl_from_text,
+acl_get_entry, acl_get_fd, acl_get_file, acl_get_permset, acl_get_qualifier,
+acl_get_tag_type, acl_init, acl_set_fd, acl_set_file, acl_set_permset,
+acl_set_qualifier, acl_set_tag_type, acl_size, acl_to_text, acl_valid.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Most libacl extensions now implemented, too:
+New APIs: acl_check, acl_cmp, acl_entries, acl_equiv_mode, acl_error,
+acl_extended_fd, acl_extended_file, acl_extended_file_nofollow,
+acl_from_mode, acl_get_perm, acl_to_any_text.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Including &lt;sys/acl.h&gt; now *only* includes the POSIX ACL API.  To include
+the old Solaris API, include &lt;cygwin/acl.h&gt;.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+First implementation of pthread_barrier/pthread_barrierattr functions.
+New APIs: pthread_barrierattr_init, pthread_barrierattr_setpshared,
+pthread_barrierattr_getpshared, pthread_barrierattr_destroy,
+pthread_barrier_init, pthread_barrier_destroy, pthread_barrier_wait.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Enabled console reports requested by escape sequences: Requesting primary
+and secondary device attributes, requesting cursor position report;
+see https://cygwin.com/ml/cygwin-patches/2012-q3/msg00019.html
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+New APIs: clog10, clog10f, nexttoward, nexttowardf, nexttowardl.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Add missing long double functions.  New APIs:
+acoshl, acosl, asinhl, asinl, atan2l, atanhl, atanl, cacoshl, cacosl, cargl,
+casinhl, casinl, catanhl, catanl, ccoshl, ccosl, ceill, cexpl, clog10l,
+clogl, conjl, copysignl, coshl, cosl, cpowl, cprojl, csinhl, csinl, csqrtl,
+ctanhl, ctanl, dreml, erfcl, erfl, exp10l, exp2l, expl, expm1l, fabsl,
+fdiml, floorl, fmal, fmaxl, fminl, fmodl, frexpl, ilogbl, isinfl, isnanl,
+ldexpl, lgammal, lgammal_r, llroundl, log10l, log1pl, log2l, logbl, logl,
+lroundl, modfl, nearbyintl, nextafterl, pow10l, powl, remainderl, remquol,
+roundl, scalbl, scalblnl, scalbnl, sincosl, sinhl, sinl, tanhl, tanl,
+tgammal, truncl.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+In calls to chmod treat ACLs with extra ACEs *only* for Admins and
+SYSTEM like a trivial ACL.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Bump POSIX option macros to POSIX.1-2008.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Profiling data, specifically pc sampling, now covers all threads of a
+program and not just the main thread.  Environment variable GMON_OUT_PREFIX
+enables multiple gmon.out files to preserve profiling data after fork or
+from multiple program runs.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+Feature test macros, which control which symbols are exposed in the standard
+headers, have been completely overhauled for compatibility with glibc.
+</p></li><li class="listitem" style="list-style-type: disc"><p>
+The isinf, isinff, and isinfl functions are signed, returning -1 for
+negative infinity for compatibility with glibc.
+</p></li></ul></div></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-new2.4"></a>What's new and what changed in 2.4</h3></div></div></div><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>
 New, unified implementation of POSIX permission and ACL handling.  The
 new ACLs now store the POSIX ACL MASK/CLASS_OBJ permission mask, and
 they allow to inherit the S_ISGID bit.  ACL inheritance now really

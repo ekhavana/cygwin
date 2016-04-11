@@ -3,7 +3,7 @@
 mount [OPTION] [&lt;win32path&gt; &lt;posixpath&gt;]
 mount -a
 mount &lt;posixpath&gt;
-      </pre></div><div class="refsect1"><a name="idm140292562716928"></a><h2>Options</h2><pre class="screen">
+      </pre></div><div class="refsect1"><a name="idm47537274175056"></a><h2>Options</h2><pre class="screen">
   -a, --all                     mount all filesystems mentioned in fstab
   -c, --change-cygdrive-prefix  change the cygdrive path prefix to &lt;posixpath&gt;
   -f, --force                   force mount, don't warn about missing mount
@@ -14,7 +14,7 @@ mount &lt;posixpath&gt;
   -o, --options X[,X...]        specify mount options
   -p, --show-cygdrive-prefix    show user and/or system cygdrive path prefix
   -V, --version                 output version information and exit
-</pre></div><div class="refsect1"><a name="idm140292570729776"></a><h2>Description</h2><p>The <span class="command"><strong>mount</strong></span> program is used to map your drives and
+</pre></div><div class="refsect1"><a name="idm47537276570720"></a><h2>Description</h2><p>The <span class="command"><strong>mount</strong></span> program is used to map your drives and
       shares onto Cygwin's simulated POSIX directory tree, much like as is done
       by mount commands on typical UNIX systems. However, in contrast to mount
       points given in <code class="filename">/etc/fstab</code>, mount points created or
@@ -142,10 +142,9 @@ D: on /d type fat (binary,user,noumount)
         automounted filesystems default to this set of options. For instance
         (using the short form of the command line flags)</p><div class="example"><a name="utils-cygdrive-ex2"></a><p class="title"><b>Example 3.12. Changing the default prefix with specific mount options</b></p><div class="example-contents"><pre class="screen">
 <code class="prompt">$</code> <strong class="userinput"><code>mount -c /mnt -o binary,noacl</code></strong>
-</pre></div></div><br class="example-break"></div><div class="refsect2"><a name="utils-limitations"></a><h3>Limitations</h3><p>Limitations: there is a hard-coded limit of 64 mount points (up to
-        Cygwin 1.7.9: 30 mount points). Also, although you can mount to
-        pathnames that do not start with "/", there is no way to make use of
-        such mount points.</p><p>Normally the POSIX mount point in Cygwin is an existing empty
+</pre></div></div><br class="example-break"></div><div class="refsect2"><a name="utils-limitations"></a><h3>Limitations</h3><p>Limitations: there is a hard-coded limit of 64 mount points.
+        Also, although you can mount to pathnames that do not start with "/",
+	there is no way to make use of such mount points.</p><p>Normally the POSIX mount point in Cygwin is an existing empty
         directory, as in standard UNIX. If this is the case, or if there is a
         place-holder for the mount point (such as a file, a symbolic link
         pointing anywhere, or a non-empty directory), you will get the expected

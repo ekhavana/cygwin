@@ -244,14 +244,13 @@ workaround for this Windows flaw.</p><p>Cygwin creates symbolic links potentiall
 ways:</p><div class="itemizedlist"><ul class="itemizedlist" style="list-style-type: bullet; "><li class="listitem" style="list-style-type: disc"><p>The default symlinks are plain files containing a magic cookie
 followed by the path to which the link points.  They are marked with the
 DOS SYSTEM attribute so that only files with that attribute have to be
-read to determine whether or not the file is a symbolic link.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Starting with Cygwin 1.7, symbolic links are using UTF-16 to encode
-the filename of the target file, to better support internationalization.
-Symlinks created by older Cygwin releases can be read just fine.  However,
-you could run into problems with them if you're now using another character
-set than the one you used when creating these symlinks
-(see <a class="xref" href="setup-locale.html#setup-locale-problems" title="Potential Problems when using Locales">the section called “Potential Problems when using Locales”</a>).  Please note that this
-new UTF-16 style of symlinks is not compatible with older Cygwin release,
-which can't read the target filename correctly.</p></div></li><li class="listitem" style="list-style-type: disc"><p>The shortcut style symlinks are Windows <code class="literal">.lnk</code>
+read to determine whether or not the file is a symbolic link.</p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Note</h3><p>Cygwin symbolic links are using UTF-16 to encode the filename of
+the target file, to better support internationalization.  Symlinks created by
+old Cygwin releases can be read just fine.  However, you could run into
+problems with them if you're now using another character set than the one you
+used when creating these symlinks
+(see <a class="xref" href="setup-locale.html#setup-locale-problems" title="Potential Problems when using Locales">the section called “Potential Problems when using Locales”</a>).
+</p></div></li><li class="listitem" style="list-style-type: disc"><p>The shortcut style symlinks are Windows <code class="literal">.lnk</code>
 shortcut files with a special header and the DOS READONLY attribute set.
 This symlink type is created if the environment variable
 <code class="literal">CYGWIN</code> (see <a class="xref" href="using-cygwinenv.html" title="The CYGWIN environment variable">the section called “The <code class="envar">CYGWIN</code> environment

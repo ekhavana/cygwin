@@ -8,11 +8,8 @@ cygcheck -f FILE [FILE]...
 cygcheck -l [PACKAGE]...
 cygcheck -p REGEXP
 cygcheck --delete-orphaned-installation-keys
-cygcheck --enable-unique-object-names Cygwin-DLL
-cygcheck --disable-unique-object-names Cygwin-DLL
-cygcheck --show-unique-object-names Cygwin-DLL
 cygcheck -h
-	</pre></div><div class="refsect1"><a name="idm140292573046144"></a><h2>Options</h2><pre class="screen">
+	</pre></div><div class="refsect1"><a name="idm47537281160688"></a><h2>Options</h2><pre class="screen">
 At least one command option or a PROGRAM is required, as shown above.
 
   PROGRAM              list library (DLL) dependencies of PROGRAM
@@ -31,15 +28,6 @@ At least one command option or a PROGRAM is required, as shown above.
                        Delete installation keys of old, now unused
                        installations from the registry.  Requires the right
                        to change the registry.
-  --enable-unique-object-names Cygwin-DLL
-  --disable-unique-object-names Cygwin-DLL
-  --show-unique-object-names Cygwin-DLL
-                       Enable, disable, or show the setting of the
-                       \"unique object names\" setting in the Cygwin DLL
-                       given as argument to this option.  The DLL path must
-                       be given as valid Windows(!) path.
-                       See the users guide for more information.
-                       If you don't know what this means, don't change it.
   -v, --verbose        produce more verbose output
   -h, --help           annotate output with explanatory comments when given
                        with another command, otherwise print this help
@@ -48,7 +36,7 @@ At least one command option or a PROGRAM is required, as shown above.
 Note: -c, -f, and -l only report on packages that are currently installed. To
   search all official Cygwin packages use -p instead.  The -p REGEXP matches
   package names, descriptions, and names of files/paths within all packages.
-</pre></div><div class="refsect1"><a name="idm140292561516608"></a><h2>Description</h2><p> The <span class="command"><strong>cygcheck</strong></span> program is a diagnostic utility for
+</pre></div><div class="refsect1"><a name="idm47537269742336"></a><h2>Description</h2><p> The <span class="command"><strong>cygcheck</strong></span> program is a diagnostic utility for
       dealing with Cygwin programs. If you are familiar with
       <span class="command"><strong>dpkg</strong></span> or <span class="command"><strong>rpm</strong></span>,
       <span class="command"><strong>cygcheck</strong></span> is similar in many ways. (The major
@@ -158,38 +146,4 @@ coreutils-5.3.0-6         GNU core utilities (includes fileutils, sh-utils and t
       registry could accumulate a lot of old Cygwin installation entries for
       which the installation doesn't exist anymore. To get rid of these
       orphaned registry entries, use the <span class="command"><strong>cygcheck
-      --delete-orphaned-installation-keys</strong></span> command.</p><p> Each Cygwin DLL generates a key value from its installation path.
-      This value is not only stored in the registry, it's also used to generate
-      global object names used for interprocess communication. This keeps
-      different Cygwin installations separate. Processes running under a Cygwin
-      DLL installed in C:\cygwin don't see processes running under a Cygwin DLL
-      installed in C:\Program Files\cygwin. This allows running multiple
-      versions of Cygwin DLLs without these versions to interfere with each
-      other, or to run small third-party installations for a specific purpose
-      independently from a Cygwin net distribution. </p><p> For debugging purposes it could be desired that the various Cygwin
-      DLLs use the same key, independently from their installation paths. If
-      the DLLs have different versions, trying to run processes under these
-      DLLs concurrently will result in error messages like this one:</p><pre class="screen">
-*** shared version mismatch detected - 0x8A88009C/0x75BE0074.
-This problem is probably due to using incompatible versions of the Cygwin DLL.
-Search for cygwin1.dll using the Windows Start-&gt;Find/Search facility
-and delete all but the most recent version.  The most recent version *should*
-reside in x:\\cygwin\\bin, where 'x' is the drive on which you have
-installed the cygwin distribution.  Rebooting is also suggested if you
-are unable to find another Cygwin DLL.
-</pre><p> To disable the usage of a unique key value of a certain Cygwin DLL,
-      use the <span class="command"><strong>cygcheck --disable-unique-object-names
-      Cygwin-DLL</strong></span> command. <code class="literal">Cygwin-DLL</code> is the
-      Windows path (*not* a Cygwin POSIX path) to the DLL for which you want to
-      disable this feature. Note that you have to stop all Cygwin processes
-      running under this DLL, before you're allowed to change this setting. For
-      instance, run <span class="command"><strong>cygcheck</strong></span> from a DOS command line for
-      this purpose.</p><p>To re-enable the usage of a unique key, use the <span class="command"><strong>cygcheck
-      --enable-unique-object-names Cygwin-DLL</strong></span> command. This option
-      has the same characteristics as the
-      <code class="literal">--disable-unique-object-names</code> option</p><p>Finally, you can use <span class="command"><strong>cygcheck --show-unique-object-names
-      Cygwin-DLL</strong></span> to find out if the given Cygwin DLL use unique
-      object names or not. In contrast to the <code class="literal">--disable-...</code>
-      and <code class="literal">--enable-...</code> options, the
-      <code class="literal">--show-unique-object-names</code> option also works for
-      Cygwin DLLs which are currently in use.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-utils.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using-utils.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="cygpath.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Cygwin Utilities </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> cygpath</td></tr></table></div></body></html>
+      --delete-orphaned-installation-keys</strong></span> command.</p></div></div><div class="navfooter"><hr><table width="100%" summary="Navigation footer"><tr><td width="40%" align="left"><a accesskey="p" href="using-utils.html">Prev</a> </td><td width="20%" align="center"><a accesskey="u" href="using-utils.html">Up</a></td><td width="40%" align="right"> <a accesskey="n" href="cygpath.html">Next</a></td></tr><tr><td width="40%" align="left" valign="top">Cygwin Utilities </td><td width="20%" align="center"><a accesskey="h" href="cygwin-ug-net.html">Home</a></td><td width="40%" align="right" valign="top"> cygpath</td></tr></table></div></body></html>
