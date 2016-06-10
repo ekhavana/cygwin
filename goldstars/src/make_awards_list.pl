@@ -146,6 +146,7 @@ foreach my $initials (sort { $awardees{$b}{latest_date} cmp $awardees{$a}{latest
 		$last_award = $award;
 		# Show the award description if any, with HTML tags stripped out, as the anchor title:
 		(my $title = $award->{Description} || '') =~ s/<[^>]*>//g;
+		$title =~ s/"/&quot;/g;
 		my $text = "<a href=\"$award->{URL}\" class=\"award\"" 
 			. ($title ? " title=\"${title}\"" : "" ) 
 			. ">";
