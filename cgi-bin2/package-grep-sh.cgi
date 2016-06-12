@@ -83,7 +83,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     cat ../top.html # opens <div>
     echo '<h1>Cygwin Package Search</h1>
 <form method="GET" action="//cygwin.com/cgi-bin2/package-grep-sh.cgi">
-Search package contents for a <a href="http://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern,
+Search package contents for a <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern,
 or view the <a href="https://cygwin.com/packages/package_list.html">full list</a> of packages<br>
 <input type="text" size=40 name="grep" value="'$param_grep_htmlencode'">
 <input type=submit value="Go"><br>'
