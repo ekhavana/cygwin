@@ -128,6 +128,7 @@ test: <i>version</i>
 category: <i>name1[ name2...]</i>
 requires: <i>package[ package...]</i>
 external-source: <i>package</i>
+message: <i>id</i> <i>"some text"</i>
 </pre>
 <p align="center">
   <b>Note: Not all of the above setup.hint lines are required. Please read the
@@ -398,6 +399,22 @@ No actual moles will be harmed during execution of this game."
     <p>
       Multiple packages are separated by spaces. Do not enclose multiple package
       names within quotation marks.
+    </p>
+  </li>
+  <li>
+    <p>
+      The <tt>message</tt> line indicates text that will be displayed by the
+      setup program when the package is installed.
+    </p>
+    <p>
+      This should be used <i>extremely</i> sparingly, for example, if a 3rd
+      party driver or service needs to be installed in Windows for the package
+      to function.
+    </p>
+    <p>
+      The id used should be derived from the package name. Currently, the text
+      for a given id will be shown by setup exactly once, when the package is
+      first installed, even if the text subsequently changes.
     </p>
   </li>
 </ul>
