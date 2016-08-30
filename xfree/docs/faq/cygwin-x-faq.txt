@@ -1,6 +1,6 @@
 Cygwin/X Frequently Asked Questions
 
-2016-03-20 21:14
+2016-08-30 16:53
      __________________________________________________________________
 
    Table of Contents
@@ -607,7 +607,7 @@ $ nedit
    connections, only accepting local connections on a unix domain socket.
 
    For local clients, use DISPLAY=:0.0, rather than DISPLAY=localhost:0.0,
-   DISPLAY=127.0.0.1:0.0 or DISPLAY=::1:0.0. See Q: 1.6..
+   DISPLAY=127.0.0.1:0.0, DISPLAY=::1:0.0, etc. See Q: 1.6..
 
    A2:
 
@@ -1005,6 +1005,9 @@ X11Forwarding yes
    forwarding is requested using the -X command line option and you need
    to use the option -Y or specify "ForwardX11Trusted yes" in the client
    configuration for trusted forwarding by default.
+
+   Since OpenSSH 7.2p1, untrusted forwarding (ssh -X) does not fallback to
+   ssh -Y trusted forwarding.
 
    So why is this disabled? Untrusted X11 forwarding was meant to be a way
    to allow logins to unknown or insecure systems. It generates a cookie
