@@ -72,9 +72,9 @@ versa.  Shell scripts and Makefiles cannot call these functions directly.
 Instead, they can do the same path translations by executing the
 <span class="command"><strong>cygpath</strong></span> utility program that we provide with Cygwin.</p><p>Win32 applications handle filenames in a case preserving, but case
 insensitive manner.  Cygwin supports case sensitivity on file systems
-supporting that.  Since Windows XP, the OS only supports case
-sensitivity when a specific registry value is changed.  Therefore, case
-sensitivity is not usually the default.</p><p>Cygwin supports creating and reading symbolic links, even on Windows
+supporting that.  Windows only supports case sensitivity when a specific
+registry value is changed.  Therefore, case sensitivity is not usually the
+default.</p><p>Cygwin supports creating and reading symbolic links, even on Windows
 filesystems and OS versions which don't support them.
 See <a class="xref" href="using.html#pathnames-symlinks" title="Symbolic links">the section called “Symbolic links”</a> for details.</p><p>Hard links are fully supported on NTFS and NFS file systems.  On FAT
 and other file systems which don't support hardlinks, the call returns with
@@ -191,10 +191,7 @@ BLODA</a>. Badly-behaved applications which
 inject dlls into other processes often manage to clobber important
 sections of the child's address space, leading to base address
 collisions which rebasing cannot fix. The only way to resolve this
-problem is to remove (usually uninstall) the offending app.  See
-<a class="xref" href="using-cygwinenv.html#cygwinenv-implemented-options" title="Implemented options">the section called “Implemented options”</a> for the
-<code class="literal">detect_bloda</code> option, which may be able to identify the
-BLODA.</p></li></ul></div><p>In summary, current Windows implementations make it
+problem is to remove (usually uninstall) the offending app.</p></li></ul></div><p>In summary, current Windows implementations make it
 impossible to implement a perfectly reliable fork, and occasional
 fork failures are inevitable.
 </p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-signals"></a>Signals</h3></div></div></div><p>When
@@ -236,11 +233,7 @@ inherited file descriptor is a socket.</p><p>AF_UNIX (AF_LOCAL) sockets are not 
 implemented in Cygwin by using local AF_INET sockets instead.  This is
 completely transparent to the application.  Cygwin's implementation also
 supports the getpeereid BSD extension.  However, Cygwin does not yet support
-descriptor passing.</p><p>IPv6 is supported.  This support is dependent, however, on the
-availability of the Windows IPv6 stack.  The IPv6 stack was "experimental",
-i.e. not feature complete in Windows 2003 and earlier.  Full IPv6 support
-became only available starting with Windows Vista and Windows Server 2008.
-</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-select"></a>Select</h3></div></div></div><p>The UNIX <code class="function">select</code> function is another
+descriptor passing.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ov-hi-select"></a>Select</h3></div></div></div><p>The UNIX <code class="function">select</code> function is another
 call that does not map cleanly on top of the Win32 API.  Much to our
 dismay, we discovered that the Win32 select in Winsock only worked on
 socket handles.  Our implementation allows select to function normally

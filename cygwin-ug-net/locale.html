@@ -2,8 +2,8 @@
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>locale</title><link rel="stylesheet" type="text/css" href="docbook.css"><meta name="generator" content="DocBook XSL Stylesheets V1.78.1"><link rel="home" href="cygwin-ug-net.html" title="Cygwin User's Guide"><link rel="up" href="using-utils.html" title="Cygwin Utilities"><link rel="prev" href="ldd.html" title="ldd"><link rel="next" href="minidumper.html" title="minidumper"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="navheader"><table width="100%" summary="Navigation header"><tr><th colspan="3" align="center">locale</th></tr><tr><td width="20%" align="left"><a accesskey="p" href="ldd.html">Prev</a> </td><th width="60%" align="center">Cygwin Utilities</th><td width="20%" align="right"> <a accesskey="n" href="minidumper.html">Next</a></td></tr></table><hr></div><div class="refentry"><a name="locale"></a><div class="titlepage"></div><div class="refnamediv"><h2>Name</h2><p>locale — Get locale-specific information</p></div><div class="refsynopsisdiv"><h2>Synopsis</h2><pre class="screen">
 locale [-amvhV]
 locale [-ck] NAME
-locale [-usfnU]
-      </pre></div><div class="refsect1"><a name="idm47124310182800"></a><h2>Options</h2><pre class="screen">
+locale [-iusfnU]
+      </pre></div><div class="refsect1"><a name="idm47369408542048"></a><h2>Options</h2><pre class="screen">
 System information:
 
   -a, --all-locales    List all available supported locales
@@ -17,6 +17,7 @@ Modify output format:
 
 Default locale information:
 
+  -i, --input          Print current input locale
   -u, --user           Print locale of user's default UI language
   -s, --system         Print locale of system default UI language
   -f, --format         Print locale of user's regional format settings
@@ -28,19 +29,23 @@ Other options:
 
   -h, --help           This text
   -V, --version        Print program version and exit
-</pre></div><div class="refsect1"><a name="idm47124312069872"></a><h2>Description</h2><p><span class="command"><strong>locale</strong></span> without parameters prints information about
-      the current locale environment settings.</p><p>The <code class="literal">-u</code>, <code class="literal">-s</code>,
-      <code class="literal">-f</code>, and <code class="literal">-n</code> options can be used to
-      request the various Windows locale settings. The purpose is to use this
-      command in scripts to set the POSIX locale variables.</p><p>The <code class="literal">-u</code> option prints the current user's Windows UI
-      locale to stdout. In Windows Vista and Windows 7 this setting is called
-      the "Display Language"; there was no corresponding user setting in
-      Windows XP. The <code class="literal">-s</code> option prints the systems default
-      instead. The <code class="literal">-f</code> option prints the user's setting for
-      time, date, number and currency. That's equivalent to the setting in the
+</pre></div><div class="refsect1"><a name="idm47369413862720"></a><h2>Description</h2><p><span class="command"><strong>locale</strong></span> without parameters prints information about
+      the current locale environment settings.</p><p>The <code class="literal">-i</code>, <code class="literal">-u</code>,
+      <code class="literal">-s</code>, <code class="literal">-f</code>, and <code class="literal">-n</code>
+      options can be used to request the various Windows locale settings. The
+      purpose is to use this command in scripts to set the POSIX locale
+      variables.</p><p>The <code class="literal">-i</code> option prints the current input language.
+      This is called the "Input language" and basically equivalent to the
+      current keyboard layout setting.</p><p>The <code class="literal">-u</code> option prints the current user's Windows UI
+      locale to stdout. In Windows this setting is called the
+      "Display Language".</p><p>The <code class="literal">-s</code> option prints the systems default instead.
+    </p><p>The <code class="literal">-f</code> option prints the user's setting for time,
+      date, number and currency. That's equivalent to the setting in the
       "Formats" or "Regional Options" tab in the "Region and Language" or
-      "Regional and Language Options" dialog. With the <code class="literal">-U</code>
-      option <span class="command"><strong>locale</strong></span> appends a ".UTF-8".</p><p>Usage example:</p><pre class="screen">
+      "Regional and Language Options" dialog.</p><p>The <code class="literal">-n</code> option prints the system's default
+      language used for applications which don't support Unicode.</p><p>With the <code class="literal">-U</code> option <span class="command"><strong>locale</strong></span>
+      appends the string ".UTF-8" to enforce using UTF-8.  Using UTF-8
+      as codeset is recommended.</p><p>Usage example:</p><pre class="screen">
 bash$ export LANG=$(locale -uU)
 bash$ echo $LANG
 en_US.UTF-8

@@ -693,8 +693,8 @@ schemata are the following:
 	      See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-cygwin" title="The cygwin schema">the section called “The <code class="literal">cygwin</code> schema”</a> for
 	      more information.</dd><dt><span class="term"><code class="literal">unix</code></span></dt><dd>Utilizes the posixAccount schema attributes per
 	      <a class="ulink" href="https://tools.ietf.org/html/rfc2307" target="_top">RFC 2307</a>.
-	      The posixAccount schema is available by default since Windows
-	      Server 2003 R2, but typically only utilized when installing the
+	      The posixAccount schema is available by default in Windows
+	      Server, but typically only utilized when installing the
 	      Active Directory "Server for NIS" feature (which is deprecated
 	      since Server 2012 R2).
 	      See also <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-posix" title="The unix schema">the section called “The <code class="literal">unix</code> schema”</a>.
@@ -864,10 +864,10 @@ At the time of writing the following attributes are utilized by Cygwin:
 	 See <a class="xref" href="ntsec.html#ntsec-mapping-nsswitch-gecos" title="The db_gecos setting">the section called “The <code class="literal">db_gecos</code> setting”</a>.</td></tr></tbody></table></div></div><div class="sect4"><div class="titlepage"><div><div><h5 class="title"><a name="ntsec-mapping-nsswitch-posix"></a>The <code class="literal">unix</code> schema</h5></div></div></div><p>
 The <code class="literal">unix</code> schema utilizes the 
 <code class="literal">posixAccount</code> attribute extension.  This is one of two
-schema extensions which are connected to AD accounts, available by default
-starting with Windows Server 2003 R2.  They are usually
-<span class="bold"><strong>not set</strong></span>, unless used by the Active Directory
-<code class="literal">Server for NIS</code> feature (deprecated since Server 2012 R2).
+schema extensions which are connected to AD accounts, available by default.
+They are usually <span class="bold"><strong>not set</strong></span>, unless used by
+the Active Directory <code class="literal">Server for NIS</code> feature (deprecated
+since Server 2012 R2).
 
 Two schemata are interesting for Cygwin, <code class="literal">posixAccount</code>,
 connected to user accounts, and <code class="literal">posixGroup</code>, connected
@@ -1104,14 +1104,12 @@ UserAllow:   010
 GroupDeny:   010
 GroupAllow:  001
 OthersAllow: 110
-</pre><p>Again: This works on all existing versions of Windows NT, at the
-time of writing from at least Windows XP up to Server 2012 R2.  Only
-the GUIs aren't able (or willing) to deal with that order.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-setuid-overview"></a>Switching the user context</h3></div></div></div><p>Since Windows XP, Windows users have been accustomed to the
-"Switch User" feature, which switches the entire desktop to another user
-while leaving the original user's desktop "suspended".  Another Windows
-feature is the "Run as..." context menu entry, which allows you to start
-an application using another user account when right-clicking on applications
-and shortcuts.</p><p>On POSIX systems, this operation can be performed by processes
+</pre><p>Again: This works on all supported versions of Windows.  Only the GUIs
+aren't able (or willing) to deal with that order.</p></div><div class="sect2"><div class="titlepage"><div><div><h3 class="title"><a name="ntsec-setuid-overview"></a>Switching the user context</h3></div></div></div><p>Windows users have been accustomed to the "Switch User" feature, which
+switches the entire desktop to another user while leaving the original user's
+desktop "suspended".  Another Windows feature is the "Run as..." context menu
+entry, which allows you to start an application using another user account
+when right-clicking on applications and shortcuts.</p><p>On POSIX systems, this operation can be performed by processes
 running under the privileged user accounts (usually the "root" user
 account) on a per-process basis.  This is called "switching the user
 context" for that process, and is performed using the POSIX
@@ -1211,9 +1209,8 @@ the user context (<span class="command"><strong>sshd</strong></span>, <span clas
 <span class="command"><strong>cron</strong></span>, ...) as Windows services under the SYSTEM
 (or LocalSystem in the GUI) account and everything just works.
 Unfortunately that's too simple.  Using <span class="command"><strong>NtCreateToken</strong></span>
-has a few drawbacks.</p><p>First of all, beginning with Windows Server 2003,
-the permission "Create a token object" gets explicitly removed from
-the SYSTEM user's access token, when starting services under that
+has a few drawbacks.</p><p>First of all, the permission "Create a token object" gets explicitly
+removed from the SYSTEM user's access token, when starting services under that
 account.  That requires us to create a new account with this specific
 permission just to run this kind of services.  But that's a minor
 problem.</p><p>A more important problem is that using <span class="command"><strong>NtCreateToken</strong></span>
@@ -1223,9 +1220,9 @@ A logon session has a couple of attributes which are unique to the
 session.  One of these attributes is the fact, that Windows functions
 identify the user domain and user name not by the SID of the access
 token owner, but only by the logon session the process is running under.</p><p>This has the following unfortunate consequence.  Consider a
-service started under the SYSTEM account (up to Windows XP) switches the
-user context to DOMAIN\my_user using a token created directly by calling
-the <span class="command"><strong>NtCreateToken</strong></span> function.  A process running under
+service started under the SYSTEM account switches the user context to
+DOMAIN\my_user using a token created directly by calling the
+<span class="command"><strong>NtCreateToken</strong></span> function.  A process running under
 this new access token might want to know under which user account it's
 running.  The corresponding SID is returned correctly, for instance
 S-1-5-21-1234-5678-9012-77777.  However, if the same process asks the OS

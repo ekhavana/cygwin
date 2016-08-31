@@ -9,7 +9,7 @@ cygcheck -l [PACKAGE]...
 cygcheck -p REGEXP
 cygcheck --delete-orphaned-installation-keys
 cygcheck -h
-	</pre></div><div class="refsect1"><a name="idm47124306526528"></a><h2>Options</h2><pre class="screen">
+	</pre></div><div class="refsect1"><a name="idm47369414681232"></a><h2>Options</h2><pre class="screen">
 At least one command option or a PROGRAM is required, as shown above.
 
   PROGRAM              list library (DLL) dependencies of PROGRAM
@@ -36,7 +36,7 @@ At least one command option or a PROGRAM is required, as shown above.
 Note: -c, -f, and -l only report on packages that are currently installed. To
   search all official Cygwin packages use -p instead.  The -p REGEXP matches
   package names, descriptions, and names of files/paths within all packages.
-</pre></div><div class="refsect1"><a name="idm47124301421536"></a><h2>Description</h2><p> The <span class="command"><strong>cygcheck</strong></span> program is a diagnostic utility for
+</pre></div><div class="refsect1"><a name="idm47369411303616"></a><h2>Description</h2><p> The <span class="command"><strong>cygcheck</strong></span> program is a diagnostic utility for
       dealing with Cygwin programs. If you are familiar with
       <span class="command"><strong>dpkg</strong></span> or <span class="command"><strong>rpm</strong></span>,
       <span class="command"><strong>cygcheck</strong></span> is similar in many ways. (The major
@@ -62,7 +62,8 @@ Note: -c, -f, and -l only report on packages that are currently installed. To
       both.</p><p> The <code class="literal">-f</code> option helps you to track down which
       package a file came from, and <code class="literal">-l</code> lists all files in a
       package. For example, to find out about
-      <code class="filename">/usr/bin/less</code> and its package: </p><div class="example"><a name="utils-cygcheck-ex"></a><p class="title"><b>Example 3.3. Example <span class="command">cygcheck</span>
+      <code class="filename">/usr/bin/less</code> and its package:
+    </p><div class="example"><a name="utils-cygcheck-ex"></a><p class="title"><b>Example 3.3. Example <span class="command">cygcheck</span>
       usage</b></p><div class="example-contents"><pre class="screen">
 $ cygcheck -f /usr/bin/less
 less-381-1
@@ -73,7 +74,7 @@ $ cygcheck -l less
 /usr/bin/lesskey.exe
 /usr/man/man1/less.1
 /usr/man/man1/lesskey.1
-</pre></div></div><p><br class="example-break"> </p><p>The <code class="literal">-h</code> option prints additional helpful messages
+</pre></div></div><br class="example-break"><p>The <code class="literal">-h</code> option prints additional helpful messages
       in the report, at the beginning of each section. It also adds table
       column headings. While this is useful information, it also adds some to
       the size of the report, so if you want a compact report or if you know
@@ -96,7 +97,7 @@ $ cygcheck -l less
       equivalent to the search that is available on the <a class="ulink" href="https://cygwin.com/packages/" target="_top">Cygwin package listing</a>
       page.</p><p>For example, perhaps you are getting an error because you are missing
       a certain DLL and you want to know which package includes that file:
-      </p><div class="example"><a name="utils-search-ex"></a><p class="title"><b>Example 3.4. Searching all packages for a
+    </p><div class="example"><a name="utils-search-ex"></a><p class="title"><b>Example 3.4. Searching all packages for a
       file</b></p><div class="example-contents"><pre class="screen">
 $ cygcheck -p 'cygintl-2\.dll'
 Found 1 matches for 'cygintl-2\.dll'.
@@ -114,7 +115,7 @@ Found 2 matches for '/ls\.exe'.
 
 coreutils-5.2.1-5         GNU core utilities (includes fileutils, sh-utils and textutils)
 coreutils-5.3.0-6         GNU core utilities (includes fileutils, sh-utils and textutils)
-</pre></div></div><p><br class="example-break"> </p><p>Note that this option takes a regular expression, not a glob or
+</pre></div></div><br class="example-break"><p>Note that this option takes a regular expression, not a glob or
       wildcard. This means that you need to use <code class="literal">.*</code> if you
       want something similar to the wildcard <code class="literal">*</code> commonly used
       in filename globbing. Similarly, to match the period character you should
