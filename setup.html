@@ -17,16 +17,15 @@
   related policies to ensure good behaviour from the setup program.
 </p>
 
-<p><a href="https://sourceware.org/cygwin-apps/setup.html">Setup</a> depends on
-  certain conventions being followed. If they are not followed, bad things may
-  happen to the users of the setup program. Where a convention can be ignored,
-  should circumstances warrant, this document will specify that. Setup has it's
-  own <a href="https://sourceware.org/cygwin-apps/setup.html">homepage</a>. If you
-  are interested in adding features to setup, you should consult the setup
+<p>Setup has it's
+  own <a href="https://sourceware.org/cygwin-apps/setup.html">homepage</a>. If
+  you are interested in adding features to setup, you should consult the setup
   homepage.
+</p>
 
-  If you are interested in creating a local mirror with or without custom Cygwin
-  packages, see
+<p>
+  If you are interested in creating a local mirror, with or without custom
+  Cygwin packages, see
   the <a href="https://sourceware.org/cygwin-apps/package-server.html">package
   server</a> page.
 </p>
@@ -197,36 +196,6 @@ curr: 0.9-1
     </p>
 
     <p>
-      Note that if <em>any</em> of the <tt>curr</tt>, <tt>prev</tt>, or <tt>test</tt>
-      options are used, they will short circuit <em>all</em> of the automatic
-      version ordering. So, if you include a <tt>test</tt> option, and you have
-      valid current and/or previous tar files, you <em>must</em>
-      specify <tt>curr</tt> and/or <tt>prev</tt>. Otherwise, the <b>only</b>
-      version that setup will display will be the <tt>test</tt> version.
-    </p>
-
-    <p>
-      For example, if your setup.hint looks like this:
-    </p>
-
-<pre>
-test: 1.9-1
-</pre>
-
-    <p>
-      then setup will not offer the 0.9-1 or 1.0-1 versions.
-    </p>
-    <p>
-      If you want all of the versions included, you must do this:
-    </p>
-
-<pre>
-prev: 0.9-1
-curr: 1.0-1
-test: 1.9-1
-</pre>
-
-    <p>
       Setup is currently unable to list more than three versions of each
       package. Therefore you should not keep more than three versions of each
       package around: The current version, the previous stable version, and,
@@ -254,9 +223,7 @@ test: 1.9-1
 
   <li>
     <p>
-      <tt>sdesc</tt> is a mandatory field for setup.hint. Your
-      package <em>must</em> contain this field. The <tt>sdesc</tt> field is
-      required for correct operation of the setup program.
+      <tt>sdesc</tt> is a mandatory line in setup.hint.
     </p>
 
     <p>
