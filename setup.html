@@ -43,7 +43,7 @@
   <li><a href="#acceptance">Uploading an accepted package</a></li>
   <li><a href="#updating">Updating a package</a></li>
 </ul>
-<h2><a id="naming" name="naming">Package file naming scheme</a></h2>
+<h2><a id="naming">Package file naming scheme</a></h2>
 <p>
   Use the upstream's version plus a release suffix (i.e. findutils 4.5.12
   becomes 4.5.12-1, 4.5.12-2, etc., until findutils 4.5.13 is packaged, which
@@ -115,7 +115,7 @@ setup.hint
   greater.
 </p>
 
-<h2><a id="setup.hint" name="setup.hint"><tt>setup.hint</tt></a></h2>
+<h2><a id="setup.hint"><tt>setup.hint</tt></a></h2>
 <p>Each package must be submitted with a file called <tt>setup.hint</tt>. This file is used for information that cannot be inferred just from the context of the file name or package name. Lines in <tt>setup.hint</tt> will consist of one of the following:</p>
 <pre>
 # <i>comment</i>
@@ -317,7 +317,7 @@ No actual moles will be harmed during execution of this game."
       Do not enclose multiple category names within quotation marks.
     </p>
 
-    <a name="categories" />
+    <a id="categories"/>
     <p>
       Please do not invent a new category without checking with the cygwin-apps
       mailing list first. At the time of writing, the current categories are:
@@ -430,7 +430,7 @@ bar whacks the mole.
 No actual moles will be harmed during execution of this game."
 </pre>
 <p>Notice that we didn't use the <tt>prev</tt>, <tt>curr</tt> or <tt>test</tt> options. Instead, we relied on setup to do as much as possible for us.</p>
-<h2><a id="advanced_setup.hint" name="advanced_setup.hint"><tt>setup.hint (Advanced Options)</tt></a></h2>
+<h2><a id="advanced_setup.hint"><tt>setup.hint (Advanced Options)</tt></a></h2>
 <p>The <tt>external-source</tt> line is used when multiple installation packages are generated from a single source package. For example, suppose the <tt>boffo</tt> package contains the executables and documentation for boffo, but there is also a shared library <tt>cygboffo-7.dll</tt> that might be used by other packages; say, the <tt>fobbo</tt> program. It would be nice to separate that <tt>cygboffo-7.dll</tt> shared library into a second installation package, so that users of the <tt>fobbo</tt> program can install <em>just</em> the library, and not the entire <tt>boffo</tt> package. However, all of the <tt>boffo</tt> executables and the DLL are generated from the same source. To support this usage, the <tt>boffo</tt> maintainer would create three package files:</p>
 <ul>
   <li><tt>boffo-2.4.1-2.tar.xz</tt>: an installable package that contains all of the normal contents of <tt>boffo</tt> -- except for the shared library.</li>
@@ -492,7 +492,7 @@ source: release/boffo/boffo-2.4.1-2-src.tar.xz
   sources.
 </p>
 
-<h2><a id="package_contents" name="package_contents">Package contents</a></h2>
+<h2><a id="package_contents">Package contents</a></h2>
 <p>The files paths within both the source and the binary package files are quite important. Since setup extracts into a predetermined directory, you must structure your package contents accordingly.</p>
 <p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
 <ul class="spaced">
@@ -543,7 +543,7 @@ strongly recommended to convert existing packages to cygport when
 updating them; ask on the <tt>cygwin-apps</tt> list if you need help
 converting an existing package to use cygport.</p>
 
-<h2><a id="making_srcpackage" name="making_srcpackage">Making a package with cygport</a></h2>
+<h2><a id="making_srcpackage">Making a package with cygport</a></h2>
 
 <p>The <tt>cygport</tt> framework improves
 on <a href="setup-packaging-historical.html">previous Cygwin build scripts</a>, and
@@ -589,12 +589,12 @@ PATCH_URI="boffo-1.0-fix-whatever.patch"
 <a href="https://cygwinports.github.io/cygport/toc_index.html">reference manual</a>
 and sample .cygport files.</p>
 
-<h2><a id="postinstall" name="postinstall">Creating a package postinstall script</a></h2>
+<h2><a id="postinstall">Creating a package postinstall script</a></h2>
 <p>If your package requires certain commands to be executed after the files in the package are installed, include them in a file in the package called /etc/postinstall/<var>package</var>.sh or /etc/postinstall/<var>package</var>.bat.</p>
 <p>If the file's name ends in ".sh", it is executed with the Cygwin shell; if it ends in ".bat", it is executed with the DOS command interpreter. If it doesn't end with either of these suffixes, it is ignored.</p>
 <p>After the script has been successfully run it is renamed by appending the suffix ".done" to its previous name, to prevent it from being run again the next time the user runs the setup program.</p>
 <p>Note that the setup program runs all the postinstall scripts after all desired packages have been installed, that is, it does not run each package's postinstall script immediately after installing that package. Note, furthermore, that the order in which the scripts are run is not guaranteed. Therefore, if your package depends on others which have their own postinstall scripts, you cannot assume in your script that the other packages' scripts have already been run.</p>
-<h2><a id="submitting" name="submitting">Submitting a new package</a></h2>
+<h2><a id="submitting">Submitting a new package</a></h2>
 <p>So you've got a package you want to submit. Follow the following checklist before emailing the <tt>cygwin-apps</tt> mailing list and you'll almost certainly save time.</p>
 <ol>
   <li><i>Do you have the time to maintain the package?</i><br />
@@ -632,7 +632,7 @@ and sample .cygport files.</p>
   <li>Each new package must in any case receive one <a href="acronyms/#GTG">GTG</a> vote from a package maintainer, meaning that an existing maintainer has downloaded the package, inspected the tar file contents, tested the applications, and rebuilt the package from the source tar file without incident. Once a successful package is produced, you become a maintainer yourself and can provide GTG reviews for others as well.</li>
 
 </ol>
-<h2><a id="acceptance" name="acceptance">Uploading an accepted package</a></h2>
+<h2><a id="acceptance">Uploading an accepted package</a></h2>
 <ol>
   <li>Once you have your GTG,
       follow <a href="https://sourceware.org/cygwin-apps/package-upload.html">these
@@ -642,7 +642,7 @@ and sample .cygport files.</p>
     Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
   <li>Feel free to delete your local copy once the files have been uploaded to sourceware.org.</li>
 </ol>
-<h2><a id="updating" name="updating">Updating a package</a></h2>
+<h2><a id="updating">Updating a package</a></h2>
 <p>So you've got an updated package you want to submit. You should
   already have upload privileges, and should be able to do the entire
   process yourself, by
@@ -657,7 +657,7 @@ and sample .cygport files.</p>
    Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
 </ol>
 <p>NOTE: On any major version upgrade, you may want to mark the release as <tt>Test</tt>.</p>
-<h2><a id="announcement" name="announcement">Example announcement</a></h2>
+<h2><a id="announcement">Example announcement</a></h2>
 <br>
 <table border="1">
   <tr>
