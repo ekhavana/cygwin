@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
+    <link rel="stylesheet" type="text/css" href="style.css" />
+    <title>Cygwin Packaging: packages</title>
+  </head>
+
+<body>
+<!--#include virtual="navbar.html" -->
+<!--#include virtual="top.html" -->
+<h1>Cygwin Packaging: packages</h1>
+
+<h2>Contents</h2>
+<ul class="spaced">
+  <li><a href="#naming">Package file naming scheme</a></li>
+  <li><a href="#package_contents">Package contents</a></li>
+  <li><a href="#postinstall">Creating a package postinstall script</a></li>
+</ul>
+
+<h2><a id="naming">Package file naming scheme</a></h2>
+<p>
+  Use the upstream's version plus a release suffix (i.e. findutils 4.5.12
+  becomes 4.5.12-1, 4.5.12-2, etc., until findutils 4.5.13 is packaged, which
+  would be 4.5.13-1, etc). Some packages also use a YYYYMMDD format for their
+  versions, e.g. terminfo-5.9-20140524-1.tar.xz. The first release of a package
+  should have a -1 release suffix.
+</p>
+
+<p>A complete package currently consists of three files:</p>
+<ul>
+  <li>a binary tar file, named <tt>package-version-release.tar.xz</tt></li>
+  <li>a source tar file, named <tt>package-version-release-src.tar.xz</tt></li>
+  <li>a .hint file, named  <tt>package-version-release.hint</tt></li>
+</ul>
+
+<p>
+e.g.:
+</p>
+
+<pre>
+bash$ ls -1 release/boffo
+boffo-1.0-1.tar.xz
+boffo-1.0-1-src.tar.xz
+boffo-1.0-1.hint
+</pre>
+
+<p>Binary tar files generally contain the executable files that will be
+  installed on a user's system plus any auxiliary files needed by the
+  package. See the <a href="#package_contents">package contents</a> section
+  below for more details on the contents of a binary tar file.
+</p>
+
+<p>Source tar files should contain the source files, patches and scripts needed
+  to rebuild the package. While installing these files is optional, the
+  inclusion of a source tar file is part of the totality that makes up a Cygwin
+  package and so, these files are <em>not</em> optional. In some cases, there
+  may be multiple packages generated from the same source; for instance, one
+  might have a "boffo" package and its associated shared library in "libboffo7",
+  where both are generated from the same source tar file. See
+  the <a href="#package_contents">package contents</a> section below for more
+  details on the contents of a source tar file, and
+  the <a href="packaging-hint-files.html#advanced_pvr.hint">package-version-release.hint</a>
+  section for information on the "external-source:" option.
+</p>
+
+<p>
+  Note that package files may be .bz2, .gzip or .xz compressed.  .gzip is
+  deprecated and .xz is preferred for new package submissions.
+</p>
+
+<p>
+  The version and release <b>must</b> start with a digit.
+  The release <b>must not</b> contain a hyphen.
+</p>
+
+<p>
+  Version and release sort according to the following rules:
+  <ul>
+    <li>Contiguous chunks of digits or non-digits are compared</li>
+    <li>Non-digit chunks sort before digit chunks</li>
+    <li>Digit chunks sort numerically and non-digit chunks sort lexicographically</li>
+    <li>If all chunks are equal, the string with any suffix remaining is the greater</li>
+  </ul>
+</p>
+
+<p>
+  A package with a higher version is greater, regardless of the release.  When
+  two packages have an identical version, the one with the higher release is
+  greater.
+</p>
+
+<h2><a id="package_contents">Package contents</a></h2>
+<p>
+  The files paths within both the source and the binary package files are quite
+  important. Since setup extracts into a predetermined directory, you must
+  structure your package contents accordingly.
+</p>
+<p>
+  The following requirements avoid problems that have occured in the past with
+  packages. Thus only skip them if you *know* your package will not recreate
+  that prior problem.
+</p>
+<ul class="spaced">
+  <li>
+    Binary packages are extracted in /, include all file paths from the root in
+    your archive, e.g.:
+<pre>
+usr/bin/boffo.exe
+usr/share/boffo/boffo.dat
+etc...
+</pre>
+  </li>
+  <li>
+    The package is configured using (at a minimum) the following paths:
+<pre>
+--prefix=/usr
+--sysconfdir=/etc
+--libexecdir=/usr/lib
+--localstatedir=/var
+--datadir=/usr/share
+--mandir=/usr/share/man
+--infodir=/usr/share/info
+</pre>
+  </li>
+  <li>All executables in your binary package are stripped.</li>
+  <li>Source packages are extracted in /usr/src (so the paths in your source tar
+  file should not include /usr/src). On extraction, the tar file should put the
+  sources in a directory with the same name as the package tar file minus the
+  -src.tar.xz part:
+<pre>
+boffo-1.0-1/boffo.cygport
+boffo-1.0-1/boffo-1.0.tar.xz
+boffo-1.0-1/boffo-1.0-1.src.patch
+etc...
+</pre>
+  <p>Generally, this will contain the original source tar file, exactly as
+     downloaded from the original upstream, any needed patch files, and a
+     cygport script that drives the packaging process.</p>
+  </li>
+  <li>In your binary package, you may choose to include a file
+    /usr/share/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the
+    information needed for an end user to recreate the package. This includes
+    CFLAGS settings, configure parameters, etc.  (You can
+    adapt <a href="https://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-readme?view=co">this
+    generic README</a>.)
+  </li>
+  <li>In your binary package include a directory /usr/share/doc/foo/ that
+  includes any binary-relevant upstream documentation, such as ChangeLogs,
+  copyright licences, READMEs etc. </li>
+  <li>If you are not creating your package from an installed virtual root, be
+  sure to check that the file permissions are appropriate. </li>
+  <li>If the package has any global settings (i.e. in files in /etc) that are
+  not overrideable on a per user basis (sshd, as a daemon, is an example of
+  this) do not include the relevant config files in your package. Instead
+  install the files into /etc/defaults and include in your post-install script
+  to install the settings files. Be sure that if you would overwrite an already
+  present file that the user is offered the choice of keeping their own or
+  overwriting with your defaults. </li>
+  <li>Ensure that your package handles being installed on binary and text mounts
+  correctly. </li>
+</ul>
+
+<h2><a id="postinstall">Creating a package postinstall script</a></h2>
+<p>
+  If your package requires certain commands to be executed after the files in
+  the package are installed, include them in a file in the package called
+  /etc/postinstall/<var>package</var>.sh or
+  /etc/postinstall/<var>package</var>.bat.
+</p>
+<p>
+  If the file's name ends in ".sh", it is executed with the Cygwin shell; if it
+  ends in ".bat", it is executed with the DOS command interpreter. If it doesn't
+  end with either of these suffixes, it is ignored.
+</p>
+<p>
+  After the script has been successfully run it is renamed by appending the
+  suffix ".done" to its previous name, to prevent it from being run again the
+  next time the user runs the setup program.
+</p>
+<p>
+  Note that the setup program runs all the postinstall scripts after all desired
+  packages have been installed, that is, it does not run each package's
+  postinstall script immediately after installing that package. Note,
+  furthermore, that the order in which the scripts are run is not
+  guaranteed. Therefore, if your package depends on others which have their own
+  postinstall scripts, you cannot assume in your script that the other packages'
+  scripts have already been run.
+</p>
+
+</div>
+</body>
+</html>

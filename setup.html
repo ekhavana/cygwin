@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=us-ascii" />
     <link rel="stylesheet" type="text/css" href="style.css" />
-    <title>Cygwin Package Contribution</title>
+    <title>Cygwin Package Contributor's Guide</title>
   </head>
 
 <body>
@@ -12,547 +12,50 @@
 <h1>Cygwin Package Contributor's Guide</h1>
 
 <p>This document is intended for people who upload packages to sourceware.org,
-  to be made available through the standard Cygwin setup program. This documents
-  the syntax of the .hint file, the layout required for packages, and the
-  related policies to ensure good behaviour from the setup program.
-</p>
-
-<p>Setup has it's
-  own <a href="https://sourceware.org/cygwin-apps/setup.html">homepage</a>. If
-  you are interested in adding features to setup, you should consult the setup
-  homepage.
+  to be made available through the standard Cygwin setup program.
 </p>
 
 <p>
+  The <tt>cygwin-apps</tt> mailing list is the correct place to discuss any
+  package creation or maintenance issues. It is not a place for end user bug
+  reports - direct those to the <tt>cygwin</tt> mailing list instead.
+</p>
+
+<h2>See also</h2>
+<ul class="spaced">
+  <li>More information about <a href="packaging-package-files.html">Cygwin
+  package files</a></li>
+  <li>More information about <a href="packaging-hint-files.html">.hint
+  files</a></li>
+  <li>Setup has it's
+  own <a href="https://sourceware.org/cygwin-apps/setup.html">homepage</a>. If
+  you are interested in adding features to setup, you should consult the setup
+  homepage.
+  </li>
+  <li>
   If you are interested in creating a local mirror, with or without custom
   Cygwin packages, see
   the <a href="https://sourceware.org/cygwin-apps/package-server.html">package
   server</a> page.
-</p>
+  </li>
+</ul>
 
-<p>The <tt>cygwin-apps</tt> mailing list is the correct place to discuss any package creation or maintenance issues. It is not a place for end user bug reports - direct those to the <tt>cygwin</tt> mailing list instead.</p>
 <h2>Contents</h2>
 <ul class="spaced">
-  <li><a href="#naming">Package file naming scheme</a></li>
-  <li><a href="#pvr.hint">package-version-release.hint file</a></li>
-  <li><a href="#package_contents">Package contents</a></li>
   <li><a href="#making_srcpackage">Making a package with cygport</a></li>
-  <li><a href="#postinstall">Creating a package postinstall script</a></li>
   <li><a href="#submitting">Submitting a package</a></li>
   <li><a href="#acceptance">Uploading an accepted package</a></li>
   <li><a href="#updating">Updating a package</a></li>
 </ul>
-<h2><a id="naming">Package file naming scheme</a></h2>
-<p>
-  Use the upstream's version plus a release suffix (i.e. findutils 4.5.12
-  becomes 4.5.12-1, 4.5.12-2, etc., until findutils 4.5.13 is packaged, which
-  would be 4.5.13-1, etc). Some packages also use a YYYYMMDD format for their
-  versions, e.g. terminfo-5.9-20140524-1.tar.xz. The first release of a package
-  should have a -1 release suffix.
-</p>
-
-<p>A complete package currently consists of three files:</p>
-<ul>
-  <li>a binary tar file, named <tt>package-version-release.tar.xz</tt></li>
-  <li>a source tar file, named <tt>package-version-release-src.tar.xz</tt></li>
-  <li>a .hint file, named  <tt>package-version-release.hint</tt></li>
-</ul>
-
-<p>
-e.g.:
-</p>
-
-<pre>
-bash$ ls -1 release/boffo
-boffo-1.0-1.tar.xz
-boffo-1.0-1-src.tar.xz
-boffo-1.0-1.hint
-</pre>
-
-<p>Binary tar files generally contain the executable files that will be
-  installed on a user's system plus any auxiliary files needed by the
-  package. See the <a href="#package_contents">package contents</a> section
-  below for more details on the contents of a binary tar file.
-</p>
-
-<p>Source tar files should contain the source files, patches and scripts needed
-  to rebuild the package. While installing these files is optional, the
-  inclusion of a source tar file is part of the totality that makes up a Cygwin
-  package and so, these files are <em>not</em> optional. In some cases, there
-  may be multiple packages generated from the same source; for instance, one
-  might have a "boffo" package and its associated shared library in "libboffo7",
-  where both are generated from the same source tar file. See
-  the <a href="#package_contents">package contents</a> section below for more
-  details on the contents of a source tar file, and
-  the <a href="#advanced_pvr.hint">package-version-release.hint</a> section for information on the
-  "external-source:" option.
-</p>
-
-<p>
-  Note that package files may be .bz2, .gzip or .xz compressed.  .gzip is
-  deprecated and .xz is preferred for new package submissions.
-</p>
-
-<p>
-  The version and release <b>must</b> start with a digit.
-  The release <b>must not</b> contain a hyphen.
-</p>
-
-<p>
-  Version and release sort according to the following rules:
-  <ul>
-    <li>Contiguous chunks of digits or non-digits are compared</li>
-    <li>Non-digit chunks sort before digit chunks</li>
-    <li>Digit chunks sort numerically and non-digit chunks sort lexicographically</li>
-    <li>If all chunks are equal, the string with any suffix remaining is the greater</li>
-  </ul>
-</p>
-
-<p>
-  A package with a higher version is greater, regardless of the release.  When
-  two packages have an identical version, the one with the higher release is
-  greater.
-</p>
-
-<h2><a id="pvr.hint"><tt>package-version-release.hint</tt> file</a></h2>
-<p>Each package must be submitted with a file
-called <tt>package-version-release.hint</tt>. This file is used for information
-that cannot be inferred just from the context of the file name or package
-name. Lines in <tt>package-version-release.hint</tt> will consist of one of the
-following:</p>
-<pre>
-# <i>comment</i>
-sdesc: <i>"some text"</i>
-ldesc: <i>"some text"</i>
-skip:
-category: <i>name1[ name2...]</i>
-requires: <i>package[ package...]</i>
-external-source: <i>package</i>
-message: <i>id</i> <i>"some text"</i>
-</pre>
-<p align="center">
-  <b>Note: Not all of the above lines are required. Please read the description
-  below for further details on how to construct a package-version-release.hint
-  file.</b>
-</p>
-
-<ul>
-  <li>
-    <p>Use UTF-8 character encoding.</p>
-  </li>
-
-  <li>
-    <p>Lines that begin with '#' are comments and are ignored.</p>
-  </li>
-
-  <li>
-    <p>
-      The <tt>skip</tt> line indicates that that package should not appear in
-      setup. It is intended for directories that exist in the hierarchy that
-      should not be considered.
-    </p>
-
-    <p>
-      This is not required, as it is only useful for indicating directories
-      which contain source-only packages, which are automatically recognized,
-      irrespective of 'skip'.
-    </p>
-  </li>
-
-  <li>
-    <p>
-      <tt>sdesc</tt> is a one line description of the package, enclosed in
-      double-quotes.  This is the information that will be displayed when
-      installing packages via setup.
-    </p>
-
-    <p>
-      Please note that the package name should <em>not</em> be part of the
-      description, e.g. this is incorrect:
-    </p>
-
-<pre>
-sdesc:      "boffo: A whackamole simulation in ASCII art"
-</pre>
-
-    <p>
-      This is correct:
-    </p>
-
-<pre>
-sdesc:      "A whackamole simulation in ASCII art"
-</pre>
-
-    <p>
-      <tt>sdesc</tt> is a mandatory line.
-    </p>
-  </li>
-
-  <li>
-    <p>
-      <tt>ldesc</tt> is a more descriptive, multi-line description of the
-      package, enclosed in double-quotes.  It is intended for future use. e.g.:
-    </p>
-
-<pre>
-ldesc:    "A whackamole simulation in ASCII art.
-Intended for use on VT100 terminals at BAUD rates 1200 and
-above.  Uses arrow keys for positioning over moles.  Space
-bar whacks the mole.
-No actual moles will be harmed during execution of this game."
-</pre>
-
-    <p>
-      Note that there is currently no method for escaping double-quotes, so
-       there is no way to represent a double-quote embedded in
-       the <tt>ldesc</tt>.
-    </p>
-
-  </li>
-
-  <li>
-    <p>
-      The <tt>category</tt> line indicates the categories that this package
-      belongs to. One package can belong to multiple categories. Multiple
-      categories are separated by spaces.
-    </p>
-
-    <p>
-      Do not enclose multiple category names within quotation marks.
-    </p>
-
-    <a id="categories"/>
-    <p>
-      Please do not invent a new category without checking with the cygwin-apps
-      mailing list first. At the time of writing, the current categories are:
-    </p>
-
-    <div id="category-list">
-      <p>Accessibility</p>
-      <p>Admin</p>
-      <p>Archive</p>
-      <p>Audio</p>
-      <p>Base</p>
-      <p>Comm</p>
-      <p>Database</p>
-      <p>Devel</p>
-      <p>Doc</p>
-      <p>Editors</p>
-      <p>Games</p>
-      <p>GNOME</p>
-      <p>Graphics</p>
-      <p>Interpreters</p>
-      <p>KDE</p>
-      <p>Libs</p>
-      <p>Lua</p>
-      <p>LXDE</p>
-      <p>Mail</p>
-      <p>MATE</p>
-      <p>Math</p>
-      <p>Mingw</p>
-      <p>Net</p>
-      <p>Ocaml</p>
-      <p>Office</p>
-      <p>Perl</p>
-      <p>PHP</p>
-      <p>Publishing</p>
-      <p>Python</p>
-      <p>Ruby</p>
-      <p>Scheme</p>
-      <p>Science</p>
-      <p>Shells</p>
-      <p>Sugar</p>
-      <p>System</p>
-      <p>Tcl</p>
-      <p>Text</p>
-      <p>Utils</p>
-      <p>video</p>
-      <p>Web</p>
-      <p>X11</p>
-      <p>Xfce</p>
-    </div>
-
-    <p>
-      As you can see, currently, all categories consist of only a single
-      word. We don't anticipate that this will change anytime soon.
-    </p>
-
-    <p>
-      <tt>category</tt> is a mandatory line.
-    </p>
-  </li>
-
-  <li>
-    <p>
-      The <tt>requires</tt> line indicates the packages that this package relies
-      on. If your package is dependent on a file provided by another package
-      that other package should be included here. The requires field may be
-      missing or empty if your package truly does not require any other package.
-    </p>
-
-    <p>
-      A package can rely on multiple other packages. Hierarchical dependencies
-      should work correctly, however, it is best to always include specific
-      dependencies, i.e. don't drop '<tt>bar</tt>' from your dependency list if
-      your package requires it, even if you are including '<tt>foo</tt>' which
-      relies on '<tt>bar</tt>'.
-    </p>
-
-    <p>
-      Conversely, do not include package dependencies of <em>dependent</em>
-      packages in your dependency list. If you think that another package has an
-      incorrect dependency list, send email to cygwin-apps noting that fact.
-    </p>
-
-    <p>
-      Multiple packages are separated by spaces. Do not enclose multiple package
-      names within quotation marks.
-    </p>
-  </li>
-  <li>
-    <p>
-      The <tt>message</tt> line indicates text that will be displayed by the
-      setup program when the package is installed.
-    </p>
-    <p>
-      This should be used <i>extremely</i> sparingly, for example, if a 3rd
-      party driver or service needs to be installed in Windows for the package
-      to function.
-    </p>
-    <p>
-      The id used should be derived from the package name. Currently, the text
-      for a given id will be shown by setup exactly once, when the package is
-      first installed, even if the text subsequently changes.
-    </p>
-  </li>
-</ul>
-<p>Here's an example of a complete <i>release/boffo/boffo-1.0-1.hint</i>:</p>
-<pre>
-category: Games Text
-requires: libncurses6 cygwin
-sdesc:    "A whackamole simulation in ASCII art"
-ldesc:    "A whackamole simulation in ASCII art.
-Intended for use on VT100 terminals at BAUD rates 1200 and
-above.  Uses arrow keys for positioning over moles.  Space
-bar whacks the mole.
-No actual moles will be harmed during execution of this game."
-</pre>
-
-<h2><a id="advanced_pvr.hint"><tt>package-version-release.hint</tt> file (Advanced Options)</a></h2>
-<p>The <tt>external-source</tt> line is used when multiple installation packages are generated from a single source package. For example, suppose the <tt>boffo</tt> package contains the executables and documentation for boffo, but there is also a shared library <tt>cygboffo-7.dll</tt> that might be used by other packages; say, the <tt>fobbo</tt> program. It would be nice to separate that <tt>cygboffo-7.dll</tt> shared library into a second installation package, so that users of the <tt>fobbo</tt> program can install <em>just</em> the library, and not the entire <tt>boffo</tt> package. However, all of the <tt>boffo</tt> executables and the DLL are generated from the same source. To support this usage, the <tt>boffo</tt> maintainer would create three package files:</p>
-<ul>
-  <li><tt>boffo-2.4.1-2.tar.xz</tt>: an installable package that contains all of the normal contents of <tt>boffo</tt> -- except for the shared library.</li>
-  <li><tt>libboffo7-2.4.1-2.tar.xz</tt>: an installable package that contains only the shared library from <tt>boffo</tt></li>
-  <li><tt>boffo-2.4.1-2-src.tar.xz</tt>: the source package for boffo.</li>
-</ul>
-<p>
-  <tt>boffo-2.4.1-2.tar.xz</tt>, <tt>boffo-2.4.1-2-src.tar.xz</tt>, and <tt>boffo-2.4.1-2.hint</tt> would go into the <tt>release/boffo/</tt> subdirectory.
-  <tt>libboffo7-2.4.1-2.tar.xz</tt>, and <tt>libboffo7-2.4.1-2.hint</tt> would go into a separate subdirectory, such as <tt>release/boffo/libboffo7/</tt>.
-  The two <tt>.hint</tt> files would look something like this:</p>
-<center>
-  <table border="2">
-    <tr>
-      <td>
-	<center>
-	  <tt>boffo-2.4.1-2.hint</tt>
-	</center>
-      </td>
-      <td>
-	<center>
-	  <tt>libboffo7-2.4.1-2.hint</tt>
-	</center>
-      </td>
-    </tr>
-    <tr>
-      <td><tt>category: Games Text<br />
-       requires: libboffo7 libncurses6 cygwin<br />
-       sdesc: "A whackamole simulation in ASCII art"<br />
-       ldesc: "A whackamole simulation in ASCII art. Intended for use on VT100 terminals at BAUD rates 1200 and above. Uses arrow keys for positioning over moles. Space bar whacks the mole.<br />
-       <br />
-       No actual moles will be harmed during execution of this game."</tt>
-       </td>
-      <td><tt>category: Games Text<br />
-       requires: cygwin<br />
-       <b>external-source: boffo</b><br />
-       sdesc: "Runtime library for a whackamole simulation in ASCII art"<br />
-       ldesc: "A whackamole simulation in ASCII art. Intended for use on VT100 terminals at BAUD rates 1200 and above. Uses arrow keys for positioning over moles. Space bar whacks the mole.<br />
-       <br />
-       No actual moles will be harmed during execution of this game."</tt>
-       </td>
-    </tr>
-  </table>
-</center>
-<p>The setup.ini generated from these .hint files will include these lines (only relevant lines shown):</p>
-<pre>
-@ boffo
-requires: libboffo7 libncurses6 cygwin
-version: 2.4.1-2
-install: release/boffo/boffo-2.4.1-2.tar.xz
-source: release/boffo/boffo-2.4.1-2-src.tar.xz
-@ libboffo7
-requires: cygwin
-version: 2.4.1-2
-install: release/boffo/libboffo7/libboffo7-2.4.1-2.tar.xz
-source: release/boffo/boffo-2.4.1-2-src.tar.xz
-</pre>
-
-<p>
-  Note that both packages point to the same source tar file. Also, it is required
-  that the versions match (libboffo7-5.2 can't point to boffo-1.4-src). The same
-  logic is used to "match up" prev: and test: versions with their external
-  sources.
-</p>
-
-<h2><a id="override.hint"><tt>override.hint</tt> file</a></h2>
-
-<p>
-  An <tt>override.hint</tt> file</a> may exist, for information not associated
-  with a specific <i>version-release</i>.
-</p>
-
-<pre>
-# <i>comment</i>
-curr: <i>version</i>
-prev: <i>version</i>
-test: <i>version</i>
-</pre>
-
-<ul>
-  <li>
-    <p>Lines that begin with '#' are comments and are ignored.</p>
-  </li>
-
-  <li>
-    <p>
-      The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate which
-      versions of that package should be used. Use these settings <em>only</em>
-      if you need to circumvent the normal version ordering.
-    </p>
-
-    <p>
-      By default, the highest version-release number is used for the current
-      version of a package; the next highest (if any) is used for the previous
-      version.
-    </p>
-
-    <p>
-      Use of <tt>curr</tt> and <tt>prev</tt> is usually not required, given this
-      version ordering. So, e.g. if you had previously
-      released <tt>boffo-0.9-1</tt> and now have a new <tt>boffo-1.0-1</tt>, the
-      version ordering matches the default and there is no need to
-      use <tt>curr</tt> or <tt>prev</tt>, as <tt>1.0-1</tt> is greater
-      than <tt>0.9-1</tt>.
-    </p>
-
-    <p>
-      However, if you had discovered a serious error in the <tt>boffo-1.0</tt>
-      release, and then decided that you want to drop back
-      to <tt>boffo-0.9-1</tt>, you could include entries like this:
-    </p>
-
-<pre>
-prev: 1.0-1
-curr: 0.9-1
-</pre>
-
-    <p>
-      This usage should be rare, however.
-    </p>
-
-    <p>
-      In general, you should trust setup to "do the right thing" -- with one
-      exception. If you decide that you need to release a <i>test</i> version of
-      your package, there is no way for setup to know that.
-    </p>
-
-    <p>
-      So, you will have to put something like "<tt>test: 1.9-1</tt>". This will
-      cause setup to characterize the 1.9-1 version as a "test" package. With
-      the current setup implementation, it will also mean that it will be
-      overlooked by most people during installation. So, unless you have made
-      arrangements to advertise your test release, this option should be used
-      sparingly.
-    </p>
-
-    <p>
-      Setup is currently unable to list more than three versions of each
-      package. Therefore you should not keep more than three versions of each
-      package around: The current version, the previous stable version, and,
-      optionally, one test version. By keeping a previous stable version around,
-      you isolate yourself (somewhat) from problems with partial mirrors. When
-      you add a new "current" version, you can either keep the old "previous"
-      version, or make the old current version the new previous version,
-      depending on how stable they each were.
-    </p>
-
-    <p>
-      It is not required that your package have a <tt>test</tt> version. Use of
-      a <tt>test</tt> version of a package is at the discretion of the package
-      maintainer.
-    </p>
-  </li>
-</ul>
-
-<h2><a id="setup.hint"><tt>setup.hint</tt> file</a></h2>
-
-<p>
-  A <tt>setup.hint</tt> which acts as a <tt>package-version-release.hint</tt>
-  for all <i>version-release</i> and as a <tt>override.hint</tt> is also
-  supported, for backwards compatibility.
-</p>
-
-<h2><a id="package_contents">Package contents</a></h2>
-<p>The files paths within both the source and the binary package files are quite important. Since setup extracts into a predetermined directory, you must structure your package contents accordingly.</p>
-<p>The following requirements avoid problems that have occured in the past with packages. Thus only skip them if you *know* your package will not recreate that prior problem.</p>
-<ul class="spaced">
-  <li>
-    Binary packages are extracted in /, include all file paths from the root in your archive, e.g.:
-<pre>
-usr/bin/boffo.exe
-usr/share/boffo/boffo.dat
-etc...
-</pre>
-  </li>
-  <li>
-    The package is configured using (at a minimum) the following paths:
-<pre>
---prefix=/usr
---sysconfdir=/etc
---libexecdir=/usr/lib
---localstatedir=/var
---datadir=/usr/share
---mandir=/usr/share/man
---infodir=/usr/share/info
-</pre>
-  </li>
-  <li>All executables in your binary package are stripped.  </li>
-  <li>Source packages are extracted in /usr/src (so the paths in your source tar file should not include /usr/src). On extraction, the tar file should put the sources in a directory with the same name as the package tar file minus the -src.tar.xz part:
-<pre>
-boffo-1.0-1/boffo.cygport
-boffo-1.0-1/boffo-1.0.tar.xz
-boffo-1.0-1/boffo-1.0-1.src.patch
-etc...
-</pre>
-  <p>Generally, this will contain the original source tar file, exactly as downloaded from the original upstream, any needed patch files, and a
-     cygport script that drives the packaging process.</p>
-  </li>
-  <li>In your binary package, you may choose to include a file /usr/share/doc/Cygwin/foo-vendor-suffix.README containing (at a minimum) the information needed for an end user to recreate the package. This includes CFLAGS settings, configure parameters, etc.
-    (You can adapt <a href="https://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-readme?view=co">this generic README</a>.)
-  </li>
-  <li>In your binary package include a directory /usr/share/doc/foo/ that includes any binary-relevant upstream documentation, such as ChangeLogs, copyright licences, READMEs etc. </li>
-  <li>If you are not creating your package from an installed virtual root, be sure to check that the file permissions are appropriate. </li>
-  <li>If the package has any global settings (i.e. in files in /etc) that are not overrideable on a per user basis (sshd, as a daemon, is an example of this) do not include the relevant config files in your package. Instead install the files into /etc/defaults and include in your post-install script to install the settings files. Be sure that if you would overwrite an already present file that the user is offered the choice of keeping their own or overwriting with your defaults. </li>
-  <li>Ensure that your package handles being installed on binary and text mounts correctly. </li>
-</ul>
-
-<p>While older packages exist which satisfy these requirements by hand, the
-only accepted way to make a new Cygwin package is using the cygport tool, which
-automatically handles most of the above issues for you.  It is also
-strongly recommended to convert existing packages to cygport when
-updating them; ask on the <tt>cygwin-apps</tt> list if you need help
-converting an existing package to use cygport.</p>
 
 <h2><a id="making_srcpackage">Making a package with cygport</a></h2>
+
+<p>While older, hand-made packages exist, the only accepted way to make a new
+Cygwin package is using the cygport tool, which automatically handles most
+packaging requirements and issues for you.  It is also strongly recommended to
+convert existing packages to cygport when updating them; ask on
+the <tt>cygwin-apps</tt> list if you need help converting an existing package to
+use cygport.</p>
 
 <p>The <tt>cygport</tt> framework improves
 on <a href="setup-packaging-historical.html">previous Cygwin build scripts</a>, and
@@ -598,11 +101,6 @@ PATCH_URI="boffo-1.0-fix-whatever.patch"
 <a href="https://cygwinports.github.io/cygport/toc_index.html">reference manual</a>
 and sample .cygport files.</p>
 
-<h2><a id="postinstall">Creating a package postinstall script</a></h2>
-<p>If your package requires certain commands to be executed after the files in the package are installed, include them in a file in the package called /etc/postinstall/<var>package</var>.sh or /etc/postinstall/<var>package</var>.bat.</p>
-<p>If the file's name ends in ".sh", it is executed with the Cygwin shell; if it ends in ".bat", it is executed with the DOS command interpreter. If it doesn't end with either of these suffixes, it is ignored.</p>
-<p>After the script has been successfully run it is renamed by appending the suffix ".done" to its previous name, to prevent it from being run again the next time the user runs the setup program.</p>
-<p>Note that the setup program runs all the postinstall scripts after all desired packages have been installed, that is, it does not run each package's postinstall script immediately after installing that package. Note, furthermore, that the order in which the scripts are run is not guaranteed. Therefore, if your package depends on others which have their own postinstall scripts, you cannot assume in your script that the other packages' scripts have already been run.</p>
 <h2><a id="submitting">Submitting a new package</a></h2>
 <p>So you've got a package you want to submit. Follow the following checklist before emailing the <tt>cygwin-apps</tt> mailing list and you'll almost certainly save time.</p>
 <ol>
@@ -619,10 +117,10 @@ and sample .cygport files.</p>
     </ul>
   </li>
   <li>
-    In order to create a good <tt>.hint</tt> file do read and follow the documentation in the <a href="#pvr.hint">specific section</a> of this very web page.<br />
+    In order to create a good <tt>.hint</tt> file do read and follow <a href="packaging-hint-files.html#pvr.hint">the documentation</a>.<br />
     A few things to take extra care to:<br />
     <ul>
-      <li>In order to select an appropriate a correct <tt>Category</tt> you can look in the Debian package list and identify the section that your package is present in there - if it's available via Debian. If it's not, have a look and take a sensible guess. Use <a href="#categories">existing categories</a> if at all possible.</li>
+      <li>In order to select an appropriate a correct <tt>Category</tt> you can look in the Debian package list and identify the section that your package is present in there - if it's available via Debian. If it's not, have a look and take a sensible guess. Use <a href="packaging-hint-files.html#categories">existing categories</a> if at all possible.</li>
       <li>Do not use the package name in <tt>sdesc</tt>, as it is added automatically by the setup program.</li>
       <li>Opinion on whether to mark your initial version as a <tt>Test</tt> version is currently mixed. If you have doubts about the stability of your initial offering you may decide to mark it as <tt>Test</tt>. Then, once the package has no major bug reports from users, a current package may be introduced. Otherwise, it is perfectly acceptable to forgo the <tt>Test</tt> designation in your first release.</li>
     </ul>
@@ -666,7 +164,7 @@ and sample .cygport files.</p>
    Once sent, your message will be reviewed by one of the cygwin-announce moderators and, once approved, will be automatically forwarded to the cygwin mailing list with an [ANNOUNCEMENT] prepended to the subject.</li>
 </ol>
 <p>NOTE: On any major version upgrade, you may want to mark the release as <tt>Test</tt>.</p>
-<h2><a id="announcement">Example announcement</a></h2>
+<h3><a id="announcement">Example announcement</a></h3>
 <br>
 <table border="1">
   <tr>
