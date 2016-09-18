@@ -80,7 +80,8 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 </head><body>'
     cat ../navbar.html
-    cat ../top.html # opens <div>
+    echo '<div id="main">'
+    cat ../top.html
     echo '<h1>Cygwin Package Search</h1>
 <form method="GET" action="//cygwin.com/cgi-bin2/package-grep-sh.cgi">
 Search package contents for a <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a> pattern,

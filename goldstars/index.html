@@ -9,6 +9,7 @@
 
 <body>
 <!--#include virtual="../navbar.html" -->
+<div id="main">
 <!--#include virtual="../top.html" -->
 <h1>Cygwin Gold Star Awards</h1>
 <p>
