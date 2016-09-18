@@ -1,9 +1,7 @@
 Redirect /faq.faq.html https://cygwin.com/faq/faq.html
-<Files setup.exe>
+
+# https://cygwin.com/ml/cygwin/2010-02/msg00149.html
+<FilesMatch "^setup-(x86|x86_64)\.exe(|.sig)$">
     ExpiresActive On
     ExpiresDefault "now"
-</Files>
-<Files setup-legacy.exe>
-    ExpiresActive On
-    ExpiresDefault "now"
-</Files>
+</FilesMatch>
