@@ -15,7 +15,7 @@
 <ul class="spaced">
   <li><a href="#naming">Package file naming scheme</a></li>
   <li><a href="#package_contents">Package contents</a></li>
-  <li><a href="#postinstall">Creating a package postinstall script</a></li>
+  <li><a href="#postinstall">Package post-install and pre-remove scripts</a></li>
 </ul>
 
 <h2><a id="naming">Package file naming scheme</a></h2>
@@ -156,31 +156,73 @@ etc...
   correctly. </li>
 </ul>
 
-<h2><a id="postinstall">Creating a package postinstall script</a></h2>
+<h2><a id="postinstall">Package post-install and pre-remove scripts</a></h2>
+<h3>Post-install scripts</h3>
 <p>
   If your package requires certain commands to be executed after the files in
   the package are installed, include them in a file in the package called
-  /etc/postinstall/<var>package</var>.sh or
-  /etc/postinstall/<var>package</var>.bat.
+  /etc/postinstall/<var>&lt;package&gt;</var>.<var>&lt;suffix&gt;</var>.
 </p>
 <p>
-  If the file's name ends in ".sh", it is executed with the Cygwin shell; if it
-  ends in ".bat", it is executed with the DOS command interpreter. If it doesn't
-  end with either of these suffixes, it is ignored.
+  The file is executed with the Cygwin bash shell if <var>suffix</var> is ".sh";
+  with the Cygwin dash shell if <var>suffix</var> is ".dash"; and with the
+  Windows cmd.exe command interpreter if <var>suffix</var> is ".bat" or ".cmd".
+  If <var>suffix</var> is unknown, the file is ignored.
 </p>
 <p>
-  After the script has been successfully run it is renamed by appending the
+  After the script has been successfully run, it is renamed by appending the
   suffix ".done" to its previous name, to prevent it from being run again the
   next time the user runs the setup program.
 </p>
 <p>
-  Note that the setup program runs all the postinstall scripts after all desired
-  packages have been installed, that is, it does not run each package's
-  postinstall script immediately after installing that package. Note,
+  Note that the setup program runs all the post-install scripts after all
+  desired packages have been installed, that is, it does not run each package's
+  post-install script immediately after installing that package. Note,
   furthermore, that the order in which the scripts are run is not
   guaranteed. Therefore, if your package depends on others which have their own
-  postinstall scripts, you cannot assume in your script that the other packages'
-  scripts have already been run.
+  post-install scripts, you cannot assume in your script that the other
+  packages' scripts have already been run.
+</p>
+
+<h3>Pre-remove scripts</h3>
+<p>
+  If your package requires certain commands to be executed before the files in
+  the package are removed, include them in a file in the package called
+  /etc/preremove/<var>&lt;package&gt;</var>.<var>&lt;suffix&gt;</var>.
+</p>
+<p>
+  Note that the setup program runs all the pre-remove scripts before any
+  packages have been uninstalled.  Note that when upgrading a package, the
+  pre-remove script for the currently installed version will be run before it is
+  removed, then the post-install script for the upgraded version will be run
+  after it is installed.
+</p>
+
+<h3>Perpetual post-install scripts</h3>
+<p>
+  In addition to the ordinary ("run-once") post-install scripts described above,
+  the setup program supports "perpetual" post-install scripts.  These are run on
+  every invocation of setup, as long as the package is still installed.
+  Perpetual post-install scripts are distinguished from run-once scripts by
+  having names that start with "0p_" or "zp_".  Those that start with "0p_" are
+  run before the run-once scripts, and those that start with "zp_" are run after
+  the run-once scripts.  Examples include
+  <tt>0p_000_autorebase.dash</tt> (provided by the <tt>_autorebase</tt> package)
+  and <tt>0p_update-info-dir.dash</tt> (provided by the <tt>info</tt> package).
+</p>
+<p>
+  For those package maintainers wanting to employ perpetual scripts, the first
+  thing to keep in mind is to only use this feature for things that really can't
+  be done with run-once scripting.  Any perpetual script should minimize the
+  resources used (use dash instead of bash for instance) and exit at the
+  earliest possible moment if no action is required.  Scripts of type "0p_" must
+  be able to run with the Base packages installed but the post-install scripts
+  not yet executed; in practical terms that rules out using bash scripts.  This
+  limitation does not apply to scripts of type "zp_".
+</p>
+<p>
+  See <a href="https://cygwin.com/ml/cygwin-apps/2014-12/msg00148.html">this
+  mailing list post</a> for more discussion and current limitations.
 </p>
 
 </div>
