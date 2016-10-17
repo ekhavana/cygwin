@@ -17,8 +17,8 @@ use FindBin qw($Bin);
 print $html->header, $html->start_html(-title=>'Cygwin Package Listing',
 				       -dtd=>['-//W3C//DTD XHTML 1.0 Strict//EN', 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd'],
 				       -style=>'../style.css');
-include_virtual "../navbar.html"
-print '<div id="main">'
+include_virtual "../navbar.html";
+print '<div id="main">';
 include_virtual "../top.html";
 
 chdir("$Bin/../packages");
