@@ -64,7 +64,7 @@ param_grep_htmlencode=`htmlencode "$param_grep"`
 ############################## print headerstuff 
 
 if [ -n "$param_text" ]; then
-    echo "Content-Type: text/plain; charset=ISO-8859-1"
+    echo "Content-Type: text/plain; charset=utf-8"
     echo
 else
     echo "Content-Type: text/html"
@@ -77,7 +77,7 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 <head>
 <title>Cygwin Package Search</title>
 <link rel="stylesheet" type="text/css" href="../style.css" />
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 </head><body>'
     cat ../navbar.html
     echo '<div id="main">'
