@@ -27,7 +27,7 @@
   <h2>See also</h2>
   <b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
 </div>
-<ul class="spaced">
+<ul class="compact">
   <li>More information about <a href="packaging-package-files.html">Cygwin
   package files</a>.</li>
   <li>More information about <a href="packaging-hint-files.html">.hint
@@ -49,7 +49,7 @@
   <h2>Contents</h2>
   <b class="rbottom"><b class="r4"></b><b class="r3"></b><b class="r2"></b><b class="r1"></b></b>
 </div>
-<ul class="spaced">
+<ul class="compact">
   <li><a href="#making_srcpackage">Making a package with cygport</a></li>
   <li><a href="#submitting">Submitting a package</a></li>
   <li><a href="#acceptance">Uploading an accepted package</a></li>
@@ -120,14 +120,14 @@ and sample .cygport files.</p>
 </div>
 
 <p>So you've got a package you want to submit. Follow the following checklist before emailing the <tt>cygwin-apps</tt> mailing list, and you'll almost certainly save time.</p>
-<ol>
+<ul class="compact">
   <li><i>Do you have the time to maintain the package?</i><br />
    Packages without active maintainers are pulled from the distribution. Generally speaking the time commitment is relatively low, simply subscribe to the <tt>cygwin</tt> mailing list. We'd prefer if you read the non-digest mode since prompt response to packaging issues is a plus. When a <i>bug</i> in your package is reported in the cygwin mailing list, address the bug (if it's a Cygwin-only bug) or pass back to the upstream. When a solution exists, create and upload an updated package with the fix in it. Note that you are not expected to be a helpdesk for the package - the users should be pointed to the upstream's lists if you've determined that the bug is not a Cygwin-related bug.</li>
   <li>
     Propose on the <tt>cygwin-apps</tt> mailing list that you are interested in becoming a package maintainer for package "foo" using a subject like "[<a href="acronyms/#ITP">ITP</a>] foo 0.10".<br />
     Some packages cannot be distributed via Cygwin's setup due to upstream licence limitations. Other packages may not be appropriate for Cygwin. This step will save time if, for some reason, we cannot accept the package.<br />
     Submission rules:<br />
-    <ul>
+    <ul class="compact">
       <li><b>Include a complete <tt>.hint</tt> file as part of your proposal</b>. Include this file in the text of your message so that it can be commented on. Do not submit it as an attachment.</li>
       <li>If the new package is a well-known program already included in a major Linux distribution (e.g. Debian, Fedora, SuSE) please <b>include the URL</b> of the package page.  Note that "development", "test", and "unstable" packages are <b>not eligible</b> for this rule.</li>
       <li>If the package is not included in any major Linux distro it must receive <b>five positive votes</b> from other package maintainers in order to be accepted.</li>
@@ -137,7 +137,7 @@ and sample .cygport files.</p>
   <li>
     In order to create a good <tt>.hint</tt> file do read and follow <a href="packaging-hint-files.html#pvr.hint">the documentation</a>.<br />
     A few things to take extra care to:<br />
-    <ul>
+    <ul class="compact">
       <li>In order to select an appropriate a correct <tt>Category</tt> you can look in the Debian package list and identify the section that your package is present in there - if it's available via Debian. If it's not, have a look and take a sensible guess. Use <a href="packaging-hint-files.html#categories">existing categories</a> if at all possible.</li>
       <li>Do not use the package name in <tt>sdesc</tt>, as it is added automatically by the setup program.</li>
       <li>Opinion on whether to mark your initial version as a <tt>Test</tt> version is currently mixed. If you have doubts about the stability of your initial offering you may decide to mark it as <tt>Test</tt>. Then, once the package has no major bug reports from users, a current package may be introduced. Otherwise, it is perfectly acceptable to forgo the <tt>Test</tt> designation in your first release.</li>
@@ -146,7 +146,7 @@ and sample .cygport files.</p>
   <li>
     Place the package files in a web accessible http/ftp site somewhere. If at all possible the files should have a directory structure in order to get them all with a single command.<br />
     For example, if I am proposing "foo" and "libfoo", an upload site should look like:<br />
-    <ul>
+    <ul class="compact">
       <li><tt>myserver.com/whatever/x86/foo/foo-0.20.3-1.tar.xz</tt></li>
       <li><tt>myserver.com/whatever/x86/foo/foo-0.20.3-1-src.tar.xz</tt></li>
       <li><tt>myserver.com/whatever/x86/foo/foo-0.20.3-1.hint</tt></li>
@@ -157,7 +157,7 @@ and sample .cygport files.</p>
   <li>Announce on the <tt>cygwin-apps</tt> mailing list that you have the package ready for uploading. Provide the URLs of all package files in your mail.</li>
   <li>Each new package must in any case receive one <a href="acronyms/#GTG">GTG</a> vote from a package maintainer, meaning that an existing maintainer has downloaded the package, inspected the tar file contents, tested the applications, and rebuilt the package from the source tar file without incident. Once a successful package is produced, you become a maintainer yourself and can provide GTG reviews for others as well.</li>
 
-</ol>
+</ul>
 
 <div class="background">
   <b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>

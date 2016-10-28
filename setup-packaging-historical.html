@@ -20,7 +20,7 @@
 
 <p>There are two previous ways of packaging source code for Cygwin packages.</p>
 <h3>Method One</h3>
-<ul class="spaced">
+<ul class="compact">
   <li>
     Source packages are extracted underneath /usr/src (so your -src tarball should not include /usr/src). On extraction, the tar file should put the sources in a directory with the same name as the package tar ball minus the -src.tar.bz2 part:
 <pre>
@@ -77,17 +77,17 @@ boffo-1.0-1/CYGWIN-PATCHES/setup.hint
 </ul>
 <h3>Method Two</h3>
 <p>This method is sometimes referred to as the "g-b-s" method, after the filename of the <a href="https://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-build-script?view=co"><tt>generic-build-script</tt></a> template.</p>
-<ul class="spaced">
+<ul class="compact">
   <li>In a packaging technique inspired by rpms and debs, you may create a -src tarball which simply contains:
-    <ol>
+    <ul class="compact">
       <li><tt>foo-vendor.tar.[gz|bz2]</tt>: The original source tarball, exactly as downloaded from the original vendor.</li>
       <li><tt>foo-vendor-release.patch</tt>: the patch file as described in Method One, above.</li>
       <li><tt>foo-vendor-release.sh</tt>: A build script that drives the entire unpacking, configuration, build, and packaging (binary and -src) process.</li>
-    </ol>
+    </ul>
   </li>
   <li>You can adapt <a href="https://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-readme?view=co">this</a> generic readme file for script-driven -src packages.</li>
   <li><a href="https://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-build-script?view=co">Here</a> is an example build script which can be adapted for your package. By carefully modifying the details of this script, it can create the binary and -src packages for you, once you've finished porting your package. How? See the <b><i>Initial packaging procedure</i></b> below. But first, a few facts:
-    <ul>
+    <ul class="compact">
       <li>The buildscript will autodetect the package name, vendor version, and release number from its own filename.</li>
       <li>When the buildscript is used to compile the package, all building occurs within a hidden subdirectory inside the source tree: <tt>boffo-1.0/.build/</tt></li>
       <li>To create the binary package, the script redirects 'make install' into a hidden subdirectory <tt>boffo-1.0/.inst/</tt>, creating a faux tree <tt>boffo-1.0/.inst/usr/bin</tt>, etc. This faux tree is tar'ed up into the new binary package.</li>
@@ -98,7 +98,7 @@ boffo-1.0-1/CYGWIN-PATCHES/setup.hint
   </li>
   <li>
     <b><i>Initial packaging procedure, script-based</i></b>
-    <ul>
+    <ul class="compact">
       <li>Suppose you've got your boffo package ported to Cygwin. It took some work, but it now builds and runs. Further, suppose that the <tt>boffo-1.0.tar.bz2</tt> file that you downloaded from the boffo homepage unpacks into <tt>boffo-1.0/</tt>, so you've been doing all of your work in <tt>~/sources/boffo-1.0/</tt>. That's good.</li>
       <li>Place a copy of <tt>boffo-1.0.tar.bz2</tt> in <tt>~/sources</tt></li>
       <li>Copy <a href="https://sourceware.org/viewvc/cygwin-apps/packaging/templates/generic-build-script?view=co"><tt>generic-build-script</tt></a> into <tt>~/sources/</tt> and rename it <tt>boffo-1.0-1.sh</tt>. Carefully adapt this script for your purposes. However, it should auto detect most of what it needs to know: the package name, vendor version, release number, etc.<br />

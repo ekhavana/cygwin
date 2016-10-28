@@ -134,7 +134,7 @@ if [ -z "$param_text" ]; then
       echo '<h1>Search Results</h1>&nbsp;Found <b>'`wc -l < "$tmpfile"`'</b>'
       echo ' matches for <b>'$param_grep_htmlencode'</b><br><br>'
     fi
-    echo '<ul>'
+    echo '<ul class="compact">'
 else
     echo 'Found '`wc -l < "$tmpfile"`' matches for '$param_grep
 fi

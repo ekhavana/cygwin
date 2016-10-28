@@ -128,7 +128,7 @@ foreach my $award (@awards) {
 # Latest awardee first; sort by increasing date within each awardee.
 
 my @list;
-push @list, '<ul>';
+push @list, '<ul class="compact">';
 
 # For each awardee (latest first):
 foreach my $initials (sort { $awardees{$b}{latest_date} cmp $awardees{$a}{latest_date} } keys %awardees) {
