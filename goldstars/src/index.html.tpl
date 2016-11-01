@@ -18,6 +18,7 @@ This page is dedicated to the Cygwin Gold Star award.  The award is given
 to people who have pleased a Cygwin project lead
 by their actions or contributions.  Each star is a link detailing the
 circumstances in which it was awarded.
+</p>
 
 <div class="background">
 <b class="rtop"><b class="r1"></b><b class="r2"></b><b class="r3"></b><b class="r4"></b></b>
@@ -28,5 +29,6 @@ circumstances in which it was awarded.
 
 __LIST_OF_AWARDS__
 
+</div>
 </body>
 </html>
