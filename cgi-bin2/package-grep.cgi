@@ -85,14 +85,18 @@ PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
     cat ../top.html
     echo '<h1>Cygwin Package Search</h1>
 <form method="GET" action="//cygwin.com/cgi-bin2/package-grep.cgi">
+<p>
 Search package contents for a
 <a href="https://www.gnu.org/software/grep/manual/grep.html">grep</a>
 <a href="https://www.gnu.org/software/grep/manual/grep.html#Basic-vs-Extended">basic</a>
 <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a>
 pattern, or view the <a href="https://cygwin.com/packages/package_list.html">full list</a>
-of packages<br>
+of packages
+</p>
+<p>
 <input type="text" size=40 name="grep" value="'$param_grep_htmlencode'">
-<input type=submit value="Go"><br>'
+<input type=submit value="Go">'
+</p>
     echo '<input type="radio" name="arch" value="x86" '
     if [ "$param_arch" = "x86" ]; then echo 'checked="checked"'; fi
     echo '>x86'
