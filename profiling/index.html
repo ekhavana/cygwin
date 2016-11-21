@@ -1,5 +1,13 @@
-<title>Profiling Cygwin</title>
-<h1 align=center>Profiling Cygwin</h1>
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Strict//EN' "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <link rel="stylesheet" type="text/css" href="style.css" />
+ <title>Profiling Cygwin</title>
+</head>
+
+<body>
+<h1>Profiling Cygwin</h1>
 
 <p>There are a couple of steps you need to do to profile cygwin itself
 (newlib and winsup).  This is preliminary documentation but ought to
@@ -16,6 +24,7 @@ them all with profiling options:
 make -k -w CFLAGS='-pg -O2 -g' CXXFLAGS='-pg -O2 -g'
 </pre>
 
+<p>
 Note: the dll builds will fail; this is OK.  You're not going to use
 those dlls.  <b>Make sure</b> you have a working <tt>cygwin.dll</tt>
 available and <b>do not</b> touch or rename it.  You'll need it.</p>
@@ -34,8 +43,8 @@ to do it.</p>
 <a href="djmalloc.c">Here's one from djgpp</a> that we
 modified to work for this context.</p>
 
-Now that you have <tt>libcpg.a</tt>, <tt>libwinpg.a</tt>, and
-<tt>malloc.o</tt>, you can build your programs like this:
+<p>Now that you have <tt>libcpg.a</tt>, <tt>libwinpg.a</tt>, and
+<tt>malloc.o</tt>, you can build your programs like this:</p>
 
 <pre>
 CFLAGS = -g -pg -O2
@@ -51,3 +60,5 @@ gmon.out : test.exe
 test.gp : gmon.out
 	gprof -b test.exe > test.gp
 </pre>
+</body>
+</html>
