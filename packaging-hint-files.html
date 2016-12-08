@@ -337,6 +337,9 @@ source: release/boffo/boffo-2.4.1-2-src.tar.xz
 curr: <i>version</i>
 prev: <i>version</i>
 test: <i>version</i>
+keep: <i>version</i>[ <i>version</i>...]
+keep-count: <i>count</i>
+keep-days: <i>days</i>
 </pre>
 
 <ul class="spaced">
@@ -413,6 +416,29 @@ curr: 0.9-1
       maintainer.
     </p>
   </li>
+
+  <li>
+    <p>
+      <tt>keep</tt>, <tt>keep-count</tt> and <tt>keep-days</tt> can be used to
+      override the default package expiry settings, when old package versions
+      are automatically removed.
+    </p>
+
+    <p>
+      All package versions listed in any <tt>keep</tt> line are always kept.
+    </p>
+
+    <p>
+      A <tt>keep-count</tt> line causes the highest <i>count</i> versions to be
+      kept.
+    </p>
+
+    <p>
+      A <tt>keep-days</tt> line causes the first version which is less
+      than <i>days</i> days old, and all higher versions to be kept.
+    </p>
+  </li>
+
 </ul>
 
 <div class="background">
