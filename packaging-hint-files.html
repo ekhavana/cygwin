@@ -335,8 +335,8 @@ source: release/boffo/boffo-2.4.1-2-src.tar.xz
 <pre>
 # <i>comment</i>
 curr: <i>version</i>
-prev: <i>version</i>
 test: <i>version</i>
+prev: <i>version</i>
 keep: <i>version</i>[ <i>version</i>...]
 keep-count: <i>count</i>
 keep-days: <i>days</i>
@@ -349,41 +349,39 @@ keep-days: <i>days</i>
 
   <li>
     <p>
-      The <tt>curr</tt>, <tt>prev</tt>, and <tt>test</tt> lines indicate which
-      versions of that package should be used. Use these settings <em>only</em>
-      if you need to circumvent the normal version ordering.
+      The <tt>curr</tt> line indicates which version of that package should be
+      normally installed by setup. Use this setting <em>only</em> if you need to
+      circumvent the normal version ordering.
     </p>
 
     <p>
       By default, the highest version-release number is used for the current
-      version of a package; the next highest (if any) is used for the previous
-      version.
+      version of a package.
     </p>
 
     <p>
-      Use of <tt>curr</tt> and <tt>prev</tt> is usually not required, given this
-      version ordering. So, e.g. if you had previously
-      released <tt>boffo-0.9-1</tt> and now have a new <tt>boffo-1.0-1</tt>, the
-      version ordering matches the default and there is no need to
-      use <tt>curr</tt> or <tt>prev</tt>, as <tt>1.0-1</tt> is greater
+      Use of <tt>curr</tt> is usually not required. e.g. if you had previously
+      released <tt>boffo-0.9-1</tt> and now have a new <tt>boffo-1.0-1</tt>,
+      there is no need to use <tt>curr</tt> as <tt>1.0-1</tt> is greater
       than <tt>0.9-1</tt>.
     </p>
 
     <p>
       However, if you had discovered a serious error in the <tt>boffo-1.0</tt>
       release, and then decided that you want to drop back
-      to <tt>boffo-0.9-1</tt>, you could include entries like this:
+      to <tt>boffo-0.9-1</tt>, you could include an entry like this:
     </p>
 
 <pre>
-prev: 1.0-1
 curr: 0.9-1
 </pre>
 
     <p>
       This usage should be rare, however.
     </p>
+  </li>
 
+  <li>
     <p>
       In general, you should trust setup to "do the right thing" -- with one
       exception. If you decide that you need to release a <i>test</i> version of
@@ -400,20 +398,17 @@ curr: 0.9-1
     </p>
 
     <p>
-      Setup is currently unable to list more than three versions of each
-      package. Therefore you should not keep more than three versions of each
-      package around: The current version, the previous stable version, and,
-      optionally, one test version. By keeping a previous stable version around,
-      you isolate yourself (somewhat) from problems with partial mirrors. When
-      you add a new "current" version, you can either keep the old "previous"
-      version, or make the old current version the new previous version,
-      depending on how stable they each were.
-    </p>
-
-    <p>
       It is not required that your package have a <tt>test</tt> version. Use of
       a <tt>test</tt> version of a package is at the discretion of the package
       maintainer.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      <tt>prev</tt> is obsolete, as setup no longer supports explicitly
+      installing <tt>prev</tt> versions, so it now just indicates that the
+      package should also be retained, and thus is equivalent to <tt>keep</tt>.
     </p>
   </li>
 
