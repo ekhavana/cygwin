@@ -40,11 +40,11 @@ following:</p>
 # <i>comment</i>
 sdesc: <i>"some text"</i>
 ldesc: <i>"some text"</i>
-skip:
 category: <i>name1[ name2...]</i>
 requires: <i>package[ package...]</i>
 external-source: <i>package</i>
 message: <i>id</i> <i>"some text"</i>
+skip:
 </pre>
 <p align="center">
   <b>Note: Not all of the above lines are required. Please read the description
@@ -59,20 +59,6 @@ message: <i>id</i> <i>"some text"</i>
 
   <li>
     <p>Lines that begin with '#' are comments and are ignored.</p>
-  </li>
-
-  <li>
-    <p>
-      The <tt>skip</tt> line indicates that that package should not appear in
-      setup. It is intended for directories that exist in the hierarchy that
-      should not be considered.
-    </p>
-
-    <p>
-      This is not required, as it is only useful for indicating directories
-      which contain source-only packages, which are automatically recognized,
-      irrespective of 'skip'.
-    </p>
   </li>
 
   <li>
@@ -239,6 +225,17 @@ No actual moles will be harmed during execution of this game."
       The id used should be derived from the package name. Currently, the text
       for a given id will be shown by setup exactly once, when the package is
       first installed, even if the text subsequently changes.
+    </p>
+  </li>
+
+  <li>
+    <p>
+      <tt>skip</tt> is obsolete.
+    </p>
+
+    <p>
+      It was only useful for indicating directories which contain source-only
+      packages, which are automatically recognized, irrespective of <tt>skip</tt>.
     </p>
   </li>
 </ul>
