@@ -44,6 +44,7 @@ category: <i>name1[ name2...]</i>
 requires: <i>package[ package...]</i>
 external-source: <i>package</i>
 message: <i>id</i> <i>"some text"</i>
+test:
 skip:
 </pre>
 <p class="center">
@@ -230,6 +231,23 @@ No actual moles will be harmed during execution of this game."
 
   <li>
     <p>
+      <tt>test</tt> indicates this is a test package.  The highest version
+      marked as a test package will be installed by setup, when use of test
+      packages is selected.
+    </p>
+    <p>
+      With the current setup implementation, it will also mean that it will be
+      overlooked by most people during installation.
+    </p>
+    <p>
+      It is not required that your package have a <tt>test</tt> version. Use of
+      a <tt>test</tt> version of a package is at the discretion of the package
+      maintainer.
+    </p>
+  </li>
+
+  <li>
+    <p>
       <tt>skip</tt> is obsolete.
     </p>
 
@@ -383,24 +401,16 @@ curr: 0.9-1
 
   <li>
     <p>
-      In general, you should trust setup to "do the right thing" -- with one
-      exception. If you decide that you need to release a <i>test</i> version of
-      your package, there is no way for setup to know that.
+      Any <tt>test</tt> line indicates which version of that package should be
+      installed by setup, when use of test packages is selected.
     </p>
-
     <p>
-      So, you will have to put something like "<tt>test: 1.9-1</tt>". This will
-      cause setup to characterize the 1.9-1 version as a "test" package. With
-      the current setup implementation, it will also mean that it will be
-      overlooked by most people during installation. So, unless you have made
-      arrangements to advertise your test release, this option should be used
-      sparingly.
+      So, something like "<tt>test: 1.9-1</tt>" will cause setup to characterize
+      the 1.9-1 version as a "test" package.
     </p>
-
     <p>
-      It is not required that your package have a <tt>test</tt> version. Use of
-      a <tt>test</tt> version of a package is at the discretion of the package
-      maintainer.
+      This should be obsolescent to the use of <tt>test:</tt> lines
+      in <tt>package-version-release.hint</tt>.
     </p>
   </li>
 
