@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="iso-8859-1"?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <link rel="stylesheet" type="text/css" href="style.css" />
-<title>The Cygwin setup.exe Package Server</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <link rel="stylesheet" type="text/css" href="style.css" />
+<title>Cygwin Package Server</title>
 </head>
 <body>
 
@@ -13,29 +11,31 @@
 <div id="main">
 <!--#include virtual="top.html" -->
 
-<h1>The Cygwin <tt>setup.exe</tt> Package Server</h1>
+<h1>Cygwin Package Server</h1>
 
 <p>
 This page documents how to create a server download tree that Cygwin's
-<tt>setup.exe</tt> understands, including the <tt>genini</tt> script that
-creates <tt>setup.ini</tt> files.  Please note that the instructions on this
+setup program understands.  Please note that the instructions on this
 page work at the present time, but may change in the future. They are provided
-on a strictly as-is basis. You can download <tt>genini</tt> from the
-<a href="https://sourceware.org/viewvc/cygwin-apps/genini/">Cygwin-apps
-CVS</a>.
+on a strictly as-is basis.
 </p>
 
 <p>
 They should be useful for creating a local mirror with or without custom Cygwin
 packages. At the present, we recommend using an Apache web server running on a
-Linux distribution such as <a href="http://debian.org">Debian GNU/Linux</a>
-since not all the software works properly on Cygwin. If you want information
+Linux distribution, but all the required software should work properly on
+Cygwin.
+</p>
+
+<p>
+If you want information
 on how to install Cygwin, read the <a
 href="http://sourceware.org/cygwin/cygwin-ug-net/setup-net.html">Setting Up
-Cygwin</a> page.  For more information on creating packages that
-<tt>setup.exe</tt> understands, read the <a href="http://cygwin.com/setup.html">
+Cygwin</a> page.  For more information on creating packages for
+Cygwin's setup program, read the <a href="http://cygwin.com/setup.html">
 Cygwin Package Contributor's Guide</a>.</p>
-<a name="local-mirror"></a>
+
+<a id="local-mirror"></a>
 <h2>Creating a local Cygwin mirror with rsync</h2>
 
 <p>
@@ -45,116 +45,155 @@ you just want a copy of an existing tree. Simply follow these steps:
 
 <ol>
 <li> The first step in creating a local Cygwin mirror is to pick which
-	existing mirror you will download your packages from. A list of
-	mirrors can be found <a href="http://cygwin.com/mirrors.html">here</a>.
+  existing mirror you will download your packages from. A list of
+  mirrors can be found <a href="mirrors.html">here</a>.
 </li>
 <li>
-	Download the current Cygwin tree.  Currently the Cygwin tree is roughly
-	80 GB of disk space. If disk space is a problem, you may want to use a
-	public mirror and only add your own custom packages as described in the
-	next section.  (Substitute your chosen mirror
-	for <em>example.com</em> and your DocumentRoot for <em>/var/www/</em>):
-	<pre>
-	rsync -vaz rsync://<em>example.com/pub/cygwin/ /var/www/</em>cygwin
-	</pre>
+  Download the current Cygwin tree.
+  If disk space is a problem, you may want to use a
+  public mirror and only add your own custom packages as described in the
+  next section.  (Substitute your chosen mirror
+  for <em>example.com</em> and your DocumentRoot for <em>/var/www/</em>):
+  <pre>
+    rsync -vaz rsync://<em>example.com/pub/cygwin/ /var/www/</em>cygwin
+  </pre>
 </li>
 <li>
-	Test the mirror by pointing a browser at
-	<tt>http://<em>your-server</em>/cygwin/</tt>. You should see Cygwin's
-	<tt>setup.exe</tt>, the <tt>setup.bz2</tt> file, the <tt>release</tt>
-	directory, and other items such as the mailing list archives. If your
-	server is not configured to show directory indexes, you can download
-	<tt>http://<em>your-server</em>/cygwin/setup.exe</tt> directly. Run
-	<tt>setup.exe</tt> and type the URL of your server.
+  Test the mirror by pointing a browser at
+  <tt>http://<em>your-server</em>/cygwin/</tt>.
+  If your server is configured to show directory indexes, you should see
+  the various <i>arch</i> directories, each containing a <tt>release</tt>
+  directory.
+  Run Cygwin's setup program and type the URL of your server.
 </li>
 <li>
-	Assuming everything works properly, you are almost done. You now have
-	a current Cygwin mirror, but you need to keep it updated by running the
-	<tt>rsync</tt> command periodically. The easiest way to do this is by
-	putting it in your <tt>crontab</tt>.
+  Assuming everything works properly, you are almost done. You now have
+  a current Cygwin mirror, but you need to keep it updated by running the
+  <tt>rsync</tt> command periodically. The easiest way to do this is by
+  putting it in your <tt>crontab</tt>.
 </li>
 </ol>
 
-<a name="custom-mirror"></a>
+<a id="overlay"></a>
+<h2>Creating an overlay Cygwin package server</h2>
+
+<p>
+  TBD.
+</p>
+
+<a id="custom-mirror"></a>
+
 <h2>Creating a custom Cygwin package server</h2>
 <p>NOTE: The instructions below may be out of date.  If you are running a
 custom package server and can update this documentation, please send it to the
 cygwin-apps list.
 </p>
 <p>
-The package format that <tt>setup.exe</tt> understands is well documented
-in the <a href="http://cygwin.com/setup.html">Cygwin Package Contributor's
-Guide</a>, which mentions that the <tt>setup.ini</tt> file (compressed to
-<tt>setup.bz2</tt>) is generated by a script. This perl script is named
-<tt>genini</tt>, and it can be downloaded from CVS and used to create a custom
-Cygwin package server. If you are planning on creating a custom package
+The package format that Cygwin's setup program understands is well documented in
+the <a href="setup.html">Cygwin Package Contributor's Guide</a>, which mentions
+that the compressed <tt>setup.ini</tt> file is generated by a script.
+</p>
+
+<p>
+This script is named <tt>mksetupini</tt>, from the <tt>calm</tt> package.  It
+can be downloaded from git and used to create a custom Cygwin package server.
+</p>
+
+<p>
+If you are planning on creating a custom package
 server, we strongly recommend subscribing to the cygwin-apps mailing list
-where changes in the <tt>setup.ini</tt> format and <tt>genini</tt> are
+where changes in the <tt>setup.ini</tt> format and <tt>calm</tt> are
 discussed and announced.
 </p>
 <ol>
 <li>
-Download the <tt>genini</tt> script from the
- <a href="https://sourceware.org/viewvc/cygwin-apps/genini/">Cygwin-apps
- CVS</a>.
-It also requires the <tt>Archive::Perl</tt> module which you can install via
-CPAN or <tt>apt-get install libarchive-tar-perl</tt> on Debian.
+  Obtain the <tt>mksetupini</tt> script, on Cygwin by installing
+  the <tt>calm</tt> Cygwin package, or directly from
+  <a href="https://cygwin.com/git/?p=cygwin-apps/calm.git">Cygwin-apps git</a>.
+
+  <pre>
+    pip3 install git+http://sourceware.org/git/cygwin-apps/calm.git
+  </pre>
+
 </li>
 <li>
-	Create a directory to store your files (i.e., the <tt>setup.*</tt> files
-	and the release/ tree). I use <tt>/var/www/custom-cygwin/</tt>.  Put a
-	copy of <tt>setup.exe</tt> in that directory (for <tt>genini</tt> to get
-	the version number).  If you also created a local mirror as described
-	above, you can link those files:
-	<pre>
-	#!/bin/sh
-	mkdir custom-cygwin
-	cd custom-cygwin
-	ln -s /var/www/cygwin/setup.exe .
-	mkdir release
-	cd release
-	ln -s /var/www/cygwin/release/* .
-	</pre>
-	That way you can use only your custom mirror to get all the packages.
-	Note that whenever a new package is uploaded, you will need to link its
-	directory to your custom mirror.
+  Create a directory to store your files (i.e., the arch/release/ tree).  I
+  use <tt>/var/www/custom-cygwin/</tt>.  If you also created a local mirror as
+  described above, you can link those files:
+  <pre>
+    #!/bin/sh
+    mkdir custom-cygwin
+    cd custom-cygwin
+    mkdir release
+    cd release
+    ln -s /var/www/cygwin/release/* .</pre>
+  That way you can use only your custom mirror to get all the packages.  Note
+  that whenever a new package is uploaded, you will need to link its directory
+  to your custom mirror.
 </li>
 <li>
-	Add your custom package to the release tree. You can add an empty
-	package in the <tt>Base</tt> categories that depends on several other
-	packages to automatically install them for anyone using your custom
-	mirror. For example:
-	<pre>
-	#!/bin/sh
-	mkdir custompackage
-	cd custompackage
-	touch custompackage-0.0.1-1.tar.bz2
-	touch custompackage-0.0.1-1-src.tar.bz2
-	cat > setup.hint << EOF
-	@ custompackage
-	sdesc: "My favorite packages"
-	ldesc: "My favorite packages"
-	category: Base
-	requires: bzip2 clear cygwin-doc file less openssh pinfo rxvt wget
-	EOF
-	</pre>
+  Add your custom package(s) to the release tree. You can add an empty
+  package in the <tt>Base</tt> category that depends on several other
+  packages to automatically install them for anyone using your custom
+  mirror. For example:
+  <pre>
+    #!/bin/sh
+    mkdir custompackage
+    cd custompackage
+    touch custompackage-0.0.1-1.tar.bz2
+    touch custompackage-0.0.1-1-src.tar.bz2
+    cat &gt; setup.hint &lt;&lt; EOF
+      @ custompackage
+      sdesc: "My favorite packages"
+      ldesc: "My favorite packages"
+      category: Base
+      requires: bzip2 clear cygwin-doc file less openssh pinfo rxvt wget
+    EOF</pre>
 </li>
 <li>
-	Run genini to create <tt>setup.bz2</tt> for <tt>setup.exe</tt>:
-	<pre>
-	genini > setup
-	bzip2 setup
-	</pre>
-	You will see error messages from <tt>genini</tt> about non-existant
-	pacakages if you do not have a full mirror (or if you made an error
-	in a <tt>setup.hint</tt> file).
+  Run <tt>mksetupini</tt> and create compressed <tt>setup.ini</tt> files for the
+  setup program:
+  <pre>
+    #!/bin/sh
+    cd /var/www/custom-cygwin/
+    for ARCH in x86 x86_64 ; do
+    mksetupini --arch ${ARCH} --inifile=${ARCH}/setup.ini --releasearea=.
+      bzip2 &lt;${ARCH}/setup.ini &gt;${ARCH}/setup.bz2
+      xz -6e &lt;${ARCH}/setup.ini &gt;${ARCH}/setup.xz
+    done</pre>
+  You will see error messages from <tt>mksetupini</tt> about non-existent
+  packages if you do not have a full mirror (or if you made an error
+  in a <tt>.hint</tt> file).
 </li>
 <li>
-	Test your mirror with <tt>setup.exe</tt>!
+  Test your mirror with the Cygwin setup program!
 </li>
 </ol>
-</pre>
-</div>
+
+<i>
+  TBD: The setup-version: line from the mirror should be perpetuated into
+  the generated <tt>setup.ini</tt>.
+</i>
+
+<h2>Historical note on <tt>genini</tt></h2>
+
+<p>
+<tt>genini</tt> is a script previously used to create <tt>setup.ini</tt> files.
+This can no longer be used as it does not currently support Cygwin packages with
+modern <tt>pvr.hint</tt> files.
+</p>
+
+<p>
+You can download <tt>genini</tt> from the
+<a href="https://cygwin.com/git/?p=cygwin-apps/calm.git">Cygwin-apps git</a>.
+</p>
+
+<p>
+<tt>genini</tt> also requires the <tt>Archive::Perl</tt> module which you can
+install via CPAN, or with <tt>apt-get install libarchive-tar-perl</tt> or
+equivalent.
+</p>
+
 </div>
 
 </body>
