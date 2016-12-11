@@ -21,7 +21,7 @@ upload packages to cygwin.com.
 
 <h2>Requesting upload privileges</h2>
 
-<p>Send your public ssh key to the <a href="http://cygwin.com/lists.html#cygwin-apps">cygwin-apps</a> using this format:</p>
+<p>Send your public ssh key to the <a href="http://cygwin.com/lists.html#cygwin-apps">cygwin-apps</a> mailing list using this format:</p>
 
 <pre><tt>    Subject: SSH key for upload access
 
@@ -141,20 +141,10 @@ directory on cygwin.com will look like this:</p>
 
 <h4>Example <tt>lftp</tt> upload command line</h4>
 
-<pre>    From: Christopher Faylor
-    To: cygwin-apps
-    Subject: Re: The upload system is live (Re: Major changes coming to
-            procedure for uploading to sourceware)
-    Date: Thu, 17 Oct 2013 00:30:00 -0400
-
-    I just used this command line to upload the time packages:
-
+<pre>
+    # command line to upload the time packages
     cd wherever
     lftp -c 'connect sftp://cygwin@cygwin.com/; cd x86/release; mirror -eR time; put /dev/null -o !ready'
-
-    FYI.
-
-    cgf
 </pre>
 
 <p>The package directories should exactly mirror what is currently in
