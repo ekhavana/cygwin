@@ -27,7 +27,7 @@ chdir dirname($file);
 my $there = getcwd;
 chdir $here;
 if (substr($there, 0, length($here) + 1) ne "$here/" || !open(F, '<', $file)) {
-    print "<br><br>\n", $html->h2("Error: couldn't open file: $file");
+    print "<br/><br/>\n", $html->h2("Error: couldn't open file: $file");
 } else {
     local $/;
     $_ = <F>;
