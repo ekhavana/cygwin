@@ -1,7 +1,7 @@
 <HTML><HEAD><TITLE>Manpage of XWIN</TITLE>
 </HEAD><BODY>
 <H1>XWIN</H1>
-Section: File Formats (5)<BR>Updated: xorg-server 1.18.0<BR><A HREF="#index">Index</A>
+Section: File Formats (5)<BR>Updated: xorg-server 1.19.0<BR><A HREF="#index">Index</A>
 <A HREF="../index.html">Return to Main Contents</A><HR>
 
 <P>
@@ -229,32 +229,33 @@ such items should be included at the start or at the end of the menu.
 <A NAME="lbAG">&nbsp;</A>
 <H2>Icon Instructions</H2>
 
-When specifying an <I>icon-file</I> in the following commands several different formats are allowed:
-<BR>
+When specifying an <I>icon-specifier</I> in the following commands several different formats are allowed:
+<P>
 
-<B>&quot;NAME.ICO&quot;</B><I> of an .ico format file</I>
-<BR>
-
-	 	 (&quot;cygwin.ico&quot;, &quot;apple.ico&quot;)
-<BR>
-
-<B>&quot;NAME.DLL,nn&quot;</B><I> of a .DLL and icon index</I>
-<BR>
-
-	 	 (&quot;c:\windows\system32\shell32.dll,4&quot; is the default folder icon)
-<BR>
-
-<B>&quot;,nnn&quot;</B><I> index into XWin.EXE internal ICON resources</I>
-<BR>
-
-	 	 (&quot;,101&quot; is the 1st icon inside <I>XWin.EXE</I>)
 <DL COMPACT>
+<DT><I>NAME.ICO</I><DD>
+filename of an .ico format file
+<BR>
+
+(e.g. &quot;cygwin.ico&quot;, &quot;apple.ico&quot;, &quot;C:\icons\cheese.ico&quot;, &quot;/usr/share/icons/moon.ico&quot;)
+<DT><I>NAME.DLL,nnn</I><DD>
+filename of a DLL with an index into it's ICON resources
+<BR>
+
+(e.g. &quot;c:\windows\system32\shell32.dll,4&quot;, the default folder icon,
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;/usr/bin/cygicons-0.dll,10&quot;,&nbsp;the&nbsp;hippo&nbsp;icon)
+<DT><I>,nnn</I><DD>
+index into the XWin executable's internal ICON resources
+<BR>
+
+(e.g. &quot;,101&quot; is the 1st icon in <I>XWin</I>)
 <DT><B>ICONDIRECTORY </B><I>Windows-path-to-icon-directory</I>
 
 <DD>
-Defines the default directory to search for con-file files.
+Defines the default directory for the file when an <I>icon-specifier</I> doesn't
+contain an absolute path.
 It should be a <I>Windows</I> style path (e.g. C:\cygwin\usr\local\icons).
-<DT><B>DEFAULTICON </B><I>icon-file</I>
+<DT><B>DEFAULTICON </B><I>icon-specifier</I>
 
 <DD>
 Defines a replacement for the standard X icon for applications without
@@ -264,7 +265,7 @@ specified icons.
 <DD>
 <BR>
 
-<BR>&nbsp;<I>class-or-name-of-window</I>&nbsp;<I>icon-file</I>
+<BR>&nbsp;<I>class-or-name-of-window</I>&nbsp;<I>icon-specifier</I>
 <BR>
 
 <BR>&nbsp;&nbsp;<I>...</I>
@@ -420,6 +421,6 @@ III.  Extended for style configuration by Colin Harrison.
 This document was created by
 <A HREF="http://savannah.nongnu.org/projects/man2html/">man2html</A>,
 using the manual pages.<BR>
-Time: 15:05:23 GMT, January 28, 2016
+Time: 15:13:05 GMT, December 12, 2016
 </BODY>
 </HTML>
