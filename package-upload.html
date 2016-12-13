@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+<link rel="stylesheet" type="text/css" href="style.css" />
+<title>Uploading Packages to cygwin.com</title>
+</head>
+<body>
+
+<!--#include virtual="navbar.html" -->
+<div id="main">
+<!--#include virtual="top.html" -->
+
+<h1>Uploading Packages to cygwin.com</h1>
+
+<p>
+<font size="+1">If you are a package maintainer you will need to request sftp upload privileges to the
+Cygwin distro.  This page documents how to request the privileges and
+upload packages to cygwin.com.</font>
+</p>
+
+<h2>Requesting upload privileges</h2>
+
+<p>Send your public ssh key to the <a href="http://cygwin.com/lists.html#cygwin-apps">cygwin-apps</a> using this format:</p>
+
+<pre><tt>    Subject: SSH key for upload access
+
+    Name: Your Name
+    Package: The name of <b>one</b> (and only one) of the packages that you are responsible for
+    ---- BEGIN SSH2 PUBLIC KEY ----
+    &nbsp;&nbsp;&nbsp;<em>encoded public ssh key here</em>
+    ---- END SSH2 PUBLIC KEY ----
+</tt></pre>
+
+<p>When specifying your name, use your exact name as shown at <a href="http://cygwin.com/cygwin-pkg-maint">http://cygwin.com/cygwin-pkg-maint</a>.<br/>
+Specifying <b>one</b> package provides you with the ability to upload
+any of your packages from <a href="http://cygwin.com/cygwin-pkg-maint">http://cygwin.com/cygwin-pkg-maint</a>.</p>
+
+<p>The SSH key above should be generated from one of your public keys, e.g.:<pre><tt>    ssh-keygen -e -f ~/.ssh/id_rsa.pub</pre></tt></p>
+
+<p>The format of this email is not optional.  It is read by a program so please
+do not deviate from the above.  In particular, don't indent, don't add multiple
+packages, and <b>do</b> use <a href="http://cygwin.com/cygwin-pkg-maint">your name</a> as
+recorded in  <a href="http://cygwin.com/cygwin-pkg-maint">http://cygwin.com/cygwin-pkg-maint</a>.</p>
+
+<p><b>Note: Send email in this format if you need to update your ssh key.</b></p>
+
+<p>Requests are handled manually and are acknowledged publicly in
+response to email to the <tt>cygwin-apps</tt> mailing list.</p>
+
+<h2>Connecting to cygwin.com</h2>
+
+<p>Once the ssh key has been installed you'll have limited
+<a href="http://en.wikipedia.org/wiki/SSH_File_Transfer_Protocol#SFTP_client">sftp</a>
+access to cygwin.com, where you will be able to upload packages.  You may connect for example by
+<tt>sftp cygwin@cygwin.com</tt>, or using lftp as in the example below.  When connecting,
+make sure that you use the user <tt>cygwin</tt> with no password, and that you are using the
+same ssh key as the one that you specified previously.</p>
+
+<p>The first time you connect, you should verify that the host key fingerprint matches one of
+the following hashes:</p>
+
+<ul>
+<li>SHA256 (OpenSSH 6.8 or later): <tt>SHA256:MFNiczzfX8/nvLSRZwR3CxMyycKtMan64Zm4C373FeM</tt>
+<li>MD5 (OpenSSH pre-6.8): <tt>1d:1e:46:7f:4d:73:8d:10:20:c3:4c:5a:34:14:44:23</tt>
+</ul>
+
+<h2>Uploading Files</h2>
+
+There are two ways to upload finished packages to cygwin.com.
+
+<h3>Using cygport</h3>
+
+<p>If you have a <a href="https://cygwin.com/cygport/README">cygport</a> build script for your
+packages, the easiest way to upload your finished packages is just to run:<p>
+
+<pre>    cygport pkg.cygport up</pre>
+
+<p>That will upload your finished packages, taking care of all of the details described in the manual method below.</p>
+
+<h3>Manually</h3>
+
+<p>You may also upload files directly, using an sftp client such as sftp or lftp. An upload
+directory on cygwin.com will look like this:</p>
+
+<pre>
+       Your Name                          # directory is currently your full name (you won't actually see this)
+        !packages                         # read-only file containing package names you are permitted to upload
+        x86        x86_64    noarch       # arch directory
+         release    release   release     # release directory
+          pkg                             # package directory
+           pkg-debuginfo                  # package subdirectories
+</pre>
+
+<h4>Example using <a href="http://lftp.yar.ru/">lftp</a> to upload packages:</h4>
+
+<pre>
+    % lftp sftp://cygwin@cygwin.com
+    cd ok, cwd=/
+
+    lftp cygwin.com:/> ls
+    -rw-rw-r--   1 root     cygstage      179 Sep  1 05:12 !packages
+    drwxrwsr-x   4 root     cygstage     4096 Sep  1 05:16 .
+    drwxrwxr-x  61 cygwin   root         4096 Sep  1 05:12 ..
+    drwxrwsr-x.  3 cygwin   cygstage     4096 May  9 19:00 noarch
+    drwxrwsr-x   3 cygwin   cygstage     4096 Oct 12 19:35 x86
+    drwxrwsr-x   3 cygwin   cygstage     4096 Aug 10 19:04 x86_64
+
+    lftp cygwin.com:/> cd x86/release
+    cd ok, cwd=/x86/release
+
+    lftp cygwin.com:/x86/release> ls
+    drwxrwsr-x   3 cygwin   cygstage     4096 Oct 12 18:28 .
+    drwxrwsr-x   3 cygwin   cygstage     4096 Oct 12 19:35 ..
+    drwxrwsr-x   3 cygwin   cygstage     4096 Oct 12 19:36 grep
+
+    lftp cygwin.com:/x86/release> mirror -eR grep
+    Total: 2 directories, 3 files, 0 symlinks
+    New: 3 files, 0 symlinks
+    2311396 bytes transferred in 14 seconds (166.2K/s)
+
+    lftp cygwin.com:/x86/release> ls grep
+    drwxrwsr-x   3 cygwin   cygstage     4096 Oct 12 19:47 .
+    drwxrwsr-x   3 cygwin   cygstage     4096 Oct 12 18:28 ..
+    -rw-r--r--   1 cygwin   cygstage  1204708 Oct 12 19:46 grep-2.14-3-src.tar.xz
+    -rw-r--r--   1 cygwin   cygstage   229284 Oct 12 19:47 grep-2.14-3.tar.xz
+    drwxrwsr-x   2 cygwin   cygstage     4096 Oct 12 19:47 grep-debuginfo
+    -rw-r--r--   1 cygwin   cygstage      356 Oct 12 19:47 setup.hint
+
+    lftp cygwin.com:/x86/release> ls grep/grep-debuginfo
+    drwxrwsr-x   2 cygwin   cygstage     4096 Oct 12 19:47 .
+    drwxrwsr-x   3 cygwin   cygstage     4096 Oct 12 19:47 ..
+    -rw-r--r--   1 cygwin   cygstage   877404 Oct 12 19:47 grep-debuginfo-2.14-3.tar.xz
+    -rw-r--r--   1 cygwin   cygstage      356 Oct 12 19:47 setup.hint
+
+    lftp cygwin.com:/x86/release> put /dev/null -o !ready
+</pre>
+
+<h4>Example <tt>lftp</tt> upload command line</h4>
+
+<pre>    From: Christopher Faylor
+    To: cygwin-apps
+    Subject: Re: The upload system is live (Re: Major changes coming to
+            procedure for uploading to sourceware)
+    Date: Thu, 17 Oct 2013 00:30:00 -0400
+
+    I just used this command line to upload the time packages:
+
+    cd wherever
+    lftp -c 'connect sftp://cygwin@cygwin.com/; cd x86/release; mirror -eR time; put /dev/null -o !ready'
+
+    FYI.
+
+    cgf
+</pre>
+
+<p>The package directories should exactly mirror what is currently in
+the release directory.  So, it should be a hierarchy containing
+<tt>.tar.xz</tt> files and <tt>setup.hint</tt> files.</p>
+
+<p>The <tt>!ready</tt> file is used to tell
+<tt>calm</tt> (the script which creates setup.ini) that any files older
+than this file in or under the given directory should be processed.  The
+intent is that you create <tt>!ready</tt> when you have finished
+uploading everything that you plan on uploading.</p>
+
+<p><b>Note: <tt>!ready</tt> files should not be created in the root of your
+upload directory</b>, i.e. they should be in the architecture
+directories <tt>x86</tt>, <tt>x86_64</tt> and <tt>noarch</tt> or in the package
+directories themselves.</p>
+
+<p><tt>calm</tt> will periodically scan the upload directories for
+packages that are ready, and, if there are no errors, move the packages
+into the real release area.  New directories in the release area will be
+created as needed.  If there are errors then <tt>setup.ini</tt> will not
+be updated and the release area will remain pristine.</tt>
+
+<h2>Getting reports</h2>
+
+<p>You can also create a <tt>!mail</tt> (or
+<tt>!email</tt>) file which contains a list of email address (one per
+line) where any <tt>calm</tt> reports on your packages should be sent.  If that isn't
+specified then you won't get email when <tt>calm</tt> finds issues with what was
+uploaded.  This file must be in the root of your upload directory.</p>
+
+<h2><a name="deleting">Removing files from the Cygwin distribution</a></h2>
+
+Removing files is not normally needed, as old versions which aren't referenced
+by <tt>setup.ini</tt>, and are thus are no longer installable, will be removed
+periodically.
+
+However, if you do need to remove a file from the distribution, upload an empty
+file with the name of the file that you want deleted, prefixed with a
+"<tt>-</tt>".
+
+<p>For example, if you want to delete the file <tt>foo-1.2-1.tar.xz</tt> then upload an empty file named:<pre> -foo-1.2-1.tar.xz</pre></p>
+
+<p>Note that files are not actually deleted; they are moved to a vault where they will be removed after some indeterminate amount of time.</p>
+
+<h2><a name="FAQ">Frequently Asked Questions</h2>
+
+<h3><a name="stalled">Q) Why aren't my files being transferred to the release area?  I've waited
+several days and don't see any movement.</h3>
+
+<p>A) The package updater runs twice every hour, at 10 and 40 minutes past the hour so, if you don't see any movement
+at, e.g., 20 minutes past the next hour, then your package is not going to be updated.</p>
+
+<p>The main reason that this could happen is if you uploaded a package that
+you are not actually responsible for.  The updater only knows what you
+are responsible for based on <a href="http://cygwin.com/cygwin-pkg-maint">http://cygwin.com/cygwin-pkg-maint</a> so if
+you aren't listed as an owner there your packages won't be updated.
+<h3><a name="cantlogin">Q) Why can't I login via sftp?</h3>
+<p>A) There are two likely reasons for login failures:
+<ol><li>You're not using the ssh key provided when you set up your account.</li>
+<li>You are not logging in as the <tt>cygwin</tt> user.  You need to login as user <tt>cygwin</tt> with no password.</li>
+</ol>
+</p>
+</div>
+
+</body>
+</html>
