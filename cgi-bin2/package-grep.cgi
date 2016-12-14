@@ -94,16 +94,16 @@ pattern, or view the <a href="https://cygwin.com/packages/package_list.html">ful
 of packages
 </p>
 <p>
-<input type="text" size=40 name="grep" value="'$param_grep_htmlencode'">
-<input type=submit value="Go">
+<input type="text" size=40 name="grep" value="'$param_grep_htmlencode'"/>
+<input type=submit value="Go"/>
 </p>'
     echo '<input type="radio" name="arch" value="x86" '
     if [ "$param_arch" = "x86" ]; then echo 'checked="checked"'; fi
-    echo '>x86'
+    echo '/>x86'
 
     echo '<input type="radio" name="arch" value="x86_64" '
     if [ "$param_arch" != "x86" ]; then echo 'checked="checked"'; fi
-    echo '>x86_64'
+    echo '/>x86_64'
 
     echo '</form>'
 fi
