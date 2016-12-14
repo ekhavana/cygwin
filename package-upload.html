@@ -15,9 +15,9 @@
 <h1>Uploading Packages to cygwin.com</h1>
 
 <p>
-<font size="+1">If you are a package maintainer you will need to request sftp upload privileges to the
+If you are a package maintainer you will need to request sftp upload privileges to the
 Cygwin distro.  This page documents how to request the privileges and
-upload packages to cygwin.com.</font>
+upload packages to cygwin.com.
 </p>
 
 <h2>Requesting upload privileges</h2>
@@ -37,7 +37,8 @@ upload packages to cygwin.com.</font>
 Specifying <b>one</b> package provides you with the ability to upload
 any of your packages from <a href="http://cygwin.com/cygwin-pkg-maint">http://cygwin.com/cygwin-pkg-maint</a>.</p>
 
-<p>The SSH key above should be generated from one of your public keys, e.g.:<pre><tt>    ssh-keygen -e -f ~/.ssh/id_rsa.pub</pre></tt></p>
+<p>The SSH key above should be generated from one of your public keys, e.g.:</p>
+<pre><tt>    ssh-keygen -e -f ~/.ssh/id_rsa.pub</tt></pre>
 
 <p>The format of this email is not optional.  It is read by a program so please
 do not deviate from the above.  In particular, don't indent, don't add multiple
@@ -62,13 +63,15 @@ same ssh key as the one that you specified previously.</p>
 the following hashes:</p>
 
 <ul>
-<li>SHA256 (OpenSSH 6.8 or later): <tt>SHA256:MFNiczzfX8/nvLSRZwR3CxMyycKtMan64Zm4C373FeM</tt>
-<li>MD5 (OpenSSH pre-6.8): <tt>1d:1e:46:7f:4d:73:8d:10:20:c3:4c:5a:34:14:44:23</tt>
+<li>SHA256 (OpenSSH 6.8 or later): <tt>SHA256:MFNiczzfX8/nvLSRZwR3CxMyycKtMan64Zm4C373FeM</tt></li>
+<li>MD5 (OpenSSH pre-6.8): <tt>1d:1e:46:7f:4d:73:8d:10:20:c3:4c:5a:34:14:44:23</tt></li>
 </ul>
 
 <h2>Uploading Files</h2>
 
+<p>
 There are two ways to upload finished packages to cygwin.com.
+</p>
 
 <h3>Using cygport</h3>
 
@@ -186,15 +189,19 @@ uploaded.  This file must be in the root of your upload directory.</p>
 
 <h2 id="deleting">Removing files from the Cygwin distribution</h2>
 
+<p>
 Removing files is not normally needed, as old versions which aren't referenced
 by <tt>setup.ini</tt>, and are thus are no longer installable, will be removed
 periodically.
+</p>
 
+<p>
 However, if you do need to remove a file from the distribution, upload an empty
 file with the name of the file that you want deleted, prefixed with a
 "<tt>-</tt>".
+</p>
 
-<p>For example, if you want to delete the file <tt>foo-1.2-1.tar.xz</tt> then upload an empty file named:<pre> -foo-1.2-1.tar.xz</pre></p>
+<p>For example, if you want to delete the file <tt>foo-1.2-1.tar.xz</tt> then upload an empty file named <tt>-foo-1.2-1.tar.xz</tt></p>
 
 <p>Note that files are not actually deleted; they are moved to a vault where they will be removed after some indeterminate amount of time.</p>
 
@@ -209,14 +216,14 @@ at, e.g., 20 minutes past the next hour, then your package is not going to be up
 <p>The main reason that this could happen is if you uploaded a package that
 you are not actually responsible for.  The updater only knows what you
 are responsible for based on <a href="http://cygwin.com/cygwin-pkg-maint">http://cygwin.com/cygwin-pkg-maint</a> so if
-you aren't listed as an owner there your packages won't be updated.
+you aren't listed as an owner there your packages won't be updated.</p>
 
 <h3 id="cantlogin">Q) Why can't I login via sftp?</h3>
-<p>A) There are two likely reasons for login failures:
-<ol><li>You're not using the ssh key provided when you set up your account.</li>
+<p>A) There are two likely reasons for login failures:</p>
+<ol>
+<li>You're not using the ssh key provided when you set up your account.</li>
 <li>You are not logging in as the <tt>cygwin</tt> user.  You need to login as user <tt>cygwin</tt> with no password.</li>
 </ol>
-</p>
 </div>
 
 </body>
