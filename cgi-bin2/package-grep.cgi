@@ -9,8 +9,11 @@ renice -n 19 -p $$ >/dev/null 2>&1
 ############################## decode parameters
 
 urldecode() {
-# urldecode <string>
-    local url_encoded="${1//+/ }"
+    # urldecode <string>, <text>
+    local url_encoded="${1}"
+    if [ -z $2 ] ; then
+        url_encoded="${1//+/ }"
+    fi
     printf '%b' "${url_encoded//%/\x}"
 } 
 
@@ -51,7 +54,7 @@ if [ "$REQUEST_METHOD" = "GET" ]; then
 	key=`echo "$i" | cut -f1 -d=`
 	value=`echo "$i" | cut -f2- -d=`
 	case "$key" in
-	    grep)  param_grep=`urldecode "$value"` ;;
+	    grep)  param_grep=`urldecode "$value" "$param_text"` ;;
 	    text)  param_text=`urldecode "$value"` ;;
 	    arch)  param_arch=`urldecode "$value"` ;;
 	    *)     param_ignored=`urldecode "$value"` ;;
