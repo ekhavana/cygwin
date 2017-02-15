@@ -117,9 +117,12 @@ discussed and announced.
     #!/bin/sh
     mkdir custom-cygwin
     cd custom-cygwin
-    mkdir release
-    cd release
-    ln -s /var/www/cygwin/release/* .</pre>
+    for ARCH in x86 x86_64 noarch ; do
+      mkdir -p ${ARCH}/release
+      cd ${ARCH}/release
+      ln -s /var/www/cygwin/${ARCH}/release/* .
+      cd ../..
+    done</pre>
   That way you can use only your custom mirror to get all the packages.  Note
   that whenever a new package is uploaded, you will need to link its directory
   to your custom mirror.
@@ -152,7 +155,7 @@ discussed and announced.
     #!/bin/sh
     cd /var/www/custom-cygwin/
     for ARCH in x86 x86_64 ; do
-    mksetupini --arch ${ARCH} --inifile=${ARCH}/setup.ini --releasearea=.
+      mksetupini --arch ${ARCH} --inifile=${ARCH}/setup.ini --releasearea=.
       bzip2 &lt;${ARCH}/setup.ini &gt;${ARCH}/setup.bz2
       xz -6e &lt;${ARCH}/setup.ini &gt;${ARCH}/setup.xz
     done</pre>
