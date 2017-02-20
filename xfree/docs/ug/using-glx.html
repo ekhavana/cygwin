@@ -73,20 +73,6 @@ CLASS="sect1"
 NAME="using-glx"
 >OpenGL (GLX)</A
 ></H1
-><DIV
-CLASS="note"
-><BLOCKQUOTE
-CLASS="note"
-><P
-><B
->Note: </B
->
-Hardware-accelerated OpenGL is still under active development and should be considered
-beta quality, but should be working well enough to be useful.  Please report
-problems with specific OpenGL applications to the cygwin mailing list.
-</P
-></BLOCKQUOTE
-></DIV
 ><P
 >&#13;The Cygwin/X X Server supports both software OpenGL rendering (using the mesa
 software renderer), and hardware accelerated OpenGL rendering (using the native
@@ -215,23 +201,17 @@ CLASS="command"
 >
         </TD
 ><TD
->&nbsp;</TD
+>&#13;          <B
+CLASS="command"
+>export LIBGL_ALWAYS_SOFTWARE=1</B
+>
+        </TD
 ><TD
 >&#13;          <P
 >&#13;            start server with <CODE
 CLASS="parameter"
 >-wgl</CODE
-> option
-          </P
->
-          <P
->&#13;            <B
-CLASS="command"
->export LIBGL_USE_WGL=1</B
->
-            <SUP
->b</SUP
->
+> option (default)
           </P
 >
           <P
@@ -248,21 +228,8 @@ COLSPAN="3"
 NAME="FTN.footnote-software-rendering"
 >a. </A
 >
-                The software renderer used (e.g. llvmpipe, softpipe) can be
+                The software renderer used (e.g. llvmpipe, softpipe, swr) can be
                 selected using the GALLIUM_DRIVER environment variable.
-              <BR/><A
-NAME="FTN.footnote-direct-wgl"
->b. </A
->
-                Since direct accelerated rendering is currently experimental,
-                the LIBGL_USE_WGL environment variable is required to enable it,
-                but that will be removed when the feature is mature, at which
-                point it will be the default and <B
-CLASS="command"
->export
-                LIBGL_ALWAYS_SOFTWARE=1</B
-> will be required to force
-                software rendering.
               <BR/></TD
 ></TR
 ></TABLE
@@ -272,15 +239,14 @@ CLASS="command"
 <UL
 ><LI
 ><P
->&#13;For local clients the default is direct, software rendering.
+>&#13;For local clients the default is direct, hardware-accelerated rendering.
 </P
 ><P
->&#13;To use the experimental direct, hardware-accelerated rendering, you must do
-<B
+>&#13;To use software rendering, you must do <B
 CLASS="command"
->export LIBGL_USE_WGL=1</B
-> before starting the client
-application.
+>export
+LIBGL_ALWAYS_SOFTWARE=1</B
+> before starting the client application.
 </P
 ></LI
 ><LI
@@ -321,6 +287,19 @@ Mesa, you have software rendering.
 >&#13;Please ensure you are using the latest display drivers for your graphics
 hardware before reporting any visual issues with WGL.
 </P
+><DIV
+CLASS="note"
+><BLOCKQUOTE
+CLASS="note"
+><P
+><B
+>Note: </B
+>
+Please report problems with specific OpenGL applications to the cygwin mailing
+list.
+</P
+></BLOCKQUOTE
+></DIV
 ><P
 >&#13;Known issues:
 <UL

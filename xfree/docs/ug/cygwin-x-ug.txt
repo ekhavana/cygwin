@@ -640,11 +640,6 @@ Remote sessions via XDMCP
 
 OpenGL (GLX)
 
-     Note: Hardware-accelerated OpenGL is still under active development
-     and should be considered beta quality, but should be working well
-     enough to be useful. Please report problems with specific OpenGL
-     applications to the cygwin mailing list.
-
    The Cygwin/X X Server supports both software OpenGL rendering (using
    the mesa software renderer), and hardware accelerated OpenGL rendering
    (using the native Windows OpenGL (WGL) interface).
@@ -660,7 +655,7 @@ OpenGL (GLX)
 
    Table 3-1. Summary of OpenGL rendering options
 
-   software rendering ^a
+        software rendering ^a
 
    hardware-accelerated rendering
 
@@ -677,27 +672,20 @@ OpenGL (GLX)
    export LIBGL_ALWAYS_INDIRECT=1
 
    direct
+   export LIBGL_ALWAYS_SOFTWARE=1
 
-
-   start server with -wgl option
-
-   export LIBGL_USE_WGL=1 ^b
+   start server with -wgl option (default)
 
    (local clients only)
    Notes:
-   a. The software renderer used (e.g. llvmpipe, softpipe) can be selected
-   using the GALLIUM_DRIVER environment variable.
-   b. Since direct accelerated rendering is currently experimental, the
-   LIBGL_USE_WGL environment variable is required to enable it, but that
-   will be removed when the feature is mature, at which point it will be
-   the default and export LIBGL_ALWAYS_SOFTWARE=1 will be required to
-   force software rendering.
+   a. The software renderer used (e.g. llvmpipe, softpipe, swr) can be
+   selected using the GALLIUM_DRIVER environment variable.
 
    Currently the default configurations are:
-     * For local clients the default is direct, software rendering.
-       To use the experimental direct, hardware-accelerated rendering, you
-       must do export LIBGL_USE_WGL=1 before starting the client
-       application.
+     * For local clients the default is direct, hardware-accelerated
+       rendering.
+       To use software rendering, you must do export
+       LIBGL_ALWAYS_SOFTWARE=1 before starting the client application.
      * For remote clients, Mesa's libGL prefers to use client-side
        software rendering and then transfer the rendered image to the
        server.
@@ -715,6 +703,9 @@ OpenGL (GLX)
 
    Please ensure you are using the latest display drivers for your
    graphics hardware before reporting any visual issues with WGL.
+
+     Note: Please report problems with specific OpenGL applications to
+     the cygwin mailing list.
 
    Known issues:
      * OpenGL drawing is just drawn on top of the X window. This works
@@ -1295,7 +1286,7 @@ Colophon
    the DocBook DSSSL Stylesheets.
 
    The production process for this instance of this document was started
-   at 2016-08-30 16:53 .
+   at 2017-02-20 15:29 .
 
   Notes
 
